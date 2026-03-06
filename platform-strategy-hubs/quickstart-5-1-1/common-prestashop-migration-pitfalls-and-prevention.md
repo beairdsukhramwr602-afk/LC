@@ -224,24 +224,32 @@ Run a Demo Migration using best sellers, complex option products, and extension-
 
 <details>
 
-<summary><strong>What is the single most common validation mistake?</strong></summary>
+<summary><strong>Will extension or integration data be migrated into OpenCart?</strong></summary>
 
-Compressing validation into the final days and treating go-live as the first time you fully inspect results.
-
-</details>
-
-<details>
-
-<summary><strong>Why do complex products matter so much in a demo sample?</strong></summary>
-
-Because complexity reveals itself in behavior and relationships. If the hardest products migrate correctly, the rest of the catalog is usually less risky.
+Core entities can migrate, but extension and integration data often represents custom structures and business logic that are not portable by default. The planning decision is whether each extension-dependent outcome is preserved by native OpenCart capability, a replacement extension, or a Custom Job. Use the demo phase to surface which outcomes need custom handling.
 
 </details>
 
 <details>
 
-<summary><strong>How does Next-Cart help prevent these pitfalls?</strong></summary>
+<summary><strong>How should we plan URL continuity and 301 redirects for an OpenCart launch?</strong></summary>
 
-Next-Cart uses Demo Migration output for early review, validates relationships that matter, and aligns the service model (Standard, Managed, or Custom) to the real complexity your data reveals.
+Start with a prioritized list of URLs that drive revenue and organic traffic, then map old paths to new destinations that preserve user intent. Validate reachability for those priority paths before cutover. Redirect implementation varies by environment, so confirm early who owns redirect execution and what mechanism will be used, then treat redirect validation as a launch gate.
+
+</details>
+
+<details>
+
+<summary><strong>Can customer passwords be preserved when moving to OpenCart?</strong></summary>
+
+Sometimes. Password continuity is typically possible only when both the source and target are open-source platforms and password hashes can be transferred in a compatible way. When continuity is not possible, plan a first-login password reset or activation journey and validate it end to end before go-live. If continuity is required and conditions allow, Next-Cart offers a Customer Password Plugin option to support legacy password verification on the new store.
+
+</details>
+
+<details>
+
+<summary><strong>How should we plan URL continuity and 301 redirects for an OpenCart launch?</strong></summary>
+
+Start with a prioritized list of URLs that drive revenue and organic traffic, then map old paths to new destinations that preserve user intent. Validate reachability for those priority paths before cutover. Redirect implementation varies by environment, so confirm early who owns redirect execution and what mechanism will be used, then treat redirect validation as a launch gate.
 
 </details>
