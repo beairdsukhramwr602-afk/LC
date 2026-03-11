@@ -9,7 +9,7 @@
 
 * [The Beginner’s Guide to Ecommerce Migration](migration-fundamentals/quickstart/README.md)
   * [What Is Shopping Cart Migration? Definition, Goals, and Outcomes](migration-fundamentals/quickstart/quickstart.md)
-  * [When Is the Right Time to Change eCommerce Platforms?](migration-fundamentals/quickstart/quickstart-1.md)
+  * [When Is the Right Time to Start an eCommerce Data Migration?](migration-fundamentals/quickstart/quickstart-1.md)
   * [Migration Readiness Scorecard: Is Your Business Ready to Move?](migration-fundamentals/quickstart/quickstart-2.md)
   * [Common Risks in Shopping Cart Migration and How to Prevent Them](migration-fundamentals/quickstart/quickstart-3.md)
 * [What You Need to Understand About Data Migration](migration-fundamentals/what-you-need-to-understand-about-data-migration/README.md)
