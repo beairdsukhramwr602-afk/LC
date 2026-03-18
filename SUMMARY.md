@@ -21,18 +21,17 @@
   * [Data Compatibility: What It Means and Why It Breaks](migration-fundamentals/data-foundations/data-compatibility-what-it-means-and-why-it-breaks.md)
   * [Entity Relationships: How Store Data Connects](migration-fundamentals/data-foundations/entity-relationships-how-store-data-connects.md)
 * [SEO and Traffic Continuity in Shopping Cart Migration](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/README.md)
-  * [SEO and Traffic Continuity: What Changes During Migration](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/the-seo-migration-framework.md)
-  * [The SEO Migration Framework](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/the-seo-migration-framework-1.md)
-  * [URL Redirects: Why They Are Critical](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/url-redirects-101-why-they-are-critical.md)
-  * [301 vs 302 Redirects](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/301-vs-302-redirects.md)
+  * [SEO and Traffic Continuity in Shopping Cart Migration](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/the-seo-migration-framework.md)
+  * [URL Structure Changes and Redirect Planning](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/the-seo-migration-framework-1.md)
+  * [Preserving Product and Category Page SEO During Migration](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/url-redirects-101-why-they-are-critical.md)
 
 ## Strategy and Planning for Migration
 
-* [The Migration Project Roadmap](strategy-and-planning-for-migration/quickstart/README.md)
-  * [Migration Roadmap: Timeline, Milestones, and Decision Points](strategy-and-planning-for-migration/quickstart/migration-roadmap-timeline-milestones-and-decision-points.md)
-  * [Building a Migration Business Case: Cost, Risk, and ROI](strategy-and-planning-for-migration/quickstart/building-a-migration-business-case-cost-risk-and-roi.md)
-  * [Roles and Responsibilities: RACI for Shopping Cart Migration Projects](strategy-and-planning-for-migration/quickstart/roles-and-responsibilities-raci-for-replatforming-projects.md)
-* [Data Preparation and Cleanup for Shopping Cart Migration](strategy-and-planning-for-migration/quickstart-1/README.md)
+* [Defining Migration Scope: What Must Move and What Can Change](strategy-and-planning-for-migration/roles-and-responsibilities-raci-for-replatforming-projects.md)
+* [What Makes an eCommerce Migration Complex?](strategy-and-planning-for-migration/building-a-migration-business-case-cost-risk-and-roi.md)
+* [Choosing the Right Migration Approach](strategy-and-planning-for-migration/migration-roadmap-timeline-milestones-and-decision-points.md)
+* [Planning an eCommerce Migration Project](strategy-and-planning-for-migration/quickstart.md)
+* [Planning Migration Validation and Acceptance Criteria](strategy-and-planning-for-migration/quickstart-1/README.md)
   * [What to Prepare Before You Purchase a Migration Service](strategy-and-planning-for-migration/quickstart-1/quickstart.md)
   * [Data Mapping Strategy: Structuring Data for the Target Platform](strategy-and-planning-for-migration/quickstart-1/quickstart-1.md)
   * [Dirty Data Cleanup: How to Fix Common Data Quality Problems](strategy-and-planning-for-migration/quickstart-1/quickstart-2.md)
@@ -42,10 +41,9 @@
 * [Entity Points Explained: How Migration Scope Is Measured](next-cart-migration-service/entity-points-explained-how-migration-scope-is-measured.md)
 * [How Next-Cart Performs a Migration: Connection, Mapping, and Validation Flow](next-cart-migration-service/how-next-cart-performs-a-migration-connection-mapping-and-validation-flow.md)
 * [Demo Migration: What It Proves and How to Read Results](next-cart-migration-service/demo-migration-what-it-proves-and-how-to-read-results.md)
-* [Recent Data Migration: Final Sync Before Go-live](next-cart-migration-service/recent-data-migration-final-sync-before-go-live.md)
+* [Recent Data Migration: Final Sync Before Go Live](next-cart-migration-service/recent-data-migration-final-sync-before-go-live.md)
 * [How to Choose Next-Cart Migration Service Model](next-cart-migration-service/how-to-choose-next-cart-migration-service-model.md)
 * [When Custom Job Is Required: Common Scenarios](next-cart-migration-service/when-custom-job-is-required-common-real-world-scenarios.md)
-* [Matching Your Needs to the Right Service](next-cart-migration-service/matching-your-needs-to-the-right-service.md)
 
 ## Platform Strategy Hubs
 
