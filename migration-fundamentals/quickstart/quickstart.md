@@ -26,7 +26,7 @@ Most migrations center on the data that supports day-to-day commerce operations:
 * Reviews
 * Coupons
 * CMS pages
-* Blog posts, when they matter to the store’s content strategy
+* Blog posts
 
 Depending on the platform and store setup, supporting structures may matter just as much as the main record sets. That can include:
 
