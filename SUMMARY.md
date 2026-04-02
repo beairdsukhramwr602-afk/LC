@@ -116,7 +116,15 @@
   * [Selecting the Right Migration Approach for Adobe Commerce](platform-strategy-hubs/page-1/selecting-the-right-migration-approach-for-adobe-commerce.md)
   * [Adobe Commerce Validation Priorities](platform-strategy-hubs/page-1/adobe-commerce-validation-priorities.md)
   * [Adobe Commerce Migration Pitfalls and Prevention](platform-strategy-hubs/page-1/adobe-commerce-migration-pitfalls-and-prevention.md)
-* [Page 3](platform-strategy-hubs/page-3.md)
+* [Shopware Migration Hub](platform-strategy-hubs/shopware-migration-hub/README.md)
+  * [Shopware Platform Overview](platform-strategy-hubs/shopware-migration-hub/shopware-platform-overview.md)
+  * [Shopware Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/shopware-migration-hub/shopware-fit-ideal-and-non-ideal-profiles.md)
+  * [Shopware Data Model Differences](platform-strategy-hubs/shopware-migration-hub/shopware-data-model-differences.md)
+  * [Shopware Constraints and Risks](platform-strategy-hubs/shopware-migration-hub/shopware-constraints-and-risks.md)
+  * [Shopware Pre-Migration Preparation Checklist](platform-strategy-hubs/shopware-migration-hub/shopware-pre-migration-preparation-checklist.md)
+  * [Selecting the Right Migration Approach for Shopware](platform-strategy-hubs/shopware-migration-hub/selecting-the-right-migration-approach-for-shopware.md)
+  * [Shopware Validation Priorities](platform-strategy-hubs/shopware-migration-hub/shopware-validation-priorities.md)
+  * [Shopware Migration Pitfalls and Prevention](platform-strategy-hubs/shopware-migration-hub/shopware-migration-pitfalls-and-prevention.md)
 * [Open-Source vs SaaS Tradeoffs](platform-strategy-hubs/quickstart.md)
 * [Square Migration Hub](platform-strategy-hubs/quickstart-5-1/README.md)
   * [Square Fit: Who Square Is and Is Not Good For](platform-strategy-hubs/quickstart-5-1/quickstart.md)
@@ -126,7 +134,6 @@
   * [Choosing the Right Migration Approach for Square](platform-strategy-hubs/quickstart-5-1/choosing-the-right-migration-approach-for-prestashop.md)
   * [Square Validation Priorities: What to Verify Most Carefully](platform-strategy-hubs/quickstart-5-1/square-validation-priorities-what-to-verify-most-carefully.md)
   * [Common Square Migration Pitfalls and Prevention](platform-strategy-hubs/quickstart-5-1/common-square-migration-pitfalls-and-prevention.md)
-* [Page 2](platform-strategy-hubs/page-2.md)
 
 ## Technical Deep Dives
 
