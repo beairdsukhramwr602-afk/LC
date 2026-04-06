@@ -7,220 +7,176 @@ metaLinks:
 
 # Migration Readiness Scorecard: Is Your Business Ready to Move?
 
+## Migration Readiness Scorecard: Is Your Business Ready to Move?
+
 Not every business that wants to migrate is ready to migrate well.
 
-That does not mean the project should stop. It means the business should understand where uncertainty is still high before it commits too deeply to scope, timeline, or launch decisions. Low readiness usually comes from unclear priorities, incomplete scope, weak data visibility, or missing ownership for review and launch decisions, not from lack of effort.
+That does not mean the project should stop. It means the business should understand where uncertainty is still high before it commits too deeply to scope, timing, or launch decisions. Low readiness usually comes from unclear priorities, incomplete scope, weak visibility into important data, or unclear review responsibility, not from lack of effort.
 
-A readiness scorecard helps make those gaps visible early. It turns migration planning into something more practical by asking whether the business has defined what must remain true after launch, understood where important data lives, identified the highest-risk parts of the store, and prepared the right people to review results before go-live.
+A readiness scorecard helps make those gaps visible early. It turns migration planning into something more practical by asking whether the business has defined what must still work after launch, identified where important data and logic live, recognized the highest-risk parts of the store, and prepared the right people to review results before go-live.
+
+Readiness is not the same as enthusiasm for change. It is the degree to which the business can make sound migration decisions without relying too heavily on assumptions.
 
 ### What migration readiness really means
-
-Migration readiness is not the same as enthusiasm for change. It is the degree to which the business can make sound migration decisions without relying on assumptions.
 
 A ready business usually has:
 
 * a clear reason for migration
 * a defined scope
-* visibility into where important data and logic live
+* enough visibility into where important data and business logic live
 * realistic expectations about complexity
-* clear responsibility for validation and launch decisions
-* enough timeline flexibility to review and correct problems before go-live
+* clear responsibility for review and launch decisions
+* enough timing flexibility to evaluate results and correct problems before go-live
 
-A business can want migration badly and still not be ready to start execution. The problem is not motivation. The problem is that unclear scope and weak validation planning usually create late surprises.
+This does not guarantee an easy migration. It means the business is more likely to make good decisions early, identify risk before it becomes expensive, and judge sample results in a useful way.
 
-### Why readiness matters before execution begins
+A business can want migration badly and still not be ready to begin well. The problem is usually not motivation. The problem is that unclear planning creates late surprises.
 
-Most migration problems do not begin in the tool. They begin earlier, when the team has not yet agreed on what must remain true after launch or who is responsible for deciding whether the result is acceptable. That is why readiness should be treated as a planning checkpoint rather than a formality.
+### Why readiness matters before deeper execution begins
+
+Most migration problems do not begin in the tool. They begin earlier, when the business has not yet agreed on what the migration must protect or how the result will be judged.
 
 Higher readiness usually leads to:
 
 * fewer late surprises
 * clearer scope decisions
-* faster identification of structural risks
+* earlier visibility into structural risk
 * more useful Demo Migration review
-* more realistic timeline planning
+* more realistic timing decisions
 * better alignment between business expectations and migration approach
 
-Lower readiness does not make migration impossible. It usually means the project needs more clarification before deeper execution decisions are locked in.
+Lower readiness does not make migration impossible. It usually means the project needs more clarification before deeper commitments become harder to change.
 
-### How to score your readiness
+### How to use this scorecard
 
 For each area below, score your current state:
 
-* **0 = Not ready**
-* **1 = Partly ready**
-* **2 = Ready**
+* **0 points** = Not ready
+* **1 point** = Partly ready
+* **2 points** = Ready
+
+The goal is not perfection. The goal is to make uncertainty visible early enough to reduce risk.
 
 ### How to interpret your score
 
-#### **0-7: Low readiness**
+#### 0 to 7 points: Low readiness
 
 The project still has major uncertainty.
 
-That usually means the business has not yet defined what must remain true after launch, which data is most important, where extension-driven logic lives, who will review results, or what the real timeline needs to support. The fastest improvement usually comes from reducing uncertainty, not from pushing harder on execution.
+This usually means the business has not yet defined what must still work after launch, which data is most important, where extension-driven logic lives, who will review the result, or what the timing really needs to support. The fastest improvement usually comes from reducing uncertainty, not from pushing harder on execution.
 
 #### 8 to 14 points: Moderate readiness
 
 The project has a usable foundation, but important decisions are still incomplete.
 
-This often means the business knows why it wants to migrate and understands some of the risk, but still needs stronger scope decisions, clearer review ownership, better visibility into app-driven data, or more realistic timing before deeper execution begins.
+This often means the business knows why it wants to migrate and understands some of the risk, but still needs stronger scope decisions, clearer review responsibility, better visibility into app-driven data, or more realistic timing before deeper commitments are made.
 
 #### 15 to 20 points: High readiness
 
-The business is in a much stronger position to plan safely.
+The business is in a much stronger position to move safely.
 
-That does not guarantee an easy migration. It means the project is more likely to make sound decisions early, evaluate Demo Migration results productively, and choose the right migration approach based on real complexity instead of assumption.
+That does not guarantee a simple migration. It means the project is more likely to interpret sample results productively, choose the right migration path, and define launch expectations in a way the team can actually review.
 
-### Readiness scorecard
+### Migration readiness scorecard
 
-Use this table to score your readiness. The goal is not perfection. The goal is making uncertainty visible early enough to reduce risk.
+| Area                                         | 0 points                                                                       | 1 point                                                                               | 2 points                                                                                                                                       |
+| -------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Clear reason for migration**               | The business reasons are vague or still being debated                          | There are reasons to move, but they are not yet prioritized                           | The reason for migration is specific, practical, and clearly understood                                                                        |
+| **Scope clarity**                            | It is still unclear what must be migrated                                      | There is a partial scope list, but important decisions are still missing              | The must-have data and must-have outcomes are clearly defined                                                                                  |
+| **Data awareness**                           | The team does not know where important data lives                              | Some important data is understood, but app-based or custom data is still unclear      | The business has identified which data is native, which depends on apps or extensions, and which is stored in custom fields or outside systems |
+| **Catalog complexity awareness**             | Variant, attribute, and category complexity is still unclear                   | Some complexity drivers are understood, but not well documented                       | The main catalog complexity drivers are documented and understood                                                                              |
+| **Order history requirements**               | The business does not know how much order history it needs or why              | Some order history needs are known, but the purpose is not fully clear                | The business has clearly defined how order history needs to support customer service, reporting, or operations after launch                    |
+| **Customer continuity expectations**         | There is no clear plan for how customer continuity should work after migration | The team understands that customer continuity matters, but there is no clear plan yet | There is a practical plan for account continuity, customer communication, and likely support impact                                            |
+| **SEO and redirect planning responsibility** | No one is clearly responsible for SEO continuity                               | Someone is responsible, but there is no clear redirect or review plan yet             | The business has a defined redirect plan and a clear SEO review plan                                                                           |
+| **Third-party logic visibility**             | Important app, plugin, extension, or outside-system logic has not been mapped  | Some third-party logic is understood, but important gaps remain                       | The business has identified the third-party layers that affect buying behavior, discovery, customer continuity, operations, or reporting       |
+| **Review responsibility**                    | It is unclear who will judge whether the result is acceptable                  | Some reviewers are known, but review responsibility is still weak                     | The right people are identified and prepared to review the result by business area                                                             |
+| **Timing flexibility**                       | The project timing leaves very little room for review or correction            | The timing allows some review, but pressure is still high                             | The timing leaves enough room to evaluate results and correct issues before launch                                                             |
 
-| Area                                         | 0 points                                                                              | 1 point                                                                                 | 2 points                                                                                                                                        |
-| -------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Clear reason for migration**               | The business reasons are vague or still being debated                                 | There are reasons to move, but they are not yet prioritized                             | The reasons for migration are specific, measurable, and clearly understood                                                                      |
-| **Scope clarity**                            | It is still unclear what must be migrated                                             | There is a partial scope list, but important decisions are still missing                | The must-have data and the must-have outcomes are clearly defined                                                                               |
-| **Data awareness**                           | The team does not know where important data lives                                     | Some important data is understood, but app-based and custom data are not mapped clearly | The business has identified which data is native, which depends on apps or extensions, and which is stored in custom fields or external systems |
-| **Catalog complexity awareness**             | Variant, attribute, and category complexity is still unclear                          | Some complexity drivers are understood, but not fully documented                        | The main complexity drivers in the catalog are documented and understood                                                                        |
-| **Order history requirements**               | The business does not know how much order history it needs or why                     | Some order history requirements are known, but the purpose is not fully clear           | The business has clearly defined how order history needs to support customer service, reporting, or operations after launch                     |
-| **Customer account expectations**            | There is no clear plan for how customer accounts should behave after migration        | The team understands that customer continuity matters, but there is no clear plan yet   | There is a practical plan for account continuity, customer communication, and likely support impact                                             |
-| **SEO and redirect planning responsibility** | No one is clearly responsible for SEO continuity                                      | Someone is responsible, but there is no clear redirect or validation plan yet           | The business has a defined redirect plan and a clear SEO review plan for high-priority pages                                                    |
-| **Target platform readiness**                | The target platform has not been chosen                                               | The platform has been chosen, but requirements are still incomplete or still changing   | The target platform is chosen and the requirements are defined clearly enough for meaningful planning                                           |
-| **Validation responsibility**                | No one is clearly responsible for checking whether the migration result is acceptable | Someone is responsible, but the review criteria are still unclear                       | The project has clear review criteria and clear responsibility for confirming whether results are acceptable                                    |
-| **Timeline realism**                         | There is a fixed launch date with no buffer for review, correction, or risk           | There is a timeline, but it is likely too optimistic                                    | The timeline includes review time, validation stages, and a realistic buffer for risk                                                           |
-
-### The fastest ways to reduce risk if your score is low
+### Where low readiness usually improves fastest
 
 Low readiness usually improves fastest when the business focuses on a small number of clarifying steps.
 
-#### Define what must remain true after launch
+Start with the outcomes that cannot quietly fail:
 
-Start with the outcomes that cannot quietly break:
-
-* product purchasability
-* category and browse-path logic
+* product buying behavior
+* browse and navigation paths
 * customer continuity
-* order usability
-* SEO-critical page behavior
-* key entity relationships that must still work after launch
+* operationally important order history
+* important content or landing pages
+* app-driven or extension-driven business logic where it matters
 
-#### Identify where important data and logic live
+Once those outcomes are clearer, the next useful step is to identify which parts of the store are most likely to expose meaningful risk during early review.
 
-Map which data is:
+This usually gives the business more value than trying to define everything at once.
 
-* native to the platform
-* extension-driven
-* stored in custom fields
-* dependent on outside systems
+### How Demo Migration helps readiness, not just validation
 
-If materially important meaning depends on third-party apps, plugins, extensions, or external systems, the project should treat that as a higher-complexity signal early.
+Demo Migration is useful before full execution because it improves readiness as well as review.
 
-#### Run a Demo Migration using representative data
+A representative sample can help the business understand:
 
-The fastest way to uncover hidden complexity is to test the hardest cases, not the easiest ones.
+* what translates cleanly
+* what changes more than expected
+* where hidden complexity is concentrated
+* whether the planned migration path still looks appropriate
+* how much review work the final migration is likely to require
 
-A good sample often includes:
+That makes the scorecard more practical because readiness should be tested against visible evidence, not only against internal confidence.
 
-* complex products
-* important category paths
-* representative customers
-* representative orders
-* reviews or coupons where they matter
-* records affected by app-driven or extension-driven logic
+### How Custom Cart can affect readiness
 
-#### Clarify review ownership before launch pressure increases
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the migration project.
 
-Someone must be responsible for deciding whether migrated results are acceptable in:
+When you migrate to or from a Custom Cart, readiness usually depends more heavily on early expert review, clearer expectations, stronger sample-based proof, and more precise interpretation, transformation, and validation.
 
-* catalog behavior
-* customer continuity
-* order usability
-* SEO-critical pages
-* relationship integrity
+That is because migration involving a Custom Cart may require the migration tool to be adjusted and fine-tuned to fit the platform’s capabilities, data model, constraints, and project needs through the Custom Migration Service.
 
-Without that clarity, teams often discover too late that nobody was actually assigned to judge the result.
+For readiness purposes, the key question is whether the business is treating that added complexity as something that needs early clarification rather than late problem-solving.
 
-### Readiness and migration approach are connected
+### What a stronger readiness position looks like
 
-Readiness does not determine complexity by itself, but it helps reveal whether the project is likely to fit a more standard path or require more guided handling.
+A stronger readiness position usually means:
 
-A more standard path is more realistic when:
+* the business can explain why it is migrating
+* the must-protect outcomes are visible
+* the most important data and logic are understood
+* the highest-risk parts of the store are no longer hidden
+* the right reviewers are identified
+* the project has enough room for evidence-based correction
+* the migration path is being judged against real complexity, not just convenience
 
-* the target platform is chosen clearly
-* scope is defined
-* data awareness is strong
-* validation ownership is clear
-* third-party logic is limited or well understood
-
-A more guided or custom path becomes more likely when:
-
-* the store depends heavily on apps, plugins, extensions, or outside systems
-* key data lives in custom fields
-* relationship-heavy data needs careful preservation
-* filtered scope or non-standard treatment is needed
-* the standard process may not preserve expected meaning safely enough
-
-Where platform limitations, third-party logic, integrations, or data-model differences create higher preservation risk, Custom Migration or a Custom Job is often the safer path.
-
-### What readiness does not mean
-
-A strong readiness score does not mean the migration will be simple.
-
-It means the business is better prepared to:
-
-* identify risk early
-* choose a more suitable service model
-* interpret Demo Migration results productively
-* protect timeline quality
-* reduce avoidable surprises
-
-A weaker score does not mean migration should be abandoned. It usually means the business should strengthen the weakest planning areas before it commits to a launch date.
+This does not remove risk. It makes the risk easier to manage.
 
 ### Conclusion
 
-Migration readiness is not about whether a business is eager to move. It is about whether the project has enough clarity to make safe decisions before execution pressure takes over.
+Migration readiness is the difference between wanting migration and being prepared to guide it well.
 
-The most useful scorecards do not try to predict everything. They reveal whether the business has defined why it is moving, what must remain true after launch, where important data lives, who will review results, and whether the timeline leaves room to protect quality. When those answers are weak, the safest next step is not speed. It is clarification.
+A business is more ready when it can explain what the migration is trying to improve, what cannot quietly fail after launch, where the most important data and logic live, and who will judge whether the result is acceptable. That is what makes scope, timing, and migration-path decisions more trustworthy.
 
-Run a Demo Migration using representative data, especially complex products, realistic order cases, important browse paths, and records affected by apps or extensions. If the scorecard shows higher uncertainty around custom logic, third-party systems, or relationship-heavy data, Next-Cart can help assess whether Managed Migration, Custom Migration, or a Custom Job is the safer fit. Live Chat is useful when you need help aligning readiness, scope, and the right migration path before deeper commitments are made.
+Use this scorecard to expose uncertainty early rather than discovering it late under launch pressure. If the project still has major gaps, Demo Migration and Live Chat can help turn vague confidence into clearer evidence about what the migration must prove before moving forward.
 
-#### FAQs
+### FAQs
 
-<details>
+#### Can a business want migration and still have low readiness?
 
-<summary><strong>What is the most important preparation step before migration?</strong></summary>
+Yes. Wanting change is not the same as being ready to move safely. A business can have a strong reason to migrate while still lacking the planning clarity needed to scope, review, and launch responsibly.
 
-The most important step is defining what must remain true after launch. That gives the rest of the project a clear standard for what success should look like.
+#### What is the most important readiness question to answer first?
 
-</details>
+Usually: what must still work after launch? That question helps the business define the outcomes that matter most and gives the rest of the planning work a clearer standard.
 
-<details>
+#### Why is review responsibility part of readiness?
 
-<summary><strong>Can I still migrate if my readiness score is low?</strong></summary>
+Because migration quality depends on whether the right people can judge the result in the areas they understand best, such as buying behavior, customer continuity, operations, or SEO continuity. Without that, the project can move forward without a reliable way to confirm success.
 
-Yes, but the project will usually need more clarification and more review discipline before it is safe to commit to a launch date. Low readiness often means more revision cycles and higher risk, not that migration is impossible.
+#### Does low readiness mean the project should stop?
 
-</details>
+Not necessarily. It usually means the project needs more clarification before deeper commitments are made. The goal is to reduce uncertainty early, not to delay for its own sake.
 
-<details>
+#### Why is Demo Migration useful before the business feels fully ready?
 
-<summary><strong>Does a higher readiness score mean a shorter timeline?</strong></summary>
+Because it helps expose hidden complexity and turns abstract planning into something visible. That often makes readiness easier to improve because the business can review real examples instead of relying only on assumptions.
 
-Not always, but higher readiness usually means fewer surprises, less rework, and a more predictable timeline.
+#### How does a Custom Cart affect readiness?
 
-</details>
-
-<details>
-
-<summary><strong>What is the fastest way to uncover hidden complexity?</strong></summary>
-
-Run a Demo Migration using representative data, especially complex products, realistic order cases, and the browse paths that matter most to revenue.
-
-</details>
-
-<details>
-
-<summary><strong>Why is validation so important in migration projects?</strong></summary>
-
-Because successful migration requires both accurate data transfer and correct store behavior. Validation confirms whether the migrated store still supports customer journeys, operational workflows, reporting needs, and the relationships between records that make those outcomes possible.
-
-</details>
+It usually makes early clarification more important. If a Custom Cart is involved, the project often needs earlier expert review, stronger sample-based proof, and clearer expectations because the migration may require more precise interpretation, transformation, validation, and tailored tool handling through Custom Migration Service.

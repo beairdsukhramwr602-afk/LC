@@ -8,8 +8,8 @@
 ## Migration Fundamentals
 
 * [Migration Foundations](migration-fundamentals/migration-foundations/README.md)
-  * [The Beginner’s Guide to Ecommerce Migration](migration-fundamentals/quickstart/README.md)
-  * [What Is Shopping Cart Migration? Definition, Goals, and Outcomes](migration-fundamentals/quickstart/quickstart.md)
+  * [What Is Shopping Cart Migration?](migration-fundamentals/migration-foundations/quickstart.md)
+  * [The Beginner’s Guide to eCommerce Migration](migration-fundamentals/migration-foundations/quickstart-1.md)
 * [Migration Decision Readiness](migration-fundamentals/migration-decision-readiness/README.md)
   * [When Is the Right Time to Start an eCommerce Data Migration?](migration-fundamentals/quickstart/quickstart-1.md)
   * [Migration Readiness Scorecard: Is Your Business Ready to Move?](migration-fundamentals/quickstart/quickstart-2.md)
@@ -17,7 +17,7 @@
   * [Common Risks in Shopping Cart Migration and How to Prevent Them](migration-fundamentals/quickstart/quickstart-3.md)
 * [Data Foundations](migration-fundamentals/data-foundations/README.md)
   * [What You Need to Understand About Data Migration](migration-fundamentals/data-foundations/what-you-need-to-understand-about-data-migration.md)
-  * [Ecommerce Data Basics: Products, Customers, Orders, and Blog Posts](migration-fundamentals/data-foundations/e-commerce-data-basics-products-customers-and-orders.md)
+  * [E-commerce Data Basics: Products, Customers, Orders, and Blog Posts](migration-fundamentals/data-foundations/e-commerce-data-basics-products-customers-and-orders.md)
   * [Data Compatibility: What It Means and Why It Breaks](migration-fundamentals/data-foundations/data-compatibility-what-it-means-and-why-it-breaks.md)
   * [Entity Relationships: How Store Data Connects](migration-fundamentals/data-foundations/entity-relationships-how-store-data-connects.md)
 * [SEO and Traffic Continuity in Shopping Cart Migration](migration-fundamentals/seo-and-traffic-continuity-in-shopping-cart-migration/README.md)
