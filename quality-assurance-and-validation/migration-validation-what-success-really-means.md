@@ -2,7 +2,7 @@
 
 A migration is not successful because the data has finished transferring. It is successful when the new store still works in the ways the business depends on.
 
-That distinction matters because a target store can look complete while important behavior has changed. Product pages may exist but variant selection may no longer feel clear. Categories may appear populated but browsing paths may no longer match shopper intent. Customer accounts may exist but the expected login or account experience may feel different. Orders may be present but less usable for support or operations. Migration validation exists to answer a practical question: does the new store behave acceptably in the areas that matter most?
+That distinction matters because a target store can appear complete even as important behavior has changed. Product pages may exist, but variant selection may no longer feel clear. Categories may appear populated, but browsing paths may no longer match shopper intent. Customer accounts may exist, but the expected login or account experience may feel different. Orders may be present but less usable for support or operations. Migration validation exists to answer a practical question: Does the new store behave acceptably in the areas that matter most?
 
 Validation is therefore a judgment process, not a counting exercise. Counts can help confirm broad completeness, but they do not prove that relationships, customer flows, storefront clarity, or operational usability were preserved. A migration can match totals and still fail where the business feels the impact first. That is why outcome-based review is stronger than surface-level approval.
 
@@ -19,7 +19,7 @@ A store can show expected numbers for products, customers, or orders and still h
 * relationships between entities may no longer behave acceptably
 * priority pages may be reachable but commercially weaker than before
 
-This is why strong validation starts with the question, “What must still be true after launch?” rather than “Do the totals look right?” Totals matter, but they belong after higher-value behavioral checks, not before them.
+This is why strong validation starts with the question, **“What must still be true after launch?”** rather than **“Do the totals look right?”** Totals matter, but they belong after higher-value behavioral checks, not before them.
 
 ### What validation is really trying to prove
 
@@ -132,6 +132,14 @@ Different people may be best placed to judge product behavior, customer continui
 
 That answer should be behavioral and evidence-based, not just a feeling that the store seems complete.
 
+### How Custom Cart can raise the validation threshold
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, validation often needs a higher threshold for confidence because more of the store’s behavior may depend on custom structure, bespoke logic, or non-standard interpretation.
+
+In those cases, the key validation question becomes even more specific: not just whether the records moved, but whether the store still preserves the meaning the business expects in the parts of the system that were handled more specially.
+
+That does not change what validation is for. It raises the importance of choosing a representative sample, defining pass conditions clearly, and judging acceptability through business outcomes rather than visible completeness.
+
 ### Conclusion
 
 Migration validation succeeds when it proves that the new store is acceptably usable in the ways that matter most to the business.
@@ -142,42 +150,26 @@ Before treating a migration as ready for launch, define the 8 to 15 outcomes tha
 
 ### FAQs
 
-<details>
-
-<summary><strong>Why are record counts not enough to approve a migration?</strong></summary>
+#### Why are record counts not enough to approve a migration?
 
 Because counts can confirm broad completeness without proving that the store still works properly. A migration can match totals and still fail in product behavior, browsing quality, customer continuity, order usability, relationship integrity, or important storefront pathways.
 
-</details>
-
-<details>
-
-<summary><strong>What is the difference between validation and acceptance criteria?</strong></summary>
+#### What is the difference between validation and acceptance criteria?
 
 Validation is the review process. Acceptance criteria are the standards used to decide whether the result is acceptable. Validation checks the outcome, while acceptance criteria define how that judgment is made.
 
-</details>
-
-<details>
-
-<summary><strong>Do I need to validate every product and every order?</strong></summary>
+#### Do I need to validate every product and every order?
 
 Usually not. A representative sample is stronger than broad random checking because it focuses on best sellers, complex products, top categories, important customer scenarios, and operationally meaningful orders.
 
-</details>
-
-<details>
-
-<summary><strong>What should be validated first?</strong></summary>
+#### What should be validated first?
 
 Start with the areas where failure would matter most: best sellers, complex variant behavior, top categories and browsing paths, customer scenarios that support depends on, and order scenarios that affect operations.
 
-</details>
-
-<details>
-
-<summary><strong>Does Recent Data Migration remove the need for final validation?</strong></summary>
+#### Does Recent Data Migration remove the need for final validation?
 
 No. Data freshness and validation are related but separate decisions. Recent Data Migration helps keep the target store current, but the business still needs to confirm that the completed store behaves acceptably and reflects the latest expected outcomes before go-live.
 
-</details>
+#### How does a Custom Cart affect migration validation?
+
+Validation often needs a higher threshold for confidence because more of the store’s behavior may depend on custom structure, bespoke logic, or non-standard interpretation than in a more predictable supported-cart pairing.

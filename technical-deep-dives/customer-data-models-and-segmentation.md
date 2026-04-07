@@ -82,7 +82,18 @@ Password continuity is the exception, not the default.
 
 Where the target platform does not support password continuity through legacy hash verification, the safer assumption is that customers will need a password reset or account activation flow after launch. In those cases, the most important planning work is not technical recovery detail. It is defining a clear first-login experience, preparing customer communication, and ensuring the support team can explain what customers will experience.
 
-Where both platforms are open-source and the target platform is compatible, password continuity may be possible through Next-Cart Customer Password Plugin. In that case, the plugin adds the source platform’s password verification method to the target so customers can continue logging in with their existing passwords. Compatible targets include Magento, OpenCart, PrestaShop, WooCommerce, WordPress, Joomla, VirtueMart, and Shopware.
+Where the target platform supports password continuity through legacy hash verification and is compatible with Next-Cart Customer Password Plugin, continuity may be possible when the source platform is open-source. In that case, the plugin adds the source platform’s password verification method to the target so customers can continue logging in with their existing passwords.
+
+Compatible targets include:
+
+* Magento
+* OpenCart
+* PrestaShop
+* WooCommerce
+* WordPress
+* Joomla
+* VirtueMart
+* Shopware
 
 For cloud and SaaS targets, password continuity is typically not possible, so the safer planning path is a well-prepared first-login reset experience rather than assumed password continuity.
 
@@ -101,7 +112,9 @@ Apps, plugins, modules, and custom fields may influence:
 * subscription or loyalty behavior
 * operational rules tied to customer identity
 
-In those cases, the migration question is not only whether customer records move. The more important question is whether the target store can still use those records to support the same commercial and operational behavior. Where customer meaning depends heavily on extension-driven logic, standard handling may preserve records without preserving the intended account outcome. In those situations, a Custom Job or Custom Migration Service may be the safer path.
+In those cases, the migration question is not only whether customer records move. The more important question is whether the target store can still use those records to support the same commercial and operational behavior.
+
+Where customer meaning depends heavily on extension-driven logic, standard handling may preserve records without preserving the intended account outcome. The issue is not customer presence alone. It is whether the account still behaves in a way that is trustworthy for customers and usable for the business.
 
 ### What merchants should define before execution
 
@@ -166,54 +179,42 @@ Risk is higher when:
 * customer-specific workflows depend on modules or custom fields
 * the target platform supports only a simplified version of the original customer behavior
 
-In those situations, the real issue is not whether customer records can move. It is whether the target store can preserve the intended account, segmentation, and support experience clearly enough through standard handling alone. If important customer outcomes depend on non-standard fields, eligibility logic, or extension-driven behavior, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+In those situations, the real issue is not whether customer records can move. It is whether the target store can preserve the same customer meaning clearly enough through standard handling alone.
+
+If the main need is stronger expert execution and more controlled review of customer groups, account experience, and support-visible continuity, Managed Migration Service may be sufficient. If the account model depends on special eligibility logic, approval workflows, customer-specific structures, or more exclusive handling of how customer meaning should be preserved, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, customer structure, segmentation behavior, approval logic, support context, or account expectations may require more specialized interpretation because customer meaning may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
-Customer migration succeeds when returning customers still feel recognized and the business can still interpret who those customers are, not when profile records simply appear in the target store.
+Customer migration succeeds when the account still feels understandable and usable to both the customer and the business, not when profile records simply appear in the target store.
 
-A store can preserve names, emails, and addresses while still weakening trust if login behavior, segmentation logic, or support context changes unexpectedly. That is why customer continuity should be judged by account clarity, access expectations, segmentation behavior, and explainable first-login outcomes, not only by record presence.
+That is why customer continuity should be judged as account behavior, segmentation meaning, and realistic login expectation, not just as successful record transfer. When platforms treat identity, access, groups, and customer-specific logic differently, the customer may still exist while the account experience becomes less trustworthy, less clear, or less commercially useful.
 
-If your store depends on repeat-customer accounts, customer-group pricing, or business rules shaped by extensions, use a Demo Migration to review representative customer profiles early. Where the sample shows that standard handling preserves records but weakens account or segmentation behavior, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the customer types and account behaviors that matter most to repeat purchasing, support clarity, pricing integrity, and launch trust. Then review whether the target store still supports those outcomes before scaling further. If you need help deciding whether the issue is standard account-model difference, password continuity limitation, segmentation mismatch, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### Why is a migrated customer record not the same thing as customer continuity?
 
-<summary><strong>Will customer accounts still exist after migration?</strong></summary>
+Because continuity depends on more than record presence. It includes login expectations, address usability, support context, segmentation behavior, and how the business recognizes that customer after launch.
 
-Usually yes. Customer profiles can normally migrate so customers still exist in the new store. The more important question is how those accounts behave afterward, including login access, visible history, addresses, and any customer-specific pricing or visibility rules.
+#### Why do customers often need a password reset even when their profiles migrated?
 
-</details>
+Because password behavior depends on platform security design, not only on whether the customer record moved. Most platforms store passwords in non-reversible hashed forms, so continuity is often limited unless compatible legacy hash verification is possible.
 
-<details>
+#### When can existing customer passwords sometimes be preserved?
 
-<summary><strong>Will customers keep the same password after migration?</strong></summary>
+Usually only when the target platform supports password continuity through legacy hash verification and is compatible with Next-Cart Customer Password Plugin, and the source platform is open-source.
 
-Usually not. Password continuity is limited by platform security design, so many migrations require a password reset or account activation flow after launch. It may be possible only when both platforms are open-source and the target platform is compatible with Next-Cart Customer Password Plugin.
+#### Why is customer segmentation such a sensitive migration area?
 
-</details>
+Because groups, tiers, tags, and classifications often control pricing, visibility, eligibility, tax treatment, or workflow behavior. The customer can exist in the target store while still receiving the wrong commercial treatment.
 
-<details>
+#### When should customer continuity be treated as a high-risk migration area?
 
-<summary><strong>Which target platforms are compatible with Next-Cart Customer Password Plugin?</strong></summary>
+When login continuity matters to trust, customer groups affect pricing or access, B2B and retail customers coexist, or support and operations depend heavily on account context and extension-driven behavior.
 
-These are the compatible targets: Magento, OpenCart, PrestaShop, WooCommerce, WordPress, Joomla, VirtueMart, and Shopware. For cloud and SaaS targets, password migration is typically not possible, so a first-login reset experience should be planned instead.
+#### How does a Custom Cart affect customer-data preservation?
 
-</details>
-
-<details>
-
-<summary><strong>Why can customer records migrate correctly but pricing or visibility still change?</strong></summary>
-
-Because customer groups, tiers, and segmentation rules do not always map cleanly across platforms. A customer can be recognized correctly while the target platform applies pricing, visibility, or eligibility logic differently.
-
-</details>
-
-<details>
-
-<summary><strong>What should be reviewed first when customer continuity matters?</strong></summary>
-
-Start with repeat customers, support-relevant accounts, and customer segments that receive different pricing, visibility, or operational treatment. Those profiles expose continuity gaps faster than generic test accounts.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Customer structure, segmentation logic, account behavior, and support-visible continuity may require more specialized interpretation, restructuring, or migration-tool adjustment than a more predictable supported-cart pairing.

@@ -80,7 +80,9 @@ Apps, modules, plugins, custom menu structures, rules-based groupings, merchandi
 * how landing pages are structured
 * how customers move from menus to category pages to products
 
-In those cases, the migration question is not only whether category records move. It is whether the target store can still reproduce the browsing logic and category behavior the business depends on. Where a store relies heavily on non-standard hierarchy handling, custom menu structures, or special grouping behavior, standard handling may preserve records without preserving discovery quality. In those cases, a Custom Job or Custom Migration Service may be the safer path.
+In those cases, the migration question is not only whether category records move. It is whether the target store can still reproduce the browsing logic and category behavior the business depends on.
+
+When a store relies heavily on non-standard hierarchy handling, custom menu structures, or special grouping behavior, the risk is not only structural completeness. It is whether the category system still supports the same discovery paths and commercial outcomes after launch.
 
 ### What merchants should define before execution
 
@@ -142,54 +144,42 @@ Risk is higher when:
 * category pages act as important landing pages
 * the target platform represents hierarchy differently from the source platform
 
-In those situations, the real issue is not whether categories can move. It is whether the target store can preserve the same discovery behavior clearly enough through standard handling alone. If reliable navigation depends on preserving non-standard hierarchy behavior, special grouping logic, or commercially important merchandising patterns, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped adjustments are required.
+In those situations, the real issue is not whether categories can move. It is whether the target store can preserve the same discovery behavior clearly enough through standard handling alone.
+
+If the main need is stronger expert execution and more controlled review of category assignments, browse paths, and merchandising outcomes, Managed Migration Service may be sufficient. If reliable navigation depends on preserving non-standard hierarchy behavior, rules-based grouping, special browse logic, or more exclusive structural handling, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, catalog structure may require more specialized interpretation because hierarchy rules, grouping behavior, assignment logic, or custom browse architecture may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
-Category migration succeeds when customers can still browse to the right products through the paths that matter to the business.
+Catalog structure migration succeeds when customers can still move through the store in the ways that matter most to discovery, comparison, and conversion.
 
-A catalog can preserve category names, product assignments, and visible structure while still weakening discovery if hierarchy logic, grouping behavior, ordering, or landing-page intent changes. That is why category-heavy catalogs should be judged by browse continuity and discovery quality, not only by whether categories exist after migration.
+That is why category migration should be judged as browse architecture, not just as a successful transfer of names and parent-child relationships. When platforms represent category structure differently, the records may still appear present while high-value navigation paths become less clear, less intuitive, or less commercially effective.
 
-If your store depends on deep navigation, curated category paths, or category pages that carry strong commercial value, use a Demo Migration to review representative browse journeys early. Where the sample shows that standard handling preserves records but weakens discovery behavior, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the category paths and category pages that matter most to revenue, organic entry, and browse behavior. Then review whether the target store still supports those journeys with the right assignments, the right ordering, and the right landing-page intent before scaling further. If you need help deciding whether the issue is standard alignment, hierarchy mismatch, rules-based grouping risk, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### Why can category migration fail even when all categories appear in the target store?
 
-<summary><strong>Why can categories migrate correctly and still feel wrong after launch?</strong></summary>
+Because category migration is not only about preserving names and hierarchy. It is also about preserving assignment logic, browse paths, ordering, landing-page intent, and category behavior as customers actually experience it.
 
-Because navigation quality depends on more than category existence. Assignment logic, ordering, grouping behavior, and landing-page intent can all change the browsing experience even when category names and product totals look correct.
+#### Are categories just navigation structures?
 
-</details>
+No. Categories are independent entities connected to products, and in many stores they carry real discovery intent, commercial meaning, and landing-page value.
 
-<details>
+#### What is the difference between category hierarchy and broader catalog structure?
 
-<summary><strong>What should be reviewed first in a category-heavy catalog?</strong></summary>
+Hierarchy is one part of catalog structure. Broader catalog structure also includes product assignments, browse groupings, sorting defaults, featured placement, category-page content, and the journeys customers use to reach products.
 
-Start with top revenue categories, top organic-traffic categories, and the browse paths customers use most often to reach best sellers. These are the areas where navigation changes are most likely to affect commercial performance.
+#### When should catalog structure be treated as a high-risk migration area?
 
-</details>
+When the category tree is deep, browse paths drive conversion, manual ordering matters, landing-page categories are important, or navigation depends on rules, tags, custom menus, or extension-driven grouping logic.
 
-<details>
+#### Can category migration require more than standard handling?
 
-<summary><strong>Why does category hierarchy become difficult when moving to a different platform?</strong></summary>
+Yes. If preserving the intended browse behavior depends on special hierarchy logic, non-standard grouping, custom menu structures, or structurally different platform behavior, more exclusive handling may be needed.
 
-Because platforms do not always represent category relationships the same way. Some rely on strict trees, while others depend more on collections, menu structures, or flexible groupings. That difference can change how the storefront expresses the same catalog structure.
+#### How does a Custom Cart affect catalog-structure preservation?
 
-</details>
-
-<details>
-
-<summary><strong>Can custom menus or grouping rules affect category migration outcomes?</strong></summary>
-
-Yes. A store may rely on custom menu structures, special grouping logic, or theme-driven navigation behavior that is separate from the core category records. In those cases, preserving category data alone may not preserve the browsing experience customers expect.
-
-</details>
-
-<details>
-
-<summary><strong>When is a Custom Job more likely to be necessary for catalog structure?</strong></summary>
-
-Usually when category continuity depends on non-standard hierarchy handling, special menu structures, or browse logic that the target platform does not reproduce cleanly through standard handling alone.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Catalog structure may require more specialized interpretation because hierarchy rules, grouping behavior, and browse architecture may not fit a predictable supported-cart pattern cleanly enough for standard handling.

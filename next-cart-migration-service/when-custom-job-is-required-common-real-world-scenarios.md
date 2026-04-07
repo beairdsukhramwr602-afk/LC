@@ -195,6 +195,8 @@ Some migration projects involve a platform not currently on the standard support
 
 Standard migration assumes recognizable source and target structures. When the platform is heavily customized or non-standard, the migration may need to interpret or map structures that do not behave like a typical platform pairing.
 
+A migration from or to a Custom Cart is always a Custom Migration Service project. In these cases, the migration often needs more exclusive handling to fit structural differences, data modifications, migration-tool tweaks, interpretation demands, validation sensitivity, and other bespoke requirements.
+
 #### What usually makes this requirement more complex
 
 This becomes more complex when:
@@ -332,9 +334,9 @@ Yes. Excluding entire entities can be straightforward, but rule-based filtering 
 
 A representative Demo Migration is one of the best ways to tell. If the issue comes from a standard supported structure that needs clearer alignment, it may be a mapping issue. If the required outcome depends on transformation, non-standard logic, or data outside standard handling, it is more likely a Custom Job case.
 
-#### Can a Custom Cart trigger a Custom Job requirement?
+#### How should I think about Custom Cart in relation to Custom Job work?
 
-Yes. When the project involves non-standard or Custom Cart structures, preserving the required outcome often needs more exclusive handling, migration-tool adaptation, and bespoke interpretation than a more standard platform pairing.
+Any migration from or to a Custom Cart is already a Custom Migration Service project. The more useful question is which parts of that project will require bespoke handling inside the migration process, such as structural interpretation, data transformation, migration-tool adjustment, or other Custom Job requirements.
 
 #### Why is it better to identify a Custom Job early?
 

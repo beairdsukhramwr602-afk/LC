@@ -4,13 +4,13 @@ A product can appear complete after migration and still become harder to buy.
 
 That usually happens when the source and target platforms do not represent product choice in the same way. One platform may treat configuration as a mix of options, child products, conditional logic, or extension-driven fields. Another may require a clearer separation between what a customer selects, what becomes a sellable variant, and what remains descriptive information. When that structural difference is not identified early, the migrated product may still exist in the catalog while purchase behavior becomes less clear, less accurate, or less commercially usable.
 
-This is why variant logic needs its own planning lens. Product counts do not show whether a store depends on many purchasable combinations, variant-specific pricing or inventory, restricted combinations, or variant-linked images. Those are not surface-level details. They affect whether customers can select the right item confidently and whether the business can still fulfill, report, and support those purchases correctly after launch.
+This is why variant logic needs its own planning lens. Product counts do not show whether a store depends on many purchasable combinations, variant-specific pricing or inventory, restricted combinations, or variant-linked images. Those are not minor implementation details. They affect whether customers can select the right item confidently and whether the business can still fulfill, report, and support those purchases correctly after launch.
 
 ### Why variants and options create migration risk so quickly
 
-The hardest product migrations are rarely difficult because a catalog is large. They are difficult because the store’s buying logic lives inside product structure.
+The hardest product migrations are rarely difficult because the catalog is large. They are difficult because the store’s buying logic lives inside the product structure.
 
-Variant-heavy catalogs become harder to preserve when purchasing meaning depends on:
+Variant-heavy catalogs become harder to preserve when the purchase meaning depends on:
 
 * many option combinations
 * variant-level SKU, inventory, or price differences
@@ -38,19 +38,23 @@ Options are the customer-facing choices that help a shopper reach the right sell
 
 Attributes describe a product. Some attributes support filtering, comparison, or merchandising. Some are purely informational. Some may look like purchase choices in the source store even though they should not create separate sellable combinations in the target store.
 
-This distinction matters because a migration often goes wrong when too many descriptive fields are treated as purchase-defining, or when genuine sellable differences are flattened into display-only information. The result can be either variant explosion or loss of purchasing clarity.
+This distinction matters because a migration often goes wrong when too many descriptive fields are treated as purchase-defining, or when genuine sellable differences are flattened into display-only information. The result can be either a variant explosion or a loss of purchasing clarity.
 
-### Dependency structure, not independent relationship
+### Variants and options are dependency structures under products
 
 Variants and options should be understood as dependency structures under products, not as independent entities that stand alone.
 
 That distinction matters because variants and options do not have meaning without the parent product. If a product structure changes during migration, the child structures under it may still appear present while the actual purchase logic becomes distorted.
 
-### The most common structural mismatches across platforms
+This also helps explain why variant migration should be reviewed behaviorally, not only structurally. A set of child records can exist in the target store while the page no longer helps the customer reach the right sellable outcome with confidence.
+
+### Where platforms differ most
 
 Platforms differ in how strictly they separate sellable variation from descriptive content.
 
-In one environment, a merchant may have broad freedom to treat many fields as configurable product choices. In another, the target model may be more opinionated about which fields should become true variants, which should remain descriptive data, and which should be handled through extensions or custom fields. Some platforms are comfortable with rich parent-child product modeling. Others favor simpler product structures and push more specialized behavior into apps, theme logic, or custom data layers.
+In one environment, a merchant may have broad freedom to treat many fields as configurable product choices. In another, the target model may be more opinionated about which fields should become true variants, which should remain descriptive data, and which should be handled through extensions or custom fields.
+
+Some platforms are comfortable with rich parent-child product modeling. Others favor simpler product structures and push more specialized behavior into apps, theme logic, or custom data layers.
 
 These differences change more than administration. They change customer behavior after launch:
 
@@ -95,6 +99,8 @@ Apps, plugins, extensions, and custom fields often add:
 * marketplace or integration identifiers
 
 This matters because some of the most important product meaning may not live inside the default product model. A standard migration may move the core record successfully while leaving behind the logic that made the product commercially usable.
+
+This is one of the places where product structure can become less standard in practice than it appears at first glance. A configurable catalog may look manageable at the entity level while depending heavily on custom fields, extension-driven logic, or non-native behavior that changes how the customer actually buys.
 
 ### What merchants should define before execution
 
@@ -148,54 +154,42 @@ Risk is higher when:
 * product meaning is split across core records and extensions
 * the target platform can preserve the data only by simplifying the structure in ways that change buyer behavior
 
-In those cases, the real issue is not whether the data can move. It is whether the target store can preserve the same commercial meaning safely enough through standard handling alone. Where that remains uncertain, deeper review, stronger sample validation, and in some cases a Custom Job or Custom Migration Service may be the safer path.
+In those cases, the real issue is not whether the data can move. It is whether the target store can preserve the same commercial meaning safely enough through standard handling alone.
+
+If the product structure mainly needs stronger execution support and closer guided review, Managed Migration Service may be sufficient. If preserving the intended buying logic depends on more exclusive handling, data restructuring, migration-tool adjustment, or bespoke treatment, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, product structure often requires more specialized interpretation because sellable-item logic, option behavior, or dependent data may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
 Product variation problems are usually not record-transfer problems. They are product-meaning problems.
 
-A migration succeeds only when the target platform can still represent the choices that matter to customers and the sellable outcomes that matter to the business. When platforms treat variants, options, and attributes differently, the product page may still look complete while the buying experience becomes less accurate, less intuitive, or less operationally reliable. That is why configurable products should be judged by purchasability and selection clarity, not by whether all fields appear somewhere after migration.
+A migration succeeds only when the target platform can still represent the choices that matter to customers and the sellable outcomes that matter to the business. When platforms treat variants, options, and attributes differently, the product page can remain populated while buying clarity weakens. That is why the core planning task is to define what the real sellable item is, which choices should remain purchase-defining, and which fields should remain descriptive instead.
 
-If your catalog includes high-variation products, complex option logic, or product behavior shaped by extensions, a Demo Migration can help test representative products early against real buying behavior. Where the sample shows that standard handling may preserve records but not the commercial meaning of the product, Live Chat can help clarify whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the configurable products that carry the most revenue, the most structural complexity, or the most customer-selection risk. Then review whether the target representation still supports the intended buying logic before scaling further. If you need help deciding whether the issue is standard mapping, structural mismatch, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### What is the difference between a variant and an option?
 
-<summary><strong>What is the difference between a product variant and a product option during migration?</strong></summary>
+A variant is usually the actual sellable outcome with distinct commercial meaning, such as its own SKU, inventory state, or price difference. An option is the customer-facing choice used to reach that outcome.
 
-A variant is usually the sellable outcome that carries commercial meaning such as SKU, stock, price difference, or fulfillment identity. An option is the customer-facing choice used to reach that outcome. The distinction matters because platforms do not always model them the same way. If a migration treats every visible choice as a separate sellable combination, products can become harder to manage and harder for customers to buy correctly.
+#### Why do variants and attributes get confused so often during migration?
 
-</details>
+Because some platforms allow descriptive fields and purchase-defining fields to sit very close together. A field can look like a buying choice in the source store even when it should behave more like descriptive product data in the target.
 
-<details>
+#### What is variant explosion?
 
-<summary><strong>Why can a product look migrated but still behave incorrectly?</strong></summary>
+It is the problem created when too many fields are treated as purchase-defining combinations, producing unnecessary sellable outcomes and weakening product clarity, validation efficiency, and operational accuracy.
 
-Because product success is not just about record presence. A product can appear in the catalog while losing the structure that supports correct purchase behavior, such as valid combinations, variant-specific media, variant-level pricing, or clear option logic. The result is a product that looks present but shops wrong.
+#### Can a product migrate successfully and still become harder to buy?
 
-</details>
+Yes. The records can be present while option behavior, selection clarity, unavailable combinations, image changes, or operational identifiers no longer work in the same way.
 
-<details>
+#### When should configurable products be treated as a high-risk validation area?
 
-<summary><strong>When do variants become a major migration risk?</strong></summary>
+When they drive meaningful revenue, include many combinations, depend on variant-specific prices or images, or rely on custom fields, plugins, or special option behavior.
 
-Risk rises when products have many meaningful combinations, variant-specific prices or inventory, restricted combinations, inconsistent option naming, or app-driven configuration logic. These are structural complexity signals, not cosmetic details, and they usually deserve early validation in a representative sample.
+#### How does a Custom Cart affect product variation handling?
 
-</details>
-
-<details>
-
-<summary><strong>Can apps, plugins, or custom fields affect variant migration outcomes?</strong></summary>
-
-Yes. Many stores rely on added logic for personalization, bundles, compatibility, custom pricing, or structured product data. In those cases, the most important product meaning may not live in the core platform model alone. If that added logic materially affects how products are bought or interpreted, a Custom Job or Custom Migration Service may be the safer planning path.
-
-</details>
-
-<details>
-
-<summary><strong>How should I review complex products before approving a full migration?</strong></summary>
-
-Start with a representative sample rather than a random one. Include best sellers, products with the most complex option logic, products with variant-specific media or inventory meaning, and products influenced by extensions or custom fields. Then review whether customers can still select the correct item clearly and whether the product still supports the business behavior it must preserve after launch.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Product variation handling often becomes more sensitive because sellable-item logic, dependent structures, and custom behavior may require more specialized interpretation, restructuring, or migration-tool adaptation than a more predictable supported-cart pairing.

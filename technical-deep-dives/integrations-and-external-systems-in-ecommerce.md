@@ -64,11 +64,11 @@ A field may survive in the target store but appear in a different structure, rel
 
 Some integrations do not depend on the core store model alone. They depend on metadata, custom fields, plugin-managed structures, or rules added by modules and apps. If that added layer changes, the external system may still connect without producing the same result.
 
-#### The storefront is checked first and the operating environment is checked later
+### The storefront is checked first and the operating environment is checked later
 
-This is one of the most common reasons integration issues are discovered too late. Teams confirm that the new store looks good, then only later discover that reporting, shipping, segmentation, or downstream automation is no longer behaving as expected.
+This is one of the most common reasons integration issues are discovered too late.
 
-### The biggest risk is often outside the storefront
+Teams confirm that the new store looks good, then only later discover that reporting, shipping, segmentation, or downstream automation is no longer behaving as expected.
 
 Integration problems are often underestimated because they are not always visible to customers immediately.
 
@@ -86,7 +86,7 @@ The storefront may launch with products, pricing, and category pages appearing h
 
 That makes integrations one of the clearest examples of why migration should be judged by business behavior rather than by storefront appearance alone.
 
-### Where integrations and extensions overlap
+### The biggest risk is often outside the storefront
 
 External systems and extensions are not the same thing, but they often reinforce each other.
 
@@ -155,54 +155,42 @@ Risk is higher when:
 * integrations rely on extension-managed structures
 * the target platform changes key statuses, mappings, or field behavior in ways other systems may not interpret cleanly
 
-In those situations, the real issue is not whether store data can move. It is whether the wider operating environment can still interpret that data clearly enough through standard handling alone. If important business outcomes depend on exact identifiers, custom metadata, non-standard structures, or mapped workflows, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped handling is required.
+In those situations, the real issue is not whether store data can move. It is whether the wider operating environment can still interpret that data clearly enough through standard handling alone.
+
+If the main need is stronger expert execution and more controlled review of identifier continuity, status mapping, and operational scenarios, Managed Migration Service may be sufficient. If important business outcomes depend on exact identifiers, remapped workflows, extension-linked structures, or more exclusive handling of how downstream systems recognize store data, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, operational continuity may require more specialized interpretation because identifiers, field structures, mappings, and downstream system expectations may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
-Integration continuity succeeds when the business operating around the storefront still works after launch, not when the storefront alone appears complete.
+Integration continuity succeeds when the wider operating environment still recognizes and uses store data correctly after launch, not when the storefront alone looks healthy.
 
-A store can preserve products, customers, and orders while still weakening fulfillment, reporting, customer management, or automation if the external systems connected to those records no longer interpret them correctly. That is why integrations should be judged by operational continuity, identifier stability, and downstream behavior, not only by visible storefront results.
+That is why integrations and external systems should be judged through operational behavior, identifier continuity, and system-to-system meaning. When the platform changes, hidden disruption often appears where outside systems no longer interpret the new store in the same way, even though the visible site appears stable.
 
-If your store depends heavily on connected systems, custom identifiers, or extension-driven operational logic, use a Demo Migration to review representative workflows early. Where the sample shows that standard handling preserves store records but weakens external-system behavior, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the workflows that matter most to fulfillment, finance, reporting, customer continuity, and daily operations. Then review whether the target environment still supports those outcomes before scaling further. If you need help deciding whether the issue is standard integration alignment, identifier mismatch, status-mapping risk, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### Why can the storefront look correct while integrations still fail?
 
-<summary><strong>Why can the new storefront look correct while operations still break after migration?</strong></summary>
+Because many external systems depend on identifiers, statuses, field structures, and metadata rather than on what customers see directly in the storefront.
 
-Because many operational processes depend on external systems that interpret store data through identifiers, statuses, mappings, and custom fields. The storefront can look healthy while those connected systems no longer recognize the same records correctly.
+#### What is the most common reason integrations break after migration?
 
-</details>
+One of the most common reasons is that identifiers, status meanings, or field structures change in ways outside systems no longer interpret correctly.
 
-<details>
+#### Are integrations only about direct app connections?
 
-<summary><strong>Which integrations should be reviewed first after a migration sample?</strong></summary>
+No. They can also involve ERP, CRM, shipping, reporting, loyalty, subscriptions, finance, automation, marketplaces, and any other business systems that depend on store data to function correctly.
 
-Start with the systems most critical to daily operations, especially ERP, CRM, fulfillment, shipping, finance, automation, and reporting workflows that depend on exact identifiers or mapped data behavior.
+#### Why should integrations be validated through operational scenarios?
 
-</details>
+Because a connection can appear active while still producing the wrong business outcome. What matters is whether downstream systems still recognize the data and support the intended workflows.
 
-<details>
+#### When should integrations be treated as a high-risk migration area?
 
-<summary><strong>Why do integrations fail even when the core data seems to be present?</strong></summary>
+When daily operations depend on exact identifiers, multiple external systems rely on the store, reporting confidence matters, or extension-managed structures feed other systems.
 
-Because presence is not the same as operational meaning. A product, customer, or order may exist in the target store while the identifiers, statuses, metadata, or relationships an external system relies on have changed.
+#### How does a Custom Cart affect integration continuity?
 
-</details>
-
-<details>
-
-<summary><strong>Can metadata and custom fields affect external-system continuity?</strong></summary>
-
-Yes. Many integrations depend on hidden fields, mapped identifiers, and extension-managed structures rather than only on the default platform model. That is why integration planning and metadata planning are closely connected.
-
-</details>
-
-<details>
-
-<summary><strong>When is a Custom Job more likely to be necessary for integrations?</strong></summary>
-
-Usually when continuity depends on exact identifiers, transformed fields, non-standard mappings, extension-managed data, or business workflows that the target platform cannot support cleanly through standard handling alone.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Integration continuity may require more specialized interpretation, remapping, identifier handling, or migration-tool adjustment than a more predictable supported-cart pairing.

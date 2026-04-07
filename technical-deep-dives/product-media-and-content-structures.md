@@ -15,7 +15,7 @@ In many catalogs, product meaning depends on:
 * featured images
 * gallery images
 * image order
-* variant-specific images
+* variant-linked images
 * images embedded in descriptions
 * downloadable files or attachments
 * videos or external media links
@@ -65,7 +65,9 @@ Rich product content may include:
 * downloadable reference material
 * long-form sections that explain value or reduce hesitation
 
-When that structure changes, the page may still contain roughly the same information while becoming harder to scan, less persuasive, or less trustworthy. This is especially important for technical products, higher-consideration purchases, and products where the customer needs support before committing to buy.
+When that structure changes, the page may still contain roughly the same information while becoming harder to scan, less persuasive, or less trustworthy.
+
+This is especially important for technical products, higher-consideration purchases, and products where the customer needs support before committing to buy.
 
 ### Where platforms differ most
 
@@ -95,7 +97,9 @@ Apps, plugins, modules, and custom fields may influence:
 * rich content blocks
 * structured product specifications
 
-In those cases, the migration question is not only whether the media files or content fields move. The more important question is whether the target store can still present those assets in a way that preserves the original product meaning. Where product persuasion depends heavily on extension-driven media or custom content structures, standard handling may preserve records without preserving the page behavior that supports conversion. In those situations, a Custom Job or Custom Migration Service may be the safer path.
+In those cases, the migration question is not only whether the media files or content fields move. The more important question is whether the target store can still present those assets in a way that preserves the original product meaning.
+
+Where product persuasion depends heavily on extension-driven media or custom content structures, standard handling may preserve records without preserving the page behavior that supports conversion. The issue is not file presence alone. It is whether the product page still explains, reassures, and guides the customer effectively enough to support the same buying decision.
 
 ### What merchants should define before execution
 
@@ -162,54 +166,42 @@ Risk is higher when:
 * key product-page elements are controlled by extensions or custom fields
 * the target platform can store the assets but not reproduce the same presentation cleanly
 
-In those situations, the real issue is not whether images and content can move. It is whether the target store can preserve the same product-page meaning clearly enough through standard handling alone. If conversion depends on rich presentation, linked assets, or custom media behavior, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped adjustments are required.
+In those situations, the real issue is not whether images and content can move. It is whether the target store can preserve the same product-page meaning clearly enough through standard handling alone.
+
+If the main need is stronger expert execution and more controlled review of page experience after migration, Managed Migration Service may be sufficient. If conversion depends on rich presentation, linked assets, custom media behavior, or more exclusive handling of how product-page meaning should be preserved, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, media structure, rich product content, linked assets, or custom presentation behavior may require more specialized interpretation because product-page meaning may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
 Product media migration succeeds when the page still helps customers understand and trust the product, not when files simply reappear in the target store.
 
-Images, galleries, embedded content, videos, downloads, and structured descriptions often carry a large share of the product’s persuasive value. When those elements remain present but lose order, placement, clarity, or behavioral support, the page may still look complete while becoming less effective. That is why media-heavy product pages should be judged by presentation quality and decision support, not only by asset presence.
+That is why media and content should be judged as part of product-page meaning, not just as transferred assets. When platforms represent galleries, descriptions, downloads, videos, and rich content differently, the page may still look populated while becoming less clear, less persuasive, or less commercially useful.
 
-If your store depends on rich product storytelling, variant-linked visuals, downloadable assets, or extension-driven media behavior, use a Demo Migration to review representative product pages early. Where the sample shows that standard handling preserves records but weakens product-page clarity or trust, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the product pages where visual trust, structured explanation, or rich content matter most to purchase confidence. Then review whether the target store still supports the same decision-ready page experience before scaling further. If you need help deciding whether the issue is standard presentation change, linked-asset risk, structured-content loss, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### Why is product media migration more than moving image files?
 
-<summary><strong>Why can product images migrate and still create a weaker product page?</strong></summary>
+Because customers evaluate media as part of the page experience. Files can survive while image order, gallery behavior, trust signals, rich descriptions, or variant-linked visuals become weaker.
 
-Because product-page quality depends on more than image presence. Gallery structure, image order, variant-linked behavior, and page layout all affect how customers understand the product. A page can keep the files while losing some of the visual support that drives confidence.
+#### Can a product page keep the same information and still lose selling strength?
 
-</details>
+Yes. Content can remain present while becoming harder to scan, less visually clear, or less persuasive because the target platform structures and presents that content differently.
 
-<details>
+#### Why does image order matter so much?
 
-<summary><strong>Does image order really matter after migration?</strong></summary>
+Because the first images often carry the most commercial weight. If those visuals appear in a weaker order after migration, the customer may understand the product differently even when the gallery is technically complete.
 
-Yes. The first images usually have the strongest influence on purchase decisions. If important visuals no longer appear first, the product page can become less effective even when the full gallery exists.
+#### When should product media be treated as a high-risk migration area?
 
-</details>
+When the store depends heavily on visual selling, variant-linked media, structured descriptions, videos, downloadable assets, or extension-driven product-page behavior.
 
-<details>
+#### Can media and content migration require more than standard handling?
 
-<summary><strong>Can images inside product descriptions be affected by migration?</strong></summary>
+Yes. If important product-page meaning depends on custom presentation logic, linked assets, structured rich content, or extension-driven behavior, more exclusive handling may be needed.
 
-Yes. Description content may include embedded images or structured content that the target platform renders differently. The information can still be present while appearing in a less useful format or position on the page.
+#### How does a Custom Cart affect media and content preservation?
 
-</details>
-
-<details>
-
-<summary><strong>What should be reviewed first when product media matters to conversion?</strong></summary>
-
-Start with best sellers, high-traffic products, products with rich galleries, products with variant-linked images, and products that depend on videos, downloads, or structured descriptions. These reveal media-behavior changes faster than simple spot checks.
-
-</details>
-
-<details>
-
-<summary><strong>When is a Custom Job more likely to be necessary for product media and content?</strong></summary>
-
-Usually when important images, videos, downloads, or structured content blocks depend on extension-driven fields, non-standard storage behavior, or special presentation logic that the target platform does not reproduce cleanly through standard handling alone.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Media structure, product-page content, linked assets, and custom presentation behavior may require more specialized interpretation, restructuring, or migration-tool adjustment than a more predictable supported-cart pairing.

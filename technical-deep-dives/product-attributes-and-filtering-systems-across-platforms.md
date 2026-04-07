@@ -2,9 +2,9 @@
 
 A catalog can migrate successfully at the record level and still become harder to shop.
 
-That usually happens when structured product information changes meaning between platforms. Attributes are often expected to do several jobs at once: describe products, support comparison, drive filtering, shape category discovery, and in some cases influence merchandising logic. When the source and target platforms do not treat those roles the same way, the visible product data may still appear present while discovery becomes less reliable and buying decisions become harder to make.
+That usually happens when structured product information changes meaning between platforms. Attributes are often expected to do several jobs at once: describe products, support comparison, drive filtering, shape category discovery, and, in some cases, influence merchandising logic. When the source and target platforms do not treat those roles the same way, the visible product data may still appear present, while discovery becomes less reliable and buying decisions become harder to make.
 
-This matters most in large catalogs, technical product catalogs, and any store where customers narrow choices through filters before they ever reach a product page. In those stores, attribute quality is not just a data-cleanliness issue. It directly affects discoverability, comparison quality, and conversion. A store can look complete after migration while losing the structured meaning that helps customers find the right products quickly.
+This matters most in large catalogs, technical product catalogs, and any store where customers narrow choices through filters before they ever reach a product page. In those stores, attribute quality is not only a data-cleanliness issue. It directly affects discoverability, comparison quality, and conversion. A store can look complete after migration while losing the structured meaning that helps customers find the right products quickly.
 
 ### What product attributes are really for
 
@@ -20,11 +20,11 @@ That means attributes do more than store information. They help shape how custom
 * whether category pages feel trustworthy
 * whether discovery paths lead to the right products efficiently
 
-### Attributes are not the same as variants
+### Attributes and variants are not the same thing
 
 Attributes and variants often overlap in everyday language, but they do not serve the same role.
 
-Variants are sellable outcomes. They define what a customer can actually buy when a choice changes the purchasable item. Attributes, by contrast, often describe product meaning in a way that supports comparison and discovery. Some platforms allow the same field family to support both functions. Others separate variation-driving structures from descriptive characteristics much more strictly. When that distinction is not handled carefully, two common problems appear: too many combinations, or too little useful product meaning.
+Variants are sellable outcomes. They define what a customer can actually buy when a choice changes the purchasable item. Attributes, by contrast, often describe product meaning in a way that supports comparison and discovery. Some platforms allow the same field family to support both functions. Others separate variation-driving structures from descriptive characteristics much more strictly.
 
 A practical rule is:
 
@@ -85,7 +85,9 @@ Apps, plugins, modules, and custom fields may:
 * support compatibility selection
 * attach merchandising rules to structured product data
 
-In those cases, the migration question is not only whether the fields move. The more important question is whether the target store can still use those fields to support the same discovery behavior. When extension-driven logic carries significant commercial meaning, standard handling may preserve records without preserving the browsing outcome the business depends on. In those cases, a Custom Job or Custom Migration Service may be the safer path.
+In those cases, the migration question is not only whether the fields move. The more important question is whether the target store can still use those fields to support the same discovery behavior.
+
+When extension-driven logic carries significant commercial meaning, standard handling may preserve records without preserving the browsing outcome the business depends on. The issue is usually not field survival alone. It is whether the fields still drive filtering, narrowing, and comparison in a way that matches the store’s real buying journey.
 
 ### What merchants should define before execution
 
@@ -105,7 +107,7 @@ Some fields are essential for deciding between similar items even if they do not
 
 These are usually the highest-risk browse paths because small structural problems can affect many products at once.
 
-#### 4. Where is attribute meaning inconsistent today?
+#### 4. Where is attribute meaning inconsistent currently?
 
 A migration will not automatically solve duplicated names, mixed formats, or partial population across similar product families.
 
@@ -148,54 +150,42 @@ Risk is higher when:
 * the store depends on extension-driven search or filtering logic
 * important discovery behavior requires attribute transformation, consolidation, or reshaping rather than simple transfer
 
-In those situations, the real issue is not whether the catalog fields can move. It is whether the target platform can support the same discovery behavior clearly enough through standard handling alone. If reliable filtering depends on restructuring duplicated attributes, standardizing values, or preserving extension-owned browse behavior, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped transformation is required.
+In those situations, the real issue is not whether the catalog fields can move. It is whether the target platform can support the same discovery behavior clearly enough through standard handling alone.
+
+If the main need is stronger guided execution and closer review of how filtering behaves after migration, Managed Migration Service may be sufficient. If reliable discovery depends on transformation, consolidation, preserved extension-owned behavior, or more exclusive handling of how structured data should work, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, structured product characteristics may require more specialized interpretation because attribute meaning, filtering behavior, compatibility logic, or transformed discovery rules may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
-Attribute migration succeeds when structured product meaning remains usable in real browsing, not when fields merely appear in the target catalog.
+Attributes matter because they help customers find, compare, and trust the right products before they ever reach the final buying decision.
 
-Customers rely on attributes to narrow choices, compare similar products, and understand what makes one item more suitable than another. When that structured meaning becomes inconsistent, flattened, or disconnected from filtering behavior, the catalog may still look complete while discovery becomes weaker and decision-making becomes slower. That is why attribute-heavy catalogs should be judged by browsing quality, filter reliability, and comparison clarity, not only by field presence.
+A migration succeeds only when the target store still uses structured characteristics in a way that supports discovery clearly enough for the real catalog. That is why filtering should be judged as a behavior system, not as a field-presence check. When platforms treat attributes differently, the data may still appear present while the browsing experience becomes weaker, less consistent, or less commercially useful.
 
-If your store depends heavily on filtering, technical specifications, or extension-driven discovery logic, use a Demo Migration to review representative category paths early. Where the sample shows that standard handling preserves records but weakens discovery behavior, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the categories, product families, and filtering paths that matter most to conversion. Then review whether the target store still uses structured product characteristics in a way that supports narrowing, comparison, and buying confidence before scaling further. If you need help deciding whether the issue is standard alignment, attribute inconsistency, transformation need, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-<details>
+#### What is the difference between an attribute and a variant?
 
-<summary><strong>Why can product attributes migrate and still fail to support filtering?</strong></summary>
+A variant defines a sellable outcome. An attribute usually helps customers find, compare, or understand a product. Some platforms let the same field family serve both roles, but they should not be treated as identical by default.
 
-Because filtering depends on consistency, structure, and storefront behavior, not just on whether fields exist. If values are duplicated, unevenly populated, or not used by the target platform in the same way, the filter menu may still appear while browse results become unreliable.
+#### Why can filtering break even when attribute data is still present?
 
-</details>
+Because filtering depends on consistent structure, usable values, and target-side behavior. A field can survive migration while still failing to support narrowing, comparison, or browse logic in the storefront.
 
-<details>
+#### Are more product attributes always better for discovery?
 
-<summary><strong>What is the difference between an attribute and a variant in migration planning?</strong></summary>
+No. A smaller, cleaner, more consistent attribute system usually supports filtering better than a larger set filled with duplicates, mixed formats, or uneven population.
 
-A variant defines a sellable outcome. An attribute usually helps describe, compare, or narrow products. Some platforms connect these concepts more closely than others, which is why a migration can go wrong when descriptive data is treated like variation logic or true buying differences are flattened into informational fields.
+#### When should attribute structure be treated as a high-risk migration area?
 
-</details>
+When filtering is central to conversion, categories depend heavily on structured narrowing, product comparison relies on standardized values, or extension-driven search and filtering logic matters commercially.
 
-<details>
+#### Can attribute migration require transformation rather than simple transfer?
 
-<summary><strong>Which categories should be reviewed first when filtering matters?</strong></summary>
+Yes. Sometimes values need to be standardized, consolidated, reshaped, or placed into a different structure so the target store can preserve the intended discovery behavior.
 
-Start with categories that drive the most traffic or revenue, especially where many similar products depend on filtering for discovery. Those areas expose structural inconsistency faster than isolated product checks.
+#### How does a Custom Cart affect attribute and filtering preservation?
 
-</details>
-
-<details>
-
-<summary><strong>Can apps, plugins, or modules affect attribute migration outcomes?</strong></summary>
-
-Yes. Many stores rely on added logic for faceted search, compatibility filtering, comparison behavior, or custom product fields. In those cases, the challenge is not only whether data moves, but whether the target store can still use that data to support the same browsing and discovery behavior.
-
-</details>
-
-<details>
-
-<summary><strong>When is a Custom Job more likely to be necessary for attribute-heavy catalogs?</strong></summary>
-
-Usually when reliable filtering depends on transforming duplicated attributes, standardizing inconsistent values, or preserving discovery behavior that depends on extension-driven logic rather than simple field transfer.
-
-</details>
+A migration from or to a Custom Cart is always a Custom Migration Service project. Attribute meaning, filtering behavior, and structured discovery logic may require more specialized interpretation, transformation, or migration-tool adjustment than a more predictable supported-cart pairing.

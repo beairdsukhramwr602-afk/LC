@@ -2,9 +2,9 @@
 
 A migration can look successful on the storefront and still fail where the business actually depends on it.
 
-That usually happens when important store meaning lives outside the default product, customer, order, or content model. Many stores rely on metadata, custom fields, plugins, apps, modules, and extensions to carry pricing rules, product specifications, visibility logic, operational identifiers, fulfillment behavior, customer eligibility, reporting signals, or other business-critical meaning. When that added layer is not preserved correctly, the core records may still migrate while the store behaves differently after launch.
+That usually happens when important store meaning lives outside the default product, customer, order, or content model. Many stores rely on metadata, custom fields, plugins, apps, modules, and extensions to carry pricing rules, product specifications, visibility logic, operational identifiers, fulfillment behavior, customer eligibility, reporting signals, or other business-critical information. When that added layer is not preserved correctly, the core records may still migrate while the store behaves differently after launch.
 
-This matters because the most important data in a store is not always the most visible data. Some fields exist mainly so the storefront can display the right information. Others exist so outside systems, workflows, or rules continue to operate correctly. A migration therefore needs to be judged by what the data must still do after launch, not only by whether it appears somewhere in the target environment.
+This matters because the most important data in a store is not always the most visible data. Some fields exist mainly so the storefront can display the right information. Others exist so outside systems, workflows, or rules continue to operate correctly. A migration, therefore, needs to be judged by what the data must still do after launch, not only by whether it appears somewhere in the target environment.
 
 ### What metadata and custom fields usually represent
 
@@ -92,9 +92,19 @@ This often happens when the source and target platforms use different role syste
 
 Some metadata is not important on the storefront at all. It matters because ERP, CRM, shipping, fulfillment, automation, or reporting systems need exact identifiers or exact field logic after launch. If those values are missing, mismapped, or transformed incorrectly, business continuity weakens even when the storefront appears fine.
 
-#### The requirement is really transformation, not transfer
+### The requirement is really transformation, not transfer
 
-Sometimes the business does not just need the field moved. It needs the field reshaped, filtered, converted, or remapped so the target environment can preserve the intended outcome. Common examples include converting product attributes into categories, converting customer tags into customer groups, or migrating only entities that meet defined criteria.
+Sometimes the business does not just need the field moved. It needs the field reshaped, filtered, converted, or remapped so the target environment can preserve the intended outcome.
+
+Common examples include:
+
+* converting product attributes into categories
+* converting customer tags into customer groups
+* migrating only entities that meet defined criteria
+* changing how custom values are structured so target-side behavior still works
+* remapping identifiers so connected systems continue to recognize the record correctly
+
+This is one of the clearest places where migration planning improves when the business describes what the field must still do after launch, rather than only listing what field should exist.
 
 ### What a Custom Job usually addresses
 
@@ -176,34 +186,42 @@ Risk is higher when:
 * the target platform can store the values but not use them in the same way
 * the requirement involves transformation, filtering, or remapping rather than simple transfer
 
-In those situations, the real issue is not whether the data can move. It is whether the target store and connected systems can preserve the same behavior clearly enough through standard handling alone. If important outcomes depend on extension-driven fields, non-standard structures, or outside-system identifiers, Managed Migration Service or Custom Migration Service may be the safer path, with Custom Jobs used where scoped handling is required.
+In those situations, the real issue is not whether the data can move. It is whether the target store and connected systems can preserve the same behavior clearly enough through standard handling alone.
+
+If the main need is stronger expert execution and more controlled review of behavior-driving metadata, Managed Migration Service may be sufficient. If preserving the intended result depends on transformation, identifier-sensitive continuity, non-standard structures, or more exclusive handling of how metadata should work after migration, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
+
+A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, metadata meaning may require more specialized interpretation because field structures, extension-owned behavior, identifier logic, or custom business rules may not fit a predictable supported-cart pattern cleanly enough for standard handling.
 
 ### Conclusion
 
-Metadata migration succeeds when the hidden layer of business meaning still works after launch, not when extra fields merely exist in the target store.
+Metadata migration succeeds when the fields that matter still drive the same business meaning after launch, not when additional values simply appear somewhere in the target environment.
 
-Many stores depend on custom fields, plugin-managed structures, and external-system identifiers to keep storefront behavior, customer logic, operations, and reporting aligned. When that layer is preserved only partially, the store may look complete while key business outcomes weaken. That is why metadata and extension-related requirements should be judged by behavioral continuity, operational usability, and connected-system readiness, not only by field transfer.
+That is why metadata, custom fields, and extensions should be judged through the behaviors, workflows, and connected-system outcomes they control. When important meaning lives outside the default platform model, a migration can preserve core records while silently weakening the logic that makes the store commercially and operationally usable.
 
-If your store depends on extension-driven fields, non-standard structures, or identifiers used by outside systems, use a Demo Migration to review representative cases early. Where the sample shows that standard handling preserves records but not the behavior your business depends on, Live Chat can help determine whether Standard Migration Service remains suitable or whether Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+Start with the fields and extension-owned behaviors that affect pricing, visibility, eligibility, operational continuity, reporting, or connected-system recognition. Then review whether the target environment still uses them in a way that preserves the intended outcome before scaling further. If you need help deciding whether the issue is standard field alignment, transformation need, identifier sensitivity, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
 
 ### FAQs
 
-#### What is the difference between metadata and a custom field in migration planning?
+#### Why are metadata and custom fields so risky in migration?
 
-They often overlap in practice. The more important distinction is whether the value is part of the default supported model or whether it exists through extensions, custom structures, or non-standard handling. That difference usually determines how much risk it carries in migration.
+Because they often hold business meaning that the default platform model does not express directly. The field can survive while the behavior it used to control stops working.
 
-#### Why can a custom field migrate and still fail after launch?
+#### What is the difference between informational metadata and behavior-driving metadata?
 
-Because preserving the value is not the same as preserving its behavior. A field can exist in the target store while no longer driving pricing, filtering, visibility, tax treatment, or operational workflows the way it did before.
+Informational metadata is mainly kept for reference or historical completeness. Behavior-driving metadata must continue to control something important after launch, such as pricing, visibility, eligibility, filtering, or external-system recognition.
 
-#### What kinds of requirements usually point to a Custom Job?
+#### Why is “field exists” not a strong enough validation standard?
 
-Common signals include extension-managed fields, transformation rules, filtered migration scope, non-standard structures, and identifiers or metadata that outside systems need in exact form after launch.
+Because a field can still be present while no longer driving the intended storefront, workflow, or system behavior.
 
-#### Can metadata matter even if customers never see it?
+#### When does metadata migration become a transformation problem instead of a transfer problem?
 
-Yes. Some metadata exists mainly for operations, reporting, fulfillment, automation, or connected systems rather than storefront display. It can still be business-critical even when it is invisible to customers.
+When the target environment needs the field reshaped, remapped, filtered, or converted so the intended outcome still works after launch.
 
-#### What should be reviewed first when extension-driven data matters?
+#### Can metadata and extension logic require more than standard handling?
 
-Start with the fields that control real outcomes, such as pricing, visibility, filtering, eligibility, operational workflows, and external-system matching. Those cases reveal continuity risk faster than reviewing informational fields alone.
+Yes. If preserving the intended outcome depends on transformation, custom structures, exact identifiers, or extension-owned behavior, more exclusive handling may be needed.
+
+#### How does a Custom Cart affect metadata preservation?
+
+A migration from or to a Custom Cart is always a Custom Migration Service project. Metadata meaning, field structure, identifier logic, and extension-owned behavior may require more specialized interpretation, restructuring, or migration-tool adjustment than a more predictable supported-cart pairing.
