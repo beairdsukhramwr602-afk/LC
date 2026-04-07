@@ -1,10 +1,8 @@
 # How to Choose Next-Cart Migration Service Model
 
-Choosing the right migration service model is not mainly about how much data the store contains. It is about how much risk the business can carry, how much execution burden the team can absorb, and how much special handling is needed to preserve business-critical outcomes.
+Choosing the right migration service model is not mainly about how much data the store contains. It is about how much risk the business can carry, how much execution burden the team can absorb, and how much special handling is needed to preserve the outcomes that matter.
 
-That is why service-model choice should come **after** Demo Migration, not before it. A representative demo gives the clearest early evidence about whether the project looks predictable enough for customer-led execution, whether expert-led execution would reduce risk, or whether bespoke handling is needed to preserve meaning that standard processing may not protect safely.
-
-### Start with the real question
+That is why service-model choice should come after Demo Migration, not before it. A representative demo gives the clearest early evidence about whether the project looks predictable enough for customer-led execution, whether expert-led execution would reduce risk, or whether more exclusive handling is needed to fit non-standard requirements, data modifications, tool adjustments, or bespoke preservation needs.
 
 The most useful question is not:
 
@@ -14,7 +12,9 @@ It is:
 
 **What kind of support does this project actually need to preserve the outcomes that matter?**
 
-That usually depends on four areas:
+### Start with the real question
+
+A practical service-model decision usually depends on four areas:
 
 * how complex the store really is
 * how much execution burden the internal team can carry
@@ -27,9 +27,9 @@ When these areas are reviewed honestly, service fit becomes much clearer.
 
 Next-Cart offers three migration service models:
 
-1. **Standard Migration**
-2. **Managed Migration**
-3. **Custom Migration**
+1. Standard Migration
+2. Managed Migration
+3. Custom Migration
 
 Each one follows the same broad migration journey, but the distribution of execution burden is different.
 
@@ -67,10 +67,14 @@ In this model:
 
 * the customer’s role remains mainly consultative and informational
 * Next-Cart takes ownership of execution
-* one or more **Custom Jobs** are used where standard handling cannot preserve the required outcomes safely
+* one or more Custom Jobs are used where standard handling cannot preserve the required outcomes safely
 * the customer validates the final result against business requirements
 
-Custom Migration is best understood as **Managed Migration plus Custom Jobs**. It becomes the stronger fit when platform limitations, third-party logic, custom fields, filtered scope, or structurally difficult requirements need tailored handling beyond standard capability.
+Custom Migration is best understood as Managed Migration plus Custom Jobs. It becomes the stronger fit when platform limitations, third-party logic, custom fields, filtered scope, structurally difficult requirements, or transformation needs require tailored handling beyond standard capability.
+
+It is also the required path for any migration involving a Custom Cart.
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a Custom Cart is the source platform, the target platform, or both, the project requires more exclusive handling to fit the store’s structure, data modifications, migration-tool tweaks, interpretation demands, validation sensitivity, and other bespoke requirements that cannot be treated like a more standard platform pairing.
 
 ### Use Demo Migration as the decision foundation
 
@@ -82,7 +86,7 @@ A Demo Migration helps reveal:
 * whether important structure still behaves credibly
 * whether extension-driven or custom logic is shaping more of the store than expected
 * whether the customer can realistically review and validate the result with confidence
-* whether preserving business meaning appears to require standard handling, expert-led execution, or Custom Jobs
+* whether preserving business meaning appears to require standard handling, expert-led execution, or more specialized treatment
 
 This is why Demo Migration should be treated as the decision trigger rather than a formality. It replaces assumptions with evidence and makes service-model selection much more reliable.
 
@@ -92,9 +96,9 @@ A practical service-model choice usually comes down to five signals.
 
 #### 1. How predictable the complexity looks
 
-If the representative demo shows that core data maps cleanly, behavior remains understandable, and the remaining gaps are limited and explainable, a standard path may be realistic.
+If the representative demo shows that core data maps cleanly, behavior remains understandable, and the remaining gaps are limited and explainable, a more standard path may be realistic.
 
-If the demo reveals structurally important complexity, the project may need stronger execution support or bespoke handling.
+If the demo reveals structurally important complexity, the project may need stronger execution support or more exclusive handling.
 
 #### 2. How much of the execution burden the team can carry
 
@@ -132,7 +136,7 @@ Where those layers materially affect storefront behavior, discoverability, custo
 
 Validation workload is one of the strongest service-fit signals.
 
-If the team cannot review results quickly, clearly, and confidently enough to support the timeline, the risk goes up even when the data itself looks straightforward. Service fit improves significantly when validation ownership is defined early and when the team knows what “acceptable” means before the project goes too far.
+If the team cannot review results quickly, clearly, and confidently enough to support the timeline, the risk goes up even when the data itself looks straightforward. Service fit improves significantly when validation responsibility is defined early and when the team knows what acceptable means before the project goes too far.
 
 ### Choose Standard Migration when control is the goal and complexity is predictable
 
@@ -171,7 +175,7 @@ What Managed gives the customer:
 
 Managed is usually the better fit when the work itself is feasible within standard handling, but the business does not want successful execution to depend on internal migration-operation capacity.
 
-### Choose Custom Migration when preserving meaning requires bespoke handling
+### Choose Custom Migration when preserving meaning requires exclusive handling
 
 Custom Migration is often the safest fit when demo results or requirement review show that standard capabilities cannot preserve what matters reliably enough.
 
@@ -181,7 +185,7 @@ Common signals include:
 * third-party extension or module data the business depends on
 * non-standard structures that do not translate cleanly
 * filtered migration requirements that must be implemented consistently
-* migration to or from a custom cart
+* migration from or to a Custom Cart
 * workflow-critical data that needs transformation rules or special handling
 * business-critical meaning that would silently degrade under standard mapping
 
@@ -198,7 +202,7 @@ Custom Migration is not about adding complexity for its own sake. It is about pr
 
 A few recurring patterns make service-fit decisions easier.
 
-#### Pattern A: “We mainly need a clean transfer of core data”
+#### Pattern A: We mainly need a clean transfer of core data
 
 Typical needs:
 
@@ -207,10 +211,10 @@ Typical needs:
 
 Often best fit:
 
-* **Standard Migration** if the team can operate and validate internally
-* **Managed Migration** if the team wants expert-led execution and fewer operational handoffs
+* Standard Migration if the team can operate and validate internally
+* Managed Migration if the team wants expert-led execution and fewer operational handoffs
 
-#### Pattern B: “Our catalog is complex, and discovery must remain strong”
+#### Pattern B: Our catalog is complex, and discovery must remain strong
 
 Typical needs:
 
@@ -220,10 +224,10 @@ Typical needs:
 
 Often best fit:
 
-* **Managed Migration** if expert execution is the main need
-* **Custom Migration** if demo results show that business-critical fields or behaviors are not preserved without customization
+* Managed Migration if expert execution is the main need
+* Custom Migration if demo results show that business-critical fields or behaviors are not preserved without customization
 
-#### Pattern C: “We rely on apps, extensions, or custom fields”
+#### Pattern C: We rely on apps, extensions, or custom fields
 
 Typical needs:
 
@@ -233,9 +237,9 @@ Typical needs:
 
 Often best fit:
 
-* **Custom Migration** if standard capabilities cannot handle the requirement safely enough
+* Custom Migration if standard capabilities cannot handle the requirement safely enough
 
-#### Pattern D: “We have a tight timeline and cannot afford execution delays”
+#### Pattern D: We have a tight timeline and cannot afford execution delays
 
 Typical needs:
 
@@ -245,9 +249,9 @@ Typical needs:
 
 Often best fit:
 
-* **Managed Migration**, unless Custom Jobs are also required
+* Managed Migration, unless Custom Jobs are also required
 
-#### Pattern E: “We only want a subset of data migrated”
+#### Pattern E: We only want a subset of data migrated
 
 Typical needs:
 
@@ -258,7 +262,7 @@ Typical needs:
 Often best fit:
 
 * depends on the exact criteria and platform pairing
-* Require **Custom Migration** if filtering must be implemented as a defined rule set rather than as a workaround
+* stronger custom handling may be needed if filtering must be implemented as a defined rule set rather than as a workaround
 
 ### What to prepare before choosing a model
 
@@ -290,14 +294,14 @@ Examples include:
 Make it explicit:
 
 * who will review outcomes
-* what “acceptable” means
+* what acceptable means
 * what must be fixed versus what is understood as an acceptable platform difference
 
 Most teams choose the wrong service model when they treat validation as an afterthought. Validation workload is often the real decision driver.
 
 ### Final customer responsibility stays the same across all models
 
-Regardless of service tier, one rule does not change: **the customer remains responsible for final validation**.
+Regardless of service tier, one rule does not change: the customer remains responsible for final validation.
 
 That means the customer must confirm:
 
@@ -316,62 +320,28 @@ That is why the safest decision usually starts with a representative Demo Migrat
 
 Run a Demo Migration using representative complexity rather than simple records, then review results against clear acceptance criteria. If the findings are unclear or point toward higher-risk structures, Live Chat is a practical way to classify the issue as mapping, scope, platform capability, or Custom Job requirement and align on the safest service model for the project.
 
-#### FAQs
+### FAQs
 
-<details>
+#### Is the right service model mainly determined by store size?
 
-<summary><strong>Can I start with Standard Migration and upgrade to Custom Migration later?</strong></summary>
+No. Size affects workload, but complexity, execution burden, validation bandwidth, and special-handling needs are much stronger service-fit signals.
 
-Absolutely! While it is possible to begin with Standard Migration and switch to Custom Migration afterward, we recommend a more cost-effective strategy.
+#### When is Managed Migration usually the safer fit?
 
-Start with a Demo Migration to observe how your data performs in the target environment. If the demo uncovers high risks, limited internal resources, or specific custom needs, you can discuss and receive expert consultation via **Live Chat** to select the most suitable service model without the hassle of an upgrade.
+Usually when the project appears feasible within standard handling, but the internal team does not want successful execution to depend on customer-side operation, coordination, or timing control.
 
-This approach ensures a smoother, more informed migration process tailored to your needs.
+#### When is Custom Migration usually the safer fit?
 
-</details>
+Usually when preserving business-critical meaning depends on custom fields, extension-managed data, filtered rules, non-standard structures, migration from or to a Custom Cart, or other requirements that need more exclusive handling than standard migration can provide safely enough.
 
-<details>
+#### Can a Demo Migration help choose the right service model?
 
-<summary><strong>What is the difference between Managed Migration and Custom Migration?</strong></summary>
+Yes. A representative demo is often the clearest early evidence about whether the project looks predictable enough for Standard Migration, better suited to Managed Migration, or likely to need Custom Migration.
 
-Managed services offer expert-led execution of standard migrations, ensuring a smooth, hassle-free transition.
+#### What is the biggest mistake in service-model selection?
 
-When you need more tailored solutions, Custom services with Custom Jobs handle non-standard requirements like unique mapping rules, transformations, or plugin-driven data.
+One of the biggest mistakes is choosing a model based on surface simplicity while underestimating execution burden, hidden custom logic, or validation workload.
 
-Contact us via **Live Chat** to receive expert support and a tailored migration plan that meets your needs. Experience a seamless e-commerce migration designed to boost your growth.
+#### Does the customer still validate the final result across all service models?
 
-</details>
-
-<details>
-
-<summary><strong>Do I still need to validate results if I choose Managed or Custom?</strong></summary>
-
-Yes. The goal is to make validation easier and more reliable, not to eliminate it. Even with expert execution, you still want to review the areas most likely to impact customers and operations, such as product structure, variants, navigation, customers, orders, and URL continuity planning.
-
-</details>
-
-<details>
-
-<summary><strong>What are the most common signs that I need a Custom Migration?</strong></summary>
-
-Common signals include data stored in third-party modules or custom fields, special transformation rules, and business-critical behaviors that must match precisely in the target store.
-
-If you are unsure, **When Custom Job Is Required: Common Scenarios** is the most direct way to sanity-check your situation.
-
-</details>
-
-<details>
-
-<summary><strong>Is Managed Migration only for large stores?</strong></summary>
-
-Not necessarily. Managed Migration is often chosen because of timeline pressure, limited internal bandwidth, or the cost of mistakes, not only because of store size.
-
-</details>
-
-<details>
-
-<summary><strong>How do I avoid choosing a service model based on guesswork?</strong></summary>
-
-Use a Demo Migration as evidence. A small, representative demo tends to reveal whether your store behaves like a standard case or whether special handling and deeper guidance are needed.
-
-</details>
+Yes. The execution burden changes across Standard, Managed, and Custom. Final validation responsibility remains with the customer in all three cases.

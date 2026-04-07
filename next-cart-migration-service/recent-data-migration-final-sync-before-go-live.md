@@ -4,7 +4,7 @@ A migration project does not end when the main dataset finishes transferring.
 
 If the source store remains active during the migration timeline, new orders, new customers, updated products, and new content can continue to accumulate after the earlier migration run. That creates a freshness gap between the source store and the target store. Recent Data Migration exists to reduce that gap before launch so the completed target store reflects a more current and usable state.
 
-This is why Recent Data Migration should be understood as a final synchronization step tied to launch readiness, not as a substitute for good planning or a late attempt to repair earlier structural problems.
+That is why Recent Data Migration should be understood as a final synchronization step tied to launch readiness, not as a substitute for good planning or a late attempt to repair earlier structural problems.
 
 ### What Recent Data Migration is
 
@@ -41,7 +41,7 @@ That usually means keeping the target store current enough in areas such as:
 * recent customer creation
 * recent order activity
 * meaningful catalog changes
-* content updates tied to campaigns or landing-page continuity, where relevant
+* content updates tied to campaigns or landing-page continuity
 
 Not every project needs every data type to be equally current. In many stores, orders and customers are the highest priority. Catalog freshness depends more on how frequently products change, and content freshness depends on how heavily content is used in campaigns or search-driven traffic.
 
@@ -60,7 +60,9 @@ It also does not prove go-live readiness by itself. Synchronization reduces data
 
 ### Who performs the Recent Data Migration
 
-Across all service models, the customer initiates and runs Recent Data Migration. After that run, the customer is also responsible for validating that the newly imported data is correctly synchronized with the latest current data on the source cart.
+Across all service models, the customer initiates and runs Recent Data Migration.
+
+After that run, the customer is also responsible for validating that the newly imported data is correctly synchronized with the latest current data on the source cart.
 
 That responsibility matters because launch confidence depends on more than whether a sync was started. It depends on whether the target store now reflects the near-launch state the business expects.
 
@@ -86,7 +88,9 @@ Recent Data Migration works best when it supports a controlled launch sequence:
 4. Final validation is completed on the highest-risk pathways
 5. The business confirms go-live readiness
 
-The most useful first planning decision is to define what “fresh enough” means for launch. For many stores, that means recent customers and orders must be current. For others, catalog or content freshness may also matter materially.
+The most useful first planning decision is to define what “fresh enough” means for launch.
+
+For many stores, that means recent customers and orders must be current. For others, catalog or content freshness may also matter materially.
 
 When that decision is made early, Recent Data Migration becomes a controlled part of launch planning rather than a rushed reaction to stale data late in the project.
 
@@ -110,6 +114,16 @@ A practical go-live readiness standard is that:
 
 This is what turns Recent Data Migration from a sync event into part of a controlled cutover plan.
 
+### How Custom Cart can make freshness control more sensitive
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the project.
+
+When a Custom Cart is involved, freshness control can become more sensitive because newer records may still need more careful interpretation or validation before they can be trusted as launch-ready.
+
+That is especially true where newer source-store data depends on custom fields, bespoke structure, outside-system identifiers, or non-standard business logic that does not behave like a more predictable platform pairing.
+
+In those cases, the final sync is not only about keeping the store current. It is also about making sure the newly synchronized data still fits the configured logic, preserved meaning, and launch-ready expectations of the broader project.
+
 ### Common mistakes
 
 Common mistakes include:
@@ -123,7 +137,7 @@ Common mistakes include:
 
 These mistakes usually create avoidable pressure at the moment when the project needs the most control.
 
-#### Conclusion
+### Conclusion
 
 Recent Data Migration is the final synchronization step that helps an active store arrive at go-live with more current and usable data. Its job is not to repair earlier migration decisions. Its job is to reduce the freshness gap between earlier migration work and the launch-ready target store.
 
@@ -131,60 +145,28 @@ The safest way to use it is to decide early what must be current at launch, incl
 
 Define what “fresh enough” means for your store before go-live, especially for recent orders, customers, and other business-critical data. Then plan the final Recent Data Migration run around your launch timing so the target store is current where it matters most. If you need help deciding what must be current, how much growth to expect, or whether your launch plan needs stronger safeguards, Live Chat is a practical way to align freshness planning, validation priorities, and go-live readiness.
 
-#### FAQs
+### FAQs
 
-<details>
+#### Is Recent Data Migration required for every project?
 
-<summary><strong>Is Recent Data Migration required for every project?</strong></summary>
+Not always. It is most useful when the source store remains active during the migration timeline. If the store continues taking orders and customer activity continues, a final synchronization strategy is usually important for a clean launch.
 
-Not always. It is most useful when your source store remains active during the migration timeline.
+#### What is the difference between Recent Data Migration and a Demo Migration?
 
-If your store continues taking orders and customer activity continues, a final synchronization strategy is usually important for a clean launch.
+Demo Migration is an early proof run using a limited sample to validate mapping behavior and reveal complexity. Recent Data Migration is a final synchronization run designed to keep active-store changes current closer to launch.
 
-</details>
-
-<details>
-
-<summary><strong>What is the difference between Recent Data Migration and a Demo Migration?</strong></summary>
-
-Demo Migration is an early proof run using a limited sample to validate mapping behavior and reveal complexity.
-
-Recent Data Migration is a final synchronization run designed to keep active-store changes current closer to launch.
-
-</details>
-
-<details>
-
-<summary><strong>Does Recent Data Migration replace the need for validation?</strong></summary>
+#### Does Recent Data Migration replace the need for validation?
 
 No. Synchronization reduces data gaps, but validation confirms that the completed target store behaves correctly in the ways the business depends on.
 
-</details>
+#### Can Recent Data Migration be run more than once?
 
-<details>
+Yes. It can be run more than once if the project timeline, validation cycle, or launch schedule makes another freshness update worthwhile.
 
-<summary><strong>How do I know whether my store is “active enough” to need a final sync plan?</strong></summary>
+#### How does Recent Data Migration interact with Entity Points?
 
-If new orders, new customers, or meaningful product changes continue during your migration timeline, you should assume the target store will drift without a final synchronization step.
+Newly created records consume Entity Points when they are migrated successfully for the first time. Records already migrated successfully can be re-migrated without consuming additional Entity Points again.
 
-Planning it early is usually easier than trying to fix drift under go-live pressure.
+#### What should be current enough at launch?
 
-</details>
-
-<details>
-
-<summary><strong>When should I ask for expert guidance instead of planning it on my own?</strong></summary>
-
-If your launch window is tight, SEO continuity is high-stakes, or your store has custom behavior that must be preserved, a short Live Chat discussion can prevent planning errors. It is also a good moment to confirm service model fit and whether any Custom Jobs are likely to be needed based on your demo results.
-
-</details>
-
-<details>
-
-<summary><strong>Can Recent Data Migration help reduce go-live mistakes?</strong></summary>
-
-Yes, when it is treated as part of a deliberate launch plan. Many go-live issues come from stale data or incomplete synchronization.
-
-A final sync strategy reduces that risk, especially for order and customer activity that changed during the migration process.
-
-</details>
+That depends on the store, but recent orders and customers are often the highest priority. Catalog or content freshness may also matter where product changes or campaign-driven content remain important near go-live

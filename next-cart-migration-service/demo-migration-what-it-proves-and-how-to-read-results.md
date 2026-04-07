@@ -6,7 +6,9 @@ That is why its value is strategic as much as technical. A Demo Migration helps 
 
 ### What Demo Migration is meant to prove
 
-A Demo Migration is designed to answer a practical question: **does representative store data appear to translate into the target platform in a way that supports the business outcomes that matter most?**
+A Demo Migration is designed to answer a practical question:
+
+**Does representative store data appear to translate into the target platform in a way that supports the business outcomes that matter most?**
 
 That includes early insight into:
 
@@ -14,7 +16,7 @@ That includes early insight into:
 * whether important structure is represented in a workable way
 * whether entity relationships appear likely to hold together
 * whether product, category, customer, order, and content behavior still look credible in the target environment
-* whether the project is likely to need standard handling, more guided support, or custom treatment
+* whether the project is likely to need standard handling, more guided support, or more bespoke treatment
 
 The purpose is not to prove everything. It is to reveal enough about the store’s real data to guide the next decisions more intelligently.
 
@@ -22,7 +24,7 @@ The purpose is not to prove everything. It is to reveal enough about the store�
 
 A Demo Migration is powerful, but it has limits.
 
-It does **not** prove:
+It does not prove:
 
 * that every record in the full dataset will behave identically
 * that every edge case has already been uncovered
@@ -36,7 +38,9 @@ A strong demo reduces uncertainty. It does not eliminate the need for later vali
 
 The value of Demo Migration depends heavily on the quality of the sample.
 
-A random set of easy records may make the result look cleaner than the real project. A representative set is much more useful because it reveals complexity earlier. The most informative sample usually includes:
+A random set of easy records may make the result look cleaner than the real project. A representative set is much more useful because it reveals complexity earlier.
+
+The most informative sample usually includes:
 
 * top-selling or structurally important products
 * products with the most complex variants or options
@@ -52,11 +56,11 @@ A good sample is not meant to be large. It is meant to be revealing.
 
 Customers typically enter the migration journey through one of two demo paths.
 
-#### Self-Service Demo
+#### Self-Execute Demo
 
-With Self-Service Demo, the customer runs the Demo Migration independently.
+The customer can run the Demo Migration independently. This path is useful when the customer wants to explore the likely migration outcome directly and has enough internal confidence to review the result.
 
-This path is useful when the customer wants to explore the likely migration outcome directly and has enough internal confidence to review the result. If the outcome differs from expectations, Next-Cart support can help interpret the result through Live Chat and clarify what the sample may be revealing about the target platform, the source-store structure, or the migration approach.
+If the outcome differs from expectations, Next-Cart support can help interpret the result through Live Chat and clarify what the sample may be revealing about the target platform, the source-store structure, or the migration approach.
 
 #### Expert-Assisted Demo
 
@@ -68,7 +72,13 @@ In both cases, the demo outcome and follow-up discussion help determine the most
 
 ### What to review in Demo Migration results
 
-The most useful review mindset is not “Did the records appear?” It is “Does this still behave like the store we need?”
+The most useful review mindset is not:
+
+**Did the records appear?**
+
+It is:
+
+**Does this still behave like the store we need?**
 
 That usually means reviewing five areas.
 
@@ -160,13 +170,13 @@ This is the strategic question. It asks what the sample suggests about:
 * structural complexity
 * platform fit
 * the safest migration service model
-* whether Custom Migration or Custom Job handling may be required
+* whether more bespoke handling may be required
 
 This is why Demo Migration should be reviewed with business pass conditions in mind, not only surface-level visibility.
 
 ### What a good Demo Migration result looks like
 
-A good result does not mean “nothing changed.”
+A good result does not mean nothing changed.
 
 A good result usually means:
 
@@ -190,7 +200,7 @@ A weaker result may indicate:
 * important relationships are harder to preserve than assumed
 * third-party or custom logic is shaping more of the store than the team realized
 * a more guided service model is safer
-* Custom Migration or Custom Job handling may be needed
+* more bespoke handling or custom work may be needed
 
 This is why a disappointing demo can still be a valuable success. It prevents the business from carrying false confidence deeper into the project.
 
@@ -226,6 +236,21 @@ Even a strong Demo Migration does not replace:
 
 It should guide those later stages, not substitute for them.
 
+### How Custom Cart can affect what the demo reveals
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the project.
+
+When a Custom Cart is involved, the demo often becomes more valuable because it can reveal whether the store’s structure, field meaning, and business behavior will require more careful interpretation than a more standard platform pairing.
+
+In these cases, the sample is often doing more than proving transfer direction. It may also expose where the migration will need:
+
+* deeper transformation logic
+* more deliberate target-side interpretation
+* tool adjustments to fit the platform’s structure
+* stronger validation standards around preserved meaning
+
+That is why Custom Cart migration projects benefit from especially careful sample design and result interpretation. The demo may be the clearest early view of where standard assumptions stop being safe.
+
 ### Common mistakes when reviewing a demo
 
 Common mistakes include:
@@ -247,84 +272,30 @@ The strongest way to use it is to choose a representative sample, review outcome
 
 Choose a sample that reflects real complexity rather than simple records, then review the result against the behaviors your business cannot afford to lose. If the findings are unclear or point to deeper structural risk, Live Chat is a practical way to review the result, refine expectations, and determine whether Standard Migration, Managed Migration, or Custom Migration is the safer fit.
 
-#### FAQs
+### FAQs
 
-<details>
+#### What’s included in the demo version and how does it differ from the full version?
 
-<summary><strong>What’s included in the demo version and how does it differ from the full version?</strong></summary>
+The demo version is designed to evaluate results using limited sample data. It typically caps core record types such as products, customers, orders, blog posts, and CMS pages at a small number per run, applies a daily quota, and does not support background migration or custom data migration.
 
-The demo is designed to evaluate results using limited sample data. It typically caps core record types (such as products, customers, orders, blog posts, and CMS pages) at a small number per run, applies a daily quota, and does not support background migration or custom data migration.
+The full version removes these evaluation limits and supports full-scope migration based on the Entity Points Plan, with features such as background execution, Recent Data Migration, and Custom Jobs for custom requirements.
 
-The full version removes these evaluation limits and supports full-scope migration based on your Entity Points Plan, with features such as background execution, Recent Data Migration, and Custom Jobs for custom requirements.
-
-</details>
-
-<details>
-
-<summary><strong>Does Demo Migration prove that the full migration will be perfect?</strong></summary>
+#### Does Demo Migration prove that the full migration will be perfect?
 
 No. It provides early evidence using representative sample data, but it does not prove that every record, edge case, or later-stage requirement will behave identically in the full project.
 
-</details>
+#### What should I do if the demo result shows problems?
 
-<details>
+A demo is designed to surface what needs attention. Some issues point to configuration choices or mapping decisions, while others signal that custom scope exists and may require more tailored handling. Live Chat is the fastest way to clarify the path forward without guessing.
 
-<summary><strong>If the demo looks wrong, does that mean the migration cannot work?</strong></summary>
+#### Can Demo Migration confirm SEO continuity completely?
 
-Not necessarily. A demo is designed to surface what needs attention. Some issues point to configuration choices or mapping decisions, while others signal that custom scope exists and may require Custom Jobs.
+No. A demo can help validate priorities and feasibility, but it does not guarantee every SEO edge case. It is better treated as an early signal check for priority pages, URL behavior, and redirect planning.
 
-If you need help interpreting what the demo is telling you, Live Chat is the fastest way to clarify the path forward without guessing.
-
-</details>
-
-<details>
-
-<summary><strong>Does a Demo Migration prove SEO will be fully preserved?</strong></summary>
-
-A demo can help you validate priorities and feasibility, but it does not guarantee every SEO edge case.
-
-Treat it as a signal check: confirm priority pages, URL behavior, and redirect planning, then validate more deeply as you finalize go-live preparation.
-
-</details>
-
-<details>
-
-<summary><strong>What is the difference between Self-Service Demo and Expert-Assisted Demo?</strong></summary>
+#### Who performs the Demo Migration?
 
 With Self-Service Demo, the customer runs the demo independently and can use Live Chat support to interpret the result if needed. With Expert-Assisted Demo, the customer provides sample data and asks a Next-Cart expert to run the demo and review the result collaboratively.
 
-</details>
+#### Should the demo be run more than once?
 
-<details>
-
-<summary><strong>How many demos should I run before go-live?</strong></summary>
-
-Run as many as you need to reduce uncertainty, especially when you change assumptions or adjust scope.
-
-Many teams use an early demo to validate mapping behavior, then follow a repeatable validation mindset as they approach launch planning and recent data synchronization.
-
-</details>
-
-<details>
-
-<summary><strong>Can I close my browser during the migration process?</strong></summary>
-
-Background execution is not available in the demo. In the paid experience, migrations can run in the background so you do not need to keep a browser session open throughout the process.
-
-</details>
-
-<details>
-
-<summary><strong>Can Demo Migration help choose the right service model?</strong></summary>
-
-Yes. Demo results, together with follow-up consultation, help reveal whether the project is likely to fit Standard Migration or whether Managed Migration, Custom Migration, or Custom Jobs may be safer.
-
-</details>
-
-<details>
-
-<summary><strong>What should I do if the demo result looks incomplete or unexpected?</strong></summary>
-
-Treat that as useful information rather than immediate failure. Review whether the sample was representative, identify which outcomes are not matching expectations, and use the result to decide whether the project needs stronger guidance, deeper mapping review, or a more tailored migration path.
-
-</details>
+It can be. Many teams use an early demo to validate mapping behavior, then refine expectations or repeat the sample review later if their scope assumptions, validation priorities, or risk interpretation changes.
