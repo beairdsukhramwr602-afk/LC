@@ -1,7 +1,5 @@
 # How Next-Cart Performs a Migration
 
-## How Next-Cart Performs a Migration: Connection, Mapping, and Validation Flow
-
 A migration is not one technical event. It is a controlled process for moving store data from one platform environment to another while preserving the business meaning the store depends on.
 
 That is why Next-Cart’s migration flow should be understood as more than data transfer. The process begins by establishing reliable access to the source and target stores, then configuring how data should move into the target platform, then validating whether the migrated store behaves as expected before launch. When this flow is handled well, the result is not only a store that looks migrated, but one that remains usable in the ways the business needs most.
