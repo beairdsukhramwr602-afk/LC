@@ -65,7 +65,7 @@ This identifies which records, pages, or scenarios should be reviewed. A useful 
 
 #### 3. Pass condition
 
-This states what must be true for the result to be acceptable. A pass condition should describe behavior clearly, not just presence. For example, it is stronger to say “customers can select the correct variant without confusion” than “product exists.”
+This states what must be true for the result to be acceptable. A pass condition should describe behavior clearly, not just presence. For example, it is stronger to say **“customers can select the correct variant without confusion”** than **“product exists.”**
 
 #### 4. Warning sign
 
@@ -192,6 +192,19 @@ This creates a triage structure before issues are found.
 
 This prevents important outcomes from being assumed rather than judged.
 
+### How Custom Cart can change checklist design
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, checklist design often needs more precise pass conditions because more of the target behavior may depend on custom structure, bespoke logic, or non-standard interpretation.
+
+In those cases, a stronger checklist usually needs:
+
+* more careful outcome wording
+* more representative edge-case samples
+* clearer pass conditions for behavior-sensitive areas
+* tighter separation between acceptable differences and launch-critical risk
+
+That does not change what a checklist is for. It changes how precise the checklist must be in order to support trustworthy judgment.
+
 ### Conclusion
 
 A migration validation checklist is strongest when it helps the business judge launch readiness clearly, not when it simply creates a long review list.
@@ -202,42 +215,26 @@ Before final validation begins, choose the outcomes that would matter most if th
 
 ### FAQs
 
-<details>
-
-<summary><strong>How many items should a migration validation checklist include?</strong></summary>
+#### How many items should a migration validation checklist include?
 
 Usually fewer than teams first expect. A useful checklist often begins with 8 to 15 business-critical outcomes, then expands only where risk or complexity justifies it.
 
-</details>
-
-<details>
-
-<summary><strong>Should a checklist be organized by entity type or by business outcome?</strong></summary>
+#### Should a checklist be organized by entity type or by business outcome?
 
 Business outcome is usually stronger. Entity types still matter, but outcomes make it easier to review what the business actually needs to preserve after launch.
 
-</details>
-
-<details>
-
-<summary><strong>What is the difference between a checklist item and a pass condition?</strong></summary>
+#### What is the difference between a checklist item and a pass condition?
 
 A checklist item identifies what should be reviewed. A pass condition defines what acceptable looks like for that item. Without a pass condition, the checklist is much less useful for launch decisions.
 
-</details>
-
-<details>
-
-<summary><strong>Should SEO and priority-page checks be part of the validation checklist?</strong></summary>
+#### Should SEO and priority-page checks be part of the validation checklist?
 
 Yes, where page reachability, continuity, and customer intent matter to the business. These checks should focus on priority pages and important paths rather than trying to review every page equally.
 
-</details>
-
-<details>
-
-<summary><strong>Do extensions and outside systems need their own checklist items?</strong></summary>
+#### Do extensions and outside systems need their own checklist items?
 
 Yes, when they affect revenue, customer continuity, operations, reporting, or discoverability. A storefront-only checklist is often too narrow for complex migrations.
 
-</details>
+#### How does a Custom Cart affect a migration validation checklist?
+
+A migration from or to a Custom Cart is always a Custom Migration Service project. Checklist design often needs more precise pass conditions, more representative edge-case samples, and clearer definitions of what counts as acceptable versus launch-critical behavior.

@@ -25,7 +25,9 @@ This is why go-live readiness should be broader than final synchronization alone
 
 A migration project often builds pressure toward launch simply because the visible work appears nearly complete.
 
-That is where weak go-live decisions usually begin. Teams see that the new store looks presentable, assume the remaining issues are minor, and let timeline pressure do the work that validation evidence should do. A stronger approach is to judge launch readiness by outcomes such as:
+That is where weak go-live decisions usually begin. Teams see that the new store looks presentable, assume the remaining issues are minor, and let timeline pressure do the work that validation evidence should do.
+
+A stronger approach is to judge launch readiness by outcomes such as:
 
 * best sellers remain clear and purchasable
 * top browse paths still guide customers correctly
@@ -77,7 +79,9 @@ Both questions matter. Neither one answers the other.
 
 Not every continuity issue appears inside product or order data.
 
-Some of the most damaging launch-week failures come from priority pages and paths becoming unreachable, landing on the wrong destination, or no longer supporting the intent they previously served. That is why go-live review should include:
+Some of the most damaging launch-week failures come from priority pages and paths becoming unreachable, landing on the wrong destination, or no longer support the intent they previously served.
+
+That is why go-live review should include:
 
 * top category pages
 * best-selling product pages
@@ -142,6 +146,14 @@ Separate launch blockers from manageable items and lower-impact differences.
 
 The launch decision should follow reviewed outcomes and understood risk, not simply the fact that the project has reached the end of the timeline.
 
+### How Custom Cart can raise the go-live threshold
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, go-live confidence often needs a higher threshold because more of the result may depend on custom structure, bespoke logic, or non-standard interpretation.
+
+In those cases, the launch decision usually needs stricter judgment around whether the migrated store is not only present and current, but truly trustworthy enough in the business-critical areas that were handled more specially.
+
+That does not change what go-live review is for. It makes the evidence standard more important.
+
 ### Conclusion
 
 Preparing for go-live means deciding whether the new store is trustworthy enough for real customers and real business use, not merely whether the migration is technically finished.
@@ -152,42 +164,26 @@ Before go-live, review a short list of launch-critical outcomes, confirm freshne
 
 ### FAQs
 
-<details>
-
-<summary><strong>Is Recent Data Migration enough to make a store ready for go-live?</strong></summary>
+#### Is Recent Data Migration enough to make a store ready for go-live?
 
 No. It helps reduce freshness gaps, but it does not prove that the store behaves acceptably. Go-live readiness still depends on reviewed customer journeys, operational usability, priority-page reachability, and confidence in the final result.
 
-</details>
-
-<details>
-
-<summary><strong>What should be checked first before launch?</strong></summary>
+#### What should be checked first before launch?
 
 Start with the areas where failure would hurt most immediately: best sellers, top categories, representative purchase scenarios, customer continuity expectations, operationally meaningful orders, and priority pages or legacy paths that still matter.
 
-</details>
-
-<details>
-
-<summary><strong>What usually counts as a launch blocker?</strong></summary>
+#### What usually counts as a launch blocker?
 
 Problems that break revenue-critical purchase paths, weaken best-seller or top-category access, create serious customer confusion, make representative orders unreliable, or strand high-value traffic on the wrong destination usually deserve to be treated as launch blockers.
 
-</details>
-
-<details>
-
-<summary><strong>Should every page be reviewed before go-live?</strong></summary>
+#### Should every page be reviewed before go-live?
 
 Usually not. A stronger method is to focus on high-value pages and paths first, especially top categories, best-selling products, landing pages, service pages, and the legacy URLs that still matter most to the business.
 
-</details>
-
-<details>
-
-<summary><strong>What is the biggest mistake teams make before launch?</strong></summary>
+#### What is the biggest mistake teams make before launch?
 
 One of the most common mistakes is assuming that a store that looks complete is ready. Go-live decisions are strongest when they are based on validated outcomes, acceptable freshness, and clearly classified remaining issues rather than on timeline pressure or visual reassurance.
 
-</details>
+#### How does a Custom Cart affect go-live judgment?
+
+Go-live confidence often needs a higher threshold because more of the migrated result may depend on custom structure, bespoke logic, or non-standard interpretation than in a more predictable supported-cart pairing.

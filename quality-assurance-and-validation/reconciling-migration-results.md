@@ -145,6 +145,14 @@ A mismatch only becomes useful to interpret when the team understands whether it
 
 This is the step that makes reconciliation useful for launch decisions rather than just for observation.
 
+### How Custom Cart can make reconciliation more sensitive
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, reconciliation often becomes more sensitive because some differences may be harder to classify using standard expectations.
+
+In those cases, more discrepancies may depend on custom structure, bespoke logic, transformed data meaning, or non-standard interpretation. That makes it more important to explain why a difference exists and whether it reflects an acceptable designed outcome, a custom handling decision, or a real continuity problem.
+
+This does not change what reconciliation is for. It increases the importance of clear classification and business-impact reasoning.
+
 ### Conclusion
 
 Reconciling migration results is the process that turns visible differences into informed judgment.
@@ -155,42 +163,26 @@ Before treating a migration result as launch-ready, classify the most important 
 
 ### FAQs
 
-<details>
-
-<summary><strong>What is the difference between validation and reconciliation?</strong></summary>
+#### What is the difference between validation and reconciliation?
 
 Validation checks whether the target store behaves acceptably. Reconciliation explains the differences between source and target and helps decide whether those differences are acceptable, expected, or risky.
 
-</details>
-
-<details>
-
-<summary><strong>Do mismatched counts always mean something went wrong?</strong></summary>
+#### Do mismatched counts always mean something went wrong?
 
 No. Some mismatches reflect platform-normal behavior, intentional scope choices, or accepted mapping differences. The important question is whether the difference is understood and acceptable in business terms.
 
-</details>
-
-<details>
-
-<summary><strong>Can matching totals still hide a bad migration outcome?</strong></summary>
+#### Can matching totals still hide a bad migration outcome?
 
 Yes. Counts can match while priority behaviors, relationships, or operational usability still weaken. Matching totals are useful, but they are not proof of preserved business meaning.
 
-</details>
-
-<details>
-
-<summary><strong>What should be reconciled first?</strong></summary>
+#### What should be reconciled first?
 
 Start with the highest-impact areas: best sellers, important browse paths, representative customer and order scenarios, priority pages, and any behavior shaped by extensions or outside systems.
 
-</details>
-
-<details>
-
-<summary><strong>What makes a difference acceptable during reconciliation?</strong></summary>
+#### What makes a difference acceptable during reconciliation?
 
 A difference becomes acceptable when it is understood, intentionally accepted, and judged not to weaken the business outcome that matters for launch.
 
-</details>
+#### How does a Custom Cart affect reconciliation?
+
+Reconciliation often needs a more careful classification lens because more differences may reflect custom structure, bespoke handling, transformed data meaning, or non-standard interpretation than in a more predictable supported-cart pairing.
