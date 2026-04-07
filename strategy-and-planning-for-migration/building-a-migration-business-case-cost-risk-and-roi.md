@@ -2,9 +2,9 @@
 
 Two migration projects can involve similar product counts and still have very different levels of difficulty.
 
-That is because migration complexity is rarely driven by size alone. It is driven by how much meaning is packed into the store’s structure, relationships, data quality, customer-facing behavior, outside systems, and launch expectations. A store with a modest catalog can still be highly complex if it depends on fragile browse logic, custom fields, extension-managed behavior, or strict validation requirements.
+That is because migration complexity is rarely driven by size alone. It is driven by how much meaning is packed into the store’s structure, customer-facing behavior, data quality, extensions, outside systems, and launch expectations. A store with a modest catalog can still be highly complex if it depends on fragile browse logic, custom fields, extension-managed behavior, or strict validation requirements.
 
-This is why complexity should be treated as a planning question, not just a technical surprise that appears later. The more clearly a business understands its complexity drivers early, the easier it becomes to choose the right migration approach, define realistic scope, and avoid avoidable rework.
+This is why complexity should be treated as a planning question, not as a technical surprise that appears later. The more clearly a business understands its real complexity drivers early, the easier it becomes to define realistic scope, choose the right migration approach, and avoid avoidable rework.
 
 ### Complexity is about structure and behavior, not just volume
 
@@ -34,7 +34,7 @@ Typical complexity drivers include:
 * product attributes used for filtering or comparison
 * product data shaped by extensions or custom fields
 
-A catalog can look manageable by record count while still being structurally difficult if the real buying experience depends on precise option behavior, filter logic, or extension-driven product fields.
+A catalog can look manageable by record count while still be structurally difficult if the real buying experience depends on precise option behavior, filter logic, or extension-driven product fields.
 
 This matters because migration risk rises whenever products must remain commercially usable, not just visibly present.
 
@@ -80,7 +80,7 @@ It often lives in:
 
 This matters because standard migration may handle the core entities while leaving behind the business-critical meaning added by those layers.
 
-The more a store depends on these external or customized layers, the more likely the project will require deeper review, stronger validation, or bespoke handling. Where that complexity is materially important, Demo Migration can help reveal whether the project still looks suitable for **Standard Migration Service** or whether **Managed Migration Service** or **Custom Migration Service** may be safer.
+The more a store depends on these external or customized layers, the more likely the project will require deeper review, stronger validation, or more tailored handling.
 
 ### Data mapping difficulty is a major complexity signal
 
@@ -144,7 +144,7 @@ This means complexity is not only about migration execution. It is also about ho
 
 ### SEO and traffic continuity can make a migration meaningfully harder
 
-Some migrations become more complex because traffic continuity matters almost as much as data continuity.
+Some migrations become more complex not because of size, but because traffic continuity matters almost as much as data continuity.
 
 That often happens when:
 
@@ -193,9 +193,17 @@ A strong early complexity check usually includes:
 * a review of category and browse pathways
 * a short inventory of apps, plugins, extensions, and outside systems
 * a look at custom fields and unusual business rules
-* a realistic discussion of who is responsible for the validation of each major outcome area before go-live
+* a realistic discussion of who is responsible for validation of each major outcome area before go-live
 
 This is also why Demo Migration is valuable early. It helps confirm whether the store’s complexity is mostly manageable, mostly execution-related, or strong enough to require more guided handling.
+
+### How Custom Cart can intensify complexity
+
+When a Custom Cart is involved, complexity often rises because preserving the intended result may require more precise interpretation, transformation, validation, and tool fine-tuning than a more straightforward project.
+
+The key issue is not simply that the project is different in name. It is that the business meaning carried by the source or target structure may require more tailored handling to preserve compatibility and data integrity successfully.
+
+That is why migration involving a Custom Cart proceeds through Custom Migration Service. In these cases, early expert review and representative sample analysis help clarify whether the complexity is mainly structural, mainly validation-related, or likely to require deeper handling from the start.
 
 ### Complexity should influence migration approach
 
@@ -214,54 +222,38 @@ A clearer reading of complexity improves:
 * approach selection
 * validation planning
 * timeline realism
-* the decision about whether **Managed Migration Service** or **Custom Migration Service** may be needed
+* the decision about whether a more guided or more tailored path may be needed
 
 ### Conclusion
 
 What makes an eCommerce migration complex is not mainly the size of the dataset. It is the amount of business meaning packed into the store’s structure, behavior, relationships, extensions, outside systems, and validation requirements.
 
-That is why complexity should be identified early and judged through representative risk signals rather than through volume alone. When a business knows where its real complexity lives, it becomes much easier to choose the right migration approach, define scope more realistically, and avoid the false confidence that causes late surprises.
+That is why complexity should be identified early and judged through representative risk signals rather than volume alone. When a business knows where its real complexity lives, it becomes much easier to define scope more realistically, choose the right migration approach, and avoid the false confidence that causes late surprises.
 
 Use a representative sample to test where structure, behavior, and custom logic are most likely to create difficulty before the project goes too far. If you need help deciding whether your complexity is mainly about execution burden, platform fit, or special handling requirements, Live Chat is a practical way to clarify the safest planning path before timelines tighten.
 
 ### FAQs
 
-<details>
-
-<summary><strong>Does a large catalog automatically mean the migration is complex?</strong></summary>
+#### Does a large catalog automatically mean the migration is complex?
 
 Not necessarily. Size increases workload, but structure is often the larger risk. A smaller store with complex variants, messy attributes, extension-driven logic, or high validation burden can be harder than a larger store with cleaner structure.
 
-</details>
+#### What is the most underestimated source of migration complexity?
 
-<details>
+Validation burden is one of the most underestimated sources. A project becomes more complex when the business has many non-negotiable outcomes, weak review structure, or too little time to confirm that the result is acceptable before launch.
 
-<summary><strong>What is the most underestimated source of migration complexity?</strong></summary>
-
-Validation burden is one of the most underestimated sources. A project becomes more complex when the business has many non-negotiable outcomes, weak review structure, or too little time to confirm that the result is acceptable before launch. A Demo Migration often makes that burden visible earlier.
-
-</details>
-
-<details>
-
-<summary><strong>Can dirty data make a migration more complex even if the store is not large?</strong></summary>
+#### Can dirty data make a migration more complex even if the store is not large?
 
 Yes. Inconsistent naming, duplicate records, messy attributes, and old workaround fields can make mapping harder, increase ambiguity, and raise the amount of validation needed after migration.
 
-</details>
+#### Why do apps and extensions make migrations harder?
 
-<details>
+Because they often store business-critical meaning outside the default platform model. Standard migration may move the core entities while leaving behind the extension-driven logic or metadata the business depends on.
 
-<summary><strong>Why do apps and extensions make migrations harder?</strong></summary>
-
-Because they often store business-critical meaning outside the default platform model. Standard migration may move the core entities while leaving behind the extension-driven logic or metadata the business depends on. Where that logic is important, Next-Cart can help determine whether **Custom Migration Service** or a **Custom Job** is the safer fit.
-
-</details>
-
-<details>
-
-<summary><strong>How can a business identify migration complexity early?</strong></summary>
+#### How can a business identify migration complexity early?
 
 The most reliable early method is to review a representative sample, identify which business outcomes are non-negotiable, inventory extensions and outside systems, and check where structure or data quality is likely to create ambiguity in the target platform.
 
-</details>
+#### How does a Custom Cart affect migration complexity?
+
+It can make the project more complex because preserving the intended result may require more precise interpretation, transformation, validation, and tailored tool handling. That is why migration involving a Custom Cart proceeds through Custom Migration Service and benefits from early expert review and representative sample analysis.

@@ -36,7 +36,7 @@
 ## Next-Cart Migration Service
 
 * [Entity Points Explained: How Migration Scope Is Measured](next-cart-migration-service/entity-points-explained-how-migration-scope-is-measured.md)
-* [How Next-Cart Performs a Migration: Connection, Mapping, and Validation Flow](next-cart-migration-service/how-next-cart-performs-a-migration-connection-mapping-and-validation-flow.md)
+* [How Next-Cart Performs a Migration](next-cart-migration-service/how-next-cart-performs-a-migration-connection-mapping-and-validation-flow.md)
 * [Demo Migration: What It Proves and How to Read Results](next-cart-migration-service/demo-migration-what-it-proves-and-how-to-read-results.md)
 * [Recent Data Migration: Final Sync Before Go Live](next-cart-migration-service/recent-data-migration-final-sync-before-go-live.md)
 * [How to Choose Next-Cart Migration Service Model](next-cart-migration-service/how-to-choose-next-cart-migration-service-model.md)

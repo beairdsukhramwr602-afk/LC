@@ -9,15 +9,15 @@ metaLinks:
 
 Migration validation is weakest when it begins after the data has already moved.
 
-By that stage, the project is usually under more pressure, more people are involved, and the cost of ambiguity is higher. That is why validation should be planned before execution, not improvised after it. A strong validation plan defines what the business needs to confirm, who is responsible for checking it, and what acceptable actually means before launch pressure begins to distort judgment.
+By that stage, the project is usually under more pressure, more people are involved, and the cost of ambiguity is higher. That is why validation should be planned before execution, not improvised afterward. A strong validation plan defines what the business needs to confirm, who is responsible for checking it, and what acceptable actually means before launch pressure begins to distort judgment.
 
-This article explains how to plan migration validation and acceptance criteria so the project can judge results through business outcomes rather than through record totals alone.
+This article explains how to plan migration validation and acceptance criteria so the project can judge results through business outcomes rather than through record counts alone.
 
 ### Validation planning is about defining acceptable before the project gets rushed
 
 A migration project does not succeed because the data appears in the target store. It succeeds when the migrated store still supports the outcomes the business depends on.
 
-That means validation should begin with questions such as:
+That means validation planning should begin with questions such as:
 
 * what must still work after launch
 * what differences are acceptable
@@ -90,13 +90,13 @@ Which records, pages, or workflows should be used to test the outcome realistica
 
 What kind of difference is acceptable, and what kind of difference requires correction before go-live.
 
-Without these five elements, validation often becomes inconsistent and overly subjective.
+Without these five elements, validation often becomes inconsistent and too subjective.
 
 ### Validation should be organized by outcome area
 
 A useful validation plan separates review into the business areas that matter most.
 
-### Product validation criteria
+#### Product validation criteria
 
 Product validation usually needs to confirm that:
 
@@ -108,7 +108,7 @@ Product validation usually needs to confirm that:
 
 A useful acceptance standard is not just “the product exists.” It is “the product still supports the intended customer buying decision.”
 
-### Category and discovery validation criteria
+#### Category and discovery validation criteria
 
 Category and browse validation usually needs to confirm that:
 
@@ -119,7 +119,7 @@ Category and browse validation usually needs to confirm that:
 
 A category page can remain visible and still fail if it no longer supports the browse intent the business depends on.
 
-### Customer continuity validation criteria
+#### Customer continuity validation criteria
 
 Customer validation usually needs to confirm that:
 
@@ -130,7 +130,7 @@ Customer validation usually needs to confirm that:
 
 This matters because customer continuity is rarely only about record presence. It is about whether the customer-facing and support-facing experience still aligns with business expectations.
 
-### Order-history validation criteria
+#### Order-history validation criteria
 
 Order validation usually needs to confirm that:
 
@@ -141,7 +141,7 @@ Order validation usually needs to confirm that:
 
 This is especially important when the business depends on order history for customer support, reconciliation, reporting, or post-purchase workflows.
 
-### SEO and page continuity validation criteria
+#### SEO and page continuity validation criteria
 
 SEO-sensitive validation usually needs to confirm that:
 
@@ -152,7 +152,7 @@ SEO-sensitive validation usually needs to confirm that:
 
 This does not require reviewing every page equally. It requires a clear priority set for pages that materially affect traffic, discovery, or conversion.
 
-### Relationship-sensitive validation criteria
+#### Relationship-sensitive validation criteria
 
 Some outcomes depend on connected records remaining usable together.
 
@@ -232,6 +232,12 @@ The project still needs to confirm that:
 
 This is why freshness alignment and validation should be planned together, but treated as separate decisions.
 
+### How Custom Cart can affect validation planning
+
+When a Custom Cart is involved, validation planning usually needs more precision because preserving the intended result may require more careful interpretation, transformation, validation, and tool fine-tuning than a more straightforward project.
+
+In these cases, representative samples, early expert review, and explicit acceptance criteria become even more important because the project needs a clearer basis for judging whether compatibility and data integrity have been preserved successfully enough for launch.
+
 ### Common validation planning mistakes
 
 Common mistakes include:
@@ -262,48 +268,32 @@ That is much stronger than saying only that the migration “looks good.”
 
 Planning migration validation and acceptance criteria is really about defining how the business will judge success before execution pressure makes that judgment harder.
 
-The strongest validation plans are built around business outcomes, representative samples, clear responsible assignments, and a disciplined distinction between acceptable difference and unacceptable loss. When those elements are defined early, the project becomes much easier to review, correct, and approve with confidence before launch.
+The strongest validation plans are built around business outcomes, representative samples, clear responsibility assignments, and a disciplined distinction between acceptable difference and unacceptable loss. When those elements are defined early, the project becomes much easier to review, correct, and approve with confidence before launch.
 
-Define your validation areas before Full Migration begins, then write acceptance criteria in terms of what the business must still be able to do after the move. If you need help deciding whether a difference is an accepted platform change, a mapping issue, or a real launch blocker, Live Chat is a practical way to reduce ambiguity before validation becomes rushed. If the issue points to deeper execution burden or structurally difficult preservation requirements, that same review may also clarify whether **Managed Migration Service** or **Custom Migration Service** is the safer path.
+Define your validation areas before Full Migration begins, then write acceptance criteria in terms of what the business must still be able to do after the move. If you need help deciding whether a difference is an accepted platform change, a mapping issue, or a real launch blocker, Live Chat is a practical way to reduce ambiguity before validation becomes rushed.
 
 ### FAQs
 
-<details>
-
-<summary><strong>What is the difference between validation and acceptance criteria?</strong></summary>
+#### What is the difference between validation and acceptance criteria?
 
 Validation is the review process. Acceptance criteria are the standards used to decide whether the result is acceptable. Validation checks the outcome; acceptance criteria define how that judgment is made.
 
-</details>
-
-<details>
-
-<summary><strong>Why are record counts not enough to approve a migration?</strong></summary>
+#### Why are record counts not enough to approve a migration?
 
 Because a store can show the expected totals and still fail in product behavior, category discovery, customer continuity, order usability, relationship integrity, or page continuity. Counts are useful, but they are not proof that the store still works correctly.
 
-</details>
-
-<details>
-
-<summary><strong>When should acceptance criteria be defined?</strong></summary>
+#### When should acceptance criteria be defined?
 
 Before Full Migration begins. A representative Demo Migration usually provides enough early evidence to help the business define realistic review areas and pass conditions before broader execution starts.
 
-</details>
+#### Who should be responsible for validation?
 
-<details>
+The project should assign review responsibility by outcome area. Different people may need to review product behavior, order usability, customer continuity, SEO-critical pages, or overall launch readiness depending on who best understands each area.
 
-<summary><strong>Who should be responsible for validation?</strong></summary>
+#### Does Recent Data Migration remove the need for final validation?
 
-The project should assign validation responsible by outcome area. Different people may need to review product behavior, order usability, customer continuity, SEO-critical pages, or overall launch readiness depending on who best understands each area.
+No. Recent Data Migration helps keep the target store current, but the business still needs to validate that the completed target store behaves acceptably and reflects the latest expected source-state outcomes before go-live.
 
-</details>
+#### How does a Custom Cart affect validation planning?
 
-<details>
-
-<summary><strong>Does Recent Data Migration remove the need for final validation?</strong></summary>
-
-No. Recent Data Migration helps keep the target store current, but the business still needs to validate that the completed target store behaves acceptably and reflects the latest expected source-state outcomes before go-live. If the result remains unclear, Next-Cart can help interpret whether the issue is mainly a validation concern, a mapping concern, or a sign that more guided handling is needed.
-
-</details>
+It usually makes validation more dependent on precise interpretation, representative samples, early expert review, explicit acceptance criteria, and tailored handling through Custom Migration Service.

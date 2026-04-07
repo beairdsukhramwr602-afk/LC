@@ -4,7 +4,7 @@ Migration pricing often feels confusing because raw record counts do not tell th
 
 Two stores can each have the same number of products and still require different migration capacity once customer volume, order history, and blog content are taken into account. That is why Next-Cart uses Entity Points: a weighted model for measuring migration scope across the core data types that drive most migration workload.
 
-Entity Points do not measure every type of data equally. They are designed to turn the core migration scope into a more realistic planning unit, so the plan size can be estimated more consistently.
+Entity Points do not treat every record equally. They turn core migration scope into a more realistic planning unit so plan size can be estimated more consistently.
 
 ### What Entity Points are
 
@@ -17,36 +17,34 @@ Entity Points are Next-Cart’s standardized method for measuring migration scop
 
 Instead of treating every record as equal, Entity Points apply different weights to these core entities. This reflects the fact that not every migrated record creates the same workload or planning impact.
 
-Supporting data may still be included in the migration scope depending on platform support, but it does not increase the Entity Points calculation.
+Supporting data may still be included in migration scope depending on platform support, but it does not increase the Entity Points calculation.
 
 ### How Entity Points are calculated
 
 Each core entity type has a coefficient:
 
-* Products: **1.0**
-* Customers: **0.5**
-* Orders: **0.8**
-* Blog Posts: **0.6**
+* Products: 1.0
+* Customers: 0.5
+* Orders: 0.8
+* Blog Posts: 0.6
 
 The formula is:
 
-{% code overflow="wrap" fullWidth="false" %}
-```
-Entity Points = (Products × 1.0) + (Customers × 0.5) + (Orders × 0.8) + (Blog Posts × 0.6)
-```
-{% endcode %}
+**Entity Points = (Products × 1.0) + (Customers × 0.5) + (Orders × 0.8) + (Blog Posts × 0.6)**
 
 This creates a weighted total that helps estimate the migration capacity the project is likely to need.
 
 ### Why Entity Points are weighted
 
-Entity Points are weighted because the migration scope is not driven by one record type alone.
+Entity Points are weighted because migration scope is not driven by one record type alone.
 
-A store with modest product volume but a large order history may require more migration capacity than another store with a larger catalog and lighter transaction history. In the same way, a store with a customer-heavy or content-heavy scope may not fit the same plan assumptions as one driven mostly by products. Weighted scope makes these differences easier to plan for.
+A store with modest product volume but a large order history may require more migration capacity than another store with a larger catalog and lighter transaction history. In the same way, a store with a customer-heavy or content-heavy scope may not fit the same plan assumptions as one driven mostly by products.
 
-This is also why Entity Points are more useful than a simple “highest count wins” model. They measure core migration volume across the combined effect of multiple entity types rather than treating one count as the whole pricing story.
+Weighted scope makes these differences easier to plan for.
 
-#### A simple example
+This is also why Entity Points are more useful than a simple highest-count model. They measure core migration volume across the combined effect of multiple entity types rather than treating one count as the whole pricing story.
+
+### A simple example
 
 Assume a store has:
 
@@ -66,15 +64,20 @@ The calculation would be:
 
 This example shows why a store’s migration plan should be based on weighted scope, not only on a single headline count.
 
-### Next-Cart Migration Service Package
+### What a Next-Cart Migration Plan includes
 
-A Next-Cart Migration Plan will include
+A Next-Cart Migration Plan includes:
 
-* The migration service model (Standard Migration, Managed Migration, or Custom Migration)
-* The Entity Points Plan
+* the migration service model
+  * Standard Migration
+  * Managed Migration
+  * Custom Migration
+* the Entity Points Plan
 * Custom Jobs, where needed and purchased for non-standard requirements
 
 A Migration Plan is valid for one year from the date of purchase. During that license period, the plan authorizes migration activity as long as total Entity Points consumption stays within the purchased Entity Points Plan.
+
+### Which migration types the plan covers
 
 The Migration Plan applies to all migration types:
 
@@ -82,15 +85,13 @@ The Migration Plan applies to all migration types:
 * Recent Data Migration
 * Re-migration
 
-A Migration Plan only applies to a specific migration direction and it does not transfer to the reverse direction or to a different target platform:
+A Migration Plan applies only to a specific migration direction and does not transfer to the reverse direction or to a different target platform.
 
-**Source Cart → Target Cart**
-
-For example, a plan purchased for **Shopify → WooCommerce** applies only to that direction. It cannot be reused for **WooCommerce → Shopify** or for a different target platform.
+For example, a plan purchased for Shopify → WooCommerce applies only to that direction. It cannot be reused for WooCommerce → Shopify or for a different target platform.
 
 ### What Entity Points do and do not measure
 
-Entity Points measure the core migration scope. They do not define relationship logic, migration order, or validation quality by themselves.
+Entity Points measure the core migration scope. They do not define relationship logic, migration order, mapping difficulty, or validation quality by themselves.
 
 They are useful for answering questions such as:
 
@@ -134,7 +135,7 @@ Businesses may re-run migration to:
 * confirm business behavior before go-live
 * continue the project after earlier planning decisions change
 
-When those re-runs involve records that have already been migrated successfully and recorded by the system, additional Entity Points are not consumed for those same records. This makes repeated validation more practical and helps keep scope planning stable across the project.
+When those re-runs involve records that have already been migrated successfully and recorded by the system, additional Entity Points are not consumed for those same records. This makes repeated validation more practical and helps keep scope planning more stable across the project.
 
 ### What happens if the Entity Points Plan runs out
 
@@ -144,7 +145,7 @@ The safer continuation path is to upgrade the Entity Points Plan and continue th
 
 This is one of the most important distinctions to keep clear:
 
-* **Entity Points** measure scope
+* Entity Points measure scope
 * the migration tool’s defined process preserves relationship integrity
 
 Those are connected decisions, but they are not the same decision.
@@ -169,22 +170,26 @@ Using the earlier example of a 1,000 Entity Points plan against a 1,090 Entity P
 
 This consumption order explains why under-scoping can interrupt the project even when the total dataset looks only slightly above the purchased plan.
 
-### Recent Data Migration and new data growth
+### Recent Data Migration and new-data growth
 
 If the source store continues generating new data after an earlier migration run, those newly created records consume Entity Points when they are migrated for the first time.
 
 For example, after upgrading and completing the migration, assume the customer has consumed 1,090 Entity Points and has 910 remaining on a 2,000 plan. If the store later adds 120 new Products and 30 new Customers, migrating that new data consumes:
 
-(120 × 1.0) + (30 × 0.5) = 120 + 15 = 135 Entity Points
+**(120 × 1.0) + (30 × 0.5) = 120 + 15 = 135 Entity Points**
 
-**New Entity Points consumed**: 135\
-**Remaining Entity Points**: 775
+New Entity Points consumed: 135\
+Remaining Entity Points: 775
 
-That is why Entity Points planning should take likely data growth into account, especially if the project timeline includes a gap between early migration activity and go-live. Recent Data Migration is the appropriate feature when the goal is to sync newly created source-store data into the target store after earlier migration activity.
+That is why Entity Points planning should take likely data growth into account, especially if the project timeline includes a gap between early migration activity and go-live.
 
-### Plan upgrades and renewal
+Recent Data Migration is the appropriate feature when the goal is to sync newly created source-store data into the target store after earlier migration activity.
 
-When a project needs more capacity, an Entity Points Plan can be upgraded. Upgrades are designed to cover the remaining scope so migration can continue without requiring the business to repurchase capacity it already secured. In practice, this is handled as the price difference between plans rather than starting over from scratch.
+### Entity Points Plan upgrades and renewal
+
+When a project needs more capacity, an Entity Points Plan can be upgraded.
+
+Upgrades are designed to cover the remaining scope so migration can continue without requiring the business to repurchase capacity it already secured. In practice, this is handled as the price difference between plans rather than starting over from scratch.
 
 A Migration Plan is valid for one year from the purchase date. If the plan expires, renewal is needed to continue access to the migration service.
 
@@ -193,29 +198,15 @@ Renewal includes:
 * the migration service model
 * the Entity Points Plan
 
-Custom Jobs are excluded from renewal of the migration package if you previously purchased it.
+Custom Jobs are excluded from renewal of the migration package if they were previously purchased.
 
-#### Entity Points Plan upgrades
+### Scalable pricing for extremely large migrations
 
-When you need more capacity, upgrading your Entity Points Plan is straightforward and cost-effective.
-
-* **Cost Efficiency**
-
-You only pay the difference between your current plan and the new, higher-capacity plan you wish to purchase. This ensures you are never double-charged for capacity you've already secured.
-
-* **Immediate Capacity**
-
-The new plan immediately covers any capacity deficit, ensuring you can continue migrating your remaining data without interruption. This is particularly useful when the migration scope increases unexpectedly, allowing for a seamless continuation of your project.
-
-#### Scalable Pricing for Extremely Large Migrations
-
-Our pricing model is structured to scale predictably, even for the largest and most complex migration projects.
-
-For very large migration runs that exceed the standard Entity Points tiers, the following supplementary pricing logic applies:
+Next-Cart’s pricing model is structured to scale predictably, even for very large migration projects.
 
 If a migration plan surpasses **1,024,000 Entity Points**, an additional fee of **$50** is charged for every extra **100,000 Entity Points**.
 
-This ensures that high-volume enterprise migrations are supported with a clear, predefined, and granular pricing structure.
+This gives very large migration runs a predefined and granular pricing structure rather than requiring ad hoc assumptions.
 
 ### A common misunderstanding to avoid
 
@@ -240,45 +231,28 @@ They are most useful when they are understood for what they are: a weighted scop
 
 Review core scope early using weighted counts rather than rough estimates. If your store is still growing, include likely new-data volume before go-live so Recent Data Migration does not become an afterthought. If the scope is difficult to estimate because filtered migration, third-party logic, or structural complexity changes what should be moved, Live Chat is a practical way to align Entity Points planning, service fit, and the safest migration path.
 
-#### FAQs
+### FAQs
 
-<details>
-
-<summary><strong>Do images, categories, or reviews increase Entity Points?</strong></summary>
+#### Do images, categories, or reviews increase Entity Points?
 
 No. Entity Points are calculated from Products, Customers, Orders, and Blog Posts only. Supporting data may still be included in migration scope depending on platform support, but it does not increase the Entity Points calculation.
 
-</details>
+#### When are Entity Points consumed?
 
-<details>
+Entity Points are consumed when new records are migrated successfully for the first time.
 
-<summary><strong>What happens if my Entity Points Plan runs out mid-migration?</strong></summary>
+#### Why does successful re-migration not consume more Entity Points?
 
-The migration continues only until the remaining capacity is exhausted, then stops. The safer next step is to upgrade the Entity Points Plan and continue through the tool rather than manually importing the remaining related data outside that process.
+Because records that were already migrated successfully are recorded by the system and can be re-migrated again without consuming additional Entity Points.
 
-</details>
+#### What happens if the Entity Points Plan runs out?
 
-<details>
+Migration stops when the remaining balance can no longer cover the next data in the processing order. The safer path is to upgrade the plan and continue through the tool where the migration paused.
 
-<summary><strong>Can I upgrade my Entity Points Plan after purchase?</strong></summary>
+#### Does Recent Data Migration consume Entity Points?
 
-Yes. Plan upgrades are designed to cover remaining scope when needs exceed the current plan, and they are generally handled as the difference between the current plan and the higher plan.
+Yes, for newly created records that are being migrated successfully for the first time. Re-migrating records that were already migrated successfully does not consume additional Entity Points.
 
-</details>
+#### Do Entity Points measure compatibility, relationship integrity, or validation quality?
 
-<details>
-
-<summary><strong>Is Next-Cart pricing a subscription?</strong></summary>
-
-No. The migration purchase is a one-year license for the migration project, not a recurring monthly subscription. Renewal is needed only if the project needs continued access after the license period.
-
-</details>
-
-<details>
-
-<summary><strong>Can I re-migrate data without consuming more Entity Points?</strong></summary>
-
-Yes, if the records were already migrated successfully and recorded by the system. Re-migration of those already recorded records does not consume additional Entity Points.
-
-</details>
-
+No. Entity Points measure weighted core scope. They do not measure platform fit, relationship integrity, mapping difficulty, or validation completeness.

@@ -1,8 +1,10 @@
-# How Next-Cart Performs a Migration: Connection, Mapping, and Validation Flow
+# How Next-Cart Performs a Migration
+
+## How Next-Cart Performs a Migration: Connection, Mapping, and Validation Flow
 
 A migration is not one technical event. It is a controlled process for moving store data from one platform environment to another while preserving the business meaning the store depends on.
 
-That is why Next-Cart’s migration flow should be understood as more than data transfer. The process begins by establishing reliable access to the source and target stores, then confirming how data should map into the target platform, then validating whether the migrated store behaves as expected before launch. When this flow is handled well, the result is not only a store that looks migrated, but one that remains usable in the ways the business needs most.
+That is why Next-Cart’s migration flow should be understood as more than data transfer. The process begins by establishing reliable access to the source and target stores, then configuring how data should move into the target platform, then validating whether the migrated store behaves as expected before launch. When this flow is handled well, the result is not only a store that looks migrated, but one that remains usable in the ways the business needs most.
 
 ### What this migration flow is designed to achieve
 
@@ -10,7 +12,7 @@ Next-Cart’s migration flow is designed to support six connected outcomes:
 
 * early proof that the migration direction is workable
 * reliable connection to the source and target stores
-* clear mapping of store data into the target platform’s structure
+* clear configuration of how store data will move into the target platform
 * controlled execution of the full migration scope
 * validation of whether the migrated store behaves as expected
 * a practical path to final freshness alignment before go-live
@@ -23,18 +25,26 @@ A practical way to understand Next-Cart’s migration service is as a six-stage 
 
 1. Initial Assessment and Demo Migration
 2. Connection Setup and Data Preparation
-3. Data Mapping
+3. Configure the Migration
 4. Full Migration Run
 5. Migration Outcome Validation
 6. Recent Data Migration and Go-Live
 
 Each stage reduces uncertainty before the next one begins. The difference between service models is not the overall journey, but how much of the execution burden Next-Cart handles directly and how much remains with the customer.
 
+Customers usually encounter this journey through a simpler three-part operating flow:
+
+* set up Source Cart and Target Cart
+* configure the migration
+* start the migration
+
+That simplified view is useful for understanding how the process is operated, while the broader six-stage flow is more useful for understanding how the migration works as a complete decision and validation path.
+
 ### Stage 1: Initial Assessment and Demo Migration
 
 The first stage is about proving direction before the customer commits to a migration service model.
 
-At this stage, customers typically begin with one of two demo paths:
+At this stage, customers typically begin with one of two demo paths.
 
 #### Self-Service Demo
 
@@ -44,7 +54,7 @@ The customer runs the Demo Migration independently. If the result differs from e
 
 The customer provides representative sample data and asks a Next-Cart expert to perform the Demo Migration and review the result collaboratively.
 
-In both cases, the purpose of the demo is the same: to preview how representative source-store data is expected to transfer into the target cart, reveal where important structure or behavior may change, and help identify whether the project is likely to need standard handling or a more guided approach.
+In both cases, the purpose of the demo is the same: to preview how representative source-store data is expected to transfer into the target cart, reveal where important structure or behavior may change, and help identify whether the project is likely to need standard handling or a more guided path.
 
 At this stage, Next-Cart’s role is to support or perform the demo process, help surface visible complexity, and help interpret the result where needed. The customer’s role is to provide representative data, define which outcomes matter most, and review whether the demo reflects the business expectations that need to be preserved.
 
@@ -54,46 +64,89 @@ This stage is also the decision point for service fit. Customers do not typicall
 
 The second stage is about making data accessible in a reliable form.
 
-Connection setup depends on platform type, access method, and how the source and target stores expose their data. Next-Cart may connect through:
+Connection setup depends on platform type, access method, and how the source and target stores expose their data. The main connection patterns include:
 
-* API connection where the platform supports it
-* administrative credentials where required
-* KitConnect for self-hosted open-source carts that require a tailored connection package
-* file-based data access where the relevant data must be provided as files, most commonly CSV
+* self-hosted open-source carts using Store URL plus Kitconnect upload
+* cloud carts with API support using Store URL plus API credentials
+* cloud carts without API support using Store URL plus data-file upload
 
 At this stage, Next-Cart’s role is to determine or support the appropriate connection method and clarify what access or preparation is needed. The customer’s role is to provide the required access, credentials, files, or environment readiness needed for the chosen connection path.
 
 How responsibilities differ by service model:
 
-* **Standard Migration**: the customer remains primarily responsible for carrying out the required setup actions, data preparation steps, configuration adjustments, and critical checks, with Next-Cart providing 24/7 expert technical support, troubleshooting, and guidance.
-* **Managed Migration**: the customer’s role is mainly consultative and informational. After discovery and access provision, Next-Cart takes ownership of the technical handling.
-* **Custom Migration**: the customer still focuses mainly on discovery, access, and requirement clarification, while Next-Cart manages the technical handling, including any bespoke preparation needed for non-standard conditions.
+* **Standard Migration:** the customer remains primarily responsible for carrying out the required setup actions, data preparation, configuration adjustments, and critical checks, with Next-Cart providing 24/7 expert technical support, troubleshooting, and guidance.
+* **Managed Migration:** the customer’s role is mainly consultative and informational. After discovery and access provision, Next-Cart takes ownership of the technical handling.
+* **Custom Migration:** the customer still focuses mainly on discovery, access, and requirement clarification, while Next-Cart manages the technical handling, including any bespoke preparation needed for non-standard conditions.
 
 This stage matters because migration quality depends first on whether the right data can be accessed in the right way.
 
-### Stage 3: Data Mapping
+### Stage 3: Configure the Migration
 
-The third stage is where store meaning is translated.
+The third stage is where the migration is shaped into an executable plan.
 
-Mapping determines how the source store’s data structure will be represented in the target platform. This is often where migration complexity becomes most visible because platforms may use the same labels for features while structuring them differently in practice.
+Configuration is broader than mapping alone. It usually includes three major areas:
 
-The main mapping areas usually include:
+* **Entities Selection**
+* **Additional Options**
+* **Advanced Attributes Mapping**
 
-* product structure, including variants, options, and attributes
-* catalog structure, including categories and browse logic
-* customer and order relationships
-* promotional logic and checkout-related behavior
-* important content and continuity-sensitive pages
+This matters because migration setup is not only about deciding which fields correspond to which target fields. It also involves deciding which entities are included, which continuity-sensitive options should be preserved, and which platform-sensitive settings need interpretation before execution begins.
 
-At this stage, Next-Cart’s role is to align source-store data with the target platform’s structure as safely as possible through the migration logic. The customer’s role is to review whether the mapped outcome preserves the business meaning that matters most, especially where products, categories, customer expectations, order usability, and extension-driven behavior are involved.
+#### Entities Selection
+
+This part of the configuration determines which data groups are included in the migration scope.
+
+Depending on platform support and project needs, that may include:
+
+* categories
+* products
+* reviews
+* customers
+* orders
+* coupons
+* pages
+* posts
+
+This is one of the first places where business priorities become visible. A project that includes only the most launch-critical entities is already making a different decision from one that is trying to preserve a broader historical or content footprint.
+
+#### Additional Options
+
+This part of the configuration defines how the migration should handle continuity-sensitive behaviors and execution choices.
+
+Typical options can include:
+
+* continuing a previous migration
+* clearing target-store data before migration
+* importing description images to the target store
+* preserving order IDs on the target store
+* migrating SEO URLs for categories, products, posts, and pages
+
+These choices matter because they influence continuity, rerun behavior, destination cleanliness, and how closely the migrated store reflects the prior operating state.
+
+#### Advanced Attributes Mapping
+
+This part handles platform-sensitive interpretation where source-side meaning needs to align with target-side logic.
+
+That can include areas such as:
+
+* target-cart tax options
+* language mapping
+* location mapping for inventory context
+* order payment status mapping
+* order fulfillment status mapping
+* other source-to-target attribute mappings that depend on platform structure and support capability
+
+This is where migration complexity often becomes more visible. The same label can carry different operational meanings depending on the platform pair. A status, tax rule, or location context that appears familiar at the record level may still require more deliberate interpretation to ensure the target store behaves credibly and usefully after migration.
+
+At this stage, Next-Cart’s role is to align source-store data with the target platform’s structure as safely as possible through the migration logic. The customer’s role is to review whether the configured outcome preserves the business meaning that matters most, especially where products, categories, customer expectations, order usability, and extension-driven behavior are involved.
 
 How responsibilities differ by service model:
 
-* **Standard Migration**: the customer carries more of the review and execution burden, while Next-Cart provides ongoing expert guidance.
-* **Managed Migration**: Next-Cart takes fuller ownership of the mapping execution after the customer provides discovery input, data, and access.
-* **Custom Migration**: Next-Cart handles mapping plus bespoke adaptations where platform limitations, custom fields, integrations, third-party logic, or data-model differences require Custom Jobs or other non-standard treatment.
+* **Standard Migration:** the customer carries more of the review and execution burden, while Next-Cart provides ongoing expert guidance.
+* **Managed Migration:** Next-Cart takes fuller ownership of the configuration and mapping execution after the customer provides discovery input, data, and access.
+* **Custom Migration:** Next-Cart handles configuration plus bespoke adaptations where platform limitations, custom fields, integrations, third-party logic, or data-model differences require Custom Jobs or other non-standard treatment.
 
-This stage matters because products, customers, orders, categories, reviews, and promotions rarely behave correctly after migration unless their meaning has been mapped into the target platform with enough care.
+This stage matters because products, customers, orders, categories, reviews, promotions, and continuity settings rarely behave correctly after migration unless the migration has been configured with enough care.
 
 ### Stage 4: Full Migration Run
 
@@ -101,19 +154,19 @@ The fourth stage is the full execution of the selected migration scope.
 
 This is where the migration moves from sample proof into the full dataset covered by the migration plan. The goal is not only to transfer the selected data, but to do so through the defined system process that preserves relationship integrity and transactional consistency.
 
-Next-Cart’s migration tool uses an automated, fixed entity sequence that users cannot modify or rearrange:
+Next-Cart’s migration tool uses an automated, fixed entity sequence:
 
-**Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts**
+Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts
 
-This defined sequence exists so later records can reconnect to earlier records accurately. Orders need customers and products. Reviews need customers and products. Coupons may depend on products or categories. If related data is introduced outside that defined process, the store may contain the records but lose the connections that make them usable.
+This defined sequence exists so later records can reconnect to earlier records accurately. If the data is manually imported rather than using Next-Cart's migration tool, the store may contain the records but lose the connections that make them usable.
 
 How responsibilities differ by service model:
 
-* **Standard Migration**: the customer runs the migration tool and is primarily responsible for carrying out the migration actions, while Next-Cart provides 24/7 expert support throughout the process.
-* **Managed Migration**: after discovery and access provision, Next-Cart takes full ownership of executing the migration.
-* **Custom Migration**: Next-Cart takes full ownership of execution after the required bespoke handling has been scoped and applied.
+* **Standard Migration:** the customer runs the migration tool and is primarily responsible for carrying out the migration actions, while Next-Cart provides 24/7 expert support throughout the process.
+* **Managed Migration:** after discovery and access provision, Next-Cart takes full ownership of executing the migration.
+* **Custom Migration:** Next-Cart takes full ownership of execution after the required bespoke handling has been scoped and applied.
 
-With Standard Migration, customers run the tool manually, but they cannot change the entity migration order. The sequence remains fixed because it is part of how Next-Cart preserves data integrity.
+Once a valid configuration is complete, the migration can be started, run automatically in the background, and tracked via ongoing status updates. The practical implication is that execution can remain under control without requiring the customer to monitor every step manually during a single active session.
 
 ### Stage 5: Migration Outcome Validation
 
@@ -127,17 +180,17 @@ This stage matters because migration success cannot be confirmed by totals alone
 * order-history usability
 * review and coupon relationships where relevant
 * priority page continuity
-* the business-critical behavior influenced by apps, plugins, extensions, or outside systems
+* business-critical behavior influenced by apps, plugins, extensions, or outside systems
 
 Next-Cart’s role at this stage is to provide support, interpretation, and technical context according to the chosen service model. The customer’s role is to validate whether the migrated store aligns with business requirements.
 
-This final validation responsibility remains with the customer across **all** service models:
+This final validation responsibility remains with the customer across all service models:
 
-* **Standard Migration**: the customer validates while also carrying the execution burden.
-* **Managed Migration**: the customer validates after Next-Cart has handled the execution.
-* **Custom Migration**: the customer validates after Next-Cart has handled execution plus bespoke adaptations.
+* **Standard Migration:** the customer validates while also carrying the execution burden.
+* **Managed Migration:** the customer validates after Next-Cart has handled the execution.
+* **Custom Migration:** the customer validates after Next-Cart has handled execution plus bespoke adaptations.
 
-This is a universal responsibility. Regardless of service model, the customer remains responsible for confirming that data integrity, functionality, user paths, and final outcomes align with expectations before launch.
+Regardless of service model, the customer remains responsible for confirming that data integrity, functionality, user paths, and final outcomes align with expectations before launch.
 
 ### Stage 6: Recent Data Migration and Go-Live
 
@@ -157,8 +210,6 @@ Go-live readiness then depends on more than the sync itself. The customer should
 * order history and customer-facing continuity still aligning with business expectations
 * the final launch-ready state matching the business requirements defined earlier in the project
 
-Next-Cart’s role at this stage is support-oriented according to the chosen service model, but the execution of Recent Data Migration and the confirmation that the target store is ready for go-live remain with the customer.
-
 ### How the service models differ overall
 
 The overall migration journey stays the same, but the customer’s execution burden changes significantly depending on the service model.
@@ -167,7 +218,7 @@ The overall migration journey stays the same, but the customer’s execution bur
 
 Standard Migration is the collaborative, hands-on model.
 
-The customer is primarily responsible for executing migration actions such as:
+The customer is primarily responsible for:
 
 * data preparation
 * configuration adjustments
@@ -200,11 +251,25 @@ The customer’s role remains mainly:
 
 Next-Cart then takes full ownership of the technical execution, including the bespoke handling needed for custom fields, third-party logic, unique integrations, filtered scope, or structurally difficult migration requirements that go beyond standard handling.
 
+### How Custom Cart affects the migration flow
+
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the project.
+
+When a Custom Cart is involved, the migration flow often requires more careful interpretation, transformation, validation, and tool fine-tuning to preserve compatibility and data integrity successfully.
+
+That usually makes three stages more sensitive:
+
+* connection and data preparation
+* migration configuration
+* migration outcome validation
+
+In these cases, the migration journey still follows the same overall logic, but the handling burden shifts more decisively toward expert-led execution and stronger interpretation of what the data needs to mean in the target environment.
+
 ### What happens if the migration pauses
 
 If the migration pauses because Entity Points are exhausted, the safest continuation path is to upgrade the Entity Points plan and continue through the tool where it paused.
 
-Manually importing the remaining related data outside that process can weaken or break relationship integrity because the system may no longer be able to reconstruct references in the intended way. This is why scope planning and migration flow should be treated as connected decisions, even though they are not the same concept.
+Manually importing the remaining related data, rather than using Next-Cart's migration tool to continue the migration, can weaken or break relationship integrity because the system may no longer be able to reconstruct references in the intended way. This is why scope planning and migration flow should be treated as connected decisions, even though they are not the same concept.
 
 ### Where customers most often misjudge the process
 
@@ -212,7 +277,7 @@ A few misunderstandings appear repeatedly in migration planning.
 
 #### Treating migration as one run
 
-Most projects require more than one pass. Testing, review, correction, and final refresh all play a role in reducing risk before launch. Recent Data Migration may also be run more than once if the source store continues changing.
+Most projects require more than one pass. Testing, review, correction, and final freshness alignment all play a role in reducing risk before launch. Recent Data Migration may also be run more than once if the source store continues changing.
 
 #### Treating validation as a quick spot-check
 
@@ -224,68 +289,34 @@ The safest service model is the one that matches the store’s real complexity. 
 
 ### Conclusion
 
-How Next-Cart performs a migration is best understood as a structured flow: prove direction early through Demo Migration, establish reliable connection and data access, map meaning into the target platform carefully, execute the full migration through the defined system process, validate whether the result aligns with business requirements, and use Recent Data Migration where needed to close the freshness gap before go-live.
+How Next-Cart performs a migration is best understood as a structured flow: prove direction early through Demo Migration, establish reliable connection and data access, configure how the migration should preserve meaning in the target platform, execute the full migration through the defined system process, validate whether the result aligns with business requirements, and use Recent Data Migration where needed to close the freshness gap before go-live.
 
 That flow matters because migration success depends on more than whether records move. It depends on whether the store still behaves correctly after the move, whether relationships are rebuilt accurately, whether the right service model is chosen after the demo stage, and whether the customer validates the final result with enough care before launch.
 
-Start with a Demo Migration that includes representative data, especially the records and pathways the business depends on most. Then use the result, together with consultation where needed, to determine whether the project is best suited to Standard Migration, Managed Migration, or Custom Migration. Live Chat is useful when you need help aligning connection method, mapping expectations, validation priorities, and the right service path.
+Start with a Demo Migration that includes representative data, especially the records and pathways the business depends on most. Then use the result, together with consultation where needed, to determine whether the project is best suited to Standard Migration, Managed Migration, or Custom Migration. Live Chat is useful when you need help aligning connection method, configuration expectations, validation priorities, and the right service path.
 
-#### FAQs
+### FAQs
 
-<details>
-
-<summary><strong>Do customers usually choose a migration service model before the Demo Migration?</strong></summary>
+#### Do customers usually choose a service model before the demo?
 
 Not usually. Customers typically begin with either a Self-Service Demo or an Expert-Assisted Demo, then use the demo outcome and follow-up consultation to determine which migration service model is the most suitable fit.
 
-</details>
+#### What is the difference between Self-Service Demo and Expert-Assisted Demo?
 
-<details>
+With Self-Service Demo, the customer runs the demo independently and can use Live Chat support if the result needs interpretation. With Expert-Assisted Demo, the customer provides representative sample data and asks a Next-Cart expert to run the demo and review the result collaboratively.
 
-<summary><strong>What is the difference between Self-Service Demo and Expert-Assisted Demo?</strong></summary>
+#### Who is responsible for final validation?
 
-With Self-Service Demo, the customer runs the demo independently and can use Live Chat support if the result needs interpretation. With Expert-Assisted Demo, the customer provides sample data and asks a Next-Cart expert to run the demo and review the result collaboratively.
+The customer remains responsible for final validation across all service models. That includes checking data integrity, functionality, user paths, and outcome alignment with business requirements before launch.
 
-</details>
+#### What configuration decisions usually matter most in the migration flow?
 
-<details>
+The most important configuration decisions usually involve entity selection, additional options that affect continuity or reruns, and platform-sensitive mapping choices such as statuses, languages, tax handling, or other attributes that shape how source meaning is represented in the target.
 
-<summary><strong>Who is responsible for the final validation of the migrated store?</strong></summary>
+#### Can the migration continue in the background?
 
-The customer remains responsible for final validation across all service models. That includes checking data integrity, functionality, user paths, and whether the final result matches business expectations before launch.
+Yes. Once valid configuration is completed, the migration can continue in the background and its status remains trackable during execution.
 
-</details>
+#### What happens if the migration pauses because the plan runs out?
 
-<details>
-
-<summary><strong>What is the difference between Full Migration and Recent Data Migration?</strong></summary>
-
-Full Migration transfers the main selected dataset as the project baseline. Recent Data Migration is used later to sync newly created source-store data into the target store after earlier migration activity.
-
-</details>
-
-<details>
-
-<summary><strong>Does Next-Cart affect my live store while migrating?</strong></summary>
-
-Next-Cart’s workflow is designed to copy data from Source to Target without switching off or overwriting your Source Store, so the Source Store can typically remain live during the project.
-
-</details>
-
-<details>
-
-<summary><strong>How do I know if I need Custom Migration?</strong></summary>
-
-If your data is scattered across specialized plugins, extensions, or third-party apps, or if you need specific data transformations and unique rules applied during the move, a standard process might not cut it. These complexities are exactly what Custom Migration Service is designed for!
-
-Connect with our experts via **Live Chat** for a dedicated consultation. We'll accurately identify your needs and chart the best course for a smooth, perfect migration.
-
-</details>
-
-<details>
-
-<summary><strong>Can I re-run migrations during the project?</strong></summary>
-
-Yes. Many stores run more than one migration during planning and validation. What matters is defining what each run is intended to prove and using the results to confirm mapping decisions and readiness for go-live.
-
-</details>
+The safest path is to upgrade the Entity Points Plan and continue through the tool where it paused, rather than trying to complete the remaining related data outside the defined process.
