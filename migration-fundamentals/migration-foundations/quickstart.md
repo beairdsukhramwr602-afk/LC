@@ -7,11 +7,9 @@ metaLinks:
 
 # What Is Shopping Cart Migration?
 
-Shopping cart migration is the controlled movement of store data from one commerce platform environment to another so the new store can still support the business correctly after launch.
+Shopping cart migration involves the planned transfer of store data from one commerce platform to another, ensuring the new store can continue to support the business effectively after launch. It is more than just a record transfer; it is a translation process. Data must move from one platform model to another without losing the meaning that drives purchasing behavior, customer engagement, order usability, content value, and daily store operations.
 
-It is not just a record-transfer task. It is a translation task. Data has to move from one platform model into another without losing the meaning that supports buying behavior, customer continuity, order usability, content value, and everyday store operations.
-
-That is why shopping cart migration should be understood as a business-continuity decision, not only as a technical transfer exercise. The record count may move successfully while the store still becomes weaker if key structures, rules, or expectations no longer behave the way the business depends on.
+Therefore, shopping cart migration should be viewed as a business continuity decision, not merely a technical data transfer. A successful record count transfer can still leave the store weaker if key structures, rules, or expectations no longer function as the business relies on.
 
 ### What shopping cart migration includes
 
@@ -29,7 +27,7 @@ A migration usually includes core commerce entities such as:
 
 But those record groups are only part of the picture.
 
-A working store also depends on supporting structure such as:
+A working store also depends on supporting structures such as:
 
 * variants
 * options
@@ -218,17 +216,34 @@ A useful early sample helps reveal:
 
 That is why Demo Migration matters in planning. It gives the business a way to review actual outcomes before scope, timing, and migration approach become too fixed.
 
-### Where Custom Cart changes migration handling
+### Custom Cart in Shopping Cart Migration
 
-A Custom Cart is any shopping cart platform that is not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in a migration project.
+#### What a Custom Cart is
 
-Migration involving a Custom Cart often introduces higher data complexity because the project may require more precise interpretation, transformation, and validation to preserve compatibility and data integrity successfully.
+A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in a migration project.
 
-The main planning issue is not that a Custom Cart uses unique connection methods. Supported carts also use similar methods depending on compatibility and export capability. The more important difference is that migration involving a Custom Cart requires a tailored handling path.
+Migration involving a Custom Cart is always managed through the Custom Migration Service.
 
-To support that, Next-Cart performs migration involving a Custom Cart through the Custom Migration Service. The migration tool is adjusted and fine-tuned to fit the platform’s capabilities, data model, constraints, project requirements, and expected outcomes.
+Custom Cart projects can use the same broad connection and data-preparation methods that Next-Cart supports across migration work, including:
 
-That is why migration involving a Custom Cart should be assessed carefully early in planning. Live Chat can help clarify the situation, scope, and likely result. A sample dataset can also be reviewed through Demo Migration so the project can be evaluated against real outcomes before moving further.
+* API protocols such as REST, GraphQL, SOAP, and RPC
+* file formats such as CSV, SQL, JSON, and TXT
+* spreadsheet formats such as XLS, XLSX, CSV, and Excel-compatible files
+* structured or semi-structured formats such as XML, JSON, TXT, and HTML
+* website URL and login credentials where appropriate
+
+#### Why Custom Cart change migration handling
+
+The key issue is not how data is accessed. The key issue is that store meaning may be expressed through structures, field logic, workflow behavior, or platform-specific patterns that require more exclusive handling than a more standard platform pairing would normally require.
+
+That usually increases the need for:
+
+* more precise interpretation of source and target data meaning
+* stronger transformation logic where structures do not translate directly
+* more careful validation of whether business behavior was preserved
+* migration-tool fine-tuning to fit platform capabilities, constraints, and project requirements
+
+For planning purposes, the most useful response is early clarification: identify what the migration must preserve, review representative sample data, and test the likely outcome before the broader path become harder to revise.
 
 ### Conclusion
 

@@ -15,14 +15,15 @@ This Learning Center is decision-stage guidance for professionals planning or ev
 
 * scope definition and cost drivers
 * platform differences that affect outcomes
+* service-path choices that affect execution burden and handling depth
 * risk signals that change the safest approach
 * validation priorities that help prevent launch surprises
 
 It is not a tool manual. It does not cover setup steps, exports, credentials, troubleshooting, or technical repair work.
 
-Use the Learning Center as a decision tool, not as a library to read from beginning to end.
-
 ### The fastest way to get value
+
+Use the Learning Center as a decision tool, not as a library to read from beginning to end.
 
 #### 1. Define what must remain true after launch
 
@@ -52,9 +53,7 @@ Early evidence is far more useful than late reassurance.
 
 #### 3. Use evidence to choose the right approach
 
-The goal is not only to confirm that data moved. The goal is to confirm that the store behaves correctly and is ready for launch validation.
-
-When you review results, focus on whether the migrated store still supports the outcomes your business depends on.
+The goal is not only to confirm that data moved. The goal is to confirm that the store behaves correctly and is ready for launch validation. When you review results, focus on whether the migrated store still supports the outcomes your business depends on.
 
 ### Recommended reading paths by goal
 
@@ -62,15 +61,13 @@ When you review results, focus on whether the migrated store still supports the 
 
 Start with **Migration Fundamentals**.
 
-Focus first on readiness, risk framing, and the practical meaning of migration scope. Once those basics are clear, move into planning content so you can judge the likely effort, validation workload, and decision points before committing to a platform or provider.
+Focus first on readiness, risk framing, and the practical meaning of migration scope. Once those basics are clear, move into **Strategy and Planning for Migration** so you can judge likely effort, validation workload, and decision points before committing to a platform or provider.
 
 #### If you already decided to migrate and need to choose a safe approach
 
-Start with **Strategy and Planning for Migration**.
+Start with **Strategy and Planning for Migration**, then move into **Next-Cart Migration Service**.
 
-Focus on service model selection and **Entity Points**. Entity Points measure migration scope using weighted counts across Products, Customers, Orders, and Blog Posts. They are consumed only when new records migrate successfully for the first time. Previously migrated records can be re-migrated without consuming additional Entity Points.
-
-This gives you a clearer way to judge scope, compare options, and avoid planning around rough assumptions.
+Use Strategy and Planning for scope, complexity, decision structure, timeline logic, and validation planning. Then use Next-Cart Migration Service for Demo Migration, Entity Points, Recent Data Migration, service-model choice, and Custom Job scenarios.
 
 #### If you are choosing a target platform
 
@@ -82,7 +79,7 @@ Use them to understand how each platform differs in structure, where constraints
 
 Use **Strategy and Planning for Migration** together with **Post-Migration and Quality Assurance**.
 
-These sections help you define milestones, decision points, validation stages, and acceptance criteria so review work does not get compressed into the final days before launch.
+These sections help you define milestones, decision points, validation stages, acceptance criteria, go-live judgment, and post-launch stabilization so review work does not get compressed into the final days before launch.
 
 ### Recommended reading paths by role
 
@@ -104,11 +101,11 @@ Focus on URL continuity, content structure, SEO-critical pages, and what should 
 
 #### Technical lead or developer
 
-Focus on data model differences, structural constraints, and integration considerations before technical decisions become expensive to reverse.
+Focus on data-model differences, structural constraints, integration considerations, and the platform-specific behaviors that become expensive to correct late.
 
 #### Agency or external consultant
 
-Focus on complexity signals, estimation logic, validation effort, and expectation alignment for the client.
+Focus on complexity signals, estimation logic, validation effort, service-path fit, and expectation alignment for the client.
 
 Not every article is written for every role equally. Each page is designed for the reader most likely to benefit from that topic.
 
@@ -121,6 +118,10 @@ Use these pages to build a shared understanding of what migration includes, what
 #### Strategy and Planning for Migration
 
 Use these pages to turn migration scope into a realistic plan with clearer milestones, decision points, responsibilities, and validation readiness.
+
+#### Next-Cart Migration Service
+
+Use these pages to understand how Next-Cart’s migration process works, how Demo Migration proves direction early, how Entity Points measure scale, how Recent Data Migration supports freshness before launch, and how to choose the safest service model.
 
 #### Platform Strategy Hubs
 
@@ -138,26 +139,18 @@ Use these pages to prepare for structured validation and go-live discipline: wha
 
 The most reliable migration plans are built on early clarity and early evidence. When you define what must remain true after launch, identify complexity early, and validate representative samples before committing too deeply, scope decisions become clearer and outcomes become far more predictable.
 
-If you are still defining scope and success criteria, start with **Migration Fundamentals**. If you have already chosen a target platform and need platform-specific risk signals, use the relevant **Platform Strategy Hub** next, then return to planning and validation content.
+If you are still defining scope and success criteria, start with **Migration Fundamentals**. If you already understand the fundamentals and need to shape the project path, move next into **Strategy and Planning for Migration** and **Next-Cart Migration Service**. If you have already chosen a target platform and need platform-specific risk signals, use the relevant **Platform Strategy Hub** next, then return to planning and validation content where needed.
 
 Use the reading paths by role as a guide, but keep your immediate decision in mind. The Learning Center works best when you use it to answer the next important question in front of you, not when you try to read everything at once.
 
 Run a Demo Migration early to reveal hidden complexity in products, customers, and orders. If you want a more guided review, you can share a small sample dataset and ask Next-Cart to run the Demo Migration and provide a structured results summary. You can then use Live Chat to align scope, confirm plan fit, and choose the safest approach.
 
-#### FAQs
+### FAQs
 
-<details>
-
-<summary><strong>Should I read platform hub content before Migration Fundamentals?</strong></summary>
+#### Should I read platform hub content before Migration Fundamentals?
 
 Usually, no. Start with Migration Fundamentals if you are still defining scope, risk, or success criteria. Platform hub content becomes more useful once you are comparing or leaning toward a specific target platform.
 
-</details>
+#### How do I know which articles apply to my role?
 
-<details>
-
-<summary><strong>How do I know which articles apply to my role?</strong></summary>
-
-Start with the reading path that matches your role or need, then adjust based on the decision you are making. For example, someone responsible for project timelines should prioritize planning and validation content, while someone responsible for platform choice or integrations should prioritize platform differences and technical deep dives.
-
-</details>
+Start with the reading path that matches your role or need, then adjust based on the decision you are making. For example, someone responsible for project timelines should prioritize planning, Next-Cart service understanding, and validation content, while someone responsible for platform choice or integrations should prioritize platform differences and technical deep dives.
