@@ -119,6 +119,8 @@ Migration decisions become much safer when they are based on representative evid
 
 This is where Demo Migration becomes useful for beginners. It turns migration from an abstract idea into something visible. Instead of guessing how the new store may behave, the business can review a sample and start learning from real results.
 
+When the source or target side involves a Custom Cart, that need for proof usually becomes stronger. A beginner should assume earlier clarification is more important in that situation, because the migration may require more precise interpretation, transformation, validation, and tailored handling than a more standard case.
+
 ### Why migration outcomes are harder to judge than beginners expect
 
 Beginners often expect migration problems to be obvious, but many important issues are subtle at first.
@@ -170,15 +172,21 @@ Ask questions such as:
 
 A beginner should not assume that every project is equally suited to the same migration path. If the sample reveals more complexity than expected, the safer path may involve more tailored handling and more guided review.
 
-### Where Custom Cart can make beginner planning harder
+### When a beginner should ask for earlier expert guidance
 
-A Custom Cart is any shopping cart platform that is not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both.
+Beginners do not need to solve every migration problem alone before asking for help.
 
-For beginners, the important point is that migration involving a Custom Cart may introduce higher data complexity. The project may require more precise interpretation, transformation, and validation to preserve compatibility and data integrity successfully.
+Earlier expert guidance becomes especially useful when:
 
-That is why any migration involving a Custom Cart proceeds through the Custom Migration Service. The migration tool is adjusted and fine-tuned to fit the platform’s capabilities, data model, constraints, project requirements, and expected outcomes.
+* product behavior is more complex than expected
+* important store logic depends on apps, plugins, or outside systems
+* the target platform changes how important structure is represented
+* the business is unsure what should count as an acceptable result
+* the demo sample reveals more change than the team expected
 
-For a beginner, the practical takeaway is simple: if a Custom Cart is involved, ask for expert guidance early, review representative sample data, and avoid treating the project like a standard one until the real complexity is clearer.
+The value of early guidance is not only technical explanation. It is helping the business interpret what the sample reveals before assumptions become harder to unwind.
+
+If a Custom Cart is involved, that earlier guidance often becomes even more useful because more of the project may depend on tailored handling, stronger validation, and clearer expectation-setting from the beginning.
 
 ### Common beginner mistakes
 
@@ -226,4 +234,4 @@ They can add business meaning that does not live entirely in the core platform. 
 
 #### What should a beginner do differently if a Custom Cart is involved?
 
-Ask for expert guidance early, review representative sample data, and expect the project to need more tailored handling. Migration involving a Custom Cart proceeds through Custom Migration Service because the tool must be adjusted and fine-tuned to fit the platform’s capabilities, data model, constraints, and project needs.
+Ask for expert guidance earlier, use a representative sample, and avoid assuming the project will behave like a more standard migration case until the real complexity is clearer.

@@ -7,17 +7,15 @@ metaLinks:
 
 # Migration Readiness Scorecard: Is Your Business Ready to Move?
 
-## Migration Readiness Scorecard: Is Your Business Ready to Move?
-
 Not every business that wants to migrate is ready to migrate well.
 
 That does not mean the project should stop. It means the business should understand where uncertainty is still high before it commits too deeply to scope, timing, or launch decisions. Low readiness usually comes from unclear priorities, incomplete scope, weak visibility into important data, or unclear review responsibility, not from lack of effort.
 
 A readiness scorecard helps make those gaps visible early. It turns migration planning into something more practical by asking whether the business has defined what must still work after launch, identified where important data and logic live, recognized the highest-risk parts of the store, and prepared the right people to review results before go-live.
 
-Readiness is not the same as enthusiasm for change. It is the degree to which the business can make sound migration decisions without relying too heavily on assumptions.
-
 ### What migration readiness really means
+
+Readiness is not the same as enthusiasm for change. It is the degree to which the business can make sound migration decisions without relying too heavily on assumptions.
 
 A ready business usually has:
 
@@ -30,9 +28,9 @@ A ready business usually has:
 
 This does not guarantee an easy migration. It means the business is more likely to make good decisions early, identify risk before it becomes expensive, and judge sample results in a useful way.
 
-A business can want migration badly and still not be ready to begin well. The problem is usually not motivation. The problem is that unclear planning creates late surprises.
-
 ### Why readiness matters before deeper execution begins
+
+A business can want migration badly and still not be ready to begin well. The problem is usually not motivation. The problem is that unclear planning creates late surprises.
 
 Most migration problems do not begin in the tool. They begin earlier, when the business has not yet agreed on what the migration must protect or how the result will be judged.
 
@@ -51,9 +49,9 @@ Lower readiness does not make migration impossible. It usually means the project
 
 For each area below, score your current state:
 
-* **0 points** = Not ready
-* **1 point** = Partly ready
-* **2 points** = Ready
+* **0 points = Not ready**
+* **1 point = Partly ready**
+* **2 points = Ready**
 
 The goal is not perfection. The goal is to make uncertainty visible early enough to reduce risk.
 
@@ -123,15 +121,7 @@ A representative sample can help the business understand:
 
 That makes the scorecard more practical because readiness should be tested against visible evidence, not only against internal confidence.
 
-### How Custom Cart can affect readiness
-
-A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the migration project.
-
-When you migrate to or from a Custom Cart, readiness usually depends more heavily on early expert review, clearer expectations, stronger sample-based proof, and more precise interpretation, transformation, and validation.
-
-That is because migration involving a Custom Cart may require the migration tool to be adjusted and fine-tuned to fit the platform’s capabilities, data model, constraints, and project needs through the Custom Migration Service.
-
-For readiness purposes, the key question is whether the business is treating that added complexity as something that needs early clarification rather than late problem-solving.
+If a Custom Cart is involved, that evidence becomes even more important. Readiness in that situation depends more heavily on early expert review, clearer expectations, and stronger sample-based proof because the project may require more precise interpretation, transformation, validation, and tailored handling than a more standard case.
 
 ### What a stronger readiness position looks like
 
@@ -179,4 +169,4 @@ Because it helps expose hidden complexity and turns abstract planning into somet
 
 #### How does a Custom Cart affect readiness?
 
-It usually makes early clarification more important. If a Custom Cart is involved, the project often needs earlier expert review, stronger sample-based proof, and clearer expectations because the migration may require more precise interpretation, transformation, validation, and tailored tool handling through Custom Migration Service.
+If a Custom Cart is involved, the project often needs earlier expert review, stronger sample-based proof, and clearer expectations because the migration may require more precise interpretation, transformation, validation, and tailored handling than a more standard case.

@@ -243,7 +243,7 @@ That usually increases the need for:
 * more careful validation of whether business behavior was preserved
 * migration-tool fine-tuning to fit platform capabilities, constraints, and project requirements
 
-For planning purposes, the most useful response is early clarification: identify what the migration must preserve, review representative sample data, and test the likely outcome before the broader path become harder to revise.
+For effective planning, the best response is early clarification: determine what needs to be preserved during migration, review sample data, and test the expected outcomes before the overall process becomes more difficult to modify.
 
 ### Conclusion
 

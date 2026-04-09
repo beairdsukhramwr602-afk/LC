@@ -320,7 +320,7 @@ This creates the appearance of discipline without enough decision value.
 This risk affects:
 
 * projects under deadline pressure
-* businesses without clear review ownership
+* businesses without clear review responsibility
 * teams that have not defined what must still work after launch
 * projects where the sample is not representative
 
@@ -374,34 +374,40 @@ Use early planning to clarify:
 
 This helps the business avoid replacing one problem with another.
 
-### Risk 10: Custom Cart complexity is underestimated
+### Risk 10: Higher-complexity handling needs are identified too late
 
 #### Description
 
-Migration involving a Custom Cart can introduce higher data complexity and a greater need for precise interpretation, transformation, validation, and tool fine-tuning to preserve compatibility and data integrity successfully.
+Some projects look manageable at first and only later reveal that preserving business meaning may require more specialized interpretation, transformation, or validation than expected.
 
-The risk is not that the project cannot proceed. The risk is treating it like a standard case before the real complexity is visible.
+That can happen when:
+
+* important logic lives in custom fields or extensions
+* the source and target represent key structures very differently
+* non-standard workflows become visible only during sample review
+* the project involves a Custom Cart and that complexity was treated too casually early on
+
+The risk is not complexity by itself. The risk is discovering that complexity after planning decisions have become harder to change.
 
 #### Who it affects
 
 This risk affects:
 
-* projects where the source platform is a Custom Cart
-* projects where the target platform is a Custom Cart
-* projects where both sides involve Custom Cart handling
-* teams that have not yet reviewed representative sample data from the real structure involved
+* projects with significant custom logic
+* projects involving non-standard structures or workflows
+* migrations where early sample review was too narrow
+* projects involving a Custom Cart that need stronger interpretation and tailored handling
 
 #### Mitigation strategy
 
-Treat Custom Cart as a reason for earlier expert review and clearer expectation setting.
+Treat signs of deeper complexity as an early planning issue, not a late surprise.
 
-Use Live Chat and representative sample review early enough to clarify:
+Use representative sample review and early expert clarification to understand:
 
-* what the migration needs to preserve
-* how much transformation or interpretation may be required
-* what should be proven before the broader path is trusted
-
-Any migration involving a Custom Cart proceeds through Custom Migration Service. That is why early clarification matters more than late correction.
+* what the migration really needs to preserve
+* where interpretation or transformation is likely to be sensitive
+* whether the current migration path is still the safest fit
+* how much validation effort the project is likely to require
 
 ### What strong risk planning looks like
 
@@ -443,9 +449,9 @@ No. The strongest reviews focus first on the areas that carry the highest busine
 
 They often carry business meaning that does not live entirely in the core platform. If that logic affects buying behavior, discovery, continuity, reporting, or operations, it should be treated as part of the real migration problem early.
 
-#### Why is Custom Cart a separate risk category?
+#### Why can higher-complexity projects become risky so quickly?
 
-Because migration involving a Custom Cart often requires more tailored handling, more precise interpretation and transformation, stronger sample-based proof, and earlier expert review than a more standard case.
+Because the project may look manageable before the business has enough visibility into what must be interpreted, transformed, or validated more carefully. The later that becomes clear, the harder it is to adjust the path safely.
 
 #### What makes Demo Migration useful for risk reduction?
 

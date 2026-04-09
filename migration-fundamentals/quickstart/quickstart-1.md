@@ -194,15 +194,7 @@ A good sample does not need to be large. It needs to be representative of the pa
 
 That makes timing more practical because it replaces general urgency with visible information.
 
-### How Custom Cart can affect timing judgment
-
-A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the migration project.
-
-When a Custom Cart is involved, timing decisions often need more care because the migration may require more precise interpretation, transformation, validation, and tailored tool fine-tuning to preserve compatibility and data integrity successfully.
-
-The timing issue is that migration involving a Custom Cart usually benefits from earlier expert review, clearer expectations, and stronger sample-based proof before the project commits too deeply.
-
-Any migration involving a Custom Cart proceeds through the Custom Migration Service. That is why early Live Chat discussion and sample-data Demo Migration can be especially useful where a Custom Cart is part of the project.
+When a Custom Cart is involved, that need for early proof usually becomes stronger. The timing issue is not only whether the business wants to move soon. It is whether the project has enough early visibility into how much interpretation, transformation, and tailored handling may be needed before the broader path becomes difficult to change.
 
 ### What a strong migration-timing decision looks like
 
