@@ -4,7 +4,7 @@ Most migration projects work well with standard capabilities when the source and
 
 That is why a Custom Job should not be understood as general extra help. It is targeted customization of the migration process used when standard handling cannot reliably preserve the outcome the business needs.
 
-### What a Custom Job is
+### What a Custom Job Is
 
 A Custom Job is a modification or extension of the migration tool designed to handle a requirement that standard capabilities do not cover by default.
 
@@ -16,7 +16,7 @@ In practice, a Custom Job is used when one or more of these conditions are true:
 
 A Custom Job is most valuable when it preserves business-critical meaning, not when it is used to avoid basic scoping decisions or routine cleanup.
 
-### Why some migration requirements go beyond standard handling
+### Why Some Migration Requirements Go Beyond Standard Handling
 
 Standard migration is strongest when the source and target stores share a reasonably compatible model for the data that matters most. Custom handling becomes necessary when the requirement depends on something more specific than standard entity transfer.
 
@@ -32,7 +32,7 @@ That often means:
 
 The key question is not whether the data exists. The key question is whether standard migration can preserve the outcome the business actually needs.
 
-### Scenario 1: Custom fields that affect storefront or operational behavior
+### Scenario 1: Custom Fields That Affect Storefront or Operational Behavior
 
 Some stores rely on custom product, customer, or order fields that are not part of the standard supported entity model. These fields may carry specifications, special pricing types, media relationships, operational metadata, or other information that affects real store behavior.
 
@@ -67,7 +67,7 @@ The customer should identify:
 * what outcome they must still support after migration
 * whether the target platform needs the same field behavior or an adapted equivalent
 
-### Scenario 2: Third-party app, plugin, or extension data
+### Scenario 2: Third-Party App, Plugin, or Extension Data
 
 Many stores depend on data created or managed by third-party modules, plugins, or extensions rather than by the platform’s native model. That can include loyalty context, subscription data, search or filtering logic, bundled-product behavior, merchandising rules, or extension-managed attributes.
 
@@ -100,7 +100,7 @@ The customer should clarify:
 * whether those extensions are only cosmetic or business-critical
 * what the target store must still be able to do after migration
 
-### Scenario 3: Rule-based filtered migration requirements
+### Scenario 3: Rule-Based Filtered Migration Requirements
 
 Some projects do not want a full-scope migration. They need defined rules for which records should move and which should not.
 
@@ -145,7 +145,7 @@ The customer should clarify:
 * why the filtered result is needed
 * whether filtering changes how related data should still behave after migration
 
-### Scenario 4: Data transformation requirements
+### Scenario 4: Data Transformation Requirements
 
 Sometimes the data is present, but it needs to be transformed so the target store can use it meaningfully.
 
@@ -187,7 +187,7 @@ The customer should clarify:
 * whether the target platform needs an exact match or a usable equivalent
 * what business behavior must still work after the transformation
 
-### Scenario 5: Custom Cart or non-standard platform structure
+### Scenario 5: Custom Cart or Non-Standard Platform Structure
 
 Some migration projects involve a platform not currently on the standard supported list, a heavily customized self-hosted implementation, or a store with unique data storage patterns.
 
@@ -195,7 +195,7 @@ Some migration projects involve a platform not currently on the standard support
 
 Standard migration assumes recognizable source and target structures. When the platform is heavily customized or non-standard, the migration may need to interpret or map structures that do not behave like a typical platform pairing.
 
-A migration from or to a Custom Cart is always a Custom Migration Service project. In these cases, the migration often needs more exclusive handling to fit structural differences, data modifications, migration-tool tweaks, interpretation demands, validation sensitivity, and other bespoke requirements.
+A migration from or to a Custom Cart always proceeds through Custom Migration Service. In these cases, the migration often needs more exclusive handling to fit structural differences, data modifications, migration-tool adjustments, interpretation demands, validation sensitivity, and other bespoke requirements.
 
 #### What usually makes this requirement more complex
 
@@ -222,7 +222,7 @@ The customer should clarify:
 * whether key data lives in unusual structures
 * which outcomes are non-negotiable if the platform behavior is custom or proprietary
 
-### Scenario 6: Relationship-sensitive special handling
+### Scenario 6: Relationship-Sensitive Special Handling
 
 Some requirements are especially risky because they affect how connected records remain usable after migration. Even when the records move, the result can still fail if relationship-heavy meaning is weakened by filtering, transformation, platform differences, or extension-driven logic.
 
@@ -255,7 +255,7 @@ The customer should clarify:
 * whether the requirement depends on more than core entity presence
 * where relationship-heavy logic lives today, especially if it is extension-driven or custom
 
-### Scenario 7: Integration-dependent migration requirements
+### Scenario 7: Integration-Dependent Migration Requirements
 
 Some stores rely on data that matters mainly because outside systems need it after migration. That can include ERP identifiers, CRM-linked customer fields, shipping or fulfillment metadata, subscription keys, automation identifiers, or reporting artifacts.
 
@@ -288,7 +288,7 @@ The customer should clarify:
 * what data those systems depend on
 * whether the dependency is optional, rebuildable, or truly business-critical
 
-### How to tell whether your requirement is a Custom Job case
+### How to Tell Whether Your Requirement Is a Custom Job Case
 
 The safest approach is to classify each concern shown by a representative demo as one of four types:
 
@@ -318,26 +318,18 @@ If your store depends on extension-driven data, filtered rules, field transforma
 
 ### FAQs
 
-#### Does needing a Custom Job mean my data cannot be migrated otherwise?
+#### Does needing a Custom Job mean the migration cannot be done normally?
 
-Not necessarily. Many stores can migrate core data, but the custom scope is about whether the result will behave correctly and match the outcomes you require. Custom handling is used when standard mapping cannot reliably reach that outcome.
+Not necessarily. Many stores can migrate core data successfully, but a Custom Job is needed when the requirement goes beyond standard capability and the business still needs that requirement preserved safely.
 
-#### Are custom fields one of the most common reasons for a Custom Job?
+#### Are filtered migrations always Custom Job cases?
 
-Yes. They are one of the most common reasons because they often carry business-critical meaning that does not exist inside the standard supported entity model.
+Not always. Excluding entire entity types can be standard. The higher-risk cases are rule-based filtering conditions within an entity type, especially when the logic must be precise and repeatable.
 
-#### Can filtered migration requirements trigger a Custom Job?
+#### Is every custom field a Custom Job case?
 
-Yes. Excluding entire entities can be straightforward, but rule-based filtering within an entity type often requires more precise logic than standard handling provides.
+No. The key question is whether the field is business-critical and whether standard migration can preserve it in a usable target-side form. Some custom fields matter little. Others directly affect storefront behavior, operations, or connected systems.
 
-#### How do I know whether this is a mapping issue or a Custom Job case?
+#### When should a business identify a likely Custom Job requirement?
 
-A representative Demo Migration is one of the best ways to tell. If the issue comes from a standard supported structure that needs clearer alignment, it may be a mapping issue. If the required outcome depends on transformation, non-standard logic, or data outside standard handling, it is more likely a Custom Job case.
-
-#### How should I think about Custom Cart in relation to Custom Job work?
-
-Any migration from or to a Custom Cart is already a Custom Migration Service project. The more useful question is which parts of that project will require bespoke handling inside the migration process, such as structural interpretation, data transformation, migration-tool adjustment, or other Custom Job requirements.
-
-#### Why is it better to identify a Custom Job early?
-
-Because it allows the migration to be planned around the real requirement before timelines tighten. Late discovery usually creates more pressure, less clarity, and a higher risk of rushed decisions.
+As early as possible, ideally through a representative Demo Migration and requirement review before the project moves too far into execution.

@@ -6,7 +6,7 @@ That is what reconciliation is for. Reconciliation is the process of comparing t
 
 This matters because migration results rarely fall into a simple pass-or-fail pattern. Some differences come from platform structure. Some come from intentional scope decisions. Some reflect known limitations or acceptable compromises. Others expose broken relationships, weakened usability, or incomplete preservation of business meaning. Reconciliation helps separate those outcomes so the final judgment is based on evidence rather than confusion.
 
-### What reconciliation is really trying to answer
+### What Reconciliation Is Really Trying to Answer
 
 Reconciliation is not only about matching totals.
 
@@ -19,7 +19,7 @@ It is trying to answer four practical questions:
 
 That makes reconciliation different from general validation. Validation asks whether the target store behaves acceptably. Reconciliation asks whether the differences between source and target can be interpreted correctly. The two are closely connected, but they do different jobs. One tests outcomes. The other explains discrepancies.
 
-### Matching counts do not prove success
+### Matching Counts Do Not Prove Success
 
 It is possible for counts to match while important behavior is still wrong.
 
@@ -27,7 +27,7 @@ Products may be present but attached to weaker browsing paths. Customers may exi
 
 This is why reconciliation should never stop at “the numbers look right.” Numbers are useful signals, but they are not the full explanation.
 
-### Count mismatches do not always mean failure
+### Count Mismatches Do Not Always Mean Failure
 
 The reverse is also true. A mismatch does not automatically mean something went wrong.
 
@@ -41,7 +41,7 @@ Differences can be acceptable when they result from:
 
 For example, a business may decide that some lower-value content is out of scope, or that a platform difference is acceptable because it does not weaken the intended customer or operational outcome. The critical issue is not whether everything matches perfectly. It is whether the difference is known, explained, and acceptable in context.
 
-### The most useful way to classify differences
+### The Most Useful Way to Classify Differences
 
 A strong reconciliation process usually classifies differences into a small number of clear categories.
 
@@ -63,7 +63,7 @@ These are the differences that should matter most. They usually weaken revenue-c
 
 This classification approach is stronger than treating every mismatch as equally serious. It gives the team a practical way to judge significance rather than just notice variance.
 
-### Reconciliation should follow business impact, not just data type
+### Reconciliation Should Follow Business Impact, Not Just Data Type
 
 The most useful reconciliation starts with the areas where differences would matter most.
 
@@ -78,7 +78,7 @@ That usually means checking:
 
 This is stronger than trying to reconcile everything at the same level of detail. A store becomes easier to trust when the highest-impact differences are understood first.
 
-### Relationship reconciliation matters as much as record reconciliation
+### Relationship Reconciliation Matters as Much as Record Reconciliation
 
 Some of the most important differences appear in relationships rather than in counts.
 
@@ -92,7 +92,7 @@ Useful reconciliation questions include:
 
 This matters because many migration problems are not missing-record problems. They are relationship and behavior problems that become visible only when connected records are reviewed together.
 
-### Reconciliation should explain, not just detect
+### Reconciliation Should Explain, Not Just Detect
 
 A useful reconciliation process does more than mark a mismatch.
 
@@ -106,7 +106,7 @@ For each important difference, the business should be able to say:
 
 This is what turns reconciliation into a decision-making tool rather than a list of anomalies. A difference that is clearly explained and accepted is very different from a difference that nobody understands under launch pressure.
 
-### What commonly causes reconciliation confusion
+### What Commonly Causes Reconciliation Confusion
 
 Several patterns make reconciliation harder than it should be.
 
@@ -121,7 +121,7 @@ Common problems include:
 
 These issues usually create the most stress near go-live, when the business needs the clearest judgment. A stronger reconciliation process reduces that stress by classifying differences early and linking them to business impact.
 
-### A practical way to reconcile migration results
+### A Practical Way to Reconcile Migration Results
 
 A useful reconciliation process can usually be built in this order:
 
@@ -145,7 +145,7 @@ A mismatch only becomes useful to interpret when the team understands whether it
 
 This is the step that makes reconciliation useful for launch decisions rather than just for observation.
 
-### How Custom Cart can make reconciliation more sensitive
+### How Custom Cart Can Make Reconciliation More Sensitive
 
 A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, reconciliation often becomes more sensitive because some differences may be harder to classify using standard expectations.
 

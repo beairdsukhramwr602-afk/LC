@@ -6,7 +6,7 @@ A discount code may still exist in the target store, yet the behavior behind it 
 
 This matters because promotions are rarely isolated marketing elements. They influence conversion, average order value, customer expectations, margin control, and support workload. In many stores, discount logic also depends on how products, categories, customers, and taxes are represented. A promotion that works in one platform can therefore become less predictable when the target platform applies the same intent through a different rule structure.
 
-### Promotions are rules, not just codes
+### Promotions Are Rules, Not Just Codes
 
 A coupon code and a promotion rule are not the same thing.
 
@@ -25,7 +25,7 @@ A promotion rule may include:
 
 When those elements change, the commercial meaning of the promotion changes even if the discount code remains recognizable.
 
-### Discounts can apply in different layers
+### Discounts Can Apply in Different Layers
 
 Platforms do not always apply discounts in the same place.
 
@@ -49,7 +49,7 @@ That difference matters because it affects:
 
 A store can therefore preserve the idea of a promotion while changing how the discount is actually applied. In some cases, the cart total may still look close enough at first glance, while the underlying distribution changes in ways that matter operationally and financially.
 
-### Why similar promotions behave differently after migration
+### Why Similar Promotions Behave Differently After Migration
 
 Promotion behavior usually changes because platforms differ in rule structure, not because the business intent was unclear.
 
@@ -75,7 +75,7 @@ Free shipping and shipping-threshold promotions often behave differently across 
 
 A platform may calculate discounts before or after tax, distribute them differently across items, or round totals differently. Even small changes can affect customer-facing totals, reporting, and margin interpretation.
 
-### Coupons depend on other store structures
+### Coupons Depend on Other Store Structures
 
 Promotions do not operate in isolation.
 
@@ -90,7 +90,7 @@ They often depend on other structures already carrying meaning in the store:
 
 That dependency matters because a promotion can appear intact while the conditions it depends on have shifted. A category-based discount becomes less reliable if category structure changes. A customer-specific promotion becomes less reliable if segmentation changes. A cart-threshold promotion becomes harder to interpret if line-level and order-level pricing logic is applied differently.
 
-### Where extensions and custom pricing logic raise the risk
+### Where Extensions and Custom Pricing Logic Raise the Risk
 
 Many stores rely on more than native pricing and promotion tools.
 
@@ -109,7 +109,7 @@ In those cases, the migration question is not only whether the code or discount 
 
 When important promotions depend on extension-driven logic, standard handling may preserve visible records without preserving the business logic that made the promotion work. The issue is not only whether a discount can still be selected. It is whether the customer, the cart, the support team, and the business reports all still experience the intended commercial rule.
 
-### What merchants should define before execution
+### What Merchants Should Define Before Execution
 
 Before approving a full migration, the business should be able to describe which pricing and promotion outcomes must remain true after launch.
 
@@ -135,7 +135,7 @@ Free shipping, threshold-based offers, and shipping discounts often deserve thei
 
 This is where apparently familiar promotions often become less predictable after migration.
 
-### What to validate first
+### What to Validate First
 
 Pricing and promotion logic should be validated through realistic carts, not by checking whether a code exists.
 
@@ -160,7 +160,7 @@ The first questions to ask are:
 
 A useful validation sample is usually representative rather than random. It should reflect the discount scenarios that matter most to real customers and real margin outcomes. A Demo Migration is often the fastest way to expose whether the target representation still supports those scenarios before the project scales further.
 
-### When standard handling may not be enough
+### When Standard Handling May Not Be Enough
 
 Not every store with discount rules needs bespoke handling. But some signals should raise the threshold for confidence.
 
@@ -176,40 +176,30 @@ Risk is higher when:
 
 In those situations, the real issue is not whether discount records can move. It is whether the target store can preserve the intended commercial behavior clearly enough through standard handling alone.
 
-If the main need is stronger expert execution and closer guided review of promotion behavior after migration, Managed Migration Service may be sufficient. If important pricing outcomes depend on non-standard rules, custom segmentation, transformation, or more exclusive handling of how the commercial logic should behave, Custom Migration Service may be the safer path, with Custom Jobs used where scoped adaptation is required.
-
-A migration from or to a Custom Cart always belongs to Custom Migration Service. In these cases, promotion logic may require more specialized interpretation because discount structure, eligibility rules, tax interaction, shipping treatment, or customer-specific pricing behavior may not fit a predictable supported-cart pattern cleanly enough for standard handling.
+If the main need is stronger expert execution and closer guided review of promotion behavior after migration, Managed Migration Service may be sufficient. If the expected outcome depends on bespoke pricing rules, extension-driven behavior, or transformation of how discounts should apply, more specialized handling may be the safer path.
 
 ### Conclusion
 
-Promotion migration succeeds when commercial intent survives the platform change, not when coupon names simply reappear in the target store.
+Pricing and promotion logic is one of the clearest examples of how migrated records can look familiar while the commercial rule behind them changes. The issue is not only whether a coupon exists. It is whether the underlying discount behavior still applies to the right products, customers, thresholds, shipping conditions, and total calculations in the way the business intends.
 
-That is why pricing and promotion logic should be judged as rule behavior, not just as visible discount records. When platforms apply discounts differently, the offer may still look familiar while the commercial outcome changes in ways that affect customers, margins, support, and reporting.
+The safest way to reduce that risk is to define which offers matter most commercially, identify where rule behavior depends on other store structures, and validate realistic carts early rather than relying on code presence or headline totals. When that work is done early, promotion continuity becomes much easier to judge before broader launch commitments are made.
 
-Start with the promotions that matter most to revenue, margin protection, customer expectations, and support clarity. Then review how those rules behave in realistic carts before scaling further. If you need help deciding whether the issue is standard rule alignment, stacking differences, tax interaction, shipping treatment, or a requirement for more exclusive handling, Live Chat is a practical way to align validation priorities and the safest migration path.
+Review the carts, promotion combinations, and threshold scenarios that matter most to revenue and margin, not just the discount codes that appear familiar in administration. If the target representation looks likely to weaken rule behavior, stacking logic, or pricing outcomes, Live Chat is a practical way to clarify whether stronger guided handling or more specialized treatment is the safer path.
 
 ### FAQs
 
-#### Why is a coupon code not the same thing as a promotion rule?
+#### Why can a discount code migrate successfully while the promotion still changes?
 
-Because the code is only the trigger. The promotion rule defines eligibility, exclusions, thresholds, stacking, shipping behavior, and how the discount is actually applied.
+Because the code is only the trigger. The commercial meaning lives in the rule behind it, including eligibility logic, exclusions, thresholds, stacking behavior, shipping treatment, and calculation order.
 
-#### Can a promotion look correct and still behave differently after migration?
+#### What should be reviewed first in promotion logic after migration?
 
-Yes. The visible code or discount label may survive while the eligibility logic, calculation layer, shipping treatment, or tax interaction changes.
+Start with the promotions that matter most commercially, especially those involving category or product restrictions, stacked discounts, shipping incentives, customer-specific pricing, or tax-sensitive total calculations.
 
-#### Why do shipping-related promotions often need special review?
+#### Do pricing and promotion rules depend on other store structures?
 
-Because free shipping and shipping-threshold incentives are often handled differently across platforms, and small differences can materially change the commercial outcome.
+Yes. Promotions often depend on products, categories, customers, shipping logic, tax treatment, and extension-driven behavior. If those surrounding structures change, the rule can change even if the discount record survives.
 
-#### What are the biggest signs that promotion logic is a high-risk migration area?
+#### When does promotion behavior become higher risk in migration?
 
-Category or product restrictions, customer-group pricing, stacked promotions, shipping incentives, tax-sensitive discounts, and extension-driven pricing behavior are all strong risk signals.
-
-#### Should promotion behavior be validated through codes or through real carts?
-
-Through realistic carts. A code can exist while the actual commercial rule still behaves incorrectly.
-
-#### How does a Custom Cart affect pricing and promotion preservation?
-
-A migration from or to a Custom Cart is always a Custom Migration Service project. Promotion logic may require more specialized interpretation because pricing structure, discount rules, tax treatment, shipping incentives, and customer-specific commercial behavior may not fit a predictable supported-cart pattern cleanly enough for standard handling.
+Risk rises when stacking rules are important, category or customer eligibility matters, shipping incentives affect conversion, tax interaction changes totals materially, or extensions and custom pricing logic drive the final outcome.

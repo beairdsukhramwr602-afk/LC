@@ -2,11 +2,11 @@
 
 A useful validation checklist is not a long list of everything that could be reviewed. It is a structured way to confirm that the migration preserved what matters most.
 
-That distinction matters because broad checklists often create false confidence. A team may spend time confirming many low-impact details while missing the behaviors that actually determine launch readiness. A stronger checklist starts by defining which outcomes are non-negotiable, which areas carry the highest risk, and which differences would be acceptable if they occur. When those decisions are made early, validation becomes clearer, faster, and more reliable.
+That distinction matters because broad checklists often create false confidence. A team may spend time confirming many low-impact details while missing the behaviors that actually determine launch readiness. A stronger checklist starts by defining which outcomes are non-negotiable, which areas carry the highest risk, and which differences would be acceptable if they occur. When those decisions are made clearly, validation becomes faster, more consistent, and more useful.
 
 A migration checklist should therefore be built around business meaning, not just around data types. Products, customers, orders, categories, pages, and supporting structures are all important, but they are not equally important in every project. The most useful checklist reflects how the store makes money, how customers navigate and buy, how support and operations use the data, and where structural or extension-driven complexity makes continuity harder to preserve.
 
-### What a validation checklist is really for
+### What a Validation Checklist Is Really For
 
 A validation checklist is a decision tool.
 
@@ -19,7 +19,7 @@ Its purpose is to help the business answer four practical questions:
 
 That makes it different from a generic QA list. A generic list may gather many observations. A good migration validation checklist creates an evidence-based path to launch judgment. It separates high-impact issues from lower-impact differences and helps the team review the right sample with the right priorities.
 
-### Start with outcomes, not entities
+### Start with Outcomes, Not Entities
 
 The strongest checklists begin with outcomes the business cares about, not with raw record types.
 
@@ -34,7 +34,7 @@ Examples of useful outcome categories include:
 
 This approach is stronger because one outcome often depends on several connected entities at once. For example, a category-browsing outcome depends on categories, product assignment, and navigation quality. Order usability depends on products, customers, discounts, taxes, and workflow-relevant context. When the checklist starts with outcomes, it becomes easier to review what the business actually needs rather than what happens to be easy to count.
 
-### The checklist should be selective, not exhaustive
+### The Checklist Should Be Selective, Not Exhaustive
 
 A useful validation checklist usually focuses on a small set of high-value review areas first.
 
@@ -51,7 +51,7 @@ That often means prioritizing:
 
 This selective approach is not a shortcut. It is a stronger review method because it tests the parts of the store where continuity failure would matter most. A checklist becomes less useful when it gives equal weight to every detail regardless of business impact.
 
-### What every strong checklist should include
+### What Every Strong Checklist Should Include
 
 A migration validation checklist does not need the same structure in every project, but the strongest versions usually include five elements.
 
@@ -65,7 +65,7 @@ This identifies which records, pages, or scenarios should be reviewed. A useful 
 
 #### 3. Pass condition
 
-This states what must be true for the result to be acceptable. A pass condition should describe behavior clearly, not just presence. For example, it is stronger to say **“customers can select the correct variant without confusion”** than **“product exists.”**
+This states what must be true for the result to be acceptable. A pass condition should describe behavior clearly, not just presence. For example, it is stronger to say “customers can select the correct variant without confusion” than “product exists.”
 
 #### 4. Warning sign
 
@@ -75,7 +75,7 @@ This identifies what should trigger deeper review. Warning signs may include bro
 
 This identifies who should judge the result. Product behavior, customer continuity, order usability, and launch readiness are not always best reviewed by the same person.
 
-### Build the checklist around risk tiers
+### Build the Checklist Around Risk Tiers
 
 Not every checklist item deserves the same weight.
 
@@ -102,7 +102,7 @@ These include differences that are visible but commercially minor, platform-norm
 
 This tiered approach helps the team avoid treating every issue as equally urgent. It also makes the final launch decision easier to explain.
 
-### Relationship checks belong inside the checklist
+### Relationship Checks Belong Inside the Checklist
 
 A checklist should not review entities as if they exist in isolation.
 
@@ -116,7 +116,7 @@ The more useful approach is to include relationship-aware checks such as:
 
 This matters because many migration failures are not missing-record failures. They are meaning-loss failures caused by weakened relationships or changed behavior between connected records.
 
-### Extension and external-system checks should not be an afterthought
+### Extension and External-System Checks Should Not Be an Afterthought
 
 Many stores depend on logic outside the default platform model.
 
@@ -131,7 +131,7 @@ That means the checklist should include explicit review items for:
 
 Without those checks, a storefront can look acceptable while important business behavior has already weakened. A checklist is strongest when it reflects both visible store behavior and the less visible logic that supports daily operations.
 
-### What a good pass condition looks like
+### What a Good Pass Condition Looks Like
 
 Pass conditions should be specific enough to guide judgment and broad enough to reflect business reality.
 
@@ -152,7 +152,7 @@ Stronger pass conditions sound like:
 
 A strong checklist becomes much more useful when every high-priority item has a pass condition written this way.
 
-### Common checklist mistakes
+### Common Checklist Mistakes
 
 Several patterns weaken validation checklists.
 
@@ -168,7 +168,7 @@ Common mistakes include:
 
 These mistakes usually lead to one of two bad outcomes: either the checklist becomes too broad to guide action, or it becomes too shallow to protect launch confidence.
 
-### A practical way to build the checklist
+### A Practical Way to Build the Checklist
 
 A strong migration validation checklist can usually be built in this order:
 
@@ -192,7 +192,7 @@ This creates a triage structure before issues are found.
 
 This prevents important outcomes from being assumed rather than judged.
 
-### How Custom Cart can change checklist design
+### How Custom Cart Can Change Checklist Design
 
 A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, checklist design often needs more precise pass conditions because more of the target behavior may depend on custom structure, bespoke logic, or non-standard interpretation.
 
@@ -237,4 +237,4 @@ Yes, when they affect revenue, customer continuity, operations, reporting, or di
 
 #### How does a Custom Cart affect a migration validation checklist?
 
-A migration from or to a Custom Cart is always a Custom Migration Service project. Checklist design often needs more precise pass conditions, more representative edge-case samples, and clearer definitions of what counts as acceptable versus launch-critical behavior.
+Checklist design often needs more precise pass conditions, more representative edge-case samples, and clearer definitions of what counts as acceptable versus launch-critical behavior.
