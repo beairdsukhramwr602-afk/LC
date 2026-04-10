@@ -125,7 +125,6 @@
   * [Selecting the Right Migration Approach for Shopware](platform-strategy-hubs/shopware-migration-hub/selecting-the-right-migration-approach-for-shopware.md)
   * [Shopware Validation Priorities](platform-strategy-hubs/shopware-migration-hub/shopware-validation-priorities.md)
   * [Shopware Migration Pitfalls and Prevention](platform-strategy-hubs/shopware-migration-hub/shopware-migration-pitfalls-and-prevention.md)
-* [Open-Source vs SaaS Tradeoffs](platform-strategy-hubs/quickstart.md)
 * [Square Migration Hub](platform-strategy-hubs/quickstart-5-1/README.md)
   * [Square Fit: Who Square Is and Is Not Good For](platform-strategy-hubs/quickstart-5-1/quickstart.md)
   * [Square Data Model Differences](platform-strategy-hubs/quickstart-5-1/quickstart-1.md)

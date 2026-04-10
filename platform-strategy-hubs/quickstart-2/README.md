@@ -7,4 +7,3 @@ metaLinks:
 
 # WooCommerce Migration Hub
 
-####
