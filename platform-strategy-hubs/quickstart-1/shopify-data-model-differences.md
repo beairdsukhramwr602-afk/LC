@@ -1,138 +1,160 @@
 # Shopify Data Model Differences
 
-Shopify does not treat store data as a deep, highly layered native structure. It organizes commerce primarily through products, options, variants, collections, customer accounts, orders, and custom data such as metafields. That makes Shopify a strong target for many stores, but it also means migration into Shopify often involves translation and simplification rather than one-to-one structural preservation.
+A migration into Shopify often looks simpler in raw data than it feels in real storefront behavior.
 
-The key question is not whether Shopify can hold the data. It is whether the target store will still express the same buying logic, discovery logic, customer continuity, and operational meaning after that translation.
+That is because Shopify’s model is narrower and more opinionated than many source platforms. Products, options, variants, collections, customers, metafields, and app-owned behavior can still support a wide range of storefront outcomes, but the way those outcomes are represented often changes materially during migration. Records may transfer successfully while the meaning attached to those records becomes more constrained, more app-dependent, or more explicit than it was before.
 
-In Shopify, some meaning that other platforms hold natively is often redistributed across variants, collections, menus, metafields, themes, and apps. That is why a Shopify migration can look complete while still changing how customers choose products, how they browse, how custom data appears, or how order and account behavior feels in real use.
+That distinction matters because data-model differences are not only technical translation questions. They change what the future store can express natively, what it must express through apps or custom data, and what may need to be simplified deliberately to preserve a clear customer journey.
 
-### Product structure is defined through products, options, and variants
+### Shopify’s Product Model Is More Constrained Than Many Source Models
 
-Shopify’s product model is one of the clearest places where store meaning can change during migration.
+Shopify’s native product structure centers on:
 
-A Shopify product can include options such as size or color, and each combination of option values becomes a variant. Variant-level properties can carry important commercial meaning such as price, SKU, barcode, inventory, shipping details, and media association. That makes Shopify clear and predictable in many cases, but it also means a source platform with richer native product structures may need to be simplified or re-expressed during migration.
+* products
+* options
+* variants
+* collections
+* metafields
+* media
+* customer records
+* orders
 
-#### Why this matters in practice
+This sounds straightforward, but the structure becomes more consequential when the source store used richer native product types, more layered option behavior, or more mixed storefront logic.
 
-A common migration challenge is deciding which attributes should become customer-selectable options, which should remain descriptive information, and which should be carried as custom data for search, feeds, or operations. When too much meaning is forced into variants, product choice can become harder to manage and harder for customers to understand. When too little meaning is preserved at the variant level, the sellable outcome can become ambiguous.
+Shopify expects product choice to be expressed through products, options, and variants. Each unique combination of option values becomes a variant. Shopify supports up to three options per product and up to 2,048 variants per product. That creates a clear target model, but it also means the business must decide more carefully which customer choices should remain true sellable outcomes and which meanings belong somewhere else.
 
-This is one of the strongest reasons to validate representative high-variant products early. A product can migrate successfully as data while still becoming harder to buy correctly.
+### Product Choice Becomes a Representation Decision
 
-### Collections and navigation replace deeper native category logic
+In many migrations, the most important model difference appears in how Shopify represents product choice.
 
-Shopify’s organizing layer is built around collections and menus rather than deep native category hierarchies.
+Source stores often blur several kinds of meaning together:
 
-Collections can be manual or rule-based. Manual collections are curated groupings. Smart collections include products automatically based on conditions, and Shopify allows up to 60 conditions in a smart collection. That makes collections flexible for merchandising, but it also means that stores coming from deeper category-tree models often need to redesign browse paths rather than expect a direct structural carryover.
+* true sellable variation
+* descriptive product differences
+* personalization inputs
+* add-on logic
+* extension-driven product behavior
 
-#### Why this matters in practice
+Shopify usually works best when those distinctions are made more explicit.
 
-A category-to-collection mapping can look accurate by label and still fail commercially if the resulting browse journey no longer matches how customers shop. Products can appear in the “right” collection names while still landing in confusing groupings, weak rule logic, or broken menu paths. The real success measure is browsing outcome, not label similarity.
+A choice that defines a real purchasable outcome may need to stay inside options and variants. A choice that only adds descriptive context, captures customer input, or supports an app-driven add-on may need to move into a different layer. When that distinction is not made clearly, a product can still appear in Shopify while the storefront becomes harder to understand or harder to validate.
 
-### Metafields carry much of Shopify’s extra meaning
+### Collections Do Not Behave Like Every Source Platform’s Category Model
 
-Shopify often handles specialized or non-standard data through metafields.
+Shopify uses collections rather than a heavier native category hierarchy model.
 
-Metafields let merchants store information that is not normally captured in the default admin model, and metafield definitions act as templates that specify where a metafield applies and what kind of values it can hold. Shopify supports metafields across products, variants, collections, customers, orders, and other store objects, which makes them one of the most important layers for preserving custom data after migration.
+That matters because a source platform may carry important browse meaning through deeper category logic, category-specific merchandising behavior, or more layered native navigation conventions. Shopify can still support strong discovery, but the target usually needs more deliberate collection design, menu planning, and validation of high-value browse paths.
 
-#### Why this matters in practice
+The important migration question is not only whether products belong to collections. It is whether the future browse structure still supports the way customers narrow, discover, and interpret the catalog after launch.
 
-Metafields often hold information such as specifications, compatibility notes, internal flags, downloadable-file references, feed data, or storefront content that is important to conversion or operations. A migration can therefore preserve the raw values while still failing if that data no longer appears where it is needed or no longer influences the intended storefront behavior. In Shopify, “stored” is not the same as “usable.”
+### Metafields Often Carry More Meaning Than Teams Expect
 
-### Customer accounts change continuity expectations
+In Shopify, metafields often become one of the most important translation layers.
 
-Customer data in Shopify is not only about names, emails, and order history. It is also about how customers regain access after launch.
+That is because many source stores carry important product, customer, page, or operational meaning in fields that Shopify does not represent natively in the same way. Metafields can help preserve structured information, but they do not automatically preserve the original behavior that surrounded that information in the source environment.
 
-Shopify’s current customer accounts support passwordless sign-in through one-time codes and can also support additional sign-in methods such as social sign-in. Imported customers, however, do not keep their existing passwords through standard import. That means customer continuity planning for Shopify is fundamentally different from open-source compatible targets where password-hash continuity may be possible. For Shopify, the planning priority is reset-flow experience, customer communication, and account-access clarity.
+This matters because a field surviving in Shopify is not the same thing as the field still doing what it used to do. A product specification, customer qualifier, or operational signal may still exist in the target while requiring theme logic, app logic, or custom configuration before it becomes useful again.
 
-#### Why this matters in practice
+### Native Behavior and App-Owned Behavior Often Shift
 
-A customer record can migrate successfully while the first-login experience still feels broken if the business has not planned the transition clearly enough. In Shopify, customer continuity should be judged by how easily customers can regain access and continue shopping, not by whether old passwords were preserved.
+One of the clearest Shopify data-model differences is how often important behavior moves into surrounding ecosystem layers.
 
-### Orders need relationship and usability review
+Depending on the target design, some business meaning may be carried through:
 
-Order data in Shopify should be judged by usability, not just by import success.
+* apps
+* metafields
+* themes
+* search extensions
+* subscription tools
+* bundle or pricing apps
+* customer-account tools
+* merchandising logic
 
-Shopify’s migration guidance notes that data import order matters: products should be imported first, then customers, and then historical orders so products and customers connect properly to those orders. That reinforces an important model difference: order records are only useful if the relationships and operational interpretation still hold after migration.
+This does not make Shopify weak. It means the target model often distributes meaning differently. A source platform may carry some behaviors more natively, while Shopify may rely on an app-plus-data pattern to reproduce the same commercial outcome.
 
-#### Why this matters in practice
+The stronger question is therefore not “can Shopify hold the data?” It is “where will this meaning live after launch, and can the business still govern it clearly?”
 
-A store can preserve historical orders while still weakening customer-to-order context, product references, or support usability. That is why Shopify order review should focus on representative operational scenarios, not only order counts.
+### Customer Data Is Preserved Differently from Customer Access
 
-### URL continuity is native, but path behavior still needs deliberate review
+Another important model difference is customer continuity.
 
-Shopify includes native URL redirect support, including bulk import and export of redirects. That makes redirect planning more practical than on platforms that require an additional redirect solution. But it does not remove the need to decide which legacy paths matter most or to validate the final destination behavior after migration.
+Shopify can preserve customer profiles, but the account-access model differs from many platforms. Imported customers do not carry their prior password through standard migration, and current customer accounts use passwordless sign-in as the native account model. That means customer data and customer access should be treated as separate target questions.
 
-#### Why this matters in practice
+The data model can preserve the customer record while the storefront still needs a different account-access experience than the source store provided.
 
-The important question is not whether redirects exist. It is whether the most commercially important legacy paths resolve to the right product, collection, page, or localized destination and still support the customer journey that matters. In Shopify, redirect continuity is a path-prioritization and validation problem, not a plugin-selection problem.
+### Markets and Domain Structure Change How International Meaning Is Carried
 
-### Markets, domains, and language behavior can materially change storefront meaning
+For international storefronts, Shopify’s Markets model changes how the future store should be understood.
 
-Shopify’s international model is built through Markets, domains, and language-aware storefront behavior rather than through a heavier multi-store hierarchy.
+Instead of assuming a heavier multi-store hierarchy, Shopify typically carries international behavior through combinations of:
 
-That means multi-region or multi-language migrations into Shopify should be planned through market structure, regional domains or subfolders, and redirect behavior rather than through assumptions carried over from a different architecture. Domain and market behavior can materially affect customer reachability, international SEO continuity, and localized shopping paths after launch.
+* Markets
+* domains or subdomains
+* languages
+* localized URLs
+* market-specific storefront behavior
 
-### Validation implications
+That means international structure becomes less about copying one store-per-context logic and more about deciding what should differ by market, domain, language, or localized route in Shopify’s own model.
 
-Shopify’s data model usually deserves validation where translation is most likely to change behavior.
+### URL Continuity Is Native, but Future Route Meaning Still Needs to Be Planned
 
-The highest-value checks often include:
+Shopify supports native URL redirects, which removes one common technical uncertainty.
 
-* high-variant products and option logic
-* top collections and rule-based collection behavior
-* metafields that influence storefront content, discovery, or operations
-* customer-account access expectations after import
-* representative order relationships and support usability
-* high-value legacy URLs and important market/domain paths
+But that does not remove the need to decide what the future route structure should mean. A redirect can be technically valid while still leading customers to a weaker or less commercially useful destination. Data-model translation therefore still affects URL continuity because products, collections, pages, and market paths may not map one-to-one from the source environment.
 
-A Shopify migration is often at its best when those validation priorities are treated as part of the target model itself, not as cleanup after the storefront appears visually complete.
+The important target question is not only whether a redirect can exist. It is whether the future destination still supports the customer intent that the legacy path used to serve.
+
+### What Usually Needs the Closest Review
+
+The highest-risk Shopify data-model differences usually sit in a small group of areas:
+
+* high-value products whose source behavior is richer than standard options-and-variants logic
+* collection-led discovery where browse meaning matters materially
+* app-owned storefront behaviors
+* metafield-heavy target structures
+* customer-account transition expectations
+* market-specific paths and domain behavior
+* media behavior on products where variant-linked visuals matter strongly
+
+These areas deserve the earliest review because they are where structurally “successful” migrations most often become behaviorally weaker.
+
+### How to Think About Shopify Translation Risk
+
+Shopify translation risk is usually strongest when the business has not yet decided which meanings belong in which target layer.
+
+A safer target translation usually comes from separating clearly:
+
+* sellable variation
+* descriptive data
+* custom content
+* app-dependent behavior
+* account experience
+* market-specific path logic
+
+The project becomes riskier when all of those meanings stay blended and the target is expected to sort them out automatically.
 
 ### Conclusion
 
-Shopify’s data model is powerful because it is structured, predictable, and commercially effective for many stores. It is also demanding in its own way because it often requires a source store’s meaning to be redistributed across variants, collections, metafields, customer-account planning, apps, and market/domain behavior.
+Shopify’s data model can support a wide range of strong storefront outcomes, but it carries meaning differently from many source platforms. The core migration challenge is not only whether the records can move. It is whether the future store still expresses buying behavior, discovery logic, account experience, app-owned meaning, and international path structure clearly enough after translation.
 
-That is why migration into Shopify succeeds when products still represent the right sellable outcomes, collections still support the intended browse paths, custom data remains usable, customer access is planned realistically, orders remain understandable, and high-value paths still resolve correctly. A Shopify migration should be judged by preserved storefront and operational behavior, not by transferred records alone.
+The safest way to reduce that risk is to review the products, collections, account scenarios, app-dependent behaviors, and market-specific paths that matter most before the full run is treated as trustworthy. When those areas are modeled clearly, Shopify’s target simplicity becomes a strength. When they are left blended, the target can look cleaner while becoming harder to govern or validate.
 
-If your migration into Shopify includes high-variant products, custom data, app-owned behavior, or commercially important market and URL paths, use a Demo Migration to test those patterns with representative samples before treating the target model as settled. If the result shows uncertainty around translation rather than simple record transfer, Live Chat can help determine whether Standard Migration Service is sufficient or whether Managed Migration Service or Custom Migration Service is the safer path.
+Use a representative Demo Migration to test the products, browse paths, app-dependent behaviors, and customer-account scenarios that carry the most business meaning. If the target representation still looks unclear, Live Chat can help determine whether the issue is standard Shopify translation, app-owned behavior that needs clearer planning, or a sign that more guided handling is safer.
 
 ### FAQs
 
-<details>
+#### What is the biggest data-model difference many teams underestimate in Shopify?
 
-<summary><strong>Why are some product variants harder to preserve cleanly in Shopify?</strong></summary>
+Usually product representation. Shopify’s product, option, and variant model is clear, but it can force more deliberate separation between sellable variation, descriptive data, personalization, and app-supported behavior than many source stores currently use.
 
-Because Shopify expresses product choice through options and variants. If the source platform uses richer native product structures or treats too many attributes as purchase-defining, the migration may need simplification or a different representation strategy. A Demo Migration is often the fastest way to see whether the target product behavior is still commercially clear.
+#### Are collections the same as every source platform’s category model?
 
-</details>
+No. Shopify collections can support strong browse behavior, but they do not automatically preserve the same structural meaning as every source platform’s category model. The browse outcome still needs to be planned and validated deliberately.
 
-<details>
+#### Do metafields automatically preserve source-side behavior?
 
-<summary><strong>Why aren’t migrated product categories nested in Shopify the way they were before?</strong></summary>
+No. Metafields can preserve structured information, but they do not automatically reproduce the storefront, workflow, or operational behavior that surrounded that information in the source platform.
 
-Because Shopify organizes browsing primarily through collections and menus rather than deep native category hierarchies. The important planning question is not whether the old tree shape is reproduced exactly, but whether the new browse paths still guide customers to the right product groups.
+#### What should be tested first when Shopify’s data model may be a poor fit?
 
-</details>
-
-<details>
-
-<summary><strong>What are metafields in Shopify, and why do they matter in migration?</strong></summary>
-
-Metafields are Shopify’s main way to store specialized data that does not fit the default model. They matter because many stores rely on custom information for storefront content, filtering, feeds, or operations. Migration succeeds when those metafields remain usable where they need to influence store behavior, not just when the values exist somewhere.
-
-</details>
-
-<details>
-
-<summary><strong>Can imported customers keep their passwords on Shopify?</strong></summary>
-
-Usually no. Imported customers need to create new passwords, and Shopify’s current account model supports passwordless sign-in and optional additional sign-in methods. The safer planning path is a clear first-login reset flow, customer communication, and optional social sign-in where appropriate.
-
-</details>
-
-<details>
-
-<summary><strong>Does Shopify need an extra redirect plugin for URL continuity?</strong></summary>
-
-No. Shopify includes native URL redirect support. The more important task is identifying and validating the high-value product, collection, landing, and legacy paths that matter most after migration.
-
-</details>
+Start with the products, collections, app-dependent behaviors, metafield-heavy structures, account scenarios, and market-specific paths most likely to expose whether the target still preserves the outcomes that matter most.
