@@ -1,221 +1,292 @@
 # Shopify Plus Migration Pitfalls and Prevention
 
-Shopify Plus migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated store preserves records without preserving the commercial logic that made the original business workable. The most common breakdowns happen when B2B structure, catalog access, account experience, store boundaries, legacy enterprise behavior, or high-value storefront paths are treated as details to refine later instead of conditions that shape the target from the beginning.
+Shopify Plus migrations often look more mature than they really are.
 
-This page focuses on the failure patterns that recur most often when Shopify Plus is chosen for the right broad reasons but prepared or validated too loosely. Each pitfall matters because it can create a store that looks complete while still behaving incorrectly for buyers, internal teams, or both.
+That can be a strength when the future store genuinely fits Shopify Plus well. It becomes a weakness when the business mistakes stronger platform capability for clearer target structure. Companies may be created, catalogs may be assigned, customer accounts may be enabled, and multiple stores may sit under one organization, yet the target can still become commercially weaker if the wrong assumptions shaped the migration path. The highest-risk Shopify Plus problems are rarely dramatic technical failures. They are quieter structural mistakes that change who can buy, what they can see, how they sign in, and how the business should govern storefront contexts after launch.
 
-### Pitfall 1: Migrating customers without preserving business-account structure
+That is why Shopify Plus pitfalls should be understood as structure-and-governance failures, not only execution failures. Most of them begin before launch, when the business leaves the company and the catalog meaning is too vague, assumes a multi-store organization means shared-data continuity, or validates the storefront too generically instead of validating the commercial contexts that matter most.
 
-#### What Goes Wrong
+### Pitfall 1: Treating Shopify Plus as Standard Shopify with More Capacity
 
-Customer records are transferred, but the target no longer reflects the real business relationship behind those records. Buyers who should operate inside a company context are no longer aligned correctly to the intended company or location structure, or the target loses the practical distinction between contacts, companies, and location-level buying conditions.
+#### What goes wrong
 
-#### Early Warning Signs
+The business chooses Shopify Plus because it feels like the “larger” version of Shopify, without deciding whether the future store actually needs the different structure Plus is meant to support.
 
-* customer records appear populated, but account relationships are hard to interpret
-* location-specific buying rules are unclear
-* support or sales teams cannot explain how a business customer should buy after launch
-* the business can no longer describe which contacts belong to which buying context
+This usually leads to a target that has more capability but not more clarity. The migration may preserve the visible storefront while still leaving the business unsure how companies, locations, catalogs, access rules, and store boundaries are supposed to work.
 
-#### Prevention
+#### Early warning signs
 
-Define the business-account model before the migration is treated as structurally ready. The target should be able to reflect which contacts belong to which company, which locations need distinct treatment, and which commercial rules apply at that level. Representative validation should include real company-account scenarios, not only general customer transfer.
-
-#### Recommendation example with explicit pass condition
-
-Use a sample that includes several business customers across different company contexts and location-level conditions.\
-**Pass condition:** the business can explain clearly which contacts belong to which company context, and those contacts can operate inside the intended buying structure without ambiguity.
-
-### Pitfall 2: Preserving catalogs without preserving the right access and pricing logic
-
-#### What Goes Wrong
-
-Catalogs exist after migration, but they do not produce the intended commercial outcome. The wrong buyers see the wrong products, pricing appears in the wrong context, or access control is technically present but no longer aligned with the intended business relationship.
-
-#### Early Warning Signs
-
-* business buyers can reach products they should not see
-* expected pricing differences do not appear consistently
-* catalog structure exists, but teams cannot explain how it maps to actual customer groups
-* B2B selling rules become harder to verify after migration than before it
+* the team talks about “moving to Plus” without defining why standard Shopify would be insufficient
+* B2B needs are still described generally rather than through concrete company, location, or catalog rules
+* multi-store ideas are present, but store boundaries are still vague
+* enterprise behavior is being discussed in terms of “flexibility” rather than target structure
 
 #### Prevention
 
-Validate catalogs as commercial behavior, not as records. The target should prove that product visibility and pricing are still controlled by the intended buyer context. Representative review should include buyers with different pricing and access conditions, especially where catalog control is central to revenue.
+Treat Shopify Plus as a platform for clearer commercial structure, not just more capacity. Define:
 
-#### Recommendation example with explicit pass condition
+* why companies matter
+* why catalogs matter
+* why multiple stores matter
+* how account access should work
+* what the business expects Plus to solve structurally
 
-Test several company or location scenarios that are expected to see different products or pricing.\
-**Pass condition:** each buyer reaches only the intended products and sees the intended pricing through the correct account context.
+#### Recommendation example
 
-### Pitfall 3: Treating multi-store governance as shared-data continuity
+A stronger planning standard is to define the 8 to 15 commercial structures that Shopify Plus must support before the migration is treated as strategically settled.
 
-#### What Goes Wrong
+**Pass condition:** the business can explain why Shopify Plus is needed as a target structure, not only why it feels like a stronger platform.
 
-The business assumes that broader organizational control means separate stores will behave like one shared-data environment. As a result, products, customers, settings, or inventory are expected to remain aligned automatically across storefront contexts that are actually independent.
+### Pitfall 2: Creating Companies Without Preserving the Real Customer Relationship
 
-#### Early Warning Signs
+#### What goes wrong
 
-* teams talk about multiple stores as if they share the same operating data by default
-* store boundaries are vague or justified only by history
-* no one can explain which data should remain shared conceptually but governed separately
-* different storefronts are created without a clear ownership model
+Companies and company locations are created in Shopify Plus, but they do not represent the real business relationship the storefront depends on.
 
-#### Prevention
+This usually happens when source-side customer meaning lived in tags, notes, groups, or informal workflows and was moved into Plus without enough structural interpretation. The result is a target that looks B2B-ready while still assigning the wrong customers to the wrong company contexts or failing to preserve location-specific behavior.
 
-Define store boundaries explicitly before launch planning advances. Each store should have a clear role, clear operational ownership, and a clear reason to exist. Multi-store validation should confirm that the business understands where data is independent and where behavior only appears aligned at a higher organizational level.
+#### Early warning signs
 
-#### Recommendation example with explicit pass condition
-
-Review a sample that includes the most commercially important storefront contexts and their intended customer journeys.\
-**Pass condition:** the business can explain which buyers belong in which store context, why those boundaries exist, and how each storefront operates without relying on assumed shared-data behavior.
-
-### Pitfall 4: Treating customer continuity as record continuity
-
-#### What Goes Wrong
-
-Customer continuity is judged by the presence of imported customer data instead of by the quality of the post-migration access experience. The store may contain the right customer records while still creating sign-in confusion, unclear first-login expectations, or business-account access problems.
-
-#### Early Warning Signs
-
-* readiness is being judged mainly by imported customer counts
-* the first-login experience has not been reviewed deliberately
-* business-account access is assumed to work because the records exist
-* teams cannot explain what customer continuity should feel like after launch
+* company creation is treated as an administrative task rather than a commercial model
+* locations exist, but their business meaning is still unclear
+* customer assignments are technically complete but commercially questionable
+* the team cannot explain which rules are supposed to follow company context versus individual customer context
 
 #### Prevention
 
-Validate continuity as an account experience. Review first-login flow, access recovery, and account behavior in the contexts that matter most commercially. Where account experience is sensitive, early validation should confirm that customers can regain access and continue operating in the intended business context.
+Validate the company structure against the real business relationship, not just against imported records. Focus on:
 
-#### Recommendation example with explicit pass condition
+* which customers belong to which companies
+* which locations matter
+* which rules follow the company
+* which rules follow the location
+* which behaviors should still feel different after launch
 
-Test representative login and account-access scenarios for both ordinary and higher-friction customer types.\
-**Pass condition:** customers can reach the intended account experience with acceptable friction and still act in the correct business context after launch.
+#### Recommendation example
 
-### Pitfall 5: Assuming legacy Shopify Plus behavior will carry forward safely
+Use representative company and location scenarios in Demo Migration and final validation.
 
-#### What Goes Wrong
+**Pass condition:** the most important business customers land in the correct company and location context and experience the intended access, visibility, and commercial rules clearly enough.
 
-Older enterprise assumptions are treated as if they still define the safe future-state model. Important storefront, checkout, discounting, or operational behavior may still depend on older customization patterns that no longer map cleanly to the current platform direction.
+### Pitfall 3: Treating Catalog Assignment as Proof of Correct Pricing and Access
 
-#### Early Warning Signs
+#### What goes wrong
 
-* key business behavior is still described through older Plus-era customization language
-* teams assume historical behavior will remain valid without current-state review
-* important workflows are known internally but not documented well enough to validate
-* enterprise logic is treated as familiar rather than re-evaluated
+Catalogs are assigned in Shopify Plus, but product availability and pricing still do not reflect the intended commercial model.
 
-#### Prevention
+Catalogs in Shopify Plus are a direct control layer for B2B product access and pricing. That makes them powerful, but also sensitive. A catalog can be assigned correctly at a technical level while still being commercially wrong if the business never clarified which company or location should receive which assortment and why.
 
-Translate legacy behavior into current business outcomes before treating it as part of the safe target model. The business should identify which behaviors are still essential, which already have an acceptable replacement, and which require redesign or tailored handling. This is especially important for older Scripts-dependent behavior because Shopify Scripts are scheduled to stop working on June 30, 2026.
+#### Early warning signs
 
-#### Recommendation example with explicit pass condition
-
-Select a small set of legacy enterprise behaviors that still affect revenue, checkout, or operations, and validate them directly in the intended target experience.\
-**Pass condition:** each essential behavior has a workable current-state outcome that the business accepts as launch-ready.
-
-### Pitfall 6: Preserving product records without preserving buying clarity
-
-#### What Goes Wrong
-
-Products migrate, but the customer no longer reaches a clear sellable outcome. This often happens when too much source complexity is forced into the standard product model, especially where pricing or access changes by buyer context.
-
-#### Early Warning Signs
-
-* products appear complete, but buyers struggle to identify the right purchasable option
-* the same product behaves differently across contexts without enough clarity
-* product representation discussions are focused on counts rather than buyability
-* structurally difficult product families are postponed until late review
+* the team is validating that catalogs exist, not that they behave correctly
+* price visibility is still being judged loosely
+* product access rules differ by customer context, but no one has ranked the sensitive cases
+* catalog logic still mirrors inherited source-side workarounds instead of an intentional Plus structure
 
 #### Prevention
 
-Validate products through buyer confidence, not product presence. Review the product families most likely to expose weakness where account context, catalog access, and product complexity intersect. The target should still support a clear buying decision for the most commercially important cases.
+Validate catalogs through the business outcomes they control:
 
-#### Recommendation example with explicit pass condition
+* which products each company location should see
+* which prices should apply
+* which exclusions matter
+* which pricing differences are commercially sensitive
+* which product-access mistakes would weaken trust or profitability
 
-Use a sample of structurally difficult, high-value products across the buyer contexts that matter most.\
-**Pass condition:** the intended buyer can identify the right sellable outcome confidently, under the correct pricing and access conditions, without operational guesswork.
+#### Recommendation example
 
-### Pitfall 7: Assuming native redirects solve continuity by themselves
+Build validation around the catalogs with the highest pricing and availability sensitivity instead of only checking generic catalog presence.
 
-#### What Goes Wrong
+**Pass condition:** the correct company context sees the correct products at the correct prices on the paths that matter most commercially.
 
-The business assumes that because native redirects exist, URL continuity is already handled. Important product, collection, landing, informational, or market-sensitive paths are not prioritized carefully enough, and the post-migration journey weakens even when redirects resolve technically.
+### Pitfall 4: Assuming Passwordless Accounts Are a Minor Detail
 
-#### Early Warning Signs
+#### What goes wrong
 
-* redirect planning is treated as a technical checkbox
-* high-value paths have not been identified explicitly
-* teams are validating redirect existence but not the destination journey
-* domain-sensitive or regional entry points are being reviewed too late
+Customer accounts are enabled, but the sign-in and access experience still feels unclear or misaligned with the business relationship.
 
-#### Prevention
+Shopify customer accounts are passwordless by default, and Shopify’s B2B flow requires customers to be associated with company locations to access the correct B2B experience. In blended stores, any customer who is not associated with a company location, or who does not sign in, is treated as a D2C customer.
 
-Validate the paths that matter most commercially, not just the existence of redirect rules. The important question is whether priority entry points still lead buyers to the right destination and support the intended next action after migration. Native redirect capability reduces tool burden, but it does not replace path prioritization and journey validation.
+This becomes a pitfall when the business treats account access as if it will preserve prior expectations automatically, or when blended-store sign-in behavior is not clearly explained to internal teams and customers.
 
-#### Recommendation example with explicit pass condition
+#### Early warning signs
 
-Review a focused list of the most valuable old URLs across product, collection, content, and market-sensitive entry paths.\
-**Pass condition:** each priority path resolves to the correct destination and still supports the intended commercial journey.
-
-### Pitfall 8: Validating visible storefronts but not app-driven or extension-driven business meaning
-
-#### What Goes Wrong
-
-The storefront looks broadly correct, but important business meaning still depends on apps, custom data, theme logic, or extension behavior that was not reviewed deeply enough. Search, discovery, trust signals, account experience, merchandising, or operational workflows can all weaken without obvious visual failure.
-
-#### Early Warning Signs
-
-* teams focus on page appearance more than business behavior
-* app-owned outcomes are listed, but not classified by commercial importance
-* important workflows are assumed to survive because the extension still exists
-* theme or extension logic is treated as secondary even when it affects conversion or operations
+* the business keeps discussing “customer import” as if that proves account continuity
+* B2B sign-in expectations are still vague
+* the same storefront serves multiple customer contexts, but no one has tested what the wrong sign-in context looks like
+* support and launch communication do not match the real account flow
 
 #### Prevention
 
-Classify extension-driven behavior by business impact before launch. Validation should confirm not only that the feature is present, but that it still produces the intended revenue, trust, or operational outcome. Where important meaning lives outside the native core, those outcomes deserve direct review early enough to change the migration path if needed.
+Treat account access as a customer-trust topic. Define:
 
-#### Recommendation example with explicit pass condition
+* what B2B customers should see
+* what D2C customers should see
+* what happens in a blended store
+* what sign-in and support communications must explain
+* how the real account experience should be validated before launch
 
-Select the extension-driven outcomes most likely to affect conversion, customer trust, or operational usability and review them in real storefront or admin scenarios.\
-**Pass condition:** each high-impact extension-driven outcome still supports the intended business behavior well enough for launch.
+#### Recommendation example
+
+Validate the most sensitive account scenarios as experience flows, not only as imported customer records.
+
+**Pass condition:** representative B2B and D2C customers can reach the intended account experience clearly enough that the sign-in path feels understandable and commercially trustworthy.
+
+### Pitfall 5: Assuming Multiple Stores Under One Organization Share Meaning Automatically
+
+#### What goes wrong
+
+The business builds a multi-store Shopify Plus model but treats the stores as if they share products, collections, settings, or validation context by default.
+
+Shopify Plus organizations can manage multiple stores centrally, including expansion stores, but the stores remain independent. Shopify states that products, collections, inventory, settings, and configurations are not shared by default.
+
+This becomes a pitfall when the team assumes one store’s successful setup proves another store’s readiness, or when governance decisions are left too vague because the organization layer creates a false feeling of shared structure.
+
+#### Early warning signs
+
+* the team uses “organization” and “shared environment” interchangeably
+* products or collections are assumed to exist across stores without explicit governance
+* validation treats multiple stores as one storefront context
+* the business has not defined which rules should remain independent by store
+
+#### Prevention
+
+Treat each store as a governed but independent environment. Validate:
+
+* which data belongs in which store
+* which settings matter by store
+* which customer journeys belong in which store
+* which governance rules should be centralized and which should remain local
+
+#### Recommendation example
+
+Build store-boundary validation into the migration plan early, not after the stores already exist.
+
+**Pass condition:** the business can explain clearly what belongs in each store and can prove that the independent-store model still supports the intended commercial structure.
+
+### Pitfall 6: Leaving Blended vs Separate-Store Logic Unresolved for Too Long
+
+#### What goes wrong
+
+The target moves forward while the business is still undecided about whether B2B and D2C should coexist in one store or be separated.
+
+This often creates a target that looks flexible but is commercially ambiguous. Products, pricing, account logic, and validation scope start getting shaped around assumptions that have not actually been approved.
+
+#### Early warning signs
+
+* B2B and D2C logic are both being discussed, but no one owns the final structural choice
+* catalog and account rules are being defined before the store model is settled
+* the team is validating blended and separate-store assumptions at the same time
+* internal stakeholders are still describing different future-store models
+
+#### Prevention
+
+Settle the store-structure decision before the migration becomes operationally heavy. Decide:
+
+* whether B2B and D2C belong together
+* what the commercial advantages of that choice are
+* what validation burden that choice creates
+* what customer confusion it could create if handled poorly
+
+#### Recommendation example
+
+Use the Demo Migration to test the structural choice, not only the data movement.
+
+**Pass condition:** the business can explain why the chosen blended or separate-store model is the right one and can validate it through representative customer and catalog scenarios.
+
+### Pitfall 7: Carrying Forward Legacy Plus Assumptions as If They Were Current Platform Truth
+
+#### What goes wrong
+
+The business treats older Shopify Plus customization patterns as if they still define the safest future model.
+
+One of the clearest current examples is Shopify Scripts. Shopify’s changelog states that published Scripts continue only until June 30, 2026, and Shopify is directing merchants toward Shopify Functions and newer approaches.
+
+This becomes a pitfall when legacy logic is assumed to remain durable simply because it was once part of a successful Plus build.
+
+#### Early warning signs
+
+* legacy enterprise logic is being described as “how Plus works”
+* older customization layers are being carried into the future state without challenge
+* current platform direction is not part of target planning
+* migration choices are being anchored in internal memory instead of current platform reality
+
+#### Prevention
+
+Validate inherited Plus assumptions against current official platform behavior before treating them as future-state truth.
+
+#### Recommendation example
+
+Review the enterprise logic that matters most to pricing, checkout, shipping, and access, then confirm whether it reflects current Shopify Plus direction or legacy assumptions.
+
+**Pass condition:** the future-state model depends on current platform reality, not on outdated Plus conventions.
+
+### Pitfall 8: Validating the Storefront Without Validating the Commercial Context
+
+#### What goes wrong
+
+The storefront looks polished, so the team assumes the target is ready before the most important contextual logic has been proven.
+
+This is one of the most common Shopify Plus launch traps. Companies may exist, catalogs may exist, stores may exist, and pages may look finished, but the target still may not be trustworthy if the company logic, pricing logic, access logic, and store-boundary logic have not been validated through representative scenarios.
+
+#### Early warning signs
+
+* validation is still mostly page-based
+* B2B outcomes are being inferred from setup rather than proven through scenarios
+* store-boundary behavior has not been tested directly
+* the launch decision is being driven by visual readiness instead of context-sensitive evidence
+
+#### Prevention
+
+Validate Shopify Plus through representative commercial context, not only through storefront appearance. Focus on:
+
+* company and company-location scenarios
+* catalog and pricing scenarios
+* B2B and D2C sign-in scenarios
+* store-boundary scenarios
+* enterprise workflows that matter most to post-launch trust
+
+#### Recommendation example
+
+Build the final validation sample around the contexts most likely to expose commercial ambiguity, not the pages easiest to inspect.
+
+**Pass condition:** the most commercially sensitive company, catalog, account, and store scenarios behave acceptably enough that the business can explain why the target is trustworthy.
+
+### How Custom Cart as a Source Changes Shopify Plus Pitfall Prevention
+
+When the source platform is a Custom Cart, Shopify Plus pitfalls become more sensitive because more of the commercial meaning may need bespoke interpretation before it can fit companies, locations, catalogs, account flows, or independent stores cleanly.
+
+That usually means:
+
+* higher risk of misreading source-side company or customer logic
+* greater risk in translating pricing and visibility rules
+* tighter need to distinguish native Plus structures from surrounding custom behavior
+* stronger need for representative company, catalog, and store-boundary validation early
+
+In this context, the key prevention move is not generic caution. It is earlier and more precise evidence around the parts of the source business model that Shopify Plus is most likely to formalize differently.
 
 ### Conclusion
 
-The most common Shopify Plus pitfalls come from confusing structural completeness with commercial correctness. A migration can move records successfully while still weakening business-account logic, catalog-controlled access, customer continuity, store-boundary clarity, legacy enterprise behavior, product buyability, high-value path continuity, or extension-driven outcomes. Strong prevention begins by making those risks visible early, then validating them through representative scenarios instead of broad assumptions.
+Shopify Plus migration pitfalls usually come from assuming that stronger platform capability automatically creates clearer commercial structure.
 
-A practical next step is to use Demo Migration and early validation around the scenarios most likely to reveal these pitfalls before launch. If the result still shows uncertainty around B2B structure, access logic, multi-store design, or legacy/custom behavior, Live Chat can help determine whether the issue is still a validation problem or whether Managed Migration Service or Custom Migration Service is the safer path.
+In reality, the most important failures tend to be quieter: companies that exist but represent the wrong relationship, catalogs that are assigned but control the wrong pricing or access, accounts that import but confuse sign-in context, stores that exist under one organization but are governed with the wrong shared-data assumptions, and storefronts that look polished before the commercial context has actually been proven. The safest way to prevent those failures is to define structure earlier, validate representative company and catalog behavior sooner, and judge Shopify Plus by preserved commercial meaning rather than by enterprise appearance alone.
+
+Before launch, review the parts of the store where Shopify Plus is most likely to formalize meaning differently: company structures, catalog rules, account-access scenarios, store boundaries, and enterprise workflows. If the result still feels unclear, Live Chat can help determine whether the issue reflects acceptable target formalization, a mapping concern, or a stronger need for guided handling before launch.
 
 ### FAQs
 
-<details>
+#### What is one of the most common Shopify Plus migration mistakes?
 
-<summary><strong>What is the most common Shopify Plus migration pitfall?</strong></summary>
+One of the most common mistakes is treating Shopify Plus as standard Shopify with more capacity rather than as a platform that needs clearer company, catalog, account, and store-governance decisions.
 
-Usually it is preserving data without preserving commercial behavior. The store may look complete while still changing who can buy, what they can see, which prices apply, how accounts work, or how different storefront contexts behave.
+#### Why are catalogs such a common Shopify Plus pitfall?
 
-</details>
+Because catalogs directly control product access and pricing visibility. A catalog can be set up correctly in the admin while still being commercially wrong if the underlying business logic was never clarified.
 
-<details>
+#### Why is multi-store governance often mishandled in Shopify Plus?
 
-<summary><strong>Why do Shopify Plus pitfalls often appear late?</strong></summary>
+Because teams sometimes assume that stores under one organization behave like a shared environment. In reality, those stores remain independent by default.
 
-Because many of them hide inside account context, catalog logic, store boundaries, or extension-driven behavior. Those problems can stay invisible until representative buyers or internal teams try to use the migrated store in real scenarios.
+#### What makes Shopify Plus pitfalls harder to detect early?
 
-</details>
-
-<details>
-
-<summary><strong>Are multiple stores automatically safer in Shopify Plus?</strong></summary>
-
-No. Separate stores can create clearer boundaries, but they also increase governance needs. They are only safer when the business has defined clearly why those boundaries exist and how each storefront should operate.
-
-</details>
-
-<details>
-
-<summary><strong>What is the best way to prevent Shopify Plus migration pitfalls?</strong></summary>
-
-Use representative early validation. The best prevention method is usually a focused review of the buyer, pricing, account, storefront, and extension-driven scenarios most likely to reveal whether the target preserves the intended business outcome.
-
-</details>
+Many of them are structural rather than visual. Companies, catalogs, accounts, and stores may all appear present while the real commercial meaning is still wrong or too vague to trust.

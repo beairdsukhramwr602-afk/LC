@@ -1,181 +1,227 @@
 # Shopify Pre-Migration Preparation Checklist
 
-Shopify preparation is strongest when the business defines the target behavior before the migration is judged by transferred records.
+## Shopify Pre-Migration Preparation Checklist
 
-That matters because Shopify often simplifies platform operations while shifting more migration risk into representation decisions. Product behavior may need to be expressed through options and variants, browse paths may need to be rebuilt through collections and menus, customer continuity depends on account-access planning rather than password preservation, and important custom logic may live in apps or metafields rather than in the native core model.
+A Shopify migration usually becomes riskier when the business treats preparation as a generic cleanup exercise instead of a target-shaping decision.
 
-A strong preparation checklist is therefore not a generic list of cleanup tasks. It is a way to define what the Shopify store must still do after launch, which areas carry the highest translation risk, and what needs to be clarified before the project moves too far into execution.
+That matters because Shopify often works well when the future store has been defined clearly enough before execution begins. The platform can support a strong hosted storefront, but it expects the business to make sharper decisions about product representation, collection logic, customer-account continuity, app-owned behavior, international path structure, and high-value URL continuity than many source environments ever required. When those decisions stay vague, the migration can look organized while still carrying avoidable uncertainty into validation and launch.
 
-### Define the target product model before mapping begins
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a Shopify migration path is safe, manageable, and commercially trustworthy.
 
-Shopify product preparation should begin with buying behavior, not with product count.
+### What This Preparation Checklist Is Really For
 
-The most important early question is whether the source product model can be represented clearly through products, options, and variants. Some catalogs move cleanly into that structure. Others depend on richer native logic that needs simplification, restructuring, or app-supported handling before the target model is trustworthy.
+A strong preparation checklist should do more than confirm that data exists.
 
-Before execution, the business should define:
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-* which product families carry the highest variant complexity
-* which product attributes must remain customer-selectable
-* which attributes should stay descriptive rather than become options
-* which high-risk products should anchor the first sample review
+* what Shopify must preserve clearly after launch
+* which source behaviors need translation rather than simple transfer
+* which target simplifications are acceptable and which are not
+* where app-, metafield-, or theme-owned meaning needs special attention
+* which paths, products, and customer scenarios deserve the earliest validation
 
-This is one of the strongest places to use a Demo Migration. A representative sample built from the highest-signal products can show whether Shopify’s target structure is preserving the intended buying logic or whether the model still needs further design work.
+That is why a Shopify preparation checklist is strongest when it is built around target behavior rather than around exports alone.
 
-### Decide how collections and navigation should work after launch
+### 1. Define Which Products Cannot Become Less Clear in Shopify
 
-Shopify preparation should treat collections as a browse-path decision, not just a destination for migrated categories.
+The first preparation priority is usually product behavior.
 
-Many source stores depend on deeper category trees. Shopify organizes browsing primarily through collections and menus, including manual collections and smart collections. That means the business needs to decide early how customers should discover products after launch, especially on the paths that drive the most revenue.
+The business should identify:
 
-Before execution, the business should identify:
+* the products that drive the most revenue
+* the products whose buying journey is structurally complex
+* the products whose source behavior depends on mixed patterns of variation, description, customization, or add-on logic
+* the products where variant-level price, stock, media, or fulfillment meaning matters materially
 
-* the browse paths that matter most commercially
-* which product groups should become manual collections
-* which product groups should be driven by rules
-* which menus and collection relationships must remain clear for customers
+This matters because Shopify’s product model is clear but more constrained than many source environments. A preparation checklist should therefore force an early decision about which products can be expressed cleanly through products, options, and variants and which ones may require more deliberate translation.
 
-The best preparation output here is not a copied category tree. It is a defined set of browse outcomes that the migrated Shopify storefront must still support.
+The goal is not to inspect every product equally. It is to find the product families most likely to reveal whether Shopify’s target model is safe for the real catalog.
 
-### Inventory app-owned behavior before assuming the migration is straightforward
+### 2. Separate Sellable Variation from Descriptive or Supporting Meaning
 
-Many Shopify migrations become riskier because important business behavior lives outside the native model.
+Many source stores blur together several kinds of product meaning.
 
-Reviews, subscriptions, personalization, bundling logic, trust signals, search behavior, merchandising blocks, feed behavior, and customer experiences are often influenced by apps, themes, or custom data. A migration can therefore move the core records successfully while still weakening the store behavior that matters most to conversion or operations.
+Before a full Shopify migration is treated as straightforward, the business should classify which product choices are:
 
-Before execution, the business should identify:
+* true sellable variations
+* descriptive characteristics
+* personalization or customer-input fields
+* add-ons or supporting options
+* app-dependent or custom-data-dependent behavior
 
-* which apps influence conversion
-* which apps support important operational workflows
-* which storefront sections depend on app data or theme logic
-* which app-driven outcomes are non-negotiable after launch
+This is one of the most important preparation tasks because Shopify works best when these layers are separated clearly. If they remain blended, the business may carry source ambiguity directly into the target and only discover the consequences during validation.
 
-When the required outcome depends heavily on app-owned behavior, metafields, or custom handling that is not cleanly expressed in Shopify’s default model, Managed Migration Service or Custom Migration Service is often the safer planning path.
+### 3. Identify Which Collections and Browse Paths Matter Most
 
-### Prepare metafields and custom data as usable outcomes
+Shopify storefront discovery often depends on collections, menus, filters, and theme behavior.
 
-Shopify preparation should treat custom data as a functional layer, not just as migrated values.
+That means the preparation checklist should identify:
 
-Metafields are often where product specifications, compatibility notes, internal flags, feed data, downloadable resources, and other meaning-critical fields are preserved. But custom data only helps if it still appears where needed and still supports the storefront, search, feeds, or operations the business depends on.
+* the collections that matter most to discovery or conversion
+* the browse paths that lead to best sellers or high-value product families
+* the landing collections or paths that carry meaningful customer intent
+* the collection structures that would become commercially weaker if they were simplified too aggressively
 
-Before execution, the business should define:
+The purpose is not to catalog every navigation detail. It is to identify the browse journeys that must remain commercially useful after launch.
 
-* which custom fields are essential after launch
-* where that data must appear
-* whether any collection logic, filtering behavior, or app logic depends on it
-* which custom-data scenarios should be included in the sample review
+### 4. Define the Customer-Account Experience Honestly
 
-The useful preparation question is not “did we move the values?” It is “what must this data still do in Shopify after launch?”
+Customer continuity in Shopify should be prepared as an account-experience decision, not a password-preservation assumption.
 
-### Plan customer continuity as an account experience
+The business should define:
 
-Shopify customer continuity should be planned as a first-login and account-access experience, not as a password-preservation exercise.
+* what returning customers should experience at first login
+* how the launch will communicate account access expectations
+* which customer groups or segments matter most commercially
+* which support scenarios may become sensitive if customers are confused about access
 
-Imported customers do not keep their existing passwords in the standard Shopify path. Shopify’s current account model supports passwordless sign-in and can support additional sign-in methods, so the practical planning issue is how customers regain access without confusion after launch.
+Because Shopify customer accounts use passwordless sign-in and imported customers do not keep prior passwords through standard migration, this area deserves explicit preparation. A customer record surviving is not the same thing as a returning-customer experience being trustworthy.
 
-Before execution, the business should define:
+### 5. List the Apps, Metafields, and Theme Behaviors That Still Need to Matter
 
-* what the first-login path should look like
-* how returning customers will be informed
-* whether customer confusion at login would create major support pressure
-* whether optional sign-in alternatives should be part of the launch plan
+One of the biggest preparation mistakes in Shopify projects is treating apps and custom data as background detail.
 
-For Shopify, the safer preparation focus is usually a first-login reset flow, clear customer communication, and optional social sign-in where appropriate.
+A stronger checklist should identify:
 
-### Protect high-value URLs and market-specific paths early
+* which apps still support commercially important storefront behavior
+* which metafields carry important product, customer, or operational meaning
+* which theme-dependent behaviors affect discovery, trust, or conversion
+* which app-owned or custom-data-owned outcomes are non-negotiable after launch
 
-Shopify includes native URL redirect support, so redirect planning should focus on path prioritization and validation rather than on an additional redirect solution.
+This is usually one of the clearest ways to reduce hidden migration risk. The business does not need a generic inventory of every app. It needs a clearer view of which app-dependent meanings still matter enough to shape scope, validation, and risk judgment.
 
-Preparation should begin by identifying the paths that matter most, because not every legacy URL carries the same business value. This is especially important for stores with important product pages, collection landing pages, campaign destinations, or international storefront paths that influence organic discovery or conversion.
+### 6. Clarify International, Domain, and Market Priorities
 
-Before execution, the business should identify:
+Where international behavior matters, Shopify preparation should identify:
 
-* best-selling product URLs
-* top collection and landing-page URLs
-* important informational pages
-* market-specific or localized paths that must remain reachable
-* any legacy URLs that still carry meaningful traffic or customer intent
+* the domains or subpaths that matter most commercially
+* the markets that matter most to launch
+* the languages that deserve deliberate validation
+* the localized routes or landing pages that still carry meaningful traffic or conversion value
+* any path logic that would create confusion if simplified badly
 
-For Shopify, redirect success is mainly a prioritization and validation problem. The earlier those important paths are defined, the easier launch planning becomes.
+This matters because Shopify’s market and domain model can support strong international behavior, but only when the business treats those paths as part of the future-state storefront design rather than as a background consequence of data import.
 
-### Define international storefront behavior through Markets, domains, and languages
+### 7. Prioritize Legacy URLs by Business Value
 
-Shopify’s international structure should be planned through Markets, domains, and localized storefront behavior rather than through assumptions carried over from multi-store architectures on other platforms.
+Because Shopify supports native redirects, the highest-value preparation question is not whether redirects are possible. It is which legacy paths deserve focused protection.
 
-Before execution, the business should define:
+The checklist should identify:
 
-* which markets matter commercially
-* which domains or subfolders will carry those experiences
-* which localized paths and redirects matter most
-* what should remain shared and what should vary by market or language
+* the product URLs that matter most to traffic or conversion
+* the collection or category-like paths that matter most to discovery
+* the campaign or landing pages that still matter commercially
+* the service or trust pages that customers still need to reach clearly
 
-This preparation step becomes especially important when international traffic, localized SEO, or region-specific browsing paths are meaningful to revenue.
+This is especially important when the source store has accumulated many paths over time. The safer preparation model is to prioritize the routes that matter most, align their intended destinations, and validate them deliberately rather than expecting route continuity to stay equally strong everywhere by default.
 
-### Choose the right validation sample before the full run
+### 8. Mark the Highest-Risk Validation Samples Before Full Execution
 
-Shopify preparation is strongest when the business knows what a useful validation sample looks like before the migration scales.
+Preparation becomes much stronger when the business identifies its validation sample early.
 
-A strong Shopify sample usually includes:
+For Shopify, that usually means:
 
-* the most complex product families
-* the collections and browse paths that drive the most revenue
-* products that depend on app-owned logic or custom data
-* customer-account scenarios that are most likely to generate confusion
-* representative order scenarios if historical orders matter
-* the highest-value legacy URLs and market-specific paths
+* complex best sellers
+* collection-led browse journeys
+* returning-customer account scenarios
+* app-dependent product or storefront behaviors
+* high-value URLs and market-specific paths
+* products where variant media or structured content matters materially
 
-This is where Demo Migration becomes most useful as a planning tool rather than only a proof-of-concept. It reveals where Shopify’s target model is already working and where it is still under-defined.
+This matters because a representative Demo Migration usually becomes much more valuable when the sample is chosen deliberately instead of conveniently.
 
-### Prepare launch decisions before the migration is “done”
+### 9. Define What Shopify Is Allowed to Simplify and What It Is Not
 
-A Shopify migration is easier to launch confidently when the business has already defined what will count as acceptable.
+A stronger Shopify preparation checklist usually includes one difficult but necessary question:
 
-That preparation should include:
+What is the business willing to simplify in order to fit Shopify cleanly, and what is not negotiable?
 
-* the highest-priority behaviors to validate
-* the simplifications that are acceptable
-* the issues that should block launch confidence
-* the people best placed to judge product clarity, collection behavior, customer continuity, and operational usability
+That question should be answered specifically for:
 
-This helps prevent a visually complete storefront from being treated as ready before the important customer and business outcomes have actually been confirmed.
+* product behavior
+* browse structure
+* customer continuity
+* app-owned meaning
+* international path logic
+* high-value URL continuity
+
+Many Shopify projects become harder because that line was never drawn clearly. The business assumed the target would preserve everything important, even though some of the source meaning had never been translated into a cleaner target-state model.
+
+### 10. Decide Which Issues Would Change the Migration Path
+
+Preparation should also help the business recognize which findings are not just validation topics but service-path topics.
+
+The checklist should highlight where uncertainty around Shopify’s target fit might signal:
+
+* a manageable standard translation issue
+* a higher-burden execution path that needs stronger guidance
+* a bespoke requirement that deserves more specialized handling
+
+That does not mean deciding service level too early. It means preparing enough evidence that service-model choice can later follow real target conditions rather than hopeful assumptions.
+
+### A Practical Shopify Preparation Sequence
+
+A useful preparation flow for Shopify usually looks like this:
+
+#### 1. Identify the product families most likely to expose target simplification risk
+
+These are usually the most commercially important structurally complex products.
+
+#### 2. Identify the browse paths and collections that matter most
+
+These reveal whether Shopify’s target discovery model is likely to remain commercially useful.
+
+#### 3. Define the returning-customer experience
+
+This prevents account continuity from becoming a late-stage surprise.
+
+#### 4. Classify app-owned and metafield-owned behavior
+
+This reduces the chance that important meaning survives only superficially.
+
+#### 5. Prioritize market paths and legacy URLs
+
+This helps the launch plan protect the routes that matter most.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than assumption.
+
+### How Custom Cart as a Source Can Change Preparation
+
+When the source platform is a Custom Cart, Shopify preparation needs a more cautious translation mindset because the source model may not align neatly with Shopify’s native structures.
+
+In those situations, preparation usually needs:
+
+* more careful classification of product meaning
+* earlier review of app- or metafield-dependent target behavior
+* clearer separation between source conventions and target outcomes
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source structure is non-standard, this usually points the project toward earlier expert review and a more bespoke migration path into Shopify.
 
 ### Conclusion
 
-Preparing for Shopify means deciding how the store should behave after migration before the project is judged by transferred data.
+A Shopify migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The highest-value preparation work usually happens in product and variant structure, collection and browse-path planning, app-owned behavior, metafields, customer-account continuity, market and domain behavior, URL protection, and representative validation design. Shopify can be a strong target for many stores, but it becomes much safer when those decisions are made deliberately before execution rather than discovered late through validation or post-launch issues.
+That means identifying the products most likely to expose target simplification, the collections and paths most important to discovery, the customer-account expectations that matter most to trust, the app-owned behavior that still needs to work, and the URLs and market paths that still carry real business value. When those preparation decisions are made clearly, the Shopify migration path becomes easier to validate and safer to judge.
 
-Before a full Shopify migration begins, define the product families, browse paths, app-driven outcomes, customer-account scenarios, and high-value legacy URLs that carry the most business meaning. If those areas are still unclear, a representative Demo Migration and Live Chat review can usually reduce more risk than pushing into a larger run too early.
+Before moving deeper into execution, build a preparation checklist around the product families, browse paths, customer scenarios, app-dependent behaviors, and URLs that matter most commercially. If those areas are still difficult to classify, Live Chat can help determine whether the issue is ordinary Shopify translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-<details>
+#### What should be prepared first before migrating into Shopify?
 
-<summary><strong>What should be prepared first before migrating into Shopify?</strong></summary>
+Usually the highest-value starting point is the product families most likely to expose target simplification risk, followed by the collection paths, customer-account scenarios, app-dependent behaviors, and URLs that matter most commercially.
 
-Start with the areas that define storefront behavior: product and variant structure, collection and menu logic, app-owned behavior, custom data, customer-account continuity, and high-value URL paths. Those areas usually reveal risk faster than broad record preparation.
+#### Why is product classification so important in Shopify preparation?
 
-</details>
+Because Shopify works best when sellable variation, descriptive data, customizations, and app-dependent behavior are separated clearly. If they remain blended, the target can look complete while becoming harder to buy from or harder to validate.
 
-<details>
+#### Should Shopify preparation include URLs and customer accounts, or only products?
 
-<summary><strong>Should I redesign categories before migrating to Shopify?</strong></summary>
+It should include all of them. Shopify migration risk often concentrates not only in product structure, but also in first-login account experience, high-value paths, and app-owned storefront meaning.
 
-Usually, you should at least redesign the browse logic. Shopify organizes discovery mainly through collections and menus, so the important preparation task is defining the browse paths customers still need after launch, not recreating the old category shape by label alone.
+#### When does Shopify preparation usually need a more cautious approach?
 
-</details>
-
-<details>
-
-<summary><strong>How should I prepare custom fields for Shopify?</strong></summary>
-
-Decide which custom fields must still influence storefront content, feeds, search, operations, or collections after launch. In Shopify, that often means planning them as metafields and validating where they appear and what they still control, rather than treating them as passive migrated values.
-
-</details>
-
-<details>
-
-<summary><strong>When is a more tailored migration path usually safer for Shopify?</strong></summary>
-
-Usually when the target includes app-driven behavior, metafield-dependent logic, high-variant products, sensitive customer-account continuity, or custom outcomes that need more than straightforward field transfer. In those situations, Managed Migration Service, Custom Migration Service, or a Custom Job may be safer than assuming a standard path will preserve the required result.
-
-</details>
+Usually when the source behavior is still vague, when important meaning depends heavily on apps or custom data, or when the source platform is a Custom Cart whose structures do not align cleanly with Shopify’s native target model.

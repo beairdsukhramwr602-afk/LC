@@ -1,158 +1,233 @@
 # Shopify Plus Pre-Migration Preparation Checklist
 
-Shopify Plus preparation is strongest when the business defines the target behavior before migration is judged by transferred records. This platform can support more commercial structure than standard Shopify, but that added structure does not remove ambiguity on its own. It increases the importance of deciding how business customers, account access, catalogs, pricing visibility, storefront boundaries, and high-value paths should work after launch.
+A Shopify Plus migration usually becomes riskier when the business treats preparation as a generic enterprise checklist instead of a target-structure decision.
 
-A strong preparation checklist is therefore not a generic cleanup exercise. It is a way to make the future store explicit early enough to reduce false confidence later. For Shopify Plus, the most useful preparation work usually sits in six areas: B2B structure, store architecture, account continuity, product representation, app-owned behavior, and continuity of the storefront paths that matter most.
+That matters because Shopify Plus is strongest when the future store has been defined clearly enough before execution begins. The platform can support native B2B structure, broader store governance, and more deliberate customer-account design than standard Shopify, but it still expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-### 1. Define the target B2B model before mapping begins
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a Shopify Plus migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
-The first preparation task is to define what the business-customer structure should look like after migration. In Shopify Plus, that usually means deciding how companies, company locations, contacts, catalogs, pricing visibility, payment expectations, and order context should relate to one another. If those relationships are still vague, the migration can move large amounts of data while still weakening the commercial logic the business depends on.
+### What This Preparation Checklist Is Really For
 
-Before execution, the business should define:
+A strong Shopify Plus preparation checklist should do more than confirm that data exists.
+
+Its purpose is to help the business answer five practical questions before execution pressure increases:
+
+* how the future commercial structure should work
+* where company, location, catalog, and account meaning must remain precise
+* what belongs inside one store versus multiple stores
+* which workflows still depend on apps, custom data, or enterprise logic
+* which outcomes deserve the earliest validation because they are most likely to expose structural ambiguity
+
+That is why a Shopify Plus preparation checklist is strongest when it is built around target governance and business behavior rather than around exported entities alone.
+
+### 1. Define the Future Company and Company-Location Structure
+
+The first preparation priority is usually not the storefront. It is the commercial structure behind it.
+
+The business should identify:
 
 * which customers belong to which companies
-* which company locations need distinct treatment
-* which catalogs should apply to which locations
-* which pricing and payment differences are commercially essential
-* which B2B rules must still hold true after launch
+* which company locations matter commercially
+* which customer roles or permissions matter by location
+* which locations need different payment, pricing, shipping, or visibility rules
+* which source-side conventions currently carry company meaning implicitly
 
-This is one of the highest-value places to use a Demo Migration. A representative sample built around real company-account scenarios usually reveals structural weakness faster than broad customer transfer alone.
+This matters because Shopify Plus can model companies and company locations natively, but that strength only helps when the business has defined the future structure clearly enough. If company logic is still vague, the target can look complete while still behaving incorrectly for business customers.
 
-### 2. Decide early whether the target should be blended or store-separated
+### 2. Clarify How Catalogs Should Control Product Access and Pricing
 
-Shopify Plus can support B2B and direct-to-consumer selling in one store or through a separate B2B-only store. That decision should be treated as a preparation priority because it affects customer segmentation, catalog scope, domain behavior, governance, and validation coverage. Leaving it unresolved too long often creates confusion later around where customers belong, how products should be exposed, and which paths need separate review.
+Catalogs are one of the most important Shopify Plus preparation topics.
 
-Before execution, the business should define:
+On Shopify Plus, catalogs can be assigned directly to companies and company locations. That means the business should define early:
 
-* whether B2B and direct-to-consumer should share one store
-* whether separate storefronts are commercially necessary
-* which differences belong in one store through segmentation and catalogs
-* which differences justify independent storefront contexts
-* who owns each storefront context operationally after launch
+* which products each customer context should be able to see
+* where pricing should differ
+* whether different locations within one company need different commercial treatment
+* whether current customer-group or negotiated-pricing logic should become catalog logic in the target
 
-This is also where inherited multi-store patterns should be questioned rather than preserved automatically. A separate store is justified by a real commercial or governance need, not by habit alone.
+A preparation checklist is stronger when it forces the business to describe these decisions in business terms rather than through inherited source-side workarounds.
 
-### 3. Plan customer continuity as an access experience
+### 3. Decide Whether the Future Model Is Blended or Multi-Store
 
-Customer continuity in Shopify Plus should be prepared as an account-access experience, not as legacy credential preservation. The most important early questions are how customers will sign in after launch, what first-login experience they should expect, whether a social or identity-provider model is relevant, and how account access should behave for business customers in company context. Shopify customer accounts use passwordless sign-in by default, and Shopify Plus can connect an OpenID Connect identity provider where a more controlled sign-in experience is required.
+One of the most important Shopify Plus preparation decisions is whether the future state should use:
 
-Before execution, the business should define:
+* one blended store for B2B and direct-to-consumer activity
+* a dedicated B2B store
+* or a broader multi-store model under one organization
 
-* what the first-login journey should feel like
-* which customer groups need the most controlled access experience
-* whether social sign-in is useful
-* whether external identity-provider integration is materially necessary
-* which account scenarios must be reviewed before launch
+This is not a later convenience setting. It is a structural decision that affects:
 
-This is one of the clearest cases where imported records are not enough to prove readiness. The account experience itself has to be planned and validated.
+* customer segmentation
+* catalog assignment
+* pricing behavior
+* validation scope
+* operational ownership
+* storefront governance after launch
 
-### 4. Confirm the intended product model before detailed mapping
+Because expansion stores remain independent and do not share products, collections, inventory, settings, or data by default, the business should define clearly what belongs in each store and why. A weaker preparation model assumes those boundaries will become obvious later.
 
-Shopify Plus adds more native structure around the buyer, but it still inherits Shopify’s core product model. Products remain structured through products, options, and variants, with up to three options and up to 2,048 variants per product. That means preparation should still begin with the sellable outcome rather than with raw product count. The business needs to decide which attributes must remain customer-selectable, which should stay descriptive, and which products are most likely to expose representation weakness early.
+### 4. Define the Customer-Account Experience Honestly
 
-Before execution, the business should define:
+Customer continuity in Shopify Plus should be prepared as an access and identity question, not as a legacy-password assumption.
 
-* which product families carry the highest representation risk
-* which attributes must remain selectable
-* which variation should stay descriptive or move outside variant logic
-* which products should anchor the first representative review
-* which B2B pricing or catalog rules intersect with complex product structure
+The business should define:
 
-A good early sample should include products that are commercially important and structurally difficult, especially where B2B access and product complexity interact.
+* what B2B customers should experience at sign-in
+* what direct-to-consumer customers should experience if the model is blended
+* how account access should reflect company and location context
+* whether external identity-provider needs materially affect the future model
+* what launch communication and support should explain clearly
 
-### 5. Identify where important business meaning lives outside the native core
+Because customer accounts are passwordless by default, and B2B sign-in is tied to the customer’s email at the relevant company location, this area deserves explicit preparation. A customer record surviving is not the same thing as the account experience being trustworthy.
 
-Many Shopify Plus migrations become riskier where important behavior lives in apps, custom data, or legacy enterprise logic rather than in the native platform model. Preparation should therefore identify which outcomes are truly native and which ones depend on extensions, custom storefront behavior, search or merchandising tools, subscriptions, loyalty programs, or other specialized logic. If those dependencies remain vague, the migration scope may look cleaner than it really is.
+### 5. Identify Which Enterprise Logic Still Depends on Apps, Metafields, or Custom Data
 
-Before execution, the business should define:
+One of the biggest Shopify Plus preparation mistakes is assuming that native Plus structure replaces the need to classify surrounding enterprise behavior.
 
-* which app-owned behaviors are commercially non-negotiable
-* which custom data drives discovery, filtering, merchandising, or operations
-* which storefront blocks or logic depend on theme or extension behavior
-* which legacy enterprise behaviors still need a current-platform equivalent
-* which outcomes can weaken safely and which cannot
+A stronger checklist should identify:
 
-This is often where Live Chat becomes especially useful. It helps distinguish between ordinary migration uncertainty and situations where Managed Migration Service, Custom Migration Service, or a Custom Job is the safer path.
+* which app-dependent behaviors still matter commercially
+* which metafields carry important product, customer, or workflow meaning
+* which enterprise rules still depend on custom logic
+* which storefront behaviors are theme-dependent but commercially important
+* which workflows still sit partly outside Shopify’s native B2B model
 
-### 6. Define what continuity matters most across storefront paths
+This is especially important because Plus can support more native structure than standard Shopify, but many enterprise storefronts still depend on a surrounding layer of app-owned and custom-data-owned logic that must remain understandable after launch.
 
-Shopify Plus preparation should identify the storefront paths that carry the most commercial value before redirect or domain review begins. Native redirect support is available, but continuity still depends on choosing the right paths, storefront contexts, and post-launch destinations to protect. This becomes more important when the business has multiple domains, region-sensitive entry points, or separate storefront contexts that customers experience differently.
+### 6. Identify the Highest-Risk Product and Catalog Combinations
 
-Before execution, the business should define:
+Even in Shopify Plus, product translation still matters.
 
-* which legacy product, collection, landing, and informational paths matter most
-* which domains or region-specific entry points need protection
-* which market-sensitive customer journeys should be preserved
-* which redirects need to be validated first after launch
-* which paths can change safely without weakening performance or trust
+The preparation checklist should identify:
 
-The most useful early redirect list is usually selective, not exhaustive. High-value paths usually reveal risk faster than large-volume URL handling.
+* the product families most likely to expose target simplification risk
+* the products whose behavior matters most to B2B ordering or blended-store clarity
+* the catalogs most likely to reveal pricing or visibility mistakes
+* the combinations of company, location, and catalog behavior that are most commercially sensitive
 
-### 7. Choose a representative review sample before full execution
+The goal is not to inspect every product equally. It is to find the combinations of product structure and customer context most likely to reveal whether the target model is actually safe.
 
-A representative review sample should be designed before detailed execution begins. The goal is not broad coverage. The goal is early signal. Shopify Plus preparation is strongest when the first sample includes the combinations most likely to expose structural weakness in B2B logic, account continuity, store boundaries, product representation, and high-value storefront behavior.
+### 7. Define How Store Governance Should Work After Launch
 
-A high-signal Shopify Plus sample usually includes:
+Shopify Plus can support broader governance across stores, but governance still needs to be defined.
 
-* representative companies and company locations
-* B2B customers with different pricing or catalog conditions
-* one-store and multi-store scenarios where relevant
-* products with the highest representation complexity
-* app-dependent or custom-data-dependent outcomes
-* priority storefront paths and account journeys
+The business should clarify:
 
-This is usually the clearest point at which the business can decide whether the target model is ready for a broader migration run or still needs structural clarification.
+* which teams own which stores
+* what should remain independent by store
+* what should be governed centrally at the organization level
+* which operational rules must remain consistent
+* where independence is acceptable and where it would create avoidable confusion
 
-### 8. Define launch-readiness in behavior terms, not record terms
+This matters because Shopify Plus can manage multiple stores under one organization, but it does not remove the need for explicit governance choices.
 
-Preparation is not complete when the fields to migrate are known. It is complete when the business can explain what must still work after launch. For Shopify Plus, that usually means defining who can buy what, under which account context, at which price, through which storefront path, with which operational expectations. If those outcomes are still not explicit, then the migration is being asked to solve a planning problem it cannot solve safely on its own.
+### 8. Prioritize the Highest-Value Validation Samples Early
 
-Before execution, the business should define:
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
 
-* which commercial outcomes must remain unchanged
-* which changes are acceptable if the business gains a cleaner target model
-* which scenarios represent pass or fail most clearly
-* who reviews the result and approves readiness
-* which unresolved questions must be answered before launch planning advances
+For Shopify Plus, that usually means:
 
-This is the point where preparation turns into a realistic validation strategy rather than a hopeful execution plan.
+* representative company and company-location scenarios
+* the catalogs with the most commercially sensitive pricing or product-visibility rules
+* the blended or separate-store customer journeys most important to launch
+* the account-access scenarios most sensitive to trust
+* the products and storefront paths most likely to expose target ambiguity
+* the stores or storefront contexts most likely to reveal governance confusion
+
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around structural risk instead of convenience.
+
+### 9. Define What Shopify Plus Is Allowed to Clarify and What It Must Preserve Exactly
+
+A stronger Shopify Plus preparation checklist usually includes one difficult but necessary question:
+
+What is the business willing to formalize or simplify in order to fit Shopify Plus clearly, and what commercial meaning is non-negotiable?
+
+That question should be answered specifically for:
+
+* company and location structure
+* catalog logic
+* account-access behavior
+* blended versus separate-store design
+* app-owned or custom-data-owned enterprise behavior
+* product and pricing outcomes that materially affect the customer journey
+
+Many Shopify Plus projects become harder because the business assumes the target will preserve all source-side commercial nuance automatically, even though part of the target advantage is that it asks for a cleaner and more explicit structure.
+
+### 10. Decide Which Findings Would Change the Migration Path
+
+Preparation should also help the business recognize which findings are not only validation topics but migration-path topics.
+
+The checklist should highlight where uncertainty around Shopify Plus fit might signal:
+
+* a manageable structural clarification
+* a higher-burden execution path that needs stronger guidance
+* a bespoke requirement that deserves more specialized handling
+
+That does not mean forcing service selection too early. It means preparing enough evidence that migration-path decisions can later follow real target conditions rather than assumptions.
+
+### A Practical Shopify Plus Preparation Sequence
+
+A useful preparation flow for Shopify Plus usually looks like this:
+
+#### 1. Define companies, locations, and commercial rules first
+
+These are usually the most important structural decisions.
+
+#### 2. Define catalog logic next
+
+This determines how pricing and product visibility should actually work.
+
+#### 3. Decide the blended or multi-store model
+
+This prevents target ambiguity from spreading across the rest of the project.
+
+#### 4. Define customer-account access expectations
+
+This reduces launch risk around passwordless and company-aware sign-in behavior.
+
+#### 5. Classify app-owned and custom-data-owned enterprise logic
+
+This prevents important meaning from remaining implicit.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than theory.
+
+### How Custom Cart as a Source Can Change Preparation
+
+When the source platform is a Custom Cart, Shopify Plus preparation usually needs a more bespoke structural lens.
+
+That is because company logic, pricing rules, access rules, or enterprise workflow meaning may sit in source-side structures that do not align neatly with Shopify Plus companies, locations, catalogs, passwordless accounts, or independent stores. In those situations, preparation usually needs:
+
+* more careful classification of company and location meaning
+* earlier review of how source-side pricing and visibility logic should be rebuilt
+* clearer separation between native Plus structure and surrounding custom behavior
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into Shopify Plus.
 
 ### Conclusion
 
-Shopify Plus preparation is strongest when it makes the future business model explicit before the migration is judged by transferred records. Companies, locations, catalogs, customer access, store boundaries, product structure, extension-driven behavior, and high-value paths all need deliberate definition early enough to guide mapping and validation with confidence.
+A Shopify Plus migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The most useful preparation work usually identifies where commercial meaning is likely to weaken first. A representative Demo Migration built around those areas is often the clearest way to test whether the target structure is ready. If the result still leaves uncertainty around B2B structure, account behavior, multi-store design, or app-dependent outcomes, Live Chat can help determine whether Standard Migration Service remains sufficient or whether Managed Migration Service or Custom Migration Service is the safer path.
+That means clarifying companies, locations, catalogs, account-access expectations, store boundaries, enterprise logic, and the product-and-customer combinations most likely to expose structural ambiguity. When those decisions are made clearly, Shopify Plus becomes easier to validate and safer to judge as a target.
+
+Before moving deeper into execution, build a preparation checklist around the company structures, catalog rules, account scenarios, storefront contexts, and enterprise behaviors that matter most commercially. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine Plus translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-<details>
+#### What should be prepared first before migrating into Shopify Plus?
 
-<summary><strong>What should be prepared first in a Shopify Plus migration?</strong></summary>
+Usually the highest-value starting point is the company and company-location structure, followed by catalog logic, the blended or multi-store model, account-access expectations, and the enterprise behaviors that still depend on apps or custom data.
 
-Usually the B2B and storefront structure. That includes company relationships, location-level rules, catalog logic, account-access expectations, and whether the business should run in one store or in separate storefront contexts.
+#### Why are catalogs such an important Shopify Plus preparation topic?
 
-</details>
+Because catalogs can directly control product access and pricing by company and company location. If that logic is vague, the target can be technically complete while commercially wrong.
 
-<details>
+#### Should Shopify Plus preparation focus mainly on products?
 
-<summary><strong>Why is Shopify Plus preparation more than a data-cleanup task?</strong></summary>
+No. Products still matter, but Shopify Plus preparation is often more sensitive around companies, locations, catalogs, account access, and store-boundary decisions.
 
-Because the main preparation challenge is not only moving records. It is defining how commercial behavior should work after launch, especially around pricing visibility, customer access, store boundaries, and app-dependent outcomes.
+#### When does Shopify Plus preparation usually need a more cautious approach?
 
-</details>
-
-<details>
-
-<summary><strong>Should Shopify Plus preparation focus on every product and customer equally?</strong></summary>
-
-Usually no. Preparation is most useful when it starts with the products, customers, company-account scenarios, and storefront paths most likely to reveal structural weakness early.
-
-</details>
-
-<details>
-
-<summary><strong>When does preparation usually point toward a more tailored migration path?</strong></summary>
-
-Usually when B2B structure is still unclear, multi-store design is unresolved, account continuity needs tighter control, or important business outcomes still depend on under-defined apps, custom data, or legacy enterprise logic.
-
-</details>
+Usually when the source behavior is still vague, when enterprise rules depend heavily on custom logic, or when the source platform is a Custom Cart whose structures do not align cleanly with Shopify Plus’s native B2B and governance model.

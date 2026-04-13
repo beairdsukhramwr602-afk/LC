@@ -1,167 +1,175 @@
 # Magento Data Model Differences
 
-Magento does not treat store data as a flat set of records. It uses product types, attributes, attribute sets, category relationships, customer-group logic, order structures, and storefront scope to determine how the store actually behaves. That makes Magento a powerful migration target, but it also means a migration into Magento must preserve structural meaning, not only data presence.
+A migration into Magento can preserve the visible storefront while still changing the structural meaning behind it.
 
-The most important question is not whether Magento can hold the data. It is whether the target store will still express the same buying logic, discovery logic, customer logic, and operational meaning after the data is translated into Magento’s model. This is where many migrations become harder than expected. The store may look populated while the underlying behavior has shifted.
+That usually happens because Magento is not only a more flexible storefront target. It is a platform where products, attributes, customer groups, URL behavior, and scope hierarchy often carry more explicit meaning than they did in the source store. Products, customers, and orders may still move successfully, but the target can behave very differently once product types, attribute sets, websites, stores, store views, customer-group rules, and native URL rewrites become part of how the business is expected to operate.
 
-### Product structure is defined through product types
+This matters because Magento data-model differences are rarely just technical translation questions. They change what the store believes a product is, how catalog structure should be governed, what should differ by scope, how customer context affects pricing or tax logic, and what the business must validate before it can trust launch readiness.
 
-Magento’s product model is one of the clearest places where data meaning can change during migration.
+### Product Type Becomes a Core Structural Decision
 
-It supports several product types, including simple, configurable, grouped, bundle, virtual, and downloadable products. These are not just labels for administration. They determine how products are purchased, how child relationships behave, how pricing can be expressed, and how the storefront presents choice.
+One of the biggest Magento data-model differences is that product meaning is often governed first through product type.
 
-That means a migration into Magento often requires a more deliberate decision about what kind of product the target store is really trying to represent. A flat or loosely structured source catalog may need to be translated into clearer product-type logic. If that translation is weak, the product may exist in the catalog while the buying experience becomes less intuitive or less commercially accurate.
+Magento supports native product types such as:
 
-#### Why this matters in practice
+* simple
+* configurable
+* virtual
+* downloadable
+* bundle
+* grouped
 
-A configurable product is not the same as a bundle product, and a grouped product is not the same as either of those. If the source platform allowed a less formal or more theme-driven buying structure, Magento may require the business to commit more clearly to which purchasable outcome it is preserving.
+That means product representation is not only about moving fields. It is about deciding which product type expresses the sellable outcome correctly in the target. A migration can therefore preserve the product record while still changing the buying journey if the target product type does not match the real commercial behavior.
 
-### Attributes and attribute sets shape discovery
+This is especially important when the source storefront blurred together:
 
-Magento uses attributes as part of the core structure of the catalog.
+* true sellable variation
+* grouped or linked products
+* bundles or configurable logic
+* downloadable or non-physical products
+* extension-driven purchase behavior
 
-Attributes describe products, but they also influence layered navigation, filtering, comparison, and merchandising logic. Attribute sets act as templates that group related attributes together, which makes them important for consistency across product families.
+Magento can often carry more structure natively than lighter targets, but it still requires the business to make those distinctions clearly.
 
-This is one of the biggest differences for businesses moving from platforms where product information is stored more loosely or where filtering behavior depends more heavily on apps, tags, or custom front-end logic. In Magento, weak attribute governance can quickly weaken discovery quality, even if products and categories appear complete.
+### Attributes Carry Governance Meaning, Not Just Description
 
-#### Common migration implication
+In Magento, attributes are not only descriptive product fields.
 
-If duplicate, inconsistent, or partially populated attributes already exist in the source store, Magento will often expose that inconsistency more visibly after migration. That makes attribute cleanup and representative filter validation much more important than a simple field-presence check.
+They often shape:
 
-### Catalog structure depends on categories and layered navigation
+* filtering
+* layered navigation
+* comparison logic
+* merchandising logic
+* catalog administration
+* product-family structure
+* scope-aware product behavior
 
-Magento’s catalog behavior is shaped by both category structure and layered navigation.
+This means a migration cannot judge attribute continuity only by field survival. The more important question is whether the attributes still support the same catalog logic and product-governance outcome after launch.
 
-Category pages can control content elements and product ordering, while layered navigation helps shoppers filter products by category, price range, and other available attributes. This means discovery depends on the relationship between products, categories, and attributes rather than on any one of those structures alone.
+Many source stores hold important product meaning in fields that were never governed consistently. Magento can make that inconsistency more visible because attributes often need to support both administration and storefront behavior more explicitly than they did before.
 
-That is an important migration difference because a catalog can be populated and still behave differently if:
+### Attribute Sets Change How Product Families Are Managed
 
-* products are assigned differently
-* category structure changes
-* the attribute model no longer supports the intended filtering logic
-* product ordering or page intent changes in ways that weaken discovery
+Magento also introduces a stronger product-family management layer through attribute sets.
 
-### Scope changes how the same data behaves
+An attribute set determines which attributes apply to a product and how that product is structured for administration and display. That means the target model often becomes more explicit about product-family differences than the source store ever was.
 
-Magento’s "websites-stores-store" views hierarchy is one of the most important model differences in the platform.
+This changes migration planning because a product may move successfully while still becoming harder to manage if:
 
-Scope determines where products, categories, content, pricing rules, configuration, and other behaviors apply. This is powerful for multi-brand, multi-region, or multi-language storefronts, but it also means the same record may behave differently depending on where it is viewed.
+* it lands in the wrong attribute set
+* important attributes are missing from the expected set
+* product-family distinctions were never defined clearly enough
+* the target catalog structure depends on administrative discipline the source store did not require
 
-For migration planning, that raises three important questions:
+A migration can therefore look successful at the record level while still weakening catalog governance if attribute sets are not planned clearly enough.
 
-* what should remain shared across storefront contexts
-* what should vary by website, store, or store view
-* whether the current business differences are defined clearly enough to survive translation into Magento’s scope model
+### Scope Becomes Part of the Data Meaning
 
-A store moving from a simpler single-context platform into Magento can underestimate this difference. The result is often not missing data, but inconsistent behavior across storefront contexts.
+One of Magento’s clearest structural differences is the websites, stores, and store views hierarchy.
 
-### Customer structure is shaped by account and group logic
+This hierarchy changes data meaning because some values may apply globally, while others may differ by:
 
-Customer data in Magento is more than basic profile information.
+* website
+* store
+* store view
 
-Customer groups are part of the native model and can influence pricing, tax treatment, and promotions. That means a migration into Magento often requires a clearer decision about how customer segmentation should behave after launch.
+That means a field is no longer only a field. It may also carry a scope decision.
 
-This becomes especially important when the source store used:
+This is important because a migration can preserve the value itself while still misrepresenting the intended behavior if the value is placed at the wrong scope. A business may want catalog variation, pricing variation, content variation, or language variation to live at different levels of the hierarchy. Magento can support that, but it expects those distinctions to be deliberate.
 
-* wholesale versus retail distinctions
-* customer-specific pricing logic
-* eligibility rules
-* extension-driven customer segmentation
-* tax-sensitive customer classification
+This is one of the clearest reasons Magento migrations can look structurally rich while still being harder to govern if scope was not defined early.
 
-If those differences are preserved only as raw fields, without preserving how Magento should apply them, customer continuity may look complete while pricing or visibility logic changes in practice.
+### Customer Groups Change Customer Meaning
 
-### Order meaning depends on how Magento interprets the transaction
+Magento customer groups are not only administrative categories.
 
-Orders are not only historical records. They also need to remain understandable enough for support and operations.
+They can influence:
 
-A migration into Magento should therefore consider not only whether orders appear, but whether the target store preserves enough product context, customer context, discount meaning, and order-state clarity for the business to use those records confidently after launch. That becomes more important when the source store used simpler or highly customized order logic.
+* pricing rules
+* discounts
+* tax class
+* customer segmentation
+* contextual storefront behavior
 
-### Metadata, custom fields, and extensions often carry critical meaning
+This means customer continuity in Magento often depends on more than importing customer records. The business also needs to decide whether customer-group logic still reflects the intended commercial outcome after migration.
 
-Magento can support extension-heavy business models, but that also means important meaning often lives outside the default entity model.
+A migration can therefore preserve customer accounts successfully while still weakening the target model if customer groups are:
 
-Custom fields, extension-managed attributes, catalog rules, search behavior, pricing logic, and workflow metadata may all shape how the store behaves. A migration can therefore preserve the core records while weakening the extension-driven layer that the business actually depends on.
+* incorrectly assigned
+* too broadly reused
+* inherited from source-side workarounds
+* no longer aligned with the pricing or tax behavior the business expects
 
-This is one of the clearest signals that the migration requirement may involve more than standard transfer. In some cases, the business needs transformation, custom handling, or stronger guided review rather than assuming that all important outcomes will survive through default mapping alone.
+Where customer groups carry important commercial meaning, they should be treated as part of the core data model, not as a secondary afterthought.
 
-### URL structure and reachability deserve separate attention
+### Native URL Rewrites Change How Path Continuity Is Governed
 
-Magento includes native URL rewrite capability, which is useful for redirect planning and catalog continuity. It also supports category and product URL behavior that can vary with store configuration. That is a strength, but it also means URL continuity should be reviewed intentionally rather than assumed.
+Magento includes native URL rewrite capability, and rewrites can apply to products, categories, and CMS pages.
 
-This matters most for:
+That means route continuity in Magento is not only a plugin or patch question. It is part of the native platform model. This is a meaningful data-model difference because the target can govern redirect and path behavior more explicitly than many businesses expect.
 
-* best-selling products
-* top categories
-* high-value landing pages
-* multi-store storefronts
-* migrations where category paths and product URLs influence reachability expectations
+But the presence of native rewrites does not remove the need for path planning. A rewrite can exist while still landing customers on a weaker destination if product, category, or CMS-page meaning changed during migration.
 
-Because Magento includes native URL rewrite capability, the planning focus is protection and validation of high-value paths rather than an additional redirect solution.
+The important target question is therefore not only whether a rewrite exists. It is whether the future destination still supports the customer intent the original route used to serve.
 
-### Validation implications
+### Extension-Owned Meaning Still Matters
 
-Magento’s data model usually deserves more structural validation than lighter platforms.
+Magento can carry a large amount of important behavior in native structures, but many stores still depend on surrounding extension logic, custom attributes, scope-sensitive configuration, and custom workflows.
 
-The highest-value checks often include:
+That means a migration into Magento often has to separate:
 
-* representative product-type behavior
-* attribute-driven filtering and layered navigation
-* category assignment and discovery quality
-* scope-sensitive storefront differences
-* customer-group outcomes where segmentation matters
-* order usability in real support scenarios
-* extension-driven behaviors the business cannot afford to weaken
-* priority-page and URL continuity validation
+* native Magento structure
+* extension-owned storefront behavior
+* custom field logic
+* scope-driven configuration behavior
+* inherited source-side logic that still needs a target meaning
 
-Magento is often at its best when those validation priorities are treated as part of the target model itself, not as cleanup after the migration appears visually complete.
+This is one of the most important Magento data-model realities: the target may be structurally rich, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving.
+
+### What Usually Needs the Closest Review
+
+The highest-risk Magento data-model differences usually deserve early review in:
+
+* product-type translation
+* attribute and attribute-set assignment
+* websites, stores, and store-view scope logic
+* customer-group behavior
+* URL rewrite and destination logic
+* extension-owned or scope-sensitive configuration behavior
+
+These are the areas most likely to expose whether the target structure is commercially clear enough rather than only technically complete.
+
+### How Custom Cart as a Source Changes Magento Data-Model Review
+
+When the source platform is a Custom Cart, Magento data-model review usually needs a more bespoke translation lens.
+
+That is because the source may carry product structure, attribute meaning, customer context, pricing logic, or scope-like behavior in ways that do not align neatly with Magento’s native product types, attribute sets, customer groups, or hierarchy model. In those cases, the key review question is not only what data exists. It is how that source meaning should be interpreted and rebuilt so the Magento target remains structurally coherent.
+
+In this context, earlier expert review and a more tailored migration path often become especially important.
 
 ### Conclusion
 
-Magento’s data model is powerful because it turns products, attributes, scope, and customer logic into structured behavior rather than loose data storage.
+Magento data-model differences matter because they change the structural meaning of migrated data, not only its storage location.
 
-That strength is also what makes Magento migration more demanding. Product types need to express the right buying logic, attributes need to support real discovery, scope needs to reflect real storefront differences, customer groups need to preserve meaningful segmentation, and extension-driven logic needs to remain usable after launch. A migration into Magento succeeds when those structural differences are understood early and validated deliberately, not when records simply appear in the target catalog.
+The target often moves from a looser record model into a more explicit structure built around product types, attributes, attribute sets, customer groups, URL rewrites, and websites / stores / store views hierarchy. That can be a major strength when the business genuinely needs that structure. It becomes riskier when the business has not yet defined how those structures should work after the move.
 
-If your migration into Magento includes complex products, multi-store scope, customer segmentation, or extension-heavy business logic, use a Demo Migration to test those patterns with representative samples before treating the model as settled. If the result shows uncertainty around structure translation rather than simple record transfer, Live Chat can help determine whether Standard Migration Service is sufficient or whether Managed Migration Service or Custom Migration Service is the safer path.
+Review the product, attribute, customer-group, URL, and scope logic that matters most before treating the target model as settled. If those structures still feel unclear, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that more guided handling is needed before full execution.
 
 ### FAQs
 
-<details>
+#### What is one of the biggest Magento data-model differences?
 
-<summary><strong>Why is Magento’s data model harder to migrate into than lighter platforms?</strong></summary>
+One of the biggest differences is that product meaning is often governed first through product type, with Magento expecting clearer structural distinctions between simple, configurable, bundle, grouped, virtual, and downloadable behavior.
 
-Because Magento uses product types, attributes, scope, and customer-group logic to shape storefront and operational behavior. That means the migration must preserve structure and meaning, not just records.
+#### Are attributes only descriptive fields in Magento?
 
-</details>
+No. In Magento, attributes often affect catalog governance, filtering, merchandising, and administration as well as product description.
 
-<details>
+#### Why do attribute sets matter so much in Magento?
 
-<summary><strong>What usually causes the biggest data-model issues after migration to Magento?</strong></summary>
+Because attribute sets determine which attributes apply to a product and how product families are structured. A migration can preserve the product record while still weakening catalog governance if attribute sets are not planned clearly enough.
 
-Common causes include weak product-type decisions, inconsistent attributes, poorly defined scope differences, and extension-driven behavior that was preserved as data but not as usable logic.
+#### Does Magento’s scope hierarchy change how data should be reviewed?
 
-</details>
-
-<details>
-
-<summary><strong>Are attributes more important in Magento than in many other platforms?</strong></summary>
-
-Often yes. Attributes are central to filtering, layered navigation, comparison, and catalog consistency, so weak attribute governance tends to create more visible storefront problems in Magento. If filtering behavior is commercially important, a Demo Migration should include representative browse paths rather than only field checks.
-
-</details>
-
-<details>
-
-<summary><strong>Why does multi-store planning matter so much in Magento?</strong></summary>
-
-Because the "websites-stores-store" views hierarchy changes how data and configuration apply across storefront contexts. If shared and varying elements are not defined clearly, the same catalog can behave inconsistently after migration.
-
-</details>
-
-<details>
-
-<summary><strong>When does Magento’s data model point toward a more tailored migration path?</strong></summary>
-
-Usually when the store depends on complex product types, extension-managed logic, customer-group behavior, multi-store differences, or structure changes that require more than straightforward field transfer. In those situations, Managed Migration Service or Custom Migration Service may be the safer path.
-
-</details>
+Yes. Because values can apply globally, by website, by store, or by store view, the meaning of a field often includes a scope decision as well as the value itself.

@@ -1,174 +1,226 @@
 # Magento Pre-Migration Preparation Checklist
 
-Magento rewards clarity before execution.
+A Magento migration usually becomes riskier when the business treats preparation as a generic data-cleanup exercise instead of a target-structure decision.
 
-That matters because the platform expresses buying behavior, discovery logic, storefront scope, customer grouping, and extension-driven outcomes through structure rather than through loose conventions. A migration can therefore look technically complete while still creating avoidable problems if the target model was not defined early enough. Magento supports multiple product types, layered navigation, customer groups, a "websites-stores-store" views hierarchy, and native URL rewrite capability, which means preparation should focus on how those structures will behave after launch, not only on whether the data can be transferred.
+That matters because Magento is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support richer product-type structure, stronger attribute governance, clearer scope-aware variation, more explicit customer-group logic, and more deliberate route handling than many lighter platforms. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-A strong preparation checklist is not a generic list of housekeeping tasks. It is a way to define what the Magento store must still do after migration, which areas carry the highest structural risk, and what must be clarified before the business commits too deeply to timing or launch assumptions. The most important preparation priorities are product modeling, attribute consistency, scope clarity, extension awareness, customer continuity, URL continuity, and representative validation planning.
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a Magento migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
-### Clarify the target product model first
+### What This Preparation Checklist Is Really For
 
-Magento product preparation should begin with how products are meant to behave, not with how many products exist.
+A strong Magento preparation checklist should do more than confirm that data exists.
 
-Magento supports distinct product types, including simple, configurable, grouped, bundle, virtual, and downloadable products. Those types influence purchasability, variation handling, pricing representation, shipping logic, and how products appear in the storefront. If the target model is vague, the catalog can migrate while the buying experience becomes less clear or less commercially accurate.
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-Before execution, the business should define:
+* how the future product and catalog structure should work
+* where attributes, attribute sets, and customer groups must remain precise
+* what should differ by website, store, or store view
+* which workflows still depend on extensions, custom fields, or scope-sensitive logic
+* which outcomes deserve the earliest validation because they are most likely to expose structural ambiguity
 
-* which product families need different product-type handling
-* where configurable behavior must remain intact
-* where grouped or bundle logic reflects a real commercial model
-* which products need the highest-priority sample review
+That is why a Magento preparation checklist is strongest when it is built around target governance and business behavior rather than around exports alone.
 
-This is one of the strongest places to use a Demo Migration. A representative sample built from high-signal product families can reveal whether Standard Migration Service is likely to preserve the intended behavior or whether the target model still needs more guided review.
+### 1. Define the Product Types That Matter Most
 
-### Prepare attributes for real discovery, not just field transfer
+The first preparation priority is usually product behavior.
 
-Magento depends heavily on attributes and attribute sets to support layered navigation, filtering, and comparison.
+The business should identify:
 
-That means attribute preparation should focus on consistency and discovery value, not simply on field presence. Duplicate attribute meanings, inconsistent naming, and mixed formatting can all weaken filtering after migration even if the underlying product data appears complete. Magento is usually more sensitive to weak attribute governance than lighter platforms because attributes sit closer to core storefront behavior.
+* which product families drive the most revenue
+* which products depend on configurable, grouped, bundle, virtual, or downloadable behavior
+* which source-side products still mix sellable variation, descriptive data, or add-on logic too loosely
+* which products would become commercially weaker if the wrong Magento product type were chosen
 
-Before execution, the business should identify:
+This matters because Magento product migration is not only about moving product records. It is about deciding which native product type expresses the real sellable outcome correctly.
 
-* which attributes matter most to filtering and comparison
-* which attributes are inconsistent today
-* which product families should share attribute logic
-* which categories depend heavily on attribute-driven discovery
+### 2. Clarify Which Attributes Carry Real Commercial Meaning
 
-Where attribute meaning is spread across custom fields, extensions, or non-standard logic, Custom Migration Service or a Custom Job may be the safer path if preserving discovery requires more than simple field transfer.
+Magento attributes are not only descriptive fields. They often affect filtering, merchandising, comparison, and catalog administration.
 
-### Define scope before the storefront is populated
+The preparation checklist should identify:
 
-Magento’s websites, stores, and store views hierarchy is one of the most important preparation areas in the platform.
+* which attributes matter to buying behavior
+* which attributes must remain filterable or comparable
+* which attributes matter mainly for administration
+* which attributes are inherited from the source store but no longer carry real value
+* which custom fields should remain native attributes versus extension-owned behavior
 
-It determines what stays shared and what varies across storefront contexts. That can be a major strength for multi-brand, multi-region, or multi-language stores, but it also creates one of the most common sources of late migration surprises when the business has not clearly defined what should differ by scope. Store-view behavior can materially affect URL continuity, especially where overrides exist.
+A stronger preparation model forces the business to separate real commercial attribute meaning from field accumulation.
 
-Before execution, the business should define:
+### 3. Define Attribute Sets Around Real Product Families
 
-* which products, categories, and content should stay shared
-* which elements should vary by website, store, or store view
-* which storefront contexts must be included in early validation
-* whether scope differences are real operating needs or only assumptions carried over from the old platform
+Magento often becomes easier to govern when product families are defined clearly enough to support intentional attribute-set design.
 
-If those answers are still vague, a narrower sample review should happen before the full target structure is treated as settled.
+That means the business should decide:
 
-### Prepare customer continuity as behavior, not just profile transfer
+* which product families genuinely differ
+* which fields belong only to certain product families
+* where administrative clarity matters as much as storefront display
+* whether inherited source categories or source-side conventions are being mistaken for real Magento product-family logic
 
-Customer preparation should focus on what returning customers should experience in Magento after launch.
+A product may migrate successfully and still become harder to manage if attribute sets are treated as an afterthought.
 
-Magento includes customer groups and can apply group-based outcomes to pricing, promotions, and tax behavior. That means customer continuity is not only about preserving names, emails, and addresses. It is also about preserving the commercial meaning attached to customer segments.
+### 4. Decide What Belongs at Website, Store, and Store-View Scope
 
-Before execution, the business should clarify:
+One of the most important Magento preparation tasks is scope definition.
 
-* which customer groups matter commercially
-* whether retail and wholesale logic should differ
-* which pricing or eligibility outcomes depend on customer grouping
-* what returning customers should experience when they access the new store
+The business should identify:
 
-Customer login continuity should also be planned separately from customer-record transfer. Magento can support password continuity as a target when the source platform is open-source. In those cases, password hashes can be transferred, and the Next-Cart Customer Password Plugin can add the source platform’s password verification method to Magento so customers can continue logging in with their existing passwords. If the source platform is not open-source or is cloud-based, the safer preparation focus is a first-login password reset flow, clear customer communication, and optional social login where appropriate.
+* what should differ by website
+* what should differ by store
+* what should differ by store view
+* what should remain global
+* whether the future hierarchy reflects a real commercial need or only optional flexibility
 
-### Review extension-owned behavior before treating the scope as final
+This matters because Magento can support a rich hierarchy, but that strength becomes a burden when scope decisions are made too late or without a clear reason.
 
-Many Magento migrations become riskier because key business behavior lives outside the core data model.
+### 5. Define How Customer Groups Should Work After Launch
 
-Search behavior, pricing logic, catalog rules, customer segmentation, product relationships, workflow metadata, and operational outputs may all depend on modules or custom fields. A store can therefore look well prepared at the entity level while still carrying major ambiguity in the behaviors that matter most after launch. Extension-owned logic is one of the clearest reasons a standard-looking migration becomes less standard in practice.
+Customer groups in Magento can influence discounts, pricing logic, and tax behavior. That means they should be treated as a commercial design topic rather than a cleanup detail.
 
-Before execution, the business should identify:
+The preparation checklist should identify:
 
-* which extensions influence revenue, discovery, support, or operations
-* which outcomes are non-negotiable after launch
-* which behaviors are native to Magento and which are extension-owned
-* whether preserving the required result will need custom handling, transformation, or stronger guided review
+* which customer groups are still commercially meaningful
+* which pricing or discount behaviors still depend on them
+* which tax or segmentation rules they must still support
+* whether any inherited source-side grouping logic should be simplified rather than preserved intact
 
-When extension-driven behavior is essential and still under-defined, Managed Migration Service or Custom Migration Service is often the safer planning path than assuming Standard Migration Service will preserve the outcome through straightforward mapping alone.
+This helps reduce the risk of keeping group structures that survive technically but no longer support the right business outcome.
 
-### Prioritize URL continuity and high-value paths early
+### 6. List the Extensions and Custom Behaviors That Still Need to Matter
 
-Magento includes native URL rewrite capability, which makes redirect planning more practical than on some platforms. Even so, preparation should focus on protecting the paths that matter most, not on assuming every URL will take care of itself.
+One of the biggest Magento preparation mistakes is treating extensions and custom logic as background detail.
 
-Before execution, the business should identify:
+A stronger checklist should identify:
 
-* best-selling product pages
-* top category pages
-* high-value landing pages
-* important informational pages
-* any legacy paths that still drive meaningful traffic or customer intent
+* which extensions still support commercially important storefront behavior
+* which extensions affect product meaning, pricing, filtering, or customer context
+* which custom fields or scope-sensitive settings still drive non-negotiable outcomes
+* which extension-owned workflows matter to operations as well as storefront behavior
 
-Because Magento includes native URL rewrite capability, the planning focus is prioritization and validation of high-value paths rather than an additional redirect solution.
+The business does not need a generic list of everything installed. It needs a clearer view of which extension-owned meanings still matter enough to shape scope, validation, and risk judgment.
 
-### Choose the right validation sample before the full run
+### 7. Prioritize Legacy URLs by Business Value
 
-Magento preparation is strongest when the business knows what a good sample looks like before the full migration begins.
+Because Magento includes native URL rewrite capability, the most important preparation question is not whether rewrites are possible. It is which legacy paths deserve focused protection.
 
-A useful Magento sample usually includes:
+The checklist should identify:
+
+* the product URLs that matter most to traffic or conversion
+* the category or landing paths that matter most to discovery
+* the CMS or service pages that still carry trust value
+* the destinations that would weaken customer intent if they were handled too generically
+
+This matters because a technically valid rewrite can still be commercially weak if the destination no longer supports the purpose the original route served.
+
+### 8. Define the Customer-Continuity Expectation Honestly
+
+Magento can support password continuity only in the compatible open-source source-to-target cases where password hashes can be transferred and the target continuity path is supported appropriately.
+
+That means the preparation checklist should define:
+
+* whether password continuity is realistically possible in this migration pair
+* what returning customers should experience at first login
+* what customer communication should explain clearly
+* which support scenarios may become sensitive if login expectations are wrong
+
+This helps prevent the business from treating customer-account continuity as an assumption instead of a launch-critical planning decision.
+
+### 9. Mark the Highest-Risk Validation Samples Before Full Execution
+
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
+
+For Magento, that usually means:
 
 * complex product families
-* attribute-heavy categories
-* scope-sensitive storefront contexts
-* customer groups that matter commercially
-* orders that support or operations still need to interpret
-* extension-driven scenarios that could weaken meaning after launch
+* the attributes and attribute sets most likely to expose ambiguity
+* the websites, stores, or store views most likely to reveal wrong scope decisions
+* customer groups with meaningful pricing or tax implications
+* extension-sensitive storefront or workflow behavior
+* high-value legacy URLs and customer-continuity scenarios
 
-This is where Demo Migration is most useful as a preparation tool rather than only a proof-of-concept. It helps clarify whether the target structure is actually preserving the intended outcomes before the project scales.
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around structural risk instead of convenience.
 
-### Prepare the launch decision before the migration finishes
+### 10. Define What Magento Is Allowed to Formalize and What It Must Preserve Exactly
 
-A Magento migration is easier to launch confidently when the business has already defined what will count as acceptable.
+A stronger Magento preparation checklist usually includes one difficult but necessary question:
 
-That preparation should include:
+What is the business willing to formalize or simplify in order to fit Magento clearly, and what structural meaning is non-negotiable?
 
-* the highest-priority behaviors to validate
-* the differences that are acceptable
-* the issues that should block launch confidence
-* the people best placed to judge product behavior, discovery quality, customer continuity, and operational usability
+That question should be answered specifically for:
 
-This reduces the risk of treating a visually complete store as launch-ready before the most important behaviors have actually been confirmed.
+* product types
+* attributes and attribute sets
+* scope hierarchy
+* customer groups
+* extension-owned logic
+* URL and customer-continuity priorities
+
+Many Magento projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of Magento’s strength is that it asks for a clearer and more governable structure.
+
+### A Practical Magento Preparation Sequence
+
+A useful preparation flow for Magento usually looks like this:
+
+#### 1. Define high-risk product families first
+
+These are usually the products most likely to expose wrong product-type decisions.
+
+#### 2. Clarify commercial attributes and attribute sets
+
+This prevents catalog governance from becoming weaker after migration.
+
+#### 3. Decide the scope hierarchy
+
+This reduces the chance that website, store, and store-view logic will be improvised later.
+
+#### 4. Define customer-group behavior
+
+This keeps customer context aligned with real pricing and tax expectations.
+
+#### 5. Classify extension-owned and custom-field behavior
+
+This prevents important meaning from remaining implicit.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than assumption.
+
+### How Custom Cart as a Source Can Change Magento Preparation
+
+When the source platform is a Custom Cart, Magento preparation usually needs a more bespoke structural lens.
+
+That is because product meaning, attribute logic, customer grouping, pricing behavior, or scope-like variation may sit in source-side structures that do not align neatly with Magento’s native product types, attributes, customer groups, or hierarchy model. In those situations, preparation usually needs:
+
+* more careful classification of product and attribute meaning
+* earlier review of how source-side pricing and customer context should be rebuilt
+* clearer separation between native Magento structure and surrounding extension logic
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into Magento.
 
 ### Conclusion
 
-Preparing for Magento means deciding how the store should behave before the migration is judged by transferred records.
+A Magento migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The highest-value preparation work usually happens in product modeling, attribute consistency, storefront scope, customer-group behavior, customer continuity, extension-owned logic, URL continuity, and representative validation planning. Magento can be a strong target for complex commerce, but it becomes much safer when those decisions are made deliberately before execution rather than discovered late during review.
+That means clarifying product types, commercial attributes, attribute sets, scope hierarchy, customer-group behavior, extension-owned logic, and the URLs or customer-continuity paths most likely to expose structural ambiguity. When those decisions are made clearly, Magento becomes easier to validate and safer to judge as a target.
 
-Before a full Magento migration begins, define the highest-risk product families, the attribute-driven browse paths that matter most, any scope-sensitive storefront contexts, the customer groups that matter commercially, and the extension-driven behaviors that must remain true. If those areas are still unclear, a representative Demo Migration and Live Chat review can usually reduce more risk than pushing forward with a larger run too early.
+Before moving deeper into execution, build a preparation checklist around the product families, attribute logic, scope decisions, customer-group scenarios, extension-dependent behaviors, and high-value route or customer-continuity cases that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine Magento translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-<details>
+#### What should be prepared first before migrating into Magento?
 
-<summary><strong>What should be prepared first before migrating into Magento?</strong></summary>
+Usually the highest-value starting point is the product families most likely to expose product-type ambiguity, followed by commercial attributes, attribute sets, scope hierarchy, customer-group behavior, and extension-owned logic.
 
-Start with the areas that define behavior: product-type decisions, attribute consistency, storefront scope, customer grouping where it matters, customer login continuity where relevant, and any extension-driven logic the business depends on. Those areas usually reveal risk much faster than broad record preparation.
+#### Why are attribute sets such an important Magento preparation topic?
 
-</details>
+Because they help define how product families are structured and managed. A migration can preserve products and attributes while still weakening catalog governance if attribute-set logic stays vague.
 
-<details>
+#### Should Magento preparation focus mainly on products?
 
-<summary><strong>Why does Magento preparation need more attention than lighter platforms?</strong></summary>
+No. Products are central, but Magento preparation is often just as sensitive around attributes, scope hierarchy, customer groups, extensions, and route or customer-continuity priorities.
 
-Because Magento expresses more business meaning through structure. If product types, attributes, scope, customer-group behavior, or customer continuity expectations are unclear before execution, the store can look complete after migration while still behaving differently in important ways.
+#### When does Magento preparation usually need a more cautious approach?
 
-</details>
-
-<details>
-
-<summary><strong>Should I clean up attributes before a Magento migration?</strong></summary>
-
-Usually yes, especially if filtering and comparison matter. Magento relies heavily on attribute consistency for discovery, so attribute cleanup is often a launch-readiness issue rather than a cosmetic improvement.
-
-</details>
-
-<details>
-
-<summary><strong>Can customers keep their passwords when migrating to Magento?</strong></summary>
-
-Sometimes. Magento can support password continuity as a target when the source platform is open-source. In that case, password hashes can be transferred, and the Next-Cart Customer Password Plugin can add the source platform’s password verification method to Magento so customers can continue logging in with their existing passwords. If the source platform is cloud-based, password continuity is typically not possible, so the safer plan is a first-login reset flow, clear customer communication, and optional social login where appropriate.
-
-</details>
-
-<details>
-
-<summary><strong>When is a more tailored migration path usually safer for Magento?</strong></summary>
-
-Usually when the target includes complex product behavior, extension-managed logic, multi-store scope, customer-group outcomes, or customer continuity requirements that need more than straightforward field transfer. In those situations, Managed Migration Service or Custom Migration Service is often safer than assuming a standard path will preserve the required result.
-
-</details>
+Usually when the source behavior is still vague, when important meaning depends heavily on extensions or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with Magento’s native model.
