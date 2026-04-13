@@ -1,188 +1,200 @@
 # Adobe Commerce Validation Priorities
 
-Adobe Commerce validation should focus on whether the target still behaves correctly in the situations that matter most commercially and operationally. A migration can preserve large amounts of data while still weakening configurable-product clarity, customer-context behavior, catalog visibility logic, route continuity, scope-specific storefront meaning, or long-term governability. That is why validation should begin with the areas where storefront behavior and operating trust are most likely to change quietly rather than trying to inspect everything equally.
+An Adobe Commerce migration should not be validated evenly across the whole storefront. It should be validated where Adobe Commerce is most likely to change commercial context, product access, pricing visibility, staged behavior, and route meaning.
 
-For Adobe Commerce, the most important validation work usually sits in eight areas:
+That matters because Adobe Commerce can produce a polished target quickly. Products may appear present, companies may exist, shared catalogs may be assigned, customer groups may be visible, staged campaigns may be configured, and URL rewrites may resolve. But those signals do not prove that the target is commercially trustworthy. The more important question is whether company relationships, shared-catalog rules, customer-group interaction, staged content, scope-aware behavior, and high-value routes still support the intended outcome after translation.
 
-* configurable-product behavior
-* the separation between configurable behavior and customizable options
-* customer-context and catalog-visibility behavior
-* route continuity and high-value path behavior
-* scope-specific storefront behavior
-* customer continuity and account-context realism
-* ecosystem- or extension-driven storefront meaning
-* governability and maintainability proof in the future-state store
+This makes Adobe Commerce validation more context-sensitive than many teams first expect. A broad record check can create false confidence. A stronger approach is to validate the places where Adobe Commerce most often reshapes meaning: company structure, shared-catalog logic, customer-group interaction, staged content behavior, scope-sensitive storefront rules, high-value routes, and surrounding enterprise behavior.
 
-A strong validation plan is narrower and more behavior-based than many teams expect. The goal is not to prove that every field arrived. The goal is to prove that the right customer can find the right products, make the right choices, encounter the right visibility and account conditions, move through the right storefront paths, and interact with a store the business can still trust and govern after launch.
+### What Adobe Commerce Validation Is Really Trying to Prove
 
-### Start with a representative validation sample
+For Adobe Commerce, validation is mainly trying to prove five things.
 
-Validation should begin with the slice of the store most likely to reveal risk early. In Adobe Commerce, that usually means representative configurable products, high-value route paths, customer-context-sensitive scenarios, scope-specific storefront situations where layered context matters, and the surrounding ecosystem-driven outcomes most likely to affect buying behavior, trust, or internal usability.
+#### 1. Company structure still works commercially
 
-A useful first sample usually includes:
+The target may show companies, but the higher-value question is whether the company relationships still support the real business model the storefront depends on.
 
-* representative configurable products
-* product journeys where configurable behavior and supporting customization must stay clearly separated
-* customer-context scenarios where visibility or buying conditions matter materially
-* high-value product, category, and content paths with strong commercial meaning
-* scope-sensitive storefront situations where layered context matters
-* ecosystem- or extension-driven outcomes that affect buyability, trust, or governance
-* account scenarios where continuity or first-login experience matters
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+#### 2. Shared-catalog access and pricing still behave correctly
 
-The point of the sample is not coverage. It is signal. A small set of high-risk, high-value examples usually reveals target-model weakness faster than broad random checking.
+Shared catalogs may be assigned, but the more important test is whether the right customer context sees the right products at the right prices.
 
-### Priority 1: Validate configurable-product behavior as a storefront outcome
+#### 3. Customer-group interaction still makes sense
 
-In Adobe Commerce, product validation should begin with the decision a customer has to make on the product page. The most important question is not whether the product record exists. It is whether the customer can still reach the correct buyable outcome through the intended configurable path.
+Groups may survive, but the commercial logic connected to those groups still needs to support the intended outcome after launch.
 
-What to validate:
+#### 4. Staged content and merchandising behavior still work where it matters
 
-* the correct selectable product states appear where they should
-* configurable behavior still leads to the intended buyable result
-* price-sensitive configuration choices still behave correctly
-* products with the highest configuration complexity still support confident purchase behavior
-* storefront product pages still communicate what is being bought clearly enough for real users
-* the customer can move from product understanding into product selection without avoidable confusion
+The storefront may look correct at one point in time, but the target still needs to prove that timed promotional or merchandising behavior remains commercially usable.
 
-A product can appear complete and still fail this priority if the customer no longer understands which choices matter to the purchase or if the product page has become harder to interpret than before.
+#### 5. High-value routes and scope-sensitive behavior still support the intended journey
 
-### Priority 2: Validate the separation between configurable behavior and customizable options in real storefront use
+Native rewrites and visible storefront structure are not enough on their own. The destination and the surrounding scope-aware logic still need to support the customer and business outcome the route used to serve.
 
-Adobe Commerce’s product structures matter most when they remain understandable in real use. Validation should confirm that configurable behavior and supporting customization each still perform the job they are meant to perform.
+### Validation Priority 1: Company Structure
 
-What to validate:
+The first Adobe Commerce validation priority is usually the company model itself.
 
-* configurable behavior still functions as defined product-state choice
-* customizable options still behave like supporting purchase customization rather than broken configurable logic
-* product pages no longer blur defined product state and supporting customization into one confusing customer experience
-* the storefront still communicates clearly what the customer is meant to choose and what the customer is meant to customize
-* product families with complex buying paths still remain understandable
+Adobe Commerce supports companies natively in its B2B model. That means validation should begin with the company relationships most likely to expose ambiguity.
 
-A store can preserve both structures and still fail this priority if customers cannot tell what they are meant to choose as the product state and what they are meant to customize as part of the purchase.
+Useful checks usually include:
 
-### Priority 3: Validate customer-context and catalog-visibility behavior in the right storefront conditions
+* whether the right customers are associated with the right company contexts
+* whether the commercial meaning of those company relationships still makes sense
+* whether the resulting access and pricing context still reflects business expectations
+* whether the company layer is supporting the right storefront outcomes rather than only existing as imported structure
 
-Adobe Commerce validation should confirm that customer-context logic still produces the intended storefront meaning. This matters because account structures and catalog exposure can materially affect what the storefront shows and how it behaves.
+This matters because a target can look structurally complete while still misrepresenting the real business relationship it is supposed to preserve.
 
-What to validate:
+### Validation Priority 2: Shared Catalog Assignment, Product Access, and Pricing Context
 
-* representative customer contexts see the intended storefront conditions
-* catalog visibility still behaves as planned for the right customer situations
-* the wrong customers do not see the wrong storefront conditions
-* internal teams can still explain why a customer is seeing a particular experience
-* customer-context logic still supports the intended commercial model
-* the storefront does not become harder to trust because visibility meaning has blurred
+Shared catalogs are one of the most important Adobe Commerce validation priorities.
 
-A customer-context model can exist and still fail validation if its storefront meaning has become too weak, too inconsistent, or too opaque to support the business safely.
+Adobe Commerce documents shared catalogs as a structure for gated catalog access with custom pricing. That means validation should focus on the most commercially sensitive shared-catalog cases first. citeturn355347search0turn355347search12
 
-### Priority 4: Validate route continuity as customer-facing behavior
+Useful checks usually include:
 
-Adobe Commerce validation should confirm that high-value paths still support discovery, trust, and the intended storefront journey. This matters because a route can exist and still fail the business if the resulting customer path no longer makes sense or no longer supports the next action customers are expected to take.
+* whether the correct shared catalog is assigned to the correct customer context
+* whether the right products are visible in that context
+* whether pricing matches the intended commercial rule
+* whether restricted access is still behaving correctly
+* whether any catalog-based exclusion or differentiation still reflects the business model
 
-What to validate:
+This is one of the clearest places where Adobe Commerce can look enterprise-ready while still being commercially wrong.
 
-* priority old URLs resolve to the correct target destinations
-* the resulting product, category, or content-page experience still supports the intended customer journey
-* high-value product and category paths still preserve discovery quality
-* important content pages still support trust and conversion where relevant
-* continuity-sensitive routes still make sense within the future-state storefront logic
-* internal teams can still explain route behavior clearly enough to trust the result after launch
+### Validation Priority 3: Customer-Group Interaction
 
-This matters even more when customer trust and search visibility are tied closely to how storefront routes are interpreted after migration.
+Customer groups are another Adobe Commerce-specific validation priority because they interact more directly with commercial structure than many teams first expect.
 
-### Priority 5: Validate scope-specific storefront behavior where layered context matters
+Adobe Commerce documents that when a shared catalog is created, a corresponding customer group is also created. That means shared-catalog validation and customer-group validation should not be separated mechanically. citeturn355347search16turn355347search8
 
-If the business uses layered scope, validation should confirm that the storefront still behaves correctly at the intended level of context. This matters whether the business separates language, region, storefront context, or other commercially meaningful conditions across the Adobe Commerce structure.
+Useful validation questions include:
 
-What to validate:
+* does the customer-group structure still reflect the intended commercial model?
+* are the right customers and companies aligned to the right group logic?
+* is any inherited grouping behavior now redundant or conflicting?
+* does the shared-catalog and customer-group combination still support the intended pricing and access outcome?
 
-* the right customers reach the right storefront context
-* scope-sensitive products, categories, routes, and content still behave as intended
-* layered scope remains understandable operationally
-* duplicated meaning or unresolved overlap does not weaken the storefront
-* scope-specific storefront conditions still support the intended use case
-* the business is not relying on unclear cross-scope logic to preserve core storefront behavior
+This is especially important where the target carries more than one layer of business-customer differentiation.
 
-Layered scope can be technically present and still fail validation if the business has not preserved clear commercial meaning across those layers. The real test is whether each context still works as a coherent customer and operating environment.
+### Validation Priority 4: Staged Content and Campaign Behavior
 
-### Priority 6: Validate customer continuity as a real source-to-target experience
+One of Adobe Commerce’s clearest platform-specific validation priorities is staged content behavior.
 
-Adobe Commerce validation should treat customer continuity as a source-to-target question rather than as a target-only assumption. In some migrations, continuity may be realistic. In others, the safer and more honest validation question is whether the first-login experience, recovery flow, and account communication still support customer trust after launch.
+Content Staging allows business teams to create, preview, and schedule content and merchandising changes from inside the platform. That means validation should focus not only on the static storefront state, but also on the staged behavior that matters commercially. citeturn355347search1turn355347search5turn355347search9turn355347search13
 
-What to validate:
+Useful checks usually include:
 
-* customer accounts are usable under the intended continuity or first-login model
-* the account experience matches what the business planned
-* reset, first-login, or continuity-sensitive scenarios remain acceptable
-* the most important customer groups do not face avoidable access friction
-* support teams can still explain the account experience clearly after launch
+* whether the right content or merchandising changes are staged for the right time
+* whether preview-based review still supports decision-making clearly
+* whether the campaign timing still matches commercial expectations
+* whether the store behaves acceptably before, during, and after the staged change
 
-This is one of the most important Adobe-Commerce-specific priorities because the platform can participate in continuity-friendly source conditions more readily than some targets, but that flexibility has to be validated against the real source conditions rather than assumed from the target platform alone.
+This is one of the clearest places where Adobe Commerce validation becomes more than storefront review. It becomes proof that the future operating model still works.
 
-### Priority 7: Validate ecosystem- or extension-driven storefront meaning directly
+### Validation Priority 5: Scope-Aware Storefront Behavior
 
-Many Adobe Commerce stores rely on more than native product and account structures to create the intended storefront and operating experience. Search services, experience layers, extensions, integrations, merchandising logic, and other surrounding layers often influence discovery, conversion, or internal usability in ways that are easy to underestimate during migration.
+Adobe Commerce still uses the websites, stores, and store views hierarchy, and that hierarchy often interacts with company, pricing, customer-group, and content logic in ways that need explicit validation.
 
-What to validate:
+Useful checks usually include:
 
-* the ecosystem-driven outcomes most important to buyability still behave acceptably
-* surrounding storefront logic still communicates the right product, visibility, or route meaning
-* important supporting storefront elements still appear where they matter
-* trust signals, merchandising areas, or customer-facing support logic still help the intended journey
-* extension- or service-driven operational behaviors still support the intended workflow
-* the future store does not depend on preserved surrounding behavior that no one can still interpret confidently
+* whether the right values appear at the intended website, store, or store-view level
+* whether commercial-rule differences still appear in the right scope context
+* whether the hierarchy is being interpreted correctly by the team after migration
+* whether scope-aware behavior still reflects the business model intentionally
 
-This priority matters especially because Adobe Commerce migrations can look structurally acceptable while still weakening the surrounding layers that make the storefront workable in practice.
+This matters because one of the most common Adobe Commerce failures is not broken data. It is commercially wrong scope behavior that looks technically complete.
 
-### Priority 8: Validate governability and maintainability as part of launch-readiness
+### Validation Priority 6: High-Value Legacy URLs and Destination Quality
 
-One of the least visible but most important Adobe Commerce validation priorities is governability. The target should not only work after launch. It should remain understandable enough for ordinary governance, future edits, and safer ongoing change.
+Adobe Commerce includes native URL rewrites for products, categories, and CMS pages. That makes route continuity less of a technical-risk question than on some targets. But validation still matters because the real issue is not whether a rewrite exists. It is whether the destination still supports the customer intent or commercial value the old route used to serve. citeturn355347search3turn355347search7turn355347search11turn355347search15turn355347search19
 
-What to validate:
+This usually means checking:
 
-* the future store is easier to interpret than the source, or at least no more fragile
-* the most important storefront logic can still be explained by the business
-* the customer-context, route, scope, and ecosystem landscape is governable enough for post-launch ownership
-* future changes do not appear unnecessarily risky because of preserved opaque behavior
-* internal teams can understand what still drives important storefront outcomes and continuity-sensitive paths
+* best-selling product URLs
+* high-value category or landing routes
+* CMS or service pages that still carry trust or support value
+* routes whose meaning changes because of shared-catalog access or staged content logic
 
-A migration can preserve functionality and still fail this priority if the result remains too structurally confusing to support safe ongoing use. For an enterprise-weight target like Adobe Commerce, that is a real validation failure, not only a post-launch inconvenience.
+A technically valid rewrite can still be commercially weak if it lands in the wrong place.
 
-### How to think about pass and fail
+### Validation Priority 7: Enterprise App and Workflow Behavior
 
-An Adobe Commerce validation plan is strongest when pass and fail are defined through storefront and operating behavior.
+Many Adobe Commerce storefronts still depend on surrounding enterprise behavior beyond the native core model.
 
-A useful pass condition is not “the data is present.” A stronger pass condition is: the right customer can find the right products, choose the right product states, understand the right product information, encounter the right account and catalog conditions, move through the right storefront paths, and interact with a store the business can still understand and govern after launch.
+That means validation should explicitly review:
 
-A useful fail condition is not only “something is missing.” A stronger fail condition is: the migrated store changes commercial meaning in a way that could confuse customers, weaken visibility trust, distort the buying path, break route logic, reduce governability, or create avoidable operational friction.
+* extension-dependent pricing or visibility behavior
+* custom fields that still drive company or customer logic
+* workflows that affect merchandising, campaign, or operational interpretation
+* surrounding storefront logic that shapes trust, navigation, or account context
+* any enterprise behavior that the business still treats as commercially non-negotiable
 
-This is why representative validation matters so much in Adobe Commerce. The storefront can look structurally complete on the surface while still becoming weaker in practice.
+This is especially important because Adobe Commerce can support more native structure than lighter platforms, but many enterprise stores still depend on a surrounding app and custom-data layer that must remain understandable after launch.
+
+### What Usually Makes an Adobe Commerce Validation Sample Strong
+
+A strong Adobe Commerce validation sample is usually built from:
+
+* the company relationships most important commercially
+* the shared catalogs with the most sensitive pricing or access logic
+* the customer-group interactions most likely to expose ambiguity
+* the staged-content or campaign behaviors most likely to affect trust or revenue
+* the scope levels most likely to expose commercial mismatch
+* the routes and enterprise behaviors most likely to reveal hidden interpretation risk
+
+This is stronger than broad random checking because it tests the places where Adobe Commerce most often changes business meaning rather than merely confirming that records survived.
+
+### What Often Gets Missed in Adobe Commerce Validation
+
+Several patterns weaken Adobe Commerce validation.
+
+Common mistakes include:
+
+* treating company creation as proof that company logic is correct
+* treating shared-catalog assignment as proof that pricing and access are commercially right
+* validating customer groups separately from shared-catalog behavior
+* checking staged content only as current state instead of timed behavior
+* validating rewrites without validating destinations
+* checking enterprise logic only superficially instead of judging the outcomes it supports
+
+These mistakes usually create the illusion of a mature Adobe Commerce launch while leaving the most important commercial questions unresolved.
+
+### How Custom Cart as a Source Changes Adobe Commerce Validation Priorities
+
+When the source platform is a Custom Cart, Adobe Commerce validation usually needs a tighter, more bespoke evidence standard.
+
+That is because more of the target behavior may depend on how source-side company, pricing, customer-group, content-timing, route, and scope meaning were interpreted during translation. In those cases, validation usually needs:
+
+* more representative company and access test cases
+* tighter review of shared-catalog and pricing reconstruction
+* more careful judgment around customer-group interaction
+* closer review of staged-content or campaign logic
+* a more precise distinction between acceptable Adobe Commerce formalization and unacceptable commercial distortion
+
+This does not change what should be validated first. It raises the precision required to trust the result.
 
 ### Conclusion
 
-Adobe Commerce validation should concentrate on the places where structured storefront behavior, customer context, and future-state governability meet. Configurable product behavior, the separation between configurable and customizable logic, customer-context meaning, catalog visibility, route continuity, scope-sensitive behavior, ecosystem-driven storefront meaning, and maintainability usually reveal risk faster than broad field-by-field review. That is where the business is most likely to discover whether the target is only populated or genuinely usable and supportable after launch.
+Adobe Commerce validation is strongest when it focuses first on the places where the platform is most likely to reshape commercial meaning: company structure, shared-catalog logic, customer-group interaction, staged content behavior, scope-aware storefront rules, high-value routes, and surrounding enterprise workflows.
 
-The most useful validation process usually begins with a tight, high-signal sample and expands only after the target proves that the important storefront behaviors still hold. This matters more in Adobe Commerce than many teams expect, because the platform can support a wide range of structured enterprise behaviors. That structure is only valuable if the future store remains clear enough to trust and govern over time.
+That is what makes the result trustworthy. A storefront can look polished while still being commercially weaker in exactly those areas. The safest path is to test those priorities deliberately with representative company, catalog, customer-group, staged-content, scope, and route scenarios rather than assume that broad completeness proves launch readiness.
 
-A sensible way to judge readiness is to ask whether the migrated store still helps the right customer move from discovery to confident purchase under the intended account, catalog, route, and scope conditions, while also leaving the business with a storefront it can still explain after launch. Those proof points usually matter more than broad completeness because they reveal whether the storefront still behaves in a way the business can operate with confidence.
-
-If that answer is still uncertain, broader checking alone rarely solves the real problem. The more useful next step is to identify whether the issue comes from target-model ambiguity, source-to-target translation pressure, or a dependency pattern that needs closer expert review. That is where Live Chat can help most. It can clarify whether the remaining uncertainty is a normal validation issue, a sign that execution needs stronger guidance through Managed Migration Service, or an indication that Custom Migration Service is the safer path because the source-to-target translation still depends on tailored handling, especially when the source is a Custom Cart.
+Validate the company relationships, shared catalogs, customer-group logic, staged-content behaviors, scope decisions, routes, and enterprise workflows that matter most before treating the target as trustworthy. If the result still leaves ambiguity around whether a difference is acceptable Adobe Commerce formalization or a real continuity problem, Live Chat can help interpret that evidence before launch decisions are locked.
 
 ### FAQs
 
 #### What should be validated first in an Adobe Commerce migration?
 
-Start with the slice of the store most likely to reveal risk fastest: representative configurable products, important route paths, customer-context scenarios, scope-sensitive storefront situations, ecosystem-driven outcomes, and any source complexity most likely to distort the target.
+Usually the first priority is the company relationships and shared catalogs most important commercially, followed by customer-group interaction, staged-content behavior, scope-aware storefront logic, high-value routes, and the enterprise workflows most likely to expose ambiguity.
 
-#### Why are matching counts not enough to validate Adobe Commerce?
+#### Why are shared catalogs such a high Adobe Commerce validation priority?
 
-Because Adobe Commerce can preserve records while still changing how customers choose products, encounter catalog conditions, move through important routes, or interact with the storefront under the wrong scope or account meaning. Validation has to prove storefront and operating behavior, not only record presence.
+Because they directly control product access and pricing visibility. A shared catalog can be assigned correctly at a technical level while still being commercially wrong if the underlying logic is weak. citeturn355347search0turn355347search12
 
-#### What is the most important product validation priority in Adobe Commerce?
+#### Why is staged content validation especially important in Adobe Commerce?
 
-Usually it is confirming that configurable-product logic still leads customers to the intended buyable outcome and that configurable behavior remains clearly separated from supporting customizable options in storefront use.
+Because Content Staging allows the business to create, preview, and schedule content or merchandising changes. That means the target may need to prove not only what the store looks like now, but how it behaves over time. citeturn355347search1turn355347search9
 
-#### Why do customer context and route continuity belong in validation for Adobe Commerce?
+#### What usually makes an Adobe Commerce validation sample weak?
 
-Because they shape the real storefront experience. A migration that preserves the data but leaves visibility meaning or route logic too weak to trust is not fully launch-ready.
+Usually it is too broad, too generic, or too storefront-focused. A weak sample avoids the companies, shared catalogs, customer-group interactions, staged behaviors, scope-sensitive rules, and routes most likely to expose whether Adobe Commerce is actually preserving the right commercial structure.

@@ -1,189 +1,227 @@
 # WooCommerce Pre-Migration Preparation Checklist
 
-WooCommerce preparation is strongest when the business defines the future store before migration is judged by transferred records. This platform can support flexible storefront behavior, native variable-product logic, taxonomy-driven discovery, permalink control, and plugin-driven customization inside WordPress, but those strengths do not remove ambiguity on their own. They increase the importance of deciding how products should behave, how customers should find them, how routes should work, how plugins and themes should be governed, how customer accounts should behave, and what kind of commerce environment the business is actually trying to preserve after launch.
+A WooCommerce migration usually becomes riskier when the business treats preparation as a generic data-cleanup exercise instead of a storefront-structure decision.
 
-A strong preparation checklist is therefore not a generic cleanup exercise. It is a way to make the future store explicit early enough to reduce false confidence later. For WooCommerce, the most useful preparation work usually sits in ten areas: product model clarity, variable-product versus plugin-driven add-on behavior, taxonomy structure, permalink continuity, plugin/theme/custom-field classification, customer continuity expectations, account-context clarity where relevant, store-scope governance ambitions, source-side clarity where the source is a Custom Cart, and representative review design.
+That matters because WooCommerce is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support variable-product behavior, taxonomy-driven discovery, WordPress-native permalink control, customer accounts, and broader content-commerce interaction more naturally than many lighter targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-### 1. Define the product model before mapping begins
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a WooCommerce migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
-The first preparation task is to decide how customers should make product choices after migration. In WooCommerce, that usually means separating real variable-product logic from descriptive product information, comparison structures, and plugin-driven add-on or custom-field behavior. This matters because the product page has to preserve a clear buyable outcome, not simply display migrated product records.
+### What This Preparation Checklist Is Really For
 
-Before execution, the business should define:
+A strong WooCommerce preparation checklist should do more than confirm that data exists.
 
-* which product differences must remain selectable through native variation logic
-* which differences belong as descriptive product information rather than as storefront choice
-* which products depend on plugin-driven add-ons or custom fields today
-* which products carry the highest risk of product-model confusion
-* which product scenarios should anchor the first representative review
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-This is one of the highest-value places to use a Demo Migration. A representative sample built around the most structurally difficult products usually reveals translation weakness faster than broad catalog transfer alone.
+* how the future product and storefront structure should work
+* where variations, categories, tags, and attributes must remain precise
+* what the permalink structure should actually support
+* which workflows still depend on plugins, themes, or custom fields
+* which outcomes deserve the earliest validation because they are most likely to expose behavioral ambiguity
 
-### 2. Separate variable-product logic from plugin-driven add-on or field behavior before the storefront inherits confusion
+That is why a WooCommerce preparation checklist is strongest when it is built around storefront governance and customer behavior rather than around exports alone.
 
-WooCommerce can support both native variable-product behavior and surrounding plugin-driven purchase logic, but those do not perform the same job. Preparation should preserve that distinction deliberately rather than letting the source structure blur it inside the target.
+### 1. Define the Product Structures That Matter Most
 
-Before execution, the business should define:
+The first preparation priority is usually product behavior.
 
-* which product differences belong in variable-product selection because customers must choose them before buying
-* which information belongs as descriptive product understanding or comparison
-* which customer-entered or plugin-driven behaviors belong outside native variation logic
-* which product pages are most likely to become unclear if these roles remain blurred
-* which variation-heavy or add-on-heavy products should be tested first
+The business should identify:
 
-This is one of the clearest places where WooCommerce rewards disciplined translation. If the business does not decide what belongs in native variable-product logic and what belongs in supporting extension behavior before execution, the storefront can become harder to shop even when the underlying records appear complete.
+* which product families drive the most revenue
+* which products depend on variation-specific price, stock, image, or availability
+* which source-side products still mix purchasable variation, descriptive information, or add-on logic too loosely
+* which products would become commercially weaker if the wrong WooCommerce structure were chosen
 
-### 3. Prepare taxonomy as storefront behavior, not only catalog administration
+This matters because WooCommerce product migration is not only about moving product records. It is about deciding which products should remain simple products, which should be variable products, and which behaviors should stay outside native product structure.
 
-WooCommerce preparation should treat categories, tags, and attributes as part of the storefront experience. Many migrations preserve term records while still weakening discovery because the business prepared taxonomy only as administrative organization rather than as part of how customers find the right products.
+### 2. Clarify Which Attributes Carry Real Commercial Meaning
 
-Before execution, the business should define:
+WooCommerce attributes can support both variable-product behavior and storefront discovery.
 
-* which category paths matter most to customer discovery
-* which attributes materially support filtering or comparison
-* which product-family relationships should remain clear after launch
-* which taxonomy structures should be preserved, simplified, or rebuilt
-* which discovery paths should be tested first in a representative review
+The preparation checklist should identify:
 
-This is especially important where search is not the whole storefront logic and where browse structure still shapes conversion materially.
+* which attributes matter to purchasable product variation
+* which attributes matter mainly to filtering or storefront discovery
+* which attributes are inherited from the source store but no longer carry real value
+* which custom fields should remain native WooCommerce attributes versus plugin-owned behavior
 
-### 4. Define permalink and route priorities before continuity decisions drift
+A stronger preparation model forces the business to separate real commercial attribute meaning from field accumulation.
 
-WooCommerce has native permalink behavior, but continuity still depends on knowing which paths matter most after launch. Preparation should identify the storefront routes that carry the most commercial value before permalink and route decisions are treated as settled. This usually includes more than product paths alone. Category routes, content pages, and broader WordPress-to-commerce paths may all matter.
+### 3. Define How Categories, Tags, and Attributes Should Work Together
 
-Before execution, the business should define:
+WooCommerce often becomes easier to govern when the business decides clearly what each taxonomy layer is supposed to do.
 
-* which legacy product, category, and content URLs matter most
-* which browse-led paths still influence discovery or conversion materially
-* which routes shape trust or search visibility most strongly
-* which permalink outcomes should be preserved as closely as possible
-* which paths can change safely without weakening continuity materially
+That means the business should decide:
 
-The most useful early continuity list is usually selective rather than exhaustive. High-value routes reveal more continuity risk than raw URL volume alone.
+* which categories genuinely matter to navigation
+* whether product tags still matter and why
+* which attributes should remain visible to customers
+* which taxonomy relationships are structural versus merely descriptive
+* whether inherited source taxonomies are being mistaken for good WooCommerce storefront logic
 
-### 5. Classify plugin-, theme-, and custom-field-driven behavior before deciding what should survive
+A product may migrate successfully and still become harder to browse or manage if taxonomy roles are treated as an afterthought.
 
-Many WooCommerce stores depend on more than native product and account structures. Plugins, themes, custom fields, page builders, merchandising tools, membership layers, wholesale tools, checkout customizations, and other storefront changes often carry real business meaning. Preparation should therefore identify what the store truly depends on rather than treating all custom behavior as equally important.
+### 4. Decide What the Permalink Structure Should Actually Support
 
-Before execution, the business should define:
+One of the most important WooCommerce preparation tasks is route definition.
 
-* which plugin-driven outcomes are commercially non-negotiable
-* which theme or layout behaviors affect buying behavior, discovery, trust, or operations
-* which custom fields or surrounding storefront logic still matter materially
-* which extension layers can be replaced safely
-* which inherited plugin or theme behaviors should not be carried forward automatically
+The business should identify:
 
-This is one of the most important WooCommerce preparation tasks because flexibility becomes risky when the business preserves surrounding customization without first deciding whether that behavior is still worth preserving.
+* which product and category routes matter most commercially
+* whether category context should appear in product URLs
+* which route patterns matter to search visibility or customer trust
+* what should happen to legacy product, category, tag, and attribute routes
+* whether the future permalink structure reflects business meaning or only technical convenience
 
-### 6. Plan customer continuity according to source-to-target reality, not target preference alone
+This matters because WooCommerce’s route behavior depends on WordPress permalink settings and WooCommerce-specific permalink options. Route continuity is not only a redirect task. It is part of the target model itself.
 
-Customer continuity should be prepared as a source-to-target planning question, not as an assumption attached to WooCommerce simply because it is open-source. In some migrations, especially from supported open-source source platforms, continuity may be more realistic. In others, first-login planning, password reset flow, and account communication may still be the safer model.
+### 5. Define the Customer-Account Experience Honestly
 
-Before execution, the business should define:
+WooCommerce can support password continuity only in the compatible open-source source-to-target cases where password hashes can be transferred and the continuity path is supported appropriately.
 
-* what level of customer continuity is technically realistic from the source platform
-* which customer groups are most sensitive to login disruption
-* what the first-login experience should look like if continuity is not feasible
-* which account scenarios need the earliest review
-* what support and communication planning will be needed after launch
+That means the preparation checklist should define:
 
-This is especially important where account continuity affects repeat buying, support load, or customer trust materially.
+* whether password continuity is realistically possible in this migration pair
+* what returning customers should experience at first login
+* what customer communication should explain clearly
+* which support scenarios may become sensitive if login expectations are wrong
 
-### 7. Clarify account-context behavior where the broader WordPress environment matters
+This helps prevent the business from treating customer-account continuity as an assumption instead of a launch-critical planning decision.
 
-WooCommerce customer accounts live inside a broader WordPress environment, and in some stores that wider context materially affects how the storefront behaves. Preparation should therefore define where account experience depends on more than order history and profile data alone.
+### 6. List the Plugins, Theme Logic, and Custom Behaviors That Still Need to Matter
 
-Before execution, the business should define:
+One of the biggest WooCommerce preparation mistakes is treating plugin and theme behavior as background detail.
 
-* which account behaviors matter commercially after launch
-* whether plugin-driven account or role logic affects the storefront materially
-* which customer scenarios are most likely to create confusion if left vague
-* how account experience should connect to the surrounding WordPress environment
-* which account-related behaviors must remain clear after migration
+A stronger checklist should identify:
 
-This prevents the store from inheriting blurred account meaning where the records migrate but the practical customer experience becomes harder to trust.
+* which plugins still support commercially important storefront behavior
+* which theme behaviors still shape trust, navigation, or buying logic
+* which custom fields still drive meaningful storefront or operational outcomes
+* which plugin-owned workflows matter to operations as well as storefront behavior
 
-### 8. Define storefront-scope ambitions before governance becomes vague
+The business does not need a generic list of everything installed. It needs a clearer view of which plugin- and theme-owned meanings still matter enough to shape scope, validation, and risk judgment.
 
-WooCommerce can be used in multi-store or multi-environment patterns, but preparation should treat that as a governance decision, not only as a technical possibility. The important question is not only whether more than one storefront can exist. It is whether the business actually wants more than one storefront context and can govern that complexity safely.
+### 7. Prioritize Legacy URLs by Business Value
 
-Before execution, the business should define:
+Because WooCommerce already has native permalink behavior, the most important preparation question is not whether routes can exist. It is which legacy paths deserve focused protection.
 
-* whether one storefront can support all required customer experiences
-* whether more than one store or environment is genuinely necessary
-* which differences justify that separation
-* who owns products, content, continuity, and customer experience in each environment
-* how the business will avoid creating unnecessary duplication or unclear ownership after launch
+The checklist should identify:
 
-Inherited storefront sprawl should be challenged rather than preserved automatically. More than one WooCommerce environment should exist because it improves clarity, governance, or customer experience, not because it existed historically without review.
+* the product URLs that matter most to traffic or conversion
+* the category or landing paths that matter most to discovery
+* the pages that still carry trust or support value
+* the destinations that would weaken customer intent if they were handled too generically
 
-### 9. If the source is a Custom Cart, prepare the source-side structure before treating the target as safe
+This matters because a technically valid route or redirect can still be commercially weak if the destination no longer supports the purpose the original path served.
 
-This is one of the most important preparation areas for the WooCommerce hub because Custom Cart can strengthen or weaken the safer path significantly depending on how well the source structure is understood. When the source is a Custom Cart, the migration is no longer a normal standard-cart translation. It becomes a source-side interpretation problem as much as a target-side mapping problem.
+### 8. Define Broader Store Architecture Only Where It Is Truly Needed
 
-Before execution, the business should define:
+WooCommerce can support broader storefront architecture, but not through one single native commerce-scope model.
 
-* which source access methods are available, such as API, file, spreadsheet, semi-structured data, or direct storefront extraction
-* what the real source entity structure looks like
-* where important storefront meaning sits in custom fields, files, or non-standard logic
-* which source-side product, account, taxonomy, and content behaviors must still hold true after launch
-* which parts of the source model already suggest the need for Custom Migration Service
+The business should clarify:
 
-This is one of the clearest places where technician-led source analysis becomes part of safe preparation rather than a later escalation.
+* whether one storefront context is enough
+* whether more than one storefront context is genuinely required
+* what should remain separate
+* what should be governed consistently
+* whether broader architecture is being chosen for a real business reason rather than for abstract flexibility
 
-### 10. Choose a representative review sample before full execution
+This matters because official WooCommerce and WordPress sources show that broader multi-store or multisite patterns are separate structural choices, not an obvious default WooCommerce operating model.
 
-A representative review sample should be designed before detailed execution begins. The goal is not broad coverage. The goal is early truth. WooCommerce preparation is strongest when the first sample includes the combinations most likely to expose weakness in variable-product logic, taxonomy behavior, permalink continuity, plugin-driven meaning, account experience, and source-to-target translation.
+### 9. Mark the Highest-Risk Validation Samples Before Full Execution
 
-A high-signal WooCommerce sample usually includes:
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
 
-* variable and high-value products
-* products where native variation and plugin-driven add-on behavior both matter
-* category and route paths with the most commercial value
-* customer-account scenarios where continuity is commercially important
-* plugin-driven storefront behaviors that materially affect the customer journey
-* any broader governance complexity around more than one storefront environment where relevant
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+For WooCommerce, that usually means:
 
-This is usually the clearest point at which the business can decide whether the target model is ready for broader migration or still needs structural clarification.
+* complex variable-product families
+* the categories, tags, and attributes most likely to expose ambiguity
+* the permalink-sensitive routes most likely to reveal weak destination logic
+* the customer-account scenarios most likely to affect trust
+* the plugin- and theme-owned storefront behaviors most likely to reveal hidden structure
+* any broader storefront architecture decisions most likely to expose misunderstanding
 
-### 11. Define launch-readiness in storefront and operating terms, not only in data terms
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around behavioral risk instead of convenience.
 
-Preparation is not complete when the business knows which records should migrate. It is complete when the business can explain what must still work after launch. For WooCommerce, that usually means defining how customers reach the right products, make the right choices, encounter the right route structure, experience the intended account behavior, and continue to interact with a storefront the business can still explain and govern safely.
+### 10. Define What WooCommerce Is Allowed to Formalize and What It Must Preserve Exactly
 
-Before execution, the business should define:
+A stronger WooCommerce preparation checklist usually includes one difficult but necessary question:
 
-* which storefront behaviors must remain unchanged
-* which changes are acceptable if the future store becomes cleaner and more governable
-* which scenarios represent pass or fail most clearly
-* who reviews the result and approves readiness
-* which unresolved questions must be answered before launch planning advances
+What is the business willing to formalize or simplify in order to fit WooCommerce clearly, and what storefront meaning is non-negotiable?
 
-This is the point where preparation becomes a realistic validation strategy rather than a hopeful execution plan.
+That question should be answered specifically for:
+
+* variable-product behavior
+* taxonomy roles
+* permalink structure
+* customer-account continuity
+* plugin- and theme-owned logic
+* broader storefront architecture, where relevant
+
+Many WooCommerce projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of WooCommerce’s strength is that it asks for a clearer and more governable storefront model.
+
+### A Practical WooCommerce Preparation Sequence
+
+A useful preparation flow for WooCommerce usually looks like this:
+
+#### 1. Define high-risk product families first
+
+These are usually the products most likely to expose variable-product ambiguity.
+
+#### 2. Clarify taxonomy roles
+
+This prevents navigation and discovery from becoming weaker after migration.
+
+#### 3. Decide the permalink structure
+
+This reduces the chance that route behavior will be improvised later.
+
+#### 4. Define customer-account expectations
+
+This keeps account continuity aligned with real login and support expectations.
+
+#### 5. Classify plugin- and theme-owned behavior
+
+This prevents important meaning from remaining implicit.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than assumption.
+
+### How Custom Cart as a Source Can Change WooCommerce Preparation
+
+When the source platform is a Custom Cart, WooCommerce preparation usually needs a more bespoke storefront lens.
+
+That is because product variation, taxonomy meaning, pricing behavior, customer context, route logic, or plugin-like storefront behavior may sit in source-side structures that do not align neatly with WooCommerce’s variable products, categories, attributes, permalinks, or WordPress-native environment. In those situations, preparation usually needs:
+
+* more careful classification of product and variation meaning
+* earlier review of how source-side taxonomy and route logic should be rebuilt
+* clearer separation between native WooCommerce structure and surrounding plugin or theme behavior
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into WooCommerce.
 
 ### Conclusion
 
-WooCommerce preparation is strongest when it makes the future store explicit before the migration is judged by transferred records. Product structure, variable-product logic, taxonomy behavior, permalink continuity, plugin-driven meaning, customer continuity, broader account-context clarity, storefront-scope governance, source-side Custom Cart pressure, and representative review design all need deliberate definition early enough to guide execution and validation with confidence.
+A WooCommerce migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The most useful preparation work usually identifies where customer-facing behavior and governability are most likely to weaken first. That is what turns a preparation checklist into something more valuable than pre-migration housekeeping. It becomes a way to decide whether the future store is being shaped deliberately enough to deserve trust before the migration scales.
+That means clarifying variable-product behavior, taxonomy roles, permalink structure, customer-account expectations, plugin- and theme-owned logic, and any broader storefront architecture decisions most likely to expose structural ambiguity. When those decisions are made clearly, WooCommerce becomes easier to validate and safer to judge as a target.
 
-A practical next step is to build a Demo Migration around those high-pressure areas rather than around the easiest records to move. Variable products, category and route paths, account and continuity scenarios, plugin-driven storefront behavior, and the routes that carry the most commercial value usually reveal more about target readiness than broad low-risk samples do.
-
-When those results still leave uncertainty, the most useful question is not whether more preparation items can be added to a list. It is whether the business has defined the future store clearly enough to support safe execution. That is where Live Chat becomes especially helpful. It can clarify whether the remaining uncertainty is mainly about ordinary readiness and validation, whether the execution burden points toward Managed Migration Service, or whether the source-to-target translation is non-standard enough to justify Custom Migration Service from the outset, especially when the source is a Custom Cart.
+Before moving deeper into execution, build a preparation checklist around the product families, taxonomy logic, permalink decisions, customer-account scenarios, plugin-dependent behaviors, and high-value route or storefront-context cases that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine WooCommerce translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-#### What should be prepared first in a WooCommerce migration?
+#### What should be prepared first before migrating into WooCommerce?
 
-Usually the highest-risk storefront behavior. That often means product structure, variable-product logic, taxonomy behavior, permalink continuity, plugin-driven meaning, customer continuity expectations, and any source-side complexity that could distort the target.
+Usually the highest-value starting point is the product families most likely to expose variable-product ambiguity, followed by taxonomy roles, permalink structure, customer-account expectations, and plugin- or theme-owned behavior.
 
-#### Why is WooCommerce preparation more than a data-cleanup task?
+#### Why is permalink structure such an important WooCommerce preparation topic?
 
-Because the main preparation challenge is not only moving records. It is defining how the future storefront should work, how customers should experience it, and how the business should govern it after launch.
+Because WooCommerce route behavior depends on WordPress permalink settings and WooCommerce-specific permalink options, so route meaning should be designed deliberately rather than treated as a late redirect task.
 
-#### Should WooCommerce preparation focus on every plugin equally?
+#### Should WooCommerce preparation focus mainly on products?
 
-Usually no. Preparation is most useful when it starts by classifying which plugins, theme behaviors, custom fields, and surrounding storefront logic are commercially essential and which can change safely.
+No. Products are central, but WooCommerce preparation is often just as sensitive around taxonomies, routes, customer-account continuity, plugin/theme behavior, and broader storefront architecture.
 
-#### When does preparation usually point toward a more guided migration path?
+#### When does WooCommerce preparation usually need a more cautious approach?
 
-Usually when product logic is still unclear, plugin dependence remains unclassified, customer continuity assumptions are still untested, route behavior is unresolved, or the source is a Custom Cart with non-standard structure.
+Usually when the source behavior is still vague, when important meaning depends heavily on plugins, themes, or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with WooCommerce’s native model.

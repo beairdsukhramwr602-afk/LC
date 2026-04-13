@@ -1,180 +1,161 @@
 # Adobe Commerce Data Model Differences
 
-A migration into Adobe Commerce succeeds when the target still preserves the storefront behavior and operating meaning that made the original store usable before the move. This page focuses on the structural differences that most often change that outcome: how products are configured, how configurable behavior differs from customizable options, how company accounts and shared catalogs shape customer context, how layered scope affects storefront meaning, how native route control influences continuity, and how surrounding services or extension-driven storefront logic can carry meaning beyond the visible catalog.
+A migration into Adobe Commerce can preserve the visible storefront while still changing the commercial meaning behind it.
 
-Adobe Commerce is structured enough to represent sophisticated commerce models clearly, but that structure does not remove the need for disciplined translation. The most important shift is that migration meaning often depends less on whether the target can hold the records and more on whether the target can still express what those records do in practice. That changes what “product,” “customer,” “catalog visibility,” “scope,” “route continuity,” and even “the same storefront” mean in migration planning.
+That usually happens because Adobe Commerce is not only a more feature-rich storefront target. It is a platform where companies, shared catalogs, customer groups, staged content behavior, scope hierarchy, and native route governance can carry more explicit business meaning than they did in the source store. Products, customers, and orders may still move successfully, but the target can behave very differently once those structures become part of how the business is expected to operate.
 
-### The Adobe Commerce data model in plain language
+This matters because Adobe Commerce data-model differences are rarely just technical translation questions. They change what the store believes a business customer relationship is, how product access and pricing should be controlled, how scheduled merchandising changes should behave, and what the business must validate before it can trust launch readiness.
 
-The Adobe Commerce model is easiest to understand through eight structural ideas:
+### The Commercial Unit Often Changes from Customer to Company
 
-* Products still sit at the center of the sellable catalog.
-* Configurable behavior is used for customer-selectable product states.
-* Customizable options support customer-entered or product-specific purchase customization rather than core configurable state.
-* Customer context can be shaped more deeply through company-account and shared-catalog structures.
-* Catalog visibility can be conditional rather than universally identical for every customer.
-* Website, store, and store-view layers can change what one commerce environment means in practice.
-* Native URL rewrite behavior makes route continuity part of the target model.
-* Surrounding ecosystem or service layers can materially affect how the real store behaves.
+One of the biggest Adobe Commerce data-model differences is that the important commercial unit is often no longer only the individual customer record.
 
-These differences matter because a migration can recreate products, customers, categories, and content successfully while still changing how customers choose, access, discover, and interpret the storefront.
+In standard direct-to-consumer models, a customer account is often the main identity unit that matters most. In Adobe Commerce B2B structures, the more important unit may be:
 
-A useful way to read this model is to ask not only what each structure stores, but what job it performs in the storefront. That is where the migration meaning becomes visible. The same data can still exist after launch while doing the wrong job in practice if it has been translated into the wrong part of the Adobe Commerce model.
+* the company
+* the customer’s role inside that company
+* the shared catalog attached to that company
+* the product access and pricing rules that follow that structure
 
-### Products still sit at the center of Adobe Commerce’s sellable model
+That means customer data in Adobe Commerce often has to be understood through a broader business relationship model. A customer profile may still exist, but the commercial meaning of that customer is shaped by the company structure and the catalog logic tied to it.
 
-Adobe Commerce builds store meaning around products, but those products often depend on surrounding structures to become usable in the storefront. A product is not only a row in the catalog. It is the center point through which configurable behavior, customizable options, account context, visibility rules, scope, routes, images, and surrounding storefront logic are all interpreted together.
+### Shared Catalogs Change What Product Access and Pricing Mean
 
-This matters because a source platform may spread product meaning across multiple layers. In Adobe Commerce, those layers still come back to the product and the structures attached to it. That can make the target feel more structured, but it also means migration planning has to decide clearly which pieces of meaning belong in the core product model and which belong in supporting product, account, or storefront logic.
+Shared catalogs are one of the clearest Adobe Commerce structural differences.
 
-A store can therefore migrate products successfully while still weakening storefront usability if the product record remains present but the surrounding configurable behavior, customization, catalog visibility, route structure, or ecosystem-driven meaning no longer supports how customers actually buy.
+Adobe Commerce uses shared catalogs to control which products business customers can access and what prices they see. That makes product visibility and pricing a more explicit target structure than in many source stores.
 
-In practical terms, this means the Adobe Commerce product record often acts as a convergence point. If source-side meaning is scattered across plugins, fields, catalogs, visibility rules, or storefront behavior, the migration has to decide how that meaning should be reassembled around the product in a way customers can still understand.
+This is a meaningful data-model difference because a source store may have carried those outcomes through:
 
-### Configurable products change what a product can become in the storefront
+* customer groups
+* negotiated pricing workarounds
+* restricted-category logic
+* custom account conditions
+* informal sales-team rules
+* extension-driven visibility logic
 
-One of the most important Adobe Commerce data-model differences is how it uses configurable product behavior. Configurable structures are not simply descriptive product data. They are central to how the customer selects among defined product states.
+Adobe Commerce can carry those outcomes more natively in some cases, but only when the business defines clearly which company should receive which access and pricing structure and why.
 
-In migration terms, that makes configurable behavior important because it influences what the product becomes at the point of selection. When size, color, style, or another defined variation matters to the final purchasable result, those differences usually need to be understood through configurable logic rather than through descriptive fields or surrounding custom storefront behavior.
+### Shared Catalogs and Customer Groups Interact More Directly Than Many Teams Expect
 
-This changes migration planning in two ways.
+Another important Adobe Commerce difference is the relationship between shared catalogs and customer groups.
 
-First, product translation becomes a state-modeling problem. The business has to decide which differences should remain selectable defined states and which ones should not.
+Adobe Commerce documents that when a shared catalog is created, a corresponding customer group is also created. That means customer groups and shared catalogs should not be treated as separate, loosely related administrative features. They can become part of one commercial-control model.
 
-Second, Adobe Commerce requires clearer separation between buyable product state and surrounding product information. If that separation is weak, the target can preserve records while confusing the storefront.
+This matters because a migration can preserve customer groups and shared catalogs at a technical level while still being commercially wrong if the business has not defined how those layers should work together. The important question is not only whether the customer group survived. It is whether the intended access, pricing, and company relationship still make sense after launch.
 
-A good way to think about this is simple: in Adobe Commerce, configurable behavior should support the decisions the customer is expected to make in order to buy the correct version of the product, not merely hold information that existed somewhere in the source store.
+### Content Staging Changes How Content and Merchandising Are Modeled
 
-The operating consequence matters too. When configurable behavior is modeled cleanly, the storefront becomes easier to understand, merchandise, and validate. When it is modeled poorly, the product page may still function, but internal teams often lose confidence in what the customer is actually choosing and why the resulting buying behavior no longer feels trustworthy.
+One of the clearest Adobe Commerce-only differences is Content Staging.
 
-### Customizable options are not the same as configurable state
+Adobe Commerce allows teams to create, preview, and schedule content and merchandising changes directly in the platform. That means the target model may need to preserve not only the visible storefront state, but also the timing and sequencing of future storefront behavior.
 
-A common migration mistake is to treat customizable options as if they perform the same job as configurable product behavior. They do not.
+This changes migration planning because some storefront meaning may now depend on:
 
-In Adobe Commerce, customizable options usually support product-specific customer-entered or product-level purchasing customization rather than the core selectable state of the product itself. In storefront terms, this means they usually support how a customer modifies or specifies part of the purchase without changing the product into a different defined variant.
+* scheduled promotional changes
+* campaign timing
+* future product-visibility updates
+* timed content launches
+* preview-based review workflows
 
-This matters in migration because some source platforms blur the line between “what the customer selects as the product state” and “what the customer adds, enters, or customizes as part of the purchase.” Adobe Commerce makes that distinction more visible.
+In many source platforms, those behaviors may have been managed more loosely or through surrounding tools. In Adobe Commerce, they can become a more native part of the commercial model.
 
-If customizable options are used where configurable behavior should have been used, the storefront can lose clarity. If configurable behavior is used where customization should have stayed a supporting purchase layer, the storefront can become harder to understand and harder to govern.
+### Scope Still Matters, but It Carries Heavier Commercial Meaning
 
-That is why the Adobe Commerce model often forces a more disciplined translation of product meaning. The business has to decide what belongs in defined selectable state and what belongs in supporting customization.
+Adobe Commerce still uses the websites, stores, and store views hierarchy. That is shared with Magento, but in Adobe Commerce the scope model often interacts more heavily with companies, customer groups, shared catalogs, pricing visibility, and staged content.
 
-### Customer context can become a structural part of storefront meaning
+That means scope is not only a storefront-variation tool. It can become part of how commercial rules are governed.
 
-One of the most important Adobe Commerce differences is that customer context can materially shape what the storefront means. Company-account logic and shared-catalog structures can influence who sees what, under which conditions, and with what commercial expectations attached.
+A value may therefore carry both a scope meaning and a commercial meaning. A migration can preserve the value itself while still misrepresenting the intended behavior if the value lands at the wrong scope or if the scope hierarchy is not aligned with the company and catalog model.
 
-This changes migration meaning because customers are not always just account records. In some businesses, the more important question is what kind of customer context the storefront believes it is serving and what visibility, pricing, or catalog conditions follow from that. That can affect what products are visible, how the catalog should be interpreted, and how different customer types move through the store.
+### Product Structure Still Inherits the Magento Baseline
 
-A migration can therefore preserve customer records successfully while still weakening commercial accuracy if the customer-context model no longer reflects the intended storefront logic after launch.
+Adobe Commerce adds more enterprise-native structure, but it does not replace the Magento product baseline.
 
-The operating consequence matters here too. If customer context loses its meaning, internal teams often become less certain about why a customer is seeing a specific catalog, pricing posture, or storefront experience. That uncertainty can weaken trust in the migrated store even when the accounts themselves are present.
+Products still rely on:
 
-### Shared catalogs change catalog visibility from a universal assumption into a controlled condition
+* native product types
+* attributes
+* attribute sets
+* websites, stores, and store views
+* customer groups
+* native URL rewrites
+* extension-aware surrounding logic
 
-Adobe Commerce can support shared-catalog logic, which means catalog visibility is not always a single universal storefront condition. This matters in migration planning because the catalog is not only a list of products. It can also be a controlled commercial layer shaped by customer context.
+That means Adobe Commerce does not remove the need to judge whether complex product behavior still fits the underlying platform model clearly enough. The B2B and staged-content layers add more structure around the storefront, but they do not automatically solve product-translation problems inside it.
 
-That changes how the business should think about product presence. A product can exist in the target and still fail commercially if the wrong customers see it, if the right customers do not see it, or if the visibility conditions no longer match the intended buying model.
+This is one reason Adobe Commerce migrations can still fail quietly if teams focus on higher-level enterprise logic while underestimating product, attribute, or scope translation risk.
 
-This is one of the clearest reasons Adobe Commerce migrations must be judged by more than product transfer alone. The real question is not only what was moved. It is how that moved product is exposed, interpreted, and sold in the target environment.
+### Native URL Rewrites Mean Route Governance Is Part of the Model
 
-### Scope changes what one commerce environment can mean
+Adobe Commerce includes native URL rewrite capability, including rewrites for products, categories, and CMS pages.
 
-Adobe Commerce can support layered scope structures, and that makes scope assignment part of the model rather than an afterthought. Products, categories, routes, language context, and storefront behavior may need to be understood through website, store, or store-view logic rather than through one flat storefront assumption.
+That means route continuity is not only a technical patching problem. It is part of the native platform model. This matters because the target can govern redirects and path continuity more explicitly than many teams expect.
 
-This matters because a scope decision changes more than deployment. It changes content ownership, route continuity, catalog behavior, customer experience, and validation scope. A business can use one Adobe Commerce environment while still needing more than one storefront context. That makes scope part of how migration meaning is reconstructed after the move.
+But native rewrites do not remove the need for path planning. A rewrite can exist while still landing customers on a weaker destination if product, category, content, or campaign meaning changed during migration.
 
-The central lesson is that scope should be treated as part of the future-state model, not simply as a technical capability that can be enabled later without changing how the storefront is interpreted.
+The important target question is therefore not only whether a rewrite exists. It is whether the destination still supports the customer intent the original route used to serve.
 
-In practical terms, this means the business is not only deciding whether multiple contexts can exist. It is deciding how many distinct storefront experiences it is willing to govern, and whether those experiences will preserve clarity or create more operational ambiguity after launch.
+### Validation Scope Becomes More Commercially Contextual
 
-### Native URL rewrites change continuity expectations structurally
+Because Adobe Commerce changes how the store is structured, it also changes what the data must prove after migration.
 
-Adobe Commerce supports native URL rewrite behavior, which means route continuity belongs directly inside the platform model rather than only inside a separate redirect solution. That changes migration planning because continuity becomes tied to how the target wants products, categories, and content pages to appear after launch.
+The target can no longer be judged only by checking whether products, customers, and orders exist. It also needs to prove that:
 
-This matters because a migration can recreate content successfully while still weakening discovery and trust if the storefront routes no longer support the same commercial journeys. URL rewrites therefore affect more than search visibility. They affect how customers interpret and trust the structure of the store.
+* companies are structured correctly
+* shared catalogs are assigned correctly
+* pricing and product visibility reflect the intended business rules
+* customer groups still carry the intended meaning
+* staged content behavior makes sense where it matters
+* scope-aware storefront behavior still reflects the business model
+* routes still support the intended journey
 
-In migration terms, that means route planning belongs in the target model itself, not only in a late redirect checklist.
+This is one of the most important data-model differences of all. Adobe Commerce changes not just the data structure, but the evidence structure the business needs before it can trust launch readiness.
 
-The practical consequence is that route structure becomes part of storefront meaning. If customers, search engines, or internal teams can no longer predict how important routes should behave, the storefront may still be technically valid while becoming less coherent and less trusted over time.
+### What Usually Needs the Earliest Review
 
-### Surrounding ecosystem and service layers may sit outside the core catalog but still define the real store
+The highest-risk Adobe Commerce data-model differences usually deserve early review in:
 
-One of the most important Adobe Commerce truths is that the real store may depend on more than native catalog and account structures alone. Search services, extensions, integrations, and surrounding experience layers can all influence what the customer sees and how internal teams operate the storefront.
+* company structure
+* shared catalog assignment and pricing visibility
+* customer-group interaction
+* staged content and campaign-sensitive behavior
+* websites, stores, and store-view scope logic
+* product families where the Magento baseline still creates structural pressure
+* route governance and destination logic
 
-This means migration planning has to distinguish between the native Adobe Commerce model and the actual business model of the store. In some cases, the difference is small. In others, much of the commercial meaning lives in those supporting layers rather than in products, customers, categories, or scope alone.
+These are the areas most likely to expose whether the target structure is commercially clear enough rather than only technically complete.
 
-That distinction matters especially when the source platform is a Custom Cart. Source-side structures may not map neatly into Adobe Commerce’s native model, which increases the translation burden. The target may still be viable, but the business has to decide what meaning belongs in native Adobe Commerce structures and what would still depend on tailored handling or surrounding service reconstruction.
+### How Custom Cart as a Source Changes Adobe Commerce Data-Model Review
 
-This is one of the clearest reasons Adobe Commerce migrations must be judged by more than core data transfer. The real storefront may depend on supporting layers strongly enough that preserving the catalog alone tells only part of the truth.
+When the source platform is a Custom Cart, Adobe Commerce data-model review usually needs a more bespoke translation lens.
 
-### The combined effect: stronger native structure, but not automatic migration simplicity
+That is because the source may carry company logic, pricing rules, customer segmentation, content-timing behavior, or route logic in structures that do not align neatly with Adobe Commerce companies, shared catalogs, customer groups, Content Staging, or scope hierarchy. In those cases, the key review question is not only what data exists. It is how that source meaning should be interpreted and rebuilt so the Adobe Commerce target remains commercially coherent.
 
-The biggest mistake in Adobe Commerce modeling is assuming that because the platform is more structured and more capable, the migration can preserve any source structure without forcing clearer decisions.
-
-The reality is more specific.
-
-Adobe Commerce can support meaningful control over products, configurable behavior, customization, customer context, catalog visibility, scope, routes, and surrounding commerce behavior. At the same time, that structure often pushes more responsibility onto the business to define what the storefront should actually become.
-
-That combination creates a distinct migration challenge. The target can become more governable and more explicit than many lighter systems, but only if the business is willing to translate source meaning into structures that Adobe Commerce can still support clearly and maintainably over time.
-
-The key point is that Adobe Commerce gives the business a stronger target language, but it does not decide on the business’s behalf which parts of the source structure deserve to remain. That is where model translation becomes a strategic task rather than only a technical one.
-
-### What these differences change in practice
-
-In practical migration terms, Adobe Commerce data-model differences usually change seven things.
-
-#### 1. Product migration becomes product-meaning translation
-
-The important question is no longer only how many products moved. It is whether products still support the correct storefront understanding and buyable outcome.
-
-#### 2. Defined product state and supporting customization must stay separate
-
-The important question is no longer only whether configurable structures and customizable options both exist. It is whether the storefront still separates what customers choose from what customers customize.
-
-#### 3. Customer context becomes more than account transfer
-
-The important question is no longer only whether customers migrated. It is whether the right account and catalog conditions still hold after launch.
-
-#### 4. Catalog visibility becomes part of commercial meaning
-
-The important question is no longer only whether products exist. It is whether the right customers see the right catalog conditions in the intended way.
-
-#### 5. Scope becomes part of the future-state architecture
-
-The important question is no longer only whether the platform can support layered contexts. It is whether the business has defined how those contexts should differ and what each one should own.
-
-#### 6. Route continuity becomes part of storefront meaning
-
-The important question is no longer only whether rewrites exist. It is whether they still support the storefront paths customers and search engines rely on.
-
-#### 7. Ecosystem-driven behavior becomes part of structural success
-
-The important question is no longer only whether services or extensions still exist. It is whether their real storefront and operational outcomes still hold after launch.
+In this context, earlier expert review and a more tailored migration path often become especially important.
 
 ### Conclusion
 
-Adobe Commerce data-model differences matter most where the business depends on structured customer context, product logic, catalog control, route continuity, and future-state governance rather than only on basic catalog transfer. Products, configurable behavior, customizable options, customer-account structures, catalog visibility, scope, routes, and surrounding ecosystem logic all change how migration meaning should be interpreted.
+Adobe Commerce data-model differences matter because they change the commercial meaning of migrated data, not only its storage location.
 
-The platform does not make migration simpler by default. It makes different kinds of structure possible. That is why Adobe Commerce migrations should be planned around preserved customer behavior, account meaning, product understanding, visibility logic, route continuity, and future-state governability rather than around transferred records alone.
+The target often moves from a looser product-and-customer model into a more explicit structure built around companies, shared catalogs, customer-group interaction, staged content behavior, scope-aware rules, and native route governance. That can be a major strength when the business genuinely needs that structure. It becomes riskier when the business has not yet defined how those layers should work after the move.
 
-A useful next step is to test these model differences through a representative Demo Migration built around configurable products, purchase paths where configurable and customizable behavior both matter, customer-context scenarios, scope-sensitive storefront behavior, route-sensitive paths, and any source-side complexity most likely to create translation pressure. Those areas usually reveal more about whether the target model is really working than broad low-risk product transfer ever could.
-
-If those parts of the store still behave unclearly after the first review, the issue is usually not only technical execution. It is a target-model question that needs clearer decisions before broader migration is treated as safe. That is where early interpretation becomes especially valuable. A focused Live Chat discussion around those representative outcomes can help distinguish between a target that is already structurally viable, a target that mainly needs more guided execution through Managed Migration Service, and a source-to-target translation problem that may justify Custom Migration Service, especially when the source is a Custom Cart.
+Review the company, catalog, customer-group, staged-content, route, and scope logic that matters most before treating the target model as settled. If those structures still feel unclear, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that more guided handling is needed before full execution.
 
 ### FAQs
 
-#### What is the biggest data-model difference in an Adobe Commerce migration?
+#### What is one of the biggest Adobe Commerce data-model differences?
 
-One of the biggest differences is that Adobe Commerce forces a clearer distinction between defined product state, supporting purchase customization, customer context, and controlled catalog visibility. That changes how migration meaning should be interpreted after the move.
+One of the biggest differences is that the important commercial unit often shifts from the individual customer account to the company relationship and the shared-catalog logic attached to it.
 
-#### Why do configurable products and customizable options matter so much in Adobe Commerce?
+#### Are shared catalogs only a merchandising tool in Adobe Commerce?
 
-Because they do different jobs. Configurable behavior supports customer choice among defined product states, while customizable options support supporting purchase customization. When those jobs are confused, the storefront can become harder to shop and harder to govern.
+No. In Adobe Commerce, shared catalogs can directly control product access and pricing visibility for different company contexts.
 
-#### Why do customer context and shared catalogs matter in the data model?
+#### Why do customer groups matter more in Adobe Commerce than many teams expect?
 
-Because they change storefront meaning, not only account administration. They can affect visibility, catalog conditions, and how different customers experience the store after launch.
+Because Adobe Commerce ties them more directly to company and shared-catalog logic. A shared catalog also creates a corresponding customer group, so the two layers should be treated as part of one commercial model.
 
-#### Why can an Adobe Commerce store migrate successfully but still feel weaker after launch?
+#### Does Content Staging change how data should be reviewed?
 
-Because the records can move while the storefront meaning changes. Product behavior, account context, visibility logic, route continuity, scope structure, or ecosystem-driven outcomes can all weaken even when the underlying data looks complete.
+Yes. Because timed and scheduled merchandising or content behavior can be part of the operating model, the business may need to validate not only the storefront state, but also the timing logic that matters after launch.

@@ -1,189 +1,223 @@
 # Adobe Commerce Pre-Migration Preparation Checklist
 
-Adobe Commerce preparation is strongest when the business defines the future store before migration is judged by transferred records. This platform can support stronger native structures for configurable product behavior, customer context, catalog visibility, route control, and layered storefront scope, but those strengths do not remove ambiguity on their own. They increase the importance of deciding how products should behave, how customers should encounter the catalog, how scope should be organized, how routes should be preserved, how surrounding ecosystem layers should be governed, and what kind of enterprise-weight commerce environment the business is actually trying to preserve after launch.
+An Adobe Commerce migration usually becomes riskier when the business treats preparation as a generic enterprise checklist instead of a target-structure decision.
 
-A strong preparation checklist is therefore not a generic cleanup exercise. It is a way to make the future store explicit early enough to reduce false confidence later. For Adobe Commerce, the most useful preparation work usually sits in ten areas: product model clarity, configurable behavior versus customizable options, customer-context and catalog-visibility logic, scope structure, route continuity, surrounding service and extension classification, customer continuity expectations, source-side clarity where the source is a Custom Cart, representative review design, and behavior-based launch-readiness definition.
+That matters because Adobe Commerce is strongest when the future store has been defined clearly enough before execution begins. The platform can support native company structure, shared catalogs, staged content behavior, broader governance over customer access and pricing visibility, and more deliberate coordination between scope and commercial rules than many other targets. But it still expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-### 1. Define the product model before mapping begins
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether an Adobe Commerce migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
-The first preparation task is to decide how customers should make product decisions after migration. In Adobe Commerce, that usually means separating defined configurable product state from descriptive product information and from supporting customization behavior. This matters because the product page has to preserve a clear buyable outcome, not simply display migrated product records.
+### What This Preparation Checklist Is Really For
 
-Before execution, the business should define:
+A strong Adobe Commerce preparation checklist should do more than confirm that data exists.
 
-* which product differences must remain selectable through configurable behavior
-* which differences belong as descriptive product understanding rather than storefront choice
-* which purchase-specific behaviors belong as supporting customization rather than defined product state
-* which products carry the highest risk of product-model confusion
-* which product scenarios should anchor the first representative review
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-This is one of the highest-value places to use a Demo Migration. A representative sample built around the most structurally difficult products usually reveals translation weakness faster than broad catalog transfer alone.
+* how the future company and access structure should work
+* where shared catalogs, customer groups, and pricing visibility must remain precise
+* which content or merchandising behavior needs timed or staged control
+* what should differ by website, store, or store view
+* which outcomes deserve the earliest validation because they are most likely to expose commercial ambiguity
 
-### 2. Separate configurable behavior from customizable options before the storefront inherits confusion
+That is why an Adobe Commerce preparation checklist is strongest when it is built around target governance and business behavior rather than around exports alone.
 
-Adobe Commerce rewards a clearer distinction between defined product state and supporting purchase customization than many source stores maintain. Preparation should preserve that distinction deliberately rather than letting the source structure blur it inside the target.
+### 1. Define the Future Company Structure Clearly
 
-Before execution, the business should define:
+The first preparation priority is usually not the storefront. It is the customer relationship model behind it.
 
-* which customer choices belong in configurable behavior because they determine the product state
-* which customer-entered or purchase-specific inputs belong in customizable options
-* which product pages are most likely to become unclear if those roles remain blurred
-* which product families depend most on strong product understanding and choice clarity
-* which high-value product journeys should be tested first
+The business should identify:
 
-This is one of the clearest places where Adobe Commerce rewards disciplined translation. If the business does not decide what belongs in configurable behavior and what belongs in customizable options before execution, the storefront can become harder to shop even when the underlying records appear complete.
+* which customers should be associated with which companies
+* which company relationships matter commercially
+* which account contexts are important to preserve
+* which rules should follow the company relationship
+* which source-side conventions currently carry company meaning only informally
 
-### 3. Define customer-context meaning before account and catalog logic become unreliable
+This matters because Adobe Commerce can model companies natively, but that strength only helps when the business has defined the future structure clearly enough. If company logic is still vague, the target can look complete while still behaving incorrectly for business customers.
 
-Adobe Commerce can support stronger native customer-context structures, which makes this one of the most important preparation areas in the hub. Preparation should therefore define what kinds of customer distinction the future store actually needs and what those distinctions should change in the storefront.
+### 2. Clarify How Shared Catalogs Should Control Product Access and Pricing
 
-Before execution, the business should define:
+Shared catalogs are one of the most important Adobe Commerce preparation topics.
 
-* which customer-context differences matter commercially
-* whether visibility, account behavior, or buying conditions should differ by customer context
-* which distinctions are still strategically justified
-* which customer scenarios are most likely to create confusion if left vague
-* which customer-facing conditions must remain clear after migration
+The business should define early:
 
-This prevents the store from inheriting blurred customer-context logic where the records migrate but the commercial meaning becomes harder to trust.
+* which customers or company contexts should see which products
+* where pricing should differ
+* which catalogs should remain public versus restricted
+* how shared-catalog logic should interact with broader customer segmentation
+* whether current access and pricing workarounds should become shared-catalog rules in the target
 
-### 4. Define catalog visibility and shared-catalog logic before product presence is mistaken for storefront correctness
+A preparation checklist is stronger when it forces the business to describe these decisions in business terms rather than through inherited source-side workarounds.
 
-In Adobe Commerce, product presence is not always the same as product availability in the intended commercial sense. If catalog exposure is meant to differ by customer context, then preparation should treat visibility as part of the future-state storefront model rather than as a background administrative detail.
+### 3. Define How Customer Groups and Shared Catalogs Should Work Together
 
-Before execution, the business should define:
+In Adobe Commerce, shared catalogs and customer groups can interact more directly than many teams expect.
 
-* which customer contexts should see which catalog conditions
-* which catalog differences are commercially essential
-* which visibility rules are still justified after migration
-* which products or categories are most sensitive to visibility error
-* which visibility-sensitive scenarios should be tested first
+Because creating a shared catalog also creates a corresponding customer group, the business should not prepare those two layers separately. It should decide:
 
-This is one of the strongest Adobe-Commerce-specific preparation areas because the storefront can look populated while still failing commercially if the wrong catalog conditions are shown to the wrong customers.
+* what the shared catalog is meant to control
+* what the corresponding customer-group meaning should be
+* whether any inherited grouping logic should be simplified
+* how those two layers should work together without creating redundant or conflicting commercial rules
 
-### 5. Define scope structure before enterprise-weight flexibility becomes governance confusion
+This helps reduce the risk of building a target that is technically complete but commercially confusing.
 
-Adobe Commerce can support layered scope, but preparation should treat that as a business decision, not only as a platform capability. The important question is not only whether more than one storefront context can exist. It is whether the business has defined clearly how those contexts should differ and what each one should own.
+### 4. Identify Which Content or Merchandising Behavior Needs Staging
 
-Before execution, the business should define:
+Adobe Commerce preparation should identify where timing matters, not only where content exists.
 
-* which differences justify separation at the appropriate scope layer
-* whether the future environment needs all of the currently imagined scope distinctions
-* who owns products, content, continuity, and customer experience at each level
-* which scope-sensitive storefront conditions are most likely to create confusion if left vague
-* which storefront scenarios should be reviewed first where layered scope matters
+That usually means clarifying:
 
-Inherited architectural separation should be challenged rather than preserved automatically. A layered scope model should exist because it improves clarity, governance, or customer experience, not because it existed historically without review.
+* which campaigns need scheduled content or merchandising changes
+* which promotional or visibility changes should be previewable before launch
+* which timed behaviors matter to seasonal or operational planning
+* whether current campaign logic is handled in ways that should become more native in Adobe Commerce
 
-### 6. Define route continuity priorities before rewrite capability creates false confidence
+This matters because Content Staging can be one of Adobe Commerce’s strongest structural advantages, but only when the business treats it as part of the target model rather than as an optional feature that will sort itself out later.
 
-Adobe Commerce has native URL rewrite and redirect capability, but continuity still depends on knowing which paths matter most after launch. Preparation should identify the storefront routes that carry the most commercial value before route decisions are treated as settled. This usually includes more than product paths alone. Category paths, content pages, and scope-sensitive storefront entry routes may all matter.
+### 5. Decide What Should Differ by Website, Store, and Store View
 
-Before execution, the business should define:
+Adobe Commerce still uses the websites, stores, and store views hierarchy, and preparation should define what belongs at each level.
 
-* which legacy product, category, and content URLs matter most
-* which routes shape trust or search visibility most strongly
-* which paths should be preserved as closely as possible
-* which routes can change safely without weakening continuity materially
-* which continuity-sensitive paths should be tested first in a representative review
+The business should identify:
 
-The most useful early continuity list is usually selective rather than exhaustive. High-value routes reveal more continuity risk than raw URL volume alone.
+* what should differ by website
+* what should differ by store
+* what should differ by store view
+* what should remain global
+* whether the future hierarchy reflects real commercial need or only optional flexibility
 
-### 7. Classify extension-, service-, and ecosystem-driven behavior before deciding what should survive
+This matters because Adobe Commerce often becomes harder to govern when scope hierarchy and commercial rules are both present but have not been designed to work together intentionally.
 
-Adobe Commerce stores can depend on more than native catalog and account structures. Search services, extensions, integrations, merchandising layers, experience tools, and surrounding commerce services may all carry real business meaning. Preparation should therefore identify what the store truly depends on rather than treating all surrounding behavior as equally important.
+### 6. Identify the Highest-Risk Product and Catalog Combinations
 
-Before execution, the business should define:
+Even in Adobe Commerce, product translation still matters.
 
-* which ecosystem-driven outcomes are commercially non-negotiable
-* which surrounding service layers affect buying behavior, discovery, trust, or operations
-* which behaviors still matter materially to the customer journey
-* which extension or service layers can be replaced safely
-* which inherited surrounding logic should not be carried forward automatically
+The preparation checklist should identify:
 
-This is one of the most important Adobe Commerce preparation tasks because strong native structure becomes risky when the business preserves surrounding complexity without first deciding whether that behavior is still worth preserving.
+* the product families most likely to expose structural ambiguity
+* the products whose behavior matters most to access or pricing visibility
+* the shared catalogs most likely to reveal product-access mistakes
+* the combinations of product structure, customer context, and pricing logic that are most commercially sensitive
 
-### 8. Plan customer continuity according to source-to-target reality, not target preference alone
+The goal is not to inspect every product equally. It is to find the combinations of product structure and customer context most likely to reveal whether the Adobe Commerce target is actually safe.
 
-Customer continuity should be prepared as a source-to-target planning question, not as an assumption attached to Adobe Commerce simply because some source conditions can make continuity more realistic than on reset-first targets. In some migrations, continuity may be realistic. In others, first-login planning, password reset flow, and customer communication may still be the safer model.
+### 7. List the Enterprise Logic That Still Depends on Extensions, Custom Data, or Rules
 
-Before execution, the business should define:
+One of the biggest Adobe Commerce preparation mistakes is assuming native enterprise capability removes the need to classify surrounding behavior.
 
-* what level of customer continuity is technically realistic from the source platform
-* which customer groups are most sensitive to login disruption
-* what the first-login experience should look like if continuity is not feasible
-* which account scenarios need the earliest review
-* what support and communication planning will be needed after launch
+A stronger checklist should identify:
 
-This is especially important where account continuity affects repeat buying, support load, or customer trust materially.
+* which extensions still support commercially important storefront behavior
+* which custom fields carry important pricing, customer, or workflow meaning
+* which business rules still depend on surrounding logic rather than native platform structures
+* which campaign, visibility, or route outcomes remain non-negotiable after launch
 
-### 9. If the source is a Custom Cart, prepare the source-side structure before treating the target as safe
+This is especially important because Adobe Commerce can support more native structure than many other platforms, but many enterprise storefronts still depend on a surrounding layer of app-owned and custom-data-owned logic that must remain understandable after launch.
 
-This is one of the most important preparation areas for the Adobe Commerce hub because Custom Cart can strengthen or weaken the safer path significantly depending on how well the source structure is understood. When the source is a Custom Cart, the migration is no longer a normal standard-cart translation. It becomes a source-side interpretation problem as much as a target-side mapping problem.
+### 8. Prioritize Legacy URLs and Destination Logic by Business Value
 
-Before execution, the business should define:
+Because Adobe Commerce includes native URL rewrite capability, the highest-value preparation question is not whether rewrites are possible. It is which routes deserve focused protection.
 
-* which source access methods are available, such as API, file, spreadsheet, semi-structured data, or direct storefront extraction
-* what the real source entity structure looks like
-* where important storefront meaning sits in custom fields, files, or non-standard logic
-* which source-side product, customer-context, visibility, content, and route behaviors must still hold true after launch
-* which parts of the source model already suggest the need for Custom Migration Service
+The checklist should identify:
 
-This is one of the clearest places where technician-led source analysis becomes part of safe preparation rather than a later escalation.
+* the product URLs that matter most to traffic or conversion
+* the category or landing paths that matter most to discovery
+* the CMS or service pages that still carry trust or support value
+* the routes that would weaken customer intent if they were handled too generically
 
-### 10. Choose a representative review sample before full execution
+This is especially important when product visibility, catalog structure, or staged content behavior may change the meaning of the destination after migration.
 
-A representative review sample should be designed before detailed execution begins. The goal is not broad coverage. The goal is early truth. Adobe Commerce preparation is strongest when the first sample includes the combinations most likely to expose weakness in product behavior, customer context, catalog visibility, route continuity, scope, and source-to-target translation.
+### 9. Define the Customer-Continuity Expectation Honestly
 
-A high-signal Adobe Commerce sample usually includes:
+Adobe Commerce can support password continuity only in the compatible open-source source-to-target cases where password hashes can be transferred and the target continuity path is supported appropriately.
 
-* configurable and high-value products
-* product journeys where configurable and customizable behavior both matter
-* customer-context scenarios where visibility or pricing meaning matters
-* high-value route paths with strong commercial importance
-* scope-sensitive storefront situations where layered context matters
-* ecosystem- or extension-driven storefront behaviors that materially affect the customer journey
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+That means the preparation checklist should define:
 
-This is usually the clearest point at which the business can decide whether the target model is ready for broader migration or still needs structural clarification.
+* whether password continuity is realistically possible in this migration pair
+* what returning customers should experience at first login
+* what customer communication should explain clearly
+* which support scenarios may become sensitive if login expectations are wrong
 
-### 11. Define launch-readiness in storefront and operating terms, not only in data terms
+This helps prevent the business from treating customer-account continuity as an assumption instead of a launch-critical planning decision.
 
-Preparation is not complete when the business knows which records should migrate. It is complete when the business can explain what must still work after launch. For Adobe Commerce, that usually means defining how customers reach the right products, make the right choices, encounter the right account and catalog conditions, move through the right routes, and continue to interact with a storefront the business can still explain and govern safely.
+### 10. Mark the Highest-Risk Validation Samples Before Full Execution
 
-Before execution, the business should define:
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
 
-* which storefront behaviors must remain unchanged
-* which changes are acceptable if the future store becomes cleaner and more governable
-* which scenarios represent pass or fail most clearly
-* who reviews the result and approves readiness
-* which unresolved questions must be answered before launch planning advances
+For Adobe Commerce, that usually means:
 
-This is the point where preparation becomes a realistic validation strategy rather than a hopeful execution plan.
+* representative company scenarios
+* the shared catalogs with the most commercially sensitive access or pricing rules
+* the customer-group interactions most likely to reveal ambiguity
+* the staged-content or campaign scenarios most important to timing and merchandising
+* the routes and destinations most likely to expose continuity weakness
+* the products and storefront paths most likely to expose structural mismatch
+
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around commercial risk instead of convenience.
+
+### A Practical Adobe Commerce Preparation Sequence
+
+A useful preparation flow for Adobe Commerce usually looks like this:
+
+#### 1. Define company structure first
+
+These are usually the most important relationship decisions.
+
+#### 2. Define shared-catalog logic next
+
+This determines how access and pricing should actually work.
+
+#### 3. Define customer-group interaction
+
+This prevents overlapping commercial-control logic later.
+
+#### 4. Identify staged content and merchandising behavior
+
+This turns campaign timing into part of the target model rather than an afterthought.
+
+#### 5. Design the scope hierarchy around real business need
+
+This reduces the chance that websites, stores, and store views will be created for optionality instead of purpose.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than theory.
+
+### How Custom Cart as a Source Can Change Adobe Commerce Preparation
+
+When the source platform is a Custom Cart, Adobe Commerce preparation usually needs a more bespoke structural lens.
+
+That is because company logic, pricing rules, customer grouping, content-timing behavior, or route logic may sit in source-side structures that do not align neatly with Adobe Commerce companies, shared catalogs, customer groups, Content Staging, or hierarchy model. In those situations, preparation usually needs:
+
+* more careful classification of company and customer meaning
+* earlier review of how source-side pricing and visibility logic should be rebuilt
+* clearer separation between native Adobe Commerce structure and surrounding custom behavior
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into Adobe Commerce.
 
 ### Conclusion
 
-Adobe Commerce preparation is strongest when it makes the future store explicit before the migration is judged by transferred records. Product structure, configurable behavior, customizable options, customer context, catalog visibility, scope logic, route continuity, ecosystem-driven meaning, customer continuity, source-side Custom Cart pressure, and representative review design all need deliberate definition early enough to guide execution and validation with confidence.
+An Adobe Commerce migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The most useful preparation work usually identifies where customer-facing behavior and governability are most likely to weaken first. That is what turns a preparation checklist into something more valuable than pre-migration housekeeping. It becomes a way to decide whether the future store is being shaped deliberately enough to deserve trust before the migration scales.
+That means clarifying companies, shared catalogs, customer-group interaction, staged content behavior, scope hierarchy, route priorities, and the product-and-customer combinations most likely to expose structural ambiguity. When those decisions are made clearly, Adobe Commerce becomes easier to validate and safer to judge as a target.
 
-A practical next step is to build a Demo Migration around those high-pressure areas rather than around the easiest records to move. Configurable products, customer-context-sensitive storefront conditions, route-critical browsing paths, scope-specific experiences, and surrounding commerce-service behavior usually reveal more about target readiness than broad low-risk samples do.
-
-When those results still leave uncertainty, the most useful question is not whether more preparation items can be added to a list. It is whether the business has defined the future store clearly enough to support safe execution. That is where Live Chat becomes especially helpful. It can clarify whether the remaining uncertainty is mainly about ordinary readiness and validation, whether the execution burden points toward Managed Migration Service, or whether the source-to-target translation is non-standard enough to justify Custom Migration Service from the outset, especially when the source is a Custom Cart.
+Before moving deeper into execution, build a preparation checklist around the company structures, shared-catalog rules, staged-content behavior, scope decisions, route priorities, and customer-continuity cases that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine Adobe Commerce translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-#### What should be prepared first in an Adobe Commerce migration?
+#### What should be prepared first before migrating into Adobe Commerce?
 
-Usually the highest-risk storefront behavior. That often means product structure, configurable versus customizable behavior, customer-context logic, catalog visibility, route continuity, scope structure, and any source-side complexity that could distort the target.
+Usually the highest-value starting point is the company structure, followed by shared-catalog logic, customer-group interaction, staged-content behavior, scope hierarchy, and the routes or products most sensitive to commercial ambiguity.
 
-#### Why is Adobe Commerce preparation more than a data-cleanup task?
+#### Why are shared catalogs such an important Adobe Commerce preparation topic?
 
-Because the main preparation challenge is not only moving records. It is defining how the future storefront should work, how customers should experience it, and how the business should govern it after launch.
+Because they can directly control product access and pricing visibility. If that logic is vague, the target can be technically complete while commercially wrong.
 
-#### Should Adobe Commerce preparation focus on every surrounding service or extension equally?
+#### Should Adobe Commerce preparation focus mainly on products?
 
-Usually no. Preparation is most useful when it starts by classifying which ecosystem-driven behaviors are commercially essential and which can change safely.
+No. Products still matter, but Adobe Commerce preparation is often more sensitive around company structure, shared catalogs, customer-group interaction, staged-content behavior, and broader commercial-rule governance.
 
-#### When does preparation usually point toward a more guided migration path?
+#### When does Adobe Commerce preparation usually need a more cautious approach?
 
-Usually when product logic is still unclear, customer-context rules remain vague, scope structure is unresolved, continuity assumptions are still untested, surrounding service dependence is unclassified, or the source is a Custom Cart with non-standard structure.
+Usually when the source behavior is still vague, when important meaning depends heavily on custom logic, or when the source platform is a Custom Cart whose structures do not align cleanly with Adobe Commerce’s native B2B and merchandising model.

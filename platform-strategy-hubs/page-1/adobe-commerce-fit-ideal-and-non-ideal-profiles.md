@@ -1,227 +1,215 @@
 # Adobe Commerce Fit: Ideal and Non-Ideal Profiles
 
-### What fit means for an Adobe Commerce migration
+Adobe Commerce is not simply a stronger fit for any business that wants more features. It is a strong fit when the future store genuinely needs the kinds of commercial structure and governance Adobe Commerce is designed to support.
 
-An Adobe Commerce fit decision should answer a practical question: does the business genuinely need a target that can carry stronger native structures for customer context, catalog visibility, storefront scope, and enterprise-weight commerce behavior, or is it trying to solve unclear current-state complexity by moving into a platform whose strength will only become valuable if that complexity is defined and governed properly?
+That distinction matters because many businesses are drawn to Adobe Commerce for scale or enterprise positioning in the abstract. Those reasons are not enough on their own. The more useful question is whether the business truly needs native company structure, shared catalogs with differentiated product access and pricing, staged content and merchandising control, websites / stores / store views working together with customer-group logic, and a validation model that can handle more than surface storefront continuity.
 
-For Adobe Commerce, fit is not defined by platform status, feature volume, or the idea of “moving up” into something more powerful. It is defined by whether the business can use Adobe Commerce’s stronger native structures without turning those structures into a new layer of storefront ambiguity or operational burden. The strongest fit signals usually appear in configurable product behavior, customer-context logic, catalog segmentation needs, route continuity priorities, scope structure, and the business’s willingness to govern the future store deliberately rather than letting inherited complexity simply continue in a more sophisticated environment.
+A business can be large and still not need Adobe Commerce. Another business can be smaller in raw volume but still be a strong fit because the commercial model depends on gated access, differentiated pricing, staged merchandising behavior, or more formal governance over how customers, products, and campaigns interact after launch.
 
-A good Adobe Commerce fit is therefore less about choosing a platform with more capability and more about choosing a target whose native structures match the real commercial and operational shape of the business. When that fit is real, Adobe Commerce can be a strong destination for merchants who need more control over account conditions, storefront visibility, and enterprise-scale commerce behavior. When that fit is weak, the migration may succeed at record level while producing a store that is technically impressive but commercially or operationally harder to trust.
+### Where Adobe Commerce Is Often a Strong Fit
 
-### Ideal Adobe Commerce profiles
+Adobe Commerce is often a strong migration target when the business needs native structure for commercial relationships and controlled merchandising behavior that lighter targets or more loosely assembled storefronts would struggle to support cleanly.
 
-#### 1. Businesses whose future store genuinely needs stronger native customer-context and catalog-control structures
+The strongest fit patterns usually appear when several conditions are true at the same time.
 
-Adobe Commerce is often a strong fit for businesses that need more than a broad storefront and product catalog. Some businesses need the target to support differentiated customer contexts, gated catalog exposure, company-account logic, or pricing conditions that materially affect what customers should see and how they should buy.
+#### Company-based customer structure is commercially important
 
-Typical strong-fit scenarios include:
+Adobe Commerce is often a strong fit when the real commercial unit is not only the individual customer account, but the company relationship and the rules attached to it.
 
-* businesses that need native company-account structures rather than only generic account handling
-* stores where catalog visibility should differ meaningfully by customer context
-* merchants whose pricing or commercial experience is materially shaped by customer segmentation
-* operations where account structure and catalog control are part of the business model, not only optional refinement
+This matters when the storefront needs to support:
 
-What makes these businesses a good fit is not only that they are complex. It is that their complexity is real enough to benefit from stronger native structures rather than from loosely layered workarounds.
+* company-based buying behavior
+* differentiated account context
+* product access controlled by company relationship
+* pricing visibility controlled by company relationship
+* customer rules that should follow a business structure rather than broad customer grouping alone
 
-#### 2. Businesses whose product behavior can still be expressed clearly through configurable and customizable structures
+Adobe Commerce supports companies natively as part of its B2B model. That makes the platform stronger when company structure is central to how the business actually sells.
 
-Adobe Commerce is often a strong fit when products can be translated into a clearer separation between what the customer chooses as a product state and what the customer customizes as part of the order. This is especially true for merchants whose source store already depends on configurable product behavior, but where that behavior can still be expressed through a structured target model instead of through improvised storefront logic.
+#### Shared catalogs matter to pricing and product access
 
-Typical strong-fit scenarios include:
+Adobe Commerce is often a strong fit when the business needs controlled product visibility and differentiated pricing across business customers.
 
-* stores with configurable products that still lead customers clearly toward the intended buyable outcome
-* businesses where configurable behavior can remain distinct from customer-entered customization
-* merchants whose product information and buying logic can be separated cleanly enough for the storefront to remain understandable
-* stores where the most important product journeys can be governed through defined native structures rather than through fragile custom behavior
+Shared catalogs can govern:
 
-These are strong-fit cases because Adobe Commerce rewards product structures that are defined clearly enough for the storefront to remain trustworthy after migration.
+* which products different customers can see
+* what pricing those customers should receive
+* which parts of the catalog should remain private or public
+* which customer contexts should map to which commercial terms
 
-#### 3. Businesses whose scope and storefront differences are materially real, not merely historical
+This is especially important when product access and price differentiation are not edge cases, but a core part of the business model. Adobe Commerce is much stronger when those outcomes need to be governed explicitly rather than improvised around customer-group workarounds alone.
 
-Adobe Commerce can be a strong fit when more than one storefront context genuinely matters and the business can explain why. Website, store, and store-view structure can support meaningful distinctions, but they work best when those differences reflect actual commercial or operational needs rather than inherited architecture.
+#### Staged content and merchandising behavior matter commercially
 
-Typical strong-fit scenarios include:
+Adobe Commerce is often a strong fit when campaign-aware content and merchandising timing are part of how the business operates.
 
-* businesses with real differences across region, language, catalog context, or customer-facing storefront behavior
-* merchants whose scope structure needs to support more than one meaningful storefront experience
-* organizations that benefit from layered scope without losing governance clarity
-* teams that can define what belongs at each scope level and why
+This matters when the future store needs to support:
 
-These are strong-fit cases when the business is clear about scope purpose, scope ownership, and future-state governance before migration begins.
+* scheduled promotional changes
+* timed content launches
+* previewable merchandising updates
+* coordinated campaign behavior that should be governed from inside the platform
 
-#### 4. Businesses that can classify surrounding ecosystem and extension dependence clearly
+Content Staging makes Adobe Commerce materially stronger in those contexts because the future store can treat timing and promotional sequencing as part of the operating model rather than as an external workaround.
 
-Adobe Commerce can also be a strong fit for businesses that know which surrounding ecosystem layers are materially important and why. Even where native structures are strong, some stores still depend on search services, extensions, integrations, or broader experience layers to produce the intended customer and operating outcomes.
+#### The business needs heavier governance around commercial rules
 
-Typical strong-fit scenarios include:
+Adobe Commerce is often a stronger fit when the business needs more deliberate control over how customer groups, shared catalogs, scope hierarchy, and content behavior work together.
 
-* stores that use extension or service layers strategically rather than indiscriminately
-* businesses that know which surrounding behaviors are commercially essential and which are replaceable
-* merchants willing to simplify or redesign ecosystem dependence where it no longer adds enough value
-* teams that understand how surrounding commerce services affect long-term governability
+That is especially useful when the business wants the storefront to support more than static product display. Adobe Commerce is often strongest when the team knows that product visibility, pricing, campaigns, account behavior, and multi-scope structure need to be governed intentionally rather than left to looser storefront conventions.
 
-Adobe Commerce becomes especially useful in these cases because structure and ecosystem extensibility reinforce each other instead of colliding.
+#### The business is prepared for a broader validation burden
 
-#### 5. Businesses where customer continuity planning matters and the source conditions make it realistic
+Adobe Commerce is often a strong fit when the business accepts that launch confidence cannot be judged only through visible storefront checks.
 
-Adobe Commerce can be a strong fit when preserving customer continuity matters materially and the source-to-target conditions make that more realistic than on reset-first targets. This is especially relevant where account continuity affects repeat purchasing, support load, or customer trust enough that it should be assessed seriously rather than dismissed automatically.
+That is especially true when the target must prove:
 
-Typical strong-fit scenarios include:
+* company structure
+* shared-catalog logic
+* customer-group interaction
+* staged content behavior
+* route and destination continuity
+* scope-aware storefront behavior
+* more than one commercial context inside the broader platform environment
 
-* migrations from source platforms where account continuity is commercially valuable and technically realistic
-* businesses where login disruption would materially affect customer trust or operational workload
-* merchants that need more continuity planning flexibility than many hosted targets allow
-* stores where customer-account expectations should be judged through real source-to-target feasibility rather than through generic assumptions
+The fit is stronger when the business is willing to validate representative commercial structure deliberately rather than assume Adobe Commerce features automatically create a workable model.
 
-These are strong-fit situations when continuity is planned as a realistic source-to-target condition, not as an automatic promise.
+### Where Adobe Commerce Is Often a Weaker Fit
 
-#### 6. Businesses prepared to rebuild into a cleaner enterprise-weight future state
+Adobe Commerce is often a weaker fit when the business wants enterprise positioning without a genuinely Adobe Commerce-shaped commercial model.
 
-Adobe Commerce is often a strong fit for merchants who want to move into a more governable enterprise-weight storefront without simply carrying forward every inherited customization. That can include businesses whose current store has outgrown lighter assumptions and whose next phase requires stronger native structures, clearer account logic, and more disciplined governance.
+Several patterns usually make the fit weaker.
 
-Typical strong-fit scenarios include:
+#### The business does not actually need native B2B structure
 
-* merchants willing to classify and reduce structural sprawl
-* stores that want to preserve important behavior without carrying forward every inherited workaround
-* businesses that want a cleaner future-state operating model with stronger native commerce structures
-* teams that define migration success partly through improved clarity and governability after launch
+Higher sales volume or a larger team alone does not automatically justify Adobe Commerce.
 
-These businesses often fit Adobe Commerce well because the platform can support sophisticated commerce behavior without forcing the future store to remain as structurally chaotic as the past one.
+The fit is weaker when the business is still operating mainly as a straightforward direct-to-consumer storefront and does not need companies, shared catalogs, differentiated product access, or more deliberate commercial-rule governance. In those cases, Magento or another target may still be structurally sufficient.
 
-### Non-ideal Adobe Commerce profiles
+#### The target structure is still vague
 
-#### 1. Businesses attracted mainly by platform sophistication rather than real structural need
+Adobe Commerce becomes a weaker fit when the business is using the platform to postpone decisions it still needs to make.
 
-Adobe Commerce is usually a weaker fit when the attraction is primarily that the platform appears more advanced, more enterprise-oriented, or more feature-rich, but the business has not defined a real future-state need for those stronger native structures. In these cases, platform weight becomes a source of unnecessary complexity rather than a meaningful business advantage.
+Risk rises when the team has not yet defined:
 
-Typical weaker-fit scenarios include:
+* how company relationships should work
+* which customers should see which products
+* how pricing should differ
+* whether staged content behavior is truly needed
+* what should differ by website, store, or store view
+* how customer groups and shared catalogs should interact
 
-* merchants drawn mainly to the idea of “more powerful” commerce technology
-* businesses treating stronger native structures as a substitute for clearer planning
-* teams assuming enterprise-weight capability will solve weak storefront governance on its own
-* operations whose real store logic does not require stronger native account, catalog, or scope structures
+Adobe Commerce is much less forgiving when the business wants the platform to supply that clarity automatically instead of defining it clearly first.
 
-In these cases, the platform may still be technically workable, but the fit is not yet commercially or operationally justified.
+#### Shared-catalog logic is still being described broadly
 
-#### 2. Businesses whose important product behavior is still too blurred to translate cleanly
+Adobe Commerce can be a weaker fit when the business knows access and pricing should differ, but still cannot explain how.
 
-Adobe Commerce becomes a weaker fit when the store’s most important product behavior still depends on a blurred mix of configurable state, descriptive information, and customer-entered customization that has never been separated clearly enough to preserve in the target.
+The fit weakens when product visibility and price differentiation are being described in broad strategic terms without clear customer, company, or catalog logic behind them.
 
-Typical weaker-fit scenarios include:
+#### Campaign and merchandising complexity is present but not governed
 
-* catalogs where the business still cannot explain what the customer chooses versus what the customer customizes
-* stores where configurable logic and surrounding product behavior still overlap confusingly
-* merchants whose highest-value products depend on too much undefined storefront logic
-* teams that assume stronger native product structures will make product ambiguity disappear automatically
+Content Staging is powerful, but the fit weakens when the business wants staged content capability without defining how campaign timing should actually behave and who will govern it.
 
-In these cases, Adobe Commerce may still be viable, but the fit is not proven until the business can define the product model more clearly.
+#### The team is not prepared for the broader validation surface
 
-#### 3. Businesses whose customer-context rules are still too vague to govern safely
+Adobe Commerce is also a weaker fit when the business wants the platform’s capability without accepting the corresponding review burden.
 
-Adobe Commerce is also a weaker fit when the business wants stronger native customer segmentation, catalog visibility control, or account-context logic, but has not yet decided which distinctions actually matter after launch. Stronger account and catalog structures do not create clarity by themselves. They amplify whatever logic the business has or has not defined.
+The fit weakens when the team does not have a realistic way to validate:
 
-Typical weaker-fit scenarios include:
+* company behavior
+* shared-catalog behavior
+* staged content outcomes
+* scope-aware storefront behavior
+* pricing and access visibility
+* the interaction between the storefront and enterprise workflows
 
-* stores wanting gated catalogs or differentiated visibility without a clear future-state model
-* businesses whose account conditions remain historically inherited rather than strategically justified
-* teams that know customer differences matter but cannot explain what those differences should change in the storefront
-* merchants trying to preserve every old rule even though not all of them still deserve to survive
+### Strong-Fit Profiles
 
-These stores often need more governance clarity before Adobe Commerce can be judged as a genuinely good fit.
+Adobe Commerce is often a strong fit for businesses that look like the following.
 
-#### 4. Businesses expecting scope structure to organize itself
+#### Businesses with meaningful B2B access and pricing structure
 
-Because Adobe Commerce supports layered scope, some teams may assume the platform will create a cleaner storefront architecture automatically. That is a weaker-fit signal when the business has not defined what should differ by website, store, or store view and why.
+These are merchants whose commercial relationships genuinely depend on company structure, differentiated product access, and controlled pricing visibility.
 
-Typical weaker-fit scenarios include:
+#### Businesses that need governed merchandising and campaign timing
 
-* businesses enabling layered scope mainly because multiple storefront contexts exist today, not because future-state differentiation is clear
-* stores preserving broad structural separation without checking whether those distinctions still matter commercially
-* teams assuming the platform’s native scope model will force good governance without business-side clarity
-* merchants whose scope boundaries remain historically inherited rather than strategically justified
+These are teams that need promotional and content changes to be scheduled, previewed, and managed as part of the operating model.
 
-These stores often need more planning clarity before Adobe Commerce can be judged as a genuinely good fit.
+#### Businesses whose storefront rules need tighter coordination
 
-#### 5. Businesses that want a cleaner future but have not decided what should be simplified
+These are businesses where customer groups, scope hierarchy, product visibility, and pricing rules need to work together in a more deliberate system than lighter targets usually support well.
 
-Adobe Commerce can be a weaker fit when the business wants to reduce complexity but has not yet decided which parts of the current store should remain, which should be restructured, and which should be left behind. This can create a migration that preserves too much of the wrong behavior while still failing to create a cleaner future state.
+#### Businesses willing to validate structure, not just records
 
-Typical weaker-fit scenarios include:
+These are teams that accept that Adobe Commerce success depends on validating company logic, shared catalogs, staged content, route continuity, and scope-aware behavior, not just imported data.
 
-* stores moving to Adobe Commerce mainly because the current store feels too fragmented
-* teams that want a more governable target but have not classified what should change
-* merchants expecting the new platform to create structural discipline automatically
-* businesses trying to preserve everything and simplify everything at the same time
+### Higher-Risk Fit Profiles
 
-These stores often need more planning clarity before Adobe Commerce can be judged as a genuinely good fit.
+Adobe Commerce usually becomes a higher-risk fit for businesses that look like the following.
 
-### Higher-risk fit patterns that are not automatic blockers
+#### Businesses chasing enterprise breadth without a defined enterprise structure
 
-Some Adobe Commerce scenarios are not inherently poor fits, but they do require more deliberate planning before the platform can be judged safely.
+These are merchants who want the status or expectation of Adobe Commerce without a real need for its native commercial-rule structures.
 
-#### Enterprise-weight customer segmentation with mixed real-world governance maturity
+#### Businesses whose target behavior is still undefined
 
-A business can still be a good fit for Adobe Commerce when customer context, company-account logic, or catalog segmentation matter materially, but only when the business is willing to define those structures clearly enough to govern them. The risk is not segmentation itself. The risk is structurally powerful segmentation without enough future-state clarity.
+These are teams that know the future store is more complex, but still have not decided how companies, shared catalogs, staged campaigns, scope, and customer-group logic should actually work.
 
-#### Strong native scope with unresolved storefront ownership
+#### Businesses expecting Adobe Commerce to resolve commercial ambiguity automatically
 
-A business can still be a good fit for Adobe Commerce when layered scope matters, but only when the reasons for that scope are commercially real and operationally governable. The issue is not whether the platform can support websites, stores, and store views. The issue is whether the business can explain how those differences should behave without creating storefront ambiguity.
+These are merchants who assume that a broader enterprise platform will make the target coherent even though the business model is still being described vaguely.
 
-#### Customer-continuity-sensitive migrations with mixed source conditions
+#### Businesses unwilling to support a broader validation burden
 
-Adobe Commerce can still be a good fit when customer continuity matters and the source situation is mixed, but only when the business is willing to validate what is technically and commercially realistic instead of assuming continuity from the target platform alone.
+These are teams that want the platform capability but do not yet have a realistic path to review and approve the more context-sensitive outcomes Adobe Commerce introduces.
 
-#### Source-side Custom Cart migrations into Adobe Commerce
+### What Should Be Confirmed Before Calling Adobe Commerce a Good Fit
 
-A migration from a Custom Cart into Adobe Commerce is not automatically a poor fit. Adobe Commerce may still be the right destination. But the fit is higher-risk because the source structure may rely on custom APIs, spreadsheets, files, semi-structured data, or non-standard storefront logic that does not align neatly with a standard commerce model.
+Before the business treats Adobe Commerce as the right target, it should be able to answer a few questions clearly.
 
-In those cases, Adobe Commerce fit should be judged through two questions:
+#### 1. Is company structure central to how customers actually buy?
 
-* can the source meaning be translated cleanly enough into Adobe Commerce’s product, customer-context, catalog, route, and scope structures?
-* is the safer path already pointing toward Custom Migration Service because the source is non-standard?
+If the important commercial unit is the company relationship rather than a loose customer grouping, the fit is usually stronger.
 
-This is one of the clearest higher-risk-but-possible fit patterns for the Adobe Commerce hub.
+#### 2. Does the business need shared catalogs to control product visibility and pricing precisely?
 
-### How to confirm Adobe Commerce fit early
+If controlled access and differentiated pricing are commercially important, Adobe Commerce is often a much stronger fit.
 
-The fastest meaningful Adobe Commerce fit test is a Demo Migration built around the parts of the store most likely to expose structural weakness before full execution. For this platform, that sample should not focus only on product import success. It should include the combinations of product behavior, customer-context logic, route continuity, scope-sensitive storefront conditions, and ecosystem dependence most likely to determine whether the target is commercially and operationally usable.
+#### 3. Does the future model genuinely need staged content or campaign-aware merchandising behavior?
 
-A high-signal Adobe Commerce fit sample usually includes:
+If timing, preview, and scheduled promotional control matter materially, Adobe Commerce is often a stronger target.
 
-* representative configurable products
-* products where configurable behavior and customization must stay clearly separated
-* customer-context scenarios where visibility or pricing meaning matters
-* high-value route paths with strong commercial importance
-* scope-sensitive storefront situations where layered context matters
-* ecosystem- or extension-driven behaviors most likely to affect storefront meaning
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+#### 4. Has the business defined how customer groups, shared catalogs, and scope should work together?
 
-A practical fit pass condition is simple: the business can still explain how customers reach the right products, make the right choices, encounter the right account and catalog conditions, move through the right storefront paths, and interact with a store model that remains commercially usable and governable after launch.
+These layers can create real strength in Adobe Commerce, but only when they are deliberately planned.
+
+#### 5. Can the team validate the broader commercial context Adobe Commerce introduces?
+
+This includes company logic, shared-catalog logic, staged content logic, route and scope behavior, and the operational meaning behind them.
 
 ### Conclusion
 
-Adobe Commerce is usually a good fit when the business genuinely needs stronger native structures for customer context, catalog control, storefront scope, and enterprise-weight commerce behavior. It is strongest when product behavior, customer-account conditions, route continuity, scope logic, and broader storefront governability can all be expressed clearly enough to produce a future store that is not only functional, but commercially coherent and operationally trustworthy.
+Adobe Commerce is often a strong migration target when the business genuinely needs native company structure, shared-catalog product access and pricing, staged merchandising behavior, and clearer governance over how commercial rules should work after the move.
 
-It becomes a weaker fit when the business wants platform sophistication without structural clarity, when product logic and customer-context rules remain too ambiguous to translate safely, when scope is expected to organize itself, or when the future-state store is still being defined through inherited habits rather than deliberate decisions.
+It is often a weaker fit when the platform is being used as a broad enterprise upgrade rather than as the answer to a clearly defined commercial structure. Adobe Commerce becomes strongest when the business already knows why company relationships, gated access, differentiated pricing, scheduled content behavior, and broader validation context matter. Without that clarity, the platform can look powerful while still carrying too much ambiguity into the migration.
 
-The safest early confirmation step is a representative Demo Migration built around the products, customer-context scenarios, route-sensitive storefront paths, scope-specific experiences, and surrounding commerce logic most likely to reveal fit problems before launch. Those scenarios usually say far more about whether Adobe Commerce is truly the right destination than broad record-level success ever will.
-
-Where the result still leaves uncertainty, the next useful question is not simply whether the target can be made to work. It is whether the business has defined the future store clearly enough to trust the migration path it is choosing. In some cases, that means the fit is broadly sound but needs more guided execution. In others, the issue is deeper source-to-target translation pressure that changes what “safe enough” really means. That is where Live Chat can help most. It can clarify whether the remaining uncertainty is within the range of ordinary scope and validation work, whether Managed Migration Service would reduce decision and execution risk, or whether Custom Migration Service is the more reliable path because the source structure, especially from a Custom Cart, is too non-standard to treat as an ordinary migration case.
+Use a representative Demo Migration to test the company structures, shared-catalog rules, staged-content assumptions, scope behavior, and high-value route or storefront scenarios that matter most. If those outcomes are still unclear, Live Chat can help determine whether Adobe Commerce is the right target and whether the migration path needs a more guided or more bespoke approach.
 
 ### FAQs
 
-#### Is Adobe Commerce a good fit mainly because it has stronger enterprise features?
+#### What usually makes Adobe Commerce a strong fit?
 
-No. Stronger native structures matter, but Adobe Commerce is usually a strong fit when the business can also preserve product behavior, customer-context logic, catalog visibility, route continuity, scope clarity, and storefront governability clearly enough after migration.
+Usually a real need for native company structure, shared-catalog access and pricing control, staged merchandising behavior, and tighter governance over how storefront rules work together.
 
-#### What makes Adobe Commerce a strong fit for some storefronts?
+#### Is Adobe Commerce automatically a good fit for large businesses?
 
-The strongest fit usually appears when the store’s important behavior can still be expressed clearly through configurable product logic, structured account context, controlled catalog exposure, layered scope, and well-governed surrounding commerce behavior without turning the future store into an unmanageable enterprise-weight environment.
+No. Size alone is not enough. Adobe Commerce is strongest when the business has a genuinely Adobe Commerce-shaped commercial model rather than only more scale or broader ambition.
 
-#### When is Adobe Commerce usually a weaker fit?
+#### What is one of the biggest Adobe Commerce fit mistakes?
 
-It is usually a weaker fit when important product logic, customer-context rules, scope decisions, route planning, or governance decisions are still vague enough that the target cannot be validated confidently.
+Assuming that enterprise feature depth alone is enough reason to choose it. The better question is whether the business actually needs its company structure, shared catalogs, staged content behavior, and broader governance model.
 
-#### What is the fastest way to confirm Adobe Commerce fit?
+#### Why is validation burden part of fit in Adobe Commerce?
 
-A representative Demo Migration is usually the fastest fit test. The most useful sample includes configurable products, important route paths, customer-context scenarios, scope-sensitive storefront situations, and any source complexity most likely to expose whether Adobe Commerce really preserves how the store works.
+Because the platform often introduces more context-sensitive behavior around companies, shared catalogs, staged content, pricing visibility, and scope. A business that cannot validate those outcomes clearly may not be ready for a good Adobe Commerce fit.
