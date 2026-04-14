@@ -1,233 +1,294 @@
 # BigCommerce Migration Pitfalls and Prevention
 
-BigCommerce migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated store preserves records without preserving the storefront logic that made the business usable before the move. The most common breakdowns happen when product-choice behavior, category-led discovery, pricing context, storefront boundaries, custom-data-driven outcomes, or high-value storefront paths are treated as details to refine later instead of conditions that shape the target from the beginning.
+BigCommerce migrations often look more governed than they really are.
 
-This page focuses on the failure patterns that recur most often when BigCommerce is chosen for the right broad reasons but prepared or validated too loosely. Each pitfall matters because it can create a store that looks complete while still behaving incorrectly for shoppers, internal teams, or both.
+That can be a strength when the future store genuinely fits BigCommerce well. It becomes a weakness when the business mistakes hosted structure for clearer commercial logic. Products may import, variants may exist, modifiers may be assigned, customer groups may be present, price lists may be active, storefronts may exist, and redirects may resolve, yet the storefront can still become commercially weaker if the wrong assumptions shaped the migration path. The highest-risk BigCommerce problems are rarely dramatic technical failures. They are quieter structural mistakes that change how customers choose products, what prices they receive, which storefront they see, how routes behave, and how app- or theme-shaped behavior works after launch.
 
-### Pitfall 1: Migrating products without preserving the real buyable outcome
+That is why BigCommerce pitfalls should be understood as commercial-structure and governance failures, not only execution failures. Most of them begin before launch, when the business leaves product-choice logic, pricing context, storefront assignments, redirect meaning, or app-owned storefront behavior too vague, assumes hosted governance will resolve ambiguity automatically, or validates the storefront too broadly instead of validating the structural areas that matter most.
 
-#### What Goes Wrong
+### Pitfall 1: Treating Hosted Governance as a Substitute for Clear Commercial Structure
 
-Product records are transferred, but the storefront no longer leads customers to the right purchasable result. Variant-based combinations and modifier-based customizations become blurred, important price-affecting choices are modeled in the wrong place, or the product page still looks populated while no longer communicating what the customer is actually buying.
+#### What goes wrong
 
-#### Early Warning Signs
+The business chooses BigCommerce because it feels more governed, without deciding how the future store should actually use that governance.
 
-* products appear complete, but shoppers struggle to identify the correct option path
-* modifier-style selections are being treated like true variants, or vice versa
-* internal teams cannot explain which product choices create a real sellable combination
-* the most configurable products require workarounds to make sense after migration
+This usually leads to a target that has more structure but not more clarity. The migration may preserve the visible storefront while still leaving the business unsure how product-choice logic, pricing context, storefront assignments, redirects, and app-shaped behavior are supposed to work together.
 
-#### Prevention
+#### Early warning signs
 
-Define the product-choice model before migration is treated as structurally ready. Separate true sellable combinations from optional customizations, personalization inputs, and descriptive choices. Use representative configurable products early enough to test whether the target still supports clear product understanding and confident purchase behavior.
-
-#### Recommendation example with explicit pass condition
-
-Use a sample that includes the most structurally difficult and highest-value configurable products.
-
-**Pass condition:** the intended customer can identify the right buyable outcome confidently, make the required choices in the correct order, and see the correct pricing and product result without confusion.
-
-### Pitfall 2: Recreating category structure without preserving discovery quality
-
-#### What Goes Wrong
-
-Categories and menus exist after migration, but the storefront no longer supports how customers actually find products. Browse paths become flatter or less intuitive, navigation loses commercial meaning, or product families become harder to compare and understand.
-
-#### Early Warning Signs
-
-* category pages exist, but customers have to rely on search more heavily than before
-* menu structure feels administratively complete but commercially weak
-* high-value browse paths no longer guide customers naturally into the right products
-* internal teams say the category tree is present, but the storefront feels harder to shop
+* the team keeps describing BigCommerce as “more structured” without defining which commercial structures matter
+* product-choice logic is still being discussed broadly
+* pricing rules are still described as something to refine later
+* storefront assignments are still vague
+* app and theme behavior are still being treated as background detail
 
 #### Prevention
 
-Treat category structure as storefront behavior, not only as data placement. Define which category paths matter most to discovery, comparison, and conversion, then validate those paths directly in the storefront rather than assuming structural completeness is enough.
+Treat BigCommerce as a platform for clearer commercial decisions, not just more control. Define:
 
-#### Recommendation example with explicit pass condition
+* why specific product-choice structures matter
+* why pricing context matters
+* why storefront assignments matter
+* why redirect behavior matters
+* which app- and theme-owned behaviors still matter commercially
 
-Review the category and menu journeys that previously carried the most traffic, comparison behavior, or conversion value.
+#### Recommendation example
 
-**Pass condition:** customers can still move from discovery into the intended product families and product pages through intuitive browse paths that support the expected shopping behavior.
+A stronger planning standard is to define the 8 to 15 commercial behaviors BigCommerce must support before the migration is treated as strategically settled.
 
-### Pitfall 3: Preserving pricing values without preserving pricing context
+**Pass condition:** the business can explain why BigCommerce is needed as a target structure, not only why it feels more governed.
 
-#### What Goes Wrong
+### Pitfall 2: Preserving Product Records While Choosing the Wrong Product-Choice Model
 
-Prices are present in the target, but the wrong customers see the wrong commercial terms. Customer-group logic, price-list behavior, or storefront-specific pricing becomes unreliable, and the business loses control over how differentiated pricing is communicated in practice.
+#### What goes wrong
 
-#### Early Warning Signs
+Products migrate successfully, but the target no longer reflects the actual sellable outcome the storefront depends on.
 
-* pricing values exist in the backend, but storefront behavior is inconsistent
-* different customer groups no longer see the expected pricing
-* internal teams cannot explain where a pricing rule should apply after launch
-* pricing-sensitive products begin creating trust or support issues
+BigCommerce distinguishes between variants and modifiers. That makes product continuity in BigCommerce a structural question, not only a record question. A storefront can look complete while still weakening buying clarity if the wrong model is used for high-value products. citeturn106962search0turn106962search20
 
-#### Prevention
+#### Early warning signs
 
-Validate pricing as a customer-facing commercial outcome. Define which customer groups, storefronts, or scenarios require differentiated pricing, then test whether those differences still appear in the correct context. Treat pricing behavior as part of storefront trust, not only as imported data.
-
-#### Recommendation example with explicit pass condition
-
-Use a sample of representative products across the customer groups or storefront conditions where pricing matters most commercially.
-
-**Pass condition:** the intended customer sees the intended pricing in the intended storefront context, and the result still supports a trustworthy buying decision.
-
-### Pitfall 4: Using storefront separation to hide unresolved governance decisions
-
-#### What Goes Wrong
-
-The business creates or preserves multiple storefront contexts without defining clearly why each one exists, what each one owns, and how customers should move through them. The result is duplicated meaning, overlapping responsibility, or storefront boundaries that look organized but remain commercially unclear.
-
-#### Early Warning Signs
-
-* teams cannot explain the distinct purpose of each storefront
-* products, categories, content, or pricing rules are being duplicated without a clear ownership model
-* storefront separation is justified mostly through history rather than future-state logic
-* launch planning is moving forward while storefront boundaries are still under debate
+* high-value products still mix true sellable variation with customization logic
+* the team keeps debating whether a choice should be a variant, a modifier, or handled by surrounding logic
+* only easy products are being used in early validation
+* the target product page looks presentable, but the sellable outcome still feels less clear than before
 
 #### Prevention
 
-Define storefront scope as a business and governance model before execution scales. Clarify which differences justify separate storefronts, which can remain within one storefront, and who owns each storefront context after launch. Validate not only the technical storefront setup, but also the customer and operating logic behind it.
+Validate product-choice structure against the actual buying journey. Focus on:
 
-#### Recommendation example with explicit pass condition
+* the products that drive the most revenue
+* the products with the most structurally complex choice behavior
+* the products most likely to expose ambiguity between variants, modifiers, and surrounding logic
+* whether the chosen BigCommerce structure still supports the intended commercial outcome clearly enough
 
-Review the most commercially important storefront contexts and the journeys customers are expected to take through them.
+#### Recommendation example
 
-**Pass condition:** the business can explain clearly why each storefront exists, what it owns, which customers it serves, and how its content, products, and pricing differ meaningfully from the others.
+Build the Demo Migration sample around the product families most likely to expose variants-versus-modifiers ambiguity instead of broad random products.
 
-### Pitfall 5: Treating customer and order history as secondary once the storefront launches
+**Pass condition:** the high-risk products most important to revenue still express the intended sellable outcome clearly enough that customers can buy without confusion.
 
-#### What Goes Wrong
+### Pitfall 3: Letting Category Survival Stand In for Useful Discovery
 
-The migrated storefront looks acceptable, but historical customer and order data become harder to interpret or use in practice. Support teams lose confidence in order context, returning-customer relationships become harder to follow, or important post-launch operational questions can no longer be answered smoothly.
+#### What goes wrong
 
-#### Early Warning Signs
+Categories migrate, but the storefront becomes weaker to browse and easier to mismanage.
 
-* customer and order totals appear correct, but support teams struggle with real examples
-* historical orders remain visible but no longer make practical sense in context
-* product-to-order and customer-to-order relationships feel harder to interpret
-* post-launch support questions become slower or less reliable to answer
+In BigCommerce, categories are not only filing structures. They shape product discovery, storefront grouping, and in many stores the relationship between merchandising and customer intent. A category can survive in the target while the storefront still becomes weaker if the business never clarified what the category model is supposed to do.
 
-#### Prevention
+#### Early warning signs
 
-Validate historical usability directly when customer and order history still matters operationally. Use representative customers and orders to confirm that the business can still support normal post-launch service, reporting, and account interpretation without avoidable friction.
-
-#### Recommendation example with explicit pass condition
-
-Test a set of representative customer accounts and previous orders that reflect the kinds of questions support or account teams handle most often.
-
-**Pass condition:** the business can still interpret customer and order history clearly enough to answer normal operational questions without uncertainty or manual reconstruction.
-
-### Pitfall 6: Assuming custom fields, metafields, and extensions will preserve their own meaning automatically
-
-#### What Goes Wrong
-
-Supporting data and extension-driven logic migrate, but the storefront or internal workflow no longer behaves the same way. Search still exists but no longer supports the same discovery quality, merchandising blocks still appear but lose their intended effect, or supporting data is technically present without still shaping the storefront meaningfully.
-
-#### Early Warning Signs
-
-* custom fields or metafields appear in the target, but no one has verified their storefront effect
-* apps or theme components are present, but the intended business outcome is still assumed rather than tested
-* extension-driven discovery, messaging, or trust signals feel weaker after launch
-* internal teams say the data migrated, but cannot confirm the resulting behavior is still correct
+* the team validates categories mainly by presence
+* category relationships still feel inherited rather than intentional
+* browse behavior is assumed to be correct because the records exist
+* important product-group distinctions are harder to explain after migration
 
 #### Prevention
 
-Validate extension-driven meaning as an outcome, not as a checklist item. Identify which custom fields, metafields, theme behaviors, search layers, merchandising tools, or trust signals still matter commercially, then test whether they still produce the intended result in the real storefront or operating flow.
+Treat category validation as discovery validation. Review:
 
-#### Recommendation example with explicit pass condition
+* which categories matter most to navigation
+* which category relationships still support the browse journey
+* which paths are still commercially important
+* whether the resulting storefront still guides customers naturally enough
+* whether the category model is still governable after launch
 
-Review the extension-driven outcomes that most affect buyability, discovery, trust, or internal usability.
+#### Recommendation example
 
-**Pass condition:** each high-impact field or extension still produces the intended business outcome well enough for launch, not just the intended data presence.
+Do not validate important categories only through record survival.
 
-### Pitfall 7: Assuming native redirects solve continuity by themselves
+**Pass condition:** the categories most important to discovery and governance still support useful browsing and clear storefront meaning after launch.
 
-#### What Goes Wrong
+### Pitfall 4: Treating Price-List Assignment as Proof of Correct Pricing Logic
 
-The business assumes that because native redirects are available, URL continuity is already handled. Important product, category, content, brand, or storefront-specific paths are not prioritized carefully enough, and the post-migration journey weakens even when redirects resolve technically.
+#### What goes wrong
 
-#### Early Warning Signs
+Customer groups and price lists are assigned in BigCommerce, but pricing still does not reflect the intended commercial model.
 
-* redirect planning is treated as a technical checkbox
-* high-value paths have not been identified explicitly
-* teams are validating redirect existence but not the destination journey
-* important category or content paths are reviewed too late
+Price lists are a direct control layer for segmented pricing. That makes them powerful, but also sensitive. A price list can be assigned correctly at a technical level while still being commercially wrong if the business never clarified which customer context should receive which prices and why. BigCommerce’s own documentation makes clear that price lists can be applied across customer groups and storefronts. citeturn106962search1turn106962search13turn106962search35
 
-#### Prevention
+#### Early warning signs
 
-Validate the paths that matter most commercially, not just the existence of redirect rules. The important question is whether priority entry points still lead customers to the right destination and support the intended next action after migration.
-
-#### Recommendation example with explicit pass condition
-
-Review a focused list of the most valuable old URLs across product, category, content, and storefront-specific paths.
-
-**Pass condition:** each priority path resolves to the correct destination and still supports the intended browse, product, or conversion journey.
-
-### Pitfall 8: Validating visual completeness but not real storefront behavior
-
-#### What Goes Wrong
-
-The storefront looks broadly correct, but the business has validated appearance more heavily than real buying behavior. Product pages look acceptable, category pages are present, content appears where expected, and pricing is visible somewhere, but no one has tested whether the combined storefront still works naturally for real customers.
-
-#### Early Warning Signs
-
-* validation is focused mainly on appearance or field presence
-* teams say the store “looks good” before testing high-risk customer journeys
-* product, pricing, navigation, and custom behavior are checked separately but not together
-* pass/fail is being judged through completeness rather than customer behavior
+* the team is validating that price lists exist, not that pricing behaves correctly
+* price visibility is still being judged loosely
+* customer-group logic still mirrors inherited workarounds instead of an intentional BigCommerce model
+* pricing differences matter commercially, but the sensitive cases have not been ranked
 
 #### Prevention
 
-Define pass and fail through storefront behavior. Use representative products, browse paths, pricing scenarios, and extension-driven outcomes to test whether the customer can still move from discovery to confident purchase under the intended conditions. BigCommerce is most vulnerable to silent failure when the storefront looks complete but behaves less coherently than before.
+Validate pricing through the business outcomes it controls:
 
-#### Recommendation example with explicit pass condition
+* which customer groups should receive which prices
+* which storefronts should carry which pricing context
+* which exclusions matter
+* which pricing differences are commercially sensitive
+* which mistakes would weaken trust, conversion, or margin
 
-Review several full customer journeys from entry path to product selection to purchase decision across the most commercially important storefront situations.
+#### Recommendation example
 
-**Pass condition:** the right customer can move through the intended journey, make the right product and pricing decisions, and complete the storefront experience with behavior the business still trusts after launch.
+Build validation around the customer-group and price-list combinations with the highest pricing sensitivity instead of only checking generic pricing presence.
+
+**Pass condition:** the correct customer context sees the correct prices in the correct storefronts on the paths that matter most commercially.
+
+### Pitfall 5: Treating Multi-Storefront as a Convenience Layer Instead of a Governance Model
+
+#### What goes wrong
+
+Multiple storefronts are created, but the business never decided what should truly differ between them and what should remain shared.
+
+BigCommerce Multi-Storefront allows a single store to power multiple storefronts. That is powerful, but it becomes a pitfall when the business treats it as a scale benefit rather than a governed structural decision. citeturn106962search2turn106962search18
+
+#### Early warning signs
+
+* teams talk about more storefronts before defining why each one exists
+* products, prices, or customer contexts are being assigned broadly rather than intentionally
+* the business cannot explain what belongs in one storefront versus another
+* validation treats multiple storefronts as if one successful storefront proves the rest
+
+#### Prevention
+
+Treat storefront scope as a commercial-model decision. Define:
+
+* what should remain shared
+* what should differ by storefront
+* which customer groups and price lists belong in each storefront
+* which storefront differences are commercially necessary versus merely possible
+
+#### Recommendation example
+
+Validate the highest-risk storefront assignments early rather than waiting for broader storefront testing.
+
+**Pass condition:** the most important products, prices, and customer contexts appear in the intended storefront and still reflect the business model clearly enough after migration.
+
+### Pitfall 6: Validating Redirects Without Validating Destinations
+
+#### What goes wrong
+
+Redirects resolve correctly, but the destination no longer supports the customer intent or commercial value the old path used to serve.
+
+BigCommerce includes native 301 Redirects. That removes one technical barrier, but not the commercial risk. A route can resolve successfully while still landing customers on a weaker destination. citeturn106962search3
+
+#### Early warning signs
+
+* redirect setup is treated as complete once the rule exists
+* the team validates that the route resolves, but not whether it resolves well
+* high-value product, category, or landing routes have not been ranked by business value
+* broad destination logic is being applied to routes that once served specific customer intent
+
+#### Prevention
+
+Prioritize the routes that matter most:
+
+* best-selling product URLs
+* high-value category or landing paths
+* support or trust pages that still matter
+* routes whose meaning changes because of storefront assignment or pricing context
+
+Then validate not only the redirect, but the commercial quality of the landing destination.
+
+#### Recommendation example
+
+Review high-value redirects by customer intent rather than by technical completion.
+
+**Pass condition:** the destination preserves the purpose the original route served well enough that the redirected journey still feels commercially useful.
+
+### Pitfall 7: Treating App and Theme Behavior as Background Detail
+
+#### What goes wrong
+
+The storefront looks complete, but important behavior weakens because the app- or theme-owned logic was never classified clearly enough.
+
+BigCommerce stores often depend on apps, theme behavior, custom fields, or workflow rules for pricing display, navigation, trust elements, customer experience, or merchandising logic. Products, customer groups, price lists, and storefronts can all survive while the real business outcome still weakens if too much meaning lived in surrounding apps and no one clarified what had to be preserved.
+
+#### Early warning signs
+
+* the team knows many apps matter, but cannot explain which outcomes each one still needs to support
+* theme behavior is being described as “probably fine”
+* custom fields or settings were migrated, but no one has tested the outcome they are meant to drive
+* the business is validating storefront visibility more carefully than app-shaped behavior
+
+#### Prevention
+
+Treat app- and theme-owned meaning as first-class migration behavior. Classify:
+
+* which apps still matter
+* which theme behaviors still shape trust, discovery, or buying logic
+* which custom fields still drive meaningful storefront or operational outcomes
+* which outcomes are non-negotiable after launch
+
+#### Recommendation example
+
+Do not validate apps only through installation or field presence.
+
+**Pass condition:** the app- and theme-dependent behaviors most important to the business still work acceptably enough that the storefront and operations remain trustworthy after launch.
+
+### Pitfall 8: Treating a Structured Hosted Storefront as Proof of a Trustworthy One
+
+#### What goes wrong
+
+The storefront looks polished and governed, so the team assumes the target is ready before the most important structural behaviors have actually been proven.
+
+This is a common BigCommerce launch trap. Products may exist, price lists may exist, storefronts may exist, and redirects may work, but the target still may not be trustworthy if the product-choice logic, pricing context, storefront assignments, route destinations, customer-account expectations, and app-shaped outcomes have not been validated through representative scenarios.
+
+#### Early warning signs
+
+* validation is still mostly page-based
+* pricing or storefront outcomes are being inferred from setup rather than proven through scenarios
+* route, pricing, and app outcomes have not been tested directly
+* the launch decision is being driven by visible completeness instead of representative evidence
+
+#### Prevention
+
+Validate BigCommerce through representative commercial context, not only through storefront appearance. Focus on:
+
+* product-choice scenarios
+* customer-group and price-list scenarios
+* storefront-assignment scenarios
+* redirect-destination scenarios
+* customer-account scenarios
+* app- and theme-dependent storefront scenarios
+
+#### Recommendation example
+
+Build the final validation sample around the structural cases most likely to expose ambiguity, not the pages easiest to inspect.
+
+**Pass condition:** the most commercially sensitive product, pricing, storefront, route, customer, and app scenarios behave acceptably enough that the business can explain why the target is trustworthy.
+
+### How Custom Cart as a Source Changes BigCommerce Pitfall Prevention
+
+When the source platform is a Custom Cart, BigCommerce pitfalls become more sensitive because more of the product-choice, pricing, customer, storefront, route, or app-like meaning may need bespoke interpretation before it can fit BigCommerce’s native structures cleanly.
+
+That usually means:
+
+* higher risk of misreading source-side option logic
+* greater risk in rebuilding pricing or storefront meaning
+* tighter need to distinguish native BigCommerce structure from app- or theme-owned behavior
+* stronger need for representative high-risk validation around product, pricing, storefront, and route behavior
+
+In this context, the key prevention move is not generic caution. It is earlier and more precise evidence around the parts of the source business model that BigCommerce is most likely to formalize differently.
 
 ### Conclusion
 
-The most common BigCommerce pitfalls come from confusing structural completeness with storefront correctness. A migration can move products, categories, customers, orders, prices, and supporting data successfully while still weakening product-choice clarity, browse-led discovery, pricing trust, storefront boundaries, operational usability, or continuity of the journeys that matter most. Strong prevention begins by making those risks visible early, then validating them through representative customer and storefront scenarios instead of relying on broad assumptions.
+BigCommerce migration pitfalls usually come from assuming that hosted governance automatically creates clearer commercial structure.
 
-The most useful prevention work usually happens before the business has committed emotionally to the idea that the migration is already “mostly done.” That is when option-heavy products, high-value category paths, pricing-sensitive scenarios, custom-data-driven behavior, and continuity-critical routes can still reveal problems early enough to influence the safer next step. Once those areas are treated as the real proof points, the migration becomes much easier to judge honestly.
+In reality, the most important failures tend to be quieter: products that exist but are modeled with the wrong product-choice structure, categories that survive but no longer guide discovery properly, price lists that exist but support the wrong customer logic, storefronts that exist but are assigned incorrectly, redirects that function technically but weaken route value, and app- or theme-owned logic that survives only superficially. The safest way to prevent those failures is to define structure earlier, validate representative high-risk behavior sooner, and judge BigCommerce by preserved commercial meaning rather than by hosted polish alone.
 
-A practical way to use this page is to compare each pitfall against the store’s own highest-risk patterns and ask which one could create the most expensive false confidence if it were missed. That question usually identifies the storefront behaviors that deserve the earliest attention in Demo Migration and structured review.
-
-Where those early checks still leave uncertainty, Live Chat can help determine whether the issue is still within the range of ordinary validation tightening, whether Managed Migration Service would reduce execution and review risk, or whether the business is facing a more customized translation problem that makes Custom Migration Service the safer path.
+Before launch, review the parts of the store where BigCommerce is most likely to formalize meaning differently: product-choice behavior, category logic, customer-group and price-list rules, storefront assignments, route destinations, customer-account expectations, and app-owned behavior. If the result still feels unclear, Live Chat can help determine whether the issue reflects acceptable BigCommerce formalization, a mapping concern, or a stronger need for guided handling before launch.
 
 ### FAQs
 
-<details>
+#### What is one of the most common BigCommerce migration mistakes?
 
-<summary><strong>What is the most common BigCommerce migration pitfall?</strong></summary>
+One of the most common mistakes is treating hosted governance as if it will automatically resolve structural ambiguity. BigCommerce is strongest when the business already knows how product-choice logic, pricing context, storefront assignments, routes, and app-shaped behavior should work.
 
-Usually it is preserving data without preserving storefront behavior. The store may look complete while still changing how customers discover products, make product choices, see pricing, or move through important storefront paths.
+#### Why are variants and modifiers such a common BigCommerce pitfall?
 
-</details>
+Because BigCommerce distinguishes them structurally, and a product can survive while the buying path still becomes weaker if the wrong product-choice model is used.
 
-<details>
+#### Why is price-list behavior often mishandled in BigCommerce?
 
-<summary><strong>Why do BigCommerce pitfalls often appear late?</strong></summary>
+Because teams sometimes treat price-list assignment as proof of correct pricing. In reality, the business still needs to prove that the right customer context receives the right prices in the right storefront.
 
-Because many of them hide inside product-choice logic, category behavior, pricing context, or extension-driven storefront meaning. Those problems can stay invisible until real customers or internal teams try to use the migrated store in practical scenarios.
+#### What makes BigCommerce pitfalls harder to detect early?
 
-</details>
-
-<details>
-
-<summary><strong>Is Multi-Storefront automatically safer in BigCommerce?</strong></summary>
-
-No. Separate storefronts can create clearer boundaries, but they also increase governance needs. They are only safer when the business has clearly defined why those boundaries exist and how each storefront should behave.
-
-</details>
-
-<details>
-
-<summary><strong>What is the best way to prevent BigCommerce migration pitfalls?</strong></summary>
-
-Use representative early validation. The best prevention method is usually a focused review of the products, category paths, pricing scenarios, storefront contexts, and extension-driven behaviors most likely to reveal whether the target still preserves the intended business outcome.
-
-</details>
+Many of them are structural rather than visual. Products, prices, storefronts, routes, and apps may all appear present while the real commercial meaning is still wrong or too vague to trust.

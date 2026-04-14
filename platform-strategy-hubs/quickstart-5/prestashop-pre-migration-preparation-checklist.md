@@ -1,175 +1,228 @@
 # PrestaShop Pre-Migration Preparation Checklist
 
-PrestaShop preparation is strongest when the business defines the future store before migration is judged by transferred records. This platform can support a more structured native commerce model, group-based access logic, multistore scope, SEO-friendly routes, and module-driven storefront behavior, but those strengths do not remove ambiguity on their own. They increase the importance of deciding how products should behave, how customers should access the storefront, how route continuity should work, how modules should be governed, how shop boundaries should be defined, and what kind of commerce model the business is actually trying to preserve after launch.
+A PrestaShop migration usually becomes riskier when the business treats preparation as a generic cleanup exercise instead of a storefront-structure decision.
 
-A strong preparation checklist is therefore not a generic cleanup exercise. It is a way to make the future store explicit early enough to reduce false confidence later. For PrestaShop, the most useful preparation work usually sits in ten areas: product structure, combinations versus features versus customization, category and route logic, customer-group and access behavior, multistore scope, module/theme/override classification, customer-account continuity, source-side clarity where the source is a Custom Cart, representative review design, and behavior-based launch-readiness definition.
+That matters because PrestaShop is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support clearer product structure, stronger customer-group behavior, broader shop scope, and friendlier route control more naturally than many lighter targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-### 1. Define the product model before mapping begins
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a PrestaShop migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
-The first preparation task is to decide how products should behave after migration. In PrestaShop, that usually means identifying what the customer chooses as a variation, what the customer only needs to understand as product information, and what the customer enters as personalization or instruction. This matters because the product page has to preserve a clear buyable outcome, not simply display migrated product records.
+### What This Preparation Checklist Is Really For
 
-Before execution, the business should define:
+A strong PrestaShop preparation checklist should do more than confirm that data exists.
 
-* which product differences must remain selectable through combinations
-* which information belongs as descriptive product understanding rather than selectable variation
-* which personalization or instruction should remain as customization
-* which products carry the highest risk of product-model confusion
-* which product scenarios should anchor the first representative review
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-This is one of the highest-value places to use a Demo Migration. A representative sample built around the most structurally difficult products usually reveals translation weakness faster than broad catalog transfer alone.
+* how the future product and storefront structure should work
+* where combinations, features, customization fields, customer groups, and shop assignments must remain precise
+* what the route model should actually support
+* which workflows still depend on modules, themes, overrides, or custom fields
+* which outcomes deserve the earliest validation because they are most likely to expose structural ambiguity
 
-### 2. Separate combinations, features, and customization before the storefront inherits confusion
+That is why a PrestaShop preparation checklist is strongest when it is built around storefront governance and customer behavior rather than around imports alone.
 
-PrestaShop rewards a clearer distinction between variation, description, and personalization than many source stores maintain. Preparation should preserve that distinction deliberately rather than letting the source structure blur it inside the target.
+### 1. Define the Product Structures That Matter Most
 
-Before execution, the business should define:
+The first preparation priority is usually product behavior.
 
-* which product differences belong in combinations because customers must choose them
-* which information belongs in features because customers need it for understanding or comparison
-* which customer-entered inputs belong in customization rather than in product-state logic
-* which product families depend most on strong comparison behavior
-* which product pages are most likely to become unclear if these roles remain blurred
+The business should identify:
 
-This is one of the clearest places where PrestaShop rewards disciplined translation. If the business does not decide what belongs in choice, understanding, and customization before execution, the storefront can become harder to shop even when the underlying records appear complete.
+* which product families drive the most revenue
+* which products depend on selectable variation
+* which product information should remain descriptive rather than selectable
+* which products need customer-entered personalization
+* which source-side products still mix variation, description, or personalization too loosely
+* which products would become commercially weaker if the wrong PrestaShop structure were chosen
 
-### 3. Prepare category and route logic as customer behavior, not only store structure
+This matters because PrestaShop product migration is not only about moving product records. It is about deciding which product meaning belongs in combinations, which belongs in features, and which belongs in customization fields. Current PrestaShop developer documentation keeps those as distinct product layers. citeturn819132search2turn0search2turn0search8
 
-PrestaShop preparation should treat categories and routes as part of the storefront experience. Many migrations preserve category records while still weakening discovery because the business prepared categories only as administrative groupings rather than as part of how customers find the right products. The same applies to route continuity. A technically valid friendly URL does not automatically preserve the storefront journey customers previously relied on.
+### 2. Clarify Which Product Features Carry Real Commercial Meaning
 
-Before execution, the business should define:
+PrestaShop product features can support descriptive or comparative product understanding rather than customer selection.
 
-* which category paths matter most to customer discovery
-* which category structures should be preserved, simplified, or rebuilt
-* which routes carry the most commercial meaning for products, categories, and content
-* which browse paths still influence trust or conversion materially
-* which discovery and continuity routes should be tested first in a representative review
+The preparation checklist should identify:
 
-This is especially important where category-led browsing remains commercially important and where route clarity contributes materially to trust, search visibility, or customer orientation.
+* which product information customers should use for comparison
+* which feature values still matter commercially
+* which descriptive fields are inherited from the source store but no longer carry real value
+* which information should remain descriptive rather than become selectable variation
 
-### 4. Define customer-group meaning before access logic becomes unreliable
+A stronger preparation model forces the business to separate real commercial feature meaning from field accumulation.
 
-PrestaShop customer groups can affect access and customer context materially, which makes them one of the most important preparation areas for stores where the storefront should not behave identically for every visitor. Preparation should therefore define what kinds of customer distinction the future store actually needs and what those differences should change.
+### 3. Define How Customization Fields Should Work
 
-Before execution, the business should define:
+One of the most important PrestaShop preparation topics is customization.
 
-* which customer groups matter commercially
-* whether category visibility, storefront access, or customer context should differ by group
-* which group-based distinctions are still strategically justified
-* which access-sensitive scenarios are most likely to create confusion if left vague
-* which customer-facing conditions must remain clear after migration
+The business should decide:
 
-This prevents the store from inheriting blurred customer context where the records migrate but the commercial meaning becomes harder to trust.
+* which products genuinely need customer-entered personalization
+* what should remain a customization field rather than a combination or note workaround
+* which personalization behaviors still matter to operations as well as storefront behavior
+* whether inherited personalization logic from the source is still worth preserving
 
-### 5. Define multistore scope before shop flexibility becomes governance confusion
+This matters because customization in PrestaShop is structurally different from selectable variation and descriptive product information. If the business does not define that boundary clearly, the target can look complete while still weakening how customers personalize products.
 
-PrestaShop can support more than one shop, but preparation should treat shop scope as a business decision, not only as a platform capability. The important question is not only whether more than one storefront can exist. It is whether multiple shops are commercially justified and how each one should differ.
+### 4. Define How Customer Groups Should Behave
 
-Before execution, the business should define:
+PrestaShop preparation should identify where customer groups still matter commercially, not only administratively.
 
-* whether one shop can support all required customer experiences
-* whether multiple shops are genuinely necessary
-* which differences belong in separate shop contexts
-* who owns each shop after launch
-* which products, categories, routes, content, and customer conditions belong to each shop
+That usually means clarifying:
 
-Inherited shop separation should be challenged rather than preserved automatically. A separate shop should exist because it improves clarity, governance, or customer experience, not because it existed historically without review.
+* which customer groups still matter
+* which storefront differences should follow customer-group logic
+* whether inherited segmentation should be simplified
+* whether group structure is being preserved because it is useful or only because it already exists
 
-### 6. Classify module-, theme-, and override-driven behavior before deciding what should survive
+This matters because customer groups can become part of the core storefront-control model rather than an afterthought.
 
-Many PrestaShop stores depend on more than native catalog and customer structures. Modules, themes, overrides, layout logic, search tools, trust elements, checkout customizations, and merchandising behavior often carry real business meaning. Preparation should therefore identify what the store truly depends on rather than treating all customization as equally important.
+### 5. Decide What Belongs in Each Shop Context
 
-Before execution, the business should define:
+PrestaShop includes native multistore capability, and preparation should define what belongs at each shop context.
 
-* which module-driven outcomes are commercially non-negotiable
-* which theme or override behaviors affect buying behavior, discovery, trust, or operations
-* which surrounding storefront logic still matters materially
-* which customization layers can be replaced safely
-* which inherited overrides or modules should not be carried forward automatically
+The business should identify:
 
-This is one of the most important PrestaShop preparation tasks because structure becomes risky when the business preserves surrounding customization without first deciding whether that behavior is still worth preserving.
+* what should remain shared across shops
+* what should differ by shop
+* which products, customer groups, and storefront behaviors belong in each shop
+* whether more than one shop is genuinely necessary
+* whether the future multistore model reflects real commercial need or only optional scale ambition
 
-### 7. Plan customer continuity according to source-to-target reality, not target preference alone
+This matters because PrestaShop’s multistore capability is real, but it also creates governance burden when shop assignments are made too late or without a clear reason. Current developer documentation confirms multistore contexts such as all shops, a group of shops, or a single shop. citeturn819132search0turn0search15
 
-Customer continuity should be prepared as a source-to-target planning question, not as an assumption attached to PrestaShop simply because it is open-source. In some migrations, especially from supported open-source source platforms, continuity may be more realistic. In others, first-login planning, password reset flow, and customer communication may still be the safer model.
+### 6. Decide What the Route Model Should Actually Support
 
-Before execution, the business should define:
+One of the most important PrestaShop preparation tasks is route definition.
 
-* what level of customer continuity is technically realistic from the source platform
-* which customer groups are most sensitive to login disruption
-* what the first-login experience should look like if continuity is not feasible
-* which account scenarios need the earliest review
-* what support and communication planning will be needed after launch
+The business should identify:
 
-This is especially important where account continuity affects repeat buying, support load, or customer trust materially.
+* which product and category routes matter most commercially
+* which paths matter to search visibility or customer trust
+* what should happen to legacy product and category routes
+* whether the future route model reflects business meaning or only technical convenience
 
-### 8. If the source is a Custom Cart, prepare the source-side structure before treating the target as safe
+This matters because PrestaShop’s own documentation states that friendly URLs depend on URL rewriting being enabled. Route continuity is not only a cleanup task. It is part of the target model itself. citeturn819132search0turn0search16turn0search17
 
-This is one of the most important preparation areas for the PrestaShop hub because Custom Cart can strengthen or weaken the safer path significantly depending on how well the source structure is understood. When the source is a Custom Cart, the migration is no longer a normal standard-cart translation. It becomes a source-side interpretation problem as much as a target-side mapping problem.
+### 7. List the Modules, Theme Logic, Overrides, and Custom Behaviors That Still Need to Matter
 
-Before execution, the business should define:
+One of the biggest PrestaShop preparation mistakes is treating module and theme behavior as background detail.
 
-* which source access methods are available, such as API, file, spreadsheet, semi-structured data, or direct storefront extraction
-* what the real source entity structure looks like
-* where important storefront meaning sits in custom fields, files, or non-standard logic
-* which source-side product, access, category, and content behaviors must still hold true after launch
-* which parts of the source model already suggest the need for Custom Migration Service
+A stronger checklist should identify:
 
-This is one of the clearest places where technician-led source analysis becomes part of safe preparation rather than a later escalation.
+* which modules still support commercially important storefront behavior
+* which theme behaviors still shape trust, navigation, or buying logic
+* which custom fields still drive meaningful storefront or operational outcomes
+* whether any overrides are shaping critical behavior
+* which module-owned workflows matter to operations as well as storefront behavior
 
-### 9. Choose a representative review sample before full execution
+The business does not need a generic list of everything installed. It needs a clearer view of which module-, theme-, or override-owned meanings still matter enough to shape scope, validation, and risk judgment. Current PrestaShop developer documentation explicitly warns that overrides have limitations and risks and should be used narrowly. citeturn819132search7turn819132search5
 
-A representative review sample should be designed before detailed execution begins. The goal is not broad coverage. The goal is early truth. PrestaShop preparation is strongest when the first sample includes the combinations most likely to expose weakness in product structure, group-based access, route continuity, module-driven meaning, shop scope, and source-to-target translation.
+### 8. Prioritize Legacy URLs by Business Value
 
-A high-signal PrestaShop sample usually includes:
+Because PrestaShop already supports friendly URLs, the most important preparation question is not whether readable routes are possible. It is which legacy paths deserve focused protection.
 
-* configurable and high-value products
-* products where combinations and customization both matter
-* group-sensitive storefront scenarios
-* category and route paths with the most commercial value
-* module-driven storefront behaviors that materially affect the customer journey
-* multistore contexts where relevant
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+The checklist should identify:
 
-This is usually the clearest point at which the business can decide whether the target model is ready for broader migration or still needs structural clarification.
+* the product URLs that matter most to traffic or conversion
+* the category or landing paths that matter most to discovery
+* the pages that still carry trust or support value
+* the destinations that would weaken customer intent if they were handled too generically
 
-### 10. Define launch-readiness in storefront and operating terms, not only in data terms
+This matters because a technically valid route can still be commercially weak if the destination no longer supports the purpose the original path served.
 
-Preparation is not complete when the business knows which records should migrate. It is complete when the business can explain what must still work after launch. For PrestaShop, that usually means defining how customers reach the right products, make the right selections, encounter the right group-based conditions, move through the right routes, and continue to interact with a storefront the business can still explain and govern safely.
+### 9. Mark the Highest-Risk Validation Samples Before Full Execution
 
-Before execution, the business should define:
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
 
-* which storefront behaviors must remain unchanged
-* which changes are acceptable if the future store becomes cleaner and more governable
-* which scenarios represent pass or fail most clearly
-* who reviews the result and approves readiness
-* which unresolved questions must be answered before launch planning advances
+For PrestaShop, that usually means:
 
-This is the point where preparation becomes a realistic validation strategy rather than a hopeful execution plan.
+* products most likely to expose combinations-versus-features-versus-customization ambiguity
+* customer groups most likely to reveal storefront-behavior differences
+* shop assignments most likely to expose ambiguity
+* route-sensitive paths most likely to reveal weak destination logic
+* module- and theme-owned storefront behaviors most likely to reveal hidden structure
+
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around structural risk instead of convenience.
+
+### 10. Define What PrestaShop Is Allowed to Formalize and What It Must Preserve Exactly
+
+A stronger PrestaShop preparation checklist usually includes one difficult but necessary question:
+
+What is the business willing to formalize or simplify in order to fit PrestaShop clearly, and what storefront meaning is non-negotiable?
+
+That question should be answered specifically for:
+
+* combinations
+* product features
+* customization fields
+* customer groups
+* shop assignments
+* route continuity
+* module- and theme-owned logic
+
+Many PrestaShop projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of PrestaShop’s strength is that it asks for a clearer and more governable storefront model.
+
+### A Practical PrestaShop Preparation Sequence
+
+A useful preparation flow for PrestaShop usually looks like this:
+
+#### 1. Define high-risk product structures first
+
+These are usually the products most likely to expose combinations-versus-features-versus-customization ambiguity.
+
+#### 2. Clarify customer-group meaning
+
+This prevents differentiated storefront behavior from becoming weaker after migration.
+
+#### 3. Decide shop assignments
+
+This reduces the chance that multistore behavior will be improvised later. citeturn819132search0
+
+#### 4. Define the route model
+
+This keeps friendly-route behavior aligned with real business meaning. citeturn819132search0turn0search16
+
+#### 5. Classify module-, theme-, and override-owned behavior
+
+This prevents important meaning from remaining implicit. citeturn819132search7
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than assumption.
+
+### How Custom Cart as a Source Can Change PrestaShop Preparation
+
+When the source platform is a Custom Cart, PrestaShop preparation usually needs a more bespoke storefront lens.
+
+That is because product-choice logic, descriptive product meaning, personalization behavior, customer segmentation, shop context, or route behavior may sit in source-side structures that do not align neatly with PrestaShop combinations, product features, customization fields, customer groups, multistore context, or friendly-route behavior. In those situations, preparation usually needs:
+
+* more careful classification of product meaning
+* earlier review of how source-side customer and shop logic should be rebuilt
+* clearer separation between native PrestaShop structure and surrounding module or theme behavior
+* more deliberate sample selection for Demo Migration and later validation
+
+Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into PrestaShop.
 
 ### Conclusion
 
-PrestaShop preparation is strongest when it makes the future store explicit before the migration is judged by transferred records. Product structure, combinations, features, customization, group-based access, route continuity, multistore scope, module-driven behavior, customer continuity, source-side Custom Cart pressure, and representative review design all need deliberate definition early enough to guide execution and validation with confidence.
+A PrestaShop migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
 
-The most useful preparation work usually identifies where customer-facing behavior and governance are most likely to weaken first. That is what turns a preparation checklist into something more valuable than pre-migration housekeeping. It becomes a way to decide whether the future store is being shaped deliberately enough to deserve trust before the migration scales.
+That means clarifying combinations, product features, customization fields, customer-group behavior, shop assignments, route priorities, customer-account expectations, and module- or theme-owned logic most likely to expose structural ambiguity. When those decisions are made clearly, PrestaShop becomes easier to validate and safer to judge as a target.
 
-A practical next step is to build a Demo Migration around those high-pressure areas rather than around the easiest records to move. Configurable products, group-sensitive storefront conditions, route-critical browsing paths, module-driven storefront behavior, shop-specific contexts, and the routes that carry the most commercial value usually reveal more about target readiness than broad low-risk samples do.
-
-When those results still leave uncertainty, the most useful question is not whether more preparation items can be added to a list. It is whether the business has defined the future store clearly enough to support safe execution. That is where Live Chat becomes especially helpful. It can clarify whether the remaining uncertainty is mainly about ordinary readiness and validation, whether the execution burden points toward Managed Migration Service, or whether the source-to-target translation is non-standard enough to justify Custom Migration Service from the outset, especially when the source is a Custom Cart.
+Before moving deeper into execution, build a preparation checklist around the product-structure cases, customer-group scenarios, shop assignments, route decisions, customer-account expectations, and module-shaped behaviors that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine PrestaShop translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
 ### FAQs
 
-#### What should be prepared first in a PrestaShop migration?
+#### What should be prepared first before migrating into PrestaShop?
 
-Usually the highest-risk storefront behavior. That often means product structure, combinations versus features versus customization, customer-group access logic, route continuity, module-driven meaning, and any source-side complexity that could distort the target.
+Usually the highest-value starting point is the product families most likely to expose combinations-versus-features-versus-customization ambiguity, followed by customer-group meaning, shop assignments, route structure, and module- or theme-owned behavior. citeturn819132search2turn819132search0turn819132search7
 
-#### Why is PrestaShop preparation more than a data-cleanup task?
+#### Why are product features and customization such important PrestaShop preparation topics?
 
-Because the main preparation challenge is not only moving records. It is defining how the future storefront should work, how customers should experience it, and how the business should govern it after launch.
+Because they represent different kinds of product meaning. If the business has not decided what should remain selectable, descriptive, or customer-entered, the target can be technically complete while commercially wrong. citeturn819132search2turn0search8
 
-#### Should PrestaShop preparation focus on every module equally?
+#### Should PrestaShop preparation focus mainly on products?
 
-Usually no. Preparation is most useful when it starts by classifying which modules, theme behaviors, overrides, and surrounding storefront logic are commercially essential and which can change safely.
+No. Products are central, but PrestaShop preparation is often just as sensitive around customer groups, shop assignments, routes, and module- or theme-owned behavior.
 
-#### When does preparation usually point toward a more guided migration path?
+#### When does PrestaShop preparation usually need a more cautious approach?
 
-Usually when product structure is still unclear, group-based access rules remain vague, module dependence is still unclassified, multistore scope is unresolved, or the source is a Custom Cart with non-standard structure.
+Usually when the source behavior is still vague, when important meaning depends heavily on modules, themes, overrides, or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with PrestaShop’s native model.
