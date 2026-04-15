@@ -67,227 +67,196 @@ Build the Demo Migration sample around the product families most likely to expos
 
 **Pass condition:** the high-risk products most important to revenue still express the intended sellable outcome clearly enough that customers can buy without confusion.
 
-### Pitfall 3: Letting Attribute Survival Stand In for Catalog Governance
+### Pitfall 3: Treating Attribute Survival as Proof of Discovery Continuity
 
 #### What goes wrong
 
-Attributes migrate, but the catalog becomes weaker to manage, filter, compare, or merchandise.
+Attributes migrate, but the storefront becomes weaker as a discovery system.
 
-In Magento, attributes are not only descriptive fields. They often drive filtering, layered navigation, comparison behavior, merchandising logic, and administration. A field can survive in the target while the catalog still becomes structurally weaker if attribute meaning was never clarified clearly enough.
+Magento relies heavily on attributes for filtering, comparison, layered navigation, and product discovery. A migration can preserve attribute fields while still weakening discovery if values are duplicated, inconsistent, partially populated, or not aligned well enough to support useful filtering.
 
 #### Early warning signs
 
-* the team validates attributes mainly by field presence
-* filter behavior is assumed to be correct because the fields exist
-* attribute sets are still vague or inherited from guesswork
-* important product-family distinctions are no longer easy to explain after migration
+* filters appear, but the narrowed results feel commercially unhelpful
+* similar products use inconsistent attribute values
+* important categories rely on browsing, but filter behavior feels weaker than before
+* teams approve attribute transfer by checking field existence without testing the actual category journey
 
 #### Prevention
 
-Treat attribute validation as governance validation. Review:
-
-* which attributes matter to filtering and comparison
-* which attributes matter to administration
-* which attributes belong only to certain product families
-* whether the right products landed in the right attribute sets
-* whether the catalog still feels manageable as well as visible
+Treat discovery-critical attributes as a governed structure, not as generic product metadata. Identify the attributes that actually drive filtering, comparison, and variant logic, then validate them through real category and browse-path behavior.
 
 #### Recommendation example
 
-Do not validate important attributes only through field survival.
+Test the categories where customers rely most on filtering to narrow choices.
 
-**Pass condition:** the commercial attributes and attribute sets most important to the catalog still support useful filtering, clearer administration, and correct product-family structure after launch.
+**Pass condition:** filters appear where expected, comparable products use consistent values, and layered navigation still guides customers to the intended product set.
 
-### Pitfall 4: Building a Scope Hierarchy That Is Technically Rich but Commercially Wrong
+### Pitfall 4: Creating Scope Complexity Without Commercial Clarity
 
 #### What goes wrong
 
-Websites, stores, and store views are created, but the hierarchy does not reflect the real business model.
+Websites, stores, and store views are created, but the target hierarchy reflects optional flexibility more than actual business need.
 
-Magento’s websites / stores / store views structure is one of its greatest strengths, but also one of its most common sources of hidden failure. Scope can be assigned at multiple levels, and a value can be technically present while still being wrong if it sits at the wrong level of the hierarchy.
+Magento can support multiple storefront contexts through websites, stores, and store views. That strength becomes a risk when the business has not defined what should stay shared, what should vary, and why those differences matter commercially.
 
 #### Early warning signs
 
-* the hierarchy is being shaped by optional flexibility rather than real commercial need
-* the team can describe the levels technically, but not explain why each level matters
-* localized or context-specific behavior is showing up in the wrong place
-* validation treats the hierarchy as a configuration detail instead of part of the target model
+* the team is still debating what belongs at website, store, or store-view level
+* storefront differences are being justified as “future flexibility” rather than current business need
+* localized or context-specific values appear in the wrong place
+* one correct-looking storefront is being treated as proof that all storefront contexts are ready
 
 #### Prevention
 
-Treat scope as a business-meaning question. Define:
-
-* what belongs globally
-* what belongs at website scope
-* what belongs at store scope
-* what belongs at store-view scope
-* which scope differences are commercially necessary versus merely possible
+Define the scope hierarchy against real commercial outcomes. Decide what must stay shared, what must vary, and where that variation should live before broader execution is treated as safe.
 
 #### Recommendation example
 
-Validate the highest-risk scope decisions early rather than waiting for broader storefront testing.
+Validate at least one representative customer journey for every storefront context that carries meaningful variation.
 
-**Pass condition:** the most important values and storefront differences appear at the intended scope and still reflect the business model clearly enough after migration.
+**Pass condition:** each storefront context behaves intentionally, and the scope model is understandable enough that the team can govern it after launch.
 
-### Pitfall 5: Keeping Customer Groups Without Rechecking the Commercial Logic Behind Them
+### Pitfall 5: Keeping Customer Groups Without Rechecking Their Meaning
 
 #### What goes wrong
 
-Customer groups survive, but the pricing, discount, or tax behavior they support no longer makes sense.
+Customer accounts import, but the group logic attached to them no longer supports the intended discount, tax, or segmentation behavior.
 
-Magento customer groups determine which discounts are available and the tax class associated with the group. That means group continuity is not only about record assignment. It is about whether the business still wants those commercial rules to behave the same way after migration.
+Magento customer groups can carry real commercial meaning. A migration can preserve the customer records while still weakening the target if group assignment is inherited too loosely or if the group structure reflects outdated source-side workarounds.
 
 #### Early warning signs
 
-* groups are imported and assumed to remain useful automatically
-* pricing or tax behavior tied to groups is still poorly understood
-* inherited customer groups are being kept because they already exist
-* the team cannot explain which real customer context each group is meant to support
+* group assignment looks technically complete but commercially questionable
+* pricing or tax outcomes feel inconsistent across customer contexts
+* no one can explain why some groups should still exist after launch
+* customer continuity is being judged only by account import, not by group behavior
 
 #### Prevention
 
-Validate customer groups against current business intent. Focus on:
-
-* which groups still matter
-* which discounts or tax rules still depend on them
-* whether the assignments are still correct
-* whether the grouping logic should be simplified rather than preserved intact
+Review customer groups as part of the target model, not as leftover administration. Clarify which groups still matter, what they should control, and which inherited structures should be simplified.
 
 #### Recommendation example
 
-Review the customer groups with the most meaningful pricing or tax implications first.
+Test the customer groups most likely to affect pricing, discount, or tax behavior.
 
-**Pass condition:** the customer groups most important to pricing, discount, or tax logic still represent the intended customer context clearly enough after launch.
+**Pass condition:** the right customers are in the right groups, and the resulting customer-context behavior still matches the intended business rules.
 
-### Pitfall 6: Validating URL Rewrites Without Validating Destinations
+### Pitfall 6: Assuming Native URL Rewrites Remove Route-Continuity Risk
 
 #### What goes wrong
 
-URL rewrites resolve correctly, but the destination no longer supports the customer intent the old path used to serve.
+Legacy paths resolve, but the destination no longer supports the customer intent or commercial value the original route carried.
 
-Magento includes native URL rewrites for products, categories, and CMS pages, and Commerce can automatically create permanent redirects in relevant cases. That removes one technical barrier, but not the commercial risk. A route can resolve successfully while still landing customers on a weaker destination.
+Magento includes native URL rewrite capability for products, categories, and CMS pages. That reduces one technical barrier, but it does not remove route-continuity risk. A technically valid rewrite can still be commercially weak if it lands customers in the wrong place.
 
 #### Early warning signs
 
-* rewrite setup is treated as complete once the rule exists
-* the team validates that the path resolves, but not whether it resolves well
-* high-value product, category, or CMS routes have not been ranked by business value
-* broad destination logic is being applied to paths that served specific customer intent before migration
+* the team is checking whether a route resolves, but not whether it resolves well
+* high-value product, category, or content paths are being handled too generically
+* category or product meaning changed during migration, but destination logic was not re-evaluated
+* priority URLs are not being separated from low-value paths
 
 #### Prevention
 
-Prioritize the routes that matter most:
-
-* best-selling product URLs
-* high-value category or landing paths
-* CMS or service pages that still carry trust value
-* the destinations that matter most to discovery, conversion, or support
-
-Then validate not only the rewrite, but the commercial quality of the landing destination.
+Treat route continuity as a destination-quality decision, not only as a rewrite-exists check. Prioritize the paths that matter most to traffic, conversion, trust, and support.
 
 #### Recommendation example
 
-Review high-value rewrites by customer intent rather than by technical completion.
+Validate the legacy routes that carry the highest business value before treating URL continuity as acceptable.
 
-**Pass condition:** the destination preserves the purpose the original route served well enough that the redirected journey still feels commercially useful.
+**Pass condition:** the highest-value paths resolve to destinations that still support the same practical customer purpose.
 
-### Pitfall 7: Leaving Extension-Owned Meaning Too Vague
+### Pitfall 7: Treating Extension-Owned Behavior Like Ordinary Data
 
 #### What goes wrong
 
-The storefront looks complete, but important behavior weakens because the extension-owned logic was never classified clearly enough.
+The visible storefront looks complete, but important behavior tied to extensions, custom attributes, pricing logic, or scope-sensitive settings no longer works the way the business expects.
 
-Magento stores often depend on extension logic for pricing, filtering, trust, account behavior, admin workflows, or other commercially important outcomes. Products, attributes, and scope can all survive while the real business outcome still weakens if too much meaning lived in surrounding extensions and no one clarified what had to be preserved.
+Magento can carry a large amount of important meaning in native structures, but many stores still depend on surrounding extension-owned behavior. A migration can therefore preserve products, customers, and storefront contexts while still weakening the real outcomes that drive conversion, trust, or operations.
 
 #### Early warning signs
 
-* the team knows many extensions matter, but cannot explain which outcomes each one still needs to support
-* extension behavior is being described as “probably fine”
-* custom fields or scope-sensitive settings were migrated, but no one has tested the outcome they are meant to drive
-* the business is validating storefront visibility more carefully than extension-supported behavior
+* extension count is known, but extension-owned meaning is not
+* important pricing, navigation, or workflow behavior still depends on surrounding logic no one has mapped clearly
+* the storefront looks acceptable at a glance, but important commercial behavior feels less reliable in real scenarios
+* teams are validating visible pages more deeply than the behaviors those pages depend on
 
 #### Prevention
 
-Treat extension-owned meaning as first-class migration behavior. Classify:
-
-* which extensions still matter
-* which custom fields still drive meaningful storefront or operational outcomes
-* which scope-sensitive settings affect trust, discovery, or conversion
-* which outcomes are non-negotiable after launch
+Classify extension-owned meaning before launch. The business does not need a generic list of everything installed. It needs a clearer view of which extension-dependent outcomes still matter enough to shape risk, preparation, and validation.
 
 #### Recommendation example
 
-Do not validate extensions only through installation or field presence.
+Review the extension-dependent scenarios most likely to affect buying behavior, discovery, customer context, or operations.
 
-**Pass condition:** the extension-dependent behaviors most important to the business still work acceptably enough that the storefront and operations remain trustworthy after launch.
+**Pass condition:** the commercially important behaviors that depend on extensions or custom logic still work acceptably in representative scenarios.
 
-### Pitfall 8: Treating a Structurally Rich Storefront as Proof of a Trustworthy One
+### Pitfall 8: Using a Validation Sample That Is Too Broad, Too Easy, or Too Late
 
 #### What goes wrong
 
-The storefront looks rich and configurable, so the team assumes the target is ready before the most important structural behaviors have actually been proven.
+The business gains confidence from a validation sample that avoids the parts of Magento most likely to expose structural failure.
 
-This is a common Magento launch trap. Products may exist, attributes may exist, store views may exist, and rewrites may work, but the target still may not be trustworthy if the product-type logic, attribute governance, scope hierarchy, customer-group behavior, and extension-owned outcomes have not been validated through representative scenarios.
+Magento often looks stronger than it really is when validation focuses on easy records, broad totals, or one reassuring storefront context. That kind of sample may prove that records moved, while failing to show whether product types, attributes, scope behavior, customer groups, routes, and extension-sensitive outcomes still work acceptably.
 
 #### Early warning signs
 
-* validation is still mostly page-based
-* structural behavior is being inferred from setup rather than proven through scenarios
-* scope and customer-group outcomes have not been tested directly
-* the launch decision is being driven by visible completeness instead of representative evidence
+* early review uses random products instead of high-risk product families
+* only one storefront context is being checked even though scope variation matters
+* routes are sampled casually instead of prioritized by business value
+* validation is happening late enough that the team is reluctant to question the target model itself
 
 #### Prevention
 
-Validate Magento through representative structural context, not only through storefront appearance. Focus on:
-
-* product-type scenarios
-* attribute and attribute-set scenarios
-* scope-sensitive storefront scenarios
-* customer-group scenarios
-* rewrite-destination scenarios
-* extension-dependent storefront and operational scenarios
+Build the sample around the parts of the Magento target most likely to reveal structural pressure early. Use Demo Migration to expose ambiguity while the project can still adjust safely.
 
 #### Recommendation example
 
-Build the final validation sample around the structural cases most likely to expose ambiguity, not the pages easiest to inspect.
+Select representative products, categories, storefront contexts, customer groups, routes, and extension-dependent behaviors before the broader migration path is treated as settled.
 
-**Pass condition:** the most commercially sensitive product, attribute, scope, customer-group, route, and extension scenarios behave acceptably enough that the business can explain why the target is trustworthy.
+**Pass condition:** the sample reveals whether the most structure-sensitive outcomes still behave acceptably, not just whether the easiest records survived.
 
-### How Custom Cart as a Source Changes Magento Pitfall Prevention
+### How Custom Cart as a Source Changes Magento Pitfalls
 
-When the source platform is a Custom Cart, Magento pitfalls become more sensitive because more of the product, attribute, customer, pricing, or scope meaning may need bespoke interpretation before it can fit Magento’s native structures cleanly.
+When the source platform is a Custom Cart, Magento pitfalls usually become more sensitive because more of the source-side product, pricing, customer, scope, or workflow meaning may not align neatly with Magento’s native structures.
 
-That usually means:
+That usually increases risk in:
 
-* higher risk of misreading source-side product logic
-* greater risk in rebuilding attribute or pricing meaning
-* tighter need to distinguish native Magento structure from surrounding extension logic
-* stronger need for representative high-risk validation around product, scope, and customer-group behavior
+* product-type translation
+* attribute and attribute-set reconstruction
+* scope-model interpretation
+* customer-group behavior
+* extension-sensitive or custom-field-dependent outcomes
 
-In this context, the key prevention move is not generic caution. It is earlier and more precise evidence around the parts of the source business model that Magento is most likely to formalize differently.
+In this context, the problem is not only that the migration is harder. The more important risk is that source meaning may be rebuilt too loosely inside the Magento target unless the translation is reviewed more deliberately from the beginning.
 
 ### Conclusion
 
-Magento migration pitfalls usually come from assuming that richer platform structure automatically creates a clearer storefront.
+Magento pitfalls usually appear when the business mistakes structural richness for structural clarity.
 
-In reality, the most important failures tend to be quieter: products that exist but are modeled with the wrong product type, attributes that survive but no longer govern the catalog properly, scope hierarchies that are technically complete but commercially wrong, customer groups that remain present but no longer support the intended pricing or tax behavior, rewrites that function technically but weaken route value, and extension logic that survives only superficially. The safest way to prevent those failures is to define structure earlier, validate representative high-risk behavior sooner, and judge Magento by preserved structural meaning rather than by storefront richness alone.
+That is why the most important prevention work happens before the migration is treated as routine. Product types, attributes, scope hierarchy, customer groups, route destinations, and extension-owned meaning all need to be defined and tested deliberately enough that the target can be trusted after launch. A Magento storefront can look complete and still be commercially weaker in exactly those areas.
 
-Before launch, review the parts of the store where Magento is most likely to formalize meaning differently: product families, attribute logic, scope hierarchy, customer groups, rewrite destinations, and extension-owned behavior. If the result still feels unclear, Live Chat can help determine whether the issue reflects acceptable Magento formalization, a mapping concern, or a stronger need for guided handling before launch.
+Review the product families, attribute logic, scope scenarios, customer groups, extension-dependent behaviors, and priority routes most likely to expose hidden structural weakness before treating the Magento target as safe enough to launch. If those reviews still reveal ambiguity, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that a more guided or more bespoke migration path is safer.
 
 ### FAQs
 
-#### What is one of the most common Magento migration mistakes?
+#### What is one of the biggest Magento migration pitfalls?
 
-One of the most common mistakes is treating Magento flexibility as if it will automatically resolve structural ambiguity. Magento is strongest when the business already knows how product, attribute, scope, customer-group, and extension logic should work.
+One of the biggest pitfalls is treating Magento flexibility as a substitute for structural clarity. The platform can carry richer structure, but that does not help if the business has not defined how that structure should work.
 
-#### Why are attributes such a common Magento pitfall?
+#### Why is choosing the right Magento product type such a critical pitfall?
 
-Because attributes in Magento often affect filtering, merchandising, administration, and comparison as well as description. A field can survive while the catalog still becomes weaker if the attribute logic is not structured clearly enough.
+Because the product can import successfully while the customer-facing buying path still becomes weaker. Magento product continuity depends on the chosen product type expressing the real sellable outcome correctly.
 
-#### Why is scope hierarchy often mishandled in Magento?
+#### Does Magento’s native URL rewrite capability remove continuity risk?
 
-Because teams sometimes build websites, stores, and store views for flexibility rather than for actual commercial need. That can create a technically rich hierarchy that still behaves incorrectly after launch.
+No. It removes one technical barrier, but continuity can still weaken if the destination no longer supports the purpose the original path served.
 
-#### What makes Magento pitfalls harder to detect early?
+#### Why are extension-dependent outcomes such a common Magento pitfall?
 
-Many of them are structural rather than visual. Products, attributes, scope levels, customer groups, and rewrites may all appear present while the real commercial meaning is still wrong or too vague to trust.
+Because the visible storefront can look complete even when important surrounding behavior has changed. Magento risk often sits in extension-owned meaning, not only in the core records.
+
+#### Why does a weak validation sample create so many Magento problems?
+
+Because it creates confidence without testing the areas where Magento most often changes structural meaning. The target can look ready while the highest-impact risks remain hidden.

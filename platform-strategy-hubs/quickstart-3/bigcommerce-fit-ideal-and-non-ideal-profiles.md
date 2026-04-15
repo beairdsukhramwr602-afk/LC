@@ -23,7 +23,7 @@ This matters when the store needs to support:
 * product-choice logic that should stay structurally clear after migration
 * customer-facing customization that should not always become full variant combinations
 
-BigCommerce is often strongest when the business genuinely benefits from the platform’s distinction between variants and modifiers rather than treating all product choice as one undifferentiated structure. citeturn561956search0turn561956search24
+BigCommerce is often strongest when the business genuinely benefits from the platform’s distinction between variants and modifiers rather than treating all product choice as one undifferentiated structure.
 
 #### Pricing context is commercially important
 
@@ -36,13 +36,13 @@ This is especially important when the business needs:
 * differentiated pricing by storefront
 * clearer segmentation of commercial terms
 
-BigCommerce documentation confirms that a single price list can be applied to multiple customer groups across multiple storefronts, while customer-group discounts and price lists do not combine on an individual customer group. That makes BigCommerce much stronger when pricing needs governance rather than improvised discount logic. citeturn561956search1turn561956search5
+BigCommerce is often much stronger when pricing needs governance rather than improvised discount logic.
 
 #### More than one storefront context matters
 
 BigCommerce is often a strong fit when the business needs more than one storefront context but still wants those contexts managed inside one governed environment.
 
-Multi-Storefront allows a single BigCommerce store to power multiple storefronts. That can be a strong fit when the business needs distinct storefront experiences, domains, or customer-facing contexts without fully splitting governance into unrelated store systems. citeturn561956search2turn561956search10
+That can be a strong fit when the business needs distinct storefront experiences, domains, or customer-facing contexts without fully splitting governance into unrelated store systems.
 
 #### Category-led discovery matters
 
@@ -138,19 +138,19 @@ Before the business treats BigCommerce as the right target, it should be able to
 
 #### 1. Does the catalog genuinely need clearer distinction between variants and modifiers?
 
-If product-choice logic is central to how the business sells, BigCommerce is often a stronger fit. citeturn561956search0turn561956search24
+If product-choice logic is central to how the business sells, BigCommerce is often a stronger fit.
 
 #### 2. Are customer groups and price lists part of real commercial governance?
 
-If pricing, visibility, or segmentation depend heavily on those structures, BigCommerce is often a much stronger fit. citeturn561956search1turn561956search5
+If pricing, visibility, or segmentation depend heavily on those structures, BigCommerce is often a much stronger fit.
 
 #### 3. Does the future model genuinely need more than one storefront context?
 
-The business should be able to explain what belongs in each storefront and why that complexity is commercially necessary. citeturn561956search2turn561956search10
+The business should be able to explain what belongs in each storefront and why that complexity is commercially necessary.
 
 #### 4. Has the business defined how routes and legacy paths should behave?
 
-Because BigCommerce includes native 301 redirects, route planning should focus on destination value and customer intent rather than assuming redirects alone prove continuity. citeturn561956search3
+Because BigCommerce includes native 301 redirects, route planning should focus on destination value and customer intent rather than assuming redirects alone prove continuity.
 
 #### 5. Can the team validate the richer structure BigCommerce introduces?
 

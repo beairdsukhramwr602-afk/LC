@@ -115,7 +115,7 @@ This matters because a technically valid rewrite can still be commercially weak 
 
 ### 8. Define the Customer-Continuity Expectation Honestly
 
-Magento can support password continuity only in the compatible open-source source-to-target cases where password hashes can be transferred and the target continuity path is supported appropriately.
+Magento can support password continuity only in compatible open-source source-to-target cases where password hashes can be transferred and the target continuity path is supported appropriately.
 
 That means the preparation checklist should define:
 
@@ -156,7 +156,7 @@ That question should be answered specifically for:
 * extension-owned logic
 * URL and customer-continuity priorities
 
-Many Magento projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of Magento’s strength is that it asks for a clearer and more governable structure.
+Many Magento projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of Magento's strength is that it asks for a clearer and more governable structure.
 
 ### A Practical Magento Preparation Sequence
 
@@ -190,7 +190,7 @@ This turns preparation into evidence rather than assumption.
 
 When the source platform is a Custom Cart, Magento preparation usually needs a more bespoke structural lens.
 
-That is because product meaning, attribute logic, customer grouping, pricing behavior, or scope-like variation may sit in source-side structures that do not align neatly with Magento’s native product types, attributes, customer groups, or hierarchy model. In those situations, preparation usually needs:
+That is because product meaning, attribute logic, customer grouping, pricing behavior, or scope-like variation may sit in source-side structures that do not align neatly with Magento's native product types, attributes, customer groups, or hierarchy model. In those situations, preparation usually needs:
 
 * more careful classification of product and attribute meaning
 * earlier review of how source-side pricing and customer context should be rebuilt
@@ -223,4 +223,4 @@ No. Products are central, but Magento preparation is often just as sensitive aro
 
 #### When does Magento preparation usually need a more cautious approach?
 
-Usually when the source behavior is still vague, when important meaning depends heavily on extensions or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with Magento’s native model.
+Usually when the source behavior is still vague, when important meaning depends heavily on extensions or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with Magento's native model.

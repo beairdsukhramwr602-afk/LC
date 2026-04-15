@@ -24,7 +24,7 @@ This matters when the storefront needs to support:
 * more deliberate merchandising structure
 * product relationships that need to remain visible and governable after migration
 
-Magento supports native product types such as simple, configurable, virtual, downloadable, bundle, and grouped products. That makes it much stronger when the business genuinely needs the target to preserve those distinctions clearly.
+Magento is much stronger when the business genuinely needs the target to preserve those distinctions clearly.
 
 #### Attribute and attribute-set governance matters commercially
 
@@ -37,7 +37,7 @@ This is especially important when:
 * different product families need different field logic
 * catalog usability matters as much as catalog presence
 
-Magento can be much stronger than lighter targets when attributes are not just descriptive data, but part of how the business governs the catalog.
+Magento is often much stronger than lighter targets when attributes are not just descriptive data, but part of how the business governs the catalog.
 
 #### Scope-aware storefront variation is important
 
@@ -49,7 +49,7 @@ That matters when different locales, storefront contexts, or parts of the busine
 
 Magento is often a strong fit when customer groups are not merely administrative labels, but part of how discounts, tax treatment, or customer segmentation should work in the storefront.
 
-This is especially useful when the business needs customer-context logic to be more explicit than in lighter targets. Adobe documentation confirms that customer groups determine available discounts and associated tax class.
+This is especially useful when the business needs customer-context logic to be more explicit than in lighter targets. Magento is a stronger fit when those distinctions are commercially real, not just technically possible.
 
 #### The business can govern extension-owned behavior realistically
 

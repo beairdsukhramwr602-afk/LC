@@ -10,7 +10,7 @@ This matters because BigCommerce data-model differences are rarely just technica
 
 One of the biggest BigCommerce data-model differences is that product meaning is often governed first through the distinction between variants and modifiers.
 
-BigCommerce documentation explains that variants are distinct versions of a product, while modifiers are customization inputs that do not create the same kind of variant combination structure. That means product representation is not only about moving options. It is about deciding whether the target should express the sellable outcome through:
+That means product representation is not only about moving options. It is about deciding whether the target should express the sellable outcome through:
 
 * true variants
 * modifier options
@@ -61,14 +61,14 @@ Many source stores carry category meaning through looser structures, duplicated 
 
 One of BigCommerce’s clearest structural differences is that pricing context can become more explicit and more governable.
 
-BigCommerce documentation shows that customer groups and price lists can be used together to support differentiated pricing, and that price lists can be assigned across customer groups and storefronts. This means pricing is no longer only a field attached to a product. It can become part of a structured relationship between:
+Customer groups and price lists can be used together to support differentiated pricing, and price lists can be assigned across customer groups and storefronts. This means pricing is no longer only a field attached to a product. It can become part of a structured relationship between:
 
 * products
 * customer groups
 * price lists
 * storefront context
 
-That changes migration planning because a price can exist in the target while still being commercially wrong if the pricing relationship has not been defined clearly enough.
+That changes migration planning because a price can exist in the target while still be commercially wrong if the pricing relationship has not been defined clearly enough.
 
 A source store may have carried those outcomes through:
 

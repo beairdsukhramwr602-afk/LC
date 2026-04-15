@@ -16,10 +16,10 @@ This usually leads to a target that has more freedom but not more clarity. The m
 
 #### Early warning signs
 
-* the team keeps describing WooCommerce as “flexible” without defining which storefront structures matter commercially
-* product families still have unresolved target-representation questions
-* category, tag, and attribute roles are still being discussed broadly instead of specifically
-* plugin and theme behavior are still being treated as background detail
+* The team keeps describing WooCommerce as flexible without defining which storefront structures matter commercially.
+* Product families still have unresolved target-representation questions.
+* Category, tag, and attribute roles are still being discussed broadly instead of specifically.
+* Plugin and theme behavior is still being treated as background detail.
 
 #### Prevention
 
@@ -31,11 +31,11 @@ Treat WooCommerce as a platform for clearer storefront decisions, not just more 
 * how customer accounts should work
 * which plugin- and theme-owned behaviors still matter commercially
 
-#### Recommendation example
-
 A stronger planning standard is to define the 8 to 15 storefront behaviors WooCommerce must support before the migration is treated as strategically settled.
 
-**Pass condition:** the business can explain why WooCommerce is needed as a target structure, not only why it feels flexible and familiar.
+#### Recommendation example
+
+Pass condition: the business can explain why WooCommerce is needed as a target structure, not only why it feels flexible and familiar.
 
 ### Pitfall 2: Preserving Product Records While Weakening Variable-Product Logic
 
@@ -43,14 +43,14 @@ A stronger planning standard is to define the 8 to 15 storefront behaviors WooCo
 
 Products migrate successfully, but the target product structure no longer reflects the actual sellable outcome the storefront depends on.
 
-WooCommerce variable products let the store offer options with variation-specific price, stock, image, and more. That makes product continuity in WooCommerce a behavioral question, not only a record question. A storefront can look complete while still weakening buying clarity if the variable-product structure no longer matches the real commercial outcome.
+WooCommerce variable products can carry variation-specific price, stock, image, and related buying behavior. That makes product continuity in WooCommerce a behavioral question, not only a record question. A storefront can look complete while still weakening buying clarity if the variable-product structure no longer matches the real commercial outcome.
 
 #### Early warning signs
 
-* high-value products still mix true purchasable variation with descriptive or supporting data
-* the team keeps debating whether certain options should be variations, attributes, or add-ons
-* only easy products are being used in early validation
-* the product page looks presentable, but the actual buying path feels less clear than before
+* High-value products still mix true purchasable variation with descriptive or supporting data.
+* The team keeps debating whether certain options should be variations, attributes, or add-ons.
+* Only easy products are being used in early validation.
+* The product page looks presentable, but the actual buying path feels less clear than before.
 
 #### Prevention
 
@@ -61,11 +61,11 @@ Validate product structure against the actual buying journey. Focus on:
 * the products most likely to expose ambiguity between variations, attributes, and add-ons
 * whether the chosen WooCommerce product structure still supports the intended commercial outcome clearly enough
 
-#### Recommendation example
-
 Build the Demo Migration sample around the product families most likely to expose variable-product ambiguity instead of broad random products.
 
-**Pass condition:** the high-risk products most important to revenue still express the intended sellable outcome clearly enough that customers can buy without confusion.
+#### Recommendation example
+
+Pass condition: the high-risk products most important to revenue still express the intended sellable outcome clearly enough that customers can buy without confusion.
 
 ### Pitfall 3: Letting Taxonomy Survival Stand In for Useful Discovery
 
@@ -77,10 +77,10 @@ In WooCommerce, categories, tags, and attributes are not interchangeable. They s
 
 #### Early warning signs
 
-* the team validates categories and tags mainly by presence
-* the roles of categories, tags, and attributes still overlap conceptually
-* filter and navigation behavior is assumed to be correct because the terms exist
-* important product-family distinctions are harder to explain after migration
+* The team validates categories and tags mainly by presence.
+* The roles of categories, tags, and attributes still overlap conceptually.
+* Filter and navigation behavior is assumed to be correct because the terms exist.
+* Important product-family distinctions are harder to explain after migration.
 
 #### Prevention
 
@@ -92,11 +92,11 @@ Treat taxonomy validation as discovery validation. Review:
 * whether the resulting storefront still guides customers naturally enough
 * whether the taxonomy model is still governable after launch
 
-#### Recommendation example
-
 Do not validate important categories and attributes only through term survival.
 
-**Pass condition:** the commercial taxonomies most important to discovery and governance still support useful navigation and clear product meaning after launch.
+#### Recommendation example
+
+Pass condition: the commercial taxonomies most important to discovery and governance still support useful navigation and clear product meaning after launch.
 
 ### Pitfall 4: Assuming Permalink Resolution Automatically Preserves Route Meaning
 
@@ -104,14 +104,14 @@ Do not validate important categories and attributes only through term survival.
 
 Permalinks resolve, but the route pattern or destination no longer supports the customer intent the old path used to serve.
 
-WooCommerce’s route behavior lives inside WordPress permalink settings, and WooCommerce-specific permalink options can shape product, category, tag, and attribute routes. That means route continuity is not solved only because URLs work. A route can be technically valid while still leading customers into a weaker browsing or buying journey.
+WooCommerce route behavior lives inside WordPress permalink settings, and WooCommerce permalink options can shape product, category, tag, and attribute routes. That means route continuity is not solved only because URLs work. A route can be technically valid while still leading customers into a weaker browsing or buying journey.
 
 #### Early warning signs
 
-* the team treats route continuity as solved once URLs resolve
-* important product or category paths have not been ranked by business value
-* permalink structure is being chosen for convenience rather than route meaning
-* broad destination logic is being applied to routes that once served specific customer intent
+* The team treats route continuity as solved once URLs resolve.
+* Important product or category paths have not been ranked by business value.
+* Permalink structure is being chosen for convenience rather than route meaning.
+* Broad destination logic is being applied to routes that once served specific customer intent.
 
 #### Prevention
 
@@ -123,11 +123,11 @@ Treat permalinks and redirects as route-governance decisions. Focus on:
 * support or trust pages customers still need to reach
 * whether the new destination still preserves the original route’s commercial purpose
 
-#### Recommendation example
-
 Review high-value WooCommerce routes by customer intent rather than by technical completion.
 
-**Pass condition:** the resulting route and destination preserve the purpose the original path served well enough that the journey still feels commercially useful.
+#### Recommendation example
+
+Pass condition: the resulting route and destination preserve the purpose the original path served well enough that the journey still feels commercially useful.
 
 ### Pitfall 5: Treating Plugin and Theme Behavior as Background Detail
 
@@ -150,10 +150,10 @@ This creates risk because the visible storefront can make that behavior look nat
 
 #### Early warning signs
 
-* the team knows many plugins matter, but cannot explain which outcomes each one still needs to support
-* theme behavior is being described as “probably fine”
-* custom fields or settings were migrated, but no one has tested the outcome they are meant to drive
-* the business is validating storefront visibility more carefully than plugin-shaped behavior
+* The team knows many plugins matter, but cannot explain which outcomes each one still needs to support.
+* Theme behavior is being described as probably fine.
+* Custom fields or settings were migrated, but no one has tested the outcome they are meant to drive.
+* The business is validating storefront visibility more carefully than plugin-shaped behavior.
 
 #### Prevention
 
@@ -164,105 +164,71 @@ Treat plugin- and theme-owned meaning as first-class migration behavior. Classif
 * which custom fields still drive meaningful storefront or operational outcomes
 * which outcomes are non-negotiable after launch
 
-#### Recommendation example
-
 Do not validate plugins only through activation or field presence.
 
-**Pass condition:** the plugin- and theme-dependent behaviors most important to the business still work acceptably enough that the storefront and operations remain trustworthy after launch.
+#### Recommendation example
 
-### Pitfall 6: Treating Customer Import as Customer Continuity
+Pass condition: the plugin- and theme-dependent behaviors most important to the business still work acceptably enough that the storefront and operations remain trustworthy after launch.
+
+### Pitfall 6: Assuming Customer Import Automatically Preserves Account Continuity
 
 #### What goes wrong
 
 Customer records appear in WooCommerce, but returning customers experience a weaker or more confusing account journey after launch.
 
-WooCommerce can support password continuity only under the compatible open-source source-to-target conditions where password hashes can be transferred and the continuity path is supported appropriately. Outside those cases, customer continuity becomes a reset-first launch and communication problem rather than a native password-preservation outcome.
-
-This becomes a pitfall when the business treats customer import as if it proves account continuity automatically.
+WooCommerce can support password continuity only in compatible cases where the source platform is open-source, password hashes can be transferred, and the target continuity path is supported appropriately. Outside those cases, customer continuity depends much more on reset-first planning, communication timing, and support readiness.
 
 #### Early warning signs
 
-* the business keeps discussing customer import as if that proves password continuity
-* first-login expectations have not been defined clearly
-* support and launch communication do not match the real account flow
-* customer trust depends on a smoother account transition than the plan currently supports
+* Imported customers are being treated as proof that the account transition is safe.
+* No one has defined what the first-login experience should look like.
+* Support is not prepared for confusion around passwords, account activation, or missing expectations.
+* Customer communication is being left until late in the launch plan.
 
 #### Prevention
 
-Treat customer continuity as a customer-trust topic. Define:
+Treat customer continuity as a launch-path decision, not only a data-transfer decision. Clarify:
 
-* whether password continuity is realistically possible in this migration pair
-* what returning customers should experience at first login
-* what communication should explain
-* what support should be ready to handle immediately after launch
+* whether password continuity is realistically available for the source-to-target pairing
+* what first login should look like if reset-first handling is required
+* what customers need to be told before launch
+* what support needs to be ready to answer during the transition period
+
+Validate the account journey through representative customer scenarios instead of assuming imported records are enough.
 
 #### Recommendation example
 
-Validate representative returning-customer scenarios as experience flows, not only as imported customer records.
+Pass condition: returning customers can re-enter the store through a realistic and well-communicated path that matches the actual continuity method available.
 
-**Pass condition:** representative customers can follow the intended login or recovery path clearly enough that the account transition feels understandable and trustworthy.
-
-### Pitfall 7: Assuming Broader Store Architecture Is Simple by Default
+### Pitfall 7: Under-Scoping the Validation Burden
 
 #### What goes wrong
 
-The business moves toward a broader WooCommerce store model while treating multiple storefront contexts as if they share one simple native governance structure automatically.
+The migration is reviewed like a lighter storefront check even though WooCommerce usually needs a broader behavioral review.
 
-Broader WooCommerce store architecture can involve separate stores, multisite, or other structural patterns rather than one simple built-in commerce-scope model. This becomes a pitfall when the business assumes that products, settings, or content will behave consistently across contexts without explicit design.
-
-#### Early warning signs
-
-* teams use “multi-store” as if it were one obvious built-in operating model
-* products, settings, or content are assumed to behave consistently across storefront contexts without explicit design
-* the business has not defined what belongs in one storefront context versus another
-* validation treats multiple storefront contexts as one simplified environment
-
-#### Prevention
-
-Treat broader store architecture as a structural decision, not a convenience assumption. Define:
-
-* whether the business truly needs multiple storefront contexts
-* what should remain separate
-* what should be governed consistently
-* how that structure will actually be validated after migration
-
-#### Recommendation example
-
-Build broader storefront-architecture validation into the migration plan early rather than treating it as a later operational detail.
-
-**Pass condition:** the business can explain clearly what belongs in each storefront context and can prove that the chosen architecture still supports the intended commercial structure.
-
-### Pitfall 8: Treating a Familiar WordPress Storefront as Proof of a Trustworthy One
-
-#### What goes wrong
-
-The storefront looks familiar and editable, so the team assumes the target is ready before the most important structural behaviors have actually been proven.
-
-This is a common WooCommerce launch trap. Products may exist, variations may exist, categories may exist, permalinks may resolve, and plugins may be active, but the target still may not be trustworthy if the variable-product logic, taxonomy model, route behavior, account experience, and plugin-owned outcomes have not been validated through representative scenarios.
+WooCommerce often needs to prove more than product presence, page availability, basic route resolution, or imported customer records. It often also needs to prove correct variable-product behavior, useful taxonomy logic, correct permalink meaning, realistic customer-account behavior, plugin- and theme-owned outcomes, and any broader storefront architecture decisions that matter to how the business operates after launch.
 
 #### Early warning signs
 
-* validation is still mostly page-based
-* behavior is being inferred from presence rather than proven through scenarios
-* route, variation, and plugin outcomes have not been tested directly
-* the launch decision is being driven by visible familiarity instead of representative evidence
+* Validation is still centered on whether pages load and records exist.
+* The demo sample avoids the most structurally sensitive products and routes.
+* Plugin-sensitive outcomes are left for later because the storefront looks acceptable.
+* Multiple storefront contexts or broader architecture choices are being reviewed too generically.
 
 #### Prevention
 
-Validate WooCommerce through representative behavioral context, not only through storefront appearance. Focus on:
+Build validation around the parts of WooCommerce most likely to expose structural misunderstanding:
 
-* variable-product scenarios
-* taxonomy and navigation scenarios
-* permalink and destination scenarios
-* customer-account scenarios
-* plugin- and theme-dependent storefront scenarios
-* broader storefront-architecture scenarios where relevant
+* the product families most important to revenue
+* the taxonomies most important to discovery
+* the routes most important to customer intent and search value
+* the customer-account scenarios most likely to affect trust
+* the plugin- and theme-owned behaviors most likely to reveal hidden meaning
+* any broader storefront architecture decisions that could change how the business operates
 
 #### Recommendation example
 
-Build the final validation sample around the behavioral cases most likely to expose ambiguity, not the pages easiest to inspect.
-
-**Pass condition:** the most commercially sensitive product, navigation, route, customer, and plugin scenarios behave acceptably enough that the business can explain why the target is trustworthy.
+Pass condition: the business has reviewed enough high-risk behavior to judge whether WooCommerce is preserving real storefront meaning rather than only presenting a familiar-looking target.
 
 ### How Custom Cart as a Source Changes WooCommerce Pitfall Prevention
 
@@ -275,7 +241,7 @@ That usually means:
 * tighter need to distinguish native WooCommerce structure from plugin- or theme-owned behavior
 * stronger need for representative high-risk validation around product, navigation, account, and route behavior
 
-In this context, the key prevention move is not generic caution. It is earlier and more precise evidence around the parts of the source business model that WooCommerce is most likely to formalize differently.
+In this context, the key prevention move is not generic caution. It is earlier and more precise evidence around the parts of the source business model that WooCommerce is most likely to formalize differently. Where service-path judgment is required, a Custom Cart source points to Custom Migration Service.
 
 ### Conclusion
 
@@ -293,7 +259,7 @@ One of the most common mistakes is treating WooCommerce flexibility as if it wil
 
 #### Why are variable products such a common WooCommerce pitfall?
 
-Because variable products can control price, stock, image, and other details by variation. A product can survive while the buying path still becomes weaker if the variation logic is not structured clearly enough.
+Because variable products can control price, stock, image, and other important buying details by variation. A product can survive while the buying path still becomes weaker if the variation logic is not structured clearly enough.
 
 #### Why is permalink behavior often mishandled in WooCommerce?
 

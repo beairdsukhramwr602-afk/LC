@@ -60,7 +60,7 @@ That means the business should decide:
 * whether any inherited discount or segmentation workarounds should be simplified
 * whether the future pricing model is being designed intentionally or only copied from the source
 
-This matters because BigCommerce documentation shows that price lists can be assigned across storefronts and customer groups, making pricing part of a governed relationship rather than just a product field.
+This matters because BigCommerce can make price lists part of a governed relationship across storefronts and customer groups rather than just a product field.
 
 ### 4. Decide What Belongs in Each Storefront Context
 

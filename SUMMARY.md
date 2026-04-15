@@ -81,7 +81,7 @@
   * [Shopify Plus Validation Priorities](platform-strategy-hubs/shopify-plus-migration-hub/shopify-plus-validation-priorities.md)
   * [Shopify Plus Migration Pitfalls and Prevention](platform-strategy-hubs/shopify-plus-migration-hub/shopify-plus-migration-pitfalls-and-prevention.md)
 * [WooCommerce Migration Hub](platform-strategy-hubs/quickstart-2/README.md)
-  * [WooCommerce Platform Hub](platform-strategy-hubs/quickstart-2/woocommerce-platform-hub.md)
+  * [WooCommerce Platform Overview](platform-strategy-hubs/quickstart-2/woocommerce-platform-hub.md)
   * [WooCommerce Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/quickstart-2/woocommerce-fit-ideal-and-non-ideal-profiles.md)
   * [WooCommerce Data Model Differences](platform-strategy-hubs/quickstart-2/woocommerce-data-model-differences.md)
   * [WooCommerce Constraints and Risks](platform-strategy-hubs/quickstart-2/woocommerce-constraints-and-risks.md)

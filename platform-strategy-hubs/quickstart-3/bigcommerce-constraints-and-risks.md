@@ -24,13 +24,25 @@ These are the areas most likely to reveal whether BigCommerce is being used as a
 
 ### Constraint 1: Product-Choice Ambiguity Weakens the Target Even When Products Import Successfully
 
+#### Description
+
 One of the clearest BigCommerce constraints is that native product structure only becomes a strength when the business knows how it should work.
 
 BigCommerce distinguishes between variants and modifiers. That gives the target more expressive product-choice control, but it also means the migration must define which customer choices should be modeled as true variants and which should remain modifiers or surrounding option logic. If that decision is still vague, the storefront can look complete while still failing to preserve how customers actually buy.
 
 This becomes especially sensitive when the source store carried product meaning through loose option logic, bundled customization, app-driven price adjustments, or workarounds that were never classified clearly enough. In those situations, the real risk is not missing products. It is commercially incorrect product-choice structure.
 
+#### Who it affects
+
+This affects merchants whose revenue depends on option-heavy products, variation-sensitive pricing or inventory behavior, and customer-facing configuration logic that needs to remain commercially clear after launch.
+
+#### Mitigation strategy
+
+Classify product-choice meaning early. Decide which choices are true sellable variants, which are modifier-style customizations, and which belong outside native product structure. Then build the early review sample around the products most likely to expose ambiguity.
+
 ### Constraint 2: Categories Can Exist While Discovery Still Fails
+
+#### Description
 
 Categories are one of BigCommerce’s strongest storefront layers, and also one of its most sensitive risk areas.
 
@@ -43,11 +55,21 @@ In BigCommerce, categories shape storefront browsing, merchandising, and how cus
 
 Risk rises quickly when the business treats category continuity as record continuity rather than discovery continuity.
 
+#### Who it affects
+
+This affects stores where navigation, browsing, and merchandising rely heavily on category-led discovery rather than only search or direct product access.
+
+#### Mitigation strategy
+
+Treat category structure as storefront meaning, not filing logic. Prioritize the categories and paths that matter most to discovery and validate them as customer journeys, not just imported records.
+
 ### Constraint 3: Price Lists and Customer Groups Can Be Technically Complete While Commercially Wrong
+
+#### Description
 
 BigCommerce’s pricing layer often exposes migration risk more clearly than teams first expect.
 
-BigCommerce documentation shows that price lists and customer groups can work together, and price lists can be assigned across storefronts. That makes pricing continuity more than a simple field migration. A target can preserve price data successfully while still being commercially wrong if the business never clarified:
+Price lists and customer groups can work together, and price lists can be assigned across storefronts. That makes pricing continuity more than a simple field migration. A target can preserve price data successfully while still be commercially wrong if the business never clarified:
 
 * which customer groups still matter
 * which price lists should apply and where
@@ -56,7 +78,17 @@ BigCommerce documentation shows that price lists and customer groups can work to
 
 This becomes a risk because BigCommerce can make segmented pricing more governable than the source store ever did. If that segmented structure is not planned clearly, the target may look more structured while becoming less trustworthy.
 
+#### Who it affects
+
+This affects businesses with negotiated pricing, segmented pricing, customer-type distinctions, storefront-specific pricing, or commercial rules that differ by audience.
+
+#### Mitigation strategy
+
+Define pricing context as a governed relationship between products, customer groups, price lists, and storefronts. Validate the most commercially sensitive combinations first rather than assuming field-level price transfer proves continuity.
+
 ### Constraint 4: Multi-Storefront Is Powerful, but Weak Governance Creates Hidden Failure
+
+#### Description
 
 BigCommerce Multi-Storefront is one of its clearest strengths, and one of its most common risk areas.
 
@@ -69,7 +101,17 @@ The platform supports multiple storefronts from one control panel. That gives bu
 
 A value can migrate successfully and still be wrong if it sits in the wrong storefront context. This is one of the clearest reasons BigCommerce targets can look well governed while still behaving incorrectly across domains, audiences, or pricing contexts.
 
+#### Who it affects
+
+This affects merchants running multiple storefront contexts, separate domains, segmented audiences, or cross-storefront pricing and catalog strategies under centralized control.
+
+#### Mitigation strategy
+
+Define storefront assignment deliberately before broader execution is treated as safe. Focus on what must stay shared, what must vary, and why that separation matters commercially.
+
 ### Constraint 5: Native 301 Redirects Reduce One Technical Risk but Not Route-Continuity Risk
+
+#### Description
 
 BigCommerce includes native 301 Redirect capability. That removes one common technical constraint, but it does not remove route-continuity risk.
 
@@ -80,9 +122,19 @@ The real pressure point is usually not whether a redirect exists. It is whether 
 * the team validates that the path resolves, but not whether it resolves well
 * destination planning is weaker than redirect implementation
 
-A redirect can therefore be technically valid while still being commercially weak.
+A redirect can therefore be technically valid while still be commercially weak.
+
+#### Who it affects
+
+This affects stores with strong SEO exposure, high-value landing paths, critical category journeys, or product pages that still carry meaningful traffic and conversion weight.
+
+#### Mitigation strategy
+
+Treat redirect continuity as destination-quality planning, not only as a redirect-exists check. Prioritize the routes that matter most to traffic, trust, and conversion, then validate whether the resulting destination still supports the original journey.
 
 ### Constraint 6: App- and Theme-Owned Meaning Can Make BigCommerce Look More Complete Than It Is
+
+#### Description
 
 Many BigCommerce stores depend on more than native product, category, pricing, and storefront structures.
 
@@ -100,11 +152,21 @@ This creates risk because the visible storefront can make that behavior look ful
 
 The important risk is not app usage alone. It is unclear app-owned meaning.
 
+#### Who it affects
+
+This affects businesses whose storefront behavior depends heavily on apps, theme customizations, custom fields, merchandising logic, or workflows that still influence what customers see and do.
+
+#### Mitigation strategy
+
+Classify the surrounding app- and theme-owned meaning before launch. The business does not need a generic inventory of everything installed. It needs a clear view of which outcomes still matter enough to shape risk, preparation, and validation.
+
 ### Constraint 7: Customer Continuity Can Be Assumed Too Optimistically
+
+#### Description
 
 Customer continuity in BigCommerce should not be treated as an automatic carry-over from the source storefront.
 
-Because BigCommerce is a hosted target, the practical question is usually not how to preserve open-source password behavior natively. It is what the real post-migration account journey should look like, what customers should expect at first login, and how support should handle that transition. A migration can preserve customer records successfully while still creating a weaker customer experience if login expectations and communication were not defined clearly enough.
+Because BigCommerce is a hosted target, the practical question is usually not how to preserve open-source password behavior natively. It is what the real post-migration account journey should look like, what customers should expect at first login, and how support should handle that transition. A migration can preserve customer records successfully while still create a weaker customer experience if login expectations and communication were not defined clearly enough.
 
 Risk rises when the business assumes that:
 
@@ -113,7 +175,17 @@ Risk rises when the business assumes that:
 * support and launch communication do not need explicit preparation
 * customer-record continuity is the same thing as account continuity
 
+#### Who it affects
+
+This affects stores where repeat-customer trust, account access, support volume, and first-login experience are important parts of post-launch stability.
+
+#### Mitigation strategy
+
+Define the post-migration account journey honestly. Plan the first-login experience, customer communication, and support handling explicitly instead of assuming account continuity will feel natural on its own.
+
 ### Constraint 8: Validation Burden Is Wider Than Many Teams Expect
+
+#### Description
 
 BigCommerce is not difficult only because it has more native structure than some teams expect. It is also demanding because the target often needs to prove more than visible storefront completeness.
 
@@ -126,14 +198,22 @@ Risk rises when teams assume that visible storefront checks are enough. In BigCo
 
 It often also needs to prove:
 
-* correct variant-versus-modifier treatment
+* correct variants-versus-modifiers treatment
 * useful category structure
 * correct customer-group and price-list behavior
 * accurate storefront assignment
 * redirect destination quality
 * app- and theme-sensitive storefront outcomes
 
-This is one of the clearest reasons BigCommerce migrations can look complete while still being less trustworthy than expected.
+This is one of the clearest reasons BigCommerce migrations can look complete while still be less trustworthy than expected.
+
+#### Who it affects
+
+This affects any business whose store depends on option-heavy products, segmented pricing, storefront context, route continuity, or surrounding app-shaped behavior that cannot be judged through broad random checks.
+
+#### Mitigation strategy
+
+Build validation around the structurally sensitive areas of the BigCommerce target rather than around easy records or reassuring totals. Use representative evidence early enough that the project can still adjust if the target model itself is under-defined.
 
 ### What Usually Deserves the Earliest Risk Review
 

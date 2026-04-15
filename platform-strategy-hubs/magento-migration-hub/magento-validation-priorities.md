@@ -41,7 +41,7 @@ That often includes:
 * products where source-side meaning mixed variation, description, or add-on behavior
 * products where the business is already uncertain which Magento product type expresses the source behavior correctly
 
-Magento supports multiple native product types, including simple, configurable, grouped, bundle, virtual, and downloadable products. That makes product validation a structural question, not just a record question. ([experienceleague.adobe.com](https://experienceleague.adobe.com/en/docs/commerce-admin/inventory/basics/product-types?utm_source=chatgpt.com))
+Magento supports multiple native product types, including simple, configurable, grouped, bundle, virtual, and downloadable products. That makes product validation a structural question, not just a record question.
 
 The review question is not only whether the product exists. It is whether the customer can still reach the correct sellable outcome without confusion.
 
@@ -57,7 +57,7 @@ That usually means checking:
 * whether the right products landed in the right attribute sets
 * whether product-family distinctions are still manageable after launch
 
-This matters because attributes in Magento often shape more than product description. They influence filtering, administration, and merchandising behavior, while attribute sets determine which fields and structures apply to different product families. ([experienceleague.adobe.com](https://experienceleague.adobe.com/en/docs/commerce-admin/catalog/product-attributes/product-attributes?utm_source=chatgpt.com))
+This matters because attributes in Magento often shape more than product description. They influence filtering, administration, and merchandising behavior, while attribute sets determine which fields and structures apply to different product families.
 
 A product can therefore exist in the target while still being commercially or administratively weaker if attributes and attribute sets are structurally wrong.
 
@@ -65,7 +65,7 @@ A product can therefore exist in the target while still being commercially or ad
 
 One of Magento’s clearest validation priorities is scope behavior.
 
-Magento uses a hierarchy of websites, stores, and store views, and configuration values can apply at different levels. That means validation should focus on the scope decisions most likely to expose ambiguity. ([experienceleague.adobe.com](https://experienceleague.adobe.com/en/docs/commerce-admin/start/setup/websites-stores-views?utm_source=chatgpt.com))
+Magento uses a hierarchy of websites, stores, and store views, and configuration values can apply at different levels. That means validation should focus on the scope decisions most likely to expose ambiguity.
 
 Useful checks usually include:
 
@@ -80,7 +80,7 @@ This is one of the clearest places where Magento validation becomes more than pa
 
 Customer continuity in Magento is not only about customer accounts. It can also depend on customer groups and the rules attached to them.
 
-Magento customer groups determine which discounts are available and which tax class is associated with the group. That means validation should review the customer groups that carry the most meaningful pricing, segmentation, or tax behavior. ([experienceleague.adobe.com](https://experienceleague.adobe.com/en/docs/commerce-admin/customers/customer-groups?utm_source=chatgpt.com))
+Magento customer groups determine which discounts are available and which tax class is associated with the group. That means validation should review the customer groups that carry the most meaningful pricing, segmentation, or tax behavior.
 
 Useful validation questions include:
 
@@ -93,7 +93,7 @@ This is especially important where customer groups carry real commercial meaning
 
 ### Validation Priority 5: High-Value Legacy URLs and Rewrite Destinations
 
-Magento includes native URL rewrite capability, including rewrites for products, categories, and CMS pages. That makes route continuity less of a technical-risk question than on some targets. But validation still matters because the real issue is not whether a rewrite exists. It is whether the destination still supports the customer intent the old path used to serve. ([experienceleague.adobe.com](https://experienceleague.adobe.com/en/docs/commerce-admin/marketing/seo/url-rewrites/url-rewrite?utm_source=chatgpt.com))
+Magento includes native URL rewrite capability, including rewrites for products, categories, and CMS pages. That makes route continuity less of a technical-risk question than on some targets. But validation still matters because the real issue is not whether a rewrite exists. It is whether the destination still supports the customer intent the old path used to serve.
 
 This usually means checking:
 
@@ -184,6 +184,6 @@ Because in Magento, attributes often affect filtering, merchandising, comparison
 
 No. Native rewrites are important, but validation should still confirm that the destination supports the same customer intent and commercial purpose as the original route.
 
-#### What usually makes a Magento validation sample weak?
+#### Why do customer groups need explicit validation in Magento?
 
-Usually it is too random or too easy. A weak sample avoids the product families, attribute logic, scope scenarios, customer groups, extension-dependent behaviors, and routes most likely to reveal whether Magento’s target model is actually preserving the right outcomes.
+Because customer groups affect discounts and tax-class context. A customer record can import successfully while the commercial behavior attached to that customer context still becomes wrong.

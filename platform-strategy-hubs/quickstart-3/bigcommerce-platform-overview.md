@@ -14,7 +14,7 @@ A move into BigCommerce often changes the store most clearly in five areas.
 
 BigCommerce distinguishes between variants and modifiers, and that distinction is one of the most important migration truths to understand early.
 
-BigCommerce documentation explains that variants are true product option combinations, while modifiers are customizable options that do not create separate variant combinations in the same way. That means product migration into BigCommerce is less about raw record transfer and more about deciding whether the target should treat product choice as real variant structure, modifier behavior, or surrounding product logic. The question is not only whether products arrive. It is whether the correct product-choice structure still expresses the real sellable outcome clearly enough after launch.
+That means product migration into BigCommerce is less about raw record transfer and more about deciding whether the target should treat product choice as real variant structure, modifier behavior, or surrounding product logic. The question is not only whether products arrive. It is whether the correct product-choice structure still expresses the real sellable outcome clearly enough after launch.
 
 This matters most when the source store carried richer option logic than a simpler product model could express clearly. BigCommerce can often preserve that logic well, but only when the business has decided which differences should remain true purchasable variants and which should instead be treated as modifiers or surrounding customization logic.
 
@@ -30,7 +30,7 @@ A migration can therefore preserve product records successfully while still weak
 
 BigCommerce gives businesses stronger native control over pricing context than many teams first expect.
 
-BigCommerce documentation shows that customer groups and price lists can work together to shape how different customer contexts receive pricing, and price lists can be assigned across customer groups and storefronts. That changes migration planning because a pricing model can no longer be treated only as a product-field issue. It often becomes a controlled relationship between products, customer groups, and storefront context.
+Customer groups and price lists can work together to shape how different customer contexts receive pricing, and price lists can be assigned across customer groups and storefronts. That changes migration planning because a pricing model can no longer be treated only as a product-field issue. It often becomes a controlled relationship between products, customer groups, and storefront context.
 
 This is especially important when the source store carried negotiated pricing, segmented visibility, or customer-specific commercial rules that now need to become a more governable BigCommerce model.
 
@@ -44,7 +44,7 @@ That is a meaningful target truth, but it also means storefront scope becomes pa
 
 BigCommerce includes native 301 Redirect capability.
 
-That means redirect capability itself is usually not the issue. The more important planning question is which legacy paths matter most, what the best destination should be, and whether the redirected journey still supports the customer intent the old path served before migration. BigCommerce’s own support documentation confirms that 301 redirects are managed natively in the platform, including storefront-specific handling in Multi-Storefront contexts.
+That means redirect capability itself is usually not the issue. The more important planning question is which legacy paths matter most, what the best destination should be, and whether the redirected journey still supports the customer intent the old path served before migration.
 
 ### Where BigCommerce Is Often a Strong Target
 

@@ -54,7 +54,7 @@ Next-Cart offers three migration service models:
 
 The same formal service-model logic applies across platforms, but the reasons one approach becomes safer than another are platform-specific. For BigCommerce, the key question is usually how much interpretation the target requires across variants, modifiers, pricing context, storefront assignments, route priorities, customer expectations, and app-shaped behavior.
 
-#### Standard Migration Service
+### Standard Migration Service
 
 Standard Migration Service is the collaborative, hands-on model.
 
@@ -70,7 +70,7 @@ For BigCommerce migrations, this is often the safer fit when:
 
 In this model, the customer carries most of the execution burden while Next-Cart provides 24/7 expert technical support, troubleshooting, and guidance. This can work well when BigCommerce’s governed structure is already clear enough that the main requirement is disciplined execution and representative validation.
 
-#### Managed Migration Service
+### Managed Migration Service
 
 Managed Migration Service is the reduced-burden, expert-led model.
 
@@ -84,7 +84,7 @@ For BigCommerce migrations, this is often the stronger fit when:
 
 This model is often the safer path when the challenge is not that BigCommerce is the wrong target, but that the interpretation and coordination burden is high enough that expert-led execution reduces avoidable risk.
 
-#### Custom Migration Service
+### Custom Migration Service
 
 Custom Migration Service is the expert-led model for bespoke requirements.
 
@@ -178,7 +178,7 @@ These are not just planning gaps. They are warning signs that the chosen migrati
 
 When the source platform is a Custom Cart, the practical implication for BigCommerce approach selection is that the project usually moves into a more bespoke migration path from the outset.
 
-That is because the source model may carry product-choice logic, pricing rules, customer segmentation, storefront meaning, or route behavior in structures that do not align neatly with BigCommerce variants, modifiers, customer groups, price lists, Multi-Storefront context, or native redirects. In this context, the key question is not whether the project looks “more complex” in the abstract. It is how the Custom Migration Service work should be scoped safely around the parts of the source that still need to be interpreted and rebuilt so the BigCommerce target remains commercially coherent.
+That is because the source model may carry product-choice logic, pricing rules, customer segmentation, storefront meaning, or route behavior in structures that do not align neatly with BigCommerce variants, modifiers, customer groups, price lists, Multi-Storefront context, or native redirects. In this context, the key question is not whether the project looks more complex in the abstract. It is how the Custom Migration Service work should be scoped safely around the parts of the source that still need to be interpreted and rebuilt so the BigCommerce target remains commercially coherent.
 
 The most useful early questions then become:
 
