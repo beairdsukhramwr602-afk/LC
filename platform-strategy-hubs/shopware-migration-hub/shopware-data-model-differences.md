@@ -1,178 +1,140 @@
 # Shopware Data Model Differences
 
-A migration into Shopware succeeds when the target still preserves the storefront behavior and operating meaning that made the original store usable before the move. This page focuses on the structural differences that most often change that outcome: how products are configured, how variants differ from properties, how sales channels shape storefront exposure, how customer-group and visibility logic affect what customers actually see, how native SEO URL behavior influences continuity, and how extensions, custom fields, or surrounding storefront logic can carry meaning beyond the visible catalog.
+A migration into Shopware can preserve the visible storefront while still changing the commercial meaning behind it.
 
-Shopware is structured enough to represent many modern commerce models clearly, but that structure does not remove the need for disciplined translation. The most important shift is that migration meaning often depends less on whether the target can hold the records and more on whether the target can still express what those records do in practice. That changes what “product,” “variant,” “filter,” “visibility,” “route continuity,” and even “the storefront” mean in migration planning.
+That usually happens because Shopware is not only a more structured commerce target. It is a platform where sales-channel context, rule-driven behavior, product visibility, and channel-aware SEO logic often carry more explicit meaning than they did in the source store. Products, customers, and orders may still move successfully, but the target can behave very differently once sales channels, Rule Builder logic, visibility settings, variants, and SEO URL behavior become part of how the business is expected to operate.
 
-### The Shopware data model in plain language
+This matters because Shopware data-model differences are rarely just technical translation questions. They change what the store believes a storefront context is, how a product becomes available, how commercial behavior is triggered, how route logic should work, and what the business must validate before it can trust launch readiness.
 
-The Shopware model is easiest to understand through eight structural ideas:
+### Sales Channels Change What Storefront Context Means
 
-* Products still sit at the center of the sellable catalog.
-* Variants are used for selectable product states.
-* Properties support product understanding, filtering, and comparison rather than buyable state.
-* Sales channels can materially change how the storefront should behave.
-* Product visibility can differ by channel rather than existing as one universal storefront condition.
-* Customer-group logic can affect what storefront conditions different customers experience.
-* Native SEO URL handling makes route continuity part of the target model.
-* Extensions, custom fields, and surrounding storefront logic can materially affect how the real store behaves.
+One of the biggest Shopware data-model differences is that storefront meaning is often governed first through sales channels.
 
-These differences matter because a migration can recreate products, categories, customer records, and content successfully while still changing how customers choose, compare, filter, discover, and interpret the storefront.
+Current Shopware documentation describes sales channels as the interface from administration to storefront, and products and categories can be assigned to specific sales channels. Migration documentation also explains that Shopware 5 main shops and subshops become separate sales channels in Shopware 6. That means a migration can preserve the storefront visually while still changing what the business means by “store,” “subshop,” or customer-facing context.
 
-A useful way to read this model is to ask not only what each structure stores, but what job it performs in the storefront. That is where the migration meaning becomes visible. The same data can still exist after launch while doing the wrong job in practice if it has been translated into the wrong part of the Shopware model.
+A value is no longer only a product or content value. It may also carry a sales-channel meaning. That means the target may preserve the value itself while still misrepresenting the intended behavior if it appears in the wrong sales channel or fails to appear in the right one.
 
-### Products still sit at the center of Shopware’s sellable model
+### Product Visibility Becomes Part of Product Meaning
 
-Shopware builds store meaning around products, but those products often depend on surrounding structures to become usable in the storefront. A product is not only a row in the catalog. It is the center point through which variants, properties, categories, sales-channel exposure, route behavior, filtering, and surrounding storefront customization are all interpreted together.
+Another important Shopware difference is that product presence is not only a yes-or-no data question.
 
-This matters because a source platform may spread product meaning across multiple layers. In Shopware, those layers still come back to the product and the structures attached to it. That can make the target feel more structured, but it also means migration planning has to decide clearly which pieces of meaning belong in the native product model and which belong in supporting discovery or storefront logic.
+Current product documentation shows that products are assigned to sales channels and that visibility values determine whether products are searchable or directly accessible in a given channel. This changes migration planning because a product can exist successfully in the target while still being commercially wrong if it is visible in the wrong context or with the wrong discoverability behavior.
 
-A store can therefore migrate products successfully while still weakening storefront usability if the product record remains present but the surrounding variant logic, property behavior, visibility settings, route structure, or extension-driven meaning no longer supports how customers actually buy.
+This is especially important when the source store treated product presence more broadly or assumed that one storefront context automatically covered another. Shopware makes product visibility a more explicit part of product meaning.
 
-In practical terms, this means the Shopware product record often acts as a convergence point. If source-side meaning is scattered across filters, custom attributes, visibility rules, storefront logic, or surrounding extensions, the migration has to decide how that meaning should be reassembled around the product in a way customers can still understand.
+### Rules Change What Commercial Behavior Means
 
-### Variants change what a product can become in the storefront
+One of Shopware’s clearest structural differences is that commercial behavior can become a more explicit rule-driven layer.
 
-One of the most important Shopware data-model differences is how it uses variants. Variants are not simply descriptive product data. They are central to how customers select among defined product states.
+Current Shopware documentation shows Rule Builder as a central settings area for defining conditions, and example documentation shows it being used for shipping and other behavior. Shopware’s documentation also shows customer-related rules being applied in promotions and other features. That means commercial logic is no longer only implied through configuration sprawl. It can become a governed rule layer.
 
-In migration terms, that makes variant logic important because it influences what the product becomes at the point of selection. When size, color, format, or other selectable product states matter to the final purchasable result, those differences usually need to be understood through variant behavior rather than through descriptive properties or surrounding storefront customization.
+This changes migration planning because a storefront can preserve products, prices, and categories while still being commercially wrong if the rule-dependent behavior that makes those things work in context has not been translated or recreated correctly.
 
-This changes migration planning in two ways.
+### Properties and Variants Change What Product Structure Means
 
-First, product translation becomes a state-modeling problem. The business has to decide which differences should remain selectable variants and which ones should not.
+Shopware product structure can carry more layered meaning than many teams first expect.
 
-Second, Shopware requires clearer separation between buyable product state and supporting product information. If that separation is weak, the target can preserve records while confusing the storefront.
+Current documentation shows that properties support filterable information and that properties can serve as the basis for generating variants. Additional Shopware documentation also makes clear that variants are generated from a main product and are not treated as fully independent products in the same way some teams may expect. That means product migration is not only about moving product records. It is about deciding how product meaning should be expressed through main products, properties, and variants.
 
-A good way to think about this is simple: in Shopware, variants should support the decisions the customer is expected to make in order to buy the correct version of the product, not merely hold information that existed somewhere in the source store.
+A migration can therefore preserve the product record while still changing the buying journey if the target product model no longer reflects the real commercial structure clearly enough.
 
-The operating consequence matters too. When variant logic is modeled cleanly, the storefront becomes easier to understand, merchandise, and validate. When it is modeled poorly, the product page may still function, but internal teams often lose confidence in what the customer is actually choosing and why the resulting buying behavior no longer feels trustworthy.
+### Category Structure Can Carry Sales-Channel Meaning
 
-### Properties are not the same as variants
+Another important Shopware difference is that category meaning can become more explicitly connected to sales channels.
 
-A common Shopware migration mistake is to treat properties as if they perform the same job as variants. They do not.
+Current category documentation shows categories can be assigned to specific sales channels and can even be configured as a home page for a selected sales channel. That means category continuity is not only about record survival. The more important question is whether the right category structure still supports navigation, discovery, and storefront context in the right channel.
 
-In Shopware, properties usually support product understanding, filtering, and comparison rather than the core selectable state of the product itself. In storefront terms, this means properties help customers understand and narrow products, but they are not necessarily the same as the choices that define the final purchasable variant.
+A source storefront may have carried category meaning more loosely. Shopware can make that structure more explicit, which can be a strength when the business wants clearer governance. It becomes a risk when those relationships were never classified clearly enough in the source.
 
-This matters in migration because many source platforms blur the line between “what the customer chooses” and “what the customer uses to compare or filter.” Shopware makes that distinction more visible.
+### SEO URLs and Canonical Behavior Change Route Meaning
 
-If properties are used where variants should have been used, the storefront can lose buyability. If variants are used where properties should have stayed descriptive, the storefront can become harder to understand, filter, and maintain.
+One of Shopware’s clearest structural differences is that route behavior can be governed in a sales-channel-aware way.
 
-That is why the Shopware model often forces a more disciplined translation of product meaning. The business has to decide what belongs in selectable product state and what belongs in supporting comparison or discovery logic.
+Current Shopware documentation shows SEO URL settings can be configured globally or for a selected sales channel, and configuration documentation shows canonical URLs can also be defined separately per sales channel. That means route continuity is not only a redirect-cleanup topic. The route model itself can change depending on sales-channel context.
 
-### Sales channels change what one storefront environment means
+This matters because a path can exist and still be wrong if the SEO URL logic no longer supports the intended storefront context, search meaning, or canonical behavior. The target question is therefore not only whether a route exists. It is whether the route still represents the right destination in the right channel.
 
-One of the most important Shopware differences is that storefront meaning can be channel-specific. Sales channels are not only publishing destinations. They can shape where products appear, how routes behave, and how customers encounter the storefront.
+### Structural Translation Can Require Re-Interpretation, Not Only Transfer
 
-This changes migration meaning because a product is not always simply “in the store” or “not in the store.” It may exist in the target while still needing the correct channel exposure, route behavior, and discovery conditions to remain commercially useful.
+Shopware migration documentation highlights that some source-side structures do not transfer one-to-one.
 
-A migration can therefore preserve product and category records successfully while still weakening the customer journey if the channel model no longer reflects the intended storefront logic after launch.
+A particularly important example is that Shopware 5 main shops and subshops become separate sales channels in Shopware 6. The migration documentation also notes that old Shopware 5 product streams do not migrate directly and may need recreation through dynamic product groups using Rule Builder. This shows that target truth in Shopware can depend on reinterpretation rather than literal transfer.
 
-The operating consequence matters here too. If channel meaning loses its clarity, internal teams often become less certain about why a customer is seeing a specific storefront experience, which products should be visible where, or how routes should behave across different storefront contexts.
+That is one of the most important Shopware data-model realities: a migration can preserve data while still changing business meaning if the target model is structurally different.
 
-### Visibility changes product presence from a universal assumption into a controlled storefront condition
+### Extension-Shaped Meaning Still Matters
 
-Shopware ties product visibility to sales-channel logic, which means product presence is not always a single universal storefront condition. This matters in migration planning because the catalog is not only a list of products. It can also be a controlled exposure layer shaped by channel and storefront decisions.
+Shopware can carry a large amount of important behavior in native structures, but many stores still depend on extensions, custom data, theme behavior, and surrounding logic.
 
-That changes how the business should think about product presence. A product can exist in the target and still fail commercially if it is not visible in the right storefront context, if the wrong storefront context shows it, or if visibility no longer matches the intended customer journey.
+That means a migration into Shopware often has to separate:
 
-This is one of the clearest reasons Shopware migrations must be judged by more than product transfer alone. The real question is not only what was moved. It is how that moved product is exposed, interpreted, and discovered in the target environment.
+* native Shopware sales-channel and rule structure
+* extension-owned storefront behavior
+* custom field logic
+* theme-owned presentation behavior
+* inherited source-side logic that still needs a target meaning
 
-### Customer-group logic can shape storefront conditions, not only account administration
+This is one of the most important Shopware data-model realities: the target may be more structured than some teams expect, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving.
 
-Shopware customer-group structures can materially shape what kind of storefront experience the customer receives. Group logic may affect prices, conditions, or other storefront outcomes that go beyond simply storing account information.
+### Validation Scope Becomes More Contextual
 
-This changes migration meaning because customers are not always just customer records. In some businesses, the more important question is what kind of storefront condition the platform believes the customer should receive and how that affects the real commercial experience after launch.
+Because Shopware changes how the storefront is structured, it also changes what the data must prove after migration.
 
-A migration can therefore preserve customer accounts successfully while still weakening commercial accuracy if the customer-group model no longer reflects the intended storefront logic after launch.
+The target can no longer be judged only by checking whether products, customers, and orders exist. It also needs to prove that:
 
-### Native SEO URLs change continuity expectations structurally
+* products appear in the right sales channels
+* visibility still behaves correctly
+* rules still trigger the intended behavior
+* properties and variants still reflect the intended product structure
+* categories still support the intended browsing paths
+* SEO URLs and canonical logic still support the intended channel-specific route behavior
+* extension-shaped behavior still supports the intended outcome
 
-Shopware supports native SEO URL behavior, which means route continuity belongs directly inside the platform model rather than only inside a separate redirect solution. That changes migration planning because continuity becomes tied to how the target wants products, categories, and storefront paths to appear after launch.
+This is one of the most important data-model differences of all. Shopware changes not just the data structure, but the evidence structure the business needs before it can trust launch readiness.
 
-This matters because a migration can recreate content and products successfully while still weakening discovery and trust if the storefront routes no longer support the same commercial journeys. SEO URLs therefore affect more than search visibility. They affect how customers interpret and trust the structure of the store.
+### What Usually Needs the Earliest Review
 
-In migration terms, that means route planning belongs in the target model itself, not only in a late redirect checklist.
+The highest-risk Shopware data-model differences usually deserve early review in:
 
-The practical consequence is that route structure becomes part of storefront meaning. If customers, search engines, or internal teams can no longer predict how important routes should behave, the storefront may still be technically valid while becoming less coherent and less trusted over time.
+* sales-channel assignment and storefront-context logic
+* visibility behavior
+* rule-dependent commercial logic
+* product structure through properties and variants
+* channel-specific category and route logic
+* extension-shaped storefront behavior
 
-### Extensions, custom fields, and surrounding storefront logic may sit outside the native catalog but still define the real store
+These are the areas most likely to expose whether the target structure is commercially clear enough rather than only technically complete.
 
-One of the most important Shopware truths is that the real store often depends on more than native product, channel, and visibility structures alone. Extensions, custom fields, search tools, merchandising logic, storefront components, and other surrounding layers can all influence what the customer sees and how internal teams operate the storefront.
+### How Custom Cart as a Source Changes Shopware Data-Model Review
 
-This means migration planning has to distinguish between the native Shopware model and the actual business model of the store. In some cases, the difference is small. In others, much of the commercial meaning lives in those supporting layers rather than in products, categories, channels, or customer records alone.
+When the source platform is a Custom Cart, Shopware data-model review usually needs a more bespoke translation lens.
 
-That distinction matters especially when the source platform is a Custom Cart. Source-side structures may not map neatly into Shopware’s native model, which increases the translation burden. The target may still be viable, but the business has to decide what meaning belongs in native Shopware structures and what would still depend on tailored handling or extension-driven reconstruction.
+That is because the source may carry storefront context, pricing logic, product structure, route behavior, or extension-like business logic in structures that do not align neatly with Shopware sales channels, Rule Builder logic, product visibility, variants, or channel-aware SEO behavior. In those cases, the key review question is not only what data exists. It is how that source meaning should be interpreted and rebuilt so the Shopware target remains commercially coherent.
 
-This is one of the clearest reasons Shopware migrations must be judged by more than core data transfer. The real storefront may depend on supporting layers strongly enough that preserving the catalog alone tells only part of the truth.
-
-### The combined effect: stronger storefront structure, but not automatic migration simplicity
-
-The biggest mistake in Shopware modeling is assuming that because the platform is more structured and channel-aware, the migration can preserve any source structure without forcing clearer decisions.
-
-The reality is more specific.
-
-Shopware can support meaningful control over products, variants, properties, visibility, channels, routes, search, and surrounding storefront behavior. At the same time, that structure often pushes more responsibility onto the business to define what the storefront should actually become.
-
-That combination creates a distinct migration challenge. The target can become more governable and more explicit than many lighter systems, but only if the business is willing to translate source meaning into structures that Shopware can still support clearly and maintainably over time.
-
-The key point is that Shopware gives the business a stronger target language, but it does not decide on the business’s behalf which parts of the source structure deserve to remain. That is where model translation becomes a strategic task rather than only a technical one.
-
-### What these differences change in practice
-
-In practical migration terms, Shopware data-model differences usually change seven things.
-
-#### 1. Product migration becomes product-meaning translation
-
-The important question is no longer only how many products moved. It is whether products still support the correct storefront understanding and buyable outcome.
-
-#### 2. Selectable product state and supporting comparison logic must stay separate
-
-The important question is no longer only whether variants and properties both exist. It is whether the storefront still separates what customers choose from what customers use to compare or filter.
-
-#### 3. Channel exposure becomes part of storefront meaning
-
-The important question is no longer only whether products migrated. It is whether the right products are visible in the right storefront contexts.
-
-#### 4. Discovery logic becomes a structural part of the model
-
-The important question is no longer only whether categories, properties, and search settings are present. It is whether they still help customers find the right products in the intended way.
-
-#### 5. Customer context becomes more than account transfer
-
-The important question is no longer only whether customers migrated. It is whether the right storefront conditions still hold after launch.
-
-#### 6. Route continuity becomes part of storefront meaning
-
-The important question is no longer only whether SEO URLs exist. It is whether they still support the storefront paths customers and search engines rely on.
-
-#### 7. Extension-driven behavior becomes part of structural success
-
-The important question is no longer only whether extensions or custom fields still exist. It is whether their real storefront and operational outcomes still hold after launch.
+In this context, earlier expert review and a more tailored migration path often become especially important.
 
 ### Conclusion
 
-Shopware data-model differences matter most where the business depends on structured storefront logic, discovery quality, and channel-aware exposure rather than only on basic catalog transfer. Products, variants, properties, visibility, customer groups, routes, search behavior, and extension-driven storefront meaning all change how migration meaning should be interpreted.
+Shopware data-model differences matter because they change the commercial meaning of migrated data, not only its storage location.
 
-The platform does not make migration simpler by default. It makes different kinds of structure possible. That is why Shopware migrations should be planned around preserved storefront behavior, product understanding, visibility logic, route continuity, discovery quality, and future-state governability rather than around transferred records alone.
+The target often moves from a looser storefront-and-product model into a more explicit structure built around sales channels, Rule Builder logic, product visibility, properties and variants, and channel-aware SEO behavior. That can be a major strength when the business genuinely needs that structure. It becomes riskier when the business has not yet defined how those layers should work after the move.
 
-A useful next step is to test these model differences through a representative Demo Migration built around variant-heavy products, filtering and route-sensitive storefront paths, sales-channel visibility scenarios, extension-driven storefront behavior, and any source-side complexity most likely to create translation pressure. Those areas usually reveal more about whether the target model is really working than broad low-risk product transfer ever could.
-
-If those parts of the store still behave unclearly after the first review, the issue is usually not only technical execution. It is a target-model question that needs clearer decisions before broader migration is treated as safe. That is where early interpretation becomes especially valuable. A focused Live Chat discussion around those representative outcomes can help distinguish between a target that is already structurally viable, a target that mainly needs more guided execution through Managed Migration Service, and a source-to-target translation problem that may justify Custom Migration Service, especially when the source is a Custom Cart.
+Review the storefront-context, product, rule, route, and extension-owned logic that matters most before treating the target model as settled. If those structures still feel unclear, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that more guided handling is needed before full execution.
 
 ### FAQs
 
-#### What is the biggest data-model difference in a Shopware migration?
+#### What is one of the biggest Shopware data-model differences?
 
-One of the biggest differences is that Shopware forces a clearer distinction between selectable variant behavior, descriptive product properties, channel-specific product visibility, and surrounding storefront logic. That changes how migration meaning should be interpreted after the move.
+One of the biggest differences is that storefront meaning often depends on sales channels, with products, categories, visibility, and route behavior needing to be understood in the correct channel context.
 
-#### Why do variants and properties matter so much in Shopware?
+#### Why does Rule Builder matter so much in Shopware?
 
-Because they do different jobs. Variants support customer choice among defined product states, while properties support product understanding, filtering, and comparison. When those jobs are confused, the storefront can become harder to shop and harder to govern.
+Because it can turn important commercial behavior into an explicit rule layer instead of leaving that logic scattered across static settings or workarounds.
 
-#### Why do sales channels and SEO URLs matter in the data model?
+#### Do SEO URLs work the same way across all storefront contexts in Shopware?
 
-Because they shape how customers and search engines interpret the storefront. They are not only background administration. They influence visibility, discovery, route continuity, and customer trust materially.
+Not necessarily. Shopware documentation shows SEO settings and canonical handling can be configured globally or per sales channel, so route meaning should be reviewed with channel context in mind.
 
-#### Why can a Shopware store migrate successfully but still feel weaker after launch?
+#### Why are products and variants such an important Shopware structure topic?
 
-Because the records can move while the storefront meaning changes. Product behavior, property logic, channel exposure, route continuity, discovery settings, or extension-driven outcomes can all weaken even when the underlying data looks complete.
+Because properties can serve as the basis for generating variants, and the target may change product meaning if main products, properties, visibility, and variants are not interpreted correctly during migration.

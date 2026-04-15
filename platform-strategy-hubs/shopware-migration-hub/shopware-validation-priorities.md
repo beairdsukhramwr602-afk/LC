@@ -1,188 +1,203 @@
 # Shopware Validation Priorities
 
-Shopware validation should focus on whether the target still behaves correctly in the situations that matter most commercially and operationally. A migration can preserve large amounts of data while still weakening variant clarity, property-driven filtering, sales-channel visibility, route continuity, customer-group storefront conditions, discovery quality, or long-term governability. That is why validation should begin with the areas where storefront behavior and operating trust are most likely to change quietly rather than trying to inspect everything equally.
+A Shopware migration should not be validated evenly across the whole storefront. It should be validated where Shopware is most likely to change storefront context, rule-driven behavior, product visibility, product structure, and route meaning.
 
-For Shopware, the most important validation work usually sits in eight areas:
+That matters because Shopware can produce a polished target quickly. Products may appear present, sales channels may exist, rules may be configured, visibility may be assigned, and routes may resolve. But those signals do not prove that the target is commercially trustworthy. The more important question is whether Shopware’s sales-channel model, rule-dependent behavior, product visibility, product structure, and channel-aware route logic still support the intended outcome after translation.
 
-* variant behavior
-* the separation between variants and properties
-* sales-channel and visibility behavior
-* route continuity and high-value path behavior
-* discovery and filtering usability
-* customer-group storefront meaning where relevant
-* extension- or custom-field-driven storefront meaning
-* governability and maintainability proof in the future-state store
+This makes Shopware validation more context-sensitive than many teams first expect. A broad record check can create false confidence. A stronger approach is to validate the places where Shopware most often reshapes meaning: sales-channel assignments, rule-dependent behavior, product visibility, category entry points, high-value routes, customer-account expectations, and surrounding extension-shaped behavior.
 
-A strong validation plan is narrower and more behavior-based than many teams expect. The goal is not to prove that every field arrived. The goal is to prove that the right customer can find the right products, make the right choices, use the intended filtering and search behavior, encounter the right storefront exposure, and interact with a store the business can still trust and govern after launch.
+### What Shopware Validation Is Really Trying to Prove
 
-### Start with a representative validation sample
+For Shopware, validation is mainly trying to prove five things.
 
-Validation should begin with the slice of the store most likely to reveal risk early. In Shopware, that usually means representative variant-heavy products, filter and category paths that matter most to browse-led conversion, sales-channel scenarios where visibility matters, route-sensitive storefront journeys, and the surrounding extension-driven outcomes most likely to affect buying behavior, trust, or internal usability.
+#### 1. The right storefront behavior exists in the right sales channels
 
-A useful first sample usually includes:
+The product and category records may exist, but the higher-value question is whether the correct customer-facing behavior appears in the intended sales-channel context.
 
-* representative variant-heavy products
-* products where variants and properties must stay clearly separated
-* the category, filter, and route paths with the most commercial value
-* sales-channel scenarios where exposure meaning matters
-* customer-group-sensitive storefront conditions where relevant
-* extension- or custom-field-driven outcomes that affect buyability, trust, or governability
-* account scenarios where continuity or first-login experience matters
-* any source-side complexity that becomes more pronounced when the source is a Custom Cart
+#### 2. Rules still trigger the intended commercial outcomes
 
-The point of the sample is not coverage. It is signal. A small set of high-risk, high-value examples usually reveals target-model weakness faster than broad random checking.
+Rules may exist, but the target still needs to prove that the actual storefront or commercial behavior those rules support still works as intended.
 
-### Priority 1: Validate variant behavior as a storefront outcome
+#### 3. Product visibility still makes sense
 
-In Shopware, product validation should begin with the decision a customer has to make on the product page. The most important question is not whether the product record exists. It is whether the customer can still reach the correct buyable outcome through the intended variant path.
+Products may exist, but the target still needs to prove that they are discoverable or accessible in the right contexts.
 
-What to validate:
+#### 4. Routes still carry the right meaning by channel
 
-* the correct selectable variants appear where they should
-* variant logic still leads to the intended buyable result
-* price-sensitive variant choices still behave correctly
-* products with the highest variation complexity still support confident purchase behavior
-* storefront product pages still communicate what is being bought clearly enough for real users
-* the customer can move from product understanding into product selection without avoidable confusion
+SEO URLs may resolve, but the route still needs to support the customer intent and storefront logic the business expects in the intended sales channel.
 
-A product can appear complete and still fail this priority if the customer no longer understands which choices matter to the purchase or if the product page has become harder to interpret than before.
+#### 5. Extension-shaped behavior still works acceptably
 
-### Priority 2: Validate the separation between variants and properties in real storefront use
+The storefront may look complete, but the surrounding extension-, theme-, or custom-data-shaped logic still needs to support the outcomes that matter most.
 
-Shopware’s product structures matter most when they remain understandable in real use. Validation should confirm that variants and properties each still perform the job they are meant to perform.
+### Validation Priority 1: Sales-Channel Assignment
 
-What to validate:
+The first Shopware validation priority is usually the sales channels most likely to expose target-structure ambiguity.
 
-* variants still function as defined product-state choice
-* properties still support the intended understanding, comparison, or filtering role
-* product pages no longer blur selectable state and supporting product characteristics into one confusing customer experience
-* filtering and product comparison still behave as intended for product families where properties matter
-* the storefront still communicates clearly what the customer is meant to choose and what the customer is meant to use for understanding or narrowing
+That often includes:
 
-A store can preserve both structures and still fail this priority if customers cannot tell what they are meant to choose as the product state and what they are meant to use to compare or filter products.
+* the channels most important to revenue or brand meaning
+* channels with different product or category assignments
+* channels with different route expectations
+* channels where the business expects materially different customer-facing behavior
+* channels where migration from older storefront structures may have changed the native model
 
-### Priority 3: Validate sales-channel and visibility behavior in the right storefront conditions
+Current Shopware documentation shows sales channels as a core storefront context, and migration documentation shows older shop structures becoming separate sales channels in Shopware 6. That makes channel assignment validation a structural question, not just a setup question. citeturn0search0turn0search4
 
-Shopware validation should confirm that sales-channel logic still produces the intended storefront meaning. This matters because product visibility and storefront exposure can materially affect what the customer sees and how the journey unfolds.
+The review question is not only whether the channel exists. It is whether the channel still represents the intended storefront meaning clearly enough after migration.
 
-What to validate:
+### Validation Priority 2: Rule-Dependent Commercial Behavior
 
-* representative sales channels expose the intended products and storefront conditions
-* visibility still behaves as planned for the right storefront contexts
-* the wrong channels do not show the wrong products or routes
-* internal teams can still explain why a customer is seeing a particular storefront experience
-* channel logic still supports the intended commercial model
-* the storefront does not become harder to trust because exposure meaning has blurred
+One of Shopware’s clearest validation priorities is Rule Builder logic.
 
-A visibility model can exist and still fail validation if its storefront meaning has become too weak, too inconsistent, or too opaque to support the business safely.
+Current documentation shows Rule Builder as a central rule-definition layer used across platform behavior. That means validation should focus on the most commercially sensitive rules first. citeturn0search1turn0search9
 
-### Priority 4: Validate route continuity as customer-facing behavior
+Useful checks usually include:
 
-Shopware validation should confirm that high-value paths still support discovery, trust, and the intended storefront journey. This matters because a route can exist and still fail the business if the resulting customer path no longer makes sense or no longer supports the next action customers are expected to take.
+* whether the right commercial behavior triggers in the intended context
+* whether inherited logic has been recreated coherently
+* whether customer- or context-sensitive outcomes still behave correctly
+* whether rule-driven behavior feels commercially trustworthy rather than superficially present
 
-What to validate:
+A rule can therefore exist in the target while the storefront still becomes commercially weaker if the rule-driven outcomes are structurally wrong.
 
-* priority old URLs resolve to the correct target destinations
-* the resulting product, category, or content-page experience still supports the intended customer journey
-* high-value product and category paths still preserve discovery quality
-* important content pages still support trust and conversion where relevant
-* continuity-sensitive routes still make sense within the future-state storefront logic
-* internal teams can still explain route behavior clearly enough to trust the result after launch
+### Validation Priority 3: Product Visibility and Product Structure
 
-This matters even more when discovery and customer trust are tied closely to how storefront routes are interpreted after migration.
+Shopware validation should explicitly review the product cases most likely to affect visibility and product meaning.
 
-### Priority 5: Validate discovery and filtering behavior as customer navigation logic
+That usually means checking:
 
-Shopware validation should confirm that the storefront still helps customers discover and narrow products naturally. This matters most for stores where browse-led discovery, filter behavior, or product-family comparison influences conversion materially.
+* whether the right products appear in the right sales channels
+* whether visibility behavior matches the intended discoverability level
+* whether product structure through properties and variants still supports the intended buying logic
+* whether the resulting storefront still supports a clear product journey
 
-What to validate:
+Current Shopware documentation shows that visibility is assigned per sales channel, and properties can serve as the basis for generating variants. That means validation should prove product usefulness and availability, not only product survival.
 
-* important category and filter paths still lead customers toward the intended products
-* property behavior still supports useful narrowing or comparison
-* product-family relationships remain understandable
-* browse and search routes still support movement from discovery into confident product selection
-* important category and listing pages still carry the right commercial and informational meaning
-* the storefront still makes sense to customers who enter through the high-value browsing paths the business depends on most
+### Validation Priority 4: Category Entry Points and Browsing Context
 
-A category tree and filter system can exist and still fail validation if they no longer support how customers actually shop. In Shopware, discovery behavior has to be judged by usability and narrowing logic, not only by structural completeness.
+Shopware validation should explicitly review the category structures most likely to affect storefront entry and browsing meaning.
 
-### Priority 6: Validate customer-group storefront meaning where it matters commercially
+That usually means checking:
 
-Shopware customer groups can materially affect storefront conditions such as pricing or related customer-facing behavior. Validation should confirm that these differences still produce the intended storefront meaning.
+* categories important to navigation
+* category entry points important to customer browsing
+* whether the resulting storefront still supports natural discovery
+* whether key categories still make sense in the right channel context
+* whether category logic is still governable after launch
 
-What to validate:
+Shopware documentation makes clear that categories can be assigned to sales channels and even configured as a home page for a selected sales channel. That makes category validation a storefront-context question, not only a taxonomy question.
 
-* representative customer groups see the intended storefront conditions
-* group-related pricing or display behavior still behaves as planned
-* internal teams can still explain why a customer is receiving a particular storefront condition
-* the customer-group model still supports the intended commercial logic
-* the storefront does not become harder to trust because customer conditions have blurred
+### Validation Priority 5: High-Value Routes, SEO URLs, and Canonical Behavior
 
-This priority matters when customer-group logic is part of how the business sells, not only how it stores accounts.
+Shopware’s route logic is one of its clearest validation priorities.
 
-### Priority 7: Validate extension- or custom-field-driven storefront meaning directly
+Current Shopware documentation shows that SEO URL settings can be configured globally or for a selected sales channel, and canonical URLs can also be defined separately per sales channel. That means validation should focus on the route decisions most likely to expose ambiguity.
 
-Many Shopware stores rely on more than native product and channel structures to create the intended storefront and operating experience. Extensions, custom fields, search layers, merchandising logic, and surrounding storefront components often influence discovery, conversion, or internal usability in ways that are easy to underestimate during migration.
+Useful checks usually include:
 
-What to validate:
+* whether the right products and categories appear under the intended route structure
+* whether channel-specific routes still make sense
+* whether the route still supports customer intent and search meaning
+* whether canonical behavior is still aligned with the intended channel context
+* whether high-value legacy paths still land on the most useful destination
 
-* the extension-driven outcomes most important to buyability still behave acceptably
-* custom-field-driven storefront logic still communicates the right product or exposure meaning
-* important supporting storefront elements still appear where they matter
-* trust signals, merchandising areas, or customer-facing support logic still help the intended journey
-* extension-driven operational behaviors still support the intended workflow
-* the future store does not depend on preserved surrounding behavior that no one can still interpret confidently
+This is one of the clearest places where Shopware validation becomes more than page checking. It becomes proof that the future SEO and route model still makes commercial sense.
 
-This priority matters especially because Shopware migrations can look structurally acceptable while still weakening the surrounding layers that make the storefront workable in practice.
+### Validation Priority 6: Customer-Account Experience
 
-### Priority 8: Validate governability and maintainability as part of launch-readiness
+Customer continuity in Shopware is not only about customer records. It is also about whether the post-migration login or recovery path still feels understandable and trustworthy.
 
-One of the least visible but most important Shopware validation priorities is governability. The target should not only work after launch. It should remain understandable enough for ordinary governance, future edits, and safer ongoing change.
+Useful validation questions include:
 
-What to validate:
+* do returning customers understand what to do at first login?
+* does the actual login or recovery path behave clearly?
+* are imported customer records recognizable after migration?
+* is launch communication aligned with what customers will actually experience?
 
-* the future store is easier to interpret than the source, or at least no more fragile
-* the most important storefront logic can still be explained by the business
-* the product, visibility, route, filter, and extension landscape is governable enough for post-launch ownership
-* future changes do not appear unnecessarily risky because of preserved opaque behavior
-* internal teams can understand what still drives important storefront outcomes and continuity-sensitive paths
+This is especially important where repeat customers matter materially to revenue or trust.
 
-A migration can preserve functionality and still fail this priority if the result remains too structurally confusing to support safe ongoing use. For a target like Shopware, that is a real validation failure, not only a post-launch inconvenience.
+Where password continuity is possible under the compatible open-source rule, validation should prove that path directly. Where it is not, validation should focus on the reset-first journey and the clarity of the customer experience rather than assume imported records are enough.
 
-### How to think about pass and fail
+### Validation Priority 7: Extension-, Theme-, and Custom-Data-Dependent Behavior
 
-A Shopware validation plan is strongest when pass and fail are defined through storefront and operating behavior.
+Many Shopware stores depend on more than native sales-channel, rule, product, and route structures.
 
-A useful pass condition is not “the data is present.” A stronger pass condition is: the right customer can find the right products, choose the right variants, understand the right product information, encounter the right storefront exposure, move through the right category and route paths, and interact with a store the business can still understand and govern after launch.
+That means Shopware validation should explicitly review:
 
-A useful fail condition is not only “something is missing.” A stronger fail condition is: the migrated store changes commercial meaning in a way that could confuse customers, weaken exposure trust, distort discovery, break route logic, reduce governability, or create avoidable operational friction.
+* extension-dependent storefront behavior
+* theme-dependent navigation or trust behavior
+* custom-data behavior that still matters to storefront or operations
+* any extension-owned search, merchandising, or context behavior the business still treats as non-negotiable
 
-This is why representative validation matters so much in Shopware. The storefront can look structurally complete on the surface while still becoming weaker in practice.
+This is one of the most important Shopware-specific validation priorities because a storefront can look sophisticated while still weakening in the areas where the real business meaning lives outside the core record model.
+
+The real question is not whether the extension or field survived. It is whether the behavior it supported is still commercially usable after launch.
+
+### What Usually Makes a Shopware Validation Sample Strong
+
+A strong Shopware validation sample is usually built from:
+
+* the sales-channel cases most likely to expose context ambiguity
+* the rules most likely to affect commercial outcomes
+* the product-visibility cases most likely to reveal storefront mismatch
+* the category and route cases most likely to expose weak channel logic
+* the customer-account scenarios most likely to affect trust
+* the extension-shaped behaviors most likely to weaken quietly
+
+This is stronger than broad random checking because it tests the areas where Shopware’s structure most often changes meaning rather than merely confirming that records survived.
+
+### What Often Gets Missed in Shopware Validation
+
+Several patterns weaken Shopware validation.
+
+Common mistakes include:
+
+* treating channel creation as proof of correct channel meaning
+* treating rule presence as proof of correct rule-driven behavior
+* assuming product visibility is correct because the product exists
+* validating routes without validating destination meaning and canonical logic
+* checking customer import without checking customer experience
+* validating extensions only superficially instead of judging the outcomes they support
+
+These mistakes usually create the illusion of a mature Shopware launch while leaving the most important commercial questions unresolved.
+
+### How Custom Cart as a Source Changes Shopware Validation Priorities
+
+When the source platform is a Custom Cart, Shopware validation usually needs a tighter, more bespoke evidence standard.
+
+That is because more of the target behavior may depend on how source-side storefront context, rule logic, product structure, route behavior, or extension-like meaning were interpreted during translation. In those cases, validation usually needs:
+
+* more representative high-risk channel samples
+* closer review of rule and visibility reconstruction
+* tighter judgment around route and canonical logic
+* more careful review of customer-account expectations
+* a more precise distinction between acceptable Shopware formalization and unacceptable storefront distortion
+
+This does not change what should be validated first. It raises the precision required to trust the result.
 
 ### Conclusion
 
-Shopware validation should concentrate on the places where storefront structure, customer-facing exposure, and future-state governability meet. Variant behavior, the separation between variants and properties, sales-channel visibility, route continuity, discovery and filtering usability, customer-group storefront meaning, extension-driven behavior, and maintainability usually reveal risk faster than broad field-by-field review. That is where the business is most likely to discover whether the target is only populated or genuinely usable and supportable after launch.
+Shopware validation is strongest when it focuses first on the areas where the platform is most likely to change commercial meaning: sales-channel assignments, rule-dependent behavior, product visibility and structure, category entry points, high-value routes, customer-account expectations, and extension-shaped behavior.
 
-The most useful validation process usually begins with a tight, high-signal sample and expands only after the target proves that the important storefront behaviors still hold. This matters more in Shopware than many teams expect, because the platform can support a wide range of structured storefront outcomes. That structure is only valuable if the future store remains clear enough to trust and govern over time.
+That is what makes the validation result useful. A storefront can look polished while still being commercially weaker in exactly those areas. The safest path is to test those priorities deliberately with a representative sample rather than assume that broad completeness proves launch readiness.
 
-A sensible way to judge readiness is to ask whether the migrated store still helps the right customer move from discovery to confident purchase under the intended variant, visibility, route, and filtering conditions, while also leaving the business with a storefront it can still explain after launch. Those proof points usually matter more than broad completeness because they reveal whether the storefront still behaves in a way the business can operate with confidence.
-
-If that answer is still uncertain, broader checking alone rarely solves the real problem. The more useful next step is to identify whether the issue comes from target-model ambiguity, source-to-target translation pressure, or a dependency pattern that needs closer expert review. That is where Live Chat can help most. It can clarify whether the remaining uncertainty is a normal validation issue, a sign that execution needs stronger guidance through Managed Migration Service, or an indication that Custom Migration Service is the safer path because the source-to-target translation still depends on tailored handling, especially when the source is a Custom Cart.
+Validate the channel structure, rule logic, product visibility, category entry points, routes, customer-account scenarios, and extension-shaped behaviors that matter most before treating the target as trustworthy. If the result still leaves ambiguity around whether a difference is acceptable Shopware formalization or a real continuity problem, Live Chat can help interpret that evidence before launch decisions are locked.
 
 ### FAQs
 
 #### What should be validated first in a Shopware migration?
 
-Start with the slice of the store most likely to reveal risk fastest: representative variant-heavy products, important category and route paths, visibility-sensitive channel scenarios, discovery-critical filtering behavior, extension-driven storefront outcomes, and any source complexity most likely to distort the target.
+Usually the first priority is the sales channels most likely to expose ambiguity, followed by rule-dependent behavior, product visibility and structure, category entry points, high-value routes, customer-account scenarios, and extension-shaped behavior.
 
-#### Why are matching counts not enough to validate Shopware?
+#### Why is Rule Builder such an important Shopware validation priority?
 
-Because Shopware can preserve records while still changing how customers choose products, narrow the catalog, encounter storefront exposure, move through important routes, or interact with extension-driven storefront behavior. Validation has to prove storefront and operating behavior, not only record presence.
+Because it can control important commercial behavior, and validation should prove that the intended outcomes still trigger correctly rather than only confirming that the rules exist.
 
-#### What is the most important product validation priority in Shopware?
+#### Why is channel-aware route validation especially important in Shopware?
 
-Usually it is confirming that variant behavior still leads customers to the intended buyable outcome and that variants remain clearly separated from supporting properties in storefront use.
+Because Shopware allows SEO URL and canonical behavior to be configured per sales channel, so route validation needs to prove the right meaning in the right channel rather than only confirm that a path resolves.
 
-#### Why do channels and discovery belong in validation for Shopware?
+#### What usually makes a Shopware validation sample weak?
 
-Because they shape the real storefront experience. A migration that preserves the data but leaves visibility meaning or discovery quality too weak to trust is not fully launch-ready.
+Usually it is too broad, too generic, or too storefront-focused. A weak sample avoids the channel, rule, visibility, route, customer, and extension-shaped cases most likely to expose whether Shopware is actually preserving the right contextual structure.

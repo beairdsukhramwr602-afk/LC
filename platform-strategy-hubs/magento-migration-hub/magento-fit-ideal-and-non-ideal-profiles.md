@@ -24,7 +24,7 @@ This matters when the storefront needs to support:
 * more deliberate merchandising structure
 * product relationships that need to remain visible and governable after migration
 
-Magento supports native product types such as simple, configurable, virtual, downloadable, bundle, and grouped products. That makes it much stronger when the business genuinely needs the target to preserve those distinctions clearly. citeturn608006search2turn608006search14
+Magento supports native product types such as simple, configurable, virtual, downloadable, bundle, and grouped products. That makes it much stronger when the business genuinely needs the target to preserve those distinctions clearly.
 
 #### Attribute and attribute-set governance matters commercially
 
@@ -37,19 +37,19 @@ This is especially important when:
 * different product families need different field logic
 * catalog usability matters as much as catalog presence
 
-Magento can be much stronger than lighter targets when attributes are not just descriptive data, but part of how the business governs the catalog. citeturn608006search1
+Magento can be much stronger than lighter targets when attributes are not just descriptive data, but part of how the business governs the catalog.
 
 #### Scope-aware storefront variation is important
 
 Magento is often a strong fit when the business genuinely benefits from websites, stores, and store views as part of the target model.
 
-That matters when different locales, storefront contexts, or parts of the business need more explicit scope control. The platform is stronger when the business wants those differences to be governed deliberately rather than improvised around simpler storefront conventions. citeturn608006search1turn608006search5turn608006search13turn608006search17
+That matters when different locales, storefront contexts, or parts of the business need more explicit scope control. The platform is stronger when the business wants those differences to be governed deliberately rather than improvised around simpler storefront conventions.
 
 #### Customer-group and pricing logic matter
 
 Magento is often a strong fit when customer groups are not merely administrative labels, but part of how discounts, tax treatment, or customer segmentation should work in the storefront.
 
-This is especially useful when the business needs customer-context logic to be more explicit than in lighter targets. Adobe documentation confirms that customer groups determine available discounts and associated tax class. citeturn608006search0turn608006search4
+This is especially useful when the business needs customer-context logic to be more explicit than in lighter targets. Adobe documentation confirms that customer groups determine available discounts and associated tax class.
 
 #### The business can govern extension-owned behavior realistically
 
@@ -145,15 +145,15 @@ If richer product logic is central to how the business sells, Magento is often a
 
 #### 2. Are attributes and attribute sets part of real catalog governance?
 
-If product structure, filtering, and merchandising depend heavily on attribute discipline, Magento is often a much stronger fit. citeturn608006search1
+If product structure, filtering, and merchandising depend heavily on attribute discipline, Magento is often a much stronger fit.
 
 #### 3. Does the future model genuinely need website, store, or store-view scope?
 
-The business should be able to explain what belongs at each level and why that complexity is commercially necessary. citeturn608006search5turn608006search13
+The business should be able to explain what belongs at each level and why that complexity is commercially necessary.
 
 #### 4. Has the business defined how customer groups should work?
 
-Because customer groups can affect discounts and tax class, their intended role should be explicit rather than assumed. citeturn608006search0turn608006search4
+Because customer groups can affect discounts and tax class, their intended role should be explicit rather than assumed.
 
 #### 5. Can the team validate the richer structure Magento introduces?
 
