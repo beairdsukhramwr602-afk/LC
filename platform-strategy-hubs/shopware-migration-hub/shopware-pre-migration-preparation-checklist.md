@@ -32,7 +32,7 @@ The business should identify:
 * which behaviors should differ by channel
 * whether any channel complexity is being added for real commercial reasons or only because the platform allows it
 
-This matters because Shopware treats sales channels as a core storefront layer, not as a minor presentation detail. Current documentation shows products and categories being assigned to channels, and migration documentation shows older shop structures becoming sales channels in Shopware 6.
+This matters because Shopware treats sales channels as a core storefront layer, not as a minor presentation detail.
 
 ### 2. Clarify Which Behaviors Need Rule-Driven Logic
 
@@ -74,7 +74,7 @@ The business should identify:
 * which source-side product structures are inherited clutter rather than real commercial meaning
 * which products would become commercially weaker if the wrong Shopware structure were chosen
 
-Current Shopware documentation shows properties as filterable information and as the basis for generating variants. That means product structure in Shopware is not only about records. It is about how the customer experiences variation and comparison after launch.
+That means product structure in Shopware is not only about records. It is about how the customer experiences variation and comparison after launch.
 
 ### 5. Decide What the Route Model Should Actually Support
 
@@ -88,7 +88,7 @@ The business should identify:
 * how canonical behavior should be handled where channel-specific URLs matter
 * whether the future SEO URL structure reflects business meaning or only technical convenience
 
-This matters because Shopware’s own documentation shows SEO URL templates and canonical behavior can be managed per sales channel. Route continuity is not only a cleanup task. It is part of the target model itself.
+This matters because Shopware’s SEO URL and canonical behavior can be managed by sales channel. Route continuity is not only a cleanup task. It is part of the target model itself.
 
 ### 6. Define Which Category Entry Points Still Matter
 

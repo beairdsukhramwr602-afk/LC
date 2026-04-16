@@ -23,7 +23,7 @@ This matters when the storefront needs to support:
 * customer-entered personalization through customization fields
 * more deliberate product structure than a flatter catalog model usually supports
 
-PrestaShop’s current developer documentation exposes combinations, product features, and product customization fields as distinct parts of the product model. That makes the platform stronger when the business genuinely needs those distinctions to remain clear after migration.
+PrestaShop is stronger when the business genuinely needs those distinctions to remain clear after migration.
 
 #### Customer-group behavior matters commercially
 
@@ -41,13 +41,13 @@ PrestaShop can be much stronger than lighter targets when customer groups are no
 
 PrestaShop is often a strong fit when the business genuinely benefits from native multistore capability.
 
-Current PrestaShop developer documentation confirms that multistore allows multiple stores in a single instance and supports management at all shops, a group of shops, or a single shop. The platform is therefore stronger when the business wants multiple shop contexts inside one governed environment rather than a looser collection of disconnected storefronts.
+The platform is stronger when the business wants multiple shop contexts inside one governed environment rather than a looser collection of disconnected storefronts.
 
 #### Friendly route control matters
 
 PrestaShop is often a strong fit when the business wants route behavior to be governed more deliberately inside the platform.
 
-PrestaShop documentation makes clear that friendly URLs depend on URL rewriting being enabled. That means the platform is stronger when route meaning, readability, and continuity matter commercially and the business is prepared to validate them carefully rather than assume they will sort themselves out.
+Because friendly URLs depend on URL rewriting being enabled, the platform is stronger when route meaning, readability, and continuity matter commercially and the business is prepared to validate them carefully rather than assume they will sort themselves out.
 
 #### The business can govern module- and theme-owned behavior realistically
 

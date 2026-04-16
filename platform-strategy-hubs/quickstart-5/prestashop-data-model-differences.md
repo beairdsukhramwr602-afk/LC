@@ -10,7 +10,7 @@ This matters because PrestaShop data-model differences are rarely just technical
 
 One of the biggest PrestaShop data-model differences is that product meaning often depends on a clearer separation between what customers select, what they need to know, and what they personalize.
 
-Current PrestaShop developer documentation exposes combinations, product features, and product customization fields as distinct product resources. That means product representation is not only about moving product fields. It is about deciding whether the target should express product meaning through:
+That means product representation is not only about moving product fields. It is about deciding whether the target should express product meaning through:
 
 * combinations for selectable variation
 * product features for descriptive or comparative information
@@ -41,7 +41,7 @@ They can become part of how the business understands:
 
 This means the target may preserve the visible storefront while still changing how the business understands product variation if selectable options are translated into the wrong structure.
 
-A migration can therefore look structurally complete while still being commercially wrong if the combination layer is used where the business really meant descriptive product comparison, or if combinations are lost where selectable product choice still matters.
+A migration can therefore look structurally complete while still be commercially wrong if the combination layer is used where the business really meant descriptive product comparison, or if combinations are lost where selectable product choice still matters.
 
 ### Product Features Change What Descriptive Information Means
 
@@ -75,7 +75,7 @@ The important target question is therefore not only whether product personalizat
 
 One of PrestaShop’s clearest structural differences is that customer groups can become a more explicit storefront-control layer.
 
-Current PrestaShop developer documentation shows that customers include a default group identifier, confirming customer-group structure as part of the customer model itself. That means customer continuity in PrestaShop often depends on more than importing customer records. It also depends on deciding whether group logic still reflects the intended commercial outcome after migration.
+That means customer continuity in PrestaShop often depends on more than importing customer records. It also depends on deciding whether group logic still reflects the intended commercial outcome after migration.
 
 A migration can therefore preserve customer accounts successfully while still weakening the target model if:
 
@@ -90,15 +90,13 @@ Where customer groups carry important commercial meaning, they should be treated
 
 One of PrestaShop’s clearest native differences is multistore.
 
-PrestaShop developer documentation states that multiple stores can be managed in a single instance, and that when multistore is enabled the back office can operate in all shops, a group of shops, or a single shop context. This changes data meaning because some values may apply broadly, while others may differ by shop context.
-
-That means a value is no longer only a product or customer value. It may also carry a shop-context meaning.
+This changes data meaning because some values may apply broadly, while others may differ by shop context. That means a value is no longer only a product or customer value. It may also carry a shop-context meaning.
 
 This is important because a migration can preserve the value itself while still misrepresenting the intended behavior if the value lands in the wrong shop context. A business may want catalog differences, customer-group differences, or route differences to live at different shop scopes. PrestaShop can support that, but it expects those distinctions to be deliberate.
 
 ### Friendly URLs Change How Route Meaning Is Governed
 
-PrestaShop supports friendly URLs, but its own documentation makes clear that they depend on URL rewriting being enabled.
+PrestaShop supports friendly URLs, but they depend on URL rewriting being enabled.
 
 That means route continuity in PrestaShop is not only a redirect or patching question. It is part of the native platform model. This matters because the target can govern route readability and continuity more explicitly than many teams expect, but it also means route behavior depends on the platform’s URL rewriting model.
 
@@ -116,7 +114,7 @@ That means a migration into PrestaShop often has to separate:
 * theme-owned presentation behavior
 * inherited source-side logic that still needs a target meaning
 
-This is one of the most important PrestaShop data-model realities: the target may be more structured than some teams expect, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving. Current PrestaShop developer documentation still treats modules and product-page extension as a first-class part of how the platform is extended.
+This is one of the most important PrestaShop data-model realities: the target may be more structured than some teams expect, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving.
 
 ### Validation Scope Becomes More Commercially Contextual
 

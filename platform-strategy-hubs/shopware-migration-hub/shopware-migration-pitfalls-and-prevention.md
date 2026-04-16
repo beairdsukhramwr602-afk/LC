@@ -1,6 +1,8 @@
 # Shopware Migration Pitfalls and Prevention
 
-Shopware migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated store preserves records without preserving the storefront and operating logic that made the business usable before the move. The most common breakdowns happen when variant behavior, property logic, sales-channel visibility, discovery quality, route continuity, customer-group storefront conditions, or surrounding extension-driven meaning are treated as details to refine later instead of as conditions that shape the target from the beginning.
+Shopware migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated store preserves records without preserving the storefront and operating logic that made the business usable before the move.
+
+That is what makes Shopware pitfalls so easy to underestimate. The target can look structured and sophisticated while still becoming commercially weaker if variant behavior, property logic, sales-channel visibility, discovery quality, route continuity, customer-group storefront conditions, or surrounding extension-driven meaning are treated as details to refine later instead of as conditions that shape the target from the beginning. The real danger is false confidence. Customers and internal teams may see a store that appears complete while the behaviors that drive buying, trust, exposure, or governability have already weakened.
 
 This page focuses on the failure patterns that recur most often when Shopware is chosen for the right broad reasons but prepared or validated too loosely. Each pitfall matters because it can create a store that looks complete while still behaving incorrectly for customers, internal teams, or both.
 
@@ -21,9 +23,10 @@ Product records are transferred, but the storefront no longer leads customers to
 
 Define the intended buyable outcome before the migration is treated as structurally ready. Separate selectable variant behavior from descriptive information and supporting property logic. Use representative configurable products early enough to test whether the target still supports a confident buying path.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Use a sample that includes the most structurally difficult and highest-value configurable products.\
+Use a sample that includes the most structurally difficult and highest-value configurable products.
+
 **Pass condition:** the intended customer can identify the right product outcome confidently, make the required selections in the correct order, and understand what is being purchased without guesswork.
 
 ### Pitfall 2: Preserving properties without preserving product understanding or filtering quality
@@ -43,9 +46,10 @@ Property structures exist after migration, but the storefront no longer supports
 
 Treat properties as discovery behavior, not only as migrated metadata. Validate whether they still support understanding, filtering, and comparison in the way the storefront requires.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review the property-driven filters and comparison paths that most influence product-family selection.\
+Review the property-driven filters and comparison paths that most influence product-family selection.
+
 **Pass condition:** customers can still use the intended properties to narrow, compare, and understand products naturally enough to support confident selection.
 
 ### Pitfall 3: Preserving products without preserving correct sales-channel exposure
@@ -65,9 +69,10 @@ Products remain in the target, but the storefront no longer exposes them under t
 
 Treat visibility as part of storefront meaning, not only as channel administration. Identify the products and categories most likely to expose commercial risk if shown in the wrong context, then validate those conditions directly across the relevant storefront channels.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review the products and categories whose exposure matters most in each relevant storefront context.\
+Review the products and categories whose exposure matters most in each relevant storefront context.
+
 **Pass condition:** the right channels expose the right products under the intended storefront conditions, and the wrong channels do not expose them inappropriately.
 
 ### Pitfall 4: Treating native SEO URL support as if continuity is already solved
@@ -87,9 +92,10 @@ Native SEO URL capability is present, but the routes customers and search engine
 
 Validate the paths that matter most commercially, not only the existence of SEO URL logic. The important question is whether priority entry points still lead customers to the right destination and support the intended next action after migration.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review a focused list of the most valuable product, category, and content routes.\
+Review a focused list of the most valuable product, category, and content routes.
+
 **Pass condition:** each priority route leads to the correct destination and still supports the intended browse, trust, or conversion journey.
 
 ### Pitfall 5: Weakening discovery while preserving the visible catalog
@@ -109,9 +115,10 @@ The catalog looks complete, but customers can no longer find products as natural
 
 Treat discovery as a first-class storefront behavior rather than as a secondary refinement layer. Identify the category, filter, and search paths that matter most to conversion, then validate those journeys directly.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review the browse and filter paths that previously helped customers reach the right products fastest.\
+Review the browse and filter paths that previously helped customers reach the right products fastest.
+
 **Pass condition:** customers can still move naturally from discovery into the intended product families and buyable products through the expected narrowing paths.
 
 ### Pitfall 6: Preserving customer groups without preserving the real storefront condition
@@ -131,9 +138,10 @@ Customer groups remain in the target, but the storefront no longer behaves the w
 
 Validate customer-group meaning as storefront behavior, not as account labeling. Identify which differences are commercially essential and test whether those distinctions still shape the storefront correctly after migration.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review representative customer accounts from the groups that matter most commercially.\
+Review representative customer accounts from the groups that matter most commercially.
+
 **Pass condition:** the intended customer sees the intended storefront conditions without ambiguity, and internal teams can still explain why those conditions exist.
 
 ### Pitfall 7: Preserving extensions and custom fields without preserving their real effect
@@ -153,9 +161,10 @@ Extensions, custom fields, search layers, or surrounding storefront logic remain
 
 Validate extension-driven meaning as an outcome, not as a checklist item. Classify which surrounding behaviors are commercially essential, then test whether they still produce the intended result in the actual storefront or internal workflow.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review the extension-, custom-field-, or discovery-driven outcomes that most affect discovery, trust, conversion, or internal usability.\
+Review the extension-, custom-field-, or discovery-driven outcomes that most affect discovery, trust, conversion, or internal usability.
+
 **Pass condition:** each high-impact surrounding layer still produces the intended business outcome well enough for launch, not just the intended technical presence.
 
 ### Pitfall 8: Treating a Custom Cart source like a standard-cart export
@@ -175,16 +184,17 @@ The business migrates into Shopware from a Custom Cart source but treats the sou
 
 Treat a Custom Cart source as a translation-risk amplifier from the beginning. Clarify access methods, source-side structures, and the business meaning hidden in non-standard data before the migration path is treated as settled. In most cases, this should move the safer baseline toward Custom Migration Service rather than toward ordinary standard handling.
 
-#### Recommendation example with explicit pass condition
+#### Recommendation example
 
-Review the source-side structures most likely to distort product, visibility, discovery, route, or storefront meaning if translated loosely into Shopware.\
+Review the source-side structures most likely to distort product, visibility, discovery, route, or storefront meaning if translated loosely into Shopware.
+
 **Pass condition:** the business can explain how the important source-side meaning will be reconstructed in Shopware clearly enough that the target remains usable, governable, and commercially correct after launch.
 
 ### Conclusion
 
 The most common Shopware pitfalls come from confusing stronger storefront structure with migration safety. A migration can move products, properties, visibility rules, routes, search behavior, customer-group structures, extensions, and supporting data successfully while still weakening variant clarity, discovery quality, visibility trust, route quality, or long-term maintainability. Strong prevention begins by making those risks visible early, then validating them through representative customer and storefront scenarios instead of relying on broad assumptions.
 
-The most useful prevention work usually happens before the business has committed emotionally to the idea that the migration is already “mostly done.” That is when variant-heavy products, filtering and route-sensitive paths, visibility-critical storefront scenarios, customer-group conditions, extension-driven storefront logic, and account continuity expectations can still reveal problems early enough to influence the safer next step. Once those areas are treated as the real proof points, the migration becomes much easier to judge honestly.
+The most useful prevention work usually happens before the business has committed emotionally to the idea that the migration is already mostly done. That is when variant-heavy products, filtering and route-sensitive paths, visibility-critical storefront scenarios, customer-group conditions, extension-driven storefront logic, and account continuity expectations can still reveal problems early enough to influence the safer next step. Once those areas are treated as the real proof points, the migration becomes much easier to judge honestly.
 
 A practical way to use this page is to compare each pitfall against the store’s own highest-risk patterns and ask which one could create the most expensive false confidence if it were missed. That question usually identifies the storefront and operating behaviors that deserve the earliest attention in Demo Migration and structured review.
 

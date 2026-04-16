@@ -42,7 +42,7 @@ That often includes:
 * channels where the business expects materially different customer-facing behavior
 * channels where migration from older storefront structures may have changed the native model
 
-Current Shopware documentation shows sales channels as a core storefront context, and migration documentation shows older shop structures becoming separate sales channels in Shopware 6. That makes channel assignment validation a structural question, not just a setup question. citeturn0search0turn0search4
+That makes channel assignment validation a structural question, not just a setup question.
 
 The review question is not only whether the channel exists. It is whether the channel still represents the intended storefront meaning clearly enough after migration.
 
@@ -50,7 +50,7 @@ The review question is not only whether the channel exists. It is whether the ch
 
 One of Shopware’s clearest validation priorities is Rule Builder logic.
 
-Current documentation shows Rule Builder as a central rule-definition layer used across platform behavior. That means validation should focus on the most commercially sensitive rules first. citeturn0search1turn0search9
+That means validation should focus on the most commercially sensitive rules first.
 
 Useful checks usually include:
 
@@ -72,7 +72,7 @@ That usually means checking:
 * whether product structure through properties and variants still supports the intended buying logic
 * whether the resulting storefront still supports a clear product journey
 
-Current Shopware documentation shows that visibility is assigned per sales channel, and properties can serve as the basis for generating variants. That means validation should prove product usefulness and availability, not only product survival.
+That means validation should prove product usefulness and availability, not only product survival.
 
 ### Validation Priority 4: Category Entry Points and Browsing Context
 
@@ -86,13 +86,13 @@ That usually means checking:
 * whether key categories still make sense in the right channel context
 * whether category logic is still governable after launch
 
-Shopware documentation makes clear that categories can be assigned to sales channels and even configured as a home page for a selected sales channel. That makes category validation a storefront-context question, not only a taxonomy question.
+That makes category validation a storefront-context question, not only a taxonomy question.
 
 ### Validation Priority 5: High-Value Routes, SEO URLs, and Canonical Behavior
 
 Shopware’s route logic is one of its clearest validation priorities.
 
-Current Shopware documentation shows that SEO URL settings can be configured globally or for a selected sales channel, and canonical URLs can also be defined separately per sales channel. That means validation should focus on the route decisions most likely to expose ambiguity.
+That means validation should focus on the route decisions most likely to expose ambiguity.
 
 Useful checks usually include:
 

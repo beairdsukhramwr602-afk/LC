@@ -14,7 +14,7 @@ A move into Shopware often changes the store most clearly in five areas.
 
 One of the most important migration truths in Shopware is that storefront context is often governed through sales channels.
 
-Current Shopware documentation describes sales channels as the interface from the administration to the storefront, and products and categories can be assigned to specific sales channels. That means migration into Shopware is less about one undifferentiated storefront and more about deciding which products, categories, SEO behavior, and customer-facing outcomes belong in which sales-channel context.
+That means migration into Shopware is less about one undifferentiated storefront and more about deciding which products, categories, SEO behavior, and customer-facing outcomes belong in which sales-channel context.
 
 The question is not only whether the storefront exists. It is whether the right storefront logic exists in the right sales channel.
 
@@ -22,25 +22,25 @@ The question is not only whether the storefront exists. It is whether the right 
 
 Shopware includes Rule Builder as a core platform capability.
 
-That matters because migration planning can no longer treat storefront behavior only as static data and layout. In many Shopware projects, part of the real target logic sits in rules that govern how commercial behavior should work in different customer, cart, or context conditions. A store can therefore look complete after migration while still being commercially weaker if the target behavior depends on rules that were never defined clearly enough.
+That matters because migration planning can no longer treat storefront behavior only as static data and layout. In many Shopware projects, part of the real target logic sits in rules that govern how commercial behavior should work in different customer, cart, or context conditions. A store can therefore look complete after migration while still be commercially weaker if the target behavior depends on rules that were never defined clearly enough.
 
 #### Product meaning becomes more context-sensitive
 
 Shopware’s product structure can carry more contextual meaning than many teams first expect.
 
-Current product documentation shows that products can be assigned to sales channels, and Shopware’s catalog model also includes property and variant logic that can change how product meaning is expressed. That means product migration is less about raw record transfer and more about deciding whether the target product model still supports the real browsing and buying outcome clearly enough.
+Products can be assigned to sales channels, and the catalog model also includes property and variant logic that can change how product meaning is expressed. That means product migration is less about raw record transfer and more about deciding whether the target product model still supports the real browsing and buying outcome clearly enough.
 
 #### Route governance becomes part of channel governance
 
-Shopware’s SEO settings and product documentation show that SEO URLs and canonical URLs can be managed in a sales-channel-aware way.
+Shopware’s SEO settings and product structure allow SEO URLs and canonical URLs to be managed in a sales-channel-aware way.
 
 That means route continuity is not only a redirect-cleanup question. It is part of the target model itself. The more important planning question is which routes matter most, what their destination should be, and whether their behavior still supports the customer intent the original path served before migration.
 
 #### Structural translation can change storefront architecture
 
-Shopware’s migration documentation makes clear that migrated Shopware 5 main shops and subshops become separate sales channels in Shopware 6.
+Storefront architecture itself may be translated into a different native model after migration.
 
-That is a meaningful target truth because it shows how storefront architecture itself may be translated into a different native model after migration. Even when data migrates successfully, the target still needs to be judged by whether the resulting channel structure reflects the intended business meaning.
+Even when data migrates successfully, the target still needs to be judged by whether the resulting channel structure reflects the intended business meaning.
 
 ### Where Shopware Is Often a Strong Target
 

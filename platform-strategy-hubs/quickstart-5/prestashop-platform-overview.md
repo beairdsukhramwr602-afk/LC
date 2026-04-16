@@ -14,11 +14,11 @@ A move into PrestaShop often changes the store most clearly in five areas.
 
 PrestaShop carries several distinct product layers, and that distinction is one of the most important migration truths to understand early.
 
-Current PrestaShop developer documentation exposes combinations, product features, and product customization fields as separate resources inside the product model. That means product migration into PrestaShop is less about raw record transfer and more about deciding whether the target should treat product meaning as:
+That means product migration into PrestaShop is less about raw record transfer and more about deciding whether the target should treat product meaning as:
 
-* selectable variation through combinations,
-* descriptive or comparative information through features,
-* or customer-entered personalization through customization fields.
+* selectable variation through combinations
+* descriptive or comparative information through features
+* customer-entered personalization through customization fields
 
 The question is not only whether products arrive. It is whether the correct product structure still expresses the real sellable outcome clearly enough after launch.
 
@@ -26,7 +26,7 @@ The question is not only whether products arrive. It is whether the correct prod
 
 In PrestaShop, categories are not only an administrative filing system.
 
-They often shape how products are discovered, grouped, and merchandised. That changes migration planning because a storefront can preserve products successfully while still weakening customer discovery if category meaning and category relationships are not planned clearly enough. PrestaShop’s own product documentation and developer resources keep categories as part of the product’s structural environment rather than a loose descriptive layer.
+They often shape how products are discovered, grouped, and merchandised. That changes migration planning because a storefront can preserve products successfully while still weakening customer discovery if category meaning and category relationships are not planned clearly enough.
 
 #### Customer groups become a stronger commercial layer
 
@@ -38,13 +38,13 @@ They can influence visibility, pricing context, or other differentiated storefro
 
 PrestaShop includes a native multistore capability.
 
-Current PrestaShop developer documentation states that PrestaShop allows multiple stores in a single instance, and when multistore is enabled the back office supports management at all shops, a group of shops, or a single shop. That makes shop scope part of migration planning rather than a later convenience detail. A store can look complete after migration while still being hard to govern if shop context was not defined clearly enough.
+That makes shop scope part of migration planning rather than a later convenience detail. A store can look complete after migration while still be hard to govern if shop context was not defined clearly enough.
 
 #### Friendly-route continuity is native, but route planning still matters
 
-PrestaShop supports friendly URLs, but its own documentation makes clear that they only work when URL rewriting is enabled.
+PrestaShop supports friendly URLs, but they depend on URL rewriting being enabled.
 
-That means route continuity in PrestaShop is not only a redirect-cleanup issue. It is part of the target model itself. The more important planning question is which legacy paths matter most, what the best destination should be, and whether the resulting route still supports the customer intent the old path served before migration. Current PrestaShop documentation explicitly ties friendly URLs to URL rewriting support.
+That means route continuity in PrestaShop is not only a redirect-cleanup issue. It is part of the target model itself. The more important planning question is which legacy paths matter most, what the best destination should be, and whether the resulting route still supports the customer intent the old path served before migration.
 
 ### Where PrestaShop Is Often a Strong Target
 
@@ -66,7 +66,7 @@ Deeper planning is usually needed when the source store carries product, custome
 
 Deeper planning is also necessary when important outcomes depend heavily on modules, theme behavior, custom fields, or inherited logic that no one has fully mapped. The risk here is not module count alone. It is unclear module-owned meaning. A migration can look successful while still weakening the real behaviors that drive conversion, trust, or operations if those behaviors were not classified clearly enough before execution.
 
-Multistore is another common planning pressure point. Businesses that move into PrestaShop without defining what belongs in one shop versus another often create targets that are technically rich but harder to operate and validate than expected. PrestaShop’s own multistore documentation shows how central shop context becomes once the feature is enabled.
+Multistore is another common planning pressure point. Businesses that move into PrestaShop without defining what belongs in one shop versus another often create targets that are technically rich but harder to operate and validate than expected.
 
 ### What Should Be Understood Early Before Moving into PrestaShop
 

@@ -24,54 +24,106 @@ These are the areas most likely to reveal whether Shopware is being used as a ge
 
 ### Constraint 1: Sales Channels Can Be Structurally Present but Commercially Misaligned
 
+#### Description
+
 One of the clearest Shopware constraints is that sales channels only become a strength when the business knows what each one is supposed to do.
 
-Current Shopware documentation shows that products and categories can be assigned to sales channels, and migration documentation confirms that older Shopware 5 main shops and subshops become separate sales channels in Shopware 6. That gives the target more explicit storefront governance, but it also means the migration must define which products, routes, and storefront behaviors belong in which channel. If that decision is still vague, the target can look complete while still failing to preserve how customers are supposed to encounter the storefront.
+That gives the target more explicit storefront governance, but it also means the migration must define which products, routes, and storefront behaviors belong in which channel. If that decision is still vague, the target can look complete while still failing to preserve how customers are supposed to encounter the storefront.
 
 This becomes especially sensitive when the source store assumed one storefront context covered another, or when older shop structures are translated into a more explicit sales-channel model than the business has actually reviewed.
 
+#### Who it affects
+
+This affects merchants whose storefront meaning depends on more than one customer-facing context, including businesses with multiple brands, markets, languages, regions, or channel-specific customer experiences.
+
+#### Mitigation strategy
+
+Define the commercial purpose of each sales channel before broader execution is treated as safe. Clarify which products, categories, routes, rules, and customer-facing outcomes belong in each channel and validate that those boundaries remain understandable after migration.
+
 ### Constraint 2: Rule-Dependent Behavior Can Survive Superficially While Commercial Logic Fails
+
+#### Description
 
 Shopware’s Rule Builder is one of its strongest native capabilities, and also one of its most sensitive risk areas.
 
-Current documentation presents Rule Builder as a central rule-definition layer, and related documentation shows rules being used across behavior such as shipping and promotions. That makes rule continuity much more important than rule presence alone. A migration can preserve products, prices, and categories at a technical level while still being commercially wrong if the rule-dependent behavior that governs them was never clarified or recreated correctly.
+That makes rule continuity much more important than rule presence alone. A migration can preserve products, prices, and categories at a technical level while still be commercially wrong if the rule-dependent behavior that governs them was never clarified or recreated correctly.
 
 Risk rises quickly when the business treats rule logic as an implementation detail rather than a core part of how the storefront is supposed to behave.
 
+#### Who it affects
+
+This affects stores where pricing, promotions, shipping conditions, customer-facing logic, or other important behaviors depend on context-sensitive rules rather than static configuration alone.
+
+#### Mitigation strategy
+
+Identify the rules that matter most commercially and validate their actual outcomes, not merely their existence. The business should know which customer, cart, or channel conditions are supposed to trigger each important behavior before migration scope is treated as stable.
+
 ### Constraint 3: Product Visibility Can Exist While Product Availability Still Fails Commercially
+
+#### Description
 
 Another important Shopware constraint is that product presence is not only about importing the product record.
 
-Developer documentation shows that products need a visibility record per sales channel, and visibility values determine whether they are searchable or directly accessible. That means product continuity is not only about whether the product exists. It is also about whether it appears in the intended channel, with the intended discoverability behavior.
+Products need a visibility state per sales channel, and visibility determines whether they are searchable or directly accessible. That means product continuity is not only about whether the product exists. It is also about whether it appears in the intended channel, with the intended discoverability behavior.
 
-A migration can therefore preserve products successfully while still being commercially wrong if the business never clarified which products should be visible where, or how visible they should be in the target context.
+A migration can therefore preserve products successfully while still be commercially wrong if the business never clarified which products should be visible where, or how visible they should be in the target context.
+
+#### Who it affects
+
+This affects stores where products should not appear universally, where channel-specific discoverability matters, or where product access needs to differ across customer-facing contexts.
+
+#### Mitigation strategy
+
+Define visibility intentionally as part of product meaning. Validate not only whether the product exists, but whether it is discoverable and accessible in the correct channels under the intended rules.
 
 ### Constraint 4: Properties and Variants Can Make Product Structure Look Complete While Buying Logic Weakens
 
+#### Description
+
 Shopware product structure often becomes more sensitive than teams first expect because properties and variants can carry more product meaning than a flat catalog model.
 
-Current documentation shows that properties can be used as the basis for generating variants. This is powerful, but it also means the migration must define whether the target product structure still reflects the intended sellable outcome clearly enough. A storefront can look polished while still weakening the buying path if the target product model no longer expresses the real relationship between main products, properties, and variants correctly.
+This is powerful, but it also means the migration must define whether the target product structure still reflects the intended sellable outcome clearly enough. A storefront can look polished while still weakening the buying path if the target product model no longer expresses the real relationship between main products, properties, and variants correctly.
 
 This becomes especially sensitive when the source store mixed descriptive information, option behavior, or variant logic too loosely.
 
+#### Who it affects
+
+This affects merchants with configurable products, filter-dependent product discovery, or buying journeys that depend on the customer understanding variants and product differences clearly.
+
+#### Mitigation strategy
+
+Classify high-risk product families early and validate the customer-facing product journey directly. The question is not only whether product data imported, but whether the sellable structure still makes sense.
+
 ### Constraint 5: Category Structure Can Become More Important Than Teams Expect
+
+#### Description
 
 Categories are one of Shopware’s strongest storefront layers, and also one of its most sensitive risk areas.
 
-Current documentation explains that the entire catalog lives in one category tree and every sales channel chooses entry points inside that tree. That means category continuity is much more important than record survival alone. A migration can preserve category data technically while still being commercially wrong if the business never clarified:
+The catalog can live in one broader category tree while sales channels use different entry points into that structure. That means category continuity is much more important than record survival alone. A migration can preserve category data technically while still be commercially wrong if the business never clarified:
 
 * which categories matter most to storefront entry points
 * which category relationships still matter
 * which channel-specific paths still support discovery clearly
-* which inherited grouping logic should survive and which should not.
+* which inherited grouping logic should survive and which should not
 
 Risk rises when the business treats category continuity as taxonomy survival rather than storefront-navigation continuity.
 
+#### Who it affects
+
+This affects stores where discovery depends heavily on navigation structure, where different channels need different category entry logic, or where category paths shape the customer journey materially.
+
+#### Mitigation strategy
+
+Treat category structure as a customer-path and channel-governance issue, not just a data hierarchy. Validate the category entry points and browsing routes that matter most commercially.
+
 ### Constraint 6: SEO URLs and Canonical Logic Reduce One Risk but Create a More Explicit Route Burden
+
+#### Description
 
 Shopware’s route model is powerful, but it also creates a more explicit route-governance burden.
 
-Current Shopware documentation shows that SEO URL structures can be configured through templates and that canonical URLs can be controlled in a sales-channel-aware way. That means route continuity is not only a redirect problem. It is a target-model decision.
+SEO URL structures can be configured through templates and canonical URLs can be controlled in a sales-channel-aware way. That means route continuity is not only a redirect problem. It is a target-model decision.
 
 Risk rises when:
 
@@ -80,9 +132,19 @@ Risk rises when:
 * the team validates that a path resolves, but not whether it resolves well
 * SEO URL logic and canonical behavior are weaker than the business needs in each channel
 
-A route can therefore be technically valid while still being commercially weak.
+A route can therefore be technically valid while still be commercially weak.
+
+#### Who it affects
+
+This affects businesses with meaningful SEO exposure, channel-specific route expectations, high-value landing paths, or canonical requirements that influence search meaning and route trust.
+
+#### Mitigation strategy
+
+Treat route continuity as a destination-quality and channel-governance question. Prioritize the paths that matter most to traffic, conversion, trust, and search intent, then validate whether their destinations and canonical behavior still support the intended outcome.
 
 ### Constraint 7: Extension-Shaped Meaning Can Make Shopware Look More Complete Than It Is
+
+#### Description
 
 Many Shopware stores depend on more than native sales-channel, rule, product, and route structures.
 
@@ -98,7 +160,17 @@ This creates risk because the visible storefront can make that behavior look ful
 
 The important risk is not extension usage alone. It is unclear extension-owned meaning.
 
+#### Who it affects
+
+This affects businesses whose storefront behavior depends heavily on extensions, themes, custom fields, overrides, or workflows that still influence what customers see and do.
+
+#### Mitigation strategy
+
+Classify the surrounding extension-shaped meaning before launch. The business does not need a generic list of everything installed. It needs a clear view of which outcomes still matter enough to shape scope, validation, and risk judgment.
+
 ### Constraint 8: Validation Burden Is Wider Than Many Teams Expect
+
+#### Description
 
 Shopware is not difficult only because it has richer native structure than some teams expect. It is also demanding because the target often needs to prove more than visible storefront completeness.
 
@@ -119,7 +191,15 @@ It often also needs to prove:
 * channel-specific SEO URL and canonical behavior
 * extension-sensitive storefront outcomes
 
-This is one of the clearest reasons Shopware migrations can look complete while still being less trustworthy than expected.
+This is one of the clearest reasons Shopware migrations can look complete while still be less trustworthy than expected.
+
+#### Who it affects
+
+This affects any business whose store depends on channel structure, rules, product visibility, route continuity, or extension-shaped behavior that cannot be judged through broad random checks alone.
+
+#### Mitigation strategy
+
+Build validation around the structurally sensitive areas of the Shopware target rather than around easy records or reassuring totals. Use representative evidence early enough that the project can still adjust if the target model itself is under-defined.
 
 ### What Usually Deserves the Earliest Risk Review
 

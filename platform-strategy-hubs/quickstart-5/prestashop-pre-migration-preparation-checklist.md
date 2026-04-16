@@ -2,7 +2,7 @@
 
 A PrestaShop migration usually becomes riskier when the business treats preparation as a generic cleanup exercise instead of a storefront-structure decision.
 
-That matters because PrestaShop is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support clearer product structure, stronger customer-group behavior, broader shop scope, and friendlier route control more naturally than many lighter targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
+That matters because PrestaShop is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support clearer product structure, stronger customer-group behavior, broader shop scope, and friendlier route control more naturally than many lighter targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carry major uncertainty into validation and launch.
 
 This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a PrestaShop migration path is commercially safe, structurally coherent, and realistically governable after launch.
 
@@ -33,7 +33,7 @@ The business should identify:
 * which source-side products still mix variation, description, or personalization too loosely
 * which products would become commercially weaker if the wrong PrestaShop structure were chosen
 
-This matters because PrestaShop product migration is not only about moving product records. It is about deciding which product meaning belongs in combinations, which belongs in features, and which belongs in customization fields. Current PrestaShop developer documentation keeps those as distinct product layers. citeturn819132search2turn0search2turn0search8
+This matters because PrestaShop product migration is not only about moving product records. It is about deciding which product meaning belongs in combinations, which belongs in features, and which belongs in customization fields.
 
 ### 2. Clarify Which Product Features Carry Real Commercial Meaning
 
@@ -86,7 +86,7 @@ The business should identify:
 * whether more than one shop is genuinely necessary
 * whether the future multistore model reflects real commercial need or only optional scale ambition
 
-This matters because PrestaShop’s multistore capability is real, but it also creates governance burden when shop assignments are made too late or without a clear reason. Current developer documentation confirms multistore contexts such as all shops, a group of shops, or a single shop. citeturn819132search0turn0search15
+This matters because PrestaShop’s multistore capability is real, but it also creates governance burden when shop assignments are made too late or without a clear reason.
 
 ### 6. Decide What the Route Model Should Actually Support
 
@@ -99,7 +99,7 @@ The business should identify:
 * what should happen to legacy product and category routes
 * whether the future route model reflects business meaning or only technical convenience
 
-This matters because PrestaShop’s own documentation states that friendly URLs depend on URL rewriting being enabled. Route continuity is not only a cleanup task. It is part of the target model itself. citeturn819132search0turn0search16turn0search17
+This matters because friendly URLs depend on URL rewriting being enabled. Route continuity is not only a cleanup task. It is part of the target model itself.
 
 ### 7. List the Modules, Theme Logic, Overrides, and Custom Behaviors That Still Need to Matter
 
@@ -113,7 +113,7 @@ A stronger checklist should identify:
 * whether any overrides are shaping critical behavior
 * which module-owned workflows matter to operations as well as storefront behavior
 
-The business does not need a generic list of everything installed. It needs a clearer view of which module-, theme-, or override-owned meanings still matter enough to shape scope, validation, and risk judgment. Current PrestaShop developer documentation explicitly warns that overrides have limitations and risks and should be used narrowly. citeturn819132search7turn819132search5
+The business does not need a generic list of everything installed. It needs a clearer view of which module-, theme-, or override-owned meanings still matter enough to shape scope, validation, and risk judgment.
 
 ### 8. Prioritize Legacy URLs by Business Value
 
@@ -174,15 +174,15 @@ This prevents differentiated storefront behavior from becoming weaker after migr
 
 #### 3. Decide shop assignments
 
-This reduces the chance that multistore behavior will be improvised later. citeturn819132search0
+This reduces the chance that multistore behavior will be improvised later.
 
 #### 4. Define the route model
 
-This keeps friendly-route behavior aligned with real business meaning. citeturn819132search0turn0search16
+This keeps friendly-route behavior aligned with real business meaning.
 
 #### 5. Classify module-, theme-, and override-owned behavior
 
-This prevents important meaning from remaining implicit. citeturn819132search7
+This prevents important meaning from remaining implicit.
 
 #### 6. Build a representative Demo Migration sample
 
@@ -213,11 +213,11 @@ Before moving deeper into execution, build a preparation checklist around the pr
 
 #### What should be prepared first before migrating into PrestaShop?
 
-Usually the highest-value starting point is the product families most likely to expose combinations-versus-features-versus-customization ambiguity, followed by customer-group meaning, shop assignments, route structure, and module- or theme-owned behavior. citeturn819132search2turn819132search0turn819132search7
+Usually the highest-value starting point is the product families most likely to expose combinations-versus-features-versus-customization ambiguity, followed by customer-group meaning, shop assignments, route structure, and module- or theme-owned behavior.
 
 #### Why are product features and customization such important PrestaShop preparation topics?
 
-Because they represent different kinds of product meaning. If the business has not decided what should remain selectable, descriptive, or customer-entered, the target can be technically complete while commercially wrong. citeturn819132search2turn0search8
+Because they represent different kinds of product meaning. If the business has not decided what should remain selectable, descriptive, or customer-entered, the target can be technically complete while commercially wrong.
 
 #### Should PrestaShop preparation focus mainly on products?
 

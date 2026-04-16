@@ -24,17 +24,29 @@ These are the areas most likely to reveal whether PrestaShop is being used as a 
 
 ### Constraint 1: Product-Structure Ambiguity Weakens the Target Even When Products Import Successfully
 
+#### Description
+
 One of the clearest PrestaShop constraints is that native product structure only becomes a strength when the business knows how it should work.
 
 PrestaShop distinguishes between combinations, product features, and customization fields. That gives the target more expressive product control, but it also means the migration must define which product meaning belongs in each layer. If that decision is still vague, the storefront can look complete while still failing to preserve how customers actually buy, compare, or personalize products.
 
 This becomes especially sensitive when the source store carried product meaning through loose option logic, descriptive clutter, add-ons, or custom behavior that were never classified clearly enough. In those situations, the real risk is not missing products. It is commercially incorrect product structure.
 
+#### Who it affects
+
+This affects merchants whose revenue depends on structured variation, meaningful product comparison, personalization inputs, or complex product logic that customers need to understand clearly.
+
+#### Mitigation strategy
+
+Classify product meaning early. Decide which product behavior belongs in combinations, which belongs in features, and which belongs in customization fields. Then build the early review sample around the products most likely to expose ambiguity.
+
 ### Constraint 2: Categories Can Survive While Discovery Still Fails
+
+#### Description
 
 Categories are one of PrestaShop’s strongest storefront layers, and also one of its most sensitive risk areas.
 
-In PrestaShop, categories shape browsing, grouping, and how customers interpret the catalog. That makes category continuity much more important than record preservation alone. A migration can preserve category data at a technical level while still being commercially wrong if the business never clarified:
+In PrestaShop, categories shape browsing, grouping, and how customers interpret the catalog. That makes category continuity much more important than record preservation alone. A migration can preserve category data at a technical level while still be commercially wrong if the business never clarified:
 
 * which categories matter most to navigation
 * which category relationships still matter
@@ -43,11 +55,21 @@ In PrestaShop, categories shape browsing, grouping, and how customers interpret 
 
 Risk rises quickly when the business treats category continuity as record continuity rather than discovery continuity.
 
+#### Who it affects
+
+This affects stores where navigation, browsing, and merchandising rely heavily on category-led discovery rather than only search or direct product access.
+
+#### Mitigation strategy
+
+Treat category structure as storefront meaning, not filing logic. Prioritize the categories and paths that matter most to discovery and validate them as customer journeys, not just imported records.
+
 ### Constraint 3: Customer Groups Can Be Structurally Present but Commercially Misaligned
+
+#### Description
 
 PrestaShop customer groups often expose migration risk more clearly than teams first expect.
 
-Customer groups can shape how the storefront behaves for different customer contexts. That means customer continuity is not only about importing customer accounts. A target can preserve customer data successfully while still being commercially wrong if the business never clarified:
+Customer groups can shape how the storefront behaves for different customer contexts. That means customer continuity is not only about importing customer accounts. A target can preserve customer data successfully while still be commercially wrong if the business never clarified:
 
 * which customer groups still matter
 * which storefront differences should follow each group
@@ -56,7 +78,17 @@ Customer groups can shape how the storefront behaves for different customer cont
 
 This becomes a risk because PrestaShop can make differentiated customer treatment more explicit than the source store ever did. If that structure is not planned clearly, the target may look more governed while becoming less trustworthy.
 
+#### Who it affects
+
+This affects businesses whose pricing, visibility, or differentiated storefront behavior depends on customer segmentation rather than one universal storefront experience.
+
+#### Mitigation strategy
+
+Define customer-group meaning as part of the target storefront model, not as a leftover administrative label. Validate the customer groups most likely to affect trust, access, pricing, or visibility.
+
 ### Constraint 4: Multistore Is Powerful, but Weak Shop Governance Creates Hidden Failure
+
+#### Description
 
 PrestaShop multistore is one of its clearest strengths, and one of its most common risk areas.
 
@@ -69,7 +101,17 @@ The platform supports multiple stores in a single instance. That gives businesse
 
 A value can migrate successfully and still be wrong if it sits in the wrong shop context. This is one of the clearest reasons PrestaShop targets can look well governed while still behaving incorrectly across shops, audiences, or catalog contexts.
 
+#### Who it affects
+
+This affects merchants operating more than one shop context, segmented audiences, localized storefronts, or shop-specific behaviors under one broader PrestaShop environment.
+
+#### Mitigation strategy
+
+Define shop assignments deliberately before broader execution is treated as safe. Focus on what must stay shared, what must vary, and why those differences matter commercially.
+
 ### Constraint 5: Friendly URLs Reduce One Friction Point but Not Route-Continuity Risk
+
+#### Description
 
 PrestaShop supports friendly URLs, but route continuity still depends on more than readable paths.
 
@@ -80,9 +122,19 @@ The real pressure point is usually not whether a route exists. It is whether the
 * the team validates that the path works, but not whether it works well
 * destination planning is weaker than route implementation
 
-A route can therefore be technically valid while still being commercially weak.
+A route can therefore be technically valid while still be commercially weak.
+
+#### Who it affects
+
+This affects stores with meaningful SEO exposure, important category journeys, product pages that still carry commercial value, or routes that influence trust and discovery.
+
+#### Mitigation strategy
+
+Treat route continuity as a destination-quality decision, not only a route-exists check. Prioritize the paths that matter most to traffic, conversion, trust, and support, then validate whether their destinations still serve the original purpose.
 
 ### Constraint 6: Module- and Theme-Owned Meaning Can Make PrestaShop Look More Complete Than It Is
+
+#### Description
 
 Many PrestaShop stores depend on more than native product, category, customer-group, and multistore structures.
 
@@ -95,11 +147,21 @@ Modules, theme behavior, custom fields, and workflow rules may still carry impor
 * merchandising outcomes
 * operational workflows that still affect storefront outcomes
 
-This creates risk because the visible storefront can make that behavior look fully native even when it is not. A migration can preserve products, customers, categories, and shop structure while still weakening the outcomes that matter if the surrounding module- and theme-owned layer has not been classified clearly enough.
+This creates risk because the visible storefront can make that behavior look fully native even when it is not. A migration can preserve products, customers, categories, and shop structure while still weaken the outcomes that matter if the surrounding module- and theme-owned layer has not been classified clearly enough.
 
 The important risk is not module usage alone. It is unclear module-owned meaning.
 
+#### Who it affects
+
+This affects businesses whose storefront behavior depends heavily on modules, theme customizations, custom fields, overrides, or workflows that still influence what customers see and do.
+
+#### Mitigation strategy
+
+Classify the surrounding module- and theme-owned meaning before launch. The business does not need a generic inventory of everything installed. It needs a clear view of which outcomes still matter enough to shape risk, preparation, and validation.
+
 ### Constraint 7: Customer Continuity Can Be Assumed Too Optimistically
+
+#### Description
 
 Customer continuity in PrestaShop should not be treated as an automatic carry-over from the source storefront.
 
@@ -112,7 +174,17 @@ Risk rises when the business assumes that:
 * support and launch communication do not need explicit preparation
 * customer-record continuity is the same thing as account continuity
 
+#### Who it affects
+
+This affects stores where repeat-customer trust, account access, support volume, and first-login experience are important parts of post-launch stability.
+
+#### Mitigation strategy
+
+Define the post-migration account journey honestly. Where password continuity is realistically possible, validate that path carefully. Where it is not, plan the first-login experience, customer communication, and support handling explicitly instead of assuming account continuity will feel natural on its own.
+
 ### Constraint 8: Validation Burden Is Wider Than Many Teams Expect
+
+#### Description
 
 PrestaShop is not difficult only because it has more native structure than some teams expect. It is also demanding because the target often needs to prove more than visible storefront completeness.
 
@@ -132,7 +204,15 @@ It often also needs to prove:
 * destination quality for important routes
 * module- and theme-sensitive storefront outcomes
 
-This is one of the clearest reasons PrestaShop migrations can look complete while still being less trustworthy than expected.
+This is one of the clearest reasons PrestaShop migrations can look complete while still be less trustworthy than expected.
+
+#### Who it affects
+
+This affects any business whose store depends on structured product logic, customer-group behavior, multistore scope, route continuity, or surrounding module-shaped behavior that cannot be judged through broad random checks alone.
+
+#### Mitigation strategy
+
+Build validation around the structurally sensitive areas of the PrestaShop target rather than around easy records or reassuring totals. Use representative evidence early enough that the project can still adjust if the target model itself is under-defined.
 
 ### What Usually Deserves the Earliest Risk Review
 

@@ -16,7 +16,7 @@ The strongest fit patterns usually appear when several conditions are true at th
 
 Shopware is often a strong fit when the storefront genuinely needs more than one customer-facing context and those contexts still need to be governed inside one broader platform model.
 
-Current Shopware documentation shows that products and categories can be assigned to specific sales channels, and migration documentation confirms that older Shopware shop structures can become separate sales channels in Shopware 6. This makes Shopware especially strong when storefront differences are not a side detail, but a central part of how the business sells. citeturn538690search0turn538690search2turn538690search6
+This makes Shopware especially strong when storefront differences are not a side detail, but a central part of how the business sells.
 
 #### Rule-dependent behavior matters commercially
 
@@ -29,19 +29,19 @@ That is especially important when:
 * pricing or promotional behavior needs more structured control
 * the business wants clearer reasoning behind how behavior changes
 
-Shopware’s Rule Builder is a real strength when the target needs more than static configuration. It allows the business to formalize context-sensitive behavior more clearly than many teams are used to. citeturn538690search3
+Shopware’s Rule Builder is a real strength when the target needs more than static configuration. It allows the business to formalize context-sensitive behavior more clearly than many teams are used to.
 
 #### Channel-specific product visibility matters
 
 Shopware is often a strong fit when the business needs products to behave differently across customer-facing contexts.
 
-Developer documentation makes clear that products need a visibility record per sales channel, and visibility values determine whether a product is searchable or directly accessible in that channel. That makes Shopware especially strong when product presence is not universal and channel-specific product meaning matters commercially. citeturn538690search6
+That makes Shopware especially strong when product presence is not universal and channel-specific product meaning matters commercially.
 
 #### Route and SEO behavior matter by storefront context
 
 Shopware is often a strong fit when route behavior is not one universal storefront question, but something the business needs to govern by channel context.
 
-Current Shopware documentation shows that SEO URLs are configurable through templates and that canonical URLs can be set separately for each sales channel. This makes Shopware especially strong when route meaning, SEO logic, and destination control need to remain deliberate across multiple storefront contexts. citeturn538690search1turn538690search4
+This makes Shopware especially strong when route meaning, SEO logic, and destination control need to remain deliberate across multiple storefront contexts.
 
 #### The business can govern extension-shaped behavior realistically
 
@@ -101,7 +101,7 @@ These are teams that need contextual storefront behavior to be governed through 
 
 #### Businesses that need stronger route and SEO control by channel
 
-These are businesses where SEO URL behavior, canonical handling, and destination logic should remain deliberate across multiple storefront contexts. citeturn538690search1turn538690search4
+These are businesses where SEO URL behavior, canonical handling, and destination logic should remain deliberate across multiple storefront contexts.
 
 #### Businesses willing to govern extension-shaped logic deliberately
 
@@ -133,19 +133,19 @@ Before the business treats Shopware as the right target, it should be able to an
 
 #### 1. Does the future storefront genuinely need more than one sales channel?
 
-If channel context is central to how the business sells, Shopware is often a stronger fit. citeturn538690search0turn538690search2turn538690search6
+If channel context is central to how the business sells, Shopware is often a stronger fit.
 
 #### 2. Are rules part of real storefront governance?
 
-If important behavior depends heavily on contextual logic, Rule Builder can become a major fit advantage. citeturn538690search3
+If important behavior depends heavily on contextual logic, Rule Builder can become a major fit advantage.
 
 #### 3. Does the future model genuinely need channel-specific SEO and route handling?
 
-The business should be able to explain why route logic and destination behavior should differ by storefront context. citeturn538690search1turn538690search4
+The business should be able to explain why route logic and destination behavior should differ by storefront context.
 
 #### 4. Has the business defined how product visibility should work across channels?
 
-Because visibility is channel-specific in Shopware, this should be intentional rather than assumed. citeturn538690search6
+Because visibility is channel-specific in Shopware, this should be intentional rather than assumed.
 
 #### 5. Can the team validate the richer contextual structure Shopware introduces?
 
