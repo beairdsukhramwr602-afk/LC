@@ -1,225 +1,205 @@
-# Square Validation Priorities: What to Verify Most Carefully
+# Square Validation Priorities
 
-Square migrations should be validated behavior-first, not totals-first. Square is designed to run commerce across channels, which means a store can look correct on the surface while the underlying selling logic is misaligned. The highest-value validation work confirms that items sell the way customers expect, inventory behaves the way staff relies on, and orders remain usable across the workflows that matter.
+A Square migration should not be validated evenly across the whole storefront. It should be validated where Square is most likely to change sellable behavior, inventory truth, customer usefulness, historical-order interpretation, and route meaning.
 
-A Square migration is validated when:
+That matters because Square can produce a clean-looking target quickly. Items may appear present, variations may exist, modifiers may be attached, inventory counts may load, customer profiles may import, historical orders may be visible, and redirects may work. But those signals do not prove that the target is commercially trustworthy. The more important question is whether Square’s catalog, inventory, customer, order, and site logic still support the intended outcome after translation.
 
-* Shoppers can find the right item, choose the intended configuration, and complete checkout without confusion.
-* The same catalog logic supports how you sell in real life (pricing, modifiers, inventory, fulfillment).
-* Operational workflows still work, including order handling, refunds, and basic customer support tasks.
-* If SEO continuity matters, priority URL paths resolve intentionally after launch.
+This makes Square validation more workflow-sensitive than many teams first expect. A broad record check can create false confidence. A stronger approach is to validate the places where Square most often reshapes meaning: high-risk sellable choices, variation-versus-modifier behavior, inventory and location-sensitive workflows, customer-profile usefulness, historical-order interpretation, multiple-website governance where relevant, and priority path continuity.
 
-Before diving into the priority areas, define what you will validate and with what sample. The most useful first pass uses a representative Demo Migration sample, not random records.
+### What Square Validation Is Really Trying to Prove
 
-A high-quality validation sample typically includes:
+For Square, validation is mainly trying to prove five things.
 
-* Best sellers and the items that drive the most support volume
-* The most configuration-heavy items (many options, add-ons, bundles, or customizations)
-* Items where pricing differs by selection or add-on
-* Products where inventory accuracy is operationally critical
-* A mix of fulfillment types (shipping, pickup, local delivery) if applicable
-* A small set of real-world orders that represent typical workflows if order history is in scope
-* Priority URLs only if SEO is a deliverable for your project
+#### 1. The right sellable units still exist
 
-#### Priority 1: Sellable item and variation integrity
+Items may exist, but the higher-value question is whether the correct variations still represent what customers are actually meant to buy.
 
-In Square, items are not validated when they “exist.” They are validated when the correct sellable choice is created and customers can buy it. This matters because Square’s catalog model relies on variations as the sellable unit, and many behaviors attach to variation-level data.
+#### 2. Customizations still mean the right thing
 
-**Validate**:
+Modifier-driven choices may still appear, but the target still needs to prove that purchase-time customization has not been confused with true sellable structure.
 
-* Each product has the correct sellable variation structure for how you sell it (single-SKU items versus multi-option items).
-* Variation names and selection labels match what customers recognize.
-* The correct variation is what gets added to cart and purchased.
-* Variation-level identifiers that operations rely on (such as SKU conventions) are consistent and visible where needed.
+#### 3. Inventory still supports real operational behavior
 
-**High-risk indicators**:
+Counts may import, but the target still needs to prove that inventory behaves correctly by variation, by location, and by fulfillment expectation.
 
-* Items display correctly but the wrong selection is purchasable, or a key option is missing.
-* Products appear “flattened” into a single sellable choice even though the source store sells multiple variants.
-* The store shows choices but purchasing does not reflect the intended sellable unit.
+#### 4. Customer and order records are still operationally useful
 
-**What to include in your sample**:
+Customer profiles and historical orders may be visible, but the target still needs to prove that they support the workflows the business actually depends on.
 
-* Your most variation-heavy best sellers.
-* Items with option-dependent pricing.
-* Items where fulfillment or inventory differs by selection.
+#### 5. Priority paths still support the intended journey
 
-#### Priority 2: Options, add-ons, and modifier behavior
+Redirects may work, but the routes and destinations still need to support the customer and search intent that matter most commercially.
 
-Square stores often rely on add-ons and customizations that shape what customers actually buy. A migration can move the base item record but still fail in practice if option structures, modifier rules, or price adjustments do not behave correctly.
+### Validation Priority 1: High-risk sellable variation cases
 
-**Validate**:
+The first Square validation priority is usually the product groups most likely to expose sellable-structure ambiguity.
 
-* Options and add-ons appear in a way that matches shopper expectations.
-* Required versus optional selections behave correctly.
-* Price adjustments for add-ons or upgraded selections apply as intended.
-* Any constraints that matter to selling behavior (such as selection limits) are respected.
+That often includes:
 
-**High-risk indicators**:
+* best sellers with meaningful structured choice
+* products with many possible combinations
+* products where price depends on the exact variation selected
+* products where inventory must remain accurate by sellable unit
+* products where the source store blurred together true variants and broader configuration logic
 
-* Add-ons exist but do not change the line item outcome the way your business expects.
-* Price changes are missing, doubled, or applied to the wrong selection.
-* Customers can select combinations that should not be purchasable.
+Square treats item variations as the purchasable units. That makes product validation a structural question, not just a record question.
 
-**What to include in your sample**:
+The review question is not only whether the product exists. It is whether the intended customer can still reach the correct purchasable outcome without confusion and without weakening downstream inventory or reporting behavior.
 
-* Items with multiple add-ons and a mix of required and optional selections.
-* Items where add-ons are the primary profit driver or a frequent cause of support tickets.
+### Validation Priority 2: Variation-versus-modifier behavior
 
-#### Priority 3: Pricing, taxes, and discount behavior
+One of Square’s clearest validation priorities is the boundary between sellable structure and purchase-time customization.
 
-Square validation should confirm that the money behaves correctly, not only that numbers were migrated. This is where many “looks fine” migrations break down because price presentation can differ from the actual checkout calculation.
+That means validation should focus on the choices most likely to expose misclassification.
 
-**Validate**:
+Useful checks usually include:
 
-* Base prices and variation prices match your intended selling model.
-* Discounts behave correctly for representative scenarios (item-level versus order-level patterns).
-* Tax behavior matches your operating reality, especially if your business has multiple locations or mixed product types.
+* whether true sellable differences are represented as variations rather than modifiers
+* whether add-ons and customizations remain flexible without distorting the sellable unit
+* whether pricing behaves correctly when modifiers are applied
+* whether the cart and order still reflect the intended customer choice clearly enough
+* whether internal teams can still explain what the customer actually bought
 
-**High-risk indicators**:
+A target can therefore look functional while still be commercially wrong if the variation-versus-modifier boundary was translated loosely.
 
-* Prices appear correct on item pages but differ at checkout.
-* Discount logic works for simple items but fails for configured items.
-* Taxes apply unexpectedly to products that should be treated differently in your business context.
+### Validation Priority 3: Inventory and location-sensitive workflows
 
-**What to include in your sample**:
+Square validation should explicitly review the inventory and location cases most likely to affect customer trust and operational accuracy.
 
-* A mix of high-volume items, high-price items, and items with add-ons.
-* A few real promotional scenarios you run frequently.
+That usually means checking:
 
-#### Priority 4: Inventory, locations, and fulfillment readiness
+* variation-level inventory behavior on the most important products
+* location-specific stock behavior where more than one location matters
+* fulfillment-sensitive products whose availability depends on operational rules
+* whether the target still supports the intended stock truth across channels
+* whether staff-facing workflows still make sense after launch
 
-Square is often chosen because it connects selling and operations. That makes inventory and fulfillment validation a top priority, especially for multi-location merchants or stores that sell both online and in person.
+This is one of the clearest areas where Square validation becomes more than checking counts. It becomes proof that the operational center still behaves correctly.
 
-**Validate**:
+### Validation Priority 4: Customer-profile usefulness
 
-* Inventory counts reflect the expectations of your operational workflow.
-* Stock status and availability match how you actually fulfill items.
-* Fulfillment methods that matter to your store are represented and usable (shipping, pickup, local delivery, or other applicable methods).
-* Items that should not be fulfillable in certain ways are restricted appropriately.
+Square customer records should be validated as workflow tools, not only imported data.
 
-**High-risk indicators**:
+That usually means checking:
 
-* Items show as in stock but cannot be fulfilled correctly.
-* Inventory looks correct in one context but not in another (location-specific behavior).
-* Pickup or delivery scenarios work for some products but fail for configured products.
+* whether support teams can still find the customer information they need
+* whether customer history still feels usable in support and retention workflows
+* whether metadata that matters commercially survived in a usable way
+* whether the profile is still useful for repeat-customer identification
+* whether the resulting customer record supports the real internal tasks the business depends on
 
-**What to include in your sample**:
+A customer can therefore exist in the target while the business still loses operational clarity if the profile is less useful than before.
 
-* Items with fast-moving inventory.
-* Items sold in multiple channels.
-* Items with different fulfillment constraints (bulky, fragile, made-to-order, local-only).
+### Validation Priority 5: Customer-account experience where it matters commercially
 
-#### Priority 5: Customer identity and continuity
+If customer accounts matter to the buying or support experience, Square validation should test those expectations directly.
 
-Customer validation is not only “did contacts migrate.” It is whether Square can recognize customers in a way that supports your operations, marketing, and support workflows. This becomes especially important if your source platform had strong account functionality and you want continuity in how customers identify themselves.
+Useful checks usually include:
 
-**Validate**:
+* whether customer accounts support the intended order-history visibility
+* whether reorder-related expectations still behave acceptably
+* whether the account experience still feels coherent to the intended customer
+* whether the most important customer scenarios remain supportable after launch
 
-* Customer profiles are accurate enough to support your key workflows (contact, support, segmentation).
-* Duplicates and identity conflicts are understood and manageable (for example, multiple records that represent the same person).
-* Customer account expectations are aligned with what Square will provide, especially around order history visibility and reordering behavior.
+This matters because imported customer records are not the same thing as a credible customer-account experience.
 
-**High-risk indicators**:
+### Validation Priority 6: Historical orders as operationally interpreted records
 
-* Customer records exist but cannot be used reliably for support or marketing.
-* The store expects rich account history behavior, but the new customer experience is more limited than anticipated.
+Square’s order model makes historical orders one of the most sensitive validation priorities.
 
-**What to include in your sample**:
+That means validation should focus on the historical orders most likely to expose support, refund, reporting, or staff-interpretation risk.
 
-* A set of repeat customers.
-* Customers with multiple addresses or meaningful profile attributes.
-* A few customers tied to representative orders if orders are in scope.
+Useful checks usually include:
 
-#### Priority 6: Order usability and support workflows
+* whether imported historical orders are visibly distinguishable enough for safe staff use
+* whether the business can still explain what those records are meant to support
+* whether the most sensitive refund- or cancellation-related orders create confusion
+* whether support and operations teams can interpret imported orders safely
+* whether the target workflow still distinguishes clearly between historical continuity and current operational action
 
-If order history is included in your migration scope, validate whether orders remain usable for real work. A migration can move an order record but still fail the operational outcome if staff cannot find what they need, interpret the order correctly, or manage common post-purchase scenarios.
+This is one of the clearest places where Square validation becomes more than record visibility. It becomes proof that the team can use order history safely.
 
-**Validate**:
+### Validation Priority 7: Multiple websites and site-governance behavior
 
-* Order visibility supports customer support needs (what was bought, key identifiers, and basic order context).
-* Fulfillment outcomes match expectations (status handling, shipping versus pickup behavior).
-* Refund and cancellation workflows are understood and workable for your operating model.
+If the business uses more than one Square Online website, validation should confirm that the site model still makes sense in practice.
 
-**High-risk indicators**:
+That usually means checking:
 
-* Orders exist but are not actionable for support workflows.
-* Status expectations do not map cleanly to how your team works.
-* Post-purchase actions become slower or require manual workarounds that you did not anticipate.
+* whether the right items appear on the right website
+* whether category and browse intent still remain coherent by site
+* whether shared operational control is not weakening storefront differentiation
+* whether teams can still explain why a product belongs where it does
+* whether multiple sites are behaving like governed commercial contexts rather than duplicated noise
 
-**What to include in your sample**:
+Multiple sites can be technically present and still fail validation if the business has not preserved clear commercial boundaries between them.
 
-* A small range of orders that represent typical workflows: fulfilled, partially fulfilled, cancelled, refunded, and edited scenarios where applicable.
+### Validation Priority 8: Priority routes and destination continuity
 
-#### Priority 7: Merchandising and discoverability in Square Online
+Square Online supports redirects, but route validation still has to prove customer continuity and destination quality.
 
-Once selling logic is correct, the next risk is whether shoppers can find what they want. Discoverability issues often show up as “missing products,” even when the underlying records exist.
+That means validation should focus on the routes most likely to expose ambiguity.
 
-**Validate**:
+Useful checks usually include:
 
-* Category structures and browse paths align with how customers shop your store.
-* Search and filtering behavior supports your most important buying journeys.
-* Product pages display meaning-critical information where shoppers rely on it (key specs, compatibility cues, or selection guidance).
+* whether the right high-value product and landing-page paths still resolve correctly
+* whether redirects lead to destinations that preserve the original commercial purpose
+* whether important discovery paths still support customer and search intent
+* whether support or trust-oriented pages still remain reachable in the right way
+* whether the priority path set was scoped correctly in the first place
 
-**High-risk indicators**:
+A redirect can therefore work technically and still fail validation if it no longer supports the purpose the original path served.
 
-* Customers can buy an item if they find it, but discovery is weaker than before.
-* Category membership is correct in data but not effective in storefront behavior.
-* Key buying information is missing or placed where shoppers will not see it.
+### What usually makes a Square validation sample strong
 
-**What to include in your sample**:
+A strong Square validation sample is usually built from:
 
-* Your top revenue categories.
-* A few categories that represent different merchandising patterns (seasonal, brand-led, collection-led).
+* the products most likely to expose sellable-structure ambiguity
+* the choices most likely to expose variation-versus-modifier drift
+* the inventory-sensitive products and locations most likely to reveal operational mismatch
+* the customer profiles most likely to reveal metadata loss
+* the historical orders most likely to expose workflow confusion
+* the websites, browse paths, and routes most likely to reveal governance or continuity risk
 
-#### Priority 8: Priority URLs if SEO continuity matters
+This is stronger than broad random checking because it tests the areas where Square’s unified commerce model most often changes meaning rather than merely confirming that records survived.
 
-Not every Square migration needs SEO continuity as a core deliverable. If SEO is important, validate it deliberately, but keep it focused.
+### What often gets missed in Square validation
 
-**Validate**:
+Several patterns weaken Square validation.
 
-* A priority list of URLs resolves intentionally after launch.
-* New URL paths align with your category and product organization.
-* Redirect readiness exists for pages whose paths must change.
+Common mistakes include:
 
-**High-risk indicators**:
+* treating item presence as proof of correct sellable structure
+* treating modifier presence as proof of correct customization logic
+* assuming imported counts prove inventory readiness
+* validating customer import without validating customer usefulness
+* treating historical-order visibility as proof of safe operational interpretation
+* checking redirects without checking destination value
+* validating multiple sites only as existence, not as governed commercial contexts
 
-* The store launches with broken priority paths.
-* Paths resolve, but to the wrong destination, creating user confusion and wasted traffic.
-
-**What to include in your sample**:
-
-* Top product URLs, top category URLs, and a short list of campaign or organic landing pages that drive meaningful traffic.
+These mistakes usually create the illusion of a mature Square launch while leaving the most important commercial and operational questions unresolved.
 
 ### Conclusion
 
-Square validation is most reliable when it is based on real outcomes. Start with a representative sample, define pass conditions in terms of buying and operating behavior, and validate in a sequence that matches business risk. If you can only validate a few areas deeply, prioritize sellable variation integrity, option and add-on behavior, and fulfillment readiness first. Those three areas surface structural mismatches faster than any record-count check.
+Square validation is strongest when it focuses first on the areas where the platform is most likely to change commercial and operational meaning: high-risk variation cases, variation-versus-modifier behavior, inventory and location workflows, customer-profile usefulness, customer-account scenarios, historical-order interpretation, multiple-site governance, and priority routes.
 
-Run a Demo Migration using best sellers, your most configurable items, and fulfillment-sensitive products, then review results against clear acceptance criteria. If you prefer, you can provide sample data and ask Next-Cart to run the Demo Migration and share the results. For complex catalogs or multi-location operations, Live Chat is the fastest way to align scope and confirm what must remain true after launch.
+That is what makes the validation result useful. A storefront can look polished while still being commercially weaker in exactly those areas. The safest path is to test those priorities deliberately with a representative sample rather than assume that broad completeness proves launch readiness.
 
-#### FAQs
+Validate the products, inventory behaviors, customer scenarios, order-history cases, site assignments, and routes that matter most before treating the target as trustworthy. If the result still leaves ambiguity around whether a difference is acceptable Square formalization or a real continuity problem, Live Chat can help interpret that evidence before launch decisions are locked.
 
-<details>
+### FAQs
 
-<summary><strong>What is the most common reason a Square migration looks correct but fails in real usage?</strong></summary>
+#### What should be validated first in a Square migration?
 
-Misaligned sellable structure. Items and images can appear correct while variation logic, add-ons, or fulfillment behavior differs from how your store actually sells
+Usually the first priority is the products most likely to expose variation-design ambiguity, followed by the variation-versus-modifier boundary, inventory and location-sensitive workflows, customer-profile usefulness, historical-order interpretation, multiple-site behavior where relevant, and the priority routes that materially matter.
 
-</details>
+#### Why are variations and modifiers such important Square validation priorities?
 
-<details>
+Because Square treats them as different kinds of commercial meaning. Variations represent what is being sold, while modifiers often represent purchase-time customization. Validation should prove that the boundary still supports the intended sellable outcome.
 
-<summary><strong>What should I validate first if time is limited?</strong></summary>
+#### Why is historical-order interpretation part of Square validation?
 
-Start with product purchase behavior for best sellers and complex products, then category navigation, then customer and order workflows. These areas usually drive most revenue and support load.
+Because imported order history can support continuity and reporting without automatically behaving like live operational Square orders. Validation should prove that staff can interpret those records safely in the real workflow.
 
-</details>
+#### Do redirects alone prove SEO continuity in Square Online?
 
-<details>
-
-<summary><strong>Do I need to validate orders if order history is not included in scope?</strong></summary>
-
-You should still validate your order workflow from new purchases (checkout, fulfillment, refunds) because that is what your team will use immediately after launch.
-
-</details>
-
+No. Native redirects reduce one technical barrier, but validation still needs to prove that the right priority paths lead to destinations that preserve the original customer and search intent.

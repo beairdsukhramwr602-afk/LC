@@ -1,244 +1,258 @@
-# Common Square Migration Pitfalls and Prevention
+# Square Migration Pitfalls and Prevention
 
-Square migrations are rarely blocked by a single hard technical limit. The more common failure pattern is behavioral: the catalog looks complete, but what customers can actually buy changes; inventory appears correct, but location and fulfillment behavior drifts; order history is present, but staff workflows become risky; SEO-critical pages stop resolving as intended.
+Square migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated system preserves records without preserving the commercial and operational logic that made the business usable before the move.
 
-Square is designed for unified commerce. Items, variations, modifiers, inventory, customers, and orders are meant to work together across channels. That design is a major advantage when it is mapped deliberately, and a major source of friction when teams assume Square will behave like their previous platform.
+That is what makes Square pitfalls so easy to underestimate. The target can look cleaner, more unified, and more operationally mature while still becoming commercially weaker if sellable structure, modifier logic, inventory behavior, customer-profile usefulness, historical-order interpretation, website governance, or route continuity are treated as details to refine later instead of as conditions that shape the target from the beginning. The real danger is false confidence. Customers and internal teams may see a system that appears complete while the behaviors that drive buying, trust, support, and day-to-day operations have already weakened.
 
-Each pitfall below includes what goes wrong, early warning signs, prevention, and a recommendation example with a pass condition.
+This page focuses on the failure patterns that recur most often when Square is chosen for the right broad reasons but prepared or validated too loosely. Each pitfall matters because it can create a system that looks complete while still behaving incorrectly for customers, internal teams, or both.
 
-### Pitfall 1: Approving the migration based on totals instead of behavior
+### Pitfall 1: Migrating products without preserving the real sellable outcome
 
-**What Goes Wrong**
+#### What Goes Wrong
 
-Teams approve the migration because the number of products, customers, or orders “matches.” After launch, they discover that the store’s meaning changed: options do not produce the right purchasable outcome, add-ons are modeled incorrectly, inventory behaves differently across locations, or staff cannot use order history safely.
+Item records are transferred, but the target no longer leads customers to the correct purchasable result. Variation structure becomes blurred with modifier logic, cosmetic distinctions, or source-side option patterns that never matched Square’s model cleanly. The product page still looks populated but no longer communicates what is actually being bought clearly enough, or the most important products rely on selection behavior that is no longer being expressed correctly in the target.
 
-**Early Warning Signs**
+#### Early Warning Signs
 
-* Validation plans emphasize counts and spot checks instead of full buying-path scenarios
-* Demo samples include only easy products and clean customers
-* Approval criteria do not define pass conditions for checkout, inventory, and support workflows
+* products appear complete, but shoppers struggle to identify the right purchase path
+* important choices feel harder to interpret than before
+* internal teams cannot explain which selection defines the actual sellable unit
+* the highest-value products require workarounds to make sense after migration
 
-**Prevention**
+#### Prevention
 
-* Validate behavior, not totals. Use scenario-based checks that reflect real buying and operational work.
-* Build a Demo Migration sample that includes complexity: option-heavy best sellers, add-on driven items, inventory-sensitive products, and representative order scenarios.
-* Define pass conditions in outcome terms (selection-to-checkout, inventory availability, support usability).
+Define the intended sellable outcome before the migration is treated as structurally ready. Separate true purchasable units from purchase-time customization and from source-side logic that should not be carried forward unchanged. Use representative high-risk products early enough to test whether the target still supports a confident buying path.
 
-**Recommendation example**
+#### Recommendation example
 
-* **Wrong**: “Totals match, so the migration is correct.”
-* **Right**: “A shopper can select the right configuration, see the correct price, add to cart, and check out for our three most complex best sellers.”
-* **Pass condition**: Selection-to-checkout outcomes match expected behavior for the representative sample.
+Use a sample that includes the most structurally difficult and highest-value products in the catalog.
 
-### Pitfall 2: Variations exist, but the sellable reality is wrong
+**Pass condition:** the intended customer can identify the correct purchasable outcome confidently, select the right option path, and understand what is being bought without guesswork.
 
-**What Goes Wrong**
+### Pitfall 2: Treating variations and modifiers as interchangeable
 
-Items and options migrate, but variations do not represent what customers are actually buying. Customers can select choices, but the wrong sellable unit is added to cart, variation naming is unclear, or the variation structure fails to support inventory and reporting expectations.
+#### What Goes Wrong
 
-Square is variation-centered. Variations are the sellable units, so a small modeling mistake can change conversion even when the catalog looks complete.
+The target preserves the visible choices, but the business no longer has a clean boundary between what defines the sellable unit and what should remain purchase-time customization.
 
-**Early Warning Signs**
+This usually creates one of two failures. Either too many choices are forced into variations, which makes the structure harder to govern and operationally bloated, or true sellable differences are pushed into modifiers, which weakens pricing logic, inventory truth, and order clarity. In both cases, the storefront may still look functional while the commercial meaning has shifted.
 
-* Products have many option combinations (size x color x pack x material)
-* Pricing and inventory are tracked at the variation level
-* The source platform relied on dependent options, complex rules, or app-driven variation logic
-* The catalog contains products that “look like one item” but behave like multiple sellable products
+#### Early Warning Signs
 
-**Prevention**
+* products have too many variations without clearer sellable logic
+* modifiers are carrying choices that should define the actual purchased unit
+* pricing or order interpretation feels less clear after migration
+* teams still describe the difference between variations and modifiers vaguely
 
-* Validate your most complex products first, not last. If they behave correctly, the rest of the catalog is usually lower risk.
-* Use buying-path pass conditions: selection, price update, cart line item correctness, and checkout readiness.
-* Treat variation modeling as a core acceptance gate, not a detail to clean up after launch.
+#### Prevention
 
-**Recommendation example**
+Treat the variation-versus-modifier boundary as a core migration decision, not as a catalog detail. Define what genuinely changes the sellable unit, what should remain purchase-time customization, and what source-side behaviors should be simplified instead of preserved mechanically.
 
-* **Wrong**: “Variations imported, so it’s correct.”
-* **Right**: “A shopper selects two key attributes, sees the correct price and availability, and the correct sellable unit is purchased.”
-* **Pass condition**: Correct selection-to-checkout outcomes for the representative products, including variation-level identifiers your team relies on.
+#### Recommendation example
 
-### Pitfall 3: Add-ons and customizations are modeled incorrectly (variations vs modifiers)
+Validate a group of products where both structured sellable choices and add-on behavior matter to the final purchase outcome.
 
-**What Goes Wrong**
+**Pass condition:** the storefront and order record still make it clear what was sold, what was customized, and why that distinction matters operationally.
 
-Teams force add-ons and personalization into variations, creating SKU and catalog explosion. Or they model true sellable differences as modifiers, losing inventory truth, pricing integrity, and reporting clarity. Either way, the store can look fine while orders and operations become inconsistent.
+### Pitfall 3: Preserving inventory counts without preserving inventory truth
 
-This pitfall is especially common when the source store used third-party tools to create add-ons, bundles, subscriptions, or personalization logic.
+#### What Goes Wrong
 
-**Early Warning Signs**
+Inventory numbers are migrated, but the operational model behind them no longer behaves correctly. Stock may appear available while the wrong location owns it, the wrong variation is being tracked, or the wrong fulfillment expectation is attached to the product.
 
-* The store relies on add-ons, personalization, or build-your-own logic
-* Price depends on selections or add-ons
-* The source platform used extensions to control purchasability and checkout behavior
-* Some products have “choices” that are not meant to become distinct SKUs
+This is a common Square pitfall because inventory in Square is more operationally central than many source systems require. A target can therefore look accurate at first glance while still creating real selling or fulfillment errors after launch.
 
-**Prevention**
+#### Early Warning Signs
 
-* Apply a classification rule in shopper terms:
-  * If the choice defines what the customer is buying, it should usually be a variation.
-  * If the choice is a purchase-time customization, it often fits better as a modifier.
-* Validate configured purchase outcomes using real baskets, not isolated product-page checks.
-* Treat app-owned product behavior as high risk until proven in a demo sample.
+* counts imported successfully, but teams still cannot explain variation-level stock logic
+* location-sensitive products are not being tested directly
+* fulfillment behavior is being assumed from the source store rather than verified in Square
+* internal teams approve inventory visibility without reviewing real operational scenarios
 
-**Recommendation example**
+#### Prevention
 
-* **Wrong**: “We’ll migrate the item and rebuild add-ons later.”
-* **Right**: “Customers must be able to select the add-on set, see the correct price impact, and the order line items must remain interpretable for staff.”
-* **Pass condition**: Add-on selections and pricing behave correctly through checkout for the representative sample.
+Validate inventory as an operating behavior, not only as imported data. Clarify what must remain true by variation, by location, and by fulfillment path, then test those scenarios directly before the migration is treated as trustworthy.
 
-### Pitfall 4: Inventory and location behavior drift creates fulfillment failures
+#### Recommendation example
 
-**What Goes Wrong**
+Review products whose availability changes materially by variation, location, or fulfillment method.
 
-Inventory looks correct at first glance, but availability is wrong in real scenarios. Multi-location assumptions cause items to appear purchasable when they should not be, or inventory sync across channels behaves differently than the team expects. This creates oversells, canceled orders, and support volume.
+**Pass condition:** the right stock is tied to the right sellable unit in the right operational context, and the business can still explain why.
 
-Square’s unified commerce model tends to surface inventory discipline issues quickly, especially when online and in-person selling share the same catalog and stock truth.
+### Pitfall 4: Importing historical orders without controlling how staff interpret them
 
-**Early Warning Signs**
+#### What Goes Wrong
 
-* Multiple locations or location-specific assortment rules
-* Pickup and local delivery are meaningful to the business
-* Inventory accuracy is mission-critical (fast-moving best sellers, limited stock)
-* The previous platform used looser inventory practices or manual adjustments
+Historical orders appear in the target, but internal teams treat them like live Square orders or assume they carry the same operational meaning as current transactions.
 
-**Prevention**
+This creates a subtle but serious risk. The business may preserve continuity and reporting context while still creating confusion around refunds, cancellations, payment interpretation, or customer support workflows. In Square, imported historical orders often need a different operational mindset than newly created live orders.
 
-* Define inventory truth before migration: what must be tracked, by variation, by location, and by fulfillment method.
-* Include inventory-sensitive products in your Demo Migration sample and validate availability behavior, not just imported quantities.
-* Validate at least one real journey per fulfillment method that matters (shipping, pickup, local delivery) using representative items.
+#### Early Warning Signs
 
-**Recommendation example**
+* historical orders are present, but no one has defined what staff should do with them
+* support teams assume imported records behave like current operational orders
+* refund- or cancellation-sensitive cases are absent from validation
+* teams focus on order visibility but not staff interpretation
 
-* **Wrong**: “Inventory imported, so availability will be fine.”
-* **Right**: “A customer can only purchase an item from the correct location and fulfillment method, and stock behavior remains consistent for our highest-risk SKUs.”
-* **Pass condition**: Location and fulfillment availability behave as defined for the representative sample.
+#### Prevention
 
-### Pitfall 5: Customer records exist, but identity and account expectations break
+Define historical-order meaning before launch. Clarify what imported orders are meant to support, what staff should and should not do with them, and which sensitive order examples should be reviewed directly in validation.
 
-**What Goes Wrong**
+#### Recommendation example
 
-Customers import, but profiles are not usable for support workflows, duplicates create confusion, or the customer experience does not match expectations around accounts and order history visibility. The store “has customers,” but the business loses continuity in how it recognizes and serves them.
+Build validation around the historical orders most likely to affect support, refunds, reporting, or payment interpretation.
 
-**Early Warning Signs**
+**Pass condition:** staff can read and use imported order history safely without confusing it with live operational order behavior.
 
-* Customer identity is inconsistent (multiple emails, shared phone numbers, duplicates)
-* The business relies on segmentation fields, eligibility flags, or CRM-driven metadata
-* The store expects a strong account experience and predictable order history visibility
-* Support relies on quick customer lookup and purchase history context
+### Pitfall 5: Preserving customer records without preserving customer usefulness
 
-**Prevention**
+#### What Goes Wrong
 
-* Define “usable customer profiles” in outcomes: what support and marketing must be able to see, search, and act on.
-* Validate representative customer profiles (repeat customers, multi-address customers, segmented customers).
-* If customer meaning depends on custom fields or third-party systems, treat metadata strategy as a core scope decision, not cleanup work.
+Customer records survive in the target, but the business loses the practical usefulness those records were supposed to provide. Profiles may still contain names and emails while support teams lose important context, segmentation becomes weaker, or customer history becomes less helpful in real workflows.
 
-**Recommendation example**
+This is a common Square pitfall because customer presence is easy to approve while customer usefulness is harder to validate.
 
-* **Wrong**: “Customers imported, so customer continuity is solved.”
-* **Right**: “Support can reliably identify repeat customers and interpret their purchase history using the fields that matter.”
-* **Pass condition**: Representative customer lookup and history checks work without manual reconciliation.
+#### Early Warning Signs
 
-### Pitfall 6: Imported order history creates refund and reporting confusion
+* customer records exist, but teams cannot explain which profile fields still matter
+* support workflows feel weaker after migration even though customer counts look correct
+* important notes, metadata, or classifications were never reviewed directly
+* the migration is being judged by record presence rather than by workflow usefulness
 
-**What Goes Wrong**
+#### Prevention
 
-Teams import historical orders for continuity, then treat them like live operational orders. In Square, cancellations and refunds are designed around transaction and tender workflows. If staff cancel or refund historical orders incorrectly, it can create operational confusion, reporting noise, or inconsistent internal processes.
+Validate customer profiles as workflow tools. Identify which data still matters to support, retention, and internal interpretation, then test the customer scenarios most likely to reveal whether that usefulness has weakened.
 
-**Early Warning Signs**
+#### Recommendation example
 
-* Large historical order migration scope
-* Frequent refunds and post-purchase adjustments in daily operations
-* Support depends heavily on order history for customer service
-* Staff workflows assume historical orders behave exactly like native Square orders
+Review the customer profiles most likely to matter to support teams, repeat buying, and retention-sensitive workflows.
 
-**Prevention**
+**Pass condition:** the resulting customer profile remains useful enough that the intended internal and customer-facing workflows still make sense after launch.
 
-* Define the purpose of historical orders: reference only, support context, or reporting context.
-* Establish a clear internal policy for how staff should treat migrated historical orders.
-* Validate how representative historical orders appear in Square and align operations to that reality before launch.
+### Pitfall 6: Treating multiple websites as a simple feature instead of a governance model
 
-**Recommendation example**
+#### What Goes Wrong
 
-* **Wrong**: “Orders are there, the team will figure it out.”
-* **Right**: “Support can find a historical order, interpret it safely, and follow a defined policy for what actions are allowed.”
-* **Pass condition**: Staff can complete key support tasks using representative historical orders without triggering incorrect workflows.
+Multiple websites are enabled or preserved, but the business has not defined clearly what belongs on each site, what should stay shared, and why those boundaries matter.
 
-### Pitfall 7: SEO continuity fails because redirect constraints and priorities are handled late
+That usually creates a target that looks more organized than it really is. Products may exist on the right site at first glance, but category intent, browsing clarity, and operational ownership become harder to govern over time. The problem is not that multiple websites exist. It is that no one has clearly defined the commercial logic behind them.
 
-**What Goes Wrong**
+#### Early Warning Signs
 
-Priority landing pages and high-value product paths stop resolving correctly after launch because URL changes were not planned early, redirect rules were misunderstood, or the team never built a priority mapping list. Organic traffic and returning customer journeys degrade even though the storefront appears functional.
+* sites exist, but the business cannot explain their distinct purpose clearly
+* products or categories appear duplicated without a clear reason
+* teams treat site scope as a technical setting rather than a customer-facing context
+* validation focuses on site existence, not on site coherence
 
-Square Online provides native URL redirect tools, but it also has practical constraints. SEO continuity succeeds when it is scoped and validated around priority paths.
+#### Prevention
 
-**Early Warning Signs**
+Define multiple websites as a governance model, not as a feature checkbox. Clarify why each site exists, what should remain shared, what must differ, and how those boundaries should remain understandable after launch.
 
-* Organic search is a meaningful revenue driver
-* The project changes URL structure or page hierarchy
-* There is no defined list of priority URLs and owners for mapping and validation
-* The team assumes redirects can be handled “after go-live”
+#### Recommendation example
 
-**Prevention**
+Use a sample that includes the sites most likely to expose ambiguity in product assignment, browse intent, or route meaning.
 
-* Only treat SEO continuity as a core deliverable when SEO is material to revenue.
-* Build a priority URL list (top categories, top products, top landing pages) and validate those early.
-* Use Square’s native redirect tools when appropriate and validate destination intent.
-* If you need the broader planning framework, refer to \[SEO and Traffic Continuity in Shopping Cart Migration].
+**Pass condition:** each relevant site remains understandable enough that both customers and internal teams can trust how it behaves.
 
-**Recommendation example**
+### Pitfall 7: Assuming native redirects solve continuity automatically
 
-* **Wrong**: “We’ll fix redirects after launch.”
-* **Right**: “Priority product and category paths must resolve to the correct destinations before cutover.”
-* **Pass condition**: A prioritized list of old paths resolves intentionally to the correct new destinations.
+#### What Goes Wrong
 
-Square migration pitfalls are most dangerous when they create a “looks right” illusion while core entity behavior fails. The strongest prevention strategy is entity-first validation: confirm Product purchase behavior (variations and add-ons), Customer usability, Order workflow safety, and SEO priority reachability when relevant. Use third-party extensions and integration-driven behavior as a mandatory lens across all four areas to avoid surface-level success masking deeper non-functionality.
+Redirects are configured, but important destinations no longer support the same discovery, trust, or conversion path that the original URLs carried.
+
+Native redirect support removes one technical barrier, but it does not guarantee that the resulting destination still serves the same commercial purpose. A route can work technically while the page it points to becomes commercially weaker or harder to govern after launch.
+
+#### Early Warning Signs
+
+* teams approve continuity by checking whether a redirect exists
+* route planning is broader than business priorities but weaker on destination review
+* important landing pages are being treated like ordinary URLs
+* destination quality is reviewed too late
+
+#### Prevention
+
+Treat continuity as a destination-quality decision. Prioritize the routes that matter most to traffic, discovery, support, and conversion, then validate whether the resulting destination still supports the intended journey.
+
+#### Recommendation example
+
+Review the highest-value product, category, and landing-page routes before treating continuity as acceptable.
+
+**Pass condition:** the most important routes still bring customers to destinations that support the intended purpose and remain easy to govern after launch.
+
+### Pitfall 8: Preserving app-shaped behavior without preserving the real business outcome
+
+#### What Goes Wrong
+
+App-driven fields, workflows, or storefront behaviors remain present in some form, but the actual business outcome they used to support becomes weaker. Search or merchandising may still appear to work, customer context may still look familiar, or operational flags may still exist while the real workflow becomes harder to trust.
+
+This is one of the most expensive Square pitfalls because the target can look unified on the surface while the most important business logic is still being carried by poorly understood surrounding systems.
+
+#### Early Warning Signs
+
+* teams describe important behavior only as “app logic” or “custom data”
+* the data survived, but no one has verified what the workflow should still produce
+* staff behavior becomes less certain even though the screens look similar
+* migration approval is based on field survival rather than on operational outcomes
+
+#### Prevention
+
+Validate app-shaped meaning as an outcome, not as a checklist item. Identify which surrounding behaviors are commercially essential, then test whether they still produce the intended result in the actual customer or internal workflow.
+
+#### Recommendation example
+
+Review the app-dependent outcomes that most affect selling, customer support, inventory decisions, or reporting usefulness.
+
+**Pass condition:** each high-impact surrounding layer still produces the intended business outcome well enough for launch, not just the intended technical presence.
+
+### Pitfall 9: Preserving too much inherited complexity and weakening governability
+
+#### What Goes Wrong
+
+The target keeps too much inherited logic, too many ambiguous workarounds, or too many loosely understood structures. The system launches with preserved functionality but becomes harder to explain, harder to validate, and harder to evolve safely.
+
+This is one of the most expensive Square pitfalls because it can make the migration look successful in the short term while weakening the main reason many businesses chose Square in the first place: a more unified and governable commerce environment.
+
+#### Early Warning Signs
+
+* teams celebrate data survival without asking whether the target is now easier to govern
+* important selling or support logic still cannot be explained clearly after migration
+* future changes already feel risky during validation
+* the migrated system looks complete but still feels opaque internally
+
+#### Prevention
+
+Treat governability as part of migration success, not as a later clean-up goal. Review whether the target has become clearer, not just whether it still works. The target should be easier to operate and interpret, not merely equally complex in a different system.
+
+#### Recommendation example
+
+Review the areas where variation logic, order history, customer metadata, or multi-site behavior most affects future maintenance and safe change.
+
+**Pass condition:** the migrated system is governable enough that ordinary maintenance, validation, and future changes do not depend on guesswork.
 
 ### Conclusion
 
-Square migrations become far smoother when you validate the behaviors that decide revenue and operations early, especially sellable variation integrity, add-on modeling, inventory readiness across locations, and safe interpretation of order history. Totals can confirm that data moved. Only scenario-based validation confirms that the store still works.
+The most common Square pitfalls come from confusing unification with migration safety. A migration can move items, variations, modifiers, inventory counts, customer records, historical orders, website structure, and routes successfully while still weakening sellable clarity, inventory truth, customer usefulness, continuity trust, or long-term governability. Strong prevention begins by making those risks visible early, then validating them through representative customer and workflow scenarios instead of relying on broad assumptions.
 
-Run a Demo Migration that includes complex products, inventory-sensitive items, and representative customer and order scenarios. Review results against clear acceptance criteria, then scale confidently.
+The most useful prevention work usually happens before the business has committed emotionally to the idea that the migration is already mostly done. That is when high-risk products, inventory-sensitive workflows, customer-profile scenarios, historical-order cases, website governance questions, and route-sensitive content can still reveal problems early enough to influence the safer next step. Once those areas are treated as the real proof points, the migration becomes much easier to judge honestly.
 
-If you prefer a faster, clearer path, you can provide your sample data and ask Next-Cart to run the Demo Migration and share a risk-focused findings summary. For complex catalogs, multi-location inventory requirements, or sensitive order-history expectations, Live Chat is the quickest way to scope what must be preserved and align on the safest approach (Standard Migration, Managed Migration, or Custom Migration).
+A practical way to use this page is to compare each pitfall against the store’s own highest-risk patterns and ask which one could create the most expensive false confidence if it were missed. That question usually identifies the products, workflows, staff behaviors, and routes that deserve the earliest attention in Demo Migration and structured review.
+
+Where those early checks still leave uncertainty, the next useful step is to decide whether the issue is mainly about tighter review, stronger execution support, or a deeper translation problem. Live Chat can help make that distinction. It can clarify whether the remaining uncertainty is still within the range of ordinary validation tightening, whether Managed Migration Service would reduce execution and review risk, or whether the business is facing a more customized source-to-target challenge that makes Custom Migration Service the safer path.
 
 ### FAQs
 
-<details>
+#### What is the most common Square migration pitfall?
 
-<summary><strong>What is the single most common validation mistake?</strong></summary>
+Usually it is preserving data without preserving operational meaning. The target may look complete while still changing how customers buy, how staff interpret order history, how inventory behaves, or how teams use customer records in daily workflows.
 
-Approving based on totals. Counts do not prove buying behavior, inventory readiness, or operational usability.
+#### Why do Square pitfalls often appear late?
 
-</details>
+Because many of them hide inside variation design, modifier logic, inventory workflows, order interpretation, customer usefulness, or route continuity that do not become obvious until real customers or internal teams try to use the migrated system.
 
-<details>
+#### Is Square’s unified model automatically a migration advantage?
 
-<summary><strong>Why do complex products matter so much in a demo sample?</strong></summary>
+Only when the business has defined the future-state meaning clearly. A more unified model helps, but it does not protect a migration automatically if sellable behavior, inventory truth, order policy, or customer workflows are still too vague.
 
-Because they reveal whether your sellable reality maps correctly into Square’s variation and modifier model. If the hardest products behave correctly, the rest of the catalog is usually less risky.
+#### What is the best way to prevent Square migration pitfalls?
 
-</details>
-
-<details>
-
-<summary><strong>How does Next-Cart help prevent these pitfalls?</strong></summary>
-
-Next-Cart uses Demo Migration output for early review, validates relationships that matter, and aligns the service model (Standard, Managed, or Custom) to the real complexity your data reveals.
-
-</details>
-
-<details>
-
-<summary><strong>How can I reduce the risk of refund confusion with imported historical orders?</strong></summary>
-
-Define a clear internal policy for historical orders, validate representative examples in the demo, and align staff workflows to the intended use (reference and support context, not live operations).
-
-</details>
-
-<details>
-
-<summary><strong>Do I need to invest heavily in SEO continuity for every Square migration?</strong></summary>
-
-Only if organic traffic is material. When it matters, protect a priority list of URLs and validate those paths early using Square’s native redirect tools within their practical constraints.
-
-</details>
+Use representative early validation. The best prevention method is usually a focused review of the products, inventory-sensitive scenarios, customer profiles, historical-order cases, website contexts, and priority routes most likely to reveal whether the target still preserves the intended business outcome.

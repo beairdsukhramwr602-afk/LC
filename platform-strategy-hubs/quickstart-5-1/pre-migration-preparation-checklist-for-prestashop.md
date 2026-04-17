@@ -1,205 +1,232 @@
 # Pre-migration Preparation Checklist for Square
 
-Square migrations rarely fail because data cannot be moved. They fail because the business model behind the storefront shifts in subtle ways: the catalog becomes harder to shop, fulfillment rules do not match real operations, inventory behaves differently across locations, or customers lose familiar purchase paths.
+A Square migration usually becomes riskier when the business treats preparation as a generic export exercise instead of an operating-model decision.
 
-Square is a unified commerce platform. Your online store, POS workflows, customer directory, and item library are designed to work as one system. That creates a major advantage after migration, but it also means “pre-migration preparation” is less about exporting files and more about aligning your data to Square’s operating model before you commit.
+That matters because Square is strongest when the future commerce environment has been defined clearly enough before execution begins. The platform can support tighter alignment between catalog, inventory, locations, customers, orders, and fulfillment than many storefront-first platforms. But it also expects the business to decide how those structures should work together. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
 
-Use the checklist below to reduce surprises, define what “done” means, and make your Demo Migration results more meaningful.
+This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a Square migration path is commercially safe, structurally coherent, and operationally workable after launch.
 
-#### Checklist: prepare your store for a Square migration
+### What This Preparation Checklist Is Really For
 
-1. **Confirm your Square target model (online-only vs unified commerce)**
+A strong Square preparation checklist should do more than confirm that data exists.
 
-* **Prepare**
-  * Decide whether Square will be used for online selling only, or as a unified system (POS plus online).
-  * Define your location strategy (single location vs multiple locations) and who needs access (teams, reporting owners).
-  * If you plan multiple storefronts, confirm whether you will run one site or multiple Square Online sites under the same account.
-* **Why this matters**
-  * Square’s catalog and operations are tightly connected. If you migrate “as if it’s just a storefront,” you can end up with a catalog that looks acceptable but does not support the daily workflow your team expects.
-* **Output**
-  * A one-page operating definition covering: channels in scope, number of locations, number of storefronts, and what must work on day one.
+Its purpose is to help the business answer five practical questions before execution pressure increases:
 
-2. **Normalize your catalog around Square’s item and variation model**
+* how the future sellable model should work across online and operational workflows
+* where variations, modifiers, inventory, locations, and fulfillment must remain precise
+* what customer and historical-order usefulness the target should actually support
+* which browse paths, websites, and routes deserve the most deliberate governance
+* which outcomes deserve the earliest validation because they are most likely to expose model mismatch
 
-* **Prepare**
-  * Classify your products into practical groups: simple items, multi-option items, bundles, and add-on driven items.
-  * Identify products with extreme option complexity (large option sets, many SKU combinations, or deeply nested configuration).
-  * Decide how you will represent each group in Square so customers can reliably choose the correct purchasable unit.
-* **Why this matters**
-  * Square’s core catalog logic is built around items and purchasable variations. If your current platform relies on a different structure, you need a deliberate mapping plan before migration to avoid “variant confusion” and SKU drift.
-* **Output**
-  * A catalog mapping table that lists each product group and the intended Square representation (item, variation strategy, SKU strategy).
+That is why a Square preparation checklist is strongest when it is built around operational truth and customer behavior rather than around exports alone.
 
-3. **Separate “true choices” from “add-ons” (variations vs modifiers)**
+### 1. Confirm your Square target model first
 
-* **Prepare**
-  * Audit options and customization inputs and split them into:
-    * **True product choices** (changes what is being sold and stocked, usually needs a SKU).
-    * **Add-ons / personalization** (changes how the item is prepared, packaged, or personalized).
-  * For add-ons, decide what must be selectable at checkout and what can be absorbed into item pricing.
-* **Why this matters**
-  * Many stores mistakenly force add-ons into the variation structure, which inflates variation counts and makes the catalog harder to maintain. Conversely, treating true variants as add-ons can break inventory accuracy and reporting.
-* **Output**
-  * A written rule set: “These attributes become variations; these become modifiers or add-ons; these become internal metadata only.”
+The first preparation priority is usually target scope.
 
-4. **Define inventory behavior by location**
+The business should identify:
 
-* **Prepare**
-  * Confirm whether inventory is tracked centrally or per location.
-  * Identify SKUs that must have location-specific availability (for pickup, local delivery, or regional assortment).
-  * Clean up inventory anomalies in the source platform: negative stock, duplicate SKUs, outdated warehouse locations, and inconsistent units of measure.
-* **Why this matters**
-  * Inventory is not just a product attribute. In Square, inventory and fulfillment are closely tied to locations. If location logic is unclear, you can accidentally allow checkout for items that should not be available.
-* **Output**
-  * A “location inventory truth” document that defines which SKUs are stockable, where they are stockable, and how out-of-stock behavior should be handled.
+* whether Square will be used for online selling only or as a broader unified commerce model
+* how many locations are in scope
+* which teams need access to the target environment
+* whether one storefront or multiple Square Online websites are genuinely needed
+* what must work on day one for the migration to be considered commercially acceptable
 
-5. **Plan navigation and browse logic as a customer experience decision**
+This matters because Square’s catalog and operations are tightly connected. If the business migrates as if Square were only a storefront, the target can look acceptable while still fail to support the daily workflows the team expects.
 
-* **Prepare**
-  * Identify the browsing paths that currently drive revenue: category paths, best-seller routes, branded collections, and seasonal landing pages.
-  * Decide which paths must be preserved and which can be simplified.
-  * If using multiple Square sites, define how categories and items will be assigned per site to prevent cross-site confusion.
-* **Why this matters**
-  * Most migrations validate totals. Customers validate the ability to find, compare, and buy. If browsing logic shifts, conversion can drop even when the product count is correct.
-* **Output**
-  * A prioritized list of “must-work browsing paths” (10 to 30 is typical) that will be tested after Demo Migration and again after Full Migration.
+### 2. Normalize your catalog around Square’s item and variation model
 
-6. **Set pricing expectations and edge-case rules**
+One of the most important Square preparation tasks is deciding how the catalog should be represented.
 
-* **Prepare**
-  * Identify price types in the source platform: base price, sale price, customer-specific pricing, tiered pricing, and bundle pricing.
-  * Decide which pricing behaviors must exist in Square on day one, and which can be simplified or deferred.
-  * Document rounding rules and tax display expectations (especially for mixed tax scenarios or multi-location selling).
-* **Why this matters**
-  * Price correctness is not only “a number on a product.” It includes rules and edge cases. If those rules are not defined early, teams often discover gaps only after the catalog is already built.
-* **Output**
-  * A pricing rule sheet: what is supported immediately, what will be approximated, and what will require customization.
+The business should identify:
 
-7. **Prepare customer data with relationship integrity in mind**
+* which products are simple and straightforward
+* which products depend on structured sellable variation
+* which products have large option sets or high combination counts
+* which products depend on app-shaped or custom configuration logic
+* which products would become commercially weaker if the wrong Square representation were chosen
 
-* **Prepare**
-  * Clean duplicates and define your “customer identity” logic (email, phone, or both).
-  * List customer fields that must remain usable after migration (addresses, notes, tax identifiers, segments, loyalty indicators, B2B flags).
-  * Decide how you will store customer metadata in Square (standard fields vs custom metadata strategy).
-* **Why this matters**
-  * Customer data is only valuable if it remains actionable. A migration can preserve names and emails but still break segmentation, support workflows, or repurchase journeys.
-* **Output**
-  * A customer data map that specifies: identity rules, required fields, and what must be searchable or reportable after migration.
+This matters because Square’s model is built around items and purchasable variations. The goal is not only to move products. It is to preserve the correct sellable reality.
 
-8. **Decide how orders should be interpreted after migration**
+### 3. Separate true sellable choices from add-ons and modifiers
 
-* **Prepare**
-  * Define the purpose of order history in the new system:
-    * Support reference only
-    * Customer self-service reference
-    * Operational workflows (rare for historical orders)
-  * Identify sensitive order artifacts that can cause confusion if misinterpreted: refunds, chargebacks, fulfillment state, internal notes, manual adjustments.
-  * Decide the cutover logic for “what becomes live operational truth” vs “what remains historical.”
-* **Why this matters**
-  * Orders are where “surface correctness” can hide functional problems. A store can show historical orders but still fail the operational workflows staff rely on.
-* **Output**
-  * A documented order policy: what you migrate, what you do not, and how staff should treat migrated orders in daily work.
+One of the most important early decisions in a Square migration is the variation-versus-modifier boundary.
 
-9. **Lock fulfillment requirements before you validate the catalog**
+The business should decide:
 
-* **Prepare**
-  * Define which fulfillment methods are required: shipping, pickup, local delivery, and any location-specific restrictions.
-  * For multi-location stores, define which items are eligible for which methods by location.
-  * Identify products with special fulfillment logic (perishables, oversized, regulated products, made-to-order).
-* **Why this matters**
-  * Fulfillment configuration influences item availability and checkout behavior. If fulfillment is decided late, you will rework catalog decisions that were already “validated.”
-* **Output**
-  * A fulfillment matrix by location: shipping, pickup, delivery, and exceptions.
+* which customer choices define a distinct sellable unit
+* which choices should remain add-ons or checkout-time customization
+* which personalization logic should remain outside the core variation structure
+* which source-side choices are being treated too loosely today
 
-10. **Inventory your integrations and extension-driven data**
+This matters because many stores force too much behavior into one general “option” idea. In Square, that can create either bloated variation structures or commercially weak modifier logic. A preparation checklist should force the business to define that distinction before migration is treated as routine.
 
-* **Prepare**
-  * List the systems that currently create or store business-critical data: subscriptions, bookings, loyalty, ERP/accounting, shipping tools, marketplace connectors, product personalization apps, POS add-ons.
-  * Identify which systems will be replaced by Square-native capabilities and which must remain integrated.
-  * Flag any extension-driven data that is not part of core entities but still required (custom identifiers, membership tiers, entitlement flags, warranties).
-* **Why this matters**
-  * Extension-driven data is one of the most common sources of “migration hallucination,” where the storefront looks correct but key workflows fail because the business logic lives outside core entities.
-* **Output**
-  * A dependency register with three tags per system: replace, integrate, or retire.
+### 4. Define inventory behavior by location
 
-11. **Keep SEO and URL continuity proportional to your channel reality**
+Inventory preparation in Square is not only about counts. It is about operational truth.
 
-* **Prepare**
-  * If organic search matters, identify your priority URLs (top landing pages, top product pages, top categories, high-performing content).
-  * Decide whether you will preserve the same domain and define how your new URL structure will differ from the old.
-  * If SEO is not material, minimize effort and focus validation on shopping behavior and checkout.
-* **Why this matters**
-  * Redirect work is only valuable when it protects meaningful traffic and preserves customer intent. Over-emphasizing redirects in low-SEO businesses wastes time that should be spent validating catalog and checkout behavior.
-* **Output**
-  * A practical SEO scope statement: which URLs must be preserved and how success will be measured post-launch.
+The business should identify:
 
-12. **Design a Demo Migration sample that can actually reveal risk**
+* whether inventory should be tracked centrally or by location
+* which products require location-specific availability
+* which fulfillment methods depend on accurate location behavior
+* which source-side inventory issues still need cleanup
+* whether SKU logic is clear enough to support variation-level inventory confidently
 
-* **Prepare**
-  * Build a sample that includes complexity, not just volume:
-    * Multi-option items and add-on heavy items
-    * Products with multiple images and edge-case naming
-    * Customers with imperfect data (duplicates, missing fields)
-    * Orders with discounts, shipping variations, and different fulfillment outcomes
-  * Assign owners for validation and define pass conditions before you run the Demo Migration.
-  * Use findings to decide whether the project should remain simple or requires a more guided approach.
-* **Why this matters**
-  * A Demo Migration is only useful when it tests the behaviors that can break the store after launch. A “clean” sample produces false confidence.
-* **Output**
-  * A Demo Migration plan with: sample definition, validation checklist, and sign-off criteria.
+This matters because inventory in Square is closely tied to variations, locations, and fulfillment. If location logic is unclear, the target can allow behavior the business did not intend.
+
+### 5. Define fulfillment rules before catalog confidence becomes misleading
+
+Square preparation should identify how the business expects fulfillment to work before products are treated as ready.
+
+That usually means clarifying:
+
+* which products are eligible for shipping, pickup, or local delivery
+* which locations are responsible for which fulfillment paths
+* which fulfillment differences are customer-facing and commercially important
+* which products require location-specific restrictions or availability rules
+
+This matters because Square’s value often increases when fulfillment, inventory, and storefront logic work inside one system. That also means unclear fulfillment logic becomes more visible after migration.
+
+### 6. Decide what a usable customer profile should include
+
+Square customer records should be prepared around actual business use, not only data presence.
+
+The business should identify:
+
+* what support teams need to see quickly
+* what customer history matters operationally
+* which metadata or tags still matter commercially
+* which source-side customer fields are still useful and which are noise
+* how customer accounts should support retention, support, or reordering behavior
+
+This matters because imported customer records are not the same thing as useful customer profiles.
+
+### 7. Define what historical orders should mean after migration
+
+One of the most important Square preparation topics is historical-order interpretation.
+
+The business should decide:
+
+* why historical orders are being migrated
+* what those orders should support after launch
+* how staff should interpret imported order history
+* which refund- or cancellation-sensitive cases deserve special review
+* which operational actions should not be assumed safe on imported records
+
+This matters because Square’s order model is closely tied to payments and refund logic. Historical orders should usually be treated as reference-sensitive records unless proven otherwise by validation.
+
+### 8. Plan website and browse governance deliberately
+
+If the business plans more than one Square Online website, or if browse structure is commercially important, preparation should define how that scope will remain governable.
+
+The business should identify:
+
+* what stays shared across sites
+* what differs by site
+* which items belong on which website
+* which categories and navigation paths matter most to discovery
+* whether multiple sites are solving a real commercial need or only creating avoidable governance burden
+
+This matters because Square can support multiple websites under one account, but that only works cleanly when site logic is intentional.
+
+### 9. Prioritize legacy URLs by business value
+
+Because Square Online supports native redirects, the most important preparation question is not whether redirects are possible. It is which paths deserve focused protection.
+
+The checklist should identify:
+
+* the product URLs that matter most to traffic or conversion
+* the category or landing-page paths that matter most to discovery
+* the pages that still carry trust or support value
+* the destinations that would weaken customer intent if they were handled too generically
+
+This matters because a technically valid redirect can still be commercially weak if the destination no longer supports the purpose the original path served.
+
+### 10. Mark the highest-risk validation samples before full execution
+
+Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
+
+For Square, that usually means:
+
+* products most likely to expose variation-design ambiguity
+* variation-versus-modifier cases most likely to reveal model mismatch
+* inventory-sensitive products and location scenarios most likely to expose operational inconsistency
+* customer profiles most likely to reveal metadata loss
+* historical orders most likely to expose workflow confusion
+* websites, browse paths, and routes most likely to reveal governance or continuity risk
+
+This matters because a representative Demo Migration becomes much more valuable when the sample is built around structural and operational risk instead of convenience.
+
+### 11. Define what Square is allowed to formalize and what it must preserve exactly
+
+A stronger Square preparation checklist usually includes one difficult but necessary question:
+
+What is the business willing to formalize or simplify in order to fit Square clearly, and what commercial or operational meaning is non-negotiable?
+
+That question should be answered specifically for:
+
+* variations
+* modifiers
+* inventory behavior
+* location rules
+* customer-profile usefulness
+* historical-order meaning
+* website governance
+* priority URL continuity
+
+Many Square projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of Square’s strength is that it asks for a clearer and more governable commerce model.
+
+### A Practical Square Preparation Sequence
+
+A useful preparation flow for Square usually looks like this:
+
+#### 1. Define the target operating model first
+
+This establishes whether the migration is online-only or genuinely unified commerce.
+
+#### 2. Normalize the sellable catalog
+
+This keeps item, variation, and modifier decisions from drifting too late.
+
+#### 3. Define inventory and fulfillment together
+
+This reduces the chance that location logic will be improvised after products appear ready.
+
+#### 4. Clarify customer and order usefulness
+
+This prevents imported records from being mistaken for usable operational truth.
+
+#### 5. Define site governance and route priorities
+
+This keeps browse and continuity logic aligned with real business value.
+
+#### 6. Build a representative Demo Migration sample
+
+This turns preparation into evidence rather than assumption.
 
 ### Conclusion
 
-A well-prepared Square migration is not “export everything and import it.” It is a controlled translation of your selling model into Square’s unified catalog, fulfillment, and customer experience. If you complete the checklist above before running your Demo Migration, your results will be clearer, your risk will be lower, and the final migration scope will be easier to define.
+A Square migration is easiest to govern when the business uses preparation to define what the target must still mean operationally, not only what data should move.
 
-If you want a fast way to validate your readiness, run a Demo Migration using a sample designed to test real complexity, then review the results against your pass conditions. If you prefer, you can also share your sample data and requirements and ask Next-Cart to run the Demo Migration for you and walk you through what the results mean. For scoping questions, edge-case mapping, or complexity concerns, Live Chat is the most efficient way to align expectations before you commit to a full migration.
+That means clarifying variations, modifiers, inventory and location behavior, fulfillment logic, customer-profile usefulness, historical-order interpretation, website governance, and priority path continuity before broader execution begins. When those decisions are made clearly, Square becomes easier to validate and safer to judge as a target.
 
-#### FAQs
+Before moving deeper into execution, build a preparation checklist around the products, inventory-sensitive workflows, customer scenarios, historical-order cases, site decisions, and priority routes most likely to reveal structural mismatch early. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine Square translation, a higher-burden managed path, or a sign that more specialized handling is safer.
 
-<details>
+### FAQs
 
-<summary><strong>Should I clean all my data before migrating to Square?</strong></summary>
+#### What should be prepared first before migrating into Square?
 
-Usually no. Focus on high-impact areas that affect buying behavior, navigation, and validation confidence, then use early validation to surface the few patterns that create most surprises.
+Usually the highest-value starting point is the target operating model itself: whether Square will function as online-only or as a broader unified commerce system. After that, the most important preparation areas are variation design, modifier boundaries, inventory and location behavior, customer usefulness, historical-order meaning, and priority route planning.
 
-</details>
+#### Why is the variation-versus-modifier decision so important in Square preparation?
 
-<details>
+Because Square treats sellable variations and purchase-time customizations differently. If the business has not decided what should remain a true sellable unit and what should remain an add-on or modifier, the target can be technically complete while commercially wrong.
 
-<summary><strong>Do I need to fully build my Square Online website before migrating?</strong></summary>
+#### Should Square preparation focus mainly on products?
 
-Not fully. You do need a clear operating model and basic structure decisions (locations, fulfillment methods, and how products will be represented). The goal is to ensure the migrated data will behave correctly once the storefront is assembled.
+No. Products are central, but Square preparation is often just as sensitive around inventory and fulfillment logic, customer-profile usefulness, historical-order interpretation, multiple-website governance, and priority-path continuity.
 
-</details>
+#### Why should historical orders be planned before the migration runs?
 
-<details>
-
-<summary><strong>How do I decide what must be included in scope?</strong></summary>
-
-Define scope by outcomes first, then map those outcomes to core categories like products/variations, customers, and orders, plus supporting content such as priority URLs.
-
-</details>
-
-<details>
-
-<summary><strong>How much data should be included in a Square Demo Migration sample?</strong></summary>
-
-Enough to expose complexity, not just prove counts. Include at least a handful of multi-option items, one or two add-on heavy products, representative customers, and orders that reflect real discounting and fulfillment patterns.
-
-</details>
-
-<details>
-
-<summary><strong>How should I handle products with a very large number of options?</strong></summary>
-
-Start by separating true variants from add-ons. If your option structure creates an extremely high number of SKU combinations, you may need a redesigned representation in Square (for example, splitting into multiple items or simplifying certain choice structures).
-
-</details>
-
-<details>
-
-<summary><strong>What is the most important “data cleanup” task before migrating to Square?</strong></summary>
-
-SKU and identity discipline. Resolve duplicate or inconsistent SKUs and define how customers are uniquely identified (email, phone, or both). These two decisions prevent many downstream issues across catalog accuracy, inventory, and customer history.
-
-</details>
+Because imported historical orders may remain useful for continuity and reporting without behaving like live operational Square orders. The business should define what those records are supposed to support and how staff should interpret them before the target is treated as trustworthy.

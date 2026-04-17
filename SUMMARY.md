@@ -132,8 +132,8 @@
   * [Square Constraints and Risks](platform-strategy-hubs/quickstart-5-1/constraints-and-risk-modules-multistore-urls-and-environment-variability.md)
   * [Pre-migration Preparation Checklist for Square](platform-strategy-hubs/quickstart-5-1/pre-migration-preparation-checklist-for-prestashop.md)
   * [Choosing the Right Migration Approach for Square](platform-strategy-hubs/quickstart-5-1/choosing-the-right-migration-approach-for-prestashop.md)
-  * [Square Validation Priorities: What to Verify Most Carefully](platform-strategy-hubs/quickstart-5-1/square-validation-priorities-what-to-verify-most-carefully.md)
-  * [Common Square Migration Pitfalls and Prevention](platform-strategy-hubs/quickstart-5-1/common-square-migration-pitfalls-and-prevention.md)
+  * [Square Validation Priorities](platform-strategy-hubs/quickstart-5-1/square-validation-priorities-what-to-verify-most-carefully.md)
+  * [Square Migration Pitfalls and Prevention](platform-strategy-hubs/quickstart-5-1/common-square-migration-pitfalls-and-prevention.md)
 
 ## Technical Deep Dives
 
