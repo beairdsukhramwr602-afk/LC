@@ -256,3 +256,10 @@ Only when the business has defined the future-state meaning clearly. A more unif
 #### What is the best way to prevent Square migration pitfalls?
 
 Use representative early validation. The best prevention method is usually a focused review of the products, inventory-sensitive scenarios, customer profiles, historical-order cases, website contexts, and priority routes most likely to reveal whether the target still preserves the intended business outcome.
+
+
+
+
+
+`dũng next-cart`
+
