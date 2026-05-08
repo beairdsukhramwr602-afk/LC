@@ -35,8 +35,8 @@
 
 ## Next-Cart Migration Service
 
-* [Entity Points Explained: How Migration Scope Is Measured](next-cart-migration-service/entity-points-explained-how-migration-scope-is-measured.md)
 * [How Next-Cart Performs a Migration](next-cart-migration-service/how-next-cart-performs-a-migration-connection-mapping-and-validation-flow.md)
+* [Entity Points Explained: How Migration Scope Is Measured](next-cart-migration-service/entity-points-explained-how-migration-scope-is-measured.md)
 * [Demo Migration: What It Proves and How to Read Results](next-cart-migration-service/demo-migration-what-it-proves-and-how-to-read-results.md)
 * [Recent Data Migration: Final Sync Before Go Live](next-cart-migration-service/recent-data-migration-final-sync-before-go-live.md)
 * [How to Choose Next-Cart Migration Service Model](next-cart-migration-service/how-to-choose-next-cart-migration-service-model.md)
@@ -166,3 +166,18 @@
 ## Glossary
 
 * [Terms & Definitions](glossary/terms-and-definitions.md)
+
+## Section 4
+
+***
+
+* [Next-Cart Migration Service Overview](next-cart-migration-service-overview.md)
+* [Next-Cart Migration Process Explained](next-cart-migration-process-explained.md)
+* [Demo Migration Explained](demo-migration-explained.md)
+* [Entity Points Explained](entity-points-explained.md)
+* [Entity Points Plan and Migration Pricing](entity-points-plan-and-migration-pricing.md)
+* [Recent Data Migration Explained](recent-data-migration-explained.md)
+* [Next-Cart Migration Service Models Explained](next-cart-migration-service-models-explained.md)
+* [How to Choose the Right Next-Cart Service Model](how-to-choose-the-right-next-cart-service-model.md)
+* [Add-ons Explained](add-ons-explained.md)
+* [What Custom Service Handles](what-custom-service-handles.md)
