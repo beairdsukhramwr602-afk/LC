@@ -4,7 +4,7 @@ Recent Data Migration helps active stores keep the Target Platform closer to the
 
 Its role is focused: reduce the freshness gap before go-live. A freshness sync supports launch preparation, but the customer still needs to review the synchronized data and confirm that the Target Platform is ready for launch.
 
-#### What Recent Data Migration Is  <a href="#what-recent-data-migration-is" id="what-recent-data-migration-is"></a>
+**What Recent Data Migration Is**
 
 Recent Data Migration syncs newly created source-store data into the Target Platform after previous migration activity has already taken place.
 
@@ -14,7 +14,7 @@ Without a freshness step, the Target Platform can become outdated before launch.
 
 Recent Data Migration helps reduce that gap by moving eligible new data into the Target Platform closer to go-live.
 
-#### Why Recent Data Migration Matters  <a href="#why-recent-data-migration-matters" id="why-recent-data-migration-matters"></a>
+**Why Recent Data Migration Matters**
 
 A migration timeline can last long enough for the source store to keep changing.
 
@@ -31,7 +31,7 @@ If those changes are not synchronized, the Target Platform may no longer reflect
 
 Recent Data Migration helps the customer launch with a fresher target store instead of relying only on the earlier Full Migration result.
 
-#### Recent Data Migration and the Migration Timeline  <a href="#recent-data-migration-and-the-migration-timeline" id="recent-data-migration-and-the-migration-timeline"></a>
+**Recent Data Migration and the Migration Timeline**
 
 Recent Data Migration usually belongs near the end of the migration timeline.
 
@@ -48,7 +48,7 @@ The exact timing depends on how active the source store is and how much new data
 
 Recent Data Migration should be planned as part of the launch sequence, not treated as a last-minute fix.
 
-#### What Recent Data Migration Syncs  <a href="#what-recent-data-migration-syncs" id="what-recent-data-migration-syncs"></a>
+**What Recent Data Migration Syncs**
 
 Recent Data Migration focuses on newly created source-store records that were not included in earlier migration activity.
 
@@ -63,7 +63,7 @@ Depending on the selected scope and platform support, other related or supportin
 
 The key idea is that Recent Data Migration is about new data created after earlier migration activity, not importing the entire store from the beginning again.
 
-#### Recent Data Migration and Entity Points  <a href="#recent-data-migration-and-entity-points" id="recent-data-migration-and-entity-points"></a>
+**Recent Data Migration and Entity Points**
 
 Recent Data Migration uses Entity Points when newly created, counted records are migrated successfully for the first time.
 
@@ -80,7 +80,7 @@ For example, if the customer’s plan still has unused Entity Points after Full 
 
 This is why active stores should consider potential new data growth before launch when estimating Entity Points capacity.
 
-#### Recent Data Migration and Re-Migration  <a href="#recent-data-migration-and-re-migration" id="recent-data-migration-and-re-migration"></a>
+**Recent Data Migration and Re-Migration**
 
 Recent Data Migration should not be confused with re-migration.
 
@@ -92,7 +92,7 @@ New records are different. They consume Entity Points when they are migrated suc
 
 This distinction helps customers understand why repeated processing of existing migrated records may not use new capacity, while newly created source-store records can consume available Entity Points.
 
-#### Recent Data Migration and All Scanned Records  <a href="#recent-data-migration-and-all-scanned-records" id="recent-data-migration-and-all-scanned-records"></a>
+**Recent Data Migration and All Scanned Records**
 
 The migration tool migrates all scanned records by default unless filtering is configured.
 
@@ -100,7 +100,7 @@ For Recent Data Migration, this means the customer should be clear about which n
 
 Recent Data Migration is safest when the customer understands whether the goal is to synchronize all newly created eligible data or only a controlled subset.
 
-#### Recent Data Migration and Add-ons  <a href="#recent-data-migration-and-add-ons" id="recent-data-migration-and-add-ons"></a>
+**Recent Data Migration and Add-ons**
 
 Add-ons can affect Recent Data Migration when the newly synchronized data needs the same focused handling as earlier migrated data.
 
@@ -114,7 +114,7 @@ Consistency matters. If the earlier migration used Add-ons to shape the target r
 
 If new data requires handling beyond standard Add-on capability, the requirement should be reviewed through Custom Service.
 
-#### Recent Data Migration and Custom Service  <a href="#recent-data-migration-and-custom-service" id="recent-data-migration-and-custom-service"></a>
+**Recent Data Migration and Custom Service**
 
 Recent Data Migration can be more sensitive when the broader project includes Custom Service requirements.
 
@@ -133,7 +133,7 @@ In those cases, the freshness sync should not be treated as a simple new-record 
 
 The customer should confirm whether the new data depends on any custom handling before launch.
 
-#### What Recent Data Migration Does Not Do  <a href="#what-recent-data-migration-does-not-do" id="what-recent-data-migration-does-not-do"></a>
+**What Recent Data Migration Does Not Do**
 
 Recent Data Migration has a specific purpose. It helps synchronize newly created data before launch.
 
@@ -149,7 +149,7 @@ It does not:
 
 A freshness sync is useful when the broader migration result is already moving in the right direction and the customer needs the Target Platform to reflect newer source-store activity.
 
-#### What to Validate After Recent Data Migration  <a href="#what-to-validate-after-recent-data-migration" id="what-to-validate-after-recent-data-migration"></a>
+**What to Validate After Recent Data Migration**
 
 After Recent Data Migration, the customer should validate the newly synchronized data and the parts of the store affected by it.
 
@@ -166,7 +166,7 @@ Useful checks include:
 
 Validation should focus on the new data most likely to affect launch confidence.
 
-#### Planning Recent Data Migration Before Launch  <a href="#planning-recent-data-migration-before-launch" id="planning-recent-data-migration-before-launch"></a>
+**Planning Recent Data Migration Before Launch**
 
 A strong launch plan should answer several questions before Recent Data Migration is run:
 
@@ -181,29 +181,29 @@ A strong launch plan should answer several questions before Recent Data Migratio
 
 These questions help the customer avoid treating Recent Data Migration as a simple button press. The feature is most useful when it is aligned with the launch plan.
 
-#### Common Recent Data Migration Misunderstandings  <a href="#common-recent-data-migration-misunderstandings" id="common-recent-data-migration-misunderstandings"></a>
+**Common Recent Data Migration Misunderstandings**
 
-**“Recent Data Migration replaces Full Migration.”**&#x20;
+**“Recent Data Migration replaces Full Migration.”**
 
 No. Recent Data Migration syncs newly created data after earlier migration activity. Full Migration is still the main migration run.
 
-**“Recent Data Migration proves launch readiness.”**&#x20;
+**“Recent Data Migration proves launch readiness.”**
 
 No. Recent Data Migration improves freshness. The customer still needs to review whether the synchronized data and affected workflows are ready for launch.
 
-**“Recent Data Migration never consumes Entity Points.”**&#x20;
+**“Recent Data Migration never consumes Entity Points.”**
 
 Newly created counted records consume Entity Points when migrated successfully for the first time.
 
-**“Any new data can be included without planning.”**&#x20;
+**“Any new data can be included without planning.”**
 
 New data should still be reviewed for scope, Add-ons, custom handling, and available Entity Points capacity.
 
-**“Recent Data Migration fixes earlier configuration problems.”**&#x20;
+**“Recent Data Migration fixes earlier configuration problems.”**
 
 No. Configuration or validation issues should be addressed before the final freshness sync.
 
-#### Conclusion  <a href="#conclusion" id="conclusion"></a>
+**Conclusion**
 
 Recent Data Migration helps active stores reduce the gap between the earlier migration result and the final source-store state before launch. It is especially useful when the Source Platform continues creating new orders, customers, products, or content while the Target Platform is being prepared.
 
@@ -211,36 +211,36 @@ Its value is freshness, not final approval. Newly synchronized data still needs 
 
 Plan Recent Data Migration as part of the launch sequence. If your Source Platform remains active, review likely new data growth, remaining Entity Points capacity, Add-on requirements, and any custom handling before the final sync. Live Chat can help clarify the safest timing and scope before go-live.
 
-#### FAQs  <a href="#faqs" id="faqs"></a>
+**FAQs**
 
-**What is Recent Data Migration?**&#x20;
+**What is Recent Data Migration?**
 
 Recent Data Migration is the feature used to sync newly created source-store data into the Target Platform after earlier migration activity.
 
-**When should I use Recent Data Migration?**&#x20;
+**When should I use Recent Data Migration?**
 
 Use it when the Source Platform remains active after Full Migration and continues creating new records before launch.
 
-**Does Recent Data Migration replace Full Migration?**&#x20;
+**Does Recent Data Migration replace Full Migration?**
 
 No. Full Migration is the main migration run. Recent Data Migration helps synchronize newly created data after earlier migration activity.
 
-**Does Recent Data Migration consume Entity Points?**&#x20;
+**Does Recent Data Migration consume Entity Points?**
 
 Yes. Newly created counted records consume Entity Points when they are migrated successfully for the first time.
 
-**Can unused Entity Points support Recent Data Migration?**&#x20;
+**Can unused Entity Points support Recent Data Migration?**
 
 Yes. Unused Entity Points within the purchased plan can support newly created counted records migrated through Recent Data Migration.
 
-**What happens if there are not enough Entity Points for Recent Data Migration?**&#x20;
+**What happens if there are not enough Entity Points for Recent Data Migration?**
 
 The customer can upgrade the Entity Points Plan. The upgrade adds capacity and the customer pays only the price difference between the current plan and the higher plan.
 
-**Can I use Add-ons with Recent Data Migration?**&#x20;
+**Can I use Add-ons with Recent Data Migration?**
 
 Yes. Add-ons may apply if the newly synchronized data needs filtering, advanced mapping, or data configuration.
 
-**Does Recent Data Migration replace validation?**&#x20;
+**Does Recent Data Migration replace validation?**
 
 No. Recent Data Migration improves data freshness. The customer still needs to validate the synchronized data and confirm launch readiness.

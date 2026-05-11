@@ -36,15 +36,15 @@
 ## Next-Cart Migration Service
 
 * [Next-Cart Migration Service Overview](next-cart-migration-service/next-cart-migration-service-overview.md)
-* [Next-Cart Migration Process Explained](next-cart-migration-service/how-next-cart-performs-a-migration-connection-mapping-and-validation-flow.md)
-* [Demo Migration Explained](next-cart-migration-service/demo-migration-what-it-proves-and-how-to-read-results.md)
-* [Entity Points Explained](next-cart-migration-service/entity-points-explained-how-migration-scope-is-measured.md)
+* [Next-Cart Migration Process Explained](next-cart-migration-service/next-cart-migration-process-explained.md)
+* [Demo Migration Explained](next-cart-migration-service/demo-migration-explained.md)
+* [Entity Points Explained](next-cart-migration-service/entity-points-explained.md)
 * [Entity Points Plan and Migration Pricing](next-cart-migration-service/entity-points-plan-and-migration-pricing.md)
-* [Recent Data Migration Explained](next-cart-migration-service/recent-data-migration-final-sync-before-go-live.md)
+* [Recent Data Migration Explained](next-cart-migration-service/recent-data-migration-explained.md)
 * [Add-ons Explained](next-cart-migration-service/add-ons-explained.md)
 * [Next-Cart Migration Service Models Explained](next-cart-migration-service/next-cart-migration-service-models-explained.md)
-* [What Custom Service Handles](next-cart-migration-service/when-custom-job-is-required-common-real-world-scenarios.md)
-* [How to Choose the Right Next-Cart Service Model](next-cart-migration-service/how-to-choose-next-cart-migration-service-model.md)
+* [What Custom Service Handles](next-cart-migration-service/what-custom-service-handles.md)
+* [How to Choose the Right Next-Cart Service Model](next-cart-migration-service/how-to-choose-the-right-next-cart-service-model.md)
 
 ## Platform Strategy Hubs
 
@@ -172,8 +172,6 @@
 * [Terms & Definitions](glossary/terms-and-definitions.md)
 
 ## Section 4
-
-***
 
 * [Next-Cart Migration Service Overview](next-cart-migration-service-overview.md)
 * [Next-Cart Migration Process Explained](next-cart-migration-process-explained.md)

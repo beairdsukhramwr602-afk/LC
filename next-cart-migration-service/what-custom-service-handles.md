@@ -6,7 +6,7 @@ This can include Add-on-related work, but Custom Service is not limited to Add-o
 
 The purpose of Custom Service is to define a workable approach for migration requirements that need more than ordinary configuration.
 
-### What Custom Service Means <a href="#what-custom-service-means" id="what-custom-service-means"></a>
+#### What Custom Service Means <a href="#what-custom-service-means" id="what-custom-service-means"></a>
 
 Custom Service is required when the migration outcome depends on tailored work.
 
@@ -24,7 +24,7 @@ This can include:
 
 The key point is that Custom Service protects the expected result when a requirement cannot be handled through the standard path.
 
-### Custom Service Is Broader Than Add-ons <a href="#custom-service-is-broader-than-add-ons" id="custom-service-is-broader-than-add-ons"></a>
+#### Custom Service Is Broader Than Add-ons <a href="#custom-service-is-broader-than-add-ons" id="custom-service-is-broader-than-add-ons"></a>
 
 Add-ons give customers more control over focused migration needs, such as data filtering, advanced mapping, or data configuration.
 
@@ -41,7 +41,7 @@ For example:
 
 This distinction keeps Add-ons useful without forcing every custom migration requirement into the Add-on category.
 
-### Tailored Add-ons and Custom Add-ons <a href="#tailored-add-ons-and-custom-add-ons" id="tailored-add-ons-and-custom-add-ons"></a>
+#### Tailored Add-ons and Custom Add-ons <a href="#tailored-add-ons-and-custom-add-ons" id="tailored-add-ons-and-custom-add-ons"></a>
 
 Custom Service can include Add-on-related work.
 
@@ -51,7 +51,7 @@ A custom Add-on is needed when the currently available Add-ons do not fit the cu
 
 Both tailored Add-ons and custom Add-ons are handled through Custom Service because they require customization or modification work.
 
-### Custom Platform Handling <a href="#custom-platform-handling" id="custom-platform-handling"></a>
+#### Custom Platform Handling <a href="#custom-platform-handling" id="custom-platform-handling"></a>
 
 Custom Platform as Source Platform or Target Platform requires Custom Service.
 
@@ -68,7 +68,7 @@ Custom Platform handling may involve:
 
 Custom Platform migration should be planned carefully because the data structure may not follow a known supported-platform pattern.
 
-### Third-Party App, Plugin, Module, or Extension Data <a href="#third-party-app-plugin-module-or-extension-data" id="third-party-app-plugin-module-or-extension-data"></a>
+#### Third-Party App, Plugin, Module, or Extension Data <a href="#third-party-app-plugin-module-or-extension-data" id="third-party-app-plugin-module-or-extension-data"></a>
 
 Many stores rely on apps, plugins, modules, or extensions to support important business functions.
 
@@ -89,7 +89,7 @@ If that data must be migrated, interpreted, transformed, or preserved beyond the
 
 The important question is not only whether the data exists. The important question is whether that data carries business meaning that must remain usable in the Target Platform.
 
-### Custom Fields <a href="#custom-fields" id="custom-fields"></a>
+#### Custom Fields <a href="#custom-fields" id="custom-fields"></a>
 
 Custom fields can be important even when they look small in the source store.
 
@@ -108,7 +108,7 @@ If custom fields need to be preserved, mapped, transformed, or placed into targe
 
 Custom fields often require review because the Target Platform may not store or use the same type of field in the same way. The goal is to define the closest workable target result based on platform capability and business need.
 
-### Outside-System Identifiers <a href="#outside-system-identifiers" id="outside-system-identifiers"></a>
+#### Outside-System Identifiers <a href="#outside-system-identifiers" id="outside-system-identifiers"></a>
 
 Outside-system identifiers connect the store to systems beyond the eCommerce platform.
 
@@ -127,7 +127,7 @@ These values may be critical after launch because outside systems may continue r
 
 If the migration must preserve or reposition these identifiers in a specific way, the project should be reviewed under Custom Service. Losing or misplacing these values can break downstream workflows even if the storefront appears complete.
 
-### Platform Capability Limitations <a href="#platform-capability-limitations" id="platform-capability-limitations"></a>
+#### Platform Capability Limitations <a href="#platform-capability-limitations" id="platform-capability-limitations"></a>
 
 Sometimes the Target Platform cannot represent source-store behavior exactly.
 
@@ -150,7 +150,7 @@ Custom Service helps define a migration approach when the expected result requir
 
 This does not mean every source behavior can be recreated exactly. It means Next-Cart reviews the requirement, defines what can be preserved, and identifies the most suitable supported result.
 
-### Migration-Tool Modification <a href="#migration-tool-modification" id="migration-tool-modification"></a>
+#### Migration-Tool Modification <a href="#migration-tool-modification" id="migration-tool-modification"></a>
 
 Some projects require modification to how the migration tool processes data.
 
@@ -167,7 +167,7 @@ This may happen when the project needs:
 
 Migration-tool modification is a Custom Service work because it changes how the migration is handled beyond the default capability.
 
-### Bespoke Data Transformation <a href="#bespoke-data-transformation" id="bespoke-data-transformation"></a>
+#### Bespoke Data Transformation <a href="#bespoke-data-transformation" id="bespoke-data-transformation"></a>
 
 Bespoke transformation is needed when source data must be changed in a specific way before it can support the expected target result.
 
@@ -182,7 +182,7 @@ Examples may include:
 
 Some simple data adjustments may fit Advanced Data Configure. Broader transformation rules or logic that exceed default Add-on capability are handled through Custom Service.
 
-### Custom Service and Migration Management <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
+#### Custom Service and Migration Management <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
 
 Custom Service does not automatically mean Next-Cart performs the full migration process.
 
@@ -196,7 +196,7 @@ The final plan may work in different ways:
 
 This distinction matters because service status and execution responsibility are not always the same.
 
-### How Custom Service Is Reviewed <a href="#how-custom-service-is-reviewed" id="how-custom-service-is-reviewed"></a>
+#### How Custom Service Is Reviewed <a href="#how-custom-service-is-reviewed" id="how-custom-service-is-reviewed"></a>
 
 A strong Custom Service request describes the expected result clearly.
 
@@ -214,7 +214,7 @@ Useful information includes:
 
 The clearer the expected outcome, the easier it is to review the request and provide a suitable quote.
 
-### What Custom Service Does Not Guarantee <a href="#what-custom-service-does-not-guarantee" id="what-custom-service-does-not-guarantee"></a>
+#### What Custom Service Does Not Guarantee <a href="#what-custom-service-does-not-guarantee" id="what-custom-service-does-not-guarantee"></a>
 
 Custom Service provides a path for reviewing and implementing tailored handling. It does not mean every source-store behavior can always be recreated exactly in the Target Platform.
 
@@ -229,7 +229,7 @@ The final result still depends on:
 
 A good Custom Service plan defines the closest workable result based on the source data, target platform, and business requirement.
 
-### When Custom Service Should Be Considered Early <a href="#when-custom-service-should-be-considered-early" id="when-custom-service-should-be-considered-early"></a>
+#### When Custom Service Should Be Considered Early <a href="#when-custom-service-should-be-considered-early" id="when-custom-service-should-be-considered-early"></a>
 
 Custom Service should be considered early when the customer already knows that the migration includes non-standard requirements.
 
@@ -247,7 +247,7 @@ Early review is especially important when the project involves:
 
 These requirements should not be left until final validation. They can shape the entire migration approach.
 
-### Conclusion <a href="#conclusion" id="conclusion"></a>
+#### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 Custom Service handles the migration requirements that go beyond the default migration tool capability and standard Add-ons. It covers tailored Add-ons, custom Add-ons, Custom Platform handling, third-party data, custom fields, outside-system identifiers, migration-tool modification, bespoke transformation, and other exclusive handling needs.
 
@@ -255,7 +255,7 @@ The most important distinction is that Add-ons are focused service features, whi
 
 Prepare Custom Service requirements around the outcome that must be preserved, not only the field or data type that needs to move. If your project involves Custom Platform, third-party logic, custom fields, outside-system identifiers, tailored Add-ons, or custom Add-ons, Live Chat can help clarify what information Next-Cart needs to review the request and prepare a suitable quote.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+#### FAQs <a href="#faqs" id="faqs"></a>
 
 **What does Custom Service handle?**
 

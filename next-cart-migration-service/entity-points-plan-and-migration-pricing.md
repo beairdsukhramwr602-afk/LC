@@ -217,7 +217,7 @@ Managed Service pricing includes the Entity Points Plan, any optional Add-ons, a
 
 **Why does Custom Service show “Request Custom Quotes”?**&#x20;
 
-Custom Service depends on customization work, tailored Add-ons, custom Add-ons, migration-tool adjustment, Custom Cart handling, entity volume, and optional migration management. Because the work varies, pricing is quoted individually.
+Custom Service depends on customization work, tailored Add-ons, custom Add-ons, migration-tool adjustment, Custom Platform handling, entity volume, and optional migration management. Because the work varies, pricing is quoted individually.
 
 **What happens if my migration exceeds the Global tier?**&#x20;
 
