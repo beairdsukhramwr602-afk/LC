@@ -51,7 +51,7 @@ A custom Add-on is needed when the currently available Add-ons do not fit the cu
 
 Both tailored Add-ons and custom Add-ons are handled through Custom Service because they require customization or modification work.
 
-### Custom Platform Handling <a href="#custom-cart-handling" id="custom-cart-handling"></a>
+### Custom Platform Handling <a href="#custom-platform-handling" id="custom-platform-handling"></a>
 
 Custom Platform as Source Platform or Target Platform requires Custom Service.
 
