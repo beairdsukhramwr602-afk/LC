@@ -1,214 +1,200 @@
-# How Next-Cart Performs a Migration
+# Next-Cart Migration Process Explained
 
-A Next-Cart migration is a structured process for moving store data from a Source Cart to a Target Cart while keeping the store usable for the business after launch. The goal is not only to transfer records. The goal is to help the migrated store continue supporting product buying behavior, customer continuity, order usability, content value, and the relationships between those records.
+A Next-Cart migration follows a structured process that moves store data from a Source Platform to a Target Platform while keeping the target store usable for review, correction, final synchronization, and launch readiness. The process is not only a transfer run. It is a sequence of decisions, configuration choices, execution steps, and validation checkpoints.
 
-This article explains the migration process at a planning level. It does not cover credential setup, export steps, dashboard instructions, or troubleshooting. Its purpose is to help customers understand the journey, where the main decisions happen, and why each stage matters before they choose how deeply Next-Cart should be involved.
+This article explains how that process works at a planning level: how the migration moves from early proof to source and target connection, configuration, Full Migration, validation, and final freshness alignment. It gives readers the process context they need before evaluating scope, pricing, Add-ons, service responsibility, or Custom Service requirements in more detail.
 
-### What the Migration Flow Is Designed to Support
+### What the Migration Process Is Designed to Do <a href="#what-the-migration-process-is-designed-to-do" id="what-the-migration-process-is-designed-to-do"></a>
 
-A migration is easier to plan when it is understood as a controlled sequence rather than a single transfer event.
+The migration process is designed to create a controlled path from initial evidence to a launch-ready target store.
 
-The Next-Cart migration flow is designed to support six connected outcomes:
+That path supports six practical goals:
 
-* early proof that the migration direction is workable
-* reliable access to the Source Cart and Target Cart
-* clear configuration of what data should move and how it should be interpreted
-* controlled migration execution through the selected platform pair
-* validation of whether the migrated result supports the business as expected
-* final freshness alignment before launch through Recent Data Migration where needed
+* confirm that the Source Platform and Target Platform can be connected
+* use Demo Migration to test the direction before full execution
+* configure the migration scope, options, mappings, and any purchased Add-ons
+* run the Full Migration through the selected platform pair
+* validate whether the migrated result works as expected
+* use Recent Data Migration where the Source Platform continues creating new data before launch
 
-These outcomes matter because migration problems often appear after the records arrive. A product may exist in the Target Cart but no longer support the same buying decision. An order may be present but harder to use in support or operations. A page may remain available but lose its role in search, navigation, or customer journeys.
+Each stage reduces uncertainty before the next one. A migration becomes riskier when the customer treats it as one event instead of a sequence that needs review and adjustment.
 
-The migration process should therefore be judged by whether the target store still works in the ways the business needs, not only by whether the transfer completed.
+### The Migration Process in Six Stages <a href="#the-migration-process-in-six-stages" id="the-migration-process-in-six-stages"></a>
 
-### The Migration Journey in Six Stages
-
-A practical way to understand Next-Cart migration is through six stages:
+A practical way to understand the Next-Cart migration process is through six stages:
 
 1. Demo Migration and early review
-2. Source and target access
+2. Source and target platforms connection
 3. Migration configuration
 4. Full Migration execution
-5. Outcome validation
+5. Result validation
 6. Recent Data Migration and launch readiness
 
-The exact handling differs by service model, but the core journey remains the same. What changes is who operates the process, whether standard configuration is enough, and whether any customization or modification work is required.
+The same general process applies across service models. What changes is who performs the work, whether the default tool capability is enough, and whether customization or modification work is required.
 
-### Stage 1: Demo Migration and Early Review
+### Stage 1: Demo Migration and Early Review <a href="#stage-1-demo-migration-and-early-review" id="stage-1-demo-migration-and-early-review"></a>
 
-The first stage is about proving direction before the project becomes harder to adjust.
+Demo Migration gives the customer an early view of how selected source-store data may appear in the Target Platform.
 
-Demo Migration gives the customer an early view of how representative source-store data is expected to appear in the Target Cart. It is most useful when the sample includes records that can reveal real migration meaning, such as complex products, important category paths, representative customers, meaningful orders, or content that supports traffic and discovery.
+This stage is meant to reveal whether the migration direction is workable before the customer relies on the full migration path. The most useful sample is not always the simplest data. It should include records that can reveal real migration meaning, such as products with options or variants, meaningful customer and order examples, important categories, or content records that need to remain useful after launch.
 
-The purpose of this stage is to answer practical questions:
+The goal is to review whether representative data still makes sense in the Target Platform.
 
-* does the selected Target Cart represent the sample data in a usable way?
-* do important structures, relationships, and mapped values make sense?
-* does the sample reveal a need for Add-ons, service support, or customization?
-* does the project look predictable enough for the intended service path?
+At this stage, the customer should look for answers to questions such as:
 
-Demo Migration does not replace full validation. It gives the project early evidence so the customer can make better decisions before full execution.
+* does the migrated sample appear in the expected structure?
+* do products, customers, orders, and content remain understandable?
+* do mapped values need adjustment?
+* does the sample reveal filtering, mapping, or configuration needs?
+* does the result suggest a Custom Service requirement?
 
-### Stage 2: Source and Target Access
+Demo Migration gives early evidence for planning. The broader result still needs to be reviewed after the Full Migration.
 
-The second stage confirms that the migration can access the data it needs and write it into the selected target environment.
+### Stage 2: Source and Target Platforms Connection <a href="#stage-2-source-and-target-connection" id="stage-2-source-and-target-connection"></a>
 
-Depending on the platforms involved, Next-Cart may use API access, KitConnect, or file-based data access. The right method depends on how the Source Cart and Target Cart expose data, what each platform supports, and what the selected migration scope requires.
+After the migration direction is understood, the process depends on reliable access to both platforms.
 
-At a planning level, this stage matters because migration quality depends first on whether the right data can be accessed in a reliable form. If important data is unavailable, incomplete, or stored outside the expected platform model, the project may need closer review before moving forward.
+Depending on the platforms involved, Next-Cart may connect through API access, KitConnect, or file-based data access. The connection method depends on what the Source Platform and Target Platform support and what the migration scope requires.
 
-This stage should not be treated only as a technical connection step. It is also where the customer begins confirming whether the migration has enough access to preserve the outcomes that matter after launch.
+This stage matters because migration quality depends on whether the process can access the right source data and write it into the target environment in a usable way.
 
-### Stage 3: Migration Configuration
+Connection should not be treated only as an access checkpoint. It also helps reveal whether the data is available through the expected platform model or whether important information lives in a place that needs closer review, such as custom fields, extensions, files, or a Custom Platform structure.
 
-Configuration shapes how the migration will be executed.
+### Stage 3: Migration Configuration <a href="#stage-3-migration-configuration" id="stage-3-migration-configuration"></a>
 
-This stage includes deciding which data types should move, how supported options should be applied, how important mappings should be handled, and whether purchased Add-ons are needed for filtering, mapping, or data configuration.
+Configuration defines how the migration should run.
 
-Configuration may include decisions such as:
+At a planning level, configuration can include:
 
-* which supported entities should be included
-* whether only selected data should be migrated
-* how languages, customer groups, order statuses, or other mapped values should align
-* whether data needs filtering, advanced mapping, or configuration before migration
-* whether a requirement goes beyond default tool or Add-on capability
+* selecting the supported data types to migrate
+* choosing migration options that fit the project goal
+* reviewing source-to-target mappings
+* aligning mapped values such as languages, customer groups, or order statuses
+* selecting purchased Add-ons where filtering, advanced mapping, or data configuration is needed
+* identifying requirements that go beyond default tool or Add-on capability
 
-The customer should not treat configuration as a simple formality. This is where the migration begins translating source-store meaning into target-platform behavior. Weak configuration can produce a store that looks populated but does not behave as expected.
+This stage is where source-store meaning begins to be translated into target-platform behavior. A weak configuration can lead to a target store that appears populated but does not behave as expected in the areas that matter.
 
-### Stage 4: Full Migration Execution
+The customer should treat configuration as a decision point, not only as a setup step.
 
-After the migration is configured, the Full Migration moves the agreed data into the Target Cart.
+### Stage 4: Full Migration Execution <a href="#stage-4-full-migration-execution" id="stage-4-full-migration-execution"></a>
 
-Migration execution runs through Next-Cart’s server-side process. The migration can continue in the background without requiring the customer to keep a browser session active throughout the entire run.
+Full Migration is the stage where the configured migration moves the selected store data into the Target Platform.
 
-The fixed entity migration sequence is:
+The migration runs through Next-Cart’s server-side process and can continue in the background during execution. The customer can monitor progress, but the value of this stage is not only seeing whether the run completes. The value is producing a target-store result that can be reviewed against real business expectations.
 
-1. Taxes
-2. Manufacturers
-3. Categories
-4. Products
-5. Customers
-6. Orders
-7. Reviews
-8. Coupons
-9. CMS Pages
-10. Blog Posts
+The fixed entity migration sequence is: Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts
 
 Within each data type, records are migrated from oldest to newest based on the source database.
 
-This order supports a controlled migration flow because many records depend on surrounding structures to remain meaningful. It also helps customers understand that migration does not simply process whichever data type was entered first during pricing. The tool follows its own migration sequence during execution.
+All scanned records are migrated by default. The numbers entered during purchase are used for pricing and Entity Points planning. They do not automatically limit which records are migrated. If the customer wants to migrate only selected records, that should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement if the default Add-on capability is not enough.
 
-All scanned records are migrated by default. The entity numbers entered during purchase are used for pricing and Entity Points planning. They are not automatic migration filters. If a customer wants to migrate only selected records, that scope should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement if default Add-on capability is not enough.
+### Migration Order and Entity Points Consumption Are Different <a href="#migration-order-and-entity-points-consumption-are-different" id="migration-order-and-entity-points-consumption-are-different"></a>
 
-Entity Points consumption follows the counted core data sequence:
+The fixed entity migration sequence is not the same as the Entity Points consumption sequence.
 
-1. Product
-2. Customer
-3. Order
-4. Blog
+The migration process follows this entity order:
 
-This means the migration execution sequence and the Entity Points consumption sequence should not be treated as the same thing. The migration process follows the fixed entity order, while points are consumed according to the counted core data types used in the Entity Points model.
+> Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts
 
-### Stage 5: Outcome Validation
+Entity Points consumption is processed through the counted core sequence:
 
-After migration execution, the result must be judged against business expectations.
+> Product → Customer → Order → Blog
 
-Validation should not stop at record totals. A migrated store can show the expected number of records while still being weaker in the areas that matter most.
+This distinction matters because the migration flow includes supporting entities as well as counted core data. Taxes, manufacturers, categories, reviews, coupons, and CMS pages can be part of the migration sequence, while Entity Points consumption is tied to the counted core data types used for plan capacity.
 
-Useful validation focuses on whether the target store still supports:
+For planning purposes, the safest assumption is that migration execution follows the full entity sequence, while capacity consumption should be interpreted through Product, Customer, Order, and Blog.
 
-* product purchasability
-* category and browse-path logic
-* customer continuity
-* order-history usability
-* review, coupon, and content meaning where relevant
-* priority URL and page continuity
-* important behavior affected by apps, extensions, custom fields, or outside systems
+### Stage 5: Result Validation <a href="#stage-5-result-validation" id="stage-5-result-validation"></a>
 
-The customer remains responsible for confirming whether the result is acceptable for launch. Next-Cart provides support, execution help, or customized handling depending on the selected service model and final plan, but the customer must still validate that the result fits business expectations.
+After Full Migration, the customer needs to review whether the target store works as expected.
 
-### Stage 6: Recent Data Migration and Launch Readiness
+Validation should not stop at checking whether records exist. A useful review should confirm whether the Target Platform still supports the outcomes the business depends on.
 
-If the Source Cart remains active after earlier migration activity, new data may continue to appear before launch. Recent Data Migration helps sync newly created source-store data into the Target Cart closer to go-live.
+Priority review areas often include:
 
-This stage reduces the freshness gap between the earlier migration state and the launch-ready target store. It is especially important when the source store continues receiving new orders, customers, products, or content while the migration project is still in progress.
+* products and purchasing behavior
+* categories and discovery paths
+* customer records and account expectations
+* order history and customer-service usefulness
+* reviews, coupons, CMS Pages, and Blog Posts where relevant
+* URL and content continuity where they affect traffic or customer journey
+* records affected by Add-ons or Custom Service requirements
 
-Recent Data Migration does not replace validation. After the sync, the customer still needs to review whether the latest data appears correctly and whether the completed target store is ready for launch.
+The customer remains responsible for confirming whether the result is acceptable for launch. Next-Cart may provide support, perform execution work, or handle customization depending on the selected service model and final plan, but the business still needs to judge whether the target store meets its expectations.
 
-### How Service Models Affect the Process
+### Stage 6: Recent Data Migration and Launch Readiness <a href="#stage-6-recent-data-migration-and-launch-readiness" id="stage-6-recent-data-migration-and-launch-readiness"></a>
 
-The migration journey stays broadly consistent across service models, but the responsibility changes.
+If the Source Platform remains active after Full Migration, new data may continue to appear before launch. Recent Data Migration helps synchronize newly created source-store data into the Target Platform closer to go-live.
 
-With **Standard Service**, the customer performs the migration using the Next-Cart migration tool for the selected platform pair. Next-Cart provides access to the tool, purchased Add-ons where applicable, and expert support.
+This stage is useful when the source store continues receiving new orders, customers, products, or content while the target store is being prepared.
 
-With **Managed Service**, Next-Cart performs the migration process for the customer using the migration tool’s default capabilities and any purchased Add-ons. The customer still provides access, clarifies requirements, and validates the result.
+Recent Data Migration helps reduce the freshness gap between the earlier migration result and the final launch-ready state. It does not replace validation. After the sync, the customer still needs to confirm that newly synchronized data appears correctly and that the completed target store is ready for launch.
 
-With **Custom Service**, Next-Cart handles customization or modification work needed for the project. This can include tailored Add-ons, custom Add-ons, Custom Cart handling, migration-tool adjustment, or other bespoke configuration work. Custom Service does not automatically mean Next-Cart performs the full migration process unless migration management is included in the final plan.
+### How the Operating View Relates to the Full Process <a href="#how-the-operating-view-relates-to-the-full-process" id="how-the-operating-view-relates-to-the-full-process"></a>
 
-This distinction matters because execution responsibility and customization requirements are not the same decision.
+Customers may also encounter the migration tool through a simpler operating view:
 
-### Where Customers Most Often Misjudge the Process
+1. connect the Source Platform and Target Platform
+2. configure the migration
+3. start and monitor the migration
 
-Several misunderstandings can weaken migration planning.
+That operating view is useful, but it does not describe the whole planning process. A sound migration also needs early proof, configuration review, Full Migration, validation, and Recent Data Migration where the store remains active before launch.
 
-#### Treating migration as one run
+The operating view explains how the process is run. The full six-stage view explains how the process should be understood and reviewed.
 
-Most successful projects involve review, adjustment, validation, and sometimes final synchronization. A single completed run is not the same as a launch-ready store.
+### Common Misunderstandings About the Process <a href="#common-misunderstandings-about-the-process" id="common-misunderstandings-about-the-process"></a>
 
-#### Treating configuration as only field mapping
+#### Thinking the migration is complete when the run completes <a href="#thinking-the-migration-is-complete-when-the-run-completes" id="thinking-the-migration-is-complete-when-the-run-completes"></a>
 
-Configuration includes more than matching fields. It also includes scope decisions, migration options, mapped values, Add-ons where needed, and recognition of requirements that belong under Custom Service.
+A completed run means the configured migration has finished processing. It does not automatically mean the target store is ready for launch. Review and validation still matter.
 
-#### Treating entered entity numbers as migration limits
+#### Treating entered entity numbers as migration limits <a href="#treating-entered-entity-numbers-as-migration-limits" id="treating-entered-entity-numbers-as-migration-limits"></a>
 
-The numbers entered for pricing and Entity Points planning are not automatic filters. The migration tool migrates all scanned records by default. If the customer wants to migrate only selected records, that should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement if default Add-on capability is not enough.
+Entered entity numbers support pricing and Entity Points planning. They are not automatic filters. All scanned records are migrated by default unless filtering is configured.
 
-#### Confusing migration order with Entity Points consumption order
+#### Confusing Demo Migration with full validation <a href="#confusing-demo-migration-with-full-validation" id="confusing-demo-migration-with-full-validation"></a>
 
-The fixed entity migration sequence is Taxes, Manufacturers, Categories, Products, Customers, Orders, Reviews, Coupons, CMS Pages, and Blog Posts. Entity Points consumption follows the counted core sequence of Product, Customer, Order, and Blog. These are related, but they are not the same sequence.
+Demo Migration gives early evidence from a limited sample. Full validation is still needed after broader migration activity.
 
-#### Treating validation as a total-count check
+#### Confusing migration order with Entity Points consumption order <a href="#confusing-migration-order-with-entity-points-consumption-order" id="confusing-migration-order-with-entity-points-consumption-order"></a>
 
-Record totals are useful, but they do not prove preserved business meaning. Validation should focus on representative outcomes and priority store behavior.
+The migration sequence and Entity Points consumption sequence are related, but they are not the same. The process follows the fixed entity migration order, while Entity Points are consumed through Product, Customer, Order, and Blog.
 
-#### Assuming Custom Service always means managed execution
+#### Treating configuration as a minor step <a href="#treating-configuration-as-a-minor-step" id="treating-configuration-as-a-minor-step"></a>
 
-Custom Service means customization or modification work is required. It can include optional migration management, but it does not automatically mean Next-Cart performs the entire migration process unless that is included in the final plan.
+Configuration is where scope, options, mappings, and Add-ons are aligned with the expected result. It can strongly affect whether the target store remains usable after migration.
 
-### Conclusion
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-How Next-Cart performs a migration is best understood as a structured journey: prove direction with Demo Migration, confirm source and target access, configure how data should move, execute the Full Migration, validate whether the target store supports business expectations, and use Recent Data Migration where final freshness alignment is needed.
+The Next-Cart migration process is a controlled journey from early proof to full execution, validation, and final freshness alignment. Each stage has a specific purpose: Demo Migration reveals direction, connection confirms access, configuration shapes how data should move, Full Migration executes the transfer, validation confirms whether the result is usable, and Recent Data Migration helps active stores stay current before launch.
 
-This structure matters because migration success is not proved by transfer completion alone. It is proved by whether the migrated store remains usable, connected, current enough for launch, and aligned with the outcomes the business needs to protect.
+The process becomes more reliable when customers understand what each stage is meant to prove and how the migration sequence, Entity Points consumption, Add-ons, and service responsibility affect the decisions made along the way.
 
-Review the migration process as a full decision and validation path, not as a single technical run. If early evidence shows selective-scope needs, mapping uncertainty, Add-on requirements, Custom Service requirements, or launch-timing concerns, Live Chat can help clarify which part of the process needs closer review before execution goes too far.
+Review the migration process as a sequence of decisions, not only as a transfer run. If the process reveals selective-scope needs, mapping uncertainty, Add-on requirements, Custom Service requirements, or launch-timing concerns, Live Chat can help clarify which stage needs closer review before the project moves further.
 
-### FAQs
+### FAQs <a href="#faqs" id="faqs"></a>
 
-#### Is Next-Cart migration just one data transfer?
+#### What are the main stages of a Next-Cart migration? <a href="#what-are-the-main-stages-of-a-next-cart-migration" id="what-are-the-main-stages-of-a-next-cart-migration"></a>
 
-No. A Next-Cart migration is a structured process that includes early proof, access confirmation, configuration, Full Migration execution, validation, and Recent Data Migration where final freshness alignment is needed.
+The main stages are Demo Migration and early review, source and target connection, migration configuration, Full Migration execution, result validation, and Recent Data Migration where final freshness alignment is needed.
 
-#### What is the fixed entity migration sequence?
+#### What is the fixed entity migration sequence? <a href="#what-is-the-fixed-entity-migration-sequence" id="what-is-the-fixed-entity-migration-sequence"></a>
 
-The fixed entity migration sequence is Taxes, Manufacturers, Categories, Products, Customers, Orders, Reviews, Coupons, CMS Pages, and Blog Posts. Within each data type, records are migrated from oldest to newest based on the source database.
+The fixed entity migration sequence is Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts
 
-#### Is the migration sequence the same as the Entity Points consumption sequence?
+#### Are all scanned records migrated by default? <a href="#are-all-scanned-records-migrated-by-default" id="are-all-scanned-records-migrated-by-default"></a>
 
-No. The migration sequence controls the order in which entity types are processed. Entity Points consumption follows the counted core data sequence of Product, Customer, Order, and Blog.
+Yes. All scanned records are migrated by default. If the customer wants to migrate only selected records, that should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement if default Add-on capability is not enough.
 
-#### Does the migration tool migrate all scanned records by default?
+#### Is the migration sequence the same as the Entity Points consumption sequence? <a href="#is-the-migration-sequence-the-same-as-the-entity-points-consumption-sequence" id="is-the-migration-sequence-the-same-as-the-entity-points-consumption-sequence"></a>
 
-Yes. All scanned records are migrated by default. If the customer wants to migrate only selected records, that scope should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement if default Add-on capability is not enough.
+No. The migration sequence controls the order in which entity types are processed. Entity Points consumption follows the counted core sequence of Product → Customer → Order → Blog.
 
-#### Does the migration process differ across Standard Service, Managed Service, and Custom Service?
+#### Does Demo Migration prove the full migration is ready? <a href="#does-demo-migration-prove-the-full-migration-is-ready" id="does-demo-migration-prove-the-full-migration-is-ready"></a>
 
-The overall journey is similar, but responsibility changes. Standard Service is customer-led, Managed Service is performed by Next-Cart, and Custom Service handles customization or modification work. Custom Service does not automatically include full migration management unless it is part of the final plan.
+No. Demo Migration gives early evidence from a limited sample. Full validation is still needed after broader migration activity.
 
-#### Why is Demo Migration part of the process?
-
-Demo Migration provides early evidence about how representative source-store data behaves in the Target Cart. It helps reveal whether the project looks predictable, needs Add-ons, or requires Custom Service before the customer commits too deeply.
-
-#### Does Recent Data Migration replace validation?
+#### Does Recent Data Migration replace validation? <a href="#does-recent-data-migration-replace-validation" id="does-recent-data-migration-replace-validation"></a>
 
 No. Recent Data Migration helps sync newly created source-store data before launch. The customer still needs to validate that the latest data appears correctly and that the target store is ready for launch.

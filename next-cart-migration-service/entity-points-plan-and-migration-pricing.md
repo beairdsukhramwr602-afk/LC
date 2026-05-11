@@ -6,7 +6,7 @@ This article explains how the Entity Points Plan is selected, how pricing differ
 
 ### What the Entity Points Plan Represents <a href="#what-the-entity-points-plan-represents" id="what-the-entity-points-plan-represents"></a>
 
-An Entity Points Plan sets the migration capacity available to a customer’s license for the selected Source Cart and Target Cart pair.
+An Entity Points Plan sets the migration capacity available to a customer’s license for the selected Source Platform and Target Platform pair.
 
 Entity Points are calculated from four counted data types:
 
@@ -99,7 +99,7 @@ Custom Service pricing is provided as a custom quote. The quote can consider:
 * tailored Add-ons
 * custom Add-ons
 * migration-tool adjustment
-* Custom Cart handling
+* Custom Platform handling
 * third-party app, plugin, module, or extension data
 * custom fields or outside-system identifiers
 * optional migration management if included in the final plan
@@ -199,15 +199,15 @@ Review your estimated Product, Customer, Order, and Blog counts carefully before
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**What is an Entity Points Plan?**&#x20;
+**What is an Entity Points Plan?**
 
 An Entity Points Plan is the capacity tier that determines how many Entity Points the migration license can support.
 
-**How is the Entity Points Plan selected?**&#x20;
+**How is the Entity Points Plan selected?**
 
 The customer enters estimated counts for Product, Customer, Order, and Blog. The system calculates the Entity Points and recommends the closest higher plan.
 
-**What is included in Standard Service pricing?**&#x20;
+**What is included in Standard Service pricing?**
 
 Standard Service pricing includes the Entity Points Plan and any optional Add-ons the customer purchases.
 

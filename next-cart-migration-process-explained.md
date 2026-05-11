@@ -1,6 +1,6 @@
 # Next-Cart Migration Process Explained
 
-A Next-Cart migration follows a structured process that moves store data from a Source Cart to a Target Cart while keeping the target store usable for review, correction, final synchronization, and launch readiness. The process is not only a transfer run. It is a sequence of decisions, configuration choices, execution steps, and validation checkpoints.
+A Next-Cart migration follows a structured process that moves store data from a Source Platform to a Target Platform while keeping the target store usable for review, correction, final synchronization, and launch readiness. The process is not only a transfer run. It is a sequence of decisions, configuration choices, execution steps, and validation checkpoints.
 
 This article explains how that process works at a planning level: how the migration moves from early proof to source and target connection, configuration, Full Migration, validation, and final freshness alignment. It gives readers the process context they need before evaluating scope, pricing, Add-ons, service responsibility, or Custom Service requirements in more detail.
 
@@ -10,12 +10,12 @@ The migration process is designed to create a controlled path from initial evide
 
 That path supports six practical goals:
 
-* confirm that the Source Cart and Target Cart can be connected
+* confirm that the Source Platform and Target Platform can be connected
 * use Demo Migration to test the direction before full execution
 * configure the migration scope, options, mappings, and any purchased Add-ons
 * run the Full Migration through the selected platform pair
 * validate whether the migrated result works as expected
-* use Recent Data Migration where the source store continues creating new data before launch
+* use Recent Data Migration where the Source Platform continues creating new data before launch
 
 Each stage reduces uncertainty before the next one. A migration becomes riskier when the customer treats it as one event instead of a sequence that needs review and adjustment.
 
@@ -24,7 +24,7 @@ Each stage reduces uncertainty before the next one. A migration becomes riskier 
 A practical way to understand the Next-Cart migration process is through six stages:
 
 1. Demo Migration and early review
-2. Source and target connection
+2. Source and target platforms connection
 3. Migration configuration
 4. Full Migration execution
 5. Result validation
@@ -34,11 +34,11 @@ The same general process applies across service models. What changes is who perf
 
 ### Stage 1: Demo Migration and Early Review <a href="#stage-1-demo-migration-and-early-review" id="stage-1-demo-migration-and-early-review"></a>
 
-Demo Migration gives the customer an early view of how selected source-store data may appear in the Target Cart.
+Demo Migration gives the customer an early view of how selected source-store data may appear in the Target Platform.
 
 This stage is meant to reveal whether the migration direction is workable before the customer relies on the full migration path. The most useful sample is not always the simplest data. It should include records that can reveal real migration meaning, such as products with options or variants, meaningful customer and order examples, important categories, or content records that need to remain useful after launch.
 
-The goal is to review whether representative data still makes sense in the Target Cart.
+The goal is to review whether representative data still makes sense in the Target Platform.
 
 At this stage, the customer should look for answers to questions such as:
 
@@ -48,17 +48,17 @@ At this stage, the customer should look for answers to questions such as:
 * does the sample reveal filtering, mapping, or configuration needs?
 * does the result suggest a Custom Service requirement?
 
-Demo Migration is an early proof step. It is not final validation of the complete store.
+Demo Migration gives early evidence for planning. The broader result still needs to be reviewed after the Full Migration.
 
-### Stage 2: Source and Target Connection <a href="#stage-2-source-and-target-connection" id="stage-2-source-and-target-connection"></a>
+### Stage 2: Source and Target Platforms Connection <a href="#stage-2-source-and-target-connection" id="stage-2-source-and-target-connection"></a>
 
-After the migration direction is understood, the process depends on reliable access to both carts.
+After the migration direction is understood, the process depends on reliable access to both platforms.
 
-Depending on the platforms involved, Next-Cart may connect through API access, KitConnect, or file-based data access. The connection method depends on what the Source Cart and Target Cart support and what the migration scope requires.
+Depending on the platforms involved, Next-Cart may connect through API access, KitConnect, or file-based data access. The connection method depends on what the Source Platform and Target Platform support and what the migration scope requires.
 
 This stage matters because migration quality depends on whether the process can access the right source data and write it into the target environment in a usable way.
 
-Connection should not be treated as only an access checkpoint. It also helps reveal whether the data is available through the expected platform model or whether important information lives in a place that needs closer review, such as custom fields, extensions, files, or a Custom Cart structure.
+Connection should not be treated only as an access checkpoint. It also helps reveal whether the data is available through the expected platform model or whether important information lives in a place that needs closer review, such as custom fields, extensions, files, or a Custom Platform structure.
 
 ### Stage 3: Migration Configuration <a href="#stage-3-migration-configuration" id="stage-3-migration-configuration"></a>
 
@@ -79,7 +79,7 @@ The customer should treat configuration as a decision point, not only as a setup
 
 ### Stage 4: Full Migration Execution <a href="#stage-4-full-migration-execution" id="stage-4-full-migration-execution"></a>
 
-Full Migration is the stage where the configured migration moves the selected store data into the Target Cart.
+Full Migration is the stage where the configured migration moves the selected store data into the Target Platform.
 
 The migration runs through Next-Cart’s server-side process and can continue in the background during execution. The customer can monitor progress, but the value of this stage is not only seeing whether the run completes. The value is producing a target-store result that can be reviewed against real business expectations.
 
@@ -109,7 +109,7 @@ For planning purposes, the safest assumption is that migration execution follows
 
 After Full Migration, the customer needs to review whether the target store works as expected.
 
-Validation should not stop at checking whether records exist. A useful review should confirm whether the target store still supports the outcomes the business depends on.
+Validation should not stop at checking whether records exist. A useful review should confirm whether the Target Platform still supports the outcomes the business depends on.
 
 Priority review areas often include:
 
@@ -125,7 +125,7 @@ The customer remains responsible for confirming whether the result is acceptable
 
 ### Stage 6: Recent Data Migration and Launch Readiness <a href="#stage-6-recent-data-migration-and-launch-readiness" id="stage-6-recent-data-migration-and-launch-readiness"></a>
 
-If the Source Cart remains active after Full Migration, new data may continue to appear before launch. Recent Data Migration helps synchronize newly created source-store data into the Target Cart closer to go-live.
+If the Source Platform remains active after Full Migration, new data may continue to appear before launch. Recent Data Migration helps synchronize newly created source-store data into the Target Platform closer to go-live.
 
 This stage is useful when the source store continues receiving new orders, customers, products, or content while the target store is being prepared.
 
@@ -135,7 +135,7 @@ Recent Data Migration helps reduce the freshness gap between the earlier migrati
 
 Customers may also encounter the migration tool through a simpler operating view:
 
-1. connect the Source Cart and Target Cart
+1. connect the Source Platform and Target Platform
 2. configure the migration
 3. start and monitor the migration
 
@@ -189,7 +189,7 @@ Yes. All scanned records are migrated by default. If the customer wants to migra
 
 #### Is the migration sequence the same as the Entity Points consumption sequence? <a href="#is-the-migration-sequence-the-same-as-the-entity-points-consumption-sequence" id="is-the-migration-sequence-the-same-as-the-entity-points-consumption-sequence"></a>
 
-No. The migration sequence controls the order in which entity types are processed. Entity Points consumption follows the counted core sequence of Product, Customer, Order, and Blog.
+No. The migration sequence controls the order in which entity types are processed. Entity Points consumption follows the counted core sequence of Product → Customer → Order → Blog.
 
 #### Does Demo Migration prove the full migration is ready? <a href="#does-demo-migration-prove-the-full-migration-is-ready" id="does-demo-migration-prove-the-full-migration-is-ready"></a>
 

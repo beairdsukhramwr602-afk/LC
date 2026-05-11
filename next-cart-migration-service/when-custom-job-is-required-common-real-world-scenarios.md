@@ -1,335 +1,290 @@
-# When Custom Job Is Required: Common Scenarios
+# What Custom Service Handles
 
-Most migration projects work well with standard capabilities when the source and target platforms can represent the same store meaning in similar ways. A Custom Job becomes necessary when standard migration can move the records, but cannot preserve a business-critical requirement, special rule, or non-standard data structure the store depends on.
+Custom Service is the Next-Cart path for migration projects that need tailored handling beyond the default migration tool capability or standard Add-ons. It applies when the expected target result depends on customization, modification, exclusive handling, or bespoke configuration.
 
-That is why a Custom Job should not be understood as general extra help. It is targeted customization of the migration process used when standard handling cannot reliably preserve the outcome the business needs.
+This can include Add-on-related work, but Custom Service is not limited to Add-ons. It also covers Custom Platform, third-party data, custom fields, outside-system identifiers, migration-tool modification, platform-specific transformation logic, and other requirements that do not fit a standard migration path.
 
-### What a Custom Job Is
+The purpose of Custom Service is to define a workable approach for migration requirements that need more than ordinary configuration.
 
-A Custom Job is a modification or extension of the migration tool designed to handle a requirement that standard capabilities do not cover by default.
+### What Custom Service Means <a href="#what-custom-service-means" id="what-custom-service-means"></a>
 
-In practice, a Custom Job is used when one or more of these conditions are true:
+Custom Service is required when the migration outcome depends on tailored work.
 
-* the data exists, but the target platform cannot represent it the same way by default
-* the data lives in a third-party module, plugin, extension, custom field set, or outside system rather than in standard supported entities
-* the data must be filtered, transformed, or reshaped to preserve business meaning after migration
+This can include:
 
-A Custom Job is most valuable when it preserves business-critical meaning, not when it is used to avoid basic scoping decisions or routine cleanup.
+* modifying how the migration tool handles specific data
+* tailoring a standard Add-on
+* creating a custom Add-on
+* interpreting a Custom Platform structure
+* transforming data to fit a target platform’s supported model
+* preserving custom fields or outside-system identifiers
+* handling third-party app, plugin, module, or extension data
+* applying bespoke configuration rules
+* supporting a migration outcome that cannot be reached through default settings alone
 
-### Why Some Migration Requirements Go Beyond Standard Handling
+The key point is that Custom Service protects the expected result when a requirement cannot be handled through the standard path.
 
-Standard migration is strongest when the source and target stores share a reasonably compatible model for the data that matters most. Custom handling becomes necessary when the requirement depends on something more specific than standard entity transfer.
+### Custom Service Is Broader Than Add-ons <a href="#custom-service-is-broader-than-add-ons" id="custom-service-is-broader-than-add-ons"></a>
 
-That often means:
+Add-ons give customers more control over focused migration needs, such as data filtering, advanced mapping, or data configuration.
 
-* custom fields that affect storefront behavior
-* extension-managed product or customer data
-* rule-based filtering inside an entity type
-* transformation logic needed to preserve meaning
-* non-standard platform structures
-* relationship-sensitive behaviors that rely on custom logic
-* identifiers or metadata needed by external systems after launch
+Custom Service is broader. It covers the wider set of requirements where the migration approach itself needs to be tailored, whether or not they involve an Add-on.
 
-The key question is not whether the data exists. The key question is whether standard migration can preserve the outcome the business actually needs.
+For example:
 
-### Scenario 1: Custom Fields That Affect Storefront or Operational Behavior
+* filtering selected data may fit the Data Filter Add-on
+* more controlled source-to-target field alignment may fit Advanced Data Mapping
+* changing selected data values before migration may fit Advanced Data Configure
+* modifying an Add-on beyond its default capabilities requires Custom Service
+* building a custom Add-on requires Custom Service
+* handling Custom Platform, app-owned data, custom fields, or migration-tool behavior belongs under Custom Service
 
-Some stores rely on custom product, customer, or order fields that are not part of the standard supported entity model. These fields may carry specifications, special pricing types, media relationships, operational metadata, or other information that affects real store behavior.
+This distinction keeps Add-ons useful without forcing every custom migration requirement into the Add-on category.
 
-#### Why standard migration may not be enough
+### Tailored Add-ons and Custom Add-ons <a href="#tailored-add-ons-and-custom-add-ons" id="tailored-add-ons-and-custom-add-ons"></a>
 
-Standard migration can transfer the core entity while leaving the business-critical field set behind or preserving it in a form that is no longer usable in the target environment.
+Custom Service can include Add-on-related work.
 
-#### What usually makes this requirement more complex
+A tailored Add-on is needed when a standard Add-on must be modified beyond its default capability. For example, a customer may need filtering logic, mapping behavior, or data configuration rules that the standard Add-on cannot support through its available settings.
 
-Common complexity drivers include:
+A custom Add-on is needed when the currently available Add-ons do not fit the customer’s migration requirements. In that case, the customer can describe the expected result, and Next-Cart reviews whether a custom Add-on can be provided.
 
-* product price types added by an extension
-* product attributes added by an extension
-* product specifications added by an extension
-* product images or videos added by an extension
-* custom fields that influence buying decisions, operations, or downstream systems
+Both tailored Add-ons and custom Add-ons are handled through Custom Service because they require customization or modification work.
 
-#### What a Custom Job may need to do
+### Custom Platform Handling <a href="#custom-cart-handling" id="custom-cart-handling"></a>
 
-A Custom Job may need to:
+Custom Platform as Source Platform or Target Platform requires Custom Service.
 
-* migrate the custom field set itself
-* place it into a usable target structure
-* adapt the data so it still supports storefront display, filtering, reporting, or operational workflows after migration
+A Custom Platform is a platform or store system that is not part of Next-Cart’s standard supported platform list. The challenge is not simply that the connection method may be different. The larger issue is that Custom Platform projects often require more interpretation before the data can be migrated safely.
 
-#### What the customer should clarify early
+Custom Platform handling may involve:
 
-The customer should identify:
+* understanding the source or target data model
+* reviewing how records are stored
+* identifying which data relationships must be preserved
+* transforming source data into a structure the Target Platform can support
+* adjusting migration logic for non-standard fields or formats
+* validating whether the migrated result matches the expected business outcome
 
-* which custom fields are genuinely business-critical
-* where those fields appear today
-* what outcome they must still support after migration
-* whether the target platform needs the same field behavior or an adapted equivalent
+Custom Platform migration should be planned carefully because the data structure may not follow a known supported-platform pattern.
 
-### Scenario 2: Third-Party App, Plugin, or Extension Data
+### Third-Party App, Plugin, Module, or Extension Data <a href="#third-party-app-plugin-module-or-extension-data" id="third-party-app-plugin-module-or-extension-data"></a>
 
-Many stores depend on data created or managed by third-party modules, plugins, or extensions rather than by the platform’s native model. That can include loyalty context, subscription data, search or filtering logic, bundled-product behavior, merchandising rules, or extension-managed attributes.
+Many stores rely on apps, plugins, modules, or extensions to support important business functions.
 
-#### Why standard migration may not be enough
+This data may affect:
 
-The storefront may make the feature look native, but the actual data may live outside the default platform model. Standard migration may move the core entities while leaving the extension-driven meaning behind.
+* product details
+* filters and merchandising
+* customer segmentation
+* loyalty or subscription logic
+* reviews
+* custom checkout behavior
+* shipping or fulfillment information
+* promotions or discounts
+* reporting identifiers
+* ERP, CRM, or automation workflows
 
-#### What usually makes this requirement more complex
+If that data must be migrated, interpreted, transformed, or preserved beyond the standard platform model, the project requires Custom Service.
 
-This becomes more complex when:
+The important question is not only whether the data exists. The important question is whether that data carries business meaning that must remain usable in the Target Platform.
 
-* the extension affects revenue-critical behavior
-* the extension shapes discovery or filtering
-* the data is stored in module-specific structures
-* the target platform cannot represent the same behavior natively
+### Custom Fields <a href="#custom-fields" id="custom-fields"></a>
 
-#### What a Custom Job may need to do
+Custom fields can be important even when they look small in the source store.
 
-A Custom Job may need to:
+They may store information used for:
 
-* extract extension-driven data that is not part of standard support
-* remap it into a usable target structure
-* preserve the relationship between the extension-driven data and the core entity it depends on
+* product classification
+* internal merchandising
+* customer segmentation
+* fulfillment
+* reporting
+* integrations
+* search and filtering
+* business-specific workflows
 
-#### What the customer should clarify early
+If custom fields need to be preserved, mapped, transformed, or placed into target-supported structures, the requirement may need Custom Service.
 
-The customer should clarify:
+Custom fields often require review because the Target Platform may not store or use the same type of field in the same way. The goal is to define the closest workable target result based on platform capability and business need.
 
-* which extensions materially affect revenue, operations, discoverability, or customer continuity
-* whether those extensions are only cosmetic or business-critical
-* what the target store must still be able to do after migration
+### Outside-System Identifiers <a href="#outside-system-identifiers" id="outside-system-identifiers"></a>
 
-### Scenario 3: Rule-Based Filtered Migration Requirements
-
-Some projects do not want a full-scope migration. They need defined rules for which records should move and which should not.
-
-Typical examples include:
-
-* only active products
-* only orders from a certain date range
-* only customers who have placed at least one order
-* only valid or unused coupons
-* only blog posts published after a certain date
-* only products from selected categories
-
-Choosing whole entity types is not the same as filtering records within those entity types. Excluding entire entities can be standard, but rule-based filtering inside an entity often requires more precise logic than standard handling provides.
-
-#### Why standard migration may not be enough
-
-Standard migration may not preserve the filtered result consistently if the project depends on explicit inclusion or exclusion rules inside an entity type.
-
-#### What usually makes this requirement more complex
-
-This becomes more complex when:
-
-* the rule must be repeatable and precise
-* the rule affects business continuity or reporting
-* the rule depends on status, date, validity, or relationship conditions
-* the filtered scope could weaken the meaning of connected records if handled loosely
-
-#### What a Custom Job may need to do
-
-A Custom Job may need to:
-
-* apply defined inclusion or exclusion conditions
-* preserve the filtered outcome consistently across the migration run
-* make sure the resulting scoped dataset still supports the intended business use
-
-#### What the customer should clarify early
-
-The customer should clarify:
-
-* exactly which records should be included
-* the rule that decides inclusion or exclusion
-* why the filtered result is needed
-* whether filtering changes how related data should still behave after migration
-
-### Scenario 4: Data Transformation Requirements
-
-Sometimes the data is present, but it needs to be transformed so the target store can use it meaningfully.
+Outside-system identifiers connect the store to systems beyond the eCommerce platform.
 
 Examples include:
 
-* removing HTML code or special characters from descriptions
-* converting product attributes into product categories
-* converting customer tags into customer groups
-* reshaping category logic so the target browse experience matches business intent
-* normalizing option values so variants behave predictably
+* ERP IDs
+* CRM IDs
+* shipping or fulfillment IDs
+* subscription references
+* marketplace identifiers
+* product information management IDs
+* accounting or reporting references
+* custom customer identifiers
 
-#### Why standard migration may not be enough
+These values may be critical after launch because outside systems may continue relying on them.
 
-Standard migration is designed to transfer and map supported data. It is not automatically designed to reshape business logic or reinterpret field meaning when the target platform needs a different structure to preserve the desired outcome.
+If the migration must preserve or reposition these identifiers in a specific way, the project should be reviewed under Custom Service. Losing or misplacing these values can break downstream workflows even if the storefront appears complete.
 
-#### What usually makes this requirement more complex
+### Platform Capability Limitations <a href="#platform-capability-limitations" id="platform-capability-limitations"></a>
 
-This becomes more complex when:
+Sometimes the Target Platform cannot represent source-store behavior exactly.
 
-* the old store uses workarounds that do not translate cleanly
-* the target platform supports the concept differently
-* the target store would become confusing or weaker if the data were copied as-is
-* the required outcome depends on interpretation rather than one-to-one transfer
+This can affect:
 
-#### What a Custom Job may need to do
+* product options and variants
+* attributes
+* customer groups
+* order statuses
+* category or collection structures
+* reviews
+* coupons
+* CMS Pages
+* Blog Posts
+* SEO and URL behavior
+* custom metadata
+* app-supported features
 
-A Custom Job may need to:
+Custom Service helps define a migration approach when the expected result requires tailored handling within the Target Platform’s supported capabilities.
 
-* transform values between field types
-* clean or standardize data during migration
-* reshape structures so the target platform can preserve the intended behavior more effectively
+This does not mean every source behavior can be recreated exactly. It means Next-Cart reviews the requirement, defines what can be preserved, and identifies the most suitable supported result.
 
-#### What the customer should clarify early
+### Migration-Tool Modification <a href="#migration-tool-modification" id="migration-tool-modification"></a>
 
-The customer should clarify:
+Some projects require modification to how the migration tool processes data.
 
-* what the data means originally
-* what it needs to mean after migration
-* whether the target platform needs an exact match or a usable equivalent
-* what business behavior must still work after the transformation
+This may happen when the project needs:
 
-### Scenario 5: Custom Cart or Non-Standard Platform Structure
+* special transformation logic
+* custom field handling
+* non-standard source interpretation
+* target-specific formatting rules
+* custom Add-on behavior
+* source data normalization
+* unusual relationship preservation
+* special handling for records that do not fit the standard migration model
 
-Some migration projects involve a platform not currently on the standard supported list, a heavily customized self-hosted implementation, or a store with unique data storage patterns.
+Migration-tool modification is a Custom Service work because it changes how the migration is handled beyond the default capability.
 
-#### Why standard migration may not be enough
+### Bespoke Data Transformation <a href="#bespoke-data-transformation" id="bespoke-data-transformation"></a>
 
-Standard migration assumes recognizable source and target structures. When the platform is heavily customized or non-standard, the migration may need to interpret or map structures that do not behave like a typical platform pairing.
+Bespoke transformation is needed when source data must be changed in a specific way before it can support the expected target result.
 
-A migration from or to a Custom Cart always proceeds through Custom Migration Service. In these cases, the migration often needs more exclusive handling to fit structural differences, data modifications, migration-tool adjustments, interpretation demands, validation sensitivity, and other bespoke requirements.
+Examples may include:
 
-#### What usually makes this requirement more complex
+* restructuring selected product data
+* changing how values are grouped or interpreted
+* transforming legacy fields into target-supported values
+* normalizing data formats
+* adjusting labels or codes used by the business
+* reshaping content or metadata for the Target Platform
 
-This becomes more complex when:
+Some simple data adjustments may fit Advanced Data Configure. Broader transformation rules or logic that exceed default Add-on capability are handled through Custom Service.
 
-* the source platform is proprietary or unusual
-* the store uses heavily modified database structures
-* the data model differs significantly from standard expectations
-* important business behavior depends on those non-standard structures
+### Custom Service and Migration Management <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
 
-#### What a Custom Job may need to do
+Custom Service does not automatically mean Next-Cart performs the full migration process.
 
-A Custom Job may need to:
+Custom Service means customization or modification work is required.
 
-* interpret non-standard data structures
-* adapt the migration logic for that platform pairing
-* preserve required data meaning where standard mappings do not apply cleanly
+The final plan may work in different ways:
 
-#### What the customer should clarify early
+* the customer purchases customization work and performs the migration themselves
+* the customer includes optional migration management so Next-Cart performs the migration process
+* the custom work is integrated into a Next-Cart-led migration if migration management is part of the final plan
 
-The customer should clarify:
+This distinction matters because service status and execution responsibility are not always the same.
 
-* whether the platform itself is non-standard
-* whether key data lives in unusual structures
-* which outcomes are non-negotiable if the platform behavior is custom or proprietary
+### How Custom Service Is Reviewed <a href="#how-custom-service-is-reviewed" id="how-custom-service-is-reviewed"></a>
 
-### Scenario 6: Relationship-Sensitive Special Handling
+A strong Custom Service request describes the expected result clearly.
 
-Some requirements are especially risky because they affect how connected records remain usable after migration. Even when the records move, the result can still fail if relationship-heavy meaning is weakened by filtering, transformation, platform differences, or extension-driven logic.
+Useful information includes:
 
-#### Why standard migration may not be enough
+* which data types are affected
+* where the source data exists
+* what the target result should look like
+* which records or examples show the requirement clearly
+* whether apps, plugins, modules, or extensions are involved
+* whether custom fields or outside-system identifiers are involved
+* whether Custom Platform is the Source Platform, Target Platform, or both
+* whether the request involves an Add-on, a tailored Add-on, or a custom Add-on
+* how the customer will validate that the result is acceptable
 
-Standard handling may preserve the records but not the special conditions needed to preserve how those records continue working together in buying paths, discovery, promotions, or operations.
+The clearer the expected outcome, the easier it is to review the request and provide a suitable quote.
 
-#### What usually makes this requirement more complex
+### What Custom Service Does Not Guarantee <a href="#what-custom-service-does-not-guarantee" id="what-custom-service-does-not-guarantee"></a>
 
-This becomes more complex when:
+Custom Service provides a path for reviewing and implementing tailored handling. It does not mean every source-store behavior can always be recreated exactly in the Target Platform.
 
-* products and variants are structured in non-standard ways
-* categories or collections are being used as operational tags rather than browse pathways
-* extensions store relationship data outside the default model
-* the requirement depends on preserving behavior across multiple connected entities
+The final result still depends on:
 
-#### What a Custom Job may need to do
+* the quality and structure of the source data
+* what the Target Platform can support
+* how the requirement is defined
+* whether the expected result is technically feasible
+* how the customer validates the result
+* whether outside systems need additional configuration beyond the migration itself
 
-A Custom Job may need to:
+A good Custom Service plan defines the closest workable result based on the source data, target platform, and business requirement.
 
-* preserve non-standard relationship logic
-* adapt how related data is mapped or filtered
-* make sure the target store preserves the connected behavior the business depends on
+### When Custom Service Should Be Considered Early <a href="#when-custom-service-should-be-considered-early" id="when-custom-service-should-be-considered-early"></a>
 
-#### What the customer should clarify early
+Custom Service should be considered early when the customer already knows that the migration includes non-standard requirements.
 
-The customer should clarify:
+Early review is especially important when the project involves:
 
-* which connected behaviors must still work after launch
-* whether the requirement depends on more than core entity presence
-* where relationship-heavy logic lives today, especially if it is extension-driven or custom
+* Custom Platform
+* complex product structures
+* app-owned or extension-owned data
+* custom fields
+* outside-system identifiers
+* unusual order or customer data
+* special transformation logic
+* advanced filtering, mapping, or data configuration beyond standard Add-ons
+* target-platform limitations that may affect the expected outcome
 
-### Scenario 7: Integration-Dependent Migration Requirements
+These requirements should not be left until final validation. They can shape the entire migration approach.
 
-Some stores rely on data that matters mainly because outside systems need it after migration. That can include ERP identifiers, CRM-linked customer fields, shipping or fulfillment metadata, subscription keys, automation identifiers, or reporting artifacts.
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-#### Why standard migration may not be enough
+Custom Service handles the migration requirements that go beyond the default migration tool capability and standard Add-ons. It covers tailored Add-ons, custom Add-ons, Custom Platform handling, third-party data, custom fields, outside-system identifiers, migration-tool modification, bespoke transformation, and other exclusive handling needs.
 
-Standard migration may preserve the visible storefront data while missing the metadata or identifiers that external systems need to keep operating correctly after launch.
+The most important distinction is that Add-ons are focused service features, while Custom Service is the broader path for customization and modification work. Custom Service also does not automatically mean Next-Cart performs the full migration process unless migration management is included in the final plan.
 
-#### What usually makes this requirement more complex
+Prepare Custom Service requirements around the outcome that must be preserved, not only the field or data type that needs to move. If your project involves Custom Platform, third-party logic, custom fields, outside-system identifiers, tailored Add-ons, or custom Add-ons, Live Chat can help clarify what information Next-Cart needs to review the request and prepare a suitable quote.
 
-This becomes more complex when:
+### FAQs <a href="#faqs" id="faqs"></a>
 
-* the external system depends on exact identifiers
-* the data is not visible in the storefront but is operationally critical
-* the target platform does not expose the same data structure by default
-* the business uses several connected systems with shared dependencies
+**What does Custom Service handle?**
 
-#### What a Custom Job may need to do
+Custom Service handles customization, modification, exclusive handling, and bespoke configuration needs that go beyond default migration-tool capability or standard Add-on capability.
 
-A Custom Job may need to:
+**Is Custom Service the same as Add-ons?**
 
-* preserve or transform external-system identifiers
-* remap fields needed by connected systems
-* make sure key operational metadata remains usable after migration
+No. Add-ons are focused optional features for filtering, advanced mapping, and data configuration. Custom Service is the broader path for requirements that need customization or modification.
 
-#### What the customer should clarify early
+**Is Custom Service required for modified Add-ons?**
 
-The customer should clarify:
+Yes. Any Add-on modification beyond default capability is handled through Custom Service.
 
-* which external systems must keep working immediately after launch
-* what data those systems depend on
-* whether the dependency is optional, rebuildable, or truly business-critical
+**Can Next-Cart provide custom Add-ons?**
 
-### How to Tell Whether Your Requirement Is a Custom Job Case
+Yes. If the available Add-ons do not fit the customer’s migration requirement, the customer can request a custom Add-on. Custom Add-ons are reviewed and quoted through Custom Service.
 
-The safest approach is to classify each concern shown by a representative demo as one of four types:
+**Is Custom Service required for Custom Platform?**
 
-* mapping decision
-* scope decision
-* platform capability difference
-* custom requirement
+Yes. Any migration involving Custom Platform as Source Platform or Target Platform requires Custom Service.
 
-Strong signals of a likely Custom Job case include:
+**Does Custom Service always include migration management?**
 
-* custom fields driving storefront display or filtering
-* third-party extension data that matters operationally
-* non-standard structures that do not translate cleanly
-* transformation rules needed to preserve required behavior
-* rule-based filtering within an entity type
-* platform pairings with non-standard or Custom Cart structures
+No. Custom Service means customization or modification work is required. Migration management can be included, but it is not automatic unless included in the final plan.
 
-A demo is most useful when it contains representative complexity on purpose. It helps distinguish between something that needs clearer mapping and something that truly requires custom handling.
+**What information should I prepare for a Custom Service request?**
 
-### Conclusion
+Prepare the expected target result, affected data types, representative examples, source data location, involved apps or custom fields, outside-system identifiers, and how you will validate the result.
 
-A Custom Job is required when standard migration capabilities cannot preserve the outcome your business needs, especially when important data lives in extensions, custom fields, filtered rules, non-standard structures, relationship-sensitive logic, or integration-dependent metadata.
+**Can Custom Service recreate every source-store behavior exactly?**
 
-The safest way to identify that need is to run a representative Demo Migration, review the result through an outcome lens, and classify the requirement carefully before deciding what kind of handling is truly necessary. When a Custom Job is needed, it works best as a planned requirement identified early, not as a late fix under launch pressure.
-
-If your store depends on extension-driven data, filtered rules, field transformations, outside-system identifiers, or a non-standard or Custom Cart structure, build a demo sample that includes those exact cases and review the outcome against what must still work after migration. If you need help deciding whether the issue is mapping, scope, platform capability, or a true Custom Job requirement, Live Chat is a practical way to confirm the safest path before timelines tighten.
-
-### FAQs
-
-#### Does needing a Custom Job mean the migration cannot be done normally?
-
-Not necessarily. Many stores can migrate core data successfully, but a Custom Job is needed when the requirement goes beyond standard capability and the business still needs that requirement preserved safely.
-
-#### Are filtered migrations always Custom Job cases?
-
-Not always. Excluding entire entity types can be standard. The higher-risk cases are rule-based filtering conditions within an entity type, especially when the logic must be precise and repeatable.
-
-#### Is every custom field a Custom Job case?
-
-No. The key question is whether the field is business-critical and whether standard migration can preserve it in a usable target-side form. Some custom fields matter little. Others directly affect storefront behavior, operations, or connected systems.
-
-#### When should a business identify a likely Custom Job requirement?
-
-As early as possible, ideally through a representative Demo Migration and requirement review before the project moves too far into execution.
+Not always. The final result depends on source data quality, target platform capability, technical feasibility, and the agreed migration approach. Custom Service defines the closest workable result for the requirement.

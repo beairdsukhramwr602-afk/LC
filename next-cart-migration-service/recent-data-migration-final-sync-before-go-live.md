@@ -1,164 +1,246 @@
-# Recent Data Migration: Final Sync Before Go Live
+# Recent Data Migration Explained
 
-A migration project does not end when the main dataset finishes transferring.
+Recent Data Migration helps active stores keep the Target Platform closer to the latest Source Platform state before launch. It is used after earlier migration activity when the Source Platform continues receiving new records, such as new orders, customers, products, or blog content.
 
-If the source store remains active during the migration timeline, new orders, new customers, updated products, and new content can continue to accumulate after the earlier migration run. That creates a freshness gap between the source store and the target store. Recent Data Migration exists to reduce that gap before launch so the completed target store reflects a more current and usable state.
+Its role is focused: reduce the freshness gap before go-live. A freshness sync supports launch preparation, but the customer still needs to review the synchronized data and confirm that the Target Platform is ready for launch.
 
-That is why Recent Data Migration should be understood as a final synchronization step tied to launch readiness, not as a substitute for good planning or a late attempt to repair earlier structural problems.
+#### What Recent Data Migration Is  <a href="#what-recent-data-migration-is" id="what-recent-data-migration-is"></a>
 
-### What Recent Data Migration Is
+Recent Data Migration syncs newly created source-store data into the Target Platform after previous migration activity has already taken place.
 
-Recent Data Migration is the process used after earlier migration activity to transfer newly created source-store records into the target store so the target reflects more up-to-date data closer to go-live. It is designed for active stores that continue generating meaningful changes during the project timeline.
+This matters because many businesses keep the Source Platform active while preparing the Target Platform. During that period, customers may place new orders, new accounts may be created, products may be added, and content may change.
 
-In practice, this often includes newly created:
+Without a freshness step, the Target Platform can become outdated before launch.
 
-* customers
-* orders
-* products
-* blog or CMS content, where relevant to the platform pairing
+Recent Data Migration helps reduce that gap by moving eligible new data into the Target Platform closer to go-live.
 
-It can be run more than once if the project timeline, validation cycle, or launch schedule makes another freshness update worthwhile. Many teams run it after validation work and again closer to go-live to reduce the final drift between source and target.
+#### Why Recent Data Migration Matters  <a href="#why-recent-data-migration-matters" id="why-recent-data-migration-matters"></a>
 
-### Why Active Stores Need a Final Sync Plan
+A migration timeline can last long enough for the source store to keep changing.
 
-The most common go-live data problem is not that the migration failed completely. It is that the target store is already out of date by the time launch arrives.
+For example:
 
-That can create problems such as:
+* new customers register
+* new orders are placed
+* existing products are updated
+* new products are added
+* new Blog Posts or CMS Pages are published
+* campaign-related content changes before launch
 
-* customer support not finding recent orders
-* fulfillment teams working from incomplete transaction history
-* teams reconciling day-one gaps under pressure
-* newer customer or order activity existing in the source store but not yet in the target store
+If those changes are not synchronized, the Target Platform may no longer reflect the source store’s most current business state. This can create launch-day confusion, missing order history, incomplete customer data, or content gaps.
 
-Recent Data Migration reduces that risk by helping the target store reflect the latest activity closer to launch. This is especially important when new orders and customer activity continue throughout the migration timeline.
+Recent Data Migration helps the customer launch with a fresher target store instead of relying only on the earlier Full Migration result.
 
-### What Recent Data Migration Is Meant to Protect
+#### Recent Data Migration and the Migration Timeline  <a href="#recent-data-migration-and-the-migration-timeline" id="recent-data-migration-and-the-migration-timeline"></a>
 
-Recent Data Migration is not only about copying newer records. It is about protecting launch readiness in the areas that become risky when the target store is stale.
+Recent Data Migration usually belongs near the end of the migration timeline.
 
-That usually means keeping the target store current enough in areas such as:
+A practical sequence is:
 
-* recent customer creation
-* recent order activity
-* meaningful catalog changes
-* content updates tied to campaigns or landing-page continuity
+1. run Demo Migration to review early direction
+2. configure and run Full Migration
+3. validate the migrated result
+4. continue preparing the Target Platform
+5. run Recent Data Migration closer to launch if the Source Platform stayed active
+6. validate the latest synchronized data before go-live
 
-Not every project needs every data type to be equally current. In many stores, orders and customers are the highest priority. Catalog freshness depends more on how frequently products change, and content freshness depends on how heavily content is used in campaigns or search-driven traffic.
+The exact timing depends on how active the source store is and how much new data is likely to appear before launch.
 
-### What Recent Data Migration Does Not Do
+Recent Data Migration should be planned as part of the launch sequence, not treated as a last-minute fix.
 
-Recent Data Migration does not replace:
+#### What Recent Data Migration Syncs  <a href="#what-recent-data-migration-syncs" id="what-recent-data-migration-syncs"></a>
 
-* outcome validation
-* mapping decisions
-* platform-fit analysis
-* earlier correction of structural or relationship problems
+Recent Data Migration focuses on newly created source-store records that were not included in earlier migration activity.
 
-It should not be treated as a way to fix issues that belong to mapping, platform differences, or unresolved migration decisions. If earlier demo results or validation revealed deeper structural problems, those issues should be resolved through planning and alignment instead of relying on a final sync to compensate for them.
+The most common freshness-sensitive data includes:
 
-It also does not prove go-live readiness by itself. Synchronization reduces data drift, but validation is what confirms that the completed target store behaves correctly in the ways the business depends on.
+* new orders
+* new customers
+* new products
+* new Blog Posts
 
-### Who Performs the Recent Data Migration
+Depending on the selected scope and platform support, other related or supporting data may also matter for the final target-store state.
 
-Across all service models, the customer initiates and runs Recent Data Migration.
+The key idea is that Recent Data Migration is about new data created after earlier migration activity, not importing the entire store from the beginning again.
 
-After that run, the customer is also responsible for validating that the newly imported data is correctly synchronized with the latest current data on the source cart.
+#### Recent Data Migration and Entity Points  <a href="#recent-data-migration-and-entity-points" id="recent-data-migration-and-entity-points"></a>
 
-That responsibility matters because launch confidence depends on more than whether a sync was started. It depends on whether the target store now reflects the near-launch state the business expects.
+Recent Data Migration uses Entity Points when newly created, counted records are migrated successfully for the first time.
 
-### How Recent Data Migration Interacts with Entity Points
+The counted Entity Points data types are:
 
-Recent Data Migration is covered by the same scope-measurement rules as other paid migrations. Entity Points are consumed only when new records are migrated successfully for the first time. Records already recorded as successfully migrated can be re-migrated without consuming additional Entity Points.
+* Product
+* Customer
+* Order
+* Blog
 
-In practice, this means:
+If the purchased Entity Points Plan still has unused capacity, new counted records can consume that remaining balance. If the remaining capacity is not enough, the customer can upgrade the Entity Points Plan.
 
-* newly created orders, customers, products, or content added after Full Migration consume Entity Points when they are migrated for the first time
-* re-running migration on records that were already recorded as successfully migrated does not consume additional Entity Points
-* if Entity Points are exhausted before all new records are transferred, Recent Data Migration stops until the plan is upgraded
+For example, if the customer’s plan still has unused Entity Points after Full Migration, those points can support new orders, customers, products, or blog content migrated later through Recent Data Migration.
 
-This is why stores with active order flow or ongoing customer growth should include likely data growth in their Entity Points planning before launch.
+This is why active stores should consider potential new data growth before launch when estimating Entity Points capacity.
 
-### How to Plan a Recent Data Migration
+#### Recent Data Migration and Re-Migration  <a href="#recent-data-migration-and-re-migration" id="recent-data-migration-and-re-migration"></a>
 
-Recent Data Migration works best when it supports a controlled launch sequence:
+Recent Data Migration should not be confused with re-migration.
 
-1. Full Migration is completed
-2. Validation is performed against priority outcomes
-3. Recent Data Migration is run to sync new records
-4. Final validation is completed on the highest-risk pathways
-5. The business confirms go-live readiness
+Recent Data Migration focuses on newly created records that appeared in the Source Platform after earlier migration activity.
 
-The most useful first planning decision is to define what “fresh enough” means for launch.
+Re-migration repeats migration activity for records that have already been migrated and recognized by the system, or applies updated migration settings to records the customer wants to process again. When the same records have already been successfully migrated, re-running those records does not consume additional Entity Points for those same records.
 
-For many stores, that means recent customers and orders must be current. For others, catalog or content freshness may also matter materially.
+New records are different. They consume Entity Points when they are migrated successfully for the first time.
 
-When that decision is made early, Recent Data Migration becomes a controlled part of launch planning rather than a rushed reaction to stale data late in the project.
+This distinction helps customers understand why repeated processing of existing migrated records may not use new capacity, while newly created source-store records can consume available Entity Points.
 
-### How Recent Data Migration Supports Go-Live Readiness
+#### Recent Data Migration and All Scanned Records  <a href="#recent-data-migration-and-all-scanned-records" id="recent-data-migration-and-all-scanned-records"></a>
 
-Go-live readiness depends on more than the existence of migrated records. The completed target store should be current enough and stable enough for launch in the areas that matter most.
+The migration tool migrates all scanned records by default unless filtering is configured.
 
-After Recent Data Migration, the customer should confirm that:
+For Recent Data Migration, this means the customer should be clear about which new data should be included before running the sync. If only selected new records should move, that scope should be planned with the Data Filter Add-on. If the filtering requirement exceeds the default capability of the Add-on, it becomes a Custom Service requirement.
 
-* the latest expected orders and customers now appear correctly in the target store
-* newly added records are aligned with the latest source-store state
-* priority user paths still work as expected
-* the completed target environment is ready for launch in the highest-risk business areas
+Recent Data Migration is safest when the customer understands whether the goal is to synchronize all newly created eligible data or only a controlled subset.
 
-A practical go-live readiness standard is that:
+#### Recent Data Migration and Add-ons  <a href="#recent-data-migration-and-add-ons" id="recent-data-migration-and-add-ons"></a>
 
-* non-negotiable outcomes have been validated using a representative sample
-* known differences are documented and accepted intentionally
-* freshness is controlled through a Recent Data Migration plan
-* decision responsibility is clear for launch day and the first days after launch
+Add-ons can affect Recent Data Migration when the newly synchronized data needs the same focused handling as earlier migrated data.
 
-This is what turns Recent Data Migration from a sync event into part of a controlled cutover plan.
+Examples include:
 
-### How Custom Cart Can Make Freshness Control More Sensitive
+* using the Data Filter Add-on when only selected new data under a specific rule or condition should be synchronized
+* using Advanced Data Mapping when new records need the same mapped structure as earlier migrated records
+* using Advanced Data Configure when new records need planned data adjustments before reaching the Target Platform
 
-A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. It may be the source platform, the target platform, or both in the project.
+Consistency matters. If the earlier migration used Add-ons to shape the target result, Recent Data Migration should preserve the same expectations for newly synchronized data.
 
-When a Custom Cart is involved, freshness control can become more sensitive because newer records may still need more careful interpretation or validation before they can be trusted as launch-ready.
+If new data requires handling beyond standard Add-on capability, the requirement should be reviewed through Custom Service.
 
-That is especially true where newer source-store data depends on custom fields, bespoke structure, outside-system identifiers, or non-standard business logic that does not behave like a more predictable platform pairing.
+#### Recent Data Migration and Custom Service  <a href="#recent-data-migration-and-custom-service" id="recent-data-migration-and-custom-service"></a>
 
-In those cases, the final sync is not only about keeping the store current. It is also about making sure the newly synchronized data still fits the configured logic, preserved meaning, and launch-ready expectations of the broader project.
+Recent Data Migration can be more sensitive when the broader project includes Custom Service requirements.
 
-### Common Mistakes
+This may happen when the migration involves:
 
-Common mistakes include:
+* Custom Platform as Source Platform or Target Platform
+* third-party app, plugin, module, or extension data
+* custom fields
+* outside-system identifiers
+* tailored Add-ons
+* custom Add-ons
+* migration-tool modification
+* bespoke data transformation rules
 
-* assuming Full Migration alone is enough for an active store
-* planning Recent Data Migration too late
-* treating it as a fix for unresolved mapping issues
-* forgetting that newly created records consume Entity Points when migrated for the first time
-* treating synchronization as if it replaces validation
-* failing to define what data must be current at launch
+In those cases, the freshness sync should not be treated as a simple new-record transfer. Newly created data may need to follow the same custom logic that made the earlier migration result acceptable.
 
-These mistakes usually create avoidable pressure at the moment when the project needs the most control.
+The customer should confirm whether the new data depends on any custom handling before launch.
 
-### Conclusion
+#### What Recent Data Migration Does Not Do  <a href="#what-recent-data-migration-does-not-do" id="what-recent-data-migration-does-not-do"></a>
 
-Recent Data Migration is the final synchronization step that helps an active store arrive at go-live with more current and usable data. Its job is not to repair earlier migration decisions. Its job is to reduce the freshness gap between earlier migration work and the launch-ready target store.
+Recent Data Migration has a specific purpose. It helps synchronize newly created data before launch.
 
-The safest way to use it is to decide early what must be current at launch, include likely new-data growth in Entity Points planning, run the sync as part of a controlled final sequence, and validate the highest-risk business outcomes before cutover. When handled that way, Recent Data Migration becomes one of the most practical tools for reducing launch-day uncertainty.
+It does not:
 
-Define what “fresh enough” means for your store before go-live, especially for recent orders, customers, and other business-critical data. Then plan the final Recent Data Migration run around your launch timing so the target store is current where it matters most. If you need help deciding what must be current, how much growth to expect, or whether your launch plan needs stronger safeguards, Live Chat is a practical way to align freshness planning, validation priorities, and go-live readiness.
+* replace Demo Migration
+* replace Full Migration
+* prove the whole target store is launch-ready
+* fix unresolved configuration issues
+* correct earlier validation problems by itself
+* remove the need for Add-ons when selective handling is required
+* remove the need for Custom Service when customization or modification work is required
 
-### FAQs
+A freshness sync is useful when the broader migration result is already moving in the right direction and the customer needs the Target Platform to reflect newer source-store activity.
 
-#### Is Recent Data Migration required for every project?
+#### What to Validate After Recent Data Migration  <a href="#what-to-validate-after-recent-data-migration" id="what-to-validate-after-recent-data-migration"></a>
 
-Not always. It is most useful when the source store remains active during the migration timeline. If the store continues taking orders and customer activity continues, a final synchronization strategy is usually important for a clean launch.
+After Recent Data Migration, the customer should validate the newly synchronized data and the parts of the store affected by it.
 
-#### What is the difference between Recent Data Migration and a Demo Migration?
+Useful checks include:
 
-Demo Migration is an early proof run using a limited sample to validate mapping behavior and reveal complexity. Recent Data Migration is a final synchronization run designed to keep active-store changes current closer to launch.
+* new orders appear with the expected customer and product relationships
+* new customers appear with usable contact and account information
+* new products appear in the expected category, collection, or browse context
+* new Blog Posts or CMS Pages appear correctly where relevant
+* mapped values remain consistent with earlier migrated records
+* Add-on-influenced records follow the same expected rules
+* custom-handled records preserve the agreed result
+* priority storefront, admin, and customer-service workflows still make sense
 
-#### Does Recent Data Migration replace the need for validation?
+Validation should focus on the new data most likely to affect launch confidence.
 
-No. Synchronization reduces data gaps, but validation confirms that the completed target store behaves correctly in the ways the business depends on.
+#### Planning Recent Data Migration Before Launch  <a href="#planning-recent-data-migration-before-launch" id="planning-recent-data-migration-before-launch"></a>
 
-#### Who is responsible for running Recent Data Migration?
+A strong launch plan should answer several questions before Recent Data Migration is run:
 
-Across all service models, the customer initiates and runs Recent Data Migration, then checks that the newly imported data is correctly synchronized with the latest source-store state.
+* Will the Source Platform remain active after Full Migration?
+* Which new data types are most likely to appear before launch?
+* How much Entity Points capacity may be needed for new counted records?
+* Should all newly created eligible data be synchronized, or only selected records?
+* Do Add-ons need to apply to the new records?
+* Does any custom handling need to apply to the new records?
+* Who will validate the synchronized result before go-live?
+* How close to launch should the final sync happen?
+
+These questions help the customer avoid treating Recent Data Migration as a simple button press. The feature is most useful when it is aligned with the launch plan.
+
+#### Common Recent Data Migration Misunderstandings  <a href="#common-recent-data-migration-misunderstandings" id="common-recent-data-migration-misunderstandings"></a>
+
+**“Recent Data Migration replaces Full Migration.”**&#x20;
+
+No. Recent Data Migration syncs newly created data after earlier migration activity. Full Migration is still the main migration run.
+
+**“Recent Data Migration proves launch readiness.”**&#x20;
+
+No. Recent Data Migration improves freshness. The customer still needs to review whether the synchronized data and affected workflows are ready for launch.
+
+**“Recent Data Migration never consumes Entity Points.”**&#x20;
+
+Newly created counted records consume Entity Points when migrated successfully for the first time.
+
+**“Any new data can be included without planning.”**&#x20;
+
+New data should still be reviewed for scope, Add-ons, custom handling, and available Entity Points capacity.
+
+**“Recent Data Migration fixes earlier configuration problems.”**&#x20;
+
+No. Configuration or validation issues should be addressed before the final freshness sync.
+
+#### Conclusion  <a href="#conclusion" id="conclusion"></a>
+
+Recent Data Migration helps active stores reduce the gap between the earlier migration result and the final source-store state before launch. It is especially useful when the Source Platform continues creating new orders, customers, products, or content while the Target Platform is being prepared.
+
+Its value is freshness, not final approval. Newly synchronized data still needs to be reviewed, especially when Entity Points capacity, Add-ons, Custom Service requirements, or launch timing affect the result.
+
+Plan Recent Data Migration as part of the launch sequence. If your Source Platform remains active, review likely new data growth, remaining Entity Points capacity, Add-on requirements, and any custom handling before the final sync. Live Chat can help clarify the safest timing and scope before go-live.
+
+#### FAQs  <a href="#faqs" id="faqs"></a>
+
+**What is Recent Data Migration?**&#x20;
+
+Recent Data Migration is the feature used to sync newly created source-store data into the Target Platform after earlier migration activity.
+
+**When should I use Recent Data Migration?**&#x20;
+
+Use it when the Source Platform remains active after Full Migration and continues creating new records before launch.
+
+**Does Recent Data Migration replace Full Migration?**&#x20;
+
+No. Full Migration is the main migration run. Recent Data Migration helps synchronize newly created data after earlier migration activity.
+
+**Does Recent Data Migration consume Entity Points?**&#x20;
+
+Yes. Newly created counted records consume Entity Points when they are migrated successfully for the first time.
+
+**Can unused Entity Points support Recent Data Migration?**&#x20;
+
+Yes. Unused Entity Points within the purchased plan can support newly created counted records migrated through Recent Data Migration.
+
+**What happens if there are not enough Entity Points for Recent Data Migration?**&#x20;
+
+The customer can upgrade the Entity Points Plan. The upgrade adds capacity and the customer pays only the price difference between the current plan and the higher plan.
+
+**Can I use Add-ons with Recent Data Migration?**&#x20;
+
+Yes. Add-ons may apply if the newly synchronized data needs filtering, advanced mapping, or data configuration.
+
+**Does Recent Data Migration replace validation?**&#x20;
+
+No. Recent Data Migration improves data freshness. The customer still needs to validate the synchronized data and confirm launch readiness.

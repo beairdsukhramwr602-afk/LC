@@ -1,6 +1,6 @@
 # Add-ons Explained
 
-Add-ons are optional Next-Cart features that give customers more control over specific parts of a migration. They are designed for focused needs such as selecting which records should move, adjusting source-to-target data mapping, or configuring data values before they reach the Target Cart.
+Add-ons are optional Next-Cart features that give customers more control over specific parts of a migration. They are designed for focused needs such as selecting which records should move, adjusting source-to-target data mapping, or configuring data values before they reach the Target Platform.
 
 Add-ons are available across Standard Service, Managed Service, and Custom Service. A standard Add-on can support a straightforward migration when its default capability is enough. When the expected result requires the Add-on to be changed or expanded, that requirement becomes part of Custom Service.
 
@@ -13,7 +13,7 @@ Add-ons are optional service features customers can select when a migration need
 They help with three common needs:
 
 * filtering selected data for migration
-* adjusting data mapping between the Source Cart and Target Cart
+* adjusting data mapping between the Source Platform and Target Platform
 * configuring or modifying data values before migration
 
 A standard Add-on is suitable when its available settings and supported behavior can achieve the customer’s intended result. If the requirement needs new logic or modification beyond those default capabilities, it should be reviewed through Custom Service.
@@ -52,7 +52,7 @@ If the customer wants only selected records to move, the Data Filter Add-on shou
 
 Advanced Data Mapping helps customers configure and modify how source data maps into target data structures within the supported data model and capabilities of the platforms involved.
 
-This Add-on is useful when the default mapping needs more control, but the expected result still fits what the Target Cart can support.
+This Add-on is useful when the default mapping needs more control, but the expected result still fits what the Target Platform can support.
 
 Examples may include:
 
@@ -62,13 +62,13 @@ Examples may include:
 * aligning selected attributes with target-supported structures
 * adjusting how source-store values are interpreted during migration
 
-Advanced Data Mapping does not remove the limitations of the Target Cart. It supports more controlled mapping within what the target platform can reasonably represent.
+Advanced Data Mapping does not remove the limitations of the Target Platform. It supports more controlled mapping within what the target platform can reasonably represent.
 
 ### Advanced Data Configure <a href="#advanced-data-configure" id="advanced-data-configure"></a>
 
-Advanced Data Configure helps customers edit or modify selected data values so the migrated data reaches the Target Cart with updated information.
+Advanced Data Configure helps customers edit or modify selected data values so the migrated data reaches the Target Platform with updated information.
 
-This Add-on is useful when the customer wants the migrated data to reflect planned adjustments instead of moving every value exactly as it appears in the Source Cart.
+This Add-on is useful when the customer wants the migrated data to reflect planned adjustments instead of moving every value exactly as it appears in the Source Platform.
 
 Examples may include:
 
@@ -177,7 +177,7 @@ Add-ons should not be used as a catch-all term for every kind of custom migratio
 
 Some requirements belong directly under Custom Service rather than the Add-ons article, such as:
 
-* Custom Cart as Source Cart or Target Cart
+* Custom Platform as Source Platform or Target Platform
 * third-party app, plugin, module, or extension data
 * custom fields
 * outside-system identifiers
@@ -195,7 +195,7 @@ A customer should consider Add-ons when the migration needs focused control over
 Useful questions include:
 
 * Should all scanned records migrate, or only selected records?
-* Do source values need more controlled mapping into the Target Cart?
+* Do source values need more controlled mapping into the Target Platform?
 * Do selected data values need to be updated before migration?
 * Can the requirement be handled through a standard Add-on’s default settings?
 * Does the expected result require Add-on modification?
@@ -214,42 +214,42 @@ Use Add-ons when your migration needs specific control over filtering, mapping, 
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-#### What are Add-ons? <a href="#what-are-add-ons" id="what-are-add-ons"></a>
+**What are Add-ons?**
 
 Add-ons are optional Next-Cart features that help customers handle focused migration needs such as data filtering, advanced mapping, or data configuration.
 
-#### Which standard Add-ons are currently available? <a href="#which-standard-add-ons-are-currently-available" id="which-standard-add-ons-are-currently-available"></a>
+**Which standard Add-ons are currently available?**
 
 The current standard Add-ons are the Data Filter Add-on, the Advanced Data Mapping, and the Advanced Data Configure.
 
-#### Can Add-ons be used with every service model? <a href="#can-add-ons-be-used-with-every-service-model" id="can-add-ons-be-used-with-every-service-model"></a>
+**Can Add-ons be used with every service model?**
 
 Yes. Standard Add-ons can be used with Standard Service, Managed Service, and Custom Service.
 
-#### Does using a standard Add-on make my project Custom? <a href="#does-using-a-standard-add-on-make-my-project-custom" id="does-using-a-standard-add-on-make-my-project-custom"></a>
+**Does using a standard Add-on make my project Custom?**
 
 No. Using a standard Add-on within the default capability does not automatically make the project Custom.
 
-#### When does an Add-on require Custom Service? <a href="#when-does-an-add-on-require-custom-service" id="when-does-an-add-on-require-custom-service"></a>
+**When does an Add-on require Custom Service?**
 
 An Add-on requires Custom Service when it needs modification beyond the default capability or when the customer requests a custom Add-on that is not currently available.
 
-#### Can Next-Cart provide a custom Add-on? <a href="#can-next-cart-provide-a-custom-add-on" id="can-next-cart-provide-a-custom-add-on"></a>
+**Can Next-Cart provide a custom Add-on?**
 
 Yes. If the currently available Add-ons do not fit the customer’s migration requirements, the customer can request a custom Add-on. Custom Add-ons are reviewed and quoted through Custom Service.
 
-#### How does Add-on top-up pricing work? <a href="#how-does-add-on-top-up-pricing-work" id="how-does-add-on-top-up-pricing-work"></a>
+**How does Add-on top-up pricing work?**
 
 If a purchased standard Add-on needs modification, the customer pays the difference between the standard Add-on price and the customized Add-on quote.
 
-#### Are Add-ons the same as Custom Service? <a href="#are-add-ons-the-same-as-custom-service" id="are-add-ons-the-same-as-custom-service"></a>
+**Are Add-ons the same as Custom Service?**
 
-No. Add-ons are focused features for specific migration needs. Custom Service is the broader path for customization, modification, Custom Cart handling, migration-tool adjustment, and other bespoke requirements.
+No. Add-ons are focused features for specific migration needs. Custom Service is the broader path for customization, modification, Custom Platform handling, migration-tool adjustment, and other bespoke requirements.
 
-#### When should I use the Data Filter Add-on? <a href="#when-should-i-use-the-data-filter-add-on" id="when-should-i-use-the-data-filter-add-on"></a>
+**When should I use the Data Filter Add-on?**
 
 Use the Data Filter Add-on when only selected records should migrate. Entered entity counts are used for pricing and plan capacity, not as automatic filters.
 
-#### What if I need filtering, mapping, or configuration beyond the available Add-ons? <a href="#what-if-i-need-filtering-mapping-or-configuration-beyond-the-available-add-ons" id="what-if-i-need-filtering-mapping-or-configuration-beyond-the-available-add-ons"></a>
+**What if I need filtering, mapping, or configuration beyond the available Add-ons?**
 
 If the available Add-ons do not support the expected result, the requirement should be reviewed as a tailored Add-on, custom Add-on, or Custom Service requirement.
