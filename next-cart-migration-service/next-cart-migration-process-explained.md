@@ -24,7 +24,7 @@ Each stage reduces uncertainty before the next one. A migration becomes riskier 
 A practical way to understand the Next-Cart migration process is through six stages:
 
 1. Demo Migration and early review
-2. Source and target platforms connection
+2. Connecting the Source Platform and Target Platform
 3. Migration configuration
 4. Full Migration execution
 5. Result validation
@@ -50,7 +50,7 @@ At this stage, the customer should look for answers to questions such as:
 
 Demo Migration gives early evidence for planning. The broader result still needs to be reviewed after the Full Migration.
 
-#### Stage 2: Source and Target Platforms Connection <a href="#stage-2-source-and-target-connection" id="stage-2-source-and-target-connection"></a>
+#### Stage 2: Connecting the Source Platform and Target Platform <a href="#stage-2-source-and-target-connection" id="stage-2-source-and-target-connection"></a>
 
 After the migration direction is understood, the process depends on reliable access to both platforms.
 
@@ -101,7 +101,7 @@ Entity Points consumption is processed through the counted core sequence:
 
 > Product → Customer → Order → Blog
 
-This distinction matters because the migration flow includes supporting entities as well as counted core data. Taxes, manufacturers, categories, reviews, coupons, and CMS pages can be part of the migration sequence, while Entity Points consumption is tied to the counted core data types used for plan capacity.
+This distinction matters because the migration flow includes supporting entities as well as counted core data. Taxes, manufacturers, categories, reviews, coupons, and CMS Pages can be part of the migration sequence, while Entity Points consumption is tied to the counted core data types used for plan capacity.
 
 For planning purposes, the safest assumption is that migration execution follows the full entity sequence, while capacity consumption should be interpreted through Product, Customer, Order, and Blog.
 

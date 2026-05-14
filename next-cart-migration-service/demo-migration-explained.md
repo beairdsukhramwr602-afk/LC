@@ -18,7 +18,7 @@ A useful Demo Migration helps answer questions such as:
 * do customers and orders remain understandable?
 * do relationships between records still make sense?
 * do mapped values need adjustment?
-* does the source-store structure fit the target platform clearly enough?
+* does the source platform structure fit the target platform clearly enough?
 * does the project show signs of needing Add-ons or Custom Service?
 
 The demo result should be reviewed as an early signal, not as a final guarantee.
