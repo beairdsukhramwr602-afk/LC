@@ -1,8 +1,8 @@
 # Entity Points Explained
 
-Entity Points are Next-Cart’s way of measuring core migration scope and migration capacity. They help customers estimate how much data the migration plan needs to support before the migration begins.
+Entity Points are Next-Cart’s way of measuring core migration scope and migration capacity within the purchased service. They help customers estimate how much counted data the selected migration path needs to support before the migration begins.
 
-Entity Points do not measure every kind of migration difficulty. A project can have a clear Entity Points estimate and still require careful review because of platform differences, product complexity, custom fields, third-party data, Add-ons, or Custom Service requirements. Entity Points answer the capacity question. They do not replace compatibility review, service choice, or validation.
+Entity Points do not measure every kind of migration difficulty. A project can have a clear Entity Points estimate and still require careful review because of platform differences, product complexity, custom fields, third-party data, Add-ons, or Custom Service requirements. Entity Points measure capacity. They do not replace compatibility review, service choice, or validation.
 
 #### What Entity Points Mean <a href="#what-entity-points-mean" id="what-entity-points-mean"></a>
 
@@ -82,17 +82,17 @@ Entity Points are used to estimate plan capacity during purchase.
 
 Customers enter estimated counts for Product, Customer, Order, and Blog. The system calculates the total Entity Points and recommends the closest higher Entity Points Plan.
 
-The entered numbers support pricing and plan selection. They do not automatically restrict what the migration tool scans or migrates.
+The entered numbers support pricing and plan selection. They do not automatically restrict what the migration process scans or migrates.
 
-This is one of the most important points to understand before execution. A customer who enters 200 Products is estimating plan capacity for pricing. That entry does not automatically tell the migration tool to migrate only 200 Product records.
+This is one of the most important points to understand before execution. A customer who enters 200 Products is estimating plan capacity for pricing. That entry does not automatically tell the migration process to migrate only 200 Product records.
 
 #### Entity Points Plan Capacity <a href="#entity-points-plan-capacity" id="entity-points-plan-capacity"></a>
 
 An Entity Points Plan can support more capacity than the customer’s initial input.
 
-For example, if the customer purchases a plan that supports up to 2,000 Entity Points and the actual scan consumes 1,400 Entity Points, the migration can use those 1,400 points while leaving 600 Entity Points available within that plan.
+For example, if the customer purchases a plan that supports up to 2,000 Entity Points and the actual scan consumes 1,400 Entity Points, the migration can use the 1,400 points and still leave 600 Entity Points available within that plan.
 
-Unused Entity Points can support later eligible migration activity, such as Recent Data Migration or Re-migration activity involving new records the customer wants to include.
+Unused Entity Points can support later eligible migration activity, such as Recent Data Migration or a later run that includes newly created counted records.
 
 This means the practical capacity limit is the Entity Points Plan, not only the customer’s original estimate.
 
@@ -100,11 +100,11 @@ This means the practical capacity limit is the Entity Points Plan, not only the 
 
 Entity count inputs should not be confused with filtering rules.
 
-By default, all scanned records are migrated. If the source store contains more eligible records than the customer estimated, the migration tool can continue migrating scanned records as long as the Entity Points Plan still has enough available capacity.
+By default, all scanned records are migrated. If the source store contains more eligible records than the customer estimated, the migration process can continue migrating scanned records as long as the Entity Points Plan still has enough available capacity.
 
 For example, a customer may enter 200 Products during purchase. If the source store contains 400 Product records and no filtering rule is configured, the migration process treats the scanned Product records as eligible for migration. If the selected plan still has enough Entity Points capacity, those records can be migrated and the available balance is consumed accordingly.
 
-If the customer wants to migrate only selected records, that requirement should be planned through the Data Filter Add-on. If the filtering need goes beyond the default capability of the Add-on, it becomes a Custom Service requirement.
+If the customer wants to migrate only selected records, that requirement should be planned through the Data Filter Add-on. If the filtering needs to go beyond the available settings and supported behavior of the Standard Add-on, it becomes a Custom Service requirement.
 
 #### Entity Points Consumption Order <a href="#entity-points-consumption-order" id="entity-points-consumption-order"></a>
 
@@ -131,15 +131,15 @@ In practical terms:
 * newly migrated Order records consume Order points
 * newly migrated Blog records consume Blog points
 
-Records that have already been successfully migrated and recognized by the system can be re-migrated without consuming additional Entity Points for the same records.
+Records that have already been successfully migrated and recognized by the service can be migrated again without consuming additional Entity Points for those same records.
 
-Newly created records still consume Entity Points when they are migrated successfully for the first time, including through Recent Data Migration or Re-migration
+Newly created records still consume Entity Points when they are migrated successfully for the first time, including through Recent Data Migration or another later migration run.
 
 #### How Actual Data Volume Affects Consumption <a href="#how-actual-data-volume-affects-consumption" id="how-actual-data-volume-affects-consumption"></a>
 
-Actual migration consumption depends on the data the tool scans and migrates, not only on the estimate entered during purchase.
+Actual migration consumption depends on the data the migration process scans and migrates, not only on the estimate entered during purchase.
 
-If the actual source-store data volume is higher than estimated, counted data types can consume more capacity than expected. If the selected Entity Points Plan still covers the actual total consumption, the migration can continue.
+If actual source-store data volume is higher than estimated, counted data types can consume more capacity than expected. If the selected Entity Points Plan still covers the actual total consumption, the migration can continue.
 
 For example:
 
@@ -160,13 +160,13 @@ The customer can continue by upgrading the Entity Points Plan. When upgrading, t
 
 The added Entity Points are distributed to the corresponding data types based on what the customer enters in the plan-upgrade purchase interface.
 
-Continuing through the migration tool is the safer and recommended path because it preserves the migration system’s record tracking and relationship handling. Manual import of remaining related data is discouraged because it can break connections between records or weaken database integrity. For example, manually imported records may not connect cleanly to previously migrated products, customers, orders, or supporting structures.
+Continuing through the purchased service is the safer path because it preserves record tracking and relationship handling. Manual import of remaining related data is discouraged because it can break connections between records or weaken database integrity. For example, manually imported records may not connect cleanly to previously migrated products, customers, orders, or supporting structures.
 
 #### Entity Points and Re-Migration <a href="#entity-points-and-re-runs" id="entity-points-and-re-runs"></a>
 
-Re-migration can be useful when the customer needs to process already migrated records again after adjustment, review, or correction.
+Re-Migration can be useful when the customer needs to process already migrated records again after adjustment, review, or correction.
 
-When the same records have already been successfully migrated and recognized by the migration system, processing those same records again does not consume additional Entity Points.
+When the same records have already been successfully migrated and recognized by the service, processing those same records again does not consume additional Entity Points.
 
 This helps customers correct or re-process existing migrated records without treating the same records as new capacity every time.
 
@@ -182,21 +182,13 @@ Unused Entity Points within the purchased plan can support this later activity. 
 
 Recent Data Migration helps reduce the freshness gap before go-live, but it still depends on available Entity Points for newly migrated counted records.
 
-**Entity Points Plan Upgrade and License Renewal Are Different**
-
-Upgrading the Entity Points Plan increases migration capacity. It does not renew the service license.
-
-License renewal is a separate decision. When renewing, the customer pays based on the minimum Entity Points Plan in the account record and the final service status of the license, excluding custom work that has already been charged.
-
-This means a customer may renew using the old preferences or renew with upgraded preferences, such as renewing an expired Standard Service license with a higher Entity Points Plan or a different final service status.
-
 #### What Entity Points Do Not Decide <a href="#what-entity-points-do-not-decide" id="what-entity-points-do-not-decide"></a>
 
 Entity Points do not decide the entire migration path.
 
 They do not determine:
 
-* whether the source and target platforms represent data in the same way
+* whether the Source Platform and Target Platform represent data in the same way
 * whether product options or variants preserve the expected buying behavior
 * whether important data requires Add-ons
 * whether custom fields or third-party data require Custom Service
@@ -228,9 +220,9 @@ No. Other entities may also move depending on platform support and selected scop
 
 No. Entity Points consumption is tied to the counted core data types in the Entity Points model.
 
-**“A re-run always consumes more points.”**
+**“Re-Migration always consumes more points.”**
 
-No. Records already successfully migrated and recognized by the system can be re-migrated without consuming additional Entity Points for the same records.
+No. Records already successfully migrated and recognized by the service can be migrated again without consuming additional Entity Points for the same records.
 
 **“Upgrading Entity Points renews my service license.”**
 
@@ -242,11 +234,11 @@ No. Entity Points measure scope and capacity. Complexity can still come from pla
 
 #### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Entity Points help customers estimate migration capacity by applying a weighted model to Product, Customer, Order, and Blog data. They are useful because they turn the core migration scope into a plan capacity number that can support pricing, execution, remaining-capacity use, and upgrade decisions.
+Entity Points help customers estimate migration capacity by applying a weighted model to Product, Customer, Order, and Blog data. They are useful because they turn core migration scope into a plan capacity number that can support pricing, execution, remaining-capacity use, and upgrade decisions.
 
 The most important distinction is that Entity Points inputs are not migration filters. All scanned records are migrated by default, and actual consumption depends on the counted records that are successfully migrated. If actual scanned data remains within the purchased Entity Points Plan, the migration can continue even when the real count is higher than the original estimate.
 
-Estimate your Product, Customer, Order, and Blog counts carefully, and consider likely source-store growth before launch. If your store contains more data than expected, you still have unused plan capacity, or you only want selected records to move, Live Chat can help clarify whether you should use remaining Entity Points, upgrade the Entity Points Plan, use the Data Filter Add-on, or review a custom filtering requirement before execution.
+Estimate your Product, Customer, Order, and Blog counts carefully, and consider likely Source Platform growth before launch. If your store contains more data than expected, you still have unused plan capacity, or you only want selected records to move, Live Chat can help clarify whether you should use remaining Entity Points, upgrade the Entity Points Plan, use the Data Filter Add-on, or review a custom filtering requirement before execution.
 
 #### FAQs <a href="#faqs" id="faqs"></a>
 
@@ -262,7 +254,7 @@ Entity Points are calculated from Product, Customer, Order, and Blog.
 
 Entity Points are calculated using coefficients: Product × 1.0, Customer × 0.5, Order × 0.8, and Blog × 0.6.
 
-**Are the entered entity counts used as migration filters?**
+**Are entered entity counts used as migration filters?**
 
 No. Entered counts are used for pricing and plan selection. They do not automatically limit which records are migrated.
 
@@ -272,24 +264,20 @@ If the selected Entity Points Plan still has enough capacity, the migration can 
 
 **Can unused Entity Points be used later?**
 
-Yes. Unused Entity Points within the purchased plan can support later eligible activity, such as Recent Data Migration or migrating newly included records.
+Yes. Unused Entity Points within the purchased plan can support later eligible activity, such as Recent Data Migration or a later migration run that includes newly created counted records.
 
 **How can I migrate only selected records?**
 
-Selective migration should be planned through the Data Filter Add-on. If the filtering needs exceed the default Add-on capability, it becomes a Custom Service requirement.
+Selective migration should be planned through the Data Filter Add-on. If the filtering need exceeds the Standard Add-on’s available settings and supported behavior, it becomes a Custom Service requirement.
 
 **What happens when Entity Points run out?**
 
 The migration pauses. The customer can upgrade the Entity Points Plan and pay only the price difference between the current plan and the higher plan.
 
-**Does re-migration consume more Entity Points?**
+**Does Re-Migration consume more Entity Points?**
 
-Not for the same records if they have already been successfully migrated and recognized by the system. Newly created records consume Entity Points when migrated for the first time.
+Not for the same records if they have already been successfully migrated and recognized by the service. Newly created records consume Entity Points when migrated for the first time.
 
 **Does Recent Data Migration consume Entity Points?**
 
-Yes. Recent Data Migration consumes Entity Points for newly created records when they are migrated successfully for the first time.
-
-**Does upgrading the Entity Points Plan renew the service license?**
-
-No. Upgrading the Entity Points Plan increases plan capacity. It does not renew the service license.
+Yes. Recent Data Migration consumes Entity Points for newly created counted records when they are migrated successfully for the first time.

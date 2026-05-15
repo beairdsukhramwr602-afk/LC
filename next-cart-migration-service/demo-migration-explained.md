@@ -18,7 +18,7 @@ A useful Demo Migration helps answer questions such as:
 * do customers and orders remain understandable?
 * do relationships between records still make sense?
 * do mapped values need adjustment?
-* does the source platform structure fit the target platform clearly enough?
+* does the Source Platform structure fit the Target Platform clearly enough?
 * does the project show signs of needing Add-ons or Custom Service?
 
 The demo result should be reviewed as an early signal, not as a final guarantee.
@@ -141,21 +141,21 @@ This review is especially important when content supports organic traffic, custo
 
 Demo Migration can reveal several kinds of findings.
 
-**The sample maps cleanly**
+**The Sample Maps Cleanly**&#x20;
 
 Some projects show that representative records move into the Target Platform with expected structure and behavior. That is a good sign, but it still needs broader validation later.
 
 A clean demo usually means the project has fewer visible early risks, not that the full migration can skip careful review.
 
-**The result needs configuration adjustment**
+**The Result Needs Configuration Adjustment**&#x20;
 
-Some differences may be corrected through entity selection, migration options, or mapping adjustments.
+Some differences may be corrected through entity selection, migration settings, or mapping adjustments.
 
 Examples may include mapped values that need clarification, order statuses that should align differently, or fields that need a more deliberate source-to-target relationship.
 
 These findings are useful because they appear early enough to adjust before Full Migration.
 
-**The project needs an Add-on**
+**The Project Needs an Add-on**&#x20;
 
 Some demo findings show that the project needs more control over a focused migration need.
 
@@ -167,11 +167,11 @@ Examples include:
 
 These findings may point to the Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure.
 
-**The project needs Custom Service**
+**The Project Needs Custom Service**&#x20;
 
-Some findings go beyond the default migration tool capability or the standard Add-on capability.
+Some findings go beyond standard service capability or standard Add-on capability.
 
-Custom Service is required when the project requires customization or modification. This can include tailored Add-ons, custom Add-ons, Custom Platform handling, migration tool adjustment, third-party app or extension data handling, custom fields, outside-system identifiers, or bespoke transformation rules.
+Custom Service is required when the project needs tailored work, such as a Tailored Add-on, Custom Add-on, Custom Platform handling, custom migration logic adjustment, third-party app or extension data, custom fields, outside-system identifiers, or bespoke transformation rules.
 
 The demo is useful because it can reveal these needs before full execution makes them harder to address.
 
@@ -179,9 +179,9 @@ The demo is useful because it can reveal these needs before full execution makes
 
 Demo Migration often gives the clearest early signal for service fit.
 
-The result may suggest that the customer can continue with Standard Service if the sample behaves predictably, the customer can operate the migration process confidently, and the required adjustments remain within the default capability.
+The result may suggest that the customer can continue with **Standard Service** if the sample behaves predictably, the customer can manage the migration process confidently, and required adjustments remain within standard service capability.
 
-It may suggest **Managed Service** if the migration appears feasible through default capability, but the customer wants Next-Cart to perform the migration process and reduce the internal execution burden.
+It may suggest **Managed Service** if the migration appears feasible through standard service capability, but the customer wants Next-Cart to perform the migration process and reduce the internal execution burden.
 
 It requires **Custom Service** if the result shows that customization or modification work is needed.
 
@@ -191,13 +191,13 @@ This distinction matters because service choice should be based on what the samp
 
 Customers may approach Demo Migration in two practical ways.
 
-**Self-run Demo Migration**
+**Self-Run Demo Migration**&#x20;
 
 A self-run demo is useful when the customer wants to explore the migration outcome directly and has enough internal confidence to review the sample result.
 
-If the result differs from expectations, the customer can use Live Chat to clarify what the sample may be revealing about the source data, target platform, configuration, Add-ons, or service fit.
+If the result differs from expectations, the customer can use Live Chat to clarify what the sample may be revealing about the source data, Target Platform, configuration, Add-ons, or service fit.
 
-**Expert-assisted Demo Migration**
+**Expert-Assisted Demo Migration**&#x20;
 
 An expert-assisted demo is useful when the customer wants help shaping the sample, interpreting the result, and deciding what the findings mean for the broader migration path.
 
@@ -237,7 +237,7 @@ These mistakes usually create false confidence. The best demo review focuses on 
 
 #### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Demo Migration is valuable because it gives customers an early, evidence-based view of how representative source-store data behaves in the Target Platform. It helps reveal what maps cleanly, what needs adjustment, what may require Add-ons, and what points toward Custom Service.
+&#x20;Migration is valuable because it gives customers an early, evidence-based view of how representative source-store data behaves in the Target Platform. It helps reveal what maps cleanly, what needs adjustment, what may require Add-ons, and what points toward Custom Service.
 
 The strongest Demo Migration is not the largest sample or the easiest sample. It is the sample that shows whether the target result can preserve the business meaning the customer needs to protect.
 
@@ -263,7 +263,7 @@ Yes. Demo Migration can reveal needs such as selective migration, advanced mappi
 
 **Can Demo Migration show whether Custom Service is needed?**
 
-Yes. If the demo reveals requirements beyond the default tool or standard Add-on capability, such as Custom Platform handling, custom fields, third-party data, or bespoke transformation, the project requires Custom Service.
+Yes. If the demo reveals requirements beyond standard service capability or standard Add-on capability, such as Custom Platform handling, custom fields, third-party data, or bespoke transformation, the project requires Custom Service.
 
 **Should service choice happen before or after Demo Migration?**
 

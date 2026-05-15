@@ -1,6 +1,6 @@
 # Next-Cart Migration Service Models Explained
 
-Next-Cart provides E-commerce Platform Migration Services through three service models: Standard Service, Managed Service, and Custom Service. Each model supports the same broad goal of moving store data from a Source Platform to a Target Platform, but they differ in normal service responsibility and whether the project requires customization or modification work.
+Next-Cart provides E-commerce Platform Migration Services through three service models: Standard Service, Managed Service, and Custom Service. Each model supports the same broad goal of moving store data from a Source Platform to a Target Platform, but they differ in service responsibility and whether the project requires customization or modification work.
 
 Every service model includes a 1-year service license for the selected migration path. The selected migration path defines the one-way direction from the Source Platform to the Target Platform under the purchased service license.
 
@@ -10,11 +10,11 @@ Understanding these differences helps customers avoid two common mistakes: choos
 
 The three service models answer different questions.
 
-| Service model    | Main meaning                                                                                                                                                                                                         | Best understood as                   |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| Standard Service | The customer purchases a 1-year service license for the selected migration path and self-performs the migration on the Next-Cart website with any purchased Add-ons.                                                 | Customer-led execution               |
-| Managed Service  | The customer purchases a 1-year service license for the selected migration path, and Next-Cart's technician will perform the migration for the customer using standard service capability and any purchased Add-ons. | Next-Cart-led execution              |
-| Custom Service   | Next-Cart handles customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or other bespoke migration requirements.                               | Customization and exclusive handling |
+| Service model    | Main meaning                                                                                                                                                                                                     | Best understood as                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Standard Service | The customer purchases a 1-year service license for the selected migration path and self-performs the migration on the Next-Cart website with any purchased Add-ons.                                             | Customer-led execution               |
+| Managed Service  | The customer purchases a 1-year service license for the selected migration path, and Next-Cart’s technician performs the migration for the customer using standard service capability and any purchased Add-ons. | Next-Cart-led execution              |
+| Custom Service   | Next-Cart handles customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or other bespoke migration requirements.                           | Customization and exclusive handling |
 
 The service models are related, but they are not simply three levels of the same support package. Standard Service and Managed Service mainly differ in the execution responsibility. Custom Service is different because it is triggered by work that changes, extends, or tailors the standard migration path.
 
@@ -47,7 +47,7 @@ The key point is the service responsibility. With Standard Service, the customer
 
 Managed Service is the Next-Cart-led execution model.
 
-With Managed Service, the customer purchases a 1-year service license for the selected migration path from the Source Platform to the Target Platform. The key difference from Standard Service is that Next-Cart's technician will perform the migration for the customer.
+With Managed Service, the customer purchases a 1-year service license for the selected migration path from the Source Platform to the Target Platform. The key difference from Standard Service is that a Next-Cart technician performs the migration for the customer.
 
 Managed Service includes:
 
@@ -179,7 +179,7 @@ The customer should still confirm whether the migrated result is acceptable for 
 * Custom Service outputs where applicable
 * Recent Data Migration results before go-live
 
-Next-Cart can support, perform, or customize migration work depending on the service model and final plan. The business still needs to confirm that the target store supports the expected outcome.
+Next-Cart can support, perform, or customize migration work depending on the service model and final plan. The business still needs to confirm that the Target Platform supports the expected outcome.
 
 #### How Service Status Can Change  <a href="#how-service-status-can-change" id="how-service-status-can-change"></a>
 
@@ -221,7 +221,7 @@ Custom Service is the model for customization, modification, Tailored Add-ons, C
 
 **Can customers self-perform the migration under any service model?**
 
-Yes. Customers of Standard Service, Managed Service, and Custom Service can access and self-perform the migration process on the Next-Cart website if they want to. The service model determines the normal service responsibility and included work, not whether the customer has access.
+Yes. Customers of Standard Service, Managed Service, and Custom Service can access and self-perform the migration process on the Next-Cart website if they want to. The service model determines the service responsibility and included work, not whether the customer has access.
 
 **Does Custom Service always mean Next-Cart performs the migration?**
 
