@@ -1,10 +1,3 @@
----
-metaLinks:
-  alternates:
-    - >-
-      https://app.gitbook.com/s/EwOn3si2UOVRL65zVOMg/next-cart-overview/quickstart
----
-
 # Learning Center Overview
 
 Planning an eCommerce data migration is one of the highest-impact projects a business can take on. You are not only moving records from one system to another. You are changing how products are represented, how customers are recognized, how order history supports service workflows, and how content and SEO-critical pages behave after launch.
