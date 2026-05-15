@@ -32,7 +32,7 @@ A practical way to understand the Next-Cart migration process is through six sta
 5. Result validation
 6. Recent Data Migration and launch readiness
 
-The same general process applies across service models. What changes is who performs the work, whether the default tool capability is enough, and whether customization or modification work is required.
+The same general process applies across service models. What changes is the service responsibility, whether standard service capability is enough, and whether customization or modification work is required.
 
 #### Stage 1: Demo Migration and Early Review <a href="#stage-1-demo-migration-and-early-review" id="stage-1-demo-migration-and-early-review"></a>
 

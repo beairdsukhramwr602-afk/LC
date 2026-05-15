@@ -150,7 +150,7 @@ Custom Service helps define a migration approach when the expected result requir
 
 This does not mean every source behavior can be recreated exactly. It means Next-Cart reviews the requirement, identifies what can be preserved, and defines the most suitable supported result.
 
-#### Migration-Tool Modification <a href="#migration-tool-modification" id="migration-tool-modification"></a>
+#### **Custom Migration Logic Adjustment**
 
 Some projects require adjustment to the migration logic that Next-Cart applies during the service process.
 
