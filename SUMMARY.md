@@ -170,16 +170,3 @@
 ## Glossary
 
 * [Terms & Definitions](glossary/terms-and-definitions.md)
-
-## Section 4
-
-* [Next-Cart Migration Service Overview](next-cart-migration-service-overview.md)
-* [Next-Cart Migration Process Explained](next-cart-migration-process-explained.md)
-* [Demo Migration Explained](demo-migration-explained.md)
-* [Entity Points Explained](entity-points-explained.md)
-* [Entity Points Plan and Migration Pricing](entity-points-plan-and-migration-pricing.md)
-* [Recent Data Migration Explained](recent-data-migration-explained.md)
-* [Add-ons Explained](add-ons-explained.md)
-* [Next-Cart Migration Service Models Explained](next-cart-migration-service-models-explained.md)
-* [What Custom Service Handles](what-custom-service-handles.md)
-* [How to Choose the Right Next-Cart Service Model](how-to-choose-the-right-next-cart-service-model.md)
