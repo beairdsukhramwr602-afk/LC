@@ -1,16 +1,16 @@
 # Entity Relationships: How Store Data Connects
 
-In eCommerce migration, some of the hardest problems are not missing records. They are broken connections between records that were supposed to remain connected.
+A migrated store can contain the right records and still behave incorrectly if the connections between those records are broken.
 
-A store can look complete after migration and still behave incorrectly if the relationships between its main entities are not rebuilt properly. Orders may be present but no longer point to the right products. Reviews may exist but no longer connect correctly to the reviewed product or the customer who submitted them. Coupons may appear without the product or category associations that made them useful in the original store.
+Products, Customers, Orders, Reviews, Coupons, Categories, Taxes, Manufacturers, CMS Pages, and Blog Posts do not work as isolated pieces of information. They support catalog structure, purchase history, customer context, review credibility, promotional behavior, and content continuity because they remain connected in the right way.
 
-This is why entity relationships matter. They explain how separate records work together to support catalog structure, customer continuity, order usability, review integrity, and promotional behavior.
+Entity relationships explain those connections. They show why migration success should not be judged by record totals alone, and why validation needs to check whether migrated data still supports real business use in the Target Platform.
 
 ### What an entity relationship is
 
-An entity is a separate data object in the store, such as a product, customer, order, category, review, coupon, CMS page, or blog post. An entity relationship is a connection between one independent entity and another independent entity.
+An entity is a separate data object in the store, such as a Product, Customer, Order, Category, Review, Coupon, CMS Page, or Blog Post. An entity relationship is a connection between one entity and another entity.
 
-Examples include:
+Common relationship examples include:
 
 * Taxes connected to Products
 * Manufacturers connected to Products
@@ -21,29 +21,29 @@ Examples include:
 * Reviews connected to Customers and Products
 * Coupons connected to Categories and Products
 
-These relationships matter because the entities already exist as separate records, but the migrated store still has to rebuild the references between them correctly. If those references are wrong, the business may lose usable store behavior even when the records themselves are present.
+These relationships matter because the records can exist separately, but the migrated store still needs to rebuild the references between them correctly. If the references are wrong, the Target Platform may contain the records while losing part of the business, meaning those records were supposed to be preserved.
 
 ### Independent relationships are not the same as dependency structures
 
-This distinction matters because the two create different migration and validation risks.
+Not every connection in store data works the same way. A useful migration review separates independent-entity relationships from dependency structures.
 
-#### Independent-entity relationships
+#### Independent-entity relationships <a href="#independent-entity-relationships" id="independent-entity-relationships"></a>
 
-These are connections between separate entities that can exist independently as data structures.
+Independent-entity relationships connect separate entities that can exist as data structures on their own.
 
 Examples include:
 
 * Categories → Products
 * Customers → Orders
 * Orders → Products
-* Reviews → Customers, Products
-* Coupons → Categories, Products
+* Reviews → Customers and Products
+* Coupons → Categories and Products
 
-In these cases, both sides are separate entities. The migration must preserve the reference between them.
+In these cases, both sides of the relationship are separate entities. The migration process must preserve the reference between them so the Target Platform can still interpret the connection correctly.
 
 #### Dependency structures
 
-These are child structures that depend on a parent entity and cannot exist meaningfully on their own.
+Dependency structures are child structures that depend on a parent entity and do not carry the same meaning on their own.
 
 Examples include:
 
@@ -51,83 +51,85 @@ Examples include:
 * Products → Options
 * Customers → Addresses
 
-A variant does not exist without a product. An option does not exist without a product. A customer address does not make sense without a customer.
+A variant does not stand on its own without the Product it belongs to. A Product option does not have useful meaning outside its Product context. A Customer address only makes sense as part of the Customer record.
 
-Both concepts matter in migration, but they should not be explained as if they are the same type of relationship.
+Both types of structure matter, but they create different migration and validation risks. Treating them as the same can lead to weak review samples and missed issues.
 
-### How to read relationship direction correctly
+### How to read relationship direction
 
-When a relationship is written as:
+Relationship direction shows which entity needs to reference which other entity.
 
-**Orders → Customers, Products**
+> Example: Orders → Customers and Products
 
-it means the order record must be able to reference the correct customer and the correct products.
+When a relationship is written as **Orders → Customers, Products**, it means the Order record must be able to reference the correct Customer and the correct purchased Products.
 
-It does not mean customers and products are directly related to each other simply because they appear on the same line.
+It does not mean Customers and Products are directly related to each other simply because both appear in the same relationship line.
 
-The same reading rule applies elsewhere:
+The same reading rule applies to other relationship groups:
 
-* **Reviews → Customers, Products** means reviews must be able to reference both the reviewer and the reviewed product
-* **Coupons → Categories, Products** means coupons must be able to reference the categories or products they affect
-* **Products → Categories** means products must retain the category relationships that support browse logic and catalog structure
+* **Reviews → Customers, Products** means Reviews must reference both the reviewer and the reviewed Product.
+* **Coupons → Categories, Products** means Coupons must reference the Categories or Products they affect.
+* **Products → Categories** means Products must retain the Category relationships that support catalog structure and browsing.
 
-This directional reading matters because it clarifies how relationships are reconstructed. Without it, different kinds of connections can be misunderstood as if they all represent the same type of link.
+This distinction matters because relationship validation should test the actual business connection, not just whether related record types exist somewhere in the Target Platform.
 
 ### Why relationships matter more than totals
 
-A migrated store can show the correct number of products, customers, and orders and still be functionally wrong.
+Record counts are useful, but they do not prove that a migrated store works correctly.
 
-That happens when the records transfer, but the connections between them no longer support the way the store works.
+A migration can show the expected number of Products, Customers, Orders, Reviews, or Coupons while still having relationship problems such as:
 
-For example:
+* Products assigned to the wrong Categories
+* Orders that no longer connect correctly to purchased Products
+* Orders that lose usable Customer context
+* Reviews that no longer belong to the correct Product or Customer
+* Coupons that lose the Product or Category associations that made them useful
+* third-party or outside-system data that no longer points to the expected core record
 
-* a product can exist while the wrong tax, manufacturer, or category relationship is applied
-* an order can exist while its purchased products are no longer connected correctly
-* a review can exist while the reviewed product or review-author relationship is broken
-* a coupon can exist while the intended category or product association is missing
-
-This is why count checks are useful, but not enough. Relationship checks usually reveal the more important business problems faster.
+These issues are more serious than a simple count mismatch because they affect how the store is used after launch. A complete-looking dataset can still be operationally unreliable if the relationships are wrong.
 
 ### Core relationship logic for migration planning
 
-A practical relationship map includes:
+A practical relationship map helps identify which references need attention before and after migration.
 
-* Taxes → Products
-* Manufacturers → Products
-* Categories → Products
-* Products → Taxes, Manufacturers, Categories, Orders, Reviews
-* Customers → Orders, Reviews
-* Orders → Customers, Products
-* Reviews → Customers, Products
-* Coupons → Categories, Products
+#### Common relationship groups <a href="#common-relationship-groups" id="common-relationship-groups"></a>
 
-These relationship groups help explain how store behavior is held together across catalog structure, customer records, order history, review integrity, and promotional logic.
+| Relationship group                                           | What the relationship supports                                       |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Taxes → Products                                             | Product tax context and calculation behavior                         |
+| Manufacturers → Products                                     | Product attribution and catalog classification                       |
+| Categories → Products                                        | Catalog structure, browsing, and organization                        |
+| Products → Taxes, Manufacturers, Categories, Orders, Reviews | Product context across catalog, purchase history, and review history |
+| Customers → Orders, Reviews                                  | Customer account history and review ownership                        |
+| Orders → Customers, Products                                 | Purchase history, support lookup, reporting, and fulfillment context |
+| Reviews → Customers, Products                                | Review credibility and storefront trust signals                      |
+| Coupons → Categories, Products                               | Promotional targeting and discount behavior                          |
 
-The key idea is simple: if one entity references another, the referenced entity must already exist in the target store before the relationship can be rebuilt correctly.
+The key idea is simple: when one entity references another, the referenced entity must exist in the Target Platform before the relationship can be rebuilt correctly.
 
-Important note:
+**Relationship lines are directional**
 
-* the first entity listed is connected to the entities that follow it
-* entities appearing in the same line are not automatically connected to each other
-* each line should be interpreted as a directional relationship, not as a full network
+Each relationship line should be read directionally. The first entity is connected to the entities that follow it. Entities appearing in the same line are not automatically connected to each other.
+
+This prevents a common misunderstanding: a relationship map is not a loose list of related data types. It is a guide to which references must survive migration.
 
 ### Why a defined migration process is necessary
 
-Relationship preservation depends on related data already existing when references are rebuilt. That is why Next-Cart uses an automated, fixed migration sequence in the migration tool that users cannot modify or rearrange.
+Relationship preservation depends on timing. Later records often need to reference records that already exist in the Target Platform.
 
-The standard data migration sequence is:
+Next-Cart uses a fixed entity migration sequence within the migration process:
 
 **Taxes → Manufacturers → Categories → Products → Customers → Orders → Reviews → Coupons → CMS Pages → Blog Posts**
 
-This sequence helps ensure that related records already exist when later relationships need to be reconstructed. Products can inherit their tax, manufacturer, and category context before they are referenced elsewhere. Orders can reconnect to the correct customers and purchased products. Reviews can reconnect to both the reviewer and the reviewed product. Coupons can reconnect to the categories or products they were meant to affect.
+This sequence helps related records exist before later references need to be rebuilt. Products can receive tax, manufacturer, and Category context before they are referenced by Orders or Reviews. Orders can reconnect to the correct Customers and purchased Products. Reviews can reconnect to both the reviewer and the reviewed Product. Coupons can reconnect to the Categories or Products they affect.
 
-If related entities are missing or manually imported outside the migration tool, the target store may contain the records but fail to preserve the intended business meaning.
+If related entities are missing, handled separately, or manually imported outside the migration process, the Target Platform may contain records but still fail to preserve the intended relationship meaning.
 
-The important takeaway is this: preparing all related entities is not enough. They must also be migrated in a sequence that allows their references to be rebuilt correctly.
+The practical takeaway is that selecting related entities is not enough. Related entities also need to be migrated through a process that preserves the references between them.
 
 ### Where third-party apps, plugins, and extensions increase relationship risk
 
-Third-party apps, plugins, and extensions often make relationship complexity more important, not less.
+Third-party apps, plugins, modules, extensions, and outside systems can make entity relationships more important, not less.
 
 They may:
 
@@ -148,88 +150,97 @@ This often matters in areas such as:
 
 Third-party logic does not replace the need for correct core relationships. If the base references are wrong, extension-driven behavior often becomes even harder to interpret and validate later.
 
-Where these layers materially affect data meaning or make the standard process less likely to preserve the expected result, the safer path may require closer review, more tailored handling, or a scoped custom treatment.
+When these layers materially affect data meaning, the requirement should be reviewed before execution. If the expected result cannot be handled through standard service capability, the requirement belongs under Custom Service, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment, depending on the nature of the work.
 
-### A common planning mistake: scope sizing versus relationship preservation
+### Scope sizing is not the same as relationship preservation <a href="#scope-sizing-is-not-the-same-as-relationship-preservation" id="scope-sizing-is-not-the-same-as-relationship-preservation"></a>
 
-This is one of the most important practical misunderstandings to prevent.
+One of the most common planning mistakes is treating migration scope as if it controls relationship logic.
 
-Some merchants look at migration scope sizing and assume they can move the largest datasets first, then manually recreate smaller connected datasets later if needed. That can break relationship integrity.
+Scope sizing helps estimate how much data needs to move. It does not change the sequence needed to preserve data meaning.
+
+#### Why manual shortcuts can break relationships <a href="#why-manual-shortcuts-can-break-relationships" id="why-manual-shortcuts-can-break-relationships"></a>
+
+Relationship problems can appear when merchants try to move the largest datasets first and recreate smaller connected datasets later.
 
 Examples include:
 
-* migrating Orders before Products can break order-to-product references
+* migrating Orders before Products can break Order-to-Product references
 * migrating Reviews before Customers can break review-author relationships
-* migrating Coupons before Categories or Products can break coupon associations
+* migrating Coupons before Categories or Products can break promotional associations
+* manually importing remaining related data can weaken relationship tracking and make validation harder
 
-Scope sizing helps estimate migration size. It does not change the defined process needed to preserve data meaning.
-
-If Entity Points are exhausted before all data is migrated, the safest continuation path is to upgrade the Entity Points plan and continue the migration process from where it paused. Manually importing the remaining related data outside the tool can weaken or break the relationships the migration process is designed to reconstruct accurately.
+If Entity Points are exhausted before all counted records are migrated, the safer continuation path is to upgrade the Entity Points Plan and continue through the purchased service. Continuing through the migration process helps preserve record tracking and relationship handling more reliably than manual import.
 
 ### How to validate relationships
 
-Relationship validation should focus on business behavior, not just whether records appear in the target store.
+Relationship validation should focus on business behavior, not only whether records appear in the Target Platform.
 
-A practical review sample should include:
+A useful review sample should include:
 
-* products with important category placement
-* products that appear in real orders
-* customers with real order history
-* reviews tied to representative products and customers
-* coupons tied to real category or product conditions
-* records affected by app-driven or extension-driven logic
+* Products with important Category placement
+* Products that appear in real Orders
+* Customers with real Order history
+* Reviews tied to representative Products and Customers
+* Coupons tied to real Product or Category conditions
+* records affected by app-driven, plugin-driven, extension-driven, or outside-system logic
 
-Then review outcomes through business questions such as:
+#### Relationship validation questions <a href="#relationship-validation-questions" id="relationship-validation-questions"></a>
 
-* do orders still point to the products the customer actually bought?
-* do reviews still belong to the correct products and customers?
-* do coupons still behave against the products or categories they were supposed to affect?
-* do category-product relationships still support the intended browse paths?
-* does app-driven or extension-driven logic still have the base relationships it depends on?
+Use practical business questions during review:
+
+* Do Orders still point to the Products the Customer actually bought?
+* Do Orders still retain usable Customer context?
+* Do Reviews still belong to the correct Products and Customers?
+* Do Coupons still apply to the Products or Categories they were meant to affect?
+* Do Category-Product relationships still support the intended browse paths?
+* Does app-driven or outside-system logic still have the base references it depends on?
+
+A Demo Migration sample should include records with real relationship complexity. Simple records may transfer cleanly while more connected records reveal risks that matter before Full Migration.
 
 ### Common relationship mistakes
 
-Common relationship mistakes include:
+Common mistakes include:
 
-* approving a migration based on totals alone
-* treating independent-entity relationships and dependency structures as if they were the same
+* approving migration results based on totals alone
+* treating independent-entity relationships and dependency structures as the same thing
 * assuming all entities in one relationship line are directly connected to each other
-* assuming that selecting related entities is enough even if they are handled outside the defined process
+* selecting related entities but handling them outside the defined migration process
 * letting scope-sizing logic override relationship logic
-* ignoring third-party app, plugin, or extension context until late review
+* ignoring third-party app, plugin, module, extension, or outside-system context until late review
+* reviewing only simple records that do not expose relationship complexity
 
-These mistakes matter because entity relationships are part of what makes a store usable after migration. They connect products, customers, orders, reviews, categories, taxes, manufacturers, and coupons into a working business system.
+These mistakes matter because relationships are part of what makes migrated data usable. They connect records into a working business system instead of leaving the Target Platform with disconnected data fragments.
 
 ### Conclusion
 
-Entity relationships explain why migration success cannot be judged by totals alone. A store works because separate records continue to point to the right related records in the right way. That is true for orders and products, reviews and customers, coupons and categories, and for the wider catalog and customer structure that supports daily commerce behavior.
+Entity relationships explain why migration success cannot be judged by record totals alone. A store works because separate records continue to point to the right related records in the right way. That is true for Orders and Products, Reviews and Customers, Coupons and Categories, and the wider catalog and customer structure that supports daily commerce behavior.
 
-The safest planning approach is to identify the relationships that matter most, distinguish them clearly from dependency structures, preserve the defined automated sequence that allows those references to be rebuilt correctly, and review representative cases early, especially where third-party apps, plugins, or extensions add extra meaning.
+The safest planning approach is to identify the relationships that matter most, distinguish them from dependency structures, preserve the defined migration sequence that allows references to be rebuilt correctly, and review representative cases early, especially where apps, plugins, modules, extensions, custom fields, or outside systems add extra meaning.
 
-Run a Demo Migration with a sample that includes real relationship complexity, not just simple records. If the store depends on custom fields, third-party logic, or non-standard relationship behavior, Live Chat can help clarify relationship risk, what still needs to be proven, and the safest way to continue if the standard path may not preserve the expected result cleanly enough.
+Run a Demo Migration with records that contain real relationship complexity, not only simple Products or Customers. If the store depends on custom fields, third-party logic, outside-system identifiers, or non-standard relationship behavior, use Live Chat to clarify what needs closer review before continuing toward Full Migration.
 
 ### FAQs
 
-#### Why are relationships more important than record counts?
+**Why are entity relationships more important than record counts?**
 
-Because counts only show that records exist. They do not show whether the store still works correctly. Orders can be present without pointing to the right products, reviews can be present without pointing to the right customer or product, and coupons can be present without the category or product associations that make them usable.
+Because counts only show that records exist. They do not show whether the store still works correctly. Orders can be present without pointing to the right Products, Reviews can be present without pointing to the right Customer or Product, and Coupons can be present without the Product or Category associations that make them usable.
 
-#### Why does migration order matter for relationships?
+**Why does migration sequence matter for relationships?**
 
-Because later records often need to reference earlier ones. Next-Cart’s migration tool processes entities in an automated, fixed sequence that users cannot change, so related data already exists when relationships are rebuilt.
+Later records often need to reference earlier records. A defined migration sequence helps related data exist in the Target Platform before later references need to be rebuilt.
 
-#### Are variants and options the same kind of relationship as orders and reviews?
+**Are variants and options the same kind of relationship as Orders and Reviews?**
 
-No. Variants and options are dependency structures under a product. Orders and reviews are separate entities that reference other separate entities. This distinction matters because dependency structures and independent-entity relationships create different migration and validation risks.
+No. Variants and options are dependency structures under a Product. Orders and Reviews are separate entities that reference other separate entities. This distinction matters because dependency structures and independent-entity relationships create different migration and validation risks.
 
-#### What should happen if Entity Points run out before all related data is migrated?
+**What should happen if Entity Points run out before all related data is migrated?**
 
-The safest approach is to upgrade the Entity Points plan and continue the migration through the tool. Manually importing the remaining related data without using Next-Cart's migration tool can weaken or break relationship integrity because the system may no longer be able to reconstruct references in the intended way.
+The safer path is to upgrade the Entity Points Plan and continue through the purchased service. Manually importing remaining related data can weaken record tracking and relationship handling, especially when later records need to reconnect to already migrated records.
 
-#### How do third-party apps and extensions affect entity relationships?
+**How do third-party apps, plugins, modules, and extensions affect entity relationships?**
 
-They often add extra meaning to product, customer, order, coupon, or category data. But that added logic still depends on the core entity relationships being preserved correctly first. If the base relationships break, extension-driven behavior becomes much harder to trust and validate after migration.
+They can add custom fields, outside-system identifiers, metadata, or rules that depend on core Product, Customer, Order, Category, Coupon, or Review relationships. If the base relationships are wrong, app-driven or extension-driven behavior becomes harder to trust after migration.
 
-#### How can I review whether relationships were preserved correctly?
+**How can I review whether relationships were preserved correctly?**
 
-Use a representative sample that includes real order history, meaningful category placement, review ownership, coupon conditions, and records affected by apps or extensions. Then check whether the connected behavior still supports the business outcome it was supposed to support.
+Review representative records with real connections: Orders with Products and Customers, Reviews with Products and Customers, Coupons with Product or Category conditions, and records affected by custom fields or third-party logic. The goal is to confirm that migrated records still support the business behavior they supported before migration.
