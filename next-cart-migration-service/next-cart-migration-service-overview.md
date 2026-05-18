@@ -204,7 +204,7 @@ This section explains Next-Cart’s E-commerce Platform Migration Service system
 
 **What is a migration path?**
 
-A migration path defines the one-way direction from the Source Platform to the Target Platform under the purchased service license. It should not be understood as a two-way migration path that can be reversed for use.
+A migration path defines the one-way direction from the Source Platform to the Target Platform under the purchased service license. It should not be understood as a two-way migration path that can be used in reverse.
 
 **Should I read this section before choosing a service model?**
 
