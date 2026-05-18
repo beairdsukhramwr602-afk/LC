@@ -9,11 +9,11 @@ metaLinks:
 
 E-commerce platform migration risk rarely comes from simple data movement alone. The more serious risk is that important business meaning changes quietly while the store still appears complete.
 
-Products may exist on the Target Platform but no longer support the same buying decisions. Categories may still appear but no longer guide customers effectively. Customer records may transfer while continuity feels weaker. Order history may remain present but become less useful for service, operations, or reporting. Important content pages may still be live while losing search or conversion value.
+Products may exist on the Target Platform, but no longer support the same buying decisions. Categories may still appear, but no longer guide customers effectively. Customer records may transfer while continuity feels weaker. Order history may remain present but become less useful for service, operations, or reporting. Important content pages may still be live while losing search or conversion value.
 
 Migration risk is not spread evenly across the entire store. It concentrates in the areas that affect buying, discovery, customer trust, daily operations, traffic continuity, and business logic outside the core platform. Identifying those areas early makes the migration process easier to plan, review, and adjust before launch pressure makes correction harder.
 
-### Why migration risk concentrates in a few areas
+### Why migration risk concentrates in a few areas <a href="#why-migration-risk-concentrates-in-a-few-areas" id="why-migration-risk-concentrates-in-a-few-areas"></a>
 
 A store can contain many data types, but not every data type creates the same business consequence when it changes.
 
@@ -26,9 +26,9 @@ The highest-risk areas usually influence:
 * how search traffic and landing-page performance are preserved
 * how app-driven, plugin-driven, module-driven, extension-driven, or outside-system logic continues to support the business after migration
 
-Many teams review migration results too evenly. In practice, some parts of the store deserve earlier and deeper attention because they carry more commercial, operational, or trust-related consequence.
+Many teams review migration results too evenly. In practice, some parts of the store deserve earlier and deeper attention because they carry more commercial, operational, or trust-related consequences.
 
-### Risk 1: Platform representation changes business behavior
+### Risk 1: Platform representation changes business behavior <a href="#risk-1-platform-representation-changes-business-behavior" id="risk-1-platform-representation-changes-business-behavior"></a>
 
 Different platforms may support similar concepts while representing them differently. A product option, customer group, category rule, tax setting, discount rule, review structure, URL pattern, or content object may not behave exactly the same after migration.
 
@@ -88,21 +88,17 @@ Start early with:
 
 The goal is to reveal meaningful change early, not to confirm the easiest records first.
 
-### Risk 3: Supporting structure is treated as secondary
+### Risk 3: Supporting structure is treated as secondary <a href="#risk-3-supporting-structure-is-treated-as-secondary" id="risk-3-supporting-structure-is-treated-as-secondary"></a>
 
 Migration planning often starts with headline data such as products, customers, and orders. That is useful, but it can create false confidence if the structures around those records are treated as secondary.
 
 Supporting structure can include:
 
-* variants
-* options
-* attributes
-* images
-* customer addresses
-* SEO fields
-* category structure
-* content relationships
-* app-driven, plugin-driven, module-driven, or extension-driven logic
+* product structure, including variants, options, and attribute meaning
+* media, category placement, and content relationships
+* customer and order fields that support service workflows
+* SEO-relevant fields and landing-page context
+* third-party, app-driven, plugin-driven, module-driven, or extension-driven behavior
 
 A record may transfer successfully while the structure that made it commercially useful becomes weaker or behaves differently.
 
@@ -129,7 +125,7 @@ Ask practical questions such as:
 
 Do not separate “data exists” from “the store still works.”
 
-### Risk 4: Customer continuity weakens in quiet ways
+### Risk 4: Customer continuity weakens in quiet ways <a href="#risk-4-customer-continuity-weakens-in-quiet-ways" id="risk-4-customer-continuity-weakens-in-quiet-ways"></a>
 
 Customer records can transfer while the customer experience still changes in important ways.
 
@@ -166,7 +162,7 @@ Clarify early:
 
 Then review representative customer cases rather than only the customer table as a whole.
 
-### Risk 5: Order history remains present but becomes less useful
+### Risk 5: Order history remains present but becomes less useful <a href="#risk-5-order-history-remains-present-but-becomes-less-useful" id="risk-5-order-history-remains-present-but-becomes-less-useful"></a>
 
 Orders are often treated as proof that history was preserved. But order records can remain present while becoming harder to interpret or use.
 
@@ -203,7 +199,7 @@ Use representative historical orders and ask:
 
 The question is not only whether orders exist. It is whether they remain workable.
 
-### Risk 6: Discovery and traffic continuity are treated too late
+### Risk 6: Discovery and traffic continuity are treated too late <a href="#risk-6-discovery-and-traffic-continuity-are-treated-too-late" id="risk-6-discovery-and-traffic-continuity-are-treated-too-late"></a>
 
 Migration can preserve the catalog and still weaken discovery or traffic value.
 
@@ -241,7 +237,7 @@ Start with:
 
 The most important review question is whether those pages still support the same purpose after migration.
 
-### Risk 7: Underestimating third-party logic
+### Risk 7: Third-party logic is underestimated <a href="#risk-7-third-party-logic-is-underestimated" id="risk-7-third-party-logic-is-underestimated"></a>
 
 Many stores rely on apps, plugins, modules, extensions, or outside systems that carry part of the store’s real meaning.
 
@@ -280,7 +276,7 @@ Identify which non-core layers materially affect:
 
 Treat those layers as part of migration planning early, rather than assuming they will follow the main data automatically.
 
-### Risk 8: Validation is too broad to be useful
+### Risk 8: Validation is too broad to be useful <a href="#risk-8-validation-is-too-broad-to-be-useful" id="risk-8-validation-is-too-broad-to-be-useful"></a>
 
 Some teams know validation matters but plan it at a level that is too general to expose real issues.
 
@@ -386,7 +382,7 @@ Use representative sample review and early expert clarification to understand:
 * how much validation effort the project is likely to require
 * whether the requirement belongs within standard service capability, a Standard Add-on, or Custom Service
 
-### What strong risk planning looks like
+### What strong risk planning looks like <a href="#what-strong-risk-planning-looks-like" id="what-strong-risk-planning-looks-like"></a>
 
 Strong migration-risk planning usually means:
 
@@ -400,7 +396,7 @@ Strong migration-risk planning usually means:
 
 Risk does not disappear from an e-commerce platform migration project. But it becomes much easier to manage when the project knows where risk is concentrated and reviews the right things early enough.
 
-### Conclusion
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 E-commerce platform migration risk usually comes from meaning loss, not from obviously missing data.
 
@@ -408,7 +404,7 @@ The most important risks are the ones that affect buying behavior, discovery, cu
 
 Use Demo Migration to expose the parts of the store most likely to reveal meaningful change before timing, scope, or launch plans become too fixed. If the sample shows more concentrated risk than expected, Live Chat can help clarify which risks are acceptable, which need deeper review, and whether the migration path, Add-ons, or Custom Service requirements should be adjusted before moving further.
 
-### FAQs
+### FAQs <a href="#faqs" id="faqs"></a>
 
 **What is the biggest risk in e-commerce platform migration?**
 
@@ -433,3 +429,5 @@ A project may look manageable before the business has enough visibility into wha
 **What makes Demo Migration useful for risk reduction?**
 
 Demo Migration exposes the parts of the store most likely to show whether business meaning is being preserved. That helps the team see concentrated risk early enough to adjust the plan before the project becomes harder to change.
+
+<br>

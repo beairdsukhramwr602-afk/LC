@@ -1,6 +1,6 @@
 # Learning Center Overview
 
-Planning an eCommerce data migration is one of the highest-impact projects a business can take on. You are not only moving records from one system to another. You are changing how products are represented, how customers are recognized, how order history supports service workflows, and how content and SEO-critical pages behave after launch.
+Planning an eCommerce platform migration is one of the highest-impact projects a business can take on. You are not only moving records from one system to another. You are changing how products are represented, how customers are recognized, how order history supports service workflows, and how content and SEO-critical pages behave after launch.
 
 Done well, an eCommerce platform migration improves flexibility and platform fit without disrupting revenue-critical behavior. Done poorly, it can introduce conversion loss, SEO instability, and operational friction that is difficult to correct after go-live.
 
@@ -25,44 +25,44 @@ Not every article is written for every role equally. Each page is intentionally 
 
 Most migration failures are not caused by data moving incorrectly. They happen because scope, expectations, migration path decisions, service responsibility, and validation criteria were never defined clearly enough before the project began.
 
-Learning Center will help you:
+This Learning Center helps you:
 
 * understand what migration scope includes beyond record counts
 * identify where migration risk typically comes from and how to reduce it early
 * compare platforms using structural differences that affect outcomes, not marketing claims
 * choose a migration approach that fits your store’s complexity and your team’s validation capacity
-* understand how Next-Cart’s E-commerce Platform Migration Service works and which service model is the safest and most suitable fit
+* understand how Next-Cart’s E-commerce Platform Migration Service works and which service model is the safest fit
 * plan validation priorities so correctness can be confirmed before go-live
 
 ### How the Learning Center is organized
 
 To make the Learning Center usable for both search and guided exploration, content is organized into clear sections.
 
-#### **Getting Started**
+#### Getting Started <a href="#getting-started" id="getting-started"></a>
 
 Use these pages to understand what the Learning Center is for, who it is designed to help, and how to navigate it efficiently.
 
-#### **Migration Fundamentals**
+#### Migration Fundamentals <a href="#migration-fundamentals" id="migration-fundamentals"></a>
 
 Use these pages to build a shared understanding of what migration includes, where risk comes from, how compatibility breaks, and what successful outcomes should look like before execution.
 
-#### **Strategy and Planning for Migration**
+#### Strategy and Planning for Migration <a href="#strategy-and-planning-for-migration" id="strategy-and-planning-for-migration"></a>
 
-Use these pages to turn migration scope into a realistic plan with clearer milestones, decision points, responsibilities, and validation readiness.
+These pages help convert early assumptions into practical project structure: what must be decided, who should review each area, and how readiness should be tested before launch pressure builds.
 
-#### **Next-Cart Migration Service**
+#### Next-Cart Migration Service <a href="#next-cart-migration-service" id="next-cart-migration-service"></a>
 
-Use these pages to understand how Next-Cart’s E-commerce Platform Migration Service works, how the selected migration path defines the Source Platform to Target Platform direction, how Demo Migration helps prove direction early, how Entity Points measure migration capacity, how Recent Data Migration supports launch freshness, and how to choose between Standard Service, Managed Service, and Custom Service.
+These pages explain the Next-Cart service layer: what a selected migration path means, how proof and capacity are evaluated, how launch-freshness features fit into the purchased service, and how customers compare Standard Service, Managed Service, and Custom Service.
 
-#### **Platform Strategy Hubs**
+#### Platform Strategy Hubs <a href="#platform-strategy-hubs" id="platform-strategy-hubs"></a>
 
 Use these pages when you are comparing or committing to a Target Platform and need to understand platform-specific differences, constraints, and validation priorities. These are planning resources, not setup guides.
 
-#### **Technical Deep Dives**
+#### Technical Deep Dives <a href="#technical-deep-dives" id="technical-deep-dives"></a>
 
-Use these pages to understand hidden complexity drivers that change migration effort and validation workload, including variants, attributes, catalog structure, media handling, pricing logic, reviews, metadata, and extension-owned meaning.
+These pages are for deeper structural questions that often change effort and review workload, such as product variants, catalog logic, media, promotional rules, reviews, metadata, integrations, and extension-owned behavior.
 
-#### **Post-Migration and Quality Assurance**
+#### Post-Migration and Quality Assurance <a href="#post-migration-and-quality-assurance" id="post-migration-and-quality-assurance"></a>
 
 Use these pages to understand how migration outcomes should be validated, how go-live readiness should be assessed, and how launch surprises can be reduced through structured review.
 

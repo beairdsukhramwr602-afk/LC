@@ -82,7 +82,7 @@ Use them to understand how each Target Platform differs in structure, where cons
 
 Use **Strategy and Planning for Migration** together with **Post-Migration and Quality Assurance**.
 
-These sections help you define milestones, decision points, validation stages, acceptance criteria, go-live judgment, and post-launch stabilization so review work does not get compressed into the final days before launch.
+These sections help you define milestones, decision points, validation stages, acceptance criteria, go-live judgment, and post-launch stabilization, so review work does not get compressed into the final days before launch.
 
 ### Recommended reading paths by role
 
@@ -120,11 +120,11 @@ Use these pages to build a shared understanding of what migration includes, what
 
 #### Strategy and Planning for Migration <a href="#strategy-and-planning-for-migration" id="strategy-and-planning-for-migration"></a>
 
-Use these pages to turn migration scope into a realistic plan with clearer milestones, decision points, responsibilities, and validation readiness.
+Use these pages when you need to turn broad intent into execution planning: scope boundaries, sequencing, decision points, responsibility, and acceptance criteria.
 
 #### Next-Cart Migration Service <a href="#next-cart-migration-service" id="next-cart-migration-service"></a>
 
-Use these pages to understand how Next-Cart’s E-commerce Platform Migration Service works, how the selected migration path defines the Source Platform to Target Platform direction, how Demo Migration proves direction early, how Entity Points measure migration capacity, how Recent Data Migration and Re-Migration support later activity, how Add-ons extend service capability, and how to choose the safest service model.
+Use these pages when you need service-specific clarity: what the purchased service includes, how migration path direction works, how proof and later migration activity are handled, and which service model fits the project risk.
 
 #### Platform Strategy Hubs <a href="#platform-strategy-hubs" id="platform-strategy-hubs"></a>
 
@@ -132,7 +132,7 @@ Use these pages to compare platforms through practical differences that affect m
 
 #### Technical Deep Dives <a href="#technical-deep-dives" id="technical-deep-dives"></a>
 
-Use these pages to understand hidden complexity that changes migration effort and risk, such as variants, attributes, category structure, media handling, reviews, pricing logic, metadata, custom fields, and extension-owned behavior.
+Use these pages when the project has technical or data-model depth that needs closer review, including product structure, catalog behavior, customer data, reviews, promotions, metadata, custom fields, integrations, and extension-owned meaning.
 
 #### Post-Migration and Quality Assurance <a href="#post-migration-and-quality-assurance" id="post-migration-and-quality-assurance"></a>
 
