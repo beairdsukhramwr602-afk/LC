@@ -27,10 +27,10 @@
 
 ## Strategy and Planning for Migration
 
+* [Planning an E-commerce Migration Project](strategy-and-planning-for-migration/planning-an-e-commerce-migration-project.md)
 * [Defining Migration Scope: What Must Move and What Can Change](strategy-and-planning-for-migration/defining-migration-scope.md)
-* [What Makes an eCommerce Migration Complex?](strategy-and-planning-for-migration/what-makes-an-ecommerce-migration-complex.md)
+* [What Makes an E-commerce Migration Complex?](strategy-and-planning-for-migration/what-makes-an-e-commerce-migration-complex.md)
 * [Choosing the Right Migration Approach](strategy-and-planning-for-migration/choosing-the-right-migration-approach.md)
-* [Planning an eCommerce Migration Project](strategy-and-planning-for-migration/planning-an-ecommerce-migration-project.md)
 * [Planning Migration Validation and Acceptance Criteria](strategy-and-planning-for-migration/planning-migration-validation-and-acceptance-criteria.md)
 
 ## Next-Cart Migration Service

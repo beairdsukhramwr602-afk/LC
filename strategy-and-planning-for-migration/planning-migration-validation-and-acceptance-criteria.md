@@ -7,247 +7,278 @@ metaLinks:
 
 # Planning Migration Validation and Acceptance Criteria
 
-Migration validation is weakest when it begins after the data has already moved. By that stage, the project is usually under more pressure, more people are involved, and the cost of ambiguity is higher. That is why validation should be planned before execution, not improvised afterward.
+Migration validation is strongest when the business defines what “acceptable” means before the project reaches execution pressure. Waiting until data has already moved often turns review into a rushed reaction: more people are involved, launch expectations are stronger, and unclear standards become harder to resolve.
 
-A strong validation plan defines what the business needs to confirm, who is responsible for checking it, how representative review will be performed, and what acceptable actually means before launch pressure begins to distort judgment.
+A strong validation plan gives the migration project a practical decision framework. It defines what must be reviewed, who should review it, what sample is representative, which differences are acceptable, and which issues should block approval.
 
-This article is about designing that review framework in advance. It is not about running post-migration checks step by step. Its purpose is to help the business decide how it will judge success before execution makes that judgment harder.
+Validation is not only a post-migration check. It is a planning discipline that helps the business decide how success will be judged before execution makes that judgment more difficult.
 
-### Validation Planning Is About Defining Acceptable Before the Project Gets Rushed
+### Validation planning defines acceptable outcomes before review begins <a href="#validation-planning-defines-acceptable-outcomes-before-review-begins" id="validation-planning-defines-acceptable-outcomes-before-review-begins"></a>
 
-A migration project does not succeed because data appears in the target store. It succeeds when the migrated store still supports the outcomes the business depends on.
+A migration project does not succeed simply because records appear in the Target Platform. It succeeds when the migrated store still supports the business outcomes that matter after launch.
 
-That means validation planning should begin with questions such as:
+That means validation planning should answer questions such as:
 
-* what must still work after launch
-* what differences are acceptable
-* what differences would create a real business problem
-* who is responsible for checking each outcome area
-* what must be confirmed before the result can be accepted
+* what must still work after migration
+* which records, pages, and workflows carry the highest business value
+* which platform-driven differences are acceptable
+* which differences would create operational, customer-facing, SEO, or reporting problems
+* who is responsible for judging each outcome area
+* what must be confirmed before the migration result can be accepted
 
-This is what acceptance criteria are for. They turn review from a vague reaction into a structured decision process.
+Acceptance criteria turn review from a vague reaction into a structured approval decision.
 
-### Why Record Counts Are Not Enough
+### Record counts are useful, but they are not acceptance criteria <a href="#record-counts-are-useful-but-they-are-not-acceptance-criteria" id="record-counts-are-useful-but-they-are-not-acceptance-criteria"></a>
 
-Record counts are useful, but they are only a surface check.
+Record totals are important as a surface check, but they do not prove that the migrated store works correctly.
 
-A store can show the expected totals for products, customers, and orders and still fail in important ways. Products may no longer support the intended buying behavior. Category pages may weaken discovery. Order history may become harder to use. Customer continuity may no longer match expectations. Connected records may no longer preserve the same business meaning.
+A project can show the expected number of products, customers, orders, or content records and still fail in ways that matter. Products may lose important buying context. Category paths may become less useful. Order history may be harder for support teams to interpret. Customer continuity may not behave as expected. SEO-sensitive pages may remain visible but no longer preserve the same search or conversion value.
 
-That is why a validation plan should be built around business outcomes and usable behavior, not only around entity presence.
+Counts confirm presence. Acceptance criteria confirm whether the result is usable.
 
-### Acceptance Criteria Should Be Outcome-Based
+### Acceptance criteria should be based on business outcomes <a href="#acceptance-criteria-should-be-based-on-business-outcomes" id="acceptance-criteria-should-be-based-on-business-outcomes"></a>
 
 The strongest acceptance criteria describe what the business must still be able to do after migration.
 
-That usually includes outcomes such as:
+Examples include:
 
-* products can still be bought in the intended way
-* customers can still discover products through the right browse paths
-* customer continuity still behaves as expected
-* order history remains usable enough for support and operations
-* priority landing pages remain reachable and credible
-* business-critical extension-driven logic still supports the required result
+* customers can still buy important products in the intended way
+* shoppers can still discover products through meaningful categories or browse paths
+* customer records remain usable for customer-facing and support-facing needs
+* order history remains clear enough for service, reconciliation, reporting, or post-purchase workflows
+* priority landing pages remain reachable, credible, and aligned with their original intent
+* business-critical app, plugin, module, extension, custom-field, or outside-system context still supports the expected result
 
-This is far more useful than saying only that products, customers, or orders are present. A good acceptance criterion defines what usable means, not just what visible means.
+This is stronger than approving a project because the data is visible. A usable validation standard defines what the migrated data must still enable.
 
-### What Should Be Included in a Validation Plan
+### A practical validation plan needs five elements <a href="#a-practical-validation-plan-needs-five-elements" id="a-practical-validation-plan-needs-five-elements"></a>
 
-A practical validation plan usually makes five things clear:
+A validation plan does not need to be complicated, but it should be specific enough to prevent late-stage confusion.
 
-1. Validation areas
-2. Acceptance criteria
-3. Validation responsibility
-4. Review sample
-5. Escalation threshold
+#### Validation areas <a href="#validation-areas" id="validation-areas"></a>
 
-Without these elements, review often becomes inconsistent and overly subjective.
+Validation areas define what parts of the migrated result need review. They usually include products, categories, customers, orders, SEO-sensitive pages, relationship-sensitive records, and any business-critical custom or third-party context.
 
-### Organize Validation by Outcome Area
+#### Acceptance criteria <a href="#acceptance-criteria" id="acceptance-criteria"></a>
 
-Validation becomes much clearer when it is divided into the business areas that matter most.
+Acceptance criteria define what is acceptable for each validation area. They should be written in outcome language, not only data-presence language.
 
-#### Product Validation Criteria
+#### Validation responsibility <a href="#validation-responsibility" id="validation-responsibility"></a>
 
-Product validation usually needs to confirm that:
+Validation responsibility identifies who is best positioned to judge each area. Product behavior, customer-service usability, SEO continuity, and launch readiness may require different reviewers.
 
-* variants and options still behave correctly
-* pricing remains understandable
-* important media and product information still support purchase confidence
-* product attributes still support discovery where they matter
-* extension-driven product behavior still supports the intended result
+#### Review sample <a href="#review-sample" id="review-sample"></a>
 
-A useful standard is not just "the product exists." It is "the product still supports the intended customer buying decision."
+The review sample should include records and pathways that are likely to expose real migration risk. A representative sample is more useful than an easy sample that only confirms simple records.
 
-#### Category and Discovery Validation Criteria
+#### Escalation threshold <a href="#escalation-threshold" id="escalation-threshold"></a>
 
-Category and browse validation usually needs to confirm that:
+An escalation threshold defines which issues should be treated as acceptable differences, which should be corrected, and which should block acceptance until resolved.
 
-* customers can still reach products through the expected pathways
-* category logic still supports discovery
-* filtering or attribute-driven navigation still behaves acceptably
-* key browse entry points still make sense as landing pages or discovery paths
+### Validation areas should reflect how the business uses the store <a href="#validation-areas-should-reflect-how-the-business-uses-the-store" id="validation-areas-should-reflect-how-the-business-uses-the-store"></a>
 
-A category page can remain visible and still fail if it no longer supports the browse intent the business depends on.
+Validation becomes clearer when it is organized around outcome areas instead of one broad “check everything” instruction.
 
-#### Customer Continuity Validation Criteria
+#### Product validation <a href="#product-validation" id="product-validation"></a>
 
-Customer validation usually needs to confirm that:
+Product validation should confirm whether important products still support the intended buying decision.
 
-* continuity behaves as expected
-* customer records remain usable
-* customer-linked history still supports the intended experience
-* segmentation or review ownership remains acceptable where relevant
+Useful criteria may include:
 
-This matters because customer continuity is rarely only about record presence. It is about whether the customer-facing and support-facing experience still aligns with business expectations.
+* variants and options behave clearly enough for customers
+* pricing, media, descriptions, and attributes remain understandable
+* product relationships, options, or bundles still support the intended purchase logic where relevant
+* product data affected by apps, plugins, modules, extensions, custom fields, or outside systems remains usable if it is business-critical
 
-#### Order-History Validation Criteria
+The practical question is not only whether the product exists. It is whether the product still works as a sellable item in the Target Platform.
 
-Order validation usually needs to confirm that:
+#### Category and discovery validation <a href="#category-and-discovery-validation" id="category-and-discovery-validation"></a>
 
-* order records are usable for support and operations
+Category and discovery validation should confirm whether customers can still reach important products through meaningful pathways.
+
+Useful criteria may include:
+
+* major category paths still make sense
+* key browse entry points still support product discovery
+* filtering, attributes, or navigation logic remains acceptable where it affects conversion
+* high-value category pages still support their intended landing-page role
+
+A category page can be visible and still fail if it no longer supports the browse behavior the business depends on.
+
+#### Customer continuity validation <a href="#customer-continuity-validation" id="customer-continuity-validation"></a>
+
+Customer validation should confirm whether customer records remain usable in the ways the business needs.
+
+Useful criteria may include:
+
+* customer records remain understandable
+* customer-linked history is usable where expected
+* customer groups, segmentation, or ownership context remains acceptable where relevant
+* the customer-facing or support-facing experience still matches business expectations
+
+Customer continuity is rarely just a record-presence issue. It is about whether the business can still interpret and use customer information after the move.
+
+#### Order-history validation <a href="#order-history-validation" id="order-history-validation"></a>
+
+Order-history validation should confirm whether migrated orders remain useful for support, operations, reporting, or post-purchase workflows.
+
+Useful criteria may include:
+
+* order records remain readable and operationally useful
 * product references inside orders remain understandable
-* customer references remain meaningful
-* discounts, taxes, or other critical order context still support intended use
+* customer relationships remain meaningful
+* discounts, taxes, shipping, payment, or fulfillment context remains usable enough for the intended business purpose
 
-This area becomes especially important when order history matters to support, reconciliation, reporting, or post-purchase workflows.
+This area becomes especially important when historical orders are needed after launch.
 
-#### SEO and Page Continuity Validation Criteria
+#### SEO and page-continuity validation <a href="#seo-and-page-continuity-validation" id="seo-and-page-continuity-validation"></a>
 
-SEO-sensitive validation usually needs to confirm that:
+SEO-sensitive validation should confirm whether priority pages still support traffic continuity and customer trust.
 
-* priority pages remain reachable
-* important page intent is preserved
-* key landing pages remain credible and useful
-* high-value paths still support continuity after migration
+Useful criteria may include:
 
-This does not require reviewing every page equally. It requires a clear priority set for pages that materially affect traffic, discovery, or conversion.
+* high-value pages remain reachable
+* page intent is preserved where possible
+* priority landing pages remain credible and useful
+* important product and category paths support continuity after migration
+* redirect-sensitive pages are included in review when URLs change
 
-#### Relationship-Sensitive Validation Criteria
+This does not mean every page needs the same review depth. It means pages with search, traffic, revenue, or customer-support value should be named clearly in the validation plan.
 
-Some outcomes depend on connected records remaining usable together.
+#### Relationship-sensitive validation <a href="#relationship-sensitive-validation" id="relationship-sensitive-validation"></a>
 
-Validation in this area usually needs to confirm that:
+Some migration outcomes depend on connected records remaining meaningful together.
 
-* orders still relate meaningfully to the correct customers and products
-* reviews still connect to the right products and customers
-* products still preserve meaningful category, tax, or manufacturer context
-* coupons still preserve the intended relationship to products or categories where relevant
+Useful criteria may include:
 
-This is one of the clearest examples of why counts alone are not enough.
+* orders still relate clearly to customers and products
+* reviews still connect to the right products or customers where supported
+* products still preserve meaningful category, manufacturer, tax, or attribute context
+* coupons or promotions still retain usable relationships where relevant
+* CMS Pages and Blog Posts remain useful in the content context where they matter
 
-### Use Representative Samples, Not Random Checks
+Relationship-sensitive validation is one of the clearest reasons record counts alone are not enough.
 
-Validation is stronger when it tests the records and pathways most likely to expose real risk.
+### Representative samples reveal risk better than random checks <a href="#representative-samples-reveal-risk-better-than-random-checks" id="representative-samples-reveal-risk-better-than-random-checks"></a>
 
-A useful review sample usually includes:
+Validation should include records that are likely to reveal whether the migration result is acceptable.
 
-* best-selling products with meaningful complexity
-* category paths that matter most to discovery
-* representative customers and orders
-* pages with strong traffic or conversion value
-* records affected by apps, plugins, extensions, or outside systems
+A useful representative sample may include:
 
-Random samples can help with surface checking. Representative samples are much better for judging whether the migration is truly acceptable.
+* best-selling or high-margin products
+* products with variants, options, attributes, or complex media
+* important category paths and landing pages
+* representative customers and order histories
+* records affected by apps, plugins, modules, extensions, custom fields, or outside-system identifiers
+* pages or records that matter to SEO, support, reporting, or launch confidence
 
-### Validation Responsibility Should Be Clear Before Review Begins
+Random checks can help catch obvious surface issues. Representative checks are better for judging whether the migrated store still supports the business.
 
-A common cause of weak validation is that everyone assumes someone else will judge the result.
+### Early evidence helps shape validation, but it does not replace final acceptance <a href="#early-evidence-helps-shape-validation-but-it-does-not-replace-final-acceptance" id="early-evidence-helps-shape-validation-but-it-does-not-replace-final-acceptance"></a>
 
-A stronger plan makes clear who is responsible for checking each area, including:
+Early review is useful because it helps the business discover what acceptance criteria should look like before broader execution begins. Demo Migration can provide representative evidence of how selected data may appear in the Target Platform and where review should be more careful.
 
-* product behavior
-* category and browse logic
-* customer continuity
-* order usability
-* SEO-critical pages
-* final launch-readiness review
+That early evidence can help identify:
 
-Different outcome areas require different kinds of business knowledge. The person best placed to judge product purchase behavior may not be the same person best placed to judge support usability or page continuity.
+* which differences are likely to be platform-driven
+* which areas need more precise mapping, filtering, or configuration
+* which records expose relationship or compatibility issues
+* whether internal reviewers can judge the result confidently
+* whether customization or modification work may be needed
 
-### Acceptance Criteria Should Distinguish Acceptable Difference from Unacceptable Loss
+Demo Migration is evidence, not final approval. A positive early sample does not remove the need for disciplined validation after broader execution.
 
-Not every change is a failure.
+### Add-on and Custom Service outcomes should be validated when they affect the expected result <a href="#add-on-and-custom-service-outcomes-should-be-validated-when-they-affect-the-expected-result" id="add-on-and-custom-service-outcomes-should-be-validated-when-they-affect-the-expected-result"></a>
 
-A strong validation plan should make clear which differences are:
+If the migration plan uses Add-ons for filtering, mapping, or data configuration, the validation plan should include the outcomes that those Add-ons are expected to support. The review should confirm whether the configured result matches the business intent, not only whether the Add-on was applied.
+
+When the expected result depends on Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, bespoke transformation, or other customization or modification work, validation criteria should be more explicit. Custom Service work should be judged against the specific outcome it was intended to support.
+
+The review standard should match the project’s real complexity. A simple data move and a customization-driven migration should not use the same acceptance criteria.
+
+### Freshness alignment does not prove launch readiness <a href="#freshness-alignment-does-not-prove-launch-readiness" id="freshness-alignment-does-not-prove-launch-readiness"></a>
+
+If the source store continues changing during the project, freshness must be managed before launch. Recent Data Migration can help reduce the gap between earlier migration activity and the final launch state where applicable.
+
+Freshness and acceptance are separate decisions. The business still needs to confirm that:
+
+* newly created important data is present as expected
+* high-risk behaviors still work acceptably
+* priority pages and records remain usable
+* known differences have been classified intentionally
+* the completed Target Platform result is ready in the ways that matter most
+
+Freshness supports launch readiness. It does not prove that the migrated result is acceptable by itself.
+
+### Acceptance criteria should separate acceptable difference from unacceptable loss <a href="#acceptance-criteria-should-separate-acceptable-difference-from-unacceptable-loss" id="acceptance-criteria-should-separate-acceptable-difference-from-unacceptable-loss"></a>
+
+Not every difference is a failure. Platform migration often changes presentation, structure, administrative workflows, or supported behavior because the Target Platform does not operate exactly like the Source Platform.
+
+A strong validation plan separates differences into practical categories:
 
 * acceptable platform-driven differences
 * manageable presentation differences
-* meaningful degradations that must be corrected
-* business-critical failures that should block acceptance
+* issues that should be corrected before acceptance
+* business-critical failures that should block approval
 
-Migration almost always introduces some differences. The project becomes easier to govern when the team already knows which ones are understood and acceptable, and which ones are not.
+This distinction prevents two common problems: approving a result too loosely because the data is present, or rejecting manageable platform differences as if every change were a migration failure.
 
-### Validation Planning Should Begin Before Execution Commitment
+### A strong acceptance decision is explainable <a href="#a-strong-acceptance-decision-is-explainable" id="a-strong-acceptance-decision-is-explainable"></a>
 
-The strongest time to define acceptance criteria is before the project commits to broader execution.
+A strong acceptance decision usually means the business can explain why the migrated result is acceptable.
 
-That is because a representative early sample often reveals:
+That decision is stronger when:
 
-* what the business will need to review carefully
-* what kinds of differences are likely to appear
-* where the hardest pass-fail judgments will be
-* whether current review capacity is strong enough for the project’s risk level
+* agreed validation areas were reviewed
+* representative samples showed that critical outcomes still work
+* responsible reviewers checked the areas they understand best
+* known differences were intentionally classified
+* unresolved issues were either corrected or consciously accepted
+* launch-readiness judgment is based on evidence rather than pressure
 
-This makes validation planning much more realistic. Instead of guessing what to check later, the business can shape its criteria around behavior it already understands.
+That is much stronger than saying the migration “looks good.”
 
-### Freshness Alignment Does Not Replace Validation
+### Common validation planning mistakes <a href="#common-validation-planning-mistakes" id="common-validation-planning-mistakes"></a>
 
-If the source store continues changing during the project, data freshness must still be managed before launch. But freshness alignment and outcome validation are separate decisions.
-
-The project still needs to confirm that:
-
-* the latest important data is present as expected
-* the highest-risk behaviors still work acceptably
-* the completed target store is ready in the ways that matter most
-
-Freshness supports launch readiness. It does not prove acceptable business behavior by itself.
-
-### Common Validation Planning Mistakes
+Validation becomes weaker when the project waits too long to define success.
 
 Common mistakes include:
 
-* waiting until late review to define what acceptable means
-* using totals as the main proof of success
-* letting review stay too broad or too vague
-* failing to assign validation responsibility by outcome area
-* treating every difference as equally important
-* failing to distinguish acceptable change from real business loss
-* assuming an early positive sample removes the need for disciplined final review
+* using record totals as the main proof of success
+* treating validation as a late-stage task only
+* leaving review responsibility unclear
+* reviewing easy records instead of representative records
+* failing to classify acceptable differences separately from blockers
+* ignoring SEO-sensitive pages or relationship-sensitive records until late review
+* assuming that Demo Migration removes the need for final validation
+* treating freshness alignment as proof that the store is ready
 
-These mistakes usually slow the project down at the exact point where clarity is most needed.
+These mistakes usually create friction at the point where the project needs clarity most.
 
-### What a Strong Acceptance Decision Looks Like
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-A strong acceptance decision usually means:
+Planning migration validation and acceptance criteria turns migration review into a controlled business decision. The strongest plans define what must be checked, who should check it, which records or pages are representative, and what acceptable means before execution pressure makes those decisions harder.
 
-* the agreed validation areas were reviewed
-* representative samples showed that critical outcomes still work
-* known differences were classified intentionally
-* unresolved issues were either corrected or consciously accepted
-* the people responsible for final review can explain why the result is acceptable
+Define acceptance criteria around the outcomes the business must preserve after migration. When a difference is difficult to classify as an accepted platform change, a mapping issue, or a blocker, Live Chat can help clarify the issue before review becomes rushed.
 
-That is much stronger than saying only that the migration "looks good."
+### FAQs <a href="#faqs" id="faqs"></a>
 
-### Conclusion
+**What is the difference between validation and acceptance criteria?**
 
-Planning migration validation and acceptance criteria is really about defining how the business will judge success before execution pressure makes that judgment harder. The strongest validation plans are built around business outcomes, representative samples, clear responsibility, and a disciplined distinction between acceptable difference and unacceptable loss.
+Validation is the review process. Acceptance criteria are the standards used to decide whether the migration result is acceptable.
 
-Define your validation areas before the project reaches full execution pressure, then write acceptance criteria in terms of what the business must still be able to do after the move. If you need help deciding whether a difference is an accepted platform change, a mapping issue, or a real blocker, Live Chat is a practical way to reduce ambiguity before review becomes rushed.
+**Why are record counts not enough to approve a migration?**
 
-### FAQs
+Record counts confirm that expected records are present. They do not prove that products remain buyable, categories still support discovery, order history remains usable, customer continuity behaves as expected, or priority pages still support traffic and conversion.
 
-#### What is the difference between validation and acceptance criteria?
+**When should acceptance criteria be defined?**
 
-Validation is the review process. Acceptance criteria are the standards used to decide whether the result is acceptable.
+Acceptance criteria should be defined before broader execution and launch pressure make review harder. They are most useful when validation areas, responsible reviewers, representative samples, and pass-fail expectations are already clear before heavy review begins.
 
-#### Why are record counts not enough to approve a migration?
+**Who should be responsible for validation?**
 
-Because a store can show the expected totals and still fail in product behavior, category discovery, customer continuity, order usability, relationship integrity, or page continuity. Counts are useful, but they are not proof that the store still works correctly.
+Validation responsibility should be assigned by outcome area. Product behavior, category discovery, customer continuity, order usability, SEO-sensitive pages, and launch readiness may require different reviewers because each area depends on different business knowledge.
 
-#### When should acceptance criteria be defined?
+**Does Recent Data Migration replace validation?**
 
-Before broader execution pressure takes over. The business should define them early enough that review areas, responsible reviewers, and pass-fail expectations are already clear when the project reaches heavier execution and launch preparation.
-
-#### Who should be responsible for validation?
-
-Validation responsibility should be assigned by outcome area. Different people may need to review product behavior, order usability, customer continuity, page continuity, or final launch readiness depending on who best understands each area.
+No. Recent Data Migration can help reduce the freshness gap before launch where applicable, but the business still needs to confirm that the migrated result is usable, connected, accurate enough for the intended outcome, and acceptable for launch.
