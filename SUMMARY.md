@@ -21,9 +21,9 @@
 * [Migration Risk Awareness](migration-fundamentals/migration-risk-awareness/README.md)
   * [Common Risks in E-commerce Platform Migration and How to Prevent Them](migration-fundamentals/migration-risk-awareness/common-risks-in-e-commerce-platform-migration-and-how-to-prevent-them.md)
 * [SEO and Traffic Continuity](migration-fundamentals/seo-and-traffic-continuity/README.md)
-  * [SEO and Traffic Continuity in Shopping Cart Migration](migration-fundamentals/seo-and-traffic-continuity/seo-and-traffic-continuity-in-shopping-cart-migration.md)
-  * [URL Structure Changes and Redirect Planning](migration-fundamentals/seo-and-traffic-continuity/url-structure-changes-and-redirect-planning.md)
+  * [SEO and Traffic Continuity in E-commerce Platform Migration](migration-fundamentals/seo-and-traffic-continuity/seo-and-traffic-continuity-in-e-commerce-platform-migration.md)
   * [Preserving Product and Category Page SEO During Migration](migration-fundamentals/seo-and-traffic-continuity/preserving-product-and-category-page-seo-during-migration.md)
+  * [URL Structure Changes and Redirect Planning](migration-fundamentals/seo-and-traffic-continuity/url-structure-changes-and-redirect-planning.md)
 
 ## Strategy and Planning for Migration
 
