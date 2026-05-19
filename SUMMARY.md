@@ -156,7 +156,7 @@
 * [Migration Validation: What Success Really Means](quality-assurance-and-validation/migration-validation-what-success-really-means.md)
 * [Building a Migration Validation Checklist](quality-assurance-and-validation/building-a-migration-validation-checklist.md)
 * [Reconciling Migration Results](quality-assurance-and-validation/reconciling-migration-results.md)
-* [Preparing for eCommerce Migration Go-Live](quality-assurance-and-validation/preparing-for-ecommerce-migration-go-live.md)
+* [Preparing for E-commerce Migration Go-Live](quality-assurance-and-validation/preparing-for-ecommerce-migration-go-live.md)
 * [Post-Launch Monitoring and Stabilization](quality-assurance-and-validation/post-launch-monitoring-and-stabilization.md)
 
 ## Worksheet and Template

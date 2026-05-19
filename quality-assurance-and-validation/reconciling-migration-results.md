@@ -1,188 +1,274 @@
 # Reconciling Migration Results
 
-A migration result should not be judged only by what matches. It should be judged by whether the differences are understood.
+Reconciliation is the part of the migration review that explains the differences between the Source Platform and the Target Platform.
 
-That is what reconciliation is for. Reconciliation is the process of comparing the source and target stores in a way that explains what changed, what stayed intact, what differs for acceptable reasons, and what signals a real continuity problem. Without that step, teams often react too strongly to harmless mismatches and not strongly enough to the differences that actually affect launch readiness.
+A migration result should not be judged only by whether the two stores look identical or whether record totals match. Some differences are expected because platforms structure data, relationships, storefront behavior, URLs, and operational rules differently. Other differences come from intentional scope choices, accepted mapping decisions, Add-ons, Custom Service handling, or Target Platform limitations. A smaller group of differences may reveal real continuity problems that should be corrected before launch.
 
-This matters because migration results rarely fall into a simple pass-or-fail pattern. Some differences come from platform structure. Some come from intentional scope decisions. Some reflect known limitations or acceptable compromises. Others expose broken relationships, weakened usability, or incomplete preservation of business meaning. Reconciliation helps separate those outcomes so the final judgment is based on evidence rather than confusion.
+The purpose of reconciliation is to separate those outcomes clearly. It helps the business understand what changed, why it changed, whether the change is acceptable, and whether the difference should affect launch confidence.
 
-### What Reconciliation Is Really Trying to Answer
+### What reconciliation is trying to prove <a href="#what-reconciliation-is-trying-to-prove" id="what-reconciliation-is-trying-to-prove"></a>
 
-Reconciliation is not only about matching totals.
+Reconciliation is not the same as general validation.
 
-It is trying to answer four practical questions:
+Validation asks whether the Target Platform result is usable, trustworthy, and acceptable for the business. Reconciliation explains the differences found during that review. It turns mismatches, changed behavior, missing-looking details, and platform-specific differences into practical launch judgment.
 
-* which differences are expected
-* which differences are explainable
-* which differences are commercially acceptable
-* which differences reveal a problem that should change launch confidence
+#### The core reconciliation questions <a href="#the-core-reconciliation-questions" id="the-core-reconciliation-questions"></a>
 
-That makes reconciliation different from general validation. Validation asks whether the target store behaves acceptably. Reconciliation asks whether the differences between source and target can be interpreted correctly. The two are closely connected, but they do different jobs. One tests outcomes. The other explains discrepancies.
+A useful reconciliation process answers four questions:
 
-### Matching Counts Do Not Prove Success
+* Which differences were expected?
+* Which differences are explainable?
+* Which differences are acceptable for the business outcome?
+* Which differences reveal a real issue that should be corrected, escalated, or treated as a launch blocker?
 
-It is possible for counts to match while important behavior is still wrong.
+Those questions make reconciliation more useful than a simple comparison table. The goal is not to force the Target Platform to look exactly like the Source Platform. The goal is to understand whether the Target Platform result preserves the business meaning that matters.
 
-Products may be present but attached to weaker browsing paths. Customers may exist but not experience the intended account continuity. Orders may be present but harder for support teams to interpret. Relationships may appear intact at a broad level while priority scenarios still behave differently. A matched total can therefore confirm broad transfer without proving that the store still works in the way the business needs.
+**Reconciliation is interpretation, not only detection**
 
-This is why reconciliation should never stop at “the numbers look right.” Numbers are useful signals, but they are not the full explanation.
+Finding a difference is only the first step. The stronger review work is explaining the difference and deciding whether it is acceptable, correctable, or blocking.
 
-### Count Mismatches Do Not Always Mean Failure
+### Why matching totals do not prove migration success <a href="#why-matching-totals-do-not-prove-migration-success" id="why-matching-totals-do-not-prove-migration-success"></a>
 
-The reverse is also true. A mismatch does not automatically mean something went wrong.
+Matching record totals can be reassuring, but they do not prove that the migration result is launch-ready.
 
-Differences can be acceptable when they result from:
+Products may exist but appear in weaker category paths. Customers may be present but not support the intended account experience. Orders may be migrated, but it is harder for support teams to interpret. Reviews, coupons, CMS Pages, Blog Posts, or product relationships may be present but disconnected from the way shoppers or teams need to use them.
 
-* platform-normal behavior
-* intentional scope decisions
-* data that was excluded by design
-* structural differences between source and target
-* accepted mapping choices made earlier in the project
+#### What matching totals can hide <a href="#what-matching-totals-can-hide" id="what-matching-totals-can-hide"></a>
 
-For example, a business may decide that some lower-value content is out of scope, or that a platform difference is acceptable because it does not weaken the intended customer or operational outcome. The critical issue is not whether everything matches perfectly. It is whether the difference is known, explained, and acceptable in context.
+Matching totals can still hide problems such as:
 
-### The Most Useful Way to Classify Differences
+* products attached to incomplete categories or weaker browsing paths
+* variants, options, or attributes that no longer support the expected buying choice
+* customers disconnected from meaningful order or account context
+* orders that are present but difficult to interpret operationally
+* reviews, coupons, CMS Pages, or Blog Posts that no longer support the intended storefront or customer journey
+* SEO-sensitive pages that exist but no longer lead visitors to the right destination
+* external identifiers or custom fields that no longer support connected systems
 
-A strong reconciliation process usually classifies differences into a small number of clear categories.
+Record counts are useful evidence, but they are not enough. Reconciliation should use totals as one signal and then test the meaning behind the records.
 
-#### 1. Expected platform differences
+### Why count differences do not always mean failure <a href="#why-count-differences-do-not-always-mean-failure" id="why-count-differences-do-not-always-mean-failure"></a>
 
-These are differences caused by how the target platform represents data or behavior differently. They may still be acceptable if the business outcome remains intact.
+A mismatch does not automatically mean the migration failed.
 
-#### 2. Scope differences
+Some differences are normal when the Target Platform stores, organizes, or displays information differently from the Source Platform. Some are caused by intentional scope decisions. Some are the result of accepted mapping choices or supported Target Platform behavior. Others may reflect data that was excluded, transformed, merged, split, or represented differently for a valid business reason.
 
-These happen when some data, pages, records, or behaviors were intentionally excluded from launch scope. They should not be treated as surprises if scope was defined clearly.
+#### Acceptable difference depends on context <a href="#acceptable-difference-depends-on-context" id="acceptable-difference-depends-on-context"></a>
 
-#### 3. Mapping or translation differences
+A difference may be acceptable when it is:
 
-These happen when source meaning had to be represented differently in the target environment. Some are acceptable. Others weaken behavior enough to need correction or escalation.
+* caused by normal Target Platform behavior
+* part of the approved migration scope
+* caused by an intentional cleanup or simplification decision
+* the result of a known mapping choice
+* compatible with the expected customer, operational, SEO, or reporting outcome
+* documented clearly enough for the business to understand after launch
 
-#### 4. True defects or continuity risks
+A difference becomes risky when nobody can explain it, when it weakens a critical customer or business workflow, or when the team discovers it too late to decide calmly.
 
-These are the differences that should matter most. They usually weaken revenue-critical behavior, customer clarity, relationship integrity, support usability, or launch confidence.
+**The difference between variance and risk**
 
-This classification approach is stronger than treating every mismatch as equally serious. It gives the team a practical way to judge significance rather than just notice variance.
+A variance is a difference. A risk is a difference that may weaken the business outcome. Reconciliation should prevent the team from treating every variance as a defect while still identifying the differences that actually matter.
 
-### Reconciliation Should Follow Business Impact, Not Just Data Type
+### How to classify reconciliation findings <a href="#how-to-classify-reconciliation-findings" id="how-to-classify-reconciliation-findings"></a>
 
-The most useful reconciliation starts with the areas where differences would matter most.
+A strong reconciliation process classifies differences into a small number of practical categories.
 
-That usually means checking:
+The categories do not need to be complicated. They should help the business decide whether a finding is expected, acceptable, needs correction, or should block launch confidence.
 
-* best sellers and complex products
-* top browse paths and important categories
-* customer scenarios that support or retention depends on
-* representative order scenarios
-* high-value pages and legacy paths
-* extension-driven or outside-system dependent behaviors
+#### Expected platform differences <a href="#expected-platform-differences" id="expected-platform-differences"></a>
 
-This is stronger than trying to reconcile everything at the same level of detail. A store becomes easier to trust when the highest-impact differences are understood first.
+These differences come from the way the Target Platform represents data, relationships, storefront behavior, URLs, account structures, or operational settings differently from the Source Platform.
 
-### Relationship Reconciliation Matters as Much as Record Reconciliation
+Expected platform differences may be acceptable when the business outcome remains intact. They should still be documented so teams do not confuse them with defects during launch review.
 
-Some of the most important differences appear in relationships rather than in counts.
+#### Scope differences <a href="#scope-differences" id="scope-differences"></a>
 
-Useful reconciliation questions include:
+Scope differences occur when data, content, behavior, or historical detail was intentionally excluded from the migration plan.
 
-* do products still appear in the categories that support real browsing intent?
-* do customers still connect meaningfully to the right orders?
-* do orders still reflect the right product context?
-* do key pages still lead customers to the destinations that matter most?
-* where reviews, coupons, or other linked structures matter, do those relationships still support the intended outcome?
+These differences should not be treated as surprises if the scope was defined clearly. They become a problem when the business assumes something will move, but the migration scope does not include it.
 
-This matters because many migration problems are not missing-record problems. They are relationship and behavior problems that become visible only when connected records are reviewed together.
+#### Mapping or transformation differences <a href="#mapping-or-transformation-differences" id="mapping-or-transformation-differences"></a>
 
-### Reconciliation Should Explain, Not Just Detect
+Mapping or transformation differences occur when the source data's meaning must be represented differently in the Target Platform.
 
-A useful reconciliation process does more than mark a mismatch.
+Some mapping differences are harmless. Others weaken product choice, filtering, customer segmentation, order interpretation, SEO continuity, or external-system behavior. When a mapping difference changes business meaning, it may need correction, Advanced Data Mapping, Advanced Data Configure, a Tailored Add-on, a Custom Add-on, or broader Custom Service handling, depending on the requirement.
 
-For each important difference, the business should be able to say:
+#### True defects or continuity risks <a href="#true-defects-or-continuity-risks" id="true-defects-or-continuity-risks"></a>
 
-* what changed
-* why it changed
-* whether it was expected
-* what business area it affects
-* whether the result is acceptable, needs correction, or should block launch confidence
+These are findings that weaken the result in a way the business cannot accept.
 
-This is what turns reconciliation into a decision-making tool rather than a list of anomalies. A difference that is clearly explained and accepted is very different from a difference that nobody understands under launch pressure.
+They may affect revenue-critical products, important categories, customer trust, order usability, support workflows, SEO-sensitive destinations, external integrations, or launch readiness. These findings should be corrected, escalated, or treated as launch blockers depending on severity.
 
-### What Commonly Causes Reconciliation Confusion
+**Keep the classification business-facing**
 
-Several patterns make reconciliation harder than it should be.
+A reconciliation category should help the business decide what to do next. If a label does not explain whether the finding is acceptable, correctable, or blocking, the label is not useful enough.
 
-Common problems include:
+### Reconcile by business impact, not only by data type <a href="#reconcile-by-business-impact-not-only-by-data-type" id="reconcile-by-business-impact-not-only-by-data-type"></a>
 
-* comparing totals without comparing behavior
-* treating every mismatch as a defect
-* failing to separate scope decisions from errors
-* discovering acceptable differences too late
-* reviewing records in isolation instead of reviewing connected behavior
-* failing to decide who is responsible for interpreting different kinds of differences
+Reconciliation should start with the areas where differences would matter most.
 
-These issues usually create the most stress near go-live, when the business needs the clearest judgment. A stronger reconciliation process reduces that stress by classifying differences early and linking them to business impact.
+Reviewing every record at the same level of detail is rarely practical or useful. The better approach is to reconcile high-impact samples first, then expand the review where the findings show additional risk.
 
-### A Practical Way to Reconcile Migration Results
+#### High-impact areas to reconcile first <a href="#high-impact-areas-to-reconcile-first" id="high-impact-areas-to-reconcile-first"></a>
 
-A useful reconciliation process can usually be built in this order:
+Useful reconciliation samples often include:
 
-#### 1. Start with launch-critical outcomes
+* best-selling products and complex products
+* top categories and high-value browse paths
+* important customer scenarios
+* representative orders with operational value
+* SEO-sensitive pages and legacy paths
+* promotions, coupons, pricing behavior, or discount rules that affect purchase decisions
+* reviews or user-generated content that support trust
+* data connected to apps, plugins, modules, extensions, or external systems
+* custom fields, outside-system identifiers, or Custom Platform structures that affect business workflows
 
-Reconcile the areas where differences would matter most to revenue, customer trust, support usability, or operational continuity.
+This approach gives the team a clearer view of launch risk. If the most important products, paths, customers, orders, and dependencies reconcile well, the business has stronger evidence than it would get from a broad but shallow review.
 
-#### 2. Compare representative source and target samples
+### Reconcile relationships, not just records <a href="#reconcile-relationships-not-just-records" id="reconcile-relationships-not-just-records"></a>
 
-Use best sellers, important categories, priority pages, representative customer cases, and operationally meaningful orders rather than random samples.
+Many migration issues are relationship issues.
 
-#### 3. Classify every important difference
+A record can exist and still fail to support the intended outcome if it is no longer connected to the right structure, page, customer, order, category, media, metadata, or external identifier. Reconciliation should therefore review connected behavior, not only isolated records.
 
-Use a small number of categories such as expected platform difference, scope difference, mapping difference, or true continuity risk.
+#### Relationship questions to ask <a href="#relationship-questions-to-ask" id="relationship-questions-to-ask"></a>
 
-#### 4. Record the business impact
+Useful questions include:
 
-A mismatch only becomes useful to interpret when the team understands whether it affects discoverability, purchasability, customer clarity, support usability, reporting, or launch confidence.
+* Do products still appear in the categories that support real browsing intent?
+* Do variants, options, images, attributes, and pricing still support the expected product choice?
+* Do customers still connect meaningfully to the right orders and account context?
+* Do orders still reflect the right product, customer, status, payment, shipping, tax, and fulfillment context?
+* Do reviews, coupons, CMS Pages, Blog Posts, and other supporting records still connect to the right storefront or operational use?
+* Do priority URLs and page destinations still support traffic continuity?
+* Do outside-system identifiers still support the systems that depend on them?
 
-#### 5. Decide whether it is acceptable, correctable, or blocking
+Relationship reconciliation is especially important when the Source Platform uses custom fields, extensions, app/plugin/module data, or Custom Platform structures. In those cases, the data may need more interpretation before the business can decide whether the Target Platform result is acceptable.
 
-This is the step that makes reconciliation useful for launch decisions rather than just for observation.
+### How to reconcile Custom Platform or custom-service results <a href="#how-to-reconcile-custom-platform-or-custom-service-results" id="how-to-reconcile-custom-platform-or-custom-service-results"></a>
 
-### How Custom Cart Can Make Reconciliation More Sensitive
+A migration involving a Custom Platform, custom fields, third-party data, outside-system identifiers, or custom migration logic adjustment usually requires more careful reconciliation.
 
-A Custom Cart is any shopping cart platform not explicitly included in Next-Cart’s standard supported cart list. When a migration involves a Custom Cart, reconciliation often becomes more sensitive because some differences may be harder to classify using standard expectations.
+The reason is not that every difference is automatically wrong. The reason is that standard expectations may not fully explain why the difference exists. The business may need to decide whether a result reflects an approved custom interpretation, a Target Platform limitation, a tailored Add-on requirement, a broader Custom Service requirement, or a true defect.
 
-In those cases, more discrepancies may depend on custom structure, bespoke logic, transformed data meaning, or non-standard interpretation. That makes it more important to explain why a difference exists and whether it reflects an acceptable designed outcome, a custom handling decision, or a real continuity problem.
+#### What to document for custom-sensitive findings <a href="#what-to-document-for-custom-sensitive-findings" id="what-to-document-for-custom-sensitive-findings"></a>
 
-This does not change what reconciliation is for. It increases the importance of clear classification and business-impact reasoning.
+For custom-sensitive findings, reconciliation should document:
 
-### Conclusion
+* what source behavior or structure the business expected to preserve
+* how the result appears in the Target Platform
+* whether the difference was approved during scope or service planning
+* whether the difference affects customer experience, operations, reporting, SEO, or external-system behavior
+* whether the result is acceptable, needs adjustment, or should be escalated
 
-Reconciling migration results is the process that turns visible differences into informed judgment.
+This documentation helps prevent custom requirements from being judged too casually. It also prevents the team from demanding exact duplication where the Target Platform requires a different representation.
 
-A store can look reassuringly similar while still hiding important continuity loss, and it can also show real differences that are acceptable once they are understood. That is why reconciliation should focus on explanation, classification, and business impact rather than on raw mismatch detection alone. A result is easier to trust when the business can explain which differences are expected, which are acceptable, and which would genuinely weaken launch readiness.
+**Custom Service does not remove validation responsibility**
 
-Before treating a migration result as launch-ready, classify the most important differences by type and business impact, not only by whether they exist. If a difference is still hard to interpret, a Demo Migration review or Live Chat can help determine whether it reflects a platform-normal outcome, a scope choice, or a sign that more guided handling may be needed.
+Custom Service can support customization, modification, Custom Platform handling, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment, but the business still needs to review whether the final result fits the intended outcome.
 
-### FAQs
+### Build a practical reconciliation record <a href="#build-a-practical-reconciliation-record" id="build-a-practical-reconciliation-record"></a>
 
-#### What is the difference between validation and reconciliation?
+Reconciliation works best when findings are recorded in a simple, decision-ready format.
 
-Validation checks whether the target store behaves acceptably. Reconciliation explains the differences between source and target and helps decide whether those differences are acceptable, expected, or risky.
+The record should help the team understand the difference quickly, assign the right next action, and avoid re-discussing the same issue repeatedly.
 
-#### Do mismatched counts always mean something went wrong?
+#### Useful reconciliation fields <a href="#useful-reconciliation-fields" id="useful-reconciliation-fields"></a>
 
-No. Some mismatches reflect platform-normal behavior, intentional scope choices, or accepted mapping differences. The important question is whether the difference is understood and acceptable in business terms.
+A practical reconciliation record may include:
 
-#### Can matching totals still hide a bad migration outcome?
+| Field            | Purpose                                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Review area      | Identifies whether the finding affects products, customers, orders, content, SEO, integrations, or another area.                        |
+| Source reference | Shows the Source Platform record, page, behavior, or sample being compared.                                                             |
+| Target result    | Shows what appears or behaves differently in the Target Platform.                                                                       |
+| Difference type  | Classifies the finding as expected platform difference, scope difference, mapping or transformation difference, or continuity risk.     |
+| Business impact  | Explains whether the finding affects customer clarity, purchasability, support, reporting, SEO, external systems, or launch confidence. |
+| Decision         | Marks the finding as accepted, needs correction, needs monitoring, or launch-blocking.                                                  |
+| Owner            | Identifies who should review, correct, approve, or monitor the finding.                                                                 |
+| Notes            | Captures context that prevents the same difference from being reinterpreted later.                                                      |
 
-Yes. Counts can match while priority behaviors, relationships, or operational usability still weaken. Matching totals are useful, but they are not proof of preserved business meaning.
+This format keeps reconciliation practical. It does not require a heavy internal process, but it does require enough evidence for the launch decision to be defensible.
 
-#### What should be reconciled first?
+### Common reconciliation mistakes <a href="#common-reconciliation-mistakes" id="common-reconciliation-mistakes"></a>
 
-Start with the highest-impact areas: best sellers, important browse paths, representative customer and order scenarios, priority pages, and any behavior shaped by extensions or outside systems.
+Reconciliation becomes weaker when the team treats it as a mechanical comparison exercise.
 
-#### What makes a difference acceptable during reconciliation?
+The most common mistakes are predictable and preventable.
 
-A difference becomes acceptable when it is understood, intentionally accepted, and judged not to weaken the business outcome that matters for launch.
+#### Mistake 1: Treating every mismatch as a defect <a href="#mistake-1-treating-every-mismatch-as-a-defect" id="mistake-1-treating-every-mismatch-as-a-defect"></a>
 
-#### How does a Custom Cart affect reconciliation?
+Some differences are expected. Treating every mismatch as a defect slows the review and makes real risks harder to prioritize.
 
-Reconciliation often needs a more careful classification lens because more differences may reflect custom structure, bespoke handling, transformed data meaning, or non-standard interpretation than in a more predictable supported-cart pairing.
+#### Mistake 2: Treating every explanation as acceptance <a href="#mistake-2-treating-every-explanation-as-acceptance" id="mistake-2-treating-every-explanation-as-acceptance"></a>
+
+Explaining a difference does not automatically make it acceptable. A difference can be understood and still be too damaging for launch.
+
+#### Mistake 3: Comparing records without checking behavior <a href="#mistake-3-comparing-records-without-checking-behavior" id="mistake-3-comparing-records-without-checking-behavior"></a>
+
+A product, customer, order, page, coupon, or review may exist but still fail to support the business outcome. Reconciliation should check behavior and relationships, not only record presence.
+
+#### Mistake 4: Ignoring scope decisions <a href="#mistake-4-ignoring-scope-decisions" id="mistake-4-ignoring-scope-decisions"></a>
+
+If scope was not defined clearly, reconciliation can become a debate about what should have moved. Strong scope planning makes reconciliation more objective.
+
+#### Mistake 5: Waiting until launch pressure is high <a href="#mistake-5-waiting-until-launch-pressure-is-high" id="mistake-5-waiting-until-launch-pressure-is-high"></a>
+
+Reconciliation should begin during Demo Migration review and continue through broader validation. Waiting until go-live creates avoidable stress and makes decisions less disciplined.
+
+### How reconciliation supports go-live decisions <a href="#how-reconciliation-supports-go-live-decisions" id="how-reconciliation-supports-go-live-decisions"></a>
+
+Reconciliation gives the business a clearer basis for launch judgment.
+
+A launch decision should not depend on whether the team found zero differences. It should depend on whether the important differences have been explained, corrected, accepted, or clearly assigned for monitoring.
+
+#### What should be true before launch <a href="#what-should-be-true-before-launch" id="what-should-be-true-before-launch"></a>
+
+Before launch, the business should be able to say:
+
+* critical findings have been reviewed by the right people
+* expected platform differences are documented and accepted
+* scope differences are understood and not mistaken for defects
+* mapping or transformation differences have been accepted or corrected
+* true continuity risks have been resolved or treated as blockers
+* unresolved items have clear ownership and monitoring plans
+* the remaining result is trustworthy enough for real customers and business operations
+
+If the team cannot explain the most important differences, the migration result may need more review before go-live.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+Reconciling migration results turns differences into informed judgment.
+
+A migrated store does not need to be identical to the Source Platform, but the business should understand why important differences exist and whether they affect the intended outcome. Matching counts can miss meaningful continuity problems, while count differences can be acceptable when they are expected, documented, and compatible with the Target Platform environment.
+
+The strongest reconciliation process classifies findings by cause and business impact, reviews relationships as well as records, and turns every important difference into a clear decision: accepted, needs correction, needs monitoring, or launch-blocking.
+
+Before treating migration results as ready for go-live, review the most important differences with the people who understand the affected business area. If a difference is difficult to interpret, use Demo Migration evidence, validation findings, and Live Chat to clarify whether it reflects expected Target Platform behavior, scope choice, Custom Service handling, or a real continuity risk.
+
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**What is the difference between validation and reconciliation?**
+
+Validation checks whether the Target Platform result is usable and acceptable. Reconciliation explains the differences found between the Source Platform and the Target Platform so the business can decide whether each difference is expected, acceptable, correctable, or blocking.
+
+**Do matching record counts mean the migration result is correct?**
+
+No. Matching counts are useful evidence, but they do not prove that product behavior, customer continuity, order usability, SEO-sensitive paths, relationships, or external-system dependencies still work as expected.
+
+**Does a count mismatch always mean the migration failed?**
+
+No. A mismatch may come from platform-normal behavior, approved scope decisions, intentional cleanup, mapping choices, or Target Platform representation. The important question is whether the difference is understood and acceptable for the business outcome.
+
+**How should we decide whether a difference is acceptable?**
+
+Classify the difference by cause and business impact. If it does not weaken customer experience, operations, SEO continuity, reporting, or launch confidence, it may be acceptable. If it affects a critical outcome, it should be corrected, escalated, or treated as a blocker.
+
+**Are Custom Platform results harder to reconcile?**
+
+They can be more sensitive because standard expectations may not fully explain custom structures, custom fields, third-party data, or outside-system identifiers. These findings should be reviewed against the approved scope and Custom Service expectations before they are accepted.
+
+**Should reconciliation happen only after Full Migration?**
+
+No. Reconciliation should begin during Demo Migration review when representative differences first appear. It should continue through broader validation and become more detailed as the business moves closer to go-live.
