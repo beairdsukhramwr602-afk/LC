@@ -1,12 +1,14 @@
 # Next-Cart Migration Service Models Explained
 
+## Next-Cart Migration Service Models Explained <a href="#next-cart-migration-service-models-explained" id="next-cart-migration-service-models-explained"></a>
+
 Next-Cart provides E-commerce Platform Migration Services through three service models: Standard Service, Managed Service, and Custom Service. Each model supports the same broad goal of moving store data from a Source Platform to a Target Platform, but they differ in service responsibility and whether the project requires customization or modification work.
 
 Every service model includes a 1-year service license for the selected migration path. The selected migration path defines the one-way direction from the Source Platform to the Target Platform under the purchased service license.
 
 Understanding these differences helps customers avoid two common mistakes: choosing only by price, or assuming that every more complex project automatically means Next-Cart performs everything from start to finish. A clearer service decision starts with understanding what each service model covers.
 
-#### The Three Service Models at a Glance  <a href="#the-three-service-models-at-a-glance" id="the-three-service-models-at-a-glance"></a>
+### The Three Service Models at a Glance  <a href="#the-three-service-models-at-a-glance" id="the-three-service-models-at-a-glance"></a>
 
 The three service models answer different questions.
 
@@ -18,7 +20,7 @@ The three service models answer different questions.
 
 The service models are related, but they are not simply three levels of the same support package. Standard Service and Managed Service mainly differ in the execution responsibility. Custom Service is different because it is triggered by work that changes, extends, or tailors the standard migration path.
 
-#### Standard Service  <a href="#standard-service" id="standard-service"></a>
+### Standard Service  <a href="#standard-service" id="standard-service"></a>
 
 Standard Service is the customer-led service model.
 
@@ -35,7 +37,7 @@ Standard Service includes:
 
 Standard Service is usually the most suitable model when the customer is comfortable managing the migration process, reviewing the result, and making configuration decisions within standard service capability.
 
-#### What Standard Service Does Not Mean  <a href="#what-standard-service-does-not-mean" id="what-standard-service-does-not-mean"></a>
+### What Standard Service Does Not Mean  <a href="#what-standard-service-does-not-mean" id="what-standard-service-does-not-mean"></a>
 
 Standard Service does not mean the customer is unsupported with the migration work. Next-Cart support is available to help clarify technical questions, configuration issues, and migration concerns.
 
@@ -43,7 +45,7 @@ Standard Add-ons can be purchased with Standard Service when the customer needs 
 
 The key point is the service responsibility. With Standard Service, the customer leads the migration execution along with the support and guidance of Next-Cart.
 
-#### Managed Service  <a href="#managed-service" id="managed-service"></a>
+### Managed Service  <a href="#managed-service" id="managed-service"></a>
 
 Managed Service is the Next-Cart-led execution model.
 
@@ -61,7 +63,7 @@ Managed Service includes:
 
 Managed Service is useful when the migration can be handled through standard service capability and purchased Standard Add-ons, but the customer wants Next-Cart to perform the process instead of managing execution internally.
 
-#### What Managed Service Does Not Mean  <a href="#what-managed-service-does-not-mean" id="what-managed-service-does-not-mean"></a>
+### What Managed Service Does Not Mean  <a href="#what-managed-service-does-not-mean" id="what-managed-service-does-not-mean"></a>
 
 Managed Service does not automatically include customization or modification work.
 
@@ -69,7 +71,7 @@ If the project requires Tailored Add-ons, Custom Add-ons, custom migration logic
 
 Managed Service is about who is responsible for performing the migration. Custom Service is about whether the project requires tailored work beyond standard service capability.
 
-#### Custom Service  <a href="#custom-service" id="custom-service"></a>
+### Custom Service  <a href="#custom-service" id="custom-service"></a>
 
 Custom Service is the service model for customization, modification, exclusive handling, and bespoke migration requirements.
 
@@ -90,7 +92,7 @@ Custom Service can include:
 
 Custom Service is not used only because a project is large. It is used when the project needs custom or exclusive handling to produce an acceptable target result.
 
-#### Custom Service and Migration Management  <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
+### Custom Service and Migration Management  <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
 
 Custom Service should not be confused with Managed Service.
 
@@ -103,7 +105,7 @@ A Custom Service plan can work in more than one way:
 
 This distinction matters because a Custom license status reflects the presence of customization work. It does not always define who will perform the migration execution.
 
-#### Customer Access Across All Service Models  <a href="#customer-access-across-all-service-models" id="customer-access-across-all-service-models"></a>
+### Customer Access Across All Service Models  <a href="#customer-access-across-all-service-models" id="customer-access-across-all-service-models"></a>
 
 Customers of any service model can access and self-perform the migration process on the Next-Cart website if they want to.
 
@@ -119,7 +121,7 @@ In practical terms:
 
 This access rule helps avoid confusion. Managed Service and Custom Service do not remove the customer’s ability to self-perform. They define what Next-Cart handles under the selected service model and final plan.
 
-#### Add-ons Across the Three Service Models  <a href="#add-ons-across-the-three-service-models" id="add-ons-across-the-three-service-models"></a>
+### Add-ons Across the Three Service Models  <a href="#add-ons-across-the-three-service-models" id="add-ons-across-the-three-service-models"></a>
 
 Add-ons are optional service features that help customers adjust filtering, mapping, or data configuration to better match the expected migration outcome.
 
@@ -141,7 +143,7 @@ For example:
 
 The service impact changes when an Add-on needs modification beyond standard capability.
 
-#### When Add-ons Move a Project Into Custom Service  <a href="#when-add-ons-move-a-project-into-custom-service" id="when-add-ons-move-a-project-into-custom-service"></a>
+### When Add-ons Move a Project Into Custom Service  <a href="#when-add-ons-move-a-project-into-custom-service" id="when-add-ons-move-a-project-into-custom-service"></a>
 
 If a Standard Add-on needs to be modified beyond its available settings and supported behavior, the modification work is handled through Custom Service.
 
@@ -153,7 +155,7 @@ For a Standard Service customer, the license status can change to Custom when mo
 
 For a Managed Service customer, the customized Add-on is integrated into the migration run handled by Next-Cart as part of the agreed service arrangement.
 
-#### Pricing Difference Between the Services  <a href="#pricing-difference-between-the-services" id="pricing-difference-between-the-services"></a>
+### Pricing Difference Between the Services  <a href="#pricing-difference-between-the-services" id="pricing-difference-between-the-services"></a>
 
 The service models also affect how pricing is structured.
 
@@ -165,7 +167,7 @@ At a planning level:
 
 This pricing structure reflects the different kinds of work involved. Standard Service is customer-led. Managed Service adds Next-Cart-led execution. Custom Service is priced around the specific customization or modification work required.
 
-#### Customer Responsibility Across All Service Models  <a href="#customer-responsibility-across-all-service-models" id="customer-responsibility-across-all-service-models"></a>
+### Customer Responsibility Across All Service Models  <a href="#customer-responsibility-across-all-service-models" id="customer-responsibility-across-all-service-models"></a>
 
 The execution burden changes across service models, but customer review remains important in every model.
 
@@ -181,7 +183,7 @@ The customer should still confirm whether the migrated result is acceptable for 
 
 Next-Cart can support, perform, or customize migration work depending on the service model and final plan. The business still needs to confirm that the Target Platform supports the expected outcome.
 
-#### How Service Status Can Change  <a href="#how-service-status-can-change" id="how-service-status-can-change"></a>
+### How Service Status Can Change  <a href="#how-service-status-can-change" id="how-service-status-can-change"></a>
 
 A migration project can move from one service status to another when the work changes.
 
@@ -193,7 +195,7 @@ A customer may begin directly with Custom Service when they already know the pro
 
 The service model should reflect the work the migration actually needs, not only the first assumption made before review.
 
-#### Conclusion  <a href="#conclusion" id="conclusion"></a>
+### Conclusion  <a href="#conclusion" id="conclusion"></a>
 
 Standard Service, Managed Service, and Custom Service describe different kinds of migration involvement. Standard Service is customer-led. Managed Service is Next-Cart-led. Custom Service is the path for customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, and other bespoke requirements.
 
@@ -201,7 +203,7 @@ The most important distinction is that Managed Service and Custom Service answer
 
 Review your migration needs through both questions: who should perform the migration, and does the project require work beyond standard service capability? If the answer is unclear after Demo Migration, or if Add-ons, Custom Platform, custom fields, or third-party data are involved, Live Chat can help clarify the right service status before you purchase or upgrade.
 
-#### FAQs  <a href="#faqs" id="faqs"></a>
+### FAQs  <a href="#faqs" id="faqs"></a>
 
 **What are the three Next-Cart service models?**
 
@@ -242,5 +244,3 @@ Not by default. Managed Service means Next-Cart performs the migration process u
 **Does the customer still need to review the result with Managed Service or Custom Service?**
 
 Yes. The customer should still confirm whether the migrated result is acceptable for launch, especially where business-critical behavior, Add-ons, or Custom Service outputs are involved.
-
-<br>

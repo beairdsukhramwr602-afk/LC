@@ -6,7 +6,7 @@ Its purpose is not only to show that data can move. Its purpose is to help the c
 
 A well-designed Demo Migration turns migration planning from assumption into evidence.
 
-#### What Demo Migration Is <a href="#what-demo-migration-is" id="what-demo-migration-is"></a>
+### What Demo Migration Is  <a href="#what-demo-migration-is" id="what-demo-migration-is"></a>
 
 Demo Migration is a sample migration performed before the full project scope is executed.
 
@@ -23,7 +23,7 @@ A useful Demo Migration helps answer questions such as:
 
 The demo result should be reviewed as an early signal, not as a final guarantee.
 
-#### Why Demo Migration Matters <a href="#why-demo-migration-matters" id="why-demo-migration-matters"></a>
+### Why Demo Migration Matters  <a href="#why-demo-migration-matters" id="why-demo-migration-matters"></a>
 
 Many migration risks are not visible from record counts alone.
 
@@ -33,7 +33,7 @@ Demo Migration helps reveal those issues before the customer relies on the full 
 
 It is especially useful because it shows the customer real migrated examples instead of only describing likely outcomes in theory.
 
-#### A Good Demo Sample Is Representative <a href="#a-good-demo-sample-is-representative" id="a-good-demo-sample-is-representative"></a>
+### A Good Demo Sample Is Representative  <a href="#a-good-demo-sample-is-representative" id="a-good-demo-sample-is-representative"></a>
 
 The value of Demo Migration depends heavily on the sample.
 
@@ -52,7 +52,7 @@ A stronger sample usually includes:
 
 A good sample does not need to be large. It needs to be revealing.
 
-#### What to Review in Demo Migration Results <a href="#what-to-review-in-demo-migration-results" id="what-to-review-in-demo-migration-results"></a>
+### What to Review in Demo Migration Results  <a href="#what-to-review-in-demo-migration-results" id="what-to-review-in-demo-migration-results"></a>
 
 The most useful review mindset is not only:
 
@@ -137,17 +137,17 @@ Important checks include:
 
 This review is especially important when content supports organic traffic, customer education, or conversion.
 
-#### What Demo Migration Can Reveal <a href="#what-demo-migration-can-reveal" id="what-demo-migration-can-reveal"></a>
+### What Demo Migration Can Reveal  <a href="#what-demo-migration-can-reveal" id="what-demo-migration-can-reveal"></a>
 
 Demo Migration can reveal several kinds of findings.
 
-**The Sample Maps Cleanly**&#x20;
+**The Sample Maps Cleanly**
 
 Some projects show that representative records move into the Target Platform with expected structure and behavior. That is a good sign, but it still needs broader validation later.
 
 A clean demo usually means the project has fewer visible early risks, not that the full migration can skip careful review.
 
-**The Result Needs Configuration Adjustment**&#x20;
+**The Result Needs Configuration Adjustment**
 
 Some differences may be corrected through entity selection, migration settings, or mapping adjustments.
 
@@ -155,7 +155,7 @@ Examples may include mapped values that need clarification, order statuses that 
 
 These findings are useful because they appear early enough to adjust before Full Migration.
 
-**The Project Needs an Add-on**&#x20;
+**The Project Needs an Add-on**
 
 Some demo findings show that the project needs more control over a focused migration need.
 
@@ -167,7 +167,7 @@ Examples include:
 
 These findings may point to the Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure.
 
-**The Project Needs Custom Service**&#x20;
+**The Project Needs Custom Service**
 
 Some findings go beyond standard service capability or standard Add-on capability.
 
@@ -175,7 +175,7 @@ Custom Service is required when the project needs tailored work, such as a Tailo
 
 The demo is useful because it can reveal these needs before full execution makes them harder to address.
 
-#### Demo Migration and Service Fit <a href="#demo-migration-and-service-fit" id="demo-migration-and-service-fit"></a>
+### Demo Migration and Service Fit  <a href="#demo-migration-and-service-fit" id="demo-migration-and-service-fit"></a>
 
 Demo Migration often gives the clearest early signal for service fit.
 
@@ -187,17 +187,17 @@ It requires **Custom Service** if the result shows that customization or modific
 
 This distinction matters because service choice should be based on what the sample proves, not only on the customer’s first expectation before seeing migrated data.
 
-#### Self-Run and Expert-Assisted Demo Paths <a href="#self-run-and-expert-assisted-demo-paths" id="self-run-and-expert-assisted-demo-paths"></a>
+### Self-Run and Expert-Assisted Demo Paths  <a href="#self-run-and-expert-assisted-demo-paths" id="self-run-and-expert-assisted-demo-paths"></a>
 
 Customers may approach Demo Migration in two practical ways.
 
-**Self-Run Demo Migration**&#x20;
+**Self-Run Demo Migration**
 
 A self-run demo is useful when the customer wants to explore the migration outcome directly and has enough internal confidence to review the sample result.
 
 If the result differs from expectations, the customer can use Live Chat to clarify what the sample may be revealing about the source data, Target Platform, configuration, Add-ons, or service fit.
 
-**Expert-Assisted Demo Migration**&#x20;
+**Expert-Assisted Demo Migration**
 
 An expert-assisted demo is useful when the customer wants help shaping the sample, interpreting the result, and deciding what the findings mean for the broader migration path.
 
@@ -205,7 +205,7 @@ This path can be especially useful when the store has complex product behavior, 
 
 In both paths, the purpose is the same: use the demo result to make better decisions before the project moves deeper into execution.
 
-#### What Demo Migration Does Not Prove <a href="#what-demo-migration-does-not-prove" id="what-demo-migration-does-not-prove"></a>
+### What Demo Migration Does Not Prove  <a href="#what-demo-migration-does-not-prove" id="what-demo-migration-does-not-prove"></a>
 
 Demo Migration is limited by design.
 
@@ -220,7 +220,7 @@ A good demo does not prove that:
 
 Demo Migration should reduce uncertainty, not create overconfidence.
 
-#### Common Mistakes When Reviewing a Demo <a href="#common-mistakes-when-reviewing-a-demo" id="common-mistakes-when-reviewing-a-demo"></a>
+### Common Mistakes When Reviewing a Demo  <a href="#common-mistakes-when-reviewing-a-demo" id="common-mistakes-when-reviewing-a-demo"></a>
 
 Common mistakes include:
 
@@ -235,15 +235,15 @@ Common mistakes include:
 
 These mistakes usually create false confidence. The best demo review focuses on whether the sample still supports the business outcomes that matter after launch.
 
-#### Conclusion <a href="#conclusion" id="conclusion"></a>
+### Conclusion  <a href="#conclusion" id="conclusion"></a>
 
-&#x20;Migration is valuable because it gives customers an early, evidence-based view of how representative source-store data behaves in the Target Platform. It helps reveal what maps cleanly, what needs adjustment, what may require Add-ons, and what points toward Custom Service.
+Migration is valuable because it gives customers an early, evidence-based view of how representative source-store data behaves in the Target Platform. It helps reveal what maps cleanly, what needs adjustment, what may require Add-ons, and what points toward Custom Service.
 
 The strongest Demo Migration is not the largest sample or the easiest sample. It is the sample that shows whether the target result can preserve the business meaning the customer needs to protect.
 
 Choose demo records that reflect the store’s real complexity, then review the result against the behaviors your business cannot afford to lose. If the findings are unclear, reveal Add-on needs, or suggest Custom Service requirements, Live Chat can help interpret the result and clarify the safest next step before Full Migration.
 
-#### FAQs <a href="#faqs" id="faqs"></a>
+### FAQs  <a href="#faqs" id="faqs"></a>
 
 **What is Demo Migration?**
 
