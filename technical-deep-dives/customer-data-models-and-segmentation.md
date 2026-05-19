@@ -1,212 +1,242 @@
 # Customer Data Models and Segmentation
 
-Customer records can migrate successfully and still leave the account experience feeling unfamiliar.
+## Customer Data Models and Segmentation <a href="#customer-data-models-and-segmentation" id="customer-data-models-and-segmentation"></a>
 
-That usually happens when the source and target platforms do not treat customer identity, account access, profile structure, addresses, segmentation, and customer-specific business logic in the same way. The customer may still exist in the new store, but what that customer can see, how that customer logs in, and how the business recognizes that customer can change in ways that affect trust, support, and repeat purchasing.
+Customer data can migrate successfully while the account experience still feels different to returning buyers, support teams, or sales teams.
 
-This matters because customer data is more than a contact list. In many stores, customer records help determine pricing eligibility, account visibility, tax treatment, support context, reorder behavior, and what the business considers a continuing relationship. A migration can therefore preserve customer records while still changing how those records behave in the storefront and in daily operations.
+That happens because customer records are not only contact profiles. They can also carry account access, addresses, customer groups, tax treatment, pricing eligibility, marketing status, B2B or wholesale logic, support context, and relationship history. When the Source Platform and Target Platform define those layers differently, the customer may still exist in the new store while the business meaning of that customer changes.
 
-### What Customer Data Usually Includes in Practice
+A strong migration plan should therefore treat customer continuity as both a data question and an account-behavior question. The practical goal is not only to move customer records, but to make sure the Target Platform can still recognize customers in the way the business needs after launch.
 
-Customer data often includes several distinct layers:
+### Customer data is more than a profile record <a href="#customer-data-is-more-than-a-profile-record" id="customer-data-is-more-than-a-profile-record"></a>
 
-* profile information such as name, email, phone number, and other customer fields
+A customer profile is the visible starting point, but it rarely contains the full account meaning.
+
+Customer data can include names, email addresses, phone numbers, billing and shipping addresses, tax identifiers, account status, tags, groups, segments, marketing consent, support notes, customer-specific fields, and relationship signals such as wholesale status or loyalty eligibility. Some of these are stored directly on the customer record. Others are calculated, assigned by rules, managed by extensions, or interpreted by connected systems.
+
+#### Common customer data layers <a href="#common-customer-data-layers" id="common-customer-data-layers"></a>
+
+Customer-related migration scope may include:
+
+* profile fields such as name, email, phone number, and account identifiers
 * billing and shipping addresses
-* account status or access-related information
-* customer groups, tags, tiers, or types
-* tax-relevant or eligibility-related profile information
-* account-visible history or support-relevant context, where that is part of the intended experience
+* account status and access-related fields
+* customer groups, tags, tiers, or segments
+* tax classification or exemption-related fields
+* B2B, wholesale, retail, or restricted-access classifications
+* marketing consent or communication preferences
+* support-relevant notes or customer attributes
+* loyalty, subscription, membership, or approval-related status
+* app, plugin, module, or extension-driven customer data
 
-These layers do not all behave the same way after migration. A customer profile can move successfully while login behavior changes. Addresses can appear correctly while account segmentation behaves differently. Groups can exist while customer-specific pricing or visibility rules no longer produce the same result.
+**Why this matters in migration**
 
-### Customer Profiles Are Not the Same as Login Continuity
+A customer record can appear complete in the Target Platform while still failing to support the same account experience. The right review question is not only “did the customer move?” It is “does the customer still behave correctly for login, checkout, pricing, visibility, support, and communication?”
 
-One of the most common expectation gaps in migration is the difference between customer existence and customer access.
+### Customer profiles and login continuity are separate concerns <a href="#customer-profiles-and-login-continuity-are-separate-concerns" id="customer-profiles-and-login-continuity-are-separate-concerns"></a>
 
-A customer can still exist in the new store while the login experience changes. That is because account profile data and authentication behavior are separate concerns. Most modern platforms store passwords in hashed or encrypted forms designed not to be reversible, so password continuity is often limited by platform security design rather than by whether the customer record migrated.
+One of the most common customer-data misunderstandings is assuming that migrated profiles automatically preserve login continuity.
 
-In practical terms, the most common outcome is:
+Customer profile data and authentication behavior are different layers. A migration can preserve the customer profile while still requiring customers to reset passwords, activate accounts, or follow a new first-login flow. This is often caused by platform security design, password-hash handling, or Target Platform restrictions rather than by missing customer records.
 
-* customer profiles migrate
-* customers still exist in the new store
-* customers may need a password reset or a new access flow when the new site goes live
+#### What usually remains separate <a href="#what-usually-remains-separate" id="what-usually-remains-separate"></a>
 
-That is why customer continuity should be planned as an account experience, not assumed from the presence of migrated records alone.
+The following items should be reviewed separately:
 
-Where the target platform supports legacy hash verification and is compatible with Next-Cart Customer Password Plugin, continuity may be possible in specific source-to-target conditions. Where that is not realistic, the safer planning path is a clear first-login reset experience, customer communication, and support readiness.
+* whether the customer profile exists
+* whether the email address is recognized
+* whether account status is active or requires activation
+* whether passwords can be preserved under the selected migration path
+* whether customers need a reset or invitation flow
+* whether support teams know how to explain the first-login experience
 
-### Addresses Are Dependency Structures Under Customers
+**Why password continuity should be planned early**
 
-Customer addresses should be treated as dependency structures under the customer record, not as independent entities.
+Password continuity should not be assumed. When it is not feasible, the better planning approach is to prepare a clear first-login or password-reset experience and make sure support teams understand what customers will see after launch.
 
-That distinction matters because address continuity depends on customer continuity. If customer records migrate but address handling changes, the customer may still exist while account usability becomes weaker for checkout, support, tax handling, or reorder workflows. Address presence alone is not enough. The addresses also need to appear where the target platform expects them and remain usable in the account and purchase journey.
+### Addresses are dependency structures under customer accounts <a href="#addresses-are-dependency-structures-under-customer-accounts" id="addresses-are-dependency-structures-under-customer-accounts"></a>
 
-### Segmentation Changes Customer Meaning
+Customer addresses should be treated as account dependencies, not isolated records.
 
-Customer segmentation is often one of the most important behavior layers in a store.
+An address matters because it supports checkout, delivery, billing, tax handling, account convenience, and support. If customer profiles migrate but addresses do not appear where the Target Platform expects them, the customer account can still feel incomplete.
 
-Segmentation may include:
+#### Address continuity needs practical validation <a href="#address-continuity-needs-practical-validation" id="address-continuity-needs-practical-validation"></a>
 
-* retail versus wholesale distinctions
-* customer groups or tiers
-* restricted customer types
-* customer-specific catalogs or visibility rules
-* tax-related customer classification
-* pricing rules tied to customer status or group membership
+Address review should check whether:
 
-This matters because segmentation is rarely just a label. It often controls what customers can buy, what they can see, which prices they receive, or which workflows apply to them. A migration can therefore preserve the customer record while changing the commercial meaning attached to that customer.
+* billing and shipping addresses remain attached to the right customer
+* default addresses behave correctly where the Target Platform supports defaults
+* address fields fit the Target Platform’s country, region, state, postcode, and phone-number requirements
+* address formatting remains usable in checkout and admin views
+* imported addresses still support tax, shipping, and support workflows
 
-### Why Customer Behavior Changes After Migration
+**Why address structure can change**
 
-Customer continuity usually weakens because platforms differ in how they define account behavior, not because customer data disappears entirely.
+Different platforms can use different required fields, address formats, country/region models, and checkout rules. A technically migrated address can still require cleanup if the Target Platform stores or validates address components differently.
 
-Common causes include:
+### Segmentation gives customer records commercial meaning <a href="#segmentation-gives-customer-records-commercial-meaning" id="segmentation-gives-customer-records-commercial-meaning"></a>
 
-#### Different account models
+Customer segmentation is where customer data often becomes business logic.
 
-Some platforms center more of the customer journey inside logged-in accounts. Others rely more heavily on email-based recovery, guest behavior, or different definitions of account state. Even when profiles migrate, the expected account experience can still shift.
+A segment, group, tag, or customer type can decide what a customer sees, which prices apply, whether tax rules change, whether a promotion is available, or whether a restricted catalog is visible. If segmentation changes during migration, the customer record may still exist while the commercial treatment changes.
 
-#### Different segmentation structures
+#### Segmentation can control several outcomes <a href="#segmentation-can-control-several-outcomes" id="segmentation-can-control-several-outcomes"></a>
 
-Customer groups, tiers, tags, and visibility rules do not always map cleanly from one platform to another. This matters most when those classifications affect pricing, catalog access, or operational treatment.
+Customer segmentation may affect:
 
-#### Different pricing and eligibility behavior
+* retail versus wholesale treatment
+* B2B account eligibility
+* customer-group pricing
+* tax treatment or exemption status
+* catalog visibility
+* restricted products or collections
+* promotion eligibility
+* loyalty, subscription, or membership logic
+* marketing audience selection
+* support priority or account handling
 
-A customer can be recognized correctly while still seeing the wrong price, the wrong catalog visibility, or the wrong promotion outcome because the target platform applies segmentation logic differently.
+**Why labels are not enough**
 
-#### Different support context
+Migrating a customer group name, tag, or segment label does not guarantee that the Target Platform will apply the same behavior. The business should validate the result through real customer scenarios, not only by checking that the label appears.
 
-Customer accounts often matter because support teams need to recognize the person, see enough account context, and respond without confusion. If the account exists but does not preserve the expected history or profile meaning, the customer relationship can still feel interrupted.
+### Customer models differ across platforms <a href="#customer-models-differ-across-platforms" id="customer-models-differ-across-platforms"></a>
 
-### Planning for Password Continuity Realistically
+Platforms can represent customers and segmentation in different ways.
 
-Password continuity is the exception, not the default.
+Some platforms rely on groups or customer classes. Others use tags, rule-based segments, customer attributes, B2B company structures, apps, plugins, modules, or external CRM logic. The same customer may therefore need to be represented differently in the Target Platform to preserve the intended business outcome.
 
-Where the target platform does not support password continuity through legacy hash verification, the safer assumption is that customers will need a password reset or account activation flow after launch. In those cases, the most important planning work is not technical recovery detail. It is defining a clear first-login experience, preparing customer communication, and ensuring the support team can explain what customers will experience.
+#### Common model differences <a href="#common-model-differences" id="common-model-differences"></a>
 
-Where the target platform supports password continuity through legacy hash verification and is compatible with Next-Cart Customer Password Plugin, continuity may be possible when the source platform is open-source. In that case, the plugin adds the source platform’s password verification method to the target so customers can continue logging in with their existing passwords.
+Customer model differences may include:
 
-Compatible targets include:
+* one account versus multiple contacts under a company
+* individual buyers versus company buyers
+* customer groups versus tags or rule-based segments
+* stored segment membership versus dynamic segment membership
+* native B2B features versus extension-driven B2B logic
+* account approval workflows versus open registration
+* customer-specific fields stored natively versus in extensions
+* customer eligibility calculated by external systems
 
-* Magento
-* OpenCart
-* PrestaShop
-* WooCommerce
-* WordPress
-* Joomla
-* VirtueMart
-* Shopware
+**Why model fit matters**
 
-For cloud and SaaS targets, password continuity is typically not possible, so the safer planning path is a well-prepared first-login reset experience rather than assumed password continuity.
+A customer model mismatch can affect pricing, catalog access, tax treatment, order visibility, communication, and support workflows. When the Target Platform cannot represent the same structure natively, the migration may need configuration, mapping decisions, or Custom Service handling.
 
-### Where Extensions and Custom Logic Raise the Risk
+### Extension-driven customer logic needs special attention <a href="#extension-driven-customer-logic-needs-special-attention" id="extension-driven-customer-logic-needs-special-attention"></a>
 
-Many stores rely on more than the default customer model.
+Many stores rely on apps, plugins, modules, extensions, or external systems to give customer data its real operational meaning.
 
-Apps, plugins, modules, and custom fields may influence:
+This is common in B2B, wholesale, subscription, membership, loyalty, approval, tax, CRM, and support workflows. In those cases, the customer record may only be one part of the customer experience. The rest may depend on rules or connected systems that are not part of a standard customer profile.
 
-* customer groups and pricing tiers
-* customer-specific visibility
-* tax treatment
-* B2B eligibility logic
-* approval or restricted-access workflows
-* support-relevant account fields
-* subscription or loyalty behavior
-* operational rules tied to customer identity
+#### Customer logic may depend on systems outside the core platform <a href="#customer-logic-may-depend-on-systems-outside-the-core-platform" id="customer-logic-may-depend-on-systems-outside-the-core-platform"></a>
 
-In those cases, the migration question is not only whether customer records move. The more important question is whether the target store can still use those records to support the same commercial and operational behavior.
+Risk is higher when customer behavior depends on:
 
-Where customer meaning depends heavily on extension-driven logic, standard handling may preserve records without preserving the intended account outcome. The issue is not customer presence alone. It is whether the account still behaves in a way that is trustworthy for customers and usable for the business.
+* B2B or company-account extensions
+* wholesale pricing modules
+* loyalty or reward systems
+* subscription or membership apps
+* CRM or support-desk integrations
+* tax exemption or VAT validation systems
+* account approval workflows
+* custom customer fields
+* ERP, POS, or external customer identifiers
 
-### What Merchants Should Define Before Execution
+**When Custom Service becomes relevant**
 
-Before approving a full migration, the business should be able to define which account outcomes must remain true after launch.
+If the required customer outcome depends on custom fields, extension-driven account behavior, outside-system identifiers, custom segmentation logic, or non-standard account handling, the requirement should be reviewed as Custom Service work. The issue is not only moving the customer record. The issue is preserving the customer behavior the business depends on.
 
-The most important questions are:
+### Marketing and communication status should not be treated casually <a href="#marketing-and-communication-status-should-not-be-treated-casually" id="marketing-and-communication-status-should-not-be-treated-casually"></a>
 
-#### 1. What should a returning customer be able to do on day one?
+Customer migration can affect marketing, consent, and communication workflows.
 
-This may include logging in, recognizing prior account information, seeing addresses, accessing order history, or receiving the right pricing and visibility.
+Marketing status is sensitive because it can influence which customers receive messages, how audiences are built, and how the business communicates after launch. A migrated customer list is not automatically a safe or complete marketing audience.
 
-#### 2. Which customer segments matter most commercially?
+#### Communication-related fields need careful review <a href="#communication-related-fields-need-careful-review" id="communication-related-fields-need-careful-review"></a>
 
-These are the groups whose pricing, access, or operational treatment must remain consistent.
+Before launch, businesses should check whether:
 
-#### 3. What login outcome is realistic on the target platform?
+* email and phone fields are usable in the Target Platform
+* marketing consent or subscription status is represented clearly
+* customer tags or segments used for campaigns still work as intended
+* inactive or suppressed customers are not incorrectly reactivated
+* support teams understand the first-login or password-reset communication plan
 
-This should be decided early so the account experience is planned rather than discovered late.
+**Why this belongs in planning**
 
-#### 4. Which account fields are essential to support or operations?
+Customer communication affects trust. If returning customers receive confusing login instructions, wrong campaign messages, or unexpected access changes, the migration can create support pressure even when the customer records are technically present.
 
-These are the fields that help teams recognize customers, resolve issues, and maintain continuity.
+### What to define before execution <a href="#what-to-define-before-execution" id="what-to-define-before-execution"></a>
 
-#### 5. Which parts of customer behavior depend on apps, modules, plugins, or custom fields?
+Customer-data planning should define the account outcomes that matter most after launch.
 
-This is where apparently complete customer records can still fail to preserve the intended business outcome.
+The business does not need to preserve every historical customer detail in the same way, but it should decide which account behaviors must remain dependable. That decision should happen before Full Migration, not during launch review.
 
-### What to Validate First
+#### Planning questions for customer continuity <a href="#planning-questions-for-customer-continuity" id="planning-questions-for-customer-continuity"></a>
 
-Customer continuity should be validated as an account and behavior experience, not only as a list of imported customer records.
+Useful planning questions include:
 
-A practical first review should focus on:
+* What should a returning customer be able to do on launch day?
+* Which customer groups, tags, tiers, or segments affect pricing or visibility?
+* Which customers need access to order history, addresses, or account context?
+* Is password continuity realistic under the selected migration path?
+* Which customer fields are essential for support, sales, tax, or operations?
+* Which customer behavior depends on apps, plugins, modules, extensions, or external systems?
+* Which customer types should be included in the Demo Migration sample?
 
-* repeat customers
-* customer segments with different pricing or visibility rules
-* B2B and retail profiles if both exist
-* accounts with meaningful address data
-* support-relevant customer records
-* customers whose account expectations are central to repeat purchasing
+**How this reduces migration risk**
 
-The first questions to ask are:
+Clear customer-outcome planning helps the migration team distinguish between simple profile preservation, configuration needs, Add-on-relevant mapping or data configuration, and broader Custom Service requirements.
 
-* can customers be found and recognized correctly?
-* do core profile fields appear as expected?
-* do billing and shipping addresses appear where needed?
-* does the intended login or recovery flow behave clearly?
-* do customer groups or segments still produce the right pricing and visibility outcomes?
-* does the account experience feel explainable and trustworthy?
+### What to validate first <a href="#what-to-validate-first" id="what-to-validate-first"></a>
 
-A useful validation sample is usually representative rather than random. It should reflect real customer types, not just easy test records. A Demo Migration is often the fastest way to expose whether the target representation still supports the intended account experience before the project scales further.
+Customer validation should focus on representative account scenarios, not only record counts.
 
-### When Standard Handling May Not Be Enough
+A useful review sample includes the customer types that carry the most commercial or operational meaning. For many stores, that means repeat customers, wholesale accounts, customers with multiple addresses, customers with tax or pricing differences, and customers whose account status depends on extensions or external systems.
 
-Not every customer migration requires bespoke handling. But some signals should raise the threshold for confidence.
+#### High-priority validation scenarios <a href="#high-priority-validation-scenarios" id="high-priority-validation-scenarios"></a>
 
-Risk is higher when:
+Review should include:
 
-* account login continuity is central to customer trust
-* customer groups affect pricing, visibility, or eligibility
-* B2B and retail customers coexist
-* support teams rely heavily on account context
-* customer-specific workflows depend on modules or custom fields
-* the target platform supports only a simplified version of the original customer behavior
+* returning customers with normal retail accounts
+* B2B or wholesale customers, if applicable
+* customers with multiple billing or shipping addresses
+* customers with customer-group pricing or catalog visibility rules
+* customers with tax classification or exemption logic
+* customers with meaningful support or account fields
+* customers tied to loyalty, subscription, membership, or approval workflows
+* customers whose records depend on external identifiers
 
-In those situations, the real issue is not whether customer records can move. It is whether the target store can preserve the same account meaning clearly enough through standard handling alone.
+**What a successful review should prove**
 
-If the main need is stronger expert execution and closer review of account behavior, Managed Migration Service may be sufficient. If the required outcome depends on extension-driven customer logic, specialized segmentation behavior, or non-standard account handling, more specialized treatment may be the safer path.
+A good customer-data review should prove that the account can be found, interpreted, and used correctly in the Target Platform. It should also confirm whether customers can follow the intended login or recovery path and whether customer classifications produce the expected pricing, visibility, communication, and support outcomes.
 
-### Conclusion
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Customer data models and segmentation are one of the clearest ways for a migration to look complete while the account experience still becomes less trustworthy. The issue is not only whether customer records survive. It is whether the new store still recognizes the customer in the right way, presents the right account outcomes, and supports the same pricing, visibility, support, and continuity expectations after launch.
+Customer data models and segmentation can make a migration look complete while leaving the customer experience weaker than expected. The core risk is not only whether profiles, addresses, and labels move. The deeper question is whether the Target Platform still recognizes the customer in the right way and supports the same account, pricing, visibility, support, and communication outcomes.
 
-The safest way to reduce that risk is to define which customer outcomes matter most, decide early what login outcome is realistic, identify which segments carry real commercial meaning, and validate representative account scenarios before broader launch commitments are made. When that work is done early, customer continuity becomes much easier to judge before the full customer base is committed.
+The safest approach is to define essential customer outcomes early, separate profile migration from login continuity, identify segmentation rules that carry business meaning, and validate representative customer scenarios before launch. When customer behavior depends on extension logic, Custom Platform structure, outside-system identifiers, or custom fields, that dependency should be reviewed before it becomes a post-launch support issue.
 
-Review the customer types and account outcomes that matter most to trust, support, and repeat purchasing, not just whether profiles appear in the target store. If the target representation looks likely to weaken segmentation behavior, account clarity, or extension-driven customer logic, Live Chat is a practical way to clarify whether stronger guided handling or more specialized treatment is the safer path.
+Review the customer types that matter most to repeat purchasing, support, pricing, visibility, and account trust. If those outcomes depend on non-standard segmentation, custom fields, B2B logic, or outside systems, Live Chat can help clarify whether standard service capability is enough or whether Custom Service review is the safer path.
 
-### FAQs
+### FAQs <a href="#faqs" id="faqs"></a>
 
-#### Can customer records migrate successfully even if login continuity changes?
+**Can customer records migrate successfully even if login continuity changes?**
 
-Yes. Customer profiles and authentication behavior are separate concerns. A customer can still exist in the new store while the login experience changes and requires a password reset or new access flow.
+Yes. Customer profiles and login behavior are separate concerns. A customer can exist in the Target Platform even when the launch plan requires a password reset, account activation, or new first-login flow.
 
-#### Are addresses independent customer records in migration planning?
+**Are customer groups and segments the same across platforms?**
 
-No. Addresses are dependency structures under the customer record. They matter only insofar as they remain usable within the broader account, checkout, support, and reorder experience.
+Not always. One platform may use groups, another may use tags, dynamic segments, customer attributes, company accounts, or extension-driven logic. The label can migrate while the behavior still needs configuration or custom handling.
 
-#### When is password continuity realistic?
+**Should customer addresses be reviewed separately?**
 
-Only in more limited cases, typically when the target platform supports legacy hash verification and is compatible with Next-Cart Customer Password Plugin, and the source platform is open-source. For many cloud and SaaS targets, the safer assumption is a prepared first-login reset flow instead.
+Yes. Addresses should be reviewed as dependencies under the customer account. The review should confirm that billing and shipping addresses remain attached correctly and remain usable in checkout, tax, shipping, and support workflows.
 
-#### What should be reviewed first in customer migration?
+**When does customer segmentation become a Custom Service concern?**
 
-Start with the account outcomes that matter most: recognition, profile visibility, address usability, login or recovery flow, segment-driven pricing or visibility, and support-relevant context for representative customer types.
+Customer segmentation becomes a Custom Service concern when the required outcome depends on custom fields, non-standard customer logic, extension-driven behavior, outside-system identifiers, Custom Platform handling, or customer-specific rules that standard service capability cannot represent clearly.
+
+**What customer records should be included in a Demo Migration review?**
+
+The sample should include representative customer types, not only simple records. Include repeat customers, customers with multiple addresses, B2B or wholesale accounts, customers with pricing or visibility differences, and customer records tied to important support, tax, loyalty, membership, or external-system behavior.
