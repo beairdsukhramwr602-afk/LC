@@ -1,197 +1,203 @@
 # WooCommerce Validation Priorities
 
-A WooCommerce migration should not be validated evenly across the whole storefront. It should be validated where WooCommerce is most likely to change variable-product behavior, discovery logic, route meaning, customer continuity, and plugin-shaped storefront behavior.
+Validation for a WooCommerce migration is not only about confirming that products, customers, orders, and categories exist in the new store. WooCommerce runs within WordPress, so the migration must also demonstrate that commerce data functions correctly within the Target Platform’s product model, taxonomy system, permalink structure, theme layer, plugin environment, customer account flow, and order history context.
 
-That matters because WooCommerce can produce a familiar-looking target quickly. Products may appear present, variations may exist, categories may appear, customer accounts may import, routes may resolve, and plugins may be active. But those signals do not prove that the target is commercially trustworthy. The more important question is whether WooCommerce’s variable-product model, taxonomy structure, permalink behavior, customer-account expectations, and plugin- or theme-owned storefront logic still support the intended outcome after translation.
+A WooCommerce migration can look complete at the record level while still failing commercially if variations are not selectable, attributes do not support product discovery, category paths do not match the intended storefront structure, customer accounts cannot be interpreted correctly, or plugin-owned data no longer supports the workflows the business depends on.
 
-This makes WooCommerce validation more selective than many teams first expect. A broad random check can create false confidence. A stronger approach is to validate the places where WooCommerce most often reshapes meaning: high-risk variable products, taxonomy behavior, permalink-sensitive routes, customer-account scenarios, plugin- and theme-owned behavior, and any broader storefront architecture the business expects to rely on.
+The safest validation plan is therefore behavior-based. It should confirm that WooCommerce can present, organize, sell, and interpret the migrated store in the way the business expects.
 
-### What WooCommerce Validation Is Really Trying to Prove
+### What validation is trying to prove in WooCommerce <a href="#what-validation-is-trying-to-prove-in-woocommerce" id="what-validation-is-trying-to-prove-in-woocommerce"></a>
 
-For WooCommerce, validation is mainly trying to prove five things.
+WooCommerce validation should prove that migrated data is usable inside the WordPress and WooCommerce environment.
 
-#### 1. Products still express the right sellable outcomes
+That means the review should not stop at comparing counts. A migrated product count, customer count, order count, or category count may confirm basic transfer coverage, but it does not prove that the store is ready to operate. The validation process should check whether migrated records preserve their commercial meaning after WooCommerce interprets them through products, variations, attributes, categories, tags, metadata, plugins, themes, URLs, and customer accounts.
 
-The product records may exist, but the higher-value question is whether the correct WooCommerce product structure still supports the way the customer should actually buy.
+For WooCommerce, validation should answer questions such as:
 
-#### 2. Taxonomies still support useful discovery
+* Can customers select the correct product variations?
+* Do product attributes support the intended filtering, display, or comparison behavior?
+* Are categories, tags, and menu paths usable in the Target Platform?
+* Do important product URLs, category URLs, and content-commerce paths behave as expected?
+* Do customer accounts and order histories remain understandable?
+* Are order totals, statuses, shipping, tax, discount, and payment references meaningful?
+* Are custom fields and plugin-owned data visible or usable where the business expects them?
+* Does the active theme or storefront setup display migrated data correctly?
 
-Categories, tags, and attributes may survive, but the more important test is whether they still support navigation, filtering, and product understanding in the way the business needs.
+The strongest validation result is not simply “the data migrated.” It is “the migrated store can be reviewed, used, and trusted in WooCommerce.”
 
-#### 3. Routes still carry the right meaning
+### Product and variation validation <a href="#product-and-variation-validation" id="product-and-variation-validation"></a>
 
-Permalinks may resolve, but the route still needs to support the customer intent and storefront logic the business expects.
+Product validation is one of the most important WooCommerce review areas because WooCommerce product behavior often depends on product type, variation structure, attributes, stock settings, images, descriptions, prices, and plugin-specific product logic.
 
-#### 4. Customer continuity still feels understandable
+Review simple products and variable products separately. A simple product may only need its name, SKU, price, stock, description, images, categories, and metadata checked. A variable product needs deeper review because the parent product and its variations must work together. Customers should be able to select variation combinations, see the correct price or stock state, and understand the available buying choices.
 
-Customer records may import, but the account experience still needs to make sense under the real first-login path the launch is actually using.
+Validation should include:
 
-#### 5. Plugin- and theme-owned behavior still works acceptably
+* simple products
+* variable products
+* products with multiple attributes
+* products with important SKUs
+* products with sale prices or special pricing behavior
+* products with stock-sensitive variations
+* products with product-level and variation-level images
+* products that depend on plugins, custom fields, or custom display rules
 
-The storefront may look complete, but the surrounding plugin- and theme-shaped logic still needs to support the outcomes that matter most.
+A product should not pass validation only because it appears in WooCommerce. It should pass when its buying logic, display logic, and product relationships are usable in the new store.
 
-### Validation Priority 1: High-Risk Variable Products
+### Attribute, category, tag, and discovery validation <a href="#attribute-category-tag-and-discovery-validation" id="attribute-category-tag-and-discovery-validation"></a>
 
-The first WooCommerce validation priority is usually the product groups most likely to expose target-structure ambiguity.
+WooCommerce uses categories, tags, and attributes in different ways. A migration can create visible records but still produce a weak browsing experience if those layers are mixed together, duplicated, or interpreted incorrectly.
 
-That often includes:
+Validation should confirm that each discovery layer has the right purpose:
 
-* best sellers with complex option behavior
-* products that depend on variation-specific price, stock, image, or availability
-* products where source-side meaning mixed purchasable variation with descriptive or add-on logic
-* products where the business is already uncertain whether WooCommerce variation logic expresses the source behavior clearly enough
+* categories support the main product grouping and storefront navigation
+* tags support secondary organization where relevant
+* attributes support product detail, variation selection, filtering, or comparison where relevant
+* menus and category paths support the intended customer journey
+* filters do not become cluttered, misleading, or incomplete
 
-This makes product validation a behavioral question, not just a record question. The review question is not only whether the product exists. It is whether the customer can still reach the correct sellable outcome without confusion.
+The review should include products from major categories, products that belong to multiple categories, products with important tags, and products with attributes used for filtering or variation selection. If the Source Platform used a different structure, the validation process should confirm that WooCommerce represents the intended meaning rather than simply preserving old labels.
 
-Useful checks usually include:
+### URL, permalink, and SEO-path validation <a href="#url-permalink-and-seo-path-validation" id="url-permalink-and-seo-path-validation"></a>
 
-* whether variation choices still create the intended price, stock, image, and purchase path
-* whether non-purchasable details have been kept separate from true sellable variation
-* whether the product page still supports the same buying decision the source store relied on
-* whether the migrated structure stays understandable for both customers and the internal team
+WooCommerce URL validation is important because WooCommerce stores often rely on WordPress permalink settings, product slugs, category bases, content pages, blog posts, landing pages, and redirect planning.
 
-### Validation Priority 2: Category, Tag, and Attribute Behavior
+Validation should focus first on high-value paths. These include major product pages, category pages, content-commerce pages, organic landing pages, and URLs that receive traffic, backlinks, paid campaign traffic, or customer bookmarks.
 
-WooCommerce validation should explicitly review the taxonomy structures most likely to affect discovery and storefront meaning.
+The review should check whether:
 
-That usually means checking:
+* important product URLs are correct or properly redirected
+* important category URLs are correct or properly redirected
+* product slugs and category slugs are readable and stable
+* duplicate or conflicting slugs are handled safely
+* menu paths and internal links point to the expected destinations
+* important content pages remain connected to the commerce journey
+* redirects lead to relevant destinations rather than generic pages
 
-* categories important to navigation
-* tags that still have a real storefront role
-* attributes important to filtering or variation behavior
-* whether categories, tags, and attributes are still doing distinct jobs
-* whether the resulting storefront still supports natural discovery
+URL validation should not be treated as a cosmetic task. In WooCommerce, URL and permalink decisions can affect customer access, SEO continuity, analytics interpretation, and launch confidence.
 
-A taxonomy can exist in the target while the storefront still becomes commercially weaker if discovery logic is structurally wrong. Validation here should prove storefront usefulness, not only taxonomy survival.
+### Customer and account validation <a href="#customer-and-account-validation" id="customer-and-account-validation"></a>
 
-### Validation Priority 3: Permalink-Sensitive Routes and Destinations
+Customer validation should prove that customer records remain useful in WooCommerce, especially where account access, order history, billing details, shipping details, customer roles, memberships, subscriptions, or wholesale behavior matter.
 
-One of WooCommerce’s clearest validation priorities is route behavior.
+Review customer records with different levels of complexity:
 
-WooCommerce route logic is governed through WordPress permalink settings and WooCommerce-specific permalink controls. That means validation should focus on the route decisions most likely to expose ambiguity.
+* customers with a single order
+* customers with multiple orders
+* customers with multiple addresses
+* customers with incomplete or legacy account data
+* customers tied to subscriptions, memberships, wholesale rules, or customer-role logic
+* customers whose source-side data came from a Custom Platform or external system
 
-Useful checks usually include:
+WooCommerce validation should not assume that every source-side customer structure maps perfectly into the Target Platform. The goal is to confirm what customers, staff, and administrators will actually be able to see, search, and interpret after migration.
 
-* whether the right products and categories appear under the intended route structure
-* whether category-sensitive product routes still make sense
-* whether the route still supports customer intent and search meaning
-* whether high-value legacy paths still land on the most useful destination
+### Order history and transaction-context validation <a href="#order-history-and-transaction-context-validation" id="order-history-and-transaction-context-validation"></a>
 
-This is one of the clearest places where WooCommerce validation becomes more than page checking. It becomes proof that the future permalink structure still makes commercial sense.
+Order validation should prove that migrated orders remain understandable as business history.
 
-### Validation Priority 4: Returning-Customer Account Experience
+A migrated WooCommerce order may include order status, product references, customer references, billing and shipping addresses, tax, shipping, discounts, payment references, notes, timestamps, and fulfillment context. Some of these elements may not behave exactly as they did in the Source Platform, but the migrated result should still preserve enough meaning for reporting, customer service, accounting reference, and operational review.
 
-Customer continuity in WooCommerce is not only about customer records. It is also about whether the first-login experience still feels understandable and trustworthy.
+Validation should include:
 
-Useful validation questions include:
+* completed orders
+* pending, cancelled, refunded, or partially fulfilled orders where relevant
+* orders with discounts or coupons
+* orders with tax and shipping complexity
+* orders with multiple products
+* orders connected to customer accounts
+* orders affected by plugin-owned behavior, subscriptions, memberships, marketplace logic, or wholesale rules
 
-* do returning customers understand what to do at first login?
-* does the actual login or reset path behave clearly?
-* are imported customer records recognizable after migration?
-* is launch communication aligned with what customers will actually experience?
+The key question is not whether historical orders can be reprocessed exactly as live WooCommerce checkout orders. The better question is whether the order history is reliable and understandable for the purposes the business needs after launch.
 
-This is especially important where repeat customers matter materially to revenue or trust.
+### Plugin, theme, and custom-field validation <a href="#plugin-theme-and-custom-field-validation" id="plugin-theme-and-custom-field-validation"></a>
 
-Where password continuity is possible under the compatible open-source rule, validation should prove that path directly. Where it is not, validation should focus on the reset-first journey and the clarity of the customer experience rather than assume imported records are enough.
+WooCommerce migration validation becomes more sensitive when business meaning depends on plugins, themes, custom fields, custom post types, custom taxonomies, or custom code.
 
-### Validation Priority 5: Plugin- and Theme-Dependent Behavior
+These areas should be validated as behavior, not just as stored data. A custom field may exist in the database but still fail if the theme does not display it, the plugin no longer uses it, or the new WooCommerce structure requires a different representation. A subscription, membership, marketplace, booking, wholesale, product-bundle, or custom checkout workflow may also require review beyond ordinary product and order validation.
 
-Many WooCommerce stores depend on more than native product and taxonomy behavior.
+Validation should identify:
 
-That means WooCommerce validation should explicitly review:
+* which custom fields affect storefront display
+* which fields affect admin workflow
+* which plugin-owned values affect customer experience
+* which data is only historical reference
+* which data must remain connected to products, customers, or orders
+* which custom behavior requires Custom Service handling or custom migration logic adjustment
 
-* plugin-dependent product or pricing behavior
-* theme-dependent navigation or trust behavior
-* custom-field behavior that still matters to storefront or operations
-* any plugin-owned search, filtering, merchandising, or account behavior the business still treats as non-negotiable
+If plugin or custom-field behavior is business-critical, the validation sample should include those cases from the Demo Migration and again after the Full Migration.
 
-This is one of the most important WooCommerce-specific validation priorities because a storefront can look familiar while still weakening in the areas where the real business meaning lives outside the core record model.
+### What makes a strong WooCommerce validation sample <a href="#what-makes-a-strong-woocommerce-validation-sample" id="what-makes-a-strong-woocommerce-validation-sample"></a>
 
-The real question is not whether the plugin or field survived. It is whether the behavior it supported is still commercially usable after launch.
+A strong WooCommerce validation sample includes the cases most likely to reveal mismatch between the Source Platform and the WooCommerce Target Platform.
 
-### Validation Priority 6: High-Value Content and Storefront Paths
+The sample should include:
 
-WooCommerce often sits inside a broader WordPress content environment. That means validation should still include the routes and journeys that matter most to trust, conversion, and discovery, not only the product pages themselves.
+* best-selling simple products
+* complex variable products
+* products with important attributes
+* products from major and edge-case categories
+* products with high-value URLs
+* products with important images, descriptions, and custom fields
+* customers with meaningful account and order history
+* orders with tax, shipping, discount, refund, or status complexity
+* plugin-dependent records
+* content-commerce pages where WordPress content supports sales
+* Custom Platform source examples where source structure is not standard
 
-This usually means checking:
+A sample that includes only easy records can create false confidence. The goal is to test ordinary records and risk-heavy records together so the business can judge whether WooCommerce is preserving the right meaning.
 
-* product URLs with the most commercial value
-* category and landing paths most important to discovery
-* content-led pages that influence buying decisions
-* support or trust pages customers still need to reach
-* the content-to-product journeys most important to conversion
+### What often gets missed in WooCommerce validation <a href="#what-often-gets-missed-in-woocommerce-validation" id="what-often-gets-missed-in-woocommerce-validation"></a>
 
-A technically valid route can still be commercially weak if it lands in the wrong place or breaks the intended content-commerce relationship.
+WooCommerce validation often fails when the review is too record-centered and not behavior-centered.
 
-### Validation Priority 7: Broader Storefront Architecture, Where Relevant
+Common misses include:
 
-If the future WooCommerce model depends on more than one storefront context, validation should explicitly test that structure rather than assume it behaves consistently by default.
+* variable products are visible, but variation selection does not feel correct
+* attributes exist, but filtering or comparison behavior is weak
+* categories transferred, but navigation does not match how customers browse
+* tags are overused or confused with attributes
+* important product or category URLs changed without proper planning
+* product images migrated, but variation-specific images are incomplete
+* custom fields exist, but the theme or plugin does not use them correctly
+* customers appear, but account continuity is not clear
+* order history exists, but statuses, totals, or references are hard to interpret
+* plugin-dependent data is treated like ordinary migrated data
+* Custom Platform source data is reviewed as if it came from a predictable standard platform
 
-Useful checks usually include:
+These issues do not always mean the migration failed. They mean the result needs interpretation before the business can call the WooCommerce store ready.
 
-* whether the right products and content belong in the right storefront context
-* whether the intended separation between contexts is still clear
-* whether the business is interpreting the architecture correctly after migration
-* whether validation is respecting that structure rather than assuming one unified storefront meaning
+### How validation should guide next action <a href="#how-validation-should-guide-next-action" id="how-validation-should-guide-next-action"></a>
 
-This is only relevant where the business is actually using broader storefront architecture. But where it is relevant, it becomes a real validation priority.
+WooCommerce validation should end with clear next-action labels.
 
-### What Usually Makes a WooCommerce Validation Sample Strong
+A record or workflow can be marked as accepted when it preserves the expected meaning and does not block customer experience, operations, reporting, or launch confidence. It can be marked as acceptable with difference when the result is different from the Source Platform but still usable in WooCommerce. It should be marked as needs review when the team cannot yet tell whether the difference is expected, acceptable, or risky. It should be treated as a blocker when it affects buying behavior, customer access, order interpretation, SEO continuity, or business-critical plugin/custom-field behavior.
 
-A strong WooCommerce validation sample is usually built from:
+When validation exposes repeated structural issues, the next step may be scope adjustment, mapping clarification, Add-on review, Custom Service handling, or custom migration logic adjustment. The right response depends on whether the issue is a normal platform difference, a configuration decision, a missing preparation step, or a true migration gap.
 
-* the products most likely to expose variation ambiguity
-* the categories, tags, and attributes most likely to reveal storefront-governance pressure
-* the routes most likely to expose permalink mismatch
-* the customer-account scenarios most likely to affect trust
-* the plugin- and theme-dependent behaviors most likely to weaken quietly
-* any broader storefront architecture decisions most likely to reveal structural misunderstanding
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-This is stronger than broad random checking because it tests the areas where WooCommerce’s structure most often changes meaning rather than just confirming that easy records survived.
+WooCommerce validation should prove that the migrated store works as a WordPress-based commerce environment, not just that records were transferred. Products, variations, attributes, categories, tags, URLs, customers, orders, plugins, themes, and custom fields all need to be reviewed through the way WooCommerce will actually use them.
 
-### Common Validation Mistakes
+Build the validation review around representative and high-risk samples. If the Demo Migration or Full Migration exposes unclear product behavior, taxonomy confusion, permalink risk, plugin dependency, Custom Platform ambiguity, or custom-field pressure, use Live Chat to clarify whether the issue can be resolved through configuration, Add-ons, or Custom Service before treating the migration as ready for launch.
 
-Several patterns weaken WooCommerce validation.
+### FAQs <a href="#faqs" id="faqs"></a>
 
-Common mistakes include:
+**Is record-count comparison enough to validate a WooCommerce migration?**
 
-* treating product existence as proof of correct variation logic
-* treating taxonomy survival as proof of useful discovery
-* assuming route continuity is correct because URLs resolve
-* checking customer import without checking customer experience
-* validating plugins only superficially instead of judging the outcomes they support
-* treating a familiar WordPress storefront as proof that the migration preserved the right business meaning
+No. Record counts are useful as an initial coverage check, but WooCommerce validation must also confirm product behavior, variation selection, taxonomy structure, URL continuity, customer-account meaning, order history, plugin behavior, and custom-field usage.
 
-These mistakes usually create the illusion of a stable WooCommerce launch while leaving the highest-impact behavioral questions unresolved.
+**What WooCommerce products should be included in validation?**
 
-### Conclusion
+Include both simple and variable products, especially products with important attributes, variation-level stock or pricing, product images, high-value URLs, custom fields, plugin dependency, or strong commercial importance.
 
-WooCommerce validation matters because the platform can preserve a familiar-looking storefront while still changing the buying logic, discovery behavior, route meaning, customer experience, and plugin-shaped outcomes that make the store commercially usable. The safest review approach is therefore selective and behavior-focused. It should prove that the high-risk products, taxonomies, routes, customer scenarios, and plugin-dependent outcomes still behave in the way the business needs, rather than treating imported records and live pages as enough evidence on their own.
+**Why are categories, tags, and attributes reviewed separately?**
 
-Use Demo Migration review to test the WooCommerce outcomes most likely to change meaning, especially variable products, taxonomy behavior, permalink-sensitive routes, returning-customer journeys, and plugin-dependent storefront behavior. If those areas still leave uncertainty, Live Chat can help determine whether the issue is validation scope, target-structure ambiguity, or a sign that the migration path needs more guided handling before launch.
+Because WooCommerce uses them for different purposes. Categories usually support primary grouping, tags support secondary organization, and attributes can support product detail, variation selection, filtering, or comparison. Mixing them incorrectly can weaken storefront usability.
 
-### FAQs
+**Should plugin-owned data be validated differently?**
 
-#### What should WooCommerce validation focus on first?
+Yes. Plugin-owned data should be validated by checking whether the plugin-dependent behavior still works or remains meaningful, not just whether a field or record exists after migration.
 
-Usually the highest-risk variable products, the most important taxonomy behavior, the most sensitive routes, the returning-customer journey, and the plugin- or theme-dependent outcomes most likely to weaken quietly.
+**When should validation findings point to Custom Service?**
 
-#### Why is product validation so important in WooCommerce?
-
-Because a product can exist in the target while still expressing the wrong sellable outcome. WooCommerce often makes variation structure more explicit, so the review has to prove that customers can still buy correctly.
-
-#### Is route validation in WooCommerce only about checking whether URLs load?
-
-No. The more important question is whether the route structure still supports the intended customer journey, search meaning, and destination relevance after migration.
-
-#### How should customer continuity be validated in WooCommerce?
-
-By checking the real first-login experience, not just imported customer records. Where password continuity is possible, that path should be tested directly. Where it is not, the reset-first journey and customer communication should be reviewed carefully.
-
-#### Why do plugins and themes need their own validation attention in WooCommerce?
-
-Because a large part of storefront meaning can sit outside the core product and customer records. A store can look familiar while still losing important pricing, filtering, navigation, merchandising, trust, or account behavior.
-
-#### When does broader storefront architecture become part of WooCommerce validation?
-
-When the future store depends on more than one storefront context, such as a broader multisite or multi-store pattern. In those cases, validation should prove the chosen structure is behaving as intended instead of assuming one unified storefront meaning.
+Custom Service should be considered when validation shows that WooCommerce success depends on customization, modification, Custom Platform interpretation, plugin-specific transformation, custom field handling, outside-system identifiers, or custom migration logic adjustment.

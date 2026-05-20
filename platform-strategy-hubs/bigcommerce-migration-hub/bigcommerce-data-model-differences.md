@@ -1,179 +1,148 @@
 # BigCommerce Data Model Differences
 
-A migration into BigCommerce can preserve the visible storefront while still changing the commercial meaning behind it.
+A migration into BigCommerce can preserve familiar storefront content while changing how the store defines product choices, pricing context, catalog structure, storefront scope, and customer segmentation.
 
-That usually happens because BigCommerce is not only a more governed hosted target. It is a platform where product-choice structure, category logic, pricing context, storefront scope, and native route governance often carry more explicit meaning than they did in the source store. Products, customers, and orders may still move successfully, but the target can behave very differently once variants, modifiers, customer groups, price lists, storefront assignments, and redirect logic become part of how the business is expected to operate.
+BigCommerce is a governed hosted Target Platform, so migrated data often needs to fit clearer target-side structures than the Source Platform used. The issue is not only whether Products, Customers, Orders, categories, or URLs can move. The more important question is whether the moved data still carries the same commercial meaning once BigCommerce represents choices through variants and modifiers, organizes discovery through categories, applies differentiated pricing through customer groups or price lists, and manages route continuity through redirect rules.
 
-This matters because BigCommerce data-model differences are rarely just technical translation questions. They change what the store believes a product choice is, how pricing should be controlled, what should differ by storefront, and what the business must validate before it can trust launch readiness.
+That makes a BigCommerce data model review a meaningful exercise, not just a record transfer exercise. A migration can appear complete yet remain commercially weak if the target store uses the wrong product-choice model, applies pricing in the wrong customer context, places products in unclear category structures, or preserves a URL without preserving the destination intent.
 
-### Variants and Modifiers Do Not Mean the Same Thing
+### How BigCommerce Changes Commercial Meaning <a href="#how-bigcommerce-changes-commercial-meaning" id="how-bigcommerce-changes-commercial-meaning"></a>
 
-One of the biggest BigCommerce data-model differences is that product meaning is often governed first through the distinction between variants and modifiers.
+BigCommerce often makes hidden source-store assumptions more explicit. Stores that previously relied on loosely governed option logic, customer-type workarounds, custom pricing rules, extension behavior, or manually managed redirects may need those behaviors translated into clearer target-side structures.
 
-That means product representation is not only about moving options. It is about deciding whether the target should express the sellable outcome through:
+This can be valuable. BigCommerce can support a more governed catalog, customer, pricing, and storefront behavior than many merchants have used before. But it also means the migration must prove that the target model reflects the business reality, not only that data appears in the admin.
 
-* true variants
-* modifier options
-* or surrounding product logic
+### Core BigCommerce Data Layers to Review <a href="#core-bigcommerce-data-layers-to-review" id="core-bigcommerce-data-layers-to-review"></a>
 
-A migration can therefore preserve the product record while still changing the buying journey if the target product-choice model no longer reflects the real commercial behavior.
+#### Product Options, Variants, and Modifiers <a href="#product-options-variants-and-modifiers" id="product-options-variants-and-modifiers"></a>
 
-This is especially important when the source storefront blurred together:
+One of the most important BigCommerce data-model differences is the separation between true sellable variation and surrounding option behavior.
 
-* true purchasable variation
-* customization inputs
-* add-ons
+A product option may lead to a true variant when the choice represents a distinct sellable version of the product. That usually matters for SKU, inventory, image, price, or purchasable product identity. A modifier can support customer-facing choice or customization without necessarily carrying the same inventory or SKU meaning.
+
+This distinction matters during migration because many Source Platforms blur together:
+
+* true purchasable variations
+* personalization inputs
+* add-on choices
 * option-dependent price behavior
-* app-driven product-choice logic
+* bundled or app-driven buying logic
+* display-only selections
 
-BigCommerce can often carry those outcomes more clearly than teams first expect, but only when the business makes those distinctions explicitly.
+If these meanings are translated into the wrong BigCommerce structure, the storefront may still show options, but the buying journey, stock control, pricing result, or order interpretation can change.
 
-### Product Options Can Change Inventory and Pricing Meaning
+#### Inventory and SKU Meaning <a href="#inventory-and-sku-meaning" id="inventory-and-sku-meaning"></a>
 
-Another important BigCommerce difference is that product-choice structure is tied to inventory and pricing meaning more directly than many teams assume.
+BigCommerce product structure affects how inventory and SKU meaning should be interpreted. A size, color, package, material, or configuration choice may need to become a variant if it represents a distinct sellable item. A non-stocked customization choice may belong elsewhere.
 
-Variants can represent distinct sellable versions of a product. Modifiers can influence the customer choice experience without necessarily creating the same stock or SKU meaning. This means the target may preserve the visible storefront while still changing how the business understands:
+This is where a visually similar migrated product can still be operationally wrong. The customer may be able to select an option, but the business may lose the intended relationship between choice, stock, fulfillment, reporting, or product identity.
 
-* inventory behavior
-* price behavior
-* SKU meaning
-* customer-facing option logic
+#### Categories and Catalog Discovery <a href="#categories-and-catalog-discovery" id="categories-and-catalog-discovery"></a>
 
-A migration can therefore look structurally complete while still being commercially wrong if product options are translated into the wrong model.
+Categories in BigCommerce are not only filing containers. They can shape browsing, merchandising, navigation, product grouping, and customer discovery.
 
-### Categories Carry Discovery Meaning, Not Only Filing Meaning
+A Source Platform may have used categories loosely, duplicated product placement, menu-only groupings, or SEO-driven landing pages that did not map cleanly into the product taxonomy. During migration, the question is not only whether categories exist. The stronger question is whether the new BigCommerce structure still helps customers find the right products and still supports the business’s merchandising logic.
 
-In BigCommerce, categories are not only administrative containers.
+#### Customer Groups and Price Lists <a href="#customer-groups-and-price-lists" id="customer-groups-and-price-lists"></a>
 
-They often shape:
+BigCommerce can make pricing context more explicit through structures such as customer groups and price lists. That changes what migrated pricing means.
 
-* storefront browsing
-* product grouping
-* merchandising logic
-* navigation clarity
-* how customers interpret the catalog
+A product price is not always enough. Some stores need different customer types, wholesale buyers, regional conditions, B2B terms, or negotiated pricing behavior to remain meaningful after migration. If the source store carried that logic through custom rules, extensions, discount workarounds, or off-platform processes, the BigCommerce target needs a clear decision about what should become native pricing context, what needs configuration, and what should remain outside the migrated data layer.
 
-This means a migration cannot judge category continuity only by record survival. The more important question is whether categories still support the same discovery and browsing outcome after launch.
+#### Multi-Storefront and Storefront Context <a href="#multi-storefront-and-storefront-context" id="multi-storefront-and-storefront-context"></a>
 
-Many source stores carry category meaning through looser structures, duplicated logic, or mixed taxonomy patterns. BigCommerce can make those issues more visible because categories often need to support both storefront discovery and ongoing governance more explicitly than before.
+When BigCommerce Multi-Storefront is relevant, data may carry storefront-specific meaning. A product, category, price rule, redirect destination, or customer-facing experience can be correct in one storefront context and wrong in another.
 
-### Customer Groups and Price Lists Change What Pricing Means
+That means migration review must check not only whether the data exists, but also whether it belongs to the right storefront context and supports the intended customer journey there. Storefront scope affects catalog visibility, navigation, pricing interpretation, and route planning.
 
-One of BigCommerce’s clearest structural differences is that pricing context can become more explicit and more governable.
+#### Redirects and Route Continuity <a href="#redirects-and-route-continuity" id="redirects-and-route-continuity"></a>
 
-Customer groups and price lists can be used together to support differentiated pricing, and price lists can be assigned across customer groups and storefronts. This means pricing is no longer only a field attached to a product. It can become part of a structured relationship between:
+BigCommerce route continuity should be reviewed as part of the data model because URLs, redirects, and destination relevance help preserve how customers and search engines interpret the store.
 
-* products
-* customer groups
-* price lists
-* storefront context
+A redirect can technically exist while still being weak if it sends visitors to a less relevant product, an overly broad category, a different storefront context, or a page that no longer supports the same purchase intent. For BigCommerce migration planning, route continuity should be tied to product, category, and storefront meaning rather than treated as a disconnected SEO task.
 
-That changes migration planning because a price can exist in the target while still be commercially wrong if the pricing relationship has not been defined clearly enough.
+#### Custom Fields, Apps, and Theme-Owned Meaning <a href="#custom-fields-apps-and-theme-owned-meaning" id="custom-fields-apps-and-theme-owned-meaning"></a>
 
-A source store may have carried those outcomes through:
+Not every important BigCommerce outcome lives inside a simple core record. Many stores depend on custom fields, apps, theme behavior, external systems, or specialized storefront logic.
 
-* discount rules
-* customer-type workarounds
-* negotiated pricing outside the catalog
-* segmented pricing logic that was not centrally governed
+Those layers can affect badges, product recommendations, shipping behavior, product-detail presentation, customer-specific messaging, subscription logic, bundled offers, quote workflows, or reporting. A migration can preserve base records while losing the logic that made those records useful.
 
-BigCommerce can carry those outcomes more natively in some cases, but only when the business defines clearly which customer context should receive which price behavior and why.
+When custom fields, app-owned data, or source-side modifications affect storefront behavior or operations, the review should determine whether the requirement can be handled through standard target structures, Add-ons, or Custom Service.
 
-### Storefront Scope Becomes Part of the Data Meaning
+### What Migrated Data Must Prove in BigCommerce <a href="#what-migrated-data-must-prove-in-bigcommerce" id="what-migrated-data-must-prove-in-bigcommerce"></a>
 
-BigCommerce supports Multi-Storefront, and that changes how the business should think about data meaning.
+#### Products Must Prove Choice Accuracy <a href="#products-must-prove-choice-accuracy" id="products-must-prove-choice-accuracy"></a>
 
-A value is no longer only a product or customer value. It may also carry a storefront-context meaning. That means a migration can preserve the value itself while still misrepresenting the intended behavior if:
+Product validation should confirm that variants, modifiers, product options, SKUs, inventory, images, and price-impacting choices represent the intended customer and operational behavior. The review should include simple products, complex variant products, customizable products, and products that relied on source-side apps or custom logic.
 
-* it belongs in the wrong storefront context
-* the wrong customer groups receive it
-* the wrong price list applies to it
-* the right route behavior is not preserved in the right storefront
+#### Categories Must Prove Discovery Accuracy <a href="#categories-must-prove-discovery-accuracy" id="categories-must-prove-discovery-accuracy"></a>
 
-This is one of the clearest reasons BigCommerce migrations can look structurally rich while still becoming harder to govern if storefront assignment logic was not defined early.
+Category validation should confirm that products appear in the right groups, navigation remains understandable, merchandising intent is preserved, and important landing paths still point customers toward the right destination.
 
-### Native Redirects Change How Route Continuity Is Governed
+#### Pricing Must Prove Context Accuracy <a href="#pricing-must-prove-context-accuracy" id="pricing-must-prove-context-accuracy"></a>
 
-BigCommerce includes native 301 Redirect capability, including storefront-specific handling in Multi-Storefront environments.
+Pricing review should not stop at visible product price. It should confirm customer-group behavior, price-list behavior, discounts, negotiated pricing assumptions, storefront context, and any source-side pricing logic that needed translation.
 
-That means route continuity in BigCommerce is not only a patching problem. It is part of the native platform model. This is a meaningful data-model difference because the target can govern redirects and route continuity more explicitly than many teams expect.
+#### Customer and Order Data Must Prove Continuity <a href="#customer-and-order-data-must-prove-continuity" id="customer-and-order-data-must-prove-continuity"></a>
 
-But the presence of native redirects does not remove the need for route planning. A redirect can exist while still landing customers on a weaker destination if product, category, or storefront meaning changed during migration.
+Customer and order review should confirm that customer identity, order history, account continuity, addresses, customer-group context, and commercial interpretation remain usable. The goal is not only historical record survival; the goal is for the target store to support customer service, reporting, and future selling decisions.
 
-The important target question is therefore not only whether a redirect exists. It is whether the destination still supports the customer intent the original route used to serve.
+#### Storefront and Route Data Must Prove Journey Accuracy <a href="#storefront-and-route-data-must-prove-journey-accuracy" id="storefront-and-route-data-must-prove-journey-accuracy"></a>
 
-### App- and Theme-Owned Meaning Still Matters
+When storefront scope or route continuity matters, migrated data should prove that customers can still reach the right product, category, content, or storefront destination. A correct record with a weak path can still create business risk.
 
-BigCommerce can carry a large amount of important behavior in native structures, but many stores still depend on apps, theme logic, custom fields, and surrounding workflow rules.
+### Where BigCommerce Data-Model Review Should Start <a href="#where-bigcommerce-data-model-review-should-start" id="where-bigcommerce-data-model-review-should-start"></a>
 
-That means a migration into BigCommerce often has to separate:
+The earliest review should focus on the parts of the store where the Source Platform’s meaning is least likely to match BigCommerce directly.
 
-* native BigCommerce product and pricing structure
-* app-owned storefront behavior
-* custom field logic
-* theme-owned presentation behavior
-* inherited source-side logic that still needs a target meaning
+#### High-Priority Review Areas <a href="#high-priority-review-areas" id="high-priority-review-areas"></a>
 
-This is one of the most important BigCommerce data-model realities: the target may be more governed than some platforms, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving.
+Start with:
 
-### Validation Scope Becomes More Commercially Contextual
+* complex products with variants, modifiers, add-ons, bundles, or personalization
+* categories that drive navigation, merchandising, or SEO landing pages
+* customer groups, wholesale pricing, segmented pricing, or price-list behavior
+* multi-storefront assignment and storefront-specific visibility
+* high-value product and category URLs
+* custom fields, apps, theme behavior, and external-system dependencies
+* Custom Platform source logic that did not follow a standard data model
 
-Because BigCommerce changes how the storefront is structured, it also changes what the data must prove after migration.
+These areas usually reveal whether the BigCommerce target structure is commercially coherent or merely populated.
 
-The target can no longer be judged only by checking whether products, customers, and orders exist. It also needs to prove that:
+### How Custom Platform Sources Change BigCommerce Data-Model Review <a href="#how-custom-platform-sources-change-bigcommerce-data-model-review" id="how-custom-platform-sources-change-bigcommerce-data-model-review"></a>
 
-* variants and modifiers are modeled correctly
-* categories still support useful browsing
-* customer groups and price lists reflect the intended commercial rules
-* storefront assignments still make sense
-* redirects still support the intended journey
-* app- and theme-owned behavior still supports the intended outcome
+When the Source Platform is a Custom Platform, BigCommerce data-model review usually needs a more bespoke translation lens.
 
-This is one of the most important data-model differences of all. BigCommerce changes not just the data structure, but the evidence structure the business needs before it can trust launch readiness.
+The source may carry product-choice logic, customer segmentation, pricing behavior, route patterns, content relationships, or external-system identifiers in structures that do not map cleanly to BigCommerce. In those cases, the key question is not only what data should move. It is how the source meaning should be rebuilt so the BigCommerce Target Platform remains usable, governable, and commercially accurate.
 
-### What Usually Needs the Earliest Review
+Custom Platform sources often require earlier review of variant/modifier interpretation, price context, storefront scope, custom fields, redirect planning, and external-system dependencies. When those requirements involve customization, modification, bespoke transformation, or custom migration logic adjustment, they belong under Custom Service rather than being treated as ordinary standard handling.
 
-The highest-risk BigCommerce data-model differences usually deserve early review in:
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-* product-choice translation between variants and modifiers
-* category structure and discovery logic
-* customer-group and price-list behavior
-* storefront assignment and scope logic
-* redirect and destination logic
-* app- or theme-owned storefront behavior
+BigCommerce data-model differences matter because they can change how the migrated store understands product choice, category discovery, pricing context, storefront scope, customer meaning, and route continuity.
 
-These are the areas most likely to expose whether the target structure is commercially clear enough rather than only technically complete.
+A successful migration into BigCommerce should not be judged only by whether products, customers, orders, and categories appear in the target. It should be judged by whether the target structure supports the same commercial decisions the business needs after launch. The strongest review starts with the areas where meaning is most likely to change: variants and modifiers, categories, customer groups, price lists, storefront context, redirects, custom fields, apps, and Custom Platform source logic.
 
-### How Custom Cart as a Source Changes BigCommerce Data-Model Review
+Use Demo Migration results to test whether the BigCommerce model represents your most important product, pricing, customer, and storefront behaviors correctly before treating the target data model as settled. If the results reveal unclear product-choice logic, customer-specific pricing gaps, storefront-scope issues, or Custom Platform translation risk, Live Chat can help determine whether the migration needs Add-ons, Custom Service, or a different preparation plan before full execution.
 
-When the source platform is a Custom Cart, BigCommerce data-model review usually needs a more bespoke translation lens.
+### FAQs <a href="#faqs" id="faqs"></a>
 
-That is because the source may carry product-choice logic, pricing rules, customer segmentation, storefront meaning, or route behavior in structures that do not align neatly with BigCommerce variants, modifiers, customer groups, price lists, Multi-Storefront context, or native redirects. In those cases, the key review question is not only what data exists. It is how that source meaning should be interpreted and rebuilt so the BigCommerce target remains commercially coherent.
+**What is one of the biggest BigCommerce data-model differences?**
 
-In this context, earlier expert review and a more tailored migration path often become especially important.
+One of the biggest differences is that BigCommerce often expects clearer separation between true variants and surrounding modifier or customization behavior. This affects SKU meaning, inventory control, pricing behavior, and how customers make product choices.
 
-### Conclusion
+**Are BigCommerce categories just administrative folders?**
 
-BigCommerce data-model differences matter because they change the commercial meaning of migrated data, not only its storage location.
+No. Categories can affect browsing, navigation, product grouping, merchandising, and landing-page meaning. Migration review should confirm that categories still support discovery, not only that category records exist.
 
-The target often moves from a looser product-and-pricing model into a more explicit structure built around variants, modifiers, categories, customer groups, price lists, storefront assignments, and native redirect governance. That can be a major strength when the business genuinely needs that structure. It becomes riskier when the business has not yet defined how those layers should work after the move.
+**Why do customer groups and price lists matter in BigCommerce migration?**
 
-Review the product-choice, category, pricing, storefront, route, and app-owned logic that matters most before treating the target model as settled. If those structures still feel unclear, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that more guided handling is needed before full execution.
+They can make pricing part of a governed customer or storefront context rather than only a product-level field. That matters when the source store used wholesale pricing, customer-specific pricing, negotiated pricing, or segmentation logic.
 
-### FAQs
+**Does Multi-Storefront change how BigCommerce data should be reviewed?**
 
-#### What is one of the biggest BigCommerce data-model differences?
+Yes. When Multi-Storefront is relevant, products, categories, prices, redirects, and customer-facing behavior may need to be reviewed by storefront context, not only as general store-wide records.
 
-One of the biggest differences is that product-choice meaning often depends on the distinction between variants and modifiers, with the platform expecting clearer separation between true sellable variations and surrounding customization behavior.
+**When does a BigCommerce data-model migration need Custom Service?**
 
-#### Are categories only administrative folders in BigCommerce?
-
-No. In BigCommerce, categories often shape storefront browsing, product grouping, and merchandising logic as well as administration.
-
-#### Why do customer groups and price lists matter so much in BigCommerce?
-
-Because they can make pricing part of a governed relationship between products, customer contexts, and storefronts rather than just a field attached to the product.
-
-#### Does Multi-Storefront change how data should be reviewed?
-
-Yes. Because values can carry storefront-specific meaning, the business often needs to validate not only the value itself, but also whether it appears in the right storefront context and follows the intended pricing and route logic.
+Custom Service is usually relevant when the Source Platform uses custom product logic, custom pricing behavior, app-owned data, external-system identifiers, bespoke transformations, Custom Platform structures, or custom migration logic adjustment that cannot be treated as standard target mapping.

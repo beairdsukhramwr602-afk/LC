@@ -1,229 +1,328 @@
 # BigCommerce Pre-Migration Preparation Checklist
 
-A BigCommerce migration usually becomes riskier when the business treats preparation as a generic cleanup exercise instead of a hosted-platform structure decision.
+A BigCommerce migration becomes easier to control when preparation is treated as a storefront-structure decision rather than solely a data-cleanup task.
 
-That matters because BigCommerce is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support clearer product-choice structure, stronger pricing governance, more deliberate storefront scope, and native redirect control more naturally than many lighter hosted targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
+BigCommerce can be a strong Target Platform for merchants that want hosted operations, clearer product-choice governance, structured pricing context, stronger catalog administration, and more deliberate storefront scope. However, those strengths are useful only when the business has already decided how the future store should work. If product options, categories, customer groups, price lists, storefront assignments, redirects, apps, or custom fields remain vague, the migration may look organized in record counts while still creating uncertainty during validation and launch.
 
-This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a BigCommerce migration path is commercially safe, structurally coherent, and realistically governable after launch.
+This checklist helps merchants prepare for migration into BigCommerce before execution begins. It is not a technical configuration guide. It is a planning framework for clarifying the business meaning that the Target Platform must preserve, formalize, or intentionally change.
 
-### What This Preparation Checklist Is Really For
+### What This BigCommerce Preparation Checklist Is For <a href="#what-this-bigcommerce-preparation-checklist-is-for" id="what-this-bigcommerce-preparation-checklist-is-for"></a>
 
-A strong BigCommerce preparation checklist should do more than confirm that data exists.
+The purpose of preparation is to reduce interpretation risk before migration results are judged.
 
-Its purpose is to help the business answer five practical questions before execution pressure increases:
+A strong checklist should help the business answer practical questions such as:
 
-* how the future product-choice and storefront structure should work
-* where variants, modifiers, categories, customer groups, and price lists must remain precise
-* what should differ by storefront and what should remain shared
-* which workflows still depend on apps, themes, or custom fields
-* which outcomes deserve the earliest validation because they are most likely to expose commercial ambiguity
+* Which product-choice structures must remain precise?
+* Which categories carry real browse, merchandising, or SEO meaning?
+* Which customer groups, price lists, or pricing rules must remain commercially accurate?
+* Which storefront contexts should share data and which should differ?
+* Which app, theme, custom field, or external system behaviors still affect the customer or operations?
+* Which URLs and landing paths need focused continuity planning?
+* Which records should be included in Demo Migration because they reveal the highest risk?
 
-That is why a BigCommerce preparation checklist is strongest when it is built around storefront governance and customer behavior rather than around imports alone.
+The checklist is strongest when it is built around customer behavior, operational meaning, and validation evidence rather than around a generic list of records to move.
 
-### 1. Define the Product-Choice Structures That Matter Most
+### Preparation Priority 1: Define High-Risk Product-Choice Structures <a href="#preparation-priority-1-define-high-risk-product-choice-structures" id="preparation-priority-1-define-high-risk-product-choice-structures"></a>
 
-The first preparation priority is usually product behavior.
+BigCommerce preparation should begin with product behavior because product-choice interpretation often affects catalog usability, pricing, inventory, and conversion.
 
-The business should identify:
+#### Identify products that need more than ordinary product transfer <a href="#identify-products-that-need-more-than-ordinary-product-transfer" id="identify-products-that-need-more-than-ordinary-product-transfer"></a>
 
-* which product families drive the most revenue
-* which products depend on true sellable variants
-* which products depend on modifier-style customization
-* which source-side products still mix purchasable variation, personalization, or add-on logic too loosely
-* which products would become commercially weaker if the wrong BigCommerce structure were chosen
+Before migration, the business should identify:
 
-This matters because BigCommerce product migration is not only about moving product records. It is about deciding which customer choices should remain true variants, which should remain modifiers, and which behaviors should stay outside native product structure.
+* product families that generate the most revenue
+* products with many options, sizes, colors, materials, bundles, or configurations
+* products where some choices are true sellable variants
+* products where some choices behave more like modifiers or personalization inputs
+* products where source-side option logic depends on apps, extensions, custom code, or theme behavior
+* products where incorrect structure would change price, inventory, SKU, order detail, or customer choice
 
-### 2. Clarify Which Categories Carry Real Commercial Meaning
+The goal is to decide how each important product choice should be represented in BigCommerce. A product may look simple on the storefront but depend on source-side logic that does not translate cleanly as an ordinary product record.
 
-BigCommerce categories are not only administrative structures. They often shape navigation and browsing behavior.
+#### Separate variants, modifiers, and surrounding customization <a href="#separate-variants-modifiers-and-surrounding-customization" id="separate-variants-modifiers-and-surrounding-customization"></a>
+
+A useful preparation step is to classify product-choice behavior into three groups.
+
+**True sellable differences**
+
+These are choices that should behave like distinct purchasable product outcomes, often with their own SKU, inventory, price, weight, image, or availability.
+
+**Modifier-style choices**
+
+These are customer selections that affect the purchase but may not represent a separate stock-managed product variation.
+
+**Surrounding customization logic**
+
+These are behaviors that may depend on custom fields, apps, external systems, manual review, or storefront-specific business rules.
+
+This distinction matters because BigCommerce can support structured product choices, but it still requires the business to decide which meaning belongs in the product model and which meaning belongs in surrounding logic. When the source structure is unclear or custom, the preparation work may signal a need for Custom Service or custom migration logic adjustment.
+
+### Preparation Priority 2: Clarify Category and Discovery Meaning <a href="#preparation-priority-2-clarify-category-and-discovery-meaning" id="preparation-priority-2-clarify-category-and-discovery-meaning"></a>
+
+Categories should be prepared as customer-facing discovery structures, not only as administrative containers.
+
+#### Identify categories that matter to the buying journey <a href="#identify-categories-that-matter-to-the-buying-journey" id="identify-categories-that-matter-to-the-buying-journey"></a>
+
+Before migration, the business should identify:
+
+* high-traffic category pages
+* categories used in major navigation paths
+* categories that support merchandising or seasonal campaigns
+* categories that carry organic search value
+* categories that customers use to compare products
+* categories that are outdated, duplicated, or no longer commercially meaningful
+
+The goal is to separate real catalog meaning from inherited taxonomy clutter. If the source store has accumulated categories over time, not every structure deserves equal preservation.
+
+#### Decide what BigCommerce should preserve or simplify <a href="#decide-what-bigcommerce-should-preserve-or-simplify" id="decide-what-bigcommerce-should-preserve-or-simplify"></a>
+
+Some category structures should remain close to the source because they support customer behavior, SEO continuity, or merchandising logic. Others may be better simplified before migration so that BigCommerce begins with a cleaner catalog structure.
+
+The preparation checklist should identify which category paths are non-negotiable, which can be reorganized, and which should be removed from the future storefront plan.
+
+### Preparation Priority 3: Define Customer Groups and Price Lists <a href="#preparation-priority-3-define-customer-groups-and-price-lists" id="preparation-priority-3-define-customer-groups-and-price-lists"></a>
+
+BigCommerce preparation should treat pricing context as commercial logic, not only as product price data.
+
+#### Identify pricing structures that must remain accurate <a href="#identify-pricing-structures-that-must-remain-accurate" id="identify-pricing-structures-that-must-remain-accurate"></a>
+
+The business should document:
+
+* customer groups that still matter
+* wholesale, B2B, retail, loyalty, or negotiated pricing segments
+* price lists or pricing structures that affect customer-specific buying experience
+* discounts or promotions that depend on customer group, catalog, or storefront context
+* inherited workarounds that should be simplified instead of copied
+* pricing behavior controlled by apps or external systems
+
+This is especially important when a store sells to different customer types, brands, regions, sales channels, or account groups.
+
+#### Confirm what pricing logic belongs in BigCommerce <a href="#confirm-what-pricing-logic-belongs-in-bigcommerce" id="confirm-what-pricing-logic-belongs-in-bigcommerce"></a>
+
+Not every source-side pricing rule should be copied exactly. Some rules may be outdated, redundant, app-owned, or better represented through a cleaner BigCommerce structure.
+
+Preparation should decide which pricing meaning must be preserved, which should be redesigned, and which needs further review before migration scope is finalized.
+
+### Preparation Priority 4: Decide Storefront Scope and Assignment Logic <a href="#preparation-priority-4-decide-storefront-scope-and-assignment-logic" id="preparation-priority-4-decide-storefront-scope-and-assignment-logic"></a>
+
+BigCommerce storefront planning is strongest when the business decides storefront scope before migration execution begins.
+
+#### Define what should be shared and what should differ <a href="#define-what-should-be-shared-and-what-should-differ" id="define-what-should-be-shared-and-what-should-differ"></a>
+
+The checklist should clarify:
+
+* whether the business needs one storefront or multiple storefront contexts
+* which products should appear in each storefront
+* which categories should differ by storefront
+* which customer groups or price lists belong to which storefront context
+* which content, brands, regions, languages, currencies, or campaigns require separate treatment
+* which operational workflows should remain shared across storefronts
+
+A Multi-Storefront structure can be useful, but it adds governance burden when product, pricing, content, or customer assignments are unclear.
+
+#### Avoid treating storefront expansion as an afterthought <a href="#avoid-treating-storefront-expansion-as-an-afterthought" id="avoid-treating-storefront-expansion-as-an-afterthought"></a>
+
+If multiple storefronts are part of the target plan, storefront assignment should be included in preparation, Demo Migration sample selection, and validation planning. Otherwise, the migrated store may look correct in one storefront while hiding assignment issues in another.
+
+### Preparation Priority 5: Plan Customer Account Expectations <a href="#preparation-priority-5-plan-customer-account-expectations" id="preparation-priority-5-plan-customer-account-expectations"></a>
+
+Customer migration should be prepared around the real post-migration customer experience, not around assumptions from the Source Platform.
+
+#### Define what returning customers should experience <a href="#define-what-returning-customers-should-experience" id="define-what-returning-customers-should-experience"></a>
+
+The business should clarify:
+
+* whether returning customers can access accounts as expected
+* whether password behavior, login reset, or account activation needs customer communication
+* which customer groups or account types are most sensitive
+* how order history should appear from the customer perspective
+* which support scenarios may appear immediately after launch
+
+Customer records may migrate successfully while the customer experience still requires planning. This is especially important when the source platform and BigCommerce handle accounts, passwords, identities, or customer groups differently.
+
+#### Prepare communication-sensitive scenarios <a href="#prepare-communication-sensitive-scenarios" id="prepare-communication-sensitive-scenarios"></a>
+
+If customer login behavior changes, preparation should include support messaging, launch communication, and internal response guidelines. The goal is to avoid treating customer-account continuity as a hidden technical detail that only becomes visible after go-live.
+
+### Preparation Priority 6: List Apps, Theme Logic, and Custom Behaviors <a href="#preparation-priority-6-list-apps-theme-logic-and-custom-behaviors" id="preparation-priority-6-list-apps-theme-logic-and-custom-behaviors"></a>
+
+A BigCommerce migration can be affected by behavior that does not live neatly inside product, customer, category, or order records.
+
+#### Identify business-critical dependencies <a href="#identify-business-critical-dependencies" id="identify-business-critical-dependencies"></a>
 
 The preparation checklist should identify:
 
-* which categories matter most to discovery
-* which category relationships matter to the customer journey
-* which source-side groupings are still meaningful
-* which category structures are inherited clutter rather than real storefront logic
-* which category paths still need to support the intended browse behavior after launch
+* apps that affect product display, personalization, reviews, subscriptions, loyalty, search, merchandising, pricing, or fulfillment
+* theme behaviors that influence navigation, trust, product presentation, or conversion
+* custom fields that drive storefront output or operational decisions
+* external systems connected to inventory, ERP, CRM, fulfillment, analytics, accounting, or marketing
+* workflows that depend on source-side identifiers or custom data
 
-A stronger preparation model forces the business to separate real commercial category meaning from taxonomy accumulation.
+The business does not need to preserve every old dependency. It needs to identify which dependencies still carry business meaning.
 
-### 3. Define How Customer Groups and Price Lists Should Work Together
+#### Separate native BigCommerce structure from surrounding behavior <a href="#separate-native-bigcommerce-structure-from-surrounding-behavior" id="separate-native-bigcommerce-structure-from-surrounding-behavior"></a>
 
-BigCommerce often becomes easier to govern when the business decides clearly how pricing context should behave before execution begins.
+Some source-side behavior can be represented through native BigCommerce structure. Other behavior may need apps, external system updates, theme work, or Custom Service review.
 
-That means the business should decide:
+Preparation should classify these dependencies before migration begins so they can be scoped, tested, and validated deliberately.
 
-* which customer groups still matter
-* which price lists should exist
-* which storefront contexts should receive which pricing
-* whether any inherited discount or segmentation workarounds should be simplified
-* whether the future pricing model is being designed intentionally or only copied from the source
+### Preparation Priority 7: Prioritize Legacy URLs and Redirect Intent <a href="#preparation-priority-7-prioritize-legacy-urls-and-redirect-intent" id="preparation-priority-7-prioritize-legacy-urls-and-redirect-intent"></a>
 
-This matters because BigCommerce can make price lists part of a governed relationship across storefronts and customer groups rather than just a product field.
+Redirect capability does not replace URL planning.
 
-### 4. Decide What Belongs in Each Storefront Context
+#### Identify URLs that deserve focused protection <a href="#identify-urls-that-deserve-focused-protection" id="identify-urls-that-deserve-focused-protection"></a>
 
-One of the most important BigCommerce preparation tasks is storefront assignment.
+Before migration, the business should identify:
 
-The business should identify:
+* product URLs with meaningful organic traffic or conversion value
+* category and landing-page URLs used in search, paid campaigns, email, affiliates, or partner links
+* brand, content, or support pages that still carry trust or customer-service value
+* outdated URLs that should not be preserved as primary paths
+* destinations that best match the old page intent
 
-* what should remain shared across storefronts
-* what should differ by storefront
-* which products, price lists, and customer contexts belong in each storefront
-* whether more than one storefront is genuinely necessary
-* whether the future Multi-Storefront model reflects a real commercial need or only optional scale ambition
+The most important question is not only whether a redirect exists. It is whether the redirected destination still satisfies the intent of the old URL.
 
-This matters because BigCommerce Multi-Storefront is a real strength, but it also creates governance burden when storefront assignments are made too late or without a clear reason.
+#### Avoid generic destination mapping for high-value pages <a href="#avoid-generic-destination-mapping-for-high-value-pages" id="avoid-generic-destination-mapping-for-high-value-pages"></a>
 
-### 5. Define the Customer-Account Experience Honestly
+A redirect from an old product or category page to a generic collection, homepage, or loosely related page can weaken customer experience even if it is technically valid. High-value paths should be mapped with commercial intent in mind and validated before launch.
 
-BigCommerce should usually be approached through realistic post-migration login planning rather than open-source password-preservation assumptions.
+### Preparation Priority 8: Select High-Risk Demo Migration Samples <a href="#preparation-priority-8-select-high-risk-demo-migration-samples" id="preparation-priority-8-select-high-risk-demo-migration-samples"></a>
 
-That means the preparation checklist should define:
+Demo Migration is most useful when the sample is chosen because it reveals risk, not because the records are easy.
 
-* what returning customers should experience at first login
-* what customer communication should explain clearly
-* which support scenarios may become sensitive if login expectations are wrong
-* whether the business is assuming a smoother account transition than the real path supports
+#### Include records that expose BigCommerce-specific decisions <a href="#include-records-that-expose-bigcommerce-specific-decisions" id="include-records-that-expose-bigcommerce-specific-decisions"></a>
 
-This helps prevent the business from treating customer-account continuity as an assumption instead of a launch-critical planning decision.
+A strong BigCommerce Demo Migration sample should include:
 
-### 6. List the Apps, Theme Logic, and Custom Behaviors That Still Need to Matter
+* option-heavy products
+* products where variant and modifier meaning could be confused
+* categories with important navigation or SEO value
+* customer groups with meaningful pricing or visibility differences
+* price-list examples, where relevant
+* storefront-specific product, category, or pricing cases
+* high-value legacy URLs
+* app- or theme-dependent storefront behavior
+* Custom Platform source records that do not fit ordinary structures cleanly
 
-One of the biggest BigCommerce preparation mistakes is treating app and theme behavior as background detail.
+This turns preparation into evidence. If the sample looks correct only for simple records, it may not prove that the full migration approach is safe.
 
-A stronger checklist should identify:
+### Preparation Priority 9: Define Validation Ownership Before Execution <a href="#preparation-priority-9-define-validation-ownership-before-execution" id="preparation-priority-9-define-validation-ownership-before-execution"></a>
 
-* which apps still support commercially important storefront behavior
-* which theme behaviors still shape trust, navigation, or buying logic
-* which custom fields still drive meaningful storefront or operational outcomes
-* which app-owned workflows matter to operations as well as storefront behavior
+Preparation should decide who will judge the migrated BigCommerce result and what evidence they will use.
 
-The business does not need a generic list of everything installed. It needs a clearer view of which app- and theme-owned meanings still matter enough to shape scope, validation, and risk judgment.
+#### Assign reviewers by business area <a href="#assign-reviewers-by-business-area" id="assign-reviewers-by-business-area"></a>
 
-### 7. Prioritize Legacy URLs by Business Value
+The checklist should identify reviewers for:
 
-Because BigCommerce already has native 301 Redirect capability, the most important preparation question is not whether redirects are possible. It is which legacy paths deserve focused protection.
+* product and variant/modifier behavior
+* category and browse experience
+* pricing, customer groups, and price-list logic
+* storefront assignment and visibility
+* customer account and order history review
+* high-value URLs and redirect destinations
+* app, theme, and custom-field behavior
+* operational handoffs to external systems
 
-The checklist should identify:
+Different reviewers may notice different issues. A merchandising reviewer may catch category or product-choice problems that a technical reviewer would not treat as failed data.
 
-* the product URLs that matter most to traffic or conversion
-* the category or landing paths that matter most to discovery
-* the pages that still carry trust or support value
-* the destinations that would weaken customer intent if they were handled too generically
+#### Define pass conditions early <a href="#define-pass-conditions-early" id="define-pass-conditions-early"></a>
 
-This matters because a technically valid redirect can still be commercially weak if the destination no longer supports the purpose the original path served.
+Each validation area should have a practical pass condition. For example, a high-risk product sample should prove that customer choices, price behavior, SKU/inventory meaning, and order output still make sense in BigCommerce. A redirect sample should prove that the destination supports the old page intent, not merely that the redirect fires.
 
-### 8. Define the Highest-Risk Pricing and Product Combinations
+### Preparation Priority 10: Decide What Can Change and What Must Remain Exact <a href="#preparation-priority-10-decide-what-can-change-and-what-must-remain-exact" id="preparation-priority-10-decide-what-can-change-and-what-must-remain-exact"></a>
 
-Preparation becomes much stronger when the business identifies its most sensitive combinations before the full migration is treated as routine.
+A BigCommerce migration should not blindly copy every source-side structure, but it also should not simplify business meaning without a decision.
 
-For BigCommerce, that usually means:
+#### Clarify acceptable change before migration <a href="#clarify-acceptable-change-before-migration" id="clarify-acceptable-change-before-migration"></a>
 
-* option-heavy products most likely to expose variants-versus-modifiers ambiguity
-* customer groups with meaningful pricing differences
-* price lists assigned across storefronts
-* storefront-specific product and pricing cases most likely to reveal assignment mistakes
-* routes where pricing or storefront context affects the intended destination
+The business should decide what BigCommerce is allowed to formalize, simplify, or reorganize in areas such as:
 
-This matters because a representative Demo Migration becomes much more valuable when the sample is built around structural risk instead of convenience.
+* product options, variants, and modifiers
+* category hierarchy and product assignment
+* customer groups and pricing structures
+* storefront assignment
+* URL structure and redirects
+* app-owned or theme-owned behavior
+* custom fields and operational identifiers
 
-### 9. Mark the Highest-Risk Validation Samples Before Full Execution
+This helps prevent validation disputes later. If a change was planned, it can be judged as an intentional target-state decision. If a change was not planned and weakens business meaning, it should be treated as an issue.
 
-A stronger BigCommerce preparation flow defines the validation sample before the full migration is treated as routine.
+### Practical BigCommerce Preparation Sequence <a href="#practical-bigcommerce-preparation-sequence" id="practical-bigcommerce-preparation-sequence"></a>
 
-For BigCommerce, that usually means:
+A clear preparation sequence helps keep decisions from becoming scattered.
 
-* products most likely to expose option-structure ambiguity
-* categories most important to browsing behavior
-* customer-group and price-list combinations most likely to affect pricing integrity
-* storefront assignments most likely to expose ambiguity
-* legacy routes most likely to carry commercial value
-* app- and theme-owned behaviors most likely to reveal hidden structure
+#### 1. Identify high-risk product-choice cases <a href="#id-1-identify-high-risk-product-choice-cases" id="id-1-identify-high-risk-product-choice-cases"></a>
 
-This turns preparation into evidence rather than assumption.
+Start with products most likely to expose variant, modifier, personalization, bundle, or app-owned behavior.
 
-### 10. Define What BigCommerce Is Allowed to Formalize and What It Must Preserve Exactly
+#### 2. Clarify category and discovery meaning <a href="#id-2-clarify-category-and-discovery-meaning" id="id-2-clarify-category-and-discovery-meaning"></a>
 
-A stronger BigCommerce preparation checklist usually includes one difficult but necessary question:
+Decide which categories support navigation, merchandising, SEO, and customer browsing.
 
-What is the business willing to formalize or simplify in order to fit BigCommerce clearly, and what commercial meaning is non-negotiable?
+#### 3. Define customer-group and pricing logic <a href="#id-3-define-customer-group-and-pricing-logic" id="id-3-define-customer-group-and-pricing-logic"></a>
 
-That question should be answered specifically for:
+Document the customer groups, price lists, discounts, and segmentation rules that affect commercial accuracy.
 
-* variants versus modifiers
-* category structure
-* customer-group and price-list logic
-* storefront assignments
-* route continuity
-* app- and theme-owned logic
+#### 4. Decide storefront scope <a href="#id-4-decide-storefront-scope" id="id-4-decide-storefront-scope"></a>
 
-Many BigCommerce projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of BigCommerce’s strength is that it asks for a clearer and more governable hosted storefront model.
+Clarify whether one storefront is enough or whether multiple storefront contexts are required.
 
-### A Practical BigCommerce Preparation Sequence
+#### 5. Classify app, theme, custom-field, and external-system behavior <a href="#id-5-classify-app-theme-custom-field-and-external-system-behavior" id="id-5-classify-app-theme-custom-field-and-external-system-behavior"></a>
 
-A useful preparation flow for BigCommerce usually looks like this:
+Identify which non-native behaviors still matter after migration.
 
-#### 1. Define high-risk product-choice cases first
+#### 6. Prioritize URL continuity <a href="#id-6-prioritize-url-continuity" id="id-6-prioritize-url-continuity"></a>
 
-These are usually the products most likely to expose variants-versus-modifiers ambiguity.
+Map high-value product, category, content, campaign, and support paths before go-live planning begins.
 
-#### 2. Clarify category meaning
+#### 7. Build a risk-based Demo Migration sample <a href="#id-7-build-a-risk-based-demo-migration-sample" id="id-7-build-a-risk-based-demo-migration-sample"></a>
 
-This prevents discovery and browsing behavior from becoming weaker after migration.
+Choose records that expose the hardest structural questions, not only the easiest data.
 
-#### 3. Define customer-group and price-list logic
+#### 8. Define validation reviewers and pass conditions <a href="#id-8-define-validation-reviewers-and-pass-conditions" id="id-8-define-validation-reviewers-and-pass-conditions"></a>
 
-This keeps pricing context aligned with real commercial expectations.
+Prepare the people and evidence needed to judge whether BigCommerce preserves the intended business meaning.
 
-#### 4. Decide storefront assignments
+### How a Custom Platform Source Changes BigCommerce Preparation <a href="#how-a-custom-platform-source-changes-bigcommerce-preparation" id="how-a-custom-platform-source-changes-bigcommerce-preparation"></a>
 
-This reduces the chance that Multi-Storefront behavior will be improvised later.
+When the Source Platform is a Custom Platform, preparation usually needs more careful interpretation.
 
-#### 5. Classify app- and theme-owned behavior
+Product-choice logic, pricing rules, customer segmentation, storefront context, route behavior, app-like functions, or operational identifiers may exist in custom structures that do not map directly into BigCommerce. In those situations, preparation should include:
 
-This prevents important meaning from remaining implicit.
+* earlier classification of product-choice and pricing meaning
+* more careful separation between native BigCommerce structure and surrounding logic
+* review of custom fields, identifiers, and outside-system dependencies
+* a stronger Demo Migration sample focused on difficult records
+* clearer validation criteria before full migration execution
 
-#### 6. Build a representative Demo Migration sample
+A Custom Platform source often signals that Custom Service should be reviewed early, especially when the migration requires custom migration logic adjustment, bespoke transformation, or interpretation beyond standard service capability.
 
-This turns preparation into evidence rather than assumption.
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-### How Custom Cart as a Source Can Change BigCommerce Preparation
+BigCommerce preparation is strongest when the business defines the target store’s meaning before migration execution begins.
 
-When the source platform is a Custom Cart, BigCommerce preparation usually needs a more bespoke storefront lens.
+That means clarifying product-choice structures, category and discovery roles, customer groups, price lists, storefront assignments, customer-account expectations, URL priorities, app or theme dependencies, and validation samples. When those decisions are made early, BigCommerce becomes easier to validate and safer to launch because the migration result can be judged against intended business outcomes rather than vague assumptions.
 
-That is because product-choice logic, pricing rules, customer segmentation, storefront meaning, or route behavior may sit in source-side structures that do not align neatly with BigCommerce variants, modifiers, customer groups, price lists, Multi-Storefront context, or native redirects. In those situations, preparation usually needs:
+Before moving deeper into execution, use Demo Migration and the preparation checklist to test the areas where BigCommerce must preserve the most important commercial meaning. If product-choice structure, pricing context, storefront scope, Custom Platform behavior, or app-owned logic remains difficult to classify, Live Chat can help determine whether the issue fits Standard Service, requires Managed Service support, or should be reviewed under Custom Service.
 
-* more careful classification of product-choice meaning
-* earlier review of how source-side pricing and storefront logic should be rebuilt
-* clearer separation between native BigCommerce structure and surrounding app or theme behavior
-* more deliberate sample selection for Demo Migration and later validation
+### FAQs <a href="#faqs" id="faqs"></a>
 
-Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into BigCommerce.
+**What should be prepared first before migrating into BigCommerce?**
 
-### Conclusion
+Start with the product families most likely to expose product-choice ambiguity, especially products where variants, modifiers, personalization, bundles, or app-owned behavior affect price, inventory, SKU, or order detail. After that, clarify category meaning, customer groups, price-list logic, storefront scope, and high-value URLs.
 
-A BigCommerce migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
+**Should BigCommerce preparation focus mainly on products?**
 
-That means clarifying variants versus modifiers, category roles, customer-group and price-list logic, storefront assignments, route priorities, customer-account expectations, and app- or theme-owned logic most likely to expose structural ambiguity. When those decisions are made clearly, BigCommerce becomes easier to validate and safer to judge as a target.
+No. Products are central, but BigCommerce preparation is also sensitive around categories, customer groups, price lists, storefront assignments, redirects, customer-account expectations, apps, themes, custom fields, and external systems. A product-only checklist can miss important business behavior.
 
-Before moving deeper into execution, build a preparation checklist around the product-choice cases, pricing structures, storefront assignments, route decisions, customer-account scenarios, and app-shaped behaviors that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine BigCommerce translation, a higher-burden managed path, or a sign that more specialized handling is safer.
+**Why are customer groups and price lists important before migration?**
 
-### FAQs
+They can affect what different customers see, what they pay, and how pricing is governed after migration. If customer-group or price-list logic is vague before migration, the target store may contain correct records while still showing commercially incorrect pricing behavior.
 
-#### What should be prepared first before migrating into BigCommerce?
+**How should legacy URLs be prepared for BigCommerce migration?**
 
-Usually the highest-value starting point is the product families most likely to expose variants-versus-modifiers ambiguity, followed by category meaning, customer-group and price-list logic, storefront assignments, and app- or theme-owned behavior.
+The business should identify high-value products, categories, landing pages, content, campaigns, and support URLs before migration. Each important old URL should have a destination that preserves customer intent, not only a technically valid redirect.
 
-#### Why are price lists such an important BigCommerce preparation topic?
+**When does BigCommerce preparation usually need Custom Service review?**
 
-Because they can make pricing part of a governed relationship between products, customer groups, and storefronts. If that logic is vague, the target can be technically complete while commercially wrong.
-
-#### Should BigCommerce preparation focus mainly on products?
-
-No. Products are central, but BigCommerce preparation is often just as sensitive around categories, pricing context, storefront assignments, redirects, and app- or theme-owned behavior.
-
-#### When does BigCommerce preparation usually need a more cautious approach?
-
-Usually when the source behavior is still vague, when important meaning depends heavily on apps, themes, or custom fields, or when the source platform is a Custom Cart whose structures do not align cleanly with BigCommerce’s native model.
+Custom Service review is usually safer when the Source Platform has custom product-choice logic, custom pricing rules, unusual storefront assignments, custom fields that drive behavior, outside-system identifiers, app-like source functions, or route behavior that cannot be represented through standard BigCommerce structures without custom migration logic adjustment.

@@ -1,202 +1,258 @@
 # BigCommerce Validation Priorities
 
-A BigCommerce migration should not be validated evenly across the whole storefront. It should be validated where BigCommerce is most likely to change product-choice behavior, pricing visibility, storefront scope, route meaning, and app-shaped storefront logic.
+A BigCommerce migration should be validated where the Target Platform is most likely to reshape commercial meaning. The goal is not only to confirm that products, customers, orders, categories, redirects, and storefront records are present. The stronger question is whether BigCommerce now supports the same buying decisions, pricing context, storefront logic, customer experience, and operational outcomes the business needs after migration.
 
-That matters because BigCommerce can produce a polished target quickly. Products may appear present, variants may exist, modifiers may appear, customer groups may be assigned, price lists may be active, storefronts may exist, and redirects may resolve. But those signals do not prove that the target is commercially trustworthy. The more important question is whether BigCommerce’s product-choice model, pricing context, storefront assignments, route behavior, and app- or theme-shaped logic still support the intended outcome after translation.
+BigCommerce can make a migrated store look complete quickly. Products can appear, variants can exist, modifiers can be displayed, customer groups can be assigned, price lists can apply, storefronts can be available, and redirects can be resolved. Those signals are useful, but they do not prove that the migration is ready for launch. Validation should focus first on the cases where BigCommerce structure changes meaning: product-choice behavior, category-led discovery, customer-group and price-list logic, Multi-Storefront assignment, route destinations, customer-account expectations, and app- or theme-shaped behavior.
 
-This makes BigCommerce validation more context-sensitive than many teams first expect. A broad record check can create false confidence. A stronger approach is to validate the places where BigCommerce most often reshapes meaning: product-choice structure, category-led discovery, customer-group and price-list behavior, storefront assignments, high-value routes, customer-account expectations, and surrounding app-shaped behavior.
+This article explains the BigCommerce-specific validation priorities that should receive the closest review after Demo Migration, Full Migration, or any high-risk migration stage.
 
-### What BigCommerce Validation Is Really Trying to Prove
+### What BigCommerce validation is trying to prove <a href="#what-bigcommerce-validation-is-trying-to-prove" id="what-bigcommerce-validation-is-trying-to-prove"></a>
 
-For BigCommerce, validation is mainly trying to prove five things.
+BigCommerce validation should prove that the migrated store works as a commercial system, not just as a collection of transferred records.
 
-#### 1. Product choices still express the right sellable outcomes
+#### Product choices still lead to the correct sellable outcome <a href="#product-choices-still-lead-to-the-correct-sellable-outcome" id="product-choices-still-lead-to-the-correct-sellable-outcome"></a>
 
-The product records may exist, but the higher-value question is whether the right BigCommerce structure still supports the way the customer should actually buy.
+Product presence is not enough. BigCommerce validation should confirm that customers can still select the right product configuration, option, variation, customization, or modifier-driven choice without confusion.
 
-#### 2. Pricing context still behaves correctly
+#### Pricing context still reflects the intended business rules <a href="#pricing-context-still-reflects-the-intended-business-rules" id="pricing-context-still-reflects-the-intended-business-rules"></a>
 
-Prices may exist, but the target still needs to prove that the correct customer context receives the correct pricing in the correct storefront.
+Visible prices are not enough. BigCommerce validation should confirm that customer groups, price lists, storefront scope, discounts, and other pricing conditions still produce the expected commercial result.
 
-#### 3. Storefront assignments still make sense
+#### Storefront assignment still matches the intended selling model <a href="#storefront-assignment-still-matches-the-intended-selling-model" id="storefront-assignment-still-matches-the-intended-selling-model"></a>
 
-Values may survive, but the target still needs to prove that products, prices, and other behaviors appear in the right storefront context.
+If Multi-Storefront or storefront-specific behavior matters, validation should confirm that products, categories, pricing, customers, and content appear in the correct storefront context.
 
-#### 4. High-value routes still support the intended journey
+#### URL and route behavior still supports customer intent <a href="#url-and-route-behavior-still-supports-customer-intent" id="url-and-route-behavior-still-supports-customer-intent"></a>
 
-Redirects may resolve, but the destination still needs to support the customer intent and commercial value the original route used to serve.
+A redirect can technically resolve while still landing the customer in a weak destination. BigCommerce validation should confirm that priority URLs still support the same search, shopping, trust, or support purpose as before.
 
-#### 5. App- and theme-owned behavior still works acceptably
+#### App, theme, and custom-data behavior still supports the intended outcome <a href="#app-theme-and-custom-data-behavior-still-supports-the-intended-outcome" id="app-theme-and-custom-data-behavior-still-supports-the-intended-outcome"></a>
 
-The storefront may look complete, but the surrounding hosted app- and theme-shaped logic still needs to support the outcomes that matter most.
+Many BigCommerce stores rely on apps, theme logic, custom fields, or external systems. Validation should confirm that those surrounding behaviors still support the business outcome, not merely that core records were transferred.
 
-### Validation Priority 1: High-Risk Product-Choice Cases
+### Validation priority 1: product-choice structure <a href="#validation-priority-1-product-choice-structure" id="validation-priority-1-product-choice-structure"></a>
 
-The first BigCommerce validation priority is usually the product groups most likely to expose target-structure ambiguity.
+The first BigCommerce validation priority is usually product-choice behavior.
 
-That often includes:
+#### What to check <a href="#what-to-check" id="what-to-check"></a>
 
-* best sellers with complex option behavior
-* products that depend on real sellable variants
-* products that depend on modifier-style customization
-* products where source-side meaning mixed variant, modifier, or surrounding logic
-* products where the business is already uncertain how BigCommerce should express the choice model clearly enough
+Review products that expose the most ambiguity between variants, options, modifiers, custom fields, or app-supported configuration. These are often the products where migration differences affect how customers actually buy.
 
-BigCommerce distinguishes between variants and modifiers explicitly. That makes product validation a structural question, not just a record question.
+#### Strong validation samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
 
-The review question is not only whether the product exists. It is whether the customer can still reach the correct sellable outcome without confusion.
+A strong sample should include:
 
-### Validation Priority 2: Category and Discovery Behavior
+* best-selling products with multiple choices
+* products with variants, options, or modifiers
+* configurable products with personalization or add-on selections
+* products where the Source Platform used custom choice logic
+* products where SKU, inventory, price, image, or fulfillment behavior depends on the selected choice
+* products where the business is unsure whether BigCommerce should formalize, simplify, or restructure the original model
 
-BigCommerce validation should explicitly review the category structures most likely to affect discovery and storefront meaning.
+#### What often gets missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
 
-That usually means checking:
+Teams often check whether the product exists but fail to confirm whether the right customer-facing choice path still exists. That can create a target store that looks complete but weakens the buying experience.
 
-* categories important to navigation
-* category relationships important to customer browsing
-* whether the resulting storefront still supports natural discovery
-* whether key category paths still make sense to the customer
-* whether category logic is still governable after launch
+### Validation priority 2: category and discovery behavior <a href="#validation-priority-2-category-and-discovery-behavior" id="validation-priority-2-category-and-discovery-behavior"></a>
 
-A category can therefore exist in the target while the storefront still becomes commercially or behaviorally weaker if discovery logic is structurally wrong.
+BigCommerce validation should review the category structures that matter most for browsing, merchandising, and search-led discovery.
 
-### Validation Priority 3: Customer-Group and Price-List Behavior
+#### What to check <a href="#what-to-check-1" id="what-to-check-1"></a>
 
-One of BigCommerce’s clearest validation priorities is pricing context.
+Review whether important categories, product assignments, navigation paths, and landing-page relationships still make sense in the BigCommerce storefront.
 
-Price lists can be assigned across customer groups and storefronts. That means pricing validation should focus on the most commercially sensitive customer-group and price-list cases first.
+#### Strong validation samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
 
-Useful checks usually include:
+A strong sample should include:
 
-* whether the correct customer group receives the intended pricing
-* whether the intended price list is active in the intended storefront
-* whether storefront-specific pricing still reflects the business model
-* whether any segmented-pricing behavior is now redundant or conflicting
-* whether the resulting pricing still feels commercially trustworthy
+* top navigation categories
+* high-revenue categories
+* categories that previously supported SEO or campaign traffic
+* product groups that depend on precise category assignment
+* categories with different storefront visibility expectations
+* product listings where sorting, filtering, or merchandising order matters
 
-This is one of the clearest places where BigCommerce can look more governed while still being commercially wrong.
+#### What often gets missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
 
-### Validation Priority 4: Multi-Storefront Assignment and Scope Behavior
+A category can exist in BigCommerce while discovery becomes weaker. The validation question is not only whether the category migrated. It is whether customers can still find the right products through the intended path.
 
-BigCommerce supports Multi-Storefront, and that makes storefront assignment a real validation priority.
+### Validation priority 3: customer groups and price lists <a href="#validation-priority-3-customer-groups-and-price-lists" id="validation-priority-3-customer-groups-and-price-lists"></a>
 
-That means validation should begin with the storefront contexts most likely to expose ambiguity.
+Customer-group and price-list behavior deserves close validation because pricing context can be commercially sensitive.
 
-Useful checks usually include:
+#### What to check <a href="#what-to-check-2" id="what-to-check-2"></a>
 
-* whether the right products appear in the right storefront
-* whether the right customer groups and price lists apply in the right storefront
-* whether the storefront differences still reflect the intended business model
-* whether the team is interpreting the storefront structure correctly after migration
+Review whether the right customers or customer groups receive the intended pricing, catalog access, or buying conditions in the correct storefront context.
 
-This matters because a target can look structurally complete while still misrepresenting the storefront logic it is supposed to preserve.
+#### Strong validation samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
 
-### Validation Priority 5: High-Value Routes and Redirect Destinations
+A strong sample should include:
 
-BigCommerce includes native 301 Redirect capability. That makes route continuity less of a technical-risk question than on some targets. But validation still matters because the real issue is not whether a redirect exists. It is whether the destination still supports the customer intent or commercial value the old route used to serve.
+* customer groups with special pricing
+* price lists that affect high-value products
+* customer segments with wholesale, B2B, loyalty, reseller, or account-specific pricing
+* storefront-specific pricing or visibility cases
+* orders or test carts that prove pricing is not only stored but applied correctly
 
-This usually means checking:
+#### What often gets missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
+
+Teams sometimes treat visible pricing as proof of correct pricing behavior. BigCommerce validation should go further and test whether the right price appears for the right customer context under the right storefront conditions.
+
+### Validation priority 4: Multi-Storefront assignment and scope <a href="#validation-priority-4-multi-storefront-assignment-and-scope" id="validation-priority-4-multi-storefront-assignment-and-scope"></a>
+
+If the store uses or plans to use Multi-Storefront, storefront assignment becomes a validation priority rather than a side detail.
+
+#### What to check <a href="#what-to-check-3" id="what-to-check-3"></a>
+
+Confirm that each storefront reflects the intended product, category, pricing, content, customer, and route scope.
+
+#### Strong validation samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
+
+A strong sample should include:
+
+* products intended for one storefront but not another
+* categories with storefront-specific visibility
+* customer groups or price lists connected to different storefront contexts
+* priority content or landing pages that need storefront-specific meaning
+* URLs whose destination depends on storefront assignment
+
+#### What often gets missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
+
+A Multi-Storefront setup can look orderly while still mixing visibility, pricing, or customer expectations. Validation should prove the storefront model, not only confirm that multiple storefronts exist.
+
+### Validation priority 5: high-value routes and redirect destinations <a href="#validation-priority-5-high-value-routes-and-redirect-destinations" id="validation-priority-5-high-value-routes-and-redirect-destinations"></a>
+
+BigCommerce route validation should focus on customer intent and commercial value, not only redirect status.
+
+#### What to check <a href="#what-to-check-4" id="what-to-check-4"></a>
+
+Review whether priority URLs resolve to destinations that still support the original intent. This includes product pages, category pages, content pages, campaign pages, and customer-support routes.
+
+#### Strong validation samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
+
+A strong sample should include:
 
 * best-selling product URLs
-* high-value category or landing routes
-* support or trust pages customers still need to reach
-* routes whose meaning changes because of storefront assignment or pricing context
+* high-traffic category URLs
+* pages with backlinks or organic search value
+* campaign or landing pages
+* support, trust, or policy pages customers rely on
+* routes affected by storefront assignment, category restructuring, or product consolidation
 
-A technically valid redirect can still be commercially weak if it lands in the wrong place.
+#### What often gets missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
 
-### Validation Priority 6: Customer-Account and First-Login Expectations
+A technically working redirect can still be commercially weak if it lands on a generic page, a wrong product, a weaker category, or a storefront context that no longer matches the original route purpose.
 
-Customer continuity in BigCommerce is not only about customer records. It is also about whether the post-migration account journey feels workable to returning customers.
+### Validation priority 6: customer-account and order-history experience <a href="#validation-priority-6-customer-account-and-order-history-experience" id="validation-priority-6-customer-account-and-order-history-experience"></a>
 
-For a hosted target like BigCommerce, validation should focus on:
+Customer validation should include the post-migration account journey, not only imported customer records.
 
-* what customers experience at first login
-* whether the account journey matches launch communication
-* whether support is prepared for expected friction points
-* whether imported customer records are leading to the expected post-launch experience
+#### What to check <a href="#what-to-check-5" id="what-to-check-5"></a>
 
-This is important because customer-record continuity is not the same thing as account-journey continuity.
+Confirm whether customer records, addresses, order history, account expectations, and first-login communication create a workable post-launch experience.
 
-### Validation Priority 7: App- and Theme-Owned Behavior
+#### Strong validation samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
 
-Many BigCommerce stores depend on more than native product, pricing, and storefront structures.
+A strong sample should include:
 
-That means validation should explicitly review:
+* returning customers with order history
+* customers with multiple addresses
+* customer-group or pricing-related accounts
+* customers who should receive specific account communication
+* order records with important tax, shipping, discount, payment, fulfillment, or customer-service meaning
 
-* app-dependent product or pricing behavior
-* theme-shaped navigation, trust, or buying logic
-* custom-field behavior that still matters to the storefront or operations
-* any non-negotiable outcome that depends on surrounding BigCommerce logic rather than only on core records
+#### What often gets missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
 
-This is one of the most important BigCommerce-specific validation priorities because a storefront can look polished while still weakening in the places where the real business meaning lives outside the core record model.
+A customer can be present in the target store while the account journey still creates friction. BigCommerce validation should check the practical customer experience after launch, especially when account continuity affects trust or support volume.
 
-The real question is not whether the app or theme survived. It is whether the behavior it supported is still commercially usable after launch.
+### Validation priority 7: app, theme, and custom-data behavior <a href="#validation-priority-7-app-theme-and-custom-data-behavior" id="validation-priority-7-app-theme-and-custom-data-behavior"></a>
 
-### What Usually Makes a BigCommerce Validation Sample Strong
+Many BigCommerce migrations depend on more than native product, customer, order, category, and pricing records.
 
-A strong BigCommerce validation sample is usually built from:
+#### What to check <a href="#what-to-check-6" id="what-to-check-6"></a>
 
-* the products most likely to expose variants-versus-modifiers ambiguity
-* the categories most likely to reveal weaker discovery behavior
-* the customer-group and price-list combinations most likely to affect pricing integrity
-* the storefront assignments most likely to expose ambiguity
-* the routes most likely to carry commercial value
-* the app- and theme-owned behaviors most likely to weaken quietly
-* the customer-account scenarios most likely to affect trust
+Review whether apps, theme logic, custom fields, outside-system identifiers, and external workflows still support the outcomes they were meant to support.
 
-This is stronger than broad record checking because it tests the areas where BigCommerce’s structure most often changes meaning rather than just confirming that easy records survived.
+#### Strong validation samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
 
-### What Often Gets Missed in BigCommerce Validation
+A strong sample should include:
 
-Several patterns weaken BigCommerce validation.
+* products that depend on app-supported behavior
+* pricing, shipping, tax, subscription, review, loyalty, ERP, CRM, fulfillment, marketplace, or analytics workflows
+* custom fields that affect storefront display or operations
+* theme-shaped navigation, trust, comparison, or buying logic
+* records that connect to outside systems by identifier or reference value
 
-Common mistakes include:
+#### What often gets missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
 
-* treating product presence as proof of correct variants-versus-modifiers treatment
-* treating price visibility as proof of correct pricing context
-* assuming storefront assignment is correct because the storefronts exist
-* validating redirects without validating destinations
-* checking customer import without testing the first-login and account journey
-* checking apps and themes only superficially instead of judging the outcomes they support
+Teams often check the core BigCommerce records but treat apps, themes, and custom fields as later configuration. That is risky when those layers carry real commercial or operational meaning.
 
-These mistakes usually create the illusion of a stable BigCommerce launch while leaving the highest-impact commercial questions unresolved.
+### How Custom Platform sources change BigCommerce validation <a href="#how-custom-platform-sources-change-bigcommerce-validation" id="how-custom-platform-sources-change-bigcommerce-validation"></a>
 
-### How Custom Cart as a Source Changes BigCommerce Validation Priorities
+When the Source Platform is a Custom Platform, BigCommerce validation needs a stricter evidence standard.
 
-When the source platform is a Custom Cart, BigCommerce validation usually needs a tighter, more bespoke evidence standard.
+#### Why the evidence threshold is higher <a href="#why-the-evidence-threshold-is-higher" id="why-the-evidence-threshold-is-higher"></a>
 
-That is because more of the target behavior may depend on how source-side product-choice, pricing, storefront, customer, and route meaning were interpreted during translation. In those cases, validation usually needs:
+Custom Platform sources often require interpretation before the data can become usable in BigCommerce. Product-choice logic, customer groups, price rules, storefront meaning, custom fields, URLs, order relationships, app data, and outside-system identifiers may not follow a standard supported data model.
+
+#### What should be reviewed more carefully <a href="#what-should-be-reviewed-more-carefully" id="what-should-be-reviewed-more-carefully"></a>
+
+Validation should include:
 
 * more representative high-risk product samples
-* closer review of customer-group and price-list reconstruction
-* tighter judgment around storefront assignment
-* more careful review of app- or custom-field-dependent meaning
-* a more precise distinction between acceptable BigCommerce formalization and unacceptable commercial distortion
+* closer review of pricing and customer-group reconstruction
+* tighter proof of storefront assignment and route behavior
+* careful review of custom fields and app-dependent outcomes
+* clear distinction between acceptable BigCommerce formalization and unacceptable business-meaning loss
 
-This does not change what should be validated first. It raises the precision required to trust the result.
+This does not change the overall validation priorities. It raises the precision required before the result should be trusted.
 
-### Conclusion
+### How to label BigCommerce validation outcomes <a href="#how-to-label-bigcommerce-validation-outcomes" id="how-to-label-bigcommerce-validation-outcomes"></a>
 
-BigCommerce validation is strongest when it focuses first on the areas where the platform is most likely to change commercial meaning: product-choice structure, category-led discovery, customer-group and price-list behavior, storefront assignments, high-value route destinations, customer-account experience, and app- or theme-owned behavior.
+BigCommerce validation should produce clear next-action labels rather than vague approval comments.
 
-That is what makes the validation result useful. A storefront can look complete while still be commercially weaker in exactly those areas. The safest path is to test those priorities deliberately with a representative sample rather than assume that broad completeness proves launch readiness.
+#### Pass <a href="#pass" id="pass"></a>
 
-Validate the product-choice cases, pricing structures, storefront assignments, route destinations, account scenarios, and app-shaped behaviors that matter most before treating the target as trustworthy. If the result still leaves ambiguity around whether a difference is acceptable BigCommerce formalization or a real continuity problem, Live Chat can help interpret that evidence before launch decisions are locked.
+Use **Pass** when the sample proves the intended BigCommerce behavior and no important commercial, customer, SEO, storefront, or operational meaning is weakened.
 
-### FAQs
+#### Acceptable difference <a href="#acceptable-difference" id="acceptable-difference"></a>
 
-#### What should be validated first in a BigCommerce migration?
+Use **Acceptable difference** when the result is different from the Source Platform but still works clearly within BigCommerce and does not weaken the intended outcome.
 
-Usually the first priority is the product cases most likely to expose variants-versus-modifiers ambiguity, followed by category-led discovery, customer-group and price-list behavior, storefront assignments, route destinations, account scenarios, and app- or theme-owned behavior.
+#### Needs review <a href="#needs-review" id="needs-review"></a>
 
-#### Why are customer groups and price lists such an important BigCommerce validation priority?
+Use **Needs review** when the difference may be acceptable, but the customer team or Next-Cart needs more context before deciding.
 
-Because they can make pricing part of a governed relationship across customer contexts and storefronts. Validation should prove that the intended pricing logic still behaves correctly, not just that prices are visible.
+#### Blocker <a href="#blocker" id="blocker"></a>
 
-#### Are native 301 redirects enough to protect continuity in BigCommerce?
+Use **Blocker** when the result prevents launch confidence, breaks a key commercial path, weakens customer trust, disrupts pricing or storefront scope, creates SEO risk, or undermines an operational workflow.
 
-No. Native redirects matter, but validation should still confirm that the destination supports the same customer intent and commercial purpose as the original route.
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-#### Why does the customer-account journey need explicit validation in BigCommerce?
+BigCommerce validation is strongest when it tests the parts of the target store where platform structure can quietly change meaning: product-choice behavior, categories and discovery, customer groups, price lists, Multi-Storefront assignment, high-value routes, customer-account experience, app behavior, theme behavior, custom fields, and outside-system dependencies.
 
-Because imported customer records do not automatically prove that first-login expectations and the broader account experience will feel clear and workable after launch.
+A complete-looking BigCommerce store is not automatically a launch-ready store. The safer test is whether representative, high-risk samples prove that the target still supports the right buying decisions, pricing context, storefront scope, customer trust, SEO continuity, and operational workflows.
+
+Validate the BigCommerce cases most likely to expose ambiguity before treating the migration result as trustworthy. If the review still leaves uncertainty around whether a difference is acceptable platform formalization or a real continuity issue, use Live Chat to clarify the evidence before launch decisions are finalized.
+
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**What should be validated first in a BigCommerce migration?**
+
+Start with the product cases most likely to expose variants-versus-modifiers ambiguity, then review category discovery, customer-group and price-list behavior, storefront assignments, route destinations, customer-account scenarios, and app- or theme-owned behavior.
+
+**Why are customer groups and price lists such an important BigCommerce validation priority?**
+
+They can make pricing depend on customer context and storefront context. Validation should prove that the intended customer receives the intended price under the intended conditions, not only that prices appear in the target store.
+
+**Are native redirects enough to protect continuity in BigCommerce?**
+
+No. Redirects are useful, but validation should also confirm that the destination supports the same customer intent, commercial value, or SEO purpose as the original route.
+
+**How does a Custom Platform source change BigCommerce validation?**
+
+A Custom Platform source usually requires tighter validation because source-side product logic, pricing rules, storefront meaning, custom fields, URLs, order relationships, and outside-system identifiers may need interpretation before they become reliable in BigCommerce.
+
+**What makes a BigCommerce validation sample strong?**
+
+A strong sample includes the cases most likely to reveal hidden weakness: complex product-choice behavior, important category paths, customer-group and price-list rules, storefront-specific cases, high-value URLs, customer-account scenarios, app-owned behavior, theme-shaped behavior, and Custom Platform records where relevant.
