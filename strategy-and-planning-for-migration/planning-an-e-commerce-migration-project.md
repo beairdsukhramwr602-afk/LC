@@ -7,7 +7,7 @@ metaLinks:
 
 # Planning an E-commerce Migration Project
 
-An E-commerce migration project usually becomes difficult long before data starts moving. The hardest problems often begin when the business has not clearly defined what must remain true after launch, which parts of the store carry the most risk, who will review each outcome, or how much time the project needs for evidence, correction, and launch preparation.
+An E-commerce migration project usually becomes difficult long before data starts moving. The hardest problems often arise when the business has not clearly defined what must remain true after launch, which parts of the store carry the most risk, who will review each outcome, or how much time the project needs for evidence collection, correction, and launch preparation.
 
 That is why migration planning should be treated as a decision framework, not as a loose collection of tasks. A good project plan does not try to predict every technical detail. It creates enough structure for the project to move forward without relying on guesswork in the areas that matter most.
 
@@ -27,7 +27,7 @@ Migration failures often begin as planning failures. They happen when scope, exp
 
 #### Planning connects the Fundamentals section to service decisions <a href="#planning-connects-the-fundamentals-section-to-service-decisions" id="planning-connects-the-fundamentals-section-to-service-decisions"></a>
 
-Migration Fundamentals explains what platform migration means, how data and relationships behave, how readiness should be judged, and where risk usually appears. Planning turns that knowledge into a project structure.
+Migration Fundamentals explains what platform migration entails, how data and relationships behave, how readiness should be assessed, and where risk typically arises. Planning turns that knowledge into a project structure.
 
 A strong plan does not need to repeat every concept from earlier sections. It should use those concepts to make practical decisions: what belongs in scope, what needs deeper review, which areas require evidence, and when the business is ready to move from preparation into execution.
 

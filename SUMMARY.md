@@ -58,7 +58,7 @@
   * [Magento Validation Priorities](platform-strategy-hubs/magento-migration-hub/magento-validation-priorities.md)
   * [Magento Migration Pitfalls and Prevention](platform-strategy-hubs/magento-migration-hub/magento-migration-pitfalls-and-prevention.md)
 * [Adobe Commerce Migration Hub](platform-strategy-hubs/adobe-commerce-migration-hub/README.md)
-  * [Adobe Commerce Migration Hub](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-migration-hub.md)
+  * [Adobe Commerce Platform Overview](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-platform-overview.md)
   * [Adobe Commerce Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-fit-ideal-and-non-ideal-profiles.md)
   * [Adobe Commerce Data Model Differences](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-data-model-differences.md)
   * [Adobe Commerce Constraints and Risks](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-constraints-and-risks.md)
