@@ -1,243 +1,276 @@
 # PrestaShop Migration Pitfalls and Prevention
 
-PrestaShop migrations rarely fail because the platform cannot hold enough data. They fail more often because the migrated store preserves records without preserving the storefront and operating logic that made the business usable before the move.
+PrestaShop migration pitfalls usually appear when the migrated store looks complete before the business has proven that the storefront, catalog logic, customer context, and shop governance still behave correctly. Products may exist, categories may load, customer records may appear, and friendly URLs may resolve, but those signs do not prove that customers can still understand products, compare choices, browse naturally, access the right experience, or trust the new store after launch.
 
-That is what makes PrestaShop pitfalls so easy to underestimate. The target can look structured and flexible while still becoming commercially weaker if combinations, descriptive product meaning, customer-group behavior, shop assignments, route continuity, or module-driven storefront logic are treated as details to refine later instead of as conditions that shape the target from the beginning. The real danger is false confidence. Customers and internal teams may see a store that appears complete while the behaviors that drive buying, trust, governance, or operational clarity have already weakened.
+The main risk is false confidence. PrestaShop gives merchants many ways to shape catalog structure, product presentation, customer-group behavior, multistore scope, modules, themes, and custom storefront behavior. That flexibility is useful, but it becomes risky when the migration preserves visible records without preserving the practical meaning behind those records.
 
-This page focuses on the failure patterns that recur most often when PrestaShop is chosen for the right broad reasons but prepared or validated too loosely. Each pitfall matters because it can create a store that looks complete while still behaving incorrectly for customers, internal teams, or both.
+This article focuses on recurring PrestaShop migration failure patterns and how to prevent them before they become post-launch issues. Each pitfall includes what goes wrong, early warning signs, prevention guidance, a recommendation example, and a pass condition.
 
-### Pitfall 1: Migrating products without preserving the real combination logic
+### Pitfall 1: Migrating Products Without Preserving the Real Sellable Outcome <a href="#pitfall-1-migrating-products-without-preserving-the-real-sellable-outcome" id="pitfall-1-migrating-products-without-preserving-the-real-sellable-outcome"></a>
 
-#### What Goes Wrong
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-Product records are transferred, but the storefront no longer leads customers to the correct purchasable result. Selectable variation becomes blurred with descriptive information, the product page still looks populated but no longer communicates what is being bought clearly enough, or the most important configurable products rely on combination behavior that is no longer being expressed correctly in the target.
+Products move into PrestaShop, but the product page no longer guides customers to the correct purchasable result. A product may look complete while its combinations, features, customization fields, stock behavior, image logic, or SKU meaning no longer support a confident buying decision.
 
-#### Early Warning Signs
+This often happens when the Source Platform mixed selectable choices, descriptive details, personalization inputs, and display rules in one product structure. If that meaning is not separated clearly, PrestaShop may preserve product presence while weakening the buying path.
 
-* products appear complete, but shoppers struggle to identify the right selection path
-* important combination behavior feels harder to interpret than before
-* internal teams cannot explain which choices the customer is actually expected to make
-* the most configurable products require workarounds to make sense after migration
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-#### Prevention
+* high-value configurable products are reviewed only by product-page presence
+* combinations exist, but customers cannot easily identify the right choice
+* important feature or personalization information appears in the wrong decision layer
+* price, stock, image, SKU, or availability depends on combinations but is not tested directly
+* internal teams cannot explain what the customer is expected to choose before purchase
 
-Define the intended buyable outcome before the migration is treated as structurally ready. Separate selectable combinations from descriptive features and customer-entered customization. Use representative configurable products early enough to test whether the target still supports a confident buying path.
+#### Prevention <a href="#prevention" id="prevention"></a>
 
-#### Recommendation example
+Define the intended sellable outcome before judging the product structure. Separate combinations that define the buyable product from features that describe the product and customization fields that collect customer-entered information. Use high-risk configurable products in the Demo Migration sample instead of relying only on simple products.
 
-Use a sample that includes the most structurally difficult and highest-value configurable products.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-**Pass condition:** the intended customer can identify the right product outcome confidently, make the required selections in the correct order, and understand what is being purchased without guesswork.
+Review a product family where combinations affect price, stock, image, SKU, or availability, and where customers also need descriptive features or personalization fields to make the right buying decision.
 
-### Pitfall 2: Preserving native product layers without preserving customer understanding
+**Pass condition**
 
-#### What Goes Wrong
+Customers can identify the correct product outcome, understand which choices affect the purchase, and complete the product decision without confusion.
 
-The native product structures exist after migration, but the storefront no longer supports how customers understand the difference between variation, description, and personalization. Features, customization fields, or surrounding content may technically survive while the product page becomes harder to interpret or less trustworthy.
+### Pitfall 2: Treating Combinations, Features, and Customization Fields as Interchangeable <a href="#pitfall-2-treating-combinations-features-and-customization-fields-as-interchangeable" id="pitfall-2-treating-combinations-features-and-customization-fields-as-interchangeable"></a>
 
-#### Early Warning Signs
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-* features are present, but customers no longer understand which details are informative and which affect the buyable product
-* personalization inputs exist, but they appear in the wrong place or create uncertainty
-* product pages look complete but comparison and understanding feel weaker
-* teams approve structural survival without checking whether the product meaning is still clear to real users
+The migrated store preserves product details, but PrestaShop’s product layers no longer communicate the right meaning. Selectable combinations may be treated like descriptive details, features may be used where customer choice is required, or customization fields may appear without a clear purpose.
 
-#### Prevention
+This weakens product understanding. Customers need to know what they are choosing, what they are comparing, and what information they are entering. When those layers blur, the product page can look populated while still becoming harder to trust.
 
-Review product understanding as a storefront outcome, not only as a data-structure result. Confirm that combinations still govern selectable variation, features still support understanding and comparison, and customization still feels like intentional personalization rather than confusing extra input.
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-#### Recommendation example
+* product values are present, but teams cannot explain whether they are selectable, descriptive, or customer-entered
+* customers must infer which values affect price, stock, or availability
+* feature-heavy products no longer support easy comparison
+* personalization fields appear as confusing extra inputs rather than intentional customer choices
+* combinations are technically present but do not support the intended buying path
 
-Validate a group of products where customers need to compare features, choose a variation, and enter personalization under one coherent buying path.
+#### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-**Pass condition:** the storefront still tells customers clearly what is selectable, what is descriptive, and what is personalized.
+Review each product layer by its storefront role. Combinations should support sellable variation, features should support understanding and comparison, and customization fields should support customer-entered personalization or order-specific information. If the source structure is unusual, use Custom Service review where custom migration logic adjustment or bespoke interpretation is needed.
 
-### Pitfall 3: Preserving categories while weakening discovery and access behavior
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-#### What Goes Wrong
+Build an early review sample around products that include combinations, feature comparison, and personalization fields in one buying journey.
 
-Categories migrate, but category paths no longer support how customers actually discover products or how differentiated access behavior is supposed to work.
+**Pass condition**
 
-In PrestaShop, categories often influence both browsing and storefront context. The store can therefore keep its category tree while still becoming harder to navigate, less intuitive to interpret, or weaker in access-sensitive browsing scenarios.
+The storefront clearly separates what the customer selects, what the customer compares, and what the customer enters.
 
-#### Early Warning Signs
+### Pitfall 3: Preserving Categories While Weakening Discovery <a href="#pitfall-3-preserving-categories-while-weakening-discovery" id="pitfall-3-preserving-categories-while-weakening-discovery"></a>
 
-* category paths still exist, but browsing feels less natural
-* internal teams can no longer explain why certain products appear in specific discovery paths
-* category-level behavior still exists technically but feels commercially weaker
-* important browse or comparison paths are missing from the Demo Migration sample
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-#### Prevention
+Categories migrate, but the new PrestaShop catalog no longer supports the way customers actually browse, compare, or reach important products. The category tree may exist, yet product placement, category depth, manufacturer or brand context, and merchandising paths may become less natural.
 
-Treat category review as a customer-path question, not just a taxonomy question. Validate the browse paths, category relationships, and access-sensitive discovery scenarios that matter most commercially.
+This pitfall appears when category migration is treated as taxonomy survival rather than customer-path continuity. A category can exist and still fail if it no longer helps customers reach the right product set.
 
-#### Recommendation example
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-Use a sample that includes the categories most important to navigation, comparison, and differentiated access behavior.
+* category paths exist, but browsing feels less intuitive than before
+* important products appear in unexpected or commercially weaker locations
+* category pages are reviewed by presence rather than customer usefulness
+* manufacturer, brand, or comparison context is not checked where it matters
+* only top-level categories are included in early review
 
-**Pass condition:** representative customers can still reach the right product set through category paths that make commercial and structural sense.
+#### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-### Pitfall 4: Treating customer groups as imported records instead of storefront logic
+Validate categories through the customer journey. Review the categories that matter most for revenue, search demand, merchandising, comparison, and support. Confirm that products appear where customers expect them and that the structure remains maintainable after launch.
 
-#### What Goes Wrong
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-Customer groups survive in the target, but the business no longer understands what differentiated storefront behavior those groups are supposed to create.
+Select several high-value category paths and confirm that product placement, subcategory logic, manufacturer or brand context, and destination meaning still support the intended browsing behavior.
 
-This creates a subtle but serious risk. Customer data may look complete while access, visibility, or differentiated behavior becomes weaker, more confusing, or harder to govern. In PrestaShop, customer-group continuity has to be judged through storefront meaning, not only through imported records.
+**Pass condition**
 
-#### Early Warning Signs
+Customers can still reach the right product set through category paths that make commercial, navigational, and structural sense.
 
-* customer groups still exist, but no one can explain what they should still change
-* differentiated storefront behavior feels inconsistent or harder to predict
-* support teams are unsure what different customer contexts should see or access
-* group-sensitive cases are absent from validation
+### Pitfall 4: Importing Customer Groups Without Preserving Storefront Context <a href="#pitfall-4-importing-customer-groups-without-preserving-storefront-context" id="pitfall-4-importing-customer-groups-without-preserving-storefront-context"></a>
 
-#### Prevention
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-Validate customer groups as real storefront-control logic. Identify which group-sensitive behaviors still matter and test them through representative customer scenarios rather than relying on field survival.
+Customer groups survive as records, but the business loses clarity about what those groups should still control. Group labels may remain while pricing expectations, visibility logic, access conditions, segmentation, communication assumptions, or support interpretation become weaker.
 
-#### Recommendation example
+This creates a hidden risk because the customer data can look complete while the customer experience no longer reflects the business rule behind each group.
 
-Build validation around the customer groups most likely to affect access conditions, trust, or differentiated storefront behavior.
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-**Pass condition:** the intended customer context still receives the intended experience, and internal teams can explain why.
+* customer groups are validated only as imported labels
+* teams cannot explain what each important group should still change
+* customer-specific experience differs from expectations after login
+* group-sensitive pricing, visibility, or access behavior is assumed rather than tested
+* support teams do not know how to interpret different customer contexts
 
-### Pitfall 5: Treating multistore as a simple toggle instead of a governance model
+#### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-#### What Goes Wrong
+Treat customer groups as storefront and operating context, not only as customer classification. Identify the groups that affect customer experience, pricing, access, segmentation, communication, or internal handling, then test representative scenarios directly.
 
-Multistore is enabled or preserved, but the business has not defined clearly what belongs in each shop, what should stay shared, and why those boundaries matter.
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-That usually creates a target that looks richer than it really is. Values may exist in the correct instance, but the logic behind shop separation becomes harder to govern, harder to validate, and easier to misinterpret after launch.
+Review customers from the groups most likely to affect access, pricing expectations, visibility, or support handling.
 
-#### Early Warning Signs
+**Pass condition**
 
-* shops exist, but the business cannot explain their distinct purpose clearly
-* different shops appear to repeat or blur meaning
-* internal teams treat shop scope as a technical state rather than a customer-facing context
-* validation focuses on whether shops exist, not whether they behave coherently
+Each important customer group still produces the intended experience, and internal teams can explain what the group means after migration.
 
-#### Prevention
+### Pitfall 5: Treating Multistore as a Checkbox Instead of a Governance Model <a href="#pitfall-5-treating-multistore-as-a-checkbox-instead-of-a-governance-model" id="pitfall-5-treating-multistore-as-a-checkbox-instead-of-a-governance-model"></a>
 
-Define multistore as a governance model, not a feature checkbox. Clarify why each shop exists, what must remain shared, what must differ, and how those boundaries should stay understandable after launch.
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-#### Recommendation example
+Multistore is enabled or preserved, but the business has not defined what belongs to each shop, what should stay shared, and why those boundaries matter. The target can therefore look flexible while becoming harder to govern.
 
-Use a sample that includes the shop contexts most likely to expose ambiguity in access, category behavior, or route meaning.
+This is especially risky when products, categories, customers, languages, content, routes, modules, or settings vary by shop context. If shop scope is unclear, validation becomes shallow and post-launch changes become risky.
 
-**Pass condition:** each relevant shop context remains understandable enough that both customers and internal teams can trust how it behaves.
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-### Pitfall 6: Assuming friendly URLs solve route continuity automatically
+* shops exist, but their distinct purpose is unclear
+* teams cannot explain what should be shared and what should differ by shop
+* product, category, content, or customer assignments are reviewed only in one context
+* modules or themes behave differently by shop but are not tested separately
+* validation checks that shops exist instead of checking how each shop behaves
 
-#### What Goes Wrong
+#### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Routes look cleaner or still function, but important destinations no longer support the same intent, trust, or conversion path that the original routes carried.
+Define multistore as a governance model before migration is judged. Clarify each shop’s purpose, audience, content boundaries, catalog exposure, customer assumptions, route structure, and module or theme dependencies. Validate the highest-risk shop contexts separately.
 
-Friendly URLs improve readability, but they do not guarantee continuity by themselves. A path can work technically while the destination becomes commercially weaker or the route model becomes harder to govern after launch.
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-#### Early Warning Signs
+Use a sample that includes products, categories, customer groups, CMS Pages, routes, and module-dependent behavior across the shop contexts most likely to expose ambiguity.
 
-* teams approve route continuity by checking whether pages load
-* category or product meaning changed but destination logic was not re-evaluated
-* legacy route priority is under-defined
-* important trust, support, or conversion paths are treated like ordinary URLs
+**Pass condition**
 
-#### Prevention
+Each relevant shop context remains understandable enough that customers and internal teams can trust how it behaves and maintain it after launch.
 
-Treat route continuity as a destination-quality question. Prioritize the legacy paths that matter most to traffic, support, trust, and conversion, then validate whether the resulting route still supports the same practical purpose.
+### Pitfall 6: Assuming Friendly URLs Preserve Route Continuity Automatically <a href="#pitfall-6-assuming-friendly-urls-preserve-route-continuity-automatically" id="pitfall-6-assuming-friendly-urls-preserve-route-continuity-automatically"></a>
 
-#### Recommendation example
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-Review the highest-value product, category, and support routes before treating route continuity as acceptable.
+Friendly URLs may look clean, but important destinations may no longer support the same customer intent, trust, or conversion path. A URL can resolve technically while pointing to a weaker product page, less relevant category, or confusing content destination.
 
-**Pass condition:** the most important routes still bring customers to destinations that support the intended journey and remain easy to govern after launch.
+This pitfall appears when route review stops at whether pages load. PrestaShop route continuity should also consider destination quality, search intent, customer trust, and post-launch governability.
 
-### Pitfall 7: Assuming the core platform defines behavior, not modules
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-#### What Goes Wrong
+* teams approve route continuity because pages resolve
+* high-value product, category, CMS Pages, or support paths are not prioritized
+* category meaning changed, but destination logic was not reconsidered
+* friendly URL settings are treated as an SEO solution by themselves
+* legacy route priority is not separated from low-impact paths
 
-PrestaShop stores often depend on modules for pricing logic, catalog fields, promotions, checkout behavior, and SEO outcomes. If scope is planned using only standard platform fields, the store can migrate “successfully” while losing business-critical meaning.
+#### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-This produces a dangerous illusion: products and customers exist, but the store does not behave the way the business sells. In PrestaShop, module-owned meaning often decides how the storefront actually works.
+Review route continuity by destination purpose. Prioritize the routes that matter most for revenue, organic traffic, support, trust, and customer decision-making. Confirm that each important route leads to the most relevant PrestaShop destination, not merely a functioning page.
 
-#### Early Warning Signs
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-* many modules influence pricing, promotions, checkout, shipping, tax, or SEO
-* custom product fields or special catalog behaviors exist outside standard product data
-* different modules interact to create one buying flow
-* multistore is enabled and modules behave differently by shop context
+Map the highest-value product, category, CMS Pages, Blog Posts, campaign, and support URLs to intended PrestaShop destinations, then review whether those destinations still serve the original customer journey.
 
-#### Prevention
+**Pass condition**
 
-Inventory modules early and classify them by business impact. Define outcomes that must remain true, not just fields that must exist. Build the Demo Migration sample around module-sensitive products and workflows rather than random items.
+Priority routes still bring customers to destinations that preserve the intended purpose and remain governable after launch.
 
-#### Recommendation example
+### Pitfall 7: Treating Modules, Themes, and Overrides as Background Detail <a href="#pitfall-7-treating-modules-themes-and-overrides-as-background-detail" id="pitfall-7-treating-modules-themes-and-overrides-as-background-detail"></a>
 
-Treat module-owned meaning as a primary validation lens across product, customer, order, and SEO-sensitive outcomes.
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-**Pass condition:** the module-dependent flows that matter most still behave correctly end to end in the representative sample.
+The migration plan focuses on native records while underestimating the behavior created by modules, themes, overrides, custom fields, or integrations. Products and customers may exist, but pricing logic, merchandising behavior, checkout assumptions, SEO structure, display behavior, or internal workflows may no longer work as expected.
 
-### Pitfall 8: Validating counts instead of real shopping and operating behavior
+In PrestaShop, these surrounding layers often shape the real storefront and operating experience. Treating them as background detail can create a target that is structurally populated but commercially weaker.
 
-#### What Goes Wrong
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-The business gains confidence from matching counts, populated pages, or visible structures without proving that customers and internal teams can still use the store correctly.
+* many modules influence pricing, promotions, shipping, tax, checkout, reviews, loyalty, analytics, or SEO
+* theme behavior affects how product choices, categories, or content are understood
+* overrides or custom code change storefront behavior that standard fields do not explain
+* custom fields or outside-system identifiers support internal workflows
+* Demo Migration review does not include module- or override-sensitive cases
 
-This is one of the most common reasons PrestaShop pitfalls appear late. The store can look complete while still changing how customers choose products, encounter access conditions, move through storefront routes, or interact with module-driven storefront behavior. It can also remain too confusing for the business to govern safely after launch.
+#### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-#### Early Warning Signs
+Inventory modules, themes, overrides, custom fields, and integrations by business impact. Define the outcomes they support and decide whether those outcomes can be preserved by standard service capability, Add-ons, or Custom Service. When behavior depends on custom code, Custom Platform structure, or bespoke transformation, treat it as a Custom Service review area.
 
-* teams rely on broad completeness checks more than behavior-driven samples
-* validation avoids the highest-risk product, customer, or route scenarios
-* customer-account experience is assumed rather than tested
-* internal teams cannot explain important storefront behavior clearly even when the data appears present
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-#### Prevention
+Use early samples that include products, customers, orders, routes, and workflows affected by modules, themes, overrides, or integrations.
 
-Validate storefront and operating behavior, not only record presence. Use representative product cases, browse and comparison paths, customer-group scenarios, route-sensitive content, module-driven outcomes, and multistore conditions likely to reveal whether the target still preserves the intended business outcome.
+**Pass condition**
 
-#### Recommendation example
+The business can identify which surrounding technical layers still matter and can prove that the migrated result preserves the outcomes those layers were meant to create.
 
-A stronger pass condition is not “the data is there.” A stronger pass condition is that customers and internal teams can still use the storefront correctly and explain how it works without confusion.
+### Pitfall 8: Validating Counts Instead of Real Storefront and Operating Behavior <a href="#pitfall-8-validating-counts-instead-of-real-storefront-and-operating-behavior" id="pitfall-8-validating-counts-instead-of-real-storefront-and-operating-behavior"></a>
 
-**Pass condition:** the migrated store still preserves the intended business outcome across the highest-risk storefront and operating scenarios.
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-### How Custom Cart as a source changes PrestaShop pitfalls
+The business gains confidence from matching counts, visible pages, populated categories, or imported customers without proving that customers and internal teams can still use the store correctly.
 
-When the source platform is a Custom Cart, PrestaShop pitfalls usually become more sensitive because more of the source-side product-choice, descriptive meaning, personalization, customer, shop, or route logic may not align cleanly with PrestaShop’s native structures.
+This creates late-stage risk. The store can appear complete while configurable products remain confusing, category discovery weakens, customer groups lose practical meaning, multistore scope becomes unclear, important routes land on weaker destinations, or module-dependent behavior is not understood.
 
-That usually increases risk in:
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-* combinations-versus-features-versus-customization translation
-* customer-group and access reconstruction
-* shop-scope interpretation
-* route continuity and destination logic
+* review focuses on totals instead of behavior-driven samples
+* only simple products and easy categories are tested
+* customer-group, multistore, and module-sensitive scenarios are postponed
+* route validation checks only whether pages load
+* internal teams cannot explain important storefront behavior even when data exists
+
+#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+
+Validate the store through representative customer and operating scenarios. Include products with combinations and customization fields, category paths with commercial value, customer groups with practical meaning, multistore contexts, priority routes, and module-dependent workflows.
+
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+
+A stronger review sample should include the cases most likely to expose false confidence: complex products, differentiated customers, shop-specific scope, high-value routes, and technical layers that affect buying or operations.
+
+**Pass condition**
+
+Customers can still buy confidently, internal teams can still operate and support the store, and the business can explain how the migrated PrestaShop structure works after launch.
+
+### How Custom Platform Sources Change PrestaShop Pitfalls <a href="#how-custom-platform-sources-change-prestashop-pitfalls" id="how-custom-platform-sources-change-prestashop-pitfalls"></a>
+
+When the Source Platform is a Custom Platform, PrestaShop pitfalls usually become more sensitive because more of the original product-choice logic, descriptive structure, personalization, customer context, shop scope, route behavior, or integration meaning may not align cleanly with PrestaShop’s native structures.
+
+The highest-risk areas usually include:
+
+* combinations, features, and customization-field translation
+* customer-group and access-context reconstruction
+* multistore and shop-scope interpretation
+* priority route and destination continuity
 * module-shaped or custom-field-driven storefront meaning
+* outside-system identifiers and integration-dependent workflows
 
-In this context, the problem is not only that the migration is harder. The more important risk is that source meaning may be rebuilt too loosely inside the PrestaShop target unless the translation is reviewed more deliberately from the beginning.
+A Custom Platform source should therefore be reviewed under Custom Service. The goal is not only to move data into PrestaShop, but to decide how non-standard source meaning should be rebuilt, adjusted, or validated in the Target Platform.
 
-### Conclusion
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-PrestaShop migration pitfalls are rarely random. They usually appear when the business preserves data without preserving the storefront and operating behavior that made the store usable before the move.
+PrestaShop migration pitfalls are rarely random. They usually appear when the business preserves visible records without preserving the storefront behavior, catalog governance, customer context, shop scope, route meaning, or module-shaped logic that made the previous store usable.
 
-That is why the most useful prevention work usually happens before the business has committed emotionally to the idea that the migration is already mostly done. Configurable products, browse and comparison paths, customer-group scenarios, route-sensitive content, module-driven storefront logic, and multistore decisions can still reveal problems early enough to influence the safer next step. Once those areas are treated as the real proof points, the migration becomes much easier to judge honestly.
+The safest prevention work starts before the migration is treated as mostly complete. Complex products, category paths, customer groups, multistore scope, friendly URLs, module-dependent outcomes, and Custom Platform source logic should be reviewed as proof points, not afterthoughts. Once those areas are tested deliberately, the business can distinguish between a store that merely contains data and a store that can actually be trusted after launch.
 
-A practical way to use this page is to compare each pitfall against the store’s own highest-risk patterns and ask which one could create the most expensive false confidence if it were missed. That question usually identifies the storefront and operating behaviors that deserve the earliest attention in Demo Migration and structured review. Where those early checks still leave uncertainty, Live Chat can help clarify whether the issue is mainly about tighter review, stronger execution support, or a deeper translation problem that may call for Managed Migration Service or Custom Migration Service.
+Use Demo Migration review to test the PrestaShop scenarios most likely to expose false confidence: complex combinations, group-sensitive customers, shop-specific scope, high-value routes, and module-dependent behavior. If those examples raise uncertainty, use Live Chat to clarify whether the issue calls for tighter review, Managed Service execution support, Add-ons, or Custom Service handling.
 
-### FAQs
+### FAQs <a href="#faqs" id="faqs"></a>
 
-#### What is the most common PrestaShop migration pitfall?
+**What is the most common PrestaShop migration pitfall?**
 
-Usually it is preserving data without preserving storefront and operating behavior. The store may look complete while still changing how customers choose products, encounter access conditions, move through the storefront, or interact with a structure the business can no longer govern clearly.
+The most common pitfall is preserving records without preserving storefront and operating meaning. A PrestaShop target may contain products, customers, categories, and URLs while still weakening product choice, customer-group behavior, shop scope, route continuity, or module-dependent workflows.
 
-#### Why do PrestaShop pitfalls often appear late?
+**Why do PrestaShop pitfalls often appear late?**
 
-Because many of them hide inside combination logic, customer-group behavior, route continuity, module-driven storefront meaning, or shop governance issues that do not become obvious until real customers or internal teams try to use the migrated store.
+They often appear late because many risks hide inside behavior rather than record presence. Product combinations, customer groups, multistore scope, friendly URLs, themes, modules, overrides, and integrations may look acceptable until customers or internal teams try to use the migrated store in realistic scenarios.
 
-#### Is multistore automatically safer in PrestaShop?
+**Is multistore automatically safer in PrestaShop?**
 
-No. Separate shops can create clearer boundaries, but they also increase governance needs. They are only safer when the business has defined clearly why those shops exist and how each one should behave.
+No. Multistore can create clearer shop separation, but it also increases governance needs. It is safer only when the business has defined why each shop exists, what should be shared, what should differ, and how each shop should be validated.
 
-#### What is the best way to prevent PrestaShop migration pitfalls?
+**When does a PrestaShop migration need Custom Service?**
 
-Use representative early validation. The best prevention method is usually a focused review of the products, access-sensitive customer scenarios, storefront routes, module-driven outcomes, and shop-scope conditions most likely to reveal whether the target still preserves the intended business outcome.
+Custom Service should be reviewed when the migration depends on a Custom Platform source, custom fields, outside-system identifiers, modules, themes, overrides, integrations, custom migration logic adjustment, or any behavior that cannot be handled safely through standard service capability or Standard Add-ons.
+
+**What is the best way to prevent PrestaShop migration pitfalls?**
+
+The strongest prevention method is representative early review. Use Demo Migration to test complex products, important category paths, customer-group scenarios, shop-specific behavior, high-value routes, and module-dependent outcomes before assuming the target is ready for launch planning.

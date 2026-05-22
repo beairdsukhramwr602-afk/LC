@@ -1,224 +1,233 @@
 # Square Fit: Ideal and Non-Ideal Profiles
 
-Square is not simply a good fit for any business that wants an online storefront. It is a strong fit when the future store genuinely needs the kind of unified commerce operating model that Square is designed to support.
+Square is not simply a good fit for any business that wants an online storefront. It is a strong fit when the future store needs a more unified operating model across online selling, point-of-sale activity, catalog management, inventory, customer profiles, and order history.
 
-That distinction matters because many businesses are drawn to Square for simplicity in the abstract. Simplicity alone is not enough. The more useful question is whether the business truly needs tighter alignment between online selling, inventory, locations, customer records, and day-to-day operations, while remaining comfortable with a platform that favors operational cohesion over deep storefront specialization.
+That distinction matters because many businesses are drawn to Square for simplicity. Simplicity alone is not enough. The stronger fit question is whether the business genuinely needs tighter alignment between how products are sold, how inventory is tracked, how customers are recognized, how orders are interpreted, and how staff operate after launch.
 
-A business can be large and still not need Square. Another business can be smaller in raw volume but still be a strong fit because the commercial model depends on operational clarity, inventory accuracy across channels, structured sellable choices, pickup or delivery workflows, or customer-history usefulness more than on highly customized storefront behavior.
+A business can be large and still not need Square. Another business can be smaller by record volume but still be a strong fit because its commercial model depends on operational clarity, location-aware inventory, structured sellable choices, pickup or delivery workflows, and customer-history usefulness more than on advanced storefront customization.
 
-### Where Square Is Often a Strong Fit
+### Where Square Is Often a Strong Fit <a href="#where-square-is-often-a-strong-fit" id="where-square-is-often-a-strong-fit"></a>
 
-Square is often a strong migration target when the business wants a platform that can keep catalog, inventory, customers, and orders tightly connected across online and in-person selling.
+Square is often a strong migration target when the business wants catalog, inventory, customers, and orders to remain connected across online and in-person activity.
 
-The strongest fit patterns usually appear when several conditions are true at the same time.
+#### Unified operations matter more than deep storefront customization <a href="#unified-operations-matter-more-than-deep-storefront-customization" id="unified-operations-matter-more-than-deep-storefront-customization"></a>
 
-#### Unified operations matter more than deep storefront customization
+Square is often a strong fit when the business wants one operating center instead of a fragmented stack of storefront, point-of-sale, inventory, and customer systems.
 
-Square is often a strong fit when the business wants one operational center rather than a more fragmented stack.
-
-This is especially important when:
+This is especially relevant when:
 
 * the team wants one place to manage items, pricing, inventory, customer profiles, and orders
 * online and in-person selling need to stay aligned
-* daily operational clarity matters more than unlimited storefront freedom
-* the business would benefit from reducing reconciliation between disconnected systems
+* staff need clear operational records rather than disconnected reports
+* the business wants to reduce reconciliation between separate systems
 
-Square is strongest when the value of a more unified operating model is real and commercially meaningful.
+Square becomes stronger when the value of a unified operating model is real, practical, and commercially meaningful.
 
-#### Inventory and location management are central to the business
+#### Inventory and location behavior are central to the business <a href="#inventory-and-location-behavior-are-central-to-the-business" id="inventory-and-location-behavior-are-central-to-the-business"></a>
 
-Square is often a strong fit when stock accuracy affects customer trust, fulfillment speed, and staff efficiency.
+Square is often a strong fit when stock accuracy affects customer trust, fulfillment speed, and daily staff decisions.
 
 This is especially true when:
 
-* inventory needs to remain accurate by variation
-* location-specific stock behavior matters
-* the business sells across more than one channel
-* operational teams rely on inventory as a live source of truth rather than a loose catalog field
+* inventory needs to remain accurate by item variation
+* stock behavior differs by location
+* the business sells through both online and in-person channels
+* fulfillment decisions depend on live operational inventory rather than static catalog data
 
-Square’s location-aware and variation-aware inventory behavior becomes a meaningful fit advantage when those expectations are explicit and governable.
+Square’s inventory model is most valuable when inventory is treated as operational truth, not only as a field attached to a product record.
 
-#### The catalog depends on structured variations, not unlimited configuration logic
+#### The catalog depends on structured variations rather than unlimited configuration logic <a href="#the-catalog-depends-on-structured-variations-rather-than-unlimited-configuration-logic" id="the-catalog-depends-on-structured-variations-rather-than-unlimited-configuration-logic"></a>
 
-Square is often a strong fit when products can still be represented through controlled sellable variations rather than through highly conditional configuration logic.
+Square is often a strong fit when products can be represented through clear items, item options, item variations, and modifiers without distorting how customers buy.
 
 A strong fit often looks like:
 
-* options are predictable and repeatable across the catalog
+* product choices are predictable and repeatable
 * sellable combinations can be represented clearly as item variations
-* add-ons or customization can be represented cleanly without distorting the sellable unit
-* pricing, SKU logic, and inventory rules can still remain coherent at the variation level
+* add-ons or purchase-time adjustments can be treated as modifiers where appropriate
+* SKU, price, and inventory meaning can remain coherent at the variation level
 
-Square becomes stronger when the business needs structured purchasability more than maximum configuration freedom.
+Square becomes stronger when the business needs structured purchasability more than unrestricted configuration freedom.
 
-#### Pickup, delivery, or omnichannel fulfillment matter to the buying experience
+#### Pickup, delivery, or local fulfillment matter to the buying experience <a href="#pickup-delivery-or-local-fulfillment-matter-to-the-buying-experience" id="pickup-delivery-or-local-fulfillment-matter-to-the-buying-experience"></a>
 
-Square is often a strong fit when fulfillment is not just a checkout detail, but a core part of how customers buy.
+Square is often a strong fit when fulfillment is not merely a checkout setting, but part of how the business sells.
 
 This is especially relevant when:
 
 * pickup matters to the customer experience
-* local delivery matters operationally or commercially
+* local delivery is operationally or commercially important
 * fulfillment behavior differs by location
-* the business wants fulfillment options tied directly to the same commerce environment as catalog and inventory
+* the business wants fulfillment options tied to the same environment as catalog, inventory, and order activity
 
-Square is often a practical target when the storefront and fulfillment model need to work inside one governed system.
+Square is often a practical target when the storefront and fulfillment model need to work inside one governed commerce environment.
 
-#### Customer records are expected to support real workflows
+#### Customer records need to support real workflows <a href="#customer-records-need-to-support-real-workflows" id="customer-records-need-to-support-real-workflows"></a>
 
-Square is often a strong fit when customer records are not only for storage, but for support, retention, and day-to-day commerce workflows.
+Square is often a strong fit when customer records are expected to support support, retention, repeat buying, and staff lookup after launch.
 
 This matters when the business wants:
 
 * support teams to find customer history quickly
 * purchase history to remain useful in customer interactions
-* customer accounts to support order visibility and repeat buying
-* customer data to stay closer to actual selling activity
+* customer accounts or profiles to support repeat buying and order visibility
+* customer data to stay close to actual selling activity
 
-Square’s customer model becomes more valuable when customer usefulness matters more than a more expansive but loosely connected account layer.
+Square’s customer model becomes more valuable when customer usefulness matters more than a broad but loosely connected account layer.
 
-#### Multiple websites need one operational umbrella
+#### Multiple sites need one operational umbrella <a href="#multiple-sites-need-one-operational-umbrella" id="multiple-sites-need-one-operational-umbrella"></a>
 
-Square is often a strong fit when the business wants more than one online site while still keeping operations centralized.
+Square can be a strong fit when the business needs more than one website while still wanting centralized operational control.
 
-This can work well when:
+This works best when:
 
-* multiple storefronts exist for real commercial reasons
-* items can be governed intentionally across sites
-* the business wants shared operational control even when storefront experiences differ
+* multiple storefronts exist for clear commercial reasons
+* catalog behavior can be governed intentionally across sites
+* the business knows what should remain shared and what should differ
+* operational consistency matters more than full independence between storefronts
 
-Square can support that model when site governance is deliberate rather than improvised.
+Square can support this model when site governance is deliberate rather than improvised.
 
-### Where Square Is Often a Weaker Fit
+### Where Square Is Often a Weaker Fit <a href="#where-square-is-often-a-weaker-fit" id="where-square-is-often-a-weaker-fit"></a>
 
-Square is often a weaker fit when the business wants the appearance of operational simplicity without accepting the structure that simplicity requires.
+Square is often a weaker fit when the business wants the appearance of operational simplicity without accepting the structure that operational simplicity requires.
 
-Several patterns usually make the fit weaker.
+#### The business depends on very complex sellable configuration logic <a href="#the-business-depends-on-very-complex-sellable-configuration-logic" id="the-business-depends-on-very-complex-sellable-configuration-logic"></a>
 
-#### The business depends on very complex sellable configuration logic
+Square becomes a weaker fit when the storefront depends on deeply conditional product configuration, highly specialized option rules, or product behavior that cannot be represented clearly through items, variations, options, modifiers, or a planned customization layer.
 
-Square becomes a weaker fit when the storefront depends on deeply conditional product configuration, highly specialized option rules, or product behavior that cannot be represented clearly through structured variations and modifiers.
+The issue is not product count. The issue is whether business-critical buyable reality can still fit Square’s model without structural distortion or excessive workaround behavior.
 
-The issue is not product count. The issue is whether the business-critical buyable reality still fits Square’s model cleanly enough without forcing either structural distortion or excessive workaround behavior.
+#### Add-ons, personalization, or build-your-own logic define too much of the catalog <a href="#add-ons-personalization-or-build-your-own-logic-define-too-much-of-the-catalog" id="add-ons-personalization-or-build-your-own-logic-define-too-much-of-the-catalog"></a>
 
-#### Add-ons, personalization, or build-your-own logic define too much of the catalog
+Square can support variations and modifiers, but the fit weakens when a large share of revenue depends on purchase-time logic that is difficult to separate into sellable units versus checkout-time customization.
 
-Square can support both variations and modifiers, but the fit weakens when a large share of revenue depends on purchase-time logic that is difficult to separate cleanly into sellable units versus checkout-time customization.
+If the business cannot explain that distinction before migration, Square becomes harder to judge safely. Products may appear present, while the commercial meaning of product choices shifts in practice.
 
-If the business cannot explain that distinction clearly before migration, Square becomes harder to judge safely because products may appear present while the sellable meaning shifts in practice.
-
-#### Highly specialized checkout or B2B workflows are business-critical
+#### Highly specialized checkout or B2B workflows are business-critical <a href="#highly-specialized-checkout-or-b2b-workflows-are-business-critical" id="highly-specialized-checkout-or-b2b-workflows-are-business-critical"></a>
 
 Square is often a weaker fit when the business depends on checkout flows, negotiated selling rules, or B2B-specific behavior that goes beyond what Square is designed to reproduce naturally.
 
-This does not automatically make Square impossible. It means fit should be treated as a validation question rather than a platform assumption.
+That does not automatically make Square impossible. It means fit should be treated as a proof question rather than a platform assumption.
 
-#### A large ecosystem of apps is the real platform
+#### A large ecosystem of apps is the real platform <a href="#a-large-ecosystem-of-apps-is-the-real-platform" id="a-large-ecosystem-of-apps-is-the-real-platform"></a>
 
-Square can still be the right platform in extension-heavy environments, but the fit weakens when the most important business logic lives in a large web of third-party tools rather than in the core commerce model.
+Square can still be the right platform in integration-heavy environments, but the fit weakens when the most important business logic lives in a large web of third-party systems rather than in the core commerce model.
 
-The issue is not integrations alone. The issue is unclear ownership of critical data, rules, and workflows. If the team cannot explain which systems still define the sellable reality, the customer experience, or operational truth, Square becomes harder to trust as a target.
+The issue is not integrations alone. The issue is unclear control of critical data, rules, and workflows. If the team cannot explain which systems define sellable reality, customer experience, inventory truth, or order interpretation, Square becomes harder to trust as a target.
 
-#### SEO dependency is very high and path continuity expectations are broad
+#### SEO dependency is high and path-continuity expectations are broad <a href="#seo-dependency-is-high-and-path-continuity-expectations-are-broad" id="seo-dependency-is-high-and-path-continuity-expectations-are-broad"></a>
 
-Square Online supports native redirect capabilities, but the fit weakens when the business expects strict continuity across a very large legacy URL structure without accepting a more focused, priority-driven continuity strategy.
+Square can be a weaker fit when the business expects strict continuity across a very large legacy URL structure without accepting a focused, priority-driven continuity plan.
 
-If organic search is a major revenue driver, the practical fit question is whether protecting the pages that materially drive revenue is enough, not whether every historical path can be mirrored perfectly.
+If organic search is a major revenue driver, the practical fit question is whether the business can identify and protect the product, category, landing-page, and local-search paths that materially affect revenue and customer trust.
 
-### Strong-Fit Profiles
+### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-Square is often a strong fit for businesses that look like the following.
+Square is often a strong fit for businesses that match the following profiles.
 
-#### Businesses with meaningful online-plus-offline alignment
+#### Businesses with meaningful online-plus-offline alignment <a href="#businesses-with-meaningful-online-plus-offline-alignment" id="businesses-with-meaningful-online-plus-offline-alignment"></a>
 
-These are merchants whose real priority is tighter coordination between storefront behavior and physical-world operations.
+These are merchants whose real priority is tighter coordination between storefront behavior and physical-world operations. They want customer, inventory, catalog, and order activity to remain closer together after migration.
 
-#### Businesses with disciplined inventory and location logic
+#### Businesses with disciplined inventory and location logic <a href="#businesses-with-disciplined-inventory-and-location-logic" id="businesses-with-disciplined-inventory-and-location-logic"></a>
 
-These are teams that need variation-level and location-aware inventory behavior to remain reliable after migration.
+These are teams that need variation-level and location-aware inventory behavior to remain reliable after migration. They usually benefit from defining inventory expectations before judging Square fit.
 
-#### Businesses with structured variation-based selling
+#### Businesses with structured variation-based selling <a href="#businesses-with-structured-variation-based-selling" id="businesses-with-structured-variation-based-selling"></a>
 
-These are stores whose most important products can still be represented as clear sellable variations without depending on uncontrolled configuration logic.
+These are stores whose most important products can be represented as clear sellable variations without depending on uncontrolled configuration logic. They may still need modifiers or supporting data, but the core purchasable unit remains understandable.
 
-#### Businesses that rely on customer history for support and retention
+#### Businesses that rely on customer history for support and retention <a href="#businesses-that-rely-on-customer-history-for-support-and-retention" id="businesses-that-rely-on-customer-history-for-support-and-retention"></a>
 
-These are merchants whose teams need customer records to remain operationally useful rather than merely imported.
+These are merchants whose teams need customer records to remain useful for real workflows, not merely imported as static contact data.
 
-#### Businesses that want multiple sites under one operational center
+#### Businesses that want multiple sites under one operational center <a href="#businesses-that-want-multiple-sites-under-one-operational-center" id="businesses-that-want-multiple-sites-under-one-operational-center"></a>
 
-These are teams that need more than one storefront while still wanting centralized governance of catalog and operations.
+These are teams that need more than one storefront while still wanting centralized governance of catalog, order, customer, and operational behavior.
 
-### Higher-Risk Fit Profiles
+### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-Square usually becomes a higher-risk fit for businesses that look like the following.
+Square usually becomes a higher-risk fit for businesses that match the following profiles.
 
-#### Businesses choosing Square mainly because it feels simpler
+#### Businesses choosing Square mainly because it feels simpler <a href="#businesses-choosing-square-mainly-because-it-feels-simpler" id="businesses-choosing-square-mainly-because-it-feels-simpler"></a>
 
-These are merchants who want operational simplicity without first confirming that Square’s structured model preserves the workflows that decide revenue and operations.
+These are merchants who want operational simplicity without first confirming that Square’s structured model preserves the workflows that decide revenue, fulfillment, customer trust, and staff efficiency.
 
-#### Businesses whose hardest products define the storefront
+#### Businesses whose hardest products define the storefront <a href="#businesses-whose-hardest-products-define-the-storefront" id="businesses-whose-hardest-products-define-the-storefront"></a>
 
-These are teams whose most important products rely on complex configuration, add-ons, or option logic that still has not been translated into a clear Square-native representation.
+These are teams whose most important products rely on complex configuration, add-ons, personalization, or option logic that has not yet been translated into a clear Square-native representation.
 
-#### Businesses whose most important behavior still lives in apps or custom fields
+#### Businesses whose most important behavior still lives in apps or custom fields <a href="#businesses-whose-most-important-behavior-still-lives-in-apps-or-custom-fields" id="businesses-whose-most-important-behavior-still-lives-in-apps-or-custom-fields"></a>
 
-These are merchants whose core business outcomes still depend on systems outside the visible catalog, customer, and order records.
+These are merchants whose core business outcomes depend on systems outside the visible catalog, customer, and order records. Square fit should be reviewed more carefully when those systems define prices, choices, fulfillment, customer segments, or operational rules.
 
-#### Businesses with sensitive historical-order interpretation needs
+#### Businesses with sensitive historical-order interpretation needs <a href="#businesses-with-sensitive-historical-order-interpretation-needs" id="businesses-with-sensitive-historical-order-interpretation-needs"></a>
 
-These are teams that rely heavily on legacy order records for support, refunds, reporting, or operational truth and therefore need stronger evidence that those records will remain usable in Square.
+These are teams that rely heavily on legacy order records for support, refunds, warranty questions, reporting, or staff decisions. They need stronger evidence that migrated records will remain usable in Square workflows.
 
-#### Businesses expecting Square to preserve SEO continuity broadly without prioritization
+#### Businesses expecting broad SEO continuity without prioritization <a href="#businesses-expecting-broad-seo-continuity-without-prioritization" id="businesses-expecting-broad-seo-continuity-without-prioritization"></a>
 
-These are merchants who need path-by-path continuity but have not yet defined which URLs materially matter most.
+These are merchants who need route continuity but have not yet defined which URLs materially matter most. Square may still be viable, but the SEO fit is harder to judge without priority-path planning.
 
-### What Should Be Confirmed Before Calling Square a Good Fit
+### What Should Be Confirmed Before Calling Square a Good Fit <a href="#what-should-be-confirmed-before-calling-square-a-good-fit" id="what-should-be-confirmed-before-calling-square-a-good-fit"></a>
 
-Before the business treats Square as the right target, it should be able to answer a few questions clearly.
+Before the business treats Square as the right Target Platform, several fit questions should be answered clearly.
 
-#### 1. What must remain true about how customers buy?
+#### What must remain true about how customers buy? <a href="#what-must-remain-true-about-how-customers-buy" id="what-must-remain-true-about-how-customers-buy"></a>
 
-If product choices, add-ons, and pricing outcomes are central to how the business sells, Square is only a strong fit when those choices can still remain commercially true through variations, modifiers, and the intended buying flow.
+If product choices, modifiers, add-ons, and pricing outcomes are central to how the business sells, Square is only a strong fit when those choices can remain commercially true through the target catalog, item variation, modifier, and buying-flow structure.
 
-#### 2. How should inventory behave across locations and channels?
+#### How should inventory behave across locations and channels? <a href="#how-should-inventory-behave-across-locations-and-channels" id="how-should-inventory-behave-across-locations-and-channels"></a>
 
-If stock accuracy is operationally important, the business should define what must remain true by variation, by location, and by fulfillment method before migration is treated as routine.
+If stock accuracy is operationally important, the business should define what must remain true by item variation, location, channel, and fulfillment method before migration is treated as straightforward.
 
-#### 3. What does a usable customer profile actually mean?
+#### What does a usable customer profile actually mean? <a href="#what-does-a-usable-customer-profile-actually-mean" id="what-does-a-usable-customer-profile-actually-mean"></a>
 
-The answer should be expressed in workflow terms. The business should know what customer history, metadata, and profile usefulness support teams and operations actually need after launch.
+The answer should be expressed in workflow terms. The business should know what customer history, profile detail, segmentation, and order visibility must support after launch.
 
-#### 4. What should historical orders be used for after migration?
+#### What should historical orders be used for after migration? <a href="#what-should-historical-orders-be-used-for-after-migration" id="what-should-historical-orders-be-used-for-after-migration"></a>
 
-This matters because historical order continuity is not only about visibility. It is about whether staff can interpret and use those records safely inside Square workflows.
+Historical order continuity is not only about visibility. The business should decide whether staff need those records for support, warranty questions, repeat ordering, reporting reference, refund interpretation, or customer trust.
 
-#### 5. Which URLs and landing paths materially matter?
+#### Which URLs and landing paths materially matter? <a href="#which-urls-and-landing-paths-materially-matter" id="which-urls-and-landing-paths-materially-matter"></a>
 
-If SEO is a meaningful channel, the business should define which product, category, or landing-page paths deserve focused protection rather than assuming every historical URL matters equally.
+If SEO is a meaningful channel, the business should identify which product, category, location, campaign, or landing-page paths deserve focused protection rather than assuming every historical URL matters equally.
 
-### Conclusion
+#### Which source requirements may need Custom Service? <a href="#which-source-requirements-may-need-custom-service" id="which-source-requirements-may-need-custom-service"></a>
 
-Square is often a strong migration target when the business genuinely values unified operations, structured sellable choices, variation-aware inventory, customer-profile usefulness, and coordinated online-plus-offline workflows more than unlimited storefront customization.
+Square fit should move into a Custom Service discussion when the migration depends on customization or modification work beyond standard service capability. Common triggers include Custom Platform handling, app/plugin/module/extension data, custom fields, outside-system identifiers, bespoke product-choice translation, or custom migration logic adjustment.
 
-It is often a weaker fit when the platform is being chosen for abstract simplicity rather than for a clearly defined operating-model need. Square becomes strongest when the business already knows why product purchasability, inventory truth, customer usefulness, order-history interpretation, and path continuity matter commercially. Without that clarity, the platform can look operationally elegant while still carrying too much ambiguity into the migration.
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Use a representative Demo Migration to test the products, inventory-sensitive workflows, customer scenarios, order-history cases, and priority paths that matter most. If those outcomes are still unclear, Live Chat can help determine whether Square is the right target and whether the migration path needs a more guided or more bespoke approach.
+Square is often a strong migration target when the business genuinely values unified operations, structured sellable choices, location-aware inventory, customer-profile usefulness, order-history interpretation, and coordinated online-plus-offline workflows more than unrestricted storefront customization.
 
-### FAQs
+It is often a weaker fit when Square is chosen for abstract simplicity rather than for a clearly defined operating-model need. Square becomes strongest when the business already knows why product purchasability, inventory truth, customer usefulness, order interpretation, and route continuity matter commercially. Without that clarity, the platform can look operationally elegant while still carrying too much ambiguity into the migration.
 
-#### Is Square Online mainly for small sellers, or can it support growing stores?
+Use a representative Demo Migration to test the products, inventory-sensitive workflows, customer scenarios, order-history cases, and priority paths that matter most. If those outcomes remain unclear, Live Chat can help determine whether Square is the right target and whether the migration path needs a more guided or more bespoke approach.
 
-Square Online can support growth, especially when operational simplicity and unified commerce matter. The more important question is whether the growth model depends on advanced storefront customization or highly specialized ecommerce workflows that Square is not designed to replicate.
+### FAQs <a href="#faqs" id="faqs"></a>
 
-#### Does Square support customer accounts and order tracking?
+**Is Square mainly for small sellers, or can it support growing stores?**
 
-Yes. Square customer accounts can support experiences such as order history visibility, order confirmations, and reordering behavior. In migration planning, the more important question is whether customer profiles and order linkage remain useful enough for the support and retention workflows your business actually relies on.
+Square can support growing stores, especially when operational simplicity and unified commerce matter. The stronger question is whether the growth model depends on advanced storefront customization or highly specialized workflows that Square is not meant to reproduce naturally.
 
-#### How do I know if my catalog is too complex for a straightforward migration?
+**Is Square a strong fit for businesses that sell both online and in person?**
 
-Complexity usually shows up in behavior and relationships, not totals. If product options, add-ons, category-navigation intent, discounts, or third-party app data are business-critical, the safer test is a representative Demo Migration built around those patterns rather than an assumption based on record counts alone.
+Often yes. Square is usually strongest when online and in-person selling should share catalog, inventory, customer, and order context rather than operate as disconnected systems.
 
-#### Can Square support multiple websites under one account?
+**How do I know if my catalog is too complex for a straightforward Square migration?**
 
-Yes. Square can support multiple websites under one account, but this is only a strong fit when the business can define clearly what should stay shared, what should differ by site, and how catalog and operational governance should remain consistent across those storefronts.
+Complexity usually appears in behavior and relationships, not record totals. If product choices, add-ons, modifiers, inventory logic, discounts, or third-party data are business-critical, the safer test is a representative Demo Migration built around those patterns.
+
+**Does Square fit every business that wants simpler operations?**
+
+No. Square can reduce operational fragmentation, but it also expects the business to accept a more structured operating model. If the business needs unlimited storefront customization, specialized checkout logic, or heavy app-defined behavior, Square fit should be reviewed carefully.
+
+**Can Square support multiple websites under one account?**
+
+Yes, Square can support multiple websites under one account. This is a stronger fit when the business can define what should stay shared, what should differ by site, and how catalog and operational governance should remain consistent across storefronts.
+
+**When should Square fit become a Custom Service discussion?**
+
+Square fit should become a Custom Service discussion when the migration depends on Custom Platform handling, app/plugin/module/extension data, custom fields, outside-system identifiers, bespoke transformation, or custom migration logic adjustment beyond standard service capability.

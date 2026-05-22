@@ -1,178 +1,232 @@
 # Shopware Fit: Ideal and Non-Ideal Profiles
 
-Shopware is not simply a good fit for any business that wants a more modern commerce platform. It is a strong fit when the future store genuinely needs the kinds of contextual storefront, rule-driven, and channel-specific structures Shopware is designed to support.
+Shopware is not automatically the right Target Platform for every business that wants a more modern commerce platform. It is usually a stronger fit when the future store genuinely needs clearer storefront context, rule-driven behavior, product visibility governance, route control, and extension-shaped flexibility that can be managed deliberately after migration.
 
-That distinction matters because many businesses are drawn to Shopware for architectural polish or flexibility in the abstract. Those reasons are not enough on their own. The more useful question is whether the business truly needs clearer sales-channel governance, more explicit rule-driven behavior, stronger channel-specific product and route logic, and a platform where contextual storefront behavior can be governed deliberately after launch.
+That distinction matters because Shopware can look attractive for broad reasons: modern storefront architecture, flexible administration, sales-channel structure, Rule Builder, product visibility controls, and extension support. Those advantages are useful only when they match a real operating need. A better fit question is whether the business can explain what should differ by channel, which rules should control behavior, how products should appear, which routes matter, and which extension-dependent outcomes must remain usable after launch.
 
-A business can be large and still not need Shopware. Another business can be smaller in raw volume but still be a strong fit because the commercial model depends on more than one storefront context, rule-sensitive pricing or behavior, channel-specific product visibility, or a storefront architecture that needs more explicit contextual control than lighter platforms usually provide.
+A business does not need to be the largest store in its category to be a strong Shopware candidate. A mid-sized merchant with meaningful channel differences, rule-sensitive pricing or availability, visibility-sensitive product groups, or a storefront model shaped by extensions may be a stronger fit than a larger merchant that only wants a cleaner administration panel. Shopware becomes most useful when the business can govern the structure it introduces.
 
-### Where Shopware Is Often a Strong Fit
+### Where Shopware Is Often a Strong Fit <a href="#where-shopware-is-often-a-strong-fit" id="where-shopware-is-often-a-strong-fit"></a>
 
-Shopware is often a strong migration target when the business needs a platform that can carry storefront context and commercial logic more explicitly than many lighter commerce targets.
+Shopware is often a strong migration target when the business needs more explicit control over storefront context and commercial behavior than a simpler platform can comfortably support.
 
-The strongest fit patterns usually appear when several conditions are true at the same time.
+#### Sales-channel structure has real commercial purpose <a href="#sales-channel-structure-has-real-commercial-purpose" id="sales-channel-structure-has-real-commercial-purpose"></a>
 
-#### More than one sales-channel context matters
+Shopware is often a strong fit when the business needs more than one customer-facing context and each context has a clear role.
 
-Shopware is often a strong fit when the storefront genuinely needs more than one customer-facing context and those contexts still need to be governed inside one broader platform model.
+This can matter when the future store needs:
 
-This makes Shopware especially strong when storefront differences are not a side detail, but a central part of how the business sells.
+* different storefront experiences by region, brand, language, market, or customer segment
+* channel-specific product visibility
+* different payment or shipping availability by context
+* channel-aware route and SEO planning
+* a clearer way to govern where products, categories, and content should appear
 
-#### Rule-dependent behavior matters commercially
+Sales channels are most valuable when they solve a defined business problem. If the business can explain why each channel exists and what should happen there, Shopware can provide a stronger target model.
 
-Shopware is often a strong fit when the business depends on contextual logic that should be governed explicitly rather than left to scattered workarounds.
+#### Rule-driven behavior matters to the buying journey <a href="#rule-driven-behavior-matters-to-the-buying-journey" id="rule-driven-behavior-matters-to-the-buying-journey"></a>
 
-That is especially important when:
+Shopware is often a strong fit when pricing, shipping, payment, promotion, visibility, or category behavior depends on defined conditions.
 
-* storefront behavior should change by customer or context
-* commercial logic depends on defined conditions
-* pricing or promotional behavior needs more structured control
-* the business wants clearer reasoning behind how behavior changes
+This is especially relevant when the business needs:
 
-Shopware’s Rule Builder is a real strength when the target needs more than static configuration. It allows the business to formalize context-sensitive behavior more clearly than many teams are used to.
+* contextual payment or shipping availability
+* promotion or discount logic based on customer, cart, product, or order conditions
+* advanced pricing behavior tied to defined rules
+* product or category visibility that changes by context
+* cleaner governance for rules that were previously scattered across extensions or manual workarounds
 
-#### Channel-specific product visibility matters
+Rule-driven behavior should not be treated as a technical extra. In Shopware, it can become part of how the target store expresses commercial intent.
 
-Shopware is often a strong fit when the business needs products to behave differently across customer-facing contexts.
+#### Product visibility and presentation need stronger governance <a href="#product-visibility-and-presentation-need-stronger-governance" id="product-visibility-and-presentation-need-stronger-governance"></a>
 
-That makes Shopware especially strong when product presence is not universal and channel-specific product meaning matters commercially.
+Shopware can be a strong fit when products should not appear everywhere in the same way.
 
-#### Route and SEO behavior matter by storefront context
+This can matter when the catalog includes:
 
-Shopware is often a strong fit when route behavior is not one universal storefront question, but something the business needs to govern by channel context.
+* products that belong only to specific sales channels
+* products with different visibility expectations by context
+* variant-heavy or property-sensitive product families
+* products with important SEO, media, pricing, or deliverability conditions
+* products whose presentation depends on surrounding storefront logic
 
-This makes Shopware especially strong when route meaning, SEO logic, and destination control need to remain deliberate across multiple storefront contexts.
+In this type of store, a migrated product must be judged by whether it remains visible, purchasable, discoverable, and contextually correct, not only by whether the product record exists.
 
-#### The business can govern extension-shaped behavior realistically
+#### Route and SEO governance matter across storefront contexts <a href="#route-and-seo-governance-matter-across-storefront-contexts" id="route-and-seo-governance-matter-across-storefront-contexts"></a>
 
-Shopware is often a strong fit when the business is comfortable with a platform whose power often depends partly on extensions and surrounding storefront logic that still need to be classified and validated carefully.
+Shopware is often a stronger fit when the business needs deliberate control over how important pages are reached after migration.
 
-Shopware works best when that surrounding behavior is intentional and governed, not when it is inherited loosely and expected to stay coherent automatically after migration.
+This is especially important for stores with valuable product, category, landing-page, or content URLs. If the store also has multiple sales channels, route continuity should be considered within that channel structure rather than treated as one universal redirect list.
 
-### Where Shopware Is Often a Weaker Fit
+A good Shopware fit depends on being able to prioritize high-value paths and define destination intent clearly.
 
-Shopware is often a weaker fit when the business wants the appearance of a more advanced platform without the operating discipline that platform expects.
+#### Extension-shaped storefront behavior can be classified clearly <a href="#extension-shaped-storefront-behavior-can-be-classified-clearly" id="extension-shaped-storefront-behavior-can-be-classified-clearly"></a>
 
-Several patterns usually make the fit weaker.
+Shopware can work well when important behavior depends on extensions, custom fields, storefront themes, integrations, or custom logic, provided those dependencies are understood.
 
-#### The business does not actually need channel- and rule-driven structure
+The fit is stronger when the business can explain which surrounding behaviors still matter after migration. The number of extensions is less important than whether the business knows what each important layer contributes to selling, browsing, checkout, customer handling, or operations.
 
-Shopware is often a weaker fit when the target does not genuinely need more structured sales-channel governance, explicit rule-based behavior, or channel-sensitive route and visibility control.
+### Where Shopware Is Often a Weaker Fit <a href="#where-shopware-is-often-a-weaker-fit" id="where-shopware-is-often-a-weaker-fit"></a>
 
-In those cases, the additional contextual burden may not create enough commercial value to justify the platform choice.
+Shopware is often a weaker fit when the business wants the appearance of a more advanced platform without the clarity required to govern it well.
 
-#### The source behavior is still too vague
+#### The business does not need sales-channel or rule-driven structure <a href="#the-business-does-not-need-sales-channel-or-rule-driven-structure" id="the-business-does-not-need-sales-channel-or-rule-driven-structure"></a>
 
-Shopware becomes a weaker fit when the business wants the platform to solve ambiguity it has not yet resolved.
+Shopware may be a weaker fit when the future store does not genuinely need sales-channel governance, rule-dependent behavior, product visibility control, or channel-aware route planning.
 
-Risk rises when the team has not yet defined:
+In that case, Shopware may still work, but the business may be accepting more structure than it needs. A simpler Target Platform may be easier to operate if catalog, pricing, payment, shipping, visibility, and customer-facing behavior are also simple.
+
+#### The source-store meaning is still too vague <a href="#the-source-store-meaning-is-still-too-vague" id="the-source-store-meaning-is-still-too-vague"></a>
+
+Shopware becomes harder to judge when the business expects the Target Platform to resolve ambiguity that the migration plan has not yet resolved.
+
+Risk rises when the team has not decided:
 
 * what should differ by sales channel
-* which logic should be rule-driven
-* how product visibility should differ by context
-* what route behavior should remain channel-specific
-* which extension- or custom-data-owned behaviors still matter
+* which rules should control pricing, payment, shipping, promotion, or visibility
+* how product visibility should work across storefront contexts
+* which product properties, variants, media, and SEO fields matter most
+* which routes deserve priority protection
+* which extension- or custom-data-owned outcomes still matter after launch
 
-Shopware is much less forgiving when the business wants the target platform to provide that clarity automatically instead of defining it clearly first.
+Shopware can provide stronger structure, but it cannot safely define the business model on behalf of the merchant during migration.
 
-#### Extension or custom behavior is high, but still poorly classified
+#### Extension and custom behavior are important but poorly classified <a href="#extension-and-custom-behavior-are-important-but-poorly-classified" id="extension-and-custom-behavior-are-important-but-poorly-classified"></a>
 
-Shopware can still be the right platform in extension-rich environments, but the fit weakens when the business cannot explain which extension- or custom-data-owned outcomes are still commercially important and why.
+Shopware can be suitable for extension-rich environments, but fit weakens when the business cannot describe what important extensions, custom fields, integrations, theme behavior, or custom logic actually do.
 
-The issue is not extension count alone. The issue is unclear meaning. If the team cannot describe what those surrounding layers still need to do after launch, Shopware becomes harder to judge safely because too much of the real storefront may sit outside the obvious product and customer records.
+A store may appear simple at the record level while depending heavily on surrounding behavior. If those behaviors are not classified, migration planning can preserve products and customers while weakening the storefront experience that made the source store usable.
 
-#### Sales-channel complexity is being chosen for ambition rather than real need
+#### Sales-channel complexity is chosen before need is proven <a href="#sales-channel-complexity-is-chosen-before-need-is-proven" id="sales-channel-complexity-is-chosen-before-need-is-proven"></a>
 
-Sales channels are powerful, but the fit weakens when businesses choose broader storefront complexity because it is available rather than because it is necessary.
+Sales channels can be powerful, but they can also add governance burden when they are chosen for ambition rather than need.
 
-A weaker fit often appears when multiple channel ambition exists without a clear explanation of why each sales channel matters commercially.
+A weaker fit often appears when the business wants multiple channels but cannot explain the audience, catalog scope, route behavior, pricing logic, language, currency, or operational role of each channel.
 
-### Strong-Fit Profiles
+#### The team is not ready for the validation burden <a href="#the-team-is-not-ready-for-the-validation-burden" id="the-team-is-not-ready-for-the-validation-burden"></a>
 
-Shopware is often a strong fit for businesses that look like the following.
+Shopware’s strength creates a broader review surface. Sales-channel behavior, rules, product visibility, properties, variants, routes, extensions, and customer-facing workflows may all need review after migration.
 
-#### Businesses with meaningful sales-channel differentiation
+If the team cannot validate those outcomes, Shopware may be difficult to confirm as a safe fit even if the platform itself is capable.
 
-These are merchants whose storefront meaning genuinely depends on more than one customer-facing context with explicit control over what appears where.
+### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-#### Businesses that need stronger rule-driven governance
+Shopware is often a strong fit for businesses that need governed storefront context and can make clear decisions about how that context should work.
 
-These are teams that need contextual storefront behavior to be governed through explicit business rules rather than through scattered workarounds.
+#### Businesses with meaningful sales-channel differentiation <a href="#businesses-with-meaningful-sales-channel-differentiation" id="businesses-with-meaningful-sales-channel-differentiation"></a>
 
-#### Businesses that need stronger route and SEO control by channel
+These merchants need separate storefront contexts for clear commercial reasons, such as region, brand, language, market, product scope, or customer segment.
 
-These are businesses where SEO URL behavior, canonical handling, and destination logic should remain deliberate across multiple storefront contexts.
+The fit is strongest when each channel has a defined purpose and the business can explain what should appear, sell, or behave differently there.
 
-#### Businesses willing to govern extension-shaped logic deliberately
+#### Businesses that rely on explicit commercial rules <a href="#businesses-that-rely-on-explicit-commercial-rules" id="businesses-that-rely-on-explicit-commercial-rules"></a>
 
-These are teams that understand Shopware’s strength comes partly from native structure and partly from the ability to classify and validate surrounding storefront behavior carefully.
+These teams need pricing, promotions, payment, shipping, product visibility, or category visibility to depend on defined conditions.
 
-### Higher-Risk Fit Profiles
+Shopware is a stronger fit when the business wants those conditions governed explicitly rather than hidden in scattered extensions, manual workarounds, or undocumented custom behavior.
 
-Shopware usually becomes a higher-risk fit for businesses that look like the following.
+#### Businesses with visibility-sensitive catalogs <a href="#businesses-with-visibility-sensitive-catalogs" id="businesses-with-visibility-sensitive-catalogs"></a>
 
-#### Businesses choosing Shopware mainly because it feels more advanced
+These merchants have products whose availability, discoverability, presentation, or buying context should vary across channels, customer contexts, or commercial situations.
 
-These are merchants who want a more modern platform without a clear reason the commercial model actually benefits from Shopware’s specific structural layers.
+Shopware can be useful when product visibility is part of strategy, not only administration.
 
-#### Businesses whose source meaning is still undefined
+#### Businesses that need stronger route and SEO control <a href="#businesses-that-need-stronger-route-and-seo-control" id="businesses-that-need-stronger-route-and-seo-control"></a>
 
-These are teams that know the future store is more complex, but still have not decided how sales channels, rules, visibility, route logic, and surrounding extension behavior should work after launch.
+These stores depend on high-value product, category, landing-page, or content URLs and need route planning to remain deliberate after migration.
 
-#### Businesses expecting Shopware to simplify ambiguity automatically
+The fit is stronger when the business can prioritize traffic-sensitive paths and define what each important destination should become in Shopware.
 
-These are merchants who assume the platform’s richer structure will automatically make the target coherent even though the source structure is still poorly classified.
+#### Businesses willing to govern extension-shaped behavior <a href="#businesses-willing-to-govern-extension-shaped-behavior" id="businesses-willing-to-govern-extension-shaped-behavior"></a>
 
-#### Businesses unwilling to support a broader validation burden
+These teams understand that migration success depends not only on native records, but also on whether extension-supported behavior, custom fields, storefront themes, integrations, and custom logic remain meaningful in the target model.
 
-These are teams that want the platform’s structural power but do not yet have a realistic path to review and approve the richer channel, rule, route, and extension-sensitive outcomes Shopware introduces.
+### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-### What Should Be Confirmed Before Calling Shopware a Good Fit
+Shopware becomes a higher-risk fit when the business wants the platform’s structural power but has not defined what that structure must preserve, simplify, or rebuild.
 
-Before the business treats Shopware as the right target, it should be able to answer a few questions clearly.
+#### Businesses choosing Shopware mainly because it feels modern <a href="#businesses-choosing-shopware-mainly-because-it-feels-modern" id="businesses-choosing-shopware-mainly-because-it-feels-modern"></a>
 
-#### 1. Does the future storefront genuinely need more than one sales channel?
+Modern architecture is not a complete fit argument. Shopware should solve a defined storefront, catalog, rule, visibility, or channel-governance problem.
 
-If channel context is central to how the business sells, Shopware is often a stronger fit.
+If the business cannot explain what Shopware-specific structure is needed, the platform choice may create additional planning burden without enough practical benefit.
 
-#### 2. Are rules part of real storefront governance?
+#### Businesses with undefined sales-channel logic <a href="#businesses-with-undefined-sales-channel-logic" id="businesses-with-undefined-sales-channel-logic"></a>
 
-If important behavior depends heavily on contextual logic, Rule Builder can become a major fit advantage.
+If the business has not clarified what belongs in each storefront context, Shopware fit is harder to confirm.
 
-#### 3. Does the future model genuinely need channel-specific SEO and route handling?
+This risk increases when product visibility, customer-facing content, route logic, payment behavior, shipping behavior, language, or currency choices are still undecided.
 
-The business should be able to explain why route logic and destination behavior should differ by storefront context.
+#### Businesses with unclear rule behavior <a href="#businesses-with-unclear-rule-behavior" id="businesses-with-unclear-rule-behavior"></a>
 
-#### 4. Has the business defined how product visibility should work across channels?
+If pricing, promotions, payment, shipping, visibility, or category behavior depends on source-platform logic that no one has classified, the fit becomes less stable.
 
-Because visibility is channel-specific in Shopware, this should be intentional rather than assumed.
+Shopware can support rule-driven behavior, but unclear rules are still unclear after migration unless they are reviewed and modeled deliberately.
 
-#### 5. Can the team validate the richer contextual structure Shopware introduces?
+#### Businesses with unclassified extension dependency <a href="#businesses-with-unclassified-extension-dependency" id="businesses-with-unclassified-extension-dependency"></a>
 
-This includes sales-channel behavior, rule-dependent logic, product visibility, route behavior, and extension-shaped meaning.
+If important source-store behavior depends on extensions, integrations, scripts, custom fields, themes, or outside systems, the business should know which outcomes still matter.
 
-### Conclusion
+Shopware fit weakens when these dependencies are treated as background details rather than active parts of the target-store plan.
 
-Shopware is often a strong migration target when the business genuinely needs richer sales-channel logic, stronger rule-driven behavior, more deliberate channel-specific route and SEO governance, and more structured control over extension-sensitive storefront outcomes than lighter platforms usually support as naturally.
+#### Businesses unwilling to support broader review after migration <a href="#businesses-unwilling-to-support-broader-review-after-migration" id="businesses-unwilling-to-support-broader-review-after-migration"></a>
 
-It is often a weaker fit when the platform is being chosen for abstract modernity rather than for a clearly defined structural need. Shopware becomes strongest when the business already knows why sales channels, rules, product visibility, SEO URL behavior, and surrounding storefront logic matter commercially. Without that clarity, the platform can look sophisticated while still carrying too much ambiguity into the migration.
+Shopware migrations often require review beyond product count and order count. A business that cannot review channel behavior, rule outcomes, visibility, routes, and extension-shaped workflows may not be ready to call Shopware a safe fit.
 
-Use a representative Demo Migration to test the sales-channel cases, rule-dependent scenarios, product-visibility questions, route expectations, extension-sensitive outcomes, and high-value storefront paths that matter most. If those outcomes are still unclear, Live Chat can help determine whether Shopware is the right target and whether the migration path needs a more guided or more bespoke approach.
+### What Should Be Confirmed Before Calling Shopware a Good Fit <a href="#what-should-be-confirmed-before-calling-shopware-a-good-fit" id="what-should-be-confirmed-before-calling-shopware-a-good-fit"></a>
 
-### FAQs
+Before treating Shopware as the right Target Platform, the business should be able to answer several practical questions.
 
-#### What usually makes Shopware a strong fit?
+#### 1. Does the future store genuinely need sales-channel governance? <a href="#id-1-does-the-future-store-genuinely-need-sales-channel-governance" id="id-1-does-the-future-store-genuinely-need-sales-channel-governance"></a>
 
-Usually a real need for clearer sales-channel governance, stronger rule-driven behavior, channel-specific SEO and route control, product visibility by context, and more deliberate control over extension-shaped storefront behavior.
+If each sales channel has a clear audience, product scope, language, market, route logic, or operational reason, Shopware may be a strong fit. If channels are planned only because the capability exists, the fit is weaker.
 
-#### Is Shopware automatically a good fit for businesses with multiple storefronts?
+#### 2. Which behaviors should be rule-driven? <a href="#id-2-which-behaviors-should-be-rule-driven" id="id-2-which-behaviors-should-be-rule-driven"></a>
 
-No. Multiple storefronts alone are not enough. Shopware is strongest when those storefront contexts need governed sales-channel behavior rather than only more storefront count.
+The business should identify which pricing, promotion, payment, shipping, visibility, category, or customer-facing behaviors depend on rules. Rule-driven structure is useful only when the rules represent real commercial intent.
 
-#### What is one of the biggest Shopware fit mistakes?
+#### 3. How should product visibility work? <a href="#id-3-how-should-product-visibility-work" id="id-3-how-should-product-visibility-work"></a>
 
-Assuming that architectural polish or platform sophistication alone is enough reason to choose Shopware. The better question is whether the business actually needs the contextual structures Shopware is designed to support.
+The team should know which products should appear where, which products should be purchasable in each channel, and which product groups need special visibility or presentation review.
 
-#### Why is validation burden part of fit in Shopware?
+#### 4. Which routes and SEO outcomes matter most? <a href="#id-4-which-routes-and-seo-outcomes-matter-most" id="id-4-which-routes-and-seo-outcomes-matter-most"></a>
 
-Because the platform often introduces more structural meaning around sales channels, rules, visibility, SEO URLs, and extension-owned logic. A business that cannot validate those outcomes clearly may not be ready for a good Shopware fit.
+The business should be able to identify priority product, category, landing-page, and content paths, then define destinations that preserve customer intent after migration.
+
+#### 5. Which extension-shaped behaviors still matter? <a href="#id-5-which-extension-shaped-behaviors-still-matter" id="id-5-which-extension-shaped-behaviors-still-matter"></a>
+
+Important extensions, custom fields, integrations, storefront themes, and custom logic should be classified by the outcome they support, not merely by their names.
+
+#### 6. Can the team validate Shopware-specific outcomes? <a href="#id-6-can-the-team-validate-shopware-specific-outcomes" id="id-6-can-the-team-validate-shopware-specific-outcomes"></a>
+
+A strong fit requires the ability to review sales channels, rules, product visibility, route behavior, customer-facing workflows, and extension-dependent outcomes after the Demo Migration and Full Migration.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+Shopware is often a strong migration target when the business needs governed sales-channel context, rule-driven commercial behavior, controlled product visibility, deliberate route planning, and extension-aware storefront flexibility. It is often a weaker fit when those needs are still vague or when the platform is chosen mainly because it appears more advanced.
+
+The safest Shopware fit is not defined by store size alone. It is defined by whether the business can explain what Shopware should govern after migration and whether the team can validate those outcomes. When that clarity exists, Shopware can support a more structured and scalable commerce model. When it does not, the platform’s richer structure can expose unresolved decisions quickly.
+
+Use the Demo Migration to test whether Shopware fit is real, not theoretical. Review a sample that includes important sales-channel behavior, rule-sensitive scenarios, visibility-sensitive products, priority URLs, and extension-shaped workflows before treating Shopware as the final Target Platform.
+
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**Is Shopware a good fit for every growing business?**
+
+No. Shopware is usually a stronger fit when growth requires clearer sales-channel governance, rule-driven behavior, product visibility control, route planning, and extension-aware structure. If the future store is simple, another Target Platform may be easier to operate.
+
+**Does choosing Shopware automatically solve source-store complexity?**
+
+No. Shopware can provide stronger structure, but it does not automatically decide unclear business rules, product visibility, route priorities, or extension-dependent behavior. Those decisions still need to be defined before migration can be judged safely.
+
+**Is Shopware mainly for large stores?**
+
+Not necessarily. Store size matters less than structural need. A smaller business with meaningful channel differences, rule-sensitive behavior, or visibility-sensitive products may be a better Shopware fit than a larger store with a simple operating model.
+
+**When is Shopware a weaker fit?**
+
+Shopware is usually a weaker fit when the business does not need sales-channel governance, rule-driven behavior, product visibility control, or extension-aware storefront structure. It is also weaker when the team cannot validate the richer outcomes Shopware introduces.
+
+**What should be checked before choosing Shopware as the Target Platform?**
+
+The business should confirm sales-channel purpose, rule-driven behavior, product visibility expectations, priority URL handling, extension-shaped dependencies, and the team’s ability to validate Shopware-specific outcomes after migration.

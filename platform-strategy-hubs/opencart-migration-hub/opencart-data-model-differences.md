@@ -1,195 +1,240 @@
 # OpenCart Data Model Differences
 
-A migration into OpenCart can preserve the visible storefront while still changing the commercial meaning behind it.
+A migration into OpenCart can preserve many visible storefront records while still changing the commercial meaning behind them. That is because OpenCart does not treat the storefront as one flat product catalog. Product choices, descriptive information, filters, categories, manufacturers, customer groups, store scope, SEO URLs, extensions, themes, and modifications can all carry separate meaning.
 
-That usually happens because OpenCart is not only a flexible open-source target. It is a platform where product options, attributes, filters, customer groups, store scope, SEO URLs, and extension-driven behavior often carry more explicit meaning than they did in the source store. Products, customers, and orders may still move successfully, but the target can behave very differently once those structures become part of how the business is expected to operate.
+The OpenCart data-model question is therefore not only whether products, customers, orders, and content can move. The better question is whether the Target Platform still expresses the same buyable choices, product understanding, browse paths, customer context, storefront separation, and route meaning after the data is translated into OpenCart.
 
-This matters because OpenCart data-model differences are rarely just technical translation questions. They change what the store believes a customer choice is, what information should help the customer understand products, how discovery should work, how customer context should be represented, what should differ by store, and what the business must validate before it can trust launch readiness.
+### How OpenCart Changes Commercial Meaning <a href="#how-opencart-changes-commercial-meaning" id="how-opencart-changes-commercial-meaning"></a>
 
-### Products remain central, but product meaning is distributed across several layers
+OpenCart can be a practical and flexible Target Platform, but that flexibility becomes safer only when each data layer has a clear job. A source store may have mixed product choices, descriptive product details, search behavior, category structure, customer segmentation, and extension-driven behavior in ways that OpenCart expects the business to classify more deliberately.
 
-One of the most important OpenCart data-model realities is that the product record does not carry customer-facing meaning by itself.
+#### Product meaning is distributed across several catalog layers <a href="#product-meaning-is-distributed-across-several-catalog-layers" id="product-meaning-is-distributed-across-several-catalog-layers"></a>
 
-Product meaning is often distributed across:
+In OpenCart, the product record is central, but it does not carry every part of storefront meaning by itself.
 
-* options and option values for customer-selectable choice
-* attributes for descriptive or comparative understanding
-* filters for discovery and narrowing behavior
+Product meaning can depend on:
+
+* options and option values for customer-selectable choices
+* attributes for descriptive or comparative information
+* filters for storefront narrowing and discovery
 * categories for browse structure
 * manufacturers for brand or source context
-* extensions, themes, and modifications for surrounding storefront logic
+* images, downloads, reviews, and information pages for supporting storefront meaning
+* extensions, themes, and modifications for behavior that does not live entirely in core product data
 
-That means product migration is not only about whether the product exists. It is about whether the target still expresses the real buyable, understandable, and discoverable outcome clearly enough after launch.
+This means a migrated product should not be judged only by whether it exists in the OpenCart admin. It should be judged by whether customers can still understand it, choose it, find it, and buy it in the intended way.
 
-### Options change what customer choice means
+#### OpenCart makes catalog governance more explicit <a href="#opencart-makes-catalog-governance-more-explicit" id="opencart-makes-catalog-governance-more-explicit"></a>
 
-One of the clearest OpenCart data-model differences is that options are a core layer for customer-selectable behavior.
+OpenCart separates many catalog concepts that source stores may have treated loosely. Options, attributes, filters, categories, manufacturers, and reviews are not interchangeable layers. Each affects a different part of how the storefront works.
 
-That means product representation is not only about moving fields. It is about deciding whether the target should treat product meaning through:
+That separation can be valuable because it gives the business more control over product presentation and discovery. It can also expose weaknesses in the source catalog when product information was not governed consistently before migration.
 
-* products as the core sellable record
-* options as customer-selectable variation or selection logic
-* surrounding extension behavior when the buying journey depends on more than native option structure
+### Core OpenCart Data Layers <a href="#core-opencart-data-layers" id="core-opencart-data-layers"></a>
 
-A migration can therefore preserve the product record while still changing the buying journey if the target product model no longer reflects the real commercial behavior clearly enough.
+The most important OpenCart data-model differences usually appear in product structure, discovery structure, customer context, store scope, route logic, and extension-owned behavior.
 
-This is especially important when the source storefront blurred together:
+#### Products and options <a href="#products-and-options" id="products-and-options"></a>
 
-* selectable variation
-* descriptive product information
-* add-on behavior
-* personalization logic
-* extension-driven product behavior
+Options are one of the clearest OpenCart data-model differences because they affect customer-selectable product behavior.
 
-OpenCart can often carry those outcomes more clearly than teams first expect, but only when the business makes those distinctions explicitly.
+A product option should represent something the customer can choose, such as size, color, configuration, add-on selection, or another selectable product decision. If the source store blurred selectable choices with descriptive information, the migration needs to clarify which values should become options and which values should remain attributes, filters, or other supporting data.
 
-### Attributes change what descriptive information means
+The risk is not only that an option value might be missing. The larger risk is that the product remains visible but no longer supports the correct buying journey.
 
-OpenCart attributes should not be treated as the same thing as options.
+#### Attributes <a href="#attributes" id="attributes"></a>
 
-Attributes often support descriptive, comparative, or informational product meaning rather than customer selection. This changes migration planning because the target often needs to preserve not only what the product is, but also what the customer should understand from the product record without making that information part of a selectable choice.
+Attributes should not be treated as another version of options.
 
-Many source stores blur together:
+In OpenCart, attributes usually support descriptive, comparative, or informational product meaning. They help customers and store teams understand what the product is, how it differs from alternatives, and which details matter for evaluation.
 
-* selectable product options
-* descriptive comparison data
-* marketing-oriented product details
+If source data uses attributes inconsistently, migration into OpenCart may make that inconsistency more visible. A value that should help comparison can become less useful if it is migrated as a selectable choice, hidden in product text, or placed in an unclear attribute structure.
 
-OpenCart makes those distinctions more explicit, which can be a strength when the business wants stronger product clarity. It becomes a risk when those layers were never classified clearly enough in the source.
+#### Filters <a href="#filters" id="filters"></a>
 
-### Filters change what discovery means
+Filters are a discovery layer, not just extra metadata.
 
-One of the most commercially important OpenCart data-model differences is the role of filters.
+OpenCart filters help customers narrow product lists and move through the catalog more efficiently. This makes filter migration commercially important for stores where customers rely on product type, specification, material, compatibility, brand, use case, or another narrowing logic.
 
-Filters are not only extra product metadata. They often shape how customers narrow and discover products inside the storefront. That means product discoverability can weaken even when products and categories survive successfully if filters no longer support the intended narrowing logic.
+A product can migrate correctly while storefront discovery still becomes weaker if the filter layer does not reflect how customers actually shop. The review question is not only whether filter values were migrated. It is whether the Target Platform still supports the intended narrowing behavior.
 
-This matters because a source store may have carried discovery partly through categories, partly through search behavior, partly through attributes, and partly through storefront conventions that were never separated clearly. In OpenCart, filter logic often needs to be reviewed as its own discovery layer.
+#### Categories and browse paths <a href="#categories-and-browse-paths" id="categories-and-browse-paths"></a>
 
-The important target question is therefore not only whether filter values exist. It is whether the business has correctly decided what should remain browse structure, what should remain descriptive product information, and what should remain narrowing logic.
+Categories carry storefront-path meaning in OpenCart.
 
-### Categories change what browse structure means
+They are not only administrative folders. They can define how customers browse, how products are grouped, how important landing pages are understood, and how SEO-sensitive catalog paths should be preserved or replaced.
 
-Categories in OpenCart are not only an administrative filing system.
+A category can exist in the Target Platform and still fail commercially if product assignments, hierarchy, naming, or route relevance no longer support the intended shopping journey.
 
-They often shape how products are discovered, grouped, and interpreted in the storefront. That changes migration planning because a storefront can preserve products successfully while still weakening customer discovery if category meaning and category relationships are not planned clearly enough.
+#### Manufacturers and brand context <a href="#manufacturers-and-brand-context" id="manufacturers-and-brand-context"></a>
 
-This means category continuity is not only a record question. It is a storefront-path question. A category can therefore exist in the target while the store still becomes commercially weaker if the resulting browse logic is structurally wrong.
+Manufacturers can carry more customer-facing meaning than teams sometimes expect.
 
-### Manufacturers change what brand context means
+For some stores, manufacturers are only background product data. For others, they support brand discovery, trust, comparison, supplier context, or catalog organization. A migration into OpenCart should therefore preserve manufacturer meaning according to how it is actually used, not merely copy manufacturer names as isolated values.
 
-Manufacturers in OpenCart can carry more storefront meaning than teams first expect.
+#### Customer groups <a href="#customer-groups" id="customer-groups"></a>
 
-They can influence how customers understand product origin, brand grouping, or browse context. This matters when manufacturer structure plays a role in product discovery, trust, or catalog organization rather than functioning only as background data.
+Customer groups can become an explicit storefront-control layer in OpenCart.
 
-A migration can therefore preserve manufacturer values successfully while still weakening storefront clarity if the business has not decided how manufacturer meaning should still work after the move.
+They may affect how customers are grouped, how the store interprets customer context, and how storefront behavior or commercial rules are organized. This matters when the source store had wholesale customers, member segments, tax-sensitive groups, region-based customer logic, or other customer distinctions.
 
-### Customer groups change what customer context means
+Customer migration is therefore not only about account presence. It should also confirm whether group assignments still mean what the business expects them to mean after migration.
 
-One of OpenCart’s clearest structural differences is that customer groups can become a more explicit storefront-control layer.
+#### Multi-store scope <a href="#multi-store-scope" id="multi-store-scope"></a>
 
-That means customer continuity in OpenCart often depends on more than importing customer records. It also depends on deciding whether customer-group logic still reflects the intended commercial outcome after migration.
+OpenCart can support more than one store from the same installation, which changes how some data should be interpreted.
 
-A migration can therefore preserve customer accounts successfully while still weaken the target model if:
+When multi-store scope matters, a value is not only a product, category, customer, or route value. It may also carry store-specific meaning. Products, categories, design behavior, store settings, and route expectations may need to be reviewed according to the store context where they should appear.
 
-* groups are incorrectly assigned
-* groups are reused too broadly
-* inherited source-side segmentation survives without review
-* the business cannot explain which storefront behavior each customer group is meant to support
+This becomes risky when the source store did not clearly separate brand, region, language, or storefront context before migration. OpenCart can support multi-store direction, but the business needs to define what should be shared and what should differ.
 
-Where customer groups carry important commercial meaning, they should be treated as part of the storefront model, not as a secondary afterthought.
+#### SEO URLs and route meaning <a href="#seo-urls-and-route-meaning" id="seo-urls-and-route-meaning"></a>
 
-### Store scope changes what storefront separation means
+OpenCart supports SEO-friendly routes, which makes URL structure part of the target data model rather than only a redirect task.
 
-One of OpenCart’s clearest native differences is its ability to support more than one store.
+A migrated route should still support the customer intent behind the old path. This matters for product pages, category pages, manufacturer pages, information pages, and other high-value storefront paths. If the target route exists but sends customers to a weaker or less relevant destination, the technical URL may survive while the commercial journey becomes worse.
 
-That changes data meaning because some values may apply broadly, while others may differ by store context. That means a value is no longer only a product, category, or customer value. It may also carry a store-specific meaning.
+#### Extensions, themes, and modifications <a href="#extensions-themes-and-modifications" id="extensions-themes-and-modifications"></a>
 
-This is important because a migration can preserve the value itself while still misrepresent the intended behavior if the value lands in the wrong store context. A business may want product, category, route, or customer behavior to differ across stores. OpenCart can support that, but it expects those distinctions to be deliberate.
+OpenCart stores often rely on extensions, themes, and modifications for behavior that sits around the core catalog model.
 
-### SEO URLs change how route meaning is governed
+That behavior can affect product display, filtering, checkout, shipping, payment, SEO, customer accounts, reporting, content presentation, or other storefront outcomes. A migration should therefore separate native OpenCart structures from extension-owned or modification-owned meaning.
 
-OpenCart supports SEO URLs, which makes route continuity part of the target model rather than only a patching task.
+A field surviving the migration is not the same thing as the business outcome surviving. If important behavior depends on an extension, theme, modification, custom field, or outside-system identifier, that dependency should be reviewed before treating the data model as complete.
 
-That means route continuity is not only a redirect question. The route model itself matters. This is important because the target can govern route readability and continuity more explicitly than many teams expect, but it also means route behavior depends on the future structure the business chooses.
+### What Migrated Data Must Prove in OpenCart <a href="#what-migrated-data-must-prove-in-opencart" id="what-migrated-data-must-prove-in-opencart"></a>
 
-The important target question is therefore not only whether a path exists. It is whether the resulting route still supports the customer intent the original path used to serve.
+OpenCart data-model review should prove that the target store still works as a coherent storefront, not merely that records are present.
 
-### Extension-, theme-, and modification-owned meaning still matters
+#### Products must prove buyable meaning <a href="#products-must-prove-buyable-meaning" id="products-must-prove-buyable-meaning"></a>
 
-OpenCart can carry a large amount of important behavior in native structures, but many stores still depend on extensions, theme logic, modifications, custom fields, and surrounding workflow rules.
+Products should be reviewed for option behavior, option values, product status, price effects, availability, image meaning, downloadable product logic where relevant, and overall customer-facing clarity.
 
-That means a migration into OpenCart often has to separate:
+The product is successful only if customers can still understand and buy it in the intended way.
 
-* native OpenCart product and storefront structure
-* extension-owned storefront behavior
-* theme-owned presentation behavior
-* modification-driven logic
-* inherited source-side logic that still needs a target meaning
+#### Attributes and filters must prove discovery meaning <a href="#attributes-and-filters-must-prove-discovery-meaning" id="attributes-and-filters-must-prove-discovery-meaning"></a>
 
-This is one of the most important OpenCart data-model realities: the target may be more flexible than some teams expect, but important meaning can still sit partly outside the core record model. A field surviving is not the same thing as the business outcome surviving.
+Attributes should support useful product understanding and comparison. Filters should support useful narrowing and discovery.
 
-### Validation scope becomes more commercially contextual
+If these layers are mixed, missing, or overused, customers may see products but struggle to find or compare them. That makes the catalog technically present but commercially weaker.
 
-Because OpenCart changes how the storefront is structured, it also changes what the data must prove after migration.
+#### Categories must prove browse continuity <a href="#categories-must-prove-browse-continuity" id="categories-must-prove-browse-continuity"></a>
 
-The target can no longer be judged only by checking whether products, customers, and orders exist. It also needs to prove that:
+Category hierarchy, product assignments, category names, and high-value category destinations should be reviewed together.
 
-* options still support the intended buyable choices
-* attributes still support useful understanding and comparison
-* filters still support the intended narrowing behavior
-* categories still support the intended browse paths
-* customer groups still reflect the intended storefront logic
-* store assignments still make sense
-* SEO URLs still support the intended journey
-* extension-, theme-, and modification-owned behavior still supports the intended outcome
+The business should confirm that customers can still move through the catalog logically and that important product groups remain discoverable.
 
-This is one of the most important data-model differences of all. OpenCart changes not just the data structure, but the evidence structure the business needs before it can trust launch readiness.
+#### Customer groups must prove commercial context <a href="#customer-groups-must-prove-commercial-context" id="customer-groups-must-prove-commercial-context"></a>
 
-### What usually needs the earliest review
+Customer groups should be reviewed where they affect account interpretation, storefront access, commercial rules, or segmentation.
 
-The highest-risk OpenCart data-model differences usually deserve early review in:
+A customer can exist in the target store while still being placed in the wrong commercial context. That is why group meaning should be validated when it affects how the business serves different customer types.
 
-* product-choice translation through options
-* attribute and comparison logic
-* filter-driven discovery behavior
-* category structure and browse paths
-* customer-group behavior
-* store-scope assignment
-* SEO-sensitive route meaning
-* extension-, theme-, or modification-owned storefront behavior
+#### Store scope must prove placement accuracy <a href="#store-scope-must-prove-placement-accuracy" id="store-scope-must-prove-placement-accuracy"></a>
 
-These are the areas most likely to expose whether the target structure is commercially clear enough rather than only technically complete.
+When OpenCart multi-store behavior is part of the target plan, migrated values should be checked in the correct store context.
 
-### How Custom Cart as a source changes OpenCart data-model review
+The review should confirm what is shared, what is store-specific, and whether products, categories, design behavior, route expectations, and customer-facing outcomes appear where they belong.
 
-When the source platform is a Custom Cart, OpenCart data-model review usually needs a more bespoke translation lens.
+#### URLs must prove destination relevance <a href="#urls-must-prove-destination-relevance" id="urls-must-prove-destination-relevance"></a>
 
-That is because the source may carry product-choice logic, descriptive product meaning, discovery behavior, customer context, route structure, or storefront logic in structures that do not align neatly with OpenCart products, options, attributes, filters, customer groups, multi-store behavior, or SEO URLs. In those cases, the key review question is not only what data exists. It is how that source meaning should be interpreted and rebuilt so the OpenCart target remains commercially coherent.
+SEO URLs and redirects should be judged by relevance, not just by technical existence.
 
-In this context, earlier expert review and a more tailored migration path often become especially important.
+A high-value product or category path should lead to a destination that still satisfies the original shopping intent as closely as possible.
 
-### Conclusion
+#### Extension-sensitive behavior must prove outcome continuity <a href="#extension-sensitive-behavior-must-prove-outcome-continuity" id="extension-sensitive-behavior-must-prove-outcome-continuity"></a>
 
-OpenCart data-model differences matter because they change the commercial meaning of migrated data, not only its storage location.
+If extensions, themes, modifications, or custom logic shaped the source storefront, the target should be reviewed for the outcome those components used to support.
 
-The target often moves from a looser storefront-and-product model into a more explicit structure built around products, options, attributes, filters, categories, customer groups, store scope, SEO URLs, and extension-driven behavior. That can be a major strength when the business genuinely needs that structure. It becomes riskier when the business has not yet defined how those layers should work after the move.
+The question is not whether the same extension exists. The question is whether the business outcome still has a clear OpenCart representation.
 
-Review the product, discovery, customer, store, route, and extension-owned logic that matters most before treating the target model as settled. If those structures still feel unclear, Live Chat can help determine whether the issue is target fit, translation risk, or a sign that more guided handling is needed before full execution.
+### Where OpenCart Data-Model Review Should Start <a href="#where-opencart-data-model-review-should-start" id="where-opencart-data-model-review-should-start"></a>
 
-### FAQs
+The earliest review should focus on the areas most likely to expose whether OpenCart’s flexibility is governed clearly.
 
-#### What is one of the biggest OpenCart data-model differences?
+#### Product-choice translation <a href="#product-choice-translation" id="product-choice-translation"></a>
 
-One of the biggest differences is that product meaning is often distributed across products, options, attributes, filters, categories, and surrounding extension-shaped behavior rather than sitting entirely inside one simple product record.
+Start with products that depend on important selectable choices.
 
-#### Are options, attributes, and filters interchangeable in OpenCart?
+These products reveal whether options, option values, price effects, availability, and customer-facing selection behavior are being interpreted correctly.
 
-No. OpenCart treats them as different layers of product and storefront meaning, so a migration should not preserve them mechanically without clarifying their distinct jobs.
+#### Attribute and filter separation <a href="#attribute-and-filter-separation" id="attribute-and-filter-separation"></a>
 
-#### Why do customer groups matter so much in OpenCart?
+Review whether descriptive product information and storefront narrowing logic have been separated correctly.
 
-Because customer groups can become part of storefront-control logic rather than only an administrative label, which means the business needs to decide what customer-group behavior should still mean after migration.
+This is especially important when the source store used one field or tag system to support multiple storefront purposes.
 
-#### Does multi-store change how data should be reviewed?
+#### Category and manufacturer meaning <a href="#category-and-manufacturer-meaning" id="category-and-manufacturer-meaning"></a>
 
-Yes. Because values can carry store-specific meaning, the business often needs to validate not only the value itself, but also whether it appears in the right store context and follows the intended product, browse, customer, and route logic.
+Review category hierarchy, product assignment, manufacturer meaning, and important browse paths.
+
+This helps confirm whether the target catalog still supports how customers understand and explore the store.
+
+#### Customer-group behavior <a href="#customer-group-behavior" id="customer-group-behavior"></a>
+
+Identify whether customer groups affect customer access, pricing expectations, tax context, membership behavior, wholesale logic, or segmentation.
+
+If they do, they should be reviewed as part of the data model, not only as customer metadata.
+
+#### Multi-store and route expectations <a href="#multi-store-and-route-expectations" id="multi-store-and-route-expectations"></a>
+
+If the target store uses multiple store contexts or SEO-sensitive routes, review those decisions early.
+
+Store-scope and URL issues can be difficult to correct cleanly if they are discovered only after the catalog structure is already accepted.
+
+#### Extension and modification dependencies <a href="#extension-and-modification-dependencies" id="extension-and-modification-dependencies"></a>
+
+List the extensions, theme behaviors, modifications, custom fields, and outside-system identifiers that affect storefront meaning.
+
+Any dependency that cannot be represented through standard OpenCart structures may require Custom Service, relevant Add-ons, or deeper planning before full execution.
+
+### How Custom Platform Sources Change OpenCart Data-Model Review <a href="#how-custom-platform-sources-change-opencart-data-model-review" id="how-custom-platform-sources-change-opencart-data-model-review"></a>
+
+When the Source Platform is a Custom Platform, OpenCart data-model review needs a more bespoke translation lens.
+
+A Custom Platform may store product choices, descriptive product information, discovery rules, customer context, route behavior, or storefront logic in structures that do not map cleanly to OpenCart products, options, attributes, filters, categories, customer groups, multi-store behavior, or SEO URLs.
+
+In that situation, the migration question is not only what data exists. It is how the source meaning should be interpreted so the OpenCart Target Platform remains commercially coherent.
+
+Custom Platform sources commonly increase review sensitivity around:
+
+* product-option decisions
+* attribute and filter translation
+* category and manufacturer meaning
+* customer-group context
+* multi-store placement
+* SEO URL interpretation
+* extension replacement or custom migration logic adjustment
+* validation samples that prove real storefront behavior
+
+This is where Custom Service is required, because the work may involve bespoke interpretation, transformation, or custom migration logic adjustment rather than ordinary field movement.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+OpenCart data-model differences matter because they change how migrated data carries storefront meaning.
+
+OpenCart can be a strong Target Platform when the business wants practical open-source control over products, options, attributes, filters, categories, manufacturers, customer groups, store scope, SEO URLs, and extension-aware behavior. It becomes riskier when those layers are inherited from the source without deciding what each one should mean in the Target Platform.
+
+Review Demo Migration results with special attention to product options, attribute/filter separation, category paths, customer groups, store scope, high-value URLs, and extension-sensitive behavior. If those areas do not translate cleanly, use Live Chat to confirm whether the migration path needs Custom Service, relevant Add-ons, or deeper planning before full execution.
+
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**What is one of the biggest OpenCart data-model differences?**
+
+One of the biggest differences is that product meaning is distributed across products, options, attributes, filters, categories, manufacturers, and surrounding extension-shaped behavior rather than sitting entirely inside one product record.
+
+**Are options, attributes, and filters interchangeable in OpenCart?**
+
+No. Options support customer-selectable choices, attributes support descriptive or comparative product information, and filters support storefront narrowing and discovery. Mixing these layers can make the migrated catalog harder to use.
+
+**Why do customer groups matter in OpenCart migration?**
+
+Customer groups matter because they can carry commercial context, segmentation, access expectations, or storefront-control logic. A customer account can migrate successfully while still being assigned to the wrong business context.
+
+**Does multi-store change how OpenCart data should be reviewed?**
+
+Yes. If more than one store context is used, migrated values should be reviewed for where they belong, what should remain shared, and what should differ by store.
+
+**When does OpenCart data-model migration require Custom Service?**
+
+Custom Service is required when the Source Platform is a Custom Platform or when product logic, custom fields, outside-system identifiers, extension-owned behavior, or custom migration logic adjustment require bespoke interpretation beyond standard service capability.

@@ -1,115 +1,151 @@
 # Shopware Platform Overview
 
-Shopware is a commerce target that often appeals to businesses needing more structured control over storefront context, product presentation, commercial logic, and customer experience than lighter platforms usually provide.
+Shopware is often chosen by businesses that need stronger control over storefront context, product presentation, commercial rules, route behavior, and customer experience than a lighter storefront normally provides. It can be a strong Target Platform when the business wants more deliberate governance over how products appear, which customers see which offers, how sales channels behave, and how storefront logic is maintained after launch.
 
-That can be a major strength, but it also changes where migration risk concentrates. Instead of sitting mainly in surface-level storefront setup, risk in Shopware often sits in how the business defines sales channels, rule-driven behavior, product structure, pricing context, SEO URL behavior, and extension-shaped logic after launch. A migration into Shopware should therefore not be judged only by whether products, customers, and orders can be moved into the platform. The more important question is whether the target still supports the browsing, buying, pricing, route, and operational outcomes the business actually depends on.
+That strength also changes how migration should be evaluated. A Shopware migration should not be judged only by whether products, customers, orders, categories, and content appear in the Target Platform. The more important question is whether the migrated result still supports the business logic that customers, store teams, and operational workflows depend on.
 
-For many merchants, Shopware is attractive because it allows the store to carry more explicit commerce logic than a simpler storefront usually can, while still keeping that logic governable inside a modern platform structure. That is valuable when the business genuinely needs stronger control over channel-specific behavior, contextual rules, or differentiated storefront outcomes. The tradeoff is that Shopware is less forgiving when the future storefront has not been defined clearly enough. The platform can preserve a great deal of commercial behavior, but it can also expose ambiguity quickly when sales-channel scope, rule-dependent logic, route behavior, or extension-shaped workflows were never classified properly in the source environment.
+Shopware works best when the business can formalize storefront context, rule-driven behavior, product visibility, route governance, and extension-shaped meaning before migration. When those decisions are clear, Shopware can provide a structured target for a more controlled commerce model. When those decisions are vague, the platform can expose ambiguity quickly.
 
-### What Changes in a Migration to Shopware
+### What Changes in a Migration to Shopware <a href="#what-changes-in-a-migration-to-shopware" id="what-changes-in-a-migration-to-shopware"></a>
 
-A move into Shopware often changes the store most clearly in five areas.
+A move into Shopware often changes how the store expresses commercial meaning. The shift is not only a design or administration change. It affects how products, categories, customers, prices, rules, sales channels, SEO URLs, and extensions work together inside the Target Platform.
 
-#### Sales channels become a primary storefront layer
+#### Sales channels become a primary storefront layer <a href="#sales-channels-become-a-primary-storefront-layer" id="sales-channels-become-a-primary-storefront-layer"></a>
 
-One of the most important migration truths in Shopware is that storefront context is often governed through sales channels.
+In Shopware, storefront context is often shaped through sales channels. That makes channel planning more important than it may be on a simpler source platform.
 
-That means migration into Shopware is less about one undifferentiated storefront and more about deciding which products, categories, SEO behavior, and customer-facing outcomes belong in which sales-channel context.
+A migration into Shopware should therefore clarify which products, categories, customer-facing content, payment behavior, shipping behavior, SEO routes, and commercial expectations belong in each sales channel. The question is not only whether the storefront exists. It is whether the correct storefront logic exists in the correct channel context.
 
-The question is not only whether the storefront exists. It is whether the right storefront logic exists in the right sales channel.
+#### Rule-driven behavior becomes part of the target model <a href="#rule-driven-behavior-becomes-part-of-the-target-model" id="rule-driven-behavior-becomes-part-of-the-target-model"></a>
 
-#### Rule-driven behavior becomes part of the target model
+Shopware’s Rule Builder allows businesses to define reusable conditions that can affect many areas of store behavior, including shipping, payment, promotions, advanced prices, product visibility, and category visibility.
 
-Shopware includes Rule Builder as a core platform capability.
+That means some migrated business meaning may depend on rules rather than only on static records. A store can look complete after migration while still behaving incorrectly if important pricing, visibility, promotion, shipping, or payment logic was not translated into an appropriate Shopware model.
 
-That matters because migration planning can no longer treat storefront behavior only as static data and layout. In many Shopware projects, part of the real target logic sits in rules that govern how commercial behavior should work in different customer, cart, or context conditions. A store can therefore look complete after migration while still be commercially weaker if the target behavior depends on rules that were never defined clearly enough.
+#### Product meaning becomes more context-sensitive <a href="#product-meaning-becomes-more-context-sensitive" id="product-meaning-becomes-more-context-sensitive"></a>
 
-#### Product meaning becomes more context-sensitive
+Shopware products can carry meaning through visibility, properties, variants, pricing, stock, deliverability, media, SEO settings, and sales-channel assignment. Product migration into Shopware is therefore not only about preserving product records.
 
-Shopware’s product structure can carry more contextual meaning than many teams first expect.
+The target result should show whether products remain discoverable, purchasable, visible in the right storefront contexts, and represented in a way that still supports the intended buying journey.
 
-Products can be assigned to sales channels, and the catalog model also includes property and variant logic that can change how product meaning is expressed. That means product migration is less about raw record transfer and more about deciding whether the target product model still supports the real browsing and buying outcome clearly enough.
+#### Route governance becomes part of storefront governance <a href="#route-governance-becomes-part-of-storefront-governance" id="route-governance-becomes-part-of-storefront-governance"></a>
 
-#### Route governance becomes part of channel governance
+Shopware route and SEO behavior should be treated as part of the target model, not as a late cleanup task. High-value product, category, landing, and content paths need clear destination planning.
 
-Shopware’s SEO settings and product structure allow SEO URLs and canonical URLs to be managed in a sales-channel-aware way.
+If a store uses multiple sales channels or differentiated storefront contexts, route continuity should be reviewed with that structure in mind. The key question is whether important legacy paths still lead customers and search engines to destinations that match the original intent.
 
-That means route continuity is not only a redirect-cleanup question. It is part of the target model itself. The more important planning question is which routes matter most, what their destination should be, and whether their behavior still supports the customer intent the original path served before migration.
+#### Extensions and custom behavior may carry business meaning <a href="#extensions-and-custom-behavior-may-carry-business-meaning" id="extensions-and-custom-behavior-may-carry-business-meaning"></a>
 
-#### Structural translation can change storefront architecture
+Shopware projects often involve extensions, integrations, custom fields, storefront themes, or custom logic that shape how the store works beyond core records. These layers can affect product presentation, checkout expectations, search behavior, pricing context, content handling, and operational workflows.
 
-Storefront architecture itself may be translated into a different native model after migration.
+If those surrounding behaviors are important, they should be classified before migration. Otherwise, a target store may preserve core data while weakening the real behavior that made the source store usable.
 
-Even when data migrates successfully, the target still needs to be judged by whether the resulting channel structure reflects the intended business meaning.
+### Where Shopware Is Often a Strong Target <a href="#where-shopware-is-often-a-strong-target" id="where-shopware-is-often-a-strong-target"></a>
 
-### Where Shopware Is Often a Strong Target
+Shopware is often a strong migration target when the business needs a structured platform for governed storefront context, rule-based commerce logic, and clearer product visibility control.
 
-Shopware is often a strong migration target when the business genuinely needs a platform that can support clearer storefront context, more explicit rule-driven behavior, and more deliberate sales-channel governance than lighter targets normally carry natively.
+#### Businesses with meaningful sales-channel differences <a href="#businesses-with-meaningful-sales-channel-differences" id="businesses-with-meaningful-sales-channel-differences"></a>
 
-It is usually a strong fit when the storefront depends on meaningful context differences, where products, content, pricing logic, route behavior, or customer-facing behavior need to be governed differently across storefront contexts. This is especially true when the team is willing to validate high-risk channel assignments, rule-dependent behavior, product visibility, and route continuity early rather than assume that familiar storefront behavior will survive automatically.
+Shopware is often suitable when different storefront contexts need different product visibility, category structure, pricing logic, language, currency, route behavior, or customer-facing experiences.
 
-Shopware is also often a strong fit when the business can benefit from sales channels and rules being part of the target model rather than treated as isolated administrative details. For merchants with meaningful storefront differentiation, contextual logic, or more than one customer-facing storefront context, Shopware can be much stronger when those differences need to be governed explicitly.
+The fit is strongest when those differences are intentional and documented. If channel differences are unclear, Shopware’s structure may make the ambiguity more visible rather than remove it.
 
-Another common strong-fit pattern is a store whose route continuity, SEO behavior, and storefront-context model can be planned clearly inside Shopware’s native channel-aware capabilities. Because Shopware supports sales-channel-specific SEO URL and canonical handling, the planning burden is usually less about whether routes are technically possible and more about which routes matter most and whether their channel-specific destinations still preserve the intended journey.
+#### Stores that depend on rule-based commercial logic <a href="#stores-that-depend-on-rule-based-commercial-logic" id="stores-that-depend-on-rule-based-commercial-logic"></a>
 
-Where customer continuity matters, Shopware can also be a strong target when the established conditions are met: the source platform is open-source, password hashes can be transferred, and the target continuity path is supported through the Next-Cart Customer Password Plugin. Where those conditions are not met, the safer path is still a reset-first launch model with clear customer communication.
+Shopware can be a good target when shipping, payment, promotions, advanced pricing, product visibility, or category visibility depends on defined conditions.
 
-### Where Deeper Planning Is Usually Needed
+This is useful when the business wants to govern logic explicitly instead of relying on scattered workarounds. The migration should confirm whether important source behavior can be expressed clearly through Shopware’s native structure or whether additional review is needed.
 
-Shopware is not automatically the right fit just because it looks modern or structurally rich.
+#### Catalogs that need structured product presentation <a href="#catalogs-that-need-structured-product-presentation" id="catalogs-that-need-structured-product-presentation"></a>
 
-Deeper planning is usually needed when the source store carries storefront, rule, route, or customer behavior that is still poorly classified. Shopware can preserve more contextual commerce structure than some teams expect, but that does not help if the business has not decided which structure is meaningful and which should be simplified.
+Shopware can be strong for catalogs that need clear product properties, variants, media, SEO fields, product visibility, and sales-channel assignment.
 
-Deeper planning is also necessary when important outcomes depend heavily on extensions, custom data, theme behavior, or inherited rule logic that no one has fully mapped. The risk here is not extension count alone. It is unclear extension-owned meaning. A migration can look successful while still weakening the real behaviors that drive conversion, trust, or operations if those behaviors were not classified clearly enough before execution.
+The advantage is strongest when product structure is not treated as a simple import task. Product families, variant-heavy records, visibility-sensitive items, and SEO-sensitive products should be reviewed early.
 
-Sales channels are another common planning pressure point. Businesses that move into Shopware without defining what belongs in one channel versus another often create targets that are technically rich but harder to operate and validate than expected.
+#### Businesses that want a more governed growth platform <a href="#businesses-that-want-a-more-governed-growth-platform" id="businesses-that-want-a-more-governed-growth-platform"></a>
 
-### What Should Be Understood Early Before Moving into Shopware
+Shopware can support a more governed operating model when the business is prepared to formalize how commerce behavior should work after launch. This includes storefront structure, rule behavior, catalog governance, extension dependencies, and route continuity.
 
-Before treating Shopware as a settled target choice, the business should be able to answer a few important questions clearly.
+For teams that want more control and can make clear planning decisions, Shopware can become a strong target platform. For teams that want the platform to decide unclear business rules for them, migration risk increases.
 
-#### 1. What should differ by sales channel?
+### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
 
-This is one of the most important early questions because channel structure often shapes the whole target more than teams first expect.
+Shopware is not automatically the right target just because the business wants a modern storefront or more advanced capabilities. Its strengths depend on clear planning.
 
-#### 2. Which behaviors depend on rules rather than only on static structure?
+#### Sales-channel logic is not yet defined <a href="#sales-channel-logic-is-not-yet-defined" id="sales-channel-logic-is-not-yet-defined"></a>
 
-If important storefront outcomes depend on contextual behavior, Rule Builder-related planning becomes central.
+Deeper planning is needed when the business has not decided what should differ by channel. Product visibility, language, currency, customer-facing content, route behavior, shipping options, and payment behavior may all need channel-aware review.
 
-#### 3. How should products behave across channels?
+#### Rule-dependent behavior is inherited but undocumented <a href="#rule-dependent-behavior-is-inherited-but-undocumented" id="rule-dependent-behavior-is-inherited-but-undocumented"></a>
 
-The answer usually determines whether visibility, browsing, and route behavior will still feel structured and usable after launch.
+If pricing, promotions, shipping, payment, customer treatment, or visibility depends on source-platform rules, extensions, manual workarounds, or custom logic, the business should identify those behaviors before migration.
 
-#### 4. Which routes and SEO outcomes matter most?
+Unclear rule logic is one of the easiest ways for a Shopware target to look complete but behave differently from what customers and store teams expect.
 
-Because Shopware supports sales-channel-specific SEO URL and canonical behavior, route logic should be treated as a real platform-fit question rather than a late technical detail.
+#### Product structure is complex or inconsistent <a href="#product-structure-is-complex-or-inconsistent" id="product-structure-is-complex-or-inconsistent"></a>
 
-#### 5. Which storefront and customer-continuity expectations matter most?
+Variant-heavy catalogs, inconsistent product attributes, unclear property usage, missing media governance, or visibility-sensitive product groups all need careful planning.
 
-Shopware can carry a great deal of contextual storefront logic, but that only helps if the business has defined which customer and channel outcomes are truly important.
+The migration should preserve product usefulness, not only product existence.
 
-### Conclusion
+#### Extensions or custom data carry important behavior <a href="#extensions-or-custom-data-carry-important-behavior" id="extensions-or-custom-data-carry-important-behavior"></a>
 
-Shopware is often a strong migration target for businesses that need a platform with clearer sales-channel context, stronger rule-driven behavior, more explicit product and storefront governance, and more deliberate route handling than lighter platforms usually carry natively. But it performs best when the business understands where Shopware exposes the planning burden rather than removes it.
+Extensions, integrations, custom fields, theme behavior, outside-system identifiers, or Custom Platform source logic can make migration more complex. These cases may require Custom Service when standard service capability or available Add-ons cannot represent the required behavior safely.
 
-A migration into Shopware should not be judged only by whether the store can be rebuilt inside a more structured platform. It should be judged by whether sales channels, rules, product visibility, SEO URL behavior, and important route or customer-continuity paths still support the intended customer and operational outcomes. Shopware can be an excellent fit when those decisions are made clearly. It becomes riskier when the source structure is still vague and the platform is expected to resolve that ambiguity automatically.
+#### SEO and route continuity carry business value <a href="#seo-and-route-continuity-carry-business-value" id="seo-and-route-continuity-carry-business-value"></a>
 
-A strong next step is to use a Demo Migration built from the sales-channel cases, rule-dependent scenarios, product-visibility questions, extension-dependent behaviors, and high-value route or customer-continuity paths that matter most. If the result still suggests uncertainty around target structure, Live Chat can help determine whether Standard Migration Service is sufficient or whether Managed Migration Service or Custom Migration Service is the safer path.
+Shopware route planning should be driven by business value. High-value products, categories, landing pages, and content routes should be identified early so important traffic paths are not weakened during migration.
 
-### FAQs
+### What Should Be Understood Early Before Moving into Shopware <a href="#what-should-be-understood-early-before-moving-into-shopware" id="what-should-be-understood-early-before-moving-into-shopware"></a>
 
-#### Is Shopware a good fit for stores with multiple storefront contexts?
+Before treating Shopware as the settled Target Platform, the business should be able to answer several practical questions.
 
-Often yes. Shopware is usually strongest when important storefront behavior depends on clearer sales-channel governance and the business can define those contexts clearly enough to validate safely.
+#### What should differ by sales channel? <a href="#what-should-differ-by-sales-channel" id="what-should-differ-by-sales-channel"></a>
 
-#### What usually makes Shopware a strong migration target?
+The answer shapes product visibility, storefront experience, route planning, customer-facing content, and sometimes payment or shipping behavior.
 
-Shopware is usually a strong target when the business needs more explicit sales-channel logic, stronger rule-driven behavior, more deliberate SEO and route governance, and more structured extension-sensitive storefront control than lighter platforms typically carry natively.
+#### Which behaviors depend on rules? <a href="#which-behaviors-depend-on-rules" id="which-behaviors-depend-on-rules"></a>
 
-#### What usually makes Shopware a weaker fit?
+Important pricing, promotion, payment, shipping, customer, cart, visibility, or category behavior should be identified before migration decisions are compressed by launch pressure.
 
-Shopware is often a weaker fit when important source behavior is still vague, when extension- or rule-owned meaning is poorly classified, or when the team expects the platform’s richer structure to solve commercial ambiguity automatically.
+#### How should products be represented in Shopware? <a href="#how-should-products-be-represented-in-shopware" id="how-should-products-be-represented-in-shopware"></a>
 
-#### What is the fastest way to confirm whether Shopware is the right target?
+The business should clarify which products require variants, properties, advanced pricing, sales-channel visibility, media review, SEO review, or custom-field handling.
 
-A representative Demo Migration is usually the fastest early fit test. It should focus on channel-specific behavior, rule-dependent logic, product-visibility questions, extension-shaped outcomes, and high-value route or continuity paths so the business can judge how Shopware handles the outcomes that matter most.
+#### Which routes and SEO outcomes matter most? <a href="#which-routes-and-seo-outcomes-matter-most" id="which-routes-and-seo-outcomes-matter-most"></a>
+
+Priority URLs should be reviewed by business value, not only by quantity. Product, category, and content destinations should still match customer intent after migration.
+
+#### Which extension-shaped or custom behaviors are essential? <a href="#which-extension-shaped-or-custom-behaviors-are-essential" id="which-extension-shaped-or-custom-behaviors-are-essential"></a>
+
+Not every extension, theme detail, or custom behavior needs to be reproduced exactly. But behavior that affects conversion, search, checkout, customer treatment, fulfillment, or reporting should be classified before migration scope is finalized.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+Shopware is often a strong migration target for businesses that need governed sales-channel context, rule-driven commerce behavior, structured product visibility, controlled route planning, and clearer extension-aware operating logic. It can support a more deliberate commerce model than simpler platforms, but only when the business defines what the target should actually represent.
+
+A Shopware migration should be judged by whether sales channels, rules, product visibility, pricing context, route behavior, and essential extension-shaped workflows still support the intended customer and operational outcomes. Shopware is strongest when the business uses its structure to clarify commerce logic. It becomes riskier when unclear source behavior is moved forward without being classified.
+
+Use a Demo Migration sample that includes sales-channel-sensitive products, rule-dependent pricing or visibility scenarios, variant-heavy product families, high-value routes, and extension-dependent behaviors. If the sample shows uncertainty around rules, custom fields, Custom Platform behavior, third-party data, or non-standard transformation needs, review the scope through Live Chat before assuming a standard migration approach is enough.
+
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**Is Shopware a good fit for stores with multiple storefront contexts?**
+
+Often yes, when the business can define what should differ by sales channel. Shopware is stronger when channel differences are intentional, documented, and validated early.
+
+**What usually makes Shopware a strong migration target?**
+
+Shopware is usually strong when the business needs governed sales channels, rule-based commercial behavior, structured product visibility, route planning, and extension-aware storefront control.
+
+**What usually makes Shopware a weaker fit?**
+
+Shopware becomes a weaker fit when the business cannot explain its sales-channel logic, rule dependencies, product visibility expectations, or extension-shaped behavior clearly enough to validate them after migration.
+
+**Does Shopware remove the need for migration planning?**
+
+No. Shopware provides structure, but that structure only helps when the business has defined what it wants the Target Platform to represent. Planning is still needed for sales channels, rules, products, routes, and custom behavior.
+
+**When should a Shopware migration be reviewed as Custom Service?**
+
+Custom Service should be reviewed when the migration involves Custom Platform source handling, third-party extension data, custom fields, outside-system identifiers, bespoke transformation rules, custom migration logic adjustment, or other requirements beyond standard service capability and available Add-ons.

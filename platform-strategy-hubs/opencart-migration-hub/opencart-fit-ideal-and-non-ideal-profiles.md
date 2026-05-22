@@ -1,224 +1,209 @@
 # OpenCart Fit: Ideal and Non-Ideal Profiles
 
-OpenCart is not simply a good fit for any business that wants an open-source storefront. It is a strong fit when the future store genuinely needs the kind of practical control and flexible storefront ownership that OpenCart is designed to support.
+OpenCart is a strong migration target when the business needs practical open-source storefront control and can govern that control clearly. It is not the best fit simply because a merchant wants flexibility. It becomes a stronger fit when product choices, category-led discovery, extensions, SEO URL behavior, customer-account expectations, and possible multi-store scope all have enough business meaning to justify a more hands-on platform.
 
-That distinction matters because many businesses are drawn to OpenCart for flexibility in the abstract. Flexibility alone is not enough. The more useful question is whether the business truly needs clearer control over product and option behavior, category-led discovery, extension-shaped storefront logic, SEO URL behavior, customer-account expectations, and possibly multi-store scope, without stepping into the heavier governance burden of a more enterprise-weight open-source platform.
+The fit question is therefore not only whether OpenCart can support the future store. The more useful question is whether the business can define what should remain flexible, what should become simpler, and what must be validated after migration. OpenCart works best when flexibility is intentional rather than inherited by accident.
 
-A business can be large and still not need OpenCart. Another business can be smaller in raw volume but still be a strong fit because the commercial model depends on configurable products, structured browse paths, direct storefront control, manageable open-source extensibility, or customer-account continuity conditions that suit an OpenCart target better than a hosted or heavier open-source alternative.
+### Where OpenCart Is Often a Strong Fit <a href="#where-opencart-is-often-a-strong-fit" id="where-opencart-is-often-a-strong-fit"></a>
 
-### Where OpenCart Is Often a Strong Fit
+OpenCart is often a strong fit for businesses that want open-source control without moving into a heavier enterprise platform model.
 
-OpenCart is often a strong migration target when the business needs an open-source platform that can support storefront control more explicitly than many hosted targets while still staying more operationally manageable than a heavier open-source environment.
+#### Product options and catalog behavior are important but still governable <a href="#product-options-and-catalog-behavior-are-important-but-still-governable" id="product-options-and-catalog-behavior-are-important-but-still-governable"></a>
 
-The strongest fit patterns usually appear when several conditions are true at the same time.
+OpenCart is often a strong fit when the catalog depends on configurable product choices, product options, option values, attributes, filters, and category-led discovery, but those structures can still be explained and validated clearly.
 
-#### Product and option behavior still fit a manageable catalog model
+This usually applies when the business needs:
 
-OpenCart is often a strong fit when product meaning can still be expressed clearly through products, options, option values, attributes, filters, and surrounding storefront logic without requiring a heavier native product architecture than the platform is meant to carry.
+* product options that affect how customers choose and buy
+* attributes that help describe and compare products
+* filters that support useful catalog browsing
+* category paths that still reflect real shopping behavior
+* product data that can remain understandable after migration
 
-This matters when the storefront needs to support:
+OpenCart is strongest when product flexibility supports the buying journey rather than making the catalog harder to maintain.
 
-* configurable products with understandable option behavior
-* descriptive product information that still helps customers compare choices
-* category- and filter-led browse paths that remain commercially useful
-* a buying journey that does not depend on a more enterprise-weight native product model
+#### Category and filter-led discovery shape how customers shop <a href="#category-and-filter-led-discovery-shape-how-customers-shop" id="category-and-filter-led-discovery-shape-how-customers-shop"></a>
 
-OpenCart is stronger when the business genuinely needs flexibility, but that flexibility still remains governable.
+OpenCart can be a good target when customers rely on browsing, narrowing, and comparison to find the right products.
 
-#### Category and filter behavior matter commercially
+This fit becomes stronger when categories, filters, and attributes are not just decorative storefront elements. They help customers move through the catalog, compare alternatives, and understand product differences. A store with deliberate browse paths can benefit from OpenCart because those pathways can be governed directly instead of being hidden inside a closed hosted structure.
 
-OpenCart is often a strong fit when browsing, narrowing, and structured product discovery are central to how customers reach the right products.
+#### The business needs practical extension-aware flexibility <a href="#the-business-needs-practical-extension-aware-flexibility" id="the-business-needs-practical-extension-aware-flexibility"></a>
 
-This is especially important when:
+OpenCart is often a good fit when the storefront depends on extensions, themes, or modifications, and the business can classify which outcomes still matter.
 
-* category paths still shape how customers shop
-* filters matter to narrowing and comparison
-* browse behavior is commercially important rather than incidental
-* the business wants direct control over storefront navigation and discovery logic
+The important point is not the number of extensions. The stronger fit appears when the team can explain what each important extension contributes: product display behavior, checkout logic, pricing behavior, SEO handling, customer-account behavior, reporting, payment behavior, shipping behavior, or another storefront outcome.
 
-OpenCart can be much stronger than a simpler hosted target when discovery behavior needs to stay deliberate and the business can still define those paths clearly enough to validate safely.
+When that meaning is visible, OpenCart can support a controlled migration into a flexible environment. When it is hidden, OpenCart may still be possible, but the fit becomes riskier.
 
-#### Extension-shaped storefront behavior is meaningful but still understandable
+#### The business wants open-source ownership without unnecessary platform weight <a href="#the-business-wants-open-source-ownership-without-unnecessary-platform-weight" id="the-business-wants-open-source-ownership-without-unnecessary-platform-weight"></a>
 
-OpenCart is often a strong fit when the storefront depends partly on extensions, themes, or modifications, but the business can still explain which of those behaviors matter and why.
+OpenCart can fit merchants that want more direct ownership than a hosted platform usually provides, but do not need a heavier enterprise structure.
 
-This is especially relevant when:
-
-* the storefront has grown through practical extensions rather than through a heavier platform architecture
-* important behaviors can still be classified clearly into what must remain, what can be replaced, and what should be left behind
-* the business wants flexibility without turning future maintenance into guesswork
-
-OpenCart is strongest when extension-driven meaning is real but still manageable.
-
-#### Customer continuity matters and the source conditions may support it
-
-OpenCart is often a strong fit when repeat-customer continuity matters materially and the source-to-target conditions make continuity more realistic than on a reset-first hosted destination.
-
-That does not make continuity automatic. It makes OpenCart potentially attractive where:
-
-* the source platform is open-source
-* password hashes can be transferred safely
-* preserving account access would reduce customer friction materially
-* the business can validate the resulting customer-account path honestly
-
-Where those conditions do not hold, OpenCart can still be a strong fit, but the advantage shifts away from continuity itself and back toward broader storefront control.
-
-#### The business wants open-source ownership without a heavier enterprise platform burden
-
-OpenCart is often a strong fit when the business wants more direct control than a hosted platform usually provides but does not actually need the full structural and operational burden of a larger open-source ecosystem.
-
-This is especially true for merchants who want:
+This is common when the business wants:
 
 * more control over storefront behavior
-* more direct ownership of future development direction
-* a more practical open-source environment for a commercially focused storefront
-* a target that is flexible without becoming unnecessarily heavy
+* a manageable open-source operating model
+* room for development and extension choices
+* catalog flexibility without excessive platform complexity
+* a target that can be maintained by a practical technical team
 
-In these cases, OpenCart can be a more proportionate destination than either a tightly constrained hosted platform or a heavier open-source architecture.
+OpenCart is often strongest for merchants that want control with discipline, not control for its own sake.
 
-### Where OpenCart Is Often a Weaker Fit
+#### Customer-account continuity is commercially meaningful <a href="#customer-account-continuity-is-commercially-meaningful" id="customer-account-continuity-is-commercially-meaningful"></a>
 
-OpenCart is often a weaker fit when the business wants the appearance of flexibility without the governance discipline that flexibility requires.
+OpenCart may be a useful target when repeat-customer continuity matters and the source conditions make that continuity realistic.
 
-Several patterns usually make the fit weaker.
+This does not mean customer login continuity is automatic. Password behavior, source structure, customer-account data, and target requirements still need review. But OpenCart can be attractive when customer accounts carry commercial value and the migration plan can test those expectations honestly.
 
-#### The source storefront meaning is still too vague
+#### Multi-store scope has a clear business reason <a href="#multi-store-scope-has-a-clear-business-reason" id="multi-store-scope-has-a-clear-business-reason"></a>
 
-OpenCart becomes a weaker fit when the business wants the platform to absorb ambiguity it has not yet resolved.
+OpenCart can support a multi-store direction, but this is a strong-fit signal only when the business can explain why separate storefront contexts are needed.
 
-Risk rises when the team has not yet defined:
+A stronger fit appears when each store context has a clear commercial purpose, such as different brands, regions, catalog visibility, design requirements, or operating expectations. A weaker fit appears when multi-store is chosen only because it sounds useful later.
 
-* how important product options are meant to behave
-* which extension-driven behaviors still matter
-* which categories and filters still shape product discovery
-* what the future SEO path logic should support
-* how customer-account continuity should actually work
-* whether more than one store is genuinely necessary
+### Where OpenCart Is Often a Weaker Fit <a href="#where-opencart-is-often-a-weaker-fit" id="where-opencart-is-often-a-weaker-fit"></a>
 
-OpenCart is much less forgiving when the business wants the target platform to provide that clarity automatically instead of defining it clearly first.
+OpenCart becomes a weaker fit when the business wants flexibility without the planning discipline required to make flexibility safe.
 
-#### Extension or modification dependence is high, but still poorly classified
+#### The future store meaning is still vague <a href="#the-future-store-meaning-is-still-vague" id="the-future-store-meaning-is-still-vague"></a>
 
-OpenCart can still be the right platform in extension-heavy environments, but the fit weakens when the business cannot explain which extension-, theme-, or modification-driven outcomes are still commercially important and why.
+OpenCart is often a weaker fit when the team has not defined how the future storefront should work.
 
-The issue is not extension count alone. The issue is unclear meaning. If the team cannot describe what those surrounding layers still need to do after launch, OpenCart becomes harder to judge safely because too much of the real storefront may sit outside the obvious catalog and account records.
+Risk increases when the business cannot yet explain:
 
-#### The store needs heavier native structural control than OpenCart is meant to carry
+* which product options matter
+* how attributes and filters should support discovery
+* which categories should remain commercially important
+* which extension-driven behaviors should be preserved
+* which SEO URL expectations matter most
+* whether customer-account continuity is realistic
+* whether multiple stores are truly needed
 
-OpenCart is often a weaker fit when the business expects the target to provide a more enterprise-weight native model for complex product behavior, deeper governance layers, or broader structural control than the platform is meant to provide cleanly.
+OpenCart does not remove that ambiguity. It usually makes unresolved decisions more visible after migration.
 
-In those cases, OpenCart may still appear flexible enough on the surface while becoming harder to govern, harder to validate, and more dependent on accumulated custom behavior than the business really wants.
+#### Extension dependency is high but poorly understood <a href="#extension-dependency-is-high-but-poorly-understood" id="extension-dependency-is-high-but-poorly-understood"></a>
 
-#### Multi-store ambition is being chosen for optionality rather than real need
+A store can be extension-heavy and still be a good OpenCart fit. The problem appears when extension-driven behavior is important but undocumented.
 
-OpenCart can support more than one store, but the fit weakens when broader store complexity is being chosen because it is available rather than because it is commercially necessary.
+If the business cannot explain which extensions affect products, checkout, orders, pricing, shipping, payment, SEO, customer accounts, or reporting, the migration may appear complete while important storefront behavior remains missing or inconsistent.
 
-A weaker fit often appears when:
+#### The business expects OpenCart to solve governance problems automatically <a href="#the-business-expects-opencart-to-solve-governance-problems-automatically" id="the-business-expects-opencart-to-solve-governance-problems-automatically"></a>
 
-* separate store contexts have not been justified clearly
-* the business cannot explain why one governed storefront is not enough
-* multi-store is being used as a vague future-proofing idea rather than a current commercial need
+OpenCart gives more control, but control does not automatically create maintainability.
 
-#### The business expects open-source control to solve maintainability automatically
+A weaker fit appears when the business expects open-source ownership to fix unclear catalog structure, messy extension history, inconsistent URL planning, weak category logic, or undefined customer-account expectations. Those issues need governance before they become safer.
 
-OpenCart is often a weaker fit when the business assumes that moving into an open-source target will automatically improve clarity, continuity, or maintainability without stronger classification of what should actually be preserved.
+#### The future model requires heavier native structure <a href="#the-future-model-requires-heavier-native-structure" id="the-future-model-requires-heavier-native-structure"></a>
 
-OpenCart can support cleaner ownership, but it does not automatically remove inherited ambiguity.
+OpenCart may not be the strongest destination when the business needs a more enterprise-weight native model for complex product structures, organizational governance, advanced workflow, or broader structural control.
 
-### Strong-Fit Profiles
+In those cases, OpenCart may still look flexible enough on the surface, but the future store may become too dependent on custom behavior, extensions, or ongoing development to remain cleanly maintainable.
 
-OpenCart is often a strong fit for businesses that look like the following.
+#### Multi-store ambition is optional rather than necessary <a href="#multi-store-ambition-is-optional-rather-than-necessary" id="multi-store-ambition-is-optional-rather-than-necessary"></a>
 
-#### Businesses that need practical open-source control
+OpenCart’s multi-store direction should be treated as a real architecture decision, not a convenience feature.
 
-These are merchants who want direct storefront ownership and flexibility for real commercial reasons, not simply because open-source sounds more powerful.
+If the business cannot explain why separate stores are needed, what should differ between them, and what should stay unified, multi-store can add avoidable validation and maintenance burden.
 
-#### Businesses with manageable configurable product behavior
+### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-These are stores whose product and option logic still needs care, but can still be expressed clearly enough through OpenCart’s native catalog structures and surrounding governed storefront logic.
+OpenCart is often a strong target for businesses with clear storefront-control needs and realistic governance capacity.
 
-#### Businesses whose discovery model still depends on categories and filters
+#### Merchants that need practical open-source control <a href="#merchants-that-need-practical-open-source-control" id="merchants-that-need-practical-open-source-control"></a>
 
-These are merchants whose browsing and narrowing behavior still matter materially to how customers reach the right products.
+These businesses want direct storefront ownership for concrete reasons: catalog behavior, development control, extension flexibility, or storefront governance. They are not choosing OpenCart only because open-source sounds more powerful.
 
-#### Businesses that can govern extension-shaped meaning deliberately
+#### Catalogs with manageable configurable products <a href="#catalogs-with-manageable-configurable-products" id="catalogs-with-manageable-configurable-products"></a>
 
-These are teams that understand OpenCart’s strength often depends partly on extensions and modifications, but can still classify those layers clearly enough to preserve what matters and remove what does not.
+These stores have product-option behavior that requires care but can still be expressed clearly enough through OpenCart’s catalog structures and surrounding storefront logic.
 
-#### Businesses that want a proportionate level of open-source ownership
+#### Stores that depend on structured browsing <a href="#stores-that-depend-on-structured-browsing" id="stores-that-depend-on-structured-browsing"></a>
 
-These are merchants who want more control than hosted platforms usually provide, but do not actually need the heavier structure of a larger open-source enterprise environment.
+These businesses rely on categories, attributes, and filters to help customers find the right products. OpenCart becomes stronger when product discovery is intentional and commercially important.
 
-### Higher-Risk Fit Profiles
+#### Teams that can classify extension-shaped behavior <a href="#teams-that-can-classify-extension-shaped-behavior" id="teams-that-can-classify-extension-shaped-behavior"></a>
 
-OpenCart usually becomes a higher-risk fit for businesses that look like the following.
+These teams can separate essential extension outcomes from outdated or replaceable behaviors. That discipline makes OpenCart more maintainable after migration.
 
-#### Businesses choosing OpenCart mainly because it is open-source
+#### Businesses seeking proportionate platform ownership <a href="#businesses-seeking-proportionate-platform-ownership" id="businesses-seeking-proportionate-platform-ownership"></a>
 
-These are merchants who want maximum flexibility without a clear reason the commercial model actually benefits from OpenCart’s specific balance of control and maintainability.
+These merchants want more control than a hosted platform usually provides, but do not need the heavier burden of an enterprise open-source environment.
 
-#### Businesses whose source meaning is still undefined
+### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-These are teams that know the future store is more complex, but still have not decided how product options, browse paths, extension-driven behavior, SEO logic, customer-account expectations, and store scope should work after launch.
+OpenCart becomes higher risk when the business chooses it for flexibility before defining what that flexibility must accomplish.
 
-#### Businesses expecting OpenCart to simplify ambiguity automatically
+#### Businesses choosing OpenCart mainly because it is open-source <a href="#businesses-choosing-opencart-mainly-because-it-is-open-source" id="businesses-choosing-opencart-mainly-because-it-is-open-source"></a>
 
-These are merchants who assume the platform’s flexibility will automatically make the target coherent even though the source structure is still poorly classified.
+Open-source ownership can be valuable, but it is not a complete fit reason. OpenCart should match a real commercial and operating need.
 
-#### Businesses with too much extension-driven meaning still hidden in the storefront
+#### Stores with unclear product and discovery rules <a href="#stores-with-unclear-product-and-discovery-rules" id="stores-with-unclear-product-and-discovery-rules"></a>
 
-These are teams whose most important behaviors still live in poorly understood themes, extensions, modifications, and custom logic that no one can yet describe clearly enough to validate or maintain.
+If product options, attributes, filters, category paths, SEO URLs, and customer-account expectations are still undefined, OpenCart may expose uncertainty rather than resolve it.
 
-#### Businesses whose real target need points toward a heavier structural model
+#### Extension-heavy stores without behavior clarity <a href="#extension-heavy-stores-without-behavior-clarity" id="extension-heavy-stores-without-behavior-clarity"></a>
 
-These are merchants whose future store may need more native structural control, broader governance layers, or more formal scope logic than OpenCart can provide comfortably without accumulating too much custom behavior.
+When important storefront behavior lives in extensions, themes, modifications, or custom logic that no one can explain clearly, OpenCart fit becomes harder to judge safely.
 
-### What Should Be Confirmed Before Calling OpenCart a Good Fit
+#### Businesses that need heavier platform governance <a href="#businesses-that-need-heavier-platform-governance" id="businesses-that-need-heavier-platform-governance"></a>
 
-Before the business treats OpenCart as the right target, it should be able to answer a few questions clearly.
+Some stores need stronger native governance, workflow, or structural depth than OpenCart is meant to provide comfortably. In those cases, OpenCart may require too much surrounding custom behavior to remain a clean fit.
 
-#### 1. Can the source product and option model be expressed cleanly in OpenCart?
+#### Teams unwilling to validate flexible storefront behavior <a href="#teams-unwilling-to-validate-flexible-storefront-behavior" id="teams-unwilling-to-validate-flexible-storefront-behavior"></a>
 
-If product-choice behavior is central to how the business sells, OpenCart is only a strong fit when that behavior can still remain clear and usable after migration.
+OpenCart fit depends on careful validation. Product options, attributes, filters, category paths, customer accounts, SEO URLs, extensions, and store scope need practical review after migration. A team that cannot support that review may not be ready for OpenCart as the Target Platform.
 
-#### 2. Which category, filter, and browse behaviors are commercially important?
+### What Should Be Confirmed Before Calling OpenCart a Good Fit <a href="#what-should-be-confirmed-before-calling-opencart-a-good-fit" id="what-should-be-confirmed-before-calling-opencart-a-good-fit"></a>
 
-The answer usually determines whether discovery continuity will still feel structured and useful after launch.
+A business should confirm several questions before treating OpenCart as the right Target Platform.
 
-#### 3. Which extension- or modification-driven behaviors still matter?
+#### Can product options remain clear and purchasable? <a href="#can-product-options-remain-clear-and-purchasable" id="can-product-options-remain-clear-and-purchasable"></a>
 
-This is one of the most important fit questions because apparently complete OpenCart migrations often become less trustworthy than they first look when extension-owned meaning is still vague.
+If product-choice behavior affects how customers buy, the business should confirm that option names, option values, price effects, availability, and customer-facing selection behavior can remain understandable after migration.
 
-#### 4. Which legacy URLs and customer-account expectations matter most?
+#### Do attributes and filters support real product discovery? <a href="#do-attributes-and-filters-support-real-product-discovery" id="do-attributes-and-filters-support-real-product-discovery"></a>
 
-OpenCart can support SEO URLs and, in compatible source-to-target conditions, may support customer continuity more realistically than some hosted targets. But both need to be judged through business priority and source reality rather than through assumption.
+Attributes and filters should have a clear purpose. If they help customers compare products, narrow choices, or understand differences, they should be included in fit evaluation rather than treated as secondary data.
 
-#### 5. Does multi-store scope genuinely improve the future model?
+#### Which extension-driven outcomes still matter? <a href="#which-extension-driven-outcomes-still-matter" id="which-extension-driven-outcomes-still-matter"></a>
 
-The business should be able to explain what should remain unified, what should differ, and why separate store contexts are commercially necessary.
+The business should identify which extensions, themes, modifications, or custom logic affect customer experience, checkout, pricing, SEO, reporting, payment, shipping, or account behavior.
 
-### Conclusion
+#### Which SEO URLs and customer-account expectations carry business value? <a href="#which-seo-urls-and-customer-account-expectations-carry-business-value" id="which-seo-urls-and-customer-account-expectations-carry-business-value"></a>
 
-OpenCart is often a strong migration target when the business genuinely needs open-source storefront control, manageable catalog flexibility, category-led discovery, extension-aware customization, and a more proportionate ownership model than either a hosted platform or a heavier open-source system can provide.
+OpenCart fit should include route and account expectations where they matter. High-value URLs, repeat-customer access, and account history expectations should be evaluated before migration planning goes too far.
 
-It is often a weaker fit when the platform is being chosen for abstract flexibility rather than for a clearly defined commercial need. OpenCart becomes strongest when the business already knows why product-option behavior, browse logic, extension-driven meaning, SEO continuity, customer-account expectations, and store scope matter commercially. Without that clarity, the platform can look flexible while still carrying too much ambiguity into the migration.
+#### Does multi-store scope have a clear operating reason? <a href="#does-multi-store-scope-have-a-clear-operating-reason" id="does-multi-store-scope-have-a-clear-operating-reason"></a>
 
-Use a representative Demo Migration to test the configurable products, browse and filter paths, extension-sensitive behaviors, customer-account scenarios, route expectations, and store-scope questions that matter most. If those outcomes are still unclear, Live Chat can help determine whether OpenCart is the right target and whether the migration path needs a more guided or more bespoke approach.
+If more than one store is expected, the business should define what differs across stores, what remains shared, and why separate store contexts are necessary.
 
-### FAQs
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-#### What usually makes OpenCart a strong fit?
+OpenCart is often a strong Target Platform when a business needs practical open-source control, manageable catalog flexibility, category- and filter-led discovery, extension-aware storefront governance, and a proportionate ownership model.
 
-Usually a real need for practical open-source control, manageable configurable product behavior, category- and filter-driven discovery, meaningful but governable extension-shaped storefront logic, and a more proportionate ownership model than either hosted platforms or heavier open-source systems provide.
+It is often a weaker fit when flexibility is being chosen before the business has defined what should be preserved, simplified, replaced, or validated. The safest OpenCart migrations begin with clear decisions about product options, browse structure, extension-driven behavior, SEO URL expectations, customer-account continuity, and store scope.
 
-#### Is OpenCart automatically a good fit for businesses that want open-source ownership?
+Use Demo Migration results to test the configurable products, category and filter paths, customer-account scenarios, high-value URLs, and extension-sensitive outcomes that matter most. If those results show uncertainty, Live Chat can help clarify whether OpenCart is the right Target Platform and whether the migration path needs Standard Service, Managed Service, or Custom Service support.
 
-No. Open-source ownership alone is not enough. OpenCart is strongest when the business has a genuinely OpenCart-shaped need rather than only a desire for flexibility in general.
+### FAQs <a href="#faqs" id="faqs"></a>
 
-#### What is one of the biggest OpenCart fit mistakes?
+**Is OpenCart automatically a good fit because it is open-source?**
 
-Assuming that flexibility alone is enough reason to choose OpenCart. The better question is whether the business actually needs the specific balance of storefront control, extension-shaped flexibility, browse logic, and maintainability that OpenCart is designed to support.
+No. OpenCart is strongest when open-source control supports a clear commercial need, such as governed catalog flexibility, category-led discovery, extension-aware storefront behavior, or direct ownership of the future storefront.
 
-#### Why is validation burden part of fit in OpenCart?
+**What usually makes OpenCart a strong migration target?**
 
-Because the platform often introduces more structural meaning around product options, browse behavior, extension-driven logic, SEO continuity, customer-account expectations, and multi-store scope. A business that cannot validate those outcomes clearly may not be ready for a good OpenCart fit.
+OpenCart is often strong when product options, attributes, filters, category paths, SEO URL expectations, customer-account continuity, and extension-shaped storefront behavior all matter and can be governed clearly.
+
+**When is OpenCart a weaker fit?**
+
+OpenCart is weaker when the business wants flexibility but has not defined product behavior, discovery structure, extension responsibility, customer-account expectations, SEO URL priorities, or store scope.
+
+**Why do extensions matter when deciding OpenCart fit?**
+
+Extensions matter because important storefront behavior may live outside ordinary product, customer, or order records. If that behavior is not classified before migration, the store can appear migrated while important commercial functions remain incomplete.
+
+**Should a Custom Platform source always use Custom Service when moving to OpenCart?**
+
+Yes. When the Source Platform is a Custom Platform, the migration path should be treated as Custom Service because the source structure and behavior require bespoke review before they can be mapped into OpenCart safely.

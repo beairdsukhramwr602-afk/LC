@@ -1,230 +1,252 @@
 # Shopware Pre-Migration Preparation Checklist
 
-A Shopware migration usually becomes riskier when the business treats preparation as a generic cleanup exercise instead of a storefront-context and behavior decision.
+A Shopware migration is easier to judge when the business has already defined how the future storefront should behave. Preparation should not only confirm that products, customers, orders, and content are available. It should clarify how Shopware should represent sales channels, product visibility, rule-driven behavior, variants, properties, categories, SEO routes, media, and extension-shaped meaning after migration.
 
-That matters because Shopware is strongest when the future storefront has been defined clearly enough before execution begins. The platform can support clearer sales-channel governance, stronger rule-driven behavior, more deliberate visibility control, and more explicit SEO URL handling than many lighter targets. But it also expects the business to decide how those structures should work. When those decisions remain vague, the migration can look organized while still carrying major uncertainty into validation and launch.
+Shopware can support a more deliberate and context-aware storefront than many simpler Target Platforms, but that strength depends on clear decisions before execution. If the business enters migration with vague channel logic, unclear product visibility rules, poorly defined pricing behavior, or undocumented extension dependencies, the migrated result may contain records without supporting the way the storefront actually needs to sell.
 
-This checklist is meant to reduce that uncertainty. It is not a technical setup guide. It is a preparation framework for deciding what must be clarified before the business can judge whether a Shopware migration path is commercially safe, structurally coherent, and realistically governable after launch.
+This checklist is meant to prepare the business for a safer Shopware migration review. It is not a setup guide. It helps teams define what must be clarified before they judge Demo Migration results, select the right service approach, or approve a full migration plan.
 
-### What This Preparation Checklist Is Really For
+### What This Preparation Checklist Is For <a href="#what-this-preparation-checklist-is-for" id="what-this-preparation-checklist-is-for"></a>
 
-A strong Shopware preparation checklist should do more than confirm that data exists.
+A strong Shopware preparation checklist should help the business answer practical questions before migration begins:
 
-Its purpose is to help the business answer five practical questions before execution pressure increases:
+* Which sales channels matter, and what should each one do?
+* Which products should be visible, searchable, purchasable, or restricted in each channel?
+* Which pricing, promotion, shipping, payment, or customer-facing outcomes depend on rule-driven behavior?
+* Which product properties, variants, categories, and media assets shape the buying experience?
+* Which URLs, category entry points, and page routes need focused continuity planning?
+* Which extensions, themes, custom fields, or integrations still carry business meaning?
+* Which sample records should be tested before the migration is treated as safe?
 
-* how the future sales-channel and storefront structure should work
-* where rules, visibility, product structure, and route behavior must remain precise
-* what should differ by sales channel and what should remain shared
-* which workflows still depend on extensions, themes, or custom fields
-* which outcomes deserve the earliest validation because they are most likely to expose contextual ambiguity
+The goal is not to document everything equally. The goal is to identify the structures most likely to affect commercial meaning, customer experience, and launch confidence.
 
-That is why a Shopware preparation checklist is strongest when it is built around storefront governance and customer behavior rather than around imports alone.
+### 1. Define the Sales Channels That Matter <a href="#id-1-define-the-sales-channels-that-matter" id="id-1-define-the-sales-channels-that-matter"></a>
 
-### 1. Define the Sales Channels That Actually Matter
+Shopware preparation should begin with sales-channel structure because sales channels shape storefront context.
 
-The first preparation priority is usually storefront context.
+Before migration, clarify:
 
-The business should identify:
+* which sales channels should exist in the Target Platform
+* what each sales channel is meant to represent
+* which products, categories, currencies, languages, or customer contexts belong in each channel
+* whether source-store differences should remain separate or be consolidated
+* which channel-specific behaviors are commercially necessary
 
-* which customer-facing channels genuinely need to exist
-* what each sales channel is meant to do
-* which products and categories belong in each channel
-* which behaviors should differ by channel
-* whether any channel complexity is being added for real commercial reasons or only because the platform allows it
+A sales channel should not be created only because legacy structure exists. It should represent a real storefront, market, language, customer context, or selling model that the business intends to manage after launch.
 
-This matters because Shopware treats sales channels as a core storefront layer, not as a minor presentation detail.
+### 2. Clarify Product Visibility by Sales Channel <a href="#id-2-clarify-product-visibility-by-sales-channel" id="id-2-clarify-product-visibility-by-sales-channel"></a>
 
-### 2. Clarify Which Behaviors Need Rule-Driven Logic
+In Shopware, product presence and product visibility are not the same thing. A migrated product may exist in the catalog, but that does not automatically prove it is visible in the correct storefront context.
 
-Shopware often becomes easier to govern when the business decides clearly what should depend on rules before execution begins.
-
-The preparation checklist should identify:
-
-* which storefront behaviors depend on context
-* which pricing or promotional outcomes depend on rules
-* which customer-facing differences need explicit condition logic
-* which inherited source-side workarounds could become clearer rule-driven behavior in Shopware
-* which outcomes are too important to leave implied
-
-This matters because Rule Builder is a core Shopware capability. If rule-dependent behavior matters commercially, it should be defined intentionally rather than discovered during validation.
-
-### 3. Define How Product Visibility Should Work by Channel
-
-One of the most important Shopware preparation tasks is visibility planning.
-
-The business should identify:
+Before migration, clarify:
 
 * which products should appear in which sales channels
-* which products should be searchable versus only directly accessible
-* whether any products should be restricted to particular contexts
-* which visibility behaviors are commercially sensitive
-* whether the target visibility model still reflects how the business actually sells
+* which products should be searchable, listed, directly accessible, or restricted
+* which product families require different visibility rules by market or storefront
+* which products must remain hidden until reviewed
+* which source-store visibility workarounds should be simplified in Shopware
 
-This matters because Shopware product presence is not only about the product record. Visibility is part of the product’s meaning in each sales channel.
+This is especially important for stores with multiple storefronts, market-specific catalogs, B2B/B2C separation, seasonal catalogs, or products that should exist operationally without being broadly visible.
 
-### 4. Define the Product Structure That Matters Most
+### 3. Identify Rule-Driven Behavior Before It Becomes a Validation Surprise <a href="#id-3-identify-rule-driven-behavior-before-it-becomes-a-validation-surprise" id="id-3-identify-rule-driven-behavior-before-it-becomes-a-validation-surprise"></a>
 
-Shopware product structure should be clarified before the migration is treated as routine.
+Shopware’s Rule Builder can shape important storefront behavior. Preparation should identify which business outcomes depend on conditions, not only which records need to move.
 
-The business should identify:
+Before migration, clarify:
 
-* which product families drive the most revenue
-* which products depend on variant logic
-* which product properties matter to filtering or comparison
-* which source-side product structures are inherited clutter rather than real commercial meaning
-* which products would become commercially weaker if the wrong Shopware structure were chosen
+* which pricing or promotional outcomes depend on customer, cart, product, channel, or delivery context
+* which payment or shipping options should appear only under certain conditions
+* which customer groups or selling contexts require different behavior
+* which legacy rules are still commercially meaningful
+* which inherited workarounds can become cleaner Shopware rules
 
-That means product structure in Shopware is not only about records. It is about how the customer experiences variation and comparison after launch.
+If rule-dependent behavior matters, it should be described as an expected outcome before migration. Otherwise, the Demo Migration may look technically complete while still failing important buying scenarios.
 
-### 5. Decide What the Route Model Should Actually Support
+### 4. Prepare Product Properties, Variants, and Product Families <a href="#id-4-prepare-product-properties-variants-and-product-families" id="id-4-prepare-product-properties-variants-and-product-families"></a>
 
-One of the most important Shopware preparation tasks is route definition.
+Shopware product structure should be prepared around how customers compare, select, and buy products.
 
-The business should identify:
+Before migration, clarify:
 
-* which product and category routes matter most commercially
-* which paths matter to search visibility or customer trust
-* whether route behavior should differ by sales channel
-* how canonical behavior should be handled where channel-specific URLs matter
-* whether the future SEO URL structure reflects business meaning or only technical convenience
+* which product families depend on variants
+* which product properties are used for filtering, comparison, search, or merchandising
+* which source attributes should become Shopware properties
+* which attributes are only internal notes and should not shape storefront discovery
+* which high-value products require manual review after migration
+* whether variant naming, pricing, media, and visibility need special attention
 
-This matters because Shopware’s SEO URL and canonical behavior can be managed by sales channel. Route continuity is not only a cleanup task. It is part of the target model itself.
+This preparation helps prevent the common mistake of treating product data as flat records. For Shopware, product meaning often depends on the relationship between products, variants, properties, visibility, pricing, and sales-channel context.
 
-### 6. Define Which Category Entry Points Still Matter
+### 5. Review Pricing, Advanced Prices, and Commercial Conditions <a href="#id-5-review-pricing-advanced-prices-and-commercial-conditions" id="id-5-review-pricing-advanced-prices-and-commercial-conditions"></a>
 
-Shopware category structure becomes stronger when the business decides clearly how navigation and storefront entry should work.
+Pricing preparation should go beyond base price transfer. Shopware can support pricing that depends on context, rules, quantities, currencies, or customer conditions, so the business should decide which pricing logic still matters.
 
-The checklist should identify:
+Before migration, clarify:
 
-* which categories matter most to storefront navigation
-* which category entry points matter by sales channel
-* whether inherited category structures are still useful
-* which category relationships still support browsing and merchandising clearly
+* which prices are simple base prices
+* which prices depend on customer group, quantity, currency, market, or sales channel
+* which promotional or discount patterns need rule-aware review
+* which advanced prices should be tested in Demo Migration
+* which old pricing workarounds can be simplified instead of copied
 
-This matters because Shopware’s category model and sales-channel entry points can shape how customers encounter the storefront.
+Pricing should be reviewed as a commercial outcome, not only as a numeric field. If a price changes correctly only under certain conditions, that condition belongs in the preparation notes.
 
-### 7. List the Extensions, Theme Logic, and Custom Behaviors That Still Need to Matter
+### 6. Clarify Category Structure and Storefront Entry Points <a href="#id-6-clarify-category-structure-and-storefront-entry-points" id="id-6-clarify-category-structure-and-storefront-entry-points"></a>
 
-One of the biggest Shopware preparation mistakes is treating extension and theme behavior as background detail.
+Categories in Shopware can shape navigation, browsing, product discovery, landing paths, and sales-channel context. Preparation should separate useful storefront structure from inherited clutter.
 
-A stronger checklist should identify:
+Before migration, clarify:
 
-* which extensions still support commercially important storefront behavior
-* which theme behaviors still shape trust, navigation, or buying logic
-* which custom fields still drive meaningful storefront or operational outcomes
-* which extension-owned workflows matter to operations as well as storefront behavior
+* which categories are essential navigation entry points
+* which category structures should be preserved, simplified, merged, or retired
+* which categories matter differently by sales channel
+* which product-category assignments drive revenue or discovery
+* which category pages carry SEO or campaign value
 
-The business does not need a generic list of everything installed. It needs a clearer view of which extension- or theme-owned meanings still matter enough to shape scope, validation, and risk judgment.
+The goal is to avoid moving category structure blindly. The migrated result should support how customers will browse the Shopware storefront after launch.
 
-### 8. Prioritize Legacy URLs by Business Value
+### 7. Prioritize SEO Routes, Canonical Behavior, and High-Value URLs <a href="#id-7-prioritize-seo-routes-canonical-behavior-and-high-value-urls" id="id-7-prioritize-seo-routes-canonical-behavior-and-high-value-urls"></a>
 
-Because Shopware supports channel-aware SEO URL handling, the most important preparation question is not whether readable routes are possible. It is which legacy paths deserve focused protection.
+Shopware preparation should include URL and route planning before SEO continuity becomes a launch issue.
 
-The checklist should identify:
+Before migration, clarify:
 
-* the product URLs that matter most to traffic or conversion
-* the category or landing paths that matter most to discovery
-* the pages that still carry trust or support value
-* the destinations that would weaken customer intent if they were handled too generically
-* the paths whose canonical handling needs closer review by sales channel
+* which product, category, CMS, or landing page URLs carry traffic or business value
+* which routes should be preserved closely where possible
+* which legacy URLs can safely redirect to new destinations
+* which sales-channel contexts may affect route or canonical behavior
+* which pages should be included in the Demo Migration review sample
 
-This matters because a technically valid route can still be commercially weak if the destination or channel context no longer supports the purpose the original path served.
+Do not treat all URLs equally. Focus first on high-value product pages, category entry points, landing pages, branded pages, and pages customers or search engines already rely on.
 
-### 9. Mark the Highest-Risk Validation Samples Before Full Execution
+### 8. Prepare Media, Layout, and Content Expectations <a href="#id-8-prepare-media-layout-and-content-expectations" id="id-8-prepare-media-layout-and-content-expectations"></a>
 
-Preparation becomes much stronger when the business identifies its validation sample before the full migration is treated as routine.
+Shopware product and storefront experience can depend heavily on media quality, layout choices, product presentation, and supporting content. Migration preparation should define what matters most before visual review begins.
 
-For Shopware, that usually means:
+Before migration, clarify:
 
-* sales-channel cases most likely to expose ambiguity
-* rule-dependent scenarios most likely to reveal weak behavior reconstruction
-* product-visibility cases most likely to expose commercial mismatch
-* category and route cases most likely to reveal weak channel context
-* extension-shaped storefront behaviors most likely to reveal hidden structure
+* which product images and galleries are commercially important
+* which product descriptions, specifications, and media assets need manual review
+* whether media roles or ordering affect buying confidence
+* which CMS or landing content should remain active
+* which layout-dependent content may need rebuilding rather than direct preservation
 
-This matters because a representative Demo Migration becomes much more valuable when the sample is built around contextual risk instead of convenience.
+This prevents validation from focusing only on whether content exists. The better question is whether the content still supports the customer’s decision in the Shopware storefront.
 
-### 10. Define What Shopware Is Allowed to Formalize and What It Must Preserve Exactly
+### 9. Classify Extensions, Themes, Custom Fields, and Integration-Owned Meaning <a href="#id-9-classify-extensions-themes-custom-fields-and-integration-owned-meaning" id="id-9-classify-extensions-themes-custom-fields-and-integration-owned-meaning"></a>
 
-A stronger Shopware preparation checklist usually includes one difficult but necessary question:
+Many Shopware migrations involve meaning that is not fully contained in native catalog, customer, or order records. Extensions, themes, custom fields, and integrations may shape storefront behavior, internal review, external system matching, or operational workflows.
 
-What is the business willing to formalize or simplify in order to fit Shopware clearly, and what storefront meaning is non-negotiable?
+Before migration, clarify:
 
-That question should be answered specifically for:
+* which extensions support commercially important behavior
+* which theme behavior affects navigation, trust, presentation, or conversion
+* which custom fields are still needed after migration
+* which outside-system identifiers must remain usable
+* which integrations depend on migrated values or record relationships
+* which behaviors require Custom Service because they depend on bespoke transformation or custom migration logic adjustment
 
-* sales-channel structure
-* rule-driven behavior
-* product visibility
-* properties and variants
-* category entry points
-* SEO URL and canonical behavior
-* extension-shaped logic
+The business does not need to preserve every historical technical detail. It needs to identify which custom or extension-shaped meanings still affect the future Shopware operation.
 
-Many Shopware projects become harder because the business assumes the target will preserve all source-side nuance automatically, even though part of Shopware’s strength is that it asks for a clearer and more governable contextual storefront model.
+### 10. Define Customer and Order Review Expectations <a href="#id-10-define-customer-and-order-review-expectations" id="id-10-define-customer-and-order-review-expectations"></a>
 
-### A Practical Shopware Preparation Sequence
+Customer and order data should be prepared around how the business will use it after migration.
 
-A useful preparation flow for Shopware usually looks like this:
+Before migration, clarify:
 
-#### 1. Define the most important sales channels first
+* which customer records are active, valuable, or required for account continuity
+* which customer groups or tags still affect pricing, access, marketing, or review
+* which order history should remain visible and understandable
+* which order statuses, totals, addresses, products, and customer relationships need representative checks
+* which historical data is useful for reference but should not be treated as live operational behavior
 
-These are usually the channels most likely to expose storefront-context ambiguity.
+This helps the business avoid validating customer and order data only by count. A useful Shopware result should support account review, customer service, and business interpretation after launch.
 
-#### 2. Clarify which commercial outcomes need rules
+### 11. Prepare a Representative Demo Migration Sample <a href="#id-11-prepare-a-representative-demo-migration-sample" id="id-11-prepare-a-representative-demo-migration-sample"></a>
 
-This prevents important behavior from remaining implicit.
+A Demo Migration is most useful when the sample is selected around risk, not convenience.
 
-#### 3. Define high-risk product visibility and structure
+For Shopware, the sample should include:
 
-This keeps channel-specific availability aligned with real commercial expectations.
+* products assigned to different sales channels
+* products with important visibility differences
+* products with variants and meaningful properties
+* products affected by advanced prices or rule-driven behavior
+* categories that matter to browsing and SEO
+* customer records tied to meaningful groups or account expectations
+* orders that show realistic status, totals, customer, product, and address relationships
+* URLs and content pages that need continuity review
+* extension-shaped or custom-field cases that could affect scope
 
-#### 4. Decide the route and canonical model
+A small sample can reveal a lot when it contains the right cases. A convenient sample with only simple records can hide the very issues that make Shopware migration complex.
 
-This reduces the chance that SEO URL behavior will be improvised later.
+### 12. Clarify Custom Platform Source Requirements Early <a href="#id-12-clarify-custom-platform-source-requirements-early" id="id-12-clarify-custom-platform-source-requirements-early"></a>
 
-#### 5. Classify extension- and theme-owned behavior
+When the Source Platform is a Custom Platform, Shopware preparation needs a more explicit translation layer.
 
-This prevents important meaning from remaining implicit.
+Before migration, clarify:
 
-#### 6. Build a representative Demo Migration sample
+* how the source represents products, variants, properties, categories, customers, and orders
+* which source-side fields have no direct Shopware equivalent
+* which custom identifiers must remain usable
+* which storefront behaviors were created through custom logic
+* which records depend on external systems
+* which outcomes require custom migration logic adjustment
 
-This turns preparation into evidence rather than assumption.
+Custom Platform handling requires Custom Service because the source structure must be interpreted before it can be translated safely into Shopware. This does not automatically mean Next-Cart performs migration management; migration management is included only when it is part of the final plan.
 
-### How Custom Cart as a Source Can Change Shopware Preparation
+### Practical Shopware Preparation Sequence <a href="#practical-shopware-preparation-sequence" id="practical-shopware-preparation-sequence"></a>
 
-When the source platform is a Custom Cart, Shopware preparation usually needs a more bespoke storefront lens.
+A useful Shopware preparation sequence usually moves from storefront context to technical proof:
 
-That is because storefront context, rule behavior, product structure, route logic, or extension-like business behavior may sit in source-side structures that do not align neatly with Shopware sales channels, Rule Builder logic, visibility behavior, variants, or channel-aware SEO handling. In those situations, preparation usually needs:
+#### 1. Define the future sales-channel model <a href="#id-1-define-the-future-sales-channel-model" id="id-1-define-the-future-sales-channel-model"></a>
 
-* more careful classification of channel and visibility meaning
-* earlier review of how source-side rules or behavior should be rebuilt
-* clearer separation between native Shopware structure and surrounding extension or theme behavior
-* more deliberate sample selection for Demo Migration and later validation
+Start with the storefront contexts that the business actually intends to operate after launch.
 
-Because the source is a Custom Cart, this usually points toward earlier expert interpretation and a more tailored migration path into Shopware.
+#### 2. Clarify rule-dependent behavior <a href="#id-2-clarify-rule-dependent-behavior" id="id-2-clarify-rule-dependent-behavior"></a>
 
-### Conclusion
+Identify pricing, promotion, shipping, payment, visibility, and customer-facing outcomes that depend on conditions.
 
-A Shopware migration is easiest to govern when the business uses preparation to define what the target must still mean, not only what data should move.
+#### 3. Prepare high-value product structures <a href="#id-3-prepare-high-value-product-structures" id="id-3-prepare-high-value-product-structures"></a>
 
-That means clarifying sales channels, rule-driven behavior, product visibility, product structure, category entry points, route and canonical logic, customer-account expectations, and extension-shaped behavior most likely to expose structural ambiguity. When those decisions are made clearly, Shopware becomes easier to validate and safer to judge as a target.
+Focus on product families where variants, properties, pricing, visibility, or media affect buying decisions.
 
-Before moving deeper into execution, build a preparation checklist around the channel cases, rule scenarios, visibility decisions, route priorities, customer-account expectations, and extension-shaped behaviors that matter most. If those areas are still difficult to classify, Live Chat can help determine whether the issue is routine Shopware translation, a higher-burden managed path, or a sign that more specialized handling is safer.
+#### 4. Review categories and route continuity <a href="#id-4-review-categories-and-route-continuity" id="id-4-review-categories-and-route-continuity"></a>
 
-### FAQs
+Decide which entry points, URLs, and canonical expectations matter most before migration results are reviewed.
 
-#### What should be prepared first before migrating into Shopware?
+#### 5. Classify extensions and custom fields <a href="#id-5-classify-extensions-and-custom-fields" id="id-5-classify-extensions-and-custom-fields"></a>
 
-Usually the highest-value starting point is the sales channels most likely to expose ambiguity, followed by rule-driven behavior, product visibility and structure, route and canonical logic, and extension-shaped behavior.
+Identify which non-native meanings still affect commercial or operational outcomes.
 
-#### Why is Rule Builder such an important Shopware preparation topic?
+#### 6. Build a risk-based Demo Migration sample <a href="#id-6-build-a-risk-based-demo-migration-sample" id="id-6-build-a-risk-based-demo-migration-sample"></a>
 
-Because it can make important storefront behavior explicit. If contextual logic matters commercially, it should be planned intentionally before migration rather than discovered late in validation.
+Choose sample data that can prove whether the migration approach is strong enough for the real Shopware context.
 
-#### Should Shopware preparation focus mainly on products?
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-No. Products are central, but Shopware preparation is often just as sensitive around sales-channel structure, rules, route logic, visibility behavior, and extension- or theme-owned behavior.
+Preparing for a Shopware migration means deciding what the future storefront model should prove. Sales channels, rules, visibility, product structure, categories, routes, media, extensions, and customer context should be clarified before migration results are judged. When those decisions are clear, Demo Migration review becomes more useful because the business can evaluate whether the migrated result supports the intended Shopware operation instead of only checking whether records appear.
 
-#### When does Shopware preparation usually need a more cautious approach?
+Before starting full migration, prepare a small set of high-value examples that represent the real Shopware target model: products with variants and properties, rule-dependent commercial behavior, sales-channel differences, priority routes, customer-account cases, and any extension-shaped data that still matters. If those examples require custom handling or source interpretation, discuss them through Live Chat before treating the migration plan as routine.
 
-Usually when the source behavior is still vague, when important meaning depends heavily on extensions, themes, or custom data, or when the source platform is a Custom Cart whose structures do not align cleanly with Shopware’s native contextual model.
+### FAQs <a href="#faqs" id="faqs"></a>
+
+**Should every product be prepared in detail before migrating to Shopware?**
+
+No. The first priority is to prepare the products that expose the most risk: high-revenue products, products with variants, products with important properties, products with channel-specific visibility, products with advanced pricing, and products tied to important routes or media. Simple products still matter, but they usually do not reveal the strongest Shopware migration risks.
+
+**Why should sales channels be prepared before migration?**
+
+Sales channels shape storefront context in Shopware. If the business has not decided which channels should exist and what each one should represent, product visibility, routing, pricing, customer experience, and validation can become unclear later.
+
+**Should rule-driven behavior be included in the preparation checklist?**
+
+Yes. If pricing, promotions, shipping, payment, discounts, product visibility, or customer-facing behavior depends on conditions, the expected outcome should be documented before migration review. Otherwise, the migrated result may look complete while still failing important selling scenarios.
+
+**What should be included in a Shopware Demo Migration sample?**
+
+A useful sample should include products with variants and properties, sales-channel visibility cases, rule-dependent pricing or promotions, important categories, priority URLs, customer-account examples, realistic order history, and any extension-shaped or custom-field data that may affect scope.
+
+**Does a Custom Platform source always require Custom Service for a Shopware migration?**
+
+Yes. When the Source Platform is a Custom Platform, the source structure must be interpreted before it can be translated safely into Shopware. That handling belongs under Custom Service. Migration management is included only when it is part of the final plan.
