@@ -1,224 +1,283 @@
 # Shift4Shop Pre-Migration Preparation Checklist
 
-Shift4Shop preparation should focus on how the store needs to operate after migration, not only on which records need to move. Because Shift4Shop combines storefront building, product and order management, SEO, marketing, inventory, shipping, payment-related operations, themes, apps, and support resources in one hosted E-commerce platform, the safest preparation starts by clarifying how those layers should work together in the new store.
+Preparation for a Shift4Shop migration should make the target outcome easier to interpret before the migration process begins. Shift4Shop can support a hosted ecommerce store with product management, order management, SEO, marketing, inventory, shipping, payment-related workflows, themes, integrations, and support resources. That range is useful only when the source data is organized in a way that can become clear, testable Shift4Shop behavior after migration.
 
-A well-prepared Shift4Shop migration gives reviewers enough context to judge whether migrated products remain sellable, categories remain useful, customers and orders remain meaningful, and important storefront routes still support traffic continuity. The preparation work should also identify where older 3DCart-era records, exports, staff notes, or integrations need to be interpreted against current Shift4Shop behavior.
+The goal is not to document every field in the Source Platform. The goal is to identify the records, rules, pages, relationships, and operational details that decide whether the migrated store will be usable. A store with simple products and standard customers may need light preparation. A wholesale, hybrid B2B/B2C, option-heavy, integration-shaped, or content-heavy store needs a more deliberate readiness pass before full execution.
+
+A strong preparation checklist turns vague expectations into reviewable evidence. It defines which products reveal catalog complexity, which customers reveal pricing or account rules, which orders reveal operational history, which URLs deserve protection, which data belongs to outside systems, and which requirements should be escalated before a Demo Migration is used as evidence.
 
 ### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
 
-Pre-migration preparation reduces uncertainty before the migration begins. It helps the business decide what must be preserved, what should be cleaned up, what can be restructured, and what needs deeper review in Demo Migration.
+Pre-migration preparation exists to reduce interpretation risk. Without preparation, migrated data may appear complete while important business meaning is still missing. Products may exist without the right buying choices. Customers may exist without wholesale treatment. Orders may exist without enough payment, shipping, discount, or fulfillment context. CMS Pages or Blog Posts may move while high-value routes and page meaning become unclear.
 
-For Shift4Shop, preparation usually concentrates on five practical questions:
+For Shift4Shop, preparation should answer five practical questions:
 
-* Is the catalog structure clear enough to rebuild product browsing and purchasing behavior?
-* Are customer, order, shipping, payment, tax, and promotion records understandable after migration?
-* Are priority URLs and SEO-sensitive pages identified before the store changes platform context?
-* Are built-in features, apps, themes, scripts, and custom behavior separated from core migrated data?
-* Are older 3DCart references understood well enough to avoid planning against outdated assumptions?
+1. Which source records represent ordinary ecommerce data?
+2. Which source records carry business rules, account treatment, pricing logic, or staff workflow meaning?
+3. Which storefront pages, product pages, and URLs are commercially important enough to protect deliberately?
+4. Which source behaviors depend on apps, modules, custom fields, external systems, or older platform assumptions?
+5. Which sample records should be used in Demo Migration so the result exposes real migration risk instead of only easy records?
 
-### Preparation Priority 1: Clarify the Shift4Shop Store Model <a href="#preparation-priority-1-clarify-the-shift4shop-store-model" id="preparation-priority-1-clarify-the-shift4shop-store-model"></a>
+These answers help the merchant, Next-Cart, and the Target Platform plan the migration path with fewer assumptions. They also make Demo Migration more useful because the sample can show how Shift4Shop handles the store’s actual operating patterns.
 
-Before reviewing records, define what the Shift4Shop store is expected to become. A merchant moving into Shift4Shop may want a simpler hosted store, a more feature-rich storefront, stronger built-in marketing and SEO support, or a cleaner operating model than the previous platform allowed.
+### 1. Confirm the Target Store Role Before Reviewing Data <a href="#id-1-confirm-the-target-store-role-before-reviewing-data" id="id-1-confirm-the-target-store-role-before-reviewing-data"></a>
 
-The preparation file should record:
+Start by defining what Shift4Shop is expected to do after launch. A store moving into Shift4Shop may be a direct replacement for the current storefront, a cleanup opportunity, a B2B or wholesale operating base, a hybrid B2B/B2C destination, or a hosted platform move intended to reduce dependency on custom maintenance.
 
-* the main sales model: retail, B2B, wholesale, subscription-like, catalog-first, or content-supported selling
-* the expected storefront structure
-* important customer groups or buyer types
-* payment, shipping, tax, and checkout expectations
-* marketing, SEO, promotion, and coupon behavior that must remain meaningful
-* whether the store depends on apps, scripts, design customization, or external systems
+The target role affects preparation. A merchant that wants to preserve the current business model should prepare evidence for every workflow that must continue. A merchant that wants to simplify the store should separate data that must be preserved from data that can be cleaned, retired, consolidated, or handled differently after migration.
 
-This prevents the migration from being judged only by record count. A Shift4Shop result should support the way the business expects to sell after launch.
+Document the target role in plain business terms before reviewing records. Useful statements include:
 
-### Preparation Priority 2: Review Product and Option Structure <a href="#preparation-priority-2-review-product-and-option-structure" id="preparation-priority-2-review-product-and-option-structure"></a>
+* whether the store sells mainly B2C, B2B, wholesale, or both
+* whether customer groups or customer-specific pricing must continue
+* whether the catalog relies on options, variants, bundles, kits, downloads, personalization, or technical specifications
+* whether SEO continuity is a major launch requirement
+* whether order history is needed mainly for customer reference, staff operations, accounting, fulfillment, or compliance review
+* whether third-party integrations will continue after migration
 
-Products are usually the first place where Shift4Shop preparation needs detail. A product can be simple in record count but complex in selling behavior if it depends on options, variants, pricing rules, images, descriptions, stock behavior, related products, or custom display logic.
+This early decision keeps preparation from becoming a raw data inventory. It makes each preparation task answer a business question.
 
-Prepare product samples that show:
+### 2. Classify the Catalog by Selling Behavior <a href="#id-2-classify-the-catalog-by-selling-behavior" id="id-2-classify-the-catalog-by-selling-behavior"></a>
 
-* simple products
-* products with multiple options
-* products with required and optional selections
-* products with price-changing choices
-* products with inventory-sensitive choices
-* products with multiple images or detailed descriptions
-* products that use custom fields, extra tabs, or app-driven content
-* products that represent high revenue or high search traffic
+Catalog preparation should separate products by how they behave, not only by category or count. Shift4Shop product records need enough structure for customers to find, understand, configure, price, and buy products correctly. Products that look similar in a spreadsheet may carry very different migration implications.
 
-Do not prepare only clean examples. Include difficult products because those reveal whether the migration can preserve meaningful buying behavior in Shift4Shop.
+Create a catalog inventory that identifies:
 
-### Preparation Priority 3: Map Categories, Navigation, and Storefront Discovery <a href="#preparation-priority-3-map-categories-navigation-and-storefront-discovery" id="preparation-priority-3-map-categories-navigation-and-storefront-discovery"></a>
+* simple products with ordinary price, image, inventory, and description data
+* products with options, selectable choices, or variation-like behavior
+* products with wholesale packs, minimum quantities, quantity pricing, or customer-type pricing
+* products with technical specifications, compatibility information, extra fields, or long-form product content
+* downloadable or digital products
+* products with reviews, Q\&A-style content, attachments, videos, or rich media
+* products that depend on source extensions, apps, modules, or custom database fields
+* inactive, discontinued, hidden, draft, or legacy products that should not be treated the same as active catalog items
 
-Shift4Shop preparation should include more than product records. Category hierarchy, navigation structure, featured collections, internal links, filters, and product grouping all affect whether customers can find products after migration.
+The preparation consequence is direct: representative catalog samples should be selected from each important behavior group. If Demo Migration only uses simple products, it cannot prove whether Shift4Shop will preserve the meaning of the products that actually carry migration risk.
 
-Prepare a clear record of:
+### 3. Document Category, Navigation, and Product Discovery Requirements <a href="#id-3-document-category-navigation-and-product-discovery-requirements" id="id-3-document-category-navigation-and-product-discovery-requirements"></a>
+
+A category record is not the same as a working storefront navigation model. Before migration, document how customers currently find products and how that discovery structure should work in Shift4Shop.
+
+Review:
 
 * main category hierarchy
-* categories that should be consolidated, removed, or renamed
+* subcategory depth
 * products assigned to multiple categories
-* high-priority landing pages
-* navigation menus that carry commercial value
-* internal links from content pages to products or categories
-* category URLs that should be preserved or redirected
+* menu structure and footer links
+* filtered navigation, compatibility finders, or search-driven discovery
+* high-value landing pages that support product discovery
+* category descriptions, banners, images, SEO titles, and meta descriptions
+* product collections or grouping logic from the Source Platform
 
-This is especially important when the source store uses old naming, outdated categories, or duplicated navigation created over time.
+If the Source Platform used custom navigation, plugin-driven filters, page-builder category content, or search rules, identify those dependencies early. They may not be ordinary category data. Some discovery behavior may require configuration after migration, Advanced Data Mapping, Advanced Data Configure, or Custom Service when the expected result depends on custom logic rather than standard category records.
 
-### Preparation Priority 4: Identify SEO-Sensitive URLs and Content Pages <a href="#preparation-priority-4-identify-seo-sensitive-urls-and-content-pages" id="preparation-priority-4-identify-seo-sensitive-urls-and-content-pages"></a>
+### 4. Separate Customer Identity from Customer Treatment <a href="#id-4-separate-customer-identity-from-customer-treatment" id="id-4-separate-customer-identity-from-customer-treatment"></a>
 
-A migration to Shift4Shop can affect page routes, metadata, product URLs, category URLs, blog or content pages, and redirect planning. Prepare URL information before migration so SEO-sensitive paths are not discovered only after launch.
+Customer preparation should distinguish contact identity from commercial treatment. Names, email addresses, billing addresses, and shipping addresses are only the visible layer. For many Shift4Shop migrations, the more important question is how the buyer should be treated after login or checkout.
 
-Create a priority URL list that includes:
+Prepare a customer-context inventory that identifies:
 
-* top product URLs
-* top category URLs
-* pages with backlinks or search traffic
-* CMS Pages and important content pages
-* landing pages used in advertising or email campaigns
-* old 3DCart-era URLs that still receive traffic or appear in internal references
-* URLs that should be redirected instead of abandoned
+* ordinary retail customers
+* wholesale or B2B customers
+* customer groups, customer types, VIP levels, or account segments
+* tax-exempt customers or buyers with special tax handling
+* customers with minimum order expectations or quantity-based pricing
+* customers linked to sales reps, account managers, CRM records, or external identifiers
+* customers with store-credit, loyalty, reward, or discount history
+* customers whose treatment depends on source notes, tags, custom fields, approval states, or third-party data
 
-URL preparation does not need to solve every redirect decision immediately. It should identify which routes deserve careful review during Demo Migration and launch planning.
+Shift4Shop preparation should make clear which customer information must become usable platform behavior and which information only needs to be retained for reference. If the expected treatment depends on non-standard source logic, custom fields, external identifiers, or a rule that cannot be represented through standard service capability, it should be escalated before execution.
 
-### Preparation Priority 5: Prepare Customer and Order Review Samples <a href="#preparation-priority-5-prepare-customer-and-order-review-samples" id="preparation-priority-5-prepare-customer-and-order-review-samples"></a>
+### 5. Review Pricing, Coupon, Discount, and Wholesale Logic <a href="#id-5-review-pricing-coupon-discount-and-wholesale-logic" id="id-5-review-pricing-coupon-discount-and-wholesale-logic"></a>
 
-Customer and order history should remain useful after migration, even when the old platform and Shift4Shop organize operational details differently.
+Pricing preparation is necessary because price-related records often behave like rules rather than static values. A migrated price is useful only if it reaches the correct customer, product, quantity, date, or checkout condition.
 
-Prepare representative samples for:
+Prepare examples of:
 
-* active customers
-* customers with multiple orders
-* guest checkout records where available
-* customers associated with special pricing, groups, or tax handling
-* completed orders
-* refunded, canceled, or partially fulfilled orders
-* orders with coupons, discounts, shipping rules, or special payment conditions
-* orders that are important for support, warranty, or accounting review
+* base product prices
+* sale prices and special prices
+* quantity pricing or tiered pricing
+* wholesale pricing
+* customer-type or customer-group pricing
+* coupons and promotion rules
+* free shipping conditions
+* minimum order conditions
+* discounts limited by product, category, customer, date, or order value
+* legacy promotions that should not continue after launch
 
-The goal is not to recreate the old admin screen exactly. The goal is to preserve enough business meaning for staff to understand customers, order history, and post-launch support context.
+Mark each pricing rule as active, historical, reference-only, or launch-critical. This prevents old discounts from receiving the same attention as current revenue logic. It also helps decide whether the migration can rely on standard migration capability, whether a Standard Add-on can support the required filtering, mapping, or configuration, or whether the requirement belongs in Custom Service.
 
-### Preparation Priority 6: Separate Built-In Shift4Shop Features from Custom or App-Dependent Behavior <a href="#preparation-priority-6-separate-built-in-shift4shop-features-from-custom-or-app-dependent-behavior" id="preparation-priority-6-separate-built-in-shift4shop-features-from-custom-or-app-dependent-behavior"></a>
+### 6. Prepare Order History for Operational Use <a href="#id-6-prepare-order-history-for-operational-use" id="id-6-prepare-order-history-for-operational-use"></a>
 
-Shift4Shop includes many built-in commerce features, but not every source-store behavior is automatically a core migrated data object. Some behavior may come from apps, custom scripts, template changes, external systems, manual workflows, or older 3DCart-era customization.
+Order history should be prepared according to how staff and customers will use it after migration. Some merchants need historical orders mainly for customer-service reference. Others need staff to understand payment method, fulfillment state, tax, discounts, shipping, returns, invoices, marketplace references, or account-management context.
 
-Before migration, identify whether each important behavior belongs to:
+Before migration, classify orders by operational meaning:
 
-* core product, category, customer, order, coupon, or content data
-* Shift4Shop built-in configuration
-* an app or integration
-* design/theme behavior
-* custom code or scripts
-* manual staff workflow
-* external systems such as ERP, accounting, shipping, marketing, or CRM tools
+* ordinary completed orders
+* pending, canceled, refunded, partially refunded, or failed orders
+* orders with unusual payment methods or manual payment handling
+* orders with complex shipping, freight, pickup, dropshipping, or multi-package fulfillment
+* orders with coupons, discounts, store credit, rewards, or custom fees
+* orders tied to wholesale accounts, sales reps, purchase orders, quotes, invoices, or external systems
+* subscription-like, repeat-order, or membership-related order history
+* orders with staff notes, customer notes, internal status changes, or custom fields
 
-This distinction helps prevent unrealistic migration expectations. Data migration can preserve records and supported structures, but custom behavior, third-party logic, and outside-system dependencies need separate review.
+The purpose is not to make every historical order behave like a new order. The purpose is to decide what level of order interpretation the business requires after migration. If staff cannot understand migrated order history, the migration may pass a record-count check while still failing daily operations.
 
-### Preparation Priority 7: Clarify 3DCart Source Context Without Making It the Project Focus <a href="#preparation-priority-7-clarify-3dcart-source-context-without-making-it-the-project-focus" id="preparation-priority-7-clarify-3dcart-source-context-without-making-it-the-project-focus"></a>
+### 7. Identify Content, CMS Pages, Blog Posts, and High-Value Routes <a href="#id-7-identify-content-cms-pages-blog-posts-and-high-value-routes" id="id-7-identify-content-cms-pages-blog-posts-and-high-value-routes"></a>
 
-Some migration projects may involve a Source Platform that staff still call 3DCart. This is useful preparation context because older exports, admin labels, support notes, URLs, integrations, or documentation may still use that name.
+Storefront content should be prepared separately from product and category data. Shift4Shop can support ecommerce pages, themes, SEO-oriented storefronts, and marketing content, but source content may include page-builder layouts, embedded forms, custom scripts, old landing pages, educational articles, policy pages, and route structures that do not translate as simple text.
 
-Treat those references as source-store context. Prepare them only where they help explain current store behavior, historical records, legacy URL structure, or custom dependencies. The migration plan should still evaluate the result through Shift4Shop’s current platform model.
+Prepare a content inventory that identifies:
 
-Useful items to collect include:
+* CMS Pages that must remain active at launch
+* Blog Posts that still attract traffic or support customers
+* policy pages such as shipping, returns, privacy, warranty, and wholesale terms
+* buying guides, technical resources, size guides, compatibility guides, or product education pages
+* campaign landing pages and seasonal pages
+* high-traffic URLs and high-value SEO routes
+* pages with embedded forms, scripts, apps, videos, calculators, or custom layouts
+* outdated pages that can be retired or redirected
 
-* old 3DCart export files or field labels that need interpretation
-* legacy URLs still used by customers or search engines
-* old app or integration references
-* staff notes that describe setup rules using older terminology
-* historical customization notes that may not match current Shift4Shop behavior
+For each important route, decide whether the goal is exact preservation, content migration with a new layout, redirect coverage, or retirement. This prevents preparation from treating all content as equal when only some pages have launch or SEO value.
 
-This preparation keeps the rebrand context helpful without turning the project into a platform-history review.
+### 8. Map Integrations, External Systems, and Custom Fields <a href="#id-8-map-integrations-external-systems-and-custom-fields" id="id-8-map-integrations-external-systems-and-custom-fields"></a>
 
-### Preparation Priority 8: Decide Which Records Should Move and Which Should Change <a href="#preparation-priority-8-decide-which-records-should-move-and-which-should-change" id="preparation-priority-8-decide-which-records-should-move-and-which-should-change"></a>
+Shift4Shop migration planning should identify which source data is owned by the ecommerce platform and which data is shaped by external systems. Integration-owned data is often the reason a migration looks simple at the record level but becomes complex during validation.
 
-A Shift4Shop migration is a good opportunity to remove obsolete structures if they no longer support the business. However, cleanup should be intentional. Removing or changing data without a clear plan can damage reporting, customer service, SEO, and operational continuity.
+Document dependencies such as:
 
-Before migration, decide whether to preserve, revise, or exclude:
+* payment gateways and payment references
+* shipping carriers, rate logic, labels, tracking, freight, or pickup workflows
+* tax services
+* inventory systems, warehouse systems, ERP, POS, or marketplace channels
+* email marketing and customer-segmentation tools
+* reviews, loyalty, reward, subscription, financing, or B2B-specific apps
+* custom product fields, custom customer fields, custom order fields, and internal notes
+* API-based workflows or scripts that read from the current store
 
-* outdated products
-* inactive categories
-* duplicate customers
-* obsolete coupons or promotions
-* old CMS Pages
-* discontinued product images or descriptions
-* historical orders that no longer need to be accessible in the new admin context
-* old URL paths that should redirect rather than remain active
+For each dependency, decide whether the data should migrate, remain external, be reconnected after launch, be transformed into reference information, or be reviewed as a Custom Service requirement. Do not assume integration-owned data will become native Shift4Shop behavior without review.
 
-If only selected records should move, the filtering requirement should be planned clearly. Estimated entity numbers are not migration filters. When the project needs selective migration, the Data Filter Add-on may be relevant where appropriate.
+### 9. Clean Up Source Data Without Destroying Review Evidence <a href="#id-9-clean-up-source-data-without-destroying-review-evidence" id="id-9-clean-up-source-data-without-destroying-review-evidence"></a>
 
-### Preparation Priority 9: Identify Custom Platform or Non-Standard Source Requirements <a href="#preparation-priority-9-identify-custom-platform-or-non-standard-source-requirements" id="preparation-priority-9-identify-custom-platform-or-non-standard-source-requirements"></a>
+Pre-migration cleanup can improve the target result, but careless cleanup can remove evidence needed for planning. The right approach is to classify data before deleting, merging, or rewriting it.
 
-If the Source Platform is a Custom Platform or if the source store uses non-standard fields, custom database structures, external identifiers, third-party app data, or bespoke business rules, the requirement should be prepared as Custom Service context.
+Useful cleanup decisions include:
 
-This can include:
+* remove duplicate products only after deciding which record should remain canonical
+* mark inactive products clearly instead of mixing them with active catalog items
+* normalize product names, SKUs, options, and categories where obvious inconsistencies exist
+* confirm that customer emails, addresses, and account records are usable
+* separate test orders from real order history
+* identify old coupons, expired promotions, and legacy customer groups
+* flag discontinued pages and old URLs that need redirect decisions
 
-* custom fields not represented in standard Shift4Shop structures
-* outside-system identifiers used by ERP, CRM, accounting, or fulfillment systems
-* app-specific product, customer, or order data
-* custom pricing, tax, shipping, or promotion logic
-* custom checkout behavior
-* modified source data exports
-* special transformation rules needed before data can be meaningful in Shift4Shop
+Do not use cleanup to hide complexity from Demo Migration. If a problem is important enough to affect launch, include a representative example in the sample set. Preparation should make the migration result easier to judge, not artificially easier to pass.
 
-Customization or modification work is handled through Custom Service. Custom Service does not automatically mean Next-Cart performs migration execution; migration management is included only when it is part of the final plan.
+### 10. Prepare Legacy Source Context Without Letting It Control the Target Plan <a href="#id-10-prepare-legacy-source-context-without-letting-it-control-the-target-plan" id="id-10-prepare-legacy-source-context-without-letting-it-control-the-target-plan"></a>
 
-### Preparation Priority 10: Choose Demo Migration Samples Carefully <a href="#preparation-priority-10-choose-demo-migration-samples-carefully" id="preparation-priority-10-choose-demo-migration-samples-carefully"></a>
+Some source records, exports, URLs, documentation, or internal notes may still use 3DCart language because Shift4Shop is the rebranded version of 3DCart. This context can matter during preparation when it helps identify older records, legacy URLs, past export formats, historical platform assumptions, or support references.
 
-Demo Migration should not use only easy records. For Shift4Shop, the sample should include records that reveal the store’s actual complexity.
+Treat that context as source evidence, not as the target planning frame. The destination should be evaluated as Shift4Shop. Older assumptions should be checked against current Shift4Shop behavior when they affect data structure, platform capabilities, storefront architecture, integrations, or support expectations.
 
-A strong sample may include:
-
-* one simple product
-* one product with several options
-* one high-value or high-traffic product
-* one product from a complex category path
-* one customer with several orders
-* one order with discount, tax, shipping, or payment complexity
-* one CMS Page or content page with internal links
-* one SEO-sensitive URL path
-* one record affected by legacy 3DCart naming or old source-store assumptions
-
-The point of the sample is to expose whether the migration result is understandable, usable, and aligned with current Shift4Shop planning expectations.
+This is especially important when older documentation describes a source workflow in platform-era terms that no longer reflect how the merchant wants the target store to operate after migration.
 
 ### Practical Preparation Sequence <a href="#practical-preparation-sequence" id="practical-preparation-sequence"></a>
 
-A useful Shift4Shop preparation sequence is:
+A practical Shift4Shop preparation sequence should move from business intent to migration evidence.
 
-1. Define the store model and expected selling workflow.
-2. Review product, option, category, customer, and order structures.
-3. Identify SEO-sensitive URLs and content pages.
-4. Separate core data from configuration, apps, themes, scripts, and external systems.
-5. Clarify any 3DCart-era source references that still affect data interpretation.
-6. Decide what should move, what should change, and what should be excluded.
-7. Identify Custom Platform or non-standard source requirements.
-8. Choose Demo Migration samples that represent real business complexity.
-9. Assign reviewers who understand catalog, customer, order, SEO, and operational meaning.
-10. Use Demo Migration results to confirm whether the final migration plan is safe enough.
+1. Define the target store role and launch priorities.
+2. Classify the catalog by selling behavior, not only by product count.
+3. Document categories, navigation, product discovery, and SEO-critical routes.
+4. Separate customer identity from customer treatment.
+5. Review wholesale, quantity, customer-type, coupon, and discount logic.
+6. Classify order history by staff and customer-service use.
+7. Inventory CMS Pages, Blog Posts, policy pages, and high-value content.
+8. Identify integration-owned data, custom fields, and outside-system identifiers.
+9. Decide what should be cleaned, retained, retired, filtered, mapped, configured, or escalated.
+10. Build a Demo Migration sample set that includes ordinary records and high-risk records.
+
+The sequence should not be treated as a technical setup procedure. It is a readiness framework that helps the migration process produce a result the merchant can evaluate with confidence.
+
+### Demo Migration Sample Planning <a href="#demo-migration-sample-planning" id="demo-migration-sample-planning"></a>
+
+Demo Migration is most useful when the sample is representative and revealing. A random sample may prove that common records can move, but it may miss the records that decide whether Shift4Shop is ready for launch.
+
+A strong Shift4Shop Demo Migration sample should include:
+
+* at least one simple product and one complex product
+* products with options, variations, technical specifications, or rich product-page content
+* products with wholesale, quantity, or customer-type pricing where relevant
+* active categories and one category with important SEO or navigation value
+* ordinary retail customers and customers with group, wholesale, tax, or account treatment
+* orders with standard checkout history and orders with discounts, shipping complexity, payment context, or staff notes
+* CMS Pages or Blog Posts with commercial or SEO importance
+* source records that rely on custom fields, extensions, integrations, or legacy source assumptions
+* one or more high-value URLs where redirect or route behavior matters
+
+The sample should produce useful evidence. If every sample record is easy, Demo Migration may look successful while the full migration still contains unresolved risks.
+
+### Custom Platform and Custom Data Preparation <a href="#custom-platform-and-custom-data-preparation" id="custom-platform-and-custom-data-preparation"></a>
+
+If the Source Platform is a Custom Platform, a heavily customized hosted store, a modified open-source installation, or a system shaped by private database structures, prepare the custom data layer before execution. Custom Platform sources require Custom Service because standard service capability cannot assume a stable source data model.
+
+Useful preparation includes:
+
+* source schema samples or export examples
+* definitions for custom product, customer, order, content, and integration fields
+* explanations of what each custom field means operationally
+* examples of records where custom data changes pricing, visibility, fulfillment, SEO, or staff workflow
+* mapping expectations for what should become native Shift4Shop data, reference information, or custom migration output
+* API, database, or export-access constraints that may affect review
+
+The goal is to make custom data understandable before migration logic is planned. Without that explanation, custom fields can be moved as text while the behavior they supported is lost.
+
+### What Should Be Escalated Before Execution <a href="#what-should-be-escalated-before-execution" id="what-should-be-escalated-before-execution"></a>
+
+Escalate requirements before execution when they cannot be judged through ordinary record migration. Common escalation signals include:
+
+* customer-specific pricing, wholesale logic, or buyer treatment that depends on custom fields or outside systems
+* catalog behavior that uses custom product types, bundles, kits, personalization, compatibility rules, or extension-owned logic
+* route and SEO requirements that need deliberate preservation or redirect planning
+* order history that must preserve custom operational states, fulfillment context, invoices, staff notes, or external references
+* integration-owned data expected to appear as usable Target Platform behavior
+* filtered migration requirements where only selected records should move
+* mapping requirements where source fields do not naturally align with Shift4Shop-supported structures
+* data-configuration requirements where values must be changed during migration
+* Custom Platform source data, private database structures, or non-standard exports
+
+Standard Add-ons can help when the need fits available settings and supported behavior for filtering, mapping, or configuration. Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, Custom Platform handling, and broader bespoke handling belong in Custom Service.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Preparing for Shift4Shop migration means preparing the business logic around the records, not just gathering export files. Product options, category discovery, customer and order meaning, SEO routes, payment and checkout assumptions, built-in features, apps, and legacy source context all influence whether the migrated store will be usable after launch.
+Preparing for a Shift4Shop migration is not mainly about creating longer spreadsheets. It is about deciding which parts of the source store carry business meaning and making that meaning visible before migration execution. Catalog behavior, customer treatment, pricing rules, order interpretation, storefront content, SEO routes, integrations, and custom data should all be reviewed through the question of how they need to work in Shift4Shop after launch.
 
-Before moving forward, prepare a sample set that reflects the real store: complex products, important categories, active customers, representative orders, priority URLs, and any source-store records that still use older 3DCart references. Use Demo Migration to confirm whether those records remain commercially meaningful in Shift4Shop before finalizing the full migration plan.
+A well-prepared migration gives Demo Migration a stronger purpose. Instead of showing only that records can appear in the Target Platform, it helps reveal whether the target store can preserve the commercial, operational, and storefront logic that matters most.
+
+Before starting the migration process, prepare a representative record set and use Demo Migration to test the parts of the store that carry the highest business meaning. If the sample exposes unclear mapping, filtering, configuration, custom-field, or integration requirements, use Live Chat to confirm whether the requirement fits standard service capability, a Standard Add-on, or Custom Service before moving into broader execution.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**Should I prepare 3DCart information before migrating to Shift4Shop?**
+**Should every product be cleaned before migrating to Shift4Shop?**
 
-Prepare 3DCart information only when it helps explain the Source Platform context. Older exports, field names, URLs, app references, or staff notes may still use the 3DCart name. Those details should help clarify the source store, while the migration result should be planned around current Shift4Shop behavior.
+No. Clean obvious duplicates, outdated records, and inconsistent values where the business decision is clear, but do not remove evidence needed to evaluate migration complexity. Complex products should be included in the review sample, not hidden from it.
 
-**What product samples should I include before migration?**
+**What customer information should be prepared for a Shift4Shop migration?**
 
-Include more than simple products. Prepare products with options, price-changing selections, inventory-sensitive choices, multiple images, detailed descriptions, important categories, and high search or revenue value. These records make Demo Migration more useful because they show whether the migrated catalog remains sellable.
+Prepare more than names and email addresses. Customer groups, wholesale treatment, tax status, quantity pricing, account notes, approval context, CRM identifiers, and custom fields should be reviewed if they affect how buyers should be treated after migration.
 
-**Do estimated entity numbers decide which records migrate?**
+**How should we choose Demo Migration samples?**
 
-No. Estimated entity numbers support pricing and Entity Points planning. They are not automatic migration filters. If only selected records should move, the migration needs filtering rules, such as the Data Filter Add-on where appropriate.
+Choose samples that reveal real store behavior. Include simple records, high-revenue products, option-heavy products, wholesale or customer-type pricing examples, important customer groups, operationally meaningful orders, key CMS Pages or Blog Posts, and high-value URLs.
 
-**When does a Shift4Shop migration need Custom Service?**
+**Do entered entity counts filter which records migrate?**
 
-Custom Service is needed when the project requires customization, modification, Custom Platform handling, third-party app or integration data, custom fields, outside-system identifiers, custom migration logic adjustment, or special transformation rules. Custom Service does not automatically include migration management unless that is part of the final plan.
+No. Entered Product, Customer, Order, and Blog counts are used for Entity Points calculation and plan selection. They are not migration filters. All scanned records are migrated by default unless filtering is configured through the Data Filter Add-on or custom handling where required.
 
-**What should Demo Migration prove before the full migration?**
+**When should custom fields be reviewed before migration?**
 
-Demo Migration should prove that important products, options, categories, customers, orders, content pages, and priority URLs remain understandable and usable in Shift4Shop. It should also reveal whether old source-store assumptions, including 3DCart-era references, need cleanup or custom handling before the full migration.
+Custom fields should be reviewed whenever they affect product meaning, customer treatment, pricing, order interpretation, fulfillment, SEO, integration workflows, or staff operations. If those fields require custom migration logic adjustment or cannot be handled through standard service capability, the requirement belongs in Custom Service.
+
+**Should old 3DCart references be removed before planning a Shift4Shop migration?**
+
+Not automatically. Older 3DCart references can help explain source records, exports, URLs, or internal documentation. They should be treated as source context and checked against current Shift4Shop behavior where they affect the target plan.
