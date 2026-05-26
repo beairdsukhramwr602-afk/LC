@@ -1,182 +1,170 @@
 # Selecting the Right Migration Approach for AmeriCommerce
 
-AmeriCommerce migration approach should be chosen by looking at how much business logic must remain usable after the data reaches the new store. Entity volume matters for pricing and capacity planning, but it does not fully explain the migration burden. A small AmeriCommerce project can still need deeper review when it depends on B2B portals, customer-specific pricing, recurring budgets, subscription products, multi-store separation, vendor workflows, or integrations that shape how the store operates.
+Choosing the right migration approach for AmeriCommerce depends on how much business meaning must be preserved, not only on how many records need to be moved. A store with ordinary products, straightforward customers, and a simple order history may be suitable for a lighter migration approach. A store that depends on B2B buyer groups, customer-specific pricing, microstores, subscription products, vendor workflows, external systems, or custom fields needs a more deliberate approach before Full Migration begins.
 
-The safest approach is the one that matches the complexity behind the records. If the store uses AmeriCommerce mainly as a straightforward catalog and order-management platform, a lighter approach may be enough. If the store depends on customer segmentation, store-specific visibility, pricing rules, fulfillment logic, or custom integrations, the migration plan should be reviewed more carefully before execution.
+AmeriCommerce is often selected because the future store must support structured commerce behavior: different buyers may need different catalogs, storefronts may serve different audiences, products may carry grouped or recurring context, and rules may influence pricing, discounts, rewards, budgets, fulfillment, or payment expectations. The migration approach should therefore answer a practical question: **can the expected AmeriCommerce outcome be reached through standard service capability, or does the project require Next-Cart-led execution, Add-ons, or Custom Service review?**
+
+The right approach protects the business outcome without making the project heavier than necessary. It should give the merchant enough control, support, and customization to move confidently while keeping each responsibility clear.
 
 ### What Approach Means for an AmeriCommerce Migration <a href="#what-approach-means-for-an-americommerce-migration" id="what-approach-means-for-an-americommerce-migration"></a>
 
-Choosing an approach for AmeriCommerce means deciding how much planning, review, and service responsibility the project needs before the migration result can be trusted.
+A migration approach is the working plan for how the selected migration path will be executed, reviewed, and adjusted. For AmeriCommerce, the approach should define how ordinary data movement and business-meaning preservation will be handled across the migration process.
 
-AmeriCommerce is often used by businesses with structured selling models. A store may support wholesale buyers, sales-led purchasing, employee portals, customer budgets, multi-store operations, recurring products, or different payment and fulfillment rules for different customer groups. Those layers can make the migration more sensitive than a simple product, customer, and order transfer.
+Before the main migration begins, the approach should clarify several questions:
 
-The selected approach should answer several questions early:
+* Are products, customers, orders, reviews, coupons, CMS Pages, Blog Posts, and other supported records ready to move through standard service capability?
+* Are buyer groups, customer types, portals, account relationships, pricing rules, budgets, tax treatment, payment expectations, or restricted catalogs part of the expected AmeriCommerce result?
+* Are storefronts, microstores, branded experiences, regional sites, or customer-specific buying environments clearly separated in the source data?
+* Do product groups, kits, configurable products, subscription products, technical specifications, or product relationships need special interpretation?
+* Are order, invoice, fulfillment, vendor, payment, or shipping details needed only for reference, or do they affect ongoing operations after launch?
+* Are integrations, API workflows, headless experiences, ERP/accounting systems, marketplace connections, or external identifiers part of the expected outcome?
+* Are custom fields, modified source structures, third-party records, or Custom Platform source data involved?
 
-* Are products simple enough to move through standard service capability?
-* Do customer types, portals, or B2B buyer relationships need special interpretation?
-* Are pricing rules, discounts, rewards, budgets, or subscriptions important to the selling model?
-* Does the store use multiple storefronts, microstores, or customer-specific catalogs?
-* Are fulfillment, payment, vendor, or integration workflows expected to remain meaningful after migration?
-* Does the Source Platform include custom structures that need interpretation before they can fit AmeriCommerce?
+A strong approach does not assume that every AmeriCommerce feature requires customization. It also does not assume that a complex business can be handled safely as a basic record migration. The approach should separate what can move through standard capability, what needs supported Add-ons, what benefits from Next-Cart-led execution, and what requires Custom Service.
 
-When these answers are clear, the service path becomes easier to choose. When they are unclear, Demo Migration evidence and consultation should guide the decision before the full migration begins.
+### Why Approach Choice Depends on AmeriCommerce-Specific Burden <a href="#why-approach-choice-depends-on-americommerce-specific-burden" id="why-approach-choice-depends-on-americommerce-specific-burden"></a>
 
-### Why AmeriCommerce Approach Choice Depends on Business Logic <a href="#why-americommerce-approach-choice-depends-on-business-logic" id="why-americommerce-approach-choice-depends-on-business-logic"></a>
+AmeriCommerce migration burden usually comes from relationship, rule, and context layers. Product volume and customer volume still matter for Entity Points capacity, but they do not fully explain the work needed to preserve a business model.
 
-AmeriCommerce projects become complex when storefront behavior depends on more than record presence. Products, customers, and orders may migrate as records, but the store may still fail to meet expectations if the commercial rules around those records are not understood.
+| Burden area                                       | Why it affects the approach                                                                                                    | Typical service implication                                                                                                                                                                        |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Buyer groups and account relationships            | Customer records may control access, pricing, tax treatment, payment expectations, or portal behavior.                         | Standard Service can fit when the structure is clear and supported; Managed Service may help with review coordination; Custom Service is needed when buyer logic requires tailored interpretation. |
+| Storefronts and microstores                       | Products, customers, content, pricing, and routes may belong to different selling contexts.                                    | The approach must define storefront boundaries before migration; unclear or custom multi-context behavior can require Custom Service.                                                              |
+| Product flexibility                               | Product groups, kits, subscriptions, configurable choices, and technical details may affect how buyers purchase.               | Standard capability can fit clean structures; special transformation, custom fields, or non-standard source logic requires Custom Service.                                                         |
+| Pricing, discounts, rewards, and budgets          | Rules may overlap and directly affect revenue or buyer trust.                                                                  | Add-ons may help with supported mapping or configuration; complex rule translation often requires Custom Service review.                                                                           |
+| Orders, invoices, fulfillment, and vendor context | Historical orders may need more than reference value if staff use them for support, fulfillment, accounting, or vendor review. | Managed Service can help coordinate standard migration; custom order interpretation or external dependencies may require Custom Service.                                                           |
+| Integrations and external systems                 | ERP, accounting, shipping, tax, CRM, marketplace, API, or headless layers may own part of the business outcome.                | Integration-owned data and outside-system identifiers should be reviewed early; custom handling usually belongs in Custom Service.                                                                 |
 
-#### B2B buyer relationships can affect the approach <a href="#b2b-buyer-relationships-can-affect-the-approach" id="b2b-buyer-relationships-can-affect-the-approach"></a>
+The service model should be chosen around the highest-risk business meaning, not the easiest records. A merchant with ten thousand clean retail products may need a lighter approach than a merchant with fewer records but extensive buyer-specific pricing, portal access, subscription rules, and integration-owned fulfillment data.
 
-AmeriCommerce is often selected for B2B and account-based selling. Buyer groups, customer types, portal access, allowances, budgets, catalog visibility, and sales-led purchasing can affect how customers interact with the store.
+### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
 
-If the source store uses only basic customer accounts, the approach may stay light. If the source store includes buyer hierarchies, company-level buying behavior, customer-specific pricing, restricted catalogs, or account-based workflows, the migration approach should include deeper review before the project moves into full execution.
+Standard Service is usually enough when the AmeriCommerce migration path fits standard service capability and the merchant can lead execution and review confidently. This often applies when the source data is organized, the future AmeriCommerce structure is already understood, and the expected result does not require custom migration logic adjustment.
 
-#### Multi-store and microstore scope can change review needs <a href="#multi-store-and-microstore-scope-can-change-review-needs" id="multi-store-and-microstore-scope-can-change-review-needs"></a>
+Standard Service is most suitable when:
 
-A single AmeriCommerce environment may support multiple storefronts, microstores, customer-specific sites, or brand-specific sales experiences. This makes store assignment and visibility more important than simple data movement.
+* the source catalog has clear products, categories, images, descriptions, SKUs, and pricing;
+* buyer groups, customer types, and account relationships are simple or already documented clearly;
+* pricing, discounts, rewards, budgets, and tax behavior can be reviewed without custom rule interpretation;
+* storefront or microstore boundaries are minimal, or the merchant already knows how they should be represented after migration;
+* subscriptions, kits, product groups, and configurable products are either not central or are structured consistently;
+* order history is needed mainly for reference rather than for complex fulfillment, invoice, vendor, or payment reconstruction;
+* SEO, content, and high-value routes can be reviewed by the merchant after Demo Migration;
+* any filtering, mapping, or data configuration needs fit available Standard Add-on capability;
+* the merchant has enough internal knowledge to judge Demo Migration output and decide what needs correction before Full Migration.
 
-A project that consolidates one straightforward store into AmeriCommerce usually needs less review than a project that must preserve multiple storefronts, separate catalogs, different pricing contexts, or store-specific customer experiences.
+With Standard Service, the customer purchases a 1-year service license for the selected migration path and self-performs the E-commerce Platform Migration on the Next-Cart website with 24/7 expert support and any purchased Add-ons. This approach works best when the merchant understands the data, can make review decisions, and does not need Next-Cart to manage execution.
 
-#### Product flexibility can make standard movement insufficient <a href="#product-flexibility-can-make-standard-movement-insufficient" id="product-flexibility-can-make-standard-movement-insufficient"></a>
+Standard Service should not be chosen only because the store is small. A small AmeriCommerce migration can still be complex if the source includes custom buyer rules, external identifiers, non-standard product structures, or undocumented account exceptions. The better test is whether the expected result can be achieved with standard service capability and merchant-led review.
 
-AmeriCommerce supports flexible product structures, including variants, attributes, groups, kits, and subscription products. The migration approach should account for how the source store represents similar concepts and whether those concepts translate cleanly into AmeriCommerce.
+### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
 
-If products are simple and use predictable option structures, Standard Service may be enough. If the catalog depends on bundles, kits, recurring products, product groups, complex variants, or custom product fields, the project may need Add-ons or Custom Service depending on the exact requirement.
+Managed Service is safer when the migration still fits standard service capability, but the merchant wants Next-Cart to perform the migration and coordinate execution. For AmeriCommerce, this can be useful when the business model is understood but the merchant does not want to manage the migration process alone.
 
-#### Pricing, discount, reward, and budget logic should not be treated as ordinary fields <a href="#pricing-discount-reward-and-budget-logic-should-not-be-treated-as-ordinary-fields" id="pricing-discount-reward-and-budget-logic-should-not-be-treated-as-ordinary-fields"></a>
+Managed Service is often a better approach when:
 
-AmeriCommerce can support advanced discounting, rule-driven behavior, loyalty, rewards, and budgets. These features are not only data values; they often represent business rules.
+* the store has many products, customers, orders, CMS Pages, Blog Posts, reviews, coupons, or historical records that need organized execution;
+* the merchant has limited internal time or migration experience;
+* buyer groups, storefront context, product structures, and order history are documented but require careful review sequencing;
+* Demo Migration findings need expert interpretation before the merchant decides whether to proceed to Full Migration;
+* the source store remains active, so launch timing and Recent Data Migration planning matter;
+* SEO, content, order history, customer groups, and representative product samples need structured review but not custom migration logic;
+* the merchant wants Next-Cart to perform the migration using standard service capability and purchased Standard Add-ons.
 
-A migration approach is too light if it assumes that all price, discount, or customer-budget expectations can be preserved by moving records alone. The project should identify which rules must be recreated, which information should be migrated, and which behavior must be configured or reviewed after migration.
+Managed Service does not automatically include customization. It is Next-Cart-led execution using standard service capability and any purchased Add-ons. If the AmeriCommerce plan reveals unsupported source behavior, tailored mapping logic, custom fields without a standard destination, integration-owned data that must be transformed, or Custom Platform source interpretation, the project should move into Custom Service review.
 
-#### Integrations and fulfillment context may determine whether customization is needed <a href="#integrations-and-fulfillment-context-may-determine-whether-customization-is-needed" id="integrations-and-fulfillment-context-may-determine-whether-customization-is-needed"></a>
-
-Payment options, shipping methods, fulfillment workflows, vendor processes, and integrations can affect how orders are interpreted after migration. A project may need only standard order history if past orders are used for reference. It may need deeper review if order history supports reordering, vendor reporting, payment reconciliation, subscription continuity, or fulfillment decisions.
-
-When integration-owned identifiers, vendor-specific structures, or external workflow dependencies must remain meaningful, the project should be evaluated for Custom Service.
-
-### When Standard Service Can Fit AmeriCommerce <a href="#when-standard-service-can-fit-americommerce" id="when-standard-service-can-fit-americommerce"></a>
-
-Standard Service can fit an AmeriCommerce migration when the store structure is clear, the source data maps predictably, and the customer is comfortable reviewing and performing the migration process independently on the Next-Cart website.
-
-Standard Service is usually more suitable when:
-
-* the catalog uses clear products, categories, and option structures;
-* customer records do not require complex company, portal, budget, or buyer-role interpretation;
-* orders are needed mainly for historical reference rather than active operational workflows;
-* multi-store or microstore behavior is absent or simple;
-* pricing rules, discounts, subscriptions, rewards, and budgets can be reviewed or rebuilt separately after migration;
-* no source-side custom structures need special interpretation;
-* the customer can evaluate Demo Migration results and decide whether the standard outcome is acceptable.
-
-This approach is most appropriate when AmeriCommerce is being used as a structured but manageable hosted commerce environment rather than as a heavily customized B2B operations system.
-
-Standard Service does not mean the project is unsupported. It means the customer leads execution while using the purchased service license, available support, and any purchased Standard Add-ons within the purchased service.
-
-### When Managed Service Is the Safer Approach <a href="#when-managed-service-is-the-safer-approach" id="when-managed-service-is-the-safer-approach"></a>
-
-Managed Service is useful when the migration can stay within standard service capability but the customer wants Next-Cart to perform the migration process and manage standard execution details.
-
-Managed Service may be a better fit when:
-
-* the store has enough data or configuration detail that customer-led execution would create avoidable risk;
-* the customer wants Next-Cart to perform the migration using standard service capability;
-* the project includes purchased Standard Add-ons that should be configured as part of the migration run;
-* the business needs a more guided review of Demo Migration results before full execution;
-* the source store has multiple customer, product, or order layers but no bespoke transformation requirement;
-* the migration team wants clearer handoff between preparation, execution, and result review.
-
-Managed Service does not turn a complex custom requirement into a standard one. If the project needs tailored transformation, custom mapping beyond supported behavior, Custom Platform handling, third-party integration data, outside-system identifiers, or custom migration logic adjustment, the requirement belongs under Custom Service.
+Managed Service is especially useful when the issue is coordination rather than customization. A merchant may already know its buyer groups, rules, storefront boundaries, and product structures, but still want a more guided migration experience because the review burden is high and the launch window is important.
 
 ### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
 
-Custom Service is the right path when the AmeriCommerce migration requires customization, modification, bespoke handling, or interpretation beyond standard service capability and Standard Add-on behavior.
+Custom Service is needed when the expected AmeriCommerce outcome requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or broader bespoke handling. The trigger is not platform complexity alone. The trigger is that the desired result cannot be achieved through standard service capability and available supported behavior.
 
-Custom Service should be used when the project involves:
+Custom Service should be reviewed when the source or expected result includes:
 
-* Custom Platform as the Source Platform;
-* custom source data structures that do not match standard AmeriCommerce-supported fields cleanly;
-* B2B portals, buyer relationships, customer types, allowances, budgets, or restricted catalog logic that need tailored interpretation;
-* product groups, kits, subscriptions, or variant structures that require custom transformation;
-* pricing rules, discount behavior, rewards, or budget logic that cannot be handled through standard mapping or configuration;
-* vendor workflows, fulfillment logic, payment identifiers, or integration-owned data that need to remain meaningful;
-* custom fields or outside-system identifiers that must be preserved for business use;
-* tailored Add-ons or Custom Add-ons;
-* custom migration logic adjustment.
+| Custom Service trigger                              | Why it matters for AmeriCommerce                                                                                                                                   |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Custom buyer logic                                  | Buyer groups, portals, account relationships, pricing visibility, tax treatment, payment expectations, or approval behavior may need tailored interpretation.      |
+| Complex storefront or microstore reconstruction     | Multiple selling contexts may require project-specific mapping of products, customers, content, routes, rules, and ownership boundaries.                           |
+| Non-standard product structures                     | Kits, groups, subscriptions, configurable products, technical specifications, or custom attributes may not translate cleanly from the source data.                 |
+| Rule translation beyond supported behavior          | Pricing, discounts, rewards, budgets, quantity breaks, or customer-specific rules may need custom logic if they are overlapping, undocumented, or source-specific. |
+| Integration-owned records or identifiers            | ERP, accounting, shipping, tax, CRM, marketplace, API, or headless systems may contain data that cannot be treated as ordinary store records.                      |
+| Custom fields or app-owned data                     | Important business meaning may be stored outside standard entities and require custom migration logic adjustment.                                                  |
+| Custom Platform or heavily modified Source Platform | Source interpretation must happen before the migration path can be planned reliably.                                                                               |
 
-Custom Service does not automatically mean Next-Cart performs the migration process. It means the project requires custom handling. Migration management is included only when it is part of the final plan.
+Custom Service does not automatically mean Next-Cart performs every migration task for the merchant. Migration management can be included in the final plan, but the defining factor is the need for customization or bespoke handling. The final Custom Service scope should specify what will be analyzed, adjusted, transformed, migrated, validated, or managed.
 
-### How Add-ons Fit into AmeriCommerce Migration Approach <a href="#how-add-ons-fit-into-americommerce-migration-approach" id="how-add-ons-fit-into-americommerce-migration-approach"></a>
+For AmeriCommerce, Custom Service should be considered early when the business cannot separate native platform configuration from source-specific behavior. Waiting until after Demo Migration to discover hidden buyer logic, external ownership, or custom field meaning usually creates avoidable rework.
 
-Add-ons can support AmeriCommerce projects when the requirement is specific to filtering, mapping, or data configuration.
+### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
 
-For AmeriCommerce, Add-ons may be useful when:
+Add-ons are optional service features that help adjust filtering, mapping, or data configuration to better match the expected migration outcome. They should be selected because they solve a defined migration requirement, not because the platform is complex in general.
 
-* only selected products, customers, orders, or other eligible records should be migrated;
-* customer groups, order statuses, product attributes, or other supported fields need more careful mapping;
-* selected migrated information should be adjusted so it reaches AmeriCommerce with updated values;
-* the project needs clearer control over what data is included or how supported fields are configured.
+| Add-on area             | When it may help in an AmeriCommerce migration                                                                                                                                                       | Boundary to remember                                                                                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Data Filter Add-on      | Useful when the merchant wants only selected products, customers, orders, Blog Posts, or other eligible data to move, such as excluding obsolete records or narrowing migration scope before launch. | Entered entity counts are used for pricing and Entity Points Plan selection. They are not migration filters. All scanned records are migrated by default unless filtering is configured. |
+| Advanced Data Mapping   | Useful when source values need to map into supported AmeriCommerce structures, such as customer grouping, product classification, content organization, or other supported destination fields.       | Mapping does not remove Target Platform limitations. If the desired result needs behavior beyond supported mapping, Custom Service is required.                                          |
+| Advanced Data Configure | Useful when selected values should be changed before reaching AmeriCommerce, such as cleaning status labels, standardizing selected field values, or preparing data for clearer review.              | Configuration changes must remain within available supported behavior. Tailored or project-specific changes are Custom Service work.                                                     |
 
-The current Standard Add-ons include Data Filter Add-on, Advanced Data Mapping, and Advanced Data Configure. These are optional service features, not a replacement for Custom Service.
-
-If a Standard Add-on must be modified beyond its available settings and supported behavior, the tailored Add-on is handled through Custom Service. If the available Standard Add-ons do not fit the migration requirement, a Custom Add-on request is also reviewed through Custom Service.
+Using a Standard Add-on within its available settings and supported behavior does not automatically make the project Custom. A Tailored Add-on or Custom Add-on, however, is handled through Custom Service because it requires modification or project-specific development.
 
 ### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
 
-Demo Migration should be used to test whether the selected approach is strong enough before full migration.
+Demo Migration should help confirm whether the selected approach is appropriate before broader execution. For AmeriCommerce, the sample should be representative enough to test buyer relationships, product meaning, storefront context, pricing behavior, order history, and operational dependencies.
 
-For AmeriCommerce, a useful Demo Migration sample should include records that represent the store’s real complexity, such as:
+A useful Demo Migration sample should include:
 
-* simple products and more complex products with variants, groups, kits, or recurring-product expectations;
-* customers from different buyer types, portals, customer segments, or budget contexts;
-* orders that show important payment, shipping, fulfillment, or vendor-related details;
-* records connected to pricing rules, discounts, rewards, or customer-specific conditions;
-* store or microstore examples where catalog visibility or storefront separation matters;
-* source records with custom fields, outside-system identifiers, or integration-owned meaning.
+* at least one ordinary retail-style product and one product with AmeriCommerce-relevant complexity, such as a group, kit, subscription, configurable choice, or technical data;
+* customer records that represent different buyer types, account relationships, or pricing expectations;
+* orders that show fulfillment, invoice, payment, vendor, shipping, or tax context where those details matter;
+* content pages, storefront routes, or microstore examples that reveal navigation and presentation requirements;
+* pricing, discount, reward, budget, or quantity-rule examples that the merchant can judge against expected behavior;
+* integration-sensitive records if external systems influence product, customer, inventory, order, fulfillment, tax, or payment data;
+* custom fields or source-specific data that may need Custom Service review.
 
-The goal is not to prove that a small sample can be moved. The goal is to determine whether the migrated records still behave and read correctly in the AmeriCommerce target environment.
+Demo Migration is early evidence, not final validation. A clean sample supports the chosen approach only when it tests the business scenarios that actually matter. If the sample includes only easy products and ordinary customers, it may hide the AmeriCommerce-specific work that should influence service selection.
 
-### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
+### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
 
-The selected approach should be reconsidered if Demo Migration or preparation review shows that important AmeriCommerce behavior is not represented clearly.
+The chosen approach may be too light when Demo Migration or preparation reveals business meaning that cannot be handled through the planned service path.
 
-Common warning signs include:
+| Warning signal                                       | What it usually means                                                                                                   | Likely next step                                                                                           |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Buyer groups appear as basic customer records only   | Customer data may be missing access, pricing, portal, tax, or payment meaning.                                          | Reassess mapping, review Add-on needs, or move to Custom Service if tailored logic is required.            |
+| Storefront or microstore context is unclear          | Products, customers, content, routes, or rules may not belong to the right selling environment.                         | Document ownership boundaries before Full Migration; consider Custom Service for complex context mapping.  |
+| Product complexity moves but buying logic is unclear | Groups, kits, subscriptions, variants, specifications, or custom attributes may not support the intended buyer journey. | Review product structure samples; separate supported configuration from custom migration logic adjustment. |
+| Pricing or rule results cannot be explained          | Discounts, rewards, budgets, quantity breaks, or customer-specific pricing may be incomplete, obsolete, or conflicting. | Document expected outcomes and review whether Add-ons or Custom Service are needed.                        |
+| Order history lacks operational context              | Staff may not be able to interpret invoices, fulfillment, vendor, shipping, payment, or tax history after migration.    | Define what order history must prove and whether external records need custom handling.                    |
+| Integration ownership is still unresolved            | AmeriCommerce may receive records but not the business logic controlled by outside systems.                             | Confirm systems of record and launch-critical reconnection responsibilities before proceeding.             |
+| Custom fields contain essential meaning              | Standard migration may not preserve the intended business context.                                                      | Move the relevant requirement into Custom Service review.                                                  |
 
-* products arrive but kits, groups, variants, subscriptions, or product relationships are not interpreted correctly;
-* customer records move but portal access, customer type, buyer role, budget, or account meaning is unclear;
-* multi-store or microstore expectations cannot be confirmed from the sample;
-* pricing, discount, reward, or budget logic depends on rules that were not scoped;
-* order history lacks the details needed for fulfillment, reporting, reordering, vendor review, or customer support;
-* integrations or outside-system identifiers are needed after migration but were not included in planning;
-* Custom Platform source data requires interpretation rather than direct mapping;
-* Add-on configuration alone cannot produce the expected outcome.
-
-When these signs appear, the safer next step is to review the project scope before full execution rather than forcing the original approach to continue.
+A too-light approach does not mean the migration has failed. It means the plan has revealed a mismatch between expected outcome and selected service path. Correcting that mismatch before Full Migration protects launch readiness.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right AmeriCommerce migration approach depends on how much business logic sits behind the store’s records. Standard Service can fit clean, predictable migrations. Managed Service is safer when the migration remains standard but the customer wants Next-Cart-led execution. Custom Service is needed when B2B structure, multi-store behavior, product relationships, pricing rules, subscriptions, integrations, Custom Platform source data, or tailored Add-ons require custom handling.
+The right AmeriCommerce migration approach depends on how much business meaning must be preserved across buyers, storefronts, products, rules, orders, integrations, and custom data. Standard Service can work well when the structure is clean, supported, and merchant-led review is realistic. Managed Service is safer when the migration fits standard service capability but execution and review coordination should be handled by Next-Cart. Custom Service is needed when the expected result requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or broader bespoke handling.
 
-Use Demo Migration results to test the approach before full execution. If the sample shows that AmeriCommerce-specific logic needs more than standard service capability, review the findings with Next-Cart through Live Chat before continuing with the same migration path.
+A strong approach decision should come from representative evidence, not from record volume alone. The merchant should use preparation and Demo Migration to confirm whether AmeriCommerce can receive the data in a way that preserves the operating model the future store depends on.
+
+Use Demo Migration and Live Chat to review representative AmeriCommerce buyer, product, storefront, pricing, order, integration, and custom-data scenarios before committing to the full migration approach.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
 **Is Standard Service enough for an AmeriCommerce migration?**
 
-Standard Service can be enough when the source data is clean, the catalog structure is predictable, and no custom interpretation is needed for B2B buyers, portals, pricing rules, subscriptions, integrations, or multi-store behavior. If the project depends on those layers, Demo Migration should be reviewed before assuming Standard Service is sufficient.
+Standard Service can be enough when the source data is clean, the expected AmeriCommerce structure fits standard service capability, and the merchant can lead review and execution confidently. If buyer rules, storefront boundaries, product structures, integrations, or custom fields require tailored interpretation, the project should be reviewed for Custom Service.
 
-**When should an AmeriCommerce project use Managed Service?**
+**When should Managed Service be chosen instead of Standard Service?**
 
-Managed Service is suitable when the migration can be handled through standard service capability but the customer wants Next-Cart to perform the migration process. It is useful for projects with meaningful data volume, several store layers, or purchased Standard Add-ons, as long as the project does not require custom transformation.
+Managed Service is safer when the migration still fits standard service capability but the merchant wants Next-Cart to perform the migration and coordinate execution. It is useful when review burden, launch timing, record volume, and Demo Migration interpretation require more support, but customization is not needed.
 
-**When does an AmeriCommerce migration need Custom Service?**
+**Does Managed Service include custom AmeriCommerce handling?**
 
-Custom Service is needed when the project requires customization or bespoke handling, such as Custom Platform source data, custom fields, outside-system identifiers, tailored product transformation, complex B2B portal logic, subscription handling, integration-owned data, or Add-on modification beyond supported behavior.
+No. Managed Service uses standard service capability and purchased Add-ons. If the project needs modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or other bespoke handling, it should move into Custom Service review.
 
-**Can Add-ons help with AmeriCommerce migration approach?**
+**Where do Add-ons fit in an AmeriCommerce migration approach?**
 
-Yes. Add-ons can help when the need involves filtering, mapping, or data configuration. For example, the Data Filter Add-on can support selected-record migration, while Advanced Data Mapping or Advanced Data Configure can support supported mapping and data-configuration needs. Broader custom handling remains Custom Service.
+Add-ons can help with filtering, mapping, or data configuration when the requirement fits available supported behavior. They are useful when the merchant has a defined adjustment need, such as selecting data, mapping supported fields, or configuring selected values before migration. Add-ons do not replace Custom Service when the expected result requires customization.
 
-**Does Custom Service mean Next-Cart automatically performs the migration?**
+**What should Demo Migration prove before Full Migration?**
 
-No. Custom Service means customization or bespoke handling is required. Migration management is included only when it is part of the final plan. A customer may purchase custom handling and still self-perform the migration process unless migration management is added.
+Demo Migration should prove whether representative buyer groups, storefront contexts, product structures, pricing rules, order history, integration-sensitive records, and custom data can be interpreted in the expected AmeriCommerce direction. It should not be judged only by whether basic records appear in the Target Platform.
