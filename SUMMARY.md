@@ -157,7 +157,7 @@
   * [AmeriCommerce Validation Priorities](platform-strategy-hubs/americommerce-migration-hub/americommerce-validation-priorities.md)
   * [AmeriCommerce Migration Pitfalls and Prevention](platform-strategy-hubs/americommerce-migration-hub/americommerce-migration-pitfalls-and-prevention.md)
 * [Bagisto Migration Hub](platform-strategy-hubs/bagisto-migration-hub/README.md)
-  * [Page 1](platform-strategy-hubs/bagisto-migration-hub/page-1.md)
+  * [Bagisto Platform Overview](platform-strategy-hubs/bagisto-migration-hub/bagisto-platform-overview.md)
   * [Bagisto Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/bagisto-migration-hub/bagisto-fit-ideal-and-non-ideal-profiles.md)
   * [Bagisto Data Model Differences](platform-strategy-hubs/bagisto-migration-hub/bagisto-data-model-differences.md)
   * [Bagisto Constraints and Risks](platform-strategy-hubs/bagisto-migration-hub/bagisto-constraints-and-risks.md)
