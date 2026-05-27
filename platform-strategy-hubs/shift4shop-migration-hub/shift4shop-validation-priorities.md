@@ -1,270 +1,238 @@
 # Shift4Shop Validation Priorities
 
-Migrating to Shift4Shop is not finished when records appear in the new admin area. The migrated store must prove that products sell correctly, customers see the right information, orders preserve usable history, storefront routes remain discoverable, and operational workflows still support the business.
+Migrating to Shift4Shop is not complete when records appear in the new store. The migrated result must prove that products can be found and purchased, customers keep useful account context, orders remain understandable, high-value routes are protected, and operational dependencies are clear enough for launch.
 
-Validation should therefore focus on business outcomes, not record counts alone. A product can exist but fail through incomplete options, missing images, inaccurate inventory, incorrect price behavior, or weak storefront presentation. A customer can exist but lose pricing, group, address, or order-context meaning. An order can migrate but become difficult to interpret if payment, shipping, tax, discount, or fulfillment details are not checked together.
+Validation should therefore test business behavior, not record presence alone. A product can exist but fail because options, inventory, images, category placement, pricing, or search visibility are incomplete. A customer can exist but lose account, pricing, address, or order-history meaning. An order can migrate with the right total but still be hard for staff to interpret if payment, shipping, tax, discount, status, or fulfillment context is fragmented.
 
-For Shift4Shop, the strongest validation approach tests the migrated result through the same paths customers, staff, and search engines will rely on after launch.
+For Shift4Shop, validation should follow the paths that buyers, staff, and search engines will rely on after launch. The strongest validation sample includes ordinary records, revenue-critical records, and edge cases that reveal whether the migrated store behaves correctly inside Shift4Shop’s hosted commerce environment.
 
 ### What Validation Is Trying to Prove <a href="#what-validation-is-trying-to-prove" id="what-validation-is-trying-to-prove"></a>
 
-Shift4Shop validation should prove that migrated data works inside the hosted platform’s selling, management, and storefront environment. The goal is not only to confirm that products, customers, orders, categories, pages, and other records were transferred. The goal is to confirm that the transferred data supports the expected commercial behavior.
+Shift4Shop validation should prove that migrated data can support the future store’s selling model. The question is not only whether products, customers, orders, categories, pages, and other records migrated. The question is whether those records work together as a usable storefront and operating environment.
 
-A strong validation pass should answer questions such as:
+A complete validation pass should answer practical questions:
 
-* Can customers find the right products through categories, navigation, search, and high-value URLs?
-* Do product pages show the correct names, descriptions, images, options, pricing, stock, and purchase rules?
-* Do customer accounts, addresses, groups, and B2B-related distinctions still support the intended buying experience?
-* Can staff read order history in a way that supports service, fulfillment, refund review, and customer communication?
-* Do discounts, coupons, tax behavior, shipping context, payment references, and inventory meaning remain understandable?
-* Are SEO titles, meta data, redirects, and important content pages ready for launch review?
-* Are integration-dependent workflows clearly separated from data that was migrated directly into Shift4Shop?
+| Validation question                                                                                              | Why it matters in Shift4Shop                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Can buyers find important products through categories, navigation, search, and high-value URLs?                  | Catalog data is useful only when the storefront helps customers reach the right products.                               |
+| Do product pages show the correct names, descriptions, images, options, pricing, stock, and purchase conditions? | Product records must support real buying decisions, not only admin completeness.                                        |
+| Do customer accounts preserve useful group, address, tax, pricing, and order-history context?                    | Retail, wholesale, and repeat buyers may depend on different account behavior.                                          |
+| Can staff read historical orders with enough payment, shipping, tax, discount, and status context?               | Order history should remain useful for support, fulfillment review, refund review, and customer communication.          |
+| Are SEO fields, redirects, internal links, and content pages ready for launch review?                            | The new store should not lose visibility because important routes or pages were not checked.                            |
+| Are integration-owned fields and custom source behavior separated from native Shift4Shop data?                   | External workflows may need configuration, reconnection, or Custom Service review rather than ordinary data validation. |
 
-When validation answers these questions clearly, the merchant can decide whether the migration result is launch-ready, needs configuration adjustment, requires Re-Migration, or should be escalated into Custom Service review.
+When validation answers these questions clearly, the merchant can decide whether the Shift4Shop result is launch-ready, needs configuration adjustment, needs Re-Migration for selected records, or requires Custom Service review.
 
-### Priority 1: Product and Catalog Structure <a href="#priority-1-product-and-catalog-structure" id="priority-1-product-and-catalog-structure"></a>
+### Product and Catalog Validation <a href="#product-and-catalog-validation" id="product-and-catalog-validation"></a>
 
 #### What to Validate <a href="#what-to-validate" id="what-to-validate"></a>
 
-Product validation should confirm that migrated products are not only present but commercially usable. Review product names, SKUs, descriptions, images, categories, pricing, sale pricing, inventory status, visibility, options, variants, downloadable or service-style product behavior where relevant, related products, and product-level SEO fields.
+Product validation should confirm that migrated products are commercially usable inside Shift4Shop. Review product names, SKUs, descriptions, short and long content, images, categories, pricing, sale pricing, inventory status, visibility, options, related products, downloadable or service-style product behavior where relevant, and product-level SEO fields.
 
-Shift4Shop is often chosen because many selling features are available inside the platform. That makes product validation broader than checking whether a product record exists. Merchants should test whether product structure supports the way customers choose, compare, and buy items.
+Shift4Shop is often selected because many commerce features are available within the hosted platform. That makes product validation broader than checking whether a product record exists. The product must support how customers compare, choose, configure, and buy.
 
 #### Strong Validation Samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
 
-Use sample products that expose real catalog complexity, such as:
+Use product samples that reveal the store’s real catalog behavior:
 
-* a simple product with clean pricing and inventory
-* a product assigned to multiple categories
-* a product with several images and detailed descriptions
-* a product with options or variants that affect selection or pricing
-* a product with sale pricing, quantity pricing, or wholesale logic
-* a product with low stock, out-of-stock status, or inventory-sensitive purchasing behavior
-* a high-traffic product with important SEO fields and URLs
-* a product that depends on custom fields, app data, or source-specific attributes
-
-The sample should include best-selling products, unusual products, recently created products, and older products that have accumulated operational history.
+| Sample type                                               | What it proves                                                                            |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Best-selling product                                      | Confirms that the highest-value buying path works correctly.                              |
+| Product assigned to multiple categories                   | Proves that catalog placement and discovery do not depend on one category path only.      |
+| Product with options or variants                          | Tests whether customer selection, pricing, stock, and display behavior remain usable.     |
+| Product with sale, quantity, or customer-specific pricing | Reveals whether price behavior works under realistic buyer conditions.                    |
+| Low-stock or out-of-stock product                         | Confirms inventory-sensitive purchase behavior and messaging.                             |
+| Product with important SEO fields or old URL value        | Tests route, metadata, and search-continuity readiness.                                   |
+| Product with custom source attributes                     | Shows whether custom fields migrated as useful information or need deeper interpretation. |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
 
-Product validation often misses selection logic. A product may appear correctly in the admin area while its options, images, category placement, visibility, or pricing behavior does not support the expected storefront experience. Another common gap is treating custom product attributes from the Source Platform as if they automatically become native Shift4Shop product behavior. If a field influenced filtering, display, quoting, manufacturing, or fulfillment before migration, it should be checked as business logic, not only as text.
+Product validation often misses selection behavior. A product may look complete in the admin area while its options, images, category placement, visibility, or price behavior do not support the expected storefront experience. Another common gap is assuming that source-side custom attributes become native Shift4Shop behavior automatically. If a field influenced filtering, display, quoting, fulfillment, or staff review before migration, it should be validated as business meaning, not as plain text.
 
-### Priority 2: Category, Navigation, and Product Discovery <a href="#priority-2-category-navigation-and-product-discovery" id="priority-2-category-navigation-and-product-discovery"></a>
+### Category, Navigation, and Discovery Validation <a href="#category-navigation-and-discovery-validation" id="category-navigation-and-discovery-validation"></a>
 
 #### What to Validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
 
-Category validation should confirm that products sit in the right browse structure and that customers can reach important products naturally. Review category hierarchy, product assignment, menu placement, featured or promotional category behavior, internal links, landing pages, and search/discovery paths.
+Category validation should prove that products are reachable through the storefront structure customers will use. Review category hierarchy, product assignment, menu placement, internal links, featured categories, search behavior, landing pages, and high-value category routes.
 
-Shift4Shop migration quality depends on whether catalog structure makes sense in the new storefront. Source Platform category trees do not always translate into the same navigation, merchandising, or SEO meaning after migration.
+Source Platform category trees do not always carry the same storefront, merchandising, or SEO meaning after migration. A category can be present but still fail if the new navigation hides it, if products are assigned incorrectly, or if the route strategy breaks valuable discovery paths.
 
 #### Strong Validation Samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
 
-Choose categories that represent different discovery patterns:
+Choose categories that expose different discovery patterns:
 
-* top-level categories used in main navigation
-* deep categories with multiple parent-child levels
-* high-revenue categories
-* seasonal or promotional categories
-* categories that contain products with options, variants, or quantity pricing
-* categories whose URLs rank in organic search
-* categories that were structured differently in the Source Platform
-
-Testing should include both admin review and storefront browsing. A category that looks organized internally but creates weak customer discovery still needs attention.
+| Sample type                                            | What it proves                                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Top-level navigation category                          | Confirms that major browsing paths are visible and usable.                            |
+| Deep category with multiple levels                     | Tests whether hierarchy remains understandable after migration.                       |
+| High-revenue category                                  | Protects a commercially important path before launch.                                 |
+| Seasonal or promotional category                       | Shows whether temporary or campaign-oriented structure needs cleanup.                 |
+| Category with option-heavy or quantity-priced products | Reveals whether browsing still leads to products with more complex purchase behavior. |
+| Category with organic search value                     | Supports SEO and redirect planning for high-value routes.                             |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
 
-Merchants often check whether categories were created but do not confirm that the storefront navigation reflects the intended selling hierarchy. Another missed gap is assuming that source categories, search filters, menus, and landing pages were all the same kind of structure. If the Source Platform used custom navigation, app-driven filters, or manually curated landing pages, those elements may need configuration or Custom Service review rather than ordinary record validation.
+Merchants often check whether categories exist but do not test whether navigation reflects the intended selling hierarchy. Another missed gap is treating source categories, menus, landing pages, and search filters as the same structure. If the Source Platform used custom navigation, manually curated pages, or app-driven filters, some discovery behavior may need configuration or Custom Service review.
 
-### Priority 3: Customer Accounts, Groups, and B2B Behavior <a href="#priority-3-customer-accounts-groups-and-b2b-behavior" id="priority-3-customer-accounts-groups-and-b2b-behavior"></a>
+### Customer Accounts, Groups, and Pricing Context <a href="#customer-accounts-groups-and-pricing-context" id="customer-accounts-groups-and-pricing-context"></a>
 
 #### What to Validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
 
-Customer validation should prove that account records remain useful for login, service, segmentation, pricing, and order-history review. Check names, emails, addresses, company details, customer groups, tax-exempt status, customer-specific pricing context, wholesale or B2B grouping, and relationship to order history.
+Customer validation should prove that account records remain useful for login, service, segmentation, pricing, tax treatment, and order-history review. Check names, emails, addresses, company details, customer groups, tax-exempt status, customer-specific pricing context, wholesale or B2B distinctions, and links to historical orders.
 
-For B2B or mixed B2B/B2C merchants, customer validation is one of the most important launch-readiness checks. Shift4Shop can support customer-type and wholesale selling patterns, but the migrated result must prove that buyers see the right products, pricing, and account context.
+For B2B or mixed B2B/B2C stores, this priority is especially important. Shift4Shop can support customer-type and wholesale selling patterns, but the migrated result must prove that the right buyers see the right account context and price behavior after migration.
 
 #### Strong Validation Samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
 
 Use customer samples that represent different business relationships:
 
-* a standard retail customer
-* a wholesale customer
-* a tax-exempt customer
-* a customer with multiple addresses
-* a customer with several historical orders
-* a customer linked to special pricing or quantity-based pricing
-* a customer whose account type affects product visibility or checkout expectations
-* an older account with incomplete or inconsistent source data
-
-Where possible, validation should include storefront/account review, not only admin review.
+| Sample type                               | What it proves                                                       |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| Standard retail customer                  | Confirms ordinary account and order-history behavior.                |
+| Wholesale or B2B customer                 | Tests customer group, pricing, visibility, and account context.      |
+| Tax-exempt customer                       | Reveals whether tax treatment needs configuration review.            |
+| Customer with multiple addresses          | Tests address completeness and account usability.                    |
+| Customer with several historical orders   | Confirms whether order links remain useful for service review.       |
+| Customer affected by special pricing      | Shows whether buyer-specific pricing can be validated as an outcome. |
+| Older account with incomplete source data | Reveals cleanup needs before launch.                                 |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
 
-The most common miss is validating customers as contact records only. In many source stores, customer records carry segmentation, pricing, permission, tax, or account-management meaning. If that meaning is not preserved or deliberately reconfigured in Shift4Shop, the migration can look complete while wholesale buyers, repeat customers, or customer-service teams lose critical context.
+The most common miss is validating customers as contact records only. In many stores, customer records also carry pricing, segmentation, tax, permission, reorder, or support meaning. If that meaning is not preserved or deliberately reconfigured, the migration can look complete while wholesale buyers, repeat customers, or customer-service teams lose essential context.
 
-### Priority 4: Pricing, Discounts, Coupons, and Purchase Rules <a href="#priority-4-pricing-discounts-coupons-and-purchase-rules" id="priority-4-pricing-discounts-coupons-and-purchase-rules"></a>
+### Orders, Payments, Shipping, Tax, and Fulfillment Validation <a href="#orders-payments-shipping-tax-and-fulfillment-validation" id="orders-payments-shipping-tax-and-fulfillment-validation"></a>
 
 #### What to Validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
 
-Pricing validation should test base price, sale price, quantity price, customer-specific price behavior, discounts, coupons, tax treatment, and any purchase conditions that affect the final checkout result. For B2B merchants, validation should include customer type, wholesale price, minimum quantity, bulk price, or special quote context where those behaviors are part of the expected operating model.
+Order validation should prove that historical orders remain readable and useful inside Shift4Shop. Review order numbers, dates, customer links, line items, quantities, product references, discounts, coupons, taxes, shipping methods, payment references, totals, order status, fulfillment notes, tracking references, and refund or cancellation context where available.
 
-Pricing should be validated as a customer-facing result. The question is not only whether price fields migrated, but whether the right buyer sees the right price under the right conditions.
+Order history does not need to reproduce every operational workflow from the Source Platform exactly, but it must remain interpretable. Staff should be able to answer customer questions, review past purchases, understand payment and shipping context, and identify whether an order requires external system review.
 
 #### Strong Validation Samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
 
-Use product and customer combinations that reveal pricing differences:
+Use order samples that reveal different operational outcomes:
 
-* retail customer viewing a standard product
-* wholesale customer viewing the same product
-* product with quantity-based price levels
-* product with active sale pricing
-* product affected by a coupon or discount rule
-* tax-exempt customer placing or reviewing an order
-* product or order with shipping-related price implications
-* older order with discount, tax, payment, and shipping values
-
-A strong sample should include both ordinary purchases and edge cases that previously created support questions.
+| Sample type                                          | What it proves                                                                                          |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Recent completed order                               | Confirms current order structure and customer link behavior.                                            |
+| Older order with legacy data                         | Reveals whether historical records remain interpretable.                                                |
+| Discounted or coupon-based order                     | Tests promotion, subtotal, tax, and total context.                                                      |
+| Tax-exempt or tax-sensitive order                    | Confirms whether tax details are usable for review.                                                     |
+| Order with multiple shipments or tracking references | Reveals fulfillment and shipping-context preservation.                                                  |
+| Refunded, canceled, or partially adjusted order      | Tests whether non-standard order history remains understandable.                                        |
+| Order tied to an external system                     | Shows whether ERP, accounting, shipping, marketplace, or payment references need reconnection planning. |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
 
-Merchants often validate product price in isolation but do not test buyer-specific outcomes. A base price can be correct while customer-group pricing, quantity pricing, coupon behavior, or tax treatment is wrong. If pricing logic came from a Source Platform extension, custom field, ERP integration, or manual sales process, it should not be assumed to migrate as standard Shift4Shop behavior.
+Merchants often validate order totals but not order meaning. A total may look correct while line items, discounts, shipping, payment references, tax details, or fulfillment notes are incomplete. Another common miss is expecting historical order records to behave like active orders. Validation should separate history preservation from workflows that need configuration, integration, or external-system review after migration.
 
-### Priority 5: Orders, Payments, Shipping, Tax, and Fulfillment Context <a href="#priority-5-orders-payments-shipping-tax-and-fulfillment-context" id="priority-5-orders-payments-shipping-tax-and-fulfillment-context"></a>
+### Storefront Content, SEO, and Route Validation <a href="#storefront-content-seo-and-route-validation" id="storefront-content-seo-and-route-validation"></a>
 
 #### What to Validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
 
-Order validation should confirm that historical orders remain readable and operationally useful. Review order numbers, order dates, statuses, line items, product references, customer links, billing and shipping addresses, taxes, discounts, coupons, shipping methods, payment references, tracking details, fulfillment notes, and refund or cancellation context where available.
+Storefront and SEO validation should confirm that important pages, metadata, routes, redirects, and internal links support launch readiness. Review product URLs, category URLs, CMS Pages, policy pages, buying guides, high-value landing pages, meta titles, meta descriptions, image alt context where available, redirects, canonical route decisions, and navigation links.
 
-The purpose is not to make old orders behave like newly placed orders in every respect. The purpose is to ensure that staff can interpret order history for customer service, reporting, fulfillment reference, and operational continuity.
+Shift4Shop includes website-building and SEO capabilities, but migrated content still needs deliberate review. The new store should not inherit weak source structure blindly, and it should not lose high-value routes without redirect or replacement planning.
 
 #### Strong Validation Samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
 
-Choose order samples that cover different operational states:
+Choose samples that matter commercially and organically:
 
-* completed order with standard payment and shipping
-* pending or partially fulfilled order
-* refunded, canceled, or adjusted order
-* order with discount or coupon usage
-* order with tax exemption or unusual tax treatment
-* order with multiple shipments or tracking details
-* order linked to a wholesale or customer-group buyer
-* older order that references products, SKUs, or customers that changed over time
-
-Sample orders should include both recent and older transactions because older records often reveal legacy formatting or source-data inconsistencies.
+| Sample type                                             | What it proves                                                   |
+| ------------------------------------------------------- | ---------------------------------------------------------------- |
+| Top organic product page                                | Protects revenue and search visibility.                          |
+| Top organic category page                               | Confirms route, metadata, and product-discovery continuity.      |
+| Policy or trust page                                    | Supports checkout confidence and customer-service expectations.  |
+| Buying guide or informational page                      | Tests content migration beyond ordinary products and categories. |
+| Page linked from ads, email, partners, or documentation | Prevents campaign and referral traffic loss.                     |
+| Old route requiring redirect planning                   | Confirms that high-value URLs are not abandoned.                 |
+| Page with source-specific layout behavior               | Shows whether theme or content review is needed.                 |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
 
-Order validation often fails when merchants check totals without checking context. A total can match while line-item tax, discount allocation, payment reference, shipping method, tracking, or customer link is incomplete. Another common miss is expecting migrated historical orders to behave exactly like new Shift4Shop orders. Historical data should be validated for continuity and interpretation; future operational behavior should be validated through current Shift4Shop configuration and launch testing.
+SEO and content review are often delayed until after product and order checks. That creates launch risk when important URLs, metadata, redirects, internal links, or informational pages are missing. Another missed gap is assuming source layouts, widgets, embedded code, or app-generated content will appear the same way after migration. Those items may need theme, content, or Custom Service review.
 
-### Priority 6: Storefront Content, SEO Fields, and Routes <a href="#priority-6-storefront-content-seo-fields-and-routes" id="priority-6-storefront-content-seo-fields-and-routes"></a>
+### Integrations, Custom Fields, and Source-Specific Logic <a href="#integrations-custom-fields-and-source-specific-logic" id="integrations-custom-fields-and-source-specific-logic"></a>
 
 #### What to Validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
 
-Storefront validation should confirm that important pages, URLs, SEO fields, content blocks, images, internal links, and high-value landing pages support customer discovery and search continuity. Review product URLs, category URLs, page URLs, meta titles, meta descriptions, redirects, canonical route decisions, navigation links, policy pages, informational pages, and any content that supports trust or conversion.
+Integration and custom-field validation should separate migrated records from behavior controlled by external systems, apps, custom code, or Source Platform-specific logic. Review custom product fields, customer fields, order metadata, ERP or accounting identifiers, shipping references, tax-service references, marketplace identifiers, CRM fields, quote workflow context, and any source-side data staff rely on for manual review.
 
-Shift4Shop includes SEO and website-building capabilities, but migrated content still needs launch review. The new storefront should not inherit weak source structure blindly, and it should not lose high-value pages without redirect or replacement planning.
+This priority is especially important when the source store used extensions, integrations, or custom development to create business meaning that was not native platform data.
 
 #### Strong Validation Samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
 
-Choose samples that matter commercially and organically:
+Use samples that reveal dependency boundaries:
 
-* top organic product pages
-* top organic category pages
-* policy pages customers review before purchase
-* buying guides or informational pages
-* pages linked from ads, emails, or partner sites
-* pages with custom titles, descriptions, or URLs
-* old URLs that need redirect planning
-* pages that used custom templates or source-specific layout behavior
-
-Validation should compare admin fields, storefront output, and route behavior.
+| Sample type                                                         | What it proves                                                                |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Product with custom fields used by staff                            | Shows whether the field remains visible and meaningful after migration.       |
+| Customer with external account identifiers                          | Tests whether connected-system references are preserved or need reconnection. |
+| Order linked to ERP, accounting, shipping, or marketplace workflows | Separates migrated order history from external workflow responsibility.       |
+| Record affected by third-party pricing or tax logic                 | Reveals whether the outcome is native, configured, or externally owned.       |
+| Data from a Custom Platform source                                  | Tests whether source interpretation needs Custom Service review.              |
+| Record whose meaning existed outside the source database            | Prevents false confidence from visible but incomplete data.                   |
 
 #### What Often Gets Missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
 
-Merchants often validate products and orders while leaving SEO and content until late. That creates launch risk when high-value URLs, metadata, redirects, navigation links, or content pages are missing or poorly mapped. A second missed gap is assuming that source page layouts, custom code, widgets, or app-generated content will appear the same way after migration. Those items may require theme, content, or Custom Service review.
-
-### Priority 7: Integrations, Custom Fields, and Source-Specific Logic <a href="#priority-7-integrations-custom-fields-and-source-specific-logic" id="priority-7-integrations-custom-fields-and-source-specific-logic"></a>
-
-#### What to Validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Integration and custom-field validation should separate migrated data from behavior that depends on external systems, apps, custom code, or Source Platform-specific logic. Review custom product fields, customer fields, order metadata, ERP or accounting identifiers, shipping-system references, tax-service references, marketplace identifiers, CRM fields, subscription context, quote workflows, and any source-specific data used by staff.
-
-This priority is especially important when the source store used integrations to create business meaning that was not native platform data.
-
-#### Strong Validation Samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
-
-Use samples that reveal dependency boundaries:
-
-* product with custom fields used by fulfillment or sales teams
-* customer with external account or CRM identifiers
-* order linked to an ERP, accounting, shipping, or marketplace workflow
-* product or customer affected by a third-party pricing or tax system
-* data imported from a Custom Platform source
-* record whose business meaning existed outside the Source Platform database
-* record that staff rely on for manual review after migration
-
-The sample should make clear what migrated into Shift4Shop, what requires configuration, and what remains dependent on external systems.
-
-#### What Often Gets Missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
-
-The biggest miss is treating integration-owned behavior as ordinary platform data. A field may migrate as a note, attribute, or reference, but that does not mean the workflow behind it has been rebuilt. If custom fields, external identifiers, or app-generated behavior determine pricing, fulfillment, reporting, or customer access, the migration result should be interpreted with Custom Service boundaries in mind.
+The biggest miss is treating integration-owned behavior as ordinary platform data. A field may migrate as a note, attribute, or reference, but that does not mean the workflow behind it has been rebuilt. If custom fields, external identifiers, or app-generated behavior determine pricing, fulfillment, reporting, or customer access, validation should identify the boundary between migrated data and functionality that requires configuration, reconnection, or Custom Service review.
 
 ### What Makes a Strong Validation Sample <a href="#what-makes-a-strong-validation-sample" id="what-makes-a-strong-validation-sample"></a>
 
-A strong Shift4Shop validation sample is representative, not merely convenient. It should include records that expose the store’s real selling model, operational history, and launch risk.
+A strong Shift4Shop validation sample is representative, not merely large. It should include records that expose the store’s ordinary selling model, highest-value revenue paths, and operational edge cases.
 
-A useful sample usually includes:
+| Sample group             | Include records that show                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Products                 | Best sellers, option-heavy products, discounted products, out-of-stock products, products with custom fields, and products with important routes. |
+| Categories and discovery | Main navigation categories, deep categories, high-revenue categories, promotional categories, and categories with search value.                   |
+| Customers                | Retail customers, wholesale customers, tax-exempt customers, customers with multiple addresses, and accounts with meaningful order history.       |
+| Orders                   | Recent orders, old orders, discounted orders, tax-sensitive orders, refunded or canceled orders, and integration-linked orders.                   |
+| Content and SEO          | Product routes, category routes, policy pages, high-value landing pages, buying guides, redirects, and internal links.                            |
+| Operational dependencies | Records connected to custom fields, external identifiers, third-party systems, or Custom Platform source logic.                                   |
 
-* best-selling products and low-volume edge-case products
-* simple products and complex products with options or pricing differences
-* retail customers and B2B or wholesale customers
-* customers with different account states, addresses, and order histories
-* orders with normal, discounted, refunded, tax-exempt, or shipping-sensitive behavior
-* high-value categories, pages, and URLs
-* records connected to integrations, custom fields, or external identifiers
-* recently created records that may be used for Recent Data Migration planning
-* older records that reveal legacy data inconsistencies
+A large but easy Demo Migration sample can create false confidence. A smaller sample that includes meaningful edge cases is more useful because it shows whether the migration path can preserve the store’s most important business meaning.
 
-The Demo Migration should be reviewed through this sample logic. A large but easy sample can create false confidence. A smaller but revealing sample is more useful because it shows whether the migration path can preserve the store’s most important business meaning.
+### What Often Gets Missed Across Shift4Shop Validation <a href="#what-often-gets-missed-across-shift4shop-validation" id="what-often-gets-missed-across-shift4shop-validation"></a>
 
-### What Often Gets Missed Across Shift4Shop Migration <a href="#what-often-gets-missed-across-shift4shop-migration" id="what-often-gets-missed-across-shift4shop-migration"></a>
-
-Across Shift4Shop migrations, validation gaps usually come from checking presence instead of behavior. The records may be visible, but the store may still fail important business tests.
+Across Shift4Shop migrations, validation gaps usually come from checking presence instead of behavior.
 
 Common missed gaps include:
 
-* product options or variants that appear incomplete on the storefront
-* quantity pricing or customer-specific pricing that is not tested with the right buyer profile
-* category records that exist but do not create useful navigation
+* product options or selection paths that appear incomplete on the storefront
+* customer-specific or quantity-based pricing that is not tested with the right buyer profile
+* category records that exist but do not produce useful navigation
 * old URLs that are not included in redirect planning
 * content pages that migrate without layout, internal-link, or trust-building context
 * customer groups that exist but do not reproduce buyer-specific outcomes
 * historical orders that preserve totals but lose operational context
 * custom fields that migrate without the workflow they supported
 * integration references that are present but not usable by connected systems
-* source-specific assumptions that are not checked against Shift4Shop’s current behavior
+* old source assumptions, including 3DCart-era records or references, that are not checked against current Shift4Shop behavior
 
-These gaps are easier to correct before launch than after customers, staff, and search engines begin relying on the new store.
+These gaps are easier to correct before launch than after buyers, staff, and search engines begin relying on the new store.
 
 ### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
 
-Validation outcomes should be interpreted in three practical categories.
+Validation results should be interpreted by pattern, not by isolated surprise. One failed sample may indicate a configuration issue. Repeated failures across the same product type, customer group, pricing rule, content structure, custom field, or external workflow point to a deeper pattern.
 
-| Outcome                    | Meaning                                                                                                                                               | Recommended Action                                                                                                                            |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Pass                       | The record works as expected inside Shift4Shop and supports the intended business use.                                                                | Keep the result and continue broader validation.                                                                                              |
-| Needs configuration review | The data migrated, but Shift4Shop settings, theme behavior, navigation, pricing, shipping, tax, content, or storefront presentation needs adjustment. | Correct configuration and recheck the affected sample.                                                                                        |
-| Needs migration review     | The migrated result does not preserve required meaning, mapping, custom-field interpretation, filtering, or source-specific logic.                    | Review the migration setup, consider Re-Migration where suitable, or escalate to Custom Service if customization or modification is required. |
+| Outcome                     | What it means                                                                                                                                                                                   | Recommended action                                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Pass                        | The record works as expected inside Shift4Shop and supports the intended business use.                                                                                                          | Keep the result and continue broader validation.                                                            |
+| Needs configuration review  | The data migrated, but Shift4Shop settings, theme behavior, navigation, pricing, shipping, tax, content, or storefront presentation needs adjustment.                                           | Correct configuration and recheck the affected sample.                                                      |
+| Needs data cleanup          | The migrated result reflects inconsistent, obsolete, duplicate, or poorly classified source data.                                                                                               | Clean the source or target-side data plan before treating the issue as a migration failure.                 |
+| Needs Add-on review         | Filtering, mapping, or data configuration requirements may need a Standard Add-on, Tailored Add-on, or Custom Add-on depending on the required outcome.                                         | Review whether available Add-on capability fits or whether the requirement should move into Custom Service. |
+| Needs Custom Service review | The issue involves customization, modification, Custom Platform handling, custom migration logic adjustment, custom fields, or integration-owned behavior beyond standard migration capability. | Escalate the pattern for Custom Service review before launch.                                               |
+| Not launch-ready            | The migrated store fails important buyer, staff, route, pricing, order, or operational tests.                                                                                                   | Delay launch until the affected pattern is corrected and retested.                                          |
 
-A single failed sample does not always mean the entire migration is wrong. It means the affected pattern should be traced. If all failures come from one product type, customer group, pricing rule, source field, or integration dependency, the correction may be focused. If failures appear across unrelated samples, the migration approach or preparation may be too light.
+Validation should not be used only to approve or reject the migration result. It should identify what kind of correction is needed: configuration, data cleanup, Add-on review, Re-Migration, or Custom Service planning.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shift4Shop validation should prove that the migrated store can function as a real selling environment, not only as a populated database. Products, categories, customers, prices, orders, content, routes, and external dependencies should be tested through the way buyers and staff will use them after launch.
+Shift4Shop validation should prove that the migrated store can function as a real selling environment. Products, categories, customers, prices, orders, content, routes, and operational dependencies should be tested through the way buyers and staff will use them after launch.
 
-The best validation process starts with representative samples, separates configuration issues from migration issues, and treats custom or integration-dependent behavior as business logic that may need deeper review. When validation is handled this way, merchants can decide with more confidence whether the Shift4Shop store is ready for launch, needs targeted correction, or requires Custom Service planning.
+A strong validation process uses representative samples, separates configuration issues from migration issues, and treats custom or integration-dependent behavior as business logic that may need deeper review. When validation is handled this way, merchants can decide whether the Shift4Shop store is ready for launch, needs targeted correction, or requires Custom Service planning.
 
-Before launch, review the Demo Migration and Full Migration results with samples that reflect your real catalog, buyer types, pricing rules, historical orders, important URLs, and operational dependencies. If a migrated result looks complete but does not behave correctly in Shift4Shop, contact Next-Cart through Live Chat so the issue can be reviewed before it becomes a launch problem.
+Before launch, review Demo Migration and Full Migration results with samples that reflect your real catalog, buyer types, pricing rules, historical orders, important URLs, and operational dependencies. If a migrated result looks complete but does not behave correctly in Shift4Shop, contact Next-Cart through Live Chat so the issue can be reviewed before it becomes a launch problem.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 

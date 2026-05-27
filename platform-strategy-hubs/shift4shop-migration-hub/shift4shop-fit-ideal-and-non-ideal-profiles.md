@@ -1,265 +1,200 @@
 # Shift4Shop Fit: Ideal and Non-Ideal Profiles
 
-Shift4Shop is often a practical Target Platform for merchants that want a hosted e-commerce environment with broad built-in commerce coverage, storefront management, product and order administration, marketing tools, SEO support, shipping workflows, payment-related capabilities, themes, integrations, and support resources. That breadth can make Shift4Shop attractive to businesses that want less technical ownership than a self-hosted platform while still keeping meaningful control over how products are presented and sold.
+Shift4Shop is usually considered by merchants that want a hosted e-commerce platform with broad built-in commerce coverage. It can be a practical Target Platform when the future store should combine storefront management, catalog administration, order handling, marketing, SEO, shipping, payment-related workflows, integrations, and support resources without the same infrastructure burden as a self-hosted environment.
 
-Fit should not be judged only by whether Shift4Shop can hold the store’s basic records. A better fit question is whether Shift4Shop can support the business model the merchant wants to run after migration. Product choices, category-led discovery, customer treatment, B2B pricing, promotions, shipping expectations, payment context, high-value URLs, and integration dependencies all affect whether the platform is a strong destination.
+Fit should be judged by the operating model the merchant wants to run after migration. A simple store may value Shift4Shop because it reduces technical ownership. A catalog-led business may value it because products, categories, content, customer groups, pricing rules, and promotions can be planned inside a more packaged platform environment. A B2B or hybrid B2B/B2C business may value it when buyer treatment is deliberate enough to configure, migrate, and validate.
 
-Shift4Shop tends to fit best when the merchant can clearly explain how the future store should operate. It becomes a weaker or higher-risk fit when the source store carries undocumented product logic, unclear B2B rules, custom pricing arrangements, integration-owned workflows, or legacy assumptions that the business expects the Target Platform to resolve automatically.
+The practical fit question is direct: _**does Shift4Shop match the way the merchant wants to sell, manage products, treat customers, preserve storefront value, and operate after launch?**_
+
+If yes, Shift4Shop can be a strong destination. If the answer depends on undocumented source behavior, custom workflows, unclear product logic, or integration ownership that nobody can explain, fit requires deeper review before the migration path is treated as straightforward.
 
 ### What Makes Shift4Shop a Strong Fit <a href="#what-makes-shift4shop-a-strong-fit" id="what-makes-shift4shop-a-strong-fit"></a>
 
-Shift4Shop is usually strongest when its hosted model and built-in commerce structure solve real operational needs rather than simply replacing one platform name with another.
+Shift4Shop is strongest when its hosted model and built-in commerce structure solve real operating problems. The platform should not be chosen only because it can receive products, customers, and orders. It is a better fit when its structure supports how the business plans to sell after migration.
 
 #### Hosted operations are part of the decision <a href="#hosted-operations-are-part-of-the-decision" id="hosted-operations-are-part-of-the-decision"></a>
 
-Shift4Shop can be a strong fit for merchants that want to reduce hosting, infrastructure, maintenance, and technical administration burden. A hosted Target Platform is especially useful when the team wants to spend more time managing products, orders, customers, marketing, content, and promotions instead of maintaining the underlying platform environment.
+Shift4Shop can be a strong fit for merchants that want to reduce hosting, infrastructure, maintenance, and technical administration burden. This matters most when the business does not want server-level work, platform updates, extension conflicts, or developer-dependent maintenance to remain part of normal store ownership.
 
-This fit is strongest when the business is prepared to work within the Target Platform’s structure. Hosted convenience does not remove the need to define product options, category hierarchy, customer groups, promotions, shipping logic, payment expectations, and SEO priorities before migration. It simply changes where those decisions are implemented and validated.
+The advantage is not that migration planning disappears. Product options, category structure, customer groups, promotions, shipping expectations, payment context, SEO priorities, content pages, and integrations still need to be clarified. The advantage is that these decisions can be planned for a hosted Target Platform where many store-management functions live inside the platform environment.
 
-#### Built-in commerce coverage matches the merchant’s operating model <a href="#built-in-commerce-coverage-matches-the-merchant-s-operating-model" id="built-in-commerce-coverage-matches-the-merchant-s-operating-model"></a>
+#### Built-in commerce coverage matches the operating model <a href="#built-in-commerce-coverage-matches-the-operating-model" id="built-in-commerce-coverage-matches-the-operating-model"></a>
 
-Shift4Shop is a stronger fit when the merchant wants many day-to-day commerce functions available inside the platform environment. Product management, order management, marketing, SEO, inventory, shipping, storefront design, mobile-friendly themes, and integrations can reduce the need to rebuild every operating layer separately.
+Shift4Shop can fit merchants that want many day-to-day commerce functions available in one platform environment. Product management, order management, customer marketing, SEO tools, inventory context, shipping workflows, storefront design, mobile-friendly themes, and integration options can reduce the need to rebuild every operating layer separately.
 
-The migration implication is practical: the future store should be planned around which source-side functions should become Shift4Shop-managed structure, which should be recreated through target-side configuration, and which should remain dependent on outside systems. Fit is stronger when the business can separate those categories before execution.
+This is valuable when the business wants a practical commerce operating base rather than a highly custom technical stack. It becomes less valuable when the store depends on source-specific scripts, unusual checkout logic, proprietary application behavior, or external workflows that cannot be recreated through normal platform configuration or standard migration capability.
 
 #### Product and category structure can be made clear <a href="#product-and-category-structure-can-be-made-clear" id="product-and-category-structure-can-be-made-clear"></a>
 
-Shift4Shop can work well for merchants whose products, categories, product pages, images, specifications, options, and content can be organized into clear storefront logic. The platform is often attractive when product discovery depends on category browsing, rich product pages, search visibility, and structured information that helps customers choose.
+Shift4Shop can fit catalog-led merchants when product meaning is organized enough to rebuild. Categories, product pages, product options, images, descriptions, reviews, price context, and content-heavy product information should help customers find and choose the right item.
 
-Fit weakens when product meaning is inconsistent in the source store. If the same field sometimes means a sellable option, sometimes a technical specification, sometimes a personalization instruction, and sometimes an internal note, the business needs classification work before Shift4Shop fit can be judged confidently.
+This fit is strongest when the merchant can separate meaningful product complexity from source-side clutter. A catalog with clear categories, organized options, useful product content, and known high-value products is easier to plan than a catalog where old attributes, custom fields, duplicate categories, obsolete SKUs, and staff-only notes are mixed together without ownership.
 
 #### Customer and pricing rules are deliberate rather than accidental <a href="#customer-and-pricing-rules-are-deliberate-rather-than-accidental" id="customer-and-pricing-rules-are-deliberate-rather-than-accidental"></a>
 
-Shift4Shop can support direct-to-consumer, B2B, and hybrid selling models. It becomes a stronger fit when customer groups, wholesale pricing, minimum order quantity logic, customer-specific rates, tax handling, payment expectations, and repeat-order behavior are documented and commercially meaningful.
+Shift4Shop can support merchants whose customer treatment matters, including wholesale buyers, customer groups, buyer-specific pricing, promotions, discounts, and hybrid B2B/B2C selling. These capabilities are useful when customer differences are part of the business model, not scattered exceptions known only by staff.
 
-For those merchants, customer migration is not only about moving profiles and addresses. It is about preserving the buyer relationship that controls visibility, pricing, payment, ordering, and service expectations. Shift4Shop is a better fit when those relationships can be described and tested with representative customers during Demo Migration review.
+A good fit requires the merchant to explain which customer groups matter, what pricing or visibility differences apply, which promotions should continue, and which historical exceptions should be retired. If buyer rules are undocumented, Shift4Shop may still be viable, but fit cannot be confirmed until those rules are clarified.
 
 #### Storefront and SEO continuity can be planned deliberately <a href="#storefront-and-seo-continuity-can-be-planned-deliberately" id="storefront-and-seo-continuity-can-be-planned-deliberately"></a>
 
-Shift4Shop can be a good fit for merchants that want a managed storefront environment but still care about SEO, mobile presentation, landing pages, category paths, content pages, product URLs, and campaign destinations.
+Shift4Shop is often a practical destination when the merchant wants a storefront reset without ignoring existing search value, high-value pages, product routes, category routes, CMS Pages, Blog Posts, and important navigation paths. The platform can support a stronger future storefront when content and route priorities are identified before migration.
 
-The strongest candidates know which routes have business value. They can identify important product pages, category pages, CMS Pages, Blog Posts, policy pages, buying guides, and landing pages before migration. Without that prioritization, even a capable Target Platform can launch with missing redirects, weak content continuity, or confusing navigation.
+The fit advantage is strongest when the business knows which pages and URLs matter. If every route is treated as equally important, or if nobody can identify which product, category, content, and landing pages drive revenue or search value, the migration becomes harder to judge and the platform decision needs more preparation.
 
 ### Where Shift4Shop Is Often a Strong Fit <a href="#where-shift4shop-is-often-a-strong-fit" id="where-shift4shop-is-often-a-strong-fit"></a>
 
-Shift4Shop is often a strong migration target when the business wants hosted commerce operations and can clearly define how its catalog, customers, storefront, and workflows should behave after migration.
+Shift4Shop is often a strong Target Platform when the merchant wants hosted operations, broad built-in commerce coverage, and enough structure to run a working store without rebuilding every operational layer through custom development.
 
-#### Merchants moving from heavier technical ownership <a href="#merchants-moving-from-heavier-technical-ownership" id="merchants-moving-from-heavier-technical-ownership"></a>
+#### The merchant wants to reduce technical ownership <a href="#the-merchant-wants-to-reduce-technical-ownership" id="the-merchant-wants-to-reduce-technical-ownership"></a>
 
-Businesses moving away from self-hosted platforms or technically demanding environments may find Shift4Shop attractive because it can reduce infrastructure responsibility and centralize more commerce administration inside a hosted platform.
+Shift4Shop is a strong fit when the current store depends too heavily on hosting maintenance, developer involvement, extension conflicts, or self-hosted platform administration. The migration can support a cleaner operating model if the merchant wants the future team to focus on products, orders, customers, marketing, content, and fulfillment rather than platform upkeep.
 
-This profile is strongest when the business does not depend on deep platform-level customization that must be reproduced exactly. If the source store uses heavy custom code, unusual database relationships, custom checkout behavior, or extension-owned logic, the fit may still exist, but the migration scope should be reviewed carefully before assuming standard service capability is enough.
+The migration planning implication is that the merchant should define which responsibilities should move into the Target Platform and which dependencies still need outside systems. A hosted platform can reduce technical ownership, but it does not automatically replace every integration, custom workflow, or business rule from the Source Platform.
 
-#### Stores with conventional product, order, and content needs <a href="#stores-with-conventional-product-order-and-content-needs" id="stores-with-conventional-product-order-and-content-needs"></a>
+#### The catalog is structured enough to become a better storefront <a href="#the-catalog-is-structured-enough-to-become-a-better-storefront" id="the-catalog-is-structured-enough-to-become-a-better-storefront"></a>
 
-Shift4Shop is often a good fit for stores whose product, customer, order, review, coupon, CMS Pages, and Blog Posts can be translated into target-side structures without extensive bespoke transformation.
+Shift4Shop is often a good fit for stores with ordinary products, organized categories, useful descriptions, clear images, reviews, and product options that can be explained. The platform can serve merchants whose main goal is to make the catalog easier to manage and easier for customers to navigate.
 
-These stores usually have understandable product options, usable category hierarchy, clean product media, ordinary customer accounts, historical orders that need reference value, and content that can be mapped into the new storefront. The migration still requires validation, but the fit is stronger because the source-store meaning is not hidden inside custom logic.
+The strongest cases are not necessarily the simplest catalogs. They are catalogs where complexity has commercial meaning. A product with options, quantity choices, downloadable information, technical details, or replacement relationships can fit well when those elements are documented and can be validated after Demo Migration.
 
-#### Merchants that want built-in marketing and SEO support <a href="#merchants-that-want-built-in-marketing-and-seo-support" id="merchants-that-want-built-in-marketing-and-seo-support"></a>
+#### The business wants built-in marketing, SEO, and content support <a href="#the-business-wants-built-in-marketing-seo-and-content-support" id="the-business-wants-built-in-marketing-seo-and-content-support"></a>
 
-Shift4Shop can fit merchants that rely on promotions, coupons, discounts, customer marketing, social selling, search visibility, and content-supported buying journeys. The platform can be useful when the business wants these capabilities as part of the operating environment instead of rebuilding every function through separate systems.
+Shift4Shop can fit merchants that want storefront content, SEO metadata, promotions, customer marketing activity, and high-value pages to remain part of the commerce plan. This is especially useful when the future store should not be only a product database, but a customer-facing sales environment with content, trust pages, product education, and route continuity.
 
-The migration planning consequence is that marketing and SEO context should be reviewed as store behavior, not as decoration. Expired promotions, active coupon logic, customer-specific offers, product metadata, category descriptions, campaign pages, and historical URLs should be classified before launch planning.
+The migration planning focus should be on prioritizing the pages and routes that matter most. Important product URLs, category URLs, policy pages, buying guides, CMS Pages, Blog Posts, and campaign landing pages should be identified before migration so the Target Platform can be evaluated against actual storefront value.
 
-#### B2B and wholesale merchants with documented rules <a href="#b2b-and-wholesale-merchants-with-documented-rules" id="b2b-and-wholesale-merchants-with-documented-rules"></a>
+#### B2B or hybrid selling rules are clear enough to preserve <a href="#b2b-or-hybrid-selling-rules-are-clear-enough-to-preserve" id="b2b-or-hybrid-selling-rules-are-clear-enough-to-preserve"></a>
 
-Shift4Shop can be a strong fit for wholesalers, manufacturers, distributors, suppliers, and hybrid B2B/B2C merchants when buyer rules are clear. Customer groups, wholesale price levels, quantity-based pricing, minimum order expectations, payment terms, tax treatment, reorder needs, and restricted visibility should be documented before migration.
+Shift4Shop can be a strong fit for wholesale, B2B, or hybrid B2B/B2C merchants when buyer groups, customer-specific pricing, quantity pricing, payment expectations, tax handling, restricted product visibility, or reorder behavior are known and documented.
 
-This profile is not strong simply because the merchant sells to businesses. It is strong when the business can explain how different buyers should be treated and can supply representative examples for validation. A B2B store with undocumented exceptions and manual pricing habits may require deeper review before Shift4Shop can be called a safe fit.
+This scenario is strong only when rules are deliberate. The merchant should prepare representative buyer accounts, product examples, price examples, and order histories that prove whether customer treatment remains meaningful after migration. If those rules are informal, fit depends on additional preparation before the migration approach is chosen.
 
-#### Merchants that want a practical storefront reset <a href="#merchants-that-want-a-practical-storefront-reset" id="merchants-that-want-a-practical-storefront-reset"></a>
+#### The merchant wants a practical storefront reset <a href="#the-merchant-wants-a-practical-storefront-reset" id="the-merchant-wants-a-practical-storefront-reset"></a>
 
-Shift4Shop can fit businesses that want migration to become a controlled storefront reset: cleaner categories, stronger product pages, better mobile presentation, clearer policies, refreshed content, and more disciplined route planning.
+Shift4Shop may be a strong fit when the migration is also a chance to remove old clutter, simplify abandoned source behavior, clarify category structure, retire obsolete pages, and rebuild a more manageable storefront. This works when the merchant knows which legacy data should remain and which historical workarounds should not be carried forward.
 
-This profile works best when the merchant is willing to decide what should be preserved and what should be improved. Migration should not blindly reproduce every old category, page, product field, or URL if the source store contains years of accumulated clutter. Shift4Shop can be a useful target when the business treats migration as a chance to preserve commercial value while reducing structural noise.
+The migration planning implication is that cleanup decisions should be made deliberately. A storefront reset should not become accidental data loss. The merchant should separate records that must migrate, records that should be filtered through the Data Filter Add-on where applicable, records that need mapping or configuration support, and records that require Custom Service review.
 
 ### Where Shift4Shop Is Often a Weaker Fit <a href="#where-shift4shop-is-often-a-weaker-fit" id="where-shift4shop-is-often-a-weaker-fit"></a>
 
-Shift4Shop is often a weaker fit when the business wants the convenience of a hosted platform but still expects highly custom, poorly documented, or integration-dependent behavior to move without review.
+Shift4Shop is often a weaker fit when the business either does not need its platform structure or expects the platform to reproduce undocumented, custom, or externally controlled source behavior without review.
 
-#### The merchant needs exact reproduction of heavy customization <a href="#the-merchant-needs-exact-reproduction-of-heavy-customization" id="the-merchant-needs-exact-reproduction-of-heavy-customization"></a>
+#### The future store only needs a very simple retail presence <a href="#the-future-store-only-needs-a-very-simple-retail-presence" id="the-future-store-only-needs-a-very-simple-retail-presence"></a>
 
-Shift4Shop may be a weaker fit when the source store depends on custom checkout rules, custom product builders, unusual subscription behavior, bespoke pricing engines, non-standard account structures, or custom database relationships that must be reproduced exactly.
+Shift4Shop may be more platform than the business needs if the future store only requires a small catalog, ordinary product pages, basic checkout, simple customer accounts, and limited marketing or operational complexity. The issue is not whether the platform can support that store. The issue is whether the platform choice adds planning and configuration weight that the merchant does not need.
 
-This does not automatically rule out Shift4Shop as the Target Platform. It means the fit cannot be confirmed through platform preference alone. The source behavior must be reviewed, the desired target outcome must be defined, and Custom Service may be required if the expected result involves customization, modification, custom fields, third-party data, or custom migration logic adjustment.
+In this situation, fit should be tested against the future operating model. If the merchant will not use hosted commerce coverage, richer catalog control, customer groups, SEO/content planning, promotions, integrations, or B2B-related structure, the migration may be better served by a simpler Target Platform.
 
-#### B2B logic exists but is not documented <a href="#b2b-logic-exists-but-is-not-documented" id="b2b-logic-exists-but-is-not-documented"></a>
+#### The merchant expects exact reproduction of custom source behavior <a href="#the-merchant-expects-exact-reproduction-of-custom-source-behavior" id="the-merchant-expects-exact-reproduction-of-custom-source-behavior"></a>
 
-A business may say it needs B2B support while still being unable to explain its buyer rules. That is a weak fit signal.
+Fit becomes weaker when the Source Platform relies on custom code, proprietary scripts, custom checkout behavior, app-owned logic, unusual database structures, or theme-level behavior that the merchant expects to appear automatically after migration.
 
-Risk rises when wholesale pricing lives in spreadsheets, customer-specific deals are handled manually, tax-exempt treatment is inconsistent, reorder behavior depends on staff memory, or different customer groups have unclear access rules. Shift4Shop can support structured buyer treatment, but undocumented buyer logic cannot be safely migrated or validated as if it were ordinary customer data.
+A migration to Shift4Shop can still be possible, but the decision is no longer a straightforward platform-fit question. The merchant must identify what can be handled through normal platform configuration, what can be supported with Standard Add-ons, and what requires Custom Service, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment.
 
-#### Product options are messy or commercially ambiguous <a href="#product-options-are-messy-or-commercially-ambiguous" id="product-options-are-messy-or-commercially-ambiguous"></a>
+#### Product, customer, or pricing rules are unclear <a href="#product-customer-or-pricing-rules-are-unclear" id="product-customer-or-pricing-rules-are-unclear"></a>
 
-Shift4Shop becomes harder to evaluate when source product options and attributes are inconsistent. A field labeled size may be a true purchasing choice on one product, a descriptive specification on another product, and an internal merchandising note elsewhere.
+Shift4Shop fit weakens when the business depends on rules that nobody can clearly document. Product options may be inconsistent, categories may not reflect real buying paths, customer groups may exist without a clear purpose, discounts may overlap, or wholesale pricing may be handled through staff memory and spreadsheets.
 
-If product data is ambiguous, the fit problem is not only technical. Customers may make wrong selections, inventory may be interpreted incorrectly, product pages may become confusing, and staff may struggle to manage the target catalog. These issues should be classified before migration rather than discovered late in validation.
+The migration risk is that records can move while commercial meaning remains unresolved. Before Shift4Shop is treated as a good fit, the merchant should clarify which product structures, customer groups, pricing rules, promotions, and exceptions should continue after launch.
 
-#### SEO value depends on routes the business has not prioritized <a href="#seo-value-depends-on-routes-the-business-has-not-prioritized" id="seo-value-depends-on-routes-the-business-has-not-prioritized"></a>
+#### SEO and storefront priorities are not identified <a href="#seo-and-storefront-priorities-are-not-identified" id="seo-and-storefront-priorities-are-not-identified"></a>
 
-Shift4Shop may be a weaker fit for a merchant that has strong organic traffic, paid campaign destinations, affiliate links, old category paths, content pages, or external backlinks but has not identified which routes matter most.
+A store with search value, content value, or established customer navigation can be a good Shift4Shop candidate only if important pages and routes are known. Fit becomes weaker when the merchant says SEO matters but cannot identify high-value product URLs, category URLs, CMS Pages, Blog Posts, buying guides, or landing pages.
 
-A platform can provide SEO-friendly structures, but it cannot decide which old paths are commercially important. If the business cannot prioritize high-value product, category, content, and landing-page URLs, the migration may preserve records while weakening search continuity and customer navigation.
+In this situation, the platform decision may be premature. The merchant should prepare route priorities, content priorities, and validation samples before judging whether Shift4Shop supports the desired storefront outcome.
 
-#### Integrations control business-critical behavior <a href="#integrations-control-business-critical-behavior" id="integrations-control-business-critical-behavior"></a>
+#### Operational ownership sits outside the store but is undocumented <a href="#operational-ownership-sits-outside-the-store-but-is-undocumented" id="operational-ownership-sits-outside-the-store-but-is-undocumented"></a>
 
-Fit becomes less stable when ERP, CRM, accounting, tax, marketplace, shipping, fulfillment, review, loyalty, subscription, email, analytics, or inventory systems control important behavior around products, customers, orders, pricing, or fulfillment.
+Shift4Shop fit is harder to confirm when outside systems control inventory, shipping, payment status, tax handling, accounting, fulfillment, marketplace activity, customer data, or reporting, but no one can explain which system owns which outcome.
 
-Shift4Shop may still be the right target, but the project should not assume those dependencies will survive migration through record movement alone. The business needs to identify which integrations consume data, which create data, and which actively govern business behavior.
-
-#### The business wants simplicity but has not simplified the source store <a href="#the-business-wants-simplicity-but-has-not-simplified-the-source-store" id="the-business-wants-simplicity-but-has-not-simplified-the-source-store"></a>
-
-A merchant may choose Shift4Shop to reduce operational complexity, but fit weakens if the source store remains structurally unclear. Old categories, unused options, inactive customer groups, expired promotions, obsolete content, broken URLs, and abandoned integrations can all migrate as clutter unless the business decides what still matters.
-
-A hosted platform can make store administration easier after migration, but it does not automatically clean years of source-store ambiguity.
+The future store may still fit Shift4Shop, but the merchant should not treat migration as a simple record transfer. Integration ownership, excluded workflows, external identifiers, and post-migration reconnection requirements should be documented before the migration approach is chosen.
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-Shift4Shop is often a strong fit for merchants that want hosted commerce operations and can define the commercial structure that must survive migration.
+The following profiles are often strong Shift4Shop candidates because their business model benefits from hosted operations, organized commerce structure, or deliberate storefront planning.
 
-#### Direct-to-consumer stores with clear catalog structure <a href="#direct-to-consumer-stores-with-clear-catalog-structure" id="direct-to-consumer-stores-with-clear-catalog-structure"></a>
-
-These merchants sell through relatively clear product, category, content, customer, and order structures. Product options are understandable, categories support browsing, and most records can be validated through standard storefront and administrative review.
-
-Shift4Shop can be a practical fit when the business wants a hosted destination with enough built-in commerce features to manage the store without rebuilding the operating model around extensive custom development.
-
-#### Catalog-led merchants with rich product pages <a href="#catalog-led-merchants-with-rich-product-pages" id="catalog-led-merchants-with-rich-product-pages"></a>
-
-These businesses depend on product detail, specifications, images, videos, product tabs, reviews, Q\&A-style information, category discovery, and search visibility to help customers buy.
-
-Shift4Shop can be a strong fit when the merchant wants the Target Platform to preserve that product education and discovery role. Migration planning should include representative products where specifications, options, media, and content influence conversion.
-
-#### Wholesale or hybrid B2B/B2C merchants with defined buyer rules <a href="#wholesale-or-hybrid-b2b-b2c-merchants-with-defined-buyer-rules" id="wholesale-or-hybrid-b2b-b2c-merchants-with-defined-buyer-rules"></a>
-
-These merchants need customer groups, wholesale prices, quantity logic, buyer-specific expectations, tax handling, payment context, and reorder support. Shift4Shop can be attractive when those rules are part of the future operating model and can be validated with real buyer examples.
-
-The fit depends on clarity. A well-documented wholesale model is a stronger Shift4Shop candidate than a business whose B2B behavior exists mostly in staff habits, disconnected spreadsheets, or old custom logic.
-
-#### Merchants leaving self-hosted or developer-heavy environments <a href="#merchants-leaving-self-hosted-or-developer-heavy-environments" id="merchants-leaving-self-hosted-or-developer-heavy-environments"></a>
-
-Shift4Shop can be a strong fit for teams that want to reduce developer dependency, hosting responsibility, patching burden, or infrastructure complexity.
-
-The best candidates have already decided which custom behaviors are still necessary and which old source-side complexity can be retired. If everything from the old store must be replicated exactly, the migration approach should be reviewed before Shift4Shop is treated as a low-friction target.
-
-#### Stores that want a migration-supported storefront cleanup <a href="#stores-that-want-a-migration-supported-storefront-cleanup" id="stores-that-want-a-migration-supported-storefront-cleanup"></a>
-
-Some merchants use migration as an opportunity to improve structure: consolidate categories, remove outdated content, improve product presentation, rationalize promotions, and prioritize important URLs.
-
-Shift4Shop can be a strong fit when the business wants a cleaner hosted storefront and is prepared to make decisions before migration, rather than expecting the migration process to decide what should stay, change, or disappear.
+| Strong-fit profile                                             | Why this profile often fits Shift4Shop                                                                                                                                                                                                                        | Migration planning focus                                                                                                                                                                                             |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Merchant moving away from self-hosted maintenance burden**   | The business wants to reduce server-level ownership, update work, extension conflicts, and developer dependency. Shift4Shop can support a more packaged operating environment when the merchant wants store administration to be less technical after launch. | Identify which responsibilities should move into the Target Platform, which integrations still need reconnection, and which custom source behaviors should be retired, replaced, or reviewed through Custom Service. |
+| **Catalog-led store with organized products and categories**   | Product structure is commercially important and can be explained. Categories, product options, images, descriptions, reviews, and content help customers choose correctly rather than merely filling database fields.                                         | Prepare representative products, difficult option examples, high-value categories, rich product pages, reviews, images, and examples where category placement affects buying decisions.                              |
+| **Content and SEO-aware merchant**                             | The business has product routes, category routes, CMS Pages, Blog Posts, trust pages, buying guides, or campaign pages that contribute to revenue, search visibility, or customer confidence.                                                                 | Prioritize high-value URLs, metadata, content pages, route expectations, navigation paths, and post-migration samples that prove storefront continuity.                                                              |
+| **Wholesale or hybrid B2B/B2C merchant with documented rules** | Customer groups, wholesale pricing, quantity pricing, restricted visibility, tax handling, or payment expectations are part of the known operating model. Fit is stronger because rules can be planned and tested instead of guessed.                         | Prepare buyer groups, special pricing examples, restricted product cases, tax-exempt buyers, B2B orders, retail orders, and reorder examples for Demo Migration review.                                              |
+| **Merchant using migration to clean up storefront structure**  | The business wants to improve categories, content, route priorities, promotions, and product presentation rather than reproduce every old source-store habit. Shift4Shop can support a cleaner destination when cleanup decisions are intentional.            | Define what should migrate, what should be filtered, what should be reorganized after migration, which routes deserve protection, and which legacy behavior should not be rebuilt.                                   |
+| **Store with ordinary integrations and clear ownership**       | External systems exist, but the merchant knows which system owns inventory, fulfillment, payment, tax, reporting, or customer data. This makes Shift4Shop easier to evaluate as the commerce destination.                                                     | Separate migrated data from reconnected integrations, document post-migration ownership, and identify which integration-dependent outcomes must be validated before launch.                                          |
 
 ### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-Shift4Shop becomes a higher-risk fit when the merchant wants hosted convenience but carries unresolved business logic, technical dependency, or source-store ambiguity into the migration.
+The following profiles do not automatically rule out Shift4Shop, but they require deeper review before the platform can be called a straightforward fit.
 
-#### Businesses with heavily customized source behavior <a href="#businesses-with-heavily-customized-source-behavior" id="businesses-with-heavily-customized-source-behavior"></a>
-
-Stores with custom product builders, unusual checkout rules, bespoke account structures, custom subscription behavior, special fulfillment logic, or non-standard source records require careful review.
-
-Shift4Shop may still be chosen as the Target Platform, but the migration should not be planned as a straightforward standard transfer if the desired outcome depends on custom transformation, outside-system identifiers, third-party data, custom fields, or custom migration logic adjustment.
-
-#### B2B merchants with informal exception-based selling <a href="#b2b-merchants-with-informal-exception-based-selling" id="b2b-merchants-with-informal-exception-based-selling"></a>
-
-Some B2B stores run on exceptions: special pricing for certain buyers, negotiated shipping arrangements, manual payment terms, customer-specific catalogs, private instructions, and staff-managed approvals.
-
-This profile is higher risk unless those exceptions are documented. If buyer treatment is not formalized, migrated customer records may appear complete while the actual buying relationship breaks after launch.
-
-#### Merchants with unclear product option meaning <a href="#merchants-with-unclear-product-option-meaning" id="merchants-with-unclear-product-option-meaning"></a>
-
-Stores with inconsistent options, overloaded attributes, outdated variant structures, duplicate SKUs, or product data maintained through manual workarounds should be treated as higher risk.
-
-The issue is not only whether the product record moves. The issue is whether the migrated product can still be understood, selected, priced, purchased, fulfilled, and managed correctly in Shift4Shop.
-
-#### SEO-dependent stores without route priorities <a href="#seo-dependent-stores-without-route-priorities" id="seo-dependent-stores-without-route-priorities"></a>
-
-If organic traffic, paid campaigns, affiliate links, or customer bookmarks matter, but the business has not identified priority URLs, migration risk increases.
-
-Shift4Shop can support a new storefront structure, but launch quality depends on route decisions. High-value pages should be known before migration, not discovered after traffic loss.
-
-#### Integration-heavy merchants without system ownership clarity <a href="#integration-heavy-merchants-without-system-ownership-clarity" id="integration-heavy-merchants-without-system-ownership-clarity"></a>
-
-A store that depends on ERP, CRM, accounting, tax, shipping, marketplace, inventory, payment, email, loyalty, analytics, or review systems needs to know which system owns which outcome.
-
-If ownership is unclear, the migration may preserve visible records while breaking the surrounding workflow. That makes Shift4Shop fit harder to confirm until integration responsibilities are reviewed.
-
-#### Custom Platform or non-standard Source Platform cases <a href="#custom-platform-or-non-standard-source-platform-cases" id="custom-platform-or-non-standard-source-platform-cases"></a>
-
-When the Source Platform is a Custom Platform or a heavily modified system, Shift4Shop fit should be reviewed through Custom Service. Non-standard data structures can contain business meaning that is not visible in ordinary exports.
-
-This does not mean Shift4Shop is a poor target. It means the source side requires custom interpretation before the target outcome can be planned reliably.
+| Higher-risk profile                                             | Why the fit is harder to confirm                                                                                                                                                                                  | What should be resolved before moving forward                                                                                                                                               |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Highly customized source store expecting exact reproduction** | Source behavior may depend on custom code, scripts, extensions, theme logic, custom checkout behavior, or database structures that do not translate as standard records.                                          | Classify each custom behavior as target configuration, Add-on-supported adjustment, Custom Service work, external-system dependency, or legacy behavior to retire.                          |
+| **B2B merchant with informal exception-based selling**          | Buyer rules may be commercially important but undocumented. Migrated customer records can look complete while pricing, visibility, tax, payment, or account treatment fails.                                      | Document customer groups, rule examples, buyer exceptions, price levels, restricted products, tax treatment, and validation samples before confirming the migration approach.               |
+| **Merchant with unclear product option meaning**                | Options, attributes, variants, custom fields, and staff notes may be mixed together. The store may contain many product details without a clear distinction between sellable choices and descriptive information. | Classify product structures before migration and identify which product examples should prove buyability, searchability, pricing, and storefront presentation.                              |
+| **SEO-dependent store without route priorities**                | The business may care about organic traffic but lack a route inventory. Without priorities, validation can miss high-value product, category, content, and landing pages.                                         | Prepare high-value URLs, metadata priorities, redirect expectations, CMS Pages, Blog Posts, and search-sensitive product/category examples before migration review.                         |
+| **Integration-heavy business without system ownership clarity** | Important data may be controlled by ERP, accounting, fulfillment, shipping, tax, CRM, marketplace, payment, or API workflows rather than the store alone.                                                         | Confirm systems of record, downstream consumers, reconnection needs, excluded workflows, and launch-critical integration checks before treating Shift4Shop as a simple target.              |
+| **Custom Platform or heavily modified Source Platform case**    | Non-standard source structures may hide business meaning in custom fields, outside-system identifiers, third-party data, or bespoke database logic.                                                               | Use Custom Service review to interpret source structure, define transformation needs, and decide what belongs in standard migration, Add-ons, or custom migration logic adjustment.         |
+| **Simple store attracted mainly by platform breadth**           | The business may not need richer B2B, marketing, SEO, catalog, integration, or workflow features. Choosing a broader platform can add planning overhead without operational benefit.                              | Confirm which Shift4Shop capabilities will actually be used after launch. If the answer is mostly basic catalog and order management, compare whether a simpler target is more appropriate. |
 
 ### What Should Be Confirmed Before Choosing Shift4Shop <a href="#what-should-be-confirmed-before-choosing-shift4shop" id="what-should-be-confirmed-before-choosing-shift4shop"></a>
 
-Before treating Shift4Shop as the right Target Platform, the business should confirm the operating model it expects the migrated store to support.
+Before Shift4Shop is treated as the right Target Platform, the merchant should confirm the business conditions that made it attractive in the first place.
 
-#### 1. Does the business want hosted operations because it solves a real problem? <a href="#id-1-does-the-business-want-hosted-operations-because-it-solves-a-real-problem" id="id-1-does-the-business-want-hosted-operations-because-it-solves-a-real-problem"></a>
+#### 1. Does hosted operation solve a real business problem? <a href="#id-1-does-hosted-operation-solve-a-real-business-problem" id="id-1-does-hosted-operation-solve-a-real-business-problem"></a>
 
-Shift4Shop is a stronger fit when hosted operations reduce a concrete burden: hosting, maintenance, technical overhead, developer dependency, platform updates, or scattered operational control.
-
-If the business mainly wants a new platform without changing unclear source-store behavior, fit remains uncertain. The future operating model should be defined before migration planning advances.
+Confirm whether the goal is to reduce infrastructure ownership, developer dependency, maintenance burden, or source-platform instability. If the main goal is only visual modernization, the migration plan should not overstate the operational benefit.
 
 #### 2. Which product structures must remain commercially meaningful? <a href="#id-2-which-product-structures-must-remain-commercially-meaningful" id="id-2-which-product-structures-must-remain-commercially-meaningful"></a>
 
-The merchant should identify products where options, specifications, variants, dimensions, personalization, bundles, files, compatibility details, or product-page content affect buying decisions.
-
-These products should be included in Demo Migration review because they reveal whether the catalog can work inside Shift4Shop as a selling structure, not merely as imported product data.
+Identify ordinary products, option-heavy products, products with rich media, technical products, products with compatibility information, product groups, downloadable products, and products where category placement affects buying decisions.
 
 #### 3. Which customer groups and pricing rules matter? <a href="#id-3-which-customer-groups-and-pricing-rules-matter" id="id-3-which-customer-groups-and-pricing-rules-matter"></a>
 
-The business should identify customer groups, wholesale pricing levels, minimum quantities, special quotes, tax-exempt treatment, payment terms, reorder expectations, and buyer-specific handling.
-
-If those rules are essential, the migration plan should treat them as fit-critical. If they are unclear, Shift4Shop should not be judged solely by its general B2B capability.
+Document wholesale customers, retail customers, buyer groups, pricing levels, quantity pricing, tax treatment, payment expectations, restricted visibility, coupons, discounts, and other rules that should remain meaningful after migration.
 
 #### 4. Which storefront pages and routes carry business value? <a href="#id-4-which-storefront-pages-and-routes-carry-business-value" id="id-4-which-storefront-pages-and-routes-carry-business-value"></a>
 
-Priority product URLs, category URLs, CMS Pages, Blog Posts, landing pages, policy pages, buyer guides, and campaign destinations should be listed before launch planning.
-
-A strong Shift4Shop fit includes the ability and willingness to manage storefront transition, not only record transfer.
+Prioritize product URLs, category URLs, CMS Pages, Blog Posts, policy pages, buying guides, promotional pages, and other routes that affect revenue, search visibility, customer trust, or support workload.
 
 #### 5. Which promotions and marketing workflows should continue? <a href="#id-5-which-promotions-and-marketing-workflows-should-continue" id="id-5-which-promotions-and-marketing-workflows-should-continue"></a>
 
-Coupons, discounts, customer offers, abandoned-order recovery logic, email workflows, social selling, and campaign structures should be reviewed before migration.
-
-Some promotional history may be useful for reference. Some rules may need to be rebuilt. Some old offers should be retired. Fit is stronger when the business can distinguish between those outcomes.
+Clarify whether coupons, discounts, customer marketing, abandoned-checkout recovery, email campaigns, loyalty behavior, or promotional rules should be preserved, rebuilt, simplified, or retired.
 
 #### 6. Which integrations are still business-critical? <a href="#id-6-which-integrations-are-still-business-critical" id="id-6-which-integrations-are-still-business-critical"></a>
 
-The merchant should identify external systems connected to products, inventory, orders, customers, payments, tax, shipping, fulfillment, reviews, subscriptions, loyalty, analytics, and marketing.
-
-Each dependency should be classified by role: source of record, downstream consumer, workflow controller, reporting layer, or optional support system. This prevents the migration from treating integration-owned behavior as ordinary store data.
+Identify whether inventory, tax, payment, shipping, fulfillment, ERP, accounting, CRM, marketplace, analytics, or API workflows must be reconnected or reviewed separately from migrated store records.
 
 #### 7. Can the team validate representative examples after Demo Migration? <a href="#id-7-can-the-team-validate-representative-examples-after-demo-migration" id="id-7-can-the-team-validate-representative-examples-after-demo-migration"></a>
 
-A strong fit requires the ability to review meaningful samples. The Demo Migration should include option-heavy products, high-value categories, representative customers, B2B buyers if relevant, historical orders, coupons, content pages, SEO-sensitive routes, and any records affected by custom fields or integrations.
-
-If the team cannot review those examples, the platform may still be workable, but the fit cannot be confirmed safely.
+Fit is stronger when the merchant can test realistic examples after Demo Migration. The sample should include ordinary products, difficult products, customer groups, B2B pricing, representative orders, high-value URLs, content pages, and any integration-sensitive records needed to judge whether Shift4Shop supports the expected operating model.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shift4Shop is often a strong Target Platform for merchants that want hosted commerce operations, broad built-in functionality, storefront and SEO management, product and order administration, marketing support, and enough structure to handle direct-to-consumer, wholesale, or hybrid selling models. The best fit appears when the business can clearly define the product, customer, pricing, content, route, and workflow meaning that must survive migration.
+Shift4Shop is a strong Target Platform candidate when the merchant wants hosted operations, broad built-in commerce coverage, clearer catalog management, deliberate customer and pricing rules, and storefront continuity that can be planned before migration. It is a weaker fit when the business only needs a very simple storefront, expects custom source behavior to transfer automatically, or cannot explain the product, customer, pricing, route, and integration rules that make the store work.
 
-Shift4Shop is often a weaker or higher-risk fit when the source store depends on undocumented B2B exceptions, inconsistent product option logic, exact reproduction of heavy customization, unclassified integrations, old route value, or Custom Platform source structures. Those factors do not automatically disqualify the platform, but they do change how the migration should be planned, scoped, and validated.
+A good Shift4Shop fit decision should come from business scenarios, not platform breadth alone. The merchant should be able to describe how products should be sold, how customers should be treated, which routes matter, which workflows depend on outside systems, and what realistic Demo Migration samples should prove.
 
-Use Demo Migration to test whether Shift4Shop fit is real in practice. Select samples that expose product-choice logic, buyer rules, pricing behavior, category discovery, order history, content continuity, and integration-sensitive records. If the sample shows that required outcomes depend on custom fields, third-party data, non-standard source structures, or custom migration logic adjustment, review the project through Live Chat before treating the standard migration path as sufficient.
+If Shift4Shop appears to match your future operating model, use Demo Migration and Live Chat to test representative product, customer, pricing, order, storefront, route, and integration scenarios before committing to the full migration approach.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
 **Is Shift4Shop a good fit for small or mid-sized merchants?**
 
-Often yes, especially when the business wants hosted commerce operations, built-in storefront tools, product and order management, marketing support, SEO capability, and less technical ownership. Fit depends less on size alone and more on whether the store’s product, customer, pricing, and workflow requirements can be clearly represented in Shift4Shop.
+Yes, it can be a good fit when the merchant wants hosted operations, practical store management, and built-in commerce coverage. The strongest fit depends less on size and more on whether the future store needs Shift4Shop’s catalog, customer, marketing, SEO, shipping, payment, and operational structure.
 
 **Is Shift4Shop a good fit for B2B or wholesale stores?**
 
-It can be, when buyer rules are documented. Customer groups, wholesale pricing, quantity logic, tax handling, payment expectations, and reorder behavior should be clarified before migration. If those rules are informal or scattered across staff habits and spreadsheets, fit requires deeper review.
+It can be a strong fit when buyer groups, wholesale pricing, quantity pricing, restricted products, payment expectations, and tax treatment are documented well enough to plan and validate. It is weaker when B2B rules exist only as informal staff knowledge or disconnected spreadsheets.
 
 **When is Shift4Shop a weaker migration target?**
 
-Shift4Shop is a weaker fit when the business needs exact reproduction of heavy customization, relies on undocumented integrations, has unclear product option meaning, depends on old SEO routes without prioritizing them, or expects the Target Platform to solve unresolved source-store decisions automatically.
+Shift4Shop is weaker when the merchant only needs a basic storefront, expects exact reproduction of custom source behavior, has unclear product-option logic, cannot identify important SEO routes, or depends on integrations without clear ownership.
 
 **Does choosing a hosted platform make migration simpler?**
 
-It can reduce some infrastructure and maintenance responsibility, but it does not remove migration planning. Product structure, customer treatment, pricing rules, promotions, routes, content, integrations, and validation samples still need to be defined.
+It can reduce infrastructure and maintenance burden after launch, but it does not remove migration planning. Products, categories, customer groups, pricing rules, content, routes, orders, and integrations still need to be reviewed before the migration result can be trusted.
 
 **What should be tested before committing to Shift4Shop as the Target Platform?**
 
-The Demo Migration should test representative products, categories, customers, B2B buyers if relevant, historical orders, coupons, CMS Pages, Blog Posts, SEO-sensitive routes, and integration- or custom-field-affected records. The sample should prove whether the future store can preserve how the business sells, not only whether records appear.
+Demo Migration review should include realistic products, product options, categories, customer groups, pricing examples, orders, CMS Pages, Blog Posts, high-value URLs, and integration-sensitive records. Easy samples alone do not prove that Shift4Shop fits the business model.

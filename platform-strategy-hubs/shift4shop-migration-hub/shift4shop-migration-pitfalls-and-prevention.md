@@ -1,36 +1,49 @@
 # Shift4Shop Migration Pitfalls and Prevention
 
-Shift4Shop migrations usually fail in predictable ways. The weakest results are not caused only by missing records. They happen when migrated data appears present but does not support the way the store actually sells, presents products, prices customer groups, processes orders, preserves routes, or connects to operational workflows.
+Shift4Shop migrations usually run into trouble when the project treats migration success as record movement rather than business continuity. Products, customers, orders, content, and settings may appear in the Target Platform, but the store can still fail if customers cannot find the right products, see the right prices, place orders confidently, or reach important pages after launch.
 
-The safest prevention strategy is to treat Shift4Shop as a hosted ecommerce environment with connected catalog, storefront, customer, order, SEO, payment, shipping, and integration behavior. A record that looks correct in isolation can still fail if its surrounding business context is incomplete.
+The most useful prevention work happens before Full Migration and launch. A strong migration plan identifies where Shift4Shop will need clean catalog structure, deliberate customer and pricing rules, usable order history, route continuity, and clear ownership for integrations or custom source behavior.
 
-The following pitfalls show where Shift4Shop migration problems often appear, how to recognize them early, and what a passing result should prove before launch.
+The pitfalls below focus on recurring failure patterns. Each one explains what goes wrong, the warning signs to watch for, how to prevent the issue, a practical example, and what a passing result should prove.
+
+### Pitfall Summary <a href="#pitfall-summary" id="pitfall-summary"></a>
+
+| Pitfall                                                | What usually fails                                                                                   | Best prevention focus                                                                                  |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Product presence is mistaken for product readiness     | Products exist but are not usable for buying decisions                                               | Validate real product pages, options, images, categories, pricing, visibility, and purchasing behavior |
+| Customer groups lose commercial meaning                | Customers migrate but buyer-specific pricing, permissions, tax, payment, or shipping context weakens | Prepare representative buyer profiles and test what each customer can see, pay, and order              |
+| Pricing and purchase rules are flattened               | Price records move but rule priority or buyer-specific outcomes fail                                 | Inventory active pricing rules and test combined rule scenarios                                        |
+| Order history loses operational context                | Orders are present but weak for customer service, fulfillment, accounting, or dispute review         | Validate orders with discounts, refunds, shipping, taxes, payment context, and manual handling         |
+| SEO routes and content paths break                     | Important URLs, redirects, metadata, or internal links are incomplete                                | Build a high-value route and content inventory before launch                                           |
+| Integration-owned data is treated as native store data | External or custom-source data moves without the behavior that gave it meaning                       | Identify system ownership and route non-standard needs to the right service review                     |
+| Demo Migration samples are too clean                   | The sample looks successful but hides real migration risk                                            | Include difficult records that expose catalog, buyer, order, pricing, SEO, and integration complexity  |
+| Launch timing is not controlled                        | Late source-store changes create stale or mismatched launch data                                     | Define final change windows and Recent Data Migration use where applicable                             |
 
 ### Pitfall 1: Treating Product Presence as Product Readiness <a href="#pitfall-1-treating-product-presence-as-product-readiness" id="pitfall-1-treating-product-presence-as-product-readiness"></a>
 
 #### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-Products are migrated into Shift4Shop, but the catalog is not ready for customers to use. Names, descriptions, images, categories, options, stock status, visibility, pricing, or product-level SEO may be incomplete or inconsistent. The result looks acceptable in a record list but fails on the storefront because customers cannot evaluate or purchase products confidently.
+Products migrate into Shift4Shop, but the catalog is not actually ready for customers. Product names, descriptions, images, categories, options, stock status, visibility, pricing, or product-level SEO may be incomplete or inconsistent. The store looks acceptable from a record list, but product pages do not help customers evaluate, compare, or purchase confidently.
 
-This problem is especially common when the Source Platform used custom attributes, option rules, product tabs, third-party catalog extensions, downloadable product handling, bundled presentation, or display logic that does not translate as a simple one-field-to-one-field transfer.
+This often happens when the Source Platform used custom attributes, option rules, product tabs, third-party catalog extensions, downloadable-product handling, bundled presentation, or display logic that cannot be treated as a simple field transfer.
 
 #### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-* Product records exist, but several product pages look thin, disorganized, or inconsistent.
-* Options or variants appear as text instead of usable selection behavior.
-* Product images migrate without the expected order, resolution, or gallery logic.
-* Products are assigned to categories but do not appear naturally in navigation or search.
+* Product records exist, but product pages look thin, disorganized, or inconsistent.
+* Product options appear as plain text instead of usable selection behavior.
+* Images migrate without the expected gallery order, quality, or product-page context.
+* Products are assigned to categories but do not appear naturally in storefront navigation or search.
 * Staff cannot explain which source fields control product display, purchasing, filtering, or fulfillment.
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Prepare product samples before Demo Migration that expose real catalog complexity, not only clean products. Include bestsellers, old products, recently added products, products with several options, products with special pricing, products assigned to multiple categories, and products that depend on custom fields or third-party logic.
+Prepare product samples before Demo Migration that expose real catalog complexity. Include bestsellers, old products, recently added products, products with several options, products with special pricing, products assigned to multiple categories, and products that depend on custom fields or third-party logic.
 
-During review, test each sample from the storefront and the admin area. The product should be usable for buying decisions, not merely visible as a migrated record. If source product behavior depends on logic that Shift4Shop does not natively reproduce through standard migration capability, the requirement should be reviewed for Custom Service before Full Migration.
+During review, test each sample from the storefront and the admin area. The product should be usable for buying decisions, not merely visible as a migrated record. If source product behavior depends on logic that Shift4Shop cannot reproduce through standard migration capability, review the requirement for Custom Service before Full Migration.
 
 #### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
 
-A merchant migrating a catalog with replacement parts should not validate only a simple product with one SKU and one image. A stronger sample includes a product with manufacturer data, fitment notes, multiple images, several purchasable choices, inventory sensitivity, and an important search-friendly URL. That sample reveals whether the migrated catalog can still support how customers identify the correct part.
+A merchant migrating replacement parts should not validate only a simple product with one SKU and one image. A stronger sample includes a product with manufacturer information, compatibility notes, multiple images, several purchasable choices, inventory sensitivity, and an important search-friendly URL. That sample reveals whether the migrated catalog can still help customers identify the correct part.
 
 #### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
 
@@ -40,9 +53,9 @@ A product passes when customers can find it, understand it, choose the right opt
 
 #### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-Customer records migrate, but customer-group, wholesale, buyer-specific, payment, shipping, tax, or visibility meaning is weakened. The store may show customers in the database while failing to preserve the buying conditions those customers expect.
+Customer records migrate, but customer-group, wholesale, buyer-specific, payment, shipping, tax, or visibility meaning weakens. The customer exists in Shift4Shop, yet the buying experience no longer reflects the relationship the merchant has with that customer.
 
-For Shift4Shop stores with B2B or hybrid B2B/B2C operations, customer context can affect pricing, minimum order requirements, product visibility, payment methods, shipping choices, tax exemption, sales representative relationships, saved purchasing behavior, and order re-use. If that context is not planned, a customer may log in successfully but see the wrong buying experience.
+This is especially risky for B2B or hybrid B2B/B2C stores. Customer context may affect pricing, minimum order requirements, product visibility, payment methods, shipping choices, tax exemption, sales-representative relationships, saved purchasing behavior, and order re-use.
 
 #### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
@@ -50,13 +63,13 @@ For Shift4Shop stores with B2B or hybrid B2B/B2C operations, customer context ca
 * Wholesale pricing, customer-specific price lists, or quantity pricing are treated as ordinary price fields.
 * Some customers require special payment, shipping, or tax treatment, but those rules are not included in migration planning.
 * B2B buyers depend on reordering, saved purchasing behavior, or account-specific workflows that were not included in the Demo Migration sample.
-* The team validates customer presence but not what each customer can see or buy.
+* The team validates customer presence but not what each customer can see, buy, or pay.
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
 Document buyer segments before migration. Identify which customers are retail, wholesale, member-only, tax-exempt, sales-rep-managed, or otherwise different from ordinary consumer accounts. Prepare representative customer samples with addresses, order history, group assignment, pricing context, and payment or shipping expectations.
 
-When customer-specific pricing, buyer permissions, or custom account logic cannot be represented through standard Shift4Shop structures and standard service capability, treat it as a Custom Service planning issue instead of forcing it into a generic customer migration.
+When customer-specific pricing, buyer permissions, or custom account logic cannot be represented through standard Shift4Shop structures and standard service capability, treat the requirement as Custom Service planning rather than forcing it into a generic customer migration.
 
 #### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
@@ -66,17 +79,17 @@ A wholesaler should include at least one ordinary retail customer, one wholesale
 
 A customer profile passes when the migrated account can log in where appropriate, see the correct account information, view the correct products and prices, use the expected payment and shipping context, and interpret prior orders without losing buyer-specific meaning.
 
-### Pitfall 3: Flattening B2B Pricing, Discounts, and Purchase Rules <a href="#pitfall-3-flattening-b2b-pricing-discounts-and-purchase-rules" id="pitfall-3-flattening-b2b-pricing-discounts-and-purchase-rules"></a>
+### Pitfall 3: Flattening Pricing, Discounts, and Purchase Rules <a href="#pitfall-3-flattening-pricing-discounts-and-purchase-rules" id="pitfall-3-flattening-pricing-discounts-and-purchase-rules"></a>
 
 #### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-Pricing records migrate, but the migrated store does not reproduce the logic that determined what different buyers were allowed to pay or buy. Quantity discounts, customer-group pricing, customer-specific price lists, coupons, promotions, tax exemptions, minimum order quantities, and payment terms may conflict or lose priority.
+Pricing records migrate, but the migrated store does not reproduce the logic that determines what different buyers are allowed to pay or buy. Quantity discounts, customer-group pricing, customer-specific price lists, coupons, promotions, tax exemptions, minimum order quantities, and payment terms may conflict or lose priority.
 
 The danger is not only a wrong price on one product. It is a loss of trust in the store’s commercial rules. A buyer who sees an incorrect wholesale price, an unexpected minimum order requirement, or a missing payment method may treat the new store as unreliable.
 
 #### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-* Pricing rules are scattered across products, customer records, spreadsheets, apps, manual quotes, or staff knowledge.
+* Pricing rules are scattered across products, customer records, spreadsheets, manual quotes, apps, or staff knowledge.
 * The same product can have retail pricing, quantity pricing, group pricing, and customer-specific pricing.
 * Promotions and coupons are validated separately from customer groups and product pricing.
 * Payment terms are treated as checkout settings only, without checking customer eligibility.
@@ -90,11 +103,11 @@ Use Advanced Data Mapping or Advanced Data Configure only when the requirement f
 
 #### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-A business that sells the same product to retail customers, wholesale customers, and named contract buyers should test all three buyer contexts for the same SKU. The review should compare product page price, quantity break behavior, checkout total, tax handling, coupon eligibility, and allowed payment methods.
+A business that sells the same product to retail customers, wholesale customers, and named contract buyers should test all three buyer contexts for the same SKU. The review should compare product-page price, quantity-break behavior, checkout total, tax handling, coupon eligibility, and allowed payment methods.
 
 #### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-Pricing passes when the same representative products produce the expected price, discount, tax, shipping, and payment outcomes for each relevant buyer type.
+Pricing passes when representative products produce the expected price, discount, tax, shipping, and payment outcomes for each relevant buyer type.
 
 ### Pitfall 4: Preserving Orders Without Preserving Operational Context <a href="#pitfall-4-preserving-orders-without-preserving-operational-context" id="pitfall-4-preserving-orders-without-preserving-operational-context"></a>
 
@@ -132,7 +145,7 @@ An order passes when staff can understand what was bought, by whom, at what pric
 
 The migrated store contains products, categories, and pages, but important URLs, metadata, redirects, internal links, or content paths are incomplete. Search visibility, bookmarked links, campaign links, and customer navigation can suffer even when the visible catalog appears usable.
 
-Shift4Shop provides SEO and storefront management capabilities, but migration planning still needs a deliberate route and content review. Source URLs, custom slugs, category paths, product URLs, CMS Pages, Blog Posts, policy pages, and high-value landing pages should be checked before launch.
+Shift4Shop provides storefront and SEO management capabilities, but migration planning still needs deliberate route and content review. Source URLs, custom slugs, category paths, product URLs, CMS Pages, Blog Posts, policy pages, and high-value landing pages should be checked before launch.
 
 #### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
@@ -146,7 +159,7 @@ Shift4Shop provides SEO and storefront management capabilities, but migration pl
 
 Create a URL and content inventory before migration. Identify high-value product URLs, category URLs, CMS Pages, Blog Posts, policy pages, external backlinks, paid-campaign landing pages, and old routes that customers or search engines still use.
 
-After Demo Migration, compare important source paths against their Shift4Shop destinations. Confirm whether redirects, metadata, page content, menus, and internal links support the launch plan. Treat SEO and route review as a launch-readiness requirement, not as a cosmetic cleanup after migration.
+After Demo Migration, compare important source paths against their Shift4Shop destinations. Confirm whether redirects, metadata, page content, menus, and internal links support the launch plan. Treat SEO and route review as launch-readiness work, not cosmetic cleanup after migration.
 
 #### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
@@ -162,7 +175,7 @@ SEO and route handling pass when important pages have intended destination paths
 
 The migration plan treats integration-owned, app-owned, extension-owned, or custom-field data as ordinary store data. After migration, records may appear incomplete because the meaning depended on an external system, source-side extension, marketplace connector, fulfillment system, ERP, CRM, accounting platform, subscription service, search tool, or custom workflow.
 
-This pitfall is common when the Source Platform has accumulated operational workarounds over time. A field may look like product information, customer data, or order history, but its real function may be controlled outside the platform’s native data model.
+This pitfall is common when the Source Platform accumulated operational workarounds over time. A field may look like product information, customer data, or order history, but its real function may be controlled outside the platform’s native data model.
 
 #### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
@@ -240,7 +253,7 @@ Treat late-stage changes as a controlled launch risk. Revalidate affected produc
 
 #### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-A merchant that continues selling during migration should track new orders, new customers, catalog edits, inventory-sensitive changes, and pricing updates after the main migration run. The final launch review should confirm that these changes are either migrated, manually recreated, intentionally excluded, or scheduled for post-launch handling.
+A merchant that continues selling during migration should track new orders, new customers, catalog edits, inventory-sensitive changes, and pricing updates after the main migration run. The final launch review should confirm that these changes are migrated, manually recreated, intentionally excluded, or scheduled for post-launch handling.
 
 #### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
