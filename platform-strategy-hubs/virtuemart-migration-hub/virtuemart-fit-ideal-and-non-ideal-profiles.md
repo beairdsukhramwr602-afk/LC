@@ -84,7 +84,7 @@ These stores require deeper discovery before migration. Custom Platform data, be
 
 #### Projects targeting unconfirmed Joomla-version behavior <a href="#projects-targeting-unconfirmed-joomla-version-behavior" id="projects-targeting-unconfirmed-joomla-version-behavior"></a>
 
-VirtueMart 4.6.4 should be treated as the stable release baseline for migration planning. If a merchant wants to target a Joomla environment beyond the stable support range, version compatibility should be confirmed before execution.
+If a merchant wants to target a Joomla environment beyond the stable support range, version compatibility should be confirmed before execution.
 
 Beta or future VirtueMart development may matter for roadmap awareness, but it should not be treated as the migration target unless the merchant deliberately accepts the risk of planning around non-stable behavior. For most migration projects, stable target behavior should control planning, validation, and service-path selection.
 
@@ -118,7 +118,7 @@ A merchant that expects full storefront replication without Joomla design/config
 
 #### Confirm the Joomla and VirtueMart version strategy <a href="#confirm-the-joomla-and-virtuemart-version-strategy" id="confirm-the-joomla-and-virtuemart-version-strategy"></a>
 
-The first fit question is whether the target environment is stable and clearly defined. VirtueMart 4.6.4 is the stable release baseline for migration planning, so projects targeting a different VirtueMart or Joomla combination should confirm compatibility before execution.
+The first fit question is whether the target environment is stable and clearly defined. Projects targeting a different VirtueMart or Joomla combination should confirm compatibility before execution.
 
 Older operational VirtueMart installations may still support active businesses, but older behavior should not be assumed to match the current stable release. A migration into an older target installation should be reviewed as a version-specific project.
 

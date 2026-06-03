@@ -89,7 +89,7 @@ Deeper planning is needed when VirtueMart migration depends on structures that a
 
 #### Version and Joomla compatibility <a href="#version-and-joomla-compatibility" id="version-and-joomla-compatibility"></a>
 
-VirtueMart 4.6.4 should be treated as the stable release baseline for migration planning. If the project targets an older VirtueMart installation, the Joomla version, VirtueMart version, installed plugins, templates, and customizations should be checked before migration expectations are set. Older stores may still operate, but their behavior may not match the stable release baseline.
+When the project targets an older VirtueMart installation, the Joomla version, VirtueMart version, installed plugins, templates, and customizations should be checked before migration expectations are set. Older stores may still operate, but their behavior may not match the stable release baseline.
 
 Joomla 6 compatibility should be verified separately when it matters to the target environment. Beta or future-version work should not be treated as stable target behavior. If the target project depends on non-stable compatibility assumptions, that requirement should be reviewed before execution.
 
@@ -158,7 +158,7 @@ Demo Migration should not be judged only by record counts. Useful samples should
 
 VirtueMart migration should be planned as a move into a Joomla-based commerce component with deep catalog, shopper, calculation, payment, shipment, storefront, and customization layers. The strongest results come from understanding how products, child products, custom fields, shopper groups, taxes, discounts, orders, invoices, payment methods, shipment methods, multilingual records, currencies, templates, modules, and routes should work inside the intended target installation.
 
-VirtueMart 4.6.4 provides the stable release baseline for migration planning, while older operational installations and future Joomla compatibility requirements should be reviewed separately. When the source store is clean and the target VirtueMart structure is clear, migration can be relatively direct. When the store depends on complex product relationships, calculation rules, custom fields, plugins, templates, or third-party logic, stronger mapping, configuration review, Demo Migration validation, and Custom Service assessment may be needed.
+When the source store is clean and the target VirtueMart structure is clear, migration can be relatively direct. When the store depends on complex product relationships, calculation rules, custom fields, plugins, templates, or third-party logic, stronger mapping, configuration review, Demo Migration validation, and Custom Service assessment may be needed.
 
 Use Demo Migration results to confirm whether VirtueMart preserves the store’s operating meaning, not only whether products, customers, and orders appear. When product relationships, shopper groups, custom fields, calculation rules, payment or shipment plugins, multilingual records, or custom Joomla behavior affect the expected outcome, review the migration path through Live Chat before Full Migration so the right Standard Service, Managed Service, Custom Service, and Add-on boundaries are clear.
 
@@ -170,7 +170,7 @@ VirtueMart operates as a Joomla commerce component. Products, categories, checko
 
 **Which VirtueMart version should be used for migration planning?**
 
-VirtueMart 4.6.4 is the stable release baseline for migration planning. Older VirtueMart installations may still operate, but their behavior should be checked against the intended target installation. Joomla 6 compatibility should be verified separately when the target environment depends on it.
+Older VirtueMart installations may still operate, but their behavior should be checked against the intended target installation. Joomla 6 compatibility should be verified separately when the target environment depends on it.
 
 **Can product variants migrate to VirtueMart?**
 

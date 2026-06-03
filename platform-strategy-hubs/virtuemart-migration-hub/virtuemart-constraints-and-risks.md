@@ -24,7 +24,7 @@ VirtueMart is a Joomla e-commerce component, so migration risk is not limited to
 
 **Description**
 
-VirtueMart migration planning must start with the intended VirtueMart and Joomla versions. VirtueMart 4.6.4 is the stable release baseline for current planning, while older VirtueMart installations may still operate when their Joomla environment, PHP version, template stack, and extensions remain functional. Risk appears when a migration project assumes that every older VirtueMart source or target behaves like the stable release.
+VirtueMart migration planning must start with the intended VirtueMart and Joomla versions. Older VirtueMart installations may still operate when their Joomla environment, PHP version, template stack, and extensions remain functional. Risk appears when a migration project assumes that every older VirtueMart source or target behaves like the stable release.
 
 Joomla 6 adds a separate compatibility concern. Stable VirtueMart 4 migration planning should not assume Joomla 6 behavior unless the target environment, VirtueMart version, and extension stack have been verified for that use.
 
@@ -198,7 +198,7 @@ Use Demo Migration to test the VirtueMart structures that carry real business me
 
 **Why is VirtueMart version confirmation important before migration?**
 
-VirtueMart behavior depends on the intended VirtueMart version, Joomla version, PHP environment, template layer, and extension stack. VirtueMart 4.6.4 provides the stable release baseline for current migration planning, but older operational stores and future compatibility targets should be reviewed separately before execution.
+VirtueMart behavior depends on the intended VirtueMart version, Joomla version, PHP environment, template layer, and extension stack. Older operational stores and future compatibility targets should be reviewed separately before execution.
 
 **What makes parent and child products risky in VirtueMart migration?**
 
