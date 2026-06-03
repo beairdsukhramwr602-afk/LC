@@ -98,7 +98,7 @@ This constraint affects stores with configurable products, variant image behavio
 
 #### Mitigation Strategy <a href="#mitigation-strategy-3" id="mitigation-strategy-3"></a>
 
-Select product samples that expose the catalog's meaning. A useful Demo Migration sample should include simple products, variant-heavy products, image-rich products, products with downloads, products assigned to multiple categories, products with custom fields, products with inventory rules, and products that depend on filters or manufacturer context.
+Select product samples that expose the catalog’s meaning. A useful Demo Migration sample should include simple products, variant-heavy products, image-rich products, products with downloads, products assigned to multiple categories, products with custom fields, products with inventory rules, and products that depend on filters or manufacturer context.
 
 Product validation should confirm the shopper-facing result and the administrator-facing result. The record should be sellable, understandable, searchable, filterable, and manageable inside J2Commerce 6.
 

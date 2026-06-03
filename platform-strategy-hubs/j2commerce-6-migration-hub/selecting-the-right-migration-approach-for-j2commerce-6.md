@@ -1,4 +1,4 @@
-# J2Commerce 6 Selecting the Right Migration Approach
+# Selecting the Right Migration Approach for J2Commerce 6
 
 Choosing the right migration approach for J2Commerce 6 depends on more than the number of products, customers, and orders being moved. J2Commerce 6 is a native Joomla 6 e-commerce platform with a new architecture, a modern plugin and event model, Bootstrap 5 and UIkit 3 storefront rendering options, REST API support, and a different implementation profile from legacy J2Store v4. The right approach should therefore reflect both the data being migrated and the target environment that will interpret that data after migration.
 
@@ -151,7 +151,7 @@ After Demo Migration, the approach should be escalated if the merchant sees reco
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right J2Commerce 6 migration approach should align with the project's true burden: source structure, Joomla 6 readiness, v4 migration context, plugin replacement, storefront rendering, API needs, and custom data interpretation. Standard Service can work well for clean supported data and a clear target configuration. Managed Service is safer when the migration remains standard, but the merchant wants Next-Cart-led execution. Custom Service is required when the project depends on Custom Platform handling, unsupported extension data, custom fields, bespoke transformation, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+The right J2Commerce 6 migration approach should align with the project’s true burden: source structure, Joomla 6 readiness, v4 migration context, plugin replacement, storefront rendering, API needs, and custom data interpretation. Standard Service can work well for clean supported data and a clear target configuration. Managed Service is safer when the migration remains standard, but the merchant wants Next-Cart-led execution. Custom Service is required when the project depends on Custom Platform handling, unsupported extension data, custom fields, bespoke transformation, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
 
 Use Demo Migration to test whether the selected migration approach is strong enough before Full Migration. If the sample exposes unclear plugin behavior, unsupported custom data, storefront implementation gaps, or source logic that cannot be handled through standard service capabilities and applicable Add-ons, review the migration path through Live Chat before continuing.
 

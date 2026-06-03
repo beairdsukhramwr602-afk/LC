@@ -4,7 +4,7 @@ J2Commerce 6 migrations can produce strong results when the project is planned a
 
 The most damaging mistakes usually happen when the project is treated as a simple record transfer. Products, orders, customers, coupons, shipping methods, payment methods, tax data, storefront layouts, and integrations may all appear familiar, but J2Commerce 6 does not behave like a lightly renamed J2Store v4 installation. It has a different foundation, different extension expectations, and different validation requirements.
 
-This article focuses on recurring failure patterns that should be prevented before Full Migration or launch. Each pitfall explains what goes wrong, how to detect it early, how to prevent it, what a practical recommendation looks like, and what must be true before the issue can be considered resolved.
+The recurring failure patterns below should be prevented before Full Migration or launch. Each pitfall explains what goes wrong, how to detect it early, how to prevent it, what a practical recommendation looks like, and what must be true before the issue can be considered resolved.
 
 ### Pitfall 1: Treating J2Commerce 6 as a Minor J2Store Version Change <a href="#pitfall-1-treating-j2commerce-6-as-a-minor-j2store-version-change" id="pitfall-1-treating-j2commerce-6-as-a-minor-j2store-version-change"></a>
 

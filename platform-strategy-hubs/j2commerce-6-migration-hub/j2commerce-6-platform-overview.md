@@ -4,7 +4,7 @@ J2Commerce 6 is a modern Joomla 6 e-commerce component built for merchants, deve
 
 A migration to J2Commerce 6 should therefore be planned as a move into a modern Joomla 6 commerce foundation. The migration result must preserve more than product names, customer records, and order totals. Products should remain sellable. Variants should remain understandable. Customer accounts and addresses should remain useful. Orders should preserve commercial meaning. Checkout should work inside the selected frontend framework. Payment and shipping behavior should be reviewed against the J2Commerce 6 plugin model rather than assumed from an older J2Store installation.
 
-This hub focuses on J2Commerce 6 as a Target Platform. J2Store v4 appears only where legacy continuity matters, especially for merchants moving from J2Store v4 into J2Commerce 6 through the dedicated migrator or replacing older J2Store-era plugins and customizations.
+J2Commerce 6 should be evaluated as the Target Platform in its own right. J2Store v4 matters when legacy data, old plugin behavior, or the v4-to-v6 migrator shapes the migration plan.
 
 ### What Changes in a Migration to J2Commerce 6 <a href="#what-changes-in-a-migration-to-j2commerce-6" id="what-changes-in-a-migration-to-j2commerce-6"></a>
 
@@ -110,7 +110,7 @@ A strong J2Commerce 6 migration starts by defining the future target, not only b
 
 J2Commerce 6 should be understood as its own target generation. It may inherit the Joomla commerce lineage, but it uses a different foundation from J2Store v4. This affects plugin compatibility, target environment requirements, frontend behavior, developer assumptions, and validation priorities.
 
-For this hub, J2Store v4 matters mainly when it is the source or when its legacy plugin and data assumptions affect the migration. The target experience should be planned around J2Commerce 6 behavior.
+J2Store v4 matters mainly when it is the source or when its legacy plugin and data assumptions affect the migration. The target experience should be planned around J2Commerce 6 behavior.
 
 #### 2. Demo Migration should test architecture-sensitive meaning <a href="#id-2-demo-migration-should-test-architecture-sensitive-meaning" id="id-2-demo-migration-should-test-architecture-sensitive-meaning"></a>
 

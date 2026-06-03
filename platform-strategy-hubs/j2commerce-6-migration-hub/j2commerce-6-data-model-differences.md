@@ -165,7 +165,7 @@ For merchants migrating from J2Store v4, J2Commerce 6 has a specific continuity 
 
 #### The v4 migrator creates a traceable transition layer <a href="#the-v4-migrator-creates-a-traceable-transition-layer" id="the-v4-migrator-creates-a-traceable-transition-layer"></a>
 
-The uploaded v6 sources describe a migrator that reads existing J2Store v4 data, writes to new J2Commerce 6 tables, supports dry-run review, and uses idmap tracking while leaving original J2Store tables untouched. This matters because migrated data can be traced back to its source origin during review.
+The v4-to-v6 migration path reads existing J2Store v4 data, writes to new J2Commerce 6 tables, supports dry-run review, and uses idmap tracking while leaving original J2Store tables untouched. This matters because migrated data can be traced back to its source origin during review.
 
 Traceability helps with troubleshooting, rollback planning, cutover confidence, and partial-failure diagnosis. However, traceability does not automatically prove business correctness. A migrated product with an idmap record still needs validation for variant behavior, image handling, category placement, pricing, stock, and storefront display.
 

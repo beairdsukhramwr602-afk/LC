@@ -136,7 +136,7 @@ Validate product list pages, product detail pages, category views, cart, checkou
 
 If the site uses custom overrides or a different frontend framework, validation should include those overrides directly. Custom storefront work should not be assumed from migrated data.
 
-#### API, web services, and integrations need end-to-end checks <a href="#api-webservices-and-integrations-need-end-to-end-checks" id="api-webservices-and-integrations-need-end-to-end-checks"></a>
+#### API, web services, and integrations need end-to-end checks <a href="#api-web-services-and-integrations-need-end-to-end-checks" id="api-web-services-and-integrations-need-end-to-end-checks"></a>
 
 For merchants using ERP, warehouse, BI, mobile app, headless, marketplace, analytics, or AI-assisted workflows, validation should include API and integration behavior. Confirm which identifiers must remain stable, which records need to sync, which write operations are allowed, and whether downstream systems understand the migrated data.
 
