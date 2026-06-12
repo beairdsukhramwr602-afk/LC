@@ -52,7 +52,7 @@
   * [Magento Platform Overview](platform-strategy-hubs/magento-migration-hub/magento-platform-overview.md)
   * [Magento Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/magento-migration-hub/magento-fit-ideal-and-non-ideal-profiles.md)
   * [Magento Data Model Differences](platform-strategy-hubs/magento-migration-hub/magento-data-model-differences.md)
-  * [Magento Constraints and Risks](platform-strategy-hubs/magento-migration-hub/magento-constraints-and-risks.md)
+  * [Magento Constraints and Migration Risks](platform-strategy-hubs/magento-migration-hub/magento-constraints-and-migration-risks.md)
   * [Magento Pre-Migration Preparation Checklist](platform-strategy-hubs/magento-migration-hub/magento-pre-migration-preparation-checklist.md)
   * [Selecting the Right Migration Approach for Magento](platform-strategy-hubs/magento-migration-hub/selecting-the-right-migration-approach-for-magento.md)
   * [Magento Validation Priorities](platform-strategy-hubs/magento-migration-hub/magento-validation-priorities.md)

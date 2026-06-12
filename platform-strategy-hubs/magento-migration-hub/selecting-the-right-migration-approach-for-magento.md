@@ -1,198 +1,182 @@
 # Selecting the Right Migration Approach for Magento
 
-Choosing the right Magento migration approach is not mainly a record-count decision. It is a judgment about how much structural interpretation, execution support, and bespoke handling the migration needs before the Magento target can be trusted.
+Choosing the right migration approach for Magento depends less on store size alone and more on how the store expects Magento to behave after migration. Magento can support simple catalogs, but it is also commonly selected for scoped storefronts, configurable products, attribute-rich catalogs, customer-group logic, multi-source inventory, URL rewrite continuity, extension-based operations, and custom business workflows. Those strengths also create planning responsibility.
 
-Magento can support a richer target structure than many lighter platforms. Product types, attributes, attribute sets, website/store/store-view scope, customer groups, URL rewrites, extensions, custom fields, and operational workflows can all carry real commercial meaning. That flexibility is valuable, but it also means the safest migration approach is the one that matches the actual interpretation burden of the project.
+A Magento migration should therefore be planned as a service decision, not only as a data-transfer decision. The right approach should answer four questions before Full Migration: what data needs to move, how that data should behave in Magento, which parts fit a standard migration path, and where Next-Cart should provide additional configuration, mapping, filtering, review, or custom handling.
 
-This article explains how to decide whether **Standard Service**, **Managed Service**, **Custom Service**, or selected **Add-ons** are the right fit for a Magento migration.
+### Start with Magento Complexity, Not Only Entity Volume <a href="#start-with-magento-complexity-not-only-entity-volume" id="start-with-magento-complexity-not-only-entity-volume"></a>
 
-### What Approach Means in a Magento Migration <a href="#what-approach-means-in-a-magento-migration" id="what-approach-means-in-a-magento-migration"></a>
+Entity volume matters because it affects the service license and Entity Points Plan, but Magento complexity is often created by relationships rather than count alone. A small catalog with multilingual store views, configurable products, extension-owned attributes, custom URLs, and ERP identifiers can require more service planning than a larger single-store catalog with simple products and ordinary customer/order history.
 
-For Magento, the migration approach defines how much responsibility, guidance, and customization the project requires to preserve business meaning safely.
+Use the first review to separate quantity from complexity.
 
-The core question is not simply whether Magento can receive the data. The better question is whether the migrated result will behave correctly inside Magento’s product, catalog, customer, scope, URL, and extension structure.
+| Review area                 | Lower-complexity signal                                                 | Higher-complexity signal                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Catalog structure           | Mostly simple products with ordinary categories and media.              | Configurable, bundle, grouped, downloadable, virtual, or heavily customized product structures.                      |
+| Attribute model             | Clean product fields with consistent labels and option values.          | Many custom attributes, duplicate values, layered-navigation requirements, or attribute-set decisions.               |
+| Store scope                 | One website, one store, one store view.                                 | Multiple websites, stores, store views, languages, localized URLs, or scope-specific values.                         |
+| Customer and order context  | Customer records and orders are needed mainly for historical reference. | Customer groups, B2B-like segmentation, external identifiers, custom order fields, or integration-dependent history. |
+| Inventory                   | Single-source inventory with straightforward quantities.                | Multiple sources, warehouses, pickup locations, dropshippers, reservations, or external stock synchronization.       |
+| Extensions and custom logic | Source data mostly uses native structures.                              | Source extensions, custom modules, custom tables, or business rules determine data meaning.                          |
 
-#### The decision should focus on structural burden <a href="#the-decision-should-focus-on-structural-burden" id="the-decision-should-focus-on-structural-burden"></a>
+The selected approach should match the highest-risk parts of the store, not the easiest parts. A Magento project can still use a Standard Service path for compatible entities while using Add-ons or Custom Service for specific sections that need additional handling.
 
-A Magento migration usually needs a stronger approach when the project depends on unclear or high-impact decisions such as:
+### When Standard Service Is the Right Starting Point <a href="#when-standard-service-is-the-right-starting-point" id="when-standard-service-is-the-right-starting-point"></a>
 
-* which products should become simple, configurable, grouped, bundle, virtual, or downloadable products
-* which attributes should be visible, searchable, filterable, comparable, or administrative
-* how attribute sets should reflect product-family governance
-* where content and settings should belong across websites, stores, and store views
-* how customer groups should preserve pricing, tax, visibility, or account context
-* how high-value URLs should resolve after migration
-* whether extension-owned or custom-field behavior needs special interpretation
+Standard Service is usually the right starting point when the source store data fits supported entities and the target Magento store can accept those entities without significant custom interpretation. It is suitable when the merchant wants to self-perform the migration process on the Next-Cart website, review Demo Migration results, and proceed to Full Migration after confirming that representative records behave correctly.
 
-If those decisions are already clear and the supported migration path is straightforward, the approach can often stay lighter. If they are unresolved, the approach should become more guided or more customized.
+Standard Service is most appropriate when:
 
-### How Magento’s Structure Affects Service Choice <a href="#how-magento-s-structure-affects-service-choice" id="how-magento-s-structure-affects-service-choice"></a>
+* products, categories, customers, orders, images, manufacturers, CMS Pages, Blog Posts, or other selected entities fit a supported migration path;
+* the target Magento structure is already prepared or simple enough to validate through Demo Migration;
+* product types and variant behavior are clear enough for standard mapping;
+* attributes do not require heavy restructuring beyond ordinary mapping decisions;
+* inventory does not depend on custom source logic or unsupported external systems;
+* customer and order history can be migrated for reference without recreating every source-side workflow;
+* SEO and URL expectations are documented and can be validated with representative samples;
+* no source extension or custom module controls critical business meaning that must be preserved exactly.
 
-Magento approach selection should match the target’s structural pressure.
+Standard Service should not be misread as a shallow option. It can be appropriate for substantial Magento stores when their data structures are compatible and the merchant can validate results with confidence. The important boundary is responsibility: Standard Service is not a substitute for unsupported custom logic review, extension-data interpretation, or bespoke target behavior planning.
 
-A store with a small catalog can still require Custom Service if its products depend on complex builders, source-side custom logic, or undocumented fields. A larger catalog can still fit Standard Service when the structure is clear, the source platform is supported, and the customer can validate results confidently.
+### When Managed Service Is the Better Fit <a href="#when-managed-service-is-the-better-fit" id="when-managed-service-is-the-better-fit"></a>
 
-#### A practical decision frame <a href="#a-practical-decision-frame" id="a-practical-decision-frame"></a>
+Managed Service is better when the migration path is compatible but the merchant wants Next-Cart to handle more of the migration process, coordination, review, or execution support. This is common when the store has many entities, a tight launch schedule, limited internal migration capacity, or a need for guided handling of Demo Migration, Full Migration, Recent Data Migration, Re-Migration, and validation follow-up.
 
-Use the following frame before choosing the approach:
+Managed Service is a strong fit when:
 
-* **Standard Service** fits when the migration path is supported, the structure is clear, and the customer can manage execution and review.
-* **Managed Service** fits when the migration still stays within standard service capability, but the customer wants Next-Cart to carry more execution responsibility.
-* **Custom Service** fits when the migration requires customization, modification, Custom Platform handling, transformation, extension-aware interpretation, or custom migration logic adjustment.
-* **Add-ons** fit when optional filtering, mapping, or configuration features support a defined need without replacing broader Custom Service work.
+* the merchant wants Next-Cart to manage the migration flow rather than self-performing each step;
+* the catalog is large enough that review coordination matters;
+* the store has multiple entity types and launch dependencies;
+* Demo Migration findings need structured interpretation before Full Migration;
+* final launch requires Recent Data Migration to capture newly created records after the initial Full Migration;
+* Re-Migration may be needed after configuration changes, mapping adjustments, or scope corrections;
+* stakeholders need clearer ownership for timing, checklist completion, and post-migration review.
 
-The approach should be selected after reviewing representative migration evidence, not only after reading platform capability descriptions.
+Managed Service is not automatically the same as Custom Service. A Magento store can be suitable for Managed Service because of operational burden, not because its data is structurally custom. Conversely, a store can require Custom Service even if the merchant is willing to self-perform the accessible migration steps, because the issue is unsupported logic rather than process ownership.
 
-### Standard Service for Magento <a href="#standard-service-for-magento" id="standard-service-for-magento"></a>
+### When Custom Service Should Be Reviewed <a href="#when-custom-service-should-be-reviewed" id="when-custom-service-should-be-reviewed"></a>
 
-Standard Service can be the right Magento approach when the store’s structure is already clear enough for a supported migration path and the customer can take an active role in migration execution and validation.
+Custom Service should be reviewed when the migration depends on structures or business logic that are not safe to treat as standard entity transfer. In Magento projects, this often happens when source data was created by extensions, custom modules, bespoke database tables, marketplace integrations, subscriptions, loyalty systems, quote workflows, ERP/PIM/WMS identifiers, or heavily modified open-source behavior.
 
-This approach is usually strongest when Magento is not being used to reinterpret unclear business logic. It works best when the customer already understands how the Source Platform data should become Magento data.
+Custom Service may be needed when:
 
-#### Standard Service is often suitable when <a href="#standard-service-is-often-suitable-when" id="standard-service-is-often-suitable-when"></a>
+* a Custom Platform source context is involved;
+* source product relationships do not map cleanly into Magento product types;
+* configurable, bundle, grouped, or custom-option behavior depends on nonstandard source logic;
+* source attributes are owned by extensions or custom tables;
+* customer groups, company-like structures, pricing rules, permissions, or tax behavior depend on custom logic;
+* order history contains custom fields that staff must continue to use operationally;
+* inventory depends on external systems, warehouse logic, reservations, marketplace stock, or custom fulfillment rules;
+* URLs, redirects, or SEO structures require bespoke handling beyond ordinary migration settings;
+* target Magento extensions expect data in a specific structure that standard migration cannot guarantee;
+* outside-system identifiers must be preserved for post-launch integrations.
 
-* the Source Platform is supported for the selected migration path
-* high-risk products translate clearly into Magento’s native product types
-* attributes and attribute sets are already well classified
-* website, store, and store-view scope decisions are already understood
-* customer groups are documented and realistic
-* URL priorities are known and manageable
-* extension-owned or custom-field behavior is limited or not business-critical
-* the customer can operate the migration flow and review Demo Migration results carefully
-* the project does not require custom migration logic adjustment
+Custom Service should be scoped before it is promised. Some custom needs are narrow, such as preserving a specific external product ID. Others are broad, such as interpreting subscription history from a source extension and making it meaningful for a target Magento subscription extension. The service plan should distinguish which custom data can be migrated, which should be rebuilt manually, which should be excluded, and which should remain historical reference only.
 
-Standard Service should not be chosen simply because the store is small. Magento risk often comes from structure, not only size.
+### Use Add-ons for Filtering, Mapping, and Configuration Needs <a href="#use-add-ons-for-filtering-mapping-and-configuration-needs" id="use-add-ons-for-filtering-mapping-and-configuration-needs"></a>
 
-### Managed Service for Magento <a href="#managed-service-for-magento" id="managed-service-for-magento"></a>
+Add-ons are optional service features that adjust how compatible migration data is filtered, mapped, or configured. They are not the same as Custom Service. In Magento planning, Add-ons are useful when the data is structurally compatible but the merchant needs more control over what moves, how fields align, or how target records are configured.
 
-Managed Service is often the stronger option when Magento remains the right Target Platform, but the customer does not want the migration outcome to depend heavily on internal execution capacity.
+| Need                             | Likely service feature  | Magento example                                                                                                                  |
+| -------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Exclude obsolete records         | Data Filter Add-on      | Migrate only active products, selected order statuses, specific customer groups, or recent historical orders.                    |
+| Align fields more precisely      | Advanced Data Mapping   | Map source custom fields into Magento-compatible product attributes, customer fields, or order reference fields where supported. |
+| Adjust target data configuration | Advanced Data Configure | Apply agreed configuration behavior for selected migrated records when compatible with the approved migration path.              |
+| Handle unsupported structures    | Custom Service          | Review extension-owned records, custom tables, bespoke logic, Custom Platform source data, or outside-system identifiers.        |
 
-This approach reduces operational burden while keeping the project within standard service capability. It can be useful when the customer can provide business decisions and validation feedback, but wants Next-Cart to handle more of the migration execution process.
+The difference matters because Add-ons help shape compatible migration work, while Custom Service evaluates unsupported or bespoke requirements. A Magento project may use both, but the scope should be explicit. For example, filtering inactive products can be an Add-on decision, while migrating product logic from a custom configurator may require Custom Service review.
 
-#### Managed Service is often suitable when <a href="#managed-service-is-often-suitable-when" id="managed-service-is-often-suitable-when"></a>
+### Plan Entity Points Around Scope and Business Value <a href="#plan-entity-points-around-scope-and-business-value" id="plan-entity-points-around-scope-and-business-value"></a>
 
-* the Magento target model is mostly clear, but the project needs closer execution coordination
-* product-type, attribute, scope, or customer-group review requires more guided handling
-* the customer wants Next-Cart-led execution while the internal team focuses on approval and launch judgment
-* the store has meaningful structural complexity but does not require bespoke transformation
-* Demo Migration results are understandable but need expert-supported interpretation
-* the migration still fits standard service capability
+The Entity Points Plan should reflect the selected entities and expected migration scope. For Magento, entity planning should avoid two mistakes: counting everything without business judgment, and reducing scope so aggressively that the target store loses operational value.
 
-Managed Service is not the same as Custom Service. It can reduce the customer’s operational workload, but it does not automatically include custom transformation, extension-specific rebuilding, custom field interpretation, outside-system logic handling, or custom migration logic adjustment.
+Entity planning should classify data into four groups.
 
-### Custom Service for Magento <a href="#custom-service-for-magento" id="custom-service-for-magento"></a>
+| Entity group                | Recommended treatment                                                                                                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Core launch data            | Products, categories, customers, orders, images, URLs, CMS Pages, Blog Posts, or other entities needed for launch should be included when compatible and valuable.       |
+| Useful but selective data   | Old orders, inactive products, legacy customers, obsolete pages, or retired categories may be filtered by date, status, category, language, or business value.           |
+| Structurally uncertain data | Extension-owned fields, custom tables, external IDs, or unusual relationship data should be reviewed before inclusion.                                                   |
+| Low-value legacy noise      | Duplicate attributes, obsolete campaign pages, unused categories, broken media, and retired custom fields should often be excluded or archived outside the target store. |
 
-Custom Service is the safer approach when the Magento migration requires customization, modification, or bespoke handling beyond standard service capability.
+Magento rewards clean structure. Migrating less data can be the right decision when excluded data would create attribute clutter, weak navigation, confusing customer records, or unusable order history. Migrating more data can also be the right decision when historical continuity, support workflows, SEO preservation, or integration references are commercially important. The Entity Points Plan should support the intended operating model, not a reflexive all-or-nothing transfer.
 
-This is common when the migration must preserve business behavior that cannot be handled as straightforward source-to-target transfer. Magento can represent sophisticated structures, but the source data may still need interpretation before it can become useful inside Magento.
+### Use Demo Migration to Confirm the Approach <a href="#use-demo-migration-to-confirm-the-approach" id="use-demo-migration-to-confirm-the-approach"></a>
 
-#### Custom Service is often needed when <a href="#custom-service-is-often-needed-when" id="custom-service-is-often-needed-when"></a>
+Demo Migration should test the selected approach before Full Migration. For Magento, a useful Demo Migration sample should not be random. It should include the records most likely to expose product-type, scope, attribute, URL, inventory, customer, order, extension, and mapping issues.
 
-* the Source Platform is a Custom Platform
-* source-side product logic does not map cleanly into Magento product types
-* attributes, attribute sets, product options, or custom fields need transformation
-* website, store, or store-view scope needs special handling
-* customer groups, price logic, tax context, or visibility rules require interpretation
-* extension, plugin, module, theme, ERP, CRM, fulfillment, subscription, loyalty, marketplace, analytics, or outside-system data affects continuity
-* selective migration or filtering rules require defined inclusion and exclusion logic
-* legacy URLs, outside-system identifiers, or custom routes require special handling
-* the project needs custom migration logic adjustment
+The sample should include expected outcomes such as:
 
-Custom Service does not automatically mean Next-Cart performs full migration management. Migration management depends on the final service plan. The key point is that customization and modification work itself belongs under Custom Service.
+* a configurable product with its associated simple products, option labels, child SKUs, images, stock behavior, and category placement;
+* a product with rich attributes that should support storefront display, search, filtering, or comparison;
+* localized product or category content assigned to the correct store view;
+* products assigned to multiple categories or websites;
+* customers assigned to different customer groups;
+* orders with discounts, taxes, shipping fees, refunds, cancellations, unusual statuses, or external IDs;
+* high-value product, category, CMS page, and custom URLs that require SEO review;
+* representative inventory cases for single-source or multi-source stock expectations;
+* records connected to source extensions or custom fields.
 
-### How Add-ons Fit into a Magento Migration Approach <a href="#how-add-ons-fit-into-a-magento-migration-approach" id="how-add-ons-fit-into-a-magento-migration-approach"></a>
+Demo Migration should decide whether the selected approach is still valid. If sample records pass, the project can move toward Full Migration with clearer confidence. If samples expose unsupported structures, unclear target configuration, or mismatched expectations, the service plan should be adjusted before scale increases the cost of correction.
 
-Add-ons can support a Magento migration when the project needs optional service features for filtering, mapping, or configuration. They should not be treated as a substitute for Custom Service.
+### Plan Recent Data Migration and Re-Migration Separately <a href="#plan-recent-data-migration-and-re-migration-separately" id="plan-recent-data-migration-and-re-migration-separately"></a>
 
-#### Where Add-ons may help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+Recent Data Migration and Re-Migration solve different problems and should be planned separately.
 
-A **Data Filter Add-on** may be relevant when the customer wants to migrate only selected products, customers, orders, categories, reviews, content, or historical records. **Advanced Data Mapping** or **Advanced Data Configure** may be relevant when mapped fields or target configuration choices need more deliberate handling.
+Recent Data Migration is relevant when the source store remains active after Full Migration and new entities continue to appear before launch. Magento stores often need this because products, customers, orders, reviews, or other live records may change during the launch window. The plan should define what qualifies as recent data, which entities need to be captured, and when the final update should happen.
 
-Add-ons are useful when the requirement is bounded and fits the Add-on’s purpose. When the issue is broader customization, Custom Platform handling, extension-aware interpretation, custom-field transformation, outside-system identifier handling, or custom migration logic adjustment, the safer boundary is Custom Service.
+Re-Migration is relevant when previously migrated data needs to be migrated again because the plan changed, target configuration changed, mapping was corrected, or the merchant intentionally wants to replace earlier migrated data. It should not be treated casually because repeated migration can affect review effort, duplicate handling, target cleanup, and launch timing.
 
-### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
+For Magento, these services are especially important when:
 
-A Demo Migration should not only show that records can appear in Magento. It should help decide whether the planned approach is strong enough for the target’s structural burden.
+* the live source store continues receiving orders close to launch;
+* Demo Migration reveals mapping changes that should be applied before Full Migration;
+* product attributes or store views are restructured after initial testing;
+* inventory logic is clarified after target configuration work;
+* SEO URLs or redirects require revised handling;
+* extension-related records are excluded first and added later after Custom Service review.
 
-For Magento, the Demo Migration should test the records and workflows most likely to expose interpretation risk.
+### Match the Approach to the Real Decision <a href="#match-the-approach-to-the-real-decision" id="match-the-approach-to-the-real-decision"></a>
 
-#### Strong Magento Demo Migration samples should include <a href="#strong-magento-demo-migration-samples-should-include" id="strong-magento-demo-migration-samples-should-include"></a>
+The right Magento migration approach usually falls into one of the following patterns.
 
-* products that expose product-type ambiguity
-* configurable, grouped, bundle, downloadable, virtual, or option-heavy products where relevant
-* attributes used for filtering, comparison, merchandising, administration, or product-family governance
-* attribute sets tied to important product families
-* website, store, and store-view examples where scope affects content or behavior
-* customer groups tied to pricing, tax, discount, visibility, or account context
-* high-value product, category, content, and campaign URLs
-* orders with important tax, shipping, discount, customer, or fulfillment context
-* extension-owned, custom-field, or outside-system-dependent records
-* Custom Platform source samples if the source is not a supported standard platform
+| Migration situation                                                                                                                   | Recommended approach                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Compatible source data, simple target structure, merchant comfortable self-performing migration steps                                 | Standard Service with careful Demo Migration review.                                                  |
+| Compatible source data, larger scope, limited internal capacity, or launch coordination needs                                         | Managed Service with defined validation responsibilities.                                             |
+| Compatible data requiring selective movement or field alignment                                                                       | Standard Service or Managed Service with Add-ons such as Data Filter Add-on or Advanced Data Mapping. |
+| Unsupported structures, extension-owned records, custom modules, external IDs, Custom Platform source data, or bespoke business logic | Custom Service review before approving scope.                                                         |
+| Active source store with new records expected before launch                                                                           | Plan Recent Data Migration as part of launch readiness.                                               |
+| Changed mapping, corrected target configuration, or intentional replacement of earlier migrated data                                  | Plan Re-Migration deliberately, with cleanup and validation expectations.                             |
 
-If these samples migrate cleanly and the customer can validate them confidently, Standard Service or Managed Service may be enough depending on execution responsibility. If they expose structural ambiguity, unclear transformation needs, extension dependency, or Custom Platform interpretation risk, Custom Service should be considered early.
-
-### Signals That the Planned Approach Is Too Light <a href="#signals-that-the-planned-approach-is-too-light" id="signals-that-the-planned-approach-is-too-light"></a>
-
-A Magento migration approach may be too light when the migration plan depends on assumptions that have not been proven.
-
-#### Common warning signs <a href="#common-warning-signs" id="common-warning-signs"></a>
-
-* product types are still being chosen after migration results appear
-* attributes are being migrated as loose fields rather than governed catalog logic
-* attribute sets are inherited without business review
-* website, store, or store-view scope is unclear
-* customer groups affect pricing, tax, discounts, or visibility but are poorly documented
-* URL planning focuses only on whether pages load, not whether destinations preserve intent
-* extension-owned data is treated as ordinary product, customer, order, or category data
-* custom fields are listed but their storefront or operational meaning is not understood
-* Demo Migration differences cannot be classified confidently
-* the Source Platform is a Custom Platform but the project is still being planned like a standard supported migration path
-
-These signals do not always mean Magento is the wrong Target Platform. They usually mean the migration needs stronger guidance, stronger validation, selected Add-ons, or Custom Service handling.
-
-### How Custom Platform Sources Affect Magento Approach Selection <a href="#how-custom-platform-sources-affect-magento-approach-selection" id="how-custom-platform-sources-affect-magento-approach-selection"></a>
-
-When the Source Platform is a Custom Platform, the valid service-path implication is Custom Service.
-
-A Custom Platform source may not follow the standard data model expected from supported platforms. Product types, attribute meaning, customer groups, pricing rules, URL patterns, order relationships, custom fields, and outside-system identifiers may need interpretation before they can become useful in Magento.
-
-#### What should be clarified early <a href="#what-should-be-clarified-early" id="what-should-be-clarified-early"></a>
-
-The early review should clarify:
-
-* which source product structures should become native Magento product types
-* which source fields should become Magento attributes, custom fields, or excluded data
-* whether attribute sets need to be designed rather than inherited
-* how customer groups, pricing, tax, or visibility rules should be represented
-* which custom workflows need migration handling and which should be rebuilt outside the data migration
-* whether source routes, identifiers, or external-system references need special handling
-
-In this situation, the approach decision is not about making the project sound more complex. It is about protecting Magento usability by identifying the parts of the source that need custom handling before they weaken the target.
+The strongest Magento migration approach is rarely the one that promises the most automation. It is the one that correctly separates standard transfer, guided execution, optional Add-ons, custom review, launch updates, and validation responsibility before Full Migration begins.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Magento migration approach is the one that matches the target’s real structural burden. Standard Service can work well when the supported migration path is clear, Magento product and attribute structures are already understood, and the customer can validate the outcome confidently. Managed Service is stronger when the customer wants Next-Cart to carry more execution responsibility while the project still fits standard service capability. Custom Service becomes the safer path when Magento success depends on customization, modification, Custom Platform handling, extension-aware interpretation, custom-field transformation, outside-system identifiers, or custom migration logic adjustment.
+Selecting a Magento migration approach should begin with the store’s real operating structure: product types, attributes, website and store-view scope, customer groups, inventory, URLs, extensions, custom logic, and launch timing. Standard Service, Managed Service, Custom Service, Add-ons, Entity Points, Recent Data Migration, and Re-Migration each answer different planning needs.
 
-Use Demo Migration results to test the Magento structures most likely to expose risk: product types, attributes, attribute sets, scope, customer groups, URL priorities, extension-owned behavior, custom fields, and Custom Platform source logic. If those areas still leave unresolved interpretation questions, use Live Chat to clarify whether Standard Service, Managed Service, Add-ons, or Custom Service is the safer path before moving into Full Migration.
+A reliable Magento migration plan does not force every requirement into one service path. It identifies which parts are structurally compatible, which parts need optional filtering or mapping, which parts require custom review, and which parts must be validated before launch.
+
+Plan your Magento migration with Next-Cart to select the right service approach, confirm the Entity Points Plan, identify Add-ons or Custom Service needs, and validate representative Magento records before Full Migration.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**Is Standard Service enough for Magento?**
+**Is Standard Service enough for a Magento migration?**
 
-Standard Service may be enough when the Source Platform uses a supported migration path, Magento product and attribute structures are clear, scope and customer-group expectations are understood, and the customer can operate and validate the migration confidently.
+Standard Service can be enough when source data fits a supported migration path, the target Magento structure is prepared, and Demo Migration confirms that representative records behave correctly. More complex stores may still need Add-ons, Managed Service, or Custom Service for specific requirements.
 
-**When should I consider Managed Service for Magento?**
+**When should a Magento project use Managed Service?**
 
-Managed Service is useful when the migration still fits standard service capability, but the customer wants Next-Cart to carry more of the execution burden while the internal team focuses on business decisions, review, approval, and launch judgment.
+Managed Service is appropriate when the migration path is compatible but the merchant wants Next-Cart to handle more of the process, coordination, execution support, or review workflow, especially for larger scopes or launch-sensitive projects.
 
-**When does Magento require Custom Service?**
+**Are Add-ons the same as Custom Service?**
 
-Custom Service should be considered when the project requires customization, modification, Custom Platform handling, product-type transformation, attribute or custom-field interpretation, extension-aware handling, filtered logic, outside-system identifier handling, or custom migration logic adjustment.
+No. Add-ons help with filtering, mapping, or data configuration for compatible migration work. Custom Service is used when the requirement involves unsupported structures, custom logic, extension-owned data, Custom Platform source context, or bespoke handling.
 
-**Do Add-ons replace Custom Service for Magento?**
+**Should Recent Data Migration be included in every Magento migration?**
 
-No. Add-ons can support specific optional needs such as filtering, mapping, or configuration. Broader customization, Custom Platform handling, extension-aware interpretation, custom-field transformation, or custom migration logic adjustment belongs under Custom Service.
+Not necessarily. It should be planned when the source store remains active after Full Migration and new or changed records need to be moved before launch.
 
-**What should the Demo Migration prove before choosing the approach?**
+**When is Re-Migration needed for Magento?**
 
-It should prove whether high-risk Magento cases can be migrated and validated safely, including product types, attributes, attribute sets, scope-sensitive records, customer groups, URLs, customers, orders, extension-owned behavior, custom fields, and any Custom Platform source data.
+Re-Migration may be needed when mapping decisions change, target configuration is corrected, migrated data needs to be replaced, or the merchant intentionally wants to rerun part of the migration after reviewing earlier results.

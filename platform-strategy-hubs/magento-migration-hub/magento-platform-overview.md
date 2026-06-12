@@ -6,180 +6,140 @@ metaLinks:
 
 # Magento Platform Overview
 
-Magento is an open-source E-commerce Target Platform for merchants that need strong control over catalog structure, product behavior, attribute governance, storefront scope, extensions, and custom business logic.
+Magento is a flexible e-commerce Target Platform for merchants that need structured catalog control, extensible storefront behavior, configurable operational logic, and room for custom development. A Magento migration should be planned as a move into a commerce environment where products, categories, attributes, customer groups, inventory, URLs, store scope, extensions, and integrations can all affect how migrated records behave after launch.
 
-For migration planning, Magento should not be treated as a simple destination for transferring products, customers, orders, categories, and content. The stronger question is whether Magento can preserve the commercial meaning behind those records: how products are modeled, how attributes drive browsing and merchandising, how websites and store views are governed, how customer groups affect experience, how extensions support storefront behavior, and how high-value URLs or customer-continuity expectations should be handled after launch.
+The most important early planning principle is that Magento is not only a destination for product, customer, and order records. It is a target system with its own data model and operating assumptions. A source product that looks like a simple item in one platform may need to become a configurable product with associated simple products in Magento. A source category may need to fit into a store-specific root category structure. A translated product name may belong at store-view scope rather than global scope. A customer segment may need to preserve pricing, tax, discount, or B2B meaning through customer-group logic.
 
-Magento can be a strong Target Platform when a business needs more structural control than lighter hosted platforms usually provide. It becomes riskier when the source store contains vague product logic, undocumented customizations, inherited extension behavior, unclear scope rules, or catalog structures that have never been deliberately classified.
+Magento can be a strong target when the merchant wants platform control and accepts the planning discipline that comes with that control. The migration should define what can move into standard Magento structures, what must be configured in the target store, what depends on extensions or custom code, and what should be reviewed through Custom Service before scope is finalized.
 
 ### What Changes in a Migration to Magento <a href="#what-changes-in-a-migration-to-magento" id="what-changes-in-a-migration-to-magento"></a>
 
-A migration into Magento often changes how the business thinks about product structure, attributes, catalog governance, storefront scope, customer context, URL continuity, and extension-dependent behavior.
+Moving into Magento changes how store data is organized, extended, displayed, and validated. The target store should be planned as a configured commerce system, not as a neutral database that simply receives imported records.
 
-#### Product structure becomes a deliberate modeling decision <a href="#product-structure-becomes-a-deliberate-modeling-decision" id="product-structure-becomes-a-deliberate-modeling-decision"></a>
+| Migration area                       | How Magento treats the area                                                                                                                                                                | Planning implication                                                                                                                |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Product structure                    | Magento supports multiple product types, including simple, configurable, grouped, virtual, bundle, and downloadable products.                                                              | Source product samples should include real catalog complexity, not only simple products.                                            |
+| Variant behavior                     | Configurable product options rely on associated simple products with distinct SKUs.                                                                                                        | Variant-like source products must be validated as product relationships, SKU records, inventory behavior, and storefront choices.   |
+| Attributes and attribute sets        | Product attributes describe catalog characteristics and can drive product pages, search, layered navigation, comparison, reports, and promotions. Attribute sets act as product templates. | Attribute cleanup and mapping affect more than display labels; they can affect search, filters, merchandising, and operations.      |
+| Website, store, and store-view scope | Magento installations use a website, store, and store-view hierarchy where scope determines where entities, content, and configuration apply.                                              | Multilingual, multi-brand, multi-region, or multi-store migrations need scope planning before Full Migration.                       |
+| Categories and navigation            | Stores can use different root categories and menus while sharing catalog foundations within the website structure.                                                                         | Category transfer must be checked against storefront discovery, not only admin completeness.                                        |
+| Customers and customer groups        | Customer groups can affect discounts and tax-class association.                                                                                                                            | Customer migration should preserve commercially meaningful grouping where it affects pricing, tax, promotion, or service workflows. |
+| Orders and operational history       | Orders may carry historical payment, shipping, tax, discount, status, and external-reference meaning.                                                                                      | Historical order readability should be validated separately from live checkout, payment, shipping, and tax configuration.           |
+| URLs and SEO                         | URL rewrites can apply to products, categories, CMS pages, and custom routes, with redirects used to preserve route continuity.                                                            | SEO-sensitive stores need URL and redirect planning before launch validation.                                                       |
+| Inventory                            | Magento inventory behavior may depend on quantities, stock status, sources, stocks, salable quantity, and fulfillment configuration.                                                       | Inventory validation should match the intended target setup, not only source quantity totals.                                       |
+| Extensions and custom code           | Magento stores commonly depend on modules, themes, APIs, third-party services, and custom development.                                                                                     | Extension-owned data or behavior may need Add-ons, target-side setup, accepted exclusions, or Custom Service review.                |
 
-Magento supports richer product modeling than many simpler commerce platforms. Product differences may need to be interpreted as simple products, configurable products, grouped products, bundle products, virtual products, downloadable products, custom attributes, or extension-supported behavior.
-
-This means product migration into Magento is not only about whether product records arrive. It is about whether the Target Platform still expresses the correct sellable outcome. Size, color, material, bundled choice, downloadable delivery, service-based products, grouped buying paths, or configuration logic should remain understandable to both customers and administrators after migration.
-
-If the source store uses option logic, custom fields, extension behavior, or storefront scripts to simulate product structure, that behavior should be reviewed before migration. Magento can support complex catalog logic, but complexity still needs to be classified clearly.
-
-#### Attributes and attribute sets become catalog-governance tools <a href="#attributes-and-attribute-sets-become-catalog-governance-tools" id="attributes-and-attribute-sets-become-catalog-governance-tools"></a>
-
-Magento attributes are not just descriptive fields. They can influence product setup, filtering, layered navigation, comparison, merchandising, search behavior, and administrator workflows.
-
-Attribute sets also matter because they determine which fields are expected for different product families. A migration can technically move products but still weaken catalog governance if attributes are imported without clear structure, inconsistent naming, duplicate values, or inappropriate attribute-set assignment.
-
-A Magento migration should therefore ask which attributes are only descriptive, which attributes support customer discovery, which attributes affect product setup, and which attributes are connected to extension or theme behavior.
-
-#### Catalog and category structure carry storefront meaning <a href="#catalog-and-category-structure-carry-storefront-meaning" id="catalog-and-category-structure-carry-storefront-meaning"></a>
-
-Magento category hierarchy can affect navigation, landing pages, SEO continuity, merchandising, and catalog management. Categories should not be treated as passive containers for products.
-
-A successful migration should preserve the meaning of important category paths, product assignments, parent-child structures, landing-page content, and high-value navigation routes. This is especially important when the source store has strong organic traffic, large category trees, brand-oriented browsing, or deeply nested product groups.
-
-When old category logic is messy or duplicated, migration planning should decide what needs to be preserved exactly and what should be cleaned before moving into Magento.
-
-#### Website, store, and store-view scope become part of the target model <a href="#website-store-and-store-view-scope-become-part-of-the-target-model" id="website-store-and-store-view-scope-become-part-of-the-target-model"></a>
-
-Magento’s website, store, and store-view structure can support different storefronts, languages, regional experiences, catalog contexts, configuration values, and content variations.
-
-That flexibility is valuable, but it also creates migration risk when scope is unclear. The business should decide early what should remain shared, what should differ by website, what should differ by store, and what should differ by store view.
-
-Without those decisions, Magento can become technically complete but operationally confusing. The store may contain the right records while still being difficult to govern, validate, or maintain.
-
-#### Customer groups and account behavior need careful interpretation <a href="#customer-groups-and-account-behavior-need-careful-interpretation" id="customer-groups-and-account-behavior-need-careful-interpretation"></a>
-
-Magento customer groups can influence pricing, visibility, tax behavior, promotions, permissions, and account experience depending on how the store is configured.
-
-During migration, customer data should not be judged only by profile presence. The business should review whether customer groups, billing and shipping addresses, account status, order history relationships, customer-specific expectations, and login continuity are still meaningful in the Target Platform.
-
-Where customer password continuity is expected, feasibility depends on source-platform access, hash compatibility, and the supported continuity path. If continuity is not feasible, a reset-first launch model with clear customer communication is usually safer than assuming direct login preservation.
-
-#### URL rewrite capability still requires route planning <a href="#url-rewrite-capability-still-requires-route-planning" id="url-rewrite-capability-still-requires-route-planning"></a>
-
-Magento can support URL rewrites and redirect handling, but platform capability does not replace migration planning.
-
-The business still needs to identify which legacy product, category, content, brand, campaign, and account-related URLs matter most. Redirects should send customers and search engines to relevant destinations, not merely to any page that avoids a broken link.
-
-Priority route planning is especially important when the source store has long-standing SEO value, deeply indexed category paths, paid landing pages, affiliate links, or important internal links.
-
-#### Extensions and customizations may carry business-critical meaning <a href="#extensions-and-customizations-may-carry-business-critical-meaning" id="extensions-and-customizations-may-carry-business-critical-meaning"></a>
-
-Many Magento stores depend on extensions, custom attributes, custom themes, pricing logic, shipping rules, checkout behavior, search tools, review systems, ERP connections, CRM workflows, marketplace feeds, or other external systems.
-
-In a migration into Magento, those dependencies need to be separated from ordinary record transfer. Some may be represented through standard target structures. Some may require Add-ons for filtering, mapping, or data configuration. Others may require Custom Service when custom migration logic adjustment, extension-aware handling, Custom Platform source interpretation, or bespoke transformation is needed.
+A clean Magento migration plan separates record transfer from target behavior. Products can migrate but still need correct product type behavior. Customers can migrate but still need useful group and address context. Orders can migrate but still need readable historical meaning. URLs can migrate but still require redirect and storefront testing. Extensions can exist in the target environment but still require separate review if they own data or business logic.
 
 ### Where Magento Is Often a Strong Target <a href="#where-magento-is-often-a-strong-target" id="where-magento-is-often-a-strong-target"></a>
 
-Magento is often a strong Target Platform when a business needs structural control, catalog depth, and flexible governance rather than a lighter storefront model.
+Magento is often a strong target for merchants that need more control than a simple hosted storefront usually offers. Its value is strongest when the target project benefits from structured catalog rules, extensible architecture, and the ability to adapt commerce behavior to business needs.
 
-#### Merchants with complex product catalogs <a href="#merchants-with-complex-product-catalogs" id="merchants-with-complex-product-catalogs"></a>
+#### Catalogs with meaningful product complexity <a href="#catalogs-with-meaningful-product-complexity" id="catalogs-with-meaningful-product-complexity"></a>
 
-Magento is often a strong fit for stores with configurable products, differentiated product families, attribute-heavy catalogs, grouped or bundled purchase models, downloadable or virtual goods, and product logic that needs to remain structured rather than simplified.
+Magento fits merchants with catalogs that depend on product types, SKU-level variation, product relationships, rich attributes, configurable options, downloadable files, bundles, grouped products, or merchandising rules. These stores need more than flat product import. They need product meaning to survive inside the target catalog model.
 
-The strongest fit occurs when the business can clearly define how source product behavior should be represented in Magento.
+For example, a fashion catalog may depend on configurable products with separate SKUs for color and size. A parts catalog may rely on attributes for filtering and compatibility. A digital catalog may need downloadable product behavior. A kit-based catalog may require bundle planning. These cases should be tested through representative samples before migration assumptions are accepted.
 
-#### Merchants with attribute-driven discovery <a href="#merchants-with-attribute-driven-discovery" id="merchants-with-attribute-driven-discovery"></a>
+#### Multi-store, multi-language, or multi-brand operations <a href="#multi-store-multi-language-or-multi-brand-operations" id="multi-store-multi-language-or-multi-brand-operations"></a>
 
-Magento can be a strong Target Platform when browsing, filtering, merchandising, comparison, or search, depending on well-structured product attributes.
+Magento can support stores that need website, store, and store-view planning. This is especially relevant for businesses that operate multiple storefronts, languages, currencies, root categories, regional structures, or brand experiences from a shared commerce foundation.
 
-This fit becomes weaker when source attributes are inconsistent, duplicated, poorly named, or mixed between descriptive and behavior-driving purposes without review.
+The planning burden is higher because scope affects where values apply. A translated product name, store-specific category structure, website-level configuration, or store-view URL can change how the target store works. The migration plan should identify which source values are global and which values need target-specific scope.
 
-#### Merchants with multiple storefronts or localization needs <a href="#merchants-with-multiple-storefront-or-localization-needs" id="merchants-with-multiple-storefront-or-localization-needs"></a>
+#### Merchants that need extension and integration flexibility <a href="#merchants-that-need-extension-and-integration-flexibility" id="merchants-that-need-extension-and-integration-flexibility"></a>
 
-Magento can work well when a business needs a website, store, or store-view governance for different regions, languages, brands, content layers, or catalog contexts.
+Magento is often selected by merchants that expect the target store to work with payment services, shipping carriers, tax services, ERP systems, PIM systems, warehouse systems, marketplaces, CRM platforms, analytics, marketing tools, custom APIs, or bespoke modules.
 
-The key requirement is planning. Scope should be designed before migration rather than inferred from whatever the source platform happened to contain.
+This flexibility is valuable, but it also changes migration planning. A migrated record may need to remain useful to external systems after launch. Product IDs, SKUs, customer identifiers, order references, custom fields, and extension-owned data should be reviewed when they support operational workflows outside the storefront.
 
-#### Merchants that rely on custom or extension-supported workflows <a href="#merchants-that-rely-on-custom-or-extension-supported-workflows" id="merchants-that-rely-on-custom-or-extension-supported-workflows"></a>
+#### Businesses prepared for implementation ownership <a href="#businesses-prepared-for-implementation-ownership" id="businesses-prepared-for-implementation-ownership"></a>
 
-Magento may be suitable when a business expects to keep meaningful custom workflows, extension-supported features, or deeper technical control.
+Magento is suitable when the merchant understands that a flexible platform requires implementation decisions. Theme work, extension selection, checkout configuration, payment setup, tax rules, shipping logic, search behavior, cache/index management, performance planning, and integration testing are not automatically solved by moving records.
 
-However, those dependencies need ownership. Magento flexibility does not remove the need to map what each extension, custom field, integration, or workflow actually does.
+Migration planning should therefore define the boundary between data migration, target-store configuration, optional Add-ons, Custom Service review, and post-migration implementation work.
 
 ### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
 
-Magento becomes more demanding when the source store contains complexity that has not been classified clearly.
+Magento migrations require deeper planning when the source store carries business meaning that is not represented by standard entities alone. Complexity is not a reason to avoid Magento, but it is a reason to plan the migration with more evidence.
 
-#### When product meaning is unclear <a href="#when-product-meaning-is-unclear" id="when-product-meaning-is-unclear"></a>
+#### Source catalogs with custom product logic <a href="#source-catalogs-with-custom-product-logic" id="source-catalogs-with-custom-product-logic"></a>
 
-If the source store mixes options, variants, bundles, custom fields, add-on choices, personalization, and extension logic inconsistently, Magento migration needs careful interpretation.
+Deeper review is needed when products depend on custom options, nonstandard variant behavior, personalized products, kits, bundles, tiered pricing, attribute-driven rules, source-specific filters, special availability logic, or extension-owned fields.
 
-The goal is not to force every source behavior into the closest target field. The goal is to preserve the right product decision in a Magento-compatible structure.
+The key question is not whether product rows can move. The key question is whether the target Magento catalog can represent the source business meaning in a way that customers, staff, search, filters, inventory, and downstream systems can use.
 
-#### When attribute governance is weak <a href="#when-attribute-governance-is-weak" id="when-attribute-governance-is-weak"></a>
+#### Stores with heavy attribute and filtering requirements <a href="#stores-with-heavy-attribute-and-filtering-requirements" id="stores-with-heavy-attribute-and-filtering-requirements"></a>
 
-Magento can expose weak attribute governance quickly. Duplicate attributes, inconsistent values, missing attribute sets, unclear filtering rules, or mixed administrative and customer-facing attributes can all reduce target quality.
+Magento attributes can influence search, layered navigation, comparison, product pages, reports, and promotions. Poor source attributes can create poor target behavior: duplicate values, inconsistent naming, unusable filters, weak search relevance, or confusing product pages.
 
-These issues should be reviewed before migration, especially for large catalogs.
+Attribute planning should identify which values are customer-facing, which values support internal operations, which values should drive filters, and which values are obsolete or source-specific noise.
 
-#### When store scope is not defined <a href="#when-store-scope-is-not-defined" id="when-store-scope-is-not-defined"></a>
+#### Multi-store and multilingual scope <a href="#multi-store-and-multilingual-scope" id="multi-store-and-multilingual-scope"></a>
 
-A business moving into Magento should not wait until after migration to decide how websites, stores, and store views should be used.
+Magento scope planning is essential when the source store has multiple languages, brands, regions, currencies, country-specific catalogs, separate menus, or localized URLs. These cases should be mapped against Magento websites, stores, and store views before Full Migration.
 
-Scope decisions affect configuration, catalog visibility, content, localization, URLs, customer experience, and validation responsibility.
+Without scope planning, migrated values may appear in the wrong storefront, inherit from the wrong level, overwrite localized content, or fail to support the intended customer experience.
 
-#### When extensions or custom behavior drive outcomes <a href="#when-extensions-or-custom-behavior-drive-outcomes" id="when-extensions-or-custom-behavior-drive-outcomes"></a>
+#### SEO-sensitive stores <a href="#seo-sensitive-stores" id="seo-sensitive-stores"></a>
 
-Magento migration risk increases when important storefront or operational behavior depends on extensions, custom modules, custom fields, integrations, or theme logic that has not been documented.
+Magento URL rewrites and redirects can support route continuity, but SEO preservation depends on preparation and validation. Product URLs, category URLs, CMS page URLs, metadata, canonical expectations, old route samples, and priority redirects should be reviewed early for stores with established organic traffic.
 
-This does not automatically make Magento a poor fit. It means the migration path should be selected with enough service responsibility to preserve the behaviors that matter.
+A migration can be technically complete while still damaging discovery if high-value URLs, category routes, page routes, or metadata are not planned and tested.
+
+#### Extension, module, and custom-code dependency <a href="#extension-module-and-custom-code-dependency" id="extension-module-and-custom-code-dependency"></a>
+
+Magento stores often depend on extensions and custom code. Some extensions only affect target configuration or storefront behavior. Others own data that may be business-critical. Examples can include product enrichment, reward points, subscriptions, custom checkout fields, B2B logic, search rules, shipping restrictions, payment workflows, or integration identifiers.
+
+When extension-owned data must move or custom source behavior must be recreated, the migration should be reviewed as a Custom Service candidate. Add-ons may help with filtering, mapping, or data configuration, but Add-ons should not be treated as a substitute for custom logic analysis.
 
 ### What Should Be Understood Early Before Moving into Magento <a href="#what-should-be-understood-early-before-moving-into-magento" id="what-should-be-understood-early-before-moving-into-magento"></a>
 
-Before choosing Magento as the Target Platform, the business should clarify the decisions that affect migration quality.
+The safest Magento migration decisions are made before Full Migration, not during final validation. Merchants should use Demo Migration and early scoping to test the parts of the store that carry real business meaning.
 
-#### Product representation <a href="#product-representation" id="product-representation"></a>
+Before migration scope is finalized, confirm:
 
-The team should understand which source products should become simple, configurable, grouped, bundle, virtual, or downloadable products, and which behaviors require custom handling or extension-supported logic.
+* whether the target is Magento Open Source, Adobe Commerce, or an Adobe Commerce environment with additional capabilities;
+* the intended website, store, and store-view structure;
+* the product types required by the target catalog;
+* how configurable, bundle, grouped, downloadable, virtual, and simple products should be represented;
+* which attributes and attribute sets should be migrated, cleaned, mapped, or excluded;
+* which categories, menus, store views, languages, currencies, URLs, and CMS Pages matter for launch;
+* whether customer groups carry pricing, tax, discount, B2B, or service meaning;
+* which order history details must remain readable for customer service, accounting, fulfillment, or support;
+* how inventory, sources, stocks, and fulfillment expectations should work in the target store;
+* whether extensions, custom fields, custom modules, or external identifiers require review;
+* which Add-ons are needed for filtering, mapping, or data configuration;
+* whether any source behavior requires Custom Service rather than standard migration handling.
 
-#### Attribute and attribute-set governance <a href="#attribute-and-attribute-set-governance" id="attribute-and-attribute-set-governance"></a>
-
-The business should decide which attributes matter for administration, filtering, search, merchandising, comparison, product setup, or customer understanding.
-
-#### Category and URL continuity <a href="#category-and-url-continuity" id="category-and-url-continuity"></a>
-
-Important categories, landing pages, legacy URLs, and redirect destinations should be prioritized before migration. SEO-sensitive paths should be tested after migration, not assumed from record transfer alone.
-
-#### Website, store, and store-view scope <a href="#website-store-and-store-view-scope" id="website-store-and-store-view-scope"></a>
-
-The team should decide which differences belong globally and which belong at website, store, or store-view level.
-
-#### Extension, integration, and customization dependency <a href="#extension-integration-and-customization-dependency" id="extension-integration-and-customization-dependency"></a>
-
-The business should identify which behaviors depend on extensions, modules, themes, custom attributes, external systems, or Custom Platform source logic.
-
-#### Validation priorities <a href="#validation-priorities" id="validation-priorities"></a>
-
-The Demo Migration should include high-risk product families, attribute-heavy catalog areas, important category paths, customer-group scenarios, scope-sensitive examples, extension-dependent behavior, and high-value URLs.
+A practical Magento plan does not need to solve every implementation decision before migration begins. It does need to identify which decisions affect data meaning, validation, service scope, and launch readiness.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Magento can be a strong Target Platform for businesses that need more control over product structure, attribute governance, storefront scope, and custom commerce behavior. Its strength is not simply that it can hold complex data. Its strength is that it can support deliberate catalog and storefront design when that design is planned clearly.
+Magento is a strong Target Platform for merchants that need structured catalog control, store-scope flexibility, extension capacity, and long-term commerce adaptability. Its strength also creates migration responsibility. Product type relationships, attributes, attribute sets, website and store scope, customer groups, URLs, inventory behavior, extensions, and custom logic should be understood before the migration is treated as routine.
 
-A migration into Magento should be judged by whether the Target Platform preserves the store’s real buying, browsing, account, operational, and SEO-sensitive outcomes. The higher the source complexity, the more important it becomes to classify product meaning, attribute behavior, scope rules, extension dependencies, and validation priorities before launch.
+A Magento migration should begin with representative source data, clear target-store assumptions, and a practical decision on whether the project fits Standard Service, Managed Service, optional Add-ons, or Custom Service review.
 
-Use a Demo Migration to test the Magento scenarios that matter most: complex product families, attribute sets, category paths, customer groups, scope-sensitive records, extension-dependent logic, and high-value URLs. If the result exposes unclear structure or custom behavior that cannot be handled through standard service capability or selected Add-ons, Live Chat can help determine whether Managed Service, Custom Service, or custom migration logic adjustment is the safer path.
+Contact Next-Cart to review your Magento migration path, confirm the data and configuration areas that matter most, and choose the service approach that matches your store’s catalog structure, operational requirements, and launch risk.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**Is Magento a good Target Platform for complex catalogs?**
+**Is Magento mainly suitable for large or complex stores?**
 
-Often, yes. Magento is usually strongest when a business needs structured product types, attribute-driven catalog governance, and flexible storefront scope. The deciding factor is not catalog size alone. It is whether the business can define how product, attribute, category, and scope logic should work after migration.
+Magento is often strongest for stores that need structured catalog control, multi-store planning, extension flexibility, custom workflows, or integration depth. Smaller stores can use Magento, but the platform usually makes more sense when the merchant can benefit from its configurability and accept the planning effort that comes with it.
 
-**What usually makes Magento a strong migration target?**
+**Why do product types matter so much in Magento migration?**
 
-Magento is usually strong when the business needs richer product modeling, attribute governance, category control, store-scope management, extension support, and technical flexibility than lighter commerce platforms provide.
+Magento product types affect how products appear, how options work, how SKUs are managed, how inventory is tracked, and how customers buy. A variant-like product from another platform may need to become a configurable product with associated simple products in Magento rather than a single flat item with option text.
 
-**What usually makes Magento a riskier target?**
+**Are Magento Open Source and Adobe Commerce the same migration target?**
 
-Magento becomes riskier when product logic, attributes, scope rules, extensions, custom fields, or integrations are poorly documented. The platform can support complexity, but it does not automatically clarify ambiguous source behavior.
+They are related but should not be treated as identical. Magento Open Source and Adobe Commerce share important foundations, but Adobe Commerce includes additional capabilities and may involve different implementation, B2B, infrastructure, or operational assumptions. The target environment should be confirmed before migration scope is finalized.
 
-**Does Magento support redirect planning?**
+**Can Add-ons handle every Magento migration complexity?**
 
-Magento can support URL rewrite and redirect handling, but the business still needs to decide which legacy URLs matter, where they should point, and whether those destinations preserve search and customer intent.
+No. Add-ons can help with filtering, mapping, or data configuration, but they do not replace Custom Service review when source behavior depends on custom logic, unsupported extension data, outside-system identifiers, or bespoke migration requirements.
 
-**When should Custom Service be considered for a Magento migration?**
+**What should be tested during Demo Migration for Magento?**
 
-Custom Service should be considered when the migration depends on Custom Platform source interpretation, custom attributes with business logic, extension or module data, bespoke transformations, custom migration logic adjustment, or target behavior that cannot be represented safely through standard service capability alone.
+Demo Migration should include representative records that prove real Magento behavior: configurable products, product attributes, attribute sets, categories, store views, customer groups, order history, URLs, inventory values, images, CMS Pages, and any records affected by extensions or custom fields.

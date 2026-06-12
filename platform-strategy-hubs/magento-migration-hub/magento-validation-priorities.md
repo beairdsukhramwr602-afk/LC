@@ -1,298 +1,209 @@
 # Magento Validation Priorities
 
-Magento validation should not treat every migrated record as equally risky. A stronger Magento review focuses first on the areas where the platform can change business meaning: product types, attributes, attribute sets, website/store/store-view scope, customer groups, URL rewrites, extension-owned behavior, and Custom Platform source logic.
+Validation for a Magento migration should prove that migrated data can operate inside Magento’s catalog, scope, inventory, URL, customer, and order structures. Matching record counts are only a baseline. A Magento store can show the expected number of products, customers, or orders while still failing at product-type behavior, store-view visibility, attribute usability, salable quantity, URL continuity, customer-group context, or extension-dependent workflows.
 
-A Magento target can look complete while still carrying hidden structural problems. Products may exist, categories may appear, attributes may be present, customers may import, and routes may resolve. Those signals are useful, but they do not prove that the migrated store is commercially trustworthy. The real validation question is whether Magento now represents the migrated data in a way the business can operate, sell from, support, and govern after launch.
+A strong validation review should therefore combine entity-level checks with operational proof. Products should not only exist; they should behave as Magento products. Categories should not only be present; they should support navigation and catalog discovery. Customers and orders should not only be readable; they should remain useful for service, reporting, and business continuity. Any accepted gap should be documented before Full Migration, Recent Data Migration, or launch approval.
 
-This article explains the validation priorities that matter most when Magento is the Target Platform.
+### What Magento Validation Should Prove <a href="#what-magento-validation-should-prove" id="what-magento-validation-should-prove"></a>
 
-### What Magento Validation Is Trying to Prove <a href="#what-magento-validation-is-trying-to-prove" id="what-magento-validation-is-trying-to-prove"></a>
+Magento validation should confirm whether the target store can support the intended launch experience. The review should cover both migrated records and the Magento structures that give those records meaning.
 
-Magento validation is trying to prove that the target store preserves commercial meaning, not only record presence.
+| Validation area                      | What should be proven                                                                                                                        | Why it matters                                                                                                                  |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Catalog and product types            | Simple, configurable, grouped, bundle, virtual, downloadable, and other relevant products behave as intended.                                | Magento product meaning depends on product type, child relationships, options, inventory handling, and storefront presentation. |
+| Attribute and attribute-set logic    | Important attributes appear in the right places and support filtering, comparison, search, merchandising, or operational use where required. | Attribute data can be present but unusable if option values, attribute sets, or frontend settings are not aligned.              |
+| Website, store, and store-view scope | Products, categories, content, URLs, prices, languages, and configuration-sensitive values are checked under the right scope.                | Magento scope can change what customers see across websites, stores, and store views.                                           |
+| Category and navigation behavior     | Category assignments, root categories, menu behavior, and product visibility support the intended buyer journey.                             | A catalog can migrate correctly at record level while storefront discovery remains incomplete.                                  |
+| Inventory and salable quantity       | Stock, sources, quantities, reservations, and availability behavior are reviewed for representative products.                                | Magento inventory validation must prove whether products are actually sellable, not only whether quantity fields exist.         |
+| URLs and redirects                   | Product, category, CMS Page, and custom URL rewrite behavior supports SEO and user continuity.                                               | Incorrect URL handling can create crawl, ranking, redirect, and customer-access problems after launch.                          |
+| Customers and orders                 | Customer profiles, addresses, groups, order items, statuses, totals, discounts, shipping, payment references, and notes remain readable.     | Customer service and operations teams need historical data to retain practical value.                                           |
+| Extensions and custom data           | Extension-owned fields, custom module data, outside-system identifiers, and Custom Service items are checked separately.                     | Magento projects often fail at custom or extension boundaries, not at ordinary entity transfer.                                 |
 
-Because Magento has a structured catalog model, validation should look beyond whether products, customers, orders, categories, and content pages exist. It should test whether the migrated result behaves correctly inside Magento’s product, attribute, scope, customer, URL, and extension environment.
+Validation should not be treated as a single pass/fail count review. It should identify whether the migrated store is ready for launch, whether specific areas need configuration changes, and whether some issues should be handled through Add-ons, Custom Service, Re-Migration, or manual target-store setup.
 
-#### The strongest validation evidence is behavior-based <a href="#the-strongest-validation-evidence-is-behavior-based" id="the-strongest-validation-evidence-is-behavior-based"></a>
+### Catalog and Product-Type Validation <a href="#catalog-and-product-type-validation" id="catalog-and-product-type-validation"></a>
 
-A Magento validation review should prove that:
+Magento catalog validation should start with products that represent the store’s real selling complexity. A simple product confirms basic product migration, but it does not prove that configurable, grouped, bundle, virtual, or downloadable products were interpreted correctly.
 
-* products still support the intended buying journey
-* attributes and attribute sets still support catalog governance
-* websites, stores, and store views contain the right values at the right level
-* customer groups still preserve useful commercial context
-* order history remains understandable for support and reporting
-* important URLs resolve to relevant target pages
-* extension-owned or custom-field behavior remains usable where it matters
-* Custom Platform source data was interpreted with enough precision
+#### Product-type samples <a href="#product-type-samples" id="product-type-samples"></a>
 
-This makes Magento validation more selective than broad random checking. Random samples can confirm easy records while missing the areas where Magento is most likely to reshape meaning.
+The validation sample should include representative product types from the source store. Configurable products require particular attention because each option should remain tied to a separate simple product with its own SKU, inventory context, image behavior, and storefront selection logic. Bundle and grouped products should be checked for relationship meaning, purchasability, and buyer choice. Downloadable and virtual products should be reviewed for delivery expectations, non-physical fulfillment, and order interpretation.
 
-### Validation Priority 1: Product-Type Accuracy <a href="#validation-priority-1-product-type-accuracy" id="validation-priority-1-product-type-accuracy"></a>
+A product-type review should answer three questions:
 
-Magento product validation should start with the product families most likely to expose product-type ambiguity.
+* does the product appear in Magento under the expected product type;
+* does the product behave correctly on the storefront and in the Admin;
+* do related child products, options, media, inventory values, and order lines remain understandable.
 
-The review should not only confirm that product records exist. It should confirm whether each important product is represented as the right sellable object inside Magento.
+#### Product visibility and sellable state <a href="#product-visibility-and-sellable-state" id="product-visibility-and-sellable-state"></a>
 
-#### What to validate <a href="#what-to-validate" id="what-to-validate"></a>
+Magento validation should include product status, visibility, website assignment, category assignment, price, media, inventory, and storefront availability. A migrated item can exist in the Admin while remaining hidden from buyers because visibility, website assignment, category placement, stock status, or scope configuration is incomplete.
 
-Prioritize products that depend on:
+The sample should include ordinary products, high-revenue products, variant-heavy products, out-of-stock products, recently updated products, and products with complex media or option structures. Products that drive merchandising, advertising, or SEO should be checked before lower-value records.
 
-* configurable product behavior
-* grouped product relationships
-* bundle or kit logic
-* virtual or downloadable product meaning
-* option-heavy buying flows
-* products where SKU, inventory, price, or fulfillment changes by selection
-* source-side builders, plugins, modules, or custom product logic
+### Attribute, Attribute-Set, and Option Validation <a href="#attribute-attribute-set-and-option-validation" id="attribute-attribute-set-and-option-validation"></a>
 
-#### What good validation proves <a href="#what-good-validation-proves" id="what-good-validation-proves"></a>
+Magento attributes can shape product display, search, layered navigation, comparison, reports, promotions, and operational workflows. Validation should therefore review how attribute data behaves, not only whether values migrated.
 
-A strong result proves that customers can select, compare, purchase, and receive the product in the intended way.
+| Attribute proof area   | Validation focus                                                                                                     | Failure signal                                                                                       |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Attribute sets         | Products are assigned to suitable attribute sets for their product families.                                         | Important fields are missing, irrelevant fields appear, or teams cannot manage products efficiently. |
+| Option values          | Select, multiselect, dropdown, and swatch values are clean and consistent.                                           | Duplicate values, inconsistent labels, or broken variant/filter behavior appear.                     |
+| Frontend display       | Customer-facing attributes appear only where they should.                                                            | Technical values appear publicly, or merchandising values are hidden.                                |
+| Search and filtering   | Attributes intended for search, layered navigation, comparison, or sorting behave correctly.                         | Buyers cannot filter by critical product properties or see misleading filter options.                |
+| Operational attributes | Internal identifiers, supplier values, warehouse values, or compliance fields remain usable where included in scope. | Staff or connected systems lose required reference values.                                           |
 
-A weak result may still show a visible product page, but the buying behavior can be wrong. For example, a product may appear in Magento while its variant logic, option dependency, SKU relationship, inventory meaning, or bundle behavior no longer matches the source business model.
+Attribute validation should be stricter for Magento than for simpler target platforms because Magento catalogs often use attributes as a core management layer. When the source store used custom fields, plugin fields, ERP identifiers, or merchandising properties, the validation sample should include those examples explicitly.
 
-### Validation Priority 2: Attributes and Attribute Sets <a href="#validation-priority-2-attributes-and-attribute-sets" id="validation-priority-2-attributes-and-attribute-sets"></a>
+### Website, Store, and Store-View Scope Validation <a href="#website-store-and-store-view-scope-validation" id="website-store-and-store-view-scope-validation"></a>
 
-Magento attributes can affect more than product description. They can support filtering, layered navigation, comparison, merchandising, product-family governance, administration, and operational review.
+Magento scope validation should prove that data appears in the correct website, store, and store-view context. A value that looks correct in the default Admin view may still be wrong for another website, language, catalog root, or localized store view.
 
-That means attribute validation should not stop at field presence.
+Validation should check:
 
-#### What to validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
+* website assignment for products and sales-channel expectations;
+* store-level category roots and navigation structures;
+* store-view names, language content, localized product text, localized category text, and localized CMS Pages;
+* scope-specific URLs, metadata, prices, configuration-sensitive values, and visibility;
+* whether data intentionally shared across scopes is not accidentally duplicated or split.
 
-Review whether important attributes:
+For a single-store Magento project, this review may be straightforward. For a multi-website or multilingual Magento project, scope validation should be one of the highest-priority launch checks. The pass condition is not that every scope has identical data. The pass condition is that each scope reflects the intended buyer experience.
 
-* appear with correct values
-* belong to the right attribute sets
-* apply to the right product families
-* support filtering or layered navigation where intended
-* remain useful for comparison, merchandising, or administration
-* avoid duplicated, fragmented, or confusing field structure
-* preserve business-critical custom-field meaning where applicable
+### Category, Navigation, and Storefront Discovery Validation <a href="#category-navigation-and-storefront-discovery-validation" id="category-navigation-and-storefront-discovery-validation"></a>
 
-#### What good validation proves <a href="#what-good-validation-proves-1" id="what-good-validation-proves-1"></a>
+Category validation should confirm whether Magento can use migrated category data to support discovery. Counts alone do not prove that navigation is usable.
 
-A strong result proves that Magento can use migrated attributes as part of a governed catalog, not just store them as imported text.
+The review should include root categories, category hierarchy, product assignments, category names, URL keys, metadata, image or content blocks where relevant, and menu behavior. Products that should appear in multiple categories should be checked for correct placement. Products that should remain hidden, inactive, or out of navigation should also be checked.
 
-Attribute-set validation is especially important because a migrated product can contain values but still be difficult to manage if it lands in the wrong product-family structure.
+Magento validation should include buyer-facing discovery paths. A tester should be able to start from the storefront navigation, reach important categories, apply expected filters, open important product pages, and confirm that category-product relationships match the launch plan.
 
-### Validation Priority 3: Website, Store, and Store-View Scope <a href="#validation-priority-3-website-store-and-store-view-scope" id="validation-priority-3-website-store-and-store-view-scope"></a>
+### Inventory, Stock, and Availability Validation <a href="#inventory-stock-and-availability-validation" id="inventory-stock-and-availability-validation"></a>
 
-Magento scope is one of the most important validation areas for multi-brand, multi-language, multi-region, wholesale, or content-sensitive stores.
+Inventory validation should prove whether migrated products can be sold correctly. Quantity fields are not enough. Magento Inventory Management can use sources, stocks, salable quantity, reservations, and website-level sales-channel mapping.
 
-The same value can mean different things depending on whether it belongs globally, at website level, at store level, or at store-view level.
+| Inventory check         | What to validate                                                                           | Why it matters                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| Single-source inventory | Product quantities and stock status match launch expectations.                             | Basic quantity transfer still needs storefront availability proof.                |
+| Multi-source inventory  | Source assignment, source quantities, stock aggregation, and website mapping are reviewed. | Incorrect source or stock setup can make products unavailable or oversellable.    |
+| Salable quantity        | Representative products show the expected available quantity to customers.                 | Magento can distinguish physical source quantity from salable quantity.           |
+| Reservations            | Products affected by cart/order activity are reviewed where relevant.                      | Reservations can influence apparent availability during checkout and fulfillment. |
+| Non-physical products   | Virtual and downloadable products follow expected inventory and fulfillment rules.         | Not every product should be validated as a physical stock item.                   |
 
-#### What to validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
+Inventory validation should include simple products, configurable-product children, high-volume SKUs, out-of-stock SKUs, backorder-sensitive SKUs, and products connected to warehouse or fulfillment processes. If inventory is ultimately controlled by an ERP, WMS, marketplace, or custom integration, validation should also confirm whether the migrated values are intended as launch data, historical reference, or temporary placeholders before synchronization.
 
-Review scope-sensitive examples such as:
+### URL, SEO, and Redirect Validation <a href="#url-seo-and-redirect-validation" id="url-seo-and-redirect-validation"></a>
 
-* localized product names and descriptions
-* storefront-specific product visibility
-* regional or language-specific content
-* category and CMS-page differences
-* pricing or tax context where scope affects interpretation
-* URL behavior across store views
-* customer or catalog context across websites or stores
+Magento URL validation should be handled as a launch-risk area. Product URLs, category URLs, CMS Page URLs, canonical behavior, store-view paths, and URL rewrites can affect both customer access and organic search continuity.
 
-#### What good validation proves <a href="#what-good-validation-proves-2" id="what-good-validation-proves-2"></a>
+Validation should include high-value product URLs, category URLs, landing pages, CMS Pages, localized URLs, and URLs used in advertising, email, affiliates, marketplaces, or external systems. When a source URL cannot be preserved exactly, the launch plan should confirm the intended redirect, accepted difference, or manual SEO action.
 
-A strong result proves that Magento’s hierarchy is not only created, but interpreted correctly.
+A useful URL validation sample should include:
 
-The target should show the right content, behavior, and commercial context in the right storefront layer. If the value survives but appears at the wrong scope, the migration still needs review.
+* products with changed names or URL keys;
+* categories with deep hierarchy;
+* products assigned to multiple categories;
+* CMS Pages or landing pages that drive organic or campaign traffic;
+* localized or store-view-specific URL paths;
+* custom routes created for campaigns or legacy content.
 
-### Validation Priority 4: Customer Groups and Commercial Context <a href="#validation-priority-4-customer-groups-and-commercial-context" id="validation-priority-4-customer-groups-and-commercial-context"></a>
+The pass condition is practical continuity: important old paths should resolve as intended, important new paths should be indexable and customer-friendly, and known differences should be documented before launch.
 
-Magento customer groups can carry meaningful pricing, discount, tax, segmentation, or account context.
+### Customer, Customer-Group, and Order Validation <a href="#customer-customer-group-and-order-validation" id="customer-customer-group-and-order-validation"></a>
 
-A customer record can migrate successfully while the commercial logic attached to that customer becomes weaker or wrong.
+Customer validation should confirm whether accounts remain usable and meaningful in Magento. The review should include names, emails, addresses, phone numbers, customer-group assignment, account status where relevant, newsletter or communication values where included in scope, and any external identifiers needed by support or connected systems.
 
-#### What to validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
+Customer groups deserve special attention because they can affect discounts and tax class. A migrated customer may appear complete but still lose commercial meaning if the group assignment, price expectation, tax behavior, or segmentation context changes.
 
-Review customer examples that involve:
+Order validation should confirm historical readability. Magento order review should include customer links, guest orders, order items, configurable-product order lines, statuses, dates, totals, discounts, tax, shipping, payment references, comments, invoices, shipments, credit memos, and any custom fields included in scope.
 
-* wholesale or B2B customer groups
-* tax-sensitive customer classifications
-* discount or pricing context
-* membership, loyalty, or segmentation logic
-* customer-account access expectations
-* historical orders tied to important customer accounts
+| Order sample                                       | Why it should be reviewed                                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Recent completed orders                            | Confirms ordinary customer-service continuity.                                                |
+| Canceled, refunded, or partially fulfilled orders  | Confirms that exception cases remain understandable.                                          |
+| Orders with discounts, tax, or shipping complexity | Confirms commercial context, not only item lines.                                             |
+| Orders involving configurable or bundle products   | Confirms product relationship readability in history.                                         |
+| Guest orders and registered-customer orders        | Confirms customer linkage differences.                                                        |
+| Orders with external references                    | Confirms ERP, payment, fulfillment, marketplace, or support-system continuity where included. |
 
-#### What good validation proves <a href="#what-good-validation-proves-3" id="what-good-validation-proves-3"></a>
+Historical orders do not need to become newly executable transactions. They need to remain readable, searchable, and useful for customer service, accounting reference, and operational history according to the migration scope.
 
-A strong result proves that customers are not only present, but assigned to the right commercial context.
+### CMS Pages, Blog Posts, Media, and Content Validation <a href="#cms-pages-blog-posts-media-and-content-validation" id="cms-pages-blog-posts-media-and-content-validation"></a>
 
-This matters especially when customer groups affect more than internal labeling. If customer-group logic supports price, tax, discount, visibility, or account workflows, it deserves explicit validation.
+Content validation should confirm that migrated CMS Pages, Blog Posts, media references, metadata, links, and formatting remain usable in Magento. Content-heavy stores should not validate content as an afterthought, because pages and posts often carry SEO traffic, policy information, buying guidance, landing-page value, or customer-support context.
 
-### Validation Priority 5: Order History and Support Usefulness <a href="#validation-priority-5-order-history-and-support-usefulness" id="validation-priority-5-order-history-and-support-usefulness"></a>
+Validation should check representative content pages by business value, not only by count. Important examples include home or landing content, policy pages, buying guides, brand pages, high-traffic Blog Posts, embedded images, internal links, metadata, and pages with forms, scripts, widgets, or extension-dependent content.
 
-Magento migration validation should review whether order history remains understandable for the business.
+When content uses target-store themes, page builders, widgets, or extensions, validation should separate migrated content from target rendering. Some content differences may require manual rebuild, theme configuration, Custom Service review, or post-migration editorial work.
 
-Historical orders do not always need to behave like newly placed Magento orders. They do need to remain useful for support, reference, reporting, and customer-service continuity.
+### Extension, Custom Service, and Integration Validation <a href="#extension-custom-service-and-integration-validation" id="extension-custom-service-and-integration-validation"></a>
 
-#### What to validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
+Magento stores frequently depend on extensions, custom modules, custom tables, or connected systems. Validation should explicitly separate standard migrated entities from custom or extension-dependent behavior.
 
-Prioritize orders with:
+Custom Service validation should include agreed custom fields, extension-owned data, outside-system identifiers, custom business rules, custom product relationships, custom order fields, ERP/PIM/WMS references, marketplace references, subscription or loyalty data, and any bespoke mapping logic included in scope.
 
-* important customer associations
-* complex line-item structure
-* discounts, taxes, shipping, or payment references
-* historical product references
-* unusual order statuses
-* fulfillment, refund, or support relevance
-* B2B, wholesale, or customer-group context
+Add-ons should be validated according to what they were selected to do. A Data Filter Add-on should be checked against the intended inclusion or exclusion rule. Advanced Data Mapping should be checked against the expected field, status, option, or relationship result. Advanced Data Configure should be checked against the intended target configuration outcome. These checks should remain separate from Custom Service validation because Add-ons and Custom Service solve different planning problems.
 
-#### What good validation proves <a href="#what-good-validation-proves-4" id="what-good-validation-proves-4"></a>
+If a required integration is not active yet, validation should still document what can be proven now and what must be retested after the integration is connected. No Magento launch should rely on assumed integration behavior when the relevant source data, target field, external identifier, or API-dependent workflow has not been checked.
 
-A strong result proves that staff can understand what happened, who ordered, what was purchased, how totals were formed, and what customer-support context remains available.
+### Demo Migration, Full Migration, Recent Data Migration, and Re-Migration Checks <a href="#demo-migration-full-migration-recent-data-migration-and-re-migration-checks" id="demo-migration-full-migration-recent-data-migration-and-re-migration-checks"></a>
 
-The goal is not perfect recreation of every legacy operational behavior. The goal is preserving the business meaning needed after launch.
+Validation should be staged. Demo Migration should prove whether representative samples behave correctly before the merchant commits to Full Migration. Full Migration should prove that the complete selected scope moved as expected. Recent Data Migration should confirm that records created or updated after the Full Migration are added correctly before launch. Re-Migration should be considered when configuration, mapping, scope, or target setup changes make the prior result unsuitable.
 
-### Validation Priority 6: URL Rewrites and Destination Relevance <a href="#validation-priority-6-url-rewrites-and-destination-relevance" id="validation-priority-6-url-rewrites-and-destination-relevance"></a>
+| Stage                 | Validation priority                               | Acceptance question                                                                                                    |
+| --------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Demo Migration        | Representative complexity, not only easy records. | Do the selected samples prove that Magento can support the intended catalog, customer, order, URL, and scope behavior? |
+| Full Migration        | Complete selected entity scope.                   | Did the full selected dataset migrate according to the approved service license and configuration decisions?           |
+| Recent Data Migration | New or changed data after Full Migration.         | Are recent products, customers, orders, updates, and other in-scope records captured before launch?                    |
+| Re-Migration          | Corrected configuration or mapping.               | Has the changed setup produced a result that is better aligned with the approved launch plan?                          |
 
-Magento can support URL rewrite behavior, but validation should judge destination relevance rather than technical routing alone.
+Each stage should have a clear acceptance decision. Validation should not continue indefinitely without classifying findings as pass, target configuration work, manual business decision, Add-on-related adjustment, Custom Service item, or accepted difference.
 
-A route can resolve and still be commercially weak if it sends visitors to a page that no longer matches the original product, category, content, or buying intent.
+### Building a Magento Validation Sample <a href="#building-a-magento-validation-sample" id="building-a-magento-validation-sample"></a>
 
-#### What to validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
+A Magento validation sample should be small enough to review carefully and broad enough to expose structural risk. The sample should include records that represent the actual launch burden, not only clean records that are likely to pass.
 
-Review high-value routes such as:
+Include examples such as:
 
-* best-selling product URLs
-* revenue-driving category paths
-* campaign landing pages
-* content pages with trust, support, or SEO value
-* localized or store-view-specific paths
-* legacy URLs that receive external links or search traffic
+* a simple product with ordinary category and inventory behavior;
+* a configurable product with child simple products and distinct SKUs;
+* a bundle or grouped product if the catalog uses those product types;
+* a downloadable or virtual product if the store sells non-physical items;
+* products assigned to more than one website, store, store view, or category;
+* products with important custom attributes or attribute-set behavior;
+* products affected by multi-source inventory or external stock systems;
+* high-value category and landing-page URLs;
+* customers from different customer groups;
+* guest and registered-customer orders;
+* refunded, canceled, discounted, or partially fulfilled orders;
+* CMS Pages, Blog Posts, media-heavy content, and SEO-sensitive pages;
+* extension-owned or custom fields included in scope.
 
-#### What good validation proves <a href="#what-good-validation-proves-5" id="what-good-validation-proves-5"></a>
-
-A strong result proves that important routes lead to relevant target destinations.
-
-Technical status is not enough. For Magento, URL validation should confirm that customers and search engines reach pages that still satisfy the original intent as closely as possible.
-
-### Validation Priority 7: Extensions, Custom Fields, and Surrounding Behavior <a href="#validation-priority-7-extensions-custom-fields-and-surrounding-behavior" id="validation-priority-7-extensions-custom-fields-and-surrounding-behavior"></a>
-
-Magento stores often depend on extensions, modules, custom fields, theme logic, integrations, or external systems.
-
-Some of that meaning may sit outside ordinary product, customer, order, or category records.
-
-#### What to validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Review business-critical behavior connected to:
-
-* extensions or modules
-* custom product fields
-* custom customer or order attributes
-* layered navigation or merchandising extensions
-* ERP, CRM, fulfillment, subscription, loyalty, marketplace, or analytics dependencies
-* theme-controlled product, category, or checkout presentation
-* outside-system identifiers
-* source-side custom logic
-
-#### What good validation proves <a href="#what-good-validation-proves-6" id="what-good-validation-proves-6"></a>
-
-A strong result proves that the migrated store still supports the behavior that matters to daily operations and customer experience.
-
-If a field exists but the behavior it supported no longer works, the migration result is not fully validated. Broader transformation, extension-aware interpretation, Custom Platform handling, or custom migration logic adjustment belongs under **Custom Service** when standard handling is not enough.
-
-### What Makes a Strong Magento Validation Sample <a href="#what-makes-a-strong-magento-validation-sample" id="what-makes-a-strong-magento-validation-sample"></a>
-
-A strong Magento validation sample is deliberately risk-based.
-
-It should include records that expose the target’s structural pressure instead of only records that are easy to migrate.
-
-#### A strong sample should include <a href="#a-strong-sample-should-include" id="a-strong-sample-should-include"></a>
-
-* simple and complex product examples
-* configurable, grouped, bundle, virtual, or downloadable products where relevant
-* products with important attributes and attribute sets
-* category and product examples tied to high-value discovery paths
-* website, store, and store-view examples when scope matters
-* customer-group examples tied to commercial behavior
-* orders with meaningful tax, discount, shipping, payment, or support context
-* high-value legacy URLs and rewrite destinations
-* extension-owned or custom-field-dependent records
-* Custom Platform source records if the source is not a supported standard platform
-
-#### Why random sampling is not enough <a href="#why-random-sampling-is-not-enough" id="why-random-sampling-is-not-enough"></a>
-
-Random sampling can confirm that common records survived. It often fails to test the edge cases that decide whether Magento is ready for launch.
-
-For Magento, validation quality depends on whether the sample represents structural risk, not only data volume.
-
-### What Often Gets Missed in Magento Validation <a href="#what-often-gets-missed-in-magento-validation" id="what-often-gets-missed-in-magento-validation"></a>
-
-Magento validation often fails when teams review visible completeness but not operating meaning.
-
-#### Common missed issues <a href="#common-missed-issues" id="common-missed-issues"></a>
-
-Common gaps include:
-
-* treating product existence as proof of correct product-type translation
-* checking attributes without checking attribute-set assignment
-* confirming category presence without testing discovery, URL, or merchandising meaning
-* assuming store views are correct because they exist
-* validating customers without checking customer-group behavior
-* reviewing orders only by count instead of support usefulness
-* confirming URL rewrites without judging destination relevance
-* checking custom fields without checking the behavior they support
-* overlooking extension-owned or outside-system-dependent meaning
-
-#### How to reduce these gaps <a href="#how-to-reduce-these-gaps" id="how-to-reduce-these-gaps"></a>
-
-Use the validation checklist as a structured evidence process. Each priority should have a clear pass condition, warning sign, and next action.
-
-If the review exposes ambiguity, the result should not be forced into a pass. It should be labeled for correction, reconfiguration, Custom Service review, or business acceptance depending on the issue.
-
-### How Custom Platform Sources Change Magento Validation <a href="#how-custom-platform-sources-change-magento-validation" id="how-custom-platform-sources-change-magento-validation"></a>
-
-A Custom Platform source usually raises the evidence standard for Magento validation.
-
-The target may need to interpret source-side behavior that was not built around Magento’s product, attribute, scope, customer-group, URL, or extension model.
-
-#### What changes in validation <a href="#what-changes-in-validation" id="what-changes-in-validation"></a>
-
-Custom Platform validation should usually include:
-
-* more high-risk product samples
-* closer review of product-type translation
-* tighter attribute and attribute-set checks
-* explicit scope and customer-group testing
-* careful review of custom-field meaning
-* URL and outside-system identifier checks
-* closer distinction between acceptable Magento formalization and unacceptable business loss
-
-#### Why this matters <a href="#why-this-matters" id="why-this-matters"></a>
-
-A Custom Platform source can make the migrated Magento target look cleaner than the source while still losing important context.
-
-Validation should confirm that simplification is intentional and acceptable, not accidental.
+The sample should be documented before validation starts. If a problem appears outside the sample, the sample should be expanded intentionally rather than replaced by random spot checks.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Magento validation is strongest when it focuses on the places where Magento can change business meaning: product types, attributes, attribute sets, scope hierarchy, customer groups, order interpretation, URL rewrites, extensions, custom fields, and Custom Platform source logic.
+Magento validation should prove operational readiness, not only data presence. The strongest review checks whether migrated records behave correctly within Magento product types, attribute sets, website/store/store-view scope, inventory logic, URL rewrites, customer groups, order history, content structures, and custom or extension-dependent workflows. When validation findings are classified early, the merchant can decide whether to adjust target configuration, use Add-ons, request Custom Service review, perform Recent Data Migration, run Re-Migration, or accept a documented difference before launch.
 
-A complete-looking Magento target is not enough. The migrated store should prove that important catalog, customer, URL, and operational behavior remains usable after translation.
-
-Review representative Magento samples before treating the target as launch-ready. If validation exposes uncertainty around product structure, scope placement, customer-group behavior, rewrite relevance, extension-owned data, or Custom Platform interpretation, use Demo Migration evidence and Live Chat to decide whether the issue needs configuration, acceptance, Add-on support, or Custom Service review.
+Review Magento validation priorities with Next-Cart before launch to confirm which samples, service responsibilities, Add-ons, Custom Service items, Recent Data Migration steps, and Re-Migration decisions should be included in the final migration plan.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**What should be validated first in a Magento migration?**
+**Is matching Magento record counts enough to approve a migration?**
 
-Start with the areas most likely to change business meaning: product types, attributes, attribute sets, website/store/store-view scope, customer groups, high-value URL rewrites, order-history usefulness, extensions, custom fields, and Custom Platform source logic.
+No. Record counts are only a starting point. Magento validation should also prove product-type behavior, attribute usability, store-scope accuracy, inventory availability, URL continuity, customer-group meaning, order readability, content rendering, and custom or extension-dependent outcomes.
 
-**Why is product-type validation important in Magento?**
+**Which Magento products should be validated first after Demo Migration?**
 
-Magento product types affect how customers select, buy, receive, and manage products. A product can exist after migration while still using the wrong target structure for its buying behavior.
+Start with products that represent real catalog complexity: configurable products with child SKUs, bundle or grouped products, high-value simple products, products assigned to multiple categories or websites, products with custom attributes, products with important URLs, and products affected by inventory or extension logic.
 
-**Are Magento URL rewrites enough to protect SEO continuity?**
+**Why should Magento store-view validation be handled separately?**
 
-No. URL rewrites help with route continuity, but validation should also confirm that each important legacy path reaches a relevant target destination that matches the original customer and search intent.
+Store views can carry language, URL, content, and scope-specific values. A product or page may look correct in the default view while another store view has missing text, incorrect metadata, wrong visibility, or an unintended URL path.
 
-**Why do Magento attributes need more than field-level checking?**
+**How should Magento inventory be validated?**
 
-Attributes can support filtering, comparison, merchandising, administration, and product-family governance. Validation should check whether attributes and attribute sets remain useful, not only whether field values appear.
+Inventory should be validated by sellable behavior. Check quantities, stock status, sources, stocks, salable quantity, website assignment, and representative checkout behavior for simple products, configurable-product children, out-of-stock products, and products connected to warehouse or fulfillment workflows.
 
-**How does a Custom Platform source affect Magento validation?**
+**What happens if Magento validation reveals custom or extension-owned data gaps?**
 
-A Custom Platform source usually requires more precise validation because source-side behavior may not map cleanly into Magento. Product logic, attributes, custom fields, identifiers, URLs, and operational workflows may need closer interpretation or Custom Service review.
+The finding should be classified before launch. Some gaps may require target configuration, Advanced Data Mapping, Advanced Data Configure, a Data Filter Add-on, Custom Service review, Re-Migration, or manual business acceptance depending on whether the issue involves standard entities, optional configuration, or custom migration logic adjustment.

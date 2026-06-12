@@ -1,301 +1,195 @@
 # Adobe Commerce Constraints and Risks
 
-Adobe Commerce can be a strong Target Platform when the business needs a more governed commerce model, especially for B2B structure, catalog control, pricing differentiation, staged merchandising, and multi-scope management. The same strengths also create migration risk when the business expects enterprise behavior but has not clearly defined the rules behind that behavior.
+Adobe Commerce migration risk is rarely caused by record volume alone. The larger risk is whether the source data, business rules, integrations, and operating model can be translated into Adobe Commerce without weakening catalog governance, buyer access, storefront scope, pricing logic, fulfillment behavior, or commercial controls.
 
-Adobe Commerce risk is rarely limited to whether products, customers, orders, categories, or CMS Pages appear after migration. A store can look structurally complete while company relationships, shared catalog access, customer-group behavior, staged campaign logic, scope rules, and URL destinations still behave in ways that weaken revenue, trust, and operational control.
+Adobe Commerce is built for complex commerce operations. That strength also increases the number of places where a migration can look technically complete while still failing business validation. Products may exist but behave incorrectly by storefront. Company accounts may migrate but lose the permissions that let buyers place orders. Shared catalogs may be created but expose the wrong product set or price. Campaign content may transfer but lose its timing logic. URLs may resolve but fail to preserve high-value routes.
 
-The main constraint is definition. Adobe Commerce asks the business to make commercial structure more explicit than many source platforms require. If those decisions are vague before migration, the Target Platform may preserve records without preserving the business logic that made those records useful.
+A strong migration plan therefore treats constraints as design inputs. The goal is not to avoid Adobe Commerce complexity. The goal is to decide which parts of that complexity must be preserved, rebuilt, simplified, or handled through a more tailored migration path.
 
-### Where Adobe Commerce Risk Usually Concentrates <a href="#where-adobe-commerce-risk-usually-concentrates" id="where-adobe-commerce-risk-usually-concentrates"></a>
+### Constraint Summary for Adobe Commerce Migration <a href="#constraint-summary-for-adobe-commerce-migration" id="constraint-summary-for-adobe-commerce-migration"></a>
 
-Adobe Commerce migration risk usually concentrates in a smaller group of high-impact pressure points rather than across every record type equally.
+| Constraint area                      | Main risk                                                                                                                                | Planning response                                                                                                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| B2B company structure                | Buyers lose company roles, approval authority, credit behavior, quote access, purchase order logic, or payment and shipping permissions. | Audit company accounts, company users, administrators, hierarchy, and purchasing controls before migration.       |
+| Shared catalogs                      | Company-specific visibility and pricing do not match the intended buyer experience.                                                      | Confirm shared catalog ownership, customer group assignment, product visibility, and custom pricing requirements. |
+| Website, store, and store-view scope | Data appears correct globally but fails by region, language, storefront, or business channel.                                            | Map source storefronts and content variants to Adobe Commerce scope before interpreting records.                  |
+| Product and attribute architecture   | Products transfer as records but do not support variants, filtering, navigation, pricing, or operational maintenance.                    | Review product types, child SKU relationships, attributes, and attribute sets before migration.                   |
+| Content staging and campaigns        | Scheduled commercial changes become static content or lose timing context.                                                               | Separate current content from future-dated campaign logic and decide what must be recreated.                      |
+| Inventory and fulfillment            | Stock quantities do not reflect sources, stocks, salable quantity, reservations, or sales-channel assignment.                            | Align inventory migration with the intended fulfillment model rather than a single quantity field.                |
+| URL and SEO continuity               | Product, category, CMS Page, or custom routes change without proper rewrite and redirect planning.                                       | Audit high-value URLs, rewrite needs, route conflicts, and post-migration redirect behavior.                      |
+| Extensions and custom logic          | Extension-owned fields, workflows, ERP identifiers, or bespoke rules are omitted or flattened.                                           | Classify extension and custom data early and route unsupported logic through Custom Service where needed.         |
 
-The most important risk areas usually include:
+### B2B Controls Can Be More Important Than Customer Records <a href="#b2b-controls-can-be-more-important-than-customer-records" id="b2b-controls-can-be-more-important-than-customer-records"></a>
 
-* company account structure and hierarchy
-* shared catalog assignment, product visibility, and custom pricing
-* customer-group interaction with B2B catalog rules
-* Content Staging and campaign timing behavior
-* websites, stores, and store views where scope affects commercial rules
-* URL rewrites, route priority, and destination quality
-* extension-owned, custom-field, or workflow-dependent enterprise behavior
-* validation coverage that must prove business behavior, not only visible data presence
+Adobe Commerce B2B migration constraints often concentrate above the individual customer account. A buyer may have a valid email, address, and order history, but that does not prove the buyer can act correctly after migration.
 
-These are the areas most likely to show whether Adobe Commerce is being used as a governed enterprise target or only as a larger storefront.
+Company accounts can carry legal identity, company administrators, company users, approval structures, credit settings, quote permissions, purchase order behavior, payment method availability, shipping method availability, customer group assignment, and shared catalog access. If those controls are not accounted for, migrated B2B customers may see the wrong catalog, lose quote access, bypass approval logic, fail checkout, or no longer match the commercial policy attached to their account.
 
-### Constraint 1: Company Structure Must Be Defined Before It Can Become a B2B Strength <a href="#constraint-1-company-structure-must-be-defined-before-it-can-become-a-b2b-strength" id="constraint-1-company-structure-must-be-defined-before-it-can-become-a-b2b-strength"></a>
+The constraint becomes more serious when the source platform uses a different representation for wholesale customers. Some platforms store B2B accounts as customer tags, customer groups, custom fields, account manager assignments, ERP IDs, external credit records, contract-pricing tables, or app-owned metadata. Those structures may not have a one-to-one path into Adobe Commerce company accounts.
 
-Adobe Commerce supports company accounts, company users, company hierarchy, account status, credit-related settings, and company-level administration. That can make it a strong target for B2B migration, but it also means the business must decide what each company relationship should mean after launch.
+B2B readiness should be judged by relationship completeness, not only customer count. The migration plan should confirm which customers are individual retail buyers, which belong to companies, which users administer company accounts, which users require purchasing authority, and which company-level rules must be available before the migrated store can accept orders.
 
-#### Who This Affects <a href="#who-this-affects" id="who-this-affects"></a>
+### Shared Catalogs Create Visibility and Pricing Risk <a href="#shared-catalogs-create-visibility-and-pricing-risk" id="shared-catalogs-create-visibility-and-pricing-risk"></a>
 
-This risk affects merchants with wholesale customers, distributor accounts, dealer networks, corporate buyers, multi-user purchasing accounts, approval workflows, account-specific visibility, or any source-side customer structure that carries business meaning beyond an individual shopper profile.
+Shared catalogs can make Adobe Commerce migration more sensitive than a standard product-and-price transfer. In a simpler platform, product visibility and price may depend mostly on product status, category assignment, customer group, or channel settings. In Adobe Commerce B2B, a company may need access to a specific shared catalog that determines which products are visible and what prices apply.
 
-#### What Can Go Wrong <a href="#what-can-go-wrong" id="what-can-go-wrong"></a>
+This creates two separate risks. First, product access can be wrong even when the catalog exists. A company may see products it should not see, fail to see contracted products, or lose access to a restricted assortment. Second, pricing can be wrong even when the product record and base price are correct, because the commercially relevant price may be company-specific or shared-catalog-specific.
 
-Risk increases when the source platform stores B2B meaning through loose tags, customer notes, custom fields, informal groups, negotiated account rules, or manual processes that do not map cleanly into Adobe Commerce company structures.
+Shared catalog planning should identify:
 
-The Target Platform may contain company records, but still fail to answer practical questions such as:
+| Question                                                                                    | Why it matters                                                                             |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Which companies use public catalog access, shared catalog access, or both?                  | Visibility rules determine what buyers can browse and purchase.                            |
+| Which products belong to each shared catalog?                                               | Product transfer alone does not prove buyer-specific assortment accuracy.                  |
+| Which prices are base prices, customer group prices, tier prices, or shared catalog prices? | Pricing validation must test the buyer context that activates the price.                   |
+| Which company assignments are required at launch?                                           | B2B buyers may be blocked or mispriced if company-to-catalog relationships are incomplete. |
 
-* which buyers belong to which company account
-* which companies should be parent or child organizations
-* which users should have buying authority
-* which company accounts should be active, blocked, or pending review
-* which pricing, visibility, credit, or workflow rules should follow each company
+For this reason, shared catalog migration often requires a narrower but deeper validation sample. It is better to prove a representative set of companies, products, and price rules than to confirm only that product records and customer records were created.
 
-When those decisions are unclear, the migration risk is not missing data alone. It is commercially incorrect relationship structure.
+### Scope Mistakes Can Hide Until Storefront Review <a href="#scope-mistakes-can-hide-until-storefront-review" id="scope-mistakes-can-hide-until-storefront-review"></a>
 
-#### Mitigation Strategy <a href="#mitigation-strategy" id="mitigation-strategy"></a>
+Adobe Commerce scope is a frequent source of migration risk because websites, stores, and store views can change the meaning of data. A source platform may have multiple storefronts, language versions, regional sites, wholesale portals, or brand catalogs. Adobe Commerce may represent those differences through scope, categories, shared catalogs, customer groups, configuration, content assignment, or several mechanisms together.
 
-Define the most important company relationships before migration. Identify the company accounts that matter most to revenue, the users connected to each account, the relationship between parent and child companies where relevant, and the commercial rules attached to those relationships.
+A scope mistake is often hard to detect through record counts. The product may exist. The CMS Page may exist. The category may exist. The customer may exist. The failure appears only when a reviewer checks the correct website, store, store view, customer group, company account, language, or buyer context.
 
-Demo Migration should be reviewed against real B2B accounts, not only generic customer samples.
+Common scope-related constraints include:
 
-### Constraint 2: Shared Catalogs Can Preserve Access and Pricing Only When Assignment Logic Is Clear <a href="#constraint-2-shared-catalogs-can-preserve-access-and-pricing-only-when-assignment-logic-is-clear" id="constraint-2-shared-catalogs-can-preserve-access-and-pricing-only-when-assignment-logic-is-clear"></a>
+| Source condition                                          | Adobe Commerce risk                                                                                                |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Multilingual content stored as duplicated pages or fields | Content may land in the wrong store view or overwrite the default version.                                         |
+| Separate regional stores with overlapping catalogs        | Product visibility, currency, language, tax, or configuration may not follow the intended website/store structure. |
+| Wholesale and retail channels mixed in one source catalog | B2B and B2C visibility may need different Adobe Commerce mechanisms.                                               |
+| Storefront-specific URLs or category paths                | SEO and navigation behavior may differ by scope.                                                                   |
+| Global product fields used inconsistently                 | Attribute and content values may need scope-level cleanup before migration.                                        |
 
-Shared catalogs are one of the strongest Adobe Commerce B2B features, but they are also one of the most sensitive migration risk areas. A shared catalog can control which products a company can access and what custom pricing that company sees.
+Scope mapping should happen before article-level or entity-level validation begins. Without that decision, reviewers may validate the wrong context and miss defects that affect only one storefront, language, company, or market.
 
-#### Who This Affects <a href="#who-this-affects-1" id="who-this-affects-1"></a>
+### Product Architecture Can Turn Simple Catalogs Into Complex Migration Work <a href="#product-architecture-can-turn-simple-catalogs-into-complex-migration-work" id="product-architecture-can-turn-simple-catalogs-into-complex-migration-work"></a>
 
-This risk affects merchants that use contract pricing, customer-specific catalogs, private product access, wholesale visibility rules, distributor-only products, negotiated price lists, or business segments with different catalog availability.
+Adobe Commerce supports rich product modeling, but migration constraints appear when source catalog structure is incomplete, inconsistent, or too loosely defined. Products that are simple in the source platform may need to become configurable products, grouped products, bundle products, downloadable products, or carefully structured simple products in Adobe Commerce.
 
-#### What Can Go Wrong <a href="#what-can-go-wrong-1" id="what-can-go-wrong-1"></a>
+Variant logic is a common pressure point. If a source platform stores variation options as text labels rather than child SKUs, the migration plan may need to define how those options become Adobe Commerce relationships. If product attributes are inconsistent across categories, attribute sets may need preparation before products can be reviewed efficiently. If product fields power search, layered navigation, reports, promotions, merchandising, or integrations, the fields cannot be treated as decorative descriptions.
 
-A shared catalog can be technically valid but commercially wrong. The problem is not only whether a catalog exists. The problem is whether the right companies see the right products at the right prices.
+Product architecture risk usually rises when the catalog includes:
 
-Risk rises when the business has not defined:
+| Catalog pattern                                             | Risk                                                                                                 |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Products with many option combinations                      | Child SKU relationships, pricing, stock, images, and option labels can become difficult to validate. |
+| Inconsistent attribute usage                                | Filtering, layered navigation, rules, and maintenance workflows may behave unpredictably.            |
+| Multiple product families with different field requirements | Attribute sets may need planning before import.                                                      |
+| App-owned product options or bundled logic                  | Standard field mapping may not preserve how buyers configure products.                               |
+| Custom merchandising relationships                          | Related products, upsells, cross-sells, and category placement may need separate review.             |
 
-* which companies should receive each shared catalog
-* which products should be included or excluded
-* how custom pricing should differ by company or business segment
-* whether inherited source rules were deliberate or just historical workarounds
-* whether public and private catalog visibility should remain separated
+When product architecture is weak in the source platform, the migration should not simply reproduce the weakness. It should decide whether Adobe Commerce should preserve the existing structure, normalize it, or route the affected areas through a more tailored service plan.
 
-If shared catalog logic is misclassified, Adobe Commerce may expose products too broadly, hide products from valid customers, or show prices that do not match business agreements.
+### Content Staging Can Be Lost If Campaign Timing Is Treated as Static Content <a href="#content-staging-can-be-lost-if-campaign-timing-is-treated-as-static-content" id="content-staging-can-be-lost-if-campaign-timing-is-treated-as-static-content"></a>
 
-#### Mitigation Strategy <a href="#mitigation-strategy-1" id="mitigation-strategy-1"></a>
+Adobe Commerce Content Staging creates a separate migration concern for merchants that rely on scheduled campaigns, seasonal changes, product updates, category changes, price-rule timing, CMS Page updates, or CMS block changes.
 
-Treat shared catalog planning as a commercial-rule exercise, not only a catalog migration task. Prioritize the catalogs, products, and company assignments that carry the highest revenue or trust risk, then validate those cases directly after Demo Migration.
+A source platform may store campaign timing in a theme, app, promotion scheduler, CMS workflow, custom table, or external planning system. If that timing is not visible in the supported migration scope, a migrated store may preserve the visible current content but lose the schedule that controls what should change later.
 
-### Constraint 3: Customer Groups and Shared Catalogs Can Drift Out of Alignment <a href="#constraint-3-customer-groups-and-shared-catalogs-can-drift-out-of-alignment" id="constraint-3-customer-groups-and-shared-catalogs-can-drift-out-of-alignment"></a>
+The practical constraint is not whether a CMS Page or promotion exists. The constraint is whether launch planning requires future-dated commercial behavior to be active, preserved, recreated, or intentionally excluded. Campaign-heavy merchants should separate:
 
-Adobe Commerce links B2B catalog behavior closely with customer-group and shared-catalog logic. When shared catalog behavior is enabled, catalog access and category permissions can become more tightly controlled by shared catalog configuration than teams expect.
+| Content or rule state                                       | Migration decision                                                                |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Live content needed at launch                               | Include in the primary migration plan and validate storefront output.             |
+| Scheduled content or price changes needed soon after launch | Plan recreation or tailored handling before launch.                               |
+| Expired campaigns retained for reference                    | Decide whether historical content should migrate or remain archived externally.   |
+| Campaign logic controlled by external systems               | Confirm whether Adobe Commerce should store it, integrate with it, or exclude it. |
 
-#### Who This Affects <a href="#who-this-affects-2" id="who-this-affects-2"></a>
+Without that separation, content review can produce a false pass. Reviewers may approve what is visible today while missing scheduled changes that matter to commercial launch.
 
-This risk affects merchants that already use customer groups for pricing, tax class behavior, access control, segmentation, wholesale logic, or B2B account separation, especially when shared catalogs are also expected to govern product visibility and custom pricing.
+### Inventory Constraints Depend on Fulfillment Design <a href="#inventory-constraints-depend-on-fulfillment-design" id="inventory-constraints-depend-on-fulfillment-design"></a>
 
-#### What Can Go Wrong <a href="#what-can-go-wrong-2" id="what-can-go-wrong-2"></a>
+Adobe Commerce inventory planning can be more complex than transferring a quantity value. Inventory Management can involve sources, stocks, salable quantity, reservations, and sales-channel assignment. A source platform with a single stock field may not provide enough structure for a merchant that wants multi-location fulfillment, regional availability, pickup locations, warehouse routing, or separate B2B and B2C stock strategies.
 
-The business may assume customer groups are only administrative categories, while Adobe Commerce uses shared catalog and customer-group behavior as part of a broader access and pricing model.
+Inventory risk is especially high when the source store uses custom warehouse fields, third-party fulfillment apps, ERP-controlled stock, external reservation systems, marketplace synchronization, or manual stock adjustments outside the commerce platform. In those cases, the visible stock number may be only an output of a broader operational process.
 
-Risk increases when:
+Before migration, inventory should be classified into three levels:
 
-* customer groups are migrated without reviewing their commercial meaning
-* shared catalogs are assigned without checking customer-group interaction
-* tax class, pricing, or visibility logic depends on customer grouping
-* teams validate catalog records but not the customer experience for each business segment
+| Inventory level            | Migration question                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------- |
+| Product-level stock        | What stock value must buyers see at launch?                                                    |
+| Source and stock structure | Which warehouses, locations, or sales channels should control availability?                    |
+| Operational stock logic    | Which reservations, ERP processes, fulfillment rules, or external systems affect availability? |
 
-In these cases, the migrated store can preserve both customer groups and shared catalogs while still failing to preserve the intended commercial segmentation.
+A Standard Service path may be suitable when inventory can be represented through supported fields and the merchant has a clear target configuration. More complex fulfillment models may require Managed Service planning, Add-ons for supported configuration needs, or Custom Service when custom inventory logic or unsupported source data must be handled.
 
-#### Mitigation Strategy <a href="#mitigation-strategy-2" id="mitigation-strategy-2"></a>
+### SEO and URL Rewrite Risk Requires Route-Level Planning <a href="#seo-and-url-rewrite-risk-requires-route-level-planning" id="seo-and-url-rewrite-risk-requires-route-level-planning"></a>
 
-Review customer groups and shared catalogs together. Validate not only whether the records exist, but whether the correct customer or company context sees the correct catalog, price, and purchase path.
+Adobe Commerce can manage URL rewrites for products, categories, CMS Pages, and custom routes. That capability helps preserve SEO continuity, but it does not eliminate the need to plan routes carefully.
 
-### Constraint 4: Content Staging Expands Risk Beyond the Static Launch State <a href="#constraint-4-content-staging-expands-risk-beyond-the-static-launch-state" id="constraint-4-content-staging-expands-risk-beyond-the-static-launch-state"></a>
+Migration risk appears when a source store has years of accumulated URL patterns, custom slugs, app-generated landing pages, localized URLs, category-path variations, discontinued products, redirected pages, or manually edited SEO routes. If those routes are not audited, the migrated store can launch with missing redirects, duplicate paths, broken category URLs, changed product URLs, or CMS Pages that no longer match high-value search-entry pages.
 
-Adobe Commerce Content Staging can support scheduled content and merchandising updates for products, categories, catalog price rules, cart price rules, CMS Pages, and CMS Blocks. That makes it useful for campaign-driven businesses, but it also means migration planning cannot stop at the storefront state visible on launch day.
+A useful URL review should separate:
 
-#### Who This Affects <a href="#who-this-affects-3" id="who-this-affects-3"></a>
+| URL type                   | Review priority                                                                                            |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| High-traffic product URLs  | Preserve or redirect routes that directly affect revenue and search visibility.                            |
+| High-traffic category URLs | Confirm category paths, layered-navigation expectations, and redirect behavior.                            |
+| CMS Page URLs              | Preserve landing pages, brand pages, policy pages, and campaign pages that receive traffic.                |
+| Custom routes              | Identify app-owned or manually created URLs that may not exist as ordinary products, categories, or pages. |
+| Legacy redirects           | Decide which historical redirects must be recreated and which can be retired.                              |
 
-This risk affects merchants with campaign calendars, seasonal promotions, scheduled category changes, content launches, merchandising events, time-sensitive pricing, or teams that rely on preview and scheduling workflows.
+URL preservation is not only a technical SEO task. It affects customer trust, paid campaign continuity, affiliate links, email campaigns, B2B procurement bookmarks, and internal sales team references.
 
-#### What Can Go Wrong <a href="#what-can-go-wrong-3" id="what-can-go-wrong-3"></a>
+### Extensions and Custom Logic Can Define the Real Migration Boundary <a href="#extensions-and-custom-logic-can-define-the-real-migration-boundary" id="extensions-and-custom-logic-can-define-the-real-migration-boundary"></a>
 
-Risk rises when teams assume the current storefront is the full migration target. A business may also need staged content behavior, campaign timing, baseline content, scheduled changes, and merchandising calendars to remain understandable after migration.
+Adobe Commerce projects often involve extensions, custom modules, ERP integrations, PIM systems, CRM connections, payment customizations, tax services, warehouse integrations, middleware, marketplace feeds, or bespoke business rules. Some of that data may be visible in the source platform. Some may live outside the platform. Some may exist only as computed behavior.
 
-Problems often appear when:
+This creates a hard boundary for migration planning. Supported entity transfer can move recognized data structures. It cannot automatically preserve every extension-owned workflow, every custom table, every external identifier, or every custom business rule unless those requirements are identified and included in the service plan.
 
-* scheduled campaigns are not inventoried before migration
-* baseline content and future updates are confused
-* teams expect timing behavior to transfer automatically
-* promotions and content updates are validated only as static records
-* store-view or time-zone expectations are not reviewed
+Custom logic should be reviewed by asking:
 
-The result can be a store that looks correct at launch but fails to support the campaign behavior the business expected to manage after launch.
+| Custom area                     | Planning question                                                                                              |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Extension-owned fields          | Are these fields standard records, supported custom fields, or extension-specific data?                        |
+| External identifiers            | Which ERP, PIM, CRM, warehouse, marketplace, or accounting IDs must remain connected?                          |
+| Checkout and payment logic      | Are there custom approval, payment, tax, shipping, or quote behaviors that affect orders?                      |
+| B2B workflows                   | Do custom company rules, user permissions, or contract terms exist outside standard Adobe Commerce structures? |
+| Reporting and compliance fields | Which fields must remain available for finance, audit, legal, or operational reporting?                        |
 
-#### Mitigation Strategy <a href="#mitigation-strategy-3" id="mitigation-strategy-3"></a>
+When custom logic matters to day-one operations, the risk is not solved by transferring more records. It is solved by deciding whether the requirement belongs in supported mapping, an Add-on, or Custom Service.
 
-Separate static launch content from timed commercial behavior. Identify which campaigns, price rules, CMS Pages, CMS Blocks, products, and categories require staged review, then validate those examples as behavior, not only as content records.
+### How to Classify Adobe Commerce Migration Risk <a href="#how-to-classify-adobe-commerce-migration-risk" id="how-to-classify-adobe-commerce-migration-risk"></a>
 
-### Constraint 5: Scope Hierarchy Becomes Riskier When It Carries Commercial Rules <a href="#constraint-5-scope-hierarchy-becomes-riskier-when-it-carries-commercial-rules" id="constraint-5-scope-hierarchy-becomes-riskier-when-it-carries-commercial-rules"></a>
+Adobe Commerce constraints should be classified before service selection, not after the migration has already been configured. The classification does not need to be complex, but it must distinguish ordinary data preparation from structural or custom migration work.
 
-Adobe Commerce uses websites, stores, and store views to control different layers of storefront structure, language, catalog context, and configuration. Scope becomes more sensitive when it interacts with pricing, catalog visibility, customer grouping, staged content, or market-specific rules.
+| Risk level | Typical condition                                                                                                                          | Recommended planning response                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Low        | Standard product, customer, order, category, content, and URL needs with limited B2B or custom logic                                       | Confirm supported scope, run Demo Migration, and validate representative records.                     |
+| Moderate   | Multi-store scope, configurable products, customer groups, meaningful URL preservation, or structured inventory needs                      | Prepare source data, define scope mapping, and consider Managed Service or relevant Add-ons.          |
+| High       | Company accounts, shared catalogs, B2B permissions, staged campaigns, complex inventory, or integration-dependent data                     | Use a deeper planning review and validate buyer-context samples before Full Migration.                |
+| Custom     | Unsupported source data, extension-owned records, outside-system identifiers, bespoke B2B workflows, or custom Adobe Commerce requirements | Route the affected work through Custom Service so the migration path reflects the actual requirement. |
 
-#### Who This Affects <a href="#who-this-affects-4" id="who-this-affects-4"></a>
-
-This risk affects merchants with multiple storefronts, regions, languages, brands, business divisions, customer groups, price books, or catalog views that should not all behave the same way after migration.
-
-#### What Can Go Wrong <a href="#what-can-go-wrong-4" id="what-can-go-wrong-4"></a>
-
-A value can be present in Adobe Commerce but still be wrong if it sits at the wrong scope. Product data, category meaning, content, pricing behavior, URL structure, customer segmentation, and visibility rules may all appear acceptable in one context while failing in another.
-
-Risk increases when:
-
-* source-side store structure was informal or inconsistent
-* the business has multiple storefronts or market views
-* pricing and visibility rules differ by customer or market
-* teams validate only the default website or default store view
-* staged content or catalog rules apply differently across contexts
-
-The constraint is not scope itself. The constraint is unmanaged scope interacting with business rules.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-4" id="mitigation-strategy-4"></a>
-
-Define which scope levels matter before migration and validate high-value examples in each important website, store, or store-view context. Do not rely on default-view validation as proof that the whole Adobe Commerce target is safe.
-
-### Constraint 6: URL Rewrites Reduce Technical Friction but Do Not Remove Route-Continuity Risk <a href="#constraint-6-url-rewrites-reduce-technical-friction-but-do-not-remove-route-continuity-risk" id="constraint-6-url-rewrites-reduce-technical-friction-but-do-not-remove-route-continuity-risk"></a>
-
-Adobe Commerce includes URL rewrite support for products, categories, CMS Pages, and custom rewrites. This helps preserve cleaner, customer-facing URLs and can create permanent redirects when URLs change. However, native rewrite capability does not remove the need for route planning.
-
-#### Who This Affects <a href="#who-this-affects-5" id="who-this-affects-5"></a>
-
-This risk affects merchants with strong organic traffic, long-lived product URLs, category landing pages, CMS Pages, campaign routes, gated catalog pages, or important URLs tied to customer support, documentation, advertising, or partner links.
-
-#### What Can Go Wrong <a href="#what-can-go-wrong-5" id="what-can-go-wrong-5"></a>
-
-A redirect or rewrite can exist while still sending the visitor to a weak destination. Route-continuity risk increases when:
-
-* high-value routes are not prioritized before migration
-* product or category meaning changes during the platform move
-* private or gated catalog behavior changes what the destination can show
-* CMS Pages are merged, retired, or renamed without destination planning
-* teams test whether a URL resolves but not whether it resolves to the right commercial intent
-
-The risk is not only a broken link. It is a technically functioning route that no longer supports the search intent, customer expectation, or business value of the old page.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-5" id="mitigation-strategy-5"></a>
-
-Rank routes by business and SEO importance before migration. For the highest-priority routes, validate the destination page, content intent, catalog visibility, and customer context—not just the redirect response.
-
-### Constraint 7: Extension-Owned and Custom Behavior Can Hide the Real Migration Burden <a href="#constraint-7-extension-owned-and-custom-behavior-can-hide-the-real-migration-burden" id="constraint-7-extension-owned-and-custom-behavior-can-hide-the-real-migration-burden"></a>
-
-Adobe Commerce stores often rely on extensions, custom fields, custom pricing rules, ERP or PIM connections, approval workflows, merchandising workflows, checkout changes, or business logic that is not fully explained by native records alone.
-
-#### Who This Affects <a href="#who-this-affects-6" id="who-this-affects-6"></a>
-
-This risk affects merchants whose source platform or current Adobe Commerce plan depends on third-party modules, custom development, external systems, specialized B2B workflows, custom product attributes, non-standard pricing logic, or integrations that influence how data is interpreted.
-
-#### What Can Go Wrong <a href="#what-can-go-wrong-6" id="what-can-go-wrong-6"></a>
-
-The migrated Adobe Commerce store may look complete because products, categories, customers, companies, and orders are present. Yet important business behavior may still be missing if that behavior lived in extensions, integrations, custom fields, outside-system identifiers, or surrounding operational workflows.
-
-Risk increases when:
-
-* custom fields are treated as simple notes instead of business rules
-* extension-owned data is not classified before migration
-* source-side pricing or visibility logic is assumed to be native
-* external system identifiers are not preserved where they still matter
-* integrations are expected to resume without clear data ownership
-
-This is where Adobe Commerce risk often moves from standard migration scope into Custom Service review.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-6" id="mitigation-strategy-6"></a>
-
-Classify extension-owned, custom-field, and integration-dependent behavior before migration. If the behavior affects pricing, visibility, workflow, access, reporting, or external system continuity, it should be reviewed as a Custom Service concern rather than treated as ordinary field transfer.
-
-### Constraint 8: Validation Must Prove Commercial Behavior, Not Only Record Completeness <a href="#constraint-8-validation-must-prove-commercial-behavior-not-only-record-completeness" id="constraint-8-validation-must-prove-commercial-behavior-not-only-record-completeness"></a>
-
-Adobe Commerce validation needs to cover more than visible storefront quality. The target often needs to prove company behavior, shared catalog access, customer-group interaction, scope-aware values, staged content behavior, URL continuity, and extension-dependent meaning.
-
-#### Who This Affects <a href="#who-this-affects-7" id="who-this-affects-7"></a>
-
-This risk affects any merchant moving into Adobe Commerce with B2B accounts, segmented catalogs, multiple scopes, scheduled merchandising, SEO-sensitive routes, or custom enterprise behavior.
-
-#### What Can Go Wrong <a href="#what-can-go-wrong-7" id="what-can-go-wrong-7"></a>
-
-Validation becomes weak when teams check only basic storefront presence:
-
-* products appear
-* categories load
-* customers exist
-* companies were created
-* CMS Pages open
-* orders are visible
-* routes resolve
-
-Those checks are necessary, but not enough. Adobe Commerce can still be commercially unreliable if the review does not prove whether the right company sees the right catalog, the right customer group receives the right behavior, the right store view carries the right value, and the right route leads to the right destination.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-7" id="mitigation-strategy-7"></a>
-
-Build validation samples around business scenarios, not only entity types. The strongest samples usually include high-value companies, sensitive shared catalogs, important customer groups, staged content examples, scope-sensitive products or pages, and high-traffic routes.
-
-### What Deserves the Earliest Risk Review <a href="#what-deserves-the-earliest-risk-review" id="what-deserves-the-earliest-risk-review"></a>
-
-The earliest Adobe Commerce risk review should focus on the areas where a wrong decision would be hardest to detect later or most damaging after launch.
-
-Prioritize:
-
-* company accounts and company hierarchies tied to revenue
-* shared catalogs that control important pricing or private catalog access
-* customer groups connected to pricing, tax, access, or visibility behavior
-* products and categories with scope-sensitive values
-* scheduled content or campaign behavior with launch or promotion timing impact
-* high-value URLs and routes that affect organic traffic or customer trust
-* extension-owned or custom-field-owned behavior that affects commercial interpretation
-* external identifiers needed for ERP, PIM, CRM, analytics, or fulfillment continuity
-
-These reviews help reveal whether Adobe Commerce is preserving business structure rather than only receiving data.
-
-### When Adobe Commerce Risk Usually Increases <a href="#when-adobe-commerce-risk-usually-increases" id="when-adobe-commerce-risk-usually-increases"></a>
-
-Adobe Commerce risk usually increases when:
-
-* company relationships are still described in general terms
-* shared catalog assignments are not tied to clear pricing and access rules
-* customer-group meaning is inherited without review
-* Content Staging matters but campaign behavior has not been inventoried
-* scope hierarchy interacts with commercial rules but has not been designed clearly
-* URL rewrites are treated as a complete SEO plan
-* extension-owned behavior is assumed to be native Adobe Commerce behavior
-* validation is planned like a lighter storefront review
-
-In those situations, Adobe Commerce may still be the right Target Platform, but the migration approach needs stronger definition before the result can be considered safe.
-
-### How a Custom Platform Source Changes Adobe Commerce Risk <a href="#how-a-custom-platform-source-changes-adobe-commerce-risk" id="how-a-custom-platform-source-changes-adobe-commerce-risk"></a>
-
-When the Source Platform is a Custom Platform, Adobe Commerce risk usually becomes more sensitive because more source-side meaning may not align cleanly with Adobe Commerce’s native structures.
-
-A Custom Platform source may store company relationships, pricing rules, product visibility, account permissions, campaign timing, SEO routes, custom attributes, and integration identifiers in non-standard ways. That raises the risk of commercial misinterpretation during target translation.
-
-In this situation, the main question is not only whether Adobe Commerce can support the desired outcome. The question is whether the source-side meaning has been interpreted clearly enough to rebuild it safely inside Adobe Commerce. Custom Platform migrations into Adobe Commerce should be reviewed through Custom Service because custom migration logic adjustment or bespoke handling is usually needed to preserve business meaning accurately.
+This classification protects the migration plan from a common mistake: treating Adobe Commerce as a larger version of a simple catalog store. The platform can support advanced commerce operations, but only when the migration plan preserves the structures that make those operations work.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Adobe Commerce constraints and risks are strongest where the platform expects clearer commercial structure than the source store required. Company relationships, shared catalogs, customer groups, Content Staging, scope hierarchy, URL rewrites, extension-owned behavior, and validation coverage all need deliberate review because they shape how the migrated store behaves after launch.
+Adobe Commerce migration constraints should be evaluated by business behavior, not just entity availability. The most important risks usually sit inside B2B authority, shared catalog access, storefront scope, catalog architecture, staged commercial activity, inventory design, URL continuity, and custom logic.
 
-Adobe Commerce is not automatically risky. It becomes risky when enterprise structures are treated as simple destination fields instead of business rules that must be defined, translated, and tested. The safest migration plans identify the highest-value B2B, catalog, scope, campaign, route, and custom-behavior cases early, then use those cases to prove whether the Target Platform is behaving correctly.
+A successful migration plan identifies those constraints before migration execution begins. When the source data is simple and well-structured, a standard path may be enough. When buyer access, pricing, fulfillment, campaign timing, or integrations carry operational value, the plan should escalate deliberately through Managed Service, Add-ons, or Custom Service instead of forcing complex requirements into a simplified migration path.
 
-Before treating an Adobe Commerce target as safe, review the company, shared catalog, customer-group, staging, scope, URL, and custom-behavior decisions that matter most to the business. If those areas still contain ambiguity after Demo Migration, Live Chat can help clarify whether the issue is target-platform fit, migration-path risk, or a Custom Service requirement that should be handled before launch.
+Plan your Adobe Commerce migration around the buyer experience, commercial rules, and operational controls that must work after launch, then choose the service path that can preserve those requirements with enough validation depth.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**What is one of the biggest Adobe Commerce migration risks?**
+**Why is Adobe Commerce migration risk higher for B2B stores?**
 
-One of the biggest risks is vague commercial structure. Adobe Commerce can support companies, shared catalogs, customer groups, scope hierarchy, and staged content, but those structures must be defined clearly before they can preserve business meaning after migration.
+B2B stores often depend on company accounts, company users, approvals, quotes, purchase orders, credit settings, payment and shipping permissions, customer group assignment, and shared catalog access. If those relationships are not planned, customer records may migrate while purchasing authority and buyer-specific access fail.
 
-**Why are shared catalogs a major Adobe Commerce risk area?**
+**Are shared catalogs always a Custom Service requirement?**
 
-Shared catalogs can control product visibility and custom pricing for specific company contexts. If assignment logic is unclear, the target can show the wrong products, hide valid products, or expose incorrect pricing even when the shared catalog itself exists.
+No. Shared catalog needs should be reviewed first. If the required data and configuration fit supported migration and preparation paths, they may not require Custom Service. Custom Service becomes relevant when company-specific pricing, visibility, source data, or custom business rules fall outside the supported migration path.
 
-**Does Content Staging increase migration risk?**
+**Can Adobe Commerce scope issues be found by checking record counts?**
 
-Content Staging increases risk when scheduled campaigns, future content updates, catalog price changes, or merchandising calendars matter after launch. The business must distinguish static launch content from timed behavior that needs separate review.
+Usually not. Record counts can confirm that products, customers, categories, or pages exist, but they cannot prove that the right content, catalog visibility, pricing, language, URL, or configuration appears in the right website, store, store view, company, or customer group context.
 
-**Are URL rewrites enough to protect SEO during Adobe Commerce migration?**
+**What makes product data risky in Adobe Commerce migration?**
 
-No. URL rewrites help with route continuity, but they do not guarantee that the destination still satisfies the original search intent, catalog visibility requirement, or customer expectation. High-value routes need destination-quality review, not only redirect testing.
+Risk increases when products rely on configurable relationships, child SKUs, attribute sets, layered navigation attributes, customer-group pricing, shared catalog pricing, bundled logic, app-owned options, or custom merchandising relationships. These structures affect storefront behavior and operations, not only product display.
 
-**When does Adobe Commerce migration usually require Custom Service review?**
+**How should custom extension data be handled?**
 
-Custom Service review is usually needed when the migration involves Custom Platform source data, extension-owned behavior, custom fields, external identifiers, bespoke pricing or visibility logic, non-standard B2B workflows, or custom migration logic adjustment beyond standard service capability.
+Custom extension data should be identified before migration scope is finalized. Supported fields may fit standard mapping or Add-ons, while extension-owned records, custom tables, outside-system identifiers, and bespoke workflows may require Custom Service.
