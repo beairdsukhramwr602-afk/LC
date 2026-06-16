@@ -40,11 +40,11 @@
 * [Demo Migration Explained](next-cart-migration-service/demo-migration-explained.md)
 * [Entity Points Explained](next-cart-migration-service/entity-points-explained.md)
 * [Entity Points Plan and Migration Pricing](next-cart-migration-service/entity-points-plan-and-migration-pricing.md)
-* [Additional Migration Options Explained](next-cart-migration-service/additional-migration-options-explained.md)
-* [Add-ons Explained](next-cart-migration-service/add-ons-explained.md)
-* [Next-Cart Migration Service Models Explained](next-cart-migration-service/next-cart-migration-service-models-explained.md)
+* [Add-ons](next-cart-migration-service/add-ons-explained.md)
+* [Next-Cart Service Models](next-cart-migration-service/next-cart-migration-service-models-explained.md)
 * [What Custom Service Handles](next-cart-migration-service/what-custom-service-handles.md)
-* [How to Choose the Right Next-Cart Service Model](next-cart-migration-service/how-to-choose-the-right-next-cart-service-model.md)
+* [Choose the Right Service Model](next-cart-migration-service/choose-the-right-service-model.md)
+* [Continue or Start a New Migration](next-cart-migration-service/continue-or-start-a-new-migration.md)
 
 ## Platform Strategy Hubs
 

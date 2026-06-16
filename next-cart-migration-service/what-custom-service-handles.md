@@ -1,297 +1,282 @@
 # What Custom Service Handles
 
-## What Custom Service Handles <a href="#what-custom-service-handles" id="what-custom-service-handles"></a>
+Custom Service is the Next-Cart service model for migration requirements that need tailored handling beyond standard service capability or available Standard Add-ons. It applies when the target-store result depends on customization, modification, bespoke data handling, Custom Platform review, or project-specific migration logic.
 
-Custom Service is the Next-Cart path for migration projects that need tailored handling beyond standard service capability or standard Add-on capability. It applies when the expected target result depends on customization, modification, exclusive handling, or bespoke configuration.
+Custom Service is broader than Add-ons. Add-ons support focused needs such as filtering, advanced mapping, or data configuration. Custom Service is used when the migration requirement needs a custom-scoped review, a modified Add-on, a Custom Add-on, Custom Platform handling, third-party data review, custom field handling, or expert-handled custom execution included in the agreed plan.
 
-This can include Add-on-related work, but Custom Service is not limited to Add-ons. It also covers Custom Platform, third-party data, custom fields, outside-system identifiers, custom migration logic adjustment, platform-specific transformation logic, and other requirements that do not fit a standard migration path.
+### What Custom Service Is Designed to Handle <a href="#what-custom-service-is-designed-to-handle" id="what-custom-service-is-designed-to-handle"></a>
 
-The purpose of Custom Service is to define a workable approach for migration requirements that need more than ordinary configuration.
+Custom Service helps define a workable migration approach when the expected target-store result cannot be reached through standard service capability alone.
 
-### What Custom Service Means  <a href="#what-custom-service-means" id="what-custom-service-means"></a>
+It is designed for requirements such as:
 
-Custom Service is required when the migration outcome depends on tailored work.
+* Custom Platform handling as Source Platform, Target Platform, or both;
+* custom fields or non-standard source-store structures;
+* app, plugin, module, extension, or third-party data;
+* outside-system identifiers used by ERP, CRM, fulfillment, accounting, reporting, or other business systems;
+* Tailored Add-ons that modify Standard Add-on behavior;
+* Custom Add-ons created for project-specific needs;
+* custom migration logic adjustment;
+* bespoke data transformation;
+* target-store requirements that need review against Target Platform capability;
+* expert-handled execution when the Expert Handle option is included in the Custom Service scope.
 
-This can include:
+The purpose is not to promise that every source-store behavior can be recreated exactly. The purpose is to review the requirement, define what can be supported, and shape the closest workable result based on the source data, Target Platform capability, and business goal.
 
-* adjusting how Next-Cart handles specific data during the migration process
-* creating a Tailored Add-on from a Standard Add-on
-* creating a Custom Add-on
-* interpreting a Custom Platform structure
-* transforming data to fit the Target Platform’s supported model
-* preserving custom fields or outside-system identifiers
-* handling third-party app, plugin, module, or extension data
-* applying bespoke configuration rules
-* supporting a migration outcome that cannot be reached through standard service capability alone
+### How Custom Service Differs from Add-ons <a href="#how-custom-service-differs-from-add-ons" id="how-custom-service-differs-from-add-ons"></a>
 
-The key point is that Custom Service protects the expected result when a requirement cannot be handled through the standard path.
+Add-ons are focused optional service features. They help customers control specific migration details, such as which records should migrate, how values should map, or how selected data should be configured.
 
-### Custom Service Is Broader Than Add-ons  <a href="#custom-service-is-broader-than-add-ons" id="custom-service-is-broader-than-add-ons"></a>
+Custom Service is the broader path for work that needs customization, modification, bespoke handling, or custom-scoped review.
 
-Add-ons give customers more control over focused migration needs, such as data filtering, advanced mapping, or data configuration.
+| Requirement type                                                            | Usually belongs to                     | Why                                                                                           |
+| --------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Filtering supported records by available conditions                         | Data Filter Add-on                     | The need is focused and can fit the Add-on’s supported behavior.                              |
+| Mapping supported fields or values with available mapping capability        | Advanced Data Mapping                  | The need is focused on source-to-target value alignment.                                      |
+| Adjusting selected data values through supported configuration behavior     | Advanced Data Configure                | The need is focused on controlled data adjustment.                                            |
+| Modifying a Standard Add-on beyond available settings                       | Tailored Add-on through Custom Service | The Add-on needs custom modification.                                                         |
+| Creating a project-specific Add-on                                          | Custom Add-on through Custom Service   | Available Standard Add-ons do not fit the required outcome.                                   |
+| Handling Custom Platform, third-party data, custom fields, or bespoke logic | Custom Service                         | The requirement changes the migration approach, data interpretation, or implementation scope. |
 
-Custom Service covers the wider set of requirements where the migration approach itself needs to be tailored.
+This separation keeps Add-ons clear and practical while giving custom requirements a proper review path.
 
-For example:
+### Tailored Add-ons and Custom Add-ons <a href="#tailored-add-ons-and-custom-add-ons" id="tailored-add-ons-and-custom-add-ons"></a>
 
-* filtering selected data may fit the Data Filter Add-on
-* more controlled source-to-target field alignment may fit Advanced Data Mapping
-* changing selected data values before migration may fit Advanced Data Configure
-* modifying a Standard Add-on beyond its available settings and supported behavior creates a Tailored Add-on and requires Custom Service
-* building a Custom Add-on requires Custom Service
-* handling Custom Platform, app-owned data, custom fields, outside-system identifiers, or custom migration logic adjustment belongs under Custom Service
+Custom Service can include Add-on-related work when the standard Add-on options are not enough.
 
-This distinction keeps Add-ons useful without forcing every custom migration requirement into the Add-on category.
+A Tailored Add-on is a modified version of a Standard Add-on. It is used when the available Add-on behavior is close to the customer’s requirement but needs adjustment beyond supported settings.
 
-### Tailored Add-ons and Custom Add-ons  <a href="#tailored-add-ons-and-custom-add-ons" id="tailored-add-ons-and-custom-add-ons"></a>
+A Custom Add-on is reviewed when the customer needs a project-specific capability that is not covered by the available Standard Add-ons.
 
-Custom Service can include Add-on-related work.
+Both cases belong under Custom Service because they require custom review, quoting, and implementation scope. The customer should describe the expected result clearly: what should be filtered, mapped, configured, transformed, or handled differently, and how the final target-store result should be validated.
 
-A Tailored Add-on is needed when a Standard Add-on must be modified beyond its available settings and supported behavior. For example, a customer may need filtering logic, mapping behavior, or data configuration rules that the Standard Add-on cannot support through its default behavior.
+### Custom Platform Handling <a href="#custom-platform-handling" id="custom-platform-handling"></a>
 
-A Custom Add-on is needed when the currently available Standard Add-ons do not fit the customer’s migration requirement. In that case, the customer can describe the expected result, and Next-Cart reviews whether a Custom Add-on can be provided.
+Custom Platform handling requires Custom Service when the Source Platform, Target Platform, or both are not part of Next-Cart’s standard supported platform list.
 
-Both cases are handled through Custom Service because they require work beyond the Standard Add-on.
+A Custom Platform project is not only a connection question. It often requires Next-Cart to understand how the store data is structured, how relationships are stored, and how the data can be converted into a usable target-store result.
 
-### Custom Platform Handling  <a href="#custom-platform-handling" id="custom-platform-handling"></a>
+Custom Platform review may involve:
 
-Custom Platform as Source Platform or Target Platform requires Custom Service.
+* identifying the source-store data model;
+* reviewing available data exports, databases, files, APIs, or access methods;
+* understanding product, customer, order, content, and relationship structures;
+* determining whether the Target Platform can support the expected result;
+* defining transformation or mapping requirements;
+* confirming what the customer will validate after migration.
 
-A Custom Platform is a platform or store system that is not part of Next-Cart’s standard supported platform list. The challenge is not only the connection method. The larger issue is that Custom Platform projects often require interpretation before the data can be migrated safely.
+The stronger the source-store examples and target-store expectations, the easier it is to define a practical Custom Service plan.
 
-Custom Platform handling may involve:
+### Third-Party Data <a href="#third-party-data" id="third-party-data"></a>
 
-* understanding the source or target data model
-* reviewing how records are stored
-* identifying which data relationships must be preserved
-* transforming source data into a structure the Target Platform can support
-* adjusting migration logic for non-standard fields or formats
-* validating whether the migrated result matches the expected business outcome
+Many stores rely on apps, plugins, modules, extensions, or external systems to support important business activity. That data may not belong to the standard platform data model, but it can still matter after migration.
 
-Custom Platform migration should be planned carefully because the data structure may not follow a known supported-platform pattern.
+Third-party data may affect:
 
-### Third-Party App, Plugin, Module, or Extension Data  <a href="#third-party-app-plugin-module-or-extension-data" id="third-party-app-plugin-module-or-extension-data"></a>
+* product merchandising;
+* product options or attributes;
+* reviews and ratings;
+* customer segmentation;
+* loyalty or membership behavior;
+* subscription logic;
+* shipping and fulfillment details;
+* promotions or discounts;
+* reporting identifiers;
+* ERP, CRM, accounting, PIM, or automation workflows.
 
-Many stores rely on apps, plugins, modules, or extensions to support important business functions.
+If this data needs to be migrated, interpreted, transformed, preserved, or placed into a target-supported structure, the requirement should be reviewed through Custom Service.
 
-This data may affect:
+The practical question is not only whether the data exists. The more important question is whether the data carries business meaning that the target store needs to keep using.
 
-* product details
-* filters and merchandising
-* customer segmentation
-* loyalty or subscription logic
-* reviews
-* custom checkout behavior
-* shipping or fulfillment information
-* promotions or discounts
-* reporting identifiers
-* ERP, CRM, or automation workflows
+### Custom Fields and Non-Standard Store Data <a href="#custom-fields-and-non-standard-store-data" id="custom-fields-and-non-standard-store-data"></a>
 
-If that data must be migrated, interpreted, transformed, or preserved beyond the standard platform model, the project should be reviewed under Custom Service.
+Custom fields can look small but carry important business meaning. They may support internal classification, merchandising, search, filtering, fulfillment, reporting, customer segmentation, or integration workflows.
 
-The important question is not only whether the data exists. The important question is whether that data carries business meaning that must remain usable in the Target Platform.
+Custom Service should be considered when custom fields need to be:
 
-### Custom Fields  <a href="#custom-fields" id="custom-fields"></a>
+* preserved in the target store;
+* mapped into target-supported fields;
+* transformed into a different structure;
+* combined, split, normalized, or renamed;
+* kept available for reporting or integration purposes;
+* validated as part of the final target-store result.
 
-Custom fields can be important even when they look small in the Source Platform.
+A custom field may not have a direct equivalent in the Target Platform. In that case, the Custom Service review should focus on the closest workable result, not only on copying the field as-is.
 
-They may store information used for:
+### Outside-System Identifiers <a href="#outside-system-identifiers" id="outside-system-identifiers"></a>
 
-* product classification
-* internal merchandising
-* customer segmentation
-* fulfillment
-* reporting
-* integrations
-* search and filtering
-* business-specific workflows
-
-If custom fields need to be preserved, mapped, transformed, or placed into target-supported structures, the requirement may need Custom Service.
-
-Custom fields often require review because the Target Platform may not store or use the same type of field in the same way. The goal is to define the closest workable target result based on platform capability and business need.
-
-### Outside-System Identifiers  <a href="#outside-system-identifiers" id="outside-system-identifiers"></a>
-
-Outside-system identifiers connect the store to systems beyond the e-commerce platform.
+Outside-system identifiers connect store records to systems beyond the e-commerce platform. They may be used by ERP, CRM, fulfillment, marketplace, subscription, accounting, reporting, or product information management systems.
 
 Examples include:
 
-* ERP IDs
-* CRM IDs
-* shipping or fulfillment IDs
-* subscription references
-* marketplace identifiers
-* product information management IDs
-* accounting or reporting references
-* custom customer identifiers
+* ERP product IDs;
+* CRM customer IDs;
+* fulfillment or shipping references;
+* marketplace listing IDs;
+* subscription references;
+* accounting IDs;
+* PIM identifiers;
+* custom order or customer references.
 
-These values may be critical after launch because outside systems may continue relying on them.
+If these identifiers are required after migration, they should be reviewed before execution. Losing, overwriting, or placing them in the wrong target-store location can break downstream workflows even when the storefront appears complete.
 
-If the migration must preserve or reposition these identifiers in a specific way, the project should be reviewed under Custom Service. Losing or misplacing these values can break downstream workflows even if the storefront appears complete.
+### Platform Capability and Target-Store Fit <a href="#platform-capability-and-target-store-fit" id="platform-capability-and-target-store-fit"></a>
 
-### Platform Capability Limitations  <a href="#platform-capability-limitations" id="platform-capability-limitations"></a>
-
-Sometimes the Target Platform cannot represent source-store behavior exactly.
+Custom Service can also be needed when the Source Platform and Target Platform represent data differently.
 
 This can affect:
 
-* product options and variants
-* attributes
-* customer groups
-* order statuses
-* category or collection structures
-* reviews
-* coupons
-* CMS Pages
-* Blog Posts
-* SEO and URL behavior
-* custom metadata
-* app-supported features
+* product options, variants, attributes, or bundles;
+* customer groups or account structures;
+* order statuses and historical order meaning;
+* categories, collections, menus, or navigation structures;
+* reviews, coupons, CMS Pages, and Blog Posts;
+* SEO fields and URL behavior;
+* metadata, metafields, custom attributes, or app-owned records;
+* platform-specific rules that affect how migrated data appears or behaves.
 
-Custom Service helps define a migration approach when the expected result requires tailored handling within the Target Platform’s supported capabilities.
+Custom Service does not remove Target Platform limitations. It helps review what the Target Platform can support and how the migrated result should be shaped within those limits.
 
-This does not mean every source behavior can be recreated exactly. It means Next-Cart reviews the requirement, identifies what can be preserved, and defines the most suitable supported result.
+### Custom Migration Logic and Bespoke Transformation <a href="#custom-migration-logic-and-bespoke-transformation" id="custom-migration-logic-and-bespoke-transformation"></a>
 
-### Custom Migration Logic Adjustment <a href="#custom-migration-logic-adjustment" id="custom-migration-logic-adjustment"></a>
+Some projects require changes to how migration data is interpreted, transformed, or placed into the target store. This is Custom Service work because it changes the migration approach beyond standard handling.
 
-Some projects require adjustment to the migration logic that Next-Cart applies during the service process.
+Custom migration logic or bespoke transformation may be needed when the project requires:
 
-This may happen when the project needs:
+* special source-data interpretation;
+* target-specific formatting rules;
+* non-standard relationship preservation;
+* custom field or identifier handling;
+* legacy data normalization;
+* special transformation of selected product, customer, order, or content data;
+* Tailored Add-on behavior;
+* Custom Add-on behavior.
 
-* special transformation logic
-* custom field handling
-* non-standard source interpretation
-* target-specific formatting rules
-* Tailored Add-on behavior
-* Custom Add-on behavior
-* source data normalization
-* unusual relationship preservation
-* special handling for records that do not fit the standard migration model
+The customer should define the expected business result, not only the technical action. A clear result statement makes the review more practical: what should the target store show, preserve, or support after migration?
 
-Custom migration logic adjustment is Custom Service work because it changes how the migration is handled beyond standard service capability.
+### Expert Handle in Custom Service <a href="#expert-handle-in-custom-service" id="expert-handle-in-custom-service"></a>
 
-### Bespoke Data Transformation  <a href="#bespoke-data-transformation" id="bespoke-data-transformation"></a>
+Custom Service does not automatically mean Next-Cart performs every migration action for the customer.
 
-Bespoke transformation is needed when source data must be changed in a specific way before it can support the expected target result.
+Custom Service defines the custom-scoped work required for the project. Expert Handle defines whether Next-Cart experts perform migration actions based on the customer’s request and agreed scope.
 
-Examples may include:
+| Custom Service setup                 | Who performs migration actions                                                         | What it means                                                                                                              |
+| ------------------------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Custom Service without Expert Handle | Customer performs migration actions.                                                   | Next-Cart provides the agreed custom work, but the customer remains responsible for executing available migration actions. |
+| Custom Service with Expert Handle    | Next-Cart performs migration actions based on the customer’s request and agreed scope. | The custom plan includes expert-handled execution responsibility where agreed.                                             |
 
-* restructuring selected product data
-* changing how values are grouped or interpreted
-* transforming legacy fields into target-supported values
-* normalizing data formats
-* adjusting labels or codes used by the business
-* reshaping content or metadata for the Target Platform
+Customers of any service model can access and perform available migration actions manually if they choose. With any service model, the customer remains responsible for final result verification and migration outcome.
 
-Some simple data adjustments may fit Advanced Data Configure. Broader transformation rules or logic that exceed standard Add-on capability are handled through Custom Service.
+### How to Prepare a Custom Service Request <a href="#how-to-prepare-a-custom-service-request" id="how-to-prepare-a-custom-service-request"></a>
 
-### Custom Service and Migration Management  <a href="#custom-service-and-migration-management" id="custom-service-and-migration-management"></a>
+A strong Custom Service request describes the expected result clearly enough for review.
 
-Custom Service does not automatically mean Next-Cart performs the full migration process.
+Useful preparation includes:
 
-Custom Service defines the tailored work needed for the migration. Migration management defines who performs the migration process.
+* the affected data types;
+* representative source-store examples;
+* where the data exists in the source store or external system;
+* what the customer expects to see in the target store;
+* whether apps, plugins, modules, extensions, or outside systems are involved;
+* whether custom fields or outside-system identifiers need to be preserved;
+* whether the project involves Custom Platform handling;
+* whether the request relates to a Standard Add-on, Tailored Add-on, or Custom Add-on;
+* how the customer will validate the result after migration.
 
-The final plan may work in different ways:
+The request should focus on business outcome. Instead of only saying that a field needs to move, the customer should explain why the field matters and how the target store should use it.
 
-* the customer purchases customization work and self-performs the migration
-* the customer includes migration management so Next-Cart performs the migration process
-* the custom work is integrated into a Next-Cart-led migration if migration management is part of the final plan
+### When Custom Service Should Be Considered Early <a href="#when-custom-service-should-be-considered-early" id="when-custom-service-should-be-considered-early"></a>
 
-Customers of any service model can access and self-perform the migration process on the Next-Cart website if they want to. This means Custom Service defines the work required, while the final plan defines whether Next-Cart performs migration management.
-
-### How Custom Service Is Reviewed  <a href="#how-custom-service-is-reviewed" id="how-custom-service-is-reviewed"></a>
-
-A strong Custom Service request describes the expected result clearly.
-
-Useful information includes:
-
-* which data types are affected
-* where the source data exists
-* what the target result should look like
-* which records or examples show the requirement clearly
-* whether apps, plugins, modules, or extensions are involved
-* whether custom fields or outside-system identifiers are involved
-* whether Custom Platform is the Source Platform, Target Platform, or both
-* whether the request involves a Standard Add-on, Tailored Add-on, or Custom Add-on
-* how the customer will validate that the result is acceptable
-
-The clearer the expected outcome, the easier it is to review the request and provide a suitable quote.
-
-### What Custom Service Does Not Guarantee  <a href="#what-custom-service-does-not-guarantee" id="what-custom-service-does-not-guarantee"></a>
-
-Custom Service provides a path for reviewing and implementing tailored handling. It does not mean every source-store behavior can always be recreated exactly in the Target Platform.
-
-The final result still depends on:
-
-* the quality and structure of the source data
-* what the Target Platform can support
-* how the requirement is defined
-* whether the expected result is technically feasible
-* how the customer validates the result
-* whether outside systems need additional configuration beyond the migration itself
-
-A good Custom Service plan defines the closest workable result based on the source data, target platform, and business requirement.
-
-### When Custom Service Should Be Considered Early  <a href="#when-custom-service-should-be-considered-early" id="when-custom-service-should-be-considered-early"></a>
-
-Custom Service should be considered early when the customer already knows that the migration includes non-standard requirements.
+Custom Service should be considered early when a known requirement may shape the migration approach, service scope, timeline, quote, or validation plan.
 
 Early review is especially important when the project involves:
 
-* Custom Platform
-* complex product structures
-* app-owned or extension-owned data
-* custom fields
-* outside-system identifiers
-* unusual order or customer data
-* special transformation logic
-* advanced filtering, mapping, or data configuration beyond Standard Addons
-* target-platform limitations that may affect the expected outcome
+* Custom Platform as Source Platform or Target Platform;
+* complex product structures;
+* third-party app, plugin, module, or extension data;
+* custom fields or metadata that affect business workflows;
+* outside-system identifiers;
+* non-standard customer, order, or content data;
+* special transformation logic;
+* Add-on behavior that needs tailoring;
+* target-store limitations that may affect the expected result.
 
-These requirements should not be left until final validation. They can shape the entire migration approach.
+These requirements should not be left until final validation. They may affect how the migration is configured, quoted, executed, and reviewed.
 
-### Conclusion  <a href="#conclusion" id="conclusion"></a>
+### What Custom Service Does Not Guarantee <a href="#what-custom-service-does-not-guarantee" id="what-custom-service-does-not-guarantee"></a>
 
-Custom Service handles migration requirements that go beyond standard service capability and Standard Add-ons. It covers Tailored Add-ons, Custom Add-ons, Custom Platform handling, third-party data, custom fields, outside-system identifiers, custom migration logic adjustment, bespoke transformation, and other exclusive handling needs.
+Custom Service provides a review and implementation path for tailored migration work. It does not guarantee that every source-store behavior can be recreated exactly in the Target Platform.
 
-The most important distinction is that Add-ons are focused optional service features, while Custom Service defines the broader path for tailored migration work. Custom Service also does not automatically mean Next-Cart performs the full migration process unless migration management is included in the final plan.
+The final result depends on:
 
-Prepare Custom Service requirements around the outcome that must be preserved, not only the field or data type that needs to move. If your project involves Custom Platform, third-party logic, custom fields, outside-system identifiers, Tailored Add-ons, or Custom Add-ons, Live Chat can help clarify what information Next-Cart needs to review the request and prepare a suitable quote.
+* source-store data quality;
+* how the Source Platform stores the data;
+* what the Target Platform can support;
+* whether the requirement is technically feasible;
+* how clearly the expected result is defined;
+* the agreed Custom Service scope;
+* customer validation after migration.
 
-### FAQs  <a href="#faqs" id="faqs"></a>
+A strong Custom Service plan defines the closest workable result for the requirement and makes clear what the customer should verify in the target store.
+
+### Common Custom Service Misunderstandings <a href="#common-custom-service-misunderstandings" id="common-custom-service-misunderstandings"></a>
+
+**“Custom Service always means Next-Cart handles execution.”**
+
+Not automatically. Custom Service defines the custom-scoped work. Expert Handle determines whether Next-Cart experts perform migration actions based on the customer’s request and agreed scope.
+
+**“Every Add-on request is Custom Service.”**
+
+No. Standard Add-ons can handle focused filtering, mapping, or data-configuration needs when their available behavior fits. Custom Service is needed when an Add-on must be tailored or created for a project-specific requirement.
+
+**“Custom Service can recreate every source-store behavior exactly.”**
+
+Not always. The result depends on source-store data, Target Platform capability, technical feasibility, and agreed service scope.
+
+**“Small stores do not need Custom Service.”**
+
+Data volume is not the only factor. A small store can require Custom Service if it contains custom fields, third-party data, outside-system identifiers, Custom Platform requirements, or bespoke migration logic.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+Custom Service handles migration requirements that need tailored work beyond standard service capability or available Standard Add-ons. It covers Custom Platform handling, Tailored Add-ons, Custom Add-ons, third-party data, custom fields, outside-system identifiers, custom migration logic adjustment, bespoke transformation, and expert-handled custom execution when Expert Handle is included in the agreed scope.
+
+The strongest Custom Service planning starts with the expected target-store result. Customers should identify the data that carries business meaning, explain how that data should be used after migration, and prepare examples that help Next-Cart review feasibility and scope. If a migration involves Custom Platform, third-party data, custom fields, outside-system identifiers, tailored Add-on behavior, or custom migration logic, Live Chat can help clarify what information is needed for review and quoting.
+
+### FAQs <a href="#faqs" id="faqs"></a>
 
 **What does Custom Service handle?**
 
-Custom Service handles customization, modification, exclusive handling, and bespoke configuration needs that go beyond standard service capability or standard Add-on capability.
+Custom Service handles migration requirements that need customization, modification, bespoke handling, Custom Platform review, Tailored Add-ons, Custom Add-ons, third-party data, custom fields, outside-system identifiers, custom migration logic adjustment, or expert-handled custom execution when included in scope.
 
 **Is Custom Service the same as Add-ons?**
 
-No. Add-ons are focused optional service features for filtering, advanced mapping, and data configuration. Custom Service is the broader path for requirements that need tailored migration work.
+No. Add-ons are focused optional service features for filtering, mapping, and data configuration. Custom Service is the broader service path for tailored work that cannot be handled through standard service capability or available Standard Add-ons alone.
 
 **Is Custom Service required for Tailored Add-ons?**
 
-Yes. Tailored Add-ons are modified versions of Standard Add-ons, so they are handled through Custom Service.
+Yes. A Tailored Add-on modifies a Standard Add-on beyond available settings and supported behavior, so it is handled through Custom Service.
 
 **Can Next-Cart provide Custom Add-ons?**
 
-Yes. If the available Standard Add-ons do not fit the customer’s migration requirement, the customer can request a Custom Add-on. Custom Add-ons are reviewed and quoted through Custom Service.
+Yes. Custom Add-ons can be reviewed when available Standard Add-ons do not fit the customer’s required outcome. They are reviewed and quoted through Custom Service.
 
 **Is Custom Service required for Custom Platform?**
 
-Yes. Any migration involving Custom Platform as Source Platform or Target Platform requires Custom Service.
+Yes. Any migration involving a Custom Platform as Source Platform, Target Platform, or both requires Custom Service review.
 
-**Does Custom Service always include migration management?**
+**Does Custom Service always include Expert Handle?**
 
-No. Custom Service means tailored migration work is required. Migration management can be included, but it is not automatic unless included in the final plan.
+No. Custom Service defines the custom-scoped work. Expert Handle determines whether Next-Cart experts perform migration actions based on the customer’s request and agreed scope.
 
-**Can Custom Service customers self-perform the migration?**
+**Can Custom Service customers perform migration actions manually?**
 
-Yes. Customers of any service model can access and self-perform the migration process on the Next-Cart website if they want to. Custom Service defines the tailored work required, not whether the customer has access.
+Yes. Customers of any service model can access and perform available migration actions manually if they choose. The agreed Custom Service scope determines whether Next-Cart also provides Expert Handle.
 
-**What information should I prepare for a Custom Service request?**
+**What should customers prepare for a Custom Service request?**
 
-Prepare the expected target result, affected data types, representative examples, source data location, involved apps or custom fields, outside-system identifiers, and how you will validate the result.
+Customers should prepare representative source-store examples, affected data types, expected target-store results, involved apps or custom fields, outside-system identifiers, Custom Platform details where applicable, and validation expectations.
 
 **Can Custom Service recreate every source-store behavior exactly?**
 
-Not always. The final result depends on source data quality, Target Platform capability, technical feasibility, and the agreed migration approach. Custom Service defines the closest workable result for the requirement.
+Not always. The result depends on source-store data quality, Target Platform capability, technical feasibility, and agreed scope. Custom Service defines the closest workable target-store result for the requirement.
