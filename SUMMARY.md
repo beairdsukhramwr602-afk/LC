@@ -36,11 +36,11 @@
 ## Next-Cart Migration Service
 
 * [Next-Cart Migration Service Overview](next-cart-migration-service/next-cart-migration-service-overview.md)
-* [Next-Cart Migration Process Explained](next-cart-migration-service/next-cart-migration-process-explained.md)
+* [How the Migration Process Works](next-cart-migration-service/how-the-migration-process-works.md)
 * [Demo Migration Explained](next-cart-migration-service/demo-migration-explained.md)
 * [Entity Points Explained](next-cart-migration-service/entity-points-explained.md)
 * [Entity Points Plan and Migration Pricing](next-cart-migration-service/entity-points-plan-and-migration-pricing.md)
-* [Recent Data Migration Explained](next-cart-migration-service/recent-data-migration-explained.md)
+* [Additional Migration Options Explained](next-cart-migration-service/additional-migration-options-explained.md)
 * [Add-ons Explained](next-cart-migration-service/add-ons-explained.md)
 * [Next-Cart Migration Service Models Explained](next-cart-migration-service/next-cart-migration-service-models-explained.md)
 * [What Custom Service Handles](next-cart-migration-service/what-custom-service-handles.md)

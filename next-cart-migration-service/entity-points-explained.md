@@ -1,7 +1,5 @@
 # Entity Points Explained
 
-## Entity Points Explained <a href="#entity-points-explained" id="entity-points-explained"></a>
-
 Entity Points are Next-Cart’s way of measuring core migration scope and migration capacity within the purchased service. They help customers estimate how much counted data the selected migration path needs to support before the migration begins.
 
 Entity Points do not measure every kind of migration difficulty. A project can have a clear Entity Points estimate and still require careful review because of platform differences, product complexity, custom fields, third-party data, Add-ons, or Custom Service requirements. Entity Points measure capacity. They do not replace compatibility review, service choice, or validation.
