@@ -1,15 +1,15 @@
 # Entity Points Plan and Migration Pricing
 
-Next-Cart migration pricing combines counted data capacity with the service responsibility and optional service features needed for the selected migration path. The Entity Points Plan defines how much migration capacity the purchased service license can support. The selected service model, Add-ons, and any Custom Service requirements determine how the final price should be understood beyond capacity alone.
+Next-Cart migration pricing combines counted data capacity with the service responsibility and optional service features needed for the selected migration path. The Entity Points Plan defines the maximum migration capacity supported by the purchased service license. The selected service model, Add-ons, and any Custom Service requirements determine how the final price should be understood beyond capacity alone.
 
 Pricing is easier to evaluate when four decisions are separated clearly:
 
-* how much data the source store is expected to migrate;
+* how much counted data the source store is expected to migrate;
 * which Entity Points Plan provides enough capacity for that counted scope;
 * whether the migration should be handled through Standard Service, Managed Service, or Custom Service;
 * whether Add-ons or custom handling are needed for filtering, mapping, configuration, platform differences, or project-specific requirements.
 
-A store with modest data may still need Managed Service or Custom Service when the migration requires expert handling, custom logic, or unusual data interpretation. A store with large amounts of data may remain operationally straightforward even when the Source Platform, Target Platform, and the store's data structure are well supported.
+A store with modest data may still need Managed Service or Custom Service when the migration requires expert handling, custom logic, or unusual data interpretation. A store with large amounts of data may remain operationally straightforward when the Source Platform, Target Platform, and store data structure are well supported.
 
 ### What the Entity Points Plan Represents  <a href="#what-the-entity-points-plan-represents" id="what-the-entity-points-plan-represents"></a>
 
@@ -21,13 +21,37 @@ The selected plan can support the actual counted migration consumption up to its
 
 Entity Points Plan capacity should not be confused with migration filtering. Purchase estimates help calculate capacity and price. They do not automatically limit which scanned records are migrated. If the customer wants to migrate only selected records, that requirement should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement when standard filtering capability is not enough.
 
-### How the Plan Is Selected  <a href="#how-the-plan-is-selected" id="how-the-plan-is-selected"></a>
+### How Estimate and Plan Capacity Shape the Purchase <a href="#how-estimate-and-plan-capacity-shape-the-purchase" id="how-estimate-and-plan-capacity-shape-the-purchase"></a>
 
-During purchase, customers estimate Product, Customer, Order, and Blog Posts quantities. Those inputs are converted into Entity Points using the coefficients and distributed to the corresponding data entity.
+Upon purchase interface, customers estimate the quantities of Product, Customer, Order, and Blog Posts. Those inputs are converted into Entity Points using the coefficients for the counted data and allocated to the corresponding counted data types.
 
-A suitable plan should provide enough capacity for the expected scope. For example, if the estimated scope requires 1,400 Entity Points, a plan with capacity up to 2,000 Entity Points can support that estimate and leave remaining capacity available under the purchased service license.
+Assume a customer enters the following source-store estimates:
 
-The estimate should be realistic because actual source-store data may differ from the entered numbers. If actual counted consumption is higher than expected but still within the selected plan capacity, migration can continue within that plan. If available capacity runs out, the customer can upgrade the Entity Points Plan.
+| Counted data type | Estimated count | Coefficient | Estimated Entity Points |
+| ----------------- | --------------- | ----------- | ----------------------- |
+| Product           | 200             | 1.0         | 200                     |
+| Customer          | 200             | 0.5         | 100                     |
+| Order             | 150             | 0.8         | 120                     |
+| Blog Posts        | 100             | 0.6         | 60                      |
+| **Total**         |                 |             | **480**                 |
+
+The estimated requirement is:
+
+```
+200 + 100 + 120 + 60 = 480 Entity Points
+```
+
+If the customer chooses a plan with 1,000 Entity Points of capacity, the estimated 480 Entity Points are covered and the remaining 520 Entity Points stay available under the purchased service license.
+
+| Purchase layer                | Entity Points |
+| ----------------------------- | ------------- |
+| Estimated counted requirement | 480           |
+| Selected plan capacity        | 1,000         |
+| Remaining available capacity  | 520           |
+
+This remaining capacity can support actual counted data that exceeds the estimate, newly migrated counted records in later migration activity, or other eligible use within the service license. It does not turn the original purchase estimate into a migration filter.
+
+If the customer wants the migration to include only selected records, that should be planned through the Data Filter Add-on or reviewed as custom filtering scope when standard filtering capability is not enough.
 
 ### Entity Points Tier Pricing  <a href="#entity-points-tier-pricing" id="entity-points-tier-pricing"></a>
 
@@ -72,11 +96,11 @@ The Entity Points Plan provides the counted capacity layer. The service model de
 | Managed Service  | Entity Points Plan + optional Add-ons + Managed Service fee | Next-Cart-led execution for customers who want expert handling within supported service capability.                  |
 | Custom Service   | Custom quote                                                | Custom-scoped work for requirements that need customization, modification, bespoke handling, or Expert Handle scope. |
 
-Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and service scope, not whether the customer can access the purchased service license.
+Customers on any service model can access and manually perform available migration actions if they choose. The selected service model determines responsibility, expert handling, and service scope, not whether the customer can access the purchased service license.
 
 With any service model, the customer remains responsible for final result verification and migration outcome.
 
-### Standard Service Pricing <a href="#standard-service-pricing" id="standard-service-pricing"></a>
+#### Standard Service Pricing <a href="#standard-service-pricing" id="standard-service-pricing"></a>
 
 Standard Service pricing includes the Entity Points Plan and any optional Add-ons selected by the customer.
 
@@ -86,7 +110,7 @@ Entity Points Plan + optional Add-ons
 
 Standard Service is customer-led. The customer performs migration actions under the purchased service license and verifies the final migration outcome. This model is most suitable when the migration path is supported, the store data is predictable, and the customer can manage configuration, execution, and result review.
 
-### Managed Service Pricing <a href="#managed-service-pricing" id="managed-service-pricing"></a>
+#### Managed Service Pricing <a href="#managed-service-pricing" id="managed-service-pricing"></a>
 
 Managed Service pricing includes the Entity Points Plan, optional Add-ons, and the Managed Service fee.
 
@@ -98,7 +122,7 @@ Managed Service is expert-led based on the customer’s request and agreed servi
 
 Managed Service does not remove the customer’s responsibility for final result verification. The customer still needs to confirm whether the target store meets the intended business expectations, launch requirements, and migration outcome.
 
-### Custom Service Pricing <a href="#custom-service-pricing" id="custom-service-pricing"></a>
+#### Custom Service Pricing <a href="#custom-service-pricing" id="custom-service-pricing"></a>
 
 Custom Service is quoted individually because the required work can differ significantly across projects.
 
@@ -140,32 +164,6 @@ Custom Add-ons are reviewed and quoted based on expected result, technical requi
 
 This keeps Standard Add-ons clear while still allowing Next-Cart to support project-specific filtering, mapping, or configuration needs that standard settings do not cover.
 
-### What Happens When Actual Data Is Higher Than the Estimate  <a href="#what-happens-when-actual-data-is-higher-than-the-estimate" id="what-happens-when-actual-data-is-higher-than-the-estimate"></a>
-
-The estimate entered during purchase supports pricing and plan selection. It is not the final measure of what the source store contains.
-
-If actual counted data volume is higher than the customer entered, migration can continue as long as the selected Entity Points Plan still has enough available capacity.
-
-For example:
-
-* the customer purchases a Basic+ plan that supports up to 2,000 Entity Points;
-* the customer’s original input estimates 1,200 Entity Points;
-* actual counted migration consumption reaches 1,400 Entity Points.
-
-In this case, the migration remains within plan capacity. The remaining 600 Entity Points stay available for eligible future migration activity under the purchased service license.
-
-The practical pricing point is that the selected plan capacity matters more than the original estimate once actual migration consumption is known.
-
-### What Happens When the Plan Capacity Runs Out  <a href="#what-happens-when-the-plan-capacity-runs-out" id="what-happens-when-the-plan-capacity-runs-out"></a>
-
-If available Entity Points are consumed before all counted records are migrated, the migration pauses.
-
-The customer can continue by upgrading the Entity Points Plan. When upgrading, the customer pays only the price difference between the current plan and the higher plan, not the full price of the new plan again.
-
-The added Entity Points are distributed to the corresponding data types based on what the customer enters in the upgrade purchase interface.
-
-Continuing through the purchased service license is safer than manually importing remaining related data outside the migration process. Manual import can weaken record relationships or database integrity, especially when products, customers, orders, categories, reviews, CMS Pages, Blog Posts, or other supporting records need to remain connected.
-
 ### Upgrade and Renewal Are Different  <a href="#upgrade-and-renewal-are-different" id="upgrade-and-renewal-are-different"></a>
 
 Upgrading the Entity Points Plan increases plan capacity. It does not renew the service license.
@@ -176,7 +174,7 @@ Customers can renew using previous preferences or upgrade both the Entity Points
 
 For example, an expired license that was Standard Service with the Basic plan can be renewed with upgraded preferences, such as Managed Service with the Basic+ plan, if that better fits the customer’s next migration period.
 
-### Pricing Questions to Clarify Before Purchase  <a href="#pricing-questions-to-clarify-before-purchase" id="pricing-questions-to-clarify-before-purchase"></a>
+### Pricing Questions to Clarify Before Purchase <a href="#pricing-questions-to-clarify-before-purchase" id="pricing-questions-to-clarify-before-purchase"></a>
 
 Before checkout, customers should clarify several pricing-related questions:
 
@@ -225,7 +223,7 @@ Custom Service depends on the customer’s data volume, customization needs, Tai
 
 For Standard Service, every additional 100,000 Entity Points above 1,024,000 costs $50. For Managed Service, every additional 100,000 Entity Points costs $150. For Custom Service, additional capacity is handled through custom quoting.
 
-**What happens if actual counted data is higher than my original estimate?**
+**What happens if the actual counted data is higher than my original estimate?**
 
 If the selected Entity Points Plan still has enough capacity, migration can continue within the plan. If available capacity runs out, migration pauses until the customer upgrades.
 
