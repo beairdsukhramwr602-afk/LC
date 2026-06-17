@@ -1,31 +1,33 @@
 # Entity Points Plan and Migration Pricing
 
-Next-Cart migration pricing combines the capacity needed for counted store data with the service responsibility, Add-ons, and custom handling required for the selected migration path. The Entity Points Plan is the capacity layer of that pricing model. It defines how many Entity Points the purchased migration service license can support.
+Next-Cart migration pricing combines counted data capacity with the service responsibility and optional service features needed for the selected migration path. The Entity Points Plan defines how much migration capacity the purchased service license can support. The selected service model, Add-ons, and any Custom Service requirements determine how the final price should be understood beyond capacity alone.
 
-Pricing becomes easier to evaluate when customers separate the following four questions: how much data requires capacity, which service model should handle the migration, whether Add-ons are needed, and whether any requirements require a custom service review. A store with modest data volume may still need a higher-service plan if it requires expert handling, advanced configuration, or custom migration logic. A store with high data volume may still remain straightforward if the Source Platform, Target Platform, and data structure are well supported.
+Pricing is easier to evaluate when four decisions are separated clearly:
+
+* how much data the source store is expected to migrate;
+* which Entity Points Plan provides enough capacity for that counted scope;
+* whether the migration should be handled through Standard Service, Managed Service, or Custom Service;
+* whether Add-ons or custom handling are needed for filtering, mapping, configuration, platform differences, or project-specific requirements.
+
+A store with modest data may still need Managed Service or Custom Service when the migration requires expert handling, custom logic, or unusual data interpretation. A store with large amounts of data may remain operationally straightforward even when the Source Platform, Target Platform, and the store's data structure are well supported.
 
 ### What the Entity Points Plan Represents  <a href="#what-the-entity-points-plan-represents" id="what-the-entity-points-plan-represents"></a>
 
-An Entity Points Plan sets the counted migration capacity available under the purchased service license for the selected migration path. The migration path defines the one-way direction from the Source Platform to the Target Platform, while the Entity Points Plan defines the capacity available for counted data within that path.
+An Entity Points Plan sets the counted migration capacity available under the purchased service license for one migration path. The migration path defines the one-way direction from the Source Platform to the Target Platform. The Entity Points Plan defines the counted capacity available for Product, Customer, Order, and Blog Posts data within that path.
 
-The plan is based on estimated quantities for four data entities:
+Customers enter estimated quantities for those counted data types during purchase. Next-Cart uses those estimates to calculate the expected Entity Points requirement and help identify a suitable plan.
 
-* Product
-* Customer
-* Order
-* Blog Posts
+The selected plan can support the actual counted migration consumption up to its capacity. This means the selected plan matters more than the exact estimate once migration execution reveals the actual counted data volume.
 
-Those estimates help calculate the Entity Points needed for purchase planning. The selected plan can support the actual counted migration consumption up to its capacity.
-
-Entity Points Plan capacity should not be confused with migration filtering. The quantities entered during purchase help estimate capacity and price. They do not automatically limit which scanned records are migrated. If the customer wants to migrate only selected records, that requirement should be implemented using the Data Filter Add-on or reviewed as a custom filtering requirement when standard filtering is insufficient.
+Entity Points Plan capacity should not be confused with migration filtering. Purchase estimates help calculate capacity and price. They do not automatically limit which scanned records are migrated. If the customer wants to migrate only selected records, that requirement should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement when standard filtering capability is not enough.
 
 ### How the Plan Is Selected  <a href="#how-the-plan-is-selected" id="how-the-plan-is-selected"></a>
 
-During purchase, customers enter estimated counts for Product, Customer, Order, and Blog Posts. Next-Cart uses those inputs to calculate the estimated Entity Points and identify a suitable plan.
+During purchase, customers estimate Product, Customer, Order, and Blog Posts quantities. Those inputs are converted into Entity Points using the coefficients and distributed to the corresponding data entity.
 
-The selected plan should be high enough to cover the expected data volume. For example, if the estimated migration scope requires 1,400 Entity Points, a plan with 2,000 Entity Points of capacity can support that estimate and leave remaining capacity available under the service license.
+A suitable plan should provide enough capacity for the expected scope. For example, if the estimated scope requires 1,400 Entity Points, a plan with capacity up to 2,000 Entity Points can support that estimate and leave remaining capacity available under the purchased service license.
 
-The estimate should be realistic. If the source store contains more counted records than expected, actual consumption may be higher than the number entered during purchase. If the selected plan still has enough available capacity, migration can continue within that plan. If available capacity runs out, the customer can upgrade the Entity Points Plan.
+The estimate should be realistic because actual source-store data may differ from the entered numbers. If actual counted consumption is higher than expected but still within the selected plan capacity, migration can continue within that plan. If available capacity runs out, the customer can upgrade the Entity Points Plan.
 
 ### Entity Points Tier Pricing  <a href="#entity-points-tier-pricing" id="entity-points-tier-pricing"></a>
 
@@ -62,41 +64,39 @@ For Custom Service, additional capacity is reviewed as part of the custom quote 
 
 ### How Service Models Affect Pricing <a href="#how-service-models-affect-pricing" id="how-service-models-affect-pricing"></a>
 
-The service model determines how responsibility and included work affect the total price. The Entity Points Plan provides the capacity layer, but the service model determines whether the migration is customer-led, expert-led, or custom-scoped.
+The Entity Points Plan provides the counted capacity layer. The service model determines how responsibility and included work affect the total price.
 
-| Service model    | Pricing structure                                           | Best understood as                                                                                                                  |
-| ---------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Standard Service | Entity Points Plan + optional Add-ons                       | Customer-led migration execution for supported paths and standard requirements.                                                     |
-| Managed Service  | Entity Points Plan + optional Add-ons + Managed Service fee | Next-Cart-led migration execution for customers who want expert handling within supported service capability.                       |
-| Custom Service   | Custom quote                                                | Custom-scoped service for requirements that need customization, modification, bespoke handling, or expert-handled custom execution. |
+| Service model    | Pricing structure                                           | Best understood as                                                                                                   |
+| ---------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Standard Service | Entity Points Plan + optional Add-ons                       | Customer-led migration execution for supported paths and standard requirements.                                      |
+| Managed Service  | Entity Points Plan + optional Add-ons + Managed Service fee | Next-Cart-led execution for customers who want expert handling within supported service capability.                  |
+| Custom Service   | Custom quote                                                | Custom-scoped work for requirements that need customization, modification, bespoke handling, or Expert Handle scope. |
 
 Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and service scope, not whether the customer can access the purchased service license.
+
+With any service model, the customer remains responsible for final result verification and migration outcome.
 
 ### Standard Service Pricing <a href="#standard-service-pricing" id="standard-service-pricing"></a>
 
 Standard Service pricing includes the Entity Points Plan and any optional Add-ons selected by the customer.
 
-The pricing structure is:
-
 ```
 Entity Points Plan + optional Add-ons
 ```
 
-Standard Service is customer-led. The customer performs migration actions under the purchased service license and validates the final migration outcome. This model is most suitable when the migration path is supported, the data structure is predictable, and the customer can manage configuration, execution, and result review.
+Standard Service is customer-led. The customer performs migration actions under the purchased service license and verifies the final migration outcome. This model is most suitable when the migration path is supported, the store data is predictable, and the customer can manage configuration, execution, and result review.
 
 ### Managed Service Pricing <a href="#managed-service-pricing" id="managed-service-pricing"></a>
 
 Managed Service pricing includes the Entity Points Plan, optional Add-ons, and the Managed Service fee.
 
-The pricing structure is:
-
 ```
 Entity Points Plan + optional Add-ons + Managed Service fee
 ```
 
-Managed Service is expert-led based on the customer’s request and agreed service scope. It is useful when the customer wants Next-Cart experts to perform migration actions, coordinate execution, and help reduce operational effort during the migration process.
+Managed Service is expert-led based on the customer’s request and agreed service scope. It is useful when the customer wants Next-Cart experts to perform migration actions, coordinate execution, and reduce operational effort during the migration process.
 
-The customer remains responsible for final result verification and migration outcome, because only the customer can confirm whether the target store meets the intended business expectations.
+Managed Service does not remove the customer’s responsibility for final result verification. The customer still needs to confirm whether the target store meets the intended business expectations, launch requirements, and migration outcome.
 
 ### Custom Service Pricing <a href="#custom-service-pricing" id="custom-service-pricing"></a>
 
@@ -106,25 +106,25 @@ A custom quote may consider:
 
 * counted data volume;
 * Custom Platform handling;
-* custom fields, extension data, app data, plugin data, or third-party records;
+* custom fields, app data, extension data, plugin data, or third-party records;
 * custom migration logic adjustment;
 * Tailored Add-ons;
 * Custom Add-ons;
 * unsupported or unusual source-store structures;
 * outside-system identifiers or bespoke mapping requirements;
-* expert-handled execution if the Expert Handle option is included in the agreed scope.
+* Expert Handle scope when expert-led execution is included in the agreed plan.
 
-Custom Service without the Expert Handle option is customer-led for migration actions. Custom Service with the Expert Handle option allows Next-Cart experts to perform migration actions based on the customer’s request and agreed scope. In both cases, the customer remains responsible for final result verification and migration outcome.
+Custom Service without the Expert Handle option remains customer-led for migration actions. Custom Service with the Expert Handle option allows Next-Cart experts to perform migration actions based on the customer’s request and agreed scope. In both cases, the customer remains responsible for final result verification and migration outcome.
 
 ### How Add-ons Affect Pricing  <a href="#how-add-ons-affect-pricing" id="how-add-ons-affect-pricing"></a>
 
-Add-ons are optional service features that support filtering, mapping, or data configuration needs. They can be purchased across Standard Service, Managed Service, and Custom Service when they fit the project requirement.
+Add-ons are optional service features that support filtering, mapping, or data configuration needs. They can be used with Standard Service, Managed Service, or Custom Service when they fit the project requirement.
 
 The current Standard Add-ons are:
 
-* Data Filter Add-on
-* Advanced Data Mapping
-* Advanced Data Configure
+* Data Filter Add-on;
+* Advanced Data Mapping;
+* Advanced Data Configure.
 
 A Standard Add-on has a default price. If the available Standard Add-on behavior is enough, the default Add-on price is added to the service price.
 
@@ -132,7 +132,7 @@ If a Standard Add-on needs modification beyond available settings and supported 
 
 For example, if a Standard Add-on costs $50 and the Tailored Add-on version is quoted at $75, the customer pays the $25 difference.
 
-### Custom Add-ons and Custom Quotes <a href="#custom-add-ons-and-custom-quotes" id="custom-add-ons-and-custom-quotes"></a>
+#### Custom Add-ons and Custom Quotes <a href="#custom-add-ons-and-custom-quotes" id="custom-add-ons-and-custom-quotes"></a>
 
 A Custom Add-on is used when the available Standard Add-ons do not cover the customer’s required outcome.
 
@@ -144,17 +144,17 @@ This keeps Standard Add-ons clear while still allowing Next-Cart to support proj
 
 The estimate entered during purchase supports pricing and plan selection. It is not the final measure of what the source store contains.
 
-If the actual counted data volume is higher than the customer entered, the migration can continue as long as the selected Entity Points Plan still has enough available capacity.
+If actual counted data volume is higher than the customer entered, migration can continue as long as the selected Entity Points Plan still has enough available capacity.
 
 For example:
 
 * the customer purchases a Basic+ plan that supports up to 2,000 Entity Points;
 * the customer’s original input estimates 1,200 Entity Points;
-* the actual counted migration consumption reaches 1,400 Entity Points.
+* actual counted migration consumption reaches 1,400 Entity Points.
 
 In this case, the migration remains within plan capacity. The remaining 600 Entity Points stay available for eligible future migration activity under the purchased service license.
 
-The practical pricing point is that the Entity Points Plan capacity matters more than the original estimate once actual migration consumption is known.
+The practical pricing point is that the selected plan capacity matters more than the original estimate once actual migration consumption is known.
 
 ### What Happens When the Plan Capacity Runs Out  <a href="#what-happens-when-the-plan-capacity-runs-out" id="what-happens-when-the-plan-capacity-runs-out"></a>
 
@@ -164,9 +164,7 @@ The customer can continue by upgrading the Entity Points Plan. When upgrading, t
 
 The added Entity Points are distributed to the corresponding data types based on what the customer enters in the upgrade purchase interface.
 
-Continuing through the purchased service license is safer than manually importing remaining related data outside the migration process. Manual import of the remaining related data can create problems because the migration process may no longer control how records connect to one another. This can weaken relationships between products, customers, orders, categories, reviews, pages, or other supporting structures.
-
-Keeping the continuation inside the Next-Cart migration process helps preserve record tracking and migration integrity.
+Continuing through the purchased service license is safer than manually importing remaining related data outside the migration process. Manual import can weaken record relationships or database integrity, especially when products, customers, orders, categories, reviews, CMS Pages, Blog Posts, or other supporting records need to remain connected.
 
 ### Upgrade and Renewal Are Different  <a href="#upgrade-and-renewal-are-different" id="upgrade-and-renewal-are-different"></a>
 
@@ -174,7 +172,7 @@ Upgrading the Entity Points Plan increases plan capacity. It does not renew the 
 
 License renewal is a separate purchase decision. When renewing the service license, the customer pays based on the minimum Entity Points Plan in the account record and the final service status of the license, excluding custom work that has already been charged.
 
-Customers can renew using the previous preferences or upgrade both the Entity Points Plan and the service status during renewal.
+Customers can renew using previous preferences or upgrade both the Entity Points Plan and service status during renewal.
 
 For example, an expired license that was Standard Service with the Basic plan can be renewed with upgraded preferences, such as Managed Service with the Basic+ plan, if that better fits the customer’s next migration period.
 
@@ -195,9 +193,9 @@ These questions help customers treat pricing as a planning checkpoint, not only 
 
 ### Conclusion  <a href="#conclusion" id="conclusion"></a>
 
-Entity Points Plan pricing connects counted migration capacity with the selected service model, Add-ons, and any custom work required for the migration path. Standard Service includes the Entity Points Plan and optional Add-ons. Managed Service includes the Entity Points Plan, optional Add-ons, and the Managed Service fee. Custom Service uses custom quotes because the required work depends on data volume, customization needs, Add-ons, expert-handled execution, and project-specific requirements.
+Entity Points Plan pricing connects counted migration capacity with the selected service model, Add-ons, and any custom work required for the migration path. Standard Service includes the Entity Points Plan and optional Add-ons. Managed Service includes the Entity Points Plan, optional Add-ons, and the Managed Service fee. Custom Service uses custom quotes because the required work depends on data volume, customization needs, Add-ons, Expert Handle scope, and project-specific requirements.
 
-The most important pricing distinction is that the selected plan provides capacity, while the customer’s input is an estimate. If actual counted migration consumption remains within the selected plan capacity, migration can continue within that plan. If capacity runs out, the customer can upgrade by paying only the price difference between plans.
+The selected plan provides capacity, while the customer’s input is an estimate. If actual counted migration consumption remains within the selected plan capacity, migration can continue within that plan. If capacity runs out, the customer can upgrade by paying only the price difference between plans.
 
 Review Product, Customer, Order, and Blog Posts estimates carefully before purchase. Then consider Add-ons, service responsibility, Custom Service requirements, source-store growth, and future license needs before checkout. If pricing, capacity, or custom quoting is unclear, Live Chat can help clarify the right plan before purchase or upgrade.
 
@@ -209,7 +207,7 @@ An Entity Points Plan is the capacity tier that determines how many Entity Point
 
 **How is the Entity Points Plan selected?**
 
-The customer enters estimated counts for Product, Customer, Order, and Blog Posts. Next-Cart uses those estimates to calculate Entity Points and identify a suitable plan.
+Customers enter estimated counts for Product, Customer, Order, and Blog Posts. Next-Cart uses those estimates to calculate Entity Points and identify a suitable plan.
 
 **What is included in Standard Service pricing?**
 
@@ -221,7 +219,7 @@ Managed Service pricing includes the Entity Points Plan, any optional Add-ons, a
 
 **Why does Custom Service require a custom quote?**
 
-Custom Service depends on the customer’s data volume, customization needs, Tailored Add-ons, Custom Add-ons, custom migration logic, Custom Platform handling, and Expert Handle scope if included. Because the work varies, pricing is quoted individually.
+Custom Service depends on the customer’s data volume, customization needs, Tailored Add-ons, Custom Add-ons, custom migration logic, Custom Platform handling, and Expert Handle scope when included. Because the work varies, pricing is quoted individually.
 
 **What happens if my migration exceeds the Global tier?**
 
