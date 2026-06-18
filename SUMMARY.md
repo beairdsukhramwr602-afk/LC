@@ -44,7 +44,7 @@
 * [Next-Cart Service Models](next-cart-migration-service/next-cart-migration-service-models-explained.md)
 * [What Custom Service Handles](next-cart-migration-service/what-custom-service-handles.md)
 * [Choose the Right Service Model](next-cart-migration-service/choose-the-right-service-model.md)
-* [Continue or Start a New Migration](next-cart-migration-service/continue-or-start-a-new-migration.md)
+* [Additional Migration Options](next-cart-migration-service/additional-migration-options.md)
 
 ## Platform Strategy Hubs
 

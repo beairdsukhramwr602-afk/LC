@@ -51,7 +51,7 @@ If the customer chooses a plan with 1,000 Entity Points of capacity, the estimat
 
 This remaining capacity can support actual counted data that exceeds the estimate, newly migrated counted records in later migration activity, or other eligible use within the service license. It does not turn the original purchase estimate into a migration filter.
 
-If the customer wants the migration to include only selected records, that should be planned through the Data Filter Add-on or reviewed as custom filtering scope when standard filtering capability is not enough.
+The purchase decision should therefore balance estimate accuracy with practical headroom. A plan that only barely covers the entered estimate may be cheaper at checkout, but it may be less flexible if the source store contains more counted records than expected or continues creating new counted data before launch.
 
 ### Entity Points Tier Pricing  <a href="#entity-points-tier-pricing" id="entity-points-tier-pricing"></a>
 
@@ -164,15 +164,27 @@ Custom Add-ons are reviewed and quoted based on expected result, technical requi
 
 This keeps Standard Add-ons clear while still allowing Next-Cart to support project-specific filtering, mapping, or configuration needs that standard settings do not cover.
 
-### Upgrade and Renewal Are Different  <a href="#upgrade-and-renewal-are-different" id="upgrade-and-renewal-are-different"></a>
+### Upgrading the Entity Points Plan and Renewing the Service License <a href="#upgrading-the-entity-points-plan-and-renewing-the-service-license" id="upgrading-the-entity-points-plan-and-renewing-the-service-license"></a>
 
-Upgrading the Entity Points Plan increases plan capacity. It does not renew the service license.
+Upgrading the Entity Points Plan and renewing the service license are separate decisions. They can sometimes appear close together in a customer’s planning timeline, but they solve different needs.
 
-License renewal is a separate purchase decision. When renewing the service license, the customer pays based on the minimum Entity Points Plan in the account record and the final service status of the license, excluding custom work that has already been charged.
+An Entity Points Plan upgrade increases the counted capacity under the purchased service license. It is relevant when the selected plan no longer provides enough capacity for the data the customer needs to migrate. The upgrade keeps the customer within the purchased service process instead of forcing disconnected manual handling for remaining related data.
 
-Customers can renew using previous preferences or upgrade both the Entity Points Plan and service status during renewal.
+When upgrading, the customer pays only the price difference between the current plan and the higher plan, not the full price of the higher plan again. The added Entity Points are distributed to the corresponding counted data types based on what the customer enters in the plan-upgrade purchase interface.
 
-For example, an expired license that was Standard Service with the Basic plan can be renewed with upgraded preferences, such as Managed Service with the Basic+ plan, if that better fits the customer’s next migration period.
+For example, a customer may originally choose a Basic plan and later upgrade to Basic+ if the source store contains more counted records than expected. The upgrade increases available capacity for the service license, while the migration path and service context remain tied to the purchased license.
+
+Renewal is different. License renewal extends or restores the service license period. It does not simply add Entity Points to the current plan. When renewing the service license, the customer pays based on the minimum Entity Points Plan in the account record and the final service status of the license, excluding custom work that has already been charged.
+
+Customers can renew using previous preferences or upgrade both the Entity Points Plan and service status during renewal. For example, an expired license that was Standard Service with the Basic plan can be renewed with upgraded preferences, such as Managed Service with the Basic+ plan, if that better fits the customer’s next migration period.
+
+| Decision                          | What it changes                                                              | What it does not automatically change                                                              | Pricing meaning                                                                                                                                     |
+| --------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Entity Points Plan upgrade        | Increases counted capacity under the service license.                        | Does not renew the service license period.                                                         | Customer pays the difference between the current plan and the higher plan.                                                                          |
+| Service license renewal           | Extends or restores the service license period.                              | Does not automatically mean the customer is only adding capacity.                                  | Customer pays based on the minimum Entity Points Plan in the account record and the final service status, excluding previously charged custom work. |
+| Renewal with upgraded preferences | Extends or restores the service license while changing selected preferences. | Does not re-charge custom work that has already been charged, unless new custom work is requested. | Customer can renew with an upgraded Entity Points Plan, upgraded service status, or both when suitable.                                             |
+
+The practical decision is whether the customer needs more capacity during an active service period, more time or renewed access to the service license, or a changed service preference for the next migration period. If both capacity and service period need to change, renewal with upgraded preferences may be more suitable than treating the situation as a capacity-only question.
 
 ### Pricing Questions to Clarify Before Purchase <a href="#pricing-questions-to-clarify-before-purchase" id="pricing-questions-to-clarify-before-purchase"></a>
 
@@ -223,17 +235,21 @@ Custom Service depends on the customer’s data volume, customization needs, Tai
 
 For Standard Service, every additional 100,000 Entity Points above 1,024,000 costs $50. For Managed Service, every additional 100,000 Entity Points costs $150. For Custom Service, additional capacity is handled through custom quoting.
 
-**What happens if the actual counted data is higher than my original estimate?**
-
-If the selected Entity Points Plan still has enough capacity, migration can continue within the plan. If available capacity runs out, migration pauses until the customer upgrades.
-
 **Do I pay the full price when upgrading the Entity Points Plan?**
 
 No. When upgrading, the customer pays only the price difference between the current plan and the higher plan.
 
 **Does upgrading the Entity Points Plan renew the service license?**
 
-No. Upgrading the Entity Points Plan increases capacity. License renewal is a separate purchase decision.
+No. Upgrading the Entity Points Plan increases counted capacity. License renewal is a separate purchase decision.
+
+**How is service license renewal priced?**
+
+When renewing the service license, the customer pays based on the minimum Entity Points Plan in the account record and the final service status of the license, excluding custom work that has already been charged.
+
+**Can I renew with upgraded preferences?**
+
+Yes. Customers can renew using previous preferences or upgrade both the Entity Points Plan and service status during renewal when that better fits the next migration period.
 
 **Do entered quantities limit what gets migrated?**
 

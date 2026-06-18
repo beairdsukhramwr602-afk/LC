@@ -1,251 +1,210 @@
 # Choose the Right Service Model
 
-Choosing the right Next-Cart service model means deciding how the migration should be handled, who should perform the migration actions, and whether the expected target-store result requires custom work. Price is part of the decision, but the safest choice starts with the migration requirement itself.
+Choosing the right Next-Cart service model means matching the migration plan with the work required to produce a reliable target-store result. The decision should not be based only on store size, price, or whether the customer wants extra help. The right model depends on the selected migration path, source-store condition, target-store expectation, Add-ons, Custom Service requirements, and who should perform the migration actions.
 
-A strong service choice uses evidence from the earlier planning steps. The migration process shows what work must be completed, Demo Migration gives early proof, Entity Points clarify counted capacity, the Entity Points Plan defines pricing capacity, Add-ons support focused filtering or mapping needs, and Custom Service covers requirements that need tailored handling.
+Next-Cart provides three service models: Standard Service, Managed Service, and Custom Service. Standard Service is suitable when the migration can remain customer-led and standard capability is enough. Managed Service is suitable when the migration can remain within supported capability, but the customer wants Next-Cart experts to perform migration actions based on the customer’s request and agreed service scope. Custom Service is suitable when the expected result requires customization, modification, bespoke handling, Custom Platform review, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, or other custom-scoped work.
 
-### The Core Service Choice <a href="#the-core-service-choice" id="the-core-service-choice"></a>
+The strongest service-model decision separates four questions: how much counted capacity is needed, who should perform migration actions, whether focused Add-ons are enough, and whether the expected result requires custom handling. A high-volume store can still fit Standard Service if the data structure is predictable and the customer can manage the process. A smaller store can require Custom Service if important data depends on custom fields, app data, plugin data, third-party records, outside-system identifiers, or modified migration logic.
 
-The service model decision should answer three questions:
+### Start with the Service Decision, Not the Price Alone <a href="#start-with-the-service-decision-not-the-price-alone" id="start-with-the-service-decision-not-the-price-alone"></a>
 
-| Decision question                                          | Why it matters                                                                                                                            |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Can the migration stay within standard service capability? | Supported, predictable requirements may not need Custom Service.                                                                          |
-| Who should perform the migration actions?                  | The project may be customer-led or Next-Cart-led depending on the service model and agreed scope.                                         |
-| Does the expected result require custom work?              | Custom Platform handling, tailored Add-ons, Custom Add-ons, custom fields, third-party data, or bespoke logic can require Custom Service. |
+The Entity Points Plan helps determine counted capacity and pricing for Product, Customer, Order, and Blog Posts data. It does not decide the service model by itself. The selected service model should reflect the operational responsibility and service scope needed for the migration.
 
-These questions should be separated. A customer may want Next-Cart to perform a standard migration without needing Custom Service. Another customer may need Custom Service because of custom data requirements while still performing available migration actions manually.
+A lower-cost service model may not be the right choice if the source store contains complex data relationships, undocumented custom fields, modified platform behavior, or business-critical records that require tailored handling. A higher service model may also be unnecessary if the selected migration path is supported, the source-store data is predictable, and the customer can prepare, configure, execute, and validate the migration without expert-led execution.
 
-### Quick Service Direction Table <a href="#quick-service-direction-table" id="quick-service-direction-table"></a>
+The service decision should answer these questions before purchase or before requesting a custom quote:
 
-| Situation                                                                                                                    | Most suitable direction                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| The migration path is supported, requirements are predictable, and the customer can perform migration actions                | Standard Service                                                                                   |
-| The migration path is supported, requirements are predictable, and the customer wants Next-Cart to perform migration actions | Managed Service                                                                                    |
-| A Standard Add-on solves a focused filtering, mapping, or configuration need                                                 | Standard Service or Managed Service, depending on execution responsibility                         |
-| A Standard Add-on needs modification beyond available settings and supported behavior                                        | Custom Service                                                                                     |
-| A Custom Add-on is needed                                                                                                    | Custom Service                                                                                     |
-| A Custom Platform is involved as Source Platform, Target Platform, or both                                                   | Custom Service                                                                                     |
-| Custom fields, third-party data, outside-system identifiers, or bespoke migration logic need tailored handling               | Custom Service                                                                                     |
-| Custom work is needed, but the customer wants to perform available migration actions manually                                | Custom Service without Expert Handle, unless expert-handled execution is added to the agreed scope |
-| Custom work is needed and the customer wants Next-Cart to perform migration actions                                          | Custom Service with Expert Handle when included in the agreed scope                                |
+| Decision area             | Question to answer                                                                                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capacity                  | Does the selected Entity Points Plan provide enough counted capacity for the expected migration scope?                                                |
+| Execution responsibility  | Will the customer perform migration actions, or should Next-Cart experts perform them based on the customer’s request?                                |
+| Add-on needs              | Are filtering, mapping, or data-configuration needs covered by available Add-ons?                                                                     |
+| Custom scope              | Does the project require customization, modification, bespoke handling, Custom Platform review, custom migration logic, or unsupported data handling? |
+| Validation responsibility | Can the customer verify whether the target-store result meets the intended migration outcome?                                                         |
 
-This table should be used as a direction-setting framework. The final service choice should reflect the source store, target store, migration path, Add-ons, Custom Service requirements, service responsibility, and validation expectations.
+A clear answer to these questions helps prevent two common mistakes: choosing Standard Service when the project needs custom handling, or choosing Custom Service when the project only needs expert-led execution within supported capability.
 
-### Choose Standard Service When the Migration Is Predictable and Customer-Led <a href="#choose-standard-service-when-the-migration-is-predictable-and-customer-led" id="choose-standard-service-when-the-migration-is-predictable-and-customer-led"></a>
+### Choose Standard Service for Customer-Led Supported Migrations <a href="#choose-standard-service-for-customer-led-supported-migrations" id="choose-standard-service-for-customer-led-supported-migrations"></a>
 
-Standard Service fits supported migration paths where the customer can perform the migration actions and the expected result can be handled through standard service capability.
+Standard Service is the right direction when the migration path is supported, the source-store data is predictable, and the customer can perform the migration actions under the purchased service license.
 
-It is usually suitable when:
+Standard Service usually fits when:
 
 * the Source Platform and Target Platform are supported for the selected migration path;
-* the customer can prepare the source store and target store;
-* the customer can configure, execute, and monitor migration activity;
-* Demo Migration does not reveal serious data-meaning or service-scope concerns;
-* any required Add-ons fit available Standard Add-on behavior;
-* no Custom Platform, Custom Add-on, tailored Add-on, custom migration logic, or bespoke data handling is required;
+* the source store uses standard data structures that Next-Cart can handle through supported capability;
+* the customer can prepare access to the source store and target store;
+* the customer can configure migration settings and selected Add-ons;
+* Demo Migration does not reveal serious data-meaning, mapping, or service-scope concerns;
+* available Standard Add-ons are enough for any filtering, mapping, or data-configuration needs;
+* no Custom Platform, Tailored Add-on, Custom Add-on, custom migration logic, third-party data handling, or bespoke transformation is required;
 * the customer can review the target-store result and confirm the migration outcome.
 
-Standard Service does not mean the customer receives no help. It means the customer leads execution while Next-Cart support remains available for clarification and service-related questions.
+Standard Service does not mean the customer receives no support. It means the customer leads the migration actions while Next-Cart support remains available for service questions, clarification, and issue review. The customer is responsible for preparing the store access, choosing migration settings, executing available actions, and validating the final target-store result.
 
-### Choose Managed Service When the Migration Is Standard but Expert-Led Execution Is Preferred <a href="#choose-managed-service-when-the-migration-is-standard-but-expert-led-execution-is-preferred" id="choose-managed-service-when-the-migration-is-standard-but-expert-led-execution-is-preferred"></a>
+A typical Standard Service case is a supported migration path where the customer wants to move standard product, customer, order, content, and related data into a target store, with only basic configuration or available Standard Add-ons. The project may still require careful validation, but it does not require Next-Cart to perform the migration actions or customize the migration logic.
 
-Managed Service fits supported migration paths where the expected result can stay within standard service capability, but the customer wants Next-Cart experts to perform migration actions based on the customer’s request and agreed service scope.
+### Choose Managed Service for Expert-Led Execution Within Supported Capability <a href="#choose-managed-service-for-expert-led-execution-within-supported-capability" id="choose-managed-service-for-expert-led-execution-within-supported-capability"></a>
 
-It is usually suitable when:
+Managed Service is the right direction when the migration path is supported and the expected result can be handled within standard service capability, but the customer wants Next-Cart experts to perform migration actions based on the customer’s request and agreed service scope.
 
-* the migration path is supported;
-* the source-store data and target-store expectation do not require custom work;
-* the customer wants to reduce internal execution workload;
-* Standard Add-ons are enough for focused filtering, mapping, or data configuration needs;
-* the customer wants Next-Cart to coordinate migration execution;
-* the customer can still review the target-store result and confirm the migration outcome.
+Managed Service usually fits when:
 
-Managed Service is about execution responsibility. It is not a substitute for Custom Service when the project requires customization, Custom Platform handling, modified Add-ons, Custom Add-ons, custom fields, third-party data, or bespoke migration logic.
+* the Source Platform and Target Platform are supported for the selected migration path;
+* the data structure does not require custom-scoped work;
+* the customer wants Next-Cart to perform migration actions instead of handling execution manually;
+* the migration may require coordination, timing control, or operational support;
+* available Standard Add-ons are enough for filtering, mapping, or data-configuration needs;
+* the customer wants to reduce execution workload while still reviewing the target-store result;
+* no Custom Platform, Custom Add-on, Tailored Add-on, custom migration logic, or unsupported data structure is required.
+
+Managed Service is about execution responsibility. It is not the same as Custom Service. Managed Service can help customers avoid managing migration actions themselves, but it does not automatically cover custom fields, app data, plugin data, third-party data, Custom Platform handling, modified Add-ons, or bespoke data transformation.
+
+A typical Managed Service case is a supported migration where the customer wants expert-led execution, but the actual migration requirement remains predictable. Next-Cart performs the migration actions based on the customer’s request and agreed scope, while the customer remains responsible for final result verification and migration outcome.
 
 ### Choose Custom Service When the Expected Result Requires Tailored Handling <a href="#choose-custom-service-when-the-expected-result-requires-tailored-handling" id="choose-custom-service-when-the-expected-result-requires-tailored-handling"></a>
 
-Custom Service is required when the expected target-store result cannot be achieved through standard service capability and available Standard Add-ons alone.
+Custom Service is the right direction when the expected target-store result cannot be achieved through standard service capability and available Standard Add-ons alone.
 
-It is usually needed when the project involves:
+Custom Service may be needed when the project involves:
 
-* Custom Platform handling as Source Platform, Target Platform, or both;
-* Tailored Add-ons or Custom Add-ons;
-* Standard Add-on modification beyond available settings and supported behavior;
-* custom fields or non-standard source-store structures;
-* app, plugin, module, extension, or third-party data;
-* outside-system identifiers used by ERP, CRM, fulfillment, accounting, reporting, or other business systems;
+* a Custom Platform as the Source Platform, Target Platform, or both;
+* Tailored Add-ons that modify Standard Add-on behavior beyond available settings and supported behavior;
+* Custom Add-ons created for project-specific filtering, mapping, or data-configuration needs;
+* custom fields, app data, plugin data, module data, extension data, or third-party records;
+* outside-system identifiers used by ERP, CRM, fulfillment, accounting, reporting, loyalty, marketplace, or other business systems;
 * custom migration logic adjustment;
-* bespoke transformation or configuration rules;
-* target-store requirements that need review against Target Platform capability.
+* bespoke transformation rules;
+* source-store structures that do not map cleanly into the Target Platform;
+* target-store requirements that need review against platform capability;
+* unusual data relationships that require tailored review before execution.
 
-Custom Service should be chosen because the project needs custom-scoped work, not simply because the store is large. A high-volume migration can still fit Standard Service or Managed Service if the data is supported, the requirement is predictable, and the selected service model matches execution responsibility.
+Custom Service should be chosen because the project needs custom-scoped work, not simply because the store is large. Large data volume affects capacity and may affect pricing, but volume alone does not prove that custom handling is required. Conversely, a small store can require Custom Service if important business data depends on non-standard structures or unsupported behavior.
+
+Custom Service is quoted individually because the required work can vary significantly. The final quote may consider data volume, platform complexity, customization requirements, Add-ons, Tailored Add-ons, Custom Add-ons, expert-handled execution when included, and any project-specific requirements that affect the expected result.
 
 ### Decide Whether Custom Service Needs Expert Handle <a href="#decide-whether-custom-service-needs-expert-handle" id="decide-whether-custom-service-needs-expert-handle"></a>
 
-Custom Service and Expert Handle are related, but they are not the same decision.
+Custom Service and Expert Handle answer different questions.
 
-Custom Service defines the need for customization, modification, bespoke handling, or custom-scoped review. Expert Handle defines whether Next-Cart experts perform migration actions as part of the agreed Custom Service scope.
+Custom Service answers whether the project needs custom-scoped work. Expert Handle answers whether Next-Cart experts also perform migration actions as part of the agreed custom plan.
 
-| Custom Service situation                                                                      | Execution implication                                                                       |
-| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Custom work is needed, and the customer wants to perform available migration actions manually | Custom Service can focus on the custom work without Expert Handle.                          |
-| Custom work is needed, and the customer wants Next-Cart to perform migration actions          | Expert Handle should be included in the agreed Custom Service scope.                        |
-| Custom work is needed, but the execution responsibility is unclear                            | The final plan should clarify whether the customer or Next-Cart performs migration actions. |
+| Custom Service setup                 | When it fits                                                                                           | Execution responsibility                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Custom Service without Expert Handle | The project needs custom work, but the customer wants to perform available migration actions manually. | The customer performs migration actions; Next-Cart handles the agreed custom-scoped work.     |
+| Custom Service with Expert Handle    | The project needs custom work and the customer wants Next-Cart experts to perform migration actions.   | Next-Cart performs migration actions based on the customer’s request and agreed custom scope. |
 
-This distinction helps avoid two common mistakes: assuming every Custom Service project is fully expert-led, or assuming customer-led execution means custom requirements can stay outside Custom Service.
+This distinction prevents two incorrect assumptions. Custom Service does not automatically mean Next-Cart performs every migration action. Customer-led execution does not mean the project can avoid Custom Service when custom requirements exist.
 
-### Use Demo Migration as Service-Fit Evidence <a href="#use-demo-migration-as-service-fit-evidence" id="use-demo-migration-as-service-fit-evidence"></a>
+If the project needs custom handling but the customer wants to operate the migration manually, Custom Service without Expert Handle may fit. If the project needs custom handling and the customer wants Next-Cart to perform migration actions, Expert Handle should be included in the agreed Custom Service scope.
 
-Demo Migration helps reveal whether the service model expectation is realistic.
+### Use Add-ons When the Requirement Is Focused <a href="#use-add-ons-when-the-requirement-is-focused" id="use-add-ons-when-the-requirement-is-focused"></a>
 
-A predictable Demo Migration result may support Standard Service when the customer can perform the migration actions and validate the target-store result. A predictable result can also support Managed Service when the customer wants Next-Cart to handle execution.
+Add-ons should be considered when the migration has a focused requirement that can be handled through available service features. They support specific needs such as filtering, advanced mapping, or data configuration. They are not the same as broader Custom Service scope.
 
-A Demo Migration result that exposes Add-on limitations, Custom Platform issues, custom fields, third-party data gaps, target-store behavior concerns, or business-critical data differences should be reviewed for Custom Service.
+Standard Add-ons may fit when:
 
-The strongest Demo Migration review looks beyond whether records appear. It checks whether the migrated sample preserves business meaning, supports target-store use, and reveals any requirement that should change the service direction before broader migration activity.
+* the customer wants to migrate only selected records through the Data Filter Add-on;
+* source values need to be mapped into target-store values through Advanced Data Mapping;
+* migration behavior needs available configuration support through Advanced Data Configure;
+* the requirement fits available Add-on settings and supported behavior.
 
-### Use Entity Points for Capacity, Not Service Fit Alone <a href="#use-entity-points-for-capacity-not-service-fit-alone" id="use-entity-points-for-capacity-not-service-fit-alone"></a>
+If the required Add-on behavior needs modification beyond available settings and supported behavior, the work should be reviewed as a Tailored Add-on through Custom Service. If no available Standard Add-on covers the requirement, the project may need a Custom Add-on.
 
-Entity Points help estimate counted migration capacity for Product, Customer, Order, and Blog Posts. They support plan selection and pricing, but they do not decide the service model by themselves.
+Add-ons help with focused migration needs. Custom Service helps when the requirement becomes bespoke, modified, unsupported, or broader than available Add-on behavior.
 
-A large store can still fit Standard Service if the migration path is supported, the customer can perform migration actions, and the expected result does not require custom work. A smaller store can require Custom Service if it depends on Custom Platform handling, custom fields, modified Add-ons, Custom Add-ons, third-party data, or bespoke migration logic.
+### Use Demo Migration as Evidence Before Finalizing the Choice <a href="#use-demo-migration-as-evidence-before-finalizing-the-choice" id="use-demo-migration-as-evidence-before-finalizing-the-choice"></a>
 
-Entity Points answer a capacity question. Service model selection answers a responsibility and requirement question.
+Demo Migration can provide early evidence about whether the selected service model is realistic. It helps customers see how a sample of source-store data appears in the Target Platform before broader migration activity.
 
-### Use Add-ons When the Need Is Focused <a href="#use-add-ons-when-the-need-is-focused" id="use-add-ons-when-the-need-is-focused"></a>
+A predictable Demo Migration result may support Standard Service when the customer can perform migration actions and validate the target-store result. The same predictable result may support Managed Service when the customer wants Next-Cart experts to perform migration actions.
 
-Add-ons are useful when the migration requirement is focused and can be handled through available service features.
+A Demo Migration result should be reviewed for Custom Service when it exposes:
 
-Standard Add-ons can support needs such as:
+* product option, variant, attribute, or relationship issues;
+* mapping needs that exceed available settings;
+* unsupported app, plugin, module, extension, or third-party data;
+* Custom Platform concerns;
+* target-store behavior that does not match the expected business result;
+* custom fields or outside-system identifiers that need to be preserved;
+* Add-on limitations that require tailored modification.
 
-* filtering selected records through the Data Filter Add-on;
-* aligning source and target values through Advanced Data Mapping;
-* adjusting selected data values through Advanced Data Configure.
+Demo Migration should not be treated only as a visual check. It is useful service-fit evidence. The customer should review whether the sample records preserve business meaning, whether Add-ons are enough, and whether the selected service model still matches the real migration requirement.
 
-Using a Standard Add-on within available settings and supported behavior does not make the service Custom. The service model still depends on whether the migration should be customer-led or Next-Cart-led.
+### Use Entity Points for Capacity, Not Complexity by Itself <a href="#use-entity-points-for-capacity-not-complexity-by-itself" id="use-entity-points-for-capacity-not-complexity-by-itself"></a>
 
-The project becomes a Custom Service case when the Add-on needs modification beyond available behavior or when the customer needs a Custom Add-on that is not covered by the available Standard Add-ons.
+Entity Points help customers estimate counted migration capacity for Product, Customer, Order, and Blog Posts. They support plan selection and pricing, but they do not determine service fit by themselves.
 
-### Check Internal Readiness Before Choosing <a href="#check-internal-readiness-before-choosing" id="check-internal-readiness-before-choosing"></a>
+A store with high Entity Points consumption may still fit Standard Service if the migration path is supported, the customer can perform migration actions, and the expected target-store result does not require custom work. A smaller store may require Custom Service if important source-store data depends on custom fields, non-standard structures, modified Add-ons, third-party records, or custom migration logic.
 
-A technically standard migration can still be difficult for a customer to manage internally.
+Use Entity Points to answer the capacity question. Use the service model to answer the responsibility and requirement question.
 
-Before choosing Standard Service, customers should consider whether their team can:
+### Compare the Most Common Decision Paths <a href="#compare-the-most-common-decision-paths" id="compare-the-most-common-decision-paths"></a>
 
-* prepare source-store and target-store access;
-* configure migration settings confidently;
-* interpret Demo Migration results;
-* decide whether Add-ons are needed;
-* monitor migration execution;
-* review products, customers, orders, content, relationships, and settings;
-* validate the target-store result before launch or business use;
-* decide whether later migration actions are needed after earlier migration activity.
+The service decision becomes clearer when capacity, responsibility, Add-ons, and custom scope are evaluated together.
 
-If those responsibilities are too heavy, Managed Service may be safer even when the migration does not require Custom Service. If the team can handle execution but the data requires tailored handling, Custom Service may be needed without Expert Handle.
+| Situation                                                                                            | Likely service direction                                                   |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Supported migration path, predictable data, customer-led execution                                   | Standard Service                                                           |
+| Supported migration path, predictable data, Next-Cart-led execution requested                        | Managed Service                                                            |
+| Standard Add-ons are enough for filtering, mapping, or configuration                                 | Standard Service or Managed Service, depending on execution responsibility |
+| Standard Add-on behavior needs modification                                                          | Custom Service as Tailored Add-on scope                                    |
+| Required outcome is not covered by available Standard Add-ons                                        | Custom Service as Custom Add-on scope                                      |
+| Custom Platform is involved                                                                          | Custom Service                                                             |
+| Custom fields, third-party data, outside-system identifiers, or bespoke migration logic are required | Custom Service                                                             |
+| Custom work is required, but the customer wants to perform migration actions                         | Custom Service without Expert Handle                                       |
+| Custom work is required, and Next-Cart should perform migration actions                              | Custom Service with Expert Handle                                          |
 
-### Practical Service-Fit Scenarios <a href="#practical-service-fit-scenarios" id="practical-service-fit-scenarios"></a>
+This comparison is a planning framework, not a substitute for requirement review. The final service choice should reflect the selected migration path, source-store condition, target-store expectations, Add-ons, Custom Service requirements, service responsibility, and validation needs.
 
-#### Scenario 1: Predictable migration with a capable internal team <a href="#scenario-1-predictable-migration-with-a-capable-internal-team" id="scenario-1-predictable-migration-with-a-capable-internal-team"></a>
+### Questions to Answer Before Choosing <a href="#questions-to-answer-before-choosing" id="questions-to-answer-before-choosing"></a>
 
-The customer understands the migration process, can perform available migration actions, and the Demo Migration result looks predictable. Required Add-ons fit available Standard Add-on behavior.
+Before selecting or changing a service model, customers should be able to answer the following questions:
 
-**Likely fit:** Standard Service.
-
-#### Scenario 2: Predictable migration with limited execution capacity <a href="#scenario-2-predictable-migration-with-limited-execution-capacity" id="scenario-2-predictable-migration-with-limited-execution-capacity"></a>
-
-The migration appears feasible through standard service capability, but the customer wants Next-Cart to perform migration actions.
-
-**Likely fit:** Managed Service.
-
-#### Scenario 3: Standard Add-on is enough <a href="#scenario-3-standard-add-on-is-enough" id="scenario-3-standard-add-on-is-enough"></a>
-
-The customer needs filtering, mapping, or data configuration that fits a Standard Add-on’s available settings and supported behavior.
-
-**Likely fit:** Standard Service or Managed Service, depending on who should perform migration actions.
-
-#### Scenario 4: Add-on needs modification <a href="#scenario-4-add-on-needs-modification" id="scenario-4-add-on-needs-modification"></a>
-
-The customer needs filtering, mapping, or data-configuration behavior that exceeds Standard Add-on capability.
-
-**Required fit:** Custom Service.
-
-#### Scenario 5: Custom Platform is involved <a href="#scenario-5-custom-platform-is-involved" id="scenario-5-custom-platform-is-involved"></a>
-
-The Source Platform or Target Platform is a Custom Platform and the migration requires interpretation beyond the supported-platform model.
-
-**Required fit:** Custom Service.
-
-#### Scenario 6: Custom work with customer-led execution <a href="#scenario-6-custom-work-with-customer-led-execution" id="scenario-6-custom-work-with-customer-led-execution"></a>
-
-The customer needs a Tailored Add-on, Custom Add-on, custom migration logic, or another custom-scoped requirement, but still wants to perform available migration actions manually.
-
-**Required fit:** Custom Service without Expert Handle, unless expert-led execution is added to the agreed scope.
-
-#### Scenario 7: Custom work with expert-led execution <a href="#scenario-7-custom-work-with-expert-led-execution" id="scenario-7-custom-work-with-expert-led-execution"></a>
-
-The customer needs custom work and also wants Next-Cart experts to perform migration actions.
-
-**Required fit:** Custom Service with Expert Handle included in the agreed scope.
-
-### Final Questions Before Choosing <a href="#final-questions-before-choosing" id="final-questions-before-choosing"></a>
-
-Before selecting a service model, customers should ask:
-
-* Can the selected migration path stay within standard service capability?
-* Can the customer perform migration actions confidently?
-* Should Next-Cart perform migration actions based on the customer’s request?
-* Did Demo Migration show predictable results?
-* Do Add-ons solve the requirement within available settings and supported behavior?
-* Does any Add-on need modification?
-* Is a Custom Add-on needed?
+* Is the migration path supported for the selected Source Platform and Target Platform?
+* Can the customer prepare source-store and target-store access reliably?
+* Does the source store use standard structures, or does it contain custom fields, third-party data, extension data, plugin data, app data, or outside-system identifiers?
+* Can available Standard Add-ons handle the filtering, mapping, or data-configuration needs?
+* Does any Add-on need modification beyond available settings and supported behavior?
 * Is a Custom Platform involved?
-* Do apps, plugins, modules, extensions, custom fields, third-party data, or outside-system identifiers affect the expected target-store result?
-* Is Custom Service needed for custom work, Expert Handle, or both?
-* Can the customer validate the final migration outcome before launch or business use?
+* Does Demo Migration reveal data-meaning or target-store behavior concerns?
+* Does the customer want to perform migration actions manually, or should Next-Cart experts perform them based on the customer’s request?
+* If Custom Service is needed, should Expert Handle be included?
+* Can the customer verify the final target-store result and confirm the migration outcome?
 
-These questions help separate preference from requirement. The right service model should reflect both how the migration should be performed and what the target-store result requires.
+The right service model should make the migration safer to plan, easier to execute, and clearer to validate. If any answer is uncertain, Live Chat can help clarify whether the next step is Standard Service, Managed Service, Custom Service, Add-ons, or a custom quote.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Next-Cart service model depends on execution responsibility and migration requirements. Standard Service fits customer-led migration through standard service capability. Managed Service fits Next-Cart-led migration through standard service capability. Custom Service is required when the project needs Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom fields, third-party data, custom migration logic, or broader bespoke handling.
+Choosing the right service model means separating capacity, execution responsibility, Add-ons, and custom requirements. Standard Service fits customer-led supported migrations. Managed Service fits supported migrations where Next-Cart performs migration actions based on the customer’s request and agreed service scope. Custom Service fits projects that require customization, modification, bespoke handling, Custom Platform review, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, or other custom-scoped work.
 
-The strongest decision comes from combining several signals: Demo Migration results, internal execution readiness, Entity Points capacity, Add-on requirements, Custom Service requirements, Expert Handle expectations, and validation responsibility. If the decision remains unclear, Live Chat can help confirm whether Standard Service, Managed Service, or Custom Service is the safest path before purchase, upgrade, or execution.
+The decision should be based on what the migration needs to produce a reliable target-store result. Entity Points define counted capacity. Add-ons support focused filtering, mapping, or configuration needs. Custom Service handles requirements that go beyond standard capability. The customer remains responsible for final result verification and migration outcome under every service model.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-**How do I choose between Standard Service and Managed Service?**
+**Is Standard Service only for small stores?**
 
-Choose Standard Service when the migration can stay within standard service capability and the customer can perform migration actions. Choose Managed Service when the migration can stay within standard service capability but the customer wants Next-Cart to perform migration actions based on the customer’s request and agreed scope.
+No. Standard Service can fit larger stores when the migration path is supported, the data structure is predictable, and the customer can perform migration actions and validate the result.
 
-**When is Custom Service required?**
+**Is Managed Service the same as Custom Service?**
 
-Custom Service is required when the project needs customization, modification, bespoke handling, Custom Platform review, Tailored Add-ons, Custom Add-ons, custom fields, third-party data, outside-system identifiers, custom migration logic, or other custom-scoped work.
+No. Managed Service is for Next-Cart-led execution within supported capability. Custom Service is for custom-scoped requirements such as Custom Platform handling, modified Add-ons, third-party data, custom fields, or custom migration logic.
 
 **Does Custom Service always include Expert Handle?**
 
-No. Custom Service defines the need for custom work. Expert Handle defines whether Next-Cart experts perform migration actions as part of the agreed Custom Service scope.
+No. Custom Service can be customer-led or expert-handled depending on the agreed plan. Expert Handle is needed when the customer wants Next-Cart experts to perform migration actions as part of the Custom Service scope.
 
-**Can customers perform migration actions manually under any service model?**
+**Can Add-ons replace Custom Service?**
 
-Yes. Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and service scope.
+Only when the requirement fits available Add-on behavior. If the Add-on needs modification or the required outcome is not covered by available settings, the requirement should be reviewed through Custom Service.
 
-**Does high Entity Points volume automatically require Managed Service or Custom Service?**
+**Do Entity Points decide the service model?**
 
-No. Entity Points measure counted capacity. A high-volume migration can still fit Standard Service if the project is predictable and the customer can perform migration actions.
+No. Entity Points define counted capacity for Product, Customer, Order, and Blog Posts. Service model selection depends on execution responsibility, Add-ons, custom requirements, platform fit, and validation needs.
 
-**Can a smaller migration still require Custom Service?**
+**What should Demo Migration prove before choosing a service model?**
 
-Yes. A smaller migration can require Custom Service if it involves Custom Platform, modified Add-ons, Custom Add-ons, custom fields, third-party data, outside-system identifiers, or bespoke migration behavior.
+Demo Migration should help show whether sample records preserve business meaning in the Target Platform and whether the requirement can stay within standard capability, needs Add-ons, or should be reviewed through Custom Service.
 
-**Does using a Standard Add-on make the service Custom?**
+**Who verifies the final migration outcome?**
 
-No. Using a Standard Add-on within available settings and supported behavior does not make the service Custom. A modified Add-on or Custom Add-on request should be reviewed through Custom Service.
-
-**Should I choose the service model before Demo Migration?**
-
-Customers may have an initial service expectation before Demo Migration, but Demo Migration can provide stronger evidence for confirming whether Standard Service, Managed Service, or Custom Service is the right fit.
-
-**What if I am unsure which service model fits?**
-
-Review Demo Migration results, Add-on needs, internal execution readiness, Custom Platform involvement, custom data requirements, and Expert Handle expectations. Live Chat can help clarify the safest service path.
+The customer remains responsible for final result verification and migration outcome under every service model.
