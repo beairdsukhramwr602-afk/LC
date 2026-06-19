@@ -1,264 +1,242 @@
 # Reviews and User-Generated Content Systems
 
-Reviews can migrate successfully as data while still becoming weaker as customer-trust signals.
+Reviews and user-generated content are not only product-page text. In an e-commerce store, they form a trust data layer that connects products, customers, ratings, moderation workflows, media, provider systems, storefront widgets, structured data, and sometimes marketplace or syndication channels.
 
-A product page may keep its title, price, images, description, and purchase options, yet feel less convincing if ratings disappear, review counts change, review text is hidden, or feedback attaches to the wrong product. Reviews are not only additional content. For many stores, they reduce hesitation, support product comparison, reinforce credibility, and help shoppers decide whether the product is worth buying.
+A product can keep its title, price, images, variants, and description while losing part of its commercial credibility if review counts disappear, ratings recalculate differently, review text attaches to the wrong product, or customer-generated photos stop appearing. The data issue is not simply whether review records exist. The deeper issue is how the review system stores evidence of customer experience and how the storefront converts that evidence into trust.
 
-Review continuity becomes more complex when reviews do not live entirely inside the core store platform. Some stores use native review features. Others rely on third-party review providers, marketplace imports, widgets, theme blocks, loyalty systems, or external moderation services. In those cases, a migrated product can appear complete while the trust layer that supported conversion behaves differently after launch.
+Technical review should start by identifying where reviews are stored, how product matching works, which fields control visibility, and whether the review experience is native to the platform, app-owned, provider-owned, marketplace-fed, or theme-rendered.
 
-### Reviews are independent entities with relationship meaning <a href="#reviews-are-independent-entities-with-relationship-meaning" id="reviews-are-independent-entities-with-relationship-meaning"></a>
+### Reviews are independent trust entities <a href="#reviews-are-independent-trust-entities" id="reviews-are-independent-trust-entities"></a>
 
-Reviews should be treated as independent entities linked to products, customers, moderation status, and storefront display rules.
+A review is usually an independent record with relationships to a product, author, rating value, moderation state, and display context. It may appear beside product data, but it should not be treated as an ordinary product field.
 
-That distinction matters because review continuity depends on association, not only record presence. A review that exists without the right product link loses much of its commercial value. A review that exists without the intended customer or author context may also weaken trust, moderation confidence, or the sense that the storefront still reflects real buyer feedback.
+A typical review model can include:
 
-#### What review relationships usually include <a href="#what-review-relationships-usually-include" id="what-review-relationships-usually-include"></a>
+| Data layer           | Common information                                              | Store behavior affected                                     |
+| -------------------- | --------------------------------------------------------------- | ----------------------------------------------------------- |
+| Review content       | title, body text, rating, review date, language                 | product-page trust, buyer confidence, product comparison    |
+| Product association  | product ID, SKU, handle, slug, variant ID, provider product key | correct product assignment, rating totals, review display   |
+| Author context       | customer ID, guest name, email, display name, anonymous flag    | credibility, customer lookup, moderation confidence         |
+| Moderation state     | approved, pending, rejected, hidden, flagged, spam status       | storefront visibility, compliance review, support workflows |
+| Review media         | uploaded images, videos, thumbnails, file URLs, captions        | visual proof, product confidence, media gallery behavior    |
+| Trust indicators     | verified buyer, source channel, import source, helpful votes    | credibility, sorting, badges, review prominence             |
+| Merchant interaction | merchant replies, response date, support notes                  | customer service visibility, brand response, issue handling |
+| Provider metadata    | external review ID, provider product ID, sync token, widget key | provider matching, reimport safety, duplicate prevention    |
 
-Review-related migration scope can include:
+The relationship layer is as important as the content layer. A review with accurate text but the wrong product association weakens trust. A review with the right product link but missing approval status may disappear from the storefront. A review with media but broken file references may look incomplete even when the review record itself exists.
 
-* review text
-* star rating or score value
-* review title or summary
-* review date
-* review status, such as approved, pending, hidden, or rejected
-* customer, guest, or author information
-* product association
-* SKU, product ID, handle, slug, or another matching identifier
-* review images, where supported
-* reply or merchant-response data, where supported
-* verified-buyer indicators, where supported by the review system
-* provider-specific fields or external review identifiers
+### Ratings are calculated data, not always stored data <a href="#ratings-are-calculated-data-not-always-stored-data" id="ratings-are-calculated-data-not-always-stored-data"></a>
 
-**Why association matters more than record count**
+Star ratings and review counts often look like simple values, but they may be calculated from multiple review records, moderation rules, provider filters, duplicate handling, and display thresholds. Some systems store an average rating directly on the product. Others calculate it dynamically from approved reviews. Some provider widgets calculate ratings outside the store database.
 
-A review count can look correct while individual reviews still attach to the wrong products, lose moderation status, or display in a weaker position on the product page. Review validation should therefore focus on whether the trust signal still works in context, not only whether review records exist somewhere in the Target Platform.
+Rating behavior can depend on:
 
-### Preserving reviews can mean different outcomes <a href="#preserving-reviews-can-mean-different-outcomes" id="preserving-reviews-can-mean-different-outcomes"></a>
+* whether pending or hidden reviews are excluded;
+* whether imported reviews count toward averages;
+* whether duplicate reviews are merged or ignored;
+* whether marketplace reviews and native reviews are combined;
+* whether rating scales are numeric, star-based, percentage-based, or provider-specific;
+* whether product variants have separate rating histories;
+* whether archived products still contribute to historical counts;
+* whether a provider recalculates ratings after product matching changes.
 
-Review continuity should be defined as a business outcome before migration execution.
+A visible rating may therefore change even when the underlying review text is preserved. The cause may be calculation logic rather than missing records.
 
-For some stores, the priority is visible star ratings on best sellers. For others, it is preserving full historical review text, review counts, review dates, customer names, review images, verified-buyer indicators, or provider-powered widgets. These goals are related, but they are not the same migration requirement.
+### Review moderation is part of the data model <a href="#review-moderation-is-part-of-the-data-model" id="review-moderation-is-part-of-the-data-model"></a>
 
-#### Common review-continuity goals <a href="#common-review-continuity-goals" id="common-review-continuity-goals"></a>
+Moderation status controls whether review data is visible, queued, rejected, hidden, or published. In many stores, moderation is not just an admin preference. It supports spam prevention, inappropriate-content control, customer service workflows, and brand-quality standards.
 
-A store may need to preserve:
+Moderation data may include:
 
-* ratings and review counts on product listing pages
-* star ratings on product detail pages
-* full review text and review dates
-* product-level review assignment
-* customer or reviewer attribution
-* moderation status
-* review images or media
-* merchant replies to reviews
-* review sorting, filtering, or display order
-* provider-powered badges, snippets, or widgets
+* approval status;
+* rejection or hidden reason;
+* moderation date;
+* moderator account;
+* spam flag;
+* abuse report status;
+* profanity or policy flag;
+* verified-purchase requirement;
+* merchant reply approval status;
+* provider-level publication state.
 
-**Why this should be decided early**
+Different platforms and providers handle moderation differently. A native platform may store review status as a simple field. A third-party provider may store moderation status in its own account and only expose approved reviews through a widget. A marketplace review feed may not allow the same moderation controls at all.
 
-A vague goal such as “move reviews” is not enough for planning. The clearer question is which trust signals must remain visible after launch and which review details are essential for customer confidence, support review, compliance, or merchandising decisions.
+For technical planning, the key question is whether moderation state is portable, reproducible, or provider-owned. If moderation state cannot be carried over directly, the Target Platform may need a new publication workflow, a provider import rule, or manual review of high-risk feedback.
 
-### Review systems differ across platforms and providers <a href="#review-systems-differ-across-platforms-and-providers" id="review-systems-differ-across-platforms-and-providers"></a>
+### User-generated media adds file and permission dependencies <a href="#user-generated-media-adds-file-and-permission-dependencies" id="user-generated-media-adds-file-and-permission-dependencies"></a>
 
-Review behavior changes because platforms and providers do not always store, calculate, approve, or display reviews the same way.
+User-generated content often includes more than written reviews. Some review systems support customer-uploaded images, videos, Q\&A entries, size-fit feedback, product-use examples, or social proof pulled from external channels.
 
-A Source Platform may store reviews directly in the product database, while the Target Platform may depend on an app or external provider. Another store may use product reviews imported from a marketplace, a review syndication network, or a custom review extension. Even when the review content is available, the Target Platform may represent it through a different data model or display layer.
+UGC media has additional structure:
 
-#### Where review behavior can change <a href="#where-review-behavior-can-change" id="where-review-behavior-can-change"></a>
+| UGC element          | Technical dependency                                         | Behavior affected                                           |
+| -------------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Review images        | file URL, CDN path, media ID, thumbnail generation           | visible customer photos, image gallery, mobile display      |
+| Review videos        | file hosting, embed provider, processing status              | video playback, loading behavior, provider compatibility    |
+| Customer Q\&A        | question, answer, product link, responder, visibility status | product-page support content, pre-purchase confidence       |
+| Helpful votes        | vote count, voter identity, anti-duplicate logic             | review sorting, credibility signals                         |
+| Fit or size feedback | structured answer, product category, option mapping          | apparel sizing guidance, product filters, returns reduction |
+| Social proof embeds  | external post ID, platform permissions, embed script         | content visibility, legal/permission continuity             |
 
-Review differences often appear in:
+Media continuity can fail for reasons that do not affect text reviews. Files may be stored on a provider CDN, theme asset library, marketplace system, app account, or old domain. Some systems preserve only the media URL; others preserve file objects, thumbnails, alt text, or display order. If file ownership or access changes, the review can remain present while the customer-generated media disappears.
 
-* rating scale and average-rating calculation
-* approved, hidden, or pending status behavior
-* guest-review handling
-* customer-account association
-* verified-buyer indicators
-* review images or media handling
-* review sorting and pagination
-* provider-specific review IDs
-* widget placement and theme rendering
-* review snippets on category pages or product cards
-* structured review markup, where supported by the storefront implementation
+### Platforms differ in how they own review data <a href="#platforms-differ-in-how-they-own-review-data" id="platforms-differ-in-how-they-own-review-data"></a>
 
-**Why display behavior should not be assumed**
+Review architecture varies widely across e-commerce platforms. Some platforms have native review modules. Some rely almost entirely on apps or extensions. Some stores use third-party review providers even when native review support exists. Enterprise and marketplace-connected stores may combine several review sources.
 
-The product record and review-display layer are separate concerns. A review can exist in the Target Platform or provider account while still not appearing where shoppers expect it. This is especially common when the storefront theme, review widget, or provider integration changes during migration.
+| Platform model        | How reviews are usually represented                                                 | Technical risk                                                           |
+| --------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Native review model   | review records live in the platform database                                        | fields may migrate, but display and moderation behavior can still differ |
+| App or plugin model   | an extension owns review records, widgets, and moderation                           | core store export may not include the complete review system             |
+| Provider-hosted model | an external review provider owns ratings, content, media, and matching              | provider identifiers and product matching become critical                |
+| Marketplace-fed model | review data originates from Amazon, eBay, marketplace apps, or syndication feeds    | reviews may not be portable or may have channel-specific restrictions    |
+| Theme-rendered model  | review data exists, but storefront display depends on theme blocks or scripts       | records may import while widgets fail to appear correctly                |
+| Hybrid model          | native reviews, provider reviews, imported reviews, and manual testimonials coexist | duplicate ratings, inconsistent counts, and source conflicts are likely  |
+| Custom model          | custom tables, metafields, extensions, or headless components hold review logic     | data may need custom mapping and storefront implementation review        |
 
-### Product matching is a major review-continuity risk <a href="#product-matching-is-a-major-review-continuity-risk" id="product-matching-is-a-major-review-continuity-risk"></a>
+The same business concept, “product reviews,” can therefore mean very different technical structures. A review-heavy store should identify the actual ownership model before treating reviews as a normal content migration task.
 
-Reviews usually need a stable way to recognize which product they belong to.
+### Product matching determines review continuity <a href="#product-matching-determines-review-continuity" id="product-matching-determines-review-continuity"></a>
 
-That matching may depend on product IDs, SKUs, handles, slugs, variant IDs, external provider IDs, or custom matching rules. When products are renamed, merged, split, consolidated, duplicated, or restructured during migration, review association becomes more fragile.
+Reviews must attach to the correct product record. That association may depend on product IDs, SKUs, handles, slugs, variant IDs, provider product keys, marketplace listing IDs, or custom matching rules.
 
-#### Product changes that can affect review continuity <a href="#product-changes-that-can-affect-review-continuity" id="product-changes-that-can-affect-review-continuity"></a>
+Review continuity becomes fragile when product structure changes. Common risk patterns include:
 
-Risk increases when:
+* several Source Platform products being consolidated into one Target Platform product;
+* one Source Platform product being split into multiple Target Platform products;
+* SKUs being cleaned, renamed, merged, or replaced;
+* handles or slugs changing during catalog cleanup;
+* variants being reorganized under different parent products;
+* discontinued products being archived while replacement products are launched;
+* review providers matching by an external product key rather than by visible SKU;
+* marketplace or syndicated reviews belonging to channel-specific listings.
 
-* several Source Platform products become one Target Platform product
-* one Source Platform product becomes several Target Platform products
-* SKUs are cleaned, merged, renamed, or replaced
-* product handles or URLs change significantly
-* product variants are reorganized
-* review systems match by provider-specific product identifiers
-* reviews were originally collected through marketplaces or external channels
-* historical products are archived while replacement products are launched
+A technically successful review import can still be commercially wrong if reviews attach to the wrong product family. For example, reviews for an older product version may not belong on a newer replacement product unless the business intentionally wants that continuity. Reviews for a bundled product may not belong on each component product. Variant-specific reviews may lose meaning if the new platform only supports product-level review display.
 
-**Why product restructuring should be reviewed with reviews in mind**
+### Storefront display is separate from review storage <a href="#storefront-display-is-separate-from-review-storage" id="storefront-display-is-separate-from-review-storage"></a>
 
-Product cleanup can be useful, but it can also break trust continuity if reviews depend on old identifiers. When product structure changes, review planning should decide whether old reviews should follow the new product, remain with archived products, be imported into a provider account, or be excluded from the launch storefront.
+Review records and review display are different layers. A review can exist in an admin panel or provider account while failing to appear on product pages, product cards, collection pages, search results, rich snippets, or mobile layouts.
 
-### Third-party review providers add another layer of dependency <a href="#third-party-review-providers-add-another-layer-of-dependency" id="third-party-review-providers-add-another-layer-of-dependency"></a>
+Display behavior may depend on:
 
-Many review systems depend on technology outside the default product model.
+* review widget placement in the theme;
+* product-page templates;
+* collection-card snippets;
+* mobile layout rules;
+* structured data or schema markup;
+* provider script loading;
+* lazy loading and performance settings;
+* moderation filters;
+* minimum-review thresholds;
+* product availability status;
+* translation and localization settings;
+* app embed permissions;
+* headless frontend integration.
 
-Apps, plugins, widgets, marketplace feeds, syndication providers, loyalty systems, and external review platforms may control where reviews are stored, how ratings are rendered, how counts are calculated, and which trust signals appear on product pages. The migration question is therefore not only whether review records can move. It is whether the Target Platform can still present the same review experience through the selected review system.
+This separation explains why admin-level record checks are not enough. A store may have preserved all review records but still lose visible trust signals if the Target Platform theme, provider widget, or frontend component is not configured to display them in the right context.
 
-#### External review dependencies to identify <a href="#external-review-dependencies-to-identify" id="external-review-dependencies-to-identify"></a>
+### Reviews interact with customers, orders, and compliance-sensitive data <a href="#reviews-interact-with-customers-orders-and-compliance-sensitive-data" id="reviews-interact-with-customers-orders-and-compliance-sensitive-data"></a>
 
-Before execution, stores should identify whether reviews depend on:
+Reviews often link to customer accounts, guest author records, verified-purchase status, and order history. These links may affect credibility, moderation, review sorting, and whether the storefront can display a verified-buyer badge.
 
-* a third-party review app or provider
-* a marketplace review import
-* syndicated reviews from another channel
-* a custom review widget
-* a theme-level review block
-* product-feed or merchandising integrations
-* loyalty, rewards, or post-purchase review flows
-* moderation workflows outside the store platform
-* provider-specific product matching
+Typical relationship questions include:
 
-**When this becomes Custom Service territory**
+* Does the review link to a registered customer or guest author?
+* Does verified-buyer status depend on an order record?
+* Does the platform allow imported reviews to be marked as verified?
+* Are customer names anonymized or displayed publicly?
+* Are review emails used only internally or visible in moderation tools?
+* Are review images subject to permission or consent rules?
+* Are old reviews subject to retention, deletion, or localization rules?
 
-If review continuity depends on external-system behavior, provider-specific identifiers, custom product matching, custom review fields, or non-standard display logic, the requirement should be reviewed as Custom Service work. The issue is not simply moving review text. It is preserving a trusted storefront outcome across systems that may not share the same data model.
+Review data can include personally identifiable information, especially when author names, emails, photos, or support-related replies are stored with the review. Technical planning should separate public-facing content from private author metadata and moderation fields.
 
-### Common review failure patterns after migration <a href="#common-review-failure-patterns-after-migration" id="common-review-failure-patterns-after-migration"></a>
+### External providers and syndication create ownership constraints <a href="#external-providers-and-syndication-create-ownership-constraints" id="external-providers-and-syndication-create-ownership-constraints"></a>
 
-Review issues are often discovered late because product pages may look mostly complete before the trust layer is checked carefully.
+Third-party review systems add an additional ownership layer. The provider may control the review database, widget, rating calculation, moderation queue, import format, product matching method, and structured-data output.
 
-The safest review process is to test the products where review visibility matters most, not only a random sample of product pages.
+Provider-dependent review systems should be examined for:
 
-#### Reviews disappear from product pages <a href="#reviews-disappear-from-product-pages" id="reviews-disappear-from-product-pages"></a>
+* export availability and field completeness;
+* import format requirements;
+* provider product ID requirements;
+* SKU or handle matching rules;
+* duplicate-prevention logic;
+* historical review import limits;
+* review media support;
+* merchant reply support;
+* verified-buyer rules;
+* syndication or marketplace restrictions;
+* widget compatibility with the Target Platform theme;
+* data access if the provider account changes.
 
-This can happen when the review provider is not connected, the widget is missing from the new theme, the Target Platform does not use the same review model, or the review data moved without a working display layer.
+In provider-owned review systems, review continuity may depend more on provider configuration than on platform data transfer. The product catalog, provider account, widget, and storefront theme must all recognize the same product identity.
 
-#### Reviews attach to the wrong products <a href="#reviews-attach-to-the-wrong-products" id="reviews-attach-to-the-wrong-products"></a>
+### How to inspect review and UGC systems before migration <a href="#how-to-inspect-review-and-ugc-systems-before-migration" id="how-to-inspect-review-and-ugc-systems-before-migration"></a>
 
-This usually happens when product identifiers change, when products are merged or split, or when a review provider cannot match old product references to the new Target Platform structure.
+A strong review-data inspection should focus on high-impact trust signals instead of random record totals. Best sellers, review-heavy products, high-consideration products, products with review images, products with merged or split histories, and products using external provider widgets should be inspected first.
 
-#### Review counts or rating averages change unexpectedly <a href="#review-counts-or-rating-averages-change-unexpectedly" id="review-counts-or-rating-averages-change-unexpectedly"></a>
+Before migration, review the following:
 
-Differences in calculation rules, moderation status, imported-review treatment, provider interpretation, or duplicate review handling can change the visible rating even when review data still exists.
+| Inspection area             | What to confirm                                           | Why it matters                                          |
+| --------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| Storage owner               | native platform, app, provider, marketplace, custom table | determines export access and import path                |
+| Product matching            | product ID, SKU, handle, provider key, listing ID         | controls whether reviews attach to the correct product  |
+| Review fields               | text, rating, date, author, status, media, replies        | defines what can be preserved visibly and operationally |
+| Rating logic                | approved-only, imported reviews, duplicate treatment      | explains rating/count differences after migration       |
+| Display layer               | widget, theme block, product-card snippet, mobile view    | determines whether shoppers see the trust signal        |
+| UGC media                   | file ownership, CDN, thumbnails, provider account         | prevents missing images or broken customer media        |
+| Compliance-sensitive fields | author identity, email, consent, deletion status          | reduces privacy and publication risks                   |
+| External dependencies       | provider account, app, API, marketplace feed              | identifies requirements outside core platform data      |
 
-#### Duplicate reviews appear <a href="#duplicate-reviews-appear" id="duplicate-reviews-appear"></a>
+Next-Cart should enter the discussion only when these inspection results show a migration-specific requirement: field mapping, review media handling, external identifiers, provider-specific matching, duplicate prevention, or a Custom Service review for non-standard review logic.
 
-Duplicates can appear when reviews are preserved through more than one continuity path, such as an import plus a provider sync, or when the same product is matched under multiple identifiers.
+### Migration implications after the review structure is understood <a href="#migration-implications-after-the-review-structure-is-understood" id="migration-implications-after-the-review-structure-is-understood"></a>
 
-#### Review widgets display but do not support the same buying confidence <a href="#review-widgets-display-but-do-not-support-the-same-buying-confidence" id="review-widgets-display-but-do-not-support-the-same-buying-confidence"></a>
+Once review architecture is clear, migration planning can focus on the expected outcome: visible ratings, correct product association, preserved review history, maintained moderation state, continued provider display, or a narrower trust-continuity target.
 
-A widget may appear on the page while showing fewer reviews, weaker placement, missing images, different sorting, missing verified-buyer context, or incomplete review history.
+Standard review handling may be enough when review records, ratings, dates, author names, status, and product associations can be represented in the Target Platform or review provider without special logic. Deeper handling may be needed when reviews depend on custom provider identifiers, product restructuring, review images, marketplace sources, extension-owned records, custom moderation fields, or storefront display behavior that cannot be reproduced by default.
 
-**Why these patterns matter commercially**
+A technically grounded review requirement should define:
 
-The customer sees the storefront result, not the migration mechanics. If ratings, counts, and review detail become less credible, the product page may lose persuasion even though the main product data appears correct.
+* which review sources are in scope;
+* which fields must remain visible;
+* which fields only need to remain operationally available;
+* how products should be matched;
+* how rating counts should be interpreted;
+* whether imported reviews should retain dates and author context;
+* whether review media and merchant replies are required;
+* which products must be validated first;
+* what differences are acceptable in the Target Platform.
 
-### What to define before execution <a href="#what-to-define-before-execution" id="what-to-define-before-execution"></a>
-
-Review planning should define the expected trust outcome before Full Migration.
-
-That does not mean every historical review must always be preserved exactly. It means the business should know which review signals matter, where they matter, and what differences are acceptable in the Target Platform.
-
-#### Review-planning questions <a href="#review-planning-questions" id="review-planning-questions"></a>
-
-Before execution, clarify:
-
-* Which products depend most on reviews for conversion?
-* Should ratings appear on product cards, product pages, or both?
-* Is full review text required, or are visible ratings and counts enough for some products?
-* Should review dates, customer names, or verified-buyer indicators be preserved?
-* Are review images, videos, or merchant replies important?
-* Are reviews stored natively, externally, or across multiple systems?
-* Does the review provider require product matching by SKU, handle, product ID, or another identifier?
-* Will products be renamed, merged, split, archived, or restructured?
-* Should pending or hidden reviews remain hidden after migration?
-
-**Why review goals should be product-specific**
-
-Not every product has the same review value. Best sellers, high-consideration products, new-customer acquisition products, and review-heavy categories usually deserve closer review than low-impact historical products.
-
-### How to validate review continuity <a href="#how-to-validate-review-continuity" id="how-to-validate-review-continuity"></a>
-
-Reviews should be validated as customer-trust behavior, not only as imported content.
-
-A practical validation sample should include review-heavy products, best sellers, products using review images, products with many variants, products matched by provider identifiers, and products whose reviews affect buying confidence. A Demo Migration can help reveal whether the Target Platform and review system can preserve the expected outcome before broader execution.
-
-#### What to check first <a href="#what-to-check-first" id="what-to-check-first"></a>
-
-Validation should confirm whether:
-
-* ratings appear where shoppers expect them
-* review counts are visible and believable
-* review text appears under the correct product
-* review dates, names, and status are acceptable
-* approved, hidden, and pending reviews behave correctly
-* provider widgets load correctly in the Target Platform theme
-* review snippets appear on listing pages if expected
-* review-heavy products still support customer trust
-* duplicate or mismatched reviews are not present
-* review behavior remains acceptable on mobile views
-
-**Why visible review validation matters**
-
-Admin-level record checks are not enough. A review may exist in the system while failing to appear on the product page, product card, or provider widget that customers actually use to judge trust.
-
-### When standard handling may not be enough <a href="#when-standard-handling-may-not-be-enough" id="when-standard-handling-may-not-be-enough"></a>
-
-Not every review migration requires customization. Many stores only need review records, ratings, and product association to remain usable in the Target Platform.
-
-Higher-risk review projects need closer planning when review continuity depends on third-party systems, provider-specific matching, custom review fields, custom moderation logic, product restructuring, review images, marketplace review sources, or theme/widget behavior that must be reproduced after launch.
-
-#### Signals that require deeper review <a href="#signals-that-require-deeper-review" id="signals-that-require-deeper-review"></a>
-
-Review continuity should be reviewed more carefully when:
-
-* reviews are a major conversion driver
-* reviews are stored outside the core platform
-* product matching depends on identifiers that will change
-* products are being merged, split, or reorganized
-* the store uses a review widget or provider-specific display layer
-* review images, replies, verified-buyer indicators, or moderation status matter
-* the business needs provider-specific behavior to continue
-* review data comes from marketplaces or syndicated sources
-
-**Service-fit implication**
-
-If the need is controlled execution using standard service capability, Managed Service may be enough. If the expected review outcome depends on custom product matching, provider-specific migration behavior, custom review fields, external-system identifiers, or display logic beyond standard handling, the requirement should be handled through Custom Service.
+The goal is not always perfect historical reproduction. The goal is to preserve the review signals that matter to customer trust, merchandising, compliance, and storefront credibility.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Reviews and user-generated content systems are one of the clearest ways for a migration to look complete while the trust layer becomes weaker. The issue is not only whether reviews survive as records. It is whether ratings, counts, review text, moderation status, and product associations still appear in the right places and support the same buying confidence after launch.
+Reviews and user-generated content systems are technical trust structures. They combine review records, product associations, author context, moderation state, media files, rating calculations, provider identifiers, storefront widgets, and display rules.
 
-The safest way to reduce that risk is to define the review outcome that matters commercially, identify where reviews are stored, protect product matching, and validate review-heavy products early. When the review layer depends on external systems or custom matching, it should be planned before execution rather than treated as a minor content detail after launch.
+A store should not evaluate review continuity only by checking record counts. The more important question is whether ratings, review text, customer media, moderation behavior, and product-level trust signals still appear in the right places and carry the same meaning. Review-heavy products, provider-owned review systems, marketplace-fed reviews, and product catalogs undergoing restructuring need especially careful inspection before migration.
 
-Review the products where ratings and review visibility matter most to conversion, not only whether review data exists somewhere in the Target Platform. If product matching, provider behavior, or visible trust signals look uncertain, Live Chat is a practical way to clarify whether the selected migration path can preserve the expected review outcome through standard handling or whether Custom Service should be reviewed.
+When review ownership, product matching, media handling, or provider behavior is unclear, the safest next step is to define the expected trust outcome and validate high-value products before broader execution.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why can reviews migrate successfully while trust still weakens?**
+**Are reviews part of product data or customer data?**
 
-Because trust depends on more than record survival. Reviews need to remain visible, attached to the correct products, displayed credibly, and presented where shoppers expect them. A review record can exist while the storefront trust signal becomes weaker.
+Reviews connect to both, but they should be treated as independent trust entities. A review usually links to a product, may link to a customer or guest author, and often has its own rating, date, status, media, moderation, and provider metadata.
 
-**Are reviews just another product field in migration planning?**
+**Why can review counts change after moving to another platform?**
 
-No. Reviews are independent entities with product, customer, moderation, and display relationships. Their business value depends on those relationships being preserved correctly.
+Review counts can change when the Target Platform or review provider calculates ratings differently, excludes pending or hidden reviews, handles imported reviews differently, removes duplicates, or fails to match some reviews to the correct products.
 
-**What should be reviewed first after review migration?**
+**What makes third-party review systems more complex?**
 
-Start with best sellers, review-heavy products, high-consideration products, and product pages where visible ratings or review counts materially influence conversion. These pages reveal trust-continuity issues faster than a random sample.
+Third-party systems may own the review records, product matching keys, moderation queue, widget display, review media, and rating calculation. Continuity depends on provider configuration as well as platform data structure.
 
-**Do third-party review providers make migration harder?**
+**Should review images and customer-uploaded media be checked separately?**
 
-They can. If reviews are stored, matched, moderated, or displayed through an external provider, continuity depends on that provider’s data model and storefront integration as well as the product migration itself.
+Yes. Review media depends on file ownership, provider storage, CDN paths, thumbnails, permissions, and storefront display. Review text may migrate while customer-uploaded images or videos fail to appear.
 
-**When should review requirements be handled through Custom Service?**
+**When should review and UGC requirements be reviewed as Custom Service work?**
 
-Custom Service should be reviewed when review continuity depends on custom product matching, provider-specific identifiers, custom review fields, external-system behavior, marketplace review sources, custom moderation logic, or a display outcome that standard handling cannot preserve.
+Custom Service should be reviewed when review continuity depends on custom product matching, provider-specific identifiers, non-standard review fields, marketplace-fed reviews, custom moderation logic, review media handling, or storefront display behavior beyond standard platform support.

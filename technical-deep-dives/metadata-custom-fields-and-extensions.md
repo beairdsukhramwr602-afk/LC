@@ -1,220 +1,252 @@
 # Metadata, Custom Fields, and Extensions
 
-A migration can look successful on the storefront and still fail where the business actually depends on it.
+Metadata, custom fields, and extensions are the parts of an e-commerce store where business meaning often moves beyond the default product, customer, order, category, or content model. They can hold simple reference details, but they can also control storefront display, filtering, pricing eligibility, customer permissions, fulfillment workflows, tax behavior, personalization, integrations, reporting, or automation.
 
-That usually happens when important store meaning lives outside the default product, customer, order, or content model. Many stores rely on metadata, custom fields, apps, plugins, modules, and extensions to hold product specifications, visibility logic, operational identifiers, fulfillment behavior, customer eligibility, reporting signals, or other business-critical information. When that layer is not preserved correctly, core records may still move while the store behaves differently after launch.
+That makes this data layer technically different from ordinary entity fields. A product title, SKU, or customer email usually has a clear destination in another platform. A custom compatibility field, wholesale approval flag, product-badge rule, ERP identifier, app-managed subscription value, or plugin-specific option table may not. The same value can be easy to store, difficult to interpret, and risky to preserve if the Target Platform does not use the same data model or extension architecture.
 
-The most important data in a store is not always the most visible data. Some values only need to appear for reference. Others must continue controlling storefront display, filtering, pricing, automation, segmentation, operational workflows, or external-system recognition. A migration should therefore be judged by what those values must still do after launch, not only by whether they appear somewhere in the Target Platform.
+A technical review should therefore ask what the field is, where it lives, which system owns it, what behavior depends on it, and whether the Target Platform can use it in the same way. Field presence alone is not enough. The field must still support the outcome it was created to control.
 
-### What metadata and custom fields usually represent <a href="#what-metadata-and-custom-fields-usually-represent" id="what-metadata-and-custom-fields-usually-represent"></a>
+### What Metadata and Custom Fields Represent in an E-commerce Store <a href="#what-metadata-and-custom-fields-represent-in-an-e-commerce-store" id="what-metadata-and-custom-fields-represent-in-an-e-commerce-store"></a>
 
-Metadata and custom fields often hold business meaning that the default platform model does not fully express.
-
-Common examples include:
-
-* product specifications added outside the default product model
-* product badges, labels, compatibility notes, care instructions, or sizing details
-* customer fields tied to wholesale, VAT, loyalty, approval, or account-status logic
-* order metadata needed for invoices, shipping, subscriptions, returns, or reporting
-* custom pricing indicators or rule inputs
-* product videos, attachments, downloadable files, or media relationships added outside the default model
-* external-system identifiers used by ERP, CRM, automation, fulfillment, PIM, marketplace, or reporting systems
-
-Some of this information is informational only. Some of it controls behavior. That distinction is one of the most important planning questions in a metadata-heavy migration.
-
-### The key question is not only whether the field can be stored <a href="#the-key-question-is-not-only-whether-the-field-can-be-stored" id="the-key-question-is-not-only-whether-the-field-can-be-stored"></a>
-
-A Target Platform can often store additional values somewhere. That does not automatically preserve the field’s original meaning.
-
-The more important questions are:
-
-* Does the field still control the behavior it controlled before?
-* Does the storefront still display the information where customers need it?
-* Do filters, search, merchandising, or personalization rules still understand the field?
-* Do connected systems still recognize the identifiers they depend on?
-* Do support, fulfillment, pricing, segmentation, reporting, or approval workflows still behave as expected?
-
-A field can survive migration technically while failing commercially or operationally. That is why metadata and custom fields should be evaluated through outcomes, not only through field presence.
-
-### Informational metadata and behavior-driving metadata are different <a href="#informational-metadata-and-behavior-driving-metadata-are-different" id="informational-metadata-and-behavior-driving-metadata-are-different"></a>
-
-A useful planning distinction is whether the field only stores context or whether it still needs to control something after launch.
-
-#### Informational metadata <a href="#informational-metadata" id="informational-metadata"></a>
-
-Informational metadata is preserved for reference, lookup, content completeness, historical context, or internal administration. It can still matter, but the business risk is usually lower if the field does not drive storefront or workflow behavior.
-
-Examples include internal notes, care instructions, secondary specifications, supplier references, or historical labels that staff may need after launch.
-
-#### Behavior-driving metadata <a href="#behavior-driving-metadata" id="behavior-driving-metadata"></a>
-
-Behavior-driving metadata must continue controlling an outcome after launch. It can affect:
-
-* pricing
-* visibility
-* eligibility
-* filtering
-* search relevance
-* personalization
-* tax treatment
-* fulfillment steps
-* automation triggers
-* customer-specific experiences
-* external-system matching or reporting behavior
-
-Behavior-driving metadata usually carries more migration risk because it depends on how the Target Platform, theme, app stack, and connected systems interpret the field after the move.
-
-### Why extension-driven meaning becomes risky <a href="#why-extension-driven-meaning-becomes-risky" id="why-extension-driven-meaning-becomes-risky"></a>
-
-Many stores use apps, plugins, modules, or custom extensions because the native platform model does not fully match how the business works.
-
-That added flexibility is useful, but it can distribute important meaning across several layers:
-
-* extension-managed fields
-* module-specific tables or structures
-* theme-driven output
-* custom role or membership systems
-* app-based pricing, filtering, or visibility logic
-* external-system identifiers
-* automation rules outside default entity handling
-* custom source behavior that the Target Platform does not reproduce natively
-
-In those cases, migration may preserve the main record while leaving behind the logic that made the record useful. A product can move without the extension-managed specifications that power filters. A customer can move without the metadata that controls wholesale eligibility. An order can move without operational metadata needed by downstream systems.
-
-### Where metadata problems usually appear <a href="#where-metadata-problems-usually-appear" id="where-metadata-problems-usually-appear"></a>
-
-Metadata and extension-related issues usually appear in a few recurring forms.
-
-#### The field survives, but not in usable form <a href="#the-field-survives-but-not-in-usable-form" id="the-field-survives-but-not-in-usable-form"></a>
-
-A value may exist in the Target Platform while no longer being readable by the theme, app, extension, workflow, or external system that previously depended on it.
-
-#### The field is preserved, but behavior changes <a href="#the-field-is-preserved-but-behavior-changes" id="the-field-is-preserved-but-behavior-changes"></a>
-
-This often happens when the Source Platform and Target Platform use different role systems, metadata structures, extension models, or theme expectations. The field exists, but it no longer drives the intended pricing, filtering, visibility, eligibility, or operational behavior.
-
-#### The field matters because another system needs it <a href="#the-field-matters-because-another-system-needs-it" id="the-field-matters-because-another-system-needs-it"></a>
-
-Some metadata is not important on the storefront at all. It matters because ERP, CRM, shipping, fulfillment, automation, marketplace, PIM, or reporting systems need exact identifiers or exact field logic after launch. If those values are missing, mismapped, renamed, or transformed incorrectly, business continuity weakens even when the storefront appears correct.
-
-### The requirement is often transformation, not transfer <a href="#the-requirement-is-often-transformation-not-transfer" id="the-requirement-is-often-transformation-not-transfer"></a>
-
-Sometimes the business does not only need the value moved. It needs the field reshaped, filtered, converted, normalized, or remapped so the Target Platform can preserve the intended outcome.
+Metadata and custom fields extend the default store model. They allow the store to record information that the platform does not provide as a standard field, or to attach additional context to existing entities.
 
 Common examples include:
 
-* converting product attributes into Target Platform metafields or custom fields
-* converting customer tags into customer groups, segments, or account states
-* migrating only records that meet defined field-based criteria
-* restructuring custom values so target-side filtering, display, or automation can use them
-* remapping identifiers so connected systems continue to recognize records correctly
-* separating one source field into multiple target fields
-* merging several source values into a cleaner target-side structure
+* product specifications that do not fit native product fields;
+* product badges, labels, compatibility notes, care instructions, sizing details, warranty notes, or compliance information;
+* custom category fields used for landing-page content, merchandising blocks, SEO text, or menu behavior;
+* customer fields tied to wholesale approval, VAT status, loyalty tier, membership level, account type, or sales-representative ownership;
+* order metadata needed for delivery notes, fulfillment routing, subscriptions, returns, invoices, fraud review, or reporting;
+* custom option values used by product builders, personalization apps, booking systems, or configurable product flows;
+* external identifiers used by ERP, CRM, PIM, POS, marketplace, fulfillment, shipping, automation, analytics, or reporting systems.
 
-This is one of the clearest places where migration planning improves when the business describes what the field must still do after launch, instead of only listing which field should exist.
+Some metadata is only descriptive. Some metadata controls store behavior. That distinction is central because descriptive metadata mainly needs to remain accessible, while behavior-driving metadata must still be understood by storefront templates, admin screens, apps, rules, workflows, and connected systems.
 
-### When Custom Service becomes the right boundary <a href="#when-custom-service-becomes-the-right-boundary" id="when-custom-service-becomes-the-right-boundary"></a>
+### Common Metadata Structures Across Store Entities <a href="#common-metadata-structures-across-store-entities" id="common-metadata-structures-across-store-entities"></a>
 
-Metadata and custom fields do not automatically make a project Custom Service. Some values can fit within standard service capability or supported Add-on behavior, especially when they only need straightforward mapping or display-preserving handling.
+Metadata can attach to many entity types. The technical shape depends on what the field describes and how the platform stores custom data.
 
-Custom Service becomes the right boundary when the expected outcome depends on customization, modification, broader bespoke handling, or custom migration logic adjustment.
+| Entity area                | Common metadata examples                                                                                                             | Typical behavior affected                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Products and variants      | Specifications, badges, compatibility notes, material, care details, source identifiers, downloadable assets, product-builder values | Product pages, filtering, merchandising, feeds, integrations, fulfillment, and support workflows    |
+| Categories and collections | Hero text, menu labels, promotional blocks, SEO content, landing-page rules, sort behavior, display settings                         | Navigation, collection pages, merchandising, SEO, and theme rendering                               |
+| Customers                  | Customer type, approval state, tax/VAT status, loyalty tier, B2B role, company ID, sales representative, segmentation values         | Account access, pricing, promotions, personalization, segmentation, tax handling, and CRM workflows |
+| Orders                     | Delivery notes, source channel, fraud flags, fulfillment instructions, subscription IDs, external order IDs, gift messages           | Fulfillment, customer service, returns, accounting, shipping, reporting, and downstream systems     |
+| Content objects            | Article attributes, CMS block settings, form values, page relationships, localization fields                                         | Content rendering, navigation, search, localization, and campaign management                        |
+| Integration records        | ERP IDs, marketplace IDs, product feed identifiers, warehouse codes, automation flags                                                | Synchronization, reconciliation, reporting, fulfillment, and cross-system matching                  |
 
-Common Custom Service signals include:
+Metadata is not always visible to shoppers. Some of the highest-risk values are invisible operational identifiers because external systems need them to recognize records after the store changes the platform.
 
-* custom fields are not part of the default supported model
-* extension-managed data must continue controlling storefront or workflow behavior
-* the Target Platform cannot use the source structure without transformation
-* outside systems require exact identifiers or exact field logic
-* filtering, segmentation, pricing, or visibility depends on custom structures
-* a Custom Platform or heavily customized platform is involved
-* the requirement needs field conversion, restructuring, conditional handling, or non-standard interpretation
+### Informational Metadata vs Behavior-Driving Metadata <a href="#informational-metadata-vs-behavior-driving-metadata" id="informational-metadata-vs-behavior-driving-metadata"></a>
 
-Add-ons may help when the need is focused on filtering, mapping, or data configuration within available settings and supported behavior. Tailored Add-ons, Custom Add-ons, and broader custom logic belong under Custom Service because they require customization or modification work.
+A useful technical split is whether the field only stores context or whether it controls something.
 
-### What to define before execution <a href="#what-to-define-before-execution" id="what-to-define-before-execution"></a>
+| Metadata type                 | What it does                                                                                                   | Risk pattern                                                                                   |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Informational metadata        | Preserves details for reference, administration, support, or content completeness                              | Lower risk if the field remains accessible to staff or visible where needed                    |
+| Display metadata              | Controls what appears on storefront pages, emails, labels, tabs, badges, or content sections                   | Risk increases if the target theme or content model cannot read the field                      |
+| Search and filtering metadata | Powers filters, facets, search ranking, product discovery, or collection rules                                 | Risk increases if the target search/filter engine uses different field types or indexing rules |
+| Eligibility metadata          | Controls customer access, price visibility, discounts, tax status, B2B permissions, or workflow approval       | Risk increases if role, segment, permission, or customer-group models differ                   |
+| Operational metadata          | Supports fulfillment, warehouse routing, invoicing, returns, subscriptions, fraud review, or support workflows | Risk increases when downstream teams or systems depend on exact values                         |
+| Integration metadata          | Connects store records to ERP, CRM, PIM, POS, marketplace, analytics, shipping, or automation systems          | Risk increases when identifiers change, disappear, duplicate, or map to the wrong entity       |
 
-Before approving a Full Migration, the business should define which added fields and extension-owned behaviors are truly important.
+This distinction prevents a common mistake: treating all custom fields as equal. A field that stores a secondary internal note does not require the same review as a field that controls wholesale pricing or ERP synchronization.
 
-#### Which fields must continue to drive behavior after launch? <a href="#which-fields-must-continue-to-drive-behavior-after-launch" id="which-fields-must-continue-to-drive-behavior-after-launch"></a>
+### How Platforms Store Custom Data Differently <a href="#how-platforms-store-custom-data-differently" id="how-platforms-store-custom-data-differently"></a>
 
-These are the highest-risk fields because they do more than store information. They influence pricing, filtering, visibility, eligibility, workflow behavior, or external-system continuity.
+Different platforms solve the custom-data needs in different ways. Some use native custom field systems. Some use metafields. Some use attributes. Some store additional data inside plugin tables, app-owned records, JSON blobs, custom database columns, or theme-specific configuration.
 
-#### Which fields are only needed for reference? <a href="#which-fields-are-only-needed-for-reference" id="which-fields-are-only-needed-for-reference"></a>
+| Platform model                              | How custom data commonly appears                                                                         | Technical implications                                                                                         |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| SaaS platforms with metafield-style systems | Namespace/key/value structures, typed custom fields, app-owned fields, theme-accessible values           | The field may be easy to store, but visibility, field type, app ownership, and theme access must be checked    |
+| Attribute-heavy platforms                   | Attribute sets, attribute groups, scoped values, option lists, entity-attribute-value structures         | The field may support filtering and admin organization, but target mapping depends on attribute type and scope |
+| Open-source or plugin-heavy platforms       | Plugin tables, custom post meta, module data, serialized values, custom columns, extension configuration | The value may live outside the default export and may need extension-aware interpretation                      |
+| Enterprise or composable platforms          | Custom objects, custom resources, API extensions, PIM-owned fields, middleware-owned identifiers         | Source of truth and system ownership matter as much as field transfer                                          |
+| Marketplace-connected stores                | Marketplace IDs, channel-specific fields, feed attributes, listing metadata, compliance fields           | Values may be channel-specific and may not belong only to the store platform                                   |
+| Headless or custom storefront setups        | CMS fields, API attributes, frontend configuration, custom schemas, app-delivered content                | Storefront behavior may depend on API contracts and frontend code, not only platform records                   |
 
-This separates informational preservation from behavior-critical continuity. Informational fields still need review, but they usually do not require the same level of behavioral testing.
+A field named `material`, `customer_type`, or `external_id` can therefore mean different things depending on where it is stored. It may be a native attribute, custom metafield, app setting, ERP identifier, plugin field, or theme-only value. The label alone does not explain the field’s role.
 
-#### Which fields belong to native platform behavior, and which belong to apps, plugins, modules, or custom logic? <a href="#which-fields-belong-to-native-platform-behavior-and-which-belong-to-apps-plugins-modules-or-custom-l" id="which-fields-belong-to-native-platform-behavior-and-which-belong-to-apps-plugins-modules-or-custom-l"></a>
+### Field Type, Scope, and Ownership Matter <a href="#field-type-scope-and-ownership-matter" id="field-type-scope-and-ownership-matter"></a>
 
-This distinction helps determine whether standard service capability is likely to be enough or whether extension-aware handling may be required.
+Custom data is not only a name-and-value pair. Several technical properties determine whether the field remains useful after a platform change.
 
-#### Which outside systems depend on exact identifiers or exact field structure? <a href="#which-outside-systems-depend-on-exact-identifiers-or-exact-field-structure" id="which-outside-systems-depend-on-exact-identifiers-or-exact-field-structure"></a>
+| Property           | Why it matters                                                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Field type         | Text, number, date, boolean, URL, file, list, JSON, reference, and rich text values behave differently in forms, filters, APIs, and themes |
+| Scope              | A value may apply globally, per store view, per language, per market, per channel, per customer group, or per website                      |
+| Entity attachment  | The same field may belong to product, variant, category, customer, order, company, content object, or integration record                   |
+| Ownership          | Native platform, theme, app, plugin, module, custom code, or external system ownership determines who can read and update the field        |
+| Visibility         | A field may be admin-only, storefront-visible, API-visible, feed-visible, search-indexed, or hidden from standard exports                  |
+| Cardinality        | One value, many values, ordered lists, repeatable blocks, references, and nested objects need different target structures                  |
+| Validation rules   | Required values, allowed options, formatting, and dependency rules can affect imports and administration                                   |
+| Lifecycle behavior | Some fields are historical snapshots, while others must stay editable, synchronized, or recalculated after launch                          |
 
-This is where hidden continuity risk often appears. A field may be invisible to shoppers but critical for ERP, CRM, fulfillment, automation, or reporting workflows.
+These details explain why custom data often needs design review before it is moved. A text field can be preserved as text, but if the Target Platform needs it as a typed reference, filterable option, or app-readable configuration, simple transfer may not preserve the business function.
 
-#### Does the business need transfer, transformation, filtering, or remapping? <a href="#does-the-business-need-transfer-transformation-filtering-or-remapping" id="does-the-business-need-transfer-transformation-filtering-or-remapping"></a>
+### Extension-Owned and App-Owned Data <a href="#extension-owned-and-app-owned-data" id="extension-owned-and-app-owned-data"></a>
 
-Those are materially different requirements. Transfer moves a value. Transformation changes its structure or meaning so the target environment can still use it. Filtering selects which records or values should move. Remapping connects source-side meaning to target-side representation.
+Apps, plugins, modules, and extensions often create their own data layer. That layer may support features such as product builders, subscriptions, loyalty, reviews, advanced search, B2B pricing, product labels, bundles, recommendations, forms, marketplace feeds, appointments, downloads, or delivery rules.
 
-### What to validate first <a href="#what-to-validate-first" id="what-to-validate-first"></a>
+Extension-owned data can be difficult because the data often depends on the extension’s own structure:
 
-Metadata and custom fields should be validated through the outcomes they control, not only through field existence.
+* custom database tables;
+* app-specific IDs;
+* configuration records;
+* serialized or JSON settings;
+* theme snippets or blocks;
+* frontend scripts;
+* API relationships;
+* scheduled jobs or automation rules;
+* provider-side records stored outside the e-commerce platform.
 
-A practical first review should focus on:
+The record may not be meaningful outside the original extension. A product-builder configuration, for example, may contain option groups, conditional logic, price modifiers, uploaded files, and customer selections that only the original product-builder app understands. A subscription record may include billing cycle, customer authorization, payment-token relationship, retry state, cancellation state, and provider-side identifiers that cannot be treated as ordinary order data.
 
-* products with extension-driven specifications, labels, badges, compatibility notes, or filtering behavior
-* customers with role, tier, wholesale, VAT, approval, loyalty, or segmentation logic
-* orders that depend on operational metadata
-* entities linked to external systems through identifiers
-* fields that affect pricing, visibility, tax treatment, fulfillment, search, filtering, or workflow continuity
-* any transformed field where the target structure differs from the source structure
+The technical question is not only whether extension-owned data exists. It is whether the Target Platform has a native equivalent, a replacement app, a custom object model, or a post-migration configuration path that can preserve the intended behavior.
 
-The first validation questions should be:
+### Common Places Where Custom Data Affects Store Behavior <a href="#common-places-where-custom-data-affects-store-behavior" id="common-places-where-custom-data-affects-store-behavior"></a>
 
-* Does the field still appear where it is needed?
-* Does it still drive the expected behavior?
-* Do apps, extensions, themes, and connected systems still recognize it?
-* If the field was transformed, does the new structure preserve the intended result?
-* Can support and operations still rely on the field without manual workarounds?
+Custom data often becomes visible only when behavior changes.
 
-A useful validation sample is usually representative rather than random. It should include the records where business meaning depends most heavily on non-standard handling. A Demo Migration can help expose whether the target environment can preserve that meaning before the project scales further.
+| Behavior area                      | How metadata or extension data can affect it                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Product pages                      | Specifications, tabs, badges, compatibility notes, downloadable files, product-builder options, and variant-specific messages  |
+| Search and filtering               | Filterable attributes, tags, metafields, taxonomy values, indexed custom fields, and search engine configuration               |
+| Pricing and promotions             | Customer type, quantity tier, wholesale flag, eligibility field, product-label rules, and extension-driven discount conditions |
+| Customer accounts                  | B2B roles, approval states, loyalty tiers, VAT status, memberships, company relationships, and access permissions              |
+| Checkout and fulfillment           | Delivery instructions, shipping constraints, pickup rules, subscription values, custom order fields, and routing identifiers   |
+| Integrations                       | ERP IDs, CRM IDs, product feed identifiers, warehouse codes, marketplace listing IDs, and middleware references                |
+| Reporting and analytics            | Attribution fields, channel IDs, sales representative fields, custom statuses, and operational categories                      |
+| Localization and multi-store logic | Locale-specific values, store-view overrides, market-specific content, and channel-specific visibility rules                   |
 
-### When standard handling may not be enough <a href="#when-standard-handling-may-not-be-enough" id="when-standard-handling-may-not-be-enough"></a>
+This is why metadata should be reviewed through use cases. A value that appears successfully in the admin area may still fail if filters cannot index it, the storefront cannot render it, pricing logic cannot read it, or an external system no longer recognizes it.
 
-Risk is higher when:
+### Transformation, Not Only Transfer <a href="#transformation-not-only-transfer" id="transformation-not-only-transfer"></a>
 
-* key behavior depends on app-managed, plugin-managed, module-managed, or custom data
-* important fields are not part of the default supported model
-* outside systems require exact identifiers
-* filtering or segmentation depends on custom structures
-* the Target Platform can store values but not use them in the same way
-* the requirement involves transformation, filtering, or remapping rather than simple transfer
+Metadata-heavy projects often need transformation rather than simple field transfer. Transformation means the source value must be reshaped so the Target Platform can use it correctly.
 
-In these situations, the issue is not only whether the data can move. It is whether the Target Platform and connected systems can still use that data clearly enough through standard service capability alone.
+Examples include:
 
-If the main need is stronger execution support and closer review within standard service capability, Managed Service may be appropriate. If the required outcome depends on transformation, non-standard structures, Custom Platform handling, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment, Custom Service is the clearer path.
+* converting product attributes into metafields or typed custom fields;
+* converting tags into customer segments, groups, or access rules;
+* converting plugin-specific option structures into native options, custom fields, or a replacement app model;
+* splitting one source field into multiple target fields;
+* merging several source values into one normalized target structure;
+* changing text values into option lists so they can support filtering;
+* converting serialized or JSON values into readable field groups;
+* preserving external IDs while changing the surrounding entity model;
+* excluding obsolete extension values that no longer have a target-side purpose.
+
+The right decision depends on the field’s future role. If the business only needs a historical reference, transfer may be enough. If the field must still drive storefront behavior, administration, search, filtering, eligibility, automation, or external-system synchronization, the target representation must be designed around that outcome.
+
+### Platform-Specific Feature Differences to Watch <a href="#platform-specific-feature-differences-to-watch" id="platform-specific-feature-differences-to-watch"></a>
+
+Several platform differences frequently affect metadata and custom fields.
+
+#### Typed fields vs loose text fields <a href="#typed-fields-vs-loose-text-fields" id="typed-fields-vs-loose-text-fields"></a>
+
+Some platforms allow strong field typing, while others store custom values as loose text. Strong typing can improve validation, filtering, and API usage, but it may require source values to be cleaned or normalized.
+
+#### Product-level vs variant-level fields <a href="#product-level-vs-variant-level-fields" id="product-level-vs-variant-level-fields"></a>
+
+A custom field may belong to the parent product in one platform and to each variant in another. If a value controls size-specific, color-specific, or SKU-specific behavior, product-level mapping may be too broad.
+
+#### Attribute sets vs global custom fields <a href="#attribute-sets-vs-global-custom-fields" id="attribute-sets-vs-global-custom-fields"></a>
+
+Attribute-heavy platforms may organize fields into attribute sets or groups, while other platforms use globally defined metafields or custom fields. The difference affects admin usability and whether staff can maintain the field cleanly after launch.
+
+#### App-owned fields vs merchant-owned fields <a href="#app-owned-fields-vs-merchant-owned-fields" id="app-owned-fields-vs-merchant-owned-fields"></a>
+
+Some fields are created and controlled by apps. They may not be safely edited outside the app, and a replacement app may not use the same field structure.
+
+#### Store-view, market, and language scope <a href="#store-view-market-and-language-scope" id="store-view-market-and-language-scope"></a>
+
+A value may differ by language, website, market, or channel. If the Target Platform has a different scope model, the field may need duplication, consolidation, or redesign.
+
+#### Search-indexed vs non-indexed fields <a href="#search-indexed-vs-non-indexed-fields" id="search-indexed-vs-non-indexed-fields"></a>
+
+A field can exist without being available for storefront search or filtering. If the field powers product discovery, the target search and filtering configuration matters as much as the field value.
+
+### How to Inspect Metadata Before a Platform Change <a href="#how-to-inspect-metadata-before-a-platform-change" id="how-to-inspect-metadata-before-a-platform-change"></a>
+
+A useful metadata inventory should capture more than field names. It should record business purpose and technical dependency.
+
+| Review question                              | Why it matters                                                                                              |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Which entity owns the field?                 | Product, variant, category, customer, order, content, or external system ownership affects mapping          |
+| What type of value is it?                    | Text, number, date, boolean, list, file, reference, JSON, or rich text values need different handling       |
+| Is it informational or behavior-driving?     | Behavior-driving fields require deeper validation                                                           |
+| Where is the field visible?                  | Admin-only, storefront, API, feed, search, report, or external system visibility affects test scope         |
+| Who updates the field?                       | Merchants, apps, integrations, middleware, staff, or automated jobs may depend on editability               |
+| Which feature depends on it?                 | Filtering, pricing, segmentation, checkout, fulfillment, reporting, or integration behavior may be affected |
+| Does the Target Platform have an equivalent? | Native field, metafield, attribute, app model, custom object, or no equivalent determines complexity        |
+| Is transformation required?                  | Transfer, conversion, normalization, splitting, merging, or exclusion are different requirements            |
+
+The inventory should include high-impact examples, not only field totals. One product with complex custom options, one customer with approval logic, one category with custom landing-page content, and one order with operational metadata may reveal more than a broad list of simple fields.
+
+### Migration Implications for Metadata and Extensions <a href="#migration-implications-for-metadata-and-extensions" id="migration-implications-for-metadata-and-extensions"></a>
+
+When metadata and extensions are involved, migration risk usually comes from meaning, ownership, and behavior.
+
+The main implications are:
+
+* field names may not be enough to identify business purpose;
+* some fields may exist outside standard exports;
+* app-owned data may not be usable without the original app or a compatible replacement;
+* the Target Platform may store a value but not expose it to themes, filters, APIs, feeds, or reports;
+* external IDs must remain connected to the correct entity;
+* behavior-driving fields require validation through storefront and workflow outcomes;
+* custom values may need transformation, normalization, filtering, or remapping.
+
+Next-Cart service discussion should be introduced only when the customer has a concrete field-handling problem. For example, Advanced Data Mapping may be relevant when source fields need to be connected to target fields with different names or structures. A Data Filter Add-on may be relevant when only selected custom-field-bearing records should move. Custom Service may be the right review path when extension-owned data, Custom Platform behavior, custom logic, or non-standard structures need interpretation beyond ordinary field transfer.
+
+### What to Validate After Metadata Is Moved <a href="#what-to-validate-after-metadata-is-moved" id="what-to-validate-after-metadata-is-moved"></a>
+
+Validation should test whether metadata still works in context.
+
+Priority samples should include:
+
+* products with custom specifications, badges, compatibility notes, downloadable assets, or product-builder behavior;
+* variants with SKU-specific custom values;
+* categories or collections with custom landing-page content or merchandising fields;
+* customers with approval, loyalty, B2B, VAT, role, or segmentation values;
+* orders with fulfillment, invoice, subscription, return, or support metadata;
+* records linked to ERP, CRM, PIM, POS, marketplace, shipping, automation, or reporting systems;
+* any field transformed from the source structure into a new target representation.
+
+Useful validation questions include:
+
+* Does the field appear in the right admin location?
+* Does the storefront display or hide the value correctly?
+* Does search, filtering, pricing, segmentation, or automation still read the value?
+* Do connected systems recognize the migrated identifier?
+* Can staff edit and maintain the field after launch?
+* If the field was transformed, does the new structure preserve the intended behavior?
+
+Validation should focus on representative complexity. A simple text note is less important than a field that controls eligibility, pricing, product discovery, fulfillment, or integration continuity.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Metadata, custom fields, and extensions are one of the clearest examples of how a migration can look complete while the store still behaves differently in the places that matter most. The issue is not only whether extra fields survive. It is whether the Target Platform still understands those fields well enough to preserve pricing, visibility, eligibility, workflow behavior, reporting, and connected-system continuity after launch.
+Metadata, custom fields, and extensions are where an e-commerce store often stores its most business-specific logic. They may look like small supporting values, but they can control how products appear, how customers qualify, how prices apply, how orders move through operations, and how external systems recognize records.
 
-The safest way to reduce that risk is to separate informational metadata from behavior-driving metadata, identify which fields live outside native platform behavior, and validate representative high-impact cases through the outcomes those fields control rather than through field presence alone. When that work is done early, hidden continuity risk becomes easier to judge before broader launch commitments are made.
+The safest technical review separates informational fields from behavior-driving fields, identifies which system owns each value, and determines whether the Target Platform can preserve the same meaning through native fields, attributes, metafields, custom objects, apps, or custom handling. A migration should not be judged only by whether the custom field exists after transfer. It should be judged by whether the field still supports the storefront, administrative, operational, and integration behavior the business depends on.
 
-Review the fields and extension-owned behaviors that still need to drive something important after launch, not just the values that appear in administration. If the target representation may weaken field meaning, extension logic, or connected-system usability, Live Chat is a practical way to clarify whether standard service capability is enough or whether Custom Service should be reviewed.
+When metadata is essential to pricing, visibility, filtering, segmentation, fulfillment, or connected-system continuity, review the target representation before execution. If the required outcome depends on transformation, extension-aware handling, or custom logic, Live Chat is the practical next step to clarify whether supported mapping, Add-ons, or Custom Service should be considered.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why can a custom field survive migration while the store still behaves differently?**
+**Is metadata the same as a custom field?**
 
-Because field survival is not the same as behavioral continuity. The field may still exist, but it may no longer drive pricing, filtering, visibility, workflow logic, or connected-system behavior in the same way.
+Not always. A custom field is usually a defined extra field attached to a product, customer, order, category, or content object. Metadata is broader and can include custom fields, app-owned values, plugin data, identifiers, configuration values, and other supporting information that adds meaning to store records.
 
-**What is the difference between informational metadata and behavior-driving metadata?**
+**Why can a custom field migrate but still stop working?**
 
-Informational metadata is mainly preserved for reference or context. Behavior-driving metadata still needs to control something important after launch, such as eligibility, visibility, automation, tax treatment, pricing, filtering, or external-system recognition.
+Because storing the value is not the same as preserving the behavior. The field may exist in the Target Platform but no longer be readable by the theme, search index, filtering system, pricing rule, app, workflow, API, or external system that previously used it.
 
-**Do custom fields always require Custom Service?**
+**Which custom fields need the most attention?**
 
-No. Some custom fields can be handled within standard service capability or supported Add-on behavior when the required outcome is straightforward. Custom Service becomes relevant when the field requires customization, transformation, Custom Platform handling, extension-aware logic, custom migration logic adjustment, or other non-standard handling.
+Fields that control real behavior need the most attention. Prioritize fields tied to pricing, visibility, eligibility, filtering, segmentation, fulfillment, tax treatment, subscriptions, product builders, marketplace listings, or external-system identifiers.
 
-**What should be reviewed first in metadata-heavy stores?**
+**Do metadata-heavy stores always require Custom Service?**
 
-Start with the fields that control real outcomes: extension-driven product specifications, customer roles or tiers, operational order metadata, exact identifiers for external systems, and any field set that affects pricing, visibility, tax treatment, filtering, or workflow continuity.
+No. Some metadata can be handled through supported field mapping or configuration when the target structure is straightforward. Custom Service becomes more relevant when the requirement involves extension-owned data, Custom Platform behavior, custom logic, transformation, non-standard structures, or target-side behavior that cannot be preserved through ordinary field transfer.

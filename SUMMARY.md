@@ -353,7 +353,7 @@
 * [Catalog Structure and Category Hierarchies Across Platforms](technical-deep-dives/catalog-structure-and-category-hierarchies-across-platforms.md)
 * [Product Media and Content Structures](technical-deep-dives/product-media-and-content-structures.md)
 * [Pricing and Promotion Logic Across Platforms](technical-deep-dives/pricing-and-promotion-logic-across-platforms.md)
-* [Customer Data Models and Segmentation](technical-deep-dives/customer-data-models-and-segmentation.md)
+* [Customer Data Models and Segmentation Across Platforms](technical-deep-dives/customer-data-models-and-segmentation.md)
 * [Reviews and User-Generated Content Systems](technical-deep-dives/reviews-and-user-generated-content-systems.md)
 * [Metadata, Custom Fields, and Extensions](technical-deep-dives/metadata-custom-fields-and-extensions.md)
 * [Integrations and External Systems in eCommerce](technical-deep-dives/integrations-and-external-systems-in-ecommerce.md)

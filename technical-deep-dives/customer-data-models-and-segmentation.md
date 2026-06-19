@@ -1,242 +1,269 @@
-# Customer Data Models and Segmentation
+# Customer Data Models and Segmentation Across Platforms
 
-## Customer Data Models and Segmentation <a href="#customer-data-models-and-segmentation" id="customer-data-models-and-segmentation"></a>
+Customer data is not just a list of names and email addresses. In an e-commerce store, customer data forms the account layer that connects identity, addresses, order history, pricing eligibility, tax treatment, marketing status, support context, B2B relationships, and segmentation logic.
 
-Customer data can migrate successfully while the account experience still feels different to returning buyers, support teams, or sales teams.
+A customer record can look simple in the admin panel while carrying several operational meanings behind the scenes. One platform may store customer type as a group. Another may use tags, customer attributes, companies, price lists, customer segments, extensions, or an external CRM. The same customer can therefore behave differently after being represented in a new platform, even when the visible profile fields appear complete.
 
-That happens because customer records are not only contact profiles. They can also carry account access, addresses, customer groups, tax treatment, pricing eligibility, marketing status, B2B or wholesale logic, support context, and relationship history. When the Source Platform and Target Platform define those layers differently, the customer may still exist in the new store while the business meaning of that customer changes.
+Technical review should start by understanding how the customer model is structured, what the store uses each customer field for, and which customer behaviors depend on platform-native logic versus app, plugin, module, or external-system logic.
 
-A strong migration plan should therefore treat customer continuity as both a data question and an account-behavior question. The practical goal is not only to move customer records, but to make sure the Target Platform can still recognize customers in the way the business needs after launch.
+### Customer data acts as the account identity layer <a href="#customer-data-acts-as-the-account-identity-layer" id="customer-data-acts-as-the-account-identity-layer"></a>
 
-### Customer data is more than a profile record <a href="#customer-data-is-more-than-a-profile-record" id="customer-data-is-more-than-a-profile-record"></a>
+A customer profile is the visible center of the customer model, but it is rarely the whole model. The profile usually identifies the person or organization, while related records define how that customer can buy, receive orders, qualify for pricing, communicate with the store, and appear in reporting.
 
-A customer profile is the visible starting point, but it rarely contains the full account meaning.
+A typical customer model can include:
 
-Customer data can include names, email addresses, phone numbers, billing and shipping addresses, tax identifiers, account status, tags, groups, segments, marketing consent, support notes, customer-specific fields, and relationship signals such as wholesale status or loyalty eligibility. Some of these are stored directly on the customer record. Others are calculated, assigned by rules, managed by extensions, or interpreted by connected systems.
+| Data layer                | Common information                                                  | Store behavior affected                                              |
+| ------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Identity                  | name, email, phone number, account ID, username, customer number    | account lookup, login recognition, support search, order association |
+| Contact details           | billing address, shipping address, phone, company name              | checkout, delivery, invoicing, tax calculation, customer convenience |
+| Account status            | active, disabled, invited, approved, pending, locked                | login access, account activation, restricted purchasing              |
+| Classification            | group, tag, tier, segment, customer type, company role              | pricing, catalog visibility, promotions, tax handling, B2B workflows |
+| Consent and communication | marketing opt-in, SMS consent, newsletter status, suppression state | campaigns, audience building, compliance-sensitive communication     |
+| Operational context       | notes, custom attributes, sales rep, account manager, external ID   | support, CRM matching, ERP/POS links, B2B account handling           |
+| Relationship history      | orders, returns, subscriptions, rewards, reviews, tickets           | customer service, loyalty logic, reporting, repeat-purchase analysis |
 
-#### Common customer data layers <a href="#common-customer-data-layers" id="common-customer-data-layers"></a>
+The profile record is therefore only one part of customer continuity. A technically valid customer import may still fail if related account logic, classification data, or external identifiers are not represented correctly.
 
-Customer-related migration scope may include:
+### Profile fields and authentication are different structures <a href="#profile-fields-and-authentication-are-different-structures" id="profile-fields-and-authentication-are-different-structures"></a>
 
-* profile fields such as name, email, phone number, and account identifiers
-* billing and shipping addresses
-* account status and access-related fields
-* customer groups, tags, tiers, or segments
-* tax classification or exemption-related fields
-* B2B, wholesale, retail, or restricted-access classifications
-* marketing consent or communication preferences
-* support-relevant notes or customer attributes
-* loyalty, subscription, membership, or approval-related status
-* app, plugin, module, or extension-driven customer data
+Customer profile data and account authentication should be treated as separate layers. A platform may allow names, emails, phone numbers, and addresses to be imported while restricting how passwords, password hashes, account activation, or login sessions are handled.
 
-**Why this matters in migration**
+Common authentication-related structures include:
 
-A customer record can appear complete in the Target Platform while still failing to support the same account experience. The right review question is not only “did the customer move?” It is “does the customer still behave correctly for login, checkout, pricing, visibility, support, and communication?”
+* email address or username used as the login identifier;
+* password hash, password salt, or platform-specific password format;
+* account activation status;
+* invitation status;
+* password reset requirement;
+* social-login connection;
+* multi-factor authentication status;
+* B2B account approval status;
+* disabled, locked, or suspended account status.
 
-### Customer profiles and login continuity are separate concerns <a href="#customer-profiles-and-login-continuity-are-separate-concerns" id="customer-profiles-and-login-continuity-are-separate-concerns"></a>
+These fields do not behave like ordinary customer profile fields. Password data is often protected by platform security rules, and many platforms do not expose it in a reusable form. Even when customer records move cleanly, returning customers may need an account invite, password reset, or first-login workflow.
 
-One of the most common customer-data misunderstandings is assuming that migrated profiles automatically preserve login continuity.
+### Addresses are child records with checkout dependencies <a href="#addresses-are-child-records-with-checkout-dependencies" id="addresses-are-child-records-with-checkout-dependencies"></a>
 
-Customer profile data and authentication behavior are different layers. A migration can preserve the customer profile while still requiring customers to reset passwords, activate accounts, or follow a new first-login flow. This is often caused by platform security design, password-hash handling, or Target Platform restrictions rather than by missing customer records.
+Customer addresses are usually dependent records attached to the customer account. They may be stored as one default address, multiple address-book entries, separate billing and shipping addresses, or order-level address snapshots.
 
-#### What usually remains separate <a href="#what-usually-remains-separate" id="what-usually-remains-separate"></a>
+Address records often contain:
 
-The following items should be reviewed separately:
+* first name and last name;
+* company name;
+* street address lines;
+* city;
+* state, province, or region;
+* postal or ZIP code;
+* country code;
+* phone number;
+* tax-related address fields;
+* default billing or shipping markers;
+* address IDs used by the platform or connected systems.
 
-* whether the customer profile exists
-* whether the email address is recognized
-* whether account status is active or requires activation
-* whether passwords can be preserved under the selected migration path
-* whether customers need a reset or invitation flow
-* whether support teams know how to explain the first-login experience
+The complexity comes from validation rules. One platform may store a free-form region value, while another requires a standardized state or province code. Some platforms require phone numbers for shipping; others do not. Some support multiple saved addresses per account; others treat recent checkout addresses differently from account-book addresses.
 
-**Why password continuity should be planned early**
+Address modeling affects more than display. It can influence shipping-rate calculation, tax rules, fraud checks, invoicing, ERP sync, and customer service workflows.
 
-Password continuity should not be assumed. When it is not feasible, the better planning approach is to prepare a clear first-login or password-reset experience and make sure support teams understand what customers will see after launch.
+### Segmentation gives customer records commercial behavior <a href="#segmentation-gives-customer-records-commercial-behavior" id="segmentation-gives-customer-records-commercial-behavior"></a>
 
-### Addresses are dependency structures under customer accounts <a href="#addresses-are-dependency-structures-under-customer-accounts" id="addresses-are-dependency-structures-under-customer-accounts"></a>
+Customer segmentation turns customer data into business logic. A segment, group, tag, customer type, company role, or tier can determine what a customer sees and what rules apply during browsing, checkout, and communication.
 
-Customer addresses should be treated as account dependencies, not isolated records.
+Segmentation may control:
 
-An address matters because it supports checkout, delivery, billing, tax handling, account convenience, and support. If customer profiles migrate but addresses do not appear where the Target Platform expects them, the customer account can still feel incomplete.
+* retail versus wholesale treatment;
+* B2B or company-account access;
+* customer-specific price lists;
+* customer-group pricing;
+* catalog or collection visibility;
+* restricted product access;
+* tax exemption or VAT handling;
+* promotion eligibility;
+* shipping method eligibility;
+* payment method availability;
+* loyalty tier or rewards status;
+* subscription, membership, or approval status;
+* marketing audience selection;
+* support priority or account ownership.
 
-#### Address continuity needs practical validation <a href="#address-continuity-needs-practical-validation" id="address-continuity-needs-practical-validation"></a>
+The important detail is that the label and the behavior are not the same. A migrated customer group named `Wholesale` does not automatically preserve wholesale pricing, catalog restrictions, payment terms, tax treatment, or approval status. The group may move as a field while the behavior must be rebuilt through the Target Platform’s pricing, catalog, B2B, promotion, or extension logic.
 
-Address review should check whether:
+### Platforms use different customer classification models <a href="#platforms-use-different-customer-classification-models" id="platforms-use-different-customer-classification-models"></a>
 
-* billing and shipping addresses remain attached to the right customer
-* default addresses behave correctly where the Target Platform supports defaults
-* address fields fit the Target Platform’s country, region, state, postcode, and phone-number requirements
-* address formatting remains usable in checkout and admin views
-* imported addresses still support tax, shipping, and support workflows
+Customer classification varies widely across e-commerce platforms. Some use fixed customer groups. Some use flexible tags. Some use dynamic customer segments built from rules. Some represent B2B customers through company accounts and company contacts. Some rely heavily on extensions or external systems.
 
-**Why address structure can change**
+| Platform model           | How customer meaning is usually represented                                               | Technical risk                                                                        |
+| ------------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Customer group model     | customers belong to one or more predefined groups                                         | group names may migrate, but pricing or tax rules may not follow automatically        |
+| Tag-based model          | free-form tags classify customers for rules, filters, or apps                             | tags can become inconsistent if they are used as both labels and operational triggers |
+| Rule-based segment model | segments are calculated from behavior, order history, location, spend, or tags            | segment membership may need to be recalculated rather than imported as a static value |
+| B2B company model        | companies contain contacts, roles, locations, permissions, price lists, or payment terms  | individual customer records may not preserve company-level behavior by themselves     |
+| Attribute-heavy model    | custom customer fields store operational data                                             | fields may need schema creation, mapping, or extension support before import          |
+| Extension-driven model   | apps, plugins, modules, or integrations define customer logic                             | core customer records may move while the behavior stays outside the platform export   |
+| External-system model    | CRM, ERP, POS, loyalty, subscription, or support systems own part of the customer meaning | external IDs and synchronization rules become as important as profile fields          |
 
-Different platforms can use different required fields, address formats, country/region models, and checkout rules. A technically migrated address can still require cleanup if the Target Platform stores or validates address components differently.
+A strong customer-data review should identify which model the Source Platform uses, which model the Target Platform supports, and which classifications are only labels versus active behavior drivers.
 
-### Segmentation gives customer records commercial meaning <a href="#segmentation-gives-customer-records-commercial-meaning" id="segmentation-gives-customer-records-commercial-meaning"></a>
+### B2B customer structures are often relationship models <a href="#b2b-customer-structures-are-often-relationship-models" id="b2b-customer-structures-are-often-relationship-models"></a>
 
-Customer segmentation is where customer data often becomes business logic.
+B2B customer data often goes beyond individual accounts. A B2B buyer may belong to a company, branch, location, department, role, approval workflow, quote process, payment-term structure, or price-list assignment.
 
-A segment, group, tag, or customer type can decide what a customer sees, which prices apply, whether tax rules change, whether a promotion is available, or whether a restricted catalog is visible. If segmentation changes during migration, the customer record may still exist while the commercial treatment changes.
+B2B and wholesale models may include:
 
-#### Segmentation can control several outcomes <a href="#segmentation-can-control-several-outcomes" id="segmentation-can-control-several-outcomes"></a>
+* company accounts;
+* multiple buyers under one company;
+* buyer roles and permissions;
+* company locations;
+* billing accounts;
+* purchase limits;
+* payment terms;
+* tax exemption fields;
+* negotiated price lists;
+* quote permissions;
+* account approval status;
+* assigned sales representatives;
+* ERP customer IDs;
+* restricted catalogs or customer-specific assortments.
 
-Customer segmentation may affect:
+A flat customer import cannot fully represent this structure if the Target Platform expects company-level records, role assignments, or price-list relationships. The technical question is not only whether customer profiles can be imported, but whether the relationship model can be represented in the new platform.
 
-* retail versus wholesale treatment
-* B2B account eligibility
-* customer-group pricing
-* tax treatment or exemption status
-* catalog visibility
-* restricted products or collections
-* promotion eligibility
-* loyalty, subscription, or membership logic
-* marketing audience selection
-* support priority or account handling
+### Marketing consent and communication status need precise field meaning <a href="#marketing-consent-and-communication-status-need-precise-field-meaning" id="marketing-consent-and-communication-status-need-precise-field-meaning"></a>
 
-**Why labels are not enough**
+Marketing and communication data should not be treated as ordinary contact information. Email, phone, and consent status can affect audience building, campaign suppression, transactional messages, newsletter subscriptions, and customer trust.
 
-Migrating a customer group name, tag, or segment label does not guarantee that the Target Platform will apply the same behavior. The business should validate the result through real customer scenarios, not only by checking that the label appears.
+Common communication-related fields include:
 
-### Customer models differ across platforms <a href="#customer-models-differ-across-platforms" id="customer-models-differ-across-platforms"></a>
+* email address;
+* phone number;
+* email marketing consent;
+* SMS consent;
+* newsletter subscription status;
+* suppression or unsubscribe status;
+* consent timestamp;
+* consent source;
+* language or locale preference;
+* customer tags used for campaign targeting;
+* external marketing platform IDs.
 
-Platforms can represent customers and segmentation in different ways.
+The challenge is that platforms and marketing systems may define these fields differently. One system may store newsletter status as a customer attribute. Another may store consent in a marketing platform. Another may distinguish transactional communication from promotional consent. Incorrect interpretation can create poor campaign targeting or accidental communication changes after launch.
 
-Some platforms rely on groups or customer classes. Others use tags, rule-based segments, customer attributes, B2B company structures, apps, plugins, modules, or external CRM logic. The same customer may therefore need to be represented differently in the Target Platform to preserve the intended business outcome.
+### Customer history often lives outside the customer profile <a href="#customer-history-often-lives-outside-the-customer-profile" id="customer-history-often-lives-outside-the-customer-profile"></a>
 
-#### Common model differences <a href="#common-model-differences" id="common-model-differences"></a>
+Customer history is usually distributed across related entities. Order history, refunds, returns, reviews, reward points, subscription records, support tickets, and CRM notes may reference the customer but not live inside the customer profile record.
 
-Customer model differences may include:
+Important relationship points include:
 
-* one account versus multiple contacts under a company
-* individual buyers versus company buyers
-* customer groups versus tags or rule-based segments
-* stored segment membership versus dynamic segment membership
-* native B2B features versus extension-driven B2B logic
-* account approval workflows versus open registration
-* customer-specific fields stored natively versus in extensions
-* customer eligibility calculated by external systems
+* order records must remain associated with the correct customer account;
+* guest orders may not attach to customer accounts automatically;
+* historical addresses may be stored on orders rather than in the customer address book;
+* loyalty balances may belong to a loyalty system, not the platform customer table;
+* subscription status may be controlled by an app or payment provider;
+* support tickets and CRM activities may use external customer IDs;
+* reviews may reference customer email, account ID, product ID, or review-system IDs.
 
-**Why model fit matters**
+A customer profile can therefore migrate while customer context remains fragmented. Technical review should identify which customer-linked records must remain connected and which are outside standard customer data scope.
 
-A customer model mismatch can affect pricing, catalog access, tax treatment, order visibility, communication, and support workflows. When the Target Platform cannot represent the same structure natively, the migration may need configuration, mapping decisions, or Custom Service handling.
+### Dynamic segments are not the same as stored segments <a href="#dynamic-segments-are-not-the-same-as-stored-segments" id="dynamic-segments-are-not-the-same-as-stored-segments"></a>
 
-### Extension-driven customer logic needs special attention <a href="#extension-driven-customer-logic-needs-special-attention" id="extension-driven-customer-logic-needs-special-attention"></a>
+Segmentation can be stored or calculated. Stored classification means the customer record carries a group, tag, tier, or field value. Dynamic segmentation means the platform calculates membership based on rules such as order count, total spend, location, product purchased, last order date, or marketing behavior.
 
-Many stores rely on apps, plugins, modules, extensions, or external systems to give customer data its real operational meaning.
+Dynamic segments may depend on:
 
-This is common in B2B, wholesale, subscription, membership, loyalty, approval, tax, CRM, and support workflows. In those cases, the customer record may only be one part of the customer experience. The rest may depend on rules or connected systems that are not part of a standard customer profile.
+* order history availability;
+* product and category relationships;
+* customer address country or region;
+* customer tags or custom fields;
+* customer lifetime value;
+* purchase frequency;
+* abandoned-cart or browsing behavior;
+* loyalty or subscription status;
+* marketing engagement data.
 
-#### Customer logic may depend on systems outside the core platform <a href="#customer-logic-may-depend-on-systems-outside-the-core-platform" id="customer-logic-may-depend-on-systems-outside-the-core-platform"></a>
+When moving platforms, a dynamic segment may not be importable as a fixed list. It may need to be rebuilt as a rule in the Target Platform or in a connected marketing, CRM, or analytics system. This distinction matters because static labels preserve membership at one point in time, while dynamic rules preserve the logic that keeps the segment updated.
 
-Risk is higher when customer behavior depends on:
+### External identifiers protect customer relationships across systems <a href="#external-identifiers-protect-customer-relationships-across-systems" id="external-identifiers-protect-customer-relationships-across-systems"></a>
 
-* B2B or company-account extensions
-* wholesale pricing modules
-* loyalty or reward systems
-* subscription or membership apps
-* CRM or support-desk integrations
-* tax exemption or VAT validation systems
-* account approval workflows
-* custom customer fields
-* ERP, POS, or external customer identifiers
+Many stores use customer identifiers that matter outside the e-commerce platform. These identifiers may connect the customer to an ERP, CRM, POS, help desk, marketing platform, tax system, loyalty system, or subscription system.
 
-**When Custom Service becomes relevant**
+External identifiers may include:
 
-If the required customer outcome depends on custom fields, extension-driven account behavior, outside-system identifiers, custom segmentation logic, or non-standard account handling, the requirement should be reviewed as Custom Service work. The issue is not only moving the customer record. The issue is preserving the customer behavior the business depends on.
+* ERP customer number;
+* CRM contact ID;
+* POS customer ID;
+* loyalty account number;
+* subscription customer ID;
+* tax or VAT validation reference;
+* support-desk requester ID;
+* company account ID;
+* marketplace buyer ID;
+* legacy platform customer ID.
 
-### Marketing and communication status should not be treated casually <a href="#marketing-and-communication-status-should-not-be-treated-casually" id="marketing-and-communication-status-should-not-be-treated-casually"></a>
+Losing or remapping these identifiers incorrectly can break reconciliation, customer service lookup, automated segmentation, account-level reporting, and integration workflows. The technical review should determine where those identifiers are stored and whether the Target Platform has a safe place to preserve them.
 
-Customer migration can affect marketing, consent, and communication workflows.
+### Migration impact depends on behavior, not only fields <a href="#migration-impact-depends-on-behavior-not-only-fields" id="migration-impact-depends-on-behavior-not-only-fields"></a>
 
-Marketing status is sensitive because it can influence which customers receive messages, how audiences are built, and how the business communicates after launch. A migrated customer list is not automatically a safe or complete marketing audience.
+Customer-data migration quality cannot be measured only by record counts. A more useful question is whether each customer type still behaves correctly in the Target Platform.
 
-#### Communication-related fields need careful review <a href="#communication-related-fields-need-careful-review" id="communication-related-fields-need-careful-review"></a>
+High-value validation scenarios include:
 
-Before launch, businesses should check whether:
+| Customer scenario                             | What to verify                                                                      |
+| --------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Returning retail customer                     | profile, address book, order association, first-login or password-reset path        |
+| Customer with multiple addresses              | default address behavior, checkout usability, billing/shipping distinction          |
+| Wholesale customer                            | group or company assignment, price visibility, catalog access, tax treatment        |
+| B2B company buyer                             | company relationship, role permissions, location access, payment terms              |
+| Marketing subscriber                          | consent status, audience inclusion, suppression handling, communication eligibility |
+| Tax-exempt customer                           | exemption field, tax calculation behavior, supporting documentation if used         |
+| Customer with external ID                     | CRM/ERP/POS matching, integration continuity, support lookup                        |
+| Customer with loyalty or subscription history | linked external records, status interpretation, post-launch account behavior        |
 
-* email and phone fields are usable in the Target Platform
-* marketing consent or subscription status is represented clearly
-* customer tags or segments used for campaigns still work as intended
-* inactive or suppressed customers are not incorrectly reactivated
-* support teams understand the first-login or password-reset communication plan
+When a required customer outcome depends on custom customer fields, company structures, extension-driven logic, outside-system identifiers, or non-standard segmentation, the requirement may need Advanced Data Mapping, Advanced Data Configure, or Custom Service review. The review should focus on the business behavior that must survive, not just the field name being transferred.
 
-**Why this belongs in planning**
+### How to inspect customer data before migration <a href="#how-to-inspect-customer-data-before-migration" id="how-to-inspect-customer-data-before-migration"></a>
 
-Customer communication affects trust. If returning customers receive confusing login instructions, wrong campaign messages, or unexpected access changes, the migration can create support pressure even when the customer records are technically present.
+A practical customer-data audit should separate profile completeness from account behavior.
 
-### What to define before execution <a href="#what-to-define-before-execution" id="what-to-define-before-execution"></a>
+Before migration, inspect:
 
-Customer-data planning should define the account outcomes that matter most after launch.
+* which profile fields are required in the Target Platform;
+* whether email addresses are unique, duplicated, missing, or shared;
+* whether phone and address formats satisfy Target Platform validation rules;
+* which customer groups, tags, tiers, or segments affect behavior;
+* whether segmentation is stored, rule-based, or extension-driven;
+* which customers depend on B2B company structures or wholesale logic;
+* which customer fields are native and which are custom or extension-owned;
+* which external identifiers must remain available after launch;
+* whether marketing consent fields have clear meaning;
+* whether order history, reviews, loyalty, subscriptions, or support records must remain connected;
+* which customer types should be included in Demo Migration validation.
 
-The business does not need to preserve every historical customer detail in the same way, but it should decide which account behaviors must remain dependable. That decision should happen before Full Migration, not during launch review.
-
-#### Planning questions for customer continuity <a href="#planning-questions-for-customer-continuity" id="planning-questions-for-customer-continuity"></a>
-
-Useful planning questions include:
-
-* What should a returning customer be able to do on launch day?
-* Which customer groups, tags, tiers, or segments affect pricing or visibility?
-* Which customers need access to order history, addresses, or account context?
-* Is password continuity realistic under the selected migration path?
-* Which customer fields are essential for support, sales, tax, or operations?
-* Which customer behavior depends on apps, plugins, modules, extensions, or external systems?
-* Which customer types should be included in the Demo Migration sample?
-
-**How this reduces migration risk**
-
-Clear customer-outcome planning helps the migration team distinguish between simple profile preservation, configuration needs, Add-on-relevant mapping or data configuration, and broader Custom Service requirements.
-
-### What to validate first <a href="#what-to-validate-first" id="what-to-validate-first"></a>
-
-Customer validation should focus on representative account scenarios, not only record counts.
-
-A useful review sample includes the customer types that carry the most commercial or operational meaning. For many stores, that means repeat customers, wholesale accounts, customers with multiple addresses, customers with tax or pricing differences, and customers whose account status depends on extensions or external systems.
-
-#### High-priority validation scenarios <a href="#high-priority-validation-scenarios" id="high-priority-validation-scenarios"></a>
-
-Review should include:
-
-* returning customers with normal retail accounts
-* B2B or wholesale customers, if applicable
-* customers with multiple billing or shipping addresses
-* customers with customer-group pricing or catalog visibility rules
-* customers with tax classification or exemption logic
-* customers with meaningful support or account fields
-* customers tied to loyalty, subscription, membership, or approval workflows
-* customers whose records depend on external identifiers
-
-**What a successful review should prove**
-
-A good customer-data review should prove that the account can be found, interpreted, and used correctly in the Target Platform. It should also confirm whether customers can follow the intended login or recovery path and whether customer classifications produce the expected pricing, visibility, communication, and support outcomes.
+The best sample set includes ordinary retail accounts, customers with multiple addresses, wholesale or B2B accounts, tax-exempt customers, marketing subscribers, customers with external IDs, and customers whose behavior depends on apps, plugins, modules, or external systems.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Customer data models and segmentation can make a migration look complete while leaving the customer experience weaker than expected. The core risk is not only whether profiles, addresses, and labels move. The deeper question is whether the Target Platform still recognizes the customer in the right way and supports the same account, pricing, visibility, support, and communication outcomes.
+Customer data models define how an e-commerce platform recognizes people, companies, permissions, addresses, communication preferences, pricing eligibility, and customer relationships. The visible profile record is only the starting point. The deeper technical work is understanding which fields are identity data, which fields drive behavior, which classifications are dynamic rules, and which meanings are owned by extensions or external systems.
 
-The safest approach is to define essential customer outcomes early, separate profile migration from login continuity, identify segmentation rules that carry business meaning, and validate representative customer scenarios before launch. When customer behavior depends on extension logic, Custom Platform structure, outside-system identifiers, or custom fields, that dependency should be reviewed before it becomes a post-launch support issue.
+Customer-data review should prove that important account scenarios still work after migration: returning customers can be recognized, addresses remain usable, B2B or wholesale relationships are represented correctly, consent status is interpreted carefully, and external identifiers remain connected where the business depends on them. When customer behavior relies on custom fields, segmentation rules, company-account structures, or outside-system IDs, Next-Cart can help review whether standard mapping is enough or whether additional configuration or Custom Service handling is the safer path.
 
-Review the customer types that matter most to repeat purchasing, support, pricing, visibility, and account trust. If those outcomes depend on non-standard segmentation, custom fields, B2B logic, or outside systems, Live Chat can help clarify whether standard service capability is enough or whether Custom Service review is the safer path.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is customer profile migration the same as preserving customer login access?**
 
-**Can customer records migrate successfully even if login continuity changes?**
+No. Customer profiles and authentication are different layers. Names, emails, phone numbers, and addresses may migrate while passwords, activation status, or first-login behavior must follow the security rules of the Target Platform.
 
-Yes. Customer profiles and login behavior are separate concerns. A customer can exist in the Target Platform even when the launch plan requires a password reset, account activation, or new first-login flow.
+**Why can customer groups or tags migrate but still behave differently?**
 
-**Are customer groups and segments the same across platforms?**
+A group or tag is often only a classification label. Pricing, catalog visibility, tax treatment, promotions, and B2B access may be controlled by separate platform rules, price lists, apps, plugins, modules, or external systems.
 
-Not always. One platform may use groups, another may use tags, dynamic segments, customer attributes, company accounts, or extension-driven logic. The label can migrate while the behavior still needs configuration or custom handling.
+**What is the difference between stored and dynamic segmentation?**
 
-**Should customer addresses be reviewed separately?**
+Stored segmentation is saved directly on the customer record as a group, tag, tier, or field. Dynamic segmentation is calculated from rules such as order history, spend, location, products purchased, or marketing behavior. Dynamic rules may need to be rebuilt rather than imported as static membership.
 
-Yes. Addresses should be reviewed as dependencies under the customer account. The review should confirm that billing and shipping addresses remain attached correctly and remain usable in checkout, tax, shipping, and support workflows.
+**Why are external customer IDs important?**
 
-**When does customer segmentation become a Custom Service concern?**
+External IDs connect customer records to systems such as ERP, CRM, POS, loyalty, subscription, marketing, tax, and support platforms. If those IDs are lost or changed without planning, connected systems may fail to match customers correctly after migration.
 
-Customer segmentation becomes a Custom Service concern when the required outcome depends on custom fields, non-standard customer logic, extension-driven behavior, outside-system identifiers, Custom Platform handling, or customer-specific rules that standard service capability cannot represent clearly.
+**Which customer records should be validated first?**
 
-**What customer records should be included in a Demo Migration review?**
+Validation should prioritize customers whose records carry operational meaning: repeat buyers, customers with multiple addresses, wholesale or B2B accounts, tax-exempt customers, marketing subscribers, customers with external IDs, and customers tied to loyalty, subscription, membership, or approval workflows.
 
-The sample should include representative customer types, not only simple records. Include repeat customers, customers with multiple addresses, B2B or wholesale accounts, customers with pricing or visibility differences, and customer records tied to important support, tax, loyalty, membership, or external-system behavior.
+<br>

@@ -1,197 +1,248 @@
 # Integrations and External Systems in eCommerce
 
-A migration can look successful inside the storefront while still weakening the systems that keep the business running.
+Integrations and external systems form the operating layer around an e-commerce store. The storefront may hold products, customers, orders, prices, content, inventory, and promotions, but many daily business outcomes depend on systems outside the storefront platform. ERP, CRM, PIM, POS, warehouse, shipping, tax, subscription, marketplace, analytics, marketing, support, search, loyalty, and finance systems may all read from, write to, enrich, or override store data.
 
-That risk appears when the store is part of a wider operating environment. Many E-commerce businesses depend on external systems for inventory, fulfillment, shipping, subscriptions, customer management, marketing automation, reporting, search, marketplace operations, finance, or support workflows. When the platform changes, products, customers, and orders may still appear in the Target Platform while the systems connected to those records no longer interpret them in the same way.
+That makes integration data different from ordinary store records. A product can look correct in the admin while the ERP cannot match its item code. A customer can appear in the Target Platform while the CRM loses account history. An order can exist with the right total while the warehouse system does not receive the fulfillment signal. The visible record and the operational workflow are related, but they are not the same technical object.
 
-The storefront is usually the visible layer. Behind it, external systems may depend on identifiers, statuses, field structures, event triggers, API behavior, app-managed records, or reporting mappings. A product may be tied to an ERP item, warehouse rule, marketplace listing, subscription plan, or search index. A customer may be tied to CRM history, loyalty status, approval logic, tax treatment, or marketing consent. An order may trigger shipping, invoicing, fulfillment, refund, support, or reporting workflows.
+A technical review of integrations should identify the systems connected to store data, the entities they depend on, the identifiers they use, the direction of data movement, the events that trigger workflow behavior, and the system of record for each value. The goal is not only to reconnect apps after launch. The goal is to understand which external systems must still recognize the right records, interpret the right states, and produce the expected business outcomes.
 
-A strong migration plan should therefore treat integrations as business behavior, not just technical connections. The question is not only whether the new store can connect to the same tools. The deeper question is whether the wider operating environment can still recognize the right records, interpret the right signals, and support the same daily outcomes after launch.
+### What Integrations Represent in an E-commerce Store <a href="#what-integrations-represent-in-an-e-commerce-store" id="what-integrations-represent-in-an-e-commerce-store"></a>
 
-### What counts as an external system <a href="#what-counts-as-an-external-system" id="what-counts-as-an-external-system"></a>
+An integration is a data relationship between the store platform and another system. The relationship may be simple, such as sending order data to a shipping service, or complex, such as maintaining two-way synchronization among product data, inventory levels, ERP item records, marketplace listings, and fulfillment locations.
 
-External systems are tools, services, databases, channels, or operational workflows outside the storefront platform that still depend on store data.
+Common external systems include:
 
-Common examples include:
+* ERP systems that manage item masters, procurement, invoices, accounting, and inventory reconciliation;
+* CRM systems that manage customer profiles, sales history, account ownership, support context, or B2B relationships;
+* PIM systems that store product specifications, channel-ready content, translations, media relationships, and catalog enrichment;
+* warehouse management systems that control picking, packing, routing, allocation, shipment confirmation, and stock movement;
+* shipping, tax, payment, fraud, and fulfillment services that require order, address, customer, and status data;
+* marketplace and channel-management tools that publish products, synchronize prices, update availability, and reconcile orders;
+* marketing automation, loyalty, subscription, and personalization systems that depend on customer, order, segment, consent, and behavioral data;
+* analytics, business-intelligence, attribution, finance, reporting, and support systems that depend on stable identifiers and consistent event history.
 
-* ERP systems
-* CRM platforms
-* inventory management systems
-* warehouse management systems
-* shipping and fulfillment tools
-* search and merchandising systems
-* subscription platforms
-* loyalty programs
-* marketing automation tools
-* finance, invoicing, or accounting systems
-* analytics and reporting layers
-* support desk platforms
-* marketplaces and channel-management tools
-* product information management systems
-* point-of-sale or offline sales systems
+Some systems only receive data from the store. Some systems push data into the store. Many systems do both. The technical risk rises when the same entity is updated by several systems or when one system treats itself as the source of truth while the store treats itself as the source of truth for the same value.
 
-Some external systems receive data from the store. Others send data back into it. Many do both. That is why integration planning needs to review not only what records exist, but how records move, update, trigger events, and remain recognizable across the connected environment.
+### Common Integration Data Structures <a href="#common-integration-data-structures" id="common-integration-data-structures"></a>
 
-### Why integrations need separate migration planning <a href="#why-integrations-need-separate-migration-planning" id="why-integrations-need-separate-migration-planning"></a>
+Integration data usually appears as a combination of external identifiers, entity references, sync states, timestamps, event payloads, credentials, configuration records, and workflow-specific fields. These values may be stored in native platform fields, custom fields, metadata, plugin tables, app records, API mappings, middleware databases, or external systems that do not expose all values directly inside the store.
 
-Integrations often become risky because they depend on structure and timing that may not be visible during a normal storefront review.
+| Data structure        | Common examples                                                                                                                   | Why it matters                                                                         |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| External identifiers  | ERP item IDs, CRM contact IDs, warehouse location codes, marketplace listing IDs, subscription IDs, loyalty IDs, invoice IDs      | Connected systems use them to recognize the same record across environments            |
+| Entity references     | Product-to-variant links, order-to-customer links, fulfillment-location references, company-account links, bundle-component links | Workflows fail when relationships change even if individual records remain present     |
+| Sync states           | Pending, synced, failed, queued, exported, imported, acknowledged, partially fulfilled                                            | Teams need to know whether a record has already moved through a workflow               |
+| Event payloads        | Order created, inventory changed, product updated, refund issued, customer tagged, fulfillment completed                          | External systems often react to events rather than stored records alone                |
+| Mapping tables        | SKU-to-item mappings, category-to-channel mappings, tax-code mappings, warehouse routing tables, marketplace mappings             | They translate platform data into external-system language                             |
+| Configuration records | API keys, webhook settings, channel settings, fulfillment rules, field mappings, app preferences                                  | The workflow may depend on configuration that is not part of ordinary entity migration |
+| Historical logs       | export logs, sync logs, error logs, webhook deliveries, integration audit trails                                                  | They provide traceability when teams investigate missing or duplicated behavior        |
 
-#### Identifiers may change <a href="#identifiers-may-change" id="identifiers-may-change"></a>
+Integration data can be invisible in the storefront but essential to operations. External IDs, queue states, mapping tables, and logs may not affect how shoppers browse a product page, but they can determine whether products sync to marketplaces, orders reach fulfillment, invoices generate correctly, or support teams can trace a customer record.
 
-External systems often depend on product IDs, SKUs, customer IDs, order IDs, handles, category references, subscription IDs, marketplace identifiers, or custom external keys. If those identifiers change or no longer match the downstream expectation, connected systems may fail even when the storefront record appears correct.
+### Source of Truth and Data Ownership <a href="#source-of-truth-and-data-ownership" id="source-of-truth-and-data-ownership"></a>
 
-#### Status logic may not translate cleanly <a href="#status-logic-may-not-translate-cleanly" id="status-logic-may-not-translate-cleanly"></a>
+Integration design depends on which system owns each value. A store may display inventory, but the warehouse system may own available quantity. A product page may show content, but a PIM may own specifications and translations. A customer profile may appear in the store, but a CRM may own lifecycle status, account manager, or sales qualification data.
 
-Order statuses, fulfillment states, payment states, customer account states, refund states, subscription states, and visibility rules vary across platforms and extensions. A status value can migrate into the Target Platform but still mean something different to a connected workflow.
+| Data area               | Possible source of truth                                                     | Common ownership conflict                                                                                       |
+| ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Product core data       | Store platform, PIM, ERP, marketplace tool                                   | The store may accept edits that are later overwritten by PIM or ERP synchronization                             |
+| Inventory               | Store platform, ERP, warehouse system, POS, marketplace channel              | Different systems may calculate available stock, reserved stock, committed stock, or location stock differently |
+| Pricing                 | Store platform, ERP, subscription system, B2B pricing engine, promotion tool | The visible price may differ from contract price, channel price, or customer-specific price                     |
+| Customer data           | Store platform, CRM, loyalty system, B2B account system, marketing platform  | Consent, tags, segment membership, account status, and lifecycle state may not share the same model             |
+| Orders and fulfillment  | Store platform, OMS, warehouse system, shipping tool, ERP                    | Payment state, fulfillment state, return state, and invoice state may not move together                         |
+| Reviews and UGC         | Store platform, review provider, marketplace, moderation system              | The visible review may depend on provider IDs, moderation status, or syndicated-source references               |
+| Reporting and analytics | Analytics tool, BI layer, data warehouse, store platform                     | Events and historical records may be transformed before reporting teams see them                                |
 
-#### Event behavior may change <a href="#event-behavior-may-change" id="event-behavior-may-change"></a>
+A platform change can expose hidden ownership assumptions. If teams edit data directly in the new store but the external system continues to overwrite it, the visible result may appear unstable. If the external system expects a field that no longer exists, synchronization may silently fail or create incomplete records.
 
-Some systems depend on events rather than stored records alone. They may react when a product changes, an order is created, inventory updates, a customer joins a segment, or a fulfillment state changes. If the Target Platform triggers events differently, the external workflow may need review even when the migrated data looks complete.
+### Identifier Design and Record Matching <a href="#identifier-design-and-record-matching" id="identifier-design-and-record-matching"></a>
 
-#### Field structure may move or split <a href="#field-structure-may-move-or-split" id="field-structure-may-move-or-split"></a>
+Identifiers are the backbone of integration continuity. External systems rarely rely only on names because names can change, duplicate, or vary by language. They usually depend on stable keys such as SKU, product ID, variant ID, customer ID, order number, invoice number, location code, channel ID, subscription ID, or a custom external key.
 
-A value may survive migration but appear in a different field, object, relationship, or app-owned structure. That can affect reporting, automation, search, ERP matching, fulfillment routing, tax logic, and customer communication.
+Identifier risk appears when a platform change alters one of the following:
 
-#### External tools may depend on app or extension logic <a href="#external-tools-may-depend-on-app-or-extension-logic" id="external-tools-may-depend-on-app-or-extension-logic"></a>
+* the primary ID generated by the platform;
+* the order-number format or sequence;
+* the SKU-to-variant relationship;
+* the customer identifier used by CRM, loyalty, or support systems;
+* the product handle, slug, or URL used by feeds and channels;
+* the marketplace listing ID or channel-specific product ID;
+* the warehouse, location, fulfillment-service, or stock-location code;
+* the external key stored in metadata, custom fields, plugin records, or app-owned data.
 
-A store may rely on apps, plugins, modules, or custom extensions to create the information that external systems use. If the Source Platform stores that information in extension-managed structures, the Target Platform may need different representation, custom migration logic adjustment, or post-migration configuration.
+A good identifier review separates display values from system keys. Product names, customer names, category labels, and product handles may help human users identify records, but connected systems often require exact keys. Even a small change in key format can affect matching, duplicate detection, update behavior, or reconciliation.
 
-### The biggest risk is hidden operational failure <a href="#the-biggest-risk-is-hidden-operational-failure" id="the-biggest-risk-is-hidden-operational-failure"></a>
+### Event-Based Workflows and Trigger Behavior <a href="#event-based-workflows-and-trigger-behavior" id="event-based-workflows-and-trigger-behavior"></a>
 
-Integration issues are often discovered late because they do not always appear on the storefront.
+Many integrations do not wait for someone to inspect a record. They react when something happens. A webhook, API event, scheduled sync, queue job, middleware task, or app automation may trigger when a product changes, an order is created, inventory adjusts, a customer joins a segment, a payment is captured, or a shipment is fulfilled.
 
-The new store may show products, categories, prices, images, customers, and orders correctly while hidden workflows fail in areas such as:
+Event behavior is technically separate from stored data. Two platforms may both store order records, but they may not emit the same events, use the same event names, send the same payload fields, or trigger updates at the same point in the workflow.
 
-* inventory synchronization
-* order routing
-* fulfillment allocation
-* invoice generation
-* refund handling
-* shipping-rate logic
-* subscription continuity
-* CRM recognition
-* marketing triggers
-* customer-support context
-* marketplace updates
-* financial reporting
-* analytics attribution
-* search or merchandising updates
+| Event area           | Common trigger                                                                  | Potential difference across platforms                                                                         |
+| -------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Product sync         | Product created, product updated, variant changed, price changed                | Some platforms send product-level events while others send variant-level or inventory-level events            |
+| Inventory sync       | Stock received, stock reserved, stock committed, stock adjusted, stock released | Systems may disagree on whether inventory means on hand, available, sellable, committed, or location-specific |
+| Order workflow       | Order placed, paid, captured, fulfilled, canceled, refunded, returned           | Payment, fulfillment, and refund events may be separate in one platform and combined in another               |
+| Customer automation  | Account created, tag added, segment entered, consent changed, address updated   | Segments may be stored dynamically in one platform but as tags or lists in another                            |
+| Fulfillment workflow | Fulfillment requested, label created, shipment confirmed, delivery updated      | Fulfillment services and warehouses may expect different status names or payload formats                      |
+| Marketing workflow   | Checkout started, order completed, product viewed, customer reactivated         | Event identity, attribution fields, consent rules, and timing can change across tools                         |
 
-This is why integration validation should not stop at connection status. A connected app is not necessarily a working workflow. The review should confirm whether the connected system still receives the right data, recognizes the right records, and produces the expected business outcome.
+A workflow can fail even when the underlying entity exists. The missing part may be the event timing, event payload, or condition that tells another system what to do next.
 
-### How integrations relate to metadata and custom fields <a href="#how-integrations-relate-to-metadata-and-custom-fields" id="how-integrations-relate-to-metadata-and-custom-fields"></a>
+### Direction of Data Movement <a href="#direction-of-data-movement" id="direction-of-data-movement"></a>
 
-External systems and custom fields are closely connected, but they are not the same topic.
+Integration planning should identify whether each connected system sends data to the store, receives data from the store, or does both. Direction affects validation because each direction creates a different failure pattern.
 
-Metadata and custom fields describe where additional meaning is stored. Integrations describe how outside systems use that meaning. A custom product field may feed an ERP. A customer field may control a loyalty segment. A custom order value may support invoice logic. A plugin-managed identifier may be required by a fulfillment provider.
+| Direction                | Typical examples                                                                                          | Main risk                                                                                          |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Store to external system | Orders sent to warehouse, customers sent to CRM, products sent to analytics or feed tools                 | External system may reject, misread, duplicate, or partially process migrated records              |
+| External system to store | PIM publishes product content, ERP pushes prices, warehouse pushes inventory, CRM updates customer groups | Store data may be overwritten, delayed, or placed into different fields than expected              |
+| Two-way synchronization  | Inventory, product updates, order status, customer tags, subscriptions, marketplace listings              | Conflicts, loops, stale values, race conditions, and ownership ambiguity can appear                |
+| Middleware-mediated sync | iPaaS, custom API layer, integration platform, queue processor, data warehouse                            | The store may work, but middleware mappings, transformations, and error handling may need redesign |
+| Manual or batch exchange | CSV imports, scheduled exports, vendor uploads, accounting batches                                        | Field order, format, encoding, identifier matching, and timing can affect outcomes                 |
 
-That relationship matters because the same value may need two different reviews:
+Two-way synchronization deserves special attention. If both sides can update the same value, teams need to know which update wins, what happens during conflict, and whether old values can overwrite newer ones.
 
-* Does the value migrate into a usable Target Platform structure?
-* Does the external system still interpret that value correctly after migration?
+### How Platform Models Change Integration Behavior <a href="#how-platform-models-change-integration-behavior" id="how-platform-models-change-integration-behavior"></a>
 
-A field can appear in the Target Platform and still fail the integration requirement if the connected system expects a different format, identifier, trigger, endpoint, or workflow condition.
+Different e-commerce platforms expose data and workflow behavior in different ways. Some provide broad native APIs and typed metadata. Some depend heavily on apps, plugins, modules, or direct database access. Some support enterprise-level custom objects, queues, and middleware. Some focus on channel publishing, marketplace connectivity, or composable architecture.
 
-### What to define before migration execution <a href="#what-to-define-before-migration-execution" id="what-to-define-before-migration-execution"></a>
+| Platform model                       | Integration behavior pattern                                                                      | Technical implications                                                                             |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| SaaS platform                        | Native APIs, webhooks, app ecosystem, controlled data model, platform-generated IDs               | Integration depends on API limits, webhook coverage, app ownership, and available extension points |
+| Open-source or plugin-heavy platform | Plugin tables, direct database access, custom modules, server-side hooks, custom endpoints        | Integration logic may be deeply tied to extensions and database structure                          |
+| Enterprise platform                  | Custom objects, complex price books, B2B accounts, staged catalogs, middleware, OMS/ERP alignment | Mapping requires review of business rules, record ownership, and workflow orchestration            |
+| Headless or composable setup         | Commerce engine, CMS, search, PIM, checkout, middleware, frontend APIs                            | Data may be distributed across systems rather than stored in one platform                          |
+| Marketplace-connected store          | Channel-specific IDs, listing rules, marketplace orders, feed attributes, inventory allocation    | Records must match channel expectations, not only store-admin expectations                         |
+| POS-connected commerce               | Offline customers, store locations, receipts, returns, local inventory, staff actions             | Customer, inventory, and order states may change outside the online storefront                     |
 
-Integration-heavy migrations need clear operational requirements before Full Migration.
+A Target Platform may support the same business outcome through a different mechanism. For example, a product feed value might move from a custom field to a channel app setting. A customer group might become a segment. A warehouse code might become a location reference. An order export might become a webhook workflow rather than a scheduled file.
 
-#### Critical systems <a href="#critical-systems" id="critical-systems"></a>
+### Integration Dependencies Across Store Entities <a href="#integration-dependencies-across-store-entities" id="integration-dependencies-across-store-entities"></a>
 
-Identify which systems are essential for launch-day operations. A reporting dashboard may be important, but a fulfillment or payment-related workflow may be more urgent. Priority should reflect business risk, not only technical difficulty.
+Integration risk is rarely isolated to one field. External systems often combine several entities before producing a result.
 
-#### Dependent records <a href="#dependent-records" id="dependent-records"></a>
+| Workflow                   | Store data commonly involved                                                              | Operational outcome                                                          |
+| -------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| ERP item synchronization   | Product, variant, SKU, cost, tax class, supplier code, barcode, inventory unit            | Item matching, purchasing, accounting, and reconciliation                    |
+| Warehouse fulfillment      | Order, line item, SKU, variant, location, inventory, shipping address, fulfillment status | Pick/pack routing, label generation, shipment confirmation, stock update     |
+| Marketplace publishing     | Product, category, attributes, media, price, inventory, channel IDs, compliance fields    | Listing creation, listing updates, channel stock, marketplace order intake   |
+| CRM and support continuity | Customer, order history, tags, segments, consent, account status, external customer ID    | Customer recognition, support context, sales follow-up, lifecycle reporting  |
+| Subscription billing       | Customer, payment reference, subscription plan, product, variant, order schedule, status  | Renewal continuity, billing events, fulfillment timing, churn reporting      |
+| Marketing automation       | Customer, order, product viewed, cart behavior, segment, consent, coupon use              | Campaign targeting, abandoned-cart flow, post-purchase flow, personalization |
+| Finance and reporting      | Order, tax, discount, refund, payment, invoice, channel, currency, customer group         | Revenue recognition, tax reporting, attribution, margin analysis             |
 
-Define which store records each system depends on most. This may include products, variants, SKUs, customers, addresses, orders, categories, coupons, subscriptions, tax values, metadata, or custom identifiers.
+These dependencies explain why a record-by-record review is not enough. The product, customer, or order may be correct on its own while the cross-system workflow fails because one dependent value is missing, renamed, transformed, or disconnected.
 
-#### Required outcomes <a href="#required-outcomes" id="required-outcomes"></a>
+### App-Owned, Plugin-Owned, and Middleware-Owned Data <a href="#app-owned-plugin-owned-and-middleware-owned-data" id="app-owned-plugin-owned-and-middleware-owned-data"></a>
 
-Describe the outcome the business needs to preserve. Examples include inventory recognition, order routing, invoice generation, CRM matching, loyalty continuity, shipping workflow behavior, search indexing, subscription continuity, or marketplace listing updates.
+Many integration values do not belong to the core platform. They may be created and managed by an app, plugin, module, connector, middleware layer, or external service. That ownership affects whether the data is accessible, reusable, or meaningful in another platform.
 
-#### Identifier expectations <a href="#identifier-expectations" id="identifier-expectations"></a>
+Examples include:
 
-Document which identifiers must remain stable, which can change, and which need mapping. This is especially important for ERP, fulfillment, marketplace, CRM, reporting, and subscription workflows.
+* marketplace connector listing IDs;
+* subscription plan references and renewal states;
+* loyalty account IDs and point balances;
+* tax-service calculation references;
+* shipping-service rate IDs or label references;
+* fraud-screening results;
+* personalization rules and recommendation history;
+* search index rules and merchandising pins;
+* analytics client IDs, attribution fields, or event mappings;
+* ERP, PIM, CRM, POS, or WMS cross-reference tables.
 
-#### Direction of data movement <a href="#direction-of-data-movement" id="direction-of-data-movement"></a>
+Some of these values can be moved as reference data. Some must be regenerated by the new app or provider. Some should not be migrated because the Target Platform needs a fresh connection, fresh token, new webhook subscription, new app-owned record, or new external-system mapping.
 
-Clarify whether each system sends data into the store, receives data from the store, or both. Two-way workflows usually need closer review because changes in one system can affect the other after launch.
+### Migration Implications for Integration Data <a href="#migration-implications-for-integration-data" id="migration-implications-for-integration-data"></a>
 
-#### Ownership after launch <a href="#ownership-after-launch" id="ownership-after-launch"></a>
+Integration migration is not only a question of whether records can be transferred. It is a question of whether connected systems can still use them.
 
-Decide who will validate each workflow. Integration review often requires input from operations, finance, marketing, fulfillment, support, IT, or external vendors because no single storefront reviewer can judge every downstream outcome.
+The main implications are:
 
-### When standard handling may not be enough <a href="#when-standard-handling-may-not-be-enough" id="when-standard-handling-may-not-be-enough"></a>
+* external identifiers may need to be preserved, mapped, or stored in a new field;
+* platform-generated IDs may change and require cross-reference mapping;
+* event behavior may need to be reconfigured through webhooks, apps, middleware, or APIs;
+* field structures may need transformation before external systems can read them;
+* app-owned records may require vendor-side export/import or reconfiguration;
+* some workflows may need to be validated after the Target Platform apps, credentials, and endpoints are active;
+* historical logs and sync states may not be transferable or may not remain meaningful in a new system;
+* operational teams may need a reconciliation plan for inventory, orders, invoices, customer records, and reporting.
 
-Not every connected store requires custom work. Some integrations can be reconnected or reconfigured after migration when the Target Platform supports the same behavior clearly.
+Standard entity migration can preserve many visible records, but integration continuity often depends on non-visible structures. When connected behavior relies on custom fields, app-owned records, non-standard identifiers, or external-system matching rules, Advanced Data Mapping, Advanced Data Configure, or Custom Service review may be needed. The service reference is relevant only where the integration requirement depends on mapping, configuration, or custom interpretation beyond ordinary entity transfer.
 
-Risk rises when:
+### Practical Inspection Checklist <a href="#practical-inspection-checklist" id="practical-inspection-checklist"></a>
 
-* several external systems depend on the same migrated records
-* operational workflows rely on exact identifiers or custom external keys
-* app, plugin, module, or extension data feeds downstream tools
-* custom fields control automation, pricing, fulfillment, segmentation, or reporting
-* order, payment, refund, or fulfillment statuses change meaning between platforms
-* external systems expect a specific data format or event behavior
-* the Target Platform cannot reproduce the same integration path through standard service capability
-* the source store uses Custom Platform behavior or non-standard structures
+Before a platform change, merchants should inspect integration dependencies as data structures, not just as installed apps.
 
-When those conditions are present, the question is no longer only whether the records can move. The safer question is whether the expected operational behavior can be achieved through standard service capability, a Standard Add-on, a Tailored Add-on, a Custom Add-on, Custom Platform handling, or broader Custom Service planning.
+A practical review should identify:
 
-### How to validate external-system continuity <a href="#how-to-validate-external-system-continuity" id="how-to-validate-external-system-continuity"></a>
+* every external system connected to the store;
+* the store entities each system uses;
+* whether the system sends data, receives data, or does both;
+* the identifiers used for matching records;
+* the fields, metadata, custom fields, app records, or mapping tables required by the workflow;
+* the events, webhooks, API calls, scheduled jobs, or batch files that trigger updates;
+* the system of record for each critical value;
+* workflows that must work on launch day;
+* workflows that can be reconfigured after launch;
+* app-owned or vendor-owned data that may need separate handling;
+* validation samples for products, customers, orders, inventory, pricing, fulfillment, finance, reporting, and marketing.
 
-Integration validation should use real operational scenarios, not only configuration checks.
+The inspection should include business owners, not only technical administrators. Fulfillment, finance, support, marketing, sales, operations, and IT teams may each know a workflow dependency that is not visible from the store admin.
 
-Useful validation samples usually include:
+### Common Failure Patterns <a href="#common-failure-patterns" id="common-failure-patterns"></a>
 
-* products linked to ERP, inventory, marketplace, or fulfillment tools
-* variants with SKU-level inventory, pricing, or channel behavior
-* customers linked to CRM, loyalty, wholesale, support, or marketing systems
-* orders that trigger fulfillment, shipping, invoicing, tax, refund, or reporting workflows
-* records carrying external IDs, custom fields, or metadata used outside the store
-* subscription, marketplace, or app-managed records that depend on special structures
-* workflows where multiple systems exchange data before the final business outcome appears
+Integration failures often appear after launch because they are not always visible in the storefront.
 
-The review should answer practical questions:
+Common patterns include:
 
-* Do external systems still recognize the migrated records they depend on?
-* Do key identifiers still match, map, or remain traceable?
-* Do statuses and events still trigger the expected workflow?
-* Do downstream systems receive the right field values in the expected structure?
-* Can teams still trust inventory, fulfillment, finance, reporting, marketing, and support outputs?
-* Are manual configuration steps or vendor-side changes required before launch?
+* duplicate customer records in CRM because the external customer ID changed;
+* products rejected by marketplace feeds because category or attribute mappings changed;
+* inventory not updating because warehouse location codes no longer match;
+* orders exported without the field required by accounting, invoicing, or tax systems;
+* fulfillment tools receiving order data but not the expected shipping method, package rule, or line-item reference;
+* marketing automations firing incorrectly because event names, consent fields, or segment rules changed;
+* reporting dashboards showing inconsistent revenue because discounts, refunds, taxes, or channels are modeled differently;
+* subscription workflows breaking because plan IDs, payment references, or renewal states belong to a provider-owned system;
+* support desks losing customer context because order history, external IDs, or account links changed.
 
-Demo Migration can help expose some integration-related risks early, especially where representative records carry external identifiers, metadata, or workflow-driving fields. However, final confidence usually requires operational validation in the Target Platform environment, because many integrations depend on live configuration, credentials, app setup, or vendor-side behavior beyond the migrated records themselves.
+These issues are not always caused by missing data. More often, the data exists but no longer appears in the field, format, timing, or relationship that the external system expects.
 
-### Relationship to the wider migration plan <a href="#relationship-to-the-wider-migration-plan" id="relationship-to-the-wider-migration-plan"></a>
+### Validation Signals for External-System Continuity <a href="#validation-signals-for-external-system-continuity" id="validation-signals-for-external-system-continuity"></a>
 
-Integration planning connects several parts of the migration project.
+A connected app is not the same as a validated workflow. Validation should prove that external systems still recognize records and execute the intended operational behavior.
 
-Scope definition identifies which connected records and fields matter. Complexity analysis explains why external dependencies increase migration risk. Approach selection helps decide whether standard handling is enough or whether Custom Service should be reviewed. Validation planning defines who confirms each operational workflow before launch.
+Useful validation samples include:
 
-The same topic also connects to later service and platform-strategy decisions. Some platforms provide native integration paths for common workflows. Others rely more heavily on apps, plugins, modules, custom APIs, or external middleware. The selected migration path should therefore be reviewed not only for storefront fit, but also for whether the Target Platform can support the operating environment the business needs after launch.
+* products with ERP, PIM, marketplace, POS, or warehouse identifiers;
+* variants with SKU-level inventory and channel-specific behavior;
+* customers linked to CRM, loyalty, wholesale, support, or marketing systems;
+* orders with discounts, taxes, shipping methods, refunds, fulfillment states, and invoices;
+* records carrying custom fields, metadata, app-owned identifiers, or middleware mappings;
+* workflows involving multiple systems before the final outcome appears.
+
+A strong validation result confirms more than connection status. It confirms that records match, events trigger, payloads carry the expected fields, downstream systems process the data correctly, and operational users can complete their work without manual correction.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Integrations and external systems are where migration risk often becomes operational rather than visual. A storefront can appear complete while inventory, fulfillment, finance, CRM, marketing, reporting, subscriptions, or support workflows no longer interpret the migrated data correctly.
+Integrations and external systems are where e-commerce data becomes operational behavior. Products, customers, orders, inventory, prices, and content do not only live inside the storefront platform; they move through ERP, CRM, PIM, POS, warehouse, shipping, finance, marketplace, marketing, analytics, support, subscription, and middleware systems.
 
-The safest planning approach is to identify critical external systems early, define which records and identifiers they depend on, confirm which workflows must still work on day one, and validate those workflows with representative scenarios. When external behavior depends on custom fields, extension-managed structures, non-standard identifiers, or custom business logic, the requirement should be reviewed as part of service planning rather than treated as a simple reconnection task.
+The technical risk is not limited to whether those systems can connect to a new platform. The deeper issue is whether they can still recognize the right records, use the right identifiers, interpret the right statuses, receive the right events, and produce the same business outcomes. Integration-heavy stores should review source-of-truth ownership, identifier design, data movement direction, event behavior, app-owned records, and validation samples before treating the connected environment as launch-ready.
 
-Review the systems that keep daily operations running, not only the storefront records customers see. If external-system behavior depends on identifiers, metadata, app-managed structures, or workflow logic that may not translate cleanly into the Target Platform, Live Chat can help clarify whether the requirement fits standard service capability or should be reviewed through Custom Service.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why can a storefront look correct while integrations still fail?**
 
-**Why can a migration look successful in the storefront while integrations still fail?**
+Because external systems often depend on identifiers, event payloads, status meanings, mapping tables, custom fields, app-owned records, or workflow timing that may not be visible in the storefront. The product, customer, or order can appear correct while the connected system cannot recognize or process it correctly.
 
-Because external systems depend on identifiers, statuses, field structures, event triggers, and downstream interpretation. Products, customers, and orders may appear in the Target Platform while connected systems no longer recognize or process them correctly.
+**What integration data should be reviewed before migration?**
 
-**Should integrations be validated only after the Full Migration?**
+Review external IDs, SKU relationships, product and customer references, order statuses, fulfillment states, inventory location codes, custom fields, metadata, app records, webhook behavior, mapping tables, middleware rules, and any fields used by ERP, CRM, PIM, POS, warehouse, marketplace, finance, marketing, support, or reporting systems.
 
-No. Integration assumptions should be reviewed before execution, and representative records should be tested as early as possible. Some final checks may still require the Target Platform environment, credentials, app configuration, or vendor-side setup, but the dependency map should not wait until launch.
+**Are integrations the same as metadata and custom fields?**
 
-**Are integrations handled the same as metadata and custom fields?**
+No. Metadata and custom fields describe where extra information is stored. Integrations describe how external systems use that information. A custom field may migrate successfully but still fail operationally if an external system expects a different identifier, format, event, endpoint, or ownership model.
 
-No. Metadata and custom fields describe where additional meaning is stored. Integrations describe how outside systems use that meaning. A migration may preserve a custom field but still require integration review if an external system expects a specific identifier, format, trigger, or workflow behavior.
+**When does integration data require custom review?**
 
-**When should integration requirements be reviewed for Custom Service?**
-
-Custom Service should be reviewed when external-system continuity depends on custom identifiers, extension-managed structures, non-standard source behavior, custom migration logic adjustment, Custom Platform handling, Tailored Add-ons, Custom Add-ons, or transformation beyond standard service capability.
+Custom review is usually needed when connected workflows depend on app-owned records, provider-owned identifiers, custom database structures, non-standard external keys, two-way synchronization, middleware transformations, or behavior that the Target Platform cannot reproduce through standard configuration alone.

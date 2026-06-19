@@ -1,253 +1,179 @@
 # URL Structure Changes and Redirect Planning
 
-E-commerce Platform Migration can change more than where store data is stored. It can also change how product pages, category pages, content pages, and campaign landing pages are reached.
+URL structure changes can be one of the most visible migration risks after an e-commerce store moves to a new platform. Product pages, category pages, CMS Pages, Blog Posts, campaign landing pages, filtered paths, regional paths, and internal links may all use different URL patterns in the Target Platform. Even when the migrated store looks complete, customers and search engines may still try to reach the old paths through bookmarks, search results, backlinks, email campaigns, advertisements, affiliates, social posts, and internal navigation.
 
-URL planning matters because customers, search engines, bookmarks, backlinks, emails, ads, and internal links may still point to existing paths after the store moves. If those paths break, lead to weak destinations, or resolve through confusing redirect behavior, the migrated store may look complete while traffic continuity becomes weaker.
+Redirect planning protects that continuity. It determines how important old URLs should resolve after migration and whether the new destination still matches the original page intent. The goal is not to avoid every 404 at any cost. The goal is to preserve meaningful access to the pages and pathways that matter for traffic, revenue, customer trust, and search continuity.
 
-The safest approach is to treat URL structure and redirect planning as part of migration readiness, not as a last-minute technical cleanup. Priority old URLs should be mapped to relevant new destinations before launch, then tested in the destination environment so important paths remain reachable and meaningful.
+URL planning should begin before go-live, not after launch problems appear. Priority URLs should be identified, mapped, implemented, and tested while there is still time to correct weak destinations, redirect chains, missing internal links, or platform limitations.
 
-### Why URL structure changes matter during migration <a href="#why-url-structure-changes-matter-during-migration" id="why-url-structure-changes-matter-during-migration"></a>
+### Why URL Structure Changes Matter During Migration <a href="#why-url-structure-changes-matter-during-migration" id="why-url-structure-changes-matter-during-migration"></a>
 
-A URL is not only a technical address. It is often the way customers and search engines recognize a page.
+A URL is more than a page address. For customers, it is often a saved route back to a product, category, content page, or campaign. For search engines, it is a signal connected to crawl history, page purpose, backlinks, internal links, and accumulated page value.
 
-During migration, URL patterns can change because the Target Platform uses different routing rules, category structures, product handles, content paths, collection logic, blog structures, language paths, or app-generated landing pages. Even when the same product or category still exists, the address may not remain the same.
+During migration, URLs can change because the Target Platform may use different routing rules, product handles, category structures, collection paths, blog paths, CMS Page paths, language paths, store-view patterns, filter logic, or app-generated landing pages. The page may still exist, but the path used to reach it may no longer be the same.
 
-#### Common URL changes during platform migration <a href="#common-url-changes-during-platform-migration" id="common-url-changes-during-platform-migration"></a>
+Common URL changes include:
 
-URL changes often affect:
+* product page paths changing because product handles, slugs, IDs, or routing rules differ;
+* category or collection paths changing because the Target Platform uses a different hierarchy;
+* CMS Pages and Blog Posts moving into different content structures;
+* campaign landing pages being renamed, rebuilt, archived, or consolidated;
+* multilingual, regional, or store-view paths being represented differently;
+* filtered, faceted, tag-based, or search-result pages behaving differently;
+* internal links inside menus, banners, product descriptions, blog content, footers, and promotional blocks still pointing to old paths.
 
-* product page paths
-* category, collection, or department paths
-* blog post and CMS page paths
-* campaign landing pages
-* filtered or search-result landing paths
-* multilingual or regional URL structures
-* internal links inside menus, product descriptions, blog content, banners, and footers
+These changes are not automatically wrong. Migration often creates a cleaner, more sustainable URL structure. Risk appears when high-value old URLs are not mapped to relevant new destinations before the store launches.
 
-These changes matter most when the old path already has value: organic traffic, backlinks, bookmarks, email traffic, paid campaign references, affiliate links, or internal navigation importance.
+### Identify Priority URLs Before Mapping Redirects <a href="#identify-priority-urls-before-mapping-redirects" id="identify-priority-urls-before-mapping-redirects"></a>
 
-#### Why broken paths are not the only risk <a href="#why-broken-paths-are-not-the-only-risk" id="why-broken-paths-are-not-the-only-risk"></a>
+Redirect planning should begin with a priority URL set. A store may have thousands or millions of historical URLs, but not all of them carry the same business or SEO value. Reviewing every path with equal depth can waste effort while the most important URLs receive too little attention.
 
-A missing redirect can create a dead end, but a poor redirect can also cause damage.
+A priority URL set usually includes:
 
-For example, an old product URL that redirects to the homepage may technically avoid a 404 page, but it does not preserve the customer’s intent. A visitor looking for a specific product expects a product page, a close replacement, or a relevant category—not a generic starting point.
+* product pages with organic traffic, sales history, backlinks, or campaign value;
+* category, collection, or department pages that support discovery and revenue;
+* CMS Pages and Blog Posts with search value, customer education value, or brand importance;
+* landing pages used in paid campaigns, email campaigns, affiliates, partnerships, or seasonal promotions;
+* pages with strong external links or frequent customer bookmarks;
+* pages that appear in important menus, guides, buying paths, or internal-link structures;
+* pages that will be merged, renamed, discontinued, or rebuilt during migration.
 
-Search continuity works the same way. Redirects are more useful when the destination keeps the page purpose close enough for customers and search engines to understand the move.
+The priority set does not need to include every old URL at the beginning. It should include the URLs where a broken path, weak redirect, or poor destination would create a measurable business problem.
 
-### What redirect planning is trying to protect <a href="#what-redirect-planning-is-trying-to-protect" id="what-redirect-planning-is-trying-to-protect"></a>
+### Map Old URLs to Relevant New Destinations <a href="#map-old-urls-to-relevant-new-destinations" id="map-old-urls-to-relevant-new-destinations"></a>
 
-Redirect planning protects continuity between important old URLs and the best available new destinations.
+The strongest redirect model is path-to-path continuity. Each important old URL should be mapped to the most relevant new destination based on page purpose, not only on URL similarity.
 
-It is not simply a task of collecting old links and pointing them somewhere. It is a planning process that asks: if a customer or search engine reaches this old path after launch, where should that request land so the destination still makes sense?
+| Old URL type                | Preferred destination                                                         | Planning risk                                                        |
+| --------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Product page                | Matching new product page                                                     | Product is renamed, merged, discontinued, or represented differently |
+| Category or collection page | Matching new category, collection, or closest browse destination              | Category hierarchy or collection logic changes                       |
+| CMS Page                    | Matching new CMS Page or equivalent content page                              | Content is merged, rewritten, or omitted                             |
+| Blog Post                   | Matching new Blog Post or consolidated content destination                    | Blog structure, authoring system, or slug pattern changes            |
+| Campaign page               | Current equivalent campaign or landing page                                   | Campaign expires or moves into a new promotional structure           |
+| Discontinued product        | Replacement product, parent category, or relevant collection when appropriate | Forced redirect creates a weak customer experience                   |
 
-#### Priority pages that usually need protection <a href="#priority-pages-that-usually-need-protection" id="priority-pages-that-usually-need-protection"></a>
+The practical question is: if a customer or search engine reaches this old path after launch, where should that request land so the destination still makes sense?
 
-The first redirect planning layer should usually include:
+A technically working redirect is not enough if the destination no longer matches the old intent. An old product URL that redirects to a generic homepage may avoid a visible 404, but it does not preserve the customer journey. A high-value category URL that redirects to a broad, unrelated collection may also weaken continuity because the visitor no longer reaches the expected browse context.
 
-* product pages with traffic, sales history, backlinks, or campaign value
-* category or collection pages that support browsing and organic discovery
-* blog posts or content pages that attract qualified traffic
-* landing pages used in ads, email campaigns, affiliates, or partnerships
-* pages with strong external links
-* pages used heavily in internal navigation
+### Avoid Weak Redirect Patterns <a href="#avoid-weak-redirect-patterns" id="avoid-weak-redirect-patterns"></a>
 
-This priority-first approach keeps the work practical. It protects the paths most likely to affect traffic, revenue, and customer experience before expanding into lower-value historical URLs.
+Some redirect patterns look efficient but create poor outcomes. They may reduce the number of broken links while weakening traffic quality, customer trust, and search continuity.
 
-#### Redirect coverage should follow page value and destination fit <a href="#redirect-coverage-should-follow-page-value-and-destination-fit" id="redirect-coverage-should-follow-page-value-and-destination-fit"></a>
+Weak redirect patterns include:
 
-Not every historical URL deserves the same amount of manual review. Some URLs may have no traffic, no backlinks, no strategic use, or no meaningful equivalent on the new store.
+* redirecting many priority product pages to the homepage;
+* redirecting old category pages to broad destinations that do not match the original browse intent;
+* redirecting discontinued products to unrelated products only because they are available;
+* redirecting CMS Pages or Blog Posts to generic information pages;
+* creating redirect chains where an old URL points to an intermediate URL before reaching the final page;
+* using temporary redirects where permanent redirects are required for a stable move;
+* leaving internal links to rely on redirects instead of updating them where practical;
+* applying broad pattern rules without checking high-value exceptions.
 
-The stronger question is not whether every old URL can be redirected. The stronger question is whether every important old URL has a destination that preserves customer intent well enough.
+Homepage redirects may be acceptable for a small number of low-value expired pages where no useful destination exists. They should not become the default for pages with traffic, backlinks, sales history, customer-intent value, or campaign relevance.
 
-### Path-to-path continuity is the strongest planning model <a href="#path-to-path-continuity-is-the-strongest-planning-model" id="path-to-path-continuity-is-the-strongest-planning-model"></a>
+### Plan for Pages Without Exact Equivalents <a href="#plan-for-pages-without-exact-equivalents" id="plan-for-pages-without-exact-equivalents"></a>
 
-The clearest redirect planning model is path-to-path continuity.
+Not every old URL will have a one-to-one replacement. Products may be retired. Categories may be merged. Campaigns may end. Content may be consolidated. A clean redirect plan needs decision rules for these cases instead of forcing every path into a weak destination.
 
-Instead of treating redirects as a bulk technical rule, define how important old paths should resolve after migration:
+When no exact equivalent exists, consider:
 
-* old product path → new product path
-* old category path → new category or collection path
-* old blog post path → new blog post path
-* old CMS page path → new CMS page path
-* old campaign page → current equivalent landing page
-* discontinued product path → replacement product or relevant category, when appropriate
+* a replacement product when the customer intent remains close;
+* a parent category or collection when the product is no longer available;
+* a consolidated guide, CMS Page, or Blog Post when content has been merged;
+* a current campaign or promotion when an old landing page has ended;
+* a clear customer-facing alternative when the old page purpose still matters;
+* no redirect when there is no relevant destination and forcing one would mislead customers.
 
-This model forces the project to review page purpose, not just URL syntax.
+The decision should balance reachability and relevance. Avoiding a 404 is not always better than sending users to an unrelated page. For priority URLs, the stronger destination is the one that preserves the most useful customer intent.
 
-#### Why homepage redirects are usually weak for priority pages <a href="#why-homepage-redirects-are-usually-weak-for-priority-pages" id="why-homepage-redirects-are-usually-weak-for-priority-pages"></a>
+### Separate Domain Changes From Path Changes <a href="#separate-domain-changes-from-path-changes" id="separate-domain-changes-from-path-changes"></a>
 
-Redirecting many old URLs to the homepage can look efficient, but it often weakens the landing experience.
+A migration may involve a domain change, a path change, or both. These are different planning problems.
 
-A homepage redirect may be acceptable for a small number of low-value or expired pages where no better destination exists. It should not be the default for priority product, category, content, or campaign URLs because it breaks the connection between the old page intent and the new arrival point.
+A domain change affects the site address, such as moving from one domain, subdomain, or regional structure to another. Domain continuity requires confirming that requests to the old domain reach the correct new site and that ownership, DNS, SSL, hosting, and launch routing are handled properly.
 
-#### When no exact equivalent exists <a href="#when-no-exact-equivalent-exists" id="when-no-exact-equivalent-exists"></a>
+A path change affects individual page locations within the domain. Path continuity requires mapping old product, category, CMS Page, Blog Post, and campaign paths to relevant new destinations.
 
-Some pages will not have a one-to-one replacement after migration. Products may be retired. Categories may be merged. Campaigns may end. Content may be consolidated.
+Many migration projects over-focus on the domain move and under-plan the page-level paths. Customers and search engines often land directly on product, category, content, and campaign URLs rather than the homepage. For SEO and traffic continuity, path-level planning usually needs the deeper review.
 
-In those cases, choose the closest useful destination:
+### Confirm Target Platform Redirect Capabilities <a href="#confirm-target-platform-redirect-capabilities" id="confirm-target-platform-redirect-capabilities"></a>
 
-* a replacement product
-* a parent category
-* a related collection
-* a consolidated guide or content page
-* a clear customer-facing alternative
+Redirect planning must match what the Target Platform can actually support. Some platforms provide native redirect management. Others may require an app, plugin, module, server-level configuration, CDN rule, hosting rule, or Custom Service review.
 
-If there is no relevant destination, forcing a redirect may not improve the experience. The decision should be based on customer usefulness and SEO risk, not only on avoiding 404s.
+Before finalizing launch readiness, confirm whether the Target Platform can support:
 
-### Domain changes and path changes are different planning problems <a href="#domain-changes-and-path-changes-are-different-planning-problems" id="domain-changes-and-path-changes-are-different-planning-problems"></a>
+* permanent redirects for changed URLs;
+* bulk redirect import or manageable redirect creation;
+* product, category, CMS Page, Blog Post, and campaign path mapping;
+* multilingual, regional, store-view, or multi-store URL behavior;
+* redirects from old filter, tag, or faceted paths when those paths matter;
+* avoidance of redirect chains and loops;
+* pre-launch testing of priority redirects;
+* post-launch updates if unexpected old URLs appear in traffic data.
 
-A migration may involve a domain change, a path change, or both.
+If standard platform capability cannot support the required redirect outcome, the project may need additional technical planning. Add-ons may support mapping or configuration needs in specific cases. Custom Service applies when the requirement involves broader customization, Custom Platform handling, unsupported extension data, outside-system identifiers, or custom migration logic adjustment.
 
-A domain change affects the site address. A path change affects where individual pages live within that address. Teams often focus on the domain move while under-planning the page-level paths that actually carry customer and search value.
+### Clean Internal Links Instead of Relying Only on Redirects <a href="#clean-internal-links-instead-of-relying-only-on-redirects" id="clean-internal-links-instead-of-relying-only-on-redirects"></a>
 
-#### Domain continuity <a href="#domain-continuity" id="domain-continuity"></a>
+Redirects help old URLs recover. They should not become a substitute for clean internal links. A migrated store should not unnecessarily keep pointing customers and crawlers through old paths when the correct new paths are known.
 
-Domain continuity matters when the store moves from one domain or subdomain pattern to another. The project must confirm how old domain requests will reach the new site and whether the domain-level move is handled safely.
+Internal-link cleanup should include:
 
-#### Path continuity <a href="#path-continuity" id="path-continuity"></a>
+* main navigation and footer links;
+* category, collection, and product links;
+* links inside product descriptions, category copy, CMS Pages, and Blog Posts;
+* promotional banners, image links, and landing-page blocks;
+* related-product, upsell, cross-sell, and recommendation pathways;
+* links used in store policies, buying guides, help content, and brand pages;
+* campaign links that remain active after launch.
 
-Path continuity matters at the page level. It determines whether an old product, category, blog, CMS, or campaign URL reaches the most relevant new page.
+Priority internal links should point directly to final URLs wherever practical. This reduces unnecessary redirect hops, improves customer experience, and makes the new store structure clearer.
 
-For most migration planning, path continuity deserves detailed review because search traffic and customer journeys usually land on specific pages, not only on the domain root.
+### Validate Redirects Before and After Launch <a href="#validate-redirects-before-and-after-launch" id="validate-redirects-before-and-after-launch"></a>
 
-### Redirects protect reachability, not page quality by themselves <a href="#redirects-protect-reachability-not-page-quality-by-themselves" id="redirects-protect-reachability-not-page-quality-by-themselves"></a>
+Redirect validation should focus on the URLs that matter most. A launch can pass broad technical checks while still failing on the pages that carry the most traffic or revenue.
 
-Redirects help old URLs reach new destinations. They do not automatically preserve ranking, relevance, page quality, or conversion strength.
+Before launch, test whether:
 
-A redirect can still underperform if the destination page is weaker than the original page.
+* priority old URLs reach the intended new destinations;
+* product URLs resolve to the correct product pages;
+* category and collection URLs preserve browse intent;
+* CMS Pages and Blog Posts reach equivalent or intentionally consolidated content;
+* campaign landing pages still support active campaigns;
+* redirects do not create chains, loops, or irrelevant destinations;
+* internal links point to final URLs where practical;
+* multilingual, regional, or store-view URLs behave as expected;
+* important pages return the expected live status in the Target Platform environment.
 
-#### What can weaken a redirected page <a href="#what-can-weaken-a-redirected-page" id="what-can-weaken-a-redirected-page"></a>
-
-A redirected destination may lose value if:
-
-* the destination no longer matches the original page intent
-* the product or category content is thinner
-* titles, meta descriptions, headings, or summaries become less specific
-* product variants, images, reviews, or supporting details are missing
-* internal links no longer support the page
-* canonical handling becomes inconsistent
-* category hierarchy changes make the page harder to discover
-* app-generated or filter-generated pages behave differently on the Target Platform
-
-That is why redirect planning should be connected to page-quality review, internal linking, metadata checks, and post-migration validation.
-
-#### Redirects and canonical signals serve different purposes <a href="#redirects-and-canonical-signals-serve-different-purposes" id="redirects-and-canonical-signals-serve-different-purposes"></a>
-
-Redirects and canonical signals are related, but they are not the same thing.
-
-A redirect sends users and crawlers from one URL to another. A canonical signal helps indicate the preferred version among duplicate or very similar URLs. During migration, redirects usually matter most when old URLs should no longer remain active, while canonical handling matters when similar versions of a page can still be reached through more than one URL.
-
-Both should support a consistent final URL strategy.
-
-### Platform capabilities affect redirect planning <a href="#platform-capabilities-affect-redirect-planning" id="platform-capabilities-affect-redirect-planning"></a>
-
-The Target Platform determines how redirect planning can be implemented.
-
-Some platforms provide native redirect management. Others may require an app, plugin, module, server-level configuration, CDN rules, or custom handling. Some platform setups may support simple path redirects but make bulk redirect import, pattern-based redirects, multilingual paths, or advanced rules more difficult.
-
-#### Check redirect capability before launch planning becomes fixed <a href="#check-redirect-capability-before-launch-planning-becomes-fixed" id="check-redirect-capability-before-launch-planning-becomes-fixed"></a>
-
-Before finalizing the migration timeline, confirm:
-
-* whether the Target Platform supports native permanent redirects
-* whether redirects can be imported in bulk
-* whether product, category, blog, and CMS URLs can be mapped cleanly
-* whether multilingual, regional, or store-view URLs need separate handling
-* whether redirect chains can be avoided
-* whether app-generated or filter-generated paths need separate review
-* whether redirects can be tested before go-live
-
-If standard platform capability cannot safely support the required redirect outcome, the project may need additional technical planning or Custom Service review.
-
-#### Custom Platform and extension-driven URL behavior <a href="#custom-platform-and-extension-driven-url-behavior" id="custom-platform-and-extension-driven-url-behavior"></a>
-
-Custom Platform handling, third-party apps, plugins, modules, extensions, and outside systems can influence URL generation, landing-page behavior, metadata, internal links, and filter paths.
-
-If those systems affect important landing pages, URL planning should account for them early. Otherwise, the migrated page may exist, but the path, internal link structure, or destination behavior may not match what the business expects.
-
-### What to validate before go-live <a href="#what-to-validate-before-go-live" id="what-to-validate-before-go-live"></a>
-
-Redirect validation should focus on priority paths first.
-
-A practical pre-launch review should confirm that:
-
-* priority old URLs resolve to the intended new destinations
-* product URLs land on matching product pages or the best available equivalent
-* category URLs land on relevant category or collection pages
-* blog and CMS pages remain reachable when they still matter
-* important campaign or partner URLs do not become dead ends
-* redirect behavior avoids unnecessary multi-step chains
-* redirected destinations still match the original customer intent
-* internal links point to final destination URLs where possible
-* canonical signals do not conflict with the redirect plan
-* important pages remain included in navigation, internal links, or sitemap logic where appropriate
-
-This review should happen before launch, then continue after go-live using real crawl, analytics, and search-console feedback where available.
-
-### Common redirect planning mistakes <a href="#common-redirect-planning-mistakes" id="common-redirect-planning-mistakes"></a>
-
-Most redirect failures are not caused by a single technical issue. They usually come from late planning, weak prioritization, or poor destination decisions.
-
-#### Mistake 1: Waiting until the end of the project <a href="#mistake-1-waiting-until-the-end-of-the-project" id="mistake-1-waiting-until-the-end-of-the-project"></a>
-
-Redirect planning becomes harder when URL changes are discovered after the new store structure is already built. Start early enough to compare old and new URL patterns, identify priority pages, and confirm implementation options.
-
-#### Mistake 2: Treating all historical URLs equally <a href="#mistake-2-treating-all-historical-urls-equally" id="mistake-2-treating-all-historical-urls-equally"></a>
-
-A large store can have many old URLs, including expired products, filtered pages, tracking URLs, duplicate paths, and low-value pages. Give the most attention to pages with traffic, backlinks, sales value, customer use, or strategic importance.
-
-#### Mistake 3: Sending too many URLs to generic destinations <a href="#mistake-3-sending-too-many-urls-to-generic-destinations" id="mistake-3-sending-too-many-urls-to-generic-destinations"></a>
-
-Generic redirects can hide 404s while still creating weak landing experiences. Priority pages should land on relevant destinations whenever possible.
-
-#### Mistake 4: Assuming redirects preserve SEO by themselves <a href="#mistake-4-assuming-redirects-preserve-seo-by-themselves" id="mistake-4-assuming-redirects-preserve-seo-by-themselves"></a>
-
-Redirects are important, but they do not replace page quality, content relevance, internal linking, metadata, crawlability, and post-launch validation.
-
-#### Mistake 5: Ignoring app-generated and filter-generated paths <a href="#mistake-5-ignoring-app-generated-and-filter-generated-paths" id="mistake-5-ignoring-app-generated-and-filter-generated-paths"></a>
-
-Some URL structures come from apps, filters, modules, extensions, themes, or custom logic. These paths can matter for traffic and customer journeys even when they are not part of the core product or category data model.
+After launch, monitor for unexpected 404s, high-value old URLs that were missed, redirect chains, traffic drops to priority pages, and search-console signals related to moved or unavailable URLs. Post-launch monitoring should not replace pre-launch planning, but it is useful for catching paths that historical exports or planning files missed.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-URL structure changes are one of the most important continuity risks in E-commerce Platform Migration because they affect how customers and search engines keep reaching valuable pages after launch.
+URL structure changes are normal during e-commerce platform migration, but unmanaged URL changes can weaken traffic continuity even when store data has migrated successfully. The safest approach is to identify priority old URLs, map them to relevant new destinations, confirm Target Platform redirect capability, clean important internal links, and validate the result before launch.
 
-The safest approach is to build a priority URL list, map important old paths to relevant new destinations, check Target Platform redirect capability early, avoid weak generic redirects for valuable pages, and validate the final behavior before and after go-live. Redirects should protect customer intent, not only prevent broken pages.
+Redirect planning should protect customer intent, not simply suppress broken paths. A strong redirect plan makes important old URLs lead to useful new pages, avoids weak generic destinations, and gives the migrated store a cleaner foundation for traffic, search visibility, and customer trust.
 
-Before launch, review your highest-value product, category, content, and campaign URLs against the new store structure. If the URL map is large, the Target Platform handles redirects differently, or apps and custom logic affect landing pages, use Live Chat to clarify which redirect and validation approach best fits the migration scope.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Should every old URL be redirected during migration?**
 
-**Are redirects the same as SEO continuity?**
-
-No. Redirects protect reachability when old paths change, but SEO continuity also depends on destination relevance, page content, internal links, metadata, canonical signals, crawlability, and validation after launch.
-
-**Do all old URLs need redirects?**
-
-Not always. Priority URLs should be reviewed first, especially pages with traffic, backlinks, revenue value, campaign use, or strong customer relevance. Lower-value historical URLs can be handled based on risk, destination availability, and practical scope.
-
-**Should old product URLs always redirect to new product URLs?**
-
-That is usually the strongest match when the same product exists on the Target Platform. If the product no longer exists, the redirect should point to the closest useful alternative, such as a replacement product or relevant category, when that destination genuinely helps the customer.
+Not always. Priority URLs with traffic, backlinks, revenue value, campaign use, or customer-intent value should be reviewed carefully. Low-value historical URLs may not need the same level of manual mapping, especially when no relevant destination exists.
 
 **Is redirecting old URLs to the homepage acceptable?**
 
-It can be acceptable for some low-value or expired paths where no meaningful equivalent exists. It should not be the default for important product, category, content, or campaign URLs because it breaks destination relevance.
+It can be acceptable for a small number of low-value expired pages where no better destination exists. It should not be the default for priority product, category, content, or campaign URLs because it usually breaks the original customer intent.
+
+**What is the best redirect destination for a discontinued product?**
+
+The best destination depends on customer usefulness. A replacement product, parent category, related collection, or clear alternative may be appropriate. An unrelated product or generic homepage redirect is usually weak for high-value product URLs.
+
+**Do redirects preserve SEO by themselves?**
+
+No. Redirects preserve reachability, but they do not guarantee page quality, destination relevance, internal-link strength, metadata quality, or commercial usefulness. Priority destinations still need page-level review.
 
 **When should redirect planning start?**
 
-Redirect planning should start before the final store structure is locked. Early planning gives the project time to identify priority URLs, compare old and new patterns, confirm Target Platform capability, and test the most important paths before launch.
-
-**What is the difference between redirects and canonical URLs?**
-
-A redirect sends an old URL to a new destination. A canonical signal indicates the preferred version among duplicate or similar URLs that may still be accessible. During migration, both should support a consistent final URL strategy.
-
-**Can platform limitations affect redirect planning?**
-
-Yes. Some Target Platforms support native redirect management, while others may require apps, modules, server rules, CDN rules, or custom handling. Redirect capability should be checked before the migration timeline and launch plan become fixed.
-
-**What should be checked after go-live?**
-
-After go-live, review priority old URLs, crawl errors, redirect chains, destination relevance, internal links, canonical signals, analytics, and search-console feedback where available. Post-launch review helps catch quiet traffic leakage that may not appear during visual store checks.
-
-<br>
+Redirect planning should start before launch planning becomes fixed. Priority URL exports, destination mapping, platform capability checks, internal-link cleanup, and pre-launch validation all need time for review and correction.

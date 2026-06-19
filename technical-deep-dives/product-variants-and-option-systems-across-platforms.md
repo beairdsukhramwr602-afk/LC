@@ -1,198 +1,155 @@
 # Product Variants and Option Systems Across Platforms
 
-A product can appear complete after migration and still become harder to buy.
+Product choice data determines how a shopper moves from a product page to a specific purchasable item. A shirt is not only a product record; it may also contain size and color options, multiple variant SKUs, variant-level inventory, separate images, price differences, fulfillment rules, and order-line details. A configurable laptop, a bundle, a made-to-order item, or a personalized product can carry even more logic beneath a single storefront page.
 
-That usually happens when the Source Platform and Target Platform do not represent product choice in the same way. One platform may treat purchase choices as options, child products, custom fields, conditional rules, or extension-driven behavior. Another platform may require a clearer separation between the sellable variant, the customer-facing selection path, and the descriptive product information that supports comparison or filtering.
+The technical challenge is that e-commerce platforms do not model product choice in one universal way. One platform may treat each purchasable combination as a child variant. Another may use configurable products, option tables, product attributes, custom options, bundles, app-owned option builders, or extension-specific records. The same business catalog can therefore look simple on the storefront while depending on a complex data structure underneath.
 
-Variant and option logic, therefore, needs its own planning lens. Product counts alone do not show whether a catalog depends on variant-level pricing, inventory, SKU identity, image behavior, restricted combinations, personalization choices, or product-specific configuration rules. These details affect whether customers can select the correct item and whether the business can still fulfill, report, and support those purchases correctly after launch.
+### What Product Variants and Options Represent in an E-commerce Store <a href="#what-product-variants-and-options-represent-in-an-e-commerce-store" id="what-product-variants-and-options-represent-in-an-e-commerce-store"></a>
 
-### Why product choice logic needs early review <a href="#why-product-choice-logic-needs-early-review" id="why-product-choice-logic-needs-early-review"></a>
+A product variant is usually a distinct sellable outcome under a broader product. It represents the item that can be priced, stocked, fulfilled, reported, and ordered. In many catalogs, a variant is the level where the business tracks SKU, barcode, inventory, weight, selected image, fulfillment location, taxability, status, and sometimes price.
 
-Variant-heavy migrations are rarely difficult only because the catalog is large. They become difficult when buying logic is embedded inside product structure.
+An option is the customer-facing choice path that leads to a variant or modifies a product selection. Common option dimensions include size, color, material, finish, capacity, flavor, package quantity, region, subscription frequency, or fit. Option values are the selectable values inside those dimensions, such as `Small`, `Medium`, `Large`, `Black`, `Walnut`, `128 GB`, or `Pack of 12`.
 
-Product choice logic deserves early review when the catalog depends on:
+The distinction matters because options describe the selection path, while variants often carry the commercial identity of the final item. If a product has three sizes and four colors, the storefront may show two option dimensions, but the catalog may contain twelve variant records. Each variant can carry its own SKU, stock level, image, price, fulfillment behavior, and order-line meaning.
 
-* many purchasable combinations under the same parent product
-* variant-level SKU, price, inventory, weight, image, or fulfillment meaning
-* option combinations that must remain unavailable or restricted
-* personalization choices or custom input fields
-* product options controlled by apps, plugins, modules, extensions, or custom code
-* marketplace, ERP, warehouse, or fulfillment identifiers tied to specific variants
+Not every customer choice should become a variant. Some choices are descriptive attributes, personalization fields, add-on selections, bundle components, or custom configuration inputs. A monogram text field, a gift-wrap checkbox, a warranty add-on, and a color selection may all appear beside the buy button, but they do not necessarily belong in the same data model.
 
-In these cases, migration is not just about whether product records can move. The more important question is whether the Target Platform can represent the same buying logic clearly enough for customers and operational teams.
+### Common Data Structure and Fields <a href="#common-data-structure-and-fields" id="common-data-structure-and-fields"></a>
 
-### Variants, options, and attributes are different planning concepts <a href="#variants-options-and-attributes-are-different-planning-concepts" id="variants-options-and-attributes-are-different-planning-concepts"></a>
+Variant and option data usually sits below a parent product but above order-line history. The parent product provides the shared identity of the item: title, description, product type, category placement, brand, tax class, shared media, SEO fields, and merchandising context. Variants and options define how that product becomes purchasable.
 
-Many stores mix these concepts over time. Migration exposes the difference because the Target Platform may enforce a different product model.
+A typical product-choice structure includes:
 
-#### Variants <a href="#variants" id="variants"></a>
+| Data layer                | Common information                                                                                     | Practical meaning                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| Parent product            | Title, handle or slug, description, category, product type, vendor or brand, shared images, SEO fields | Defines the main storefront product and merchandising context   |
+| Option dimension          | Option name, display order, input type, allowed values                                                 | Defines what the shopper must choose                            |
+| Option value              | Value label, value code, sort order, swatch, color code, linked media                                  | Defines the selectable choice inside an option                  |
+| Variant record            | SKU, barcode, price, inventory, weight, image, availability, fulfillment data, taxability, status      | Defines the sellable item created from the option combination   |
+| Custom option or modifier | Text input, upload field, checkbox, date, measurement, add-on price, validation rule                   | Adds purchase behavior that may not create a standard variant   |
+| Bundle or kit component   | Component product, quantity, required or optional state, substitution rule                             | Defines a compound purchasable item made from multiple products |
 
-Variants are sellable outcomes. They usually carry commercial meaning such as a distinct SKU, price, stock position, barcode, fulfillment rule, or product image.
+The exact field ownership differs by platform. In one system, price may live only on the variant. In another, the parent product may hold the base price while option modifiers or rules adjust the final price. Some platforms store variant images directly on variant records; others rely on gallery associations, theme behavior, or external apps to change images when a customer selects an option.
 
-A variant should usually answer the question: “What exactly is the customer buying?”
+The structure becomes especially important when a store uses variant-specific data. If every variant has the same price, image, and inventory behavior, the model is easier to recreate. If each variant has different stock, barcode, warehouse routing, images, sale prices, tax classes, or marketplace identifiers, the variant layer becomes operationally critical.
 
-#### Options <a href="#options" id="options"></a>
+### Relationships With Other Store Data <a href="#relationships-with-other-store-data" id="relationships-with-other-store-data"></a>
 
-Options are customer-facing choices that help shoppers reach the correct sellable outcome. Size, color, material, finish, capacity, package type, or configuration choice may be options, depending on the catalog.
+Variants and options rarely function alone. They interact with catalog browsing, search, filtering, inventory, cart logic, order records, fulfillment, analytics, and external systems.
 
-Options should usually answer the question: “What does the customer need to choose before buying?”
+Inventory is one of the most important relationships. A parent product may appear available, but the actual purchasable quantity often belongs to each variant. If `Blue / Medium` is out of stock while `Blue / Large` is available, the storefront must communicate that at the correct selection level. Multi-location inventory adds another layer because the same variant can have different available quantities by warehouse, store, fulfillment center, or market.
 
-#### Attributes <a href="#attributes" id="attributes"></a>
+Order records also depend on variant structure. A completed order should show the exact item the customer bought, not just the parent product title. Variant SKU, option values, price, tax, discount allocation, fulfillment data, and custom input values may all need to remain interpretable for customer support, warehouse processing, returns, analytics, and accounting.
 
-Attributes describe a product. They may support filtering, comparison, search, merchandising, technical specification, or internal classification. Some attributes look similar to options but should not always create separate sellable combinations.
+Search and filtering can also depend on the boundary between options and attributes. A color option may drive variant selection, while a color attribute may support filtering. Some platforms connect those concepts; others keep them separate. When the model changes, a store can accidentally preserve purchasability but weaken filtering, or preserve filtering while losing variant-level buying logic.
 
-Attributes should usually answer the question: “What information helps people understand, compare, or organize this product?”
+External systems often use variant-level identifiers. ERP, warehouse, marketplace, POS, PIM, subscription, and fulfillment systems may identify the sellable item by SKU, barcode, variant ID, external product ID, or a combination of those fields. If those identifiers are tied to the wrong level after migration, downstream systems can misread stock, orders, or reporting data.
 
-#### Why the distinction matters <a href="#why-the-distinction-matters" id="why-the-distinction-matters"></a>
+### How Platform Models Differ <a href="#how-platform-models-differ" id="how-platform-models-differ"></a>
 
-Migration risk increases when descriptive attributes are turned into unnecessary variants, or when real sellable differences are flattened into display-only information. Either mistake can weaken the catalog: one creates unnecessary complexity, while the other removes buying or fulfillment meaning.
+E-commerce platforms vary in how they separate parent products, variants, options, attributes, configurable products, bundles, and custom option behavior.
 
-### Product choice structures depend on the parent product <a href="#product-choice-structures-depend-on-the-parent-product" id="product-choice-structures-depend-on-the-parent-product"></a>
+Many SaaS platforms use a parent product with a limited set of option dimensions and a generated list of variants. This model is easy to understand and works well for simple size/color catalogs, but it can impose limits on option count, variant count, option display, or variant-level custom behavior.
 
-Variants and options should be treated as dependency structures under products, not as independent records with full meaning on their own.
+Some open-source and enterprise platforms use richer product-type systems. A configurable product may serve as the parent, while simple products act as sellable children. Grouped products, bundles, downloadable products, virtual products, and custom-option products may each have different data structures. The same storefront choice can therefore be represented as a variant in one platform and as a configurable relationship, bundle component, or custom option in another.
 
-A variant usually depends on the parent product for title, category placement, description, shared media, SEO context, and storefront presentation. Options depend on the parent product because their meaning changes by product type. For example, “small” may describe a shirt size, a package size, or a storage capacity, depending on the catalog.
+Other platforms rely heavily on attributes. Attribute sets, global attributes, product-specific attributes, swatches, layered navigation, and configurable attributes may all influence how a choice appears and whether it creates a sellable variation. In these systems, the attribute model is not only descriptive; it can also control product construction, filtering, merchandising, and comparison.
 
-That is why validation cannot stop at record presence. A migrated product may contain parent and child records while still losing the practical relationship between choices, sellable outcomes, images, prices, stock, and fulfillment meaning.
+Extension-heavy stores may use option builders, product configurators, custom tables, app-owned fields, serialized configuration data, or theme-level logic to create buying behavior outside the core product model. These stores can look normal on the storefront while depending on data that standard product exports do not fully represent.
 
-### Where Source Platform and Target Platform models differ <a href="#where-source-platform-and-target-platform-models-differ" id="where-source-platform-and-target-platform-models-differ"></a>
+### Platform-Specific Features and Edge Cases <a href="#platform-specific-features-and-edge-cases" id="platform-specific-features-and-edge-cases"></a>
 
-Platforms differ in how they separate sellable variation from descriptive information and custom product behavior.
+Product-choice complexity often appears in details that are easy to miss during a surface-level catalog review.
 
-Some platforms support rich parent-child product modeling. Some keep variants close to option combinations. Some rely more heavily on apps, plugins, themes, modules, metafields, custom fields, or external systems for advanced product behavior. Some can represent variant-level images, prices, inventory, and identifiers directly, while others may need configuration changes or specialized handling to preserve equivalent behavior.
+One edge case is variant-count pressure. A product with four option dimensions can create hundreds or thousands of possible combinations. Some platforms restrict how many variants can exist under one parent product. Even where higher counts are allowed, large variant matrices can slow administration, clutter product pages, complicate inventory updates, and make validation harder.
 
-These differences affect more than administration. They affect how a customer experiences the product page after migration:
+Another edge case is invalid combinations. A catalog may offer `Black / Small`, `Black / Medium`, and `White / Large`, but not every color-size combination. Some platforms represent only valid variants. Others generate combinations and require unavailable choices to be hidden, disabled, or marked out of stock. The difference affects both data structure and customer experience.
 
-* how many choices appear before purchase
-* whether option names and values remain clear
-* whether invalid combinations are blocked correctly
-* whether the selected image, price, SKU, and availability change as expected
-* whether the cart and order records show the chosen item clearly
-* whether support, warehouse, and fulfillment teams can interpret the order
+Variant images are also platform-specific. Some stores attach images directly to variants. Some use swatches or option values. Some rely on theme logic that changes the gallery when an option is selected. Some keep all images at the parent level. Losing the relationship between option value and image can make a migrated product technically purchasable but visually confusing.
 
-A product page can look populated and still fail commercially. The real pass condition is whether customers can reach the correct sellable item without confusion and whether the business can operate from the resulting order data.
+Custom options create another category of risk. Engraving text, file uploads, measurements, date selections, installation options, gift messages, warranty choices, and made-to-order specifications may be stored separately from variants. Some choices affect price but not inventory. Some affect fulfillment but not SKU. Some should be captured on the order line but should not create separate product records.
 
-### Variant explosion is a modeling problem <a href="#variant-explosion-is-a-modeling-problem" id="variant-explosion-is-a-modeling-problem"></a>
+Bundles, kits, and grouped products require special interpretation. A bundle may have its own product page while depending on component products and quantities. A kit may be fulfilled as one SKU even if it contains multiple components. A grouped product may allow shoppers to buy several related products together. Treating all of these as simple variants can distort inventory, order lines, pricing, and fulfillment.
 
-Variant explosion happens when too many fields are treated as purchase-defining combinations.
+### What Can Change When the Structure Is Recreated Elsewhere <a href="#what-can-change-when-the-structure-is-recreated-elsewhere" id="what-can-change-when-the-structure-is-recreated-elsewhere"></a>
 
-This is not only a size problem. It is a modeling problem. Some fields may be useful for description, filtering, comparison, personalization, or merchandising, but they do not always deserve to multiply the number of sellable variants.
+When product-choice data is recreated in another platform model, the visible product page may be only part of the result. The deeper question is whether the platform can still express the same commercial logic.
 
-Variant explosion can create:
+Several changes can occur:
 
-* unnecessary product-management workload
-* confusing product pages
-* inconsistent option naming
-* invalid or meaningless combinations
-* weaker merchandising control
-* harder inventory review
-* more validation work than the catalog actually needs
+| Structural change                            | Possible effect                                                                            |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Variants become attributes                   | Customers may see information, but the store may lose SKU, inventory, or price differences |
+| Attributes become variants                   | Product management may become unnecessarily complex and produce meaningless combinations   |
+| Custom options become standard variants      | Personalization or add-on fields may turn into rigid stock-tracked items                   |
+| Variant images become parent images          | Product selection may no longer update the visual presentation correctly                   |
+| Bundle components become standalone products | Order lines, fulfillment, or stock deduction may no longer match the intended kit logic    |
+| External IDs move to the wrong level         | ERP, POS, marketplace, or warehouse systems may sync against the wrong item                |
 
-The safer planning question is not “How many combinations can be generated?” It is “Which combinations represent real sellable outcomes that the business must manage after launch?”
+These changes do not always mean the migration is wrong. Sometimes a structure must be normalized because the Target Platform uses a different model. But the business needs to know which meaning should be preserved: purchasability, display clarity, inventory control, order-line interpretation, fulfillment accuracy, reporting, or merchandising.
 
-### Custom logic and extension-driven options need special attention <a href="#custom-logic-and-extension-driven-options-need-special-attention" id="custom-logic-and-extension-driven-options-need-special-attention"></a>
+A technically acceptable transformation is one that preserves the important behavior even if the underlying model changes. A risky transformation is one that preserves record count while losing the relationship between choice, item identity, and operational meaning.
 
-Many stores do not rely only on the core product model. Product behavior may depend on apps, plugins, modules, extensions, custom fields, or external systems.
+### What Merchants Should Inspect <a href="#what-merchants-should-inspect" id="what-merchants-should-inspect"></a>
 
-Common examples include:
+A useful inspection starts with representative product samples rather than total product count. The best samples expose different product-choice patterns across the catalog.
 
-* personalization fields
-* bundle or kit selection logic
-* engraving, printing, measurement, or upload requirements
-* compatibility selectors
-* conditional option display
-* custom price modifiers
-* product configurators
-* industry-specific specifications
-* marketplace or fulfillment identifiers
-* media behavior tied to specific selections
+Merchants should inspect:
 
-These requirements may make a product look standard at the record level while behaving non-standard in practice. A standard migration may move the core product data, but the business still needs to evaluate whether the purchase behavior, custom logic, and downstream dependencies can be preserved in the Target Platform.
+* products with the most variants or option dimensions;
+* products with variant-specific prices, images, weights, SKUs, barcodes, or inventory;
+* products where some combinations are invalid or unavailable;
+* products with custom text fields, uploads, measurements, engraving, or personalization;
+* bundles, kits, grouped products, subscription products, or made-to-order items;
+* products connected to ERP, POS, WMS, marketplace, PIM, or fulfillment systems;
+* best-selling configurable products where a small buying error would create support or fulfillment problems.
 
-When custom option behavior, non-standard product structure, extension-specific data, or custom migration logic adjustment is required, the requirement belongs under Custom Service review rather than simple product transfer planning.
+For each sample, the review should answer concrete questions. Which record is the real sellable item? Which fields belong to the parent product? Which fields belong to the variant? Which choices are only display information? Which choices affect price, inventory, fulfillment, or order records? Which behavior depends on extensions, apps, custom fields, or theme logic?
 
-### What merchants should define before execution <a href="#what-merchants-should-define-before-execution" id="what-merchants-should-define-before-execution"></a>
+Merchants should also compare storefront behavior with admin data. A product may show the right options on the page, but the admin may store the logic in an extension table. Another product may have clean variant records but rely on theme code for image switching. Both cases require different preservation decisions.
 
-Before the full catalog is migrated, the business should define how product choice should work in the Target Platform.
+### When the Data Needs Deeper Review <a href="#when-the-data-needs-deeper-review" id="when-the-data-needs-deeper-review"></a>
 
-#### Which choices define the real sellable item? <a href="#which-choices-define-the-real-sellable-item" id="which-choices-define-the-real-sellable-item"></a>
+Product-choice data needs deeper review when the structure carries business logic that cannot be inferred from product titles or record counts.
 
-These choices must remain tied to the correct purchasable outcome. They often affect SKU, price, stock, fulfillment, image, or reporting.
+Deeper review is usually needed when:
 
-#### Which fields are descriptive rather than purchase-defining? <a href="#which-fields-are-descriptive-rather-than-purchase-defining" id="which-fields-are-descriptive-rather-than-purchase-defining"></a>
+* the Source Platform and Target Platform use different product-type models;
+* variant limits or option-dimension limits affect the catalog;
+* products depend on custom option builders, configurators, extensions, or app-owned fields;
+* variant-level identifiers are used by external systems;
+* bundles, kits, grouped products, or subscriptions must remain operationally equivalent;
+* custom fields determine price, fulfillment, eligibility, or order-line interpretation;
+* product choice affects filtering, search, swatches, images, or merchandising rules.
 
-These fields may still matter for filtering, comparison, SEO, merchandising, or customer education, but they should not automatically create more variants.
+In these cases, standard product transfer planning may not be enough. The important work is to identify which product-choice behavior is core platform data, which behavior is custom or extension-owned, and which behavior should be recreated differently in the Target Platform.
 
-#### Which products carry the highest structural risk? <a href="#which-products-carry-the-highest-structural-risk" id="which-products-carry-the-highest-structural-risk"></a>
-
-These are often best sellers, configurable products, bundle-like products, products with many meaningful choices, or products where a small mistake can affect fulfillment.
-
-#### Which product behaviors depend on apps, plugins, modules, extensions, or custom fields? <a href="#which-product-behaviors-depend-on-apps-plugins-modules-extensions-or-custom-fields" id="which-product-behaviors-depend-on-apps-plugins-modules-extensions-or-custom-fields"></a>
-
-This is where standard-looking products often become custom in practice. The key issue is whether the important behavior exists in the core product model or outside it.
-
-#### What must remain true after launch? <a href="#what-must-remain-true-after-launch" id="what-must-remain-true-after-launch"></a>
-
-The answer should be behavioral. Customers should be able to select the correct configuration, invalid combinations should remain unavailable, variant-level data should remain meaningful, and order records should still support fulfillment and support review.
-
-### What to validate first <a href="#what-to-validate-first" id="what-to-validate-first"></a>
-
-Variant-heavy products should be early validation candidates because they reveal structural mismatch quickly.
-
-A strong first review sample should include:
-
-* top-revenue configurable products
-* products with the highest number of meaningful choices
-* products with variant-specific prices, SKUs, inventory, weights, or images
-* products with historically inconsistent option names
-* products controlled by apps, plugins, modules, extensions, or custom fields
-* products that feed warehouse, ERP, marketplace, or fulfillment workflows
-
-The review question is straightforward: can a customer still choose the correct item without hesitation, workaround behavior, or hidden errors?
-
-Demo Migration can help expose whether the Target Platform representation still supports the intended buying logic before the project scales across the full catalog.
-
-### When standard handling may not be enough <a href="#when-standard-handling-may-not-be-enough" id="when-standard-handling-may-not-be-enough"></a>
-
-Not every configurable catalog needs custom work. Some catalogs can be represented clearly through standard service capability, especially when options and variants already map cleanly into the Target Platform model.
-
-The risk is higher when:
-
-* a small group of configurable products drives a large share of revenue
-* product choices depend on non-native option behavior
-* custom fields influence what customers can select or what downstream systems expect
-* product meaning is split across core records and extensions
-* the Target Platform can preserve the data only by simplifying the product structure
-* the expected result depends on custom migration logic adjustment
-
-If the main need is careful execution and review using standard service capability, Managed Service may be suitable. If the expected result depends on custom option behavior, transformation, Custom Platform handling, extension-specific interpretation, or non-standard product structure, the safer path is Custom Service review.
+Next-Cart review is most relevant when product-choice structures require Advanced Data Mapping, Advanced Data Configure, Custom Add-ons, or Custom Service evaluation because the Target Platform cannot represent the Source Platform behavior through equivalent standard fields. The service discussion should follow the data finding, not replace it.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Product variants and option systems are one of the fastest ways for a migration to look complete while becoming commercially weaker. The issue is not only whether product records exist. It is whether the Target Platform still expresses the same sellable outcomes, selection logic, and customer decision path clearly enough after migration.
+Product variants and option systems define the path from a product page to a specific purchasable item. They connect customer choice with SKU identity, price, inventory, images, fulfillment, order records, reporting, and external systems.
 
-The safest planning approach is to separate true variants from options and descriptive attributes, identify where product behavior depends on custom or extension-driven logic, and validate representative high-risk products early. When that work is done before full execution, product migration becomes easier to judge and less likely to create hidden buying or fulfillment problems.
+A reliable migration does not only preserve products. It preserves the meaning of each purchasable choice and the relationships that make that choice usable in the storefront and operationally correct after checkout. The safest preparation is to study representative product-choice structures before migration decisions are finalized, especially where variants, attributes, custom options, bundles, and external identifiers overlap.
 
-Review your highest-risk configurable products first, especially the products where variant-level price, stock, image, SKU, or fulfillment meaning matters. If the Target Platform representation appears likely to simplify or distort the intended buying logic, Live Chat can help clarify whether standard service capability is enough or whether Custom Service review is the safer path.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Are product variants the same as product options?**
 
-**Why can configurable products migrate and still become harder to buy?**
+No. Options are usually the customer-facing choice dimensions, such as size or color. Variants are the sellable outcomes created from those choices, often carrying SKU, price, inventory, image, and fulfillment meaning.
 
-Because the product record can survive while the selection logic changes. The page may still show the product, but choices, pricing, images, availability rules, or sellable outcomes may no longer behave clearly enough for customers.
+**Should every product attribute become a variant?**
 
-**Are variants, options, and attributes interchangeable in migration planning?**
+No. Attributes often describe, filter, compare, or organize products. They should become variants only when they define a real purchasable outcome that needs its own commercial or operational identity.
 
-No. Variants are sellable outcomes, options are customer-facing selection paths, and attributes describe or organize product information. Treating them as the same thing can create either unnecessary combinations or a loss of real buying meaning.
+**Why can variant migration become difficult even when product counts are small?**
 
-**What is variant explosion in migration planning?**
+A small catalog can still contain complex product-choice logic. Custom options, invalid combinations, variant-specific inventory, bundles, configurators, or external SKU dependencies can create more risk than product count suggests.
 
-Variant explosion happens when too many fields are treated as purchase-defining combinations. It can create unnecessary variants, harder catalog management, confusing product pages, and more validation work than the catalog actually needs.
+**What should be reviewed first in a variant-heavy catalog?**
 
-**Which products should be reviewed first?**
+Start with best sellers, products with the most meaningful option combinations, products with variant-specific prices or inventory, and products connected to external systems. These samples reveal structural mismatch faster than reviewing simple products.
 
-Start with products that carry the most commercial and structural risk: best sellers with many meaningful choices, variant-specific prices or images, inconsistent option naming, custom fields, or extension-driven product behavior.
+**When does product-choice data need custom handling?**
 
-**Does a complex variant structure always require Custom Service?**
-
-No. Some variant structures can be handled through standard service capability when they map cleanly into the Target Platform model. Custom Service review becomes important when the expected result depends on custom option logic, extension-specific behavior, non-standard product structure, or custom migration logic adjustment.
+Custom handling may be needed when important product behavior is stored in extensions, apps, custom fields, configurators, bundles, or external systems rather than in standard product and variant fields.

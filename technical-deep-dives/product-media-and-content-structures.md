@@ -1,215 +1,210 @@
 # Product Media and Content Structures
 
-Product media and product content can migrate as files, fields, or embedded assets while still changing how the product page persuades the customer.
+Product media and product content are the data structures that turn a product record into a product page customers can understand. A product can have the correct title, SKU, price, and inventory state while still becoming harder to buy if its images, video, gallery order, variant-linked media, product descriptions, specification blocks, downloadable documents, or embedded content lose their original structure.
 
-That is why product media should not be reviewed only as asset transfer. Product images, galleries, videos, downloadable files, rich descriptions, comparison blocks, and embedded product content all help customers understand what they are buying. If those elements arrive in the Target Platform but appear in the wrong order, lose their context, render poorly, or stop working with product choices, the product page may look technically complete while becoming less useful.
+In an e-commerce platform, product media is rarely only a folder of files. Media can be tied to product records, variants, attributes, rich descriptions, theme sections, custom fields, app data, CDN URLs, product-page templates, CMS blocks, or external media providers. Product content can also be stored as plain text, HTML, reusable blocks, page-builder sections, metafields, custom fields, or extension-owned data.
 
-Media and content continuity is strongest when the migration plan identifies which assets carry product meaning, how they are connected to the product experience, and how the Target Platform can present them after migration.
+A technical review of product media and content therefore needs to examine the asset, its relationship to the product, its display role, its storage location, its rendering rules, and its customer-facing behavior. The main question is not only whether media exists after migration. The stronger question is whether the Target Platform can still interpret and present the media in the right product context.
 
-### Why Product Media Matters in Migration <a href="#why-product-media-matters-in-migration" id="why-product-media-matters-in-migration"></a>
+### What Product Media and Content Represent in an E-commerce Store <a href="#what-product-media-and-content-represent-in-an-e-commerce-store" id="what-product-media-and-content-represent-in-an-e-commerce-store"></a>
 
-A product page is not only a title, SKU, price, and description. Many buying decisions depend on visual and content signals that help customers compare, trust, and choose.
+Product media and content represent the visual, descriptive, instructional, and persuasive layers of a product page. They help customers see what the product looks like, understand product differences, compare details, verify compatibility, review specifications, inspect quality, and decide whether the item fits their need.
 
-Product media can influence:
+These structures often support several store functions at once:
 
-* how customers understand size, color, material, compatibility, or use case
-* whether variant choices feel clear
-* whether product details look trustworthy
-* whether technical or high-consideration products provide enough supporting evidence
-* whether customers can compare features before purchasing
-* whether product pages still feel complete after the platform change
+| Media or content layer      | What it represents                                                                               | Store behavior affected                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Featured image              | The primary product image shown first                                                            | Product page impression, collection thumbnails, search results, and merchandising cards |
+| Gallery images              | Secondary product visuals                                                                        | Detail inspection, alternate angles, packaging views, lifestyle context, and trust      |
+| Variant-linked media        | Images assigned to a specific color, material, size, style, or configuration                     | Option selection, visual confirmation, and purchasability confidence                    |
+| Alt text and image metadata | Descriptive text and image context                                                               | Accessibility, image search, internal maintenance, and SEO support                      |
+| Videos and embedded media   | Product demonstrations, tutorials, 3D viewers, hosted players, or external embeds                | Product education, technical explanation, and conversion support                        |
+| Downloadable files          | Manuals, certificates, specification sheets, installation guides, care guides, or digital files  | Pre-purchase evaluation, compliance, technical support, and post-purchase use           |
+| Rich descriptions           | Structured product explanation beyond plain text                                                 | Product-page readability, comparison, sizing, warranty, compatibility, and persuasion   |
+| Content blocks              | Tabs, accordions, icons, tables, banners, trust blocks, comparison sections, or reusable modules | Page layout, content hierarchy, theme behavior, and user interaction                    |
 
-A migration that preserves product records but weakens media presentation can reduce product-page clarity. The issue is not only whether assets exist in the Target Platform. The issue is whether the assets still support the customer’s decision.
+The same asset may have multiple roles. A product image can be a gallery image, a variant image, a collection thumbnail, a feed image, and a social-sharing image. A product manual can be a downloadable file, a custom field value, a CMS asset, or a link embedded inside product description HTML. Those roles matter because platforms do not always store or display them in the same way.
 
-### Product Media Is More Than File Transfer <a href="#product-media-is-more-than-file-transfer" id="product-media-is-more-than-file-transfer"></a>
+### Common Data Structure and Fields <a href="#common-data-structure-and-fields" id="common-data-structure-and-fields"></a>
 
-Product media can include several different structures, and each structure may behave differently after migration.
+A product media record usually includes more than a file path. It may contain identifiers, asset references, display roles, sort positions, variant relationships, metadata, dimensions, MIME type, timestamps, accessibility text, and publication status.
 
-#### Featured images and gallery images <a href="#featured-images-and-gallery-images" id="featured-images-and-gallery-images"></a>
+Common media fields include:
 
-Featured images usually carry the first impression of the product. Gallery images support comparison, detail inspection, lifestyle context, packaging views, diagrams, or alternate angles.
+| Field or property             | Typical function                                                     | Why it matters                                                     |
+| ----------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Media ID                      | Internal identifier for the asset                                    | Connects the asset to product, variant, gallery, or CMS references |
+| Product ID                    | Parent product relationship                                          | Determines which product page uses the asset                       |
+| Variant ID or option relation | Choice-specific media relationship                                   | Controls whether images change when a customer selects an option   |
+| File URL or storage path      | Location of the asset                                                | Affects rendering, transfer, CDN access, and broken-link risk      |
+| File type                     | Image, video, PDF, document, 3D model, or embedded asset             | Determines platform support and display behavior                   |
+| Sort order                    | Position inside a gallery or media set                               | Controls visual storytelling and first-impression sequence         |
+| Role or usage flag            | Main image, thumbnail, gallery, swatch, listing image, or feed image | Controls where the asset appears in the storefront                 |
+| Alt text                      | Descriptive accessibility and search text                            | Supports accessibility, image interpretation, and maintenance      |
+| Caption or label              | Customer-facing or admin-facing context                              | Helps describe diagrams, attachments, or technical assets          |
+| Dimensions and file size      | Width, height, weight, and storage properties                        | Affects theme rendering, performance, zoom, and responsive display |
+| Visibility or status          | Published, hidden, disabled, or channel-specific state               | Determines where the asset appears                                 |
+| External provider reference   | Video ID, CDN ID, app asset ID, or DAM reference                     | Connects media to third-party systems or hosted players            |
 
-If the Target Platform changes the featured image, gallery sequence, thumbnail behavior, zoom behavior, or image display rules, the product page may no longer guide the customer in the same way.
+Product content records can be more difficult because the structure may be stored as text, HTML, JSON, page-builder data, custom-field groups, metafields, theme sections, or app-owned blocks.
 
-#### Variant-linked images <a href="#variant-linked-images" id="variant-linked-images"></a>
+Common content fields include:
 
-Some products rely on images that change when the customer selects a color, size, style, bundle, finish, or configuration. In those cases, the relationship between product choice and image display is part of the buying experience.
+| Content field            | Typical use                                            | Structural concern                                                    |
+| ------------------------ | ------------------------------------------------------ | --------------------------------------------------------------------- |
+| Short description        | Brief summary or listing text                          | May be native in one platform and absent in another                   |
+| Long description         | Main product explanation                               | May contain HTML, tables, scripts, styles, images, or embedded assets |
+| Specification table      | Technical attributes displayed in structured form      | May be native attributes, HTML tables, tabs, or custom fields         |
+| Size chart or fit guide  | Product choice guidance                                | Often stored in app data, theme sections, CMS blocks, or metafields   |
+| Warranty or care content | Policy and usage details                               | May be reused across many products or embedded per product            |
+| Compatibility content    | Fitment, vehicle, device, part, or model relationships | May depend on attributes, tables, apps, or external databases         |
+| Comparison content       | Feature blocks or product comparison rows              | May depend on page builders, custom templates, or merchandising apps  |
+| Download links           | Product documents or digital assets                    | May depend on file libraries, permissions, or external storage        |
 
-If variant-linked images migrate as normal gallery images without preserving their choice-specific behavior, customers may still see images but lose the visual confirmation they need to choose correctly.
+A clean product-page transfer requires knowing whether these values are independent fields, embedded HTML fragments, reusable content references, or display objects controlled by the theme or an app.
 
-#### Embedded media and videos <a href="#embedded-media-and-videos" id="embedded-media-and-videos"></a>
+### Relationships With Other Store Data <a href="#relationships-with-other-store-data" id="relationships-with-other-store-data"></a>
 
-Videos, external embeds, 3D assets, product demos, and hosted media may not behave like ordinary product images. They can depend on theme support, platform media fields, embed rules, third-party hosting, or custom page layouts.
+Product media and content are relationship-heavy. They connect to product data, variant data, catalog data, SEO data, inventory behavior, reviews, external feeds, page templates, and sometimes order or fulfillment data.
 
-A product page can keep the video link while losing the original display behavior. That is why embedded media should be reviewed as page experience, not only as stored content.
+The most common relationship is the link between product and media. A product can have many images, and each image can have a position, role, language scope, market scope, or channel scope. Some platforms also allow one media asset to be reused across multiple products, while others duplicate asset references per product.
 
-#### Downloadable files and product attachments <a href="#downloadable-files-and-product-attachments" id="downloadable-files-and-product-attachments"></a>
+Variant-linked media adds another relationship layer. A color variant may need a specific gallery set, a material option may need a texture image, and a bundle configuration may need a different assembled-product image. If the platform stores variant images directly on variant records, the relationship is clear. If the platform stores variant-specific galleries through custom fields, theme logic, or an app, the relationship may not be visible in the core product media table.
 
-Some products depend on manuals, specification sheets, compatibility documents, installation guides, care instructions, certificates, digital files, or other downloadable assets.
+Product content also depends on other store data. Specification tables may be generated from product attributes. Size charts may be selected by product type or category. Compatibility blocks may use SKU, model number, vehicle fitment, device family, or product tags. Trust badges may depend on product collections, vendor, price, warranty field, shipping class, or promotional state.
 
-These assets may require special review because they can be stored in file libraries, product fields, custom fields, extensions, or external systems. The main question is whether customers can still find and use the asset in the right product-page context.
+These relationships affect storefront behavior. A product page may show the correct product image but fail to show the correct variant image. A product may keep its long description but lose its tabs. A downloadable manual may transfer but no longer appear beside the right product. A size chart may exist as an asset but lose the condition that decides when it should appear.
 
-#### Rich descriptions and content blocks <a href="#rich-descriptions-and-content-blocks" id="rich-descriptions-and-content-blocks"></a>
+### How Platform Models Differ <a href="#how-platform-models-differ" id="how-platform-models-differ"></a>
 
-Product descriptions often contain more than plain text. They may include tables, icons, tabs, accordions, embedded images, trust blocks, specification sections, sizing guides, warranty information, or comparison content.
+Platforms differ in how they separate media storage, media roles, product content, page layout, and storefront rendering.
 
-If the Target Platform renders this content differently, the description can become harder to scan even when the text survives. For technical products, regulated products, or higher-consideration purchases, that loss of structure can matter as much as a missing field.
+Some SaaS platforms keep product images and variant images inside native product records, while videos, 3D models, metafield-driven content, and theme sections may live in separate platform objects. Product content may be a native rich text field, but tabs, icon blocks, size charts, and product-specific content sections may depend on theme settings or apps.
 
-### Where Media and Content Structures Usually Change <a href="#where-media-and-content-structures-usually-change" id="where-media-and-content-structures-usually-change"></a>
+Open-source platforms often provide deeper control over image roles, store views, custom attributes, media galleries, template overrides, CMS blocks, and extension tables. A single image may have different roles for base image, small image, thumbnail, swatch, or listing display. That flexibility is powerful, but it increases the chance that media meaning is stored outside the visible product edit screen.
 
-Media continuity issues often come from platform differences rather than data loss.
+Enterprise and B2B platforms may use digital asset management systems, PIM-managed media, customer-specific catalogs, market-specific content, approval workflows, or localization layers. Product media may be selected by channel, customer segment, language, or region. The storefront may consume media from a PIM or DAM rather than owning the master asset.
 
-#### Gallery and image-role models <a href="#gallery-and-image-role-models" id="gallery-and-image-role-models"></a>
+Headless and composable stores add another model. Product data may live in the commerce platform, product content in a CMS, assets in a DAM, product copy in a PIM, media transformations in a CDN, and product-page assembly in a frontend framework. In that environment, media migration is not only a commerce-platform question. It is a relationship question across several systems.
 
-Platforms may treat image roles, thumbnails, gallery order, product-page display, collection-page images, and variant-specific images differently. A source image may have multiple purposes that do not map one-to-one into the Target Platform.
+Marketplace-connected stores also create separate media requirements. A storefront image set may differ from marketplace image requirements, feed images, social-channel images, or advertising assets. Cropping, background rules, aspect ratios, image count limits, and title-card requirements may vary by channel.
 
-For example, one platform may use separate image roles for product pages, listing pages, thumbnails, and store views, while another may rely more heavily on theme behavior or media references.
+### Platform-Specific Features and Edge Cases <a href="#platform-specific-features-and-edge-cases" id="platform-specific-features-and-edge-cases"></a>
 
-#### Theme and storefront presentation <a href="#theme-and-storefront-presentation" id="theme-and-storefront-presentation"></a>
+Product media and content become complex when stores use features beyond ordinary product image galleries.
 
-The same migrated image set can look different under a different theme. Image crop ratios, zoom, carousel behavior, mobile behavior, lightbox behavior, and responsive layouts can all affect whether the product page still looks polished.
+Important edge cases include:
 
-This is why media validation should happen in the actual Target Platform presentation, not only in the product admin.
-
-#### Rich-content rendering <a href="#rich-content-rendering" id="rich-content-rendering"></a>
-
-Content blocks, HTML descriptions, embedded tables, icons, tabs, and custom layouts may not render the same way after migration. Some content may need cleanup, restructuring, or a different presentation model in the Target Platform.
-
-When rich descriptions are important to conversion, the migration plan should identify which pages deserve representative review before broader execution.
-
-#### Asset location and access rules <a href="#asset-location-and-access-rules" id="asset-location-and-access-rules"></a>
-
-Media may be stored as product fields, file-library assets, CMS assets, extension data, external URLs, or hosted files. If the asset location changes, the customer-facing page may need different references or presentation logic.
-
-This matters especially for embedded videos, downloadable documents, manuals, and assets controlled by third-party apps, plugins, modules, or custom fields.
-
-### Extension-Driven Media and Content Need Extra Review <a href="#extension-driven-media-and-content-need-extra-review" id="extension-driven-media-and-content-need-extra-review"></a>
-
-Many stores do not rely only on native product media behavior.
-
-Apps, plugins, modules, custom templates, custom fields, or external systems may control:
-
-* advanced image galleries
-* zoom or swipe behavior
-* product videos
-* 3D models or interactive media
-* downloadable product files
-* variant-specific image logic
-* trust badges and promotional content
-* size charts and compatibility tables
-* tabs, accordions, or long-form product sections
-* product specification blocks
-* external asset libraries
-
-When these structures influence the buying experience, the migration question is not only whether the asset can move. The stronger question is whether the Target Platform can reproduce the same customer-facing meaning through standard service capability, available settings, Standard Add-ons, or Custom Service work.
-
-If the expected product-page result depends on custom media behavior, extension-specific structures, custom fields, or special transformation rules, the requirement should be reviewed as Custom Service territory rather than assumed to be ordinary product media transfer.
-
-### What to Define Before Migration <a href="#what-to-define-before-migration" id="what-to-define-before-migration"></a>
-
-Before migration execution, merchants should identify which product-page media and content elements carry real business value.
-
-#### Products that depend on visual selling <a href="#products-that-depend-on-visual-selling" id="products-that-depend-on-visual-selling"></a>
-
-Fashion, furniture, jewelry, beauty, home goods, electronics, spare parts, and visual configuration products often depend heavily on image order, alternate views, and detail visibility.
-
-For these products, media review should include whether the first image, gallery sequence, zoom behavior, and mobile presentation still support buying confidence.
-
-#### Products that depend on rich explanation <a href="#products-that-depend-on-rich-explanation" id="products-that-depend-on-rich-explanation"></a>
-
-Technical products, B2B products, configurable products, regulated products, and compatibility-sensitive products often need structured descriptions, tables, diagrams, downloads, or guidance blocks.
-
-These pages should be reviewed for readability and meaning, not only for text presence.
-
-#### Products that use variant-linked media <a href="#products-that-use-variant-linked-media" id="products-that-use-variant-linked-media"></a>
-
-Products with color, material, style, size, or bundle variations should be reviewed for image-choice behavior. The product should still help the customer visually confirm the selected option.
-
-If variant-linked behavior cannot be reproduced through standard handling, the requirement may need custom migration logic adjustment or post-migration storefront configuration.
-
-#### Products with downloadable or embedded assets <a href="#products-with-downloadable-or-embedded-assets" id="products-with-downloadable-or-embedded-assets"></a>
-
-Products with PDFs, manuals, certificates, care guides, embedded videos, external media links, or digital files should be tested early. These assets may depend on file hosting, permissions, theme support, or external references.
-
-The practical test is simple: can the customer still find, open, view, and trust the asset from the product page?
-
-### What to Validate After Demo Migration <a href="#what-to-validate-after-demo-migration" id="what-to-validate-after-demo-migration"></a>
-
-Demo Migration should be used to inspect product media and content as customer-facing experience, not only as backend records.
-
-#### Review representative product types <a href="#review-representative-product-types" id="review-representative-product-types"></a>
-
-The review sample should include products where media or content does meaningful work:
-
-* best sellers
-* high-traffic products
-* products with many gallery images
-* products with variant-linked images
-* products with videos or embedded media
-* products with downloadable files
-* products with rich descriptions or structured content blocks
-* products where visual details affect selection or trust
-
-A random sample may miss the most important media issues. A representative sample is more useful because it exposes where the Target Platform’s structure changes the product page experience.
-
-#### Check page experience, not only asset presence <a href="#check-page-experience-not-only-asset-presence" id="check-page-experience-not-only-asset-presence"></a>
-
-A strong review should ask:
-
-* Do the most important images appear in the right order?
-* Does the gallery still help customers understand the product?
-* Do variant-linked images still guide product choice?
-* Do videos or embedded media still display correctly?
-* Do downloadable assets remain accessible from the right page context?
-* Do rich descriptions stay readable and structured?
-* Does the page still support comparison, trust, and buying confidence?
-
-#### Review mobile presentation <a href="#review-mobile-presentation" id="review-mobile-presentation"></a>
-
-Product media problems often appear differently on mobile. Image cropping, gallery controls, embedded media, tabs, accordions, and long descriptions may behave differently from desktop.
-
-If mobile traffic is important, media validation should include mobile review before launch.
-
-### When Standard Handling May Not Be Enough <a href="#when-standard-handling-may-not-be-enough" id="when-standard-handling-may-not-be-enough"></a>
-
-Standard handling may be enough when media and content use common product fields and the Target Platform can present them clearly through available settings and supported behavior.
-
-Custom Service should be considered when the expected result depends on:
-
-* extension-controlled media behavior
-* custom gallery logic
-* variant-linked image transformation beyond standard capability
-* rich content restructuring
-* downloadable asset handling outside ordinary product fields
-* embedded video or external media behavior that needs special treatment
-* custom fields that control product-page content
-* product content blocks that need bespoke transformation
-* Target Platform limitations that require a custom migration logic adjustment
-
-This does not mean every media-heavy catalog needs Custom Service. It means media-heavy catalogs should be reviewed by outcome. If the standard result preserves assets but weakens the product page’s meaning, the project may need stronger planning before Full Migration.
+| Feature or pattern          | Technical meaning                                                                 | Risk if misunderstood                                               |
+| --------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Variant-specific galleries  | Separate image sets for each selected option                                      | Customers may see the wrong color, material, or configuration       |
+| Swatch images               | Small visual option selectors tied to color, pattern, material, or finish         | Option selection may become less clear or text-only                 |
+| Image roles                 | Different images for product page, thumbnail, listing, swatch, or feed            | The wrong image may appear in listings or product detail pages      |
+| Rich description HTML       | Tables, embedded images, custom classes, inline styles, scripts, or layout markup | Product content may render poorly or break responsive layout        |
+| Page-builder content        | Structured blocks stored as JSON or app data                                      | Layout may not map to native product fields                         |
+| Product tabs and accordions | Reusable or product-specific content sections                                     | Important details may collapse into unstructured text               |
+| Downloadable assets         | Manuals, certificates, spec sheets, digital files, or instructions                | Files may transfer without customer-facing access or permissions    |
+| Embedded videos             | External player references or native video objects                                | Links may remain while embedded playback fails                      |
+| 3D and AR assets            | Specialized media types with viewer dependencies                                  | Assets may not be supported or may need theme/frontend support      |
+| DAM or PIM assets           | Externally owned media references                                                 | Storefront may lose access if ownership and sync paths change       |
+| Localized content           | Language-specific descriptions, images, alt text, or documents                    | International product pages may lose market-specific meaning        |
+| Market-specific media       | Different images or documents by region, channel, or customer group               | Customers may see the wrong compliance, packaging, or offer context |
+
+These features are not cosmetic. They can define what the customer understands about the product. For fashion, furniture, beauty, electronics, automotive, replacement parts, industrial supplies, food, supplements, regulated products, and B2B catalogs, the media/content layer often carries information that is not fully represented by the product title or attributes.
+
+### What Can Change When Product Media and Content Are Recreated Elsewhere <a href="#what-can-change-when-product-media-and-content-are-recreated-elsewhere" id="what-can-change-when-product-media-and-content-are-recreated-elsewhere"></a>
+
+Product media can appear complete while changing meaning. That happens when the file moves but the relationship, role, order, or display logic changes.
+
+Common changes include:
+
+| Structural change                                    | Possible effect                                                         |
+| ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| Featured image changes                               | Product cards, search results, and first product-page impression change |
+| Gallery order changes                                | The product page tells a weaker or confusing visual story               |
+| Variant-linked images become ordinary gallery images | Customers lose visual confirmation after selecting an option            |
+| Image roles collapse into one image set              | Listing, thumbnail, swatch, and product-page images become inconsistent |
+| Alt text is dropped                                  | Accessibility and image context weaken                                  |
+| Rich HTML is sanitized or rendered differently       | Tables, tabs, icons, and layout blocks may break or flatten             |
+| Product tabs become plain text                       | Product details become harder to scan                                   |
+| Downloadable files lose product-page placement       | Manuals and technical documents still exist but become hard to find     |
+| Embedded videos become links                         | Product demonstration value decreases                                   |
+| External media URLs expire or change access rules    | Images, videos, or documents may become unavailable                     |
+| CMS or page-builder blocks are not recreated         | High-value product content becomes a plain description field            |
+
+Not every change is harmful. A platform move can be a chance to improve image standards, remove outdated embedded HTML, centralize specification blocks, replace app-owned tabs with native fields, clean duplicate media, or move product documents into a more maintainable structure. But those are deliberate architecture decisions. They should not happen accidentally because the media model was treated as ordinary file transfer.
+
+### What Merchants Should Inspect <a href="#what-merchants-should-inspect" id="what-merchants-should-inspect"></a>
+
+Merchants should inspect representative product pages where media and content do real work. A random product sample may miss the highest-risk content structures.
+
+A strong inspection sample should include:
+
+* products with many gallery images;
+* products with variant-linked images or swatches;
+* best sellers and high-traffic product pages;
+* visual products where image order influences purchase confidence;
+* technical products with manuals, diagrams, spec sheets, or compatibility documents;
+* products with embedded videos, 3D media, or external media players;
+* products using tabs, accordions, size charts, comparison blocks, or rich HTML descriptions;
+* localized or market-specific product pages;
+* products where a PIM, DAM, CMS, app, module, or custom field controls content;
+* products with feed-specific or marketplace-specific image requirements.
+
+Inspection should compare both backend structure and customer-facing behavior. The backend review asks whether the asset, field, relationship, and metadata exist. The storefront review asks whether customers see the right media in the right place, in the right order, with the right option behavior, on desktop and mobile.
+
+Useful review questions include:
+
+* Does the featured image match the original product role?
+* Do gallery images appear in the intended sequence?
+* Do variant images update correctly when a customer selects an option?
+* Are image roles, swatches, thumbnails, listing images, and feed images preserved or intentionally redesigned?
+* Does alt text remain attached to the correct media?
+* Do rich descriptions render cleanly without broken markup or unreadable tables?
+* Are tabs, accordions, specification blocks, videos, and downloadable files still accessible from the product page?
+* Are external media links still valid and controlled by the right system?
+* Does the mobile product page preserve the same content hierarchy?
+
+The inspection should also identify ownership. If a product page depends on a CMS, PIM, DAM, app, custom field, or external provider, the commerce platform may not be the only source of truth for the media experience.
+
+### When the Data Needs Deeper Review <a href="#when-the-data-needs-deeper-review" id="when-the-data-needs-deeper-review"></a>
+
+Product media and content need deeper review when the product-page experience depends on relationships or rendering logic that is not stored as standard product fields.
+
+Deeper review is usually needed when:
+
+* variant-specific galleries or swatch images control product selection;
+* image roles differ between Source Platform and Target Platform;
+* product descriptions contain complex HTML, scripts, embedded assets, or custom CSS classes;
+* product content is stored in tabs, accordions, page-builder blocks, custom fields, metafields, or extension tables;
+* manuals, certificates, spec sheets, digital files, or downloadable assets require permissions or product-specific placement;
+* product videos, 3D media, AR files, or external player embeds need frontend support;
+* media is owned by a PIM, DAM, CMS, marketplace connector, or external provider;
+* localized, market-specific, customer-specific, or channel-specific media must be preserved;
+* content has legal, compliance, warranty, compatibility, safety, or technical support significance.
+
+Next-Cart review is most relevant when media associations, variant-linked images, custom content blocks, extension-owned structures, external asset references, or non-standard product documents cannot be safely represented through direct field mapping. In those cases, the practical question is whether the data relationship and customer-facing meaning can be preserved, transformed, or flagged for Custom Service review.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Product media and content structures matter because they shape how customers understand, compare, and trust products. A migration can preserve files and descriptions while still changing the way the product page supports buying decisions.
+Product media and content structures define how product information is seen, understood, and trusted. Images, galleries, variant-linked media, videos, downloadable files, alt text, rich descriptions, specification blocks, and page-builder sections all carry data relationships that affect the product-page experience.
 
-The safest approach is to identify the product pages where media carries the most meaning, test those pages early through Demo Migration, and validate the customer-facing result in the Target Platform. When image sequencing, variant-linked media, rich descriptions, downloadable assets, or extension-driven presentation affect conversion, those areas should be planned as part of the migration outcome rather than treated as simple file transfer.
+A technically sound migration treats these elements as structured product data, not as loose files or decorative content. The safest review separates asset existence, product relationship, display role, platform support, ownership, and storefront behavior. That approach helps merchants identify which media can transfer directly, which content should be cleaned or redesigned, and which structures need deeper review before the product page can retain its original meaning.
 
-Review the product pages where media, rich content, or downloadable assets have the strongest influence on buying confidence. If the Target Platform can store the assets but cannot present them in a way that preserves the intended customer experience, Live Chat can help clarify whether standard handling, available settings, or Custom Service review is the safer path.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Are product images usually enough to preserve the product-page experience?**
 
-**Why can product media migrate successfully while the product page still feels weaker?**
+No. Product images are only one part of the media structure. The product-page experience also depends on image order, featured image role, variant linkage, thumbnails, swatches, alt text, gallery behavior, zoom behavior, mobile display, and any media controlled by theme or app logic.
 
-Because product media depends on presentation, sequence, context, and behavior. Files can exist in the Target Platform while image order, gallery layout, variant-linked display, embedded media, or rich description structure changes the customer experience.
+**Why do variant-linked images require special attention?**
 
-**Should product media be checked in the admin or on the storefront?**
+Variant-linked images connect customer choices to visual confirmation. If a customer selects a color, material, style, or configuration, the product page should show media that matches that selection. When this relationship is lost, the product may still have images, but the buying experience becomes less reliable.
 
-Both are useful, but storefront review is essential. Customers experience media through the product page, theme, mobile layout, gallery controls, embedded content, and downloadable links, not only through backend asset records.
+**What makes rich product descriptions difficult to move between platforms?**
 
-**Do videos, 3D assets, and downloadable files migrate like normal images?**
+Rich descriptions may include HTML tables, embedded images, tabs, accordions, custom CSS classes, scripts, icons, specification blocks, or page-builder data. A Target Platform may sanitize, flatten, or render these structures differently, so the text can survive while the layout and readability change.
 
-Not always. These assets may depend on platform media support, file libraries, external hosting, custom fields, theme behavior, or third-party extensions. They should be reviewed separately when they are important to the product page.
+**When should product media be reviewed outside the product admin?**
 
-**When should product media requirements be reviewed as Custom Service?**
-
-Custom Service should be reviewed when the expected result depends on extension-controlled media, custom fields, variant-linked image transformation, rich content restructuring, embedded media behavior, downloadable asset handling, or custom migration logic adjustment beyond standard service capability.
+Product media should be reviewed in the storefront whenever presentation matters. Admin records can confirm that assets exist, but only the storefront shows whether galleries, variant images, videos, documents, rich content, and mobile layouts still support the customer’s buying decision.
