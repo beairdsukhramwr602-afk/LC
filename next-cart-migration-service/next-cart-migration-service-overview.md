@@ -91,7 +91,7 @@ Entity Points are important because they connect data volume with plan selection
 
 Customers should treat Entity Points as a capacity measure. Migration quality still depends on preparation, configuration, service scope, platform fit, and final verification.
 
-### Entity Points Plan and Pricing <a href="#entity-points-plan-and-migration-pricing" id="entity-points-plan-and-migration-pricing"></a>
+### Entity Points Plan and Pricing <a href="#entity-points-plan-and-pricing" id="entity-points-plan-and-pricing"></a>
 
 The Entity Points Plan is the pricing-capacity layer of the migration service. It defines the available migration capacity under the purchased service license for the selected migration path.
 

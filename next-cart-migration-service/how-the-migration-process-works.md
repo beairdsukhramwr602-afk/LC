@@ -90,7 +90,7 @@ Within each data type, records are migrated from oldest to newest based on the s
 
 All scanned records are migrated by default unless filtering is configured. The quantities entered during purchase support pricing and Entity Points planning; they do not automatically limit which records are migrated. If the customer wants to migrate only selected records, that requirement should be planned through the Data Filter Add-on or reviewed as a custom filtering requirement when standard filtering capability is not enough.
 
-### Migration Order and Entity Points Consumption Are Different  <a href="#migration-order-and-entity-points-consumption-are-different" id="migration-order-and-entity-points-consumption-are-different"></a>
+### Migration Order and Entity Points Consumption Are Different <a href="#migration-order-and-entity-points-consumption-are-different" id="migration-order-and-entity-points-consumption-are-different"></a>
 
 Migration order and Entity Points consumption are related to the same migration project, but they describe different things.
 
@@ -106,7 +106,7 @@ This distinction matters because the migration flow includes supporting entities
 
 For process planning, the practical distinction is direct: execution order determines how the store data is processed, while Entity Points define counted migration capacity. Entered purchase quantities should not be interpreted as automatic filters, and supporting entities should not be assumed to consume Entity Points in the same way as counted core data.
 
-#### Stage 5: Result Validation <a href="#stage-5-result-validation" id="stage-5-result-validation"></a>
+### Stage 5: Result Validation <a href="#stage-5-result-validation" id="stage-5-result-validation"></a>
 
 After migration execution, the customer needs to review whether the target store works as expected. Validation should not stop at checking whether records exist. A useful review confirms whether the target store supports the outcomes the business depends on.
 
@@ -140,8 +140,6 @@ Additional migration options should be chosen around the intended target-store o
 
 ### How Customer-Led and Expert-Led Execution Fit into the Process <a href="#how-customer-led-and-expert-led-execution-fit-into-the-process" id="how-customer-led-and-expert-led-execution-fit-into-the-process"></a>
 
-### How Customer-Led and Expert-Led Execution Fit into the Process <a href="#how-customer-led-and-expert-led-execution-fit-into-the-process" id="how-customer-led-and-expert-led-execution-fit-into-the-process"></a>
-
 The migration process can be customer-led or expert-led depending on the selected service model and agreed scope.
 
 | Service context                      | Execution responsibility                                                                                                                                                 |
@@ -155,27 +153,27 @@ Customers of any service model can access and perform available migration action
 
 ### Common Misunderstandings About the Process <a href="#common-misunderstandings-about-the-process" id="common-misunderstandings-about-the-process"></a>
 
-**“The migration is complete when the run completes.”**
+#### “The migration is complete when the run completes.” <a href="#the-migration-is-complete-when-the-run-completes" id="the-migration-is-complete-when-the-run-completes"></a>
 
 A completed run means the configured migration has finished processing. It does not automatically mean the target store is ready for launch. Review and validation still matter.
 
-**“The numbers entered during purchase limit what gets migrated.”**
+#### “The numbers entered during purchase limit what gets migrated.” <a href="#the-numbers-entered-during-purchase-limit-what-gets-migrated" id="the-numbers-entered-during-purchase-limit-what-gets-migrated"></a>
 
 Entered entity quantities support pricing and Entity Points Plan selection. They are not automatic migration filters. All scanned records are migrated by default unless filtering is configured.
 
-**“Demo Migration proves the full migration result.”**
+#### “Demo Migration proves the full migration result.” <a href="#demo-migration-proves-the-full-migration-result" id="demo-migration-proves-the-full-migration-result"></a>
 
 Demo Migration gives early evidence from a limited sample. Full validation is still needed after broader migration activity.
 
-**“Migration order and Entity Points are the same concept.”**
+#### “Migration order and Entity Points are the same concept.” <a href="#migration-order-and-entity-points-are-the-same-concept" id="migration-order-and-entity-points-are-the-same-concept"></a>
 
 Migration order describes the sequence used to process store data. Entity Points describe counted migration capacity. They are related to planning, but they should not be interpreted as the same mechanism.
 
-**“Configuration is only a minor setup step.”**
+#### “Configuration is only a minor setup step.” <a href="#configuration-is-only-a-minor-setup-step" id="configuration-is-only-a-minor-setup-step"></a>
 
 Configuration is where scope, settings, mappings, and Add-ons are aligned with the expected target-store result. It can strongly affect whether the migrated store remains usable after migration.
 
-**“Expert-led service means the customer no longer needs to validate the result.”**
+#### “Expert-led service means the customer no longer needs to validate the result.” <a href="#expert-led-service-means-the-customer-no-longer-needs-to-validate-the-result" id="expert-led-service-means-the-customer-no-longer-needs-to-validate-the-result"></a>
 
 Expert-led execution can reduce operational effort, but the customer still needs to verify the final result and migration outcome. Only the customer can confirm whether the target store meets the intended business expectation.
 
@@ -185,7 +183,7 @@ The Next-Cart migration process gives customers a structured path from early pro
 
 A migration becomes more reliable when customers understand the purpose of each stage before moving forward. If the process reveals selective-scope needs, mapping uncertainty, Add-on requirements, Custom Service requirements, service-responsibility questions, or launch-timing concerns, Live Chat can help clarify which part of the process needs closer review.
 
-### FAQs  <a href="#faqs" id="faqs"></a>
+### FAQs <a href="#faqs" id="faqs"></a>
 
 **What are the main stages of a Next-Cart migration?**
 

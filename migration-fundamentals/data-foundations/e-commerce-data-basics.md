@@ -1,227 +1,193 @@
-# E-commerce Data Basics: Products, Customers, Orders, and Blog Posts
+# E-commerce Data Basics
 
-When businesses first think about migration, they often start with record counts. That is understandable, but it is not the best place to stop.
+E-commerce data is not just a collection of records. It is the operating memory of the store: what the business sells, who it serves, what customers have bought, which content supports discovery, and which structures make products, accounts, orders, and pages work together.
 
-What matters more is what those records allow the business to do after launch. Products support buying. Customers support continuity. Orders preserve commercial and operational history. Blog Posts often support discovery, trust, and long-tail traffic. These four data groups form a practical starting point because they carry much of the value the business expects a migration to preserve.
+Before migration planning becomes technical, merchants need a practical data model. The most useful starting point is not every possible field in the store. It is the set of data groups that carry the greatest commercial, operational, customer-facing, and continuity value.
 
-A store can migrate the right number of Products, Customers, Orders, and Blog Posts and still feel weaker after launch if the structure, behavior, and connected meaning behind those records no longer work acceptably. That is why data basics should be treated as business basics, not just as database categories.
+For most stores, that starting point includes Products, Customers, Orders, CMS Pages, and Blog Posts, plus the supporting structure that connects them. These groups do not explain the full migration scope by themselves, but they create a clear foundation for understanding what must remain usable after the store moves from the Source Platform to the Target Platform.
 
-### Why these four data groups matter first
+### Basic Store Data Is Business Context <a href="#basic-store-data-is-business-context" id="basic-store-data-is-business-context"></a>
 
-Products, Customers, Orders, and Blog Posts are not the only data types involved in migration. But they are often the clearest starting point because they help the business answer four practical questions:
+Basic e-commerce data groups matter because they support the everyday work of the store. Products support selling. Customers support account and service continuity. Orders preserve commercial and operational history. CMS Pages and Blog Posts support information, trust, navigation, and traffic continuity.
 
-* what the store can still sell
-* who the store can still serve
-* what commercial history the business can still use
-* what content can still support traffic and conversion
+A migration that only checks whether these records exist in the Target Platform can miss the real issue. The practical test is whether each data group still supports the business role it had before migration.
 
-If these four foundations are weak after migration, the store may still look populated while everyday business use becomes less reliable.
+| Data group           | Basic role in the store         | What migration should preserve                                                                               |
+| -------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Products             | Defines what the business sells | Buyable product structure, pricing context, images, categorization, variants, options, and discovery value   |
+| Customers            | Defines who the business serves | Account identity, addresses, customer context, service continuity, and order-history access where applicable |
+| Orders               | Preserves commercial history    | Order detail, customer relationship, purchased items, totals, statuses, and operational reference value      |
+| CMS Pages            | Holds evergreen store content   | Important information pages, internal links, metadata, and customer-facing content structure                 |
+| Blog Posts           | Supports content and traffic    | Articles, URLs, metadata, images, internal links, and search or discovery value                              |
+| Supporting structure | Makes core records usable       | Categories, attributes, images, relationships, SEO fields, custom fields, and third-party context            |
 
-### Products: more than a catalog record
+These groups are simple enough to understand early, but important enough to affect launch quality.
 
-Products are often treated like simple records, but in practice they carry some of the most important business meaning in the store.
+### Products Define What the Store Can Sell <a href="#products-define-what-the-store-can-sell" id="products-define-what-the-store-can-sell"></a>
 
-A Product may include:
+Products are usually the most visible migration data group because customers, merchandising teams, and store managers interact with them constantly. A product record can include titles, descriptions, prices, SKUs, stock status, product images, categories, tags, attributes, options, variants, reviews, related products, cross-sells, upsells, and other structure that affects buying behavior.
 
-* titles, descriptions, prices, and images
-* variants and option logic
-* attributes used for filtering and discovery
-* tax and manufacturer associations
-* category relationships
-* reviews
-* related products, upsells, or cross-sells
-* app-driven or custom fields that affect search, merchandising, bundles, or personalization
+The basic mistake is treating products as flat catalog entries. In a working store, a product often depends on relationships and behavior:
 
-This matters because a Product can appear to migrate successfully while the actual buying behavior still changes. Customers may see weaker option logic, incomplete variation handling, incorrect media behavior, or less effective discovery paths. A product page that looks present is not the same as a product structure that still supports revenue correctly.
+* a parent product may depend on variants, options, or configurable logic;
+* prices may depend on tax settings, customer groups, sale rules, or custom fields;
+* product discovery may depend on categories, attributes, filters, tags, collections, or search values;
+* product pages may depend on images, media, reviews, metadata, internal links, and related-product logic;
+* product availability may depend on inventory fields, stock rules, warehouse logic, or connected apps.
 
-### Customers: continuity matters more than presence
+A product can migrate and still become weaker if customers cannot select the right option, find the item through the expected path, understand the product page, or trust the displayed information. Product review should therefore include representative examples, not only record totals.
 
-Customer data is not just a list of names and email addresses.
+### Customers Preserve Account and Relationship Continuity <a href="#customers-preserve-account-and-relationship-continuity" id="customers-preserve-account-and-relationship-continuity"></a>
 
-It can include:
+Customer data usually begins with names, email addresses, account details, and addresses. For many stores, it also includes customer groups, segmentation rules, review ownership, order-history links, loyalty context, tax status, subscription identifiers, CRM identifiers, or support references.
 
-* account identity
-* addresses
-* customer grouping or segmentation
-* review ownership
-* order-history continuity
-* loyalty or extension-driven context
-* identifiers used by CRM, support, subscription, or marketing systems
+Customer migration is sensitive because the business is not only preserving records. It is preserving continuity. The store may need customers to recognize their account, access relevant history, receive correct communications, or remain tied to service and marketing workflows.
 
-A Customer record can exist after migration while customer experience still changes in important ways. Account expectations may shift. Review ownership may weaken. Group-based logic may behave differently. Important context added by apps, plugins, or extensions may not carry over cleanly. That is why customer data should be planned as a continuity issue, not only as a transfer issue.
+Important customer questions include:
 
-Customer password continuity also needs planning where it matters. Some Target Platforms do not preserve existing login behavior in the same way, so the project may need to protect the first-login experience through password reset planning and customer communication instead of assuming continuity will happen automatically.
+* will customer identity remain understandable in the Target Platform;
+* will addresses remain usable for service and order reference;
+* will customer groups or segmentation still support business rules;
+* will customer-order relationships remain useful;
+* will review ownership, loyalty context, or subscription references need separate review;
+* will login expectations need communication or password reset planning.
 
-### Orders: historical records with operational meaning
+Password behavior deserves early attention. Some migrations cannot preserve customer password behavior exactly because of platform security models or password storage differences. When that happens, the practical goal is not to force identical login behavior. It is to protect the first-login experience through planning, communication, and the correct account-continuity approach.
 
-Orders are often among the most sensitive records in a migration because they support more than reporting.
+### Orders Preserve History, Service, and Operational Reference <a href="#orders-preserve-history-service-and-operational-reference" id="orders-preserve-history-service-and-operational-reference"></a>
 
-They may be needed for:
+Orders are historical records, but they are not only historical. They support customer service, refund review, fulfillment reference, accounting support, reporting, tax review, fraud review, warranty questions, subscription review, and other operational workflows.
 
-* customer service
-* financial reconciliation
-* support history
-* fulfillment context
-* operational reference
-* renewals, returns, or other downstream workflows
+A useful order migration should preserve the information needed to interpret what happened. That can include customer details, purchased products, quantities, prices, discounts, taxes, shipping details, billing details, payment references, status history, notes, and metadata.
 
-That means Order migration is not only about preserving totals. It is about preserving usable meaning.
+Order data can become less useful even when order counts match. Common problems include:
 
-An Order can exist in the Target Platform and still become less useful if:
+* purchased items become harder to interpret because product references changed;
+* customer links are incomplete or less useful;
+* discounts, taxes, shipping fields, or totals no longer carry the same meaning;
+* status history does not match operational expectations;
+* custom order fields or third-party metadata are missing or no longer actionable;
+* legacy history is present but difficult for staff to use.
 
-* the purchased Products are harder to interpret
-* discount or tax meaning changes
-* related Customer context becomes weaker
-* extension-driven metadata no longer supports the same workflows
-* the Target Platform represents Order structure differently
+For many businesses, order quality becomes visible after launch when support teams need to answer real customer questions. That is why representative historical orders should be part of early review, especially orders with refunds, discounts, multiple shipments, complex taxes, custom fields, or support value.
 
-For many businesses, this is where migration risk becomes visible fastest in day-to-day operations.
+### CMS Pages and Blog Posts Support Content Continuity <a href="#cms-pages-and-blog-posts-support-content-continuity" id="cms-pages-and-blog-posts-support-content-continuity"></a>
 
-### Blog posts: often smaller in volume, high in business value
+Content data often receives less attention than products or orders, but it can carry substantial business value. CMS Pages may include About pages, policy pages, shipping information, landing pages, buying guides, sizing information, warranty information, or other evergreen content. Blog Posts may support search traffic, education, internal linking, buying confidence, and long-tail discovery.
 
-Blog Posts are sometimes treated as secondary because they are rarely the largest data type. But they can still matter a great deal.
+Content migration should preserve more than text. It may need to preserve:
 
-They often support:
+* page titles, body content, images, and media references;
+* URL values and redirect requirements;
+* metadata and search-facing fields;
+* internal links to products, categories, CMS Pages, and Blog Posts;
+* publishing status, dates, authorship, or content grouping where relevant;
+* layout-sensitive content that may need review in the Target Platform.
 
-* organic search visibility
-* internal linking
-* product discovery
-* educational content
-* buying confidence
-* long-tail landing pages that contribute to revenue
+A content page can migrate but still lose value if images break, URLs change without adequate redirects, internal links point to old paths, formatting becomes unreadable, or metadata is lost. Content should therefore be judged by customer usability and traffic continuity, not by page count alone.
 
-A migration can preserve Blog Posts and still weaken their value if URL behavior changes, content structure changes, images break, or important pathways from blog content to category or product pages are lost. That is why Blog Posts belong in early scope conversations even when they are not operationally complex.
+### Categories, Attributes, Images, and Relationships Make Data Usable <a href="#categories-attributes-images-and-relationships-make-data-usable" id="categories-attributes-images-and-relationships-make-data-usable"></a>
 
-### Supporting structure is what makes the core data useful
+Core records rarely work alone. Products need categories, attributes, options, variants, images, and metadata. Customers need addresses, customer groups, and order links. Orders need customer, product, tax, discount, shipping, and payment context. CMS Pages and Blog Posts need URLs, internal links, images, and metadata.
 
-Core data types do not work alone. They depend on supporting structure that often determines whether the migrated store still behaves correctly.
+These supporting structures are easy to underestimate because they can look secondary during early scoping. In practice, they often determine whether the migrated data still works.
 
-Supporting structure can include:
+| Supporting structure       | Why it matters                                                                          |
+| -------------------------- | --------------------------------------------------------------------------------------- |
+| Categories and collections | Preserve browse paths, merchandising logic, landing-page value, and internal discovery. |
+| Attributes and filters     | Help customers compare, narrow, and understand products.                                |
+| Variants and options       | Preserve product selection behavior and buyability.                                     |
+| Images and media           | Support trust, product evaluation, content continuity, and page completeness.           |
+| SEO fields and URLs        | Help preserve search visibility, click-through context, and page intent.                |
+| Relationships              | Connect products, customers, orders, content, categories, and supporting records.       |
+| Custom fields and metadata | Carry business-specific meaning that may not fit the default Target Platform model.     |
 
-* variants
-* options
-* attributes
-* customer addresses
-* images
-* SEO fields
-* product relationships
-* category structure
-* connected content that influences discoverability and buying decisions
+When these structures change, the store may look populated but behave differently. That is why basic data review should include how records connect, not only whether records exist.
 
-This is where many teams underestimate migration complexity. The core records may move successfully while the structure that made them useful becomes weaker or behaves differently.
+### Entity Points Help Size Core Scope, Not Full Meaning <a href="#entity-points-help-size-core-scope-not-full-meaning" id="entity-points-help-size-core-scope-not-full-meaning"></a>
 
-#### Core groups and supporting structure are not the same <a href="#core-groups-and-supporting-structure-are-not-the-same" id="core-groups-and-supporting-structure-are-not-the-same"></a>
+Entity Points give Next-Cart a standardized way to measure core migration scope across major data groups such as Products, Customers, Orders, and Blog Posts. They help translate raw data volume into a more consistent sizing model for a migration path.
 
-Planning should distinguish between:
+However, Entity Points do not replace business review. A store with similar core counts can have very different migration complexity depending on product structure, customer groups, historical order requirements, content value, SEO sensitivity, custom fields, extension data, or outside-system identifiers.
 
-* core business data groups such as Products, Customers, Orders, and Blog Posts
-* the supporting structure that preserves how those groups function in practice
+The correct way to use core sizing is to separate two questions:
 
-That distinction makes scope and validation decisions much more realistic.
+| Question                                     | What it answers                                                             |
+| -------------------------------------------- | --------------------------------------------------------------------------- |
+| How much core data is involved?              | Helps size the migration scope using standardized core data measurement.    |
+| How much business meaning must be preserved? | Helps identify structure, relationships, custom data, and validation needs. |
 
-### Why the same totals do not mean the same migration scope <a href="#why-the-same-totals-do-not-mean-the-same-migration-scope" id="why-the-same-totals-do-not-mean-the-same-migration-scope"></a>
+A migration can be correctly sized and still need additional planning if the store depends on complex supporting structure. That does not make the sizing model wrong. It means sizing and business-continuity review answer different questions.
 
-Two stores can each have 10,000 Products and still require very different migration planning.
+### Third-Party and Custom Data Can Redefine the Basics <a href="#third-party-and-custom-data-can-redefine-the-basics" id="third-party-and-custom-data-can-redefine-the-basics"></a>
 
-That is because scope depends on more than counts. It also depends on:
+Many stores depend on apps, plugins, modules, extensions, custom fields, or outside systems that add meaning to otherwise basic data. A product field may control search, merchandising, bundles, subscriptions, personalization, or ERP matching. A customer field may control segmentation, tax handling, or loyalty logic. An order field may support fulfillment, reporting, shipping automation, fraud review, or customer support.
 
-* product complexity
-* category and filtering structure
-* customer continuity expectations
-* order-history usefulness
-* SEO-sensitive content and URLs
-* third-party apps, plugins, extensions, and outside-system identifiers
+When those fields affect real business behavior, they should not be dismissed as minor details. They may require mapping, configuration, filtering, transformation, or custom migration logic adjustment.
 
-This is one reason Entity Points are useful. They create a standardized way to measure core scope across Products, Customers, Orders, and Blog Posts. But scope measurement is not the same as judging whether the migrated store will still preserve the business meaning connected to those records after launch.
+Some cases may be handled through Add-ons such as Advanced Data Mapping, Advanced Data Configure, or the Data Filter Add-on. Broader customization, unsupported extension data, outside-system identifiers, Custom Platform conditions, or bespoke handling should be reviewed under Custom Service.
 
-### Third-party logic can change what “basic data” really means
+The key point is simple: basic data is only basic when the business uses it in a basic way. Once third-party or custom logic controls real outcomes, that data becomes part of the migration requirement.
 
-A store’s basic data picture is often more complicated than the native platform suggests.
+### Practical Review Questions for Basic E-commerce Data <a href="#practical-review-questions-for-basic-e-commerce-data" id="practical-review-questions-for-basic-e-commerce-data"></a>
 
-Third-party apps, plugins, and extensions may add:
+A useful early review should connect each data group to the business outcome it supports. The goal is not to inspect every field immediately. The goal is to identify which records and structures should be sampled, protected, or escalated before assumptions become fixed.
 
-* custom product fields used for search, bundles, personalization, or merchandising
-* customer segmentation, loyalty context, or account rules
-* order metadata used for fulfillment, reporting, or automation
-* custom identifiers needed by ERP, CRM, subscription, shipping, or marketing systems
+| Review question                                                                          | Why it matters                                                                             |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Which products are most complex or highest value?                                        | Simple products rarely reveal the full product-structure risk.                             |
+| Which customer groups or account cases need continuity?                                  | Customer migration quality depends on more than names and emails.                          |
+| Which historical orders must remain operationally useful?                                | Support, refunds, reporting, and fulfillment review may depend on preserved order meaning. |
+| Which CMS Pages and Blog Posts support trust, traffic, or conversion?                    | Content value can be lost through URL, metadata, image, or internal-link changes.          |
+| Which categories, attributes, images, and relationships carry business value?            | Supporting structure often determines whether core records remain usable.                  |
+| Which apps, plugins, modules, extensions, or outside systems add important data meaning? | These layers may require Add-ons, Custom Service evaluation, or deeper planning.           |
 
-This matters because a store can appear to have clean Products, Customers, Orders, and Blog Posts while still depending heavily on extension-driven meaning. If that added context is not identified early, the project may underestimate both complexity and validation effort.
+These questions create a better foundation for Demo Migration review, scope discussion, and later validation because they focus attention on the data that carries real business value.
 
-#### When extension-driven meaning affects migration planning <a href="#when-extension-driven-meaning-affects-migration-planning" id="when-extension-driven-meaning-affects-migration-planning"></a>
+### Common Mistakes in Basic Data Planning <a href="#common-mistakes-in-basic-data-planning" id="common-mistakes-in-basic-data-planning"></a>
 
-When these layers materially affect business behavior, the migration requirement needs closer review. Some cases may fit standard service capability. Others may require Custom Service because the expected result depends on custom fields, outside-system identifiers, third-party data, special transformation rules, or custom migration logic adjustment.
+Several mistakes repeat across e-commerce migration projects.
 
-### How to reduce uncertainty early
+The first is assuming that Products, Customers, Orders, CMS Pages, and Blog Posts are complete because the records are present. Presence is only the starting point. The data must still be usable.
 
-The fastest way to make early data planning more reliable is to replace assumptions with evidence.
+The second is focusing on the largest data group while ignoring the most sensitive one. A store may have many products but depend heavily on a smaller number of historical orders, customer groups, custom fields, or traffic-driving content pages.
 
-A more grounded approach is to:
+The third is treating supporting structure as optional. Categories, attributes, variants, images, metadata, relationships, and internal links often carry the meaning customers and staff depend on.
 
-* identify the store’s core pillars first
-* list the supporting structure that must still work
-* identify app-driven or custom data that affects business behavior
-* use Entity Points to size core scope consistently
-* review a representative sample early through Demo Migration
+The fourth is discovering custom and third-party data too late. If apps, plugins, modules, extensions, or outside systems shape store behavior, those dependencies need early review.
 
-A useful Demo Migration sample often includes:
+The fifth is confusing basic data sizing with migration acceptance. Sizing helps define scope. Acceptance requires proof that the migrated store still supports business use.
 
-* complex Products rather than only simple ones
-* important category paths
-* representative Customer cases
-* representative Orders
-* Blog Posts or content pages that support traffic or sales
-* records affected by apps, plugins, or extensions
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-That helps reveal what maps cleanly, what changes meaning, and where deeper review is needed before broader decisions are made.
+Products, Customers, Orders, CMS Pages, Blog Posts, and their supporting structures form the practical foundation of e-commerce migration planning. These data groups explain what the store sells, who it serves, what history it preserves, and which content supports customer trust and traffic continuity.
 
-If the source store continues generating new data during the project, Recent Data Migration is the appropriate feature when the goal is to sync newly created source-store data into the Target Platform after earlier migration activity. It is most relevant when the project needs to reduce the freshness gap before go-live.
+The safest planning approach treats basic data as business context, not as isolated records. Counts matter, but the more important question is whether the migrated data still supports buying, account continuity, service review, operational reference, content value, and discovery after launch.
 
-### Common mistakes in understanding basic store data
+When the store depends on custom fields, third-party logic, outside-system identifiers, or unusual platform structure, those requirements should be clarified early. Live Chat can help confirm whether the expected migration path is likely to preserve the required data meaning or whether Add-ons, Custom Service handling, or deeper review should be considered.
 
-Common planning mistakes include:
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-* treating core data groups as complete without reviewing supporting structure
-* assuming the same feature names mean the same behavior on the Target Platform
-* checking totals only and missing outcome-sensitive problems
-* overlooking app-driven or custom fields until late in the project
-* assuming basic records are simple because they are familiar
+**What are the main e-commerce data groups to review before migration?**
 
-These mistakes usually lead to late surprises because the store appears complete before the business checks whether the data still behaves correctly in real use.
+The main starting groups are usually Products, Customers, Orders, CMS Pages, and Blog Posts. Supporting structures such as categories, attributes, variants, options, images, SEO fields, URLs, relationships, custom fields, and metadata should also be reviewed because they determine how useful the core records remain after migration.
 
-### Conclusion
+**Why are products more than simple catalog records?**
 
-Products, Customers, Orders, and Blog Posts are the most practical starting point for understanding migration scope because they carry much of the business meaning a store depends on. But they only remain useful after migration when the supporting structure, related business logic, and practical behavior behind them are preserved as well.
+Products often depend on variants, options, attributes, categories, images, reviews, related products, pricing context, inventory logic, and third-party fields. A product can exist in the Target Platform while selection, discovery, merchandising, or buying behavior becomes weaker.
 
-The safest approach is to define what must remain true for each of these data groups, identify the supporting structure and third-party logic that affect them, and review representative cases early. That turns data planning from a counting exercise into a clearer decision process about what the store must still be able to do after launch.
+**Why does order data need careful review?**
 
-Run a Demo Migration using a representative sample that includes complex Products, realistic Customer and Order cases, important Blog Posts or content pages, and any extension-affected records that matter to the business. If the sample shows more change than expected, Live Chat can help clarify what the results mean, what still needs deeper review, and the safest path forward before broader commitments are made.
+Orders preserve historical and operational context. They may support customer service, refunds, reporting, fulfillment review, accounting support, and internal operations. Matching order counts does not prove that order history remains useful for staff or customers.
 
-### FAQs
+**Should CMS Pages and Blog Posts be part of early migration planning?**
 
-**Are Products, Customers, Orders, and Blog Posts the only data that matter in migration?**
+Yes. CMS Pages and Blog Posts can support trust, navigation, SEO continuity, internal links, and conversion. They should be reviewed for content quality, URL behavior, metadata, images, formatting, and links to important products or categories.
 
-No. They are the most practical starting point because they carry much of the business value the store depends on, but they are supported by other entities and structures such as categories, reviews, coupons, taxes, options, attributes, images, and SEO-related content.
+**Do Entity Points explain all migration complexity?**
 
-**Why can a store look complete after migration and still behave incorrectly?**
+No. Entity Points help size core migration scope, but they do not fully explain business meaning, custom data, third-party logic, relationships, SEO sensitivity, or validation effort. Sizing and business-continuity review should be treated as separate planning questions.
 
-Because core records can transfer while their supporting structure, business logic, or practical meaning changes. A Product may exist with weaker buying behavior, an Order may exist with poorer operational usefulness, or content may exist without preserving the same discovery value.
+**When does basic data require Custom Service review?**
 
-**If I only migrate Products, is that a full migration?**
-
-No. That can be a valid scope choice, but it is not the same as preserving full operational continuity. The right scope depends on what outcomes your business needs after launch.
-
-**How do third-party apps affect basic data planning?**
-
-They can change what “basic” data really means by adding custom fields, customer context, order metadata, or outside-system identifiers. If that added logic affects revenue, operations, discoverability, or customer continuity, it should be treated as migration-relevant early.
-
-**Do extension-driven fields always require Custom Service?**
-
-No. Some extension-driven context may not need migration, and some requirements may fit standard service capability. Custom Service is needed when the expected result depends on customization, modification, third-party data handling, outside-system identifiers, custom fields, special transformation rules, or custom migration logic adjustment.
-
-**Will Customers see their Order history after the migration?**
-
-They often can when Order history is included in scope and Customer and Order data are migrated together. Whether that is the right outcome depends on your business needs and how you want Customer accounts to behave after launch, so the expectation should be defined early and reviewed with representative Customer and Order cases.
-
-**Why is Demo Migration useful even for basic data planning?**
-
-Because it helps show whether the most important business data still behaves acceptably, not just whether the records appear in the Target Platform. Even basic-looking data can reveal deeper complexity when reviewed through representative examples.
+Custom Service review may be needed when important data depends on unsupported extension data, outside-system identifiers, Custom Platform conditions, bespoke structure, or custom migration logic adjustment. Some narrower needs may fit Add-ons such as Advanced Data Mapping, Advanced Data Configure, or the Data Filter Add-on.

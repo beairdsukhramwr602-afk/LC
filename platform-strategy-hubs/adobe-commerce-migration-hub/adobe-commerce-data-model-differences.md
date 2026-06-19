@@ -1,190 +1,192 @@
 # Adobe Commerce Data Model Differences
 
-Adobe Commerce migration planning must look beyond whether products, customers, orders, categories, and CMS Pages can be transferred. The deeper question is whether the source data can support the way Adobe Commerce expects commerce operations to work after migration.
+Adobe Commerce migration planning is not only a transfer of products, customers, orders, categories, CMS Pages, and Blog Posts. The larger task is translating source store data into a Target Platform that can support enterprise storefront scope, B2B account relationships, governed catalog visibility, pricing rules, staged content, integrations, and operational ownership after launch.
 
-That distinction matters because Adobe Commerce can combine a flexible catalog model with scoped storefronts, B2B company accounts, shared catalogs, staged campaigns, customer-group pricing, inventory sources, URL rewrite behavior, and extension-owned workflows. A source record that looks complete in another platform may still be incomplete for Adobe Commerce if it lacks the structure needed for catalog governance, buyer access, commercial visibility, or downstream integrations.
+A source record can look complete in the source store but still be incomplete for Adobe Commerce if it lacks the structure required for company purchasing, shared catalog assignment, store-view behavior, product governance, or downstream system continuity. Data model review should therefore ask how each source record is expected to behave in Adobe Commerce, not only whether the record can be migrated.
 
-### Adobe Commerce Turns Records Into Operating Structures <a href="#adobe-commerce-turns-records-into-operating-structures" id="adobe-commerce-turns-records-into-operating-structures"></a>
+### Adobe Commerce Treats Data as Operational Structure <a href="#adobe-commerce-treats-data-as-operational-structure" id="adobe-commerce-treats-data-as-operational-structure"></a>
 
-Many source platforms store commerce information as relatively flat records: product, customer, order, category, page, discount, and setting. Adobe Commerce can use those records inside a more layered operating model.
+Many source platforms organize commerce data as relatively direct records: products, customers, orders, categories, pages, discounts, and configuration values. Adobe Commerce can use those records inside a more layered operating model.
 
-| Source data area       | Adobe Commerce interpretation                                                                                                            | Migration planning implication                                                                           |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Products and variants  | Product types, child SKUs, attributes, attribute sets, pricing, websites, categories, inventory, and URL behavior                        | Product records must be translated into usable catalog architecture, not only imported as item listings. |
-| Customers              | Individual accounts, customer groups, company administrators, company users, addresses, tax/discount context, and storefront scope       | Customer migration may need to preserve both identity and buying context.                                |
-| B2B accounts           | Company accounts, company users, roles, credit, quotes, purchase orders, payment and shipping permissions, and shared catalog assignment | Wholesale or contract-buyer data may require company-level planning before migration.                    |
-| Catalog visibility     | Categories, product assignments, shared catalogs, customer groups, and storefront scope                                                  | Product visibility may depend on buyer identity, company assignment, and target configuration.           |
-| Promotions and content | Catalog price rules, cart price rules, CMS Pages, CMS blocks, scheduled updates, and campaign timing                                     | Time-sensitive commercial data may need staging-aware validation, not only record transfer.              |
-| URLs                   | Product rewrites, category rewrites, CMS page rewrites, custom rewrites, and redirects                                                   | SEO continuity depends on route interpretation and rewrite planning.                                     |
-| Inventory              | Sources, stocks, salable quantity, reservations, and channel assignment                                                                  | Stock migration must reflect the intended fulfillment model, not just a single quantity field.           |
+| Source data area      | Adobe Commerce interpretation                                                                                             | Migration planning implication                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Products              | Product types, child SKUs, attributes, attribute sets, websites, categories, prices, inventory, and URL behavior          | Product data must support the intended catalog architecture, not only item display. |
+| Customers             | Individual accounts, customer groups, addresses, order history, company relationships, and buying context                 | Customer data may need to preserve both identity and purchasing authority.          |
+| Company accounts      | Company administrators, company users, roles, permissions, credit, quotes, purchase orders, and shared catalog assignment | B2B data may require company-level planning before migration configuration.         |
+| Catalog visibility    | Product status, categories, websites, customer groups, shared catalogs, and company access                                | Buyers may see different products or prices depending on account context.           |
+| Storefront scope      | Websites, stores, store views, language, currency, content, configuration, and catalog assignment                         | Multi-storefront data must be mapped to the correct scope instead of flattened.     |
+| Content and campaigns | CMS Pages, CMS blocks, scheduled updates, promotion timing, and campaign dependencies                                     | Time-sensitive commercial content may require launch-aware validation.              |
+| URLs                  | Product URL keys, category URL keys, CMS page paths, URL rewrites, redirects, and custom routes                           | SEO continuity depends on route interpretation, not only page existence.            |
+| Inventory             | Sources, stocks, salable quantity, channel assignment, and fulfillment assumptions                                        | Stock data should match the intended Adobe Commerce fulfillment model.              |
 
-A clean Adobe Commerce migration therefore starts by identifying which source records are simple data objects and which records carry operational meaning that must be reconstructed, mapped, configured, or intentionally excluded.
+A clean migration starts by separating simple records from records that carry business rules. Simple records can often follow standard mapping logic. Business-rule-heavy records may need Add-ons, Custom Service, or additional Target Store configuration before they behave correctly.
 
 ### Product Data Depends on Type, Relationship, and Attribute Logic <a href="#product-data-depends-on-type-relationship-and-attribute-logic" id="product-data-depends-on-type-relationship-and-attribute-logic"></a>
 
-Adobe Commerce product migration is rarely a one-field-to-one-field exercise. A source product can become a simple product, configurable product, grouped product, virtual product, bundle product, downloadable product, or another supported commercial structure depending on what the item represents and how buyers should purchase it.
+Adobe Commerce product migration can involve multiple product types, including simple, configurable, grouped, virtual, bundle, and downloadable products. A source product with options may need to become a configurable product connected to child simple products. A source item with kit-like behavior may need different handling if it is expected to behave like a bundle, grouped product, or custom product relationship in Adobe Commerce.
 
-Configurable products are especially important because storefront options depend on associated simple products. A color-and-size product in a source platform may look like a single product with option values, but in Adobe Commerce those purchasable variations often need child SKUs with their own inventory, pricing, images, identifiers, and attribute values. If the source platform stores variants loosely, the migration plan must decide how variation options become Adobe Commerce product relationships.
+Configurable products are especially sensitive because storefront option selection depends on associated child SKUs. Size, color, material, pack quantity, or configuration options should not be treated as cosmetic fields when they control purchasable variants, inventory, images, prices, or integration identifiers.
 
-Attributes and attribute sets add another layer. Adobe Commerce attributes can affect product pages, search, layered navigation, comparison, reports, promotions, and administrative maintenance. Attribute sets act as templates for product families. A source field called “material,” “brand,” “condition,” “wholesale flag,” or “season” may be harmless in the source platform but operationally important in Adobe Commerce if it affects filtering, merchandising, customer-group rules, external integrations, or product maintenance.
+Attributes and attribute sets create another layer of meaning. Adobe Commerce attributes can affect product display, search, layered navigation, comparison, merchandising, promotions, reports, imports, and administrative maintenance. Attribute sets group fields into product-family templates, which means a source field may need to become a structured Adobe Commerce attribute instead of a loose description value.
 
-Product migration should therefore classify source product data by purpose:
+| Product structure       | What to review                                                                                               | Why it matters                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| Product type            | Whether source items should become simple, configurable, bundle, grouped, virtual, or downloadable products  | Product type controls how buyers select and purchase items.                         |
+| Child SKU relationships | Variant SKUs, option labels, images, prices, stock, identifiers, and parent-child assignment                 | Broken relationships can make variants unavailable or operationally unusable.       |
+| Attributes              | Display fields, searchable fields, filterable fields, rule inputs, integration identifiers, and admin fields | Attribute decisions affect storefront behavior and ongoing catalog governance.      |
+| Attribute sets          | Product-family templates and required fields by catalog type                                                 | Poor attribute-set planning can make catalog maintenance difficult after migration. |
+| Category assignment     | Navigation paths, merchandising structure, visibility, and store-scope relevance                             | Category errors can damage discovery, SEO, and buyer experience.                    |
+| Related products        | Related items, upsells, cross-sells, accessories, and replacement relationships                              | Relationship loss can reduce conversion and operational continuity.                 |
 
-| Product data type    | Meaning in Adobe Commerce                                                               | Planning question                                                                          |
-| -------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Identity fields      | SKU, name, product type, URL key, status, visibility                                    | Which fields must remain stable for buyers, operations, and integrations?                  |
-| Variant fields       | Configurable options, child SKU attributes, option labels, images, stock, price         | Does each buyer-selectable option need its own simple product relationship?                |
-| Attribute fields     | Display, search, layered navigation, reporting, rules, integrations                     | Which attributes should become structured Adobe Commerce attributes instead of loose text? |
-| Pricing fields       | Base price, special price, tier price, customer-group relevance, shared catalog pricing | Which prices are public, group-specific, company-specific, or rule-driven?                 |
-| Merchandising fields | Category assignment, related products, upsells, cross-sells, visibility, featured logic | Which relationships must be recreated to preserve discovery and conversion behavior?       |
+The goal is not to preserve every source field exactly as it appeared. The goal is to land high-value catalog data in a form that supports Adobe Commerce storefront behavior and back-office workflows.
 
-The goal is not to preserve every source field exactly as it appeared. The goal is to make sure high-value product data lands in Adobe Commerce in a form that supports the target catalog, storefront behavior, and operational workflows.
+### Storefront Scope Changes Data Meaning <a href="#storefront-scope-changes-data-meaning" id="storefront-scope-changes-data-meaning"></a>
 
-### Scope Changes the Meaning of Storefront Data <a href="#scope-changes-the-meaning-of-storefront-data" id="scope-changes-the-meaning-of-storefront-data"></a>
+Adobe Commerce uses a hierarchy of websites, stores, and store views. That hierarchy can affect language, currency, catalog assignment, category trees, product visibility, configuration, content, pricing behavior, and customer experience.
 
-Adobe Commerce uses a hierarchy of websites, stores, and store views. That hierarchy affects how products, categories, content, configuration, pricing behavior, language, currency, and storefront presentation may be organized.
+A source platform may represent multiple brands, regions, languages, B2B portals, wholesale areas, or sales channels in ways that do not map one-to-one into Adobe Commerce. Some source distinctions may become websites. Others may become stores, store views, categories, customer groups, shared catalogs, or configuration rules.
 
-A source platform may have separate stores, regional storefronts, language versions, sales channels, microsites, wholesale portals, or duplicated catalogs. Adobe Commerce may represent some of those differences through websites, stores, store views, categories, customer groups, shared catalogs, configuration, or a combination of several structures.
+Scope should be decided before detailed mapping. A product name may be global while descriptions vary by store view. A CMS Page may require translated versions. A category path may apply only to one website. A price may depend on customer group or shared catalog context rather than the product alone.
 
-That means scope must be decided before source data is interpreted. A product title may be global, while a description may differ by store view. A CMS Page may need a translated version. A category path may apply only to one storefront. A price may belong to a customer group or shared catalog rather than to the product itself. A configuration value may be global in the source but website-specific in Adobe Commerce.
+Scope mistakes are hard to detect through record counts. A store can have the expected number of products and pages while showing the wrong language, content, price, catalog, or URL structure in one storefront. Representative samples should include each important website, store, store view, brand, language, B2B segment, and regional context.
 
-Scope mistakes can be difficult to detect if migration validation only checks whether records exist. A store can appear complete while showing the wrong language, catalog, content, URL, pricing, or visibility in one storefront. Representative validation samples should include every important storefront scope, especially when the merchant operates across regions, brands, languages, B2B/B2C channels, or customer segments.
+### Customer Data May Represent Individuals, Companies, and Purchasing Authority <a href="#customer-data-may-represent-individuals-companies-and-purchasing-authority" id="customer-data-may-represent-individuals-companies-and-purchasing-authority"></a>
 
-### Customer Data May Represent Individuals, Companies, and Buying Authority <a href="#customer-data-may-represent-individuals-companies-and-buying-authority" id="customer-data-may-represent-individuals-companies-and-buying-authority"></a>
+In simpler migrations, customer data often means account identity, email, name, addresses, order history, and account status. Adobe Commerce can require a broader customer model, especially when B2B features are used.
 
-In a simple retail migration, customer data often means account identity, email, name, addresses, order history, and subscription or marketing preferences where supported. Adobe Commerce can require a broader interpretation, especially for B2B operations.
+A buyer may be an individual customer, a company administrator, a company user, or a contact whose purchasing authority depends on company-level rules. Company data may include legal business details, administrators, users, roles, credit, quote permissions, purchase order permissions, payment method permissions, shipping method permissions, customer group assignment, and shared catalog assignment.
 
-A customer can be an individual buyer, a company administrator, a company user, a contact within a company hierarchy, or a buyer whose access depends on company-level rules. Company account data can include legal business identity, administrator details, company users, roles, credit configuration, quote permissions, purchase order permissions, payment method permissions, shipping method permissions, customer group assignment, and shared catalog assignment.
+| Customer layer       | What to verify                                                                           | Why it matters                                                                       |
+| -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Individual identity  | Email, name, addresses, account status, password strategy, order association             | Buyers need recognizable account continuity.                                         |
+| Customer grouping    | Customer groups, tax class context, discount eligibility, storefront relevance           | Pricing, tax, and visibility may depend on group assignment.                         |
+| Company relationship | Company account, administrator, users, hierarchy, and legal address                      | B2B purchasing context often exists above the individual account.                    |
+| Purchasing controls  | Quotes, purchase orders, credit, payment methods, shipping methods, and role permissions | Buyers may be unable to order correctly if permissions are not preserved or rebuilt. |
+| External identifiers | ERP IDs, CRM IDs, account manager references, dealer IDs, and contract references        | External systems may rely on identifiers that are not visible in storefront review.  |
 
-That changes the definition of a successful customer migration. A customer record may transfer correctly as an account but still fail operationally if it loses the company relationship that controls purchasing. A company may exist but buyers may not see the correct shared catalog. A buyer may retain an address but lose the approval workflow required to place orders. A customer group may move but no longer represent the same discount or tax class logic.
+A customer record can transfer correctly as an account while still failing operationally if it loses company assignment, buying role, shared catalog access, or integration identity. Those dependencies should be identified before treating customer migration as a standard account transfer.
 
-Customer data review should separate four layers:
+### Shared Catalogs Turn Visibility and Pricing Into Buyer-Specific Logic <a href="#shared-catalogs-turn-visibility-and-pricing-into-buyer-specific-logic" id="shared-catalogs-turn-visibility-and-pricing-into-buyer-specific-logic"></a>
 
-| Customer layer       | What to verify                                                                            | Why it matters                                                                          |
-| -------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Individual identity  | Email, name, password strategy, addresses, account status                                 | Buyers must be able to access and recognize their accounts.                             |
-| Commercial grouping  | Customer groups, tax class context, discount eligibility                                  | Pricing and tax behavior can depend on group assignment.                                |
-| Company relationship | Company account, administrator, company users, hierarchy, legal address                   | B2B buying authority may exist above the individual customer record.                    |
-| Purchasing control   | Quotes, purchase orders, credit, payment methods, shipping methods, shared catalog access | Buyers may need permissions and company-specific rules before they can order correctly. |
+Shared catalogs can make Adobe Commerce product visibility and pricing buyer-specific. A product that exists in the Target Store may not be visible to every buyer. A price that appears correct for one customer may be incorrect for another company, customer group, or storefront scope.
 
-When the source platform has wholesale accounts, dealer accounts, account managers, contract customers, approval workflows, purchase limits, custom buyer fields, or ERP-linked customer IDs, those relationships should be reviewed before assuming they fit a standard supported migration path.
+Shared catalog planning should define which companies or customer groups can see which products, which prices apply, and how catalog access should differ across buyer segments. A source platform may store this logic as wholesale price lists, customer tags, account groups, dealer catalogs, contract pricing, hidden categories, custom fields, or ERP-driven rules.
 
-### Shared Catalogs Turn Product Visibility Into Buyer-Specific Commerce Logic <a href="#shared-catalogs-turn-product-visibility-into-buyer-specific-commerce-logic" id="shared-catalogs-turn-product-visibility-into-buyer-specific-commerce-logic"></a>
+Migration review should separate three questions:
 
-Shared catalogs are one of the clearest Adobe Commerce data-model differences. Product visibility and price may depend on company assignment and catalog configuration, not only product status or category placement.
+1. Which products exist in Adobe Commerce?
+2. Which buyers should be allowed to see those products?
+3. Which price or purchasing rule should each buyer receive?
 
-A source system may store wholesale pricing as customer tags, price lists, customer groups, custom fields, source extensions, ERP rules, or manually maintained spreadsheet logic. Adobe Commerce can represent company-specific catalog access and custom pricing through shared catalogs. That means migration planning must determine whether source wholesale logic should become customer groups, shared catalogs, tier pricing, advanced pricing, catalog rules, custom configuration, or a Custom Service review item.
+If those questions are blended, validation may only confirm that products migrated while missing the more important question of whether the correct buyers see the correct commercial offer.
 
-The key planning risk is semantic mismatch. A source “dealer tier” might represent a discount percentage, a contract price list, a restricted product catalog, a tax class, a payment method rule, a sales-representative assignment, or several of these at once. Mapping that value blindly into a single Adobe Commerce field can make the account look correct while breaking what the buyer can actually see or purchase.
+### Pricing Data Can Be Public, Group-Based, Company-Based, or Rule-Driven <a href="#pricing-data-can-be-public-group-based-company-based-or-rule-driven" id="pricing-data-can-be-public-group-based-company-based-or-rule-driven"></a>
 
-For shared catalog planning, merchants should identify:
+Adobe Commerce pricing can involve base prices, special prices, tier prices, customer-group pricing, shared catalog pricing, catalog price rules, cart price rules, coupon behavior, taxes, and integration-supplied pricing. Some projects only need straightforward product prices. Others require buyer-specific or time-sensitive commercial rules.
 
-| Source signal           | Possible Adobe Commerce interpretation                                                                  | Review priority |
-| ----------------------- | ------------------------------------------------------------------------------------------------------- | --------------- |
-| Wholesale tier          | Customer group, shared catalog assignment, pricing rule, or company classification                      | High            |
-| Contract price list     | Shared catalog custom pricing, advanced pricing, external pricing integration, or Custom Service review | High            |
-| Restricted product list | Shared catalog product selection, category permissions, or custom access logic                          | High            |
-| Account manager field   | Company account reference, CRM integration field, or custom attribute                                   | Medium          |
-| Buyer approval status   | Company status, role, purchase order workflow, or custom approval logic                                 | High            |
+Pricing migration should identify the source of truth for each pricing layer. A public retail price may come from the source store. Contract pricing may come from an ERP. Shared catalog prices may need Target Store configuration. Promotional pricing may depend on date ranges, customer groups, or campaign logic.
 
-Shared catalog data should be validated with real companies, real buyers, representative products, and expected price/visibility outcomes. A small sample of ordinary retail customers is not sufficient for an Adobe Commerce B2B target.
+Pricing review should also identify which values must be migrated, which should be recreated in Adobe Commerce, and which should remain governed by an external system after launch. Preserving incorrect historical pricing logic can be more damaging than intentionally rebuilding it in the target operating model.
 
-### Content and Promotion Data Can Include Timing, Not Just Current State <a href="#content-and-promotion-data-can-include-timing-not-just-current-state" id="content-and-promotion-data-can-include-timing-not-just-current-state"></a>
+### Content and Campaign Data May Have Timing Dependencies <a href="#content-and-campaign-data-may-have-timing-dependencies" id="content-and-campaign-data-may-have-timing-dependencies"></a>
 
-Adobe Commerce Content Staging adds time as a migration planning dimension. Scheduled updates can apply to products, categories, catalog price rules, cart price rules, CMS Pages, and CMS blocks. For merchants using launches, seasonal campaigns, merchandising calendars, price changes, or content refreshes, the current live record may not be the only relevant state.
+Adobe Commerce content can include CMS Pages, CMS blocks, banners, landing pages, promotional content, category content, and campaign-related changes. Adobe Commerce projects may also involve Content Staging or scheduled commercial changes, depending on the implementation.
 
-A source platform may have unpublished pages, scheduled promotions, future price changes, seasonal categories, campaign landing pages, hidden products, or third-party promotion rules. Adobe Commerce planning should determine whether those records are migrated, recreated, excluded, or rebuilt manually in the target Admin.
+A source page is not always just a page. It may support a campaign, a seasonal offer, a localized storefront, a B2B information flow, a landing-page URL, or a merchandising schedule. Content migration should identify which pages and blocks are evergreen, which are launch-critical, which are campaign-sensitive, and which should be rebuilt instead of migrated.
 
-The most important distinction is between present-state data and future-state data. Migrating only visible records may be appropriate for some stores. For campaign-sensitive Adobe Commerce projects, however, future scheduled content and promotion behavior can affect launch readiness. A promotion that was scheduled in the source may need to be recreated as a rule or staged update. A CMS block that supports a campaign may need a launch-specific version. A category scheduled for a sale may need separate validation from the standard category tree.
+Campaign timing matters because launch readiness may depend on what should be visible on the target store at launch, not merely what exists in the database. A staged promotion, scheduled category update, or time-sensitive landing page should be validated against business timing and storefront scope.
 
-Content and promotion review should answer three questions before migration execution:
+### Orders Carry Operational and Historical Context <a href="#orders-carry-operational-and-historical-context" id="orders-carry-operational-and-historical-context"></a>
 
-| Question                                                                                    | Reason                                                                            |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Which records are live, inactive, archived, scheduled, or campaign-specific?                | Migration scope should match launch requirements, not just database availability. |
-| Which promotion rules depend on customer groups, companies, products, categories, or dates? | Rules may need configuration or validation beyond simple data transfer.           |
-| Which CMS Pages, CMS blocks, and campaign URLs are SEO- or revenue-sensitive?               | These records need stronger route, content, and timing validation.                |
+Order migration in Adobe Commerce should preserve enough history for customer service, reporting reference, account review, and operational continuity. However, historical orders may not behave exactly like newly placed Adobe Commerce orders because payment captures, fulfillment events, refunds, invoices, shipments, and external integrations may have occurred in the source environment.
 
-If scheduled updates or campaign rules are complex, merchants should not assume they are automatically equivalent across platforms. The safer approach is to define the target behavior first, then decide whether the migration path, Add-ons, manual setup, or Custom Service review is the correct handling route.
+Order data review should identify which order details are needed for business continuity and which workflows will be active only for new orders after launch. Historical orders should be evaluated for customer account association, billing and shipping addresses, product references, totals, taxes, discounts, order statuses, and external IDs.
 
-### Inventory Data Must Match the Target Fulfillment Model <a href="#inventory-data-must-match-the-target-fulfillment-model" id="inventory-data-must-match-the-target-fulfillment-model"></a>
+When B2B is involved, order context can also depend on company account, buyer identity, purchase order behavior, quote history, approval workflow, or ERP reference. Those relationships may require Custom Service or implementation-side handling if they are stored outside standard supported structures.
 
-Adobe Commerce Inventory Management can use sources, stocks, salable quantity, and reservations. That model is different from a simple source quantity field. A source platform might have one stock number per SKU, multiple warehouse quantities, supplier stock, marketplace inventory, store pickup inventory, or ERP-controlled availability.
+### Inventory Should Match the Target Fulfillment Model <a href="#inventory-should-match-the-target-fulfillment-model" id="inventory-should-match-the-target-fulfillment-model"></a>
 
-A single source quantity can be acceptable for a simple target inventory model. It is not enough when Adobe Commerce needs to represent multiple warehouses, regional fulfillment, channel-specific availability, safety stock, backorder expectations, or external inventory ownership. In those cases, source inventory should be evaluated against the intended target fulfillment model before migration assumptions are accepted.
+Inventory data can look simple when the source store has one stock quantity per product. Adobe Commerce can be more complex, especially when multiple inventory sources, stocks, sales channels, reservations, pickup locations, warehouses, fulfillment integrations, or ERP-managed stock are involved.
 
-Inventory migration planning should distinguish:
+Migration planning should distinguish between migrated stock values and the target fulfillment model. A quantity can be migrated, but that does not automatically define where stock belongs, which website can sell it, how reservations are handled, or whether an external system will overwrite values after launch.
 
-| Inventory concern              | Why it affects Adobe Commerce migration                                                   |
-| ------------------------------ | ----------------------------------------------------------------------------------------- |
-| Source quantity                | Basic stock transfer may be sufficient only for simple operations.                        |
-| Source location                | Multi-source fulfillment may require source and stock planning.                           |
-| Channel availability           | Different websites or sales channels may need different salable inventory assumptions.    |
-| External inventory system      | ERP, warehouse, marketplace, or supplier-controlled stock may need identifier continuity. |
-| Reservations and live ordering | Migration timing should avoid inventory confusion during active sales periods.            |
+The most important inventory question is whether the Target Store needs a simple stock baseline, a multi-source stock structure, or an integration-managed stock model. That answer affects preparation, migration configuration, validation samples, and launch timing.
 
-The target store should be validated with products that represent common and edge-case inventory behavior, including configurable child SKUs, out-of-stock items, backorder-sensitive products, and items tied to warehouse or external-system logic.
+### URL and SEO Data Need Route-Level Review <a href="#url-and-seo-data-need-route-level-review" id="url-and-seo-data-need-route-level-review"></a>
 
-### URLs and Identifiers Carry Operational Continuity <a href="#urls-and-identifiers-carry-operational-continuity" id="urls-and-identifiers-carry-operational-continuity"></a>
+Adobe Commerce URL behavior can include product URL keys, category URL keys, CMS page paths, generated URL rewrites, custom rewrites, canonical behavior, redirects, and scoped URL differences. A source URL may not map cleanly to a target URL if the category structure, store scope, product visibility, or CMS page structure changes.
 
-Adobe Commerce URL rewrites can support product, category, CMS page, and custom routes. In migration planning, URLs are not just display fields. They preserve buyer access, search-engine continuity, campaign links, analytics history, marketplace references, email links, and integration assumptions.
+URL review should prioritize high-value pages rather than treating every URL equally. Priority product pages, category pages, CMS Pages, landing pages, search-visible pages, campaign URLs, and externally linked URLs should be tested before launch.
 
-Source platforms may use different URL structures, category paths, product handles, slugs, IDs, redirect rules, or canonical URL behavior. Adobe Commerce may require URL keys, rewrites, redirects, and route decisions that preserve high-value paths while fitting the target architecture.
+A migrated record can be present while the public route changes. That is why URL and SEO review belongs in data-model planning as well as validation. Source URL meaning should be captured before configuration decisions make later route correction harder.
 
-External identifiers matter in the same way. ERP IDs, PIM IDs, CRM IDs, marketplace IDs, tax-system IDs, fulfillment IDs, and legacy order references may not be visible to customers, but they can be essential to operations. A migration that preserves storefront data while losing hidden identifiers can still disrupt fulfillment, reporting, customer service, accounting, or integration reconciliation.
+### Extension and Integration Data May Sit Outside Standard Entities <a href="#extension-and-integration-data-may-sit-outside-standard-entities" id="extension-and-integration-data-may-sit-outside-standard-entities"></a>
 
-Route and identifier planning should prioritize:
+Adobe Commerce projects often involve extensions, ERP systems, PIM systems, CRM systems, OMS tools, search services, tax services, payment services, shipping systems, marketing automation tools, and analytics platforms. Some data belongs to the commerce platform. Some belongs to connected systems. Some exists only as extension-owned or custom fields.
 
-* high-value product and category URLs;
-* CMS Pages and campaign landing pages;
-* old-to-new redirect expectations;
-* canonical URL assumptions;
-* SKU and order-reference continuity;
-* customer and company external IDs;
-* product, inventory, and account identifiers used by integrations.
+Standard migration coverage should not be assumed for extension-owned records, custom database tables, outside-system identifiers, custom workflows, or implementation-specific logic. Those items should be classified before migration begins.
 
-Unsupported source identifiers, extension-owned records, or integration-specific fields should be reviewed early. Depending on scope, these may require Advanced Data Mapping, Advanced Data Configure, other Add-ons, accepted exclusions, or Custom Service review.
+| Data source                | Typical examples                                                                                                                | Planning response                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Standard platform entities | Products, customers, orders, categories, CMS Pages, Blog Posts where supported                                                  | Review standard mapping and validation expectations.                     |
+| Add-on-sensitive data      | Filtered scopes, adjusted field mapping, configured values, selected records                                                    | Consider Add-ons when supported options match the requirement.           |
+| Custom Service candidates  | Unsupported extension data, custom tables, outside-system identifiers, bespoke logic, company-specific workflows                | Scope with Next-Cart before assuming standard migration coverage.        |
+| Implementation-owned setup | Theme behavior, checkout configuration, payment configuration, shipping configuration, B2B feature setup, external integrations | Prepare or rebuild in the Target Store outside the data transfer itself. |
 
-### How to Decide What Requires Standard Mapping, Add-ons, or Custom Service Review <a href="#how-to-decide-what-requires-standard-mapping-add-ons-or-custom-service-review" id="how-to-decide-what-requires-standard-mapping-add-ons-or-custom-service-review"></a>
+This separation keeps migration planning realistic. Data migration can preserve records and relationships, but it does not automatically recreate every extension, business workflow, theme behavior, or integration process.
 
-Not every Adobe Commerce data-model difference requires Custom Service. Some differences are normal target-platform interpretation work. Others require optional Add-ons. The highest-risk cases are source-specific behaviors that do not have a clean equivalent in the supported migration path.
+### Entity Points Measure Capacity, Not Data-Model Complexity <a href="#entity-points-measure-capacity-not-data-model-complexity" id="entity-points-measure-capacity-not-data-model-complexity"></a>
 
-| Data-model situation                                                                                                                               | Likely handling direction                                                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Standard products, customers, orders, categories, and CMS Pages with clean field structure                                                         | Standard Service may be sufficient if the supported migration path covers the required entities.          |
-| Attributes, groups, filters, or field-level transformations need additional handling within supported scope                                        | Add-ons such as Advanced Data Mapping, Advanced Data Configure, or Data Filter Add-on may be appropriate. |
-| Source data includes company-specific pricing, unsupported B2B relationships, extension-owned records, outside-system identifiers, or custom logic | Custom Service review may be needed before the service license is finalized.                              |
-| Merchant wants execution support, planning review, or coordinated handling but the data model is still within supported scope                      | Managed Service may be the better operating choice.                                                       |
-| Source platform is unsupported, heavily customized, or behaves as a Custom Platform                                                                | Custom Service review should clarify feasibility, scope, responsibility, and exclusions.                  |
+Entity Points help estimate and purchase counted data capacity for the selected migration path. They do not measure whether Adobe Commerce data is simple or complex. Two stores can have similar counted data volume but very different migration complexity if one has company accounts, shared catalogs, scoped storefronts, custom attributes, external IDs, or extension-owned workflows.
 
-The practical standard is simple: if the source value has commercial, operational, or integration meaning that Adobe Commerce must preserve, it should be identified before the main migration run, represented in Demo Migration samples where possible, and assigned to a clear handling route.
+Adobe Commerce planning should therefore use Entity Points for capacity awareness while using data-model review to identify structural complexity. When the source store contains unsupported structures, custom logic, or records that need bespoke handling, the planning question is not only how many records exist. The planning question is how those records should behave in the Target Store.
+
+### Data Model Review Should Lead to a Clear Migration Scope <a href="#data-model-review-should-lead-to-a-clear-migration-scope" id="data-model-review-should-lead-to-a-clear-migration-scope"></a>
+
+Adobe Commerce data-model review should produce a practical scope decision before migration execution. The clearest output is a list of what will be migrated through supported structures, what requires Add-ons, what requires Custom Service, what will be configured directly in the Target Store, and what should be excluded or rebuilt.
+
+#### Scope decisions to make before configuration <a href="#scope-decisions-to-make-before-configuration" id="scope-decisions-to-make-before-configuration"></a>
+
+* Which product types and parent-child relationships must be preserved.
+* Which attributes should become structured Adobe Commerce attributes.
+* Which customer groups, companies, company users, and buyer roles must be represented.
+* Which shared catalogs, price rules, or buyer-specific visibility rules are required.
+* Which websites, stores, and store views must be represented.
+* Which CMS Pages, Blog Posts, blocks, campaign pages, and landing pages are launch-critical.
+* Which URL routes and redirects are high priority.
+* Which inventory values are migrated and which are governed by external systems.
+* Which custom fields, extension records, external identifiers, or integrations require Custom Service review.
+
+A clear scope protects both migration quality and validation quality. The target result can only be validated properly when the intended Adobe Commerce behavior is defined before launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Adobe Commerce data migration is not only a transfer of records. It is a translation of source commerce meaning into an enterprise target model that can include scoped storefronts, structured catalogs, company accounts, shared catalogs, staged campaigns, inventory sources, URL rewrites, and external-system dependencies.
+Adobe Commerce changes migration planning because records often carry operational meaning beyond their basic entity type. Products may depend on product type, attributes, and scope. Customers may depend on company relationships and purchasing authority. Catalog visibility may depend on shared catalogs. Content and pricing may depend on timing, storefront scope, and governance rules.
 
-The strongest migration plans identify where source data is descriptive, where it is behavioral, and where it is tied to pricing, access, fulfillment, compliance, reporting, or integrations. That separation prevents Adobe Commerce from becoming a technically complete target store that fails to support the merchant’s actual operating model.
+The strongest Adobe Commerce migration plans treat data-model review as a translation step. Source data should be evaluated according to how it must behave in the Target Store, which parts can follow supported migration paths, which parts need Add-ons, and which parts require Custom Service or implementation-side configuration.
 
-Before confirming the migration path, prepare representative source examples for products, attributes, companies, customer groups, shared catalogs, scheduled content, inventory, URLs, and integration identifiers. Use those examples during Demo Migration review to decide what fits the supported migration path, what should be handled through Add-ons, and what needs Custom Service review.
+#### Common questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Adobe Commerce data migration the same as Magento data migration?**
 
-**Why does Adobe Commerce data migration require more planning than simpler target platforms?**
+No. Adobe Commerce shares important architectural roots with Magento, but Adobe Commerce projects often add enterprise B2B, shared catalog, staging, governance, and integration requirements that change migration planning and validation.
 
-Adobe Commerce can attach operational meaning to records through scope, product types, attributes, company accounts, shared catalogs, customer groups, staged content, inventory sources, URL rewrites, and integrations. A record may transfer successfully while still failing to support the intended business behavior.
+**Do company accounts migrate like normal customer records?**
 
-**Are Adobe Commerce shared catalogs just another product category structure?**
+Not always. Individual customer records and company account structures can have different meanings. Company administrators, company users, roles, permissions, credit, purchase orders, quotes, and shared catalog assignments may require separate planning.
 
-No. Shared catalogs can control product visibility and pricing for assigned companies. They should be planned as buyer-specific commercial logic, not as ordinary category migration.
+**Are shared catalogs just category assignments?**
 
-**Should every source customer become a company account in Adobe Commerce?**
+No. Shared catalogs can control product visibility and pricing for specific companies or customer groups. They should be reviewed as buyer-specific commercial logic, not only as catalog navigation.
 
-No. Individual retail buyers, company administrators, company users, and wholesale accounts should be separated during planning. Company accounts are appropriate when the target store needs B2B purchasing structure, buyer roles, company-level settings, or shared catalog assignment.
+**Do Entity Points show whether the Adobe Commerce data model is complex?**
 
-**Can source attributes be migrated as plain text fields?**
+No. Entity Points help estimate counted data capacity. They do not measure structural complexity, customization, B2B relationships, integration dependency, or validation difficulty.
 
-Some can, but high-value attributes should be reviewed for target use. Attributes that affect search, layered navigation, product pages, promotions, reporting, integrations, or product maintenance should be structured carefully in Adobe Commerce.
+**Should all extension data be migrated automatically?**
 
-**When should data-model differences be raised for Custom Service review?**
+No. Extension-owned data, custom database tables, outside-system identifiers, and bespoke workflows should be reviewed before migration. Some items may require Custom Service, Target Store configuration, or implementation-side rebuilding.
 
-Custom Service review is appropriate when required behavior depends on unsupported source data, extension-owned records, outside-system identifiers, company-specific pricing logic, custom B2B relationships, or other bespoke logic that cannot be safely handled as normal field mapping.
+**What is the most important data-model decision before Adobe Commerce migration?**
+
+The most important decision is how source data should behave in the Target Store. Record transfer matters, but Adobe Commerce success depends on whether catalog, customer, company, pricing, content, scope, and integration relationships work as intended after migration.

@@ -139,23 +139,23 @@ Service status should reflect the work the migration actually needs. A project d
 
 ### Common Misunderstandings About Service Models <a href="#common-misunderstandings-about-service-models" id="common-misunderstandings-about-service-models"></a>
 
-**“Managed Service and Custom Service mean the same thing.”**
+#### “Managed Service and Custom Service mean the same thing.” <a href="#managed-service-and-custom-service-mean-the-same-thing" id="managed-service-and-custom-service-mean-the-same-thing"></a>
 
 No. Managed Service is about Next-Cart-led execution within supported service capability. Custom Service is about customization, modification, bespoke handling, or custom-scoped requirements.
 
-**“Custom Service always means Next-Cart performs the entire migration.”**
+#### “Custom Service always means Next-Cart performs the entire migration.” <a href="#custom-service-always-means-next-cart-performs-the-entire-migration" id="custom-service-always-means-next-cart-performs-the-entire-migration"></a>
 
 No. Custom Service means custom work is required. Next-Cart performs migration actions only when Expert Handle is included in the agreed scope.
 
-**“Standard Service means there is no support.”**
+#### “Standard Service means there is no support.” <a href="#standard-service-means-there-is-no-support" id="standard-service-means-there-is-no-support"></a>
 
 No. Standard Service is customer-led, but customers can still request support. The customer remains responsible for performing migration actions.
 
-**“Add-ons always make the project Custom.”**
+#### “Add-ons always make the project Custom.” <a href="#add-ons-always-make-the-project-custom" id="add-ons-always-make-the-project-custom"></a>
 
 No. Standard Add-ons can be used with Standard Service, Managed Service, or Custom Service. The project becomes custom-scoped when the Add-on needs modification beyond available behavior or when a Custom Add-on is required.
 
-**“Next-Cart-led execution removes the need for customer validation.”**
+#### “Next-Cart-led execution removes the need for customer validation.” <a href="#next-cart-led-execution-removes-the-need-for-customer-validation" id="next-cart-led-execution-removes-the-need-for-customer-validation"></a>
 
 No. The customer remains responsible for final result verification and migration outcome under every service model.
 

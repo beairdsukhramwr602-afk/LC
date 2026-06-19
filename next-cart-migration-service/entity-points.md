@@ -100,7 +100,7 @@ Consider the same purchase setup: the customer estimates 480 Entity Points and p
 | Blog Posts        | 100             | 0.6         | 60                      |
 | **Total**         |                 |             | **480**                 |
 
-#### Scenario 1: The actual Entity Points usage remains within the plan capacity
+#### Scenario 1: The actual Entity Points usage remains within the plan capacity <a href="#scenario-1-the-actual-entity-points-usage-remains-within-the-plan-capacity" id="scenario-1-the-actual-entity-points-usage-remains-within-the-plan-capacity"></a>
 
 If the actual counted migration consumption reaches 800 Entity Points, the migration can continue within the selected 1,000 Entity Points Plan because the plan has enough available capacity.
 
@@ -113,7 +113,7 @@ If the actual counted migration consumption reaches 800 Entity Points, the migra
 
 The remaining capacity is consumed according to the counted data that is successfully migrated. Customers should not assume the original estimate is a hard limit. The selected plan capacity is the practical boundary.
 
-#### Scenario 2: The actual Entity Points usage exceeds the planned capacity
+#### Scenario 2: The actual Entity Points usage exceeds the planned capacity <a href="#scenario-2-the-actual-entity-points-usage-exceeds-the-planned-capacity" id="scenario-2-the-actual-entity-points-usage-exceeds-the-planned-capacity"></a>
 
 If actual counted data exceeds the selected plan capacity, Entity Points are consumed until the plan capacity is used. Entity Points consumption follows the counted core data sequence:
 
@@ -146,7 +146,7 @@ This consumption sequence is separate from the fixed entity migration sequence u
 
 Execution order describes how the store data is processed during migration. Entity Points consumption order describes how the counted capacity is consumed for Products, Customers, Orders, and Blog Posts. The two concepts are related to the same migration activity, but they should not be interpreted as the same mechanism.
 
-### Entity Points and Later Migration Activity <a href="#entity-points-and-later-migration-actions" id="entity-points-and-later-migration-actions"></a>
+### Entity Points and Later Migration Activity <a href="#entity-points-and-later-migration-activity" id="entity-points-and-later-migration-activity"></a>
 
 After a successful migration activity under the purchased service license, additional migration actions may involve existing records, newly added records, or a new migration result for the same migration path.
 
@@ -219,7 +219,7 @@ No. Entity Points Plan upgrade increases plan capacity. It does not renew the se
 
 No. Entity Points measure counted capacity. Complexity can still come from platform differences, Add-ons, Custom Service requirements, Custom Platform handling, third-party data, or validation needs.
 
-### Conclusion  <a href="#conclusion" id="conclusion"></a>
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 Entity Points help customers estimate counted migration capacity by applying a weighted model to Product, Customer, Order, and Blog Posts data. They support plan selection, migration execution, remaining-capacity use, and upgrade decisions under the purchased service license.
 
@@ -227,7 +227,7 @@ The most important distinction is that Entity Points inputs are not migration fi
 
 Customers should estimate Product, Customer, Order, and Blog Posts counts carefully, consider expected source-store growth, and review selective-scope needs before execution. If the store contains more data than expected, has unused plan capacity, or needs selective filtering, Live Chat can help clarify whether the next step is plan capacity review, Entity Points Plan upgrade, the Data Filter Add-on, or Custom Service review.
 
-### FAQs  <a href="#faqs" id="faqs"></a>
+### FAQs <a href="#faqs" id="faqs"></a>
 
 **What are Entity Points?**
 

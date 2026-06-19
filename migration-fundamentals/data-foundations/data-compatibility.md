@@ -1,334 +1,242 @@
-# Data Compatibility: What It Means and Why It Breaks
+# Data Compatibility
 
-Most e-commerce platforms can store similar types of information. The more important question is whether the Target Platform can represent that information in a way that preserves the meaning, behavior, and daily use the business depends on.
+Data compatibility is the difference between moving store records and preserving the business meaning those records carry.
 
-That is why data compatibility matters. A migration can move records successfully and still create business problems if Products behave differently, category paths no longer support discovery, Customer records no longer support the same account expectations, Order history becomes harder to use, promotions apply differently, or important content loses continuity after launch.
+Most e-commerce platforms can store Products, Customers, Orders, categories, content, reviews, discounts, and related data. That does not mean they represent those concepts in the same way. A migration can complete successfully at the record level while the Target Platform interprets product options, category paths, customer groups, order history, discount rules, content URLs, or third-party data differently from the Source Platform.
 
-Data compatibility is not simply the question, “Can this data be migrated?” It is a broader planning question:
+Compatibility matters because the business does not operate on record totals alone. It depends on behavior: customers finding the right products, staff interpreting orders, customer accounts remaining usable, promotions applying correctly, content retaining continuity, and connected workflows keeping enough context to support daily operations.
 
-* Can the Target Platform represent the same business concepts used by the Source Platform?
-* Will the migrated store behave acceptably after launch?
-* Will connected data still support daily work in usable ways?
-* Will app-driven, plugin-driven, extension-driven, or outside-system logic still have the structure it needs?
+### Data Compatibility Is About Preserving Meaning <a href="#data-compatibility-is-about-preserving-meaning" id="data-compatibility-is-about-preserving-meaning"></a>
 
-A store can show the right record totals and still be incompatible in practice if the Target Platform interprets the same business concept differently.
+Data compatibility asks whether the Target Platform can represent migrated data in a way that still supports the store’s intended use after launch.
 
-### What data compatibility really means
+This is broader than asking whether a data group can be transferred. A product record may move, but option selection may change. A customer record may move, but segmentation logic may not carry the same meaning. An order may move, but staff may lose context that used to come from extensions, custom fields, or outside systems.
 
-Data compatibility is about preserving meaning, not only preserving fields.
+| Transfer question          | Compatibility question                                                |
+| -------------------------- | --------------------------------------------------------------------- |
+| Can the records be moved?  | Will the records still support the same business use?                 |
+| Do record totals match?    | Does the Target Platform interpret the data acceptably?               |
+| Are Products present?      | Are Products still buyable, discoverable, and understandable?         |
+| Are Customers present?     | Are accounts, groups, history, and customer context still usable?     |
+| Are Orders present?        | Can staff still interpret order history for service and operations?   |
+| Are URLs or pages present? | Do important pages still support navigation, traffic, and continuity? |
 
-Two platforms may both support Products, variants, discounts, reviews, Customer groups, or categories. But those same labels can hide different underlying structures. One platform may treat a concept as a native feature, while another handles it through a different model, an app, a rule system, or a workaround.
+A compatibility review therefore looks beyond presence. It asks whether the migrated store still behaves in a way the business can rely on.
 
-That is where compatibility problems begin. The data may transfer, but storefront behavior, admin behavior, reporting meaning, or promotional logic can change in ways the business feels after launch.
+### Why Compatibility Breaks Even When Migration Succeeds <a href="#why-compatibility-breaks-even-when-migration-succeeds" id="why-compatibility-breaks-even-when-migration-succeeds"></a>
 
-Compatibility becomes more important when the business depends on outcomes such as:
+Compatibility problems usually appear because platforms organize similar concepts differently.
 
-* complex Product behavior
-* category and filtering logic
-* Customer-group meaning
-* Order usability
-* promotion and pricing rules
-* content and URL continuity
-* app-driven, plugin-driven, extension-driven, or outside-system workflows
+Two platforms may both support variants, categories, discounts, reviews, customer groups, CMS Pages, or Blog Posts. The names may be familiar, but the underlying structure may not match. One platform may treat a concept as a native feature. Another may require an app, extension, rule, field mapping decision, configuration change, or custom handling.
 
-### Why compatibility breaks even when record transfer succeeds
+The issue is not always missing data. Often, the data exists but no longer carries the same operational meaning.
 
-Compatibility problems usually happen because platforms do not organize the same concepts in the same way.
+Common causes include:
 
-Two platforms may use the same words for a feature while assigning those words different rules, structures, or limits. A variant may behave differently. A category may carry different navigation meaning. A Customer group may not support the same pricing or visibility logic. A discount may apply through a different rule system.
+* product options and variants using different structures;
+* category, collection, or filter logic changing after migration;
+* customer groups or segments losing pricing, visibility, or workflow meaning;
+* order history becoming less useful because references or metadata changed;
+* discounts, tax rules, reviews, or promotions applying through different models;
+* content and URL patterns changing in ways that affect navigation or traffic;
+* custom fields, extension data, or outside-system identifiers needing special interpretation.
 
-The words match, but the business behavior does not.
+This is why compatibility should be evaluated with representative examples, not only with record counts.
 
-That is the central compatibility problem: the store still has data, but the Target Platform no longer interprets that data in a way that preserves the expected result.
+### Same Label Does Not Mean Same Behavior <a href="#same-label-does-not-mean-same-behavior" id="same-label-does-not-mean-same-behavior"></a>
 
-#### Same name, different meaning <a href="#same-name-different-meaning" id="same-name-different-meaning"></a>
+Many compatibility risks hide behind familiar labels.
 
-Some of the hardest compatibility problems appear when features look familiar.
+A merchant may see Products, categories, Customers, Orders, reviews, and discounts in both platforms and assume that the migration path is straightforward. That assumption can fail when the business depends on a specific behavior behind those labels.
 
-Examples include:
+| Familiar label            | Compatibility risk to check                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Product options           | Whether option selection, variant pricing, inventory, and media still support purchasing behavior     |
+| Categories or collections | Whether browse paths, filters, parent-child meaning, and merchandising logic still work acceptably    |
+| Customer groups           | Whether pricing, visibility, tax, approval, loyalty, or segmentation meaning survives                 |
+| Orders                    | Whether staff can still interpret purchased items, totals, discounts, taxes, statuses, and notes      |
+| Discounts                 | Whether conditions, eligibility, stacking, timing, and product relationships still behave as expected |
+| Reviews                   | Whether ownership, product association, visibility, and trust value remain usable                     |
+| CMS Pages and Blog Posts  | Whether content structure, metadata, links, media, and URLs retain continuity                         |
 
-* a product option that behaves differently as a variant or configuration choice
-* a category that still exists but supports weaker browse behavior
-* a Customer group that no longer drives the same price or visibility logic
-* a discount that exists but applies through a different set of conditions
-* a review record that survives while its role in storefront trust changes
+The practical test is not whether the Target Platform uses the same word. The practical test is whether the migrated data still supports the outcome the business needs.
 
-Compatibility should not be judged by labels alone. The real question is whether the same concept still supports the same business use after migration.
+### Compatibility Risk Concentrates in Specific Store Areas <a href="#compatibility-risk-concentrates-in-specific-store-areas" id="compatibility-risk-concentrates-in-specific-store-areas"></a>
 
-### Rules, limits, and platform behavior change compatibility
+Compatibility risk is rarely spread evenly across the whole store. Most stores have a few areas where meaning, behavior, or structure matters more than simple transfer.
 
-Compatibility is not only about data fields. It is also about how the Target Platform applies business rules.
+#### Product Options, Variants, and Purchasability <a href="#product-options-variants-and-purchasability" id="product-options-variants-and-purchasability"></a>
 
-Important differences often appear in:
+Product compatibility is often the highest revenue-risk area because customers interact with it directly.
 
-* option and variant handling
-* pricing and discount logic
-* tax behavior
-* review visibility or ownership
-* category or collection behavior
-* URL and page behavior
-* Customer segmentation or account expectations
+Problems can appear when:
 
-The more the business depends on these rules, the more carefully compatibility should be judged.
+* option selection works differently;
+* variant-specific pricing, inventory, SKU, image, or availability logic changes;
+* configurable, bundled, grouped, personalized, or subscription-like product behavior does not map cleanly;
+* attributes move but no longer support the same filtering or comparison behavior;
+* app-driven product fields do not become usable Target Platform fields.
 
-### Store behavior may depend on data outside the core platform
+A product page can look complete while still creating the wrong buying experience. Compatibility review should therefore include the most complex and commercially important Products, not only simple catalog items.
 
-Many compatibility problems come from business logic that does not live entirely inside the default platform model.
+#### Catalog Structure and Discovery <a href="#catalog-structure-and-discovery" id="catalog-structure-and-discovery"></a>
 
-Apps, plugins, extensions, custom fields, and outside systems may influence:
+Catalog compatibility is about whether customers can still find and understand products after migration.
 
-* custom Product fields
-* filtering or merchandising behavior
-* Customer segmentation
-* Order metadata
-* reporting logic
-* ERP, CRM, shipping, subscription, or automation identifiers
+Risk increases when the store depends on:
 
-This matters because the core records may transfer while the behavior layer does not carry over automatically. The more important those added layers are to the real store, the more the business should treat compatibility as a practical behavior question rather than a simple transfer question.
+* deep category trees;
+* layered navigation;
+* faceted filters;
+* attribute-driven search or merchandising;
+* collection logic;
+* brand, size, color, compatibility, fitment, or use-case browsing;
+* category-level content and metadata.
 
-#### When added data layers affects service planning <a href="#when-added-data-layers-affect-service-planning" id="when-added-data-layers-affect-service-planning"></a>
+Products may transfer correctly while discovery becomes weaker. If customers used the old structure to browse, compare, filter, or land on search-sensitive pages, catalog compatibility needs early review.
 
-Some extension-driven or outside-system context may not need to be migrated. Some may fit standard service capability. But when the expected result depends on custom fields, third-party data, outside-system identifiers, special transformation rules, or custom migration logic adjustment, the requirement belongs under Custom Service.
+#### Customer Continuity <a href="#customer-continuity" id="customer-continuity"></a>
 
-### Where compatibility breaks most often
+Customer data is compatible only when it remains useful for account, service, marketing, or operational continuity.
 
-Compatibility risk usually concentrates in a few areas. If your store depends heavily on them, they should be treated as higher-risk until they are reviewed.
+Risk appears when the business depends on:
 
-#### 1. Product options, variants, and purchasability
+* customer groups or segments;
+* account status or approval workflows;
+* B2B pricing or visibility logic;
+* tax status;
+* loyalty, subscription, or membership context;
+* review ownership;
+* CRM, support, or outside-system identifiers.
 
-This is often the highest revenue-risk area.
+The record may exist after migration, but the business may not be able to use it in the same way. Password behavior also needs realistic planning because platform security rules may prevent exact password continuity.
 
-Compatibility problems can appear as:
+#### Orders and Operational Usability <a href="#orders-and-operational-usability" id="orders-and-operational-usability"></a>
 
-* option selection behavior changing
-* variant pricing or inventory meaning changing
-* product configuration patterns not mapping cleanly
-* variant-specific media behavior changing
-* attribute-driven filters behaving differently
+Order compatibility depends on whether historical orders remain interpretable and useful.
 
-A Product page can look complete while still allowing the wrong purchase behavior.
+A migrated order should preserve enough context for customer service, reporting, accounting support, refund review, warranty questions, fulfillment reference, and internal operations. Risk increases when orders contain custom fields, complex taxes, discounts, partial shipments, refunds, notes, app-generated metadata, or outside-system references.
 
-#### 2. Catalog structure and discovery
+An order can be present and still become weaker if staff cannot understand what was purchased, how the total was calculated, which customer context matters, or what operational action the order history supports.
 
-Products may migrate correctly while discovery still changes in important ways.
+#### Discounts, Taxes, Reviews, and Rule-Based Behavior <a href="#discounts-taxes-reviews-and-rule-based-behavior" id="discounts-taxes-reviews-and-rule-based-behavior"></a>
 
-Common problems include:
+Some data depends heavily on rules rather than static fields. Discounts, taxes, reviews, customer visibility, product eligibility, and promotion logic may work through different Target Platform models.
 
-* category paths changing in ways that weaken browse logic
-* filter behavior becoming less precise
-* attribute meaning shifting between search, filtering, and display
-* collection logic or grouping rules no longer behaving the same way
-* category intent weakening even when Product totals match
+Compatibility review should look for rule meaning, not just record presence. A discount that migrates but applies under different conditions is still a compatibility issue. A review that transfers but loses product association or customer trust value is also a compatibility issue.
 
-A catalog can transfer while the path customers use to find Products becomes less effective.
+#### Content, URLs, and Traffic Continuity <a href="#content-urls-and-traffic-continuity" id="content-urls-and-traffic-continuity"></a>
 
-#### 3. Customer continuity
+CMS Pages, Blog Posts, product URLs, category URLs, metadata, media references, and internal links can affect customer trust and search continuity.
 
-Customer records can transfer successfully while Customer experience still changes in important ways.
+Compatibility risk increases when the store depends on organic traffic, long-lived landing pages, buying guides, policy pages, product education, category content, or content-led conversion paths. URL structure and redirect planning should be reviewed early enough to support Section 2 SEO continuity work and later validation.
 
-Compatibility problems often involve:
+### Third-Party and Custom Data Can Change the Service Path <a href="#third-party-and-custom-data-can-change-the-service-path" id="third-party-and-custom-data-can-change-the-service-path"></a>
 
-* changed account expectations
-* differences in Customer grouping or segmentation logic
-* review ownership behaving differently
-* incomplete continuity in customer-facing account behavior
-* loss of important extension-driven Customer context
+Many compatibility issues come from data that does not live entirely inside the default platform model.
 
-The problem is often not that the Customer data is missing. It is that the business can no longer use it in the same way.
+Apps, plugins, extensions, custom fields, integrations, and outside systems may carry business meaning that standard core records do not explain. They can affect product merchandising, customer segmentation, order operations, subscriptions, loyalty, reporting, shipping, ERP, CRM, automation, or support workflows.
 
-#### 4. Orders and operational usability
+Not every added data layer must be migrated. Some context may be retired, replaced, recreated, or handled through Target Platform configuration. But when the expected result depends on custom fields, third-party data, outside-system identifiers, special transformation rules, or custom migration logic adjustment, the requirement should be reviewed through Custom Service.
 
-Order compatibility is about whether Order history remains workable for customer service, reporting, reconciliation, and daily operations.
+This distinction matters. Add-ons can support optional filtering, mapping, or data configuration needs within service planning. Custom Service is the path for broader customization, modification, bespoke handling, Custom Platform work, unsupported extension data, outside-system identifiers, or custom migration logic adjustment.
 
-Problems often appear as:
+### Compatibility Risk Is Usually Low, Moderate, or High <a href="#compatibility-risk-is-usually-low-moderate-or-high" id="compatibility-risk-is-usually-low-moderate-or-high"></a>
 
-* weaker Product references inside Order history
-* changed discount or tax interpretation
-* Order records that are present but harder to understand
-* reduced support usefulness after migration
-* missing context previously supplied by apps, plugins, extensions, or outside systems
+Compatibility does not need to be treated as a vague concern. Most stores can be grouped by practical risk level once the important data and behavior requirements are visible.
 
-An Order can exist after migration and still be less useful to the business.
+| Risk level | Typical signals                                                                                                                                                    | Planning implication                                                                      |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Low        | Straightforward catalog, mostly native data, simple promotions, limited app dependency, standard content needs                                                     | Standard review is usually enough if sample results are clean                             |
+| Moderate   | Complex variants, layered categories, meaningful SEO dependence, important order-history needs, some custom fields or app context                                  | Migration may fit standard capability, but representative review becomes more important   |
+| High       | Heavy app or extension dependency, custom fields, advanced product logic, complex pricing or tax behavior, outside-system identifiers, Custom Platform involvement | Deeper discovery, Custom Service review, and more structured validation are usually safer |
 
-#### 5. Discounts, taxes, reviews, and rule-based behavior
+High compatibility risk does not mean the migration should stop. It means the project needs a more realistic service path, better evidence, and stronger validation before launch assumptions become fixed.
 
-Compatibility can break when the rule engine behind the data changes.
+### How to Evaluate Compatibility Before Migration <a href="#how-to-evaluate-compatibility-before-migration" id="how-to-evaluate-compatibility-before-migration"></a>
 
-Common issues include:
+A compatibility review should make business risk visible early without turning the whole project into a technical audit.
 
-* discounts existing but applying differently
-* tax behavior changing across Products, Customers, or regions
-* reviews existing without preserving the same visibility, ownership, or trust role
-* promotions reconnecting differently to Products or categories
-* business rules moving from native data into app-dependent logic
+#### Define What Must Remain True <a href="#define-what-must-remain-true" id="define-what-must-remain-true"></a>
 
-A rule that behaves differently after migration is still a compatibility problem even when the underlying records are present.
+Start with outcomes, not fields. The business should identify what must remain true after launch for:
 
-#### 6. SEO and URL behavior
+* complex Products and buying behavior;
+* category navigation, filters, and search-sensitive discovery;
+* Customer account and segmentation continuity;
+* Order history and staff usability;
+* discounts, taxes, reviews, and pricing rules;
+* CMS Pages, Blog Posts, URLs, and internal links;
+* app-driven, plugin-driven, extension-driven, or outside-system workflows.
 
-Platforms also differ in how they structure URLs and content.
+These outcomes become the compatibility lens for later review.
 
-Common compatibility issues include:
+#### Choose Representative Data <a href="#choose-representative-data" id="choose-representative-data"></a>
 
-* URL patterns changing for Products, categories, or content
-* content structure changing
-* page behavior changing because platform rules differ
-* Blog Posts, category pages, or Product pathways losing continuity
+A useful review sample should include the records most likely to expose real complexity:
 
-The safest approach is to identify priority URLs early and treat page behavior as a review category, not as a last-minute technical task.
+* the most complex Products;
+* the highest-value category paths;
+* representative Customers;
+* representative Orders with discounts, refunds, notes, or taxes;
+* reviews, coupons, or pricing rules where they matter;
+* priority URLs, CMS Pages, Blog Posts, and landing pages;
+* records affected by custom fields, extensions, integrations, or outside systems.
 
-### Compatibility is not a yes-or-no decision
+Easy records can make compatibility look better than it is. Representative records show whether the Target Platform can preserve the meaning that matters.
 
-Most real projects fall into three broad groups.
+#### Use Demo Migration as Evidence <a href="#use-demo-migration-as-evidence" id="use-demo-migration-as-evidence"></a>
 
-#### Low compatibility risk <a href="#low-compatibility-risk" id="low-compatibility-risk"></a>
+A Demo Migration is useful because it turns compatibility from an assumption into observable evidence.
 
-This usually means:
+The review should ask:
 
-* most important data is native to the Source Platform
-* catalog structure is straightforward
-* fewer important behaviors depend on apps, plugins, extensions, or custom logic
-* tax and promotion behavior is relatively simple
+* what mapped cleanly;
+* what changed meaning or behavior;
+* which data groups need more review;
+* whether the result still supports expected business use;
+* whether the project fits a standard service path or needs Custom Service.
 
-Typical result: most scope maps cleanly and validation is simpler.
+The goal is not perfection in a sample. The goal is to identify where compatibility is straightforward, where review is needed, and where the service plan should change before full migration work proceeds.
 
-#### Moderate compatibility risk <a href="#moderate-compatibility-risk" id="moderate-compatibility-risk"></a>
+### Custom Platform Compatibility Needs Earlier Review <a href="#custom-platform-compatibility-needs-earlier-review" id="custom-platform-compatibility-needs-earlier-review"></a>
 
-This usually means the store has some meaningful complexity, such as:
+A Custom Platform usually increases compatibility sensitivity because source structure, field meaning, platform behavior, or data extraction logic may require more interpretation.
 
-* complex variants
-* layered categories
-* meaningful SEO dependence
-* important Order-history needs
-* some app-driven behavior or custom fields
+The important question is not whether visible records can be moved at all. The important question is whether the Target Platform can represent the same business meaning acceptably after the data is interpreted, transformed, mapped, or restructured.
 
-Typical result: migration is feasible, but success depends on early validation and better scope decisions.
+Migration involving a Custom Platform as the Source Platform or Target Platform requires Custom Service because the project depends on custom interpretation, custom structure handling, or custom migration logic adjustment. That does not automatically mean every task is managed end to end by Next-Cart. It means the requirement needs the Custom Service path so the scope and responsibility can be defined correctly.
 
-#### High compatibility risk <a href="#high-compatibility-risk" id="high-compatibility-risk"></a>
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-This usually means the store depends heavily on:
+Data compatibility determines whether migrated records remain useful after the store moves to the Target Platform. The core issue is not only whether data can be transferred. It is whether Products, categories, Customers, Orders, discounts, reviews, CMS Pages, Blog Posts, URLs, custom fields, and connected workflows still preserve enough business meaning to support the store after launch.
 
-* app-driven, plugin-driven, or extension-driven behavior
-* custom fields
-* advanced Product logic
-* complex pricing, discount, tax, or review behavior
-* outside systems and integrations
+The safest approach is to evaluate compatibility with representative data, not easy examples. Product behavior, catalog discovery, customer continuity, order usability, rule-based behavior, content continuity, and third-party context should be checked before the migration path is treated as stable.
 
-Typical result: the project needs deeper discovery, more structured validation, and often Custom Service when preserving the expected result requires customization, modification, or bespoke handling.
+When compatibility risk is low, standard service capability may be enough. When the store depends on complex structure, custom data, extension-driven workflows, outside-system identifiers, or Custom Platform handling, Custom Service is usually the safer review path. Use Demo Migration evidence to identify what maps cleanly, what changes meaning, and what needs a stronger service plan before full execution.
 
-High compatibility risk does not mean the migration should stop. It means the project should plan validation and service fit more realistically.
-
-### How to evaluate compatibility without becoming overly technical
-
-The goal is to make compatibility visible early through useful evidence.
-
-#### Step 1: Identify what must remain true after launch <a href="#step-1-identify-what-must-remain-true-after-launch" id="step-1-identify-what-must-remain-true-after-launch"></a>
-
-Write down the non-negotiable outcomes for:
-
-* complex Products and buying behavior
-* category navigation and filtering
-* Customer continuity
-* Order usability
-* reviews, coupons, or pricing rules where they matter
-* SEO-sensitive pages and URL behavior
-* app-driven, plugin-driven, extension-driven, or outside-system logic that affects real store behavior
-
-#### Step 2: Identify the highest-risk part of your store <a href="#step-2-identify-the-highest-risk-part-of-your-store" id="step-2-identify-the-highest-risk-part-of-your-store"></a>
-
-Choose a small but representative set of data that reflects real complexity:
-
-* your most complex Products
-* your highest-value category paths
-* representative Customer cases
-* representative Orders
-* reviews or coupons where relevant
-* priority URLs and landing pages
-* records affected by apps, plugins, extensions, or outside systems
-
-#### Step 3: Validate direction with a Demo Migration <a href="#step-3-validate-direction-with-a-demo-migration" id="step-3-validate-direction-with-a-demo-migration"></a>
-
-A Demo Migration is most useful when it shows:
-
-* what maps cleanly
-* what changes meaning or behavior
-* which areas are hardest to preserve
-* how much review work the project is likely to require
-
-This turns compatibility from a guess into something the business can evaluate before broader migration decisions are made.
-
-#### Step 4: Clarify Custom Platform requirements early <a href="#step-4-clarify-custom-platform-requirements-early" id="step-4-clarify-custom-platform-requirements-early"></a>
-
-If a Custom Platform is involved, compatibility risk usually needs earlier clarification. The key issue is not whether visible records can be moved at all. The key issue is whether the Target Platform can still represent the same business meaning acceptably when more of the source structure, field logic, or platform behavior may require tailored handling.
-
-Any migration involving a Custom Platform as the Source Platform or Target Platform requires Custom Service because the project depends on custom interpretation, custom structure handling, or custom migration logic adjustment.
-
-### What compatibility means for service planning <a href="#what-compatibility-means-for-service-planning" id="what-compatibility-means-for-service-planning"></a>
-
-Compatibility is one of the strongest signals for whether a project fits standard service capability or needs Custom Service.
-
-A more standard service path is often suitable when:
-
-* most critical data is native to the Source Platform
-* catalog structure is straightforward
-* promotions and taxes are relatively uncomplicated
-* the store can be reviewed successfully with standard checks
-
-Custom Service is more likely when:
-
-* the store depends on third-party or custom data
-* Product structure is complex or heavily constrained by the Target Platform model
-* data must be transformed to preserve meaning and behavior
-* Custom Platform handling is involved
-* the expected result depends on custom migration logic adjustment
-* the team needs deeper proof than record totals alone can provide
-
-If compatibility risk becomes high enough that standard service capability cannot preserve important meaning safely, the project should be reviewed through Custom Service rather than forced into a standard scope.
-
-### Best practices
-
-Use these practices to reduce compatibility surprises early:
-
-* define what must remain true after launch before planning too deeply
-* identify app-driven, plugin-driven, and extension-driven data early
-* focus on behavior, not just counts
-* validate business outcomes, not just data presence
-* review the highest-risk areas with representative examples
-* treat outside-system meaning as part of the real compatibility picture rather than an afterthought
-* use Demo Migration to test representative complexity before making broader launch assumptions
-
-### Conclusion
-
-Data compatibility is the question underneath every migration decision: not only whether data can be transferred, but whether the Target Platform can still support the same business meaning after the move.
-
-That makes compatibility a structural and behavioral issue, not a record-count issue. Products, categories, Customers, Orders, reviews, promotions, URLs, Blog Posts, and app-driven logic can all appear present while behaving differently in ways that affect revenue, operations, trust, or discoverability.
-
-The safest approach is to define what must remain true, review the highest-risk areas with representative data, and treat third-party or outside-system logic as part of the real compatibility picture. A Demo Migration is often the fastest way to see whether important data maps cleanly or changes meaning on the Target Platform.
-
-Use a representative Demo Migration sample to test the parts of your store most likely to break in meaning, not only the easiest records to move. If the result shows more compatibility risk than expected, Live Chat can help clarify what still fits standard service capability and what should be reviewed through Custom Service before broader execution.
-
-### FAQs
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the difference between data transfer and data compatibility?**
 
-Data transfer asks whether records can be moved. Data compatibility asks whether the Target Platform can still represent the same business meaning after the move. A store can complete the transfer and still have compatibility problems if Product behavior, category logic, Customer continuity, Order usability, or promotion rules change.
+Data transfer asks whether records can be moved from the Source Platform to the Target Platform. Data compatibility asks whether those records still preserve the same business meaning after migration. A store can transfer Products, Customers, Orders, or content successfully and still have compatibility problems if behavior, structure, rules, or usability changes.
 
-**Why can a store be incompatible even when the data transfers successfully?**
+**Why can compatibility break even when record totals match?**
 
-Because the Target Platform may represent the same concepts differently. The records can exist while the behavior changes. That often affects variants, filtering, Customer accounts, Order history, reviews, discounts, and category relationships.
+Record totals only show that records exist. They do not prove that the Target Platform interprets those records in the same way. Compatibility can still break through changed variant behavior, weaker category logic, different customer group meaning, less useful order history, changed discount rules, or missing custom-field context.
 
-**Do third-party apps and custom fields increase compatibility risk?**
+**Do apps, plugins, extensions, and custom fields increase compatibility risk?**
 
-Yes. They often carry business meaning that does not live in the core platform. If a store depends on custom fields, plugin logic, extension data, or outside-system identifiers, compatibility risk is usually higher until a representative sample is reviewed.
+Yes. They often carry business meaning that is not part of the default platform data model. If important workflows depend on custom fields, extension data, outside-system identifiers, or special transformation rules, the project may need Custom Service review rather than standard mapping assumptions.
 
-**How do I know if my store has high compatibility risk?**
+**How should a merchant test data compatibility early?**
 
-Risk is usually higher if your store depends on complex variants and options, layered categories and filtering, advanced discounts or tax rules, reviews that must preserve authorship and Product links, app-driven behavior, custom fields, integrations, or SEO-sensitive content.
+The best early test is a representative Demo Migration sample. The sample should include complex Products, important category paths, representative Customers and Orders, priority content or URLs, and records affected by custom fields or third-party logic. Reviewing only simple records can hide real compatibility risk.
 
-**Can compatibility risk change the right service approach?**
+**Does high compatibility risk mean migration is not possible?**
 
-Yes. Lower-risk stores often fit standard service capability. Stores with custom data, complex Product structure, extension-driven logic, or more fragile behavior often need Custom Service. When preserving meaning requires special mapping, transformation, custom migration logic adjustment, or non-standard handling, Custom Service is the safer review path.
+No. High compatibility risk means the project needs stronger discovery, clearer service planning, and more structured validation. Migration may still be feasible, but the expected result should not be forced into a standard path if preserving business meaning requires customization, transformation, bespoke handling, or custom migration logic adjustment.
 
-**How does a Custom Platform affect compatibility?**
+**How does Custom Platform involvement affect compatibility?**
 
-If a Custom Platform is involved, compatibility risk becomes more sensitive because the project may need more precise interpretation, transformation, and validation to confirm that the Target Platform can still represent the same business meaning acceptably. Migration involving a Custom Platform as the Source Platform or Target Platform requires Custom Service.
+Custom Platform involvement usually requires earlier compatibility review because the project may depend on custom interpretation, custom structure handling, or custom migration logic adjustment. Any migration involving a Custom Platform as the Source Platform or Target Platform requires Custom Service so the scope and responsibility can be defined correctly.

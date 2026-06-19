@@ -1,225 +1,186 @@
 # Selecting the Right Migration Approach for Shopify
 
-Choosing the right migration approach for Shopify is not mainly a question of how many records the store contains. It is a question of how much translation risk sits inside the product model, collection structure, customer-account experience, app-owned behavior, international path logic, and high-value URLs that the business still needs to preserve clearly.
+A Shopify migration approach should be selected by matching the source store’s structure to the right service responsibility and target-state expectations. Shopify reduces hosting and infrastructure ownership, but it does not automatically simplify every migration decision. Product options, variants, collections, Markets, metafields, metaobjects, apps, themes, redirects, customer accounts, and external systems can all affect how well source-store meaning fits the Target Store.
 
-Shopify can reduce infrastructure burden after launch, but that does not make every migration into Shopify equally simple. Some stores fit Shopify’s product, collection, customer, and storefront model cleanly enough for a customer-led migration. Others need stronger expert involvement because the risk lies in how source-store meaning must be translated into Shopify’s more structured and app-dependent target environment.
+The right approach should define which data can move through a supported migration path, which data needs filtering or mapping, which behavior belongs in Shopify configuration or apps, which requirements need Custom Service, and which results must be validated before launch. Entity Points capacity matters, but it should not be used as a proxy for Shopify migration complexity.
 
-The safest migration approach is therefore the one that matches the actual Shopify translation burden, not the one that sounds simplest before trade-offs become apparent.
+### Start with Shopify Fit, Not Only Store Size <a href="#start-with-shopify-fit-not-only-store-size" id="start-with-shopify-fit-not-only-store-size"></a>
 
-### What approach means in a Shopify migration <a href="#what-approach-means-in-a-shopify-migration" id="what-approach-means-in-a-shopify-migration"></a>
+Store size affects the service license and Entity Points Plan. Shopify approach selection should also consider whether the source-store model can be represented cleanly inside Shopify’s hosted structure.
 
-For Shopify, migration approach selection means deciding how much guidance, execution support, or bespoke handling is needed to preserve the intended business outcome.
+A smaller store can require more planning if it depends on custom product relationships, personalization logic, app-owned fields, marketplace identifiers, subscription data, regional catalogs, or legacy URL structures. A larger store can remain suitable for Standard Service when products, customers, orders, content, collections, and redirects are structurally compatible and the customer can validate representative results with confidence.
 
-A practical decision usually depends on four questions:
+| Review area                | Lower-complexity signal                                                                                            | Higher-complexity signal                                                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product structure          | Products use clear options, variants, SKUs, prices, images, and inventory.                                         | Source products include custom options, bundles, kits, personalization fields, subscription logic, or product relationships that do not map cleanly. |
+| Collections and navigation | Category-equivalent paths can become Shopify collections, menus, tags, metafields, or redirects with clear intent. | Source categories rely on layered navigation, dynamic rules, extension logic, custom merchandising, or many overlapping browse paths.                |
+| Markets and localization   | One main market, language, currency, and domain structure.                                                         | Multiple countries, languages, currencies, regional catalogs, localized URLs, market-specific pricing, or international content priorities.          |
+| Apps and custom behavior   | Most critical behavior is native Shopify configuration or can be rebuilt with planned apps.                        | Source functions depend on app/plugin/module data, custom tables, external systems, unsupported workflows, or bespoke logic.                         |
+| Customer and order context | Customer and order history are mainly needed for reference and support.                                            | Login behavior, loyalty, wholesale, subscriptions, customer groups, external IDs, or custom order fields need continuity.                            |
+| URL and SEO continuity     | Priority redirects are documented and target destinations are clear.                                               | Many high-value legacy URLs, localized paths, duplicate paths, rewritten URLs, or campaign URLs need special handling.                               |
 
-* Can the source-store behavior be represented clearly enough in Shopify’s product, option, variant, collection, customer, and content model?
-* Can the internal team operate and validate the migration confidently if Shopify requires simplification, app-supported behavior, or a different storefront structure?
-* Are the most important product families, collections, customer scenarios, apps, metafields, domains, and URLs already classified clearly?
-* Does any required outcome depend on tailored rules, custom data interpretation, or custom migration logic adjustment beyond standard service capability?
+The selected approach should match the highest-risk requirements, not only the easiest entity types. A Shopify project may use Standard Service for compatible entities while using Add-ons or Custom Service for specific parts of the scope.
 
-These questions matter more than raw volume because Shopify migration risk often sits in meaning, not just quantity.
+### Use Standard Service When Shopify Structure Is Compatible <a href="#use-standard-service-when-shopify-structure-is-compatible" id="use-standard-service-when-shopify-structure-is-compatible"></a>
 
-### Why Shopify approach choice often depends on translation pressure <a href="#why-shopify-approach-choice-often-depends-on-translation-pressure" id="why-shopify-approach-choice-often-depends-on-translation-pressure"></a>
+Standard Service is usually the right starting point when the selected migration path supports the required entities and the Target Store can represent the data without heavy custom interpretation. It is suitable when the customer wants to self-perform available migration actions on the Next-Cart website, review Demo Migration results, and proceed to Full Migration after representative records behave correctly.
 
-A Shopify migration can stay relatively straightforward when the future store can be described in Shopify-ready terms before execution begins.
+Standard Service is most appropriate when:
 
-That usually means:
+* products, collections, customers, orders, images, CMS Pages, Blog Posts, reviews, coupons, or other selected entities fit a supported migration path;
+* product options and variants are clear enough to validate through representative samples;
+* source category logic can be translated into Shopify collections, navigation, tags, metafields, content, or redirects without bespoke transformation;
+* apps are not required to interpret the migrated records as business-critical source data;
+* customer and order history can be migrated for reference without recreating every source-side login, loyalty, wholesale, subscription, or external-system workflow;
+* URLs and redirects have clear target destinations;
+* the customer can review product, collection, content, customer, order, and URL results after Demo Migration;
+* no Custom Platform source structure or unsupported app/plugin/module data controls critical business meaning.
 
-* product choices can be represented through products, options, variants, or supporting product information without major ambiguity
-* collection-led discovery can be planned deliberately
-* customer-account expectations are realistic for Shopify’s account model
-* app-owned or metafield-owned meaning is limited, documented, or already classified
-* high-value URLs, market-specific paths, domains, and priority redirects are known early
-* the business understands which source-store behaviors must be preserved and which can reasonably change
+Standard Service should not be treated as a low-quality option. It can be a good fit for Shopify when data structures are compatible and the customer can validate the result. The boundary is unsupported behavior: Standard Service does not recreate custom applications, app-owned business logic, theme behavior, checkout-adjacent workflows, external-system dependencies, or bespoke data transformations.
 
-A Shopify migration usually needs a stronger approach when the business is still unsure how important source-store behavior should appear in Shopify. The concern is not simply whether Shopify can receive the data. The concern is whether the Target Platform can represent the commercial meaning safely enough after translation.
+### Use Managed Service When Compatible Work Needs Expert-Led Execution <a href="#use-managed-service-when-compatible-work-needs-expert-led-execution" id="use-managed-service-when-compatible-work-needs-expert-led-execution"></a>
 
-### How the three Next-Cart service models apply to Shopify <a href="#how-the-three-next-cart-service-models-apply-to-shopify" id="how-the-three-next-cart-service-models-apply-to-shopify"></a>
+Managed Service is useful when the migration path is compatible but the customer wants Next-Cart to handle more of the execution, coordination, review support, or migration-process management. This can be appropriate even when the data itself does not require Custom Service.
 
-Next-Cart provides three service models for e-commerce platform migration work:
+Managed Service is a strong fit when:
 
-1. Standard Service
-2. Managed Service
-3. Custom Service
+* the customer wants Next-Cart to perform available migration actions instead of self-performing each step;
+* the store has many products, variants, collections, customers, orders, CMS Pages, Blog Posts, redirects, or market-specific samples to coordinate;
+* internal teams have limited time to configure and review the migration process;
+* Demo Migration findings need structured interpretation before Full Migration;
+* collection, URL, product, customer, and content results need coordinated review before launch;
+* late source-store activity may require a planned additional migration action before cutover;
+* the customer wants guided execution but the data remains within supported service scope.
 
-The same core service logic applies across migration paths, but the reason one service model becomes safer than another is platform-specific. For Shopify, the main decision usually depends on how much Shopify-specific translation, execution support, and custom handling the project requires.
+Managed Service is not the same as Custom Service. A Shopify migration can need Managed Service because of coordination burden, tight timeline, or limited internal migration capacity. A different Shopify migration can need Custom Service because the source-store meaning depends on unsupported structures or custom logic, even if the customer is comfortable executing available actions manually.
 
-#### Standard Service <a href="#standard-service" id="standard-service"></a>
+### Use Add-ons for Compatible Filtering, Mapping, or Configuration Needs <a href="#use-add-ons-for-compatible-filtering-mapping-or-configuration-needs" id="use-add-ons-for-compatible-filtering-mapping-or-configuration-needs"></a>
 
-Standard Service is often suitable when the Shopify migration can be handled through standard service capability and the customer is ready to self-perform the migration process on the Next-Cart website.
+Add-ons are optional service features that adjust how compatible migration data is filtered, mapped, or configured. They are not a substitute for Custom Service when the requirement depends on unsupported business logic, app-owned data, or Custom Platform source behavior.
 
-For Shopify, this is usually a reasonable fit when:
+| Need                                      | Likely service feature             | Shopify example                                                                                                                                                                     |
+| ----------------------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Move only selected data                   | Data Filter Add-on                 | Migrate selected products, active products, chosen order statuses, recent orders, specific customers, selected collections, or launch-relevant content.                             |
+| Align compatible fields more precisely    | Advanced Data Mapping              | Map supported source fields into Shopify product fields, customer fields, order reference fields, metafield-ready values, content fields, or tag-like structures where appropriate. |
+| Adjust compatible target behavior         | Advanced Data Configure            | Apply agreed configuration behavior for selected migrated records when compatible with the approved Shopify migration path.                                                         |
+| Modify an Add-on beyond standard coverage | Tailored Add-ons or Custom Add-ons | Adapt filtering, mapping, or configuration behavior when standard Add-on scope does not fully match the Shopify requirement.                                                        |
 
-* the Demo Migration shows that representative products translate cleanly enough into Shopify
-* options, variants, collections, and core product information are already classified clearly
-* app-owned or metafield-dependent behavior is limited or not central to storefront operation
-* customer-account expectations are understood before migration
-* high-value URLs and market-specific paths have been prioritized for review
-* the internal team can operate the migration process and validate the result carefully
+Add-ons are most effective when the underlying data is already compatible with the migration path. For example, filtering obsolete products is different from interpreting app-owned subscription logic. Mapping a supported product field is different from rebuilding a source module’s product-builder behavior. A Shopify project may combine Standard Service, Managed Service, and Add-ons when the core migration is compatible but selected data needs more precise handling.
 
-Standard Service does not mean the project has no risk. It means the customer-led model is appropriate because the unresolved Shopify translation burden is low enough to manage through disciplined preparation, Demo Migration review, validation, and 24/7 expert support.
+### Review Custom Service When Shopify Needs Bespoke Handling <a href="#review-custom-service-when-shopify-needs-bespoke-handling" id="review-custom-service-when-shopify-needs-bespoke-handling"></a>
 
-#### Managed Service <a href="#managed-service" id="managed-service"></a>
+Custom Service should be reviewed when source-store meaning cannot be safely transferred through standard entity movement, standard Add-ons, or ordinary Shopify configuration. Shopify migrations often need custom review when the source store uses unsupported product logic, external identifiers, app/plugin/module records, custom fields, bespoke checkout-adjacent behavior, subscription data, wholesale logic, marketplace integrations, loyalty programs, or a Custom Platform source structure.
 
-Managed Service is often suitable when Shopify is still the right Target Platform, but the customer does not want the success of execution and review coordination to depend heavily on internal migration-operation capacity.
+Custom Service may be needed when:
 
-For Shopify, this can be a safer fit when:
+* source product structures cannot be represented cleanly as Shopify products, options, variants, metafields, app data, or content;
+* bundles, kits, build-your-own products, personalization workflows, custom options, subscriptions, or product relationships depend on unsupported source logic;
+* collection, navigation, filter, or merchandising rules rely on source extensions, custom code, or complex layered navigation behavior;
+* app/plugin/module data must remain meaningful after migration;
+* source metafield-like data, custom fields, or outside-system identifiers need deliberate preservation for operations, ERP, PIM, WMS, fulfillment, reporting, or support;
+* customer groups, loyalty status, wholesale relationships, subscription status, account behavior, or external customer identifiers require special treatment;
+* order records include custom fields, custom statuses, external references, or operational notes that teams still rely on;
+* localized or market-specific catalog, content, pricing, URL, or domain behavior requires bespoke handling;
+* a Custom Platform source or heavily customized source store is involved.
 
-* important product groups need closer interpretation during translation
-* collection logic, customer-account behavior, app-owned meaning, or market paths create a larger review surface
-* the business wants Next-Cart’s technician to perform the migration using standard service capability and any purchased Standard Add-ons
-* the customer wants to focus more on evidence review, business confirmation, and launch judgment than on operating the migration process
+Custom Service should be scoped precisely. Some custom needs are narrow, such as preserving an external product ID or mapping a specific field into a controlled target structure. Others are broad, such as interpreting subscription records from a source extension and making them meaningful in a Shopify app workflow. The service plan should clarify which custom items can be migrated, which need app setup, which should be rebuilt manually, and which should be excluded.
 
-Managed Service is not the same as Custom Service. It changes who leads execution under standard service capability. It does not automatically include custom transformation, custom migration logic adjustment, Custom Platform handling, or bespoke app-data interpretation unless those needs are separately handled through Custom Service.
+#### Separate Custom Service from Expert Handle <a href="#separate-custom-service-from-expert-handle" id="separate-custom-service-from-expert-handle"></a>
 
-#### Custom Service <a href="#custom-service" id="custom-service"></a>
+Custom Service defines custom handling scope. Expert Handle defines whether Next-Cart performs migration actions and related execution work on the customer’s behalf. A Shopify project can require Custom Service without full expert-managed execution, or it can combine Custom Service with Expert Handle when the agreed plan includes both custom handling and Next-Cart-led execution.
 
-Custom Service is the correct path when the Shopify migration requires customization, modification, or bespoke handling beyond standard service capability or Standard Add-on capability.
+This distinction prevents two planning errors: assuming every custom requirement includes complete migration management, or assuming customer-led execution can resolve unsupported Shopify data logic without custom review.
 
-For Shopify, Custom Service is often needed when:
+### Plan Entity Points Around Useful Migration Scope <a href="#plan-entity-points-around-useful-migration-scope" id="plan-entity-points-around-useful-migration-scope"></a>
 
-* source product behavior does not translate cleanly into Shopify’s normal product, option, and variant model
-* custom fields, source-side structures, app/plugin/module/extension data, or outside-system identifiers need interpretation or transformation
-* filtered migration requirements need defined inclusion or exclusion logic beyond normal scope decisions
-* app-owned or metafield-owned behavior is business-critical and cannot be approximated loosely
-* the source platform is a Custom Platform
-* preserving the required Shopify outcome depends on custom migration logic adjustment
+The Entity Points Plan should reflect the selected entities and expected migration scope. For Shopify, Entity Points planning should support launch value and validation readiness, not a mechanical desire to move every historical record.
 
-Custom Service does not automatically mean Next-Cart performs the full migration execution. Migration management is included only when it is part of the final plan. A Shopify Custom Service project may involve custom handling only, or it may combine custom handling with migration management when that is agreed in scope.
+| Entity group                | Recommended treatment                                                                                                                                                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Core launch data            | Products, collections, customers, orders, images, URLs, CMS Pages, Blog Posts, reviews, coupons, and other selected entities required for launch should be included when compatible and valuable.                               |
+| Useful but selective data   | Old orders, inactive products, obsolete customers, retired collections, old campaigns, duplicate content, or low-value Blog Posts may be filtered by business value.                                                            |
+| Structurally uncertain data | App-owned data, metafields, metaobjects, personalization data, subscription records, external identifiers, custom fields, market-specific content, or complex source product relationships should be reviewed before inclusion. |
+| Low-value legacy noise      | Broken media, obsolete redirects, outdated categories, unused fields, duplicate tags, retired campaign pages, or abandoned app data should often be excluded or archived outside the Target Store.                              |
 
-### Where Add-ons fit in a Shopify migration approach <a href="#where-add-ons-fit-in-a-shopify-migration-approach" id="where-add-ons-fit-in-a-shopify-migration-approach"></a>
+Entity Points are capacity planning, not complexity scoring. A large compatible Shopify migration may need a higher Entity Points Plan but remain suitable for Standard Service. A smaller project may need Custom Service if it depends on unsupported app logic, custom product behavior, external identifiers, or a Custom Platform source.
 
-Add-ons can support a Shopify migration when the requirement is still bounded enough to be handled as a service feature rather than a broader custom-service plan.
+### Use Demo Migration to Confirm the Approach <a href="#use-demo-migration-to-confirm-the-approach" id="use-demo-migration-to-confirm-the-approach"></a>
 
-For Shopify, Add-ons may be relevant when the project needs clearer filtering, mapping, or data configuration around:
+Demo Migration should test whether the selected Shopify approach is realistic before Full Migration. A useful sample should include records that expose the migration risks most likely to affect launch, not only the simplest records.
 
-* selected product groups or record subsets
-* product, customer, order, or content fields that need adjusted mapping
-* Shopify-ready data configuration that remains within defined service capability
-* migration settings that affect how included data should be handled
+A strong Shopify Demo Migration sample should include:
 
-Add-ons should not be used as a substitute for Custom Service. If the Shopify outcome depends on bespoke transformation, Custom Platform interpretation, app-owned logic, outside-system identifiers, or custom migration logic adjustment, the safer boundary is Custom Service.
+* simple products and structurally complex products;
+* products with multiple options, variants, SKUs, images, prices, inventory differences, weights, barcodes, or fulfillment differences;
+* products that depend on metafields, metaobjects, tags, apps, theme sections, or custom display logic;
+* priority collections and source category-equivalent paths;
+* CMS Pages and Blog Posts that support trust, SEO, policies, support, or campaigns;
+* customer records with addresses, tags, segmentation, loyalty importance, or support importance;
+* orders with discounts, taxes, refunds, cancellations, unusual statuses, fulfillment situations, notes, and external references;
+* important legacy URLs, localized paths, and redirect samples;
+* records that may require Add-ons, Custom Service, or post-migration Shopify configuration.
 
-### When Standard Service is usually enough for Shopify <a href="#when-standard-service-is-usually-enough-for-shopify" id="when-standard-service-is-usually-enough-for-shopify"></a>
+Demo Migration should decide whether the selected approach is still valid. If representative samples behave well, the project can proceed with clearer confidence. If samples expose unsupported structures, app dependence, unclear mapping, poor URL continuity, or customer-experience mismatch, the service plan should be adjusted before Full Migration.
 
-Standard Service is often the right Shopify approach when the business has already done the hard classification work.
+### Plan Additional Migration Options for Launch Timing <a href="#plan-additional-migration-options-for-launch-timing" id="plan-additional-migration-options-for-launch-timing"></a>
 
-That usually means:
+Shopify migrations often happen while the source store remains active. New products, customers, orders, reviews, CMS Pages, Blog Posts, URL changes, content edits, or product updates may appear after an earlier migration run. These changes should be handled through the available Additional Migration Options under the service license instead of informal manual fixes.
 
-* the most important products can be expressed clearly in Shopify
-* sellable variation, descriptive data, and custom behavior have been separated
-* collection and browse priorities are understood
-* apps and metafields are limited or already documented
-* customer-account continuity has been planned realistically
-* domains, Markets, localized paths, and priority URLs have been identified where relevant
-* the Demo Migration does not reveal major unresolved translation issues
+Additional Migration Options are relevant when:
 
-In this situation, the migration is not safe because Shopify is universally simple. It is safer because the business has already translated the future store into a Shopify-ready model clearly enough for customer-led execution and validation.
+* the live source store continues receiving orders close to launch;
+* new products, customers, reviews, CMS Pages, Blog Posts, or content updates appear after Full Migration;
+* source product, collection, URL, or content decisions change after earlier review;
+* target Shopify configuration changes make an earlier migrated result unsuitable;
+* mapping, filtering, or configuration decisions are corrected after Demo Migration;
+* launch timing requires the Target Store to be refreshed closer to cutover;
+* app-dependent or custom-scope data is excluded first and added later after review.
 
-### When Managed Service is often safer for Shopify <a href="#when-managed-service-is-often-safer-for-shopify" id="when-managed-service-is-often-safer-for-shopify"></a>
+The planning question is which additional action fits the business need: continuing the migration with the last used configuration, continuing with a new configuration, or performing a new migration. The choice should consider target cleanup, duplicate risk, Entity Points capacity, validation effort, launch timing, and whether the changed scope affects products, variants, collections, URLs, Markets, apps, or customer/order history.
 
-Managed Service is often safer when the Shopify target is workable, but the business wants stronger execution support.
+### Match the Approach to the Real Shopify Decision <a href="#match-the-approach-to-the-real-shopify-decision" id="match-the-approach-to-the-real-shopify-decision"></a>
 
-This is especially common when:
+A strong Shopify migration approach separates standard transfer, expert-led execution, Add-ons, custom review, capacity planning, launch timing, and validation responsibility before Full Migration begins.
 
-* a small group of high-value products carries most of the translation risk
-* the team needs help coordinating migration execution and review activity
-* collection paths, customer-account behavior, or market-specific paths require closer attention
-* app-owned or metafield-dependent behavior is important enough to increase review burden
-* the customer prefers to review outcomes rather than operate the migration process directly
+| Migration situation                                                                                                                                                              | Recommended approach                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Compatible source data, clear Shopify Target Store model, and customer confidence in self-performing migration steps                                                             | Standard Service with representative Demo Migration review.                                           |
+| Compatible source data, limited internal capacity, launch pressure, or need for Next-Cart-led execution                                                                          | Managed Service with defined validation responsibility.                                               |
+| Compatible data requiring selective movement, field alignment, or agreed configuration behavior                                                                                  | Standard Service or Managed Service with Add-ons such as Data Filter Add-on or Advanced Data Mapping. |
+| App-owned data, custom product logic, complex source categories, external IDs, subscription/loyalty/wholesale records, Custom Platform source context, or bespoke transformation | Custom Service review before approving scope.                                                         |
+| Active source store with new records or updates expected before launch                                                                                                           | Plan the appropriate Additional Migration Option as part of launch readiness.                         |
+| Changed mapping, corrected target configuration, revised scope, or intentional replacement of earlier migrated results                                                           | Choose the additional action deliberately, with cleanup and validation expectations.                  |
 
-Managed Service is a good fit when the issue is not bespoke migration logic, but operational burden and execution confidence.
-
-### When Custom Service is often safer for Shopify <a href="#when-custom-service-is-often-safer-for-shopify" id="when-custom-service-is-often-safer-for-shopify"></a>
-
-Custom Service is often safer when Shopify remains the right Target Platform, but the required outcome depends on more than standard handling.
-
-This is especially relevant when:
-
-* source behavior cannot be represented cleanly through Shopify’s standard structures
-* custom fields, extension data, or outside-system identifiers need transformation
-* app-owned behavior affects storefront logic, merchandising, customer experience, fulfillment, or reporting
-* filtered migration logic must be implemented consistently
-* Shopify-specific tradeoffs need custom migration logic adjustment to preserve business meaning
-* a Custom Platform is involved as the Source Platform
-
-Custom Service does not mean Shopify is the wrong destination. It means the migration path into Shopify requires more controlled handling than a standard path can provide safely.
-
-### What the Demo Migration should decide in a Shopify project <a href="#what-the-demo-migration-should-decide-in-a-shopify-project" id="what-the-demo-migration-should-decide-in-a-shopify-project"></a>
-
-A representative Demo Migration is usually the strongest early tool for choosing the right Shopify approach.
-
-For Shopify, the Demo Migration should test:
-
-* products most likely to expose option, variant, or simplification pressure
-* collections and browse paths that matter most to conversion
-* customer-account scenarios that carry continuity risk
-* app-dependent or metafield-dependent behavior that affects storefront meaning
-* high-value URLs, domains, and market-specific paths that need continuity planning
-* examples that reveal whether Standard Service, Managed Service, or Custom Service is carrying enough responsibility
-
-A useful Shopify Demo Migration is not only evidence that records can move. It should reveal whether Shopify preserves the behavior that matters most and whether the selected service model is strong enough for the real translation burden.
-
-### What signals that the planned approach is too light <a href="#what-signals-that-the-planned-approach-is-too-light" id="what-signals-that-the-planned-approach-is-too-light"></a>
-
-A planned Shopify approach is often too light when unresolved interpretation is being treated as routine execution.
-
-Warning signs include:
-
-* key product behavior is still described vaguely
-* the business has not decided which source-store behaviors can change in Shopify
-* app-owned or metafield-owned behavior is important but undocumented
-* customer-account expectations are still unclear
-* priority URLs, domains, Markets, or localized paths have not been identified
-* the Demo Migration reveals ambiguity but the project is still being treated as a standard execution task
-* the source platform is a Custom Platform but the work has not been scoped as Custom Service
-
-These are not only planning gaps. They are signs that the selected approach may not include enough guidance, execution support, or bespoke handling for the actual Shopify migration risk.
-
-### How Custom Platform as a source changes Shopify approach selection <a href="#how-custom-platform-as-a-source-changes-shopify-approach-selection" id="how-custom-platform-as-a-source-changes-shopify-approach-selection"></a>
-
-When the Source Platform is a Custom Platform, the migration into Shopify requires Custom Service.
-
-That is because the source structure falls outside a standard supported-platform model and usually needs more source-side interpretation, field review, custom migration logic adjustment, and target translation into Shopify’s product, collection, customer, content, and app-supported environment.
-
-The practical question becomes how the Custom Service work should be scoped. Useful early questions include:
-
-* how difficult product and variant translation is likely to be
-* where field meaning, identifiers, or relationships are still unclear
-* how much transformation or remapping is likely to be needed
-* how much target behavior will depend on Shopify apps, metafields, or external systems
-* whether the Demo Migration sample is strong enough to expose the real source-to-target pressure
-
-A Custom Platform source does not make the project impossible. It does mean the Shopify approach should be scoped around interpretation and custom handling from the beginning.
+The right Shopify approach does not force every requirement into one service path. It identifies which parts are compatible, which parts need optional filtering or mapping, which parts require custom review, which actions should be expert-led, and which outcomes must be validated before launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Shopify migration approach is the one that matches the real target-translation burden. Standard Service is often suitable when the Shopify-ready target model is already clear enough for customer-led execution and validation. Managed Service is often safer when Shopify is workable but the customer wants Next-Cart-led execution using standard service capability. Custom Service becomes the safer path when preserving the required Shopify outcome depends on customization, modification, Custom Platform handling, custom migration logic adjustment, or other bespoke requirements.
+Selecting a Shopify migration approach should begin with the Target Store operating model: products, options, variants, collections, Markets, apps, metafields, redirects, customer expectations, order history, and launch timing. Standard Service, Managed Service, Custom Service, Add-ons, Entity Points, Expert Handle, and Additional Migration Options each solve different planning needs.
 
-Use the Demo Migration to test the product families, collections, customer scenarios, app-owned behavior, metafields, market paths, and high-value URLs most likely to expose Shopify-specific risk. If those areas still reveal uncertainty, Live Chat can help clarify whether the project fits Standard Service, Managed Service, or Custom Service before the full migration is planned.
+The best approach is the one that correctly separates compatible migration work, guided execution, optional filtering or mapping, bespoke handling, capacity planning, launch updates, and final verification responsibility before Full Migration begins.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+#### Common questions <a href="#common-questions" id="common-questions"></a>
 
-**What usually decides the right Shopify migration approach?**
+**Is Standard Service enough for a Shopify migration?**
 
-The strongest deciding factor is usually the amount of Shopify translation risk, not record count alone. Product behavior, collection logic, customer continuity, app-owned meaning, metafields, market paths, and high-value URL continuity often matter more than raw volume.
+Standard Service can be enough when the selected migration path supports the required entities, the Shopify Target Store model is clear, and Demo Migration confirms that representative products, collections, customers, orders, content, and URLs behave correctly.
 
-**When is Standard Service usually enough for Shopify?**
+**When should a Shopify project use Managed Service?**
 
-Standard Service is usually enough when the business has already classified products, collections, customer-account expectations, app-dependent behavior, and URL priorities clearly enough that Shopify’s target model does not introduce major unresolved ambiguity.
+Managed Service is appropriate when the migration path is compatible but the customer wants Next-Cart to handle more of the execution, coordination, or review workflow. It is especially useful when launch timing, internal capacity, or stakeholder coordination makes self-performing the process difficult.
 
-**When does Managed Service become safer for Shopify?**
+**Are Add-ons the same as Custom Service?**
 
-Managed Service becomes safer when Shopify is still the right target, but the customer wants Next-Cart-led execution using standard service capability so the internal team can focus on review, evidence, and launch judgment.
+No. Add-ons help with filtering, mapping, or data configuration for compatible migration work. Custom Service is used when the requirement involves unsupported structures, app-owned data, custom logic, outside-system identifiers, Custom Platform source context, or bespoke transformation.
 
-**When does Custom Service become safer for Shopify?**
+**Does Entity Points capacity measure Shopify migration complexity?**
 
-Custom Service becomes safer when preserving the intended Shopify outcome depends on bespoke handling, transformation, Custom Platform handling, app-owned data interpretation, custom fields, filtered migration rules, or custom migration logic adjustment.
+No. Entity Points help determine the required Entity Points Plan for the selected migration scope. They do not fully measure Shopify product-model pressure, app dependence, metafield strategy, Markets, URL risk, or custom business logic.
 
-**Does Custom Service automatically mean Next-Cart manages the whole migration?**
+**Should Additional Migration Options be planned before Shopify launch?**
 
-No. Custom Service means customization or modification work is required. Migration management is included only when it is part of the final plan.
+They should be considered when the source store remains active, new records are expected before launch, or mapping and configuration decisions may change after earlier migration runs. The selected action should match the business need and the validation scope.
 
-**What changes when the Source Platform is a Custom Platform?**
+**Does Custom Service automatically mean Next-Cart performs the whole migration?**
 
-A Custom Platform source requires Custom Service because the source structure needs more interpretation and custom handling before it can be translated safely into Shopify.
+No. Custom Service defines the custom handling scope. Expert Handle or Managed Service determines whether Next-Cart performs migration actions and related execution work on the customer’s behalf.

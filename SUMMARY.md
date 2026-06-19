@@ -12,12 +12,12 @@
   * [The Beginner’s Guide to E-commerce Migration](migration-fundamentals/migration-foundations/the-beginners-guide-to-e-commerce-migration.md)
 * [Data Foundations](migration-fundamentals/data-foundations/README.md)
   * [What You Need to Understand About Data Migration](migration-fundamentals/data-foundations/what-you-need-to-understand-about-data-migration.md)
-  * [E-commerce Data Basics: Products, Customers, Orders, and Blog Posts](migration-fundamentals/data-foundations/e-commerce-data-basics.md)
-  * [Data Compatibility: What It Means and Why It Breaks](migration-fundamentals/data-foundations/data-compatibility.md)
-  * [Entity Relationships: How Store Data Connects](migration-fundamentals/data-foundations/entity-relationships.md)
+  * [E-commerce Data Basics](migration-fundamentals/data-foundations/e-commerce-data-basics.md)
+  * [Data Compatibility](migration-fundamentals/data-foundations/data-compatibility.md)
+  * [Entity Relationships](migration-fundamentals/data-foundations/entity-relationships.md)
 * [Migration Decision Readiness](migration-fundamentals/migration-decision-readiness/README.md)
   * [When Is the Right Time to Start an E-commerce Data Migration?](migration-fundamentals/migration-decision-readiness/when-is-the-right-time-to-start-an-e-commerce-data-migration.md)
-  * [Migration Readiness Scorecard: Is Your Business Ready to Move?](migration-fundamentals/migration-decision-readiness/migration-readiness-scorecard-is-your-business-ready-to-move.md)
+  * [Migration Readiness Scorecard](migration-fundamentals/migration-decision-readiness/migration-readiness-scorecard.md)
 * [Migration Risk Awareness](migration-fundamentals/migration-risk-awareness/README.md)
   * [Common Risks in E-commerce Platform Migration and How to Prevent Them](migration-fundamentals/migration-risk-awareness/common-risks-in-e-commerce-platform-migration-and-how-to-prevent-them.md)
 * [SEO and Traffic Continuity](migration-fundamentals/seo-and-traffic-continuity/README.md)
@@ -360,10 +360,10 @@
 
 ## Quality Assurance and Validation
 
-* [Migration Validation: What Success Really Means](quality-assurance-and-validation/migration-validation-what-success-really-means.md)
-* [Building a Migration Validation Checklist](quality-assurance-and-validation/building-a-migration-validation-checklist.md)
+* [Migration Validation](quality-assurance-and-validation/migration-validation-what-success-really-means.md)
+* [Migration Validation Checklist](quality-assurance-and-validation/building-a-migration-validation-checklist.md)
 * [Reconciling Migration Results](quality-assurance-and-validation/reconciling-migration-results.md)
-* [Preparing for E-commerce Migration Go-Live](quality-assurance-and-validation/preparing-for-ecommerce-migration-go-live.md)
+* [E-commerce Migration Go-Live Readiness](quality-assurance-and-validation/preparing-for-ecommerce-migration-go-live.md)
 * [Post-Launch Monitoring and Stabilization](quality-assurance-and-validation/post-launch-monitoring-and-stabilization.md)
 
 ## Worksheet and Template

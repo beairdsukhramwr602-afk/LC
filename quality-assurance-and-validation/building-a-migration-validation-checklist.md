@@ -1,361 +1,328 @@
-# Building a Migration Validation Checklist
+# Migration Validation Checklist
 
-A migration validation checklist should not be a long list of everything someone could inspect. It should be a structured approach to demonstrating that the migrated store is usable, trustworthy, and ready to support the business decisions that depend on it.
+A migration validation checklist should help the business decide whether the migrated store is usable, trustworthy, and ready for launch decisions. It should not become a generic inventory of every possible record or screen that someone could inspect.
 
-That distinction matters because broad checklists can create false confidence. A team can review many low-impact records and still miss the product behavior, customer experience, order interpretation, SEO-sensitive paths, or operational handoffs that matter most at launch. A stronger checklist starts with business-critical outcomes, then turns those outcomes into representative samples, pass conditions, warning signs, and review responsibilities.
+A strong checklist translates migration quality into practical review work. It identifies what matters most, what evidence should be checked, what acceptable behavior looks like, who should approve each area, and which issues should weaken launch confidence.
 
-The checklist should translate migration quality into practical review work. It should help the business decide what to check first, what acceptable means, who should judge each area, and which issues should affect launch confidence.
+The best validation checklist is selective before it becomes broad. It starts with business-critical outcomes, representative samples, and clear pass conditions, then expands where the store has higher complexity, heavier customization, external-system dependencies, or launch-sensitive traffic paths.
 
-### What a validation checklist is really for <a href="#what-a-validation-checklist-is-really-for" id="what-a-validation-checklist-is-really-for"></a>
+### What a Migration Validation Checklist Should Prove <a href="#what-a-migration-validation-checklist-should-prove" id="what-a-migration-validation-checklist-should-prove"></a>
 
-A validation checklist is a decision tool, not a generic QA inventory.
+A validation checklist is a decision tool. Its purpose is to make migration review consistent enough that the business can judge the target store with evidence instead of assumptions.
 
-Its purpose is to help the business answer four practical questions:
+The checklist should help answer five questions:
 
-* What must still work after migration?
-* What should be reviewed first?
-* What counts as acceptable behavior?
-* What should weaken or block launch confidence if it fails?
+* Which outcomes must still work after migration?
+* Which samples provide meaningful proof?
+* What result counts as acceptable?
+* Who is qualified to approve each area?
+* Which issues should block launch, require correction, or be accepted as known differences?
 
-When a checklist answers those questions clearly, it becomes more than a task list. It gives the team a shared standard for judging the Target Platform before the store is exposed to real customers, real orders, and operational pressure.
+When those questions are clear, the checklist supports launch judgment instead of becoming a disconnected quality-control task.
 
-#### A checklist should support launch judgment <a href="#a-checklist-should-support-launch-judgment" id="a-checklist-should-support-launch-judgment"></a>
+#### The checklist should support business confidence <a href="#the-checklist-should-support-business-confidence" id="the-checklist-should-support-business-confidence"></a>
 
-The checklist should make the final decision easier to defend. It should show which outcomes were reviewed, which samples were used, what passed, what still needs correction, and which differences were accepted intentionally.
+Migration success is not proved only by record presence. A product may exist but be hard to buy. A customer record may appear but not support the intended account experience. An order may be present but difficult for support or operations to interpret.
 
-This is especially important when migration differences are expected. A platform change does not always reproduce the Source Platform exactly. The useful question is whether the Target Platform result is acceptable for the business outcome being reviewed.
+The checklist should therefore focus on whether migrated data still supports the business purpose behind the store. It should help reviewers confirm product usability, customer continuity, order interpretation, content reachability, SEO-sensitive paths, operational handoffs, and any custom or external-system requirements that matter to launch.
 
-**Strong checklist purpose**
+#### The checklist should not treat every item equally <a href="#the-checklist-should-not-treat-every-item-equally" id="the-checklist-should-not-treat-every-item-equally"></a>
 
-A strong checklist does not try to make every record equally important. It gives priority to the outcomes that would create the most business risk if they failed.
+Some migrated results carry higher business risk than others. A best-selling product, top category path, revenue-critical promotion, or operationally important order sample deserves more attention than a low-traffic content page or a minor formatting difference.
 
-### Start with outcomes, not record types <a href="#start-with-outcomes-not-record-types" id="start-with-outcomes-not-record-types"></a>
+The checklist should make that priority visible. High-risk areas should be reviewed first, with clearer pass conditions and stronger approval requirements.
 
-The strongest validation checklists begin with business outcomes rather than raw data types.
+### Start with Business Outcomes Before Record Types <a href="#start-with-business-outcomes-before-record-types" id="start-with-business-outcomes-before-record-types"></a>
 
-Products, customers, orders, categories, CMS Pages, Blog Posts, reviews, and coupons all matter, but they do not matter in the same way for every store. A checklist becomes more useful when it reflects how the business sells, supports customers, manages operations, and protects traffic continuity.
-
-#### Outcome areas to define first <a href="#outcome-areas-to-define-first" id="outcome-areas-to-define-first"></a>
+Products, customers, orders, categories, reviews, coupons, CMS Pages, and Blog Posts all matter, but they do not matter in the same way for every store. A checklist becomes stronger when it starts with the outcomes the business needs to preserve.
 
 Useful outcome areas may include:
 
-* priority products remain clear, purchasable, and understandable
-* top categories still support the expected browsing journey
-* customers can follow the intended account or recovery path
-* representative orders remain usable for support and operations
-* important content pages remain reachable and meaningful
-* SEO-sensitive paths still guide visitors to the right destination
-* extension-driven or outside-system behavior remains understandable
-* known Custom Platform or custom-field requirements produce the expected result
+* priority products remain clear, purchasable, and understandable;
+* top categories support the expected browsing journey;
+* returning customers can follow the intended account or recovery path;
+* representative orders remain usable for support, reporting, and operations;
+* important pages remain reachable and meaningful;
+* SEO-sensitive legacy paths guide visitors to relevant target-store destinations;
+* coupons, promotions, pricing, tax, or shipping behavior remains understandable;
+* extension-managed, custom-field, or outside-system data remains usable where it affects business workflows.
 
-These areas are stronger than a simple entity checklist because one outcome often depends on several connected records. Category usability may depend on category hierarchy, product assignment, filtering, navigation, and content. Order usability may depend on customer context, product context, status interpretation, tax, shipping, payment, and fulfillment details.
+Outcome-first review is more reliable because shoppers and staff experience the store through connected behavior, not isolated database records.
 
-#### Why outcome-first review is more reliable <a href="#why-outcome-first-review-is-more-reliable" id="why-outcome-first-review-is-more-reliable"></a>
+#### Why outcome-first validation is stronger <a href="#why-outcome-first-validation-is-stronger" id="why-outcome-first-validation-is-stronger"></a>
 
-Outcome-first review helps the team inspect what the business actually needs to preserve. It also prevents the checklist from becoming a superficial record-presence exercise.
+A simple entity checklist can create false confidence. It may confirm that products, customers, and orders exist, while missing the relationships and workflows that determine whether the target store is ready for business use.
 
-A product that exists is not necessarily usable. A customer record that exists may not support the expected account experience. An order that exists may still be difficult for support to interpret. The checklist should test the business meaning behind the data, not only whether the data appears.
+Category usability may depend on category hierarchy, product assignment, filtering behavior, navigation labels, and content. Order usability may depend on customer context, product references, payment interpretation, shipping details, tax values, status mapping, and fulfillment expectations.
 
-### Keep the checklist selective and prioritized <a href="#keep-the-checklist-selective-and-prioritized" id="keep-the-checklist-selective-and-prioritized"></a>
+Outcome-first validation tests whether the migrated store still makes sense as a working commerce environment.
 
-A validation checklist should be selective before it becomes broad.
+#### When entity-level checks still matter <a href="#when-entity-level-checks-still-matter" id="when-entity-level-checks-still-matter"></a>
 
-The first version should focus on the highest-value review areas: the records, pathways, and behaviors that would create the most damage if they failed. After those areas are covered, the checklist can expand where the project has additional risk.
+Entity-level checks still have value when they support an outcome. Count checks, spot checks, and entity comparisons can help identify missing or unexpected data, but they should not replace business judgment.
 
-#### High-value review samples <a href="#high-value-review-samples" id="high-value-review-samples"></a>
+The checklist should use entity checks as supporting evidence, then connect them to the outcome being validated.
 
-A strong checklist usually prioritizes:
+### Choose Representative Samples with Business Intent <a href="#choose-representative-samples-with-business-intent" id="choose-representative-samples-with-business-intent"></a>
 
-* best-selling products
-* complex products with variants, options, attributes, or custom fields
-* top categories and high-value browse paths
-* important customer scenarios
-* representative orders with real operational value
-* priority content pages and landing pages
-* SEO-sensitive legacy paths
-* promotions or coupons that affect buying behavior
-* data connected to apps, plugins, modules, extensions, or external systems
-* any requirement marked as non-negotiable during planning
+A checklist does not need to review every record to be useful. It needs samples that reveal the areas most likely to affect revenue, customer experience, operations, traffic continuity, or trust.
 
-This is not a shortcut. It is a more disciplined way to review the parts of the store where continuity failure would matter most.
+Representative samples should be selected because they are important, complex, risky, or business-critical.
 
-#### Why broad random checking is weaker <a href="#why-broad-random-checking-is-weaker" id="why-broad-random-checking-is-weaker"></a>
+#### High-value samples to include <a href="#high-value-samples-to-include" id="high-value-samples-to-include"></a>
 
-Random checking often favors simple records. Simple records may pass while the most important, customized, or behavior-sensitive areas still fail.
+Strong validation samples often include:
 
-The checklist should therefore start with representative examples. It should answer whether the Target Platform can support the store’s real business behavior, not whether a collection of easy records looks acceptable.
+* best-selling products;
+* complex products with variants, options, attributes, custom fields, or media requirements;
+* top categories and high-value browse paths;
+* important customer scenarios;
+* representative orders with real support or operational value;
+* priority CMS Pages, Blog Posts, and landing pages;
+* SEO-sensitive legacy URLs and traffic paths;
+* promotions or coupons that affect buying behavior;
+* records connected to apps, plugins, modules, extensions, or external systems;
+* requirements marked as non-negotiable during migration planning.
 
-### What every strong checklist should include <a href="#what-every-strong-checklist-should-include" id="what-every-strong-checklist-should-include"></a>
+These samples make the checklist more useful than broad random checking, because they target the areas where a failed result would matter most.
 
-A useful checklist can be simple, but each item should be complete enough to guide judgment.
+#### Why random checking is weaker <a href="#why-random-checking-is-weaker" id="why-random-checking-is-weaker"></a>
 
-Each high-priority checklist item should include the outcome area, sample, pass condition, warning sign, and review responsibility. Without those elements, the team may know what to look at but not how to judge it.
+Random checking often favors simple, easy-to-find records. Those records may pass while the most important or customized parts of the store still need correction.
 
-#### Outcome area <a href="#outcome-area" id="outcome-area"></a>
+A stronger checklist starts with representative examples, then broadens only after the high-risk areas have been reviewed.
 
-The outcome area identifies what the business is validating.
+### Define Clear Pass Conditions <a href="#define-clear-pass-conditions" id="define-clear-pass-conditions"></a>
 
-Examples include product behavior, category discovery, account continuity, order usability, content reachability, SEO continuity, promotion behavior, or external-system dependency.
+Every important checklist item should include a pass condition. Without a clear pass condition, reviewers may agree that something was checked but disagree about whether it passed.
 
-#### Representative sample <a href="#representative-sample" id="representative-sample"></a>
-
-The sample identifies which records, pages, scenarios, or workflows should be reviewed.
-
-A useful sample should reflect business importance, known complexity, and likely risk. It should not be chosen only because it is easy to find.
-
-#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
-
-The pass condition states what acceptable behavior looks like.
-
-A strong pass condition describes business usability. For example, “customers can select the intended product option without confusion” is stronger than “product exists.”
-
-#### Warning sign <a href="#warning-sign" id="warning-sign"></a>
-
-The warning sign identifies what should trigger deeper review.
-
-Warning signs may include missing relationships, unclear option behavior, wrong category assignment, confusing account behavior, unreliable order interpretation, weak redirect destinations, missing trust content, or external-system identifiers that no longer support the intended workflow.
-
-#### Review responsibility <a href="#review-responsibility" id="review-responsibility"></a>
-
-Review responsibility identifies who should judge the result.
-
-Product, customer, order, SEO, content, and operations outcomes are not always best reviewed by the same person. A checklist becomes stronger when it names the people or teams most qualified to approve each area.
-
-**Checklist item pattern**
-
-A practical checklist item can follow this pattern: outcome area, representative sample, pass condition, warning sign, reviewer, and final status.
-
-### Use risk tiers to avoid treating every issue equally <a href="#use-risk-tiers-to-avoid-treating-every-issue-equally" id="use-risk-tiers-to-avoid-treating-every-issue-equally"></a>
-
-Not every checklist item should carry the same weight.
-
-A launch-critical buying path should not be judged the same way as a minor formatting difference. A strong checklist separates blockers, warnings, and lower-impact differences before launch pressure makes every issue feel urgent.
-
-#### Tier 1: launch-critical outcomes <a href="#tier-1-launch-critical-outcomes" id="tier-1-launch-critical-outcomes"></a>
-
-These outcomes should weaken or block launch confidence if they fail.
-
-They often include:
-
-* best-selling products that drive revenue
-* top category paths that support discovery
-* normal purchase paths
-* customer account expectations that affect trust or support
-* representative order usability for support and operations
-* priority page reachability
-* revenue-critical promotions or pricing rules
-* external-system dependencies required for day-one operations
-
-#### Tier 2: important but manageable issues <a href="#tier-2-important-but-manageable-issues" id="tier-2-important-but-manageable-issues"></a>
-
-These issues matter, but they may not always block launch if the business understands the impact and the critical outcomes remain stable.
-
-Examples may include lower-priority content formatting differences, manageable merchandising adjustments, secondary page improvements, or non-critical workflow refinements.
-
-#### Tier 3: lower-impact differences <a href="#tier-3-lower-impact-differences" id="tier-3-lower-impact-differences"></a>
-
-These differences are visible but lower in commercial or operational impact. Some may reflect normal Target Platform behavior or agreed scope decisions.
-
-The checklist should still record them, but they should not distract the team from the areas that determine launch readiness.
-
-**Why tiering matters**
-
-Risk tiers help the business decide quickly and fairly. They prevent minor differences from overwhelming the review while making sure serious continuity issues are not normalized as acceptable variation.
-
-### Include relationship-aware checks <a href="#include-relationship-aware-checks" id="include-relationship-aware-checks"></a>
-
-Migration failures are often relationship failures, not missing-record failures.
-
-A checklist that reviews each entity in isolation can miss the way records depend on one another. The more useful approach is to include checks that confirm relationships still preserve meaning across the Target Platform.
-
-#### Relationships to validate <a href="#relationships-to-validate" id="relationships-to-validate"></a>
-
-The checklist should include checks such as:
-
-* products appear in the categories that support real browsing intent
-* category paths guide shoppers to the expected product sets
-* products retain meaningful variants, options, attributes, media, and pricing context
-* customers remain meaningfully connected to their order history where applicable
-* orders still show enough product, customer, payment, tax, shipping, status, and fulfillment context for support use
-* reviews remain attached to the correct products where reviews matter
-* coupons and promotions behave according to the expected commercial rules
-* CMS Pages, Blog Posts, and important landing pages remain reachable and useful
-
-#### How relationship checks improve validation <a href="#how-relationship-checks-improve-validation" id="how-relationship-checks-improve-validation"></a>
-
-Relationship checks reveal whether migrated data still works as a system. They are often more valuable than checking isolated records because shoppers and staff experience the store through connected behavior, not separate database entries.
-
-### Add extension, Custom Platform, and external-system checks where relevant <a href="#add-extension-custom-platform-and-external-system-checks-where-relevant" id="add-extension-custom-platform-and-external-system-checks-where-relevant"></a>
-
-Many stores depend on behavior outside the default platform model.
-
-When those dependencies matter, the checklist should include explicit checks for custom fields, extension-managed data, outside-system identifiers, or external workflows. These areas often decide whether the migration result is operationally usable even when the storefront appears acceptable.
-
-#### Areas that may need explicit checklist items <a href="#areas-that-may-need-explicit-checklist-items" id="areas-that-may-need-explicit-checklist-items"></a>
-
-Add checklist items for:
-
-* custom fields that affect display, reporting, fulfillment, or segmentation
-* app, plugin, module, or extension data used by daily workflows
-* identifiers used by ERP, CRM, warehouse, marketplace, subscription, or analytics systems
-* customer segmentation behavior used by marketing or B2B operations
-* pricing, promotion, tax, or shipping logic that depends on extensions or custom data
-* review, loyalty, subscription, or membership data that depends on a third-party provider
-* Custom Platform structures that require non-standard interpretation
-* custom migration logic adjustment that needs business verification
-
-#### Custom Service boundary <a href="#custom-service-boundary" id="custom-service-boundary"></a>
-
-If the expected outcome depends on customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment, the requirement belongs under Custom Service review.
-
-The checklist should not present those items as ordinary default behavior. It should identify what result was expected, what sample proves it, and who needs to approve the outcome.
-
-**Keep Add-ons and Custom Service separate**
-
-Add-ons should be referenced only when the checklist item relates to filtering, mapping, or data configuration. Broader customization, extension-aware handling, Custom Platform interpretation, or custom migration logic belongs under Custom Service.
-
-### Write pass conditions that describe acceptable behavior <a href="#write-pass-conditions-that-describe-acceptable-behavior" id="write-pass-conditions-that-describe-acceptable-behavior"></a>
-
-A checklist is only as useful as its pass conditions.
-
-Weak pass conditions are vague. They create room for disagreement because they do not explain what the reviewer should accept.
+A strong pass condition describes acceptable business behavior, not just surface presence.
 
 #### Weak pass conditions <a href="#weak-pass-conditions" id="weak-pass-conditions"></a>
 
-Weak examples include:
+Weak pass conditions include:
 
-* data is there
-* page loads
-* product looks fine
-* order exists
-* customer appears
+* product exists;
+* page loads;
+* order appears;
+* customer is present;
+* data looks fine.
 
-These may confirm surface presence, but they do not prove business usability.
+These statements may confirm that something appears in the target store, but they do not prove that the result is usable.
 
 #### Strong pass conditions <a href="#strong-pass-conditions" id="strong-pass-conditions"></a>
 
-Stronger examples include:
+Stronger pass conditions include:
 
-* best-selling products remain clear, purchasable, and understandable
-* variant or option choices still lead customers to the intended item
-* top categories guide shoppers to the expected product sets
-* returning customers can follow the intended account or recovery path
-* representative orders remain understandable for support and operations
-* priority legacy paths resolve to relevant Target Platform destinations
-* customer segmentation data remains usable for the intended marketing or operational purpose
-* extension-dependent fields support the expected workflow after migration
+* best-selling products remain clear, purchasable, and understandable;
+* variant and option choices lead customers to the intended item;
+* top categories guide shoppers to the expected product sets;
+* returning customers can follow the intended account or recovery path;
+* representative orders remain understandable for support and operations;
+* priority legacy paths resolve to relevant target-store destinations;
+* customer segmentation data remains usable for the intended marketing or operational workflow;
+* extension-dependent fields support the expected workflow after migration.
 
-These conditions make the checklist easier to use because reviewers know what they are judging.
+A checklist with strong pass conditions is easier to use because reviewers know what they are judging.
 
-### Assign review responsibility by outcome area <a href="#assign-review-responsibility-by-outcome-area" id="assign-review-responsibility-by-outcome-area"></a>
+### Add Severity Levels Before Review Begins <a href="#add-severity-levels-before-review-begins" id="add-severity-levels-before-review-begins"></a>
 
-Validation should not rely on one person reviewing everything.
+Not every issue should carry the same launch weight. A checklist should separate launch blockers, correction items, accepted differences, and post-launch monitoring items before launch pressure makes every issue feel urgent.
 
-Different outcome areas require different business knowledge. A technical reviewer may confirm that data appears, but the business team often needs to judge whether the result is usable.
+Severity levels help the business decide whether an issue blocks launch, needs correction, can be accepted, or should be watched after launch.
 
-#### Suggested review ownership <a href="#suggested-review-ownership" id="suggested-review-ownership"></a>
+#### Launch blocker <a href="#launch-blocker" id="launch-blocker"></a>
 
-Common review responsibilities include:
+A launch blocker is an issue that weakens the ability to operate or sell safely after launch. Examples may include broken buying paths, unusable priority products, missing or misleading operational order context, failed customer account expectations, serious SEO-sensitive path problems, or external-system dependencies required for day-one operations.
 
-* merchandising team: product behavior, categories, attributes, media, pricing visibility, promotions
-* customer support team: customer records, order history, refund context, account expectations
-* marketing team: content, SEO-sensitive pages, redirects, campaign landing pages, customer segments
-* operations team: fulfillment, shipping, tax, reporting, external-system handoffs
-* leadership or launch owner: blocker classification, acceptance of known differences, final launch confidence
+#### Needs correction <a href="#needs-correction" id="needs-correction"></a>
 
-Review ownership should be practical. The goal is to make sure each area is judged by someone who understands the business impact.
+A correction item affects quality, trust, or usability but may not always block launch if the business understands the impact and has an agreed correction plan.
+
+Examples may include important formatting issues, secondary navigation problems, manageable merchandising cleanup, or non-critical workflow refinements.
+
+#### Accepted difference <a href="#accepted-difference" id="accepted-difference"></a>
+
+An accepted difference is a documented result that does not match the source store exactly but is acceptable because of target platform behavior, agreed migration scope, business preference, or practical launch judgment.
+
+Accepted differences should be intentional. They should not become a label for unresolved defects.
+
+#### Monitor after launch <a href="#monitor-after-launch" id="monitor-after-launch"></a>
+
+A monitoring item is an area that appears acceptable before launch but should be observed after the target store becomes live. Examples may include traffic behavior, search visibility, customer support patterns, order processing rhythm, or external-system handoff stability.
+
+### Include Relationship-Aware Checks <a href="#include-relationship-aware-checks" id="include-relationship-aware-checks"></a>
+
+Migration problems often appear in relationships, not isolated records. The checklist should therefore confirm whether connected data still preserves its business meaning.
+
+Relationship-aware checks may include:
+
+* products appear in the categories that support real browsing intent;
+* category paths guide shoppers to the expected product sets;
+* products retain meaningful variants, options, attributes, media, and pricing context;
+* customers remain meaningfully connected to order history where applicable;
+* orders show enough product, customer, payment, tax, shipping, status, and fulfillment context for support use;
+* reviews remain attached to the correct products where reviews matter;
+* coupons and promotions remain understandable against the expected commercial rules;
+* CMS Pages, Blog Posts, and important landing pages remain reachable and useful.
+
+These checks confirm whether migrated data still works as a system. They are often more valuable than checking records one by one.
+
+### Add Custom, Add-on, and External-System Checks Where Relevant <a href="#add-custom-add-on-and-external-system-checks-where-relevant" id="add-custom-add-on-and-external-system-checks-where-relevant"></a>
+
+Some stores depend on behavior outside the default target platform model. When those dependencies matter, the checklist should include explicit items for custom fields, extension-managed data, third-party data, outside-system identifiers, or external workflows.
+
+#### Areas that may need dedicated checklist items <a href="#areas-that-may-need-dedicated-checklist-items" id="areas-that-may-need-dedicated-checklist-items"></a>
+
+Dedicated checklist items may be needed for:
+
+* custom fields used for display, reporting, fulfillment, segmentation, or internal operations;
+* app, plugin, module, or extension data used by daily workflows;
+* identifiers used by ERP, CRM, warehouse, marketplace, subscription, analytics, or support systems;
+* customer segmentation used by marketing, wholesale, B2B, membership, or loyalty operations;
+* pricing, promotion, tax, or shipping logic that depends on extensions or custom data;
+* review, subscription, membership, or loyalty data handled by a third-party provider;
+* Custom Platform structures that require non-standard interpretation;
+* custom migration logic adjustment that requires business verification.
+
+#### Keep Add-ons and Custom Service separate <a href="#keep-add-ons-and-custom-service-separate" id="keep-add-ons-and-custom-service-separate"></a>
+
+Checklist wording should keep Add-ons and Custom Service distinct.
+
+Add-ons relate to filtering, mapping, or data configuration. Broader customization, Custom Platform interpretation, extension-aware handling, unsupported app or plugin data, outside-system identifiers, and custom migration logic adjustment belong under Custom Service review.
+
+Where the expected result depends on Custom Service, the checklist should state the expected business outcome, the sample that proves it, and who needs to approve the result.
+
+### Assign Review Ownership by Outcome Area <a href="#assign-review-ownership-by-outcome-area" id="assign-review-ownership-by-outcome-area"></a>
+
+Validation should not rely on one person approving every area. Different outcomes require different business knowledge.
+
+A technical reviewer may confirm that data appears, but the business team usually needs to decide whether the result is commercially and operationally acceptable.
+
+#### Common review owners <a href="#common-review-owners" id="common-review-owners"></a>
+
+Useful ownership assignments may include:
+
+| Review area                                                                     | Typical reviewer                             |
+| ------------------------------------------------------------------------------- | -------------------------------------------- |
+| Product behavior, categories, attributes, media, pricing visibility, promotions | Merchandising or catalog team                |
+| Customer records, account expectations, order history, support context          | Customer support or customer operations team |
+| CMS Pages, Blog Posts, priority landing pages, campaign pages                   | Content or marketing team                    |
+| SEO-sensitive paths, redirects, page intent, search visibility signals          | SEO or marketing team                        |
+| Fulfillment, shipping, tax, reporting, external-system handoffs                 | Operations or systems team                   |
+| Blocker classification, accepted differences, launch confidence                 | Launch owner or leadership team              |
+
+Ownership should be practical. The goal is to make sure each area is judged by someone who understands its business impact.
 
 #### Why vague ownership creates risk <a href="#why-vague-ownership-creates-risk" id="why-vague-ownership-creates-risk"></a>
 
-When review ownership is unclear, important issues can be assumed rather than approved. Clear ownership reduces last-minute confusion and makes the final validation decision more defensible.
+When ownership is unclear, important issues can be assumed rather than approved. Clear ownership reduces last-minute confusion and makes the final validation decision easier to defend.
 
-### Build the checklist in a practical sequence <a href="#build-the-checklist-in-a-practical-sequence" id="build-the-checklist-in-a-practical-sequence"></a>
+### Use a Consistent Checklist Format <a href="#use-a-consistent-checklist-format" id="use-a-consistent-checklist-format"></a>
 
-A strong checklist can be built in a clear order.
+A checklist item should be complete enough to guide judgment without becoming difficult to maintain.
 
-The sequence should move from business outcomes to sample selection, then to pass conditions, priority tiering, review ownership, and final status.
+A practical format includes:
 
-#### Step 1: define business-critical outcomes <a href="#step-1-define-business-critical-outcomes" id="step-1-define-business-critical-outcomes"></a>
+| Field                 | Purpose                                                                                  |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Outcome area          | What business result is being validated                                                  |
+| Representative sample | Which product, category, order, customer, page, path, or workflow proves the result      |
+| Pass condition        | What acceptable behavior looks like                                                      |
+| Warning sign          | What should trigger correction, escalation, or deeper review                             |
+| Severity              | Whether the issue is a blocker, correction item, accepted difference, or monitoring item |
+| Reviewer              | Who is responsible for judging the outcome                                               |
+| Final status          | The recorded decision after review                                                       |
 
-Choose the outcomes that would matter most if they failed. This usually includes buying paths, customer continuity, order usability, SEO-sensitive pages, and operational dependencies.
+This format gives the team enough structure to review consistently without forcing every item into a rigid technical template.
+
+#### Useful final status labels <a href="#useful-final-status-labels" id="useful-final-status-labels"></a>
+
+Useful final status labels include:
+
+* Pass;
+* Needs correction;
+* Accepted difference;
+* Monitor after launch;
+* Launch blocker.
+
+These labels make it easier to turn checklist results into reconciliation, launch readiness, and post-launch monitoring decisions.
+
+### Build the Checklist in a Practical Sequence <a href="#build-the-checklist-in-a-practical-sequence" id="build-the-checklist-in-a-practical-sequence"></a>
+
+A strong checklist can be built in a simple order. The sequence should move from business importance to evidence, then to pass conditions, severity, ownership, and status.
+
+#### Step 1: define launch-critical outcomes <a href="#step-1-define-launch-critical-outcomes" id="step-1-define-launch-critical-outcomes"></a>
+
+Identify the outcomes that would matter most if they failed. This usually includes buying paths, customer continuity, order usability, priority pages, SEO-sensitive paths, and operational dependencies.
 
 #### Step 2: choose representative samples <a href="#step-2-choose-representative-samples" id="step-2-choose-representative-samples"></a>
 
-Use best sellers, top categories, priority pages, important customer records, representative orders, complex products, and extension-affected examples where relevant.
+Select best sellers, top categories, priority pages, important customer scenarios, representative orders, complex products, and extension-affected examples where relevant.
 
 #### Step 3: write pass conditions <a href="#step-3-write-pass-conditions" id="step-3-write-pass-conditions"></a>
 
 Define what acceptable behavior looks like for each outcome. Avoid pass conditions that only confirm presence.
 
-#### Step 4: mark blockers, warnings, and lower-priority differences <a href="#step-4-mark-blockers-warnings-and-lower-priority-differences" id="step-4-mark-blockers-warnings-and-lower-priority-differences"></a>
+#### Step 4: assign severity levels <a href="#step-4-assign-severity-levels" id="step-4-assign-severity-levels"></a>
 
-Decide in advance which failures should block launch confidence, which require correction or review, and which are acceptable differences if documented.
+Decide whether a failed item should be a launch blocker, correction item, accepted difference, or post-launch monitoring item.
 
 #### Step 5: assign reviewers <a href="#step-5-assign-reviewers" id="step-5-assign-reviewers"></a>
 
 Give each outcome area to the person or team best able to judge it.
 
-#### Step 6: record final status and next action <a href="#step-6-record-final-status-and-next-action" id="step-6-record-final-status-and-next-action"></a>
+#### Step 6: record status and next action <a href="#step-6-record-status-and-next-action" id="step-6-record-status-and-next-action"></a>
 
-Each item should end with a status: pass, needs correction, accepted difference, monitor after launch, or launch blocker.
+Each reviewed item should end with a final status and a next action where needed.
 
-**Practical checklist status labels**
+### How the Checklist Supports Reconciliation and Go-Live Readiness <a href="#how-the-checklist-supports-reconciliation-and-go-live-readiness" id="how-the-checklist-supports-reconciliation-and-go-live-readiness"></a>
 
-Useful labels include `Pass`, `Needs correction`, `Accepted difference`, `Monitor after launch`, and `Launch blocker`. These labels make the checklist easier to turn into launch decisions.
+The checklist is not the end of validation. It creates the evidence needed for reconciliation, launch judgment, and post-launch monitoring.
 
-### Common checklist mistakes <a href="#common-checklist-mistakes" id="common-checklist-mistakes"></a>
+After checklist review begins, the business still needs to interpret mismatches, classify differences, decide what should be corrected, and determine whether the target store is trustworthy enough for launch.
+
+The checklist should therefore:
+
+* translate validation principles into review work;
+* identify which differences require explanation;
+* show which issues affect launch confidence;
+* support blocker and accepted-difference decisions;
+* define areas that should be monitored after launch.
+
+A checklist that feeds directly into reconciliation and launch readiness is stronger than one that only records isolated review tasks.
+
+### Common Checklist Mistakes to Avoid <a href="#common-checklist-mistakes-to-avoid" id="common-checklist-mistakes-to-avoid"></a>
 
 Several patterns weaken migration validation checklists.
 
-The most common mistake is building the checklist around what is easy to count instead of what matters to the business.
-
-#### Mistakes to avoid <a href="#mistakes-to-avoid" id="mistakes-to-avoid"></a>
-
 Avoid:
 
-* starting with a long entity list instead of business outcomes
-* reviewing too many low-impact records before high-risk samples
-* using presence as the main pass condition
-* failing to identify acceptable differences in advance
-* treating storefront review as enough on its own
-* leaving review responsibility vague
-* ignoring extension, Custom Platform, or external-system dependencies
-* treating Recent Data Migration as a replacement for validation
-* waiting until late in the project to define what should block launch confidence
+* starting with a long entity list instead of business outcomes;
+* reviewing many low-impact records before high-risk samples;
+* using record presence as the main pass condition;
+* failing to identify acceptable differences before launch review;
+* treating storefront review as enough on its own;
+* leaving review responsibility vague;
+* ignoring extension, Custom Platform, or external-system dependencies;
+* treating Additional Migration Options as a substitute for validation;
+* waiting until late in the project to define launch blockers.
 
-These mistakes usually produce either an overlong checklist that does not guide action or a shallow checklist that cannot support launch confidence.
-
-### How the checklist connects to the next validation steps <a href="#how-the-checklist-connects-to-the-next-validation-steps" id="how-the-checklist-connects-to-the-next-validation-steps"></a>
-
-The checklist is not the end of validation. It prepares the business for reconciliation, go-live judgment, and post-launch monitoring.
-
-After checklist review begins, the team still needs to interpret mismatches, classify differences, decide what should be corrected, and determine whether the store is trustworthy enough for launch.
-
-#### Where the checklist fits in the section <a href="#where-the-checklist-fits-in-the-section" id="where-the-checklist-fits-in-the-section"></a>
-
-The validation checklist should:
-
-* translate validation meaning into review work
-* create the input for reconciliation
-* identify which differences require explanation
-* support go-live blocker decisions
-* define what should be monitored after launch
-
-This keeps the checklist connected to the rest of the QA and Validation process instead of treating it as an isolated task.
+These mistakes usually create either an overlong checklist that does not guide action or a shallow checklist that cannot support launch confidence.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 A migration validation checklist is strongest when it helps the business judge launch readiness clearly.
 
-That means building it around business-critical outcomes, representative samples, relationship-aware checks, specific pass conditions, and review responsibility. The checklist should not try to prove that every detail is perfect. It should prove that the Target Platform is acceptable in the areas that matter most, that known differences are understood, and that launch confidence is based on evidence.
+That means building it around business-critical outcomes, representative samples, relationship-aware checks, specific pass conditions, severity levels, and review ownership. The checklist does not need to prove that every detail is perfect. It needs to prove that the target store is acceptable in the areas that matter most, that known differences are understood, and that launch confidence is based on evidence.
 
-Before final validation begins, choose the outcomes that would matter most if they failed, define a pass condition for each one, and assign the right reviewer. If those standards are difficult to define, Demo Migration review or Live Chat can help clarify what should be treated as launch-critical and what may be an acceptable Target Platform difference.
+Before final validation begins, define the outcomes that would create the greatest risk if they failed, choose representative samples for each one, and assign qualified reviewers. If those standards are difficult to define, Demo Migration review or Live Chat can help clarify what should be treated as launch-critical and what may be an acceptable target-store difference.
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
 **How many items should a migration validation checklist include?**
 
-A useful checklist often starts with 8 to 15 business-critical outcomes, then expands where risk, complexity, Custom Platform handling, or external-system dependency justifies deeper review. The checklist should be long enough to support launch confidence, but not so broad that it hides the highest-risk areas.
+A useful checklist often starts with 8 to 15 business-critical outcomes, then expands where risk, complexity, Custom Platform handling, or external-system dependency justifies deeper review. It should be broad enough to support launch confidence, but not so broad that it hides the highest-risk areas.
 
 **Should a checklist be organized by entity type or business outcome?**
 
@@ -367,12 +334,13 @@ A checklist item identifies what should be reviewed. A pass condition defines wh
 
 **Should SEO and priority-page checks be part of the validation checklist?**
 
-Yes, when page reachability, traffic continuity, and customer intent matter to the business. These checks should focus on priority pages, important legacy paths, and commercially meaningful destinations rather than trying to review every page equally.
+Yes, when page reachability, traffic continuity, and customer intent matter to the business. These checks should focus on priority pages, important legacy paths, and commercially meaningful destinations instead of trying to review every page equally.
 
 **Do extensions and outside systems need their own checklist items?**
 
 Yes, when they affect revenue, customer continuity, operations, reporting, fulfillment, marketing, or external workflows. A storefront-only checklist is often too narrow for complex migrations.
 
-**How does Custom Platform handling affect a migration validation checklist?**
+**How do Additional Migration Options affect the checklist?**
 
-Custom Platform handling usually requires more precise pass conditions, stronger representative samples, and clearer definitions of what counts as acceptable versus launch-critical behavior. The checklist should confirm whether the Target Platform result preserves the business meaning expected from the custom handling.
+Additional Migration Options can change what needs to be rechecked, especially when new records, updated configuration, or a new migration run affects the target store. They do not remove the need for validation. The checklist should be updated to reflect the action performed and the result that needs approval.
+

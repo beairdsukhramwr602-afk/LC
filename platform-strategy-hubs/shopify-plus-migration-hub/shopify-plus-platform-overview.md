@@ -1,151 +1,179 @@
 # Shopify Plus Platform Overview
 
-Shopify Plus is a hosted enterprise commerce platform for businesses that need more than a simple storefront migration into Shopify.
+Shopify Plus is an enterprise hosted SaaS Target Platform for merchants whose migration decisions depend on more than storefront record transfer. It shares Shopify’s hosted commerce foundation, but the planning lens is different when the future store must support B2B company structure, catalog-based product visibility, pricing context, buyer access, market or storefront governance, integration-heavy operations, and stronger launch validation.
 
-A migration to Shopify Plus is not only a move into Shopify with a larger operational budget. It is a target-platform decision that can affect B2B structure, company-based buying relationships, account access, catalog visibility, pricing logic, store governance, and validation scope. For that reason, Shopify Plus should be evaluated by whether it can preserve the commercial behavior the business depends on, not only by whether products, customers, and orders can be transferred.
+A Shopify Plus migration should be evaluated by whether the target environment can preserve the commercial behavior the business depends on. Products, variants, collections, customers, orders, CMS Pages, Blog Posts, redirects, metafields, metaobjects, apps, and Markets still matter. For Shopify Plus, those records often sit inside a wider operating model that includes companies, company locations, B2B catalogs, buyer permissions, payment and shipping expectations, enterprise reporting needs, and external-system dependencies.
 
-Shopify Plus shares the hosted Shopify foundation: products are structured around products, options, and variants; collections shape storefront discovery; apps and custom data often carry specialized behavior; and redirect planning remains important when URL structures change. The difference is that Shopify Plus often entails higher expectations for enterprise governance, B2B customer modeling, multi-store structure, operational controls, and launch validation.
+The central planning question is not whether Shopify Plus is a larger version of Shopify. The question is whether the merchant can define the future operating model clearly enough for the migration to preserve customer experience, buyer access, operational control, and validation confidence.
 
-### What Changes in a Migration to Shopify Plus <a href="#what-changes-in-a-migration-to-shopify-plus" id="what-changes-in-a-migration-to-shopify-plus"></a>
+### What Shopify Plus Changes in Migration Planning <a href="#what-shopify-plus-changes-in-migration-planning" id="what-shopify-plus-changes-in-migration-planning"></a>
 
-A move into Shopify Plus usually changes how the target store should be planned, modeled, and validated.
+Shopify Plus changes migration planning because more business behavior may depend on account structure, access rules, catalogs, pricing visibility, integrations, and governance decisions that are not visible in ordinary data totals.
 
-#### B2B structure becomes a primary planning layer <a href="#b2b-structure-becomes-a-primary-planning-layer" id="b2b-structure-becomes-a-primary-planning-layer"></a>
+| Planning area                 | Shopify Plus implication                                                                                                                 | Migration planning focus                                                                                                         |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Enterprise hosted SaaS model  | Shopify Plus reduces platform infrastructure responsibility while preserving enterprise operating expectations.                          | Separate migrated data from target-store configuration, app setup, integration work, governance decisions, and validation scope. |
+| B2B company structure         | Business buyers may need company accounts, company locations, assigned catalogs, buyer roles, and account-specific terms.                | Define company logic before migration rather than treating business customers as ordinary customer records only.                 |
+| Catalog and pricing context   | Product visibility and buying conditions may depend on B2B catalogs, price lists, Markets, or customer context.                          | Validate whether each buyer scenario sees the correct products, prices, purchasing terms, and storefront content.                |
+| Store and market architecture | B2B, D2C, regional, brand, and wholesale activity may need one store, separate stores, Markets, or expansion-store planning.             | Decide what should be shared, separated, localized, governed centrally, or validated independently.                              |
+| Apps and integrations         | Enterprise workflows often depend on ERP, OMS, WMS, CRM, middleware, subscription, loyalty, analytics, or reporting systems.             | Identify which records migrate, which workflows require configuration, and which dependencies need Custom Service review.        |
+| Custom information            | Metafields, metaobjects, app-owned records, outside-system identifiers, and specialized attributes may support operations.               | Preserve custom information only when the target purpose, owner, and validation method are clear.                                |
+| Launch validation             | Shopify Plus validation must prove buyer behavior, operational workflows, pricing visibility, account access, and external dependencies. | Validate by business scenario, not only by record counts or storefront appearance.                                               |
 
-In many Shopify Plus migrations, the important customer unit is not only the individual customer account. It may be the company, the company location, the catalog assigned to that company, the payment terms available to the buyer, and the product or pricing rules attached to that relationship.
+A Shopify Plus migration plan should therefore connect data structure to business behavior. A company may migrate, but buyer access may still be wrong. A product may appear in the target store, but a B2B buyer may not see the correct catalog or price. A URL may redirect, but a key buyer journey may still fail if account context, app behavior, or integration timing is incomplete.
 
-This matters because a migration can appear complete at the record level yet still fail to preserve how business customers actually buy. Company structure, buyer access, catalog visibility, and account behavior should therefore be planned before the full migration is executed, rather than discovered only during final validation.
+### Shopify Plus as an Enterprise Hosted SaaS Target Platform <a href="#shopify-plus-as-an-enterprise-hosted-saas-target-platform" id="shopify-plus-as-an-enterprise-hosted-saas-target-platform"></a>
 
-#### Store architecture becomes a business decision <a href="#store-architecture-becomes-a-business-decision" id="store-architecture-becomes-a-business-decision"></a>
+Shopify Plus is often selected by businesses that want hosted SaaS operations with stronger enterprise controls than a standard Shopify project typically requires. The platform can reduce responsibility for infrastructure, patching, and core platform maintenance, but it does not remove the need for target-store planning.
 
-Shopify Plus can support broader organizational planning than standard Shopify, but store boundaries still need deliberate decisions.
+The migration still needs clear decisions about storefront structure, account model, catalog assignment, product representation, payment and shipping expectations, URL continuity, apps, integrations, and post-launch ownership. Hosted SaaS reduces one category of technical burden, but it also means the target model should align with Shopify Plus conventions instead of assuming the source platform’s internal structure can be recreated exactly.
 
-A business may need to decide whether B2B and direct-to-consumer activities should operate within one store, in separate stores, in expansion stores, or in different regional/storefront contexts. That decision affects catalog design, customer segmentation, URL planning, app configuration, reporting, operational responsibility, and validation scope.
+For enterprise teams, this usually means planning around business behavior first. The future store should be evaluated through buyer scenarios, administrative workflows, integration needs, and launch-critical outcomes.
 
-#### Customer continuity depends on account experience <a href="#customer-continuity-depends-on-account-experience" id="customer-continuity-depends-on-account-experience"></a>
+### B2B Structure Is a Primary Planning Layer <a href="#b2b-structure-is-a-primary-planning-layer" id="b2b-structure-is-a-primary-planning-layer"></a>
 
-Customer continuity should not be judged only by whether customer records appear in Shopify Plus.
+Shopify Plus migrations often involve B2B requirements that make the customer model more complex than a normal customer-record transfer. The important buying unit may be a company, a company location, a buyer role, an assigned catalog, or a pricing context rather than only an individual customer account.
 
-For many businesses, especially those with B2B, wholesale, loyalty, or account-based purchasing expectations, the important question is whether the customer can sign in, access the correct account context, see the right product and pricing conditions, and continue buying without operational confusion.
+This matters because record transfer can look complete while the buying experience remains incomplete. A business customer may need to sign in under the correct company, access the right location, see the right products, receive the expected pricing, and place orders under the correct payment and shipping conditions.
 
-#### App and custom-data dependencies become more visible <a href="#app-and-custom-data-dependencies-become-more-visible" id="app-and-custom-data-dependencies-become-more-visible"></a>
+Before Full Migration, the business should clarify which customers belong to companies, how company locations should be represented, whether buyers need distinct permissions, how catalog visibility should work, and which account behaviors must be preserved at launch.
 
-Shopify Plus stores often use apps, custom data, integrations, or theme logic to represent behavior that is not carried by standard migrated records alone.
+### Catalog, Pricing, and Visibility Need Scenario-Based Planning <a href="#catalog-pricing-and-visibility-need-scenario-based-planning" id="catalog-pricing-and-visibility-need-scenario-based-planning"></a>
 
-This can include product personalization, B2B workflows, pricing display rules, subscription behavior, loyalty logic, ERP-connected fields, specialized customer attributes, or reporting identifiers. If these layers affect business operations, they should be assessed as part of the migration plan instead of being treated as minor post-migration configuration.
+Shopify Plus can support more structured B2B catalog and pricing scenarios, but those scenarios need to be defined before migration execution. Catalog visibility, price expectations, currency, regional context, product availability, and customer-specific buying rules should be treated as business requirements, not as assumptions that automatically follow product and customer migration.
 
-#### Validation must cover business behavior, not just storefront appearance <a href="#validation-must-cover-business-behavior-not-just-storefront-appearance" id="validation-must-cover-business-behavior-not-just-storefront-appearance"></a>
+A migration plan should identify representative buyer scenarios early. These scenarios should include important companies, locations, customer groups, product families, catalog rules, market contexts, and high-value order patterns. If the source store uses customer groups, wholesale price lists, custom pricing logic, ERP-controlled terms, or app-driven visibility rules, those dependencies should be reviewed before the migration scope is considered stable.
 
-Shopify Plus validation should prove that business-critical behavior still works after the move.
+### Store, Market, and Governance Decisions Shape the Target Model <a href="#store-market-and-governance-decisions-shape-the-target-model" id="store-market-and-governance-decisions-shape-the-target-model"></a>
 
-That includes product choices, company access, account behavior, catalog visibility, pricing expectations, high-value URLs, storefront navigation, app-dependent workflows, and representative order scenarios. A visually clean storefront is not enough if key customer types cannot buy correctly or if operational teams cannot interpret migrated data after launch.
+Shopify Plus can support broader operating models involving B2B and D2C activity, multiple storefront contexts, regional selling, brand-specific operations, or market-specific customer experience. Those options are useful only when the business defines what should be shared and what should stay separate.
 
-### Where Shopify Plus Is Often a Strong Target <a href="#where-shopify-plus-is-often-a-strong-target" id="where-shopify-plus-is-often-a-strong-target"></a>
+A merchant may need to decide whether B2B and D2C activity belong in one store, separate stores, expansion stores, or different market contexts. That decision affects products, catalogs, customers, account access, URLs, content, reporting, operational ownership, and validation planning.
 
-Shopify Plus is often a strong migration target when a business wants a hosted enterprise platform but still needs structured handling for more complex commercial operations.
+The risk is assuming that a larger platform tier solves governance by itself. Shopify Plus provides enterprise capabilities, but the migration still needs clear governance rules for store boundaries, catalog ownership, app configuration, market setup, and operational responsibility.
 
-#### B2B and wholesale operations need clearer structure <a href="#b2b-and-wholesale-operations-need-clearer-structure" id="b2b-and-wholesale-operations-need-clearer-structure"></a>
+### Apps, Integrations, and Custom Data Require Early Classification <a href="#apps-integrations-and-custom-data-require-early-classification" id="apps-integrations-and-custom-data-require-early-classification"></a>
 
-Shopify Plus can be a strong target when business customers, company locations, assigned catalogs, payment terms, and account-based purchasing rules matter to the store’s revenue model.
+Shopify Plus stores often depend on apps, APIs, metafields, metaobjects, integrations, and external-system identifiers. These layers can support storefront behavior, B2B workflows, order routing, fulfillment, reporting, customer segmentation, loyalty, subscriptions, tax, shipping, or ERP-controlled operations.
 
-The strongest fit usually occurs when the business can clearly define those relationships before migration. Shopify Plus works better when the company structure is deliberate rather than improvised after data has already been moved.
+Not all of those dependencies are ordinary migrated records. Some data can be moved into standard target structures. Some custom information may belong in metafields or metaobjects. Some behavior may require app setup, target-store configuration, Advanced Data Mapping, Advanced Data Configure, or Custom Service.
 
-#### The business wants SaaS operations with enterprise governance <a href="#the-business-wants-saas-operations-with-enterprise-governance" id="the-business-wants-saas-operations-with-enterprise-governance"></a>
+Early classification prevents overpromising. The migration plan should separate what can be migrated as store data, what needs target configuration, what depends on third-party apps, and what requires bespoke handling because the source or target structure falls outside standard migration logic.
 
-Shopify Plus can fit businesses that want to reduce infrastructure and maintenance burdens while still maintaining stronger governance over store structure, permissions, store expansion, checkout expectations, app usage, and operational workflows.
+### Validation Must Prove Business Behavior <a href="#validation-must-prove-business-behavior" id="validation-must-prove-business-behavior"></a>
 
-This is especially useful when the source environment has become difficult to maintain because too much business logic lives in custom code, outdated extensions, or disconnected operational processes.
+Shopify Plus validation should prove that the target store works for the real operating model. A visually correct storefront is not enough if B2B buyers cannot access the right company context, if catalogs expose the wrong products, if pricing visibility is incorrect, or if operational teams cannot interpret migrated orders after launch.
 
-#### Multiple storefront contexts need clearer boundaries <a href="#multiple-storefront-contexts-need-clearer-boundaries" id="multiple-storefront-contexts-need-clearer-boundaries"></a>
+Validation should include representative products, buyer accounts, company locations, catalog assignments, storefront navigation, high-value URLs, app-dependent workflows, integration-sensitive identifiers, and order-history examples. For merchants with B2B and D2C activity, validation should also prove that each customer type experiences the correct storefront, content, pricing, account access, and support path.
 
-Shopify Plus may fit businesses with regional stores, brand stores, B2B and B2C divisions, or market-specific storefront needs.
+This is where Section 7 validation standards become especially important. The customer remains responsible for final result verification, even when Next-Cart supports migration execution through Managed Service or Custom Service with Expert Handle.
 
-The key is to define what should be shared, what should remain separate, and what must be governed consistently. A migration should not assume that multiple stores automatically solve governance problems. Store separation only helps when the boundaries are planned intentionally.
+### Where Shopify Plus Is Usually Strong <a href="#where-shopify-plus-is-usually-strong" id="where-shopify-plus-is-usually-strong"></a>
 
-#### Enterprise teams need stronger validation discipline <a href="#enterprise-teams-need-stronger-validation-discipline" id="enterprise-teams-need-stronger-validation-discipline"></a>
+Shopify Plus is usually strongest when the merchant wants hosted enterprise commerce and can define the future operating model clearly enough for migration planning.
 
-Shopify Plus can be a good target when the business has enough operational maturity to validate the future store by scenario, not only by data totals.
+#### B2B and wholesale operations with defined company logic <a href="#b2b-and-wholesale-operations-with-defined-company-logic" id="b2b-and-wholesale-operations-with-defined-company-logic"></a>
 
-This includes checking representative B2B buyers, consumer customers, products with complex options, high-value categories, important redirects, app-dependent workflows, and integration-sensitive records.
+Shopify Plus is often a strong Target Platform when company accounts, company locations, catalogs, price visibility, buyer roles, payment expectations, and business-customer workflows are central to revenue.
+
+The strongest fit appears when those requirements are documented before migration. Shopify Plus works better when company structure and catalog logic are intentional, not improvised after data has already moved.
+
+#### Enterprise teams that want SaaS operations with stronger governance <a href="#enterprise-teams-that-want-saas-operations-with-stronger-governance" id="enterprise-teams-that-want-saas-operations-with-stronger-governance"></a>
+
+Shopify Plus can fit businesses that want to reduce infrastructure responsibility while maintaining stronger governance over storefronts, roles, expansion contexts, checkout-adjacent expectations, integrations, apps, and operational workflows.
+
+This can be valuable when the source environment has become difficult to maintain because too much business logic depends on custom code, outdated extensions, disconnected systems, or manual operational workarounds.
+
+#### Multi-context commerce that needs clearer boundaries <a href="#multi-context-commerce-that-needs-clearer-boundaries" id="multi-context-commerce-that-needs-clearer-boundaries"></a>
+
+Shopify Plus may fit businesses with B2B and D2C divisions, regional selling, brand-specific storefronts, wholesale relationships, or market-specific buying expectations.
+
+The benefit depends on planning discipline. Store separation, Markets, catalogs, and buyer permissions are useful only when the business knows which experiences should be shared, separated, localized, or governed centrally.
+
+#### Integration-heavy operations that can be validated by scenario <a href="#integration-heavy-operations-that-can-be-validated-by-scenario" id="integration-heavy-operations-that-can-be-validated-by-scenario"></a>
+
+Shopify Plus can support enterprise commerce operations that depend on ERP, OMS, WMS, CRM, middleware, reporting, or fulfillment integrations. The migration is stronger when those dependencies are identified early and tested through representative workflows.
+
+A good migration plan should not wait until launch week to discover which identifiers, customer records, order attributes, product fields, or app-owned data drive operational continuity.
 
 ### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
 
-Shopify Plus is not automatically the best target simply because a business is large, growing, or operationally complex.
+Shopify Plus is not automatically the right Target Platform because a merchant is large, growing, or operationally complex. It should be chosen because the future operating model benefits from Shopify Plus capabilities and can be defined clearly enough for migration.
 
-#### B2B rules are vague or undocumented <a href="#b2b-rules-are-vague-or-undocumented" id="b2b-rules-are-vague-or-undocumented"></a>
+#### B2B rules are vague <a href="#b2b-rules-are-vague" id="b2b-rules-are-vague"></a>
 
-If the company structure, account access, catalog visibility, pricing logic, payment terms, and approval behavior are unclear, the migration plan should pause before treating Shopify Plus as fully defined.
+If company structure, buyer roles, catalogs, pricing visibility, payment terms, shipping methods, approval behavior, and account access are not clearly defined, the migration plan should pause before treating Shopify Plus as fully scoped.
 
-Vague B2B requirements often create risk because the target cannot preserve behavior that the business has not clearly described.
+A platform cannot preserve business behavior that the team has not described. Vague B2B requirements often lead to rework, validation gaps, and late Custom Service escalation.
 
-#### The source store depends heavily on custom behavior <a href="#the-source-store-depends-heavily-on-custom-behavior" id="the-source-store-depends-heavily-on-custom-behavior"></a>
+#### Source behavior depends on custom logic <a href="#source-behavior-depends-on-custom-logic" id="source-behavior-depends-on-custom-logic"></a>
 
-If the source platform relies on custom code, third-party modules, custom fields, non-standard customer groups, unique checkout behavior, or ERP-driven business rules, deeper planning is needed.
+If the source store relies on custom code, extension-owned records, non-standard customer groups, source-specific price rules, unique checkout behavior, or ERP-driven workflows, deeper review is needed.
 
-Some of this behavior may be handled through Shopify Plus configuration or apps. Other behavior may require **Custom Service**, especially when custom migration logic adjustment, Custom Platform handling, transformation, or bespoke data interpretation is required.
+Some behavior may be recreated with Shopify Plus configuration or apps. Some may need Add-ons. Broader transformation, bespoke data interpretation, Custom Platform handling, or custom migration logic adjustment belongs under Custom Service.
 
-#### Multi-store assumptions are not yet governed <a href="#multi-store-assumptions-are-not-yet-governed" id="multi-store-assumptions-are-not-yet-governed"></a>
+#### Store and market assumptions are unresolved <a href="#store-and-market-assumptions-are-unresolved" id="store-and-market-assumptions-are-unresolved"></a>
 
-A business should not assume that expansion stores, regional stores, or B2B/B2C store separation automatically share products, inventory, customer context, settings, or content by default.
+A business should not assume that B2B, D2C, regional, wholesale, or brand contexts can be arranged later without affecting migration scope.
 
-If the future operating model depends on consistency across stores, that governance model should be defined before migration planning goes too far.
+Store and market decisions affect product availability, URLs, content, catalogs, customer access, reporting, fulfillment, operational ownership, and validation. These decisions should be made before the migration is treated as straightforward.
 
-#### Legacy behavior is being copied without challenge <a href="#legacy-behavior-is-being-copied-without-challenge" id="legacy-behavior-is-being-copied-without-challenge"></a>
+#### Legacy behavior is being carried forward without business review <a href="#legacy-behavior-is-being-carried-forward-without-business-review" id="legacy-behavior-is-being-carried-forward-without-business-review"></a>
 
-A Shopify Plus migration is often an opportunity to decide which legacy behavior should be preserved, simplified, replaced, or retired.
+A Shopify Plus migration is often a chance to decide which legacy behavior should be preserved, simplified, retired, or replaced by a clearer target model.
 
-Not every historical customization deserves to be rebuilt. Some source-store behavior exists because of old platform constraints rather than current business need. Deeper planning is needed when teams cannot yet separate business-critical behavior from legacy clutter.
+Not every historical customization deserves to be rebuilt. Some source-store behavior exists because of old platform constraints rather than current business need. Deeper planning is needed when teams cannot yet separate business-critical behavior from historical clutter.
 
-### What Should Be Understood Early Before Moving into Shopify Plus <a href="#what-should-be-understood-early-before-moving-into-shopify-plus" id="what-should-be-understood-early-before-moving-into-shopify-plus"></a>
+### What to Clarify Before Moving to Shopify Plus <a href="#what-to-clarify-before-moving-to-shopify-plus" id="what-to-clarify-before-moving-to-shopify-plus"></a>
 
-Before choosing Shopify Plus as the Target Platform, the business should clarify the following areas.
+Before selecting Shopify Plus as the Target Platform, the business should clarify the operating model that the target store must support.
 
-#### B2B structure and company logic <a href="#b2b-structure-and-company-logic" id="b2b-structure-and-company-logic"></a>
+#### Company, buyer, and account model <a href="#company-buyer-and-account-model" id="company-buyer-and-account-model"></a>
 
-The business should understand which customers belong to companies, whether locations need distinct rules, how catalogs should be assigned, how payment terms are expected to work, and which buyer roles or account behaviors matter after launch.
+The business should know which customers belong to companies, whether locations need distinct rules, which buyers need access, how account experience should work, and which roles or permissions matter after launch.
 
-#### Store and market architecture <a href="#store-and-market-architecture" id="store-and-market-architecture"></a>
+#### Catalog and pricing expectations <a href="#catalog-and-pricing-expectations" id="catalog-and-pricing-expectations"></a>
 
-The business should decide whether B2B, DTC, wholesale, regional, or brand-specific activity belongs in one store or multiple stores. This decision affects migration scope, validation, operations, reporting, and long-term governance.
+Catalog visibility, price lists, currency, market context, payment terms, shipping methods, and product availability should be reviewed through representative buyer scenarios.
 
-#### Product and catalog representation <a href="#product-and-catalog-representation" id="product-and-catalog-representation"></a>
+#### Store, market, and regional architecture <a href="#store-market-and-regional-architecture" id="store-market-and-regional-architecture"></a>
 
-Products, variants, options, collections, catalogs, and app-dependent product behavior should be reviewed early. Shopify Plus works best when the target product model is defined clearly before full migration execution.
+The business should decide whether B2B, D2C, wholesale, regional, or brand-specific activity belongs in one store, multiple stores, expansion stores, or market-specific contexts.
 
-#### Custom data and app dependency <a href="#custom-data-and-app-dependency" id="custom-data-and-app-dependency"></a>
+#### Product and custom-data representation <a href="#product-and-custom-data-representation" id="product-and-custom-data-representation"></a>
 
-Metafields, metaobjects, app-owned records, ERP identifiers, customer attributes, subscription references, loyalty data, and specialized operational fields should be classified before migration. Some can be preserved through standard or configurable handling; others may require **Custom Service**.
+Products, variants, collections, metafields, metaobjects, app-owned data, outside-system identifiers, and custom attributes should be classified by future use. Useful data should have a target purpose; obsolete data should not be carried forward only because it exists in the source store.
 
-#### URL and storefront continuity <a href="#url-and-storefront-continuity" id="url-and-storefront-continuity"></a>
+#### Integration and operational dependencies <a href="#integration-and-operational-dependencies" id="integration-and-operational-dependencies"></a>
 
-High-value URLs, product/category-equivalent pages, B2B entry points, customer-facing landing pages, and content-heavy pages should be reviewed early so redirect and storefront continuity planning can support SEO and customer access.
+ERP, OMS, WMS, CRM, middleware, fulfillment, tax, shipping, payment, analytics, reporting, subscription, loyalty, and support dependencies should be documented before migration planning becomes final.
 
 #### Validation responsibility <a href="#validation-responsibility" id="validation-responsibility"></a>
 
-A Shopify Plus migration should define who will validate business-customer behavior, account access, catalog visibility, order history interpretation, app-dependent workflows, and store-boundary assumptions. These checks should not be left to a generic final review.
+The team should define who will validate company access, buyer scenarios, catalog visibility, pricing behavior, storefront paths, order-history interpretation, app workflows, integration-sensitive records, and launch readiness.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify Plus is a strong Target Platform when a business needs hosted enterprise commerce with clearer structure for B2B relationships, store governance, customer-account behavior, catalog control, and operational validation.
+Shopify Plus is a strong Target Platform when a business needs hosted enterprise commerce with deliberate structure for B2B relationships, company accounts, catalog visibility, pricing context, store governance, integrations, and business-behavior validation.
 
-Its migration value depends on how clearly the business defines the future operating model. Shopify Plus should not be treated as standard Shopify with a higher tier attached. It should be evaluated as a target environment where company structure, account access, catalog visibility, store boundaries, and enterprise workflows must be intentionally planned and validated.
+Its migration value depends on how clearly the future operating model is defined. Shopify Plus should not be treated as standard Shopify with more capacity or a higher tier attached. It should be evaluated as a target environment where account access, buyer context, storefront boundaries, catalogs, apps, custom data, and integrations must be intentionally planned and verified.
 
-A good next step is to run a Demo Migration using products, customer/company records, catalog scenarios, app-dependent data, and high-value URLs that represent the real Shopify Plus target model. If the result raises questions about B2B structure, multi-store boundaries, custom data, or service responsibility, Live Chat can help clarify the safest migration path before full execution.
+A strong next step is to run a Demo Migration with representative products, company/customer examples, catalog scenarios, app-dependent data, integration-sensitive identifiers, and high-value URLs. If the result raises questions about company structure, buyer access, catalog visibility, custom data, or service responsibility, Live Chat can help clarify the safest migration path before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What makes Shopify Plus different from standard Shopify in migration planning?**
+#### What makes Shopify Plus different from standard Shopify in migration planning? <a href="#what-makes-shopify-plus-different-from-standard-shopify-in-migration-planning" id="what-makes-shopify-plus-different-from-standard-shopify-in-migration-planning"></a>
 
-Shopify Plus usually requires deeper planning around B2B structure, company and location logic, account access, catalog visibility, multi-store governance, and enterprise validation. The migration is not only about moving more data; it is about preserving more business behavior.
+Shopify Plus usually requires deeper planning around B2B structure, company and location logic, buyer access, catalog visibility, pricing context, multi-store or market governance, integrations, and enterprise validation. The migration is not only about moving more data; it is about preserving more business behavior.
 
-**Is Shopify Plus always the right choice for a large store?**
+#### Is Shopify Plus always the right choice for a large store? <a href="#is-shopify-plus-always-the-right-choice-for-a-large-store" id="is-shopify-plus-always-the-right-choice-for-a-large-store"></a>
 
-No. Shopify Plus can be a strong target for larger or more complex businesses, but fit depends on the future operating model. If the business does not need enterprise governance, B2B structure, advanced account logic, or broader operational controls, standard Shopify may still be sufficient.
+No. Shopify Plus can be a strong target for larger or more complex businesses, but fit depends on the future operating model. If the business does not need enterprise governance, B2B structure, advanced account logic, integration-heavy workflows, or broader operational controls, standard Shopify may still be sufficient.
 
-**Does Shopify Plus automatically preserve custom source-store behavior?**
+#### Does Shopify Plus automatically preserve custom source-store behavior? <a href="#does-shopify-plus-automatically-preserve-custom-source-store-behavior" id="does-shopify-plus-automatically-preserve-custom-source-store-behavior"></a>
 
-No. Custom behavior must be reviewed by purpose and target-platform fit. Some behavior can be replaced with Shopify Plus configuration, apps, or simplified target logic. Broader customization, transformation, Custom Platform handling, or custom migration logic adjustment belongs under **Custom Service**.
+No. Custom behavior must be reviewed by purpose and target-platform fit. Some behavior can be handled with Shopify Plus configuration, apps, Add-ons, or simplified target logic. Broader customization, transformation, Custom Platform handling, or custom migration logic adjustment belongs under Custom Service.
 
-**What should a Shopify Plus Demo Migration prove?**
+#### What should a Shopify Plus Demo Migration prove? <a href="#what-should-a-shopify-plus-demo-migration-prove" id="what-should-a-shopify-plus-demo-migration-prove"></a>
 
-A Shopify Plus Demo Migration should test representative products, company/customer structures, catalog visibility, account behavior, high-value URLs, app-dependent records, and any custom data that affects business operations. The goal is to reveal whether the target model is clear enough for full migration.
+A Shopify Plus Demo Migration should test representative products, company and customer structures, catalog visibility, buyer access, high-value URLs, app-dependent records, integration-sensitive identifiers, and custom data that affects business operations. The goal is to reveal whether the target model is clear enough for Full Migration.

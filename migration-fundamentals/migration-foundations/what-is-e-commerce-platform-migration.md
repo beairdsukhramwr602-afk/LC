@@ -7,284 +7,194 @@ metaLinks:
 
 # What Is E-commerce Platform Migration?
 
-E-commerce platform migration is the planned movement and reconstruction of store data from one commerce platform environment to another. Its purpose is not only to transfer records, but to help the new store continue supporting the business after launch.
+E-commerce platform migration is the planned movement and reconstruction of store data from a Source Platform into a Target Platform. The purpose is not only to transfer records. The purpose is to help the target store continue supporting the business after the platform change.
 
-A migration may begin with products, customers, orders, categories, reviews, coupons, taxes, blog posts, and other store data. But the real work is broader than moving visible records. The new platform needs to preserve the business meaning carried by that data: how products can be purchased, how customers find items, how order history can be used, how content supports discovery, and how the store continues operating after the change.
+A migration may include products, customers, orders, categories, reviews, coupons, taxes, CMS Pages, Blog Posts, images, SEO fields, customer addresses, product options, variants, attributes, and other supporting data. Those record groups are the visible layer. The more important question is whether the Target Platform can preserve the meaning behind them.
 
-That is why e-commerce platform migration should be viewed as a business continuity decision, not only a technical data-transfer task. A store can receive the expected records and still become weaker if important structures, relationships, or operating assumptions no longer work in the Target Platform.
+That is why e-commerce platform migration should be treated as a business-continuity decision, not only as a data-transfer task. A target store can contain the expected records and still be weaker if products cannot be purchased correctly, categories no longer support discovery, order history becomes difficult to use, customer context is incomplete, or important pages lose search and traffic value.
 
-### What e-commerce platform migration includes <a href="#what-e-commerce-platform-migration-includes" id="what-e-commerce-platform-migration-includes"></a>
+### What E-commerce Platform Migration Includes <a href="#what-e-commerce-platform-migration-includes" id="what-e-commerce-platform-migration-includes"></a>
 
-A migration usually includes core commerce data such as:
+E-commerce platform migration usually begins with the store data that keeps a business usable. That may include core commerce records, content records, customer records, and operational history.
 
-* products
-* customers
-* orders
-* categories
-* reviews
-* coupons
-* taxes
-* CMS Pages
-* Blog Posts
+| Migration area               | What it usually covers                                                                                                                          | Why it matters                                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Catalog data                 | Products, variants, options, attributes, images, categories, prices, inventory-related fields, and product relationships.                       | Customers need to browse, compare, and buy products in a way that still reflects the business model.                        |
+| Customer data                | Customer records, customer addresses, account-related information, customer groups, and customer-related context where supported.               | Support, continuity, segmentation, and customer trust often depend on usable customer information.                          |
+| Order data                   | Orders, order details, order status context, customer links, product references, totals, discounts, taxes, and related history where available. | Teams may need order history for support, reporting, reconciliation, refunds, fulfillment review, or operational reference. |
+| Content data                 | CMS Pages, Blog Posts, landing-page content, metadata, and supporting page information.                                                         | Content can support search visibility, product education, navigation, trust, and conversion paths.                          |
+| Commercial rules and context | Coupons, tax-related data, product relationships, merchandising context, SEO fields, and other store-specific structures.                       | A store depends on relationships and supporting rules, not only on isolated records.                                        |
 
-These record groups are only the visible layer.
+The exact scope depends on the selected migration path, platform capability, service scope, store structure, and any selected Add-ons or Custom Service requirements. Migration scope should therefore not be understood as a flat checklist of records. It should be defined by the business outcomes the target store must support.
 
-A working store also depends on supporting structures such as:
+### What Migration Is Trying to Preserve <a href="#what-migration-is-trying-to-preserve" id="what-migration-is-trying-to-preserve"></a>
 
-* variants
-* options
-* attributes
-* customer addresses
-* images
-* SEO fields
-* product relationships
-* category hierarchy
-* content elements that support discovery and conversion
+Successful migration preserves usable business meaning. The migrated data should not merely exist in the Target Platform; it should remain useful for customers, staff, operations, and future store management.
 
-Migration scope should therefore not be understood as a record list alone. The better question is whether the Target Platform can support the outcomes the business needs after the move.
+#### Purchasability <a href="#purchasability" id="purchasability"></a>
 
-### What e-commerce platform migration is trying to preserve <a href="#what-e-commerce-platform-migration-is-trying-to-preserve" id="what-e-commerce-platform-migration-is-trying-to-preserve"></a>
+Products need to remain buyable in the way customers expect. That depends on more than product names and descriptions.
 
-A successful migration does more than reproduce stored information. It preserves usable business meaning.
+Important checks may include whether:
 
-In practice, that usually means preserving five outcome areas.
+* variants and options still represent real buying choices;
+* prices, stock-related fields, and product-specific details still make sense;
+* configurable, bundled, grouped, or otherwise complex products still support the intended purchase decision;
+* images and supporting product information remain connected to the correct products;
+* required product relationships remain understandable in the Target Platform.
 
-#### 1. Purchasability
+A product can appear in the target store and still fail commercially if its buying logic changes.
 
-Products should still be buyable in the way customers expect.
+#### Discoverability <a href="#discoverability" id="discoverability"></a>
 
-This includes questions such as:
+Customers still need to find the right products through the paths that matter. Discoverability often depends on category hierarchy, navigation logic, filters, attributes, product relationships, internal links, and page structure.
 
-* do options and variants still behave correctly?
-* does product structure still support the intended buying decision?
-* do pricing, inventory, and product-specific details still make sense?
+A catalog can migrate successfully in record-count terms while becoming weaker as a discovery system. For example, products may exist, but the category structure may no longer guide customers properly. Filters may become less useful if attributes are not represented correctly. Important collections, landing paths, or merchandising relationships may require closer review.
 
-A product can appear in the Target Platform and still fail in practice if its buying logic changes.
+#### Customer Continuity <a href="#customer-continuity" id="customer-continuity"></a>
 
-#### 2. Discoverability
+Customer records should still support the business and customer experience after migration. That may include customer account context, addresses, historical order visibility, customer groups, reviews, loyalty-related context, or support workflows where those elements are part of the source store and supported by the migration scope.
 
-Customers still need to find the right products through the paths that matter.
+The question is not only whether customer records exist. The question is whether the business can still use customer context in a workable way after launch.
 
-That often depends on:
+#### Order Usability <a href="#order-usability" id="order-usability"></a>
 
-* category structure
-* navigation logic
-* attribute-driven browsing
-* filtering behavior
-* relationships between products and merchandising pathways
+Order history is often more than archive data. Businesses may rely on it for support, reporting, reconciliation, warranty review, refund reference, fulfillment investigation, or customer-service continuity.
 
-A catalog can migrate successfully in record terms while becoming weaker as a discovery system.
+Order data can become less useful if product references weaken, customer links are incomplete, statuses are interpreted differently, or platform differences change how historical orders can be reviewed. For that reason, order migration should be judged by practical usability, not only by the number of migrated orders.
 
-#### 3. Customer continuity
+#### SEO and Content Continuity <a href="#seo-and-content-continuity" id="seo-and-content-continuity"></a>
 
-Customer records should still support the business and customer experience appropriately after launch.
+Migration can affect the pages and structures that support search visibility, traffic, and customer journeys. Product pages, category pages, CMS Pages, Blog Posts, metadata, URL structure, redirects, and internal linking can all influence post-migration continuity.
 
-That may include:
+A store can complete its core data migration and still lose traffic or conversion momentum if important pages become harder to reach, less relevant, or less useful after launch.
 
-* account expectations
-* usable order history from the customer side
-* review ownership where relevant
-* customer grouping or segmentation behavior
-* the continuity needed for support and trust
+### What Migration Is Not <a href="#what-migration-is-not" id="what-migration-is-not"></a>
 
-The question is not only whether customer records exist. The question is whether the business can still use that customer context in a workable way.
+E-commerce platform migration is not the same as a complete store redesign, a full business-process rebuild, or a broad replatforming strategy, even though those efforts often happen at the same time.
 
-#### 4. Order usability
+A wider replatforming project may also include:
 
-Order history is often more than archive data.
+* storefront redesign;
+* theme redevelopment;
+* checkout changes;
+* app, plugin, module, or extension replacement;
+* integration changes;
+* new merchandising logic;
+* new operational workflows;
+* broader content or SEO strategy changes.
 
-Businesses may rely on it for:
+Migration is narrower: it is the controlled movement and reconstruction of store data and related meaning so the target store can remain usable. Redesign, integration, marketing, and operating-model changes may affect the same project, but they should not be confused with the migration scope itself.
 
-* customer service
-* reporting
-* reconciliation
-* operational reference
-* downstream workflows tied to previous transactions
+That distinction matters because teams often mix transfer decisions with redesign decisions. When everything becomes part of one undefined move, migration success becomes harder to define, harder to price, harder to validate, and harder to troubleshoot.
 
-An order record can exist after migration and still become less useful if product references weaken, context changes, or important supporting meaning is lost.
+### Why Record Totals Are Not Enough <a href="#why-record-totals-are-not-enough" id="why-record-totals-are-not-enough"></a>
 
-#### 5. SEO and content continuity
+Record totals are useful. They help confirm whether expected groups of data were transferred. They do not prove that the migrated store is ready for business use.
 
-Migration can affect the pages that support search visibility, landing-page performance, and customer journeys.
+A target store can show the expected number of products, customers, orders, categories, or pages and still be functionally wrong if:
 
-That includes:
+* product options no longer support the intended purchase behavior;
+* categories and filters no longer match how customers browse;
+* customer accounts or customer groups lose useful context;
+* order history is present but difficult to interpret;
+* discounts, taxes, or supporting rules behave differently;
+* page URLs change without adequate redirect planning;
+* Blog Posts, CMS Pages, or landing pages lose metadata or internal-link value;
+* app, plugin, module, extension, or outside-system data does not translate cleanly.
 
-* URL behavior
-* category and product page intent
-* Blog Posts and content pathways
-* metadata clarity
-* internal linking to important pages
+Presence is not the same as preserved meaning. Migration quality should be judged by whether the target store can support the outcomes the business needs, not only by whether the visible records arrived.
 
-A store can complete the core data transfer and still lose traffic or conversion momentum if important pages become harder to reach, less relevant, or less useful after launch.
+### What Shapes Migration Complexity <a href="#what-shapes-migration-complexity" id="what-shapes-migration-complexity"></a>
 
-### What e-commerce platform migration is not <a href="#what-e-commerce-platform-migration-is-not" id="what-e-commerce-platform-migration-is-not"></a>
+Two stores can have similar data volumes and very different migration difficulty. Complexity is shaped by the structure, meaning, and expected use of the data, not only by quantity.
 
-E-commerce platform migration is not the same thing as a full digital rebuild, even though the two often happen together.
+Common complexity drivers include:
 
-A broader replatforming project may also include:
+| Complexity driver                | Why it changes the migration decision                                                                                                    |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Target Platform differences      | The Target Platform may store products, customers, orders, content, URLs, or custom fields differently from the Source Platform.         |
+| Product structure                | Variants, configurable products, bundles, grouped products, options, attributes, and product relationships may not translate one-to-one. |
+| Custom or third-party data       | App, plugin, module, extension, custom-field, or outside-system data may require interpretation beyond standard handling.                |
+| Content and SEO dependence       | Stores that rely heavily on organic traffic, landing pages, Blog Posts, CMS Pages, or URL continuity need careful review.                |
+| Operational history requirements | Order, customer, and transaction-related context may need to remain usable for support, reporting, or reconciliation.                    |
+| Platform capability limits       | Some source-store behavior may not be supported in the same way by the Target Platform.                                                  |
 
-* redesign
-* theme redevelopment
-* new apps or integrations
-* new checkout or merchandising logic
-* changes to content strategy
-* wider operating-model changes
+Complexity does not automatically make migration unsuitable. It changes how early review, service scope, Add-ons, Custom Service, and validation should be planned.
 
-Many projects include both migration work and wider store change. Migration itself is the controlled movement and reconstruction of store data and related meaning so the new platform environment remains usable after launch.
+### How Custom Platform Cases Fit <a href="#how-custom-platform-cases-fit" id="how-custom-platform-cases-fit"></a>
 
-That distinction matters because teams often confuse transfer decisions with redesign decisions. When that happens, migration success becomes harder to define and harder to validate.
+Some migrations involve a Custom Platform as the Source Platform, the Target Platform, or both. A Custom Platform may be a custom-built store, a heavily modified commerce system, a private commerce environment, or a data structure that does not follow a standard supported platform model.
 
-### Why migration success cannot be judged by totals alone
+Custom Platform cases usually require Custom Service review because the project may need interpretation beyond a standard migration path. The important question is not only how the data can be accessed. The more important question is how store meaning is structured and what must be preserved in the target store.
 
-Record totals are useful, but they do not tell the whole story.
+Depending on the case, review may involve APIs, structured files, spreadsheets, database exports, semi-structured content, website access, or other available data sources. Those access methods are only inputs. The migration decision depends on whether the expected business result can be defined, reconstructed, and validated.
 
-A store can show the expected number of products, customers, orders, and pages and still be functionally wrong if:
+### Three Questions to Ask Early <a href="#three-questions-to-ask-early" id="three-questions-to-ask-early"></a>
 
-* products no longer support the intended buying behavior
-* browse paths no longer support discovery
-* customer expectations change in important ways
-* order history becomes harder to interpret
-* promotions or rules apply differently
-* key pages lose continuity after launch
-
-This is one of the most important truths about e-commerce migration: presence is not the same as preserved meaning.
-
-That is why migration success should be defined in outcome terms, not just quantity terms.
-
-### The main goals of e-commerce platform migration <a href="#the-main-goals-of-e-commerce-platform-migration" id="the-main-goals-of-e-commerce-platform-migration"></a>
-
-The goals of migration usually fall into two layers.
-
-#### Layer 1: Transfer the necessary store data
-
-The Target Platform needs the right records and supporting structures to exist in usable form.
-
-#### Layer 2: Preserve the business value carried by that data
-
-The migrated store still needs to support the outcomes that matter commercially and operationally.
-
-That often includes:
-
-* products that can still be bought correctly
-* category and navigation paths that still help customers find products
-* customer records that still support trust and continuity
-* order history that still supports daily work
-* content and pages that still support traffic and discovery
-* core store relationships that still hold the business together
-
-The second layer is what makes migration more than a copy task.
-
-### What shapes the outcome of a migration
-
-A migration outcome is shaped by more than whether the source data can be exported.
-
-The result depends on things such as:
-
-* how the Target Platform represents the same concepts
-* whether important store behavior depends on apps, plugins, modules, extensions, or outside systems
-* how much of the store’s meaning lives in supporting structure rather than headline record groups
-* whether complex products, rules, or workflows still behave acceptably
-* whether important connected data can remain usable after the move
-
-This is why two projects with similar volumes can still have very different migration difficulty and very different review needs.
-
-### Three useful questions to ask early
-
-A practical way to understand e-commerce platform migration is to ask three early questions.
+A practical way to understand migration is to ask three questions before the project becomes too fixed.
 
 #### What must still work after launch? <a href="#what-must-still-work-after-launch" id="what-must-still-work-after-launch"></a>
 
-This keeps the project focused on preserved business outcomes instead of vague hopes of a successful move.
+This question moves the discussion from vague transfer expectations to specific business outcomes. Products, search paths, customer records, order history, content, URLs, and operational workflows do not all carry equal value for every store.
+
+The first planning task is to identify the areas where loss of meaning would create real business risk.
 
 #### Which parts of the store carry the most risk? <a href="#which-parts-of-the-store-carry-the-most-risk" id="which-parts-of-the-store-carry-the-most-risk"></a>
 
-This helps the team focus first on the areas most likely to expose meaning loss, such as complex products, important browse paths, customer continuity, operational order history, and key landing pages.
+Risk often appears where the source store depends on complex structure, custom data, third-party behavior, platform-specific logic, high-value landing pages, or important historical context.
 
-#### What needs to be proven before the project goes too far? <a href="#what-needs-to-be-proven-before-the-project-goes-too-far" id="what-needs-to-be-proven-before-the-project-goes-too-far"></a>
+Identifying those areas early helps the team focus on representative samples and meaningful validation instead of reviewing only easy records.
 
-This keeps early review focused on representative evidence instead of assumptions.
+#### What needs to be proven before broader execution? <a href="#what-needs-to-be-proven-before-broader-execution" id="what-needs-to-be-proven-before-broader-execution"></a>
 
-### Why early proof matters
+Early proof should show whether important source-store data can become usable target-store data. A representative sample can reveal clean translations, structural gaps, mapping needs, filtering needs, platform constraints, Add-on requirements, or Custom Service requirements before the broader migration plan becomes harder to adjust.
 
-Migration becomes much easier to assess when the business can review a representative sample early on.
+### Why Demo Migration Matters <a href="#why-demo-migration-matters" id="why-demo-migration-matters"></a>
 
-A useful early sample helps reveal:
+Demo Migration gives merchants an early sample of how selected source-store data may appear after migration. It helps test whether records, relationships, and configuration assumptions remain sensible in the Target Platform before broader execution.
 
-* what translates cleanly
-* what changes meaning
-* which areas need closer review
-* whether the standard path is likely to be enough
-* how much validation work the project is likely to require
+A useful Demo Migration can reveal:
 
-That is why Demo Migration matters in planning. It gives the business a way to review actual outcomes before scope, timing, and migration approach become too fixed.
+* whether representative products, customers, orders, categories, or content migrate in a usable way;
+* whether product structure and relationships still make sense;
+* whether mapping, filtering, or configuration should be adjusted;
+* whether Add-ons may be needed;
+* whether Custom Service review should happen before full execution;
+* where later validation should focus.
 
-### Custom Platform in e-commerce platform migration <a href="#custom-platform-in-e-commerce-platform-migration" id="custom-platform-in-e-commerce-platform-migration"></a>
+Demo Migration supports planning and decision-making. It does not replace full validation after broader migration activity. The strongest use of Demo Migration is to test representative cases from the parts of the store that matter most, not only the easiest records to move.
 
-#### What is a Custom Platform?
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Some migration projects involve a Custom Platform as the Source Platform, the Target Platform, or both.
+E-commerce platform migration is the controlled movement and reconstruction of store data from a Source Platform into a Target Platform so the target store can remain useful after the platform change. Its real purpose is to preserve business meaning: products should remain purchasable, customers should retain continuity, order history should remain useful, content should support discovery, and important pages should keep their commercial value where possible.
 
-A Custom Platform is a platform environment that is not handled as a standard supported platform path. It may involve a custom-built store, a heavily modified commerce system, a private platform, or a data structure that does not follow a standard platform model.
+Migration should not be judged by record totals alone. The better standard is whether the migrated result supports the business outcomes that matter after launch. That standard begins with clear scope, representative early proof, realistic attention to platform differences, and later validation of the target-store result.
 
-Migration involving a Custom Platform is handled through Custom Service because the project requires review, interpretation, and planning beyond standard service capability.
+Run a Demo Migration using samples from the parts of the source store that carry the most business meaning. If the sample exposes structural differences, high-risk product behavior, custom data, platform constraints, or unclear preservation requirements, review the migration path, selected Add-ons, and possible Custom Service needs before committing to broader execution.
 
-#### How Custom Platform data may be reviewed <a href="#how-custom-platform-data-may-be-reviewed" id="how-custom-platform-data-may-be-reviewed"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-Custom Platform migration projects can use the same broad connection and data-preparation methods that Next-Cart supports across migration work, including:
+**Is e-commerce platform migration just copying store data?**
 
-* API protocols such as REST, GraphQL, SOAP, and RPC
-* file formats such as CSV, SQL, JSON, and TXT
-* spreadsheet formats such as XLS, XLSX, CSV, and Excel-compatible files
-* structured or semi-structured formats such as XML, JSON, TXT, and HTML
-* website URL and login credentials where appropriate
+No. It includes moving store data, but the larger goal is to preserve usable business meaning in the Target Platform. A target store can contain migrated records and still be unsuitable if product logic, category paths, customer context, order usability, content, or SEO continuity no longer work as expected.
 
-The access method is only one part of the decision. The more important question is how store meaning is structured and how much interpretation is needed to preserve the expected result.
+**What data is usually included in e-commerce platform migration?**
 
-#### Why Custom Platform changes migration handling <a href="#why-custom-platform-changes-migration-handling" id="why-custom-platform-changes-migration-handling"></a>
+Common migration scope may include products, customers, orders, categories, reviews, coupons, taxes, CMS Pages, Blog Posts, images, SEO fields, customer addresses, variants, options, attributes, and supporting relationships. Exact scope depends on the migration path, platform capability, selected service scope, Add-ons, and any Custom Service requirements.
 
-The key issue is not only how data is accessed. The key issue is that store meaning may be expressed through custom structures, field logic, workflow behavior, or platform-specific patterns that need more precise handling than a standard migration path normally requires.
+**How is migration different from replatforming?**
 
-That usually increases the need for:
+Migration focuses on moving and reconstructing store data so the target store remains usable. Replatforming is broader and may include redesign, integrations, checkout changes, new apps or extensions, merchandising changes, workflow changes, and business-process decisions. Many projects include both, but they should not be treated as the same scope.
 
-* more precise interpretation of Source Platform and Target Platform data meaning
-* stronger transformation logic where structures do not translate directly
-* closer validation of whether business behavior was preserved
-* custom migration logic adjustment when standard service capability cannot achieve the expected outcome
+**Why can a migration look complete but still fail?**
 
-For effective planning, the safest response is early clarification: determine what must be preserved, review representative sample data, and test expected outcomes before the overall migration plan becomes difficult to adjust.
+A migration can look complete when record counts match, but still fail if the migrated data does not behave correctly. Products may not support the right buying decisions, categories may not guide customers properly, order history may be hard to interpret, customer records may lose context, or important pages may lose traffic value.
 
-### Conclusion
+**When should Custom Service be considered?**
 
-E-commerce platform migration is the controlled movement and reconstruction of store data into a new platform environment, ensuring the business can continue operating correctly after launch.
+Custom Service should be considered when the project involves customization, modification, Custom Platform handling, custom fields, app, plugin, module, extension, or third-party data, outside-system identifiers, unsupported structures, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke handling beyond standard service capability.
 
-Its real purpose is not only to move records. It is to preserve business meaning. Products still need to be buyable, customers still need continuity, orders still need to stay useful, and important pages still need to support discovery and traffic. That is why migration success cannot be judged by totals alone.
+**What should be reviewed first before a larger migration?**
 
-The strongest migration decisions begin with a clear definition of what must still work, a realistic view of where store meaning may change, and early proof from representative cases before the project commits too deeply to a migration path.
-
-Run a Demo Migration using a representative sample from the parts of the store that matter most, not just the easiest records to move. If the results reveal structural differences, high-risk product behavior, or platform constraints that could change the business meaning of the store after launch, Next-Cart can help determine the safest way to proceed. Live Chat is useful when you need help interpreting early results and deciding what the migration must prove before moving forward.
-
-### FAQs
-
-**Is e-commerce platform migration just copying data from one platform to another?**
-
-No. It includes moving data, but the harder question is whether the Target Platform can still support the same useful business meaning after launch. A store can receive the records and still behave differently in ways that matter.
-
-**What kinds of data are usually included in e-commerce platform migration?**
-
-Most projects include core commerce entities such as products, customers, orders, categories, reviews, coupons, taxes, CMS Pages, and Blog Posts. Supporting structures such as variants, options, attributes, addresses, images, and SEO fields may matter just as much.
-
-**Why can a migration look complete and still fail in practice?**
-
-Because transferred records do not automatically guarantee preserved behavior. Product logic, discovery paths, customer expectations, order usability, and important pages can all become weaker even when the totals look correct.
-
-**Is e-commerce platform migration the same as replatforming?**
-
-Not exactly. Migration is the controlled movement and reconstruction of store data and related meaning. Replatforming may also include broader redesign, app changes, integration changes, and wider business changes. Many projects include both, but they are not the same decision.
-
-**How do I know what a migration really needs to preserve?**
-
-Start by identifying what must still work after launch. That usually includes buying behavior, discovery paths, customer continuity, order usability, and important SEO or content pathways. Those outcomes provide a clearer standard for judging success.
-
-**When does a migration need Custom Service?**
-
-Custom Service is needed when the migration requires customization, modification, Custom Platform handling, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke handling beyond standard service capability.
+Start with representative proof. Review samples from the parts of the store that matter most: complex products, important categories, customer records, order history, high-value pages, redirects, custom data, or any area where platform differences could change business meaning after launch.

@@ -1,162 +1,238 @@
 # Shopify Data Model Differences
 
-A migration into Shopify can look straightforward when the review focuses only on whether products, customers, orders, and content records appear in the Target Platform. The more important question is whether the data still carries the same commercial meaning after Shopify represents it through its own product, collection, customer, content, app, and market structures.
+A Shopify migration is not only a transfer of products, customers, orders, and content into a new store. It is a translation of source-store meaning into Shopify’s hosted data model. The target result should prove that customers can still choose products, browse collections, understand content, manage account expectations, and interact with the storefront in a way that supports the intended business outcome.
 
-Shopify is intentionally more structured and more opinionated than many source platforms. That can make the future store easier to govern, but it also means some source-side behavior must be translated, simplified, or moved into a different Shopify layer. A successful migration should therefore prove not only that records moved, but that customers can still choose products, browse the catalog, interpret content, manage accounts, and complete orders in a way that matches the intended storefront outcome.
+Shopify is structured around products, options, variants, collections, customers, orders, pages, Blog Posts, metafields, files, redirects, Markets, apps, themes, and storefront configuration. Many source platforms represent those same business needs through categories, product types, option systems, extensions, modules, custom fields, database tables, multi-store structures, or outside systems. The migration plan should identify where each source meaning belongs in Shopify, not simply whether a record can be moved.
 
-### How Shopify Changes Commercial Meaning During Migration <a href="#how-shopify-changes-commercial-meaning-during-migration" id="how-shopify-changes-commercial-meaning-during-migration"></a>
+### What Changes When Data Moves Into Shopify <a href="#what-changes-when-data-moves-into-shopify" id="what-changes-when-data-moves-into-shopify"></a>
 
-Shopify does not preserve every source structure in the same shape. It translates the store into a target model built around products, options, variants, collections, customers, orders, pages, media, metafields, apps, themes, markets, and redirects.
+Shopify separates migrated records from target-store behavior. A product record can migrate, but option logic, variant behavior, collection placement, search filters, app-supported functions, theme display, and market-specific presentation may still require target-store decisions.
 
-That distinction matters because a source platform may have used deeper product types, more flexible category logic, extension-specific fields, custom customer rules, or multi-store structures that do not map one-to-one into Shopify. The migration decision is not simply whether Shopify can store the information. It is where that information should live after launch and how it should remain usable.
+| Source-store meaning                   | Common Shopify representation                                                                        | Planning implication                                                                                    |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Product record                         | Product, options, variants, media, product category, product type, tags, metafields                  | Confirm which differences are true buying choices and which are descriptive or operational details.     |
+| Category or department                 | Collection, menu, filter, product type, tag, metafield, redirect, or page                            | Do not assume source categories should become Shopify collections one-to-one.                           |
+| Custom field                           | Native field, metafield, metaobject, app field, or Custom Service item                               | Preserve the field only when it has a clear storefront, operational, integration, or reporting purpose. |
+| Extension or module data               | Shopify app configuration, metafields, target-store setup, integration work, or Custom Service item  | App-owned behavior should not be treated as ordinary migrated data.                                     |
+| Multi-store or international structure | Markets, domains, languages, currencies, catalogs, redirects, or separate store planning             | Confirm localized selling expectations before launch-sensitive migration work.                          |
+| Customer account behavior              | Customer records, addresses, order history, tags, communication plan, or app-supported account logic | Preserved customer records do not guarantee identical login or account behavior.                        |
+| Historical order context               | Orders, line items, totals, taxes, shipping, discounts, statuses, customer association, notes        | Validate order usefulness for customer service and operations, not only record count.                   |
+| SEO-sensitive paths                    | Shopify handles, URL patterns, redirects, collection/page/blog routes, or cleanup decisions          | Priority URLs need target-path and redirect planning before launch.                                     |
 
-#### Product Data Becomes More Explicit <a href="#product-data-becomes-more-explicit" id="product-data-becomes-more-explicit"></a>
+A strong Shopify data model plan separates what should be migrated, what should be configured, what should be recreated with apps or theme behavior, and what requires Custom Service review.
 
-Shopify expects product choice to be expressed clearly through products, options, and variants. This is helpful when a catalog has clean buying choices such as size, color, material, or package quantity. It becomes more sensitive when the source store mixed several meanings together inside one product structure.
+### Product Structure <a href="#product-structure" id="product-structure"></a>
 
-A source product may combine:
+Shopify product structure is built around products, options, and variants. This is straightforward when the source catalog already has clean purchasable choices, such as size, color, material, quantity, or package format. It becomes more sensitive when the source store used product options, configurable products, custom options, grouped products, bundles, kits, personalization fields, or extension logic to represent different meanings.
 
-* true sellable variation
-* descriptive differences
-* personalization inputs
-* add-on selections
-* bundled behavior
-* extension-driven product rules
-* operational notes or internal qualifiers
+#### Products, options, and variants <a href="#products-options-and-variants" id="products-options-and-variants"></a>
 
-Those meanings should not all be forced into variants by default. During planning, each choice should be reviewed for what it actually does. If it changes the purchasable item, inventory, SKU, image, price, or fulfillment meaning, it may belong in the variant structure. If it describes the product, supports merchandising, or drives custom behavior, another Shopify layer may be safer.
+A product should represent the item being sold. Options should represent the customer-facing dimensions of choice. Variants should represent the actual purchasable combinations created from those options.
 
-**Why this matters for validation**
+Before migration, source product differences should be classified by meaning:
 
-A product can look complete while still losing the logic that helped customers choose correctly. Validation should therefore include products with multiple options, variant-linked images, price differences, stock differences, and source-side add-on behavior.
+* sellable variation;
+* descriptive information;
+* inventory or SKU difference;
+* price difference;
+* image or media difference;
+* fulfillment difference;
+* personalization input;
+* bundle, kit, or add-on behavior;
+* internal operational note;
+* app, extension, or custom-logic dependency.
 
-#### Collections Replace Many Category Assumptions <a href="#collections-replace-many-category-assumptions" id="collections-replace-many-category-assumptions"></a>
+Not every source-side option should become a Shopify variant. Some information may belong in product content, metafields, tags, apps, theme configuration, or Custom Service scope. The safest target model preserves buying clarity rather than mechanically copying every source product structure.
 
-Shopify uses collections and navigation structures rather than copying every source platform’s category model in the same way. This can work well, but it changes how browse meaning should be planned.
+#### Product identifiers and operational meaning <a href="#product-identifiers-and-operational-meaning" id="product-identifiers-and-operational-meaning"></a>
 
-Source platforms often use categories to carry several kinds of meaning at once: hierarchy, navigation, landing-page content, filter context, merchandising rules, SEO value, and operational grouping. In Shopify, some of those meanings may move into collections, menus, filters, theme sections, metafields, or app logic.
+SKUs, handles, vendor values, product types, tags, barcodes, and other identifiers can affect merchandising, fulfillment, reporting, search, filtering, integrations, and operational review. These fields should be handled as operational signals, not only product details.
 
-The migration question is not only whether products are assigned to the right collection. The stronger question is whether the future storefront still supports the way customers discover, narrow, and compare products.
+If source identifiers connect to ERP, fulfillment, marketplace, CRM, analytics, product information management, or reporting systems, those relationships should be documented before migration. Outside-system identifiers may require Custom Service when they must be transformed, preserved in a specific structure, or interpreted by target-side processes.
 
-**What deserves early review**
+#### Product media and presentation <a href="#product-media-and-presentation" id="product-media-and-presentation"></a>
 
-High-value categories, SEO-sensitive landing pages, collection-based merchandising, seasonal groupings, and source categories with custom display logic should be reviewed before the full migration is treated as low risk.
+Images and media affect customer confidence and product selection. Shopify can store product media, but display behavior depends on product setup, variant association, theme behavior, and target-store configuration.
 
-#### Metafields Preserve Information, Not Automatically Behavior <a href="#metafields-preserve-information-not-automatically-behavior" id="metafields-preserve-information-not-automatically-behavior"></a>
+Validation samples should include products where media order, variant-specific imagery, alt text, image count, or product-page layout affects commercial meaning. A technically migrated product is not enough if customers cannot see the right image for the selected option.
 
-Metafields are often one of Shopify’s most important translation layers because many source platforms store business meaning in fields that do not have a direct Shopify-native equivalent.
+### Collections and Storefront Discovery <a href="#collections-and-storefront-discovery" id="collections-and-storefront-discovery"></a>
 
-Metafields can help preserve structured product details, customer qualifiers, page-level context, operational notes, compatibility data, and other custom information. However, preserving a field is not the same as preserving how that field used to behave. A value may exist in Shopify but still need theme logic, app logic, configuration, or custom handling before it affects the storefront or internal workflow correctly.
+Shopify uses collections and navigation to support product discovery. Source platforms often use categories to carry several meanings at once: hierarchy, navigation, landing-page content, filtering context, merchandising rules, SEO value, and internal classification.
 
-#### App-Owned Logic May Replace Source-Native Logic <a href="#app-owned-logic-may-replace-source-native-logic" id="app-owned-logic-may-replace-source-native-logic"></a>
+#### Collections are not always categories <a href="#collections-are-not-always-categories" id="collections-are-not-always-categories"></a>
 
-Some behaviors that were native or extension-based in the Source Platform may become app-owned or theme-dependent in Shopify. This often affects:
+Some source categories should become Shopify collections. Others may be better represented as menus, filters, product types, tags, metafields, search behavior, campaign pages, redirects, or cleanup decisions.
 
-* subscriptions
-* bundles
-* product personalization
-* advanced filters
-* memberships or gated purchasing
-* complex discounts
-* delivery rules
-* customer-specific pricing
-* loyalty or review systems
-* ERP, fulfillment, or inventory integrations
+A collection should be validated by customer outcome:
 
-This does not mean Shopify is unsuitable. It means the business should identify which behaviors are part of the migration service scope, which are app configuration decisions, and which require Custom Service because customization or modification work is needed.
+* customers can find the intended products;
+* high-value landing pages still make sense;
+* merchandising groups remain useful;
+* collection content and SEO fields support launch goals;
+* menus and filters support browse behavior;
+* source category URLs are redirected when needed.
 
-### Core Shopify Data Layers to Review <a href="#core-shopify-data-layers-to-review" id="core-shopify-data-layers-to-review"></a>
+The best Shopify collection model is usually the one that supports target-store discovery, not the one that reproduces the deepest source taxonomy.
 
-#### Products, Options, and Variants <a href="#products-options-and-variants" id="products-options-and-variants"></a>
+#### Navigation and filtering are target-store decisions <a href="#navigation-and-filtering-are-target-store-decisions" id="navigation-and-filtering-are-target-store-decisions"></a>
 
-Products define the item being sold. Options describe the dimensions of choice. Variants represent the specific sellable combinations created from those choices.
+Navigation menus, filters, search behavior, collection templates, and theme settings help determine how customers browse the target store. These elements may depend on Shopify configuration, theme capabilities, apps, product tags, metafields, or product attributes.
 
-This structure is clear when source data is already clean. It becomes more complex when the source store used product options as a catch-all for sellable choices, notes, add-ons, calculations, customer input, or bundled components. The safest review separates these meanings before deciding how they should appear in Shopify.
+If the source store used category-specific filters, layered navigation, product comparison, advanced search, or custom merchandising rules, those behaviors should be reviewed separately from category record migration. Data can migrate while the browse experience still needs configuration or Custom Service.
 
-#### Collections and Navigation <a href="#collections-and-navigation" id="collections-and-navigation"></a>
+### Custom Information, Metafields, and Metaobjects <a href="#custom-information-metafields-and-metaobjects" id="custom-information-metafields-and-metaobjects"></a>
 
-Collections organize product discovery. Navigation turns those collections and pages into browse paths. A migration should therefore validate both the product assignment and the customer journey.
+Shopify metafields can preserve structured information that does not fit a standard Shopify field. They are useful for product specifications, compatibility details, customer-service context, operational notes, compliance fields, integration values, or display-ready custom information.
 
-A collection can be technically populated while still failing to replace the source category’s original role. The review should include priority collection pages, main menus, high-value browse paths, and product groups that previously depended on category-specific rules.
+#### Metafields preserve information, not automatic behavior <a href="#metafields-preserve-information-not-automatic-behavior" id="metafields-preserve-information-not-automatic-behavior"></a>
 
-#### Customers and Account Experience <a href="#customers-and-account-experience" id="customers-and-account-experience"></a>
+A migrated metafield can keep a value available in Shopify, but it does not automatically recreate source-side behavior. A field that previously controlled storefront display, pricing, eligibility, filtering, personalization, fulfillment, or integration logic may need app configuration, theme work, target-store setup, or Custom Service planning before it behaves as expected.
 
-Customer records and customer access are separate concerns. A migration can preserve customer profiles, addresses, order relationships, and useful customer history while still requiring a different account-access experience in Shopify.
+Metafield planning should answer four questions:
 
-Imported customer data should be reviewed for profile completeness, address usability, order association, segmentation meaning, and communication status where relevant. Account login expectations should be planned separately so the business does not mistake preserved customer records for an identical source-side account experience.
+1. Why should this value exist in Shopify?
+2. Who will use it after launch?
+3. Where should it appear or be processed?
+4. Does it require configuration, app behavior, theme behavior, or custom logic?
 
-#### Orders and Historical Meaning <a href="#orders-and-historical-meaning" id="orders-and-historical-meaning"></a>
+Fields with no target purpose can make validation harder and the Shopify admin less maintainable.
 
-Orders should be reviewed not only as records, but as business history. A useful migrated order should still make sense for customer service, reporting, customer review, and operational reference.
+#### Metaobjects and structured content <a href="#metaobjects-and-structured-content" id="metaobjects-and-structured-content"></a>
 
-The most important checks usually include order numbers or reference logic, customer association, product line items, totals, taxes, shipping, discounts, fulfillment state, payment status, and source-side information that may have been custom or app-owned.
+Some structured information may be better handled through metaobjects or app-supported content structures rather than simple field movement. This is especially relevant when source data represents reusable specifications, compatibility lists, brand information, size guides, landing-page components, or structured content blocks.
 
-#### Content, Media, and SEO-Sensitive Pages <a href="#content-media-and-seo-sensitive-pages" id="content-media-and-seo-sensitive-pages"></a>
+Metaobject planning should remain practical. The goal is not to preserve source technical structure exactly. The goal is to make target-store information usable, governable, and visible where it supports the customer journey or store operations.
 
-Product images, product descriptions, CMS pages, Blog Posts, collection content, and SEO metadata can carry customer trust and search meaning. Shopify may store or display these elements differently from the source platform, so validation should confirm not only presence but also storefront usefulness.
+### Customers, Accounts, and Order History <a href="#customers-accounts-and-order-history" id="customers-accounts-and-order-history"></a>
 
-Priority pages should be reviewed for visible content, layout-sensitive information, product media order, alt text where available, internal links, metadata, and redirect destinations for changed URLs.
+Customer and order migration should be evaluated by business usability. A record can be present in Shopify but still fail to support customer service, account expectations, reporting, or operational reference.
 
-#### Markets, Domains, and Localized Meaning <a href="#markets-domains-and-localized-meaning" id="markets-domains-and-localized-meaning"></a>
+#### Customer records and account access are separate concerns <a href="#customer-records-and-account-access-are-separate-concerns" id="customer-records-and-account-access-are-separate-concerns"></a>
 
-International stores need extra planning because Shopify’s market, domain, language, currency, and localized URL logic may not mirror the source platform’s previous structure.
+Customer profiles, addresses, tags, notes, marketing status, and order relationships may migrate as data. Account access, login behavior, password expectations, activation flow, loyalty context, and customer communication require separate planning.
 
-A source store may have represented markets through separate stores, subdirectories, domains, language packs, customer groups, tax zones, or extension logic. Shopify can support international selling, but the target structure should be reviewed in Shopify’s own terms so localized catalog, pricing, routing, and customer experience are not assumed to transfer automatically.
+The target-store question is not only whether the customer exists. It is whether staff can support the customer, whether order history remains understandable, and whether returning customers know how to use the new store after launch.
 
-### When Shopify Data Translation Usually Needs Custom Service <a href="#when-shopify-data-translation-usually-needs-custom-service" id="when-shopify-data-translation-usually-needs-custom-service"></a>
+#### Historical orders need context <a href="#historical-orders-need-context" id="historical-orders-need-context"></a>
 
-Custom Service should be considered when the migration requires customization or modification work beyond standard service capability or Standard Add-on capability. In a Shopify data-model context, this often applies when the source store depends on:
+Historical orders should be reviewed for reference usefulness. Important fields often include order number or reference, customer association, products, line items, totals, taxes, shipping, discounts, payment status, fulfillment state, notes, and source-specific context.
 
-* Custom Platform handling
-* custom fields with behavior attached
-* source-side product logic that cannot be represented cleanly through standard products, options, variants, collections, or metafields
-* app/plugin/module/extension data that must be interpreted, transformed, or connected to Shopify-side behavior
-* outside-system identifiers that must remain meaningful for ERP, CRM, fulfillment, marketplace, or reporting workflows
-* custom migration logic adjustment
-* bespoke transformation rather than direct field movement
+Some source order behavior may not transfer as live transactional logic. Old payment methods, fulfillment integrations, fraud tools, subscription behavior, loyalty points, refund workflows, or invoice logic may depend on source extensions or external systems. Those dependencies should be separated from ordinary order record migration.
 
-Custom Service does not automatically mean Next-Cart performs the migration process for the customer. Migration management is included only when it is part of the final plan.
+### Content, Blog Posts, URLs, and Redirects <a href="#content-blog-posts-urls-and-redirects" id="content-blog-posts-urls-and-redirects"></a>
 
-### What a Strong Demo Migration Should Prove <a href="#what-a-strong-demo-migration-should-prove" id="what-a-strong-demo-migration-should-prove"></a>
+Shopify content migration can involve pages, Blog Posts, product descriptions, collection content, media, metadata, handles, and redirects. The planning focus should be continuity of customer access and search value, not only content presence.
 
-A useful Shopify Demo Migration should test records that expose real data-model risk, not only simple records that are easy to move.
+#### Pages and Blog Posts <a href="#pages-and-blog-posts" id="pages-and-blog-posts"></a>
 
-A strong Shopify sample usually includes:
+CMS Pages and Blog Posts should be reviewed for business purpose. Some pages support trust, policy, shipping, returns, sizing, buying advice, SEO, campaigns, or customer education. Some source pages may be obsolete and should not be carried forward unchanged.
 
-* products with multiple options and variant-specific details
-* products with images, media, and description structure that matter commercially
-* collection-led browse paths
-* customers with addresses and order history
-* orders with discounts, taxes, shipping, fulfillment, and payment context
-* metafield-heavy products or customers
-* app-dependent behavior where relevant
-* market-specific paths or domain-sensitive content when international selling matters
-* priority URLs where SEO continuity matters
+Content review should include internal links, images, formatting, metadata, priority URLs, and whether the page still makes sense in the Shopify theme and navigation model.
 
-The result should show whether Shopify can represent the source store’s important meanings clearly enough for customers, staff, and post-launch operations.
+#### URL structure and redirects <a href="#url-structure-and-redirects" id="url-structure-and-redirects"></a>
+
+Shopify uses controlled storefront URL patterns and handles. Source URLs may not be preserved exactly, especially for categories, products, pages, Blog Posts, and filtered paths. Redirect planning is therefore part of data-model translation, not only launch cleanup.
+
+Priority URLs should be identified before Full Migration. Validation should confirm target paths, redirects, internal links, menu links, collection links, blog paths, product handles, and high-value campaign or SEO routes.
+
+### Markets, Localization, and Regional Selling <a href="#markets-localization-and-regional-selling" id="markets-localization-and-regional-selling"></a>
+
+International selling can involve markets, domains, languages, currencies, regional catalogs, localized content, shipping rules, tax assumptions, redirects, and customer expectations. A source platform may have represented these through separate stores, language packs, subdirectories, customer groups, extensions, or custom routing.
+
+Shopify can support international selling through its own structures, but those structures should be planned in Shopify terms. The target model should clarify which regions matter, which localized content must be reviewed, whether product availability differs by market, and how priority URLs should behave for each launch region.
+
+International scope often changes validation priorities. Product availability, pricing display, currency behavior, domain routing, translated content, shipping assumptions, and region-specific redirects should not be left to general product validation.
+
+### Apps, Themes, and External Systems <a href="#apps-themes-and-external-systems" id="apps-themes-and-external-systems"></a>
+
+Many Shopify behaviors depend on apps, theme configuration, or external systems. That dependency is normal for Shopify, but it must be separated from migrated data.
+
+#### App-owned behavior is not ordinary migrated data <a href="#app-owned-behavior-is-not-ordinary-migrated-data" id="app-owned-behavior-is-not-ordinary-migrated-data"></a>
+
+Apps may support reviews, subscriptions, loyalty, search, filters, personalization, bundles, wholesale workflows, marketing, analytics, fulfillment, delivery rules, product recommendations, customer service, or integrations. A source-side extension may have stored data that is not useful unless a Shopify-side app or workflow can interpret it.
+
+When app-dependent data matters after launch, planning should identify:
+
+* the source behavior;
+* the target Shopify app or configuration;
+* the data required for the target behavior;
+* whether the data can be mapped normally;
+* whether Advanced Data Mapping, Advanced Data Configure, or Custom Service is needed;
+* how the behavior will be validated before launch.
+
+#### Themes affect presentation, not just appearance <a href="#themes-affect-presentation-not-just-appearance" id="themes-affect-presentation-not-just-appearance"></a>
+
+Shopify themes shape how data appears and how customers interact with product pages, collections, menus, filters, content blocks, metafields, and apps. A migrated value may exist in the admin but remain invisible until the theme or app configuration uses it.
+
+Theme-dependent requirements should be captured early when they affect buying decisions, content visibility, custom fields, product recommendations, badges, compatibility tables, size guides, or other customer-facing signals.
+
+### When Shopify Data Translation Needs Add-ons or Custom Service <a href="#when-shopify-data-translation-needs-add-ons-or-custom-service" id="when-shopify-data-translation-needs-add-ons-or-custom-service"></a>
+
+Some Shopify migrations can stay close to standard data movement. Others need Add-ons or Custom Service because source data must be filtered, mapped differently, configured beyond default behavior, or transformed into a Shopify-ready model.
+
+#### Add-on signals <a href="#add-on-signals" id="add-on-signals"></a>
+
+Add-ons may be relevant when the migration needs controlled filtering, adjusted field relationships, or data configuration beyond a straightforward standard setup. Typical Shopify signals include selective record scope, field-level mapping needs, product/collection adjustments, URL-related preparation, or target data configuration that remains within supported service capability.
+
+Add-ons should support a defined target outcome. They should not be used as a vague substitute for deciding how Shopify should represent the source store.
+
+#### Custom Service signals <a href="#custom-service-signals" id="custom-service-signals"></a>
+
+Custom Service should be considered when the migration requires customization or modification work beyond Standard Service and Standard Add-ons. Shopify data-model contexts that often require Custom Service include:
+
+* Custom Platform handling;
+* app, plugin, module, or extension data that must be interpreted or transformed;
+* source-side product logic that cannot be represented cleanly through standard Shopify products, options, variants, collections, metafields, or configuration;
+* custom fields with behavior attached;
+* outside-system identifiers that must remain meaningful for ERP, CRM, fulfillment, marketplace, analytics, or reporting workflows;
+* bespoke transformation rules;
+* custom migration logic adjustment.
+
+Custom Service does not automatically mean Next-Cart performs migration execution. Migration management is included only when it is part of the final plan.
+
+### Demo Migration Samples for Shopify Data Differences <a href="#demo-migration-samples-for-shopify-data-differences" id="demo-migration-samples-for-shopify-data-differences"></a>
+
+A Shopify Demo Migration should include records that expose real target-model decisions. Simple products and ordinary orders can confirm basic transfer behavior, but they do not prove that Shopify can represent the source store’s important meanings.
+
+Strong Shopify samples usually include:
+
+* products with multiple options and variant-specific prices, SKUs, images, or stock behavior;
+* products with custom fields, specifications, compatibility data, or metafield candidates;
+* source categories that carry navigation, SEO, or merchandising value;
+* customers with addresses, tags, order history, or support relevance;
+* orders with discounts, taxes, shipping, fulfillment, payment, and source reference context;
+* CMS Pages or Blog Posts with internal links, media, metadata, and priority URLs;
+* app-dependent records or extension-owned information when relevant;
+* market-specific products, localized content, or domain-sensitive paths;
+* URLs that matter for SEO, paid campaigns, or customer bookmarks.
+
+The Demo Migration should help the business decide whether Shopify’s native structures are enough, whether Add-ons are needed, or whether Custom Service should be planned before Full Migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify’s data model can support clean and scalable storefront operations, but it does not preserve every source-side structure by copying it in the same shape. Products, variants, collections, metafields, apps, customers, orders, content, and market logic all need to be reviewed as target representations, not only as transferred records.
+Shopify data-model differences matter because Shopify does not copy every source-store structure in the same shape. It translates the store into a hosted model built around products, options, variants, collections, customers, orders, content, metafields, apps, Markets, redirects, and target-store configuration.
 
-The safest migration planning begins by identifying which source meanings must remain native, which can become structured Shopify data, which depend on apps or theme behavior, and which require Custom Service. When those decisions are made early, Shopify’s simpler target structure can become easier to manage. When they are ignored, the migrated store may look cleaner while losing important commercial or operational meaning.
+The strongest Shopify migration plans identify which source meanings should become standard Shopify data, which should become metafields or structured content, which depend on apps or themes, which require redirects or market planning, and which need Add-ons or Custom Service. When those decisions are made early, Shopify can become easier to operate after launch. When they are ignored, the target store may look clean while losing important commercial or operational meaning.
 
-Use a representative Demo Migration to test the Shopify data layers that carry the most business meaning: product choices, collection paths, customer and order history, metafields, app-dependent behavior, priority content, and market-specific routes. If the result shows unclear target representation, Live Chat can help determine whether the issue belongs to standard Shopify translation, Add-on configuration, or Custom Service planning.
+#### Common questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Are Shopify collections the same as source categories?**
 
-**Is Shopify’s data model simpler than most source platforms?**
+No. Shopify collections can replace some source category roles, but source categories may also represent navigation, filters, landing pages, SEO value, internal grouping, or merchandising rules. Priority browse paths should be translated into a Shopify discovery model rather than copied one-to-one.
 
-Shopify is often more structured and more opinionated than many source platforms. That can make the future store easier to govern, but it also means source-side behaviors may need to be represented through Shopify products, variants, collections, metafields, apps, themes, or Custom Service planning.
+**Should every custom source field become a Shopify metafield?**
 
-**Are Shopify collections the same as categories?**
+No. Metafields are useful when the field has a clear target purpose. Obsolete fields, duplicate fields, extension residue, or values with no storefront, operational, integration, or reporting purpose can make the target store harder to maintain and validate.
 
-Not exactly. Collections can support strong product discovery, but they may not carry the same hierarchy, landing-page logic, filter context, or merchandising rules that a source category carried. Priority browse paths should be validated after migration.
+**Do Shopify apps migrate automatically from the source store?**
 
-**Do metafields preserve all custom source data behavior?**
+No. Apps, extensions, modules, and theme behavior are not ordinary migrated records. The migration plan should identify which source behaviors need Shopify app configuration, target-store setup, Add-ons, or Custom Service.
 
-No. Metafields can preserve structured information, but they do not automatically reproduce storefront behavior, app behavior, workflow rules, or operational logic. If the field controlled behavior in the source store, the target behavior needs separate review.
+**Can Shopify preserve the same customer account experience as the source store?**
 
-**When should Shopify data-model differences move into Custom Service?**
+Customer records and account experience should be planned separately. Migrated customers can retain useful profile and order-history context, but login behavior, activation, password expectations, loyalty context, and customer communication may require target-store planning.
 
-Custom Service is appropriate when customization or modification work is needed, such as Custom Platform handling, app/plugin/module/extension data interpretation, custom field behavior, outside-system identifiers, bespoke transformation, or custom migration logic adjustment.
+**When should Shopify data differences be reviewed through Custom Service?**
+
+Custom Service should be reviewed when source data requires customization or modification work, such as Custom Platform handling, app or extension data interpretation, custom field behavior, outside-system identifiers, bespoke transformation, or custom migration logic adjustment.

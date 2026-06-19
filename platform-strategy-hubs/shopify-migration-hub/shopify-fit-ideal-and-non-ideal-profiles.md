@@ -1,201 +1,227 @@
 # Shopify Fit: Ideal and Non-Ideal Profiles
 
-Shopify is not simply a good or bad Target Platform. It is a strong fit for some operating models and a weaker fit for others. The difference depends on whether Shopify supports the business outcomes the store must preserve after migration, not only whether Shopify is easier to operate than the Source Platform.
+Shopify can be a strong Target Platform when the future store should run on a hosted SaaS model, use Shopify’s product and collection structure clearly, and rely on governed apps, themes, metafields, and market configuration instead of heavy self-managed platform logic. The strongest fit is not based on whether Shopify appears simpler than the Source Platform. It depends on whether Shopify can support the business outcomes the store must preserve after migration.
 
-Shopify can reduce infrastructure responsibility and make day-to-day storefront administration more predictable. Those advantages matter, but they do not remove the need to judge product behavior, collection structure, customer-account continuity, market setup, app dependence, URL continuity, and validation requirements. A business can move into a cleaner hosted environment and still weaken important commercial behavior if the fit is judged too broadly.
-
-A stronger fit decision asks whether Shopify matches the future store the business actually needs, including the products customers buy, the paths they use to find those products, the account experience returning customers expect, and the app or custom-data behavior that supports operations after launch.
+A strong Shopify fit usually combines lower infrastructure ownership with clear target-store decisions. Products, options, variants, collections, customer-account expectations, URLs, markets, app behavior, and custom information should be reviewed before the migration is treated as straightforward.
 
 ### Where Shopify Is Often a Strong Fit <a href="#where-shopify-is-often-a-strong-fit" id="where-shopify-is-often-a-strong-fit"></a>
 
-Shopify is often a strong migration target when the business wants a hosted operating model and can express its storefront clearly through Shopify’s product, collection, customer, market, and app ecosystem structure.
+Shopify is often a strong fit when the business wants a hosted operating model and can express the future store through Shopify’s native structures, configuration, apps, and storefront conventions without weakening core buying journeys.
 
-The strongest fit patterns usually appear when several conditions are true together.
+#### The business wants a hosted operating model <a href="#the-business-wants-a-hosted-operating-model" id="the-business-wants-a-hosted-operating-model"></a>
 
-#### The business wants lower infrastructure ownership <a href="#the-business-wants-lower-infrastructure-ownership" id="the-business-wants-lower-infrastructure-ownership"></a>
+Shopify fits merchants that want to reduce responsibility for hosting, server maintenance, platform upgrades, and broad infrastructure administration. The team can focus more on merchandising, content, conversion, campaign execution, fulfillment coordination, and day-to-day store operations.
 
-Shopify is often a strong fit when the business wants to reduce infrastructure responsibilities, reduce routine technical overhead, and shift more attention toward storefront operations, merchandising, content, marketing, and conversion rather than platform administration.
+This fit is strongest when the business is comfortable operating within Shopify’s managed platform boundaries rather than expecting deep server-side control or unrestricted platform modification.
 
-This is especially useful for teams that no longer want hosting, server-side maintenance, or broad self-managed commerce-stack governance to remain part of their future operating model.
+#### Product behavior can fit Shopify’s product model <a href="#product-behavior-can-fit-shopify-s-product-model" id="product-behavior-can-fit-shopify-s-product-model"></a>
 
-#### Product behavior can be expressed clearly through Shopify’s product model <a href="#product-behavior-can-be-expressed-clearly-through-shopify-s-product-model" id="product-behavior-can-be-expressed-clearly-through-shopify-s-product-model"></a>
+Shopify is often a strong fit when product structure can be represented through products, options, variants, SKUs, collections, product content, metafields, apps, or theme-supported presentation.
 
-Shopify is usually a stronger fit when important product behavior can be represented clearly through products, options, variants, collections, product content, metafields, apps, or theme-supported behavior without weakening the buying journey.
+The catalog does not need to be small. The important question is whether commercially important product behavior can be expressed clearly in Shopify. Strong-fit stores can usually separate:
 
-This does not mean the catalog must be simple. It means the business can separate the parts of the product model that matter most:
+* sellable product choices;
+* descriptive product information;
+* merchandising and browsing structure;
+* custom information that belongs in metafields;
+* app-supported behavior;
+* theme presentation that should not be treated as migrated data.
 
-* true sellable variation
-* descriptive product information
-* customizations or add-on-style choices
-* app-supported or metafield-supported behavior
-* product paths that affect search, merchandising, or conversion
+A large catalog can still be a strong Shopify fit when its buying logic is understandable and representative products can be validated early.
 
-The fit becomes much stronger when those distinctions are understood before migration rather than discovered only during validation.
+#### Collection and merchandising decisions are manageable <a href="#collection-and-merchandising-decisions-are-manageable" id="collection-and-merchandising-decisions-are-manageable"></a>
 
-#### The business can govern app and custom-data dependence <a href="#the-business-can-govern-app-and-custom-data-dependence" id="the-business-can-govern-app-and-custom-data-dependence"></a>
+Shopify is a strong fit when the business can translate source categories into a practical target browsing model. Some source categories may become collections. Others may be better handled through menus, product types, tags, filters, search behavior, redirects, or cleanup decisions.
 
-Shopify is often a strong fit when the business accepts that some behavior may live in apps, metafields, theme logic, or surrounding storefront configuration rather than expecting every business rule to exist as a deep native platform structure.
+Fit improves when the business knows which browsing paths, landing pages, product families, brands, campaigns, and search patterns carry commercial value. Shopify becomes easier to validate when collections and navigation are designed around target-store usability instead of copied mechanically from the Source Store.
 
-That can work well when app-owned outcomes are intentional, documented, and validated. Shopify becomes weaker when app dependence is accidental, inherited, or poorly understood.
+#### App dependence can be governed deliberately <a href="#app-dependence-can-be-governed-deliberately" id="app-dependence-can-be-governed-deliberately"></a>
+
+Shopify’s app ecosystem can support reviews, subscriptions, loyalty, search, filtering, product recommendations, fulfillment, analytics, marketing, customer service, wholesale workflows, and other operational needs. Shopify is a strong fit when app-owned behavior is intentional and documented.
+
+The business should know which outcomes are handled by Shopify configuration, which depend on apps, which depend on theme behavior, and which require migration support. App count alone is not the issue. The risk is unclear app meaning.
+
+#### Custom information has a clear target purpose <a href="#custom-information-has-a-clear-target-purpose" id="custom-information-has-a-clear-target-purpose"></a>
+
+Shopify metafields can support structured custom information when the business understands why that information should exist in the Target Store. Metafields are useful for product specifications, customer-service context, operational notes, compliance details, storefront presentation, integrations, or reporting needs.
+
+Shopify is a stronger fit when custom fields are curated before migration. Carrying every legacy custom field into Shopify can make the store harder to maintain and validate.
 
 #### Customer continuity can be planned as an account-experience transition <a href="#customer-continuity-can-be-planned-as-an-account-experience-transition" id="customer-continuity-can-be-planned-as-an-account-experience-transition"></a>
 
-Shopify is often a stronger fit when the business is prepared to treat returning-customer continuity as an account-experience, communication, support, and first-login planning issue rather than a simple password-preservation expectation.
+Shopify is often a strong fit when the business can plan returning-customer continuity around account access, communication, support readiness, and order-history usability rather than expecting every legacy account behavior to remain identical.
 
-Customer records can migrate while the returning-customer experience still changes. A strong Shopify fit requires the business to plan how customers will recognize the new store, access their account, review available history, and understand what has changed after launch.
+Customer records may migrate while password behavior, login flow, account activation, loyalty context, B2B expectations, or support scripts require separate planning. Strong-fit merchants prepare the customer experience before launch.
 
-#### International structure can be planned deliberately <a href="#international-structure-can-be-planned-deliberately" id="international-structure-can-be-planned-deliberately"></a>
+#### Market and localization decisions can be made clearly <a href="#market-and-localization-decisions-can-be-made-clearly" id="market-and-localization-decisions-can-be-made-clearly"></a>
 
-Shopify is often a strong fit when the business can define its international model through market, domain, language, currency, pricing, and localized-path decisions rather than expecting the Target Platform to copy every source-side storefront convention.
+Shopify fits merchants that can define international selling requirements through markets, domains, languages, currencies, catalog presentation, localized content, pricing assumptions, shipping rules, and tax assumptions.
 
-This is especially important when the business can identify:
+Fit is stronger when the business knows which countries, languages, localized URLs, product availability rules, and market-specific landing pages matter most. Shopify becomes riskier when international structure is assumed rather than planned.
 
-* which countries or regions matter most
-* which domains, subdomains, or subpaths carry commercial value
-* which languages need deliberate validation
-* which localized product, collection, or landing-page paths affect traffic and conversion
-* which market-specific rules must be represented after migration
+### Strong-Fit Merchant Profiles <a href="#strong-fit-merchant-profiles" id="strong-fit-merchant-profiles"></a>
 
-The fit is stronger when those decisions are explicit rather than assumed.
+A Shopify migration usually has a stronger fit when the business matches several of the following profiles.
 
-### Where Shopify Is Often a Weaker Fit <a href="#where-shopify-is-often-a-weaker-fit" id="where-shopify-is-often-a-weaker-fit"></a>
+#### Merchants reducing infrastructure responsibility <a href="#merchants-reducing-infrastructure-responsibility" id="merchants-reducing-infrastructure-responsibility"></a>
 
-Shopify is often a weaker fit when the business expects the Target Platform to preserve source-side complexity without first deciding what should remain native, what should move into apps or custom data, what can be simplified, and what requires Custom Service.
+These merchants want the Target Platform to simplify platform operations and reduce the overhead of hosting, upgrades, server administration, and self-managed platform maintenance.
 
-Several patterns usually make the fit weaker.
+They may still have complex commerce needs, but they want that complexity managed through Shopify’s hosted environment, configuration, apps, themes, and integrations rather than a heavily customized self-managed platform stack.
 
-#### The Source Platform carries richer native product structure than Shopify can express cleanly <a href="#the-source-platform-carries-richer-native-product-structure-than-shopify-can-express-cleanly" id="the-source-platform-carries-richer-native-product-structure-than-shopify-can-express-cleanly"></a>
+#### Merchants with clear product and variant logic <a href="#merchants-with-clear-product-and-variant-logic" id="merchants-with-clear-product-and-variant-logic"></a>
 
-Shopify can be a weaker fit when the source storefront depends on product structures that go beyond Shopify’s product, option, variant, collection, and app-supported model in commercially important ways.
+These merchants can explain which choices customers actually buy, which values are descriptive, which differences require separate variants, and which information belongs in metafields or app-supported presentation.
 
-This risk is usually higher when:
+They do not need every source-side product structure copied exactly. They need the Target Store to preserve buying clarity, product discoverability, pricing expectations, inventory meaning, and fulfillment usability.
 
-* a small group of high-value products carries complex buying logic
-* product behavior depends on mixed structural patterns
-* storefront clarity depends on richer native product modeling
-* custom option behavior changes price, availability, fulfillment, or support expectations
-* the business has not separated sellable choices from descriptive or supporting structures
+#### Merchants with practical collection and navigation requirements <a href="#merchants-with-practical-collection-and-navigation-requirements" id="merchants-with-practical-collection-and-navigation-requirements"></a>
 
-Shopify can still be viable in these cases, but the fit is weaker unless the business accepts target simplification, app-supported representation, or a carefully planned Custom Service path where needed.
+These stores can decide which source categories should become collections, which should become menus or filters, and which should be removed or redirected. They can identify the customer paths that matter most and validate those paths before launch.
 
-#### Business-critical behavior is still vague and app-owned <a href="#business-critical-behavior-is-still-vague-and-app-owned" id="business-critical-behavior-is-still-vague-and-app-owned"></a>
+This profile is especially strong when the store has clear merchandising groups, product families, campaign pages, brand pages, seasonal collections, or high-value landing pages that can be intentionally rebuilt in Shopify.
 
-Shopify is also a weaker fit when important outcomes depend on apps, metafields, theme logic, outside-system identifiers, or custom storefront behavior that the team has not yet classified clearly.
+#### Merchants comfortable with governed app usage <a href="#merchants-comfortable-with-governed-app-usage" id="merchants-comfortable-with-governed-app-usage"></a>
 
-The issue is not app count alone. The issue is unclear meaning. If the business cannot explain what those layers must do after launch, the Shopify fit is difficult to judge safely because too much of the real storefront behavior sits outside the obvious Product, Customer, Order, and content records.
+These merchants understand that apps and theme configuration may support important target-store behavior. They do not expect apps to be migrated as ordinary records or assume that app behavior will recreate itself automatically.
 
-#### Password continuity is treated as a non-negotiable requirement <a href="#password-continuity-is-treated-as-a-non-negotiable-requirement" id="password-continuity-is-treated-as-a-non-negotiable-requirement"></a>
+They are prepared to document app dependencies, configure required apps before launch, and validate app-supported behavior alongside migrated data.
 
-Shopify is usually a weaker fit when the business treats legacy password continuity as essential rather than planning a returning-customer experience around account access expectations, customer communication, and support readiness.
+#### Merchants with well-scoped custom information <a href="#merchants-with-well-scoped-custom-information" id="merchants-with-well-scoped-custom-information"></a>
 
-This does not mean Shopify cannot support returning customers. It means the business should judge account continuity as a customer-experience transition, not as a guarantee that old access behavior will remain identical.
+These merchants know which custom fields and source-specific values still matter. They can separate useful custom data from obsolete extension residue, duplicated fields, one-off legacy values, and information that no longer supports operations or customer experience.
 
-#### The international model requires heavier storefront separation <a href="#the-international-model-requires-heavier-storefront-separation" id="the-international-model-requires-heavier-storefront-separation"></a>
+This makes Shopify metafield planning more reliable and reduces validation noise.
 
-Shopify can be a weaker fit when the business expects a more layered storefront governance model than Shopify’s market, domain, language, pricing, and localized-path structure can support comfortably.
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
 
-This does not mean Shopify cannot support international complexity. It means the fit weakens when the business still needs a heavier or more source-specific separation model than the Shopify target state is meant to carry.
+Shopify can still be a good Target Platform when the store has complexity, but the migration requires earlier planning and a more careful service path.
 
-#### The business expects Shopify to remove complexity rather than relocate it <a href="#the-business-expects-shopify-to-remove-complexity-rather-than-relocate-it" id="the-business-expects-shopify-to-remove-complexity-rather-than-relocate-it"></a>
+#### Stores with complex product choices <a href="#stores-with-complex-product-choices" id="stores-with-complex-product-choices"></a>
 
-One of the most common fit mistakes is assuming that Shopify simplifies everything.
+Stores with bundles, kits, personalized products, nested choices, option-dependent pricing, build-your-own flows, or high-variant product families can move to Shopify when the target buying experience is planned deliberately.
 
-In practice, Shopify often reduces infrastructure complexity while relocating other complexity into product translation, app governance, account-experience planning, market setup, URL continuity, and validation of high-value storefront paths. If the team treats Shopify as a universal simplifier rather than a different structural model, the fit can be weaker than it first appears.
+The fit is conditional because the project must decide what becomes Shopify variants, what becomes app-supported behavior, what becomes metafield-backed information, and what requires Custom Service review.
 
-### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
+#### Stores with heavy app or extension history <a href="#stores-with-heavy-app-or-extension-history" id="stores-with-heavy-app-or-extension-history"></a>
 
-Shopify is often a strong fit for businesses that match the following profiles.
+A source store may depend on extensions, custom modules, apps, scripts, or outside systems that control important behavior. Shopify can still be appropriate, but those dependencies should be classified before the migration is scoped.
 
-#### Businesses that want a cleaner hosted operating model <a href="#businesses-that-want-a-cleaner-hosted-operating-model" id="businesses-that-want-a-cleaner-hosted-operating-model"></a>
+Some outcomes may be rebuilt through Shopify apps or configuration. Others may require Advanced Data Mapping, Advanced Data Configure, or Custom Service.
 
-These are teams that want a more focused storefront-operating environment and do not want long-term platform maintenance or infrastructure governance to remain a defining part of the commerce model.
+#### Stores with international selling requirements <a href="#stores-with-international-selling-requirements" id="stores-with-international-selling-requirements"></a>
 
-#### Businesses whose important product behavior fits the Shopify model <a href="#businesses-whose-important-product-behavior-fits-the-shopify-model" id="businesses-whose-important-product-behavior-fits-the-shopify-model"></a>
+Shopify can support international commerce, but the migration fit depends on whether market structure is clear. Domains, subdomains, languages, currencies, product availability, localized content, redirects, and market-specific collections should be reviewed before launch-sensitive data is migrated.
 
-These are merchants whose catalog may be large or commercially significant, but whose real buyable outcomes can still be represented clearly through products, options, variants, collections, content, metafields, apps, or theme-supported behavior without distorting the customer journey.
+A conditional fit becomes stronger when the business can define priority markets and validation samples early.
 
-#### Businesses comfortable with governed app dependence <a href="#businesses-comfortable-with-governed-app-dependence" id="businesses-comfortable-with-governed-app-dependence"></a>
+#### Stores with customer-account or loyalty expectations <a href="#stores-with-customer-account-or-loyalty-expectations" id="stores-with-customer-account-or-loyalty-expectations"></a>
 
-These are teams that accept that some important behavior will live in apps, metafields, or theme logic and are prepared to classify, validate, and govern those layers rather than assume they will take care of themselves.
+Shopify can be a viable target for stores with important customer history, loyalty expectations, account communication needs, or returning-customer support requirements. The fit is conditional when those expectations are not yet translated into a target customer experience.
 
-#### Businesses that can plan customer continuity around first-login experience <a href="#businesses-that-can-plan-customer-continuity-around-first-login-experience" id="businesses-that-can-plan-customer-continuity-around-first-login-experience"></a>
+The migration should clarify what customers will see, how they will regain access if needed, how much order history is required, and which loyalty or support workflows depend on apps or external systems.
 
-These are merchants willing to treat customer continuity as communication, recovery, account-access guidance, and support readiness rather than as a simple password-preservation requirement.
+#### Stores with important SEO and URL continuity needs <a href="#stores-with-important-seo-and-url-continuity-needs" id="stores-with-important-seo-and-url-continuity-needs"></a>
 
-#### Businesses that can define high-value URL and market behavior clearly <a href="#businesses-that-can-define-high-value-url-and-market-behavior-clearly" id="businesses-that-can-define-high-value-url-and-market-behavior-clearly"></a>
+Shopify uses controlled URL patterns. A store with high organic traffic, long-running campaigns, legacy landing pages, blog content, or complex category URLs can still fit Shopify, but URL and redirect planning should be treated as launch-critical.
 
-These are teams that know which legacy paths, localized routes, domains, priority collections, and landing pages matter most commercially and are willing to prioritize those paths during migration planning and validation.
+Fit improves when priority URLs are identified before Full Migration and validated before launch.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+### Weaker-Fit or High-Risk Profiles <a href="#weaker-fit-or-high-risk-profiles" id="weaker-fit-or-high-risk-profiles"></a>
 
-Shopify usually becomes a higher-risk fit for businesses that match the following profiles.
+Shopify is a weaker fit when the business expects the Target Platform to preserve source-side complexity without target-model decisions, app planning, Custom Service review, or acceptance of structural change.
 
-#### Stores whose buying journey depends on richer native product structures <a href="#stores-whose-buying-journey-depends-on-richer-native-product-structures" id="stores-whose-buying-journey-depends-on-richer-native-product-structures"></a>
+#### Stores expecting a direct copy of a custom platform model <a href="#stores-expecting-a-direct-copy-of-a-custom-platform-model" id="stores-expecting-a-direct-copy-of-a-custom-platform-model"></a>
 
-These are stores where a small number of complex products determine a large share of revenue and where target simplification may weaken buying clarity materially.
+Shopify is not designed to copy every source-side platform structure exactly. Stores that depend on deeply custom product modeling, custom checkout logic, source-specific database behavior, or complex server-side workflows may face fit risk if they expect the same architecture to exist natively in Shopify.
 
-#### Stores whose real behavior is still poorly classified <a href="#stores-whose-real-behavior-is-still-poorly-classified" id="stores-whose-real-behavior-is-still-poorly-classified"></a>
+The project may still be possible, but it should not be treated as a straightforward platform-to-platform move.
 
-These are businesses whose source storefront depends on too many loosely understood apps, custom fields, non-standard workflows, outside-system identifiers, or theme behaviors for the target state to be judged safely yet.
+#### Stores with unclear app, theme, or integration requirements <a href="#stores-with-unclear-app-theme-or-integration-requirements" id="stores-with-unclear-app-theme-or-integration-requirements"></a>
 
-#### Stores with highly sensitive customer-account continuity expectations <a href="#stores-with-highly-sensitive-customer-account-continuity-expectations" id="stores-with-highly-sensitive-customer-account-continuity-expectations"></a>
+Shopify fit weakens when business-critical behavior is hidden in apps, themes, scripts, third-party systems, unsupported custom fields, or outside-system identifiers that the team cannot explain.
 
-These are businesses where login continuity, account recognition, order-history interpretation, or repeat-customer trust is commercially sensitive enough that the customer-access transition must be assessed deliberately before Shopify is treated as the safer target.
+The problem is not that Shopify cannot support apps or integrations. The problem is that unclear dependencies make migration scope, validation, and launch readiness difficult to control.
 
-#### Businesses whose international or multi-context structure is still vague <a href="#businesses-whose-international-or-multi-context-structure-is-still-vague" id="businesses-whose-international-or-multi-context-structure-is-still-vague"></a>
+#### Stores requiring identical password or account behavior <a href="#stores-requiring-identical-password-or-account-behavior" id="stores-requiring-identical-password-or-account-behavior"></a>
 
-These are teams that know multiple customer contexts matter but have not yet decided how those contexts should be represented through Shopify’s market, domain, language, localized-path, pricing, and storefront experience model.
+Shopify fit is weaker when the business treats legacy password continuity or source-account behavior as a non-negotiable copy requirement. Returning-customer experience should be planned as a transition, not assumed to remain identical.
 
-### What Should Be Confirmed Before Calling Shopify a Good Fit <a href="#what-should-be-confirmed-before-calling-shopify-a-good-fit" id="what-should-be-confirmed-before-calling-shopify-a-good-fit"></a>
+If exact source-side account behavior is critical, the project needs early review of customer communication, account activation, support scripts, app requirements, and launch expectations.
 
-Before the business treats Shopify as a settled Target Platform choice, several fit questions should be answered clearly.
+#### Stores that cannot accept Shopify URL conventions <a href="#stores-that-cannot-accept-shopify-url-conventions" id="stores-that-cannot-accept-shopify-url-conventions"></a>
 
-#### Can the product model be translated without weakening buying clarity? <a href="#can-the-product-model-be-translated-without-weakening-buying-clarity" id="can-the-product-model-be-translated-without-weakening-buying-clarity"></a>
+A source store with highly customized URL structures may not be able to preserve every path exactly in Shopify. If the business cannot accept redirects, handle planning, and target URL conventions, Shopify may create SEO and customer-access risk.
 
-This should be tested through representative product families rather than assumed from exports. The highest-risk products are usually the ones with complex options, high revenue concentration, variant-heavy structures, bundled logic, app-supported choices, or support-sensitive purchase behavior.
+The weaker fit is usually caused by unrealistic URL expectations, not by the presence of valuable URLs.
 
-#### Which outcomes depend on apps, metafields, themes, or custom storefront logic? <a href="#which-outcomes-depend-on-apps-metafields-themes-or-custom-storefront-logic" id="which-outcomes-depend-on-apps-metafields-themes-or-custom-storefront-logic"></a>
+#### Teams expecting Shopify to remove all complexity <a href="#teams-expecting-shopify-to-remove-all-complexity" id="teams-expecting-shopify-to-remove-all-complexity"></a>
 
-The answer often determines whether the project can remain within standard service capability, whether Standard Add-ons are relevant, or whether broader customization, app/plugin/module/extension data handling, Custom Platform handling, or custom migration logic adjustment should be planned under Custom Service.
+Shopify can reduce infrastructure complexity, but it does not remove the need to plan product translation, collections, apps, metafields, URLs, markets, validation, and launch readiness.
 
-#### Is the business comfortable with Shopify’s customer-account transition? <a href="#is-the-business-comfortable-with-shopify-s-customer-account-transition" id="is-the-business-comfortable-with-shopify-s-customer-account-transition"></a>
+Fit weakens when the business sees Shopify as a universal simplifier instead of a different operating model that relocates some complexity into configuration, app governance, and target-store validation.
 
-This means deciding whether launch communication, support workflows, account-access expectations, and returning-customer guidance can support the target account experience clearly enough.
+### Fit Signals by Migration Area <a href="#fit-signals-by-migration-area" id="fit-signals-by-migration-area"></a>
 
-#### Which URL paths, domains, and market-specific routes are commercially non-negotiable? <a href="#which-url-paths-domains-and-market-specific-routes-are-commercially-non-negotiable" id="which-url-paths-domains-and-market-specific-routes-are-commercially-non-negotiable"></a>
+Shopify fit should be judged across the areas that affect customer experience, operational usability, and launch risk.
 
-Shopify fit should be tested against the paths that matter most: high-value product URLs, collection paths, localized routes, domains, campaign pages, and market-specific customer journeys. Redirect capability matters, but destination relevance and journey continuity matter just as much.
+| Migration area            | Stronger Shopify fit                                                                                                           | Higher-risk Shopify fit                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Operating model           | The team wants hosted SaaS operations and less infrastructure ownership.                                                       | The team still needs deep platform-code control or source-like server behavior.           |
+| Products                  | Product choices can be represented through Shopify products, options, variants, metafields, apps, or theme-supported behavior. | Product buying logic depends on source-specific structures that have not been translated. |
+| Categories and navigation | Source taxonomy can become collections, menus, filters, redirects, or cleanup decisions.                                       | The team expects every category path and browsing rule to transfer directly.              |
+| Custom information        | Important custom fields have a clear target purpose.                                                                           | Legacy custom fields are unclassified or mostly extension residue.                        |
+| Apps and integrations     | Required app behavior is documented and planned.                                                                               | Business-critical behavior is hidden in unknown apps, scripts, or external systems.       |
+| Customer accounts         | Returning-customer experience can be planned and communicated.                                                                 | Identical password or account behavior is assumed.                                        |
+| Markets and localization  | Countries, languages, domains, currencies, and localized paths are defined.                                                    | International structure is vague or source-specific.                                      |
+| URLs and SEO              | Priority URLs and redirects can be planned before launch.                                                                      | Exact URL preservation is expected despite Shopify conventions.                           |
 
-#### Does Shopify simplify the business in the right places? <a href="#does-shopify-simplify-the-business-in-the-right-places" id="does-shopify-simplify-the-business-in-the-right-places"></a>
+### When Shopify Plus Should Be Considered Instead <a href="#when-shopify-plus-should-be-considered-instead" id="when-shopify-plus-should-be-considered-instead"></a>
 
-The strongest fit decision asks whether Shopify reduces the burdens the business actually wants to remove while preserving the outcomes the business cannot afford to weaken. If Shopify only moves complexity into less visible app, theme, market, or validation layers, the target fit should be reviewed more carefully.
+Shopify and Shopify Plus should not be treated as identical Target Platforms. Shopify Plus may be more relevant when the business has enterprise governance needs, higher transaction or integration intensity, advanced B2B requirements, multi-store or organizational complexity, or stronger operational support expectations.
+
+A store may be a weak fit for standard Shopify but a stronger fit for Shopify Plus. The target plan should confirm whether the future store is Shopify or Shopify Plus before service scope, validation priorities, and launch-readiness assumptions are finalized.
+
+### What a Fit Decision Should Confirm <a href="#what-a-fit-decision-should-confirm" id="what-a-fit-decision-should-confirm"></a>
+
+A reliable Shopify fit decision should answer these questions before the project is treated as straightforward:
+
+* whether the target is Shopify or Shopify Plus;
+* whether the business accepts Shopify’s hosted operating model;
+* how products, options, variants, and SKUs should be represented;
+* which source categories become collections, menus, filters, tags, product type values, product category values, or redirects;
+* which custom fields should become metafields and which should be excluded;
+* which apps, theme behavior, integrations, and external systems affect launch-critical outcomes;
+* how customer-account access, order-history usability, loyalty, and support expectations will work after launch;
+* which markets, domains, languages, currencies, and localized paths need deliberate setup;
+* which high-value URLs require redirect planning;
+* whether Add-ons or Custom Service are needed for filtering, mapping, data configuration, app-dependent records, or custom logic;
+* which representative products, collections, customers, orders, CMS Pages, and Blog Posts should be reviewed during Demo Migration and Full Migration validation.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify is often a strong Target Platform when the business genuinely wants a hosted operating model, can represent important buying behavior clearly through Shopify’s structure, and is prepared to govern app-dependent meaning, customer-account transition, market setup, and high-value route continuity deliberately.
+Shopify is a strong Target Platform for merchants that want hosted commerce operations, structured product and collection management, app extensibility, and less infrastructure responsibility. Its fit is strongest when the business can translate source-store complexity into Shopify’s target model deliberately.
 
-It is often a weaker fit when the Source Platform depends on richer native structures, app-owned business behavior is still vague, international governance is not yet defined, or legacy customer-access expectations are treated as non-negotiable. Shopify can be an excellent destination, but only when the business judges fit by preserved behavior and future governance rather than by operational simplicity alone.
+A weaker Shopify fit usually appears when the business expects the Target Store to copy custom source behavior exactly, preserve every account or URL convention unchanged, or remove complexity without product, app, market, URL, and validation planning.
 
-A useful next step is to test Shopify with a Demo Migration built from the products, customer scenarios, app-dependent behaviors, market paths, and high-value URLs that matter most. If the result still leaves uncertainty about fit, Live Chat can help determine whether the issue is target suitability, translation risk, or a sign that Managed Service or Custom Service should be considered.
+#### Common questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Shopify only a good fit for simple stores?**
 
-**Is Shopify usually a good fit for businesses that want a hosted platform?**
+No. Shopify can support stores with large catalogs, international selling, app-supported behavior, and custom information. Fit depends on whether those requirements can be represented clearly through Shopify’s product, collection, metafield, app, market, theme, and operational structures.
 
-Often yes, especially when the business genuinely wants lower infrastructure ownership and the target behavior still fits Shopify’s product, collection, customer-account, market, and app ecosystem model.
+**Does a large catalog make Shopify a poor fit?**
 
-**Does Shopify fit every complex catalog poorly?**
+Not by itself. A large catalog can fit Shopify well when product options, variants, collections, filters, and custom information are planned clearly. Risk increases when the catalog relies on unclassified product logic, source-specific category behavior, or custom structures that have not been translated.
 
-No. The issue is not complexity alone. Shopify can fit complex catalogs well when the important buying behavior can still be represented clearly through products, options, variants, collections, content, metafields, apps, or theme-supported behavior.
+**Is Shopify a weak fit if the source store uses many apps or extensions?**
 
-**Is password continuity usually part of a strong Shopify fit?**
+Not automatically. App or extension dependence becomes risky when the business does not know what those layers do. Shopify can be a strong fit when required app-supported outcomes are documented, configured, and validated deliberately.
 
-Usually no. Shopify is more naturally a strong fit when the business can plan continuity through account access expectations, first-login experience, customer communication, and support readiness rather than through preserved prior password behavior.
+**Can Shopify preserve customer accounts exactly as they worked before?**
 
-**When does Shopify fit become a Custom Service discussion?**
+Customer data and account experience should be reviewed separately. Returning-customer access, password behavior, order-history visibility, loyalty context, and support expectations may change after migration and should be planned before launch.
 
-Shopify fit should move into a Custom Service discussion when the migration depends on customization or modification work beyond standard service capability. Common triggers include app/plugin/module/extension data, custom fields, outside-system identifiers, Custom Platform handling, bespoke product transformation, or custom migration logic adjustment.
+**When should Custom Service be considered for Shopify?**
 
-**What is the fastest way to judge whether Shopify is a good fit?**
-
-A representative Demo Migration is usually the fastest early fit test. It should focus on the products, customer-account scenarios, app-dependent behaviors, market paths, and high-value URLs most likely to reveal whether Shopify supports the future store the business actually needs.
+Custom Service should be considered when the source store depends on custom logic, unsupported app or extension data, outside-system identifiers, complex product behavior, nonstandard customer-account requirements, or target behavior that cannot be handled through Standard Service, Managed Service, or Add-ons alone.

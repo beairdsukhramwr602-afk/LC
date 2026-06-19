@@ -187,34 +187,34 @@ Custom Service is most effective when the expected result is clearly described. 
 
 ### FAQs <a href="#faqs" id="faqs"></a>
 
-#### What does Custom Service handle? <a href="#what-does-custom-service-handle" id="what-does-custom-service-handle"></a>
+**What does Custom Service handle?**
 
 Custom Service handles migration requirements that need custom-scoped review, modification, bespoke handling, or work beyond standard service capability. This can include Custom Platform handling, custom fields, third-party data, Tailored Add-ons, Custom Add-ons, custom migration logic, and outside-system identifiers.
 
-#### Is Custom Service only for Custom Platforms? <a href="#is-custom-service-only-for-custom-platforms" id="is-custom-service-only-for-custom-platforms"></a>
+**Is Custom Service only for Custom Platforms?**
 
 No. Custom Platform handling is one Custom Service case, but Custom Service also applies to non-standard store data, modified Add-ons, custom Add-ons, custom fields, third-party data, custom migration logic, and other project-specific requirements.
 
-#### Does Custom Service always include Expert Handle? <a href="#does-custom-service-always-include-expert-handle" id="does-custom-service-always-include-expert-handle"></a>
+**Does Custom Service always include Expert Handle?**
 
 No. Expert Handle is included only when it is part of the agreed Custom Service scope. Custom Service without Expert Handle can still be customer-led for migration actions.
 
-#### How is Custom Service different from Add-ons? <a href="#how-is-custom-service-different-from-add-ons" id="how-is-custom-service-different-from-add-ons"></a>
+**How is Custom Service different from Add-ons?**
 
 Add-ons handle focused filtering, mapping, or data configuration needs. Custom Service handles broader or modified requirements that need custom-scoped review, bespoke handling, custom implementation, Custom Platform handling, or custom migration logic.
 
-#### What is a Tailored Add-on? <a href="#what-is-a-tailored-add-on" id="what-is-a-tailored-add-on"></a>
+**What is a Tailored Add-on?**
 
 A Tailored Add-on is a modified version of a Standard Add-on. It is handled through Custom Service because the available Standard Add-on behavior needs adjustment beyond supported settings.
 
-#### What is a Custom Add-on? <a href="#what-is-a-custom-add-on" id="what-is-a-custom-add-on"></a>
+**What is a Custom Add-on?**
 
 A Custom Add-on is a project-specific Add-on requested when available Standard Add-ons do not fit the customer’s required outcome. It is reviewed and quoted through Custom Service.
 
-#### What should customers prepare before requesting Custom Service? <a href="#what-should-customers-prepare-before-requesting-custom-service" id="what-should-customers-prepare-before-requesting-custom-service"></a>
+**What should customers prepare before requesting Custom Service?**
 
 Customers should prepare sample records, source-store structure details, target-store expectations, affected data types, related apps or systems, business reasons, and validation examples.
 
-#### Can Custom Service recreate every source-store behavior exactly? <a href="#can-custom-service-recreate-every-source-store-behavior-exactly" id="can-custom-service-recreate-every-source-store-behavior-exactly"></a>
+**Can Custom Service recreate every source-store behavior exactly?**
 
 No. Custom Service helps review what can be supported and how the target-store result can be shaped, but the final result still depends on source data condition, Target Platform capability, agreed scope, and customer validation.
