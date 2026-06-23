@@ -1,97 +1,125 @@
 # Learning Center Overview
 
-Planning an eCommerce platform migration is one of the highest-impact projects a business can take on. You are not only moving records from one system to another. You are changing how products are represented, how customers are recognized, how order history supports service workflows, and how content and SEO-critical pages behave after launch.
+The Next-Cart Learning Center helps merchants, e-commerce teams, agencies, and technical stakeholders understand platform migration before execution decisions become difficult to change. Its purpose is not to replace project discovery, platform documentation, or implementation work. It gives readers a structured way to understand what they need to evaluate, which questions to ask, and where to go next inside the Learning Center.
 
-Done well, an eCommerce platform migration improves flexibility and platform fit without disrupting revenue-critical behavior. Done poorly, it can introduce conversion loss, SEO instability, and operational friction that is difficult to correct after go-live.
+An e-commerce platform migration affects more than exported records. It can change how products are represented, how catalog structure is organized, how customer and order information supports operations, how URLs and content behave, how apps or integrations connect to store data, and how teams validate the result before launch. The Learning Center is organized around those decision points so readers can move from general orientation to more specific planning, service, platform, technical, and validation topics.
 
-The Next-Cart Learning Center is designed for anyone who needs decision-stage clarity before execution. Its purpose is to help you understand migration scope, risk, platform differences, service choices, migration path planning, and validation priorities so you can make better decisions before technical work is locked in.
+### Who the Learning Center Is For <a href="#who-the-learning-center-is-for" id="who-the-learning-center-is-for"></a>
 
-Different teams view the same migration through different responsibilities. The Learning Center is built to support those perspectives without becoming a technical manual.
+The Learning Center is written for people involved in deciding, planning, supervising, or validating an e-commerce platform migration. Different readers may enter with different responsibilities.
 
-### Who this Learning Center is designed for
+Store owners and business leaders usually need to understand why migration is being considered, what must remain stable after launch, and which risks could affect revenue, customer experience, operations, or long-term platform fit.
 
-It is especially useful for:
+E-commerce managers often need to understand how catalog structure, product data, merchandising logic, promotions, content, and customer-facing workflows may behave differently on a new platform.
 
-* store owners and business owners who need to understand what a migration really changes and where business risk comes from
-* eCommerce managers who need to anticipate how catalog structure, merchandising logic, and day-to-day store operations may change after launch
-* project managers and operations leads who need realistic planning around dependencies, milestones, responsibilities, and validation
-* marketing and SEO specialists who need early visibility into URL continuity, content structure, and high-value landing-page risk
-* technical leads and developers who need to assess platform data-model differences, integration implications, and structural constraints before decisions become expensive to reverse
-* agencies and consultants who need a clear framework for estimating scope, risk, and validation effort for clients
+Project managers and operations leads usually need to turn migration goals into scope, responsibility, sequencing, review milestones, and acceptance criteria.
 
-Not every article is written for every role equally. Each page is intentionally shaped around the audience most likely to benefit from that topic.
+Marketing and SEO stakeholders need early visibility into URLs, page structure, content continuity, traffic-sensitive pages, metadata, and ranking-sensitive changes.
 
-### What Learning Center helps you do
+Technical leads, developers, agencies, and consultants may need to understand platform-specific data behavior, integration dependencies, field-level complexity, and validation risks before making architectural or scope recommendations.
 
-Most migration failures are not caused by data moving incorrectly. They happen because scope, expectations, migration path decisions, service responsibility, and validation criteria were never defined clearly enough before the project began.
+The same migration can look very different from each role’s perspective. The Learning Center is designed to support those perspectives without forcing every reader through the same path.
 
-This Learning Center helps you:
+### What the Learning Center Helps Readers Decide <a href="#what-the-learning-center-helps-readers-decide" id="what-the-learning-center-helps-readers-decide"></a>
 
-* understand what migration scope includes beyond record counts
-* identify where migration risk typically comes from and how to reduce it early
-* compare platforms using structural differences that affect outcomes, not marketing claims
-* choose a migration approach that fits your store’s complexity and your team’s validation capacity
-* understand how Next-Cart’s E-commerce Platform Migration Service works and which service model is the safest fit
-* plan validation priorities so correctness can be confirmed before go-live
+The Learning Center is most useful before a migration plan becomes fixed. It helps readers clarify the questions that shape migration direction, including:
 
-### How the Learning Center is organized
+* what the business needs to preserve after launch;
+* what data, content, relationships, and customer-facing behavior must be included in scope;
+* which risks require attention before migration begins;
+* how platform differences may affect migration expectations;
+* which Next-Cart service path or migration support model may fit the project context;
+* what technical data structures deserve deeper review;
+* what should be validated before the migrated store is considered acceptable.
 
-To make the Learning Center usable for both search and guided exploration, content is organized into clear sections.
+The goal is not to make every reader a technical specialist. The goal is to make migration decisions more explicit, better sequenced, and easier to review.
+
+### How the Learning Center Is Organized <a href="#how-the-learning-center-is-organized" id="how-the-learning-center-is-organized"></a>
+
+Each major section has a specific role. Reading the sections in order can be useful, but many readers should start with the section that matches their current decision.
 
 #### Getting Started <a href="#getting-started" id="getting-started"></a>
 
-Use these pages to understand what the Learning Center is for, who it is designed to help, and how to navigate it efficiently.
+The opening pages explain how the Learning Center is structured and how to choose a useful reading path. Use this section when the reader needs orientation before deciding which migration topic matters most.
 
-#### Migration Fundamentals <a href="#migration-fundamentals" id="migration-fundamentals"></a>
+#### Migration Foundations <a href="#migration-foundations" id="migration-foundations"></a>
 
-Use these pages to build a shared understanding of what migration includes, where risk comes from, how compatibility breaks, and what successful outcomes should look like before execution.
+Migration Foundations introduces core concepts, readiness questions, risk awareness, data basics, SEO continuity, and early decision support. Use this section when the reader still needs shared baseline understanding before planning a project.
 
-#### Strategy and Planning for Migration <a href="#strategy-and-planning-for-migration" id="strategy-and-planning-for-migration"></a>
+#### Strategy and Planning <a href="#strategy-and-planning" id="strategy-and-planning"></a>
 
-These pages help convert early assumptions into practical project structure: what must be decided, who should review each area, and how readiness should be tested before launch pressure builds.
+Strategy and Planning helps teams convert migration intent into project structure. It covers planning, scope, complexity, migration approach selection, validation planning, and acceptance criteria. Use this section when the business already understands the basics and needs governance around what will happen next.
 
-#### Next-Cart Migration Service <a href="#next-cart-migration-service" id="next-cart-migration-service"></a>
+#### Next-Cart E-commerce Platform Migration Services <a href="#next-cart-e-commerce-platform-migration-services" id="next-cart-e-commerce-platform-migration-services"></a>
 
-These pages explain the Next-Cart service layer: what a selected migration path means, how proof and capacity are evaluated, how launch-freshness features fit into the purchased service, and how customers compare Standard Service, Managed Service, and Custom Service.
+The service section explains how Next-Cart migration service paths, Entity Points, Add-ons, Demo Migration, Migration Services, and related migration options work. Use this section when the reader needs to understand service responsibilities, included work, optional support, or the difference between Standard Service, Managed Service, and Custom Service.
 
 #### Platform Strategy Hubs <a href="#platform-strategy-hubs" id="platform-strategy-hubs"></a>
 
-Use these pages when you are comparing or committing to a Target Platform and need to understand platform-specific differences, constraints, and validation priorities. These are planning resources, not setup guides.
+Platform Strategy Hubs help readers evaluate specific Target Platforms. They focus on platform fit, data model differences, constraints, preparation priorities, migration approach, validation concerns, and pitfalls. Use this section when the business is comparing platforms or needs platform-specific migration guidance.
 
 #### Technical Deep Dives <a href="#technical-deep-dives" id="technical-deep-dives"></a>
 
-These pages are for deeper structural questions that often change effort and review workload, such as product variants, catalog logic, media, promotional rules, reviews, metadata, integrations, and extension-owned behavior.
+Technical Deep Dives explain the structure and behavior of important e-commerce data areas, such as variants, attributes, catalog hierarchy, media, pricing logic, customer data, reviews, metadata, and integrations. Use this section when the reader needs to understand how data objects actually work across platforms and why those differences affect planning and validation.
 
 #### Post-Migration and Quality Assurance <a href="#post-migration-and-quality-assurance" id="post-migration-and-quality-assurance"></a>
 
-Use these pages to understand how migration outcomes should be validated, how go-live readiness should be assessed, and how launch surprises can be reduced through structured review.
+Post-Migration and Quality Assurance focuses on reviewing outcomes after migration. Use this section when the reader needs to understand what to check, how to organize validation, and how to reduce launch surprises through structured review.
 
-As you read, follow the embedded in-text references to go deeper on the exact concept you are evaluating.
+### How to Choose a Starting Point <a href="#how-to-choose-a-starting-point" id="how-to-choose-a-starting-point"></a>
 
-### How to get the most value from it
+A useful starting point depends on the reader’s current question.
 
-A successful migration is usually the result of good decisions made early: defining what must remain true after launch, choosing an approach that fits your complexity, selecting the safest service model, and validating outcomes using representative samples rather than assumptions.
+If the question is “What does e-commerce migration involve?”, start with Migration Foundations.
 
-When migration is treated as a structured decision process instead of a last-minute data task, outcomes become far more predictable.
+If the question is “How should this project be scoped and governed?”, start with Strategy and Planning.
 
-A practical starting point is to begin with whoever owns scope and risk decisions inside the business, often the store owner, the eCommerce manager, or the project manager. Marketing, SEO, and technical reviewers should then be brought in early enough to validate traffic priorities, data-model differences, integration risks, and acceptance criteria before execution begins.
+If the question is “Which Next-Cart service path fits this situation?”, start with Next-Cart E-commerce Platform Migration Services.
 
-### Conclusion
+If the question is “Which Target Platform makes sense for this store?”, start with Platform Strategy Hubs.
 
-The Learning Center is designed to help teams make better migration decisions before execution pressure takes over. Its value is not in teaching platform configuration. Its value is in helping you understand what changes, what matters, what to validate, which service model is likely to fit your situation, and what a safe migration path should look like for your store.
+If the question is “Why is this data area technically complicated?”, start with Technical Deep Dives.
 
-If you use it in that spirit, as a decision-stage planning resource rather than a reference library, it becomes much easier to define scope clearly, reduce avoidable risk, and move into execution with better alignment across teams.
+If the question is “How do we know the result is acceptable?”, start with Post-Migration and Quality Assurance.
 
-Start with the foundational pages if you are still framing the project. Move into planning, Next-Cart Migration Service, platform, and validation content once your goals, risks, and target direction become clearer.
+Some teams may move through the Learning Center in order. Others may use it selectively during discovery, estimation, platform comparison, pre-migration preparation, or validation planning.
 
-Use the reading paths by role and goal in the "How to Use the Learning Center" page to decide where to go next.
+### How to Use the Learning Center in a Migration Project <a href="#how-to-use-the-learning-center-in-a-migration-project" id="how-to-use-the-learning-center-in-a-migration-project"></a>
 
-### FAQs
+The Learning Center works best when it is used as a decision-support resource rather than as a checklist to complete mechanically.
 
-**Who should use the Learning Center first inside a business?**
+Before migration begins, use it to align business, technical, marketing, SEO, and operations stakeholders around scope, risk, and expected outcomes. During planning, use it to clarify responsibilities, platform assumptions, data complexity, and validation priorities. Before launch, use it to confirm that acceptance criteria are specific enough to support a confident go-live decision.
 
-The best starting point is usually the person who owns scope and risk decisions, often a store owner, an e-commerce manager, or a project manager. Once the project direction is clearer, marketing, SEO, and technical reviewers should use the relevant sections to validate assumptions in their own areas.
+The content is intentionally organized to separate broad concepts from planning governance, service mechanics, platform-specific strategy, technical data interpretation, and quality assurance. That separation helps readers avoid treating every migration question as the same type of question.
 
-**Is the Learning Center only for beginners?**
+### Where Next-Cart Fits <a href="#where-next-cart-fits" id="where-next-cart-fits"></a>
 
-No. The Learning Center is designed to be approachable, but it is written for professionals making real migration decisions. Some pages focus on business risk and planning, while others go deeper into platform differences, service choices, structural constraints, and validation priorities.
+Next-Cart appears in the Learning Center where service responsibility, migration path selection, Entity Points, Add-ons, Migration Services, or validation expectations are directly relevant. In orientation, planning, platform, and technical topics, the emphasis stays on the reader’s decision need first.
+
+This approach keeps the Learning Center useful even before a reader is ready to choose a Migration Service. It also helps readers understand when a question belongs to general migration planning, when it belongs to platform evaluation, and when it should be connected to a specific Next-Cart service path.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+The Next-Cart Learning Center is designed to help readers navigate migration decisions with clearer structure. It gives different stakeholders a shared way to understand migration foundations, project planning, service options, platform strategy, technical data behavior, and validation priorities.
+
+The best way to use it is to start with the reader’s current decision, then move into the sections that support that decision. A business still defining the migration problem may begin with Migration Foundations. A team preparing the project may move to Strategy and Planning. A team comparing platforms may use Platform Strategy Hubs. A technical reviewer may focus on Technical Deep Dives. A launch team may rely on Post-Migration and Quality Assurance.
+
+When used this way, the Learning Center becomes a navigation system for better migration decisions rather than a long list of disconnected articles.
+
+### Common Questions <a href="#common-questions" id="common-questions"></a>
+
+**Is the Learning Center only for people new to migration?**
+
+No. Some pages are introductory, but the Learning Center is also designed for teams making real planning, platform, technical, service, and validation decisions. Readers can skip foundational topics when they already understand them and move directly to the section that matches their decision stage.
+
+**Should every reader follow the Learning Center in order?**
+
+Not necessarily. Reading in order can help when a team is early in the process, but many readers should start with the topic closest to their responsibility. A technical lead may start with Technical Deep Dives, while a project manager may start with Strategy and Planning.
+
+**How is the Learning Center different from service documentation?**
+
+The Learning Center explains decision context, planning logic, platform considerations, and validation priorities. Service-specific pages explain Next-Cart service paths and responsibilities when that information is relevant. Procedural service execution details belong outside general orientation content.
+
+**When should a team use the Learning Center during a migration project?**
+
+It is most useful before decisions are locked in, but it can also support scope review, stakeholder alignment, platform comparison, technical preparation, and validation planning. Teams can return to different sections as new questions appear.

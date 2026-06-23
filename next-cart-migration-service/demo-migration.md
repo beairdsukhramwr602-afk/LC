@@ -197,7 +197,7 @@ Service choice should be based on what the demo result reveals, not only on the 
 
 ### Self-Run and Expert-Assisted Demo Review <a href="#self-run-and-expert-assisted-demo-review" id="self-run-and-expert-assisted-demo-review"></a>
 
-Customers may approach Demo Migration in different ways depending on the selected service model, internal confidence, and desired level of expert handling.
+Customers may approach Demo Migration in different ways depending on the selected Migration Service, internal confidence, and desired level of expert handling.
 
 A customer-led demo review is useful when the customer wants to inspect the migration outcome directly and has enough internal knowledge to judge the sample result. If the result differs from expectations, Live Chat can help clarify what the sample may be revealing about source data, Target Platform behavior, configuration, Add-ons, or service fit.
 
@@ -242,7 +242,7 @@ Demo Migration helps customers turn migration planning into early evidence. A st
 
 The best Demo Migration review looks beyond whether records appeared. It checks whether migrated examples remain useful for catalog management, customer service, order history, content continuity, storefront experience, and future validation. If the result raises questions about mapping, filtering, configuration, custom data, or service fit, Live Chat can help clarify the next planning decision before the migration proceeds further.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is Demo Migration?**
 
@@ -266,4 +266,4 @@ Yes. Demo Migration can reveal custom fields, app data, plugin data, extension d
 
 **Should service choice happen before or after Demo Migration?**
 
-Customers may choose an initial service model before running Demo Migration, but the demo result can provide stronger evidence for whether the selected path remains suitable or whether Managed Service, Add-ons, or Custom Service should be considered.
+Customers may choose an initial Migration Service before running Demo Migration, but the demo result can provide stronger evidence for whether the selected path remains suitable or whether Managed Service, Add-ons, or Custom Service should be considered.

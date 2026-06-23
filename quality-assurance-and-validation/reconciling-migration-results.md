@@ -4,11 +4,11 @@ Reconciliation explains the differences found during migration validation. It he
 
 A migrated store does not need to be identical to the source store to be successful. Different e-commerce Platforms can structure products, variants, customer accounts, orders, URLs, CMS Pages, Blog Posts, promotions, and operational settings in different ways. Some differences are expected. Some reflect approved migration scope, Add-ons, mapping decisions, Custom Service handling, or Target Platform behavior. Other differences may reveal real continuity risks that need correction or escalation.
 
-Reconciliation turns those findings into launch judgment. It prevents the team from treating every mismatch as a defect while still identifying the differences that could weaken customer experience, operations, SEO continuity, reporting, support, or connected business workflows.
+Reconciliation turns those findings into launch judgment. It prevents the team from treating every mismatch as a defect, while still identifying the differences that could weaken customer experience, operations, SEO continuity, reporting, support, or connected business workflows.
 
 ### What Reconciliation Should Prove <a href="#what-reconciliation-should-prove" id="what-reconciliation-should-prove"></a>
 
-Reconciliation should prove that important differences have been reviewed with enough context to support a decision. It is not a search for perfect visual or numerical sameness between the source store and the target store.
+Reconciliation should prove that important differences have been reviewed with enough context to support a decision. It is not a search for perfect visual or numerical sameness between the source store and target store.
 
 A strong reconciliation process answers four questions:
 
@@ -257,7 +257,7 @@ The strongest reconciliation process classifies findings by cause and business i
 
 Before treating migration results as ready for launch, review the most important differences with the people who understand the affected business area. If a difference is difficult to interpret, use Demo Migration evidence, validation findings, and Next-Cart support guidance to clarify whether it reflects expected Target Platform behavior, approved scope, Add-ons, Custom Service handling, configuration, or a true continuity risk.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the difference between validation and reconciliation?**
 

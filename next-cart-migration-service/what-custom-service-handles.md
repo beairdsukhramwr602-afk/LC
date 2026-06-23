@@ -1,6 +1,6 @@
 # What Custom Service Handles
 
-Custom Service is the Next-Cart service model for migration requirements that need custom-scoped review, modification, bespoke handling, or implementation work beyond standard service capability. It applies when the expected target-store result cannot be planned safely through a supported migration path, standard migration handling, and available Standard Add-ons alone.
+Custom Service is the Next-Cart Migration Service for migration requirements that need custom-scoped review, modification, bespoke handling, or implementation work beyond standard service capability. It applies when the expected target-store result cannot be planned safely through a supported migration path, standard migration handling, and available Standard Add-ons alone.
 
 Custom Service does not mean every part of the migration becomes custom. A project may only need Custom Service for one critical area, such as a modified Add-on, app-owned product data, a Custom Platform source, custom fields, outside-system identifiers, or a specific transformation rule. The value of Custom Service is to identify the parts that need tailored handling, define what can be supported, quote the required work, and set clearer expectations before execution.
 
@@ -185,7 +185,7 @@ Custom Service handles migration requirements that need custom-scoped review, mo
 
 Custom Service is most effective when the expected result is clearly described. Customers should prepare sample records, business context, target-store expectations, affected data types, related apps or systems, and validation examples before requesting a quote. If a requirement cannot be clearly matched to Standard Service, Managed Service, a Standard Add-on, or an available platform capability, Live Chat can help clarify whether Custom Service is the right path.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What does Custom Service handle?**
 

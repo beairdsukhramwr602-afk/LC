@@ -41,9 +41,9 @@
 * [Entity Points](next-cart-migration-service/entity-points.md)
 * [Entity Points Plan and Migration Pricing](next-cart-migration-service/entity-points-plan-and-migration-pricing.md)
 * [Add-ons](next-cart-migration-service/add-ons-explained.md)
-* [Next-Cart Service Models](next-cart-migration-service/next-cart-migration-service-models-explained.md)
+* [Next-Cart Migration Services](next-cart-migration-service/next-cart-migration-service-models-explained.md)
 * [What Custom Service Handles](next-cart-migration-service/what-custom-service-handles.md)
-* [Choose the Right Service Model](next-cart-migration-service/choose-the-right-service-model.md)
+* [Choose the Right Migration Service](next-cart-migration-service/choose-the-right-migration-service.md)
 * [Additional Migration Options](next-cart-migration-service/additional-migration-options.md)
 
 ## Platform Strategy Hubs
@@ -68,7 +68,7 @@
   * [Adobe Commerce Migration Pitfalls and Prevention](platform-strategy-hubs/adobe-commerce-migration-hub/adobe-commerce-migration-pitfalls-and-prevention.md)
 * [Shopify Migration Hub](platform-strategy-hubs/shopify-migration-hub/README.md)
   * [Shopify Platform Overview](platform-strategy-hubs/shopify-migration-hub/shopify-platform-overview.md)
-  * [Shopify Fit: Ideal and Non-Ideal Profiles](platform-strategy-hubs/shopify-migration-hub/shopify-fit-ideal-and-non-ideal-profiles.md)
+  * [Shopify Fit: Ideal and Non-Ideal Migration Profiles](platform-strategy-hubs/shopify-migration-hub/shopify-fit-ideal-and-non-ideal-profiles.md)
   * [Shopify Data Model Differences](platform-strategy-hubs/shopify-migration-hub/shopify-data-model-differences.md)
   * [Shopify Constraints and Risks](platform-strategy-hubs/shopify-migration-hub/shopify-constraints-and-risks.md)
   * [Shopify Pre-Migration Preparation Checklist](platform-strategy-hubs/shopify-migration-hub/shopify-pre-migration-preparation-checklist.md)

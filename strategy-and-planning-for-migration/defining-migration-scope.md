@@ -1,225 +1,246 @@
 # Defining Migration Scope: What Must Move and What Can Change
 
-Migration scope is often defined too late and too loosely. Many teams begin with a data export, a list of entities, or the assumption that everything should move. That can sound cautious, but it usually hides the more important planning question: what must the business still be able to do after the move?
+Migration scope is often defined too late and too loosely. Many teams begin with an export list, a set of entity counts, or the assumption that everything should move. That can feel cautious, but it usually avoids the more important planning question: what must the business still be able to do after the move?
 
 A store does not depend on record presence alone. It depends on products remaining commercially usable, browse paths remaining understandable, customer and order history still supporting operations, and continuity-sensitive pages still serving their purpose. If scope is defined only by totals, important losses can remain invisible until late review.
 
-A stronger scope definition starts with preserved business meaning. Before deciding what belongs in scope, the business should decide what must remain true after launch.
+A stronger scope definition starts with preserved business meaning. Before deciding what belongs in scope, the business should decide what must remain true after launch, which differences are acceptable, and which areas need closer review before execution begins.
 
-### Start with preserved outcomes, not export categories <a href="#start-with-preserved-outcomes-not-export-categories" id="start-with-preserved-outcomes-not-export-categories"></a>
+### Scope Is a Planning Boundary, Not Just a Data List <a href="#scope-is-a-planning-boundary-not-just-a-data-list" id="scope-is-a-planning-boundary-not-just-a-data-list"></a>
 
-Useful scope planning begins with business outcomes such as:
+Migration scope should define the boundary of what the project is responsible for preserving, changing, excluding, or reviewing. That boundary is broader than a list of record types because useful store data usually depends on relationships, behavior, and business context.
 
-* customers can still find products through the right browse paths
-* products still support the intended buying decision
-* order history remains usable enough for support and operations
-* customer continuity still aligns with business expectations
-* high-value pages remain reachable and relevant
-* important relationships still support how the store works
+A practical scope definition should clarify:
 
-These outcomes give the project a practical basis for deciding what must move, what can change, and what requires closer review.
+* which business outcomes must remain usable after launch;
+* which entities, content types, and supporting structures are included;
+* which records or historical ranges can be excluded intentionally;
+* which platform differences are acceptable if the business meaning survives;
+* which areas require sample review before the migration approach is considered safe;
+* which owners should confirm whether the result is acceptable.
 
-Without that starting point, scope easily becomes unbounded. Teams include more and more data without deciding which elements are commercially critical, which ones are useful but not essential, and which changes are acceptable if the core outcome remains intact.
+This makes scope a governance tool. It gives the project a basis for deciding what must move, what can change, what can be cleaned up, and what should not be treated as a launch requirement.
 
-#### Scope should connect "business meaning" to migration planning <a href="#scope-should-connect-business-meaning-to-migration-planning" id="scope-should-connect-business-meaning-to-migration-planning"></a>
+### Start With Preserved Outcomes <a href="#start-with-preserved-outcomes" id="start-with-preserved-outcomes"></a>
 
-A migration scope is not only a content inventory. It is a planning boundary. It should tell the project which data, structures, relationships, and continuity-sensitive elements need to be protected because they support real business use after launch.
+Useful scope planning begins with outcomes rather than export categories. The most important question is not simply whether products, customers, orders, categories, or content can be transferred. The question is whether the migrated store can still support the activities that matter.
 
-This is why scope planning belongs before approach selection. A business cannot confidently choose a migration approach until it knows what must be preserved, where the Target Platform may represent data differently, and which requirements may need closer handling.
+Common preserved outcomes include:
 
-### What usually belongs in migration scope <a href="#what-usually-belongs-in-migration-scope" id="what-usually-belongs-in-migration-scope"></a>
+| Outcome area            | What scope must protect                                   | Example review focus                                                         |
+| ----------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Product buying behavior | Customers can choose and purchase the intended products   | Variants, options, prices, stock meaning, images, product status             |
+| Catalog discovery       | Customers can find products through expected browse paths | Categories, collections, filters, search fields, landing pages               |
+| Customer continuity     | Staff can understand customer context after launch        | Accounts, addresses, order references, consent state, segmentation relevance |
+| Operational usability   | Internal teams can continue key workflows                 | Order history, fulfillment references, support notes, external identifiers   |
+| Commercial continuity   | Revenue-critical logic remains intentional                | Promotions, coupons, price rules, tax context, priority customer groups      |
+| SEO continuity          | Important pages remain reachable and purposeful           | URLs, redirects, metadata, content pages, high-value landing paths           |
 
-Scope usually starts with core entities, but it should not stop there. The obvious categories matter, yet the planning risk usually grows when teams fail to define the structures that make those entities usable.
+Starting with outcomes prevents scope from becoming either too broad or too shallow. It helps the business identify which data is essential, which data is useful but non-critical, and which historical or obsolete information can be excluded without damaging launch readiness.
+
+### Identify Core Entities and Their Supporting Structures <a href="#identify-core-entities-and-their-supporting-structures" id="identify-core-entities-and-their-supporting-structures"></a>
+
+Scope usually starts with core entities, but it should not stop there. Core records often carry value only when their supporting structures move with enough meaning intact.
 
 Common core categories include:
 
-* products
-* customers
-* orders
-* categories
-* reviews
-* coupons
-* taxes
-* CMS Pages
-* Blog Posts where traffic, conversion, or continuity depends on them
+* products;
+* customers;
+* orders;
+* categories or collections;
+* reviews;
+* coupons and promotions;
+* taxes and related configuration references;
+* CMS Pages;
+* Blog Posts where traffic, conversion, or continuity depends on them.
 
-Supporting structures often need explicit scope treatment as well, including:
+Supporting structures often need explicit scope treatment as well:
 
-* variants and options
-* product and variant images
-* attributes used for filtering or comparison
-* customer addresses
-* product relationships
-* category logic and browse paths
-* promotions that materially affect revenue
-* SEO-sensitive URLs and landing paths
-* operational metadata needed after launch
-* app, plugin, module, or extension-managed fields that shape storefront or support behavior
+* variants and product options;
+* product and variant images;
+* product attributes used for filtering, comparison, or merchandising;
+* customer addresses and account status;
+* product relationships, bundles, grouped items, or cross-sell logic;
+* category assignment rules and browse paths;
+* promotion eligibility rules and coupon conditions;
+* SEO-sensitive URLs, metadata, redirects, and landing paths;
+* operational metadata needed for reporting, support, fulfillment, or external systems;
+* app, plugin, module, or extension-managed fields that shape storefront or admin behavior.
 
-A smaller store can still have broad scope. If its buying logic, discovery logic, customer continuity, or support workflows depend on layered structures, the scope is larger than the entity list suggests.
+A smaller store can still have broad scope if its commercial behavior depends on layered structures. A larger store can have a narrower launch scope if the business intentionally excludes unused historical data and defines what must remain usable.
 
-#### Core data should not be separated from its supporting context <a href="#core-data-should-not-be-separated-from-its-supporting-context" id="core-data-should-not-be-separated-from-its-supporting-context"></a>
+### Separate Must-Preserve, Transformable, Optional, and Excluded Scope <a href="#separate-must-preserve-transformable-optional-and-excluded-scope" id="separate-must-preserve-transformable-optional-and-excluded-scope"></a>
 
-Products are not only product records. Customers are not only profile records. Orders are not only transaction records. Their value often depends on attributes, relationships, historical references, display logic, and operational context.
+Scope is easier to manage when every major data area is assigned a planning status. Not all included data needs identical preservation, and not all excluded data represents a loss.
 
-A scope plan should make those dependencies visible early. Otherwise, the project may appear simple at the entity level while carrying hidden complexity in the structures that make the migrated store usable.
+| Scope classification | Meaning                                                                      | Example                                                                             |
+| -------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Must preserve        | The business outcome cannot safely change                                    | Top-selling products must keep their buying logic and order meaning intact          |
+| Can transform        | The structure may change if the business meaning remains acceptable          | Category trees may become collections or navigation groups on the Target Platform   |
+| Can clean up         | Data should be corrected or consolidated before or during migration planning | Duplicate attribute values can be normalized before they affect filtering review    |
+| Can exclude          | Data is not required for launch or ongoing operations                        | Obsolete products, expired campaigns, old test customers, unused content drafts     |
+| Needs special review | The requirement may exceed standard platform-to-platform handling            | Custom fields, outside-system identifiers, extension-owned data, unusual rule logic |
 
-### Separate what must remain equivalent from what can change <a href="#separate-what-must-remain-equivalent-from-what-can-change" id="separate-what-must-remain-equivalent-from-what-can-change"></a>
+This classification protects the project from treating every difference as a defect. Some differences are acceptable. Some are improvements. Others are genuine continuity risks. Scope planning should make that distinction visible before review begins.
 
-Not every element needs the same level of preservation. Scope becomes easier to control when it is divided into three planning groups.
+### Define What Must Remain Functionally Equivalent <a href="#define-what-must-remain-functionally-equivalent" id="define-what-must-remain-functionally-equivalent"></a>
 
-#### What must move and remain functionally equivalent <a href="#what-must-move-and-remain-functionally-equivalent" id="what-must-move-and-remain-functionally-equivalent"></a>
-
-This is the highest-priority layer. It includes the data and behavior that the business cannot afford to lose.
+The highest-priority scope layer contains data and behavior that must remain functionally equivalent after migration. Functional equivalence does not always mean identical structure. It means the migrated store still supports the same practical business outcome.
 
 Examples often include:
 
-* best-selling products with their real buying logic intact
-* customer and order relationships needed for support
-* category structures that drive browse intent
-* revenue-critical promotions
-* top landing pages that carry meaningful traffic or conversion value
+* best-selling products with their real buying logic intact;
+* customer and order relationships needed for support;
+* category or collection structures that drive browse intent;
+* revenue-critical promotions and pricing rules;
+* customer groups or segments that affect pricing, access, communication, or service workflows;
+* high-value pages that carry meaningful traffic, conversion, or brand credibility.
 
-These are the outcomes that should shape later review priorities.
+These areas should shape sample selection and validation priority. They should not be reviewed only after all data has moved. If a must-preserve area behaves differently in the Target Platform, the team needs an early decision about whether the difference is acceptable, transformable, or a scope issue.
 
-#### What must move, but may change in representation <a href="#what-must-move-but-may-change-in-representation" id="what-must-move-but-may-change-in-representation"></a>
+### Decide What Can Change in Representation <a href="#decide-what-can-change-in-representation" id="decide-what-can-change-in-representation"></a>
 
-Some elements still need to be preserved even when the Target Platform expresses them differently.
+Some elements still need to be preserved even when the Target Platform expresses them differently. A direct one-to-one structure may not exist, especially when moving between platforms with different catalog, customer, content, or promotion models.
 
-Examples include:
+Common examples include:
 
-* category or collection structure on a platform with a different navigation model
-* segmentation logic on a platform with a different customer-group structure
-* content presentation on a platform with a different CMS or template model
-* field placement that changes while the underlying business use remains intact
+* category logic represented as collections, menus, tags, or landing pages;
+* customer groups represented as segments, tags, lists, or rules;
+* product attributes represented as fields, metafields, specifications, option values, or filter sources;
+* CMS content represented through a different page builder, theme, or block model;
+* promotion logic represented through a different rule engine or discount model.
 
-These are not necessarily migration failures. They are planning decisions. The important question is whether the business meaning survives the Target Platform difference.
+These changes are not automatically failures. They are scope decisions. The important question is whether the business meaning survives the new representation. If customers can still find, evaluate, and purchase products correctly, a structural difference may be acceptable. If the difference changes pricing, eligibility, product discovery, support usability, or reporting meaning, it needs closer review.
 
-#### What can change without harming the business <a href="#what-can-change-without-harming-the-business" id="what-can-change-without-harming-the-business"></a>
+### Name Relationship-Sensitive Areas Early <a href="#name-relationship-sensitive-areas-early" id="name-relationship-sensitive-areas-early"></a>
 
-Some differences are acceptable if the store still supports the same commercial and operational outcome.
+Many scope issues are caused by relationships, not by missing records. Products, customers, orders, reviews, coupons, and content often depend on other records to remain meaningful.
 
-Examples may include:
+Relationship-sensitive examples include:
 
-* internal administrative organization changing while workflows remain workable
-* category naming adjustments that do not weaken browse intent
-* content layout differences that do not damage reachability, clarity, or conversion
-* presentation-level variation that does not change the customer decision path
+* orders needing the correct customer and product references;
+* reviews needing the correct products, customers, rating state, and moderation status;
+* coupons needing the correct product, category, customer, or date conditions;
+* products needing meaningful category, manufacturer, tax, inventory, and media context;
+* customer records needing addresses, order history, consent state, or account status to remain interpretable;
+* content pages needing URL, redirect, image, metadata, and navigation context to remain useful.
 
-This distinction matters because projects become much easier to govern once the business stops treating every difference as equally important.
+Scope planning does not need to describe every relationship in technical depth. That level belongs in deeper data-entity analysis. But the scope plan should identify where connected meaning matters. Otherwise, a project can preserve expected record counts while losing the context that makes those records usable.
 
-### Scope includes behavior, not just records <a href="#scope-includes-behavior-not-just-records" id="scope-includes-behavior-not-just-records"></a>
+### Treat Third-Party and Custom Logic as Scope Signals <a href="#treat-third-party-and-custom-logic-as-scope-signals" id="treat-third-party-and-custom-logic-as-scope-signals"></a>
 
-A store can migrate the expected totals and still fail in practice. Scope planning is stronger when it includes questions such as:
-
-* Do variants and options still behave correctly?
-* Do category pages still support discovery?
-* Does order history still support support-team workflows?
-* Do promotions still preserve the intended revenue logic?
-* Do priority URLs and landing pages still support continuity?
-* Do customer-facing pathways still align with expectations?
-
-If those questions are not part of scope planning, the project can move a large amount of data and still deliver a weaker store.
-
-#### Behavior should be judged from the customer and business view <a href="#behavior-should-be-judged-from-the-customer-and-business-view" id="behavior-should-be-judged-from-the-customer-and-business-view"></a>
-
-Scope should not be judged only by whether data appears in the Target Platform. It should also consider whether customers can still make buying decisions, staff can still support customers, and the business can still interpret migrated records correctly.
-
-This keeps the scope definition practical. The goal is not to preserve every old platform behavior exactly. The goal is to define which outcomes need equivalent meaning, which differences are acceptable, and which areas need deeper review before the migration approach is chosen.
-
-### Relationship-sensitive areas should be named early <a href="#relationship-sensitive-areas-should-be-named-early" id="relationship-sensitive-areas-should-be-named-early"></a>
-
-Some outcomes depend on connected records remaining usable together. Scope planning should identify these areas explicitly, especially when the business depends heavily on support history, browse logic, reviews, or coupon rules.
-
-Typical examples include:
-
-* orders needing the correct customers and products
-* reviews needing the correct products and customers
-* coupons needing the correct product or category context
-* products needing meaningful category, manufacturer, or tax context
-
-This does not require re-explaining all entity relationships in full. It does require recognizing that some outcomes depend on connected behavior, not just on individual records being present.
-
-### Third-party and custom logic can expand scope quietly <a href="#third-party-and-custom-logic-can-expand-scope-quietly" id="third-party-and-custom-logic-can-expand-scope-quietly"></a>
-
-Scope is often understated because teams inventory the visible storefront and overlook the fields, rules, and identifiers that make the storefront usable.
+Scope is often understated because teams inventory visible storefront content but overlook the hidden fields, rules, identifiers, and extension-owned data that make the store work.
 
 That hidden layer may include:
 
-* custom product fields used for filtering, display, or merchandising
-* app, plugin, module, or extension-managed loyalty, review, subscription, or search behavior
-* order metadata needed for support or reporting
-* identifiers required by ERP, CRM, shipping, or automation systems
-* custom collection, landing-page, or browse logic
+* custom product fields used for display, filtering, merchandising, or reporting;
+* app, plugin, module, or extension-managed loyalty, review, subscription, search, or personalization behavior;
+* order metadata required for support, refunds, fulfillment, or reporting;
+* identifiers required by ERP, CRM, shipping, tax, marketing automation, or marketplace systems;
+* custom collection, landing-page, or browse logic;
+* business rules that live outside the platform but influence store behavior.
 
-If those elements materially affect revenue, discoverability, operations, or customer continuity, they belong in scope planning early. Otherwise, the project may preserve the main entities while losing the business meaning attached to them.
+If those elements materially affect revenue, discoverability, operations, or customer continuity, they belong in scope planning early. They should not appear for the first time during final validation.
 
-#### Custom handling should be identified before scope becomes fixed <a href="#custom-handling-should-be-identified-before-scope-becomes-fixed" id="custom-handling-should-be-identified-before-scope-becomes-fixed"></a>
+Important custom logic should also be classified by business value. Some fields are only historical. Some are useful for administration. Others are essential to customer experience, pricing, fulfillment, or external-system continuity. Only the essential and operationally meaningful parts should expand the scope.
 
-When important meaning depends on custom logic, outside-system identifiers, third-party data, or behavior that exceeds standard service capability, the requirement should be identified before the project treats the scope as fixed.
+### Use Selective Migration Carefully <a href="#use-selective-migration-carefully" id="use-selective-migration-carefully"></a>
 
-That does not mean every custom field creates the same level of risk. It means the business should decide whether the field or rule is merely historical, operationally useful, or essential to the expected migration outcome. Requirements that need customization, modification, Custom Platform handling, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment belong under Custom Service review.
-
-### Selective migration is valid only when it is well defined <a href="#selective-migration-is-valid-only-when-it-is-well-defined" id="selective-migration-is-valid-only-when-it-is-well-defined"></a>
-
-A smaller scope can be a strong planning choice. Many businesses do not need every historical record to support launch readiness.
+Selective migration can be a strong planning choice. Many businesses do not need every historical record to support launch readiness.
 
 A selective scope may prioritize:
 
-* essential products
-* active customers
-* recent orders
-* high-value content
-* categories most important to launch readiness
+* active products and current catalog structures;
+* active customers;
+* recent orders needed for support or accounting reference;
+* high-value CMS Pages and Blog Posts;
+* priority categories, collections, URLs, and landing pages;
+* records needed by external systems or post-launch workflows.
 
-But selective migration is not automatically simple. It becomes harder when the selection rule is precise, transformation-heavy, or likely to change the meaning of related records. A smaller scope can still carry high risk if excluded data affects connected behavior, support usability, or decision-making context.
+But selective migration is not automatically simple. It becomes more complex when the selection rule is precise, relationship-sensitive, or likely to change the meaning of connected records. For example, migrating recent orders without the related customers, products, coupons, or fulfillment references may reduce the practical value of the order history.
 
 Selective scope should therefore be defined through business outcomes, not only through reduction targets.
 
-#### Filtering decisions should be planned before execution <a href="#filtering-decisions-should-be-planned-before-execution" id="filtering-decisions-should-be-planned-before-execution"></a>
+### Plan Filtering Rules Before Execution <a href="#plan-filtering-rules-before-execution" id="plan-filtering-rules-before-execution"></a>
 
-If the business wants only selected records to move, the selection logic should be planned before execution. Estimated entity counts are used for pricing and Entity Points Plan selection; they are not migration filters.
+Filtering decisions should be planned before execution. Estimated entity counts help with planning and Entity Points Plan selection, but they do not automatically define which records should move.
 
-When filtering is needed, the scope plan should clarify which records should be moved, why they are selected, and whether the selection rule can be handled through the Data Filter Add-on or requires Custom Service because the requirement exceeds the Standard Add-on's capabilities.
+A filtering decision should clarify:
 
-### What a strong scope definition usually makes clear <a href="#what-a-strong-scope-definition-usually-makes-clear" id="what-a-strong-scope-definition-usually-makes-clear"></a>
+* which records should be included;
+* which records should be excluded;
+* why the selection rule supports the business objective;
+* whether the rule affects connected data;
+* whether the selection can be validated after migration;
+* who accepts the consequences of excluded history.
 
-A useful migration scope definition should clarify:
+Some filtering requirements are simple, such as excluding inactive products or moving only orders after a specific date. Others are more complex, especially when they depend on multiple conditions, custom fields, third-party status values, external identifiers, or relationship rules. When filtering needs exceed standard selection logic, the requirement may need review through the Data Filter Add-on or a Custom Service path.
 
-1. what the business cannot afford to lose after launch
-2. which entities and content types are in scope
-3. which supporting structures also need explicit planning
-4. which platform-driven differences are understood and acceptable
-5. which areas carry the highest business risk and must be reviewed first
+### Document Acceptable Change Before Review Begins <a href="#document-acceptable-change-before-review-begins" id="document-acceptable-change-before-review-begins"></a>
 
-This level of clarity does not require perfect documentation. It requires disciplined judgment about what the store must still be able to do.
+A scope plan should not only define what is included. It should also define what differences are acceptable.
 
-#### Scope should prepare the next planning decisions <a href="#scope-should-prepare-the-next-planning-decisions" id="scope-should-prepare-the-next-planning-decisions"></a>
+Acceptable changes may include:
 
-A good scope definition should make the next articles easier to use. It should help the business identify what makes the migration complex, which migration approach best fits the requirements, and what later validation must be demonstrated.
+* internal administrative organization changing while workflows remain workable;
+* category naming or grouping adjustments that do not weaken browse intent;
+* content layout differences that do not damage reachability, clarity, or conversion;
+* platform-native field placement replacing an older custom field arrangement;
+* retired products or outdated content being intentionally excluded;
+* old campaign rules being rebuilt rather than migrated exactly.
 
-If the scope remains vague, every later planning decision becomes weaker. Complexity is harder to assess, service fit is harder to judge, and acceptance criteria become subjective.
+Documenting acceptable change reduces review friction. Reviewers can distinguish between expected Target Platform differences and true scope failures. Without this distinction, every difference can become a late-stage dispute.
 
-### Conclusion
+### Turn Scope Into Review Priorities <a href="#turn-scope-into-review-priorities" id="turn-scope-into-review-priorities"></a>
 
-Migration scope is not simply the answer to “what data do we want to move?” It is the answer to “what must still work after the move, which structures support that outcome, and which changes are acceptable?” When scope is defined through preserved outcomes, supporting structures, relationship-sensitive behavior, and intentional acceptance of Target Platform differences, later planning becomes much easier to control.
+Scope should prepare the next planning decisions. It should help the business identify what makes the migration complex, which approach fits the requirement, and what validation must prove.
 
-Define scope around what the business must still be able to do after launch, then use a representative early sample to test whether those assumptions hold. If you need help deciding whether a requirement is standard scope, selective scope, or a sign that more specialized handling may be needed, Live Chat is a practical way to reduce ambiguity before scope creep becomes harder to control.
+A useful review priority list includes:
 
-### FAQs
+| Priority level | Scope area                                                              | Review purpose                                     |
+| -------------- | ----------------------------------------------------------------------- | -------------------------------------------------- |
+| Critical       | Revenue, checkout, support, SEO, external-system continuity             | Confirm that launch-blocking outcomes still work   |
+| High           | Catalog discovery, customer continuity, priority content                | Confirm that important workflows remain usable     |
+| Medium         | Administrative convenience, historical reference, internal organization | Confirm that changes are understood and acceptable |
+| Low            | Obsolete, duplicate, or unused data                                     | Confirm intentional exclusion or cleanup           |
+
+This avoids equal-weight review, where low-value historical data consumes as much attention as launch-critical behavior. Scope should tell reviewers where to spend the most time and what level of proof is needed.
+
+### What a Strong Scope Definition Should Include <a href="#what-a-strong-scope-definition-should-include" id="what-a-strong-scope-definition-should-include"></a>
+
+A strong migration scope definition should make the following points clear:
+
+1. what the business cannot afford to lose after launch;
+2. which entities and content types are included;
+3. which supporting structures and relationships need explicit treatment;
+4. which data can be transformed, cleaned up, excluded, or deferred;
+5. which platform differences are understood and acceptable;
+6. which areas require special review or custom handling;
+7. which records should be selected or filtered and why;
+8. which review priorities prove that the scope has been met.
+
+This level of clarity does not require perfect documentation. It requires disciplined judgment about what the migrated store must still be able to do.
+
+### Conclusion <a href="#conclusion" id="conclusion"></a>
+
+Migration scope is not simply the answer to “what data should move?” It is the answer to “what must still work after the move, which structures support that outcome, and which changes are acceptable?” When scope is defined through preserved outcomes, supporting structures, relationship-sensitive behavior, selective migration rules, and intentional acceptance of Target Platform differences, later planning becomes easier to control.
+
+Define scope around what the business must still be able to do after launch. Then use that scope to decide where complexity is concentrated, which migration approach is appropriate, and what validation must prove before the store is considered ready.
+
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Does migration scope always mean migrating everything?**
 
-No. In many cases, a selective migration is valid if the business defines the scope clearly and understands the effect on connected behavior, support usability, and launch goals. The important issue is not whether every record moves. It is whether the chosen scope still supports the outcomes the business depends on.
+No. Selective migration can be valid if the business defines the scope clearly and understands the effect on connected behavior, support usability, reporting, customer continuity, and launch goals. The important issue is not whether every record moves. It is whether the chosen scope still supports the outcomes the business depends on.
 
 **What is the biggest mistake in scope planning?**
 
-One of the most common mistakes is defining scope as “everything” without deciding what actually needs to be preserved. That usually delays the harder judgment about non-negotiable continuity, acceptable change, and review priority. The result is broader activity with weaker control.
+One of the most common mistakes is defining scope as “everything” without deciding what actually needs to be preserved. That delays the harder judgment about non-negotiable continuity, acceptable change, exclusions, cleanup, and review priority.
 
 **Are products, customers, and orders enough to define scope?**
 
-Not usually. Supporting structures such as variants, attributes, browse logic, images, promotions, URLs, operational metadata, and app, plugin, module, or extension-managed behavior often carry the business meaning that makes the core entities usable. If they matter to revenue, discovery, support, or continuity, they belong in scope planning early.
+Not usually. Supporting structures such as variants, attributes, browse logic, images, promotions, URLs, operational metadata, customer addresses, order references, and app, plugin, module, or extension-managed behavior often carry the business meaning that makes the core entities usable.
 
 **When does scope planning point toward Custom Service?**
 
-Scope planning points toward Custom Service when the scope cannot be described as standard data movement with available settings and supported behavior. Typical signals include Custom Platform handling, project-specific transformation rules, third-party or outside-system data, custom fields that must remain operationally meaningful, or selective migration rules that need service-side adjustment rather than normal filtering.
+Scope planning points toward Custom Service when the required outcome depends on customization, modification, Custom Platform handling, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, third-party data, custom fields, outside-system identifiers, or other requirements that exceed standard service capability.

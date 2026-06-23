@@ -227,7 +227,7 @@ The most important distinction is that Entity Points inputs are not migration fi
 
 Customers should estimate Product, Customer, Order, and Blog Posts counts carefully, consider expected source-store growth, and review selective-scope needs before execution. If the store contains more data than expected, has unused plan capacity, or needs selective filtering, Live Chat can help clarify whether the next step is plan capacity review, Entity Points Plan upgrade, the Data Filter Add-on, or Custom Service review.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What are Entity Points?**
 

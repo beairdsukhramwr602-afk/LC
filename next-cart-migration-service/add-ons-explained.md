@@ -6,7 +6,7 @@ Add-ons should be understood as focused migration enhancements, not as a general
 
 ### What Add-ons Help Customers Control <a href="#what-add-ons-help-customers-control" id="what-add-ons-help-customers-control"></a>
 
-A migration can be technically supported and still need more control over how the store data is selected, interpreted, or adjusted. Add-ons help customers handle those focused decisions before migration execution, especially when the expected target-store result depends on more than moving all scanned records with default settings.
+A migration can be technically supported and still need more control over how store data is selected, interpreted, or adjusted. Add-ons help customers handle those focused decisions before migration execution, especially when the expected target-store result depends on more than moving all scanned records with default settings.
 
 Add-ons are most useful when customers need to answer questions such as:
 
@@ -116,7 +116,7 @@ Add-ons and Custom Service can still work together. A Custom Service plan may in
 
 ### How Add-ons Affect Pricing and Service Responsibility <a href="#how-add-ons-affect-pricing-and-service-responsibility" id="how-add-ons-affect-pricing-and-service-responsibility"></a>
 
-A Standard Add-on has a default price. When selected, that price is added to the migration total.
+A Standard Add-on has a default price. When selected, that price is added to the migration total. The Add-on price is separate from Entity Points Plan capacity, which defines counted migration capacity for Product, Customer, Order, and Blog Posts data.
 
 If a Standard Add-on needs modification, the tailored version is quoted through Custom Service. If the customer already purchased the Standard Add-on and later needs a tailored version, the customer pays only the top-up difference between the default Add-on price and the tailored quote.
 
@@ -132,7 +132,7 @@ Custom Add-ons are quoted individually because the expected result, data structu
 
 Add-ons affect how the migration is configured and performed, but they do not decide who performs the migration by themselves. With Standard Service, the customer performs migration actions and uses purchased Add-ons within the available service flow. With Managed Service, Next-Cart experts can integrate purchased Add-ons based on the customer’s request and agreed service scope. With Custom Service, Add-ons may be included as part of a broader custom plan, especially when the Add-on is tailored or created as a Custom Add-on.
 
-Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and service scope, not whether the customer can access the purchased service license.
+Customers using any Migration Service can access and perform available migration actions manually if they choose. The selected Migration Service determines responsibility, expert handling, and service scope, not whether the customer can access the purchased service license.
 
 ### How to Decide Whether an Add-on Is Needed <a href="#how-to-decide-whether-an-add-on-is-needed" id="how-to-decide-whether-an-add-on-is-needed"></a>
 
@@ -182,17 +182,17 @@ When a Standard Add-on needs modification, the requirement becomes a Tailored Ad
 
 Add-ons are most effective when the customer can clearly describe the intended target-store result. If the available Add-ons do not clearly match the expected outcome, Live Chat can help clarify whether the right next step is a Standard Add-on, Tailored Add-on, Custom Add-on, or broader Custom Service review.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What are Add-ons?**
 
-Add-ons are optional service features that help customers control focused migration needs, such as data filtering, advanced mapping, or data configuration.
+Add-ons are optional service features that help customers control focused migration needs such as data filtering, advanced mapping, or data configuration.
 
 **Which Standard Add-ons are currently available?**
 
-The current Standard Add-ons are "Data Filter Add-on", "Advanced Data Mapping", and "Advanced Data Configure".
+The current Standard Add-ons are Data Filter Add-on, Advanced Data Mapping, and Advanced Data Configure.
 
-**Can Add-ons be used with every service model?**
+**Can Add-ons be used with every Migration Service?**
 
 Yes. Standard Add-ons can be used with Standard Service, Managed Service, and Custom Service when their available settings and supported behavior fit the requirement.
 
@@ -206,7 +206,7 @@ A Tailored Add-on is a modified version of a Standard Add-on. It is handled thro
 
 **What is a Custom Add-on?**
 
-A Custom Add-on is a new or project-specific Add-on requested when the available Standard Add-ons do not fit the customer’s requirements. It is reviewed and quoted through Custom Service.
+A Custom Add-on is a new or project-specific Add-on requested when the available Standard Add-ons do not fit the customer’s requirement. It is reviewed and quoted through Custom Service.
 
 **When does an Add-on require Custom Service?**
 
@@ -214,4 +214,4 @@ An Add-on requires Custom Service when it needs modification beyond its availabl
 
 **Is Add-on pricing the same as Entity Points pricing?**
 
-No. Entity Points Plans define the counted migration capacity. Add-ons are optional service features added when the customer needs filtering, advanced mapping, or data configuration support.
+No. Entity Points Plans define counted migration capacity. Add-ons are optional service features added when the customer needs filtering, advanced mapping, or data configuration support.

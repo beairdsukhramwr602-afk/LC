@@ -1,240 +1,241 @@
 # Choosing the Right Migration Approach
 
-Choosing the right migration approach is not simply about where the store is moving. It is about how much uncertainty the business can absorb, how much business meaning must be preserved, how much execution responsibility the internal team can carry, and how much risk control the project needs before launch.
+Choosing the right migration approach is a planning decision. It should not be based only on where the store is moving, how many records exist, or which option sounds easiest. A strong approach matches the real shape of the project: what must be preserved, how predictable the data is, how much platform difference exists, how much work the internal team can carry, and how much evidence the business needs before launch approval.
 
-Approach selection works best when it is based on evidence. A store may appear straightforward until representative review reveals product-structure issues, extension-driven logic, relationship-sensitive behavior, or validation demands that make a more guided or customized path safer. Another store may not need customization, but may still benefit from Next-Cart-led execution because the business does not want migration success to depend on internal execution bandwidth.
+A store can look simple until representative review reveals product-structure issues, extension-driven logic, custom fields, selective migration requirements, or acceptance criteria that require more controlled handling. Another store may not require customization at all, but may still need more guided execution because the internal team does not have enough time to coordinate the migration, review results, and make launch decisions without support.
 
-This article explains how to choose a migration approach at the planning level. The goal is not to compare labels too early. The goal is to match the project to the kind of service responsibility and risk control it actually needs.
+Approach selection works best when it starts with evidence. The goal is not to choose a label early. The goal is to understand what level of handling, responsibility, and risk control the project actually needs.
 
-### Migration approach is a planning decision, not a preference decision <a href="#migration-approach-is-a-planning-decision-not-a-preference-decision" id="migration-approach-is-a-planning-decision-not-a-preference-decision"></a>
+### Migration Approach Should Follow Project Evidence <a href="#migration-approach-should-follow-project-evidence" id="migration-approach-should-follow-project-evidence"></a>
 
-The most useful question is not which approach sounds easiest. A stronger question is:
+A migration approach should be chosen after the project has enough evidence to classify its real risk. Surface information can help with early orientation, but it is not enough for a reliable decision.
 
-**What kind of approach gives this project the best chance of preserving the outcomes that matter without creating avoidable execution risk?**
+Common surface indicators include:
 
-That depends on several planning signals:
+* catalog size;
+* customer and order volume;
+* Source Platform and Target Platform names;
+* number of store views, languages, or currencies;
+* expected launch timeline;
+* whether the business wants a full or selective migration.
 
-* how predictable the store structure is
-* how much ambiguity exists in the source data
-* how well the Target Platform can represent the same business meaning
-* how much execution and review responsibility the customer team can carry
-* whether customization or modification work is needed beyond standard service capability
+Those details matter, but they do not fully explain the migration approach. A small store can require custom handling if business-critical information lives in non-standard fields. A larger store can remain predictable when the data model is clean, relationships are consistent, and the Target Platform can represent the same business meaning without major compromise.
 
-When those areas are evaluated honestly, the right approach usually becomes clearer.
+The stronger planning question is:
 
-### Start with evidence, not assumptions <a href="#start-with-evidence-not-assumptions" id="start-with-evidence-not-assumptions"></a>
+**Which approach gives the project enough control to preserve the required outcomes without adding unnecessary process weight?**
 
-Approach selection becomes stronger after the business has seen representative evidence. A useful early proof point can reveal whether the migration is mainly predictable, operationally demanding, or structurally dependent on customization.
+That question keeps approach selection tied to evidence rather than preference.
 
-A representative sample can help show:
+### Separate Approach Choice From Service-Model Detail <a href="#separate-approach-choice-from-service-model-detail" id="separate-approach-choice-from-service-model-detail"></a>
 
-* whether core records map cleanly
-* whether product, category, customer, and order relationships still make sense
-* whether category and browse logic remain usable
-* whether apps, plugins, modules, extensions, custom fields, or outside-system identifiers shape more of the store than expected
-* whether the customer team can realistically review the result with confidence
+Approach selection should not become a full Migration Service explanation. Migration Services belong to service documentation and service comparison content. At the planning stage, the more useful task is to understand what kind of project pattern the migration fits.
 
-This matters because a project that looks simple in an export or record count can look different when representative records are reviewed in the Target Platform.
+Most migrations fall into one of three approach patterns:
 
-### Three broad migration approach patterns <a href="#three-broad-migration-approach-patterns" id="three-broad-migration-approach-patterns"></a>
+| Planning pattern                   | What it means                                                                                                                    | Main planning question                                                         |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Predictable customer-led migration | The data is structurally workable and the customer can carry execution and review responsibility                                 | Can the customer team execute and validate the migration with acceptable risk? |
+| Guided or expert-led execution     | The data is feasible within standard capability, but internal bandwidth or coordination risk is high                             | Would expert-led execution reduce avoidable operational risk?                  |
+| Customization-driven handling      | The expected outcome depends on mapping, filtering, transformation, Custom Platform handling, or non-standard preservation logic | Is standard handling enough to preserve the required business meaning?         |
 
-Most projects fall into one of three planning patterns. These patterns are not a substitute for the full Next-Cart service-model explanation, but they help customers understand what kind of responsibility and handling their project may need.
+These patterns may later connect to Standard Service, Managed Service, or Custom Service, but the planning decision should begin with the project’s needs. Service labels are useful only after the evidence shows what type of responsibility and handling the project requires.
 
-#### Predictable customer-led execution <a href="#predictable-customer-led-execution" id="predictable-customer-led-execution"></a>
+### Start With the Outcome That Must Be Protected <a href="#start-with-the-outcome-that-must-be-protected" id="start-with-the-outcome-that-must-be-protected"></a>
 
-This pattern is usually realistic when:
+A migration approach should protect the outcomes that matter most to the business. Without that anchor, a project can choose an approach that is convenient but poorly matched to the actual risk.
 
-* representative records behave predictably
-* core structure maps in a workable way
-* app, plugin, module, or extension dependence is limited or clearly understood
-* the customer team can manage execution and review responsibility
-* differences found during early review are acceptable rather than structurally risky
+Important protected outcomes may include:
 
-The project still needs discipline. The point is that the main challenge is controlled execution and review, not bespoke preservation logic.
+* customers can find and purchase products correctly;
+* product choices, variants, options, and attributes remain understandable;
+* categories, collections, menus, and filters still support product discovery;
+* customer accounts, address books, order history, and business-customer records remain usable;
+* SEO-sensitive URLs, redirects, metadata, and page continuity receive enough planning attention;
+* pricing, tax, promotion, or customer-group behavior does not create launch confusion;
+* operational teams can confirm that migrated records are acceptable before launch.
 
-#### Expert-led execution <a href="#expert-led-execution" id="expert-led-execution"></a>
+Approach selection becomes clearer when these outcomes are named before execution. A project that only needs record movement and basic review can use a lighter approach. A project that needs meaning preservation across platform differences may require deeper handling.
 
-This pattern is usually safer when:
+### Evaluate Internal Responsibility Honestly <a href="#evaluate-internal-responsibility-honestly" id="evaluate-internal-responsibility-honestly"></a>
 
-* the data appears feasible within standard service capability
-* the business does not want the project to depend on customer-led execution
-* timeline pressure or internal capacity makes expert-led handling safer
-* the migration looks structurally feasible, but coordination and review will still require careful control
+Some migrations are technically feasible but operationally risky because the customer team cannot carry the required execution or review workload. Approach selection should account for internal capacity, not just data complexity.
 
-In this pattern, the core risk is often not that the data cannot move. The core risk is that the project becomes less predictable if execution depends too heavily on internal availability, repeated handoffs, or customer-side coordination.
+The customer team may need to handle:
 
-#### Customization or modification-driven handling <a href="#customization-or-modification-driven-handling" id="customization-or-modification-driven-handling"></a>
+* preparing access and source data;
+* confirming what should move and what should be excluded;
+* reviewing sample results;
+* identifying acceptable differences;
+* validating high-value records;
+* coordinating business stakeholders before launch;
+* making decisions when edge cases appear.
 
-This pattern becomes necessary when the expected result depends on work beyond standard service capability or Standard Add-on capability.
+If those responsibilities are unrealistic for the team’s availability, a customer-led approach may create avoidable risk even when the data itself is not highly complex. In that case, the project may need more guided or expert-led execution to keep decisions, review, and launch preparation under control.
+
+This is not the same as Custom Service. Limited internal bandwidth does not automatically mean custom handling is needed. It may simply mean the business needs more execution support for a structurally feasible migration.
+
+### Use Complexity to Decide the Level of Handling <a href="#use-complexity-to-decide-the-level-of-handling" id="use-complexity-to-decide-the-level-of-handling"></a>
+
+Complexity should inform the approach because it changes how much interpretation, control, and review the project needs. Complexity is not only about volume. It can come from structure, behavior, platform differences, third-party dependencies, data quality, or validation expectations.
+
+| Complexity source                   | Why it affects approach selection                                             | Possible planning response                                 |
+| ----------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Product and catalog structure       | Variant, attribute, category, and filter behavior may not map directly        | Require deeper sample review and clear acceptance criteria |
+| Relationship-sensitive data         | Products, customers, orders, categories, and content may depend on each other | Validate connected behavior, not isolated records only     |
+| Third-party or extension-owned data | Important meaning may live outside standard platform structures               | Assess whether custom mapping or preservation is needed    |
+| Target Platform limitations         | The new platform may represent the same business concept differently          | Decide what must remain equivalent and what can change     |
+| Data ambiguity                      | Inconsistent or duplicated source data can make meaning unclear               | Clean, exclude, transform, or document acceptable change   |
+| Validation burden                   | Launch approval may require stronger proof than basic spot checks             | Define review priorities before execution begins           |
+
+The right approach is the one that matches the strongest source of risk. If risk comes from internal workload, guided execution may be enough. If risk comes from data meaning that cannot be preserved through standard handling, custom handling may be needed.
+
+### Identify Whether the Project Is Predictable Enough for Customer-Led Execution <a href="#identify-whether-the-project-is-predictable-enough-for-customer-led-execution" id="identify-whether-the-project-is-predictable-enough-for-customer-led-execution"></a>
+
+A customer-led standard approach is realistic when the project is predictable and the customer team can take responsibility for execution and review. Predictable does not mean risk-free. It means the project’s main challenge is disciplined execution rather than unclear structure or non-standard preservation logic.
+
+Strong signals include:
+
+* representative records map in a workable way;
+* product, category, customer, and order relationships remain understandable;
+* platform differences are acceptable or easy to explain;
+* business-critical logic does not depend heavily on custom fields, apps, plugins, modules, extensions, or outside systems;
+* selective migration rules are simple and clearly documented;
+* the internal team can review the result before launch;
+* launch timing allows enough time for correction if issues appear.
+
+A customer-led approach becomes weaker when the business wants convenience but cannot realistically perform review. The approach should be selected for the real operating conditions, not for the ideal version of the team’s availability.
+
+### Identify When Guided or Expert-Led Execution Is Safer <a href="#identify-when-guided-or-expert-led-execution-is-safer" id="identify-when-guided-or-expert-led-execution-is-safer"></a>
+
+Guided or expert-led execution is often safer when the migration is feasible within standard capability but operational execution risk is high. The project may not need custom transformation, but it may still need stronger coordination, clearer process control, and more support during execution.
 
 Common signals include:
 
-* custom fields that affect storefront, reporting, fulfillment, or customer-service behavior
-* app, plugin, module, or extension-managed data outside standard supported structures
-* filtering, mapping, or data configuration needs that exceed Standard Add-on capability
-* field transformations required to preserve business meaning
-* Custom Platform or other non-standard platform structures
-* integration-dependent metadata required after launch
-* Target Platform limitations that require custom migration logic adjustment or bespoke handling
+* the business has limited internal migration bandwidth;
+* the launch window is tight;
+* multiple stakeholders must approve the result;
+* the customer team cannot spend enough time managing repeated execution steps;
+* the data is generally workable, but review and correction need careful coordination;
+* the business wants less exposure to missed steps or delayed decisions.
 
-In these cases, the project does not mainly choose who executes the migration. It is choosing what kind of handling is required to preserve the intended result safely.
+In this pattern, the main concern is not that the data is impossible to migrate through standard handling. The concern is that customer-led execution may not be realistic enough for the project’s timeline, review burden, or operational pressure.
 
-### Match the approach to the real source of risk <a href="#match-the-approach-to-the-real-source-of-risk" id="match-the-approach-to-the-real-source-of-risk"></a>
+This distinction matters. A project can need more execution support without needing customization. The planning decision should keep those two issues separate.
 
-Projects usually go off course when the chosen approach solves the wrong problem.
+### Identify When Custom Handling Is Required <a href="#identify-when-custom-handling-is-required" id="identify-when-custom-handling-is-required"></a>
 
-A project may appear to need a lighter customer-led path when the real issue is:
+Custom handling becomes necessary when the expected outcome depends on work beyond standard capability or Standard Add-on capability. In these cases, the project is no longer only deciding who performs the migration. It is deciding how business meaning should be preserved when standard structures are not enough.
 
-* limited internal bandwidth
-* unclear review responsibility
-* timeline pressure
-* a launch window with little tolerance for rework
-* a team that cannot review results quickly enough
+Custom handling may be relevant when:
 
-A project may appear to need only expert-led execution when the real issue is actually:
+* custom fields affect storefront, reporting, fulfillment, customer service, or merchandising behavior;
+* app, plugin, module, or extension-managed data must remain usable after migration;
+* field values need transformation before they make sense on the Target Platform;
+* filtering, mapping, or data configuration needs exceed Standard Add-on capability;
+* the Source Platform or Target Platform uses non-standard structures;
+* a Custom Platform requires bespoke interpretation;
+* outside-system identifiers must remain connected to ERP, CRM, PIM, OMS, fulfillment, marketing, or analytics systems;
+* the Target Platform cannot represent an important behavior in the same way by default.
 
-* hidden custom logic
-* transformation requirements
-* selective migration rules
-* a Target Platform capability gap
-* business-critical meaning stored in apps, plugins, modules, extensions, custom fields, or outside systems
+Custom Service is the Next-Cart path for customization or modification-driven handling, including Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, and bespoke transformation. It does not automatically mean Next-Cart performs the full migration unless migration management is included in the final plan.
 
-The right approach is the one that reduces the project’s highest real risk, not the one that sounds most convenient in the abstract.
+### Treat Add-ons as Scope and Handling Signals <a href="#treat-add-ons-as-scope-and-handling-signals" id="treat-add-ons-as-scope-and-handling-signals"></a>
 
-### Five strong approach signals <a href="#five-strong-approach-signals" id="five-strong-approach-signals"></a>
+Add-ons should not be treated as general feature promotion inside approach planning. They should appear only when the project has a concrete planning need that points to filtering, mapping, or configuration work.
 
-#### Structural complexity <a href="#structural-complexity" id="structural-complexity"></a>
+Relevant signals include:
 
-Approach risk rises when product structure, category logic, attributes, customer relationships, order-history expectations, or content structures are difficult to represent clearly on the Target Platform.
+* the project needs to migrate only selected records;
+* field relationships require more precise mapping than the standard path covers;
+* product, customer, order, category, or content data needs configuration before it can be interpreted correctly;
+* source values need to be included, excluded, grouped, adjusted, or mapped in a specific way;
+* the customer wants a controlled outcome rather than a broad transfer of available records.
 
-#### Data ambiguity <a href="#data-ambiguity" id="data-ambiguity"></a>
+Standard Add-ons can help when the need fits predefined filtering, mapping, or configuration capability. Tailored Add-ons and Custom Add-ons belong under Custom Service when the requirement needs adjustment or bespoke handling beyond standard capability.
 
-Messy or inconsistent source data makes interpretation and review harder. Examples include inconsistent variant values, duplicate records, unclear customer identifiers, misleading category structures, and workaround fields carrying hidden business meaning.
+This keeps Add-ons connected to real project requirements instead of turning the approach discussion into a service-feature list.
 
-#### App, plugin, module, extension, and integration dependence <a href="#app-plugin-module-extension-and-integration-dependence" id="app-plugin-module-extension-and-integration-dependence"></a>
+### Build an Approach Decision Matrix <a href="#build-an-approach-decision-matrix" id="build-an-approach-decision-matrix"></a>
 
-Approach risk rises quickly when important business meaning lives outside the standard data model. These dependencies are among the clearest signals that standard service capability may not be enough on its own.
+A simple matrix can prevent approach selection from becoming subjective. The goal is not to calculate an automatic answer. The goal is to expose the evidence behind the decision.
 
-#### Validation burden <a href="#validation-burden" id="validation-burden"></a>
+| Decision area         | Lower-control signal                                      | Higher-control signal                                                        | What it influences                                               |
+| --------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Data structure        | Standard records and predictable relationships            | Custom fields, extensions, complex relationships, or non-standard structures | Whether standard handling is enough                              |
+| Platform difference   | Similar data models and acceptable representation changes | Major mismatch between Source Platform and Target Platform behavior          | Whether mapping or transformation needs deeper review            |
+| Internal capacity     | Customer team can execute and validate on time            | Customer team has limited availability or launch pressure                    | Whether expert-led execution is safer                            |
+| Scope selectivity     | Full or simple scope                                      | Precise filtering, exclusions, partial history, or segmented records         | Whether Data Filter Add-on or custom selection logic is needed   |
+| Validation burden     | Basic review is enough for launch confidence              | Stakeholders require detailed acceptance proof                               | How much review structure the approach needs                     |
+| External dependencies | Few or low-impact external systems                        | ERP, CRM, PIM, fulfillment, subscription, loyalty, or analytics dependencies | Whether external identifiers and workflows need special handling |
 
-A technically feasible migration can still become risky if the business cannot review results quickly, clearly, or consistently enough before launch. Approach choice should account for who can confirm the result is acceptable.
+A project with low structural uncertainty but high internal workload may need guided execution. A project with high structural uncertainty may need Custom Service evaluation. A project with both may need a combined plan.
 
-#### Selectivity and transformation needs <a href="#selectivity-and-transformation-needs" id="selectivity-and-transformation-needs"></a>
+### Avoid Choosing the Approach Too Early <a href="#avoid-choosing-the-approach-too-early" id="avoid-choosing-the-approach-too-early"></a>
 
-Some projects are harder not because of size, but because the business wants precise selection rules, transformed field logic, or non-standard preservation of meaning. In those cases, the approach must preserve rules and outcomes, not just move records.
+A common mistake is choosing the approach before the project has enough evidence. Early assumptions often come from record counts, platform names, or budget expectations. Those assumptions can change once the team reviews representative data and identifies actual dependencies.
 
-### When a customer-led standard approach is realistic <a href="#when-a-customer-led-standard-approach-is-realistic" id="when-a-customer-led-standard-approach-is-realistic"></a>
+Approach choice should usually wait until the project has at least:
 
-A customer-led standard approach is often realistic when the project is predictable enough that the main burden is execution discipline rather than structural uncertainty.
+* an initial entity and scope list;
+* a clear view of what must remain equivalent;
+* representative sample evidence;
+* known exclusions or acceptable changes;
+* identified custom fields, extension data, and outside-system dependencies;
+* a realistic view of internal execution and review capacity;
+* preliminary acceptance criteria for launch approval.
 
-Typical signals include:
+This does not mean every project needs a long discovery phase. It means the approach should be based on enough information to avoid solving the wrong problem.
 
-* representative records map cleanly
-* core business behavior remains understandable
-* app, plugin, module, or extension dependence is limited or non-critical
-* the customer team can manage execution and review responsibility
-* differences revealed by early review are acceptable rather than commercially risky
+### Match the Approach to the Highest Real Risk <a href="#match-the-approach-to-the-highest-real-risk" id="match-the-approach-to-the-highest-real-risk"></a>
 
-This kind of project is not risk-free. It is simply predictable enough that a customer-led standard path can be a sound planning decision.
+The best approach is usually the one that addresses the highest real risk first.
 
-### When expert-led execution is safer <a href="#when-expert-led-execution-is-safer" id="when-expert-led-execution-is-safer"></a>
+If the highest risk is internal workload, stronger execution support may be the right answer. If the highest risk is structural mismatch, custom mapping or transformation may be required. If the highest risk is unclear scope, approach selection should wait until the scope is defined. If the highest risk is validation uncertainty, the approach should include stronger review checkpoints and acceptance criteria.
 
-Expert-led execution is usually safer when the project appears feasible within standard service capability, but the customer does not want migration success to depend heavily on internal coordination, execution capacity, or repeated decision handoffs.
+Approach selection becomes weak when it treats all risk as the same kind of risk. A migration can fail because the data is difficult, because decisions are unclear, because the team cannot review the result, or because the Target Platform cannot express the same behavior without adjustment. Each problem points to a different kind of approach.
 
-Typical signals include:
+### Approach Selection Should Produce a Planning Rationale <a href="#approach-selection-should-produce-a-planning-rationale" id="approach-selection-should-produce-a-planning-rationale"></a>
 
-* limited internal bandwidth
-* a tight launch window
-* a need for stronger process control
-* review demands that are difficult to coordinate internally
-* a structurally feasible store that still requires careful operational handling
+The output of approach selection should be a rationale the team can use during the rest of the project. It should explain why the chosen approach fits the project evidence and what assumptions must remain true.
 
-In these cases, the business is usually reducing execution risk rather than solving a structural impossibility.
+A strong rationale usually includes:
 
-### When Custom Service becomes necessary <a href="#when-custom-service-becomes-necessary" id="when-custom-service-becomes-necessary"></a>
+* the protected outcomes;
+* the selected scope and major exclusions;
+* the strongest complexity signals;
+* the customer team’s execution and review responsibilities;
+* the expected level of Next-Cart involvement, if relevant;
+* Add-ons or Custom Service considerations, if justified by the project;
+* validation priorities that must confirm the approach worked;
+* conditions that would trigger approach escalation.
 
-Custom Service is required when customization or modification work is needed to achieve the expected result. This includes Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, bespoke transformation, or other handling beyond standard service capability.
-
-Custom Service can be relevant when:
-
-* standard handling cannot preserve the required outcome reliably enough
-* filtering, mapping, or configuration requirements exceed Standard Add-on capability
-* the Source Platform or Target Platform has non-standard structures
-* custom fields or outside-system identifiers must remain usable after launch
-* third-party data must be interpreted, transformed, or preserved in a specific way
-* the Target Platform cannot represent important behavior in the same way by default
-
-Custom Service does not automatically mean Next-Cart performs full migration execution. Migration management can be part of the final plan, but it is not automatic unless included.
-
-### How this planning decision connects to Next-Cart services <a href="#how-this-planning-decision-connects-to-next-cart-services" id="how-this-planning-decision-connects-to-next-cart-services"></a>
-
-At a high level, the planning patterns often connect to Next-Cart services this way:
-
-| Planning signal                                                                                               | Likely service direction | Why                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Predictable structure, customer can execute and review                                                        | Standard Service         | The customer can self-perform the migration process on the Next-Cart website with support and any purchased Standard Add-ons. |
-| Standard capability appears sufficient, but execution burden is high                                          | Managed Service          | Next-Cart performs the migration for the customer using standard service capability and any purchased Standard Add-ons.       |
-| Customization, modification, Custom Platform, Tailored Add-ons, Custom Add-ons, or bespoke handling is needed | Custom Service           | The project requires work beyond standard service capability or Standard Add-on capability.                                   |
-
-This mapping should become firmer after representative review. The goal is to determine whether the project is mainly facing execution responsibility, operational coordination, or customization/modification requirements.
-
-### Use preparation quality to improve approach quality <a href="#use-preparation-quality-to-improve-approach-quality" id="use-preparation-quality-to-improve-approach-quality"></a>
-
-Approach decisions improve when preparation improves. The business does not need perfect documentation, but it does need practical clarity on:
-
-* which outcomes must remain reliable after launch
-* which parts of the store carry the highest commercial or operational risk
-* where important data and logic actually live
-* how difficult the result will be to review
-* what would count as an acceptable difference after migration
-* what would create a launch-blocking issue
-
-Without that clarity, teams often choose an approach that looks efficient early and becomes more expensive later because the project was solving for speed instead of predictability.
-
-### A useful decision test <a href="#a-useful-decision-test" id="a-useful-decision-test"></a>
-
-A practical test is:
-
-**If the project went wrong, what is the most likely reason?**
-
-If the likely reason is internal execution burden, the project likely needs a more expert-led path.
-
-If the likely reason is hidden custom logic, structural mismatch, or transformation requirements, the project likely needs Custom Service review.
-
-If the likely reason is unclear review standards or weak preparation, the project should strengthen planning before locking the approach.
-
-If none of those signals dominate because the store looks predictable and the customer team is capable, a customer-led standard approach may be realistic.
-
-This framing usually leads to better decisions than comparing service labels too early.
+This rationale prevents the approach from becoming a one-time label. It gives the project a decision record that can be revisited if sample results, scope changes, or platform constraints reveal new risk.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Choosing the right migration approach is really about matching the project to the right kind of risk control. Some stores mainly need a predictable customer-led path. Some need expert-led execution because internal coordination would create avoidable risk. Others need Custom Service because preserving business-critical meaning depends on customization, modification, Custom Platform handling, or bespoke interpretation that standard service capability cannot safely cover on its own.
+Choosing the right migration approach means matching the project to the kind of control it actually needs. A predictable project with enough internal capacity may fit customer-led execution. A feasible but operationally demanding project may need guided or expert-led execution. A project that depends on non-standard preservation, transformation, Custom Platform handling, or deeper mapping may need Custom Service evaluation.
 
-Choose the approach after the project has enough evidence to reveal where the real risk sits. If the main uncertainty is whether the project needs customer-led execution, expert-led execution, or Custom Service review, Live Chat can help clarify the practical service direction before the project commits too far in the wrong path.
+The strongest decision comes from evidence: protected outcomes, scope, representative data, complexity signals, internal capacity, and validation requirements. When approach selection follows those inputs, the migration plan is more likely to control the right risks before execution begins.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is the right migration approach mainly determined by store size?**
+**Should the migration approach be chosen before a sample review?**
 
-No. Size affects workload, but structure, third-party dependence, data ambiguity, review burden, Target Platform fit, and customization requirements often matter more.
+It can be estimated early, but it should not be treated as final until representative data has been reviewed. A sample can reveal structural issues, custom logic, or review demands that change the safest approach.
 
-**When does a project usually fit Standard Service?**
+**Does a large store always need a more advanced migration approach?**
 
-A project usually fits Standard Service when standard service capability is enough, the expected outcome is predictable, and the customer can self-perform the migration process and review the result with confidence.
+No. Large stores can be predictable when their data structures are clean and their expected outcomes are straightforward. Smaller stores can require deeper handling when they depend on custom fields, extension data, platform-specific logic, or strict validation requirements.
 
-**When does a project usually fit Managed Service?**
+**What is the difference between needing execution support and needing Custom Service?**
 
-A project usually fits Managed Service when standard service capability is enough, but the business wants Next-Cart to perform the migration because internal execution bandwidth, coordination, or timeline pressure would create avoidable risk.
+Execution support helps when the migration is feasible but the customer team needs stronger coordination, process control, or workload support. Custom Service is needed when customization or modification work is required to preserve the expected result.
 
-**When does a project usually need Custom Service?**
+**When should Add-ons be considered during approach selection?**
 
-A project usually needs Custom Service when customization or modification work is required, including Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, bespoke transformation, or handling beyond standard service capability.
+Add-ons should be considered when the project has a specific filtering, mapping, or configuration need. They should not be added by default; they should solve a defined planning requirement.
 
-**Does Custom Service automatically mean Next-Cart performs the full migration?**
+**What should trigger approach escalation?**
 
-No. Custom Service covers customization or modification-driven handling. Migration management can be included in the final plan, but it is not automatic unless included.
-
-**What is the biggest mistake in approach selection?**
-
-One major mistake is choosing an approach based on surface simplicity while underestimating execution burden, hidden custom logic, Target Platform limitations, or review difficulty.
+Approach escalation should be considered when sample results reveal structural mismatch, unsupported data, hidden custom logic, unclear ownership, Target Platform limitations, or validation demands that the current approach cannot control safely.

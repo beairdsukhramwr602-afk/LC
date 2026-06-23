@@ -179,9 +179,9 @@ Run a Demo Migration using samples from the parts of the source store that carry
 
 No. It includes moving store data, but the larger goal is to preserve usable business meaning in the Target Platform. A target store can contain migrated records and still be unsuitable if product logic, category paths, customer context, order usability, content, or SEO continuity no longer work as expected.
 
-**What data is usually included in e-commerce platform migration?**
+**What data is usually included in an e-commerce platform migration?**
 
-Common migration scope may include products, customers, orders, categories, reviews, coupons, taxes, CMS Pages, Blog Posts, images, SEO fields, customer addresses, variants, options, attributes, and supporting relationships. Exact scope depends on the migration path, platform capability, selected service scope, Add-ons, and any Custom Service requirements.
+Common migration scope may include products, customers, orders, categories, reviews, coupons, taxes, CMS Pages, Blog Posts, images, SEO fields, customer addresses, variants, options, attributes, and supporting relationships. The exact scope depends on the migration path, platform capability, selected service scope, Add-ons, and any Custom Service requirements.
 
 **How is migration different from replatforming?**
 
@@ -193,7 +193,7 @@ A migration can look complete when record counts match, but still fail if the mi
 
 **When should Custom Service be considered?**
 
-Custom Service should be considered when the project involves customization, modification, Custom Platform handling, custom fields, app, plugin, module, extension, or third-party data, outside-system identifiers, unsupported structures, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke handling beyond standard service capability.
+Custom Service should be considered when the project involves customization, modification, Custom Platform handling, custom fields, app, plugin, module, extension, or third-party data; outside-system identifiers; unsupported structures; custom migration logic adjustment; Tailored Add-ons; Custom Add-ons; or broader bespoke handling beyond standard service capability.
 
 **What should be reviewed first before a larger migration?**
 

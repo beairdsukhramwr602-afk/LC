@@ -1,6 +1,6 @@
 # Next-Cart Migration Service Overview
 
-Next-Cart provides E-commerce Platform Migration Services for moving store data from a Source Platform to a Target Platform under a purchased migration service license. The service license connects the selected migration path with the practical decisions needed to prepare store data, configure migration behavior, choose a service model, review the migrated result, and continue migration activity when needed.
+Next-Cart provides E-commerce Platform Migration Services for moving store data from a Source Platform to a Target Platform under a purchased migration service license. The service license connects the selected migration path with the practical decisions needed to prepare store data, configure migration behavior, choose a Migration Service, review the migrated result, and continue migration activity when needed.
 
 A strong migration plan starts with the service structure, not only with the amount of data being moved. Data volume affects capacity and pricing, but migration quality also depends on platform fit, source-store condition, target-store expectations, configuration decisions, Add-ons, Custom Service needs, execution responsibility, and final result verification.
 
@@ -8,16 +8,16 @@ A strong migration plan starts with the service structure, not only with the amo
 
 The service overview gives customers a first map of the decisions that shape a migration project. It helps separate related concepts that are often confused during early planning.
 
-| Planning area       | What it clarifies                                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Migration direction | Which Source Platform and Target Platform are covered by the selected migration path.                         |
-| Service license     | Which purchased service access supports the migration path and later available migration actions.             |
-| Store data          | What source-store records, content, settings, and relationships may need to move into the target store.       |
-| Capacity            | How Entity Points help estimate counted migration capacity for Product, Customer, Order, and Blog Posts data. |
-| Pricing             | How the Entity Points Plan, service model, Add-ons, and custom requirements affect the total migration price. |
-| Configuration       | How settings, filtering, mapping, and data-configuration choices shape the target-store result.               |
-| Responsibility      | Whether migration actions are customer-led, expert-led, or custom-scoped under the selected service model.    |
-| Validation          | What the customer must verify before treating the target-store result as ready for business use.              |
+| Planning area       | What it clarifies                                                                                                 |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Migration direction | Which Source Platform and Target Platform are covered by the selected migration path.                             |
+| Service license     | Which purchased service access supports the migration path and later available migration actions.                 |
+| Store data          | What source-store records, content, settings, and relationships may need to move into the target store.           |
+| Capacity            | How Entity Points help estimate counted migration capacity for Product, Customer, Order, and Blog Posts data.     |
+| Pricing             | How the Entity Points Plan, Migration Service, Add-ons, and custom requirements affect the total migration price. |
+| Configuration       | How settings, filtering, mapping, and data-configuration choices shape the target-store result.                   |
+| Responsibility      | Whether migration actions are customer-led, expert-led, or custom-scoped under the selected Migration Service.    |
+| Validation          | What the customer must verify before treating the target-store result as ready for business use.                  |
 
 These areas should be considered together. A store with modest data volume may still require deeper review if the source store contains custom fields, third-party data, unusual relationships, or target-store expectations that standard handling cannot fully cover. A store with larger data volume may remain straightforward when the migration path is well supported and the required outcome is predictable.
 
@@ -27,7 +27,7 @@ A migration path defines the one-way direction from the Source Platform to the T
 
 For example, a service license for Platform A to Platform B covers that migration direction. If the customer later needs Platform B to Platform A, that is a different migration path.
 
-The migration path sets the service boundary. Before reviewing Entity Points, Add-ons, or service models, customers should confirm that the selected Source Platform and Target Platform match the store they intend to migrate and the target environment they intend to prepare.
+The migration path sets the service boundary. Before reviewing Entity Points, Add-ons, or Migration Services, customers should confirm that the selected Source Platform and Target Platform match the store they intend to migrate and the target environment they intend to prepare.
 
 ### Platform and Store Terminology <a href="#platform-and-store-terminology" id="platform-and-store-terminology"></a>
 
@@ -97,7 +97,7 @@ The Entity Points Plan is the pricing-capacity layer of the migration service. I
 
 Migration pricing can also be affected by:
 
-* the selected service model;
+* the selected Migration Service;
 * optional Add-ons;
 * Tailored Add-ons or Custom Add-ons;
 * Custom Service requirements;
@@ -119,23 +119,23 @@ Add-ons are suitable when the customer needs a focused configuration capability 
 
 Add-ons should not be confused with Custom Service. Add-ons support focused migration behavior. Custom Service handles broader customization, modification, bespoke handling, Custom Platform cases, and custom migration logic.
 
-### Service Models and Responsibility <a href="#service-models-and-responsibility" id="service-models-and-responsibility"></a>
+### Migration Services and Responsibility <a href="#migration-services-and-responsibility" id="migration-services-and-responsibility"></a>
 
-Next-Cart provides three service models: Standard Service, Managed Service, and Custom Service.
+Next-Cart provides three Migration Services: Standard Service, Managed Service, and Custom Service.
 
 At overview level:
 
-| Service model    | Main role                                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------------------------- |
-| Standard Service | Customer-led migration using the purchased service license and any selected Add-ons.                    |
-| Managed Service  | Next-Cart-led migration execution based on the customer’s request and agreed service scope.             |
-| Custom Service   | Custom-scoped handling for customization, modification, Custom Platform cases, or bespoke requirements. |
+| Migration Service | Main role                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------- |
+| Standard Service  | Customer-led migration using the purchased service license and any selected Add-ons.                    |
+| Managed Service   | Next-Cart-led migration execution based on the customer’s request and agreed service scope.             |
+| Custom Service    | Custom-scoped handling for customization, modification, Custom Platform cases, or bespoke requirements. |
 
 Standard Service and Custom Service without the Expert Handle option are customer-led for migration actions.
 
 Managed Service and Custom Service with the Expert Handle option allow Next-Cart experts to perform migration actions based on the customer’s request and agreed service scope.
 
-Customers of any service model can access and perform available migration actions manually if they choose. With any service model, the customer remains responsible for final result verification and migration outcome.
+Customers using any Migration Service can access and perform available migration actions manually if they choose. Under any Migration Service, the customer remains responsible for final result verification and migration outcome.
 
 ### Custom Service and Custom Requirements <a href="#custom-service-and-custom-requirements" id="custom-service-and-custom-requirements"></a>
 
@@ -174,11 +174,11 @@ The strongest learning path through this service section is:
 2. **How the Migration Process Works** — understand the migration journey from early proof to execution and validation.
 3. **Demo Migration** — understand how early samples support planning decisions.
 4. **Entity Points** — understand counted migration capacity.
-5. **Entity Points Plan and Migration Pricing** — understand how capacity, service model, Add-ons, and custom scope affect pricing.
+5. **Entity Points Plan and Migration Pricing** — understand how capacity, Migration Service, Add-ons, and custom scope affect pricing.
 6. **Add-ons** — understand focused filtering, mapping, and configuration support.
-7. **Next-Cart Service Models** — understand Standard Service, Managed Service, and Custom Service responsibility.
+7. **Next-Cart Migration Services** — understand Standard Service, Managed Service, and Custom Service responsibility.
 8. **What Custom Service Handles** — understand broader customization and bespoke migration needs.
-9. **Choose the Right Service Model** — connect the section concepts into a practical service decision.
+9. **Choose the Right Migration Service** — connect the section concepts into a practical service decision.
 10. **Additional Migration Options** — understand available options after migration activity has already taken place.
 
 This order moves from orientation to process, proof, capacity, pricing, configuration support, service responsibility, custom scope, service choice, and later migration options.
@@ -203,13 +203,13 @@ Clarifying these points before execution helps reduce rework and improves the ch
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Next-Cart’s E-commerce Platform Migration Service gives customers a structured way to plan, execute, and validate migration from a Source Platform to a Target Platform. The migration path defines the service direction. The migration process explains how the work moves from early evidence to execution and validation. Entity Points and the Entity Points Plan clarify capacity and pricing. Add-ons support focused configuration needs. Service models define responsibility. Custom Service handles requirements beyond standard capability. Additional migration options help customers continue working with the same migration path after earlier migration activity.
+Next-Cart’s E-commerce Platform Migration Service gives customers a structured way to plan, execute, and validate migration from a Source Platform to a Target Platform. The migration path defines the service direction. The migration process explains how the work moves from early evidence to execution and validation. Entity Points and the Entity Points Plan clarify capacity and pricing. Add-ons support focused configuration needs. Migration Services define responsibility. Custom Service handles requirements beyond standard capability. Additional migration options help customers continue working with the same migration path after earlier migration activity.
 
 A reliable migration decision comes from understanding how these parts work together. Customers should review what the source store contains, what the target store needs to become, who should perform the migration actions, which configuration or custom handling is needed, and how the final migrated result will be verified.
 
 For migration questions involving unclear scope, Add-ons, custom data, service responsibility, pricing capacity, or target-store readiness, Live Chat can help clarify the next decision before the customer commits to a service path.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What does Next-Cart’s migration service help customers do?**
 
@@ -235,10 +235,10 @@ No. Add-ons are focused optional service features for filtering, mapping, or dat
 
 No. Custom Service means the project requires custom or tailored handling. Expert-handled migration execution depends on the customer’s request and the agreed custom scope.
 
-**Can customers perform migration actions manually under any service model?**
+**Can customers perform migration actions manually under any Migration Service?**
 
-Yes. Customers of any service model can access and perform available migration actions manually if they choose. Service models define responsibility and included work, while the customer remains responsible for final result verification and migration outcome.
+Yes. Customers using any Migration Service can access and perform available migration actions manually if they choose. Migration Services define the responsibility and include work, while the customer remains responsible for final result verification and the migration outcome.
 
 **What are additional migration options?**
 
-Additional migration options are available actions customers may use after migration activity has already taken place under the purchased service license. They may include continuing with the last used configuration, continuing with a new configuration, or performing a new migration for the same migration path.
+Additional migration options are available to customers after migration activity has already taken place under the purchased service license. They may include continuing with the last used configuration, continuing with a new configuration, or performing a new migration for the same migration path.

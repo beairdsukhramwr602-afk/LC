@@ -74,7 +74,7 @@ At a planning level, configuration may include:
 
 Configuration is where source-store meaning begins to be translated into target-store behavior. A target store may contain migrated records but still need review if the configuration does not support how the business needs to operate.
 
-Customers should treat configuration as a decision point. It can determine whether migrated products remain buyable, whether customers and orders remain useful, whether content still makes sense, and whether the selected service model has enough support for the expected result.
+Customers should treat configuration as a decision point. It can determine whether migrated products remain buyable, whether customers and orders remain useful, whether content still makes sense, and whether the selected Migration Service has enough support for the expected result.
 
 ### Stage 4: Full Migration Execution <a href="#stage-4-full-migration-execution" id="stage-4-full-migration-execution"></a>
 
@@ -120,7 +120,7 @@ Priority review areas often include:
 * URL and content continuity where they affect traffic or customer journeys;
 * records affected by Add-ons, mapping decisions, filtering, or Custom Service requirements.
 
-The customer remains responsible for final result verification and migration outcome. Next-Cart may provide support, perform migration actions, or handle customization depending on the selected service model and agreed scope, but only the customer can confirm whether the target store matches the intended business use.
+The customer remains responsible for final result verification and migration outcome. Next-Cart may provide support, perform migration actions, or handle customization depending on the selected Migration Service and agreed scope, but only the customer can confirm whether the target store matches the intended business use.
 
 Validation should produce clear decisions. If the migrated result is accurate and suitable, the customer can continue toward the next launch or business step. If the result exposes mapping issues, missing records, unsupported custom data, or target-store behavior that does not match expectations, the customer should review whether configuration, Add-ons, Custom Service, or another migration action is needed.
 
@@ -140,7 +140,7 @@ Additional migration options should be chosen around the intended target-store o
 
 ### How Customer-Led and Expert-Led Execution Fit into the Process <a href="#how-customer-led-and-expert-led-execution-fit-into-the-process" id="how-customer-led-and-expert-led-execution-fit-into-the-process"></a>
 
-The migration process can be customer-led or expert-led depending on the selected service model and agreed scope.
+The migration process can be customer-led or expert-led depending on the selected Migration Service and agreed scope.
 
 | Service context                      | Execution responsibility                                                                                                                                                 |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -149,7 +149,7 @@ The migration process can be customer-led or expert-led depending on the selecte
 | Managed Service                      | Next-Cart performs migration actions based on the customer’s request and agreed service scope. The customer can still perform available actions manually if they choose. |
 | Custom Service with Expert Handle    | Next-Cart performs migration actions based on the customer’s request and agreed custom scope. The customer can still perform available actions manually if they choose.  |
 
-Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and support scope. With any service model, the customer remains responsible for final result verification and migration outcome.
+Customers using any Migration Service can access and perform available migration actions manually if they choose. The selected Migration Service determines responsibility, expert handling, and support scope. Under any Migration Service, the customer remains responsible for final result verification and migration outcome.
 
 ### Common Misunderstandings About the Process <a href="#common-misunderstandings-about-the-process" id="common-misunderstandings-about-the-process"></a>
 
@@ -183,7 +183,7 @@ The Next-Cart migration process gives customers a structured path from early pro
 
 A migration becomes more reliable when customers understand the purpose of each stage before moving forward. If the process reveals selective-scope needs, mapping uncertainty, Add-on requirements, Custom Service requirements, service-responsibility questions, or launch-timing concerns, Live Chat can help clarify which part of the process needs closer review.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What are the main stages of a Next-Cart migration?**
 
@@ -205,9 +205,9 @@ Yes. All scanned records are migrated by default unless filtering is configured.
 
 No. Migration order determines the sequence used to process store data. Entity Points consumption applies to counted core data types: Product, Customer, Order, and Blog Posts.
 
-**Can customers perform migration actions manually under any service model?**
+**Can customers perform migration actions manually under any Migration Service?**
 
-Yes. Customers of any service model can access and perform available migration actions manually if they choose. The selected service model determines responsibility, expert handling, and support scope.
+Yes. Customers using any Migration Service can access and perform available migration actions manually if they choose. The selected Migration Service determines responsibility, expert handling, and support scope.
 
 **Does Demo Migration prove the full migration is ready?**
 

@@ -99,16 +99,16 @@ This keeps additional migration planning focused on real counted-data needs. New
 
 ### How Service Responsibility Works <a href="#how-service-responsibility-works" id="how-service-responsibility-works"></a>
 
-Customers on any service model can access and manually perform available migration actions if they choose. The service model determines who is responsible for performing migration actions and how much expert handling is included.
+Customers on any Migration Service can access and manually perform available migration actions if they choose. The Migration Service determines who is responsible for performing migration actions and how much expert handling is included.
 
-| Service model                        | Who performs migration actions                                                                                                                                           | Customer responsibility                                       |
+| Migration Service                    | Who performs migration actions                                                                                                                                           | Customer responsibility                                       |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
 | Standard Service                     | The customer performs migration actions.                                                                                                                                 | The customer verifies the final result and migration outcome. |
 | Custom Service without Expert Handle | The customer performs migration actions.                                                                                                                                 | The customer verifies the final result and migration outcome. |
 | Managed Service                      | Next-Cart performs migration actions based on the customer’s request and agreed service scope. The customer can still perform available actions manually if they choose. | The customer verifies the final result and migration outcome. |
 | Custom Service with Expert Handle    | Next-Cart performs migration actions based on the customer’s request and agreed custom scope. The customer can still perform available actions manually if they choose.  | The customer verifies the final result and migration outcome. |
 
-The service model affects execution responsibility. It does not remove the customer’s responsibility to confirm that the target-store result matches the intended migration outcome.
+The Migration Service affects execution responsibility. It does not remove the customer’s responsibility to confirm that the target-store result matches the intended migration outcome.
 
 ### What to Decide Before Choosing an Option <a href="#what-to-decide-before-choosing-an-option" id="what-to-decide-before-choosing-an-option"></a>
 
@@ -124,8 +124,8 @@ Useful questions include:
 | Should the earlier target-store result be replaced?                                                                           | If yes, performing a new migration may be more suitable.                                 |
 | Is there enough Entity Points capacity for newly migrated counted records?                                                    | New Product, Customer, Order, and Blog Posts records require available counted capacity. |
 | Does the requirement involve custom fields, app data, extension data, plugin data, Custom Platform handling, or custom logic? | Custom Service review may be needed before execution.                                    |
-| Who should perform the action under the selected service model?                                                               | Execution responsibility should be clear before the action starts.                       |
-| What target-store result must be verified afterward?                                                                          | Validation remains required for every service model.                                     |
+| Who should perform the action under the selected Migration Service?                                                           | Execution responsibility should be clear before the action starts.                       |
+| What target-store result must be verified afterward?                                                                          | Validation remains required for every Migration Service.                                 |
 
 These questions help prevent customers from choosing an option only because it appears available. The safest option is the one that matches the intended target-store result and the customer’s service scope.
 
@@ -167,7 +167,7 @@ Additional Migration Options help customers decide what to do after migration ac
 
 The best choice depends on the customer’s goal, source-store changes, configuration needs, Entity Points capacity for newly migrated counted records, service responsibility, and validation expectations. If the right option is unclear, Live Chat can help review whether the next step should be continuation, configuration adjustment, a new migration, Add-ons, Custom Service review, or expert-handled execution.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **When do Additional Migration Options become available?**
 
@@ -191,7 +191,7 @@ No. Counted records already recorded through the service license do not consume 
 
 **Can customers perform these options manually?**
 
-Yes. Customers on any service model can access and manually perform available migration actions if they choose.
+Yes. Customers on any Migration Service can access and manually perform available migration actions if they choose.
 
 **Who performs these options under Managed Service or Custom Service with Expert Handle?**
 

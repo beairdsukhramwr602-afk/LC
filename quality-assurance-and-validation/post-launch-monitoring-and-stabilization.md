@@ -307,7 +307,7 @@ A migrated store can look ready before launch and still reveal important issues 
 
 The goal is not to remove every fluctuation. The goal is to confirm that the target store is stable enough to trust, surface the issues that matter before they create extended disruption, and revalidate affected areas after correction or additional migration activity.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be checked first after launching a migrated store?**
 

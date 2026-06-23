@@ -138,7 +138,9 @@ This outcome-based review keeps validation tied to the business result rather th
 
 ### How Service Responsibility Fits Into Validation <a href="#how-service-responsibility-fits-into-validation" id="how-service-responsibility-fits-into-validation"></a>
 
-Next-Cart service responsibility depends on the selected service model and agreed scope, but final result verification remains a customer responsibility. The customer is the party best positioned to judge whether the migrated store is acceptable for their business, customers, internal teams, and launch goals.
+Next-Cart service responsibility depends on the selected Migration Service and agreed scope, but final result verification remains a customer responsibility. The customer is the party best positioned to judge whether the migrated store is acceptable for their business, customers, internal teams, and launch goals.
+
+Standard Service is typically customer-led. Managed Service and Custom Service with Expert Handle can include more Next-Cart execution or guidance, depending on the agreed plan. Custom Service can also support custom structure, bespoke handling, modified logic, or Custom Platform requirements.
 
 Even when Next-Cart assists with execution or custom handling, validation should still confirm whether the target-store result meets the customer’s business expectations.
 
@@ -223,7 +225,7 @@ Migration validation succeeds when it proves that the target store is understand
 
 The best validation work starts with business outcomes, then uses record counts, representative samples, relationship checks, workflow review, and accepted platform differences as supporting evidence. A migrated store does not need to be identical to the source store, but it must be trustworthy enough for the customer to operate, support, market, and launch with confidence.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Why are record counts not enough to approve a migration?**
 
@@ -235,7 +237,7 @@ Usually no. A representative validation sample is stronger than random broad che
 
 **Who is responsible for final validation?**
 
-The customer is responsible for final result verification because only the customer can judge whether the target store is acceptable for their business, customers, operations, and launch goals. Next-Cart may support execution, guidance, or custom handling depending on the selected service model and agreed scope.
+The customer is responsible for final result verification because only the customer can judge whether the target store is acceptable for their business, customers, operations, and launch goals. Next-Cart may support execution, guidance, or custom handling depending on the selected Migration Service and agreed scope.
 
 **Does a strong Demo Migration remove the need for final validation?**
 

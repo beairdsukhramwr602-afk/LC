@@ -318,7 +318,7 @@ That means building it around business-critical outcomes, representative samples
 
 Before final validation begins, define the outcomes that would create the greatest risk if they failed, choose representative samples for each one, and assign qualified reviewers. If those standards are difficult to define, Demo Migration review or Live Chat can help clarify what should be treated as launch-critical and what may be an acceptable target-store difference.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **How many items should a migration validation checklist include?**
 
@@ -343,4 +343,3 @@ Yes, when they affect revenue, customer continuity, operations, reporting, fulfi
 **How do Additional Migration Options affect the checklist?**
 
 Additional Migration Options can change what needs to be rechecked, especially when new records, updated configuration, or a new migration run affects the target store. They do not remove the need for validation. The checklist should be updated to reflect the action performed and the result that needs approval.
-
