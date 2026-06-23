@@ -1,257 +1,188 @@
 # Shopify Plus Validation Priorities
 
-A Shopify Plus migration should be validated, where the platform is most likely to reshape commercial meaning. Record presence is not enough. Products, customers, companies, catalogs, orders, stores, and content can appear in the Target Platform while the actual buying context, account access, pricing visibility, or enterprise workflow still needs closer review.
+Shopify Plus validation should prove that the migrated Target Platform can support the business model behind the storefront. Record totals are useful, but they are not enough for a store that depends on companies, company locations, catalog-controlled pricing, buyer permissions, B2B and direct-to-consumer coexistence, multiple stores, markets, metafields, metaobjects, apps, integrations, and external-system identifiers.
 
-This is especially important because Shopify Plus is often selected for more than a storefront replacement. It may support B2B structure, company and company-location relationships, catalog-based visibility, buyer access, multi-store governance, market-based localization, app-dependent workflows, and custom data. A validation plan that treats every migrated record equally can overlook the areas where Shopify Plus has the greatest business impact.
+A strong validation plan should test the scenarios where Shopify Plus changes commercial meaning. The most important question is not only whether products, customers, orders, CMS Pages, Blog Posts, and redirects are present. The stronger question is whether the right buyers can access the right products, see the right pricing, use the right account context, reach the right storefront path, and continue business operations with confidence after migration.
 
-Strong Shopify Plus validation should therefore test the scenarios that matter most: company structure, catalog behavior, account access, store context, enterprise workflow continuity, high-value product paths, and cases where Custom Platform or custom data logic requires interpretation during migration.
+### What Shopify Plus Validation Should Prove <a href="#what-shopify-plus-validation-should-prove" id="what-shopify-plus-validation-should-prove"></a>
 
-### What Shopify Plus validation is trying to prove <a href="#what-shopify-plus-validation-is-trying-to-prove" id="what-shopify-plus-validation-is-trying-to-prove"></a>
+Shopify Plus validation should prove business continuity across the structures that make the platform different from a simpler Shopify migration. For many merchants, Shopify Plus is selected because it can support B2B selling, catalog-based access, enterprise governance, custom data, and integration-heavy operations. Those areas need validation evidence that goes beyond visual storefront checks.
 
-Shopify Plus validation is trying to prove that the migrated store can support the intended operating model, not only that, but the migration produced visible records.
+A Shopify Plus validation framework should confirm:
 
-#### Company and company-location structure still reflects the business relationship <a href="#company-and-company-location-structure-still-reflects-the-business-relationship" id="company-and-company-location-structure-still-reflects-the-business-relationship"></a>
+| Validation area              | What the review should prove                                                                                                                                               |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Companies and locations      | Buying organizations, locations, contacts, addresses, permissions, tax context, payment terms, and checkout behavior still represent the intended commercial relationship. |
+| Catalogs and pricing         | The right company or location sees the right products, pricing, quantity rules, and volume pricing behavior.                                                               |
+| Buyer access                 | Returning customers and B2B contacts can reach the intended account experience and understand their company context.                                                       |
+| Store and market governance  | Stores, markets, domains, language, currency, and storefront boundaries behave as planned.                                                                                 |
+| Products and content         | Products, variants, collections, CMS Pages, Blog Posts, redirects, and SEO-sensitive paths remain usable in the Target Platform.                                           |
+| Custom data and integrations | Metafields, metaobjects, app-owned records, external IDs, and integration-dependent outputs still support operations.                                                      |
 
-The Target Platform may contain companies and company locations, but validation needs to confirm whether those structures still represent the real buying organizations, locations, contacts, permissions, addresses, tax expectations, and operational responsibilities the business depends on.
+Validation should use representative business examples. A broad scan of ordinary records can miss the company, catalog, buyer, market, or integration cases that carry the highest launch risk.
 
-#### Catalog visibility and pricing context still behave correctly <a href="#catalog-visibility-and-pricing-context-still-behave-correctly" id="catalog-visibility-and-pricing-context-still-behave-correctly"></a>
+### Validate Company and Company-Location Structure <a href="#validate-company-and-company-location-structure" id="validate-company-and-company-location-structure"></a>
 
-Catalogs can affect what B2B customers see and how pricing is presented. Validation should prove that the right company or location context sees the right products, pricing, and availability, especially when the Source Platform used customer groups, wholesale rules, contract pricing, hidden catalogs, or custom logic.
+The first Shopify Plus validation priority is usually the company model. Companies and company locations can control the buying context in ways that ordinary customer records cannot. A company may include multiple locations, and each location can carry its own contacts, addresses, tax expectations, payment terms, catalog assignments, and checkout behavior.
 
-#### Account access still feels clear and trustworthy <a href="#account-access-still-feels-clear-and-trustworthy" id="account-access-still-feels-clear-and-trustworthy"></a>
+Validation should test whether those relationships still match the business reality. A company record can be present but incomplete if locations are missing, contacts are attached to the wrong location, payment terms are not represented, tax information is not aligned, or checkout behavior does not fit the customer relationship.
 
-Customer records alone do not prove account continuity. Shopify Plus validation should test whether buyers can reach the right account experience, whether their company context is clear, and whether sign-in expectations match what the business will communicate before and after launch.
+Strong company and location validation should include:
 
-#### Store, market, and governance boundaries remain understandable <a href="#store-market-and-governance-boundaries-remain-understandable" id="store-market-and-governance-boundaries-remain-understandable"></a>
+* high-value companies with several locations;
+* companies with different billing and shipping addresses;
+* locations with different tax or exemption expectations;
+* buyer contacts with different permissions or responsibilities;
+* accounts that depend on payment terms or checkout review behavior;
+* source-side wholesale, distributor, branch, dealer, or account structures that required interpretation;
+* company or location external IDs needed by ERP, CRM, fulfillment, accounting, or reporting systems.
 
-Shopify Plus may involve one store, multiple stores, blended B2B and D2C selling, or market-specific storefront behavior. Validation should confirm that the chosen structure behaves as intended instead of assuming that the existence of stores, markets, or customer records proves governance continuity.
+The pass condition is not simply that companies exist in Shopify Plus. The pass condition is that company structure, location context, contacts, permissions, payment expectations, and operational identifiers still support the intended B2B relationship.
 
-#### Enterprise workflows still support real operations <a href="#enterprise-workflows-still-support-real-operations" id="enterprise-workflows-still-support-real-operations"></a>
+### Validate Catalog Assignment, Product Visibility, and Pricing <a href="#validate-catalog-assignment-product-visibility-and-pricing" id="validate-catalog-assignment-product-visibility-and-pricing"></a>
 
-Many Shopify Plus projects depend on apps, metafields, ERP connections, subscription systems, custom workflows, approval rules, or operational handoffs. Validation should test whether those workflows still make sense after migration, especially when migrated data is used by systems outside the storefront.
+Catalog validation is one of the highest-priority Shopify Plus checks because catalogs can determine what B2B customers can access and how products are priced. If the Source Platform used customer groups, price lists, wholesale tiers, hidden collections, contract pricing, or custom visibility logic, Shopify Plus validation should confirm that the translated model behaves acceptably.
 
-### Validation priority 1: company and company-location structure <a href="#validation-priority-1-company-and-company-location-structure" id="validation-priority-1-company-and-company-location-structure"></a>
+The review should test company and location scenarios, not only catalog records. A catalog can be assigned but still produce the wrong result if the company sees the wrong products, lacks key products, receives an incorrect price context, or exposes products that should remain hidden.
 
-The first Shopify Plus validation priority is usually the company model.
+Useful catalog and pricing samples include:
 
-Company and location structure should be reviewed with real commercial examples, not only broad record counts. The goal is to confirm whether the migrated structure still supports the business relationship between the merchant and each buying organization.
+| Sample type                                | Validation focus                                                                             |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Priority company with negotiated pricing   | Confirm assigned catalog, product visibility, and expected B2B pricing behavior.             |
+| Location-specific buying context           | Confirm that location-level catalog access and payment assumptions behave correctly.         |
+| Product group with sensitive visibility    | Confirm that restricted products are visible only where intended.                            |
+| Quantity-rule or volume-pricing case       | Confirm that purchase quantity behavior and price breaks support the business rule.          |
+| Blended B2B and direct-to-consumer product | Confirm that B2B buyers and retail customers do not see the wrong pricing or access context. |
 
-#### What to test in company samples <a href="#what-to-test-in-company-samples" id="what-to-test-in-company-samples"></a>
+Catalog validation should be tied to real purchasing scenarios. The strongest evidence comes from testing companies, locations, products, and price contexts together.
 
-A strong company sample should check:
+### Validate Buyer Access and Account Experience <a href="#validate-buyer-access-and-account-experience" id="validate-buyer-access-and-account-experience"></a>
 
-* whether important companies are present with the right commercial identity
-* whether company locations are represented correctly
-* whether buyers are connected to the right company or location context
-* whether addresses, payment expectations, tax context, contact details, and location-level responsibilities still make sense
-* whether historical order interpretation remains understandable in relation to the company or buyer context
-* whether any source-side customer group, wholesale tier, or account relationship was translated into an acceptable Shopify Plus structure
+Shopify Plus validation should review how buyers experience the migrated store. Customer records, buyer contacts, order history, and company access may all be technically present while the account experience remains confusing.
 
-The pass condition is not simply that companies exist. The pass condition is that the company and location model supports the same business relationship the Source Platform supported.
+This is especially important when customers purchase on behalf of companies, when buyers have access to more than one company location, or when B2B and direct-to-consumer activity coexist. The Target Platform should make it clear what account context the buyer is using, what they can access, and what purchasing path they should follow.
 
-### Validation priority 2: catalog assignment, product visibility, and pricing context <a href="#validation-priority-2-catalog-assignment-product-visibility-and-pricing-context" id="validation-priority-2-catalog-assignment-product-visibility-and-pricing-context"></a>
+Buyer-access validation should check:
 
-Catalog behavior is one of the highest-value Shopify Plus validation areas.
+* whether priority buyers can reach the intended account experience;
+* whether buyer records are connected to the correct company or location context;
+* whether buyers with multiple locations can identify the correct purchasing location;
+* whether account information, addresses, historical order context, and company context are understandable;
+* whether retail customers are not exposed to B2B-only content, catalogs, or pricing;
+* whether launch communication matches the actual sign-in and account experience.
 
-If catalogs control what buyers can access, then validation must prove that visibility and pricing behave correctly for the most important company and location scenarios. A catalog assignment can be technically present but still commercially wrong if it gives a buyer the wrong product set, the wrong price context, or an incomplete purchasing path.
+The pass condition is that buyers can continue purchasing with confidence. If a buyer can see records but cannot understand the company context, pricing, or purchasing path, validation is not complete.
 
-#### What to test in catalog samples <a href="#what-to-test-in-catalog-samples" id="what-to-test-in-catalog-samples"></a>
+### Validate Store, Market, and Governance Boundaries <a href="#validate-store-market-and-governance-boundaries" id="validate-store-market-and-governance-boundaries"></a>
 
-Catalog validation should check:
+Shopify Plus migrations often include organization-level decisions, multiple stores, B2B and direct-to-consumer separation, markets, regional domains, language, currency, or brand-specific storefronts. Validation should test the structure the merchant actually chose instead of assuming that all Shopify Plus stores operate the same way.
 
-* whether the correct catalog is assigned to the correct company or company location
-* whether the right products appear for that commercial context
-* whether products that should be hidden remain hidden
-* whether pricing, quantity logic, or buyer-specific commercial treatment is represented acceptably
-* whether catalog behavior still works across priority products, collections, markets, or stores
-* whether any pricing or visibility behavior depends on apps, metafields, external systems, or Custom Service handling
+Where multiple stores are involved, each store should be validated as its own operating context. Store-level products, collections, navigation, content, theme behavior, domains, market settings, and operational responsibilities should be reviewed separately where they affect customer experience or internal workflows.
 
-The strongest samples usually include high-value companies, sensitive pricing agreements, important wholesale product groups, and edge cases where the source used custom B2B logic.
+Store, market, and governance validation should confirm:
 
-### Validation priority 3: buyer access and account experience <a href="#validation-priority-3-buyer-access-and-account-experience" id="validation-priority-3-buyer-access-and-account-experience"></a>
+* whether products and collections belong in the right store context;
+* whether market, language, currency, and domain behavior matches the launch plan;
+* whether B2B and direct-to-consumer experiences are separated or blended as intended;
+* whether each store has the expected content, menus, URLs, and redirects;
+* whether regional or brand-specific teams understand what is shared, what is separate, and what requires separate configuration;
+* whether company, catalog, and buyer assumptions are reviewed within the correct store or market context.
 
-Shopify Plus validation should review the buyer experience, not only the customer record.
+The pass condition is not that the Shopify Plus organization exists. The pass condition is that each store and market context supports its intended commercial role.
 
-This is especially important where customers purchase on behalf of companies, where different buyers have different responsibilities, or where launch communication must explain a changed account experience. If the account path is unclear, the migration can look technically complete while still damaging trust for returning customers or B2B buyers.
+### Validate Products, Content, URLs, and SEO-Sensitive Paths <a href="#validate-products-content-urls-and-seo-sensitive-paths" id="validate-products-content-urls-and-seo-sensitive-paths"></a>
 
-#### What to test in account-access samples <a href="#what-to-test-in-account-access-samples" id="what-to-test-in-account-access-samples"></a>
+Product and content validation should focus on high-value paths, not only general completeness. Shopify Plus merchants often have complex products, variant structures, merchandising rules, category expectations, metafields, metaobjects, collections, content pages, Blog Posts, and SEO-sensitive URLs that influence revenue and trust.
 
-Useful account-access validation includes:
+Validation should include samples that reflect both normal and difficult cases:
 
-* whether important buyers can reach the intended account experience
-* whether company context appears clearly after sign-in
-* whether buyer access aligns with the intended company or location relationship
-* whether blended B2B and D2C customer scenarios behave as expected
-* whether customer records, addresses, order references, and relevant profile context are understandable
-* whether the launch communication plan matches what users will actually experience
+* high-revenue products with variants, options, images, pricing, inventory, and collection placement;
+* products with metafields, metaobjects, category metafields, compatibility data, downloadable information, specifications, or other structured content;
+* products with B2B catalog restrictions or different buyer contexts;
+* high-value collections, navigation paths, CMS Pages, Blog Posts, and landing pages;
+* priority URLs and redirects that affect search visibility or returning-customer behavior;
+* localized or market-specific paths where domain, language, currency, or content differs.
 
-The pass condition is that buyers understand where they are, what they can access, and how to continue purchasing after migration.
+Product validation should not treat storefront appearance as the whole result. A product page can look correct while the variant, collection, metafield, catalog, URL, or market context is still wrong. The strongest validation samples connect product structure to the way customers actually browse, price, purchase, and return to the store.
 
-### Validation priority 4: blended B2B and D2C behavior <a href="#validation-priority-4-blended-b2b-and-d2c-behavior" id="validation-priority-4-blended-b2b-and-d2c-behavior"></a>
+### Validate Apps, Metafields, Integrations, and Custom Data <a href="#validate-apps-metafields-integrations-and-custom-data" id="validate-apps-metafields-integrations-and-custom-data"></a>
 
-Some Shopify Plus stores combine B2B and D2C selling in one storefront. Others keep B2B and D2C experiences separate through different stores or stronger segmentation. Validation should test the model the business actually chose.
+Shopify Plus migration quality often depends on data used outside ordinary storefront display. Metafields, metaobjects, app-owned records, integration identifiers, ERP keys, CRM references, subscription relationships, loyalty data, B2B workflow fields, and reporting attributes can carry operational meaning even when they are not visible on a product or account page.
 
-Blended structures deserve special attention because the same storefront may need to support different customer contexts without creating confusion around products, pricing, account access, or checkout expectations.
+Validation should identify which custom or integration-owned data affects operations after migration. If those fields are included, samples should prove that the values are present, connected to the right records, usable by the intended system, and acceptable for launch operations.
 
-#### What to test in blended-store samples <a href="#what-to-test-in-blended-store-samples" id="what-to-test-in-blended-store-samples"></a>
+Custom-data validation should include:
 
-A blended-store validation sample should check:
+* products, customers, companies, orders, and content records with important metafields;
+* metaobject-driven product, content, or category information;
+* app-dependent records used by fulfillment, subscriptions, reviews, warranties, loyalty, wholesale, or reporting workflows;
+* external IDs that must stay connected to ERP, CRM, accounting, fulfillment, or analytics systems;
+* custom fields or Custom Platform structures that required interpretation during migration;
+* output from Add-ons or Custom Service that changes record meaning.
 
-* whether B2B buyers and D2C customers reach the intended experience
-* whether company-linked buyers see the correct catalog and account context
-* whether ordinary retail customers are not exposed to unintended B2B pricing or content
-* whether navigation, product visibility, and checkout expectations remain clear for each audience
-* whether customer segmentation, tags, apps, or metafields are influencing experience correctly
+If app, metafield, integration, or Custom Platform logic was part of the migration scope, the pass condition should be operational. The data should not merely exist; it should still support the workflow or system that depends on it.
 
-The goal is to prove that the business can serve different customer types without weakening clarity or trust.
+### Validate Demo Migration and Full Migration Evidence <a href="#validate-demo-migration-and-full-migration-evidence" id="validate-demo-migration-and-full-migration-evidence"></a>
 
-### Validation priority 5: store boundaries and governance assumptions <a href="#validation-priority-5-store-boundaries-and-governance-assumptions" id="validation-priority-5-store-boundaries-and-governance-assumptions"></a>
+Demo Migration evidence should be used to define what the team must check before Full Migration. For Shopify Plus, the Demo Migration should not include only simple products or ordinary customers. It should include representative examples that expose B2B, catalog, store, market, custom-data, and integration complexity early.
 
-Shopify Plus can support multiple stores under an organization, but validation should not assume that multiple stores share the same data, settings, products, collections, themes, or operational behavior automatically.
+A strong Shopify Plus Demo Migration sample should include:
 
-Where the migration uses multiple stores, validation needs to respect each store as a distinct operating context. This is especially important for merchants with regional storefronts, brand-specific storefronts, B2B/D2C separation, language or currency differences, or different operational teams.
+| Sample group                                | Why it matters                                                                                               |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Complex company with several locations      | Tests location-level contacts, addresses, payment terms, tax context, checkout settings, and catalog access. |
+| Catalog-controlled product group            | Tests visibility, pricing, quantity rules, volume pricing, and buyer-specific product access.                |
+| Blended B2B and direct-to-consumer scenario | Tests whether different customer types see the right experience.                                             |
+| Multi-store or market-specific path         | Tests governance, content, URL, domain, language, or currency behavior.                                      |
+| Custom-data or integration sample           | Tests metafields, metaobjects, external IDs, app behavior, or Custom Service interpretation.                 |
+| SEO-sensitive product or content URL        | Tests route continuity, redirects, and customer re-entry paths.                                              |
 
-#### What to test in multi-store samples <a href="#what-to-test-in-multi-store-samples" id="what-to-test-in-multi-store-samples"></a>
+After Full Migration, the same evidence categories should be reviewed again with final data. Demo Migration helps identify expected behavior and risk areas. Full Migration validation proves that the final migrated store is ready for launch decisions.
 
-Store-boundary validation should check:
+### How Additional Migration Options Affect Validation Scope <a href="#how-additional-migration-options-affect-validation-scope" id="how-additional-migration-options-affect-validation-scope"></a>
 
-* whether the right products and collections exist in the right store context
-* whether each store has the intended navigation, content, theme behavior, and settings
-* whether customer, company, and catalog assumptions are correct for each store
-* whether market, domain, language, and currency behavior is being reviewed in the correct context
-* whether operational teams understand what is shared, what is separate, and what must be configured independently
+Additional Migration Options can affect Shopify Plus validation when source-store activity continues, configuration changes before launch, or the migration plan changes after earlier migration activity. They should not be treated as a substitute for validation. They are useful only when the affected records, configuration, or follow-up migration activity are reviewed again in the Target Platform.
 
-The pass condition is not that the organization contains multiple stores. The pass condition is that each store supports its intended commercial role.
+For Shopify Plus, renewed validation may be needed when later migration activity includes:
 
-### Validation priority 6: Markets, localization, and high-value paths <a href="#validation-priority-6-markets-localization-and-high-value-paths" id="validation-priority-6-markets-localization-and-high-value-paths"></a>
+* new products, variants, customers, orders, CMS Pages, or Blog Posts;
+* changed company, company-location, buyer-contact, payment-term, catalog, or checkout information;
+* changed product visibility, catalog assignment, quantity rules, or volume pricing;
+* updated metafields, metaobjects, app-owned data, external IDs, or Custom Service output;
+* changed URL, redirect, market, content, domain, or localization assumptions;
+* altered Add-on configuration, data filtering, mapping, or advanced data configuration.
 
-Shopify Plus migrations often involve regional, language, currency, or domain decisions. Validation should therefore include market-specific journeys where they matter commercially.
+Entity Points should remain clear in this context. Already recorded counted entities do not deduct Entity Points again solely because later migration activity is performed for the same migration path. New counted records may still consume Entity Points when they are migrated for the first time under the service license record.
 
-International or localized behavior can be easy to under-test because the default storefront may appear complete. But customers may reach the store through region-specific domains, localized paths, market-specific landing pages, or priority product and collection URLs.
-
-#### What to test in market-specific samples <a href="#what-to-test-in-market-specific-samples" id="what-to-test-in-market-specific-samples"></a>
-
-A strong market sample should include:
-
-* high-value product and collection pages for each priority market
-* domains, subfolders, or localized paths that carry meaningful traffic
-* market-specific navigation and landing pages
-* language, currency, and regional presentation expectations
-* redirects from legacy market-specific URLs
-* content or pricing expectations that differ by region or customer type
-
-The pass condition is that customers in priority markets reach a clear and commercially relevant Shopify Plus experience, not merely that the default store works.
-
-### Validation priority 7: enterprise app, metafield, and workflow behavior <a href="#validation-priority-7-enterprise-app-metafield-and-workflow-behavior" id="validation-priority-7-enterprise-app-metafield-and-workflow-behavior"></a>
-
-Shopify Plus stores often depend on apps, custom workflows, metafields, and external systems for behavior that is not visible from record counts alone.
-
-Validation should check whether the migrated data still supports those behaviors. This is especially important for subscriptions, loyalty, ERP-connected pricing, fulfillment rules, approvals, customer-specific content, custom reporting, wholesale workflows, or other enterprise operations.
-
-#### What to test in app and workflow samples <a href="#what-to-test-in-app-and-workflow-samples" id="what-to-test-in-app-and-workflow-samples"></a>
-
-Useful checks include:
-
-* whether app-dependent pricing, visibility, subscription, review, search, loyalty, or merchandising behavior still works
-* whether metafields and custom data still appear where they support storefront or operational meaning
-* whether external systems can still interpret migrated identifiers, customers, orders, products, and company context
-* whether workflow-dependent data behaves correctly in realistic order, account, and fulfillment scenarios
-* whether missing behavior is an acceptable simplification or a launch blocker
-
-This is where Shopify Plus validation often separates a visually complete migration from a commercially reliable one.
-
-### Validation priority 8: high-value products, collections, orders, and routes <a href="#validation-priority-8-high-value-products-collections-orders-and-routes" id="validation-priority-8-high-value-products-collections-orders-and-routes"></a>
-
-Even when the Shopify Plus structure is enterprise-oriented, storefront proof still matters.
-
-Validation should include the products, collections, orders, pages, and legacy URLs that carry the most revenue, trust, SEO value, sales-team usage, support history, or customer expectation. These samples should be tested in the right company, location, catalog, market, and store context whenever those conditions matter.
-
-#### What to test in high-value commercial samples <a href="#what-to-test-in-high-value-commercial-samples" id="what-to-test-in-high-value-commercial-samples"></a>
-
-A strong commercial sample should include:
-
-* best-selling or strategically important products
-* product groups with complex variants, options, bundles, personalization, or app-dependent logic
-* collections or landing pages that support major campaigns, SEO, sales enablement, or merchandising
-* orders that reveal B2B, wholesale, customer-group, or company-context meaning
-* routes that still carry paid traffic, organic search traffic, email traffic, affiliate traffic, or support value
-* redirects that must lead to destinations with matching customer intent
-
-The pass condition is that the migrated Shopify Plus experience still supports the journeys customers and internal teams actually use.
-
-### What makes a Shopify Plus validation sample strong <a href="#what-makes-a-shopify-plus-validation-sample-strong" id="what-makes-a-shopify-plus-validation-sample-strong"></a>
-
-A strong Shopify Plus validation sample is intentionally uneven. It should concentrate on the records and scenarios most likely to reveal whether the migration preserved business meaning.
-
-The strongest samples usually include:
-
-* commercially important companies and company locations
-* sensitive catalogs and pricing-visibility cases
-* buyer-access scenarios with different customer contexts
-* blended B2B/D2C cases or multi-store governance cases
-* market-specific pages, domains, currencies, and language expectations
-* app-dependent, metafield-dependent, or external-system-dependent workflows
-* high-value products, collections, orders, pages, and redirects
-* Custom Platform source cases where source-side behavior required interpretation
-
-This is stronger than random checking because Shopify Plus migration risk often hides in context, not in broad record totals.
-
-### What often gets missed in Shopify Plus validation <a href="#what-often-gets-missed-in-shopify-plus-validation" id="what-often-gets-missed-in-shopify-plus-validation"></a>
-
-Several mistakes can make a Shopify Plus migration look more ready than it really is.
-
-Common misses include:
-
-* treating company creation as proof that company logic is correct
-* treating catalog assignment as proof that product visibility and pricing are correct
-* checking customers without testing real buyer access
-* validating a blended store without testing different customer contexts
-* validating multiple stores as though they share all behavior automatically
-* testing the default market while ignoring priority localized paths
-* checking metafields or app data as fields instead of testing the behavior they support
-* treating redirects as successful without checking destination relevance
-
-These misses usually create false confidence because the target looks organized while the most important commercial relationships remain under-tested.
-
-### How Custom Platform as a source changes Shopify Plus validation priorities <a href="#how-custom-platform-as-a-source-changes-shopify-plus-validation-priorities" id="how-custom-platform-as-a-source-changes-shopify-plus-validation-priorities"></a>
-
-When the Source Platform is a Custom Platform, Shopify Plus validation usually needs a tighter evidence standard.
-
-A Custom Platform source may contain company logic, access rules, catalog behavior, pricing visibility, customer permissions, workflow meaning, or integration behavior that was not stored in a conventional platform structure. In that case, validation should prove that the interpretation used during migration still produces a Shopify Plus outcome the business can operate confidently.
-
-That usually means:
-
-* more representative company and location samples
-* closer review of catalog, pricing, and product-visibility translation
-* clearer review of buyer-account and blended-store behavior
-* careful distinction between acceptable Shopify Plus formalization and unacceptable commercial distortion
-* stronger testing of app, metafield, external-system, and custom workflow behavior
-* more deliberate review of high-value URLs, storefront paths, and customer journeys
-
-Custom Service may be needed when this interpretation requires bespoke transformation, customization, Custom Platform handling, or custom migration logic adjustment. The validation priority is not only whether the data moved. It is whether the translated model still supports the intended Shopify Plus operation.
+The validation rule is straightforward: when later migration activity changes the data or configuration that Shopify Plus depends on, the affected business scenarios should be validated again.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify Plus validation is strongest when it proves the commercial structure behind the storefront. Company and location relationships, catalog visibility, buyer access, store governance, market behavior, enterprise workflows, and high-value customer paths should be tested before the target is treated as launch-ready.
+Shopify Plus validation is strongest when it proves commercial behavior, not only record presence. Company structures, company locations, catalogs, pricing visibility, buyer access, store boundaries, market behavior, product paths, content, URLs, custom data, apps, and integrations should be tested with representative business examples before the store is treated as launch-ready.
 
-A broad record review can confirm useful baseline completeness, but it cannot prove that Shopify Plus is preserving the right operating model. The safer approach is to validate the scenarios where Shopify Plus changes meaning most: company context, catalog context, buyer context, store context, market context, and workflow context.
+The safest validation approach starts with Demo Migration samples that expose the hardest Shopify Plus assumptions, then repeats the right checks after Full Migration and any relevant follow-up migration activity. If the team cannot prove company context, catalog access, buyer experience, store governance, custom data, and high-value customer paths, the migration result is not ready for confident launch decisions.
 
-Validate the Shopify Plus scenarios that carry the most business meaning before launch: company structures, catalogs, buyer access, store boundaries, market paths, enterprise workflows, and priority products or URLs. If the evidence still leaves uncertainty about whether a difference is acceptable Shopify Plus formalization or a real continuity issue, use Live Chat to clarify the result before launch decisions are finalized.
+For Shopify Plus projects with B2B structure, catalog-controlled pricing, multiple stores, markets, custom data, or integration dependencies, use Demo Migration and Full Migration evidence to confirm the highest-value scenarios before launch. If a validation result is unclear, use Live Chat to clarify whether the issue needs configuration adjustment, review of Add-ons, Custom Service handling, or renewed validation after Additional Migration Options.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be validated first in a Shopify Plus migration?**
 
-Start with the company and company-location structures that matter most commercially, then review catalog assignment, product visibility, pricing context, buyer access, store boundaries, Markets behavior, enterprise workflows, and high-value products or URLs.
-
-**Why are catalogs a major Shopify Plus validation priority?**
-
-Catalogs can affect which products and prices B2B customers can access. A catalog may be assigned at a technical level while still producing the wrong commercial result if the source pricing, visibility, or customer-context logic was not translated correctly.
+Start with the Shopify Plus structures that carry the most commercial meaning: companies, company locations, buyer contacts, catalog assignments, pricing context, checkout behavior, and high-value product paths. After those are stable, validate store boundaries, market behavior, custom data, integrations, URLs, content, and ordinary record completeness.
 
 **Is checking record totals enough for Shopify Plus validation?**
 
-No. Record totals can confirm baseline completeness, but they do not prove that company relationships, catalog visibility, buyer access, market context, app behavior, or high-value customer journeys still work correctly.
+No. Record totals can confirm useful baseline completeness, but they do not prove that company relationships, catalog visibility, B2B pricing, buyer access, market context, app behavior, or high-value customer journeys work correctly.
 
-**Why does a Custom Platform source require stricter Shopify Plus validation?**
+**Why are catalogs a major Shopify Plus validation priority?**
 
-A Custom Platform source may store company, pricing, access, catalog, or workflow meaning in bespoke structures. Validation needs stronger representative evidence to prove that those meanings were interpreted correctly for Shopify Plus rather than merely moved into visible target records.
+Catalogs can control which products and prices B2B customers can access. A catalog may be assigned at a technical level while still producing the wrong commercial result if the company, location, pricing, visibility, or quantity-rule context is not validated with real buyer scenarios.
+
+**How should custom data be validated for Shopify Plus?**
+
+Custom data should be tested through the records and systems that use it. Metafields, metaobjects, app-owned data, external IDs, and Custom Service output should be checked against products, customers, companies, orders, content, integrations, and operational workflows where they affect launch readiness.
+
+**Do Additional Migration Options remove the need for Shopify Plus validation?**
+
+No. Additional Migration Options can help handle later migration activity, but affected Shopify Plus records and behaviors still need renewed validation when products, customers, orders, company structures, catalogs, URLs, output from Add-ons, Custom Service output, or configuration assumptions change before launch.

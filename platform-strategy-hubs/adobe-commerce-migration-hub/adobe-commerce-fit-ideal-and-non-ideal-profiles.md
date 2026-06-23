@@ -90,7 +90,7 @@ This does not mean Adobe Commerce cannot support simple stores. It means the mer
 
 Adobe Commerce is a weaker fit when no one can own catalog structure, customer-account rules, shared catalog decisions, pricing visibility, storefront scope, launch timing, or integration dependencies. Enterprise platforms work best when business and technical owners can define target behavior before launch.
 
-If the merchant expects the migration to decide those rules automatically, the project is likely underprepared. Next-Cart can support migration execution according to the selected service model and agreed scope, but the customer remains responsible for confirming that the target result matches business expectations.
+If the merchant expects the migration to decide those rules automatically, the project is likely underprepared. Next-Cart can support migration execution according to the selected Migration Service and agreed scope, but the customer remains responsible for confirming that the target result matches business expectations.
 
 #### Merchants avoiding platform configuration decisions <a href="#merchants-avoiding-platform-configuration-decisions" id="merchants-avoiding-platform-configuration-decisions"></a>
 
@@ -118,7 +118,7 @@ If business-critical logic cannot be located, explained, or tested, Adobe Commer
 
 ### How Fit Affects Service Planning <a href="#how-fit-affects-service-planning" id="how-fit-affects-service-planning"></a>
 
-Adobe Commerce fit does not automatically determine the service model. A strong-fit Adobe Commerce project may still use Standard Service when source data maps cleanly to supported structures and the customer is prepared to configure and validate the migration. Managed Service may fit when the customer wants Next-Cart to perform migration execution and coordinate the process under an agreed scope.
+Adobe Commerce fit does not automatically determine the Migration Service. A strong-fit Adobe Commerce project may still use Standard Service when source data maps cleanly to supported structures and the customer is prepared to configure and validate the migration. Managed Service may fit when the customer wants Next-Cart to perform migration execution and coordinate the process under an agreed scope.
 
 Add-ons may be appropriate when the project needs filtering, mapping, or data configuration beyond the default setup. Custom Service should be considered when the migration depends on unsupported source structures, custom fields, extension-owned data, outside-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic.
 
@@ -136,7 +136,7 @@ Adobe Commerce is strongest when the merchant needs enterprise commerce control 
 
 It is weaker when the business wants simplicity, minimal configuration, limited validation, or an automatic migration decision in place of target-store planning. The best fit decision is not whether Adobe Commerce can handle complexity. It is whether the merchant needs that complexity, can define it, and can validate it before launch.
 
-#### Common questions <a href="#common-questions" id="common-questions"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Adobe Commerce only for very large catalogs?**
 

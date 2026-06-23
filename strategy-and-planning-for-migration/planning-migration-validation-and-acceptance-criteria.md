@@ -215,7 +215,7 @@ The review standard should match the project’s real complexity. A simple migra
 
 ### Freshness Alignment Does Not Prove Launch Readiness <a href="#freshness-alignment-does-not-prove-launch-readiness" id="freshness-alignment-does-not-prove-launch-readiness"></a>
 
-If the source store continues changing during the project, freshness must be managed before launch. Recent Data Migration can help reduce the gap between earlier migration activity and the final launch state where applicable.
+If the source store continues changing during the project, freshness must be managed before launch. An applicable additional migration option can help reduce the gap between earlier migration activity and the final launch state.
 
 Freshness and acceptance are separate decisions. The business still needs to confirm that:
 
@@ -283,6 +283,6 @@ Acceptance criteria should be defined before broader execution and launch pressu
 
 Validation responsibility should be assigned by outcome area. Product behavior, category discovery, customer continuity, order usability, SEO-sensitive pages, and launch readiness may require different reviewers because each area depends on different business knowledge.
 
-**Does Recent Data Migration replace validation?**
+**Can an additional migration option replace validation?**
 
-No. Recent Data Migration can help reduce the freshness gap before launch where applicable, but the business still needs to confirm that the migrated result is usable, connected, accurate enough for the intended outcome, and acceptable for launch.
+No. An additional migration option can help reduce the freshness gap before launch where applicable, but the business still needs to confirm that the migrated result is usable, connected, accurate enough for the intended outcome, and acceptable for launch.

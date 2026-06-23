@@ -38,15 +38,15 @@ Starting from the current decision prevents the Learning Center from becoming a 
 
 Each Learning Center section is designed to answer a different type of question. Keeping those roles separate helps readers avoid repeating the same information or using a technical article for a planning decision.
 
-| Section                                          | Use it when the reader needs to understand                                                                                                           |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Getting Started                                  | How the Learning Center is organized and where to begin                                                                                              |
-| Migration Foundations                            | Core migration concepts, readiness signals, risk awareness, data basics, and SEO continuity foundations                                              |
-| Strategy and Planning                            | Scope, complexity, approach selection, governance, validation planning, and acceptance criteria                                                      |
-| Next-Cart E-commerce Platform Migration Services | Next-Cart service paths, Migration Services, Entity Points, Add-ons, Demo Migration, Recent Data Migration, Re-Migration, and service responsibility |
-| Platform Strategy Hubs                           | Platform-specific fit, data model differences, preparation needs, constraints, validation priorities, and pitfalls                                   |
-| Technical Deep Dives                             | How important store data areas are structured and behave across platforms                                                                            |
-| Post-Migration and Quality Assurance             | How to review migrated results, prioritize validation, and support a launch decision                                                                 |
+| Section                                          | Use it when the reader needs to understand                                                                                                   |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Getting Started                                  | How the Learning Center is organized and where to begin                                                                                      |
+| Migration Foundations                            | Core migration concepts, readiness signals, risk awareness, data basics, and SEO continuity foundations                                      |
+| Strategy and Planning                            | Scope, complexity, approach selection, governance, validation planning, and acceptance criteria                                              |
+| Next-Cart E-commerce Platform Migration Services | Next-Cart service paths, Migration Services, Entity Points, Add-ons, Demo Migration, Additional Migration Options and service responsibility |
+| Platform Strategy Hubs                           | Platform-specific fit, data model differences, preparation needs, constraints, validation priorities, and pitfalls                           |
+| Technical Deep Dives                             | How important store data areas are structured and behave across platforms                                                                    |
+| Post-Migration and Quality Assurance             | How to review migrated results, prioritize validation, and support a launch decision                                                         |
 
 Readers do not need to treat every section as a required prerequisite. The right path depends on the reader’s decision stage.
 
@@ -149,7 +149,7 @@ Do not use Technical Deep Dives as basic migration primers. They are intended fo
 
 ### Where Next-Cart-Specific Guidance Fits <a href="#where-next-cart-specific-guidance-fits" id="where-next-cart-specific-guidance-fits"></a>
 
-Next-Cart-specific guidance appears where it helps readers connect a decision to service responsibility or migration handling. That usually includes topics such as Migration Service selection, Entity Points, Demo Migration, Add-ons, Recent Data Migration, Re-Migration, Custom Service, and support expectations.
+Next-Cart-specific guidance appears where it helps readers connect a decision to service responsibility or migration handling. That usually includes topics such as Migration Service selection, Entity Points, Demo Migration, Add-ons, Additional Migration Options, Custom Service, and support expectations.
 
 General orientation, planning, platform strategy, and technical data topics should still start from the reader’s migration question. Next-Cart service references are most useful when the reader needs to understand how a specific concern affects service fit, migration path planning, optional handling, validation, or escalation.
 
@@ -175,7 +175,7 @@ Reading in order can help early-stage teams, but it is not required. The Learnin
 
 **Where should a team go to understand Next-Cart service options?**
 
-Use the Next-Cart E-commerce Platform Migration Services section when the team needs to understand service paths, Migration Services, Entity Points, Demo Migration, Add-ons, Recent Data Migration, Re-Migration, or Custom Service. Use planning and technical sections first when the question is still about scope, complexity, or data behavior.
+Use the Next-Cart E-commerce Platform Migration Services section when the team needs to understand service paths, Migration Services, Entity Points, Demo Migration, Add-ons, Additional Migration Options or Custom Service. Use planning and technical sections first when the question is still about scope, complexity, or data behavior.
 
 **When should validation content be reviewed?**
 

@@ -1,123 +1,135 @@
 # Magento Migration Pitfalls and Prevention
 
-Magento migrations usually become risky when the project treats Magento as a place to store records instead of a structured commerce environment. A Magento Target Store can contain migrated products, customers, orders, categories, CMS Pages, Blog Posts, and media while still failing at product behavior, storefront visibility, scope assignment, inventory availability, URL continuity, customer-group context, or extension-dependent workflows.
+Magento migration pitfalls usually appear when migrated records exist but do not behave correctly inside the Target Store. Magento is structure-heavy: product types, configurable product relationships, attributes, attribute sets, websites, stores, store views, inventory settings, URLs, customer groups, extensions, and custom fields can all change how migrated data is used after launch.
 
-Pitfall prevention should start before Full Migration. The strongest Magento migration projects identify where data meaning can change, where target configuration affects migrated results, and where Custom Service or Add-ons may be needed before launch-critical validation begins.
+A safe Magento migration plan should identify these failure points before Full Migration, test representative samples, and separate ordinary migration scope from Add-ons, Custom Service items, target configuration work, and manual business decisions. Pitfall prevention protects buyer experience, merchandising, SEO continuity, fulfillment, customer support, reporting, and post-launch operations.
 
-Prevention is not only a technical safeguard. It protects customer experience, merchandising, support, fulfillment, SEO continuity, reporting, and the operational teams that will use the Target Store after launch.
+### How Magento Migration Pitfalls Usually Develop <a href="#how-magento-migration-pitfalls-usually-develop" id="how-magento-migration-pitfalls-usually-develop"></a>
 
-### How Magento Pitfalls Usually Develop <a href="#how-magento-pitfalls-usually-develop" id="how-magento-pitfalls-usually-develop"></a>
-
-Magento pitfalls rarely come from one missing record. They usually develop when a record-level migration appears complete but the migrated data does not behave correctly inside Magento’s product, scope, inventory, URL, customer, order, or extension structure.
+Magento pitfalls rarely come from one missing record. They usually develop when a record-level migration appears complete but the migrated data loses business meaning in the Target Store.
 
 Common patterns include:
 
-* products that exist but do not behave like the intended Magento product type;
-* attributes that migrate as values but do not support filtering, search, display, merchandising, or operations;
-* store-view values that appear correct in one scope but wrong or missing in another;
-* categories that transfer but do not create usable storefront navigation;
-* inventory values that exist but do not support sellable storefront behavior;
-* URLs, redirects, metadata, or media paths that weaken SEO and campaign continuity;
-* custom fields, extension data, or outside-system identifiers that need more than ordinary record transfer;
-* validation that checks counts but misses buyer, staff, support, and operational workflows.
+* products that exist but no longer behave as the intended Magento product type;
+* configurable products whose parent-child relationships, option labels, child SKUs, images, prices, or inventory behavior are unclear;
+* attributes that migrate as values but do not support filtering, search, comparison, display, merchandising, reporting, or admin use;
+* website, store, and store-view values that look correct in one scope but wrong, hidden, untranslated, or incomplete in another;
+* categories that transfer but do not create usable storefront discovery;
+* inventory values that exist but do not produce the expected sellable storefront result;
+* URLs, redirects, metadata, CMS Pages, Blog Posts, media, or internal links that weaken launch continuity;
+* customer groups, order lines, statuses, totals, taxes, discounts, shipping, or payment references that lose operational meaning;
+* extension-owned data, custom fields, outside-system IDs, or bespoke logic that require more than ordinary record transfer;
+* validation that checks totals but misses buyer, staff, fulfillment, SEO, and support workflows.
 
-The prevention strategy is to identify these patterns early, assign ownership, and validate representative samples before relying on the migrated result for launch.
+The prevention strategy is to identify these patterns early, assign ownership, and confirm pass conditions before launch readiness is approved.
 
 ### Pitfall 1: Treating Product Types as Ordinary Product Records <a href="#pitfall-1-treating-product-types-as-ordinary-product-records" id="pitfall-1-treating-product-types-as-ordinary-product-records"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong" id="what-can-go-wrong"></a>
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-Magento product meaning depends heavily on product type. Simple, configurable, grouped, bundle, virtual, downloadable, and other product structures do not behave the same way. A source product with variants, kits, options, subscriptions, downloads, or bundled choices may not preserve useful meaning if the accepted Magento behavior is not defined before migration.
+Magento product meaning depends on product type. Simple, configurable, grouped, bundle, virtual, downloadable, and custom-option products do not behave the same way. A source product with variants, kits, choices, downloads, or special purchase behavior can arrive as a migrated record while losing useful storefront and operational meaning.
 
-The risk is highest for configurable products because the parent product, child simple products, option values, images, prices, stock status, SKUs, and order-line meaning must remain connected.
+The highest-risk area is often configurable products because the visible parent product, associated simple products, option values, child SKUs, images, prices, inventory status, category placement, and order-line meaning must remain understandable together.
 
 #### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-* variant products appear as unrelated products;
-* configurable products have missing or confusing option values;
-* child products exist but are not connected to the expected parent product;
-* grouped or bundle products lose buyer-choice behavior;
-* downloadable or virtual products are handled like ordinary physical products;
-* order lines no longer make clear what the customer purchased.
+* Variant products appear as unrelated products.
+* Configurable products have missing or confusing option values.
+* Child simple products exist but are not connected to the expected parent product.
+* Bundle or grouped products lose buyer-choice behavior.
+* Downloadable or virtual products are handled like ordinary physical products.
+* Order lines no longer make clear what the customer purchased.
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Prepare a product-type sample before Full Migration. The sample should include each product type that matters to the store, including high-revenue products, variant-heavy products, products with custom options, products with complex media, out-of-stock products, and products with important order-history context.
+Prepare a product-type sample before Full Migration. The sample should include every product type that matters to the store: high-revenue products, variant-heavy products, products with custom options, products with complex media, out-of-stock products, products assigned to multiple categories or websites, and products with important order-history context.
 
-For each product type, define the accepted Magento behavior before launch validation begins. Some source structures may map cleanly to Magento. Others may need Advanced Data Mapping, Advanced Data Configure, Custom Add-ons, or Custom Service when the source behavior depends on custom logic, unsupported extension structures, or bespoke product modeling.
+For each product type, define the accepted Magento behavior before launch validation begins. Use Advanced Data Mapping when source values need translation into Magento-ready values. Use Advanced Data Configure when target-compatible configuration affects the output. Use Custom Service when product behavior depends on unsupported structures, extension-owned logic, bespoke relationships, or Custom Platform interpretation.
+
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
+
+Select one configurable product with multiple child SKUs, one grouped or bundle product if the catalog uses those types, one downloadable or virtual product if relevant, and one product with custom options. Confirm product page behavior, admin editing, category assignment, price, image, inventory, and order-line readability before approving the broader catalog result.
 
 #### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-Magento product pages, admin records, child-product relationships, option values, prices, images, inventory behavior, and order lines should support the intended buying and operating model for each important product type.
+Magento product pages, admin records, child-product relationships, option values, prices, images, inventory behavior, and historical order lines support the intended buying and operating model for each important product type.
 
 ### Pitfall 2: Validating Only the Default Scope <a href="#pitfall-2-validating-only-the-default-scope" id="pitfall-2-validating-only-the-default-scope"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-1" id="what-can-go-wrong-1"></a>
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-Magento’s website, store, and store-view structure affects product visibility, category roots, URLs, localized text, metadata, prices, content, and configuration-sensitive values. A migration can look correct in the default admin view while another website, store, language, or store view shows missing or wrong data.
+Magento websites, stores, and store views affect product visibility, category roots, localized values, content, metadata, URL keys, prices, and configuration-sensitive behavior. A migration can look correct in the default admin view while another website, store, language, or store view shows missing, fallback, hidden, or wrong data.
 
-This pitfall is common in multi-brand, multilingual, multi-region, or multi-store projects where values are intentionally different across scope.
+This pitfall is common in multilingual, multi-brand, multi-region, multi-domain, or multi-store projects where values are intentionally different by scope.
 
 #### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-* products appear in the admin area but not on the expected website;
-* localized product names, descriptions, CMS Pages, Blog Posts, or category labels are missing;
-* one store view shows correct content while another shows fallback content;
-* categories do not attach to the intended root category;
+* Products appear in the admin area but not on the expected website.
+* Localized product names, descriptions, categories, CMS Pages, or Blog Posts are missing.
+* One store view shows correct content while another shows fallback content.
+* Categories do not attach to the intended root category.
 * URL keys, metadata, price, or visibility differ unexpectedly by store view.
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Document the intended Magento scope structure before migration. The plan should identify websites, stores, store views, languages, domains, currencies, root categories, shared values, localized values, and scope-sensitive content.
+Document the intended Magento hierarchy before migration. The plan should identify websites, stores, store views, languages, domains, currencies, root categories, shared values, localized values, and scope-sensitive content.
 
-Validation should be performed under the relevant scope, not only from the global admin view. For multilingual stores, review product text, category text, CMS Pages, Blog Posts, URLs, metadata, and navigation in each launch-critical language or store view.
+Validate under the relevant scope, not only from the global admin view. For multilingual or multi-store projects, review product text, category text, CMS Pages, Blog Posts, URLs, metadata, navigation, visibility, and priority products in each launch-critical store view.
+
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+
+Choose one product, one category, one CMS Page, one Blog Post, and one priority URL from each launch-critical store view. Confirm that each item appears with the correct language, scope, visibility, category context, and URL behavior.
 
 #### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-Each website, store, and store view should show the intended catalog, content, language, navigation, URL, and configuration-sensitive behavior. Differences across scope should be intentional, explainable, and documented.
+Each website, store, and store view shows the intended catalog, content, language, navigation, URL, and configuration-sensitive behavior. Differences across scope are intentional, explainable, and documented.
 
 ### Pitfall 3: Moving Attribute Values Without Preserving Attribute Meaning <a href="#pitfall-3-moving-attribute-values-without-preserving-attribute-meaning" id="pitfall-3-moving-attribute-values-without-preserving-attribute-meaning"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-2" id="what-can-go-wrong-2"></a>
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-Magento attributes can shape product pages, layered navigation, search, comparison, sorting, merchandising, promotions, reporting, admin workflows, and integration behavior. Attribute values can migrate while still being unusable if attribute sets, option values, storefront settings, labels, or operational meaning are not prepared.
+Magento attributes can shape product pages, layered navigation, search, comparison, sorting, merchandising, promotions, reporting, admin workflows, and integration behavior. Attribute values can migrate while remaining unusable if attribute sets, option values, frontend settings, labels, or operational meaning are not prepared.
 
-The risk increases when the source store uses custom fields, plugin fields, supplier values, ERP identifiers, PIM data, compliance data, compatibility values, marketplace fields, or internal merchandising properties.
+The risk increases when the source store uses custom fields, plugin fields, supplier data, ERP identifiers, PIM values, compliance fields, compatibility values, marketplace references, or internal merchandising properties.
 
 #### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-* important product fields are missing from the expected attribute set;
-* duplicate option labels appear in filters or product editing screens;
-* swatches, dropdowns, or multiselect values behave inconsistently;
-* customer-facing filters do not include important properties;
-* technical or internal values appear publicly;
-* staff cannot use migrated identifiers or operational values after migration.
+* Important product fields are missing from the expected attribute set.
+* Duplicate option labels appear in filters or admin editing screens.
+* Swatches, dropdowns, or multiselect values behave inconsistently.
+* Customer-facing filters do not include important properties.
+* Technical or internal values appear publicly.
+* Staff cannot use migrated identifiers or operational values after migration.
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
 Plan attribute sets and important attributes before migration. Each important attribute should have a clear purpose: customer-facing display, search, filtering, comparison, merchandising, internal administration, reporting, integration, or SEO support.
 
-Use Advanced Data Mapping when source values need translation into Magento-ready values. Use Advanced Data Configure when field behavior needs adjustment to fit Magento’s Target Platform structure. Use Custom Service when attribute logic depends on unsupported extension structures, custom modules, outside-system identifiers, or bespoke transformation logic.
+Use Advanced Data Mapping when source values need translation into Magento-ready values. Use Advanced Data Configure when field behavior needs compatible target adjustment. Use Custom Service when attribute logic depends on unsupported extension structures, custom modules, outside-system identifiers, or bespoke transformation logic.
+
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+
+Review one product from each major attribute set and confirm that required attributes appear, option labels are clean, filters behave as expected, internal fields remain internal, and operational IDs remain usable for staff or connected systems where included in scope.
 
 #### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-Important attributes should appear in the correct attribute sets, support the intended storefront and admin use, and avoid duplicate, misleading, hidden, or unusable option data.
+Important attributes appear in the correct attribute sets, support the intended storefront and admin use, and avoid duplicate, misleading, hidden, or unusable option data.
 
 ### Pitfall 4: Assuming Category Transfer Creates Usable Navigation <a href="#pitfall-4-assuming-category-transfer-creates-usable-navigation" id="pitfall-4-assuming-category-transfer-creates-usable-navigation"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-3" id="what-can-go-wrong-3"></a>
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-Magento category records can migrate while storefront discovery remains weak. Useful navigation depends on hierarchy, root category assignment, product assignment, category visibility, URL keys, metadata, menu configuration, and the way buyers move through the catalog.
+Magento category records can migrate while storefront discovery remains weak. Useful navigation depends on hierarchy, root category assignment, product assignment, category visibility, URL keys, metadata, menu configuration, and how buyers move through the catalog.
 
 A category can exist in the admin area but remain invisible, poorly connected, incorrectly assigned, or unsuitable for SEO-sensitive landing pages.
 
 #### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-* categories exist in the admin area but do not appear in the storefront menu;
-* products are missing from key categories or assigned to unexpected categories;
-* root categories do not match the intended store structure;
-* category URLs, metadata, descriptions, or images are incomplete;
-* important merchandising or SEO landing categories do not work as expected.
+* Categories exist in the admin area but do not appear in the storefront menu.
+* Products are missing from key categories or assigned to unexpected categories.
+* Root categories do not match the intended store structure.
+* Category URLs, metadata, descriptions, or images are incomplete.
+* Important merchandising or SEO landing categories do not work as expected.
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
@@ -125,66 +137,78 @@ Prepare a navigation map before migration. The map should identify root categori
 
 Review navigation from the storefront, not only the admin category tree. The sample should include high-traffic categories, high-revenue product families, SEO-sensitive category pages, and categories used in paid campaigns or merchandising activities.
 
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+
+Start from the storefront menu, reach a high-value category, apply expected filters, open representative products, and confirm that the category URL, metadata, product assignment, and buyer path match the launch plan.
+
 #### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-Magento categories should support buyer discovery, product placement, menu behavior, URL continuity, metadata, and launch-critical merchandising paths.
+Magento categories support buyer discovery, product placement, menu behavior, URL continuity, metadata, and launch-critical merchandising paths.
 
 ### Pitfall 5: Overlooking Inventory and Availability Behavior <a href="#pitfall-5-overlooking-inventory-and-availability-behavior" id="pitfall-5-overlooking-inventory-and-availability-behavior"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-4" id="what-can-go-wrong-4"></a>
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-Inventory values do not always prove sellable storefront behavior. Magento availability can depend on quantity, stock status, source assignment, salable quantity, backorder behavior, product type, website assignment, and target configuration.
+Inventory values do not always prove sellable storefront behavior. Magento availability can depend on quantity, stock status, source assignment, stock assignment, salable quantity, backorder behavior, product type, website assignment, and target configuration.
 
 A product can have migrated quantity values but remain unavailable, unexpectedly available, assigned to the wrong source, or unclear for fulfillment teams.
 
 #### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-* products show quantity but cannot be purchased;
-* out-of-stock products appear available when they should not;
-* stock status differs between admin and storefront behavior;
-* multi-source inventory assumptions are unclear;
-* bundle, grouped, or configurable products show unexpected availability.
+* Products show quantity but cannot be purchased.
+* Out-of-stock products appear available when they should not.
+* Stock status differs between admin and storefront behavior.
+* Source or stock assignment is unclear.
+* Bundle, grouped, or configurable products show unexpected availability.
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Define inventory expectations before Full Migration. Identify whether Magento’s inventory behavior should reflect a single stock location, multiple sources, external inventory logic, or a simplified launch setup.
+Define inventory expectations before Full Migration. Identify whether Magento inventory should reflect a single stock location, multiple sources, external inventory logic, or a simplified launch setup.
 
-Validate representative products across ordinary, high-revenue, variant-heavy, low-stock, out-of-stock, backorder-sensitive, and fulfillment-sensitive samples. When inventory behavior depends on unsupported modules, external systems, custom source logic, or special fulfillment rules, Custom Service review may be needed.
+Validate ordinary, high-revenue, variant-heavy, low-stock, out-of-stock, backorder-sensitive, and fulfillment-sensitive products. When inventory behavior depends on unsupported modules, external systems, custom source logic, or special fulfillment rules, Custom Service review may be needed.
+
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+
+Test one in-stock simple product, one out-of-stock product, one configurable product with mixed child availability, and one fulfillment-sensitive product. Confirm admin quantity, storefront availability, add-to-cart behavior, and expected fulfillment interpretation.
 
 #### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-Migrated inventory should support expected storefront availability, admin interpretation, order placement, fulfillment assumptions, and launch operations for the products that matter most.
+Migrated inventory supports expected storefront availability, admin interpretation, order placement, fulfillment assumptions, and launch operations for the products that matter most.
 
 ### Pitfall 6: Leaving URL and SEO Continuity Until Late Validation <a href="#pitfall-6-leaving-url-and-seo-continuity-until-late-validation" id="pitfall-6-leaving-url-and-seo-continuity-until-late-validation"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-5" id="what-can-go-wrong-5"></a>
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-Magento URL behavior can affect product pages, category pages, CMS Pages, Blog Posts, media, metadata, redirects, canonical expectations, internal links, paid campaigns, and analytics continuity. A migration that preserves records but changes URLs unexpectedly can weaken customer access and search visibility after launch.
+Magento URL behavior can affect product pages, category pages, CMS Pages, Blog Posts, media, metadata, redirects, internal links, paid campaigns, analytics continuity, and customer access. A migration that preserves records but changes URLs unexpectedly can weaken launch continuity.
 
-SEO-sensitive issues often become difficult to resolve when they are discovered near launch.
+SEO-sensitive issues are harder to resolve when they are discovered near launch.
 
 #### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-* product or category URL keys differ unexpectedly from the source store;
-* priority URLs return unexpected pages or missing pages;
-* redirects are missing for important legacy paths;
-* metadata is incomplete, duplicated, or assigned to the wrong scope;
-* internal links in CMS Pages or Blog Posts point to old paths;
-* media paths or embedded assets break after launch preparation.
+* Product or category URL keys differ unexpectedly from the source store.
+* Priority URLs return unexpected pages or missing pages.
+* Redirects are missing for important legacy paths.
+* Metadata is incomplete, duplicated, or assigned to the wrong scope.
+* Internal links in CMS Pages or Blog Posts point to old paths.
+* Media paths or embedded assets break after launch preparation.
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Create a priority URL sample before migration. The sample should include high-traffic products, high-revenue categories, paid campaign landing pages, indexed pages, CMS Pages, Blog Posts, and pages with important internal links.
+Create a priority URL sample before migration. The sample should include high-traffic products, high-revenue categories, campaign landing pages, indexed pages, CMS Pages, Blog Posts, and pages with important internal links.
 
 Define which URL, metadata, redirect, media, and internal-link items are included in the migration scope. If URL behavior requires special mapping, redirect preparation, platform-specific transformation, or custom rules, plan that work before final validation.
 
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+
+Prepare a list of priority product, category, CMS Page, Blog Post, campaign, and policy URLs. After migration, check destination page, metadata, internal links, redirect behavior, media rendering, and store-view context for each priority path.
+
 #### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-Priority URLs, redirects, metadata, internal links, CMS Pages, Blog Posts, and media references should support the expected launch and SEO continuity plan.
+Priority URLs, redirects, metadata, internal links, CMS Pages, Blog Posts, and media references support the expected launch and SEO continuity plan.
 
 ### Pitfall 7: Assuming Customer and Order Data Has the Same Meaning in Magento <a href="#pitfall-7-assuming-customer-and-order-data-has-the-same-meaning-in-magento" id="pitfall-7-assuming-customer-and-order-data-has-the-same-meaning-in-magento"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-6" id="what-can-go-wrong-6"></a>
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
 Customer and order records are not only historical data. They support support teams, financial review, customer service, operational reference, loyalty context, returns, refunds, taxation review, shipping interpretation, and downstream reporting.
 
@@ -192,26 +216,30 @@ Magento may represent customer groups, addresses, order statuses, order totals, 
 
 #### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-* customer groups do not match expected business rules;
-* addresses are incomplete or difficult to use;
-* order statuses no longer reflect operational history;
-* totals, taxes, discounts, shipping, or payment references are hard to interpret;
-* variant or bundle order lines lose product meaning;
-* staff cannot locate the historical context needed for support.
+* Customer groups do not match expected business rules.
+* Addresses are incomplete or difficult to use.
+* Order statuses no longer reflect operational history.
+* Totals, taxes, discounts, shipping, or payment references are hard to interpret.
+* Variant, bundle, or grouped order lines lose product meaning.
+* Staff cannot locate the historical context needed for support.
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Review customer and order samples by operational use, not only by record count. Include recent orders, older orders, refunded orders, discounted orders, tax-sensitive orders, multi-address or international orders where relevant, guest orders, registered-customer orders, and orders containing configurable, bundle, grouped, downloadable, or virtual products.
+Review customer and order samples by operational use, not only by record count. Include recent orders, older orders, refunded orders, discounted orders, tax-sensitive orders, international orders where relevant, guest orders, registered-customer orders, and orders containing configurable, bundle, grouped, downloadable, or virtual products.
 
 Decide which historical details must remain useful in Magento and which differences are acceptable platform differences. If support, accounting, loyalty, ERP, marketplace, or fulfillment workflows depend on specific fields or identifiers, include those in the migration scope and validation sample.
 
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+
+Ask support, finance, and operations reviewers to inspect a small order-history sample together. Include ordinary orders, exception orders, discounted or tax-sensitive orders, and orders containing complex products. Record whether each order remains understandable for post-launch use.
+
 #### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-Customer and order history should remain understandable and usable for post-launch support, operations, financial review, and customer-service workflows.
+Customer and order history remains understandable and usable for post-launch support, operations, financial review, and customer-service workflows.
 
 ### Pitfall 8: Treating Extension-Owned or Custom Data as Ordinary Fields <a href="#pitfall-8-treating-extension-owned-or-custom-data-as-ordinary-fields" id="pitfall-8-treating-extension-owned-or-custom-data-as-ordinary-fields"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-7" id="what-can-go-wrong-7"></a>
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
 Magento projects often contain custom modules, extension-owned tables, third-party integration data, ERP identifiers, PIM identifiers, marketplace references, loyalty data, B2B values, subscription logic, custom checkout fields, or other structures outside ordinary store records.
 
@@ -219,122 +247,84 @@ If these items are treated as ordinary fields without confirming ownership and t
 
 #### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-* important values exist in source extensions or custom tables;
-* staff depends on identifiers that do not appear in standard Magento fields;
-* customer, product, order, or inventory behavior depends on custom modules;
-* marketplace, ERP, PIM, loyalty, subscription, B2B, or fulfillment data is expected in the Target Store;
-* source-specific business logic has no clear Magento equivalent.
+* Important values exist in source extensions or custom tables.
+* Staff depends on identifiers that do not appear in standard Magento fields.
+* Customer, product, order, or inventory behavior depends on custom modules.
+* Marketplace, ERP, PIM, loyalty, subscription, B2B, or fulfillment data is expected in the Target Store.
+* Source-specific business logic has no clear Magento equivalent.
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
 Identify extension-owned and custom data before migration configuration. Separate ordinary migration entities from custom logic, unsupported extension structures, outside-system identifiers, and bespoke transformation needs.
 
-Add-ons can support filtering, mapping, or data configuration when the requirement fits the supported Add-on scope. Custom Service should be considered when the data structure, logic, source ownership, or target behavior requires custom handling beyond standard migration scope.
+Add-ons can support filtering, mapping, or compatible data configuration when the requirement fits the supported Add-on scope. Custom Service should be considered when the data structure, logic, source ownership, or target behavior requires custom handling beyond standard migration scope.
+
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+
+Create a custom-data register listing extension names, field names, source ownership, business use, target expectation, and handling decision. Mark each item as standard scope, Add-on need, Custom Service item, manual business task, or intentional exclusion.
 
 #### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-Custom fields, extension-owned data, third-party identifiers, and bespoke logic should have a clear migration decision: included through standard handling, handled with Add-ons, handled through Custom Service, manually managed outside migration, or intentionally excluded.
+Custom fields, extension-owned data, third-party identifiers, and bespoke logic have a clear migration decision and validation owner.
 
 ### Pitfall 9: Using Entity Points as a Complexity Signal <a href="#pitfall-9-using-entity-points-as-a-complexity-signal" id="pitfall-9-using-entity-points-as-a-complexity-signal"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-8" id="what-can-go-wrong-8"></a>
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
 Entity Points help determine counted-data capacity under the selected Entity Points Plan. They do not measure Magento migration complexity, custom-data risk, attribute quality, extension dependency, validation difficulty, or launch readiness.
 
-A Magento project with moderate counted-data volume can still be complex if it includes custom product modeling, store-view scope, extension data, custom identifiers, or sensitive operational workflows. A larger counted-data project can be more straightforward if the source structure maps cleanly and validation expectations are clear.
+A Magento project with moderate counted-data volume can still be complex if it includes custom product modeling, store-view scope, extension data, custom identifiers, or sensitive operational workflows.
 
 #### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
 
-* the project is treated as low-risk only because the counted-data estimate is modest;
-* service planning ignores attributes, store scope, extensions, custom fields, or URL requirements;
-* the Entity Points Plan is selected before migration complexity is reviewed;
+* The project is treated as low-risk only because the counted-data estimate is modest.
+* Service planning ignores attributes, store scope, extensions, custom fields, or URL requirements.
+* The Entity Points Plan is selected before Magento complexity is reviewed.
 * Custom Service signals are dismissed because record volume looks manageable.
 
 #### Prevention <a href="#prevention-8" id="prevention-8"></a>
 
 Use Entity Points for capacity planning and use Magento risk review for complexity planning. Review product types, attributes, scope, inventory, URLs, customer/order context, custom data, Add-ons, Custom Service items, and validation readiness separately from counted-data capacity.
 
+New Product, Customer, Order, and Blog Posts records consume Entity Points when they are migrated for the first time. Records already counted through the service license should not consume Entity Points again merely because the customer performs later additional migration activity for the same migration path.
+
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+
+Review two separate questions before launch approval: whether the Entity Points Plan covers counted-data capacity, and whether the selected service path covers Magento structural complexity. Do not use one answer as a substitute for the other.
+
 #### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
 
-The selected Entity Points Plan should cover counted-data capacity, while the selected service path and validation plan should address Magento-specific complexity.
+The selected Entity Points Plan covers counted-data capacity, while the selected service path and validation plan address Magento-specific complexity.
 
-### Pitfall 10: Waiting Until Launch to Decide How to Handle New or Changed Data <a href="#pitfall-10-waiting-until-launch-to-decide-how-to-handle-new-or-changed-data" id="pitfall-10-waiting-until-launch-to-decide-how-to-handle-new-or-changed-data"></a>
+### Pitfall 10: Waiting Until Launch to Handle New or Changed Data <a href="#pitfall-10-waiting-until-launch-to-handle-new-or-changed-data" id="pitfall-10-waiting-until-launch-to-handle-new-or-changed-data"></a>
 
-#### What can go wrong <a href="#what-can-go-wrong-9" id="what-can-go-wrong-9"></a>
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
 
-Source Store activity can continue while migration work is being prepared, validated, or launched. New products, customers, orders, content updates, inventory changes, pricing changes, and URL changes may appear after an earlier migration run or validation sample.
+The Source Store may remain active while migration work is prepared, validated, or launched. New products, customers, orders, Blog Posts, CMS updates, inventory changes, price changes, and URL changes can appear after an earlier migration run or validation sample.
 
 If the team waits until launch to decide how to handle these changes, validation evidence can become stale, launch readiness can weaken, and operations may face avoidable disruption.
 
 #### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
 
-* the source store remains active but no freshness plan exists;
-* validation was performed long before the planned launch date;
-* new orders, products, or content updates appeared after the last migration run;
-* the launch team is unsure whether to continue with existing configuration, adjust scope, or perform a new migration;
-* post-launch stabilization issues are confused with pre-launch freshness gaps.
+* The source store remains active but no freshness plan exists.
+* Validation was performed long before the planned launch date.
+* New orders, products, content, or URL changes appeared after the last migration run.
+* The launch team is unsure whether to continue with existing configuration, adjust configuration, or perform a new migration.
+* Post-launch stabilization issues are confused with pre-launch freshness gaps.
 
 #### Prevention <a href="#prevention-9" id="prevention-9"></a>
 
-Plan Additional Migration Options before launch timing becomes critical. The team should decide when existing configuration is still valid, when configuration changes are needed, and when a new migration is more appropriate.
+Plan Additional Migration Options before launch timing becomes critical. Decide when the last used configuration is still valid, when a new configuration is needed, and when a new migration is more appropriate.
 
 Freshness decisions should be tied to validation evidence. If new or changed records affect launch-critical products, categories, orders, URLs, CMS Pages, Blog Posts, or custom-scope items, the validation sample should be refreshed after the selected migration action.
 
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+
+Before final launch approval, compare the latest Source Store activity with the last validated migration result. If new or changed records affect launch-critical areas, choose the appropriate Additional Migration Options path and revalidate the affected Magento samples.
+
 #### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
 
-The launch plan should include a clear decision for handling new or changed Source Store data and a validation step after the selected migration action.
-
-### Pitfall 11: Treating Validation as a Final Count Check <a href="#pitfall-11-treating-validation-as-a-final-count-check" id="pitfall-11-treating-validation-as-a-final-count-check"></a>
-
-#### What can go wrong <a href="#what-can-go-wrong-10" id="what-can-go-wrong-10"></a>
-
-Record counts can support validation, but they do not prove Magento readiness. A migration can match expected counts while failing on product behavior, attribute usability, scope visibility, category navigation, inventory availability, SEO continuity, customer/order meaning, or extension-dependent workflows.
-
-This pitfall creates false confidence because the project appears numerically complete while launch-critical behavior remains untested.
-
-#### Early warning signs <a href="#early-warning-signs-10" id="early-warning-signs-10"></a>
-
-* validation focuses only on totals or random records;
-* no representative Magento samples are defined;
-* customer, support, merchandising, fulfillment, and SEO teams do not review relevant outcomes;
-* expected platform differences are not separated from actual issues;
-* validation findings are not tied to launch readiness.
-
-#### Prevention <a href="#prevention-10" id="prevention-10"></a>
-
-Build validation around representative samples and business outcomes. Use counts as supporting evidence, then review the records most likely to expose Magento-specific risk: complex products, high-traffic categories, store-view values, priority URLs, customer groups, historical orders, inventory-sensitive products, custom fields, and Add-on or Custom Service items.
-
-Findings should be classified as expected Magento differences, target configuration work, mapping concerns, Add-on-related issues, Custom Service items, manual business decisions, or launch-blocking issues.
-
-#### Pass condition <a href="#pass-condition-10" id="pass-condition-10"></a>
-
-Validation should prove whether the Magento Target Store can support buyer experience, admin workflows, fulfillment, support, SEO continuity, and agreed migration scope.
-
-### Pitfall 12: Treating Custom Service as a Late Rescue Option <a href="#pitfall-12-treating-custom-service-as-a-late-rescue-option" id="pitfall-12-treating-custom-service-as-a-late-rescue-option"></a>
-
-#### What can go wrong <a href="#what-can-go-wrong-11" id="what-can-go-wrong-11"></a>
-
-Custom Service is most useful when custom scope is identified early. If custom requirements are discovered only after migration results are reviewed, the project may require repeated analysis, late scope changes, additional validation, or launch rescheduling.
-
-Magento custom risk often appears around custom modules, custom product logic, unsupported extension data, outside-system identifiers, B2B workflows, ERP/PIM dependencies, custom checkout fields, marketplace data, subscription logic, and bespoke reporting values.
-
-#### Early warning signs <a href="#early-warning-signs-11" id="early-warning-signs-11"></a>
-
-* the source store includes custom tables or extension-owned records;
-* important workflows depend on data outside ordinary product, customer, order, category, CMS Page, or Blog Post structures;
-* target behavior is not achievable through standard mapping or configuration;
-* migration requirements depend on business logic, not only fields;
-* the team cannot explain how critical custom values should appear in Magento.
-
-#### Prevention <a href="#prevention-11" id="prevention-11"></a>
-
-Separate standard migration scope, Add-on needs, Tailored Add-ons, Custom Add-ons, and Custom Service items during planning. Custom Service should be considered when unsupported structures, custom logic, or bespoke target behavior must be reviewed and handled deliberately.
-
-For complex Magento stores, request examples early: representative source records, target behavior expectations, field lists, screenshots, database samples where appropriate, extension names, workflow notes, and examples of how staff uses the data.
-
-#### Pass condition <a href="#pass-condition-11" id="pass-condition-11"></a>
-
-Custom requirements should be identified, scoped, priced, and validated as planned work rather than discovered as launch blockers.
+The launch plan includes a clear decision for handling new or changed Source Store data and a validation step after the selected migration action.
 
 ### Magento Pitfall Prevention Checklist <a href="#magento-pitfall-prevention-checklist" id="magento-pitfall-prevention-checklist"></a>
 
@@ -370,11 +360,11 @@ Early escalation helps define whether the issue belongs to target configuration,
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Magento migration pitfalls are preventable when the project reviews platform behavior before relying on migrated records. Product types, scope, attributes, categories, inventory, URLs, customer and order context, extension data, and custom requirements all affect whether the Target Store is actually ready for business use.
+Magento migration pitfalls are preventable when the project reviews platform behavior before relying on migrated records. Product types, scope, attributes, categories, inventory, URLs, customer and order context, extension data, and custom requirements all affect whether the Target Store is ready for business use.
 
 A strong Magento migration plan combines preparation, service-path selection, representative validation, and launch-readiness review. The safest outcome comes from identifying risk patterns early, assigning ownership, and confirming that migrated data works inside Magento’s real storefront, admin, operational, and post-launch environment.
 
-#### Common questions <a href="#common-questions" id="common-questions"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Are Magento migration pitfalls mostly technical problems?**
 

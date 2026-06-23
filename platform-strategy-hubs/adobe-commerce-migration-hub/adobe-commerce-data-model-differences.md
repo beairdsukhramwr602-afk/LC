@@ -36,7 +36,7 @@ Attributes and attribute sets create another layer of meaning. Adobe Commerce at
 | Attributes              | Display fields, searchable fields, filterable fields, rule inputs, integration identifiers, and admin fields | Attribute decisions affect storefront behavior and ongoing catalog governance.      |
 | Attribute sets          | Product-family templates and required fields by catalog type                                                 | Poor attribute-set planning can make catalog maintenance difficult after migration. |
 | Category assignment     | Navigation paths, merchandising structure, visibility, and store-scope relevance                             | Category errors can damage discovery, SEO, and buyer experience.                    |
-| Related products        | Related items, upsells, cross-sells, accessories, and replacement relationships                              | Relationship loss can reduce conversion and operational continuity.                 |
+| Related products        | Related items, upsells, cross-sells, accessories, and substitute-product relationships                       | Relationship loss can reduce conversion and operational continuity.                 |
 
 The goal is not to preserve every source field exactly as it appeared. The goal is to land high-value catalog data in a form that supports Adobe Commerce storefront behavior and back-office workflows.
 
@@ -165,7 +165,7 @@ Adobe Commerce changes migration planning because records often carry operationa
 
 The strongest Adobe Commerce migration plans treat data-model review as a translation step. Source data should be evaluated according to how it must behave in the Target Store, which parts can follow supported migration paths, which parts need Add-ons, and which parts require Custom Service or implementation-side configuration.
 
-#### Common questions <a href="#common-questions" id="common-questions"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Adobe Commerce data migration the same as Magento data migration?**
 

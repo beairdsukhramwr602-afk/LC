@@ -1,4 +1,4 @@
-# E-commerce Migration Go-Live Readiness
+# Preparing for E-commerce Migration Go-Live
 
 Go-live is the point where the business decides the migrated store is trustworthy enough for real customers, real orders, live traffic, and normal operational pressure.
 
@@ -59,9 +59,9 @@ Live stores continue to change while migration review is happening. New customer
 
 That is why freshness planning matters before go-live. The Target Platform should be current enough that the launch does not expose customers or teams to an avoidable data gap. However, freshness does not prove launch readiness by itself.
 
-#### How Recent Data Migration supports go-live readiness <a href="#how-recent-data-migration-supports-go-live-readiness" id="how-recent-data-migration-supports-go-live-readiness"></a>
+#### How additional migration activity supports go-live readiness <a href="#how-additional-migration-activity-supports-go-live-readiness" id="how-additional-migration-activity-supports-go-live-readiness"></a>
 
-Recent Data Migration helps reduce the freshness gap by migrating newly created source-store data into the Target Platform after earlier migration activity, where applicable within the purchased service.
+Applicable additional migration activity can help reduce the freshness gap by migrating eligible source-store data into the Target Platform after earlier migration activity, where permitted within the purchased service.
 
 It supports go-live readiness because it helps bring the Target Platform closer to the current Source Platform state before launch. But it does not replace validation, reconciliation, or go-live judgment. After fresh data is migrated, the business still needs to confirm that the refreshed Target Platform remains usable and acceptable.
 
@@ -136,7 +136,7 @@ Before approving launch, confirm:
 * who has reviewed product, customer, order, content, SEO, and operational areas
 * when final freshness activity should happen
 * what source-store activity should pause or be controlled near launch, if applicable
-* who validates the refreshed Target Platform after Recent Data Migration
+* who validates the refreshed Target Platform after additional migration activity
 * who monitors the store during launch and immediately after launch
 * what communication path will be used if a launch-critical issue appears
 
@@ -177,7 +177,7 @@ Weak go-live decisions usually come from treating launch as the end of the timel
 
 Common problems include:
 
-* treating Recent Data Migration as proof of readiness
+* treating additional migration activity as proof of readiness
 * focusing on broad completeness instead of launch-critical paths
 * waiting too late to define what should block launch
 * giving equal weight to high-impact and low-impact issues
@@ -202,7 +202,7 @@ Make sure important differences have been explained, accepted, corrected, or cla
 
 #### 3. Confirm freshness readiness <a href="#id-3-confirm-freshness-readiness" id="id-3-confirm-freshness-readiness"></a>
 
-Use Recent Data Migration where applicable to reduce the gap between the reviewed Target Platform and the current Source Platform state, then validate the refreshed result.
+Use an applicable additional migration option where needed to reduce the gap between the reviewed Target Platform and the current Source Platform state, then validate the refreshed result.
 
 #### 4. Confirm traffic and page continuity <a href="#id-4-confirm-traffic-and-page-continuity" id="id-4-confirm-traffic-and-page-continuity"></a>
 
@@ -230,9 +230,9 @@ Before go-live, review a short list of launch-critical outcomes, confirm freshne
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Recent Data Migration enough to make a store ready for go-live?**
+**Is an additional migration option enough to make a store ready for go-live?**
 
-No. Recent Data Migration helps reduce freshness gaps, but it does not prove that the Target Platform behaves acceptably. Go-live readiness still depends on reviewed customer journeys, operational usability, priority-page continuity, reconciliation status, and confidence in the final result.
+No. Additional migration activity can help reduce freshness gaps, but it does not prove that the Target Platform behaves acceptably. Go-live readiness still depends on reviewed customer journeys, operational usability, priority-page continuity, reconciliation status, and confidence in the final result.
 
 **What should be checked first before launch?**
 

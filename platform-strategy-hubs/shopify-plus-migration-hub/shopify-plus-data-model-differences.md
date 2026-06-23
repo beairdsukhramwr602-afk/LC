@@ -1,215 +1,151 @@
 # Shopify Plus Data Model Differences
 
-A migration into Shopify Plus can preserve visible storefront records while still changing the commercial meaning behind them. The issue is not only whether products, customers, orders, collections, and content appear in the Target Platform. The stronger question is whether Shopify Plus can support the business relationships, catalog access, pricing visibility, customer account behavior, and store governance model the business needs after launch.
+A Shopify Plus migration should not be judged only by whether products, customers, orders, collections, and content appear in the Target Platform. Shopify Plus can change how those records carry commercial meaning because B2B companies, company locations, catalogs, buyer permissions, payment terms, checkout settings, markets, organization-level governance, metafields, metaobjects, and enterprise integrations can all affect how migrated data behaves after launch.
 
-Shopify Plus should not be treated as only a larger version of Shopify. It keeps the Shopify product, collection, customer, order, metafield, app, theme, and market foundations, but adds enterprise structures that can change how migrated data should be interpreted. B2B companies, company locations, catalogs, payment terms, customer permissions, expansion stores, and organization-level governance can make the target model more powerful, but also more sensitive to planning mistakes.
+The central data-model question is therefore not only what records move, but what relationships those records must support. A customer can remain a customer, but the business meaning may depend on the company they represent, the company location they buy for, the catalog they can access, the store or market they enter, and the custom fields or integrations that interpret the record. Shopify Plus migration planning should translate source-side meaning into Shopify Plus structures before record counts are treated as success.
 
-### How Shopify Plus Changes Commercial Meaning During Migration <a href="#how-shopify-plus-changes-commercial-meaning-during-migration" id="how-shopify-plus-changes-commercial-meaning-during-migration"></a>
+### Why Data Model Differences Matter in Shopify Plus <a href="#why-data-model-differences-matter-in-shopify-plus" id="why-data-model-differences-matter-in-shopify-plus"></a>
 
-The main difference in the Shopify Plus data model is that business meaning can move from individual records into structured relationships. A customer record may still exist, but its useful meaning may depend on the company it belongs to, the location it represents, the catalog assigned to that relationship, the storefront it enters, and the apps or workflows that interpret the data.
+Shopify Plus keeps the Shopify foundation of products, variants, collections, customers, orders, content, redirects, metafields, metaobjects, apps, and markets. The difference is that enterprise and B2B use cases often place important meaning outside individual records. Product visibility can depend on catalog assignment. Pricing can depend on company or location context. Buyer access can depend on contact permissions. Checkout behavior can depend on B2B settings. Storefront meaning can depend on market, store, organization, or integration context.
 
-That means a Shopify Plus migration should not be judged only by record presence. It should prove that migrated data still supports the intended commercial behavior: who can access the store, what they can buy, which prices they see, how account permissions work, where orders belong, and which store or market owns the experience.
+That makes Shopify Plus different from a straightforward store-to-store migration. A visible product record might not be commercially ready if it appears to the wrong buyer. A customer record might not be useful if it is not attached to the correct company location. An order history might be incomplete if it does not support service, reporting, or account review in the intended B2B context. A metafield might migrate successfully but still fail if its definition, validation, storefront usage, or app dependency is missing.
 
-#### The Commercial Unit Can Shift from Customer to Company <a href="#the-commercial-unit-can-shift-from-customer-to-company" id="the-commercial-unit-can-shift-from-customer-to-company"></a>
+| Source-side meaning                     | Shopify Plus translation question                                                                                               |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Wholesale customer groups               | Should they become companies, locations, catalogs, customer segments, tags, app logic, or Custom Service scope?                 |
+| Negotiated price lists                  | Should pricing be represented through catalogs, markets, apps, custom data, or revised business rules?                          |
+| Branches, departments, or buyer offices | Should they become company locations, addresses, contacts, or separate operational contexts?                                    |
+| Custom product attributes               | Should they become standard fields, product options, variants, metafields, metaobjects, category metafields, or app-owned data? |
+| Multi-store or regional structures      | Should they become Shopify Plus stores, markets, domains, languages, currencies, catalogs, or integration rules?                |
+| Extension-owned logic                   | Can it be represented by supported Shopify Plus structures, or does it require Custom Service?                                  |
 
-In many direct-to-consumer migrations, the customer profile is the central identity unit. In Shopify Plus B2B contexts, the more important commercial units may be the company and its location structure.
+The value of Shopify Plus is strongest when these choices are explicit. When the choices are vague, migrated records can look complete while the operating model remains unreliable.
 
-That structure can affect:
+### Company, Location, and Buyer Relationship Differences <a href="#company-location-and-buyer-relationship-differences" id="company-location-and-buyer-relationship-differences"></a>
 
-* which customers belong to which business account
-* which location a buyer represents
-* which catalog, payment terms, and purchasing rules apply
-* which shipping and billing addresses are available
-* which users can place orders or manage account activity
+In many Source Platforms, B2B meaning is stored through customer groups, account records, billing addresses, shipping addresses, custom fields, roles, approval flags, price lists, ERP identifiers, or extension logic. Shopify Plus B2B uses companies and company locations as core relationship structures. That means customer migration must be planned as a business-account model, not only as a profile transfer.
 
-This changes the meaning of customer migration. A customer profile can be preserved yet remain incomplete if it is not connected to the correct company, location, access rule, or buying context.
+A company can represent the parent business relationship. Company locations can represent the specific buying locations or business units under that company. Contacts are customer profiles connected to those locations, and their access can affect what they can do after logging in. Location-level details can also carry important commercial context, including shipping address, billing address, tax ID, tax exemptions, catalogs, payment terms, contacts, and checkout settings.
 
-**Why this matters for validation**
+This changes the meaning of several common source records:
 
-Validation should include company accounts with multiple buyers, multiple locations, different catalog assignments, different payment terms, and different address behavior. A simple customer-count comparison is not enough for Shopify Plus B2B readiness.
+* a customer group might become a company assignment, catalog rule, segment, or pricing context;
+* an address might become an ordinary customer address or a company-location address;
+* a branch or department might become a company location rather than a standalone customer;
+* a buyer contact might need permission to buy for one location but not another;
+* an external account ID might need to remain usable for ERP, CRM, support, reporting, or fulfillment continuity;
+* historical orders may need to support company-level or location-level account review.
 
-#### Company Locations Change Access, Pricing, and Order Context <a href="#company-locations-change-access-pricing-and-order-context" id="company-locations-change-access-pricing-and-order-context"></a>
+The strongest migration plans define these relationships before migration begins. If the source store uses customer groups or custom fields to simulate business accounts, those structures should be translated into Shopify Plus B2B meaning rather than copied as flat labels.
 
-Company locations are not just address records. In Shopify Plus B2B structures, they can define how a business relationship behaves.
+### Catalog, Pricing, and Product Visibility Differences <a href="#catalog-pricing-and-product-visibility-differences" id="catalog-pricing-and-product-visibility-differences"></a>
 
-A company may have several locations with different buying needs. One location may need a different product catalog, payment term, shipping address, billing address, tax context, or order-visibility expectation from another location under the same company.
+Catalogs are one of the most important Shopify Plus data-model differences for B2B migration. In a standard direct-to-consumer model, a product can often be evaluated by storefront visibility, price, inventory, and collection placement. In Shopify Plus B2B, product availability and pricing can depend on which company or company location is buying.
 
-This matters during migration because source platforms often store these distinctions in looser structures such as customer groups, account notes, custom fields, ERP identifiers, negotiated pricing tables, or extension-driven account rules. The migration has to preserve the commercial meaning of those distinctions, not simply move address information.
+This creates a commercial control layer above the product record. A migrated product can be accurate as a product but still wrong for a buyer if catalog assignment, product inclusion, price adjustment, market relationship, or location access has not been configured correctly.
 
-#### Catalogs Become a Product-and-Pricing Control Layer <a href="#catalogs-become-a-product-and-pricing-control-layer" id="catalogs-become-a-product-and-pricing-control-layer"></a>
+Source-side pricing and visibility can appear in many forms:
 
-Catalogs are one of the most important Shopify Plus data layers in B2B migrations. They can define which products and prices are available to specific companies or company locations.
+| Source behavior              | Shopify Plus interpretation                                                                                       |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Customer-group pricing       | May need catalog pricing, company/location assignment, app logic, or Custom Service depending on rule complexity. |
+| Hidden wholesale products    | May need catalog-controlled product visibility, separate storefront logic, or product-publication decisions.      |
+| Contract price lists         | May need catalog planning, integration review, or custom handling if price logic is not directly supported.       |
+| Regional B2B pricing         | May involve catalogs, markets, currencies, tax context, or separate operational rules.                            |
+| Distributor-only assortments | May need company-location catalog assignment and validation by representative buyer accounts.                     |
 
-A source store may have controlled the same outcome through:
+Catalog planning should not be treated as a cosmetic step. It determines whether migrated product and pricing data supports the intended buying experience. For Shopify Plus, product migration and catalog assignment must be reviewed together when B2B access or negotiated pricing matters.
 
-* customer groups
-* wholesale categories
-* restricted product visibility
-* price lists
-* customer-specific discount rules
-* negotiated B2B pricing
-* app/plugin/module logic
-* custom account conditions
+### Product, Variant, Metafield, and Metaobject Differences <a href="#product-variant-metafield-and-metaobject-differences" id="product-variant-metafield-and-metaobject-differences"></a>
 
-In Shopify Plus, those outcomes may need to be reinterpreted through catalogs, company assignments, location assignments, and related pricing logic. This can be cleaner than the source model, but only when the business defines exactly which buyer should see which products and prices.
+Shopify Plus still follows Shopify product architecture. Products can have options and variants, collections organize storefront discovery, and product information can be extended with metafields and metaobjects. The important distinction is that enterprise merchants often bring source-side product complexity that does not map cleanly to simple product fields.
 
-**What often goes wrong**
+Several source structures need special review:
 
-The common mistake is assuming that product visibility and pricing rules are preserved because products and customers were migrated. In reality, Shopify Plus needs the business relationship layer to be planned clearly before those rules can be trusted.
+* configurable, bundled, personalized, or made-to-order product behavior;
+* product options that are not equivalent to Shopify variants;
+* variant-level identifiers used by ERP, fulfillment, or marketplace systems;
+* product attributes used for filtering, tax classification, channel feeds, or merchandising;
+* source categories that need to become Shopify collections, product categories, product types, tags, metafields, or navigation logic;
+* custom product tables, extension fields, or app-owned attributes;
+* category-specific attributes that may align better with Shopify category metafields or metaobjects.
 
-#### B2B and Direct-to-Consumer Contexts May Share a Platform but Not the Same Meaning <a href="#b2b-and-direct-to-consumer-contexts-may-share-a-platform-but-not-the-same-meaning" id="b2b-and-direct-to-consumer-contexts-may-share-a-platform-but-not-the-same-meaning"></a>
+Metafields are useful because they extend Shopify data models such as products, customers, and orders with custom data. Metaobjects can support reusable structured content or data entries. These structures can preserve important business meaning, but they need definitions, field types, validation expectations, display logic, and ownership rules. Migrating a value into a metafield is not enough if the Target Platform lacks the definition, storefront usage, app dependency, or operational process that makes the value useful.
 
-Shopify Plus can support businesses that sell to both direct-to-consumer and B2B audiences. The data-model question is whether those audiences should share one storefront context, use dedicated B2B structures, or operate through separate stores.
+For Shopify Plus, product-data translation should also separate standard record movement from customization. Supported field mapping, filtering, or data configuration can often be handled through Add-ons. Unsupported source structures, bespoke transformations, custom product logic, app-owned data, or Custom Platform source behavior may require Custom Service.
 
-This decision changes the meaning of:
+### Store, Market, and Localization Differences <a href="#store-market-and-localization-differences" id="store-market-and-localization-differences"></a>
 
-* products and collections
-* price visibility
-* catalog assignment
-* account access
-* customer segmentation
-* order interpretation
-* validation samples
-* operational ownership after launch
+Shopify Plus merchants often operate across multiple stores, markets, regions, languages, currencies, domains, or brands. These structures can make data-model planning more complex because the same record type might need different meaning depending on where it appears.
 
-A migration can look complete while still being commercially vague if the business has not decided how direct-to-consumer and B2B structures should coexist in Shopify Plus.
+A Source Platform might use one back office with store views, language packs, customer groups, regional domains, custom tax rules, or extension-driven price logic. Shopify Plus may represent the future operating model through stores, markets, catalogs, localized content, domains, apps, and organization-level governance. The migration should define which structure owns each commercial difference.
 
-#### Multiple Stores Under an Organization Remain Operationally Separate <a href="#multiple-stores-under-an-organization-remain-operationally-separate" id="multiple-stores-under-an-organization-remain-operationally-separate"></a>
+Important questions include:
 
-Shopify Plus can support organization-level governance across multiple stores, including expansion stores, but each store still needs deliberate data governance. A product, collection, setting, theme, app configuration, or operational rule in one store should not be assumed to exist or behave identically in another.
+* Should a regional experience become a Market, a separate Shopify Plus store, a catalog rule, or an app-supported workflow?
+* Should translated content move as content records, theme content, metaobjects, app data, or be recreated after migration?
+* Should URLs and redirects be validated by market, domain, language, or storefront path?
+* Should B2B and direct-to-consumer buyers share one storefront context or operate through different contexts?
+* Should product visibility vary by catalog, market, store, or publication state?
 
-This creates a different data-model challenge from source platforms that used one shared back office with several storefront views. Shopify Plus can manage a multi-store strategy, but migrated data still needs to be assigned, configured, and validated according to the store boundary that will actually own it.
+Shopify Plus organization-level control can help enterprise teams govern stores, but it does not make every store share the same data meaning automatically. Each store, market, catalog, and buyer path still needs deliberate migration ownership.
 
-**What this changes in migration planning**
+### Customer, Order, and Account History Differences <a href="#customer-order-and-account-history-differences" id="customer-order-and-account-history-differences"></a>
 
-Multi-store Shopify Plus migrations should confirm which products, collections, customers, content, redirects, markets, apps, and operational settings belong in each store. Validation should not assume that one successful sample proves every store context.
+Customer and order history can carry different meaning in Shopify Plus than in the Source Platform. A direct-to-consumer customer profile may only need identity, addresses, communication consent, and order history. A Shopify Plus B2B profile may also need company association, location access, buyer permission, payment terms, tax context, and relationship to catalogs or checkout rules.
 
-### Core Shopify Plus Data Layers to Review <a href="#core-shopify-plus-data-layers-to-review" id="core-shopify-plus-data-layers-to-review"></a>
+Order history also needs interpretation. Historical orders can support customer service, account review, reorder decisions, reporting, ERP reconciliation, and internal operations. For B2B merchants, it may matter whether orders can be reviewed by company, location, contact, product, pricing context, or external reference. A migrated order can be present but still less useful if the surrounding account structure does not support the business process.
 
-Shopify Plus migrations should review both the Shopify baseline model and the enterprise layers added around it.
+Account access deserves separate planning. Password behavior, login method, customer-account experience, company selection, location selection, buyer permissions, and account-management expectations may differ from the source store. Merchants should avoid assuming that migrated customer data automatically recreates the same account experience.
 
-#### Products, Options, Variants, and Metafields <a href="#products-options-variants-and-metafields" id="products-options-variants-and-metafields"></a>
+### App, Integration, and Custom Data Differences <a href="#app-integration-and-custom-data-differences" id="app-integration-and-custom-data-differences"></a>
 
-Shopify Plus still relies on Shopify’s native product structure. Products, options, variants, collections, media, and metafields remain central to how catalog data is represented.
+Shopify Plus migrations frequently involve apps, integrations, ERP systems, CRM systems, fulfillment providers, tax services, loyalty systems, subscription systems, marketplaces, review platforms, reporting tools, and custom workflows. These systems can define how data is interpreted after launch.
 
-This means Shopify Plus does not automatically solve every source-side product complexity. Product personalization, bundled logic, custom option behavior, extension-driven price changes, or highly flexible product configuration may still require careful translation, Add-on handling, or Custom Service when customization or modification work is needed.
+A field that looks optional during migration can become critical when it controls fulfillment routing, tax calculation, support lookup, buyer approval, contract pricing, product configuration, reporting, or ERP synchronization. External IDs, app-owned fields, custom account rules, and integration-specific flags should be identified before migration scope is finalized.
 
-#### Companies, Locations, and B2B Buyers <a href="#companies-locations-and-b2b-buyers" id="companies-locations-and-b2b-buyers"></a>
+This is also where Custom Service boundaries become important. Add-ons can support filtering, mapping, and supported data configuration. Custom Service is the correct escalation path when the business needs unsupported source structures, app-owned logic, bespoke transformation, Custom Platform handling, or custom migration logic adjustment. Treating custom operational data as ordinary records can produce a migration that is technically complete but operationally incomplete.
 
-Companies and locations are core structures in Shopify Plus B2B planning. They help translate business-account relationships into Shopify Plus terms.
+### How Data Model Differences Affect Migration Scope <a href="#how-data-model-differences-affect-migration-scope" id="how-data-model-differences-affect-migration-scope"></a>
 
-A strong migration plan should clarify:
+Data-model differences should directly shape the migration scope for Shopify Plus. The more the target model depends on company relationships, location context, catalogs, custom product data, market logic, store boundaries, integrations, and custom workflows, the more the migration plan must define what is standard, what needs Add-ons, and what requires Custom Service.
 
-* which source accounts become companies
-* which addresses or branches become company locations
-* which contacts become buyers
-* which buyers can act for which company or location
-* which payment, catalog, and access rules follow that relationship
+| Scope area                     | Planning implication                                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Companies and locations        | Define source-to-target account relationships before customer migration is treated as complete.                                           |
+| Catalogs and pricing           | Validate product visibility and price outcomes by buyer context, not only by catalog count.                                               |
+| Products and custom attributes | Decide which source attributes become standard fields, variants, metafields, metaobjects, apps, or custom scope.                          |
+| Store and market structure     | Assign records to the correct store, market, domain, language, currency, and validation path.                                             |
+| Customer and order history     | Confirm whether historical data supports support, reporting, reorder, account review, or ERP continuity.                                  |
+| Apps and integrations          | Identify external IDs, operational fields, and app-owned data before launch-critical behavior is tested.                                  |
+| Later migration activity       | Revalidate affected buyer, catalog, product, order, and configuration behavior when follow-up migration activity changes meaningful data. |
 
-The target should be reviewed as a business-account model, not only as a customer import.
-
-#### Catalogs, Pricing, and Product Visibility <a href="#catalogs-pricing-and-product-visibility" id="catalogs-pricing-and-product-visibility"></a>
-
-Catalog assignment can determine whether a B2B buyer sees the correct product selection and pricing. This is one of the clearest places where Shopify Plus data-model review becomes commercial rather than technical.
-
-The migration should confirm whether source-side pricing and visibility meaning should become Shopify Plus catalog logic, product configuration, app behavior, Custom Service handling, or a deliberately simplified target-state rule.
-
-#### Customer Accounts and Access Experience <a href="#customer-accounts-and-access-experience" id="customer-accounts-and-access-experience"></a>
-
-Customer data and customer access are different concerns. Preserving a customer profile does not guarantee the same login experience, password behavior, company access, or account-management flow the source store used.
-
-Shopify’s customer-account model should be reviewed early, especially when the source store depends on legacy password behavior, B2B user roles, account approval, company-managed purchasing, or custom account workflows.
-
-#### Markets, Localization, and Selling Context <a href="#markets-localization-and-selling-context" id="markets-localization-and-selling-context"></a>
-
-Shopify Plus projects often involve international, multi-currency, multi-language, or region-specific selling. The target model may use Markets, domains, localized content, regional catalogs, or app-supported behavior, depending on the business structure.
-
-A source store may have represented these differences through separate stores, language packs, customer groups, custom tax rules, region-specific price logic, or extension behavior. Shopify Plus can support more deliberate governance, but the migration should define which context belongs to Markets, which belongs to separate stores, and which belongs to app or Custom Service handling.
-
-#### Apps, Integrations, and Enterprise Workflows <a href="#apps-integrations-and-enterprise-workflows" id="apps-integrations-and-enterprise-workflows"></a>
-
-Many Shopify Plus migrations rely on apps, integrations, or custom workflows to preserve operational meaning. ERP, CRM, subscription, fulfillment, marketplace, loyalty, review, tax, payment, and B2B ordering systems can all affect how migrated data behaves after launch.
-
-This matters because external-system identifiers and app-owned data may not be meaningful if they are only stored as raw values. They need to remain usable by the workflow that depends on them.
-
-### When Shopify Plus Data Translation Usually Needs Custom Service <a href="#when-shopify-plus-data-translation-usually-needs-custom-service" id="when-shopify-plus-data-translation-usually-needs-custom-service"></a>
-
-Custom Service should be considered when the migration requires customization, modification, bespoke interpretation, or custom migration logic adjustment beyond standard service capability or relevant Add-ons.
-
-In a Shopify Plus data-model context, this is especially likely when the source store depends on:
-
-* Custom Platform handling
-* complex B2B account structures
-* company, branch, department, or buyer-role logic that needs interpretation
-* negotiated pricing or restricted catalog visibility that must be rebuilt carefully
-* source-side product configuration that does not fit cleanly into Shopify products, options, variants, or metafields
-* app/plugin/module/extension data that must remain operationally meaningful
-* outside-system identifiers required by ERP, CRM, fulfillment, accounting, or reporting workflows
-* multi-store or market logic that requires bespoke translation
-* custom migration logic adjustment
-
-Custom Service does not automatically mean Next-Cart performs the migration process for the customer. Migration management is included only when it is part of the final plan.
-
-### What a Strong Demo Migration Should Prove <a href="#what-a-strong-demo-migration-should-prove" id="what-a-strong-demo-migration-should-prove"></a>
-
-A Shopify Plus Demo Migration should test the data structures that carry the most business meaning, not only simple products or customer records.
-
-The strongest samples usually include:
-
-* products with variants, metafields, media, and app-sensitive behavior
-* companies with more than one buyer
-* companies with more than one location
-* catalogs assigned to different company or location contexts
-* B2B buyers with different access expectations
-* customers with historical orders
-* localized or market-sensitive products and URLs
-* app-owned or integration-sensitive records
-* high-value pages where SEO continuity matters
-
-The Demo Migration should help the business decide whether Shopify Plus is representing the commercial model clearly, whether Add-ons are enough, or whether Custom Service is needed.
-
-### What Usually Needs the Earliest Review <a href="#what-usually-needs-the-earliest-review" id="what-usually-needs-the-earliest-review"></a>
-
-The earliest Shopify Plus data-model review should focus on the structures most likely to change commercial meaning:
-
-* company and company-location structure
-* catalog and pricing assignment
-* customer-account and buyer-access expectations
-* direct-to-consumer versus B2B separation
-* store and organization boundaries
-* market, language, currency, and domain logic
-* app-owned data and external identifiers
-* high-value products with complex options or behavior
-* SEO-sensitive URLs and storefront content
-
-These areas expose whether the migration is ready to move from record transfer into a commercially coherent Shopify Plus target model.
+Additional Migration Options should appear in Shopify Plus planning only when later migration activity has real platform-specific impact. For example, new companies, changed company-location assignments, catalog updates, product changes, new orders, or updated custom data may require renewed checks. They do not replace the need to define the correct Shopify Plus target model before migration begins.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify Plus data-model differences matter because the platform can change what migrated records mean. The target is not only a place to store products, customers, orders, and content. It can become a structured commercial environment built around companies, locations, catalogs, buyer access, organization governance, apps, markets, and independent store contexts.
+Shopify Plus data-model differences are mainly about business meaning. Products, customers, orders, collections, content, and custom data still matter, but enterprise and B2B success depends on whether those records support the intended company, location, catalog, pricing, store, market, account, and integration behavior after launch.
 
-That structure can be a strength when the business truly needs B2B, enterprise, multi-store, or advanced operational control. It becomes risky when the business treats Shopify Plus as a direct copy of the source platform without defining how those structures should work after launch.
+A strong Shopify Plus migration treats data as connected commercial context. The target model should explain who buys, where they buy from, what they can see, which prices apply, which store or market owns the experience, which custom data remains operational, and how each critical scenario will be validated before launch decisions are made.
 
-Before full migration, review the company, location, catalog, customer-access, store-boundary, market, and app-owned data logic that will decide whether Shopify Plus is commercially trustworthy. If those relationships are still unclear, use Demo Migration results and Live Chat to confirm whether the issue is target fit, data translation, Add-on scope, or Custom Service planning.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why are Shopify Plus data model differences more complex than standard Shopify differences?**
 
-**What is the biggest Shopify Plus data-model difference?**
+Shopify Plus can add enterprise and B2B context around baseline Shopify records. Companies, company locations, catalogs, buyer permissions, payment terms, markets, stores, metafields, metaobjects, and integrations can all affect what migrated data means after launch.
 
-The biggest difference is often that the main commercial unit shifts from an individual customer record to a company and company-location structure. Customer profiles still matter, but their meaning may depend on the business account, buyer role, assigned catalog, and location context.
+**Do customer records automatically become Shopify Plus B2B companies?**
 
-**Are Shopify Plus catalogs only used for merchandising?**
+No. Customer records, companies, company locations, and contacts serve different purposes. The migration must define which source accounts become companies, which addresses or branches become locations, which people become contacts, and what access each buyer should have.
 
-No. In B2B contexts, Shopify Plus catalogs can control product access and pricing visibility for companies or company locations. That makes them a commercial control layer, not only a merchandising structure.
+**Are catalogs just another way to organize products?**
 
-**Do multiple Shopify Plus stores share products and data automatically?**
+No. In Shopify Plus B2B, catalogs can control product availability and pricing for companies or company locations. They should be validated as commercial access rules, not treated as ordinary product grouping.
 
-No. Multiple stores under a Shopify Plus organization still require deliberate governance. Products, collections, settings, apps, content, redirects, and operational logic should be planned and validated according to the store that owns them.
+**Can metafields and metaobjects preserve custom source data?**
 
-**Does Shopify Plus preserve the same customer login experience from the source platform?**
+Often, but they need planning. A custom value should have the right definition, type, validation expectation, storefront or app usage, and operational owner. Unsupported or app-owned custom behavior may require Custom Service rather than simple field mapping.
 
-Not automatically. Customer records and customer access are separate concerns. The migration can preserve useful customer data while the target account-access experience changes according to Shopify’s customer-account model and the business’s B2B structure.
+**Should Additional Migration Options be planned around Shopify Plus data-model differences?**
 
-**When does Shopify Plus data translation usually require Custom Service?**
-
-Custom Service is usually relevant when source-side meaning cannot be preserved through standard Shopify Plus structures or standard Add-ons alone. This can include Custom Platform handling, complex B2B account rules, negotiated pricing, app-owned data, external identifiers, bespoke multi-store logic, or custom migration logic adjustment.
+Only when later migration activity affects meaningful Shopify Plus behavior. New companies, updated catalogs, changed pricing, additional orders, or revised custom data can require renewed validation, but Additional Migration Options do not replace initial data-model planning.

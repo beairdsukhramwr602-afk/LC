@@ -169,7 +169,7 @@ Before launch, the business should confirm:
 * high-risk outcome areas have been reviewed by the right owners;
 * known differences are documented and intentionally accepted;
 * issues that affect buying, support, operations, SEO, or compliance have clear decisions;
-* Recent Data Migration or final data refresh needs are understood where timing matters;
+* an applicable additional migration option or final data refresh need is understood where timing matters;
 * launch approval reflects evidence, not only schedule pressure.
 
 The strongest launch decision is not the absence of every imperfection. It is a clear understanding of which differences are acceptable, which issues are corrected, and which open items do not materially block launch.
