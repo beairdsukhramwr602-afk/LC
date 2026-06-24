@@ -1,192 +1,205 @@
 # Wix Pre-Migration Preparation Checklist
 
-Wix migration preparation should make the target store testable before the migration result is accepted. Because Wix combines hosted website building, Wix Stores commerce, apps, member features, content tools, checkout settings, payments, shipping, tax, SEO, and optional Velo or API work, preparation should cover more than product, customer, and order counts.
+Wix migration preparation should make the Target Platform testable before the migration result is accepted. Wix combines hosted site building, Wix Stores, Wix eCommerce services, apps, members, content tools, checkout settings, payments, shipping, tax, SEO, and optional Velo or API work. Preparation must therefore cover more than product, customer, and order counts.
 
-The goal is to identify what must become migrated data, what must be configured in Wix, what belongs to apps or external systems, and what should be reviewed through Demo Migration before Full Migration. A prepared Wix migration is easier to estimate, easier to validate, and less likely to expose late launch gaps.
+A well-prepared Wix migration separates data that can be migrated, settings that must be configured in Wix, design or content work that must be rebuilt, and custom or app-owned behavior that may require Add-ons or Custom Service review. That separation gives Demo Migration and Full Migration a clear decision basis instead of relying on broad assumptions about what a hosted site-builder platform will recreate automatically.
 
-### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
+### What Preparation Means for Wix <a href="#what-preparation-means-for-wix" id="what-preparation-means-for-wix"></a>
 
-Preparation should create a clear view of how the current store should operate inside Wix after migration. The most useful preparation work connects source records to real target outcomes: products must be sellable, options and variants must behave as expected, collections must support browsing, customers and members must remain understandable, orders must be readable, and content or SEO changes must be intentional.
+Preparation defines how the current store should operate inside Wix after migration. The practical test is not only whether records appear, but whether the target site can sell, display, organize, search, and support those records in a way the business can use.
 
-For Wix, preparation should separate three types of work:
+| Preparation layer      | Wix-specific meaning                                                                                                             | What must be decided before migration                                                        |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Store and site context | Wix site, Wix Stores, eCommerce services, apps, plan, domain, storefront, checkout, and design expectations.                     | Which target environment is being prepared and which features must be active before testing. |
+| Migrated records       | Products, customers, orders, CMS Pages, Blog Posts, images, eligible commerce data, and supported metadata.                      | Which records are in scope and which samples must prove the migration path.                  |
+| Configured behavior    | Payments, tax, shipping, pickup, delivery, discounts, fulfillment, checkout behavior, menus, collection pages, and SEO settings. | Which outcomes depend on Wix setup rather than migrated data.                                |
+| App or custom behavior | Wix apps, Velo logic, APIs, custom catalogs, service plugins, custom fields, app-owned records, and external systems.            | Which requirements need mapping, Add-ons, Custom Service, or accepted exclusions.            |
 
-| Preparation area             | What it means for Wix                                                                                                     | Why it matters                                                                                 |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Migrated records             | Products, customers, orders, CMS Pages, Blog Posts, and eligible commerce data that should move into the Target Platform. | These records form the measurable migration scope and should be sampled before Full Migration. |
-| Target configuration         | Wix plan, store setup, checkout, payments, shipping, tax, domains, site menus, collections, filters, and app settings.    | Configuration affects whether migrated records can be used correctly after launch.             |
-| Custom or connected behavior | Velo logic, APIs, custom app data, external systems, third-party apps, custom fields, and unsupported source behavior.    | These items can require mapping, accepted exclusions, or Custom Service review.                |
+### Confirm the Target Wix Site Context <a href="#confirm-the-target-wix-site-context" id="confirm-the-target-wix-site-context"></a>
 
-### 1. Confirm the Target Wix Site Context <a href="#id-1-confirm-the-target-wix-site-context" id="id-1-confirm-the-target-wix-site-context"></a>
+Before preparing record samples, confirm the Wix environment that will receive the migration. Wix behavior can depend on enabled business solutions, installed apps, site structure, checkout configuration, domain planning, and whether custom code or external systems are expected.
 
-Before preparing data samples, confirm the target Wix environment that will receive the migration. Wix behavior can depend on the selected site type, installed apps, enabled commerce features, payment and shipping setup, domain planning, and whether custom code or external integrations are expected.
+| Target context                   | What to prepare                                                                                                                            | Why it matters                                                                                 |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| Wix Stores and commerce features | Confirm whether products, cart, checkout, orders, payments, tax, shipping, discounts, fulfillment, and inventory are required.             | Store records should be tested against the actual commerce setup, not a generic website shell. |
+| Wix apps and business modules    | List bookings, events, subscriptions, memberships, restaurants, pricing plans, forms, chat, loyalty, email marketing, or third-party apps. | App-owned records may not behave like standard products, customers, or orders.                 |
+| Site structure and design        | Identify product pages, collection pages, CMS Pages, Blog Posts, landing pages, menus, footer links, and mobile layout expectations.       | Data migration does not recreate every design, layout, or page-builder decision automatically. |
+| Domain and launch context        | Prepare domains, subdomains, DNS timing, old URLs, redirect needs, and launch windows.                                                     | URL continuity and launch timing should be planned before Full Migration acceptance.           |
+| Custom logic and integrations    | Document Velo code, APIs, custom catalog behavior, external payment, shipping, tax, ERP, CRM, PIM, WMS, analytics, or marketplace systems. | Custom behavior can change service path, mapping effort, validation scope, and launch risk.    |
 
-| Target context                         | What to confirm                                                                                                                                                     | Migration impact                                                                                        |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Wix site and commerce setup            | Whether the target site uses Wix Stores and which related business apps are needed.                                                                                 | Store data should be reviewed against the actual Wix commerce environment, not a generic website shell. |
-| Product and store feature availability | Whether the target setup supports the needed product types, variants, inventory behavior, discounts, subscriptions, bookings, memberships, or other selling models. | Feature mismatch can turn a normal migration into configuration, app, or Custom Service work.           |
-| Checkout setup                         | Payment methods, Wix Payments or external payment providers, tax, shipping, pickup, delivery, and checkout rules.                                                   | Historical order labels do not automatically configure live checkout behavior.                          |
-| Content and design context             | Template, site structure, navigation, product pages, CMS Pages, Blog Posts, landing pages, and mobile expectations.                                                 | A data migration can pass technically while storefront continuity remains incomplete.                   |
-| App and Velo context                   | Installed apps, custom code, API usage, automations, external systems, and data collections.                                                                        | App-owned or custom behavior should be identified before scope is finalized.                            |
-| SEO and domain context                 | Domains, URL slugs, redirects, metadata, priority product/category/page URLs, and search visibility needs.                                                          | URL and metadata planning reduces avoidable launch disruption.                                          |
+### Prepare Product, Variant, and Catalog Evidence <a href="#prepare-product-variant-and-catalog-evidence" id="prepare-product-variant-and-catalog-evidence"></a>
 
-### 2. Prepare Product and Catalog Samples <a href="#id-2-prepare-product-and-catalog-samples" id="id-2-prepare-product-and-catalog-samples"></a>
+Product preparation should represent how the store sells, not only how many products exist. Wix may need to interpret product names, descriptions, images, prices, inventory, SKUs, collections, product options, choices, variants, modifiers, ribbons, visibility, discounts, subscriptions, and shipping-related behavior.
 
-Product samples should represent how the store sells, not only how many products exist. Wix Stores may need to interpret product names, descriptions, images, pricing, inventory, SKUs, collections, product options, choices, variants, modifiers, ribbons, visibility, discounts, subscriptions, and shipping-related behavior.
+| Product sample                    | Evidence to collect                                                                                                     | What it proves during Demo Migration                                          |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Baseline product                  | Title, description, SKU, price, inventory, images, collection, visibility, SEO title, and slug.                         | Standard products remain readable, findable, and sellable.                    |
+| Variant product                   | Options, choices, variant SKUs, price differences, inventory, images, unavailable combinations, and storefront display. | Shopper choices translate into usable Wix product behavior.                   |
+| Product with modifiers or add-ons | Personalization, engraving, packaging, service choice, gift options, configurable extras, or price-changing inputs.     | The requirement is standard, Add-on-supported, custom, or excluded.           |
+| Digital or service product        | Delivery method, access expectation, file handling, appointment, booking, event, or membership relationship.            | The selling model belongs in Wix Stores, a Wix app, or Custom Service review. |
+| SEO-important product             | Existing URL, metadata, alt text, structured content, redirects, ad traffic, and ranking importance.                    | Migration planning protects product visibility and conversion paths.          |
+| External-system product           | ERP/PIM/marketplace IDs, supplier references, inventory source, fulfillment rules, or sync status.                      | The target record can be reconciled after launch.                             |
 
-Prepare examples from the most important product patterns:
+Custom fields, hidden attributes, marketplace identifiers, supplier references, personalization notes, and app-specific values should be listed separately. They should not be assumed to migrate as ordinary product fields.
 
-| Product sample                     | What to include                                                                                         | Why it matters                                                                              |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Simple products                    | Title, description, price, images, SKU, inventory, collection, visibility, and SEO values.              | Confirms baseline product readability and storefront placement.                             |
-| Variant products                   | Options, choices, variants, variant pricing, SKUs, stock, images, and unavailable combinations.         | Shows whether buying choices are represented correctly in Wix.                              |
-| Products with modifiers or add-ons | Any source behavior that changes price, personalization, packaging, service choice, or product details. | Some source modifiers may not map cleanly to standard Wix product behavior.                 |
-| Digital or non-physical products   | Delivery expectation, product type, files, access method, or fulfillment handling.                      | Confirms whether the selling model belongs in Wix Stores, another Wix app, or custom scope. |
-| Subscription or recurring products | Subscription terms, billing expectation, product association, and customer-facing meaning.              | Recurring commerce should be reviewed separately from ordinary product migration.           |
-| High-value products                | Best sellers, complex bundles, SEO-important products, or products tied to ads or marketplaces.         | These records should be included in Demo Migration review.                                  |
+### Prepare Collections, Filters, Menus, and Storefront Discovery <a href="#prepare-collections-filters-menus-and-storefront-discovery" id="prepare-collections-filters-menus-and-storefront-discovery"></a>
 
-Product samples should also include source fields that may not have an obvious Wix destination. Custom fields, option rules, hidden attributes, product badges, marketplace IDs, personalization notes, supplier references, and app-specific values should be listed separately instead of assumed to migrate as ordinary product data.
+Wix storefront discovery depends on how products are organized and displayed. Source categories may become collections, menus, gallery sections, landing pages, filters, redirects, or accepted structural changes. Preparation should show how shoppers are expected to find products after migration.
 
-### 3. Prepare Collections, Categories, Filters, and Storefront Discovery Evidence <a href="#id-3-prepare-collections-categories-filters-and-storefront-discovery-evidence" id="id-3-prepare-collections-categories-filters-and-storefront-discovery-evidence"></a>
+| Discovery area             | Evidence to prepare                                                                                                 | Wix readiness question                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Categories and collections | Source category tree, collection names, product assignments, visibility, priority URLs, and merchandising order.    | Should each structure become a Wix collection, menu item, landing page, or accepted change? |
+| Filters and facets         | Size, color, brand, material, price, availability, custom attributes, and search filters.                           | Which filters can be represented in Wix and which need configuration or custom handling?    |
+| Navigation                 | Header menus, footer menus, category links, product galleries, campaign pages, and collection pages.                | Can customers reach important products and sections without relying on old site paths?      |
+| Product display            | Product gallery layout, collection sorting, badges, ribbons, labels, sale display, image order, and mobile display. | Does migrated data support the intended storefront experience?                              |
+| Priority URLs              | Best-selling products, high-traffic categories, product-listing pages, landing pages, and campaign URLs.            | Which URLs require redirects, metadata review, or manual launch planning?                   |
 
-Wix storefront discovery depends on how products are organized and displayed. Source categories may become Wix collections, menus, product galleries, filters, landing pages, or other storefront structures. The preparation work should show how shoppers are expected to browse and find products after launch.
+### Prepare Customer, Contact, Member, and Account Data <a href="#prepare-customer-contact-member-and-account-data" id="prepare-customer-contact-member-and-account-data"></a>
 
-| Discovery element    | Evidence to prepare                                                                             | What to check in Wix                                                                            |
-| -------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Source categories    | Category names, hierarchy, product assignments, URL importance, and visibility rules.           | Whether each structure should become a collection, menu path, page section, or accepted change. |
-| Product filters      | Filter values, attributes, sizes, colors, brands, prices, availability, or custom filter logic. | Whether Wix filtering supports the expected browsing behavior.                                  |
-| Menus and navigation | Main menu, footer menu, product listing links, landing pages, and promotional paths.            | Whether shoppers can reach key products and collections after migration.                        |
-| Product galleries    | Store pages, category pages, featured sections, and collection displays.                        | Whether product organization works visually in the target site.                                 |
-| Priority URLs        | High-traffic category, collection, product, and landing-page URLs.                              | Whether redirects or URL changes need to be planned.                                            |
+Wix can involve customers, contacts, site members, subscribers, app participants, and CRM-style records. These identity layers should not be treated as one identical record type without review.
 
-### 4. Prepare Customer, Contact, Member, and Account Evidence <a href="#id-4-prepare-customer-contact-member-and-account-evidence" id="id-4-prepare-customer-contact-member-and-account-evidence"></a>
+| Identity sample          | Evidence to prepare                                                                                  | Why it matters                                                                                       |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Buyer with orders        | Name, email, billing/shipping addresses, order history, notes, tags, and customer status.            | Confirms historical commerce context remains understandable.                                         |
+| Registered member        | Login expectation, member status, permissions, account fields, and content access.                   | Member behavior may depend on Wix settings or app workflows, not migration alone.                    |
+| Marketing contact        | Consent, subscription status, segmentation, tags, notes, and CRM fields.                             | Marketing usability depends on more than customer email migration.                                   |
+| App participant          | Booking, event, membership, restaurant, subscription, pricing plan, or form-submission relationship. | App-owned records may require separate review or configuration.                                      |
+| B2B-like account         | Company name, tax ID, approval status, custom pricing, saved addresses, or account owner.            | Wix may require configuration, app support, or Custom Service review for non-standard account logic. |
+| External-system identity | CRM ID, loyalty ID, ERP account code, marketplace buyer ID, or support-system reference.             | External references may need mapping or accepted exclusion decisions.                                |
 
-Wix can involve several related identity layers: customers, contacts, members, subscribers, account holders, and app-specific participant records. These should not be treated as one identical data type without review.
+The objective is usable identity meaning after migration. Customers should be understandable for service, order review, segmentation, and post-launch operations. Member access, custom roles, app participation, or account permissions should be reviewed separately from standard customer migration.
 
-Prepare representative records that show:
+### Prepare Order, Transaction, and Fulfillment Samples <a href="#prepare-order-transaction-and-fulfillment-samples" id="prepare-order-transaction-and-fulfillment-samples"></a>
 
-* ordinary buyers with order history;
-* registered customers or members with account context;
-* newsletter subscribers and marketing-consent status;
-* contacts with phone, address, company, tags, notes, or segmentation values;
-* customers tied to subscriptions, bookings, memberships, events, restaurants, or other Wix app workflows;
-* B2B-like records with company details, tax identifiers, special pricing, or approval rules;
-* external CRM, email marketing, loyalty, or accounting identifiers.
+Order preparation should support customer service, finance, fulfillment, and operational review after migration. A useful sample includes more than successful paid orders.
 
-The preparation objective is to preserve usable identity meaning. A migrated customer record should be understandable for order review, service follow-up, segmentation, and post-launch operation. If member access, custom roles, app participation, or account permissions matter, those requirements should be reviewed separately from standard customer migration.
+| Order sample               | Evidence to collect                                                                                                        | What to verify later                                                                             |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Paid and fulfilled order   | Products, quantities, totals, discounts, tax, shipping, payment label, tracking, fulfillment status, and customer details. | Ordinary historical orders remain readable.                                                      |
+| Refunded or canceled order | Status, refund amount, refund reason, payment label, fulfillment status, customer communication, and notes.                | Non-standard order states do not lose operational meaning.                                       |
+| Discounted order           | Coupon code, discount label, promotion context, line-item totals, and order total.                                         | Historical discounts remain understandable even if live discounts must be configured separately. |
+| Variant or modifier order  | Purchased choice, SKU, personalization note, price change, product name at purchase, and line-item metadata.               | Purchased product meaning remains clear.                                                         |
+| App or channel order       | Booking, event, restaurant, subscription, marketplace, POS, or external-channel context.                                   | App-owned or channel-owned meaning receives separate review.                                     |
+| External-reference order   | Invoice number, payment transaction ID, ERP order number, shipping reference, or accounting ID.                            | External reconciliation remains possible after migration.                                        |
 
-### 5. Prepare Order and Transaction Samples <a href="#id-5-prepare-order-and-transaction-samples" id="id-5-prepare-order-and-transaction-samples"></a>
+Historical order records do not configure live Wix checkout. Payments, tax, shipping, pickup, delivery, fulfillment, discounts, and checkout behavior must be configured and tested in the target site.
 
-Order preparation should cover the records that customer service, finance, fulfillment, and store management will rely on after migration. A useful order sample set should include more than successful paid orders.
+### Separate Live Checkout Setup from Migrated History <a href="#separate-live-checkout-setup-from-migrated-history" id="separate-live-checkout-setup-from-migrated-history"></a>
 
-| Order sample                                      | What to include                                                                                                    | Why it matters                                                         |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Paid and fulfilled orders                         | Products, quantities, totals, taxes, discounts, customer details, shipping, payment label, and fulfillment status. | Confirms ordinary historical order readability.                        |
-| Refunded, canceled, or partially fulfilled orders | Status, totals, refund context, shipping context, and customer communication needs.                                | Shows whether complex historical order states remain understandable.   |
-| Orders with discounts or coupons                  | Coupon codes, discount names, totals, and promotion context.                                                       | Historical discount labels may not recreate live discount rules.       |
-| Orders with variants or modifiers                 | Purchased choices, SKU, product name at purchase, price differences, and personalization details.                  | Confirms whether purchased product meaning remains clear.              |
-| Orders from channels or apps                      | Marketplace, POS, booking, restaurant, event, subscription, or app-related context.                                | App or channel-owned order meaning may need separate review.           |
-| Orders with external references                   | Payment IDs, invoice numbers, shipping labels, ERP records, accounting IDs, or fulfillment IDs.                    | External references may affect post-launch service and reconciliation. |
+A common preparation mistake is treating historical order migration as proof that the target store is ready to sell. The historical record and live checkout flow are different workstreams.
 
-Historical order migration should be reviewed separately from live checkout configuration. Order records can preserve past transaction context, but payment providers, tax settings, shipping rates, pickup, delivery, fulfillment, discounts, and checkout behavior must be configured and tested in Wix.
+| Area            | Migration preparation                                                                    | Wix setup responsibility                                                                      |
+| --------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Payments        | Preserve payment labels and transaction references where supported.                      | Configure payment providers and test live payment flow.                                       |
+| Shipping        | Preserve historical method labels, tracking, and fulfillment notes where supported.      | Configure shipping regions, rates, pickup, delivery, carrier logic, and fulfillment behavior. |
+| Tax             | Preserve historical tax values in order records where supported.                         | Configure tax calculation for new checkout activity.                                          |
+| Discounts       | Preserve historical coupon or discount context where supported.                          | Recreate active coupons, promotions, or discount rules if still needed.                       |
+| Checkout fields | Identify custom checkout fields, delivery notes, gift notes, terms, or app-owned fields. | Configure forms, checkout validation, or custom handling where supported.                     |
+| Fulfillment     | Preserve historical fulfillment status and references where supported.                   | Configure fulfillment workflow, notifications, delivery options, and external-system sync.    |
 
-### 6. Separate Checkout Configuration from Migrated Order History <a href="#id-6-separate-checkout-configuration-from-migrated-order-history" id="id-6-separate-checkout-configuration-from-migrated-order-history"></a>
+### Prepare CMS Pages, Blog Posts, Media, and Site Content <a href="#prepare-cms-pages-blog-posts-media-and-site-content" id="prepare-cms-pages-blog-posts-media-and-site-content"></a>
 
-A common Wix preparation mistake is assuming historical order data proves the live store is ready to sell. These are different workstreams.
+Wix is often selected because it combines website management and commerce. Preparation should include content and design evidence, especially when SEO, landing pages, blog traffic, forms, images, videos, or branded page layouts matter.
 
-| Area              | Migration preparation                                                                         | Target setup responsibility                                                                      |
-| ----------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Payments          | Preserve historical payment labels and transaction references where supported.                | Configure Wix Payments or other payment providers and test live payment flow.                    |
-| Shipping          | Preserve historical shipping labels, methods, tracking, or fulfillment notes where supported. | Configure shipping regions, rates, pickup, delivery, fulfillment methods, and carrier logic.     |
-| Tax               | Preserve historical tax values in order records where supported.                              | Configure tax rules and test tax calculation for new checkout activity.                          |
-| Discounts         | Preserve order-level discount context where supported.                                        | Recreate active coupon or promotion behavior in Wix if still needed.                             |
-| Customer accounts | Preserve customer or contact meaning where supported.                                         | Configure member access, account behavior, forms, roles, or app-specific permissions.            |
-| App workflows     | Identify orders tied to apps, subscriptions, bookings, events, restaurants, or memberships.   | Configure the relevant Wix app workflow and review whether historical app data belongs in scope. |
+| Content area         | Evidence to prepare                                                                                | Migration planning decision                                                        |
+| -------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| CMS Pages            | Policy pages, landing pages, content pages, FAQs, buying guides, and page metadata.                | Which pages migrate, rebuild, redirect, or get excluded?                           |
+| Blog Posts           | Titles, authors, categories, tags, dates, images, slugs, metadata, and internal links.             | Which blog structure should be preserved in Wix?                                   |
+| Product-page content | Size guides, warranty blocks, product FAQs, embedded media, comparison tables, and instructions.   | Which content belongs inside product data, CMS Pages, apps, or manual design work? |
+| Media                | Images, galleries, downloadable files, videos, alt text, filenames, and usage locations.           | Which assets must remain connected to products, pages, posts, or forms?            |
+| Site layout          | Menus, footer links, homepage sections, campaign pages, mobile layout, and product-gallery design. | Which visual outcomes are migration scope and which are design/build work?         |
 
-### 7. Prepare CMS Pages, Blog Posts, Content, and Design Evidence <a href="#id-7-prepare-cms-pages-blog-posts-content-and-design-evidence" id="id-7-prepare-cms-pages-blog-posts-content-and-design-evidence"></a>
+Design recreation should not be assumed to happen automatically through data migration. Preparation should state what is migrated, rebuilt, redesigned, redirected, or intentionally excluded.
 
-Wix is often selected for its combined website and commerce environment. Migration preparation should therefore include content and design evidence, especially when the source store depends on editorial pages, blog traffic, landing pages, menus, forms, images, videos, or SEO-sensitive content.
+### Prepare SEO, URL, Redirect, and Domain Evidence <a href="#prepare-seo-url-redirect-and-domain-evidence" id="prepare-seo-url-redirect-and-domain-evidence"></a>
 
-Prepare:
-
-* priority CMS Pages, landing pages, and policy pages;
-* Blog Posts, authors, categories, tags, publication dates, images, and SEO values;
-* product-page content blocks, size guides, FAQs, warranty pages, or buying guides;
-* menus, footer links, homepage sections, promotional landing pages, and campaign pages;
-* media files, alt text, embedded videos, downloadable files, and image galleries;
-* forms, member-only content, booking pages, event pages, restaurant pages, or other Wix-app content;
-* mobile layout expectations and visual differences that matter for launch acceptance.
-
-Content preparation should identify which material is migrated, rebuilt, redesigned, redirected, or intentionally excluded. Design recreation should not be assumed to happen automatically through data migration.
-
-### 8. Prepare SEO, URL, Redirect, and Domain Evidence <a href="#id-8-prepare-seo-url-redirect-and-domain-evidence" id="id-8-prepare-seo-url-redirect-and-domain-evidence"></a>
-
-SEO preparation should start before migration because Wix URL structure, page hierarchy, product slugs, collection paths, redirects, metadata, and domain setup may differ from the Source Platform.
+SEO preparation should start before migration because Wix URL behavior, page hierarchy, product slugs, collection paths, redirects, metadata, and domain setup may differ from the Source Platform.
 
 | SEO area                    | Evidence to prepare                                                                               | Planning reason                                                                    |
 | --------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Priority product URLs       | Best-selling or high-traffic product URLs, metadata, image alt text, and ranking-sensitive pages. | These records should be sampled in Demo Migration and redirect planning.           |
-| Category or collection URLs | Source category paths, landing pages, and product-listing pages.                                  | Source categories may not become identical Wix URLs.                               |
-| Blog and content URLs       | Blog Posts, CMS Pages, authors, tags, and legacy permalink structures.                            | Content migration can affect organic traffic if URLs and metadata are not planned. |
-| Redirect map                | Old-to-new URL expectations for important pages.                                                  | Redirect planning helps preserve traffic continuity.                               |
-| Domain setup                | Primary domain, subdomains, DNS expectations, and launch timing.                                  | Domain work is part of launch readiness, not proof that data migrated correctly.   |
+| Product URLs                | High-traffic products, slugs, metadata, alt text, ranking-sensitive pages, and ad landing URLs.   | Product visibility depends on data accuracy and redirect planning.                 |
+| Category or collection URLs | Source category paths, product-listing pages, collection pages, and merchandising landing pages.  | Source categories may not become identical Wix URLs.                               |
+| Blog and content URLs       | Blog Posts, CMS Pages, author pages, tag pages, metadata, and old permalink structure.            | Content migration can affect organic traffic if URLs and metadata are not planned. |
+| Redirect map                | Old-to-new URL expectations for priority products, collections, pages, posts, and campaign pages. | Redirect planning reduces avoidable launch disruption.                             |
+| Domain setup                | Primary domain, subdomains, DNS timing, launch windows, and analytics/search-console ownership.   | Domain work is launch readiness, not proof that data migrated correctly.           |
 
-### 9. Inventory Apps, Velo, APIs, and External Systems <a href="#id-9-inventory-apps-velo-apis-and-external-systems" id="id-9-inventory-apps-velo-apis-and-external-systems"></a>
+### Inventory Apps, Velo, APIs, and External Systems <a href="#inventory-apps-velo-apis-and-external-systems" id="inventory-apps-velo-apis-and-external-systems"></a>
 
-Apps and custom behavior can carry business meaning that is not visible in standard product, customer, or order exports. Wix preparation should identify these dependencies early so they are not discovered only after Demo Migration.
+Apps and custom behavior can carry business meaning that is not visible in standard product, customer, or order exports. Wix preparation should identify these dependencies early so they do not appear only after Demo Migration.
 
-| Dependency type                    | Examples to document                                                                                                                    | Migration implication                                                                           |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Wix apps or equivalent source apps | Bookings, Events, Restaurants, Pricing Plans, Subscriptions, loyalty, email marketing, chat, forms, reviews, or third-party store apps. | App-owned records may require separate scope review or manual setup.                            |
-| Velo or custom code                | Custom collections, page logic, form submissions, dynamic pages, custom checkout-adjacent behavior, or automation logic.                | Custom logic is handled through Custom Service when migration behavior must be adjusted.        |
-| APIs and external systems          | ERP, CRM, accounting, PIM, WMS, fulfillment, shipping, tax, analytics, marketplace, or advertising systems.                             | External identifiers and sync rules may need mapping or reconfiguration.                        |
-| Custom fields                      | Product, customer, order, contact, member, or content fields that affect operations.                                                    | Unsupported or custom field mapping may require Advanced Data Mapping or Custom Service review. |
-| Automations and notifications      | Email workflows, order alerts, customer segmentation, abandoned-cart behavior, or fulfillment messages.                                 | These usually require target setup rather than data migration alone.                            |
+| Dependency type                    | Examples to document                                                                                                              | Migration implication                                                                                       |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Wix apps or source app equivalents | Bookings, Events, Restaurants, Pricing Plans, subscriptions, loyalty, forms, reviews, chat, email marketing, or third-party apps. | App-owned records may require separate scope review, target setup, or accepted exclusions.                  |
+| Velo or custom code                | Custom collections, dynamic pages, form submissions, business rules, validations, calculations, or automation logic.              | Custom logic may require Custom Service when migration behavior must be adjusted.                           |
+| APIs and external systems          | ERP, CRM, accounting, PIM, WMS, fulfillment, shipping, tax, analytics, marketplace, or advertising systems.                       | External identifiers and sync rules may need mapping, target setup, or post-launch reconciliation.          |
+| Service plugins                    | Custom fees, custom shipping rates, payment services, checkout/cart validation, or custom catalog integration.                    | Service-plugin behavior should be treated as implementation scope, not assumed migration output.            |
+| Custom fields                      | Product, customer, order, contact, member, or content fields that affect operations.                                              | Supported mapping, Add-ons, Custom Service, or accepted exclusions should be decided before Full Migration. |
 
-### 10. Choose Demo Migration Samples Deliberately <a href="#id-10-choose-demo-migration-samples-deliberately" id="id-10-choose-demo-migration-samples-deliberately"></a>
+### Choose Demo Migration Samples Deliberately <a href="#choose-demo-migration-samples-deliberately" id="choose-demo-migration-samples-deliberately"></a>
 
-Demo Migration should test the records most likely to reveal whether the Wix migration path fits the business. A shallow sample can make the migration look cleaner than it will be in production.
+Demo Migration should test records most likely to reveal whether the Wix migration path fits the business. A shallow sample can make migration look cleaner than it will be in production.
 
-| Sample type             | Strong Wix sample                                                                                      | What it proves                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| Product                 | A product with multiple options, choices, variants, SKU, inventory, image differences, and SEO values. | Whether catalog behavior translates into usable Wix product structure.            |
-| Collection              | A category or collection with important filters, navigation, and priority URL needs.                   | Whether shoppers can browse and find products after migration.                    |
-| Customer/contact/member | A buyer with account context, contact details, consent status, tags, and order history.                | Whether identity meaning remains usable in Wix.                                   |
-| Order                   | An order with variants, discounts, tax, payment label, shipping, tracking, and external references.    | Whether historical order records remain readable for operations.                  |
-| Content                 | A CMS Page, Blog Post, or landing page with images, metadata, links, and old URL value.                | Whether content and SEO handling need extra planning.                             |
-| App or custom record    | A record tied to bookings, events, subscriptions, memberships, Velo, or an external system.            | Whether app-owned or custom behavior belongs in standard scope or Custom Service. |
+| Sample type             | Strong Wix sample                                                                                            | What it proves                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Product                 | A product with options, variants, SKU, inventory, images, SEO values, and collection assignment.             | Catalog behavior translates into usable Wix product structure.    |
+| Collection              | A category or collection with filters, navigation, priority URL needs, and merchandising purpose.            | Shoppers can browse and find products after migration.            |
+| Customer/contact/member | A buyer with contact fields, consent status, tags, member context, and order history.                        | Identity meaning remains usable in Wix.                           |
+| Order                   | An order with variants, discounts, tax, payment label, shipping, tracking, and external references.          | Historical order records remain readable for operations.          |
+| Content                 | A CMS Page, Blog Post, or landing page with images, metadata, links, and old URL value.                      | Content and SEO handling are clear before launch.                 |
+| App or custom record    | A record tied to bookings, events, subscriptions, memberships, Velo, service plugins, or an external system. | App-owned or custom behavior is classified before Full Migration. |
 
-### 11. Identify Add-on and Custom Service Signals Early <a href="#id-11-identify-add-on-and-custom-service-signals-early" id="id-11-identify-add-on-and-custom-service-signals-early"></a>
+### Identify Add-ons, Custom Service, and Accepted Exclusions <a href="#identify-add-ons-custom-service-and-accepted-exclusions" id="identify-add-ons-custom-service-and-accepted-exclusions"></a>
 
-Preparation should also reveal whether standard migration scope is enough or whether additional service planning is needed.
+Preparation should reveal whether standard migration scope is enough or whether additional service planning is needed.
 
-Add-ons can help when filtering, mapping, or data configuration needs fit supported behavior. The Data Filter Add-on can support selected-record migration where appropriate. Advanced Data Mapping can help align supported fields between the Source Platform and Wix. Advanced Data Configure can support supported data value adjustments before migration.
+| Need identified during preparation | Likely handling                         | Reasoning                                                                                                 |
+| ---------------------------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Supported data filtering           | Data Filter Add-on                      | Selected-record migration may be enough when source data is too broad or outdated.                        |
+| Supported field alignment          | Advanced Data Mapping                   | Source fields can be aligned to supported Wix destinations when the behavior is within supported mapping. |
+| Supported value adjustment         | Advanced Data Configure                 | Data values can be adjusted before migration when the requirement remains within supported configuration. |
+| Unsupported app records            | Custom Service or accepted exclusion    | App-owned behavior may not fit standard Wix commerce data.                                                |
+| Velo, API, or service-plugin logic | Custom Service or target implementation | Custom logic should not be treated as ordinary data migration.                                            |
+| Design recreation                  | Target-site build or accepted exclusion | Site design, layout, and interactions often require build work outside data migration.                    |
+| External-system sync               | Custom Service or integration setup     | External IDs and sync rules may need custom handling or separate system configuration.                    |
 
-Custom Service is the correct path when the requirement involves custom migration logic adjustment, Custom Platform source interpretation, unsupported app data, Velo or API-specific handling, custom field transformation beyond supported mapping, bespoke product-option behavior, non-standard checkout-related meaning, or external-system identifiers that must be preserved in a specific way.
+### Plan Follow-Up Migration Timing <a href="#plan-follow-up-migration-timing" id="plan-follow-up-migration-timing"></a>
+
+If source-store activity continues after Demo Migration, preparation should define how later changes will be reviewed. Additional Migration Options should be planned around what changed and whether those changes affect Wix setup, validation, or service scope.
+
+Entity Points should be reviewed correctly: new Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because another migration action is performed for the same migration path. New eligible records may consume Entity Points when migrated for the first time.
+
+| Follow-up area            | What to track                                                                      | Why it matters                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| New products              | New SKUs, variants, images, prices, inventory, collections, and SEO fields.        | Product changes may require renewed catalog validation.                             |
+| New customers or contacts | New buyers, members, subscribers, consent fields, tags, and addresses.             | Identity changes may affect customer/account review.                                |
+| New orders                | Order statuses, discounts, tax, shipping, payment labels, and external references. | Operational review may need to cover new transaction patterns.                      |
+| New Blog Posts            | New posts, authors, categories, tags, images, slugs, and metadata.                 | Content and SEO review may need extension.                                          |
+| Configuration changes     | Payment, shipping, tax, domain, app, Velo, API, or service-plugin changes.         | Configuration changes may require preparation and testing outside record migration. |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-A prepared Wix migration gives the Demo Migration and Full Migration a clear decision basis. The strongest preparation connects records to actual Wix use: products must be sellable, options and variants must make sense, collections must support browsing, customers and members must remain understandable, orders must be readable, and content or SEO outcomes must be planned before launch.
+A prepared Wix migration connects source records to real target use. Products should be sellable, collections should support browsing, customers and members should remain understandable, orders should be readable, checkout setup should be tested separately from historical order migration, and content or SEO outcomes should be planned before launch.
 
-Before starting Demo Migration, collect the product, order, customer, content, app, API, and SEO samples that best represent the store’s real operating complexity. If those samples reveal filtering, mapping, data configuration, custom app behavior, Velo logic, or external-system dependency, review the need for Add-ons or Custom Service before Full Migration.
+Before Demo Migration, collect samples that represent the store’s actual complexity. If those samples reveal filtering, mapping, data configuration, app-owned behavior, Velo logic, service-plugin dependency, external-system identifiers, or unsupported custom records, review Add-ons, Custom Service, or accepted exclusions before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be prepared first for a Wix migration?**
 
-Start with the target Wix site context, including Wix Stores setup, required apps, checkout expectations, payment and shipping needs, domain plans, and the product and content samples that represent the store’s real operating model.
+Start with the target Wix site context: Wix Stores setup, required apps, checkout expectations, payment and shipping needs, domain plan, content priorities, and the product and order samples that represent the store’s real operating model.
 
 **Which product samples should be included before Demo Migration?**
 
-Include simple products, products with options and variants, inventory-sensitive products, products with custom fields or modifiers, best sellers, SEO-important products, and any records tied to subscriptions, apps, or external systems.
+Include simple products, products with options and variants, inventory-sensitive products, products with modifiers or custom fields, best sellers, SEO-important products, and any records tied to subscriptions, apps, service plugins, or external systems.
 
 **Should CMS Pages and Blog Posts be prepared before migration?**
 
-Yes. Wix is often used as a website-and-commerce platform, so CMS Pages, Blog Posts, landing pages, menus, media, metadata, and redirects should be prepared before launch planning depends on the migrated result.
+Yes. Wix often combines site and store operations, so CMS Pages, Blog Posts, landing pages, menus, media, metadata, internal links, and redirects should be prepared before launch decisions depend on the migrated result.
 
 **Does migrated order history configure Wix checkout?**
 
-No. Historical order data can preserve past order context, but Wix checkout, payments, shipping, tax, pickup, delivery, discounts, and fulfillment behavior must be configured and tested in the target site.
+No. Historical order data can preserve past order context, but Wix checkout, payment providers, shipping, tax, pickup, delivery, discounts, fulfillment, and service-plugin behavior must be configured and tested in the target site.
 
 **When should Custom Service be considered for a Wix migration?**
 
-Custom Service should be considered when the migration depends on Custom Platform interpretation, unsupported app data, Velo or API-specific behavior, custom migration logic adjustment, complex custom fields, or external-system identifiers that must be preserved in a specific way.
+Custom Service should be considered when the migration depends on Custom Platform interpretation, unsupported app data, Velo or API-specific behavior, custom migration logic adjustment, service-plugin dependency, complex custom fields, or external-system identifiers that must be preserved in a specific way.

@@ -1,171 +1,209 @@
 # VTEX Validation Priorities
 
-Validation in a VTEX migration should prove that the migrated store can operate inside VTEX’s enterprise commerce structure, not only that records were copied. VTEX stores often depend on catalog depth, SKU-level detail, specifications, pricing rules, trade policies, promotions, Checkout behavior, OMS flows, marketplace or seller architecture, Master Data, storefront solution choices, apps, APIs, and external business systems.
+VTEX migration validation should prove that migrated data can support real commerce operations inside VTEX, not only that records arrived. A product may exist but fail review if the SKU cannot be activated, specifications do not support discovery, a trade policy changes availability, pricing is reviewed in the wrong channel, marketplace context is missing, Master Data is incomplete, or external systems cannot reconcile migrated identifiers.
 
-A useful validation review should therefore combine record checks with operational checks. Products should be readable as sellable VTEX catalog items. Orders should be understandable inside OMS. Customer and B2B data should support the intended account experience. Storefront, search, SEO, and URL behavior should support buyer discovery. App, API, ERP, PIM, WMS, and marketplace references should be checked where they influence daily operations.
+Validation should therefore be organized around proof. Catalog, customer, order, CMS Pages, and Blog Posts checks are still necessary, but they should be tested through the VTEX operating layers that determine whether the migrated store can be used after launch: Catalog, SKUs, specifications, trade policies, pricing, promotions, marketplace and seller operations, OMS, logistics, Master Data, storefront implementation, apps, APIs, integrations, Add-ons, and Custom Service outputs.
+
+For VTEX, a useful validation plan does three things. It confirms baseline transfer accuracy, tests platform-specific behavior, and identifies which exceptions belong to target configuration, Add-ons, Custom Service, or external-system work. This keeps validation practical without reducing VTEX to a simple product/customer/order checklist.
 
 ### What VTEX Validation Should Prove <a href="#what-vtex-validation-should-prove" id="what-vtex-validation-should-prove"></a>
 
-VTEX validation should confirm whether migrated data behaves correctly in the target commerce environment. A product count, customer count, or order count is only the starting point. The migrated data must also support buying, merchandising, fulfillment, customer service, reporting, and integration workflows.
+VTEX validation should confirm whether migrated records preserve business meaning across connected platform layers. The review should not stop at field comparison. It should test whether the target record can be found, understood, priced, sold, fulfilled, supported, reported, and reconciled by the teams that will operate the store.
 
-| Validation area                     | What should be proven                                                                                                                                | Why it matters                                                                                           |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Catalog structure                   | Products, SKUs, brands, categories, specifications, images, attachments, services, kits, and collections are represented in a usable VTEX structure. | VTEX selling behavior is SKU-centered and depends on more than product titles and descriptions.          |
-| Pricing and selling context         | Prices, price tables, promotions, trade policies, sales channels, and commercial conditions support the intended buyer experience.                   | A catalog can appear complete while the wrong buyer sees the wrong price, availability, or promotion.    |
-| Checkout and order creation         | Checkout behavior, cart structure, shipping options, payment context, tax logic, and order creation are reviewed separately from historical data.    | Migrated order history does not prove that new VTEX orders can be placed correctly.                      |
-| OMS and historical orders           | Orders are readable with customer, item, payment, shipping, status, seller, marketplace, and fulfillment context.                                    | Customer service and operations teams need historical orders to remain useful after migration.           |
-| Customer and Master Data            | Customer profiles, addresses, consent, custom fields, B2B structures, and Master Data records retain usable business meaning.                        | Customer and account data may affect segmentation, B2B access, compliance, and connected workflows.      |
-| Marketplace and seller architecture | Seller, marketplace, fulfillment, commission, product, order, and channel context is preserved or intentionally reconfigured.                        | Marketplace operations can fail even when products and orders look correct at record level.              |
-| Storefront and search               | Product discovery, category paths, search behavior, filters, content, CMS areas, and SEO-sensitive URLs support launch expectations.                 | VTEX storefront results depend on the chosen storefront solution and search/discovery configuration.     |
-| Apps, APIs, and integrations        | App-owned values, API identifiers, webhook behavior, ERP/PIM/WMS references, and external workflows are checked where they matter.                   | Enterprise commerce migration often fails at integration boundaries rather than simple record migration. |
+| Validation layer             | What to inspect                                                                                                                      | Pass condition                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Catalog structure            | Products, SKUs, categories, brands, images, specifications, attachments, assembly options, services, kits, and collections.          | Representative products are active, discoverable, commercially understandable, and reviewable by catalog owners. |
+| Commercial behavior          | Prices, price tables, promotions, trade policies, sales channels, marketplace context, and B2B/B2C eligibility.                      | Reviewers can explain why each sample is available, unavailable, priced, discounted, or channel-specific.        |
+| Marketplace and operations   | Sellers, marketplace order context, OMS status meaning, logistics references, delivery/pickup behavior, and fulfillment identifiers. | Operational teams can read migrated records without losing seller, fulfillment, or external-system context.      |
+| Customer and account data    | Customer records, addresses, segmentation, B2B/account relationships, consent indicators, custom fields, and Master Data.            | Customer meaning is preserved beyond basic contact details.                                                      |
+| Storefront and content       | Navigation, search, filters, facets, CMS Pages, Blog Posts, landing pages, metadata, redirects, and priority URLs.                   | Migrated data can support launch discovery, content continuity, and SEO-sensitive paths.                         |
+| Integrations and custom data | ERP, PIM, WMS, CRM, accounting, marketplace, payment, analytics, middleware, app-owned records, and external IDs.                    | Downstream systems can reconcile migrated records or known exclusions are documented.                            |
+| Service-scope outputs        | Add-ons, Custom Service deliverables, Custom Platform interpretation, and accepted exclusions.                                       | Reviewers can separate supported migration results from custom, configured, or externally owned behavior.        |
 
-### Catalog, Product, SKU, and Specification Validation <a href="#catalog-product-sku-and-specification-validation" id="catalog-product-sku-and-specification-validation"></a>
+A VTEX validation plan is complete only when each layer has representative samples, assigned reviewers, expected outcomes, known exclusions, and escalation rules.
 
-Catalog validation should begin with products that represent real selling complexity. Simple products are useful for baseline checks, but they do not prove that VTEX can support the store’s actual catalog behavior.
+### Validate Catalog, SKU, and Specification Outcomes <a href="#validate-catalog-sku-and-specification-outcomes" id="validate-catalog-sku-and-specification-outcomes"></a>
 
-#### Product and SKU structure <a href="#product-and-sku-structure" id="product-and-sku-structure"></a>
+Catalog validation is usually the first proof point because VTEX separates product identity, SKU sellability, category placement, specifications, and commercial visibility. Reviewers should test simple products and complex examples instead of approving only the easiest records.
 
-A strong product sample should show whether source products became usable VTEX products and SKUs. The review should confirm product names, descriptions, brands, categories, images, SEO values, variant relationships, SKU codes, inventory-related identifiers, measurements, and sellable status.
+| Sample to validate                             | What to check                                                                                                 | Why it matters                                                                                              |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Baseline product                               | Product name, description, brand, category, images, SKU, stock, and price.                                    | Confirms ordinary migration accuracy before edge cases are reviewed.                                        |
+| Multi-SKU product                              | SKU names, choices, images, prices, stock, and specification values.                                          | Prevents source variants from becoming confusing or inactive VTEX SKUs.                                     |
+| Specification-heavy product                    | Product specifications, SKU specifications, filterable values, category-specific groups, and required values. | Validates whether discovery, comparison, compliance, and merchandising data remain usable.                  |
+| Category-sensitive product                     | Department, category, subcategory, product-category assignment, and specification behavior by category.       | Category placement affects navigation and the meaning of some specifications.                               |
+| Attachment or customization product            | Required input, optional service, personalization, gift wrap, warranty, or configurable add-on behavior.      | Some source choices may require VTEX setup, app behavior, or Custom Service rather than ordinary migration. |
+| Assembly, kit, collection, or bundle-like item | Grouped selling logic, component relationships, collection membership, service attachment, or kit behavior.   | Validates whether the result is represented correctly or flagged as a target-side/custom requirement.       |
+| Marketplace-relevant SKU                       | Seller identifiers, marketplace association, external SKU, offer context, or channel-specific data.           | Marketplace meaning may not be visible from product fields alone.                                           |
 
-The key question is not only whether the product exists. The product should be understandable to the buyer, manageable by the commerce team, and usable by connected systems.
+Pass condition: selected catalog samples can be located, reviewed, and approved by catalog, merchandising, storefront, and operations stakeholders without relying on hidden assumptions from the Source Platform.
 
-#### Specifications and attributes <a href="#specifications-and-attributes" id="specifications-and-attributes"></a>
+### Validate Pricing, Promotions, and Trade Policy Behavior <a href="#validate-pricing-promotions-and-trade-policy-behavior" id="validate-pricing-promotions-and-trade-policy-behavior"></a>
 
-VTEX specifications can carry important catalog meaning, including filtering, product comparison, storefront display, and integration logic. Validation should confirm whether important source attributes, custom fields, option values, and product properties are represented in a way that supports the intended storefront and management behavior.
+VTEX pricing review should test more than base prices. Trade policies, sales channels, marketplace context, B2B/B2C segmentation, promotions, and external pricing systems can change how a migrated SKU behaves after launch. A price that looks correct in one context may be wrong in another.
 
-If the source store used custom attributes for merchandising, logistics, B2B eligibility, product compliance, or integration workflows, those examples should be included in the validation sample.
+| Commercial area                   | Validation check                                                                                | Pass condition                                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Base price                        | Compare ordinary SKU prices, currencies, rounding, and tax-display assumptions where relevant.  | Baseline prices are accurate for representative products.                                  |
+| Price tables and fixed prices     | Review customer-specific, regional, channel, B2B, marketplace, or segmented prices.             | Differentiated prices are preserved, configured, excluded, or assigned to the right owner. |
+| Promotions and coupons            | Test active, expired, category, product, customer, cart-value, shipping, and campaign examples. | Promotion history and launch promotion behavior are not confused.                          |
+| Trade policies and sales channels | Check whether products, prices, and availability behave correctly across selling contexts.      | Reviewers know which results are migrated data and which are VTEX configuration.           |
+| Marketplace pricing               | Check seller, offer, commission, marketplace, and external pricing context where in scope.      | Marketplace pricing expectations are documented and reviewable.                            |
+| External price authority          | Identify ERP, PIM, marketplace, pricing engine, or middleware ownership.                        | The migration does not overwrite or misrepresent data owned by another system.             |
 
-#### Attachments, services, kits, and special product behavior <a href="#attachments-services-kits-and-special-product-behavior" id="attachments-services-kits-and-special-product-behavior"></a>
+Pass condition: pricing reviewers can explain each difference between migrated values, configured VTEX behavior, and externally owned pricing logic.
 
-Some VTEX catalogs use attachments, services, kits, bundles, or product relationships that are not equivalent to ordinary variants. These cases should be validated separately because they can affect cart behavior, pricing, fulfillment, and buyer choice.
+### Validate Marketplace, OMS, and Logistics Context <a href="#validate-marketplace-oms-and-logistics-context" id="validate-marketplace-oms-and-logistics-context"></a>
 
-When a source product behavior has no direct standard equivalent, the validation result should state whether the behavior was mapped, reconfigured, excluded, or moved into Custom Service scope.
+VTEX projects often depend on marketplace, seller, order-management, and logistics behavior. Historical orders may migrate, but their meaning can be incomplete if seller references, fulfillment responsibility, delivery method, invoice data, or external-system identifiers are not reviewed.
 
-### Pricing, Promotions, and Trade Policy Validation <a href="#pricing-promotions-and-trade-policy-validation" id="pricing-promotions-and-trade-policy-validation"></a>
+| Operational area               | What to validate                                                                                               | Pass condition                                                                                             |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Seller and marketplace context | Seller identifiers, marketplace order references, external IDs, channel context, and offer ownership.          | Marketplace teams can understand which seller or channel the record belongs to.                            |
+| OMS status meaning             | Source order statuses, payment status, fulfillment status, cancellation, refund, and return context.           | Operational teams can interpret migrated order history without assuming source status logic still applies. |
+| Logistics and fulfillment      | Shipping method, delivery window, pickup point, warehouse, carrier, package, invoice, and tracking references. | Fulfillment evidence remains readable for customer service and operations.                                 |
+| Order financial detail         | Items, discounts, tax, shipping, total, payment method, refund, and adjustment data.                           | Finance and support teams can reconcile representative orders.                                             |
+| External operations systems    | ERP, WMS, marketplace middleware, accounting, invoice, and customer-service references.                        | Records can be reconciled or documented as outside migration scope.                                        |
 
-VTEX pricing validation should check the commercial context around the product, not only the visible price field. Price tables, trade policies, promotions, sales channels, currency context, B2B pricing, and customer-specific conditions can all affect what buyers see and pay.
+Pass condition: order and operational samples can be used for support, reporting, and reconciliation without losing marketplace or fulfillment context.
 
-| Pricing proof area   | Validation focus                                                                                                     | Example check                                                                        |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Base pricing         | Product and SKU prices appear correctly for representative catalog items.                                            | A simple SKU and a variant-heavy SKU show the expected price.                        |
-| Price tables         | Different price contexts are reviewed when the source store used customer groups, regions, channels, or B2B pricing. | A wholesale or B2B profile sees the expected pricing behavior.                       |
-| Promotions           | Discounts and promotional logic are reviewed as target configuration, not only historical data.                      | A migrated product behaves correctly under the expected promotion conditions.        |
-| Trade policies       | Sales channel, market, B2B, or marketplace conditions are checked where they affect selling.                         | The same SKU is reviewed under more than one selling context when relevant.          |
-| Accepted differences | Any pricing behavior that is intentionally changed is documented before launch acceptance.                           | A legacy promotion that will not be recreated is treated as a known launch decision. |
+### Validate Customers, B2B Data, and Master Data <a href="#validate-customers-b2b-data-and-master-data" id="validate-customers-b2b-data-and-master-data"></a>
 
-Pricing validation should avoid false confidence. A product can display a correct default price while still failing under a specific trade policy, promotion, seller, marketplace, or B2B context.
+Customer validation should test account meaning, not only contact transfer. VTEX projects may use Master Data, customer segmentation, custom fields, B2B/account relationships, consent data, app-owned customer records, or external IDs that determine how customers are recognized and served.
 
-### Checkout, Cart, and Order Creation Validation <a href="#checkout-cart-and-order-creation-validation" id="checkout-cart-and-order-creation-validation"></a>
+| Customer data area           | Validation check                                                                                                  | Pass condition                                                                           |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Core customer record         | Name, email, phone, address, account status, billing/shipping details, and order association.                     | Basic customer history is readable and connected to migrated orders where supported.     |
+| B2B or account structure     | Company/account relationship, buyer contacts, roles, approval expectations, or customer segment logic.            | B2B meaning is preserved, rebuilt, excluded, or assigned to Custom Service/target setup. |
+| Master Data records          | Custom entities, document schemas, app records, consent fields, loyalty data, or operational customer attributes. | Custom data is migrated, mapped, excluded, or separately scoped with clear ownership.    |
+| Segmentation and eligibility | Customer group, price eligibility, promotion eligibility, channel access, or trade-policy relevance.              | Customers are not accidentally treated as one flat audience.                             |
+| External IDs                 | ERP, CRM, marketplace, support, accounting, or analytics identifiers.                                             | Downstream systems can recognize migrated customers or known gaps are documented.        |
 
-Checkout validation should be separated from historical order validation. A migrated order history proves that past orders are readable. It does not prove that new customers can add products to cart, receive correct shipping options, select valid payment methods, and complete new VTEX orders.
+Pass condition: customer samples preserve the information needed for service, segmentation, account continuity, and downstream reconciliation.
 
-Validation should review representative cart cases, including simple products, variant products, products with attachments or services, mixed carts, discounted carts, shipping-sensitive products, marketplace items, and B2B purchase contexts where applicable.
+### Validate Storefront, Content, Search, and URL Continuity <a href="#validate-storefront-content-search-and-url-continuity" id="validate-storefront-content-search-and-url-continuity"></a>
 
-The Checkout `orderForm` should be treated as a launch-readiness proof area. It can expose whether product availability, pricing, promotions, customer profile data, shipping simulation, payment selection, and seller context work together as expected.
+VTEX storefront behavior may be implemented through Store Framework, FastStore, headless architecture, storefront apps, search tools, CMS structures, or custom frontend work. Migration validation should confirm that migrated data supports the storefront, while recognizing that frontend implementation is not the same as data migration.
 
-### OMS and Historical Order Validation <a href="#oms-and-historical-order-validation" id="oms-and-historical-order-validation"></a>
+| Storefront area                   | What to validate                                                                                          | Pass condition                                                                                           |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Navigation and category discovery | Departments, categories, menus, filters, facets, brand pages, collection pages, and search relevance.     | Priority products are findable through expected discovery paths.                                         |
+| Product display                   | Images, descriptions, SKU choices, specifications, attachments, services, and kit/collection information. | Product pages show the right commercial information or gaps are assigned to implementation/custom scope. |
+| CMS Pages and Blog Posts          | Page titles, body content, metadata, URLs, links, images, embedded media, and internal navigation.        | Content is readable, linked, and reviewed for launch continuity.                                         |
+| SEO-sensitive URLs                | Priority product, category, page, Blog Post, redirect, canonical, and metadata examples.                  | High-value paths are preserved, redirected, or documented for SEO ownership.                             |
+| Storefront ownership              | Store Framework, FastStore, headless frontend, custom routes, search apps, and CMS implementation.        | Stakeholders distinguish migrated content/data from frontend build requirements.                         |
 
-VTEX OMS validation should confirm that historical orders remain useful for operations. Orders should be reviewed by status, date range, payment context, shipping context, fulfillment status, customer link, seller or marketplace context, refund or cancellation behavior, and external-system references where relevant.
+Pass condition: migrated records can support storefront discovery and content continuity, and any frontend implementation gaps are assigned to the right owner.
 
-A good validation sample should include different order types, not only recent successful orders. Useful examples include paid orders, canceled orders, refunded orders, partially fulfilled orders, marketplace orders, seller orders, B2B orders, orders with discounts, orders with multiple shipping methods, and orders linked to ERP or fulfillment systems.
+### Validate Apps, APIs, Integrations, and Custom Data <a href="#validate-apps-apis-integrations-and-custom-data" id="validate-apps-apis-integrations-and-custom-data"></a>
 
-The pass condition is practical readability: customer service, finance, fulfillment, and management teams should be able to interpret the migrated orders without relying on hidden source-store knowledge.
+VTEX validation should identify data that belongs to apps, APIs, middleware, or external systems. These values may be essential to operations but not suitable for ordinary migration handling. Treating every custom value as a normal field can create misleading approval results.
 
-### Customer, B2B, and Master Data Validation <a href="#customer-b2b-and-master-data-validation" id="customer-b2b-and-master-data-validation"></a>
+| Dependency type                     | Validation check                                                                                                      | Pass condition                                                                                    |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| ERP/PIM/WMS/OMS integrations        | Product references, inventory authority, order updates, price ownership, invoice numbers, and fulfillment references. | Integration-critical identifiers are preserved or documented as external-system responsibilities. |
+| VTEX IO or storefront apps          | App-owned data, storefront blocks, custom product behavior, search apps, payment apps, and marketplace apps.          | App-dependent behavior is reviewed separately from migrated records.                              |
+| API-owned objects                   | Data created or maintained through API workflows, middleware, or custom services.                                     | Ownership and migration feasibility are clear before approval.                                    |
+| Custom fields and external IDs      | Source custom fields, Custom Platform fields, external IDs, and integration keys.                                     | Values are mapped, excluded, handled through Add-ons, or escalated to Custom Service.             |
+| Custom checkout or order attributes | Gift notes, delivery preferences, loyalty references, tax IDs, marketplace references, or B2B approval values.        | Checkout and order custom meaning remains usable or is documented as outside standard scope.      |
 
-Customer validation should confirm more than names and email addresses. VTEX projects may involve customer profiles, addresses, account fields, consent values, company data, B2B organizations, cost centers, roles, permissions, custom Master Data entities, and external identifiers.
+Pass condition: custom and integration-dependent data does not disappear into vague approval language. Each important value has a clear migration, configuration, Custom Service, or exclusion decision.
 
-| Customer or account area | What to validate                                                                                               | Why it matters                                                                                  |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Customer profiles        | Names, emails, phone numbers, addresses, and account links are readable and usable.                            | Basic customer data supports account access and customer service.                               |
-| B2B context              | Company, role, permission, cost center, or buyer-organization data is preserved or intentionally reconfigured. | B2B migration can fail when individual contacts move but account structure does not.            |
-| Master Data              | Custom fields and entities retain their intended business meaning where they are part of scope.                | Master Data often carries project-specific data that ordinary customer tables cannot represent. |
-| Consent and preferences  | Marketing, communication, or compliance-relevant values are reviewed where they exist in the source.           | Incorrect consent handling can affect marketing and customer communication after launch.        |
-| External identifiers     | ERP, CRM, PIM, marketplace, or support-system IDs are preserved or mapped where required.                      | Connected systems may depend on stable identifiers after launch.                                |
+### Validate Add-ons and Custom Service Outputs <a href="#validate-add-ons-and-custom-service-outputs" id="validate-add-ons-and-custom-service-outputs"></a>
 
-If important customer or B2B information cannot be represented through standard migration behavior, the result should be treated as a scope issue rather than a small validation note.
+Add-ons and Custom Service outputs should receive explicit validation because they are usually tied to project-specific decisions. A result can pass baseline migration checks while failing the additional logic the customer purchased or requested.
 
-### Marketplace and Seller Validation <a href="#marketplace-and-seller-validation" id="marketplace-and-seller-validation"></a>
+| Scope area              | What to validate                                                                                                                                  | Pass condition                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Data Filter Add-on      | Selected records, excluded records, date ranges, status filters, product/customer/order groups, and other supported filters.                      | Included and excluded samples match the approved filter rule.                                    |
+| Advanced Data Mapping   | Supported mapped fields, target values, specification fields, customer fields, order fields, CMS Pages, Blog Posts, or identifiers.               | Mapped values appear in the expected target fields and remain reviewable.                        |
+| Advanced Data Configure | Configured values, adjusted names, statuses, categories, field values, or supported transformations.                                              | Configured values match the approved rule without creating unintended side effects.              |
+| Custom Add-ons          | Bounded custom handling agreed for a specific need.                                                                                               | The custom result matches the accepted scope and is tested with representative samples.          |
+| Custom Service          | Custom Platform interpretation, unsupported data handling, bespoke transformation, external-system logic, or project-specific migration behavior. | Accepted custom requirements are demonstrably met, or exceptions are documented before approval. |
 
-VTEX marketplace and seller validation should confirm whether the migrated result supports the intended operating model. Seller data, marketplace-origin orders, product associations, fulfillment responsibility, commission context, channel rules, and external identifiers may need separate review.
+Pass condition: reviewers can verify the exact added value of each Add-on or Custom Service item rather than assuming it passed because the general migration passed.
 
-Validation should include examples from each important seller, marketplace, sales channel, or fulfillment model. A single ordinary product or order will not prove that marketplace behavior is launch-ready.
+### Validate Demo Migration Before Full Migration <a href="#validate-demo-migration-before-full-migration" id="validate-demo-migration-before-full-migration"></a>
 
-When marketplace data is not part of standard migration scope, the validation result should clearly separate migrated commerce records from channel configuration, seller onboarding, synchronization logic, and external marketplace setup.
+Demo Migration should be used as an evidence checkpoint. It should test representative VTEX complexity before Full Migration, not only prove that a few ordinary records can move.
 
-### Storefront, Search, CMS, URL, and SEO Validation <a href="#storefront-search-cms-url-and-seo-validation" id="storefront-search-cms-url-and-seo-validation"></a>
+| Demo Migration sample group | Include                                                                                                  | Approval question                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Simple baseline records     | Ordinary products, customers, orders, CMS Pages, and Blog Posts.                                         | Does the migration produce a clean baseline result?                      |
+| Catalog complexity          | Multi-SKU products, specifications, images, categories, attachments, services, kits, and collections.    | Does the target catalog preserve commercial meaning?                     |
+| Commercial behavior         | Price examples, promotions, trade policies, marketplace context, and channel-sensitive samples.          | Are price and availability expectations clear enough for Full Migration? |
+| Operational records         | Orders, statuses, fulfillment references, invoices, returns, and external IDs.                           | Can support and operations teams read the migrated history?              |
+| Customer and Master Data    | Customer profiles, B2B/account examples, custom fields, consent values, and external references.         | Does customer meaning survive beyond basic account transfer?             |
+| Storefront/content          | Priority pages, Blog Posts, product URLs, category URLs, redirects, metadata, and search/facet examples. | Will launch-critical discovery and content paths be testable?            |
+| Custom scope                | Add-ons, Custom Service samples, app-owned records, and integration-dependent values.                    | Are special requirements proven before Full Migration approval?          |
 
-VTEX storefront validation depends on the chosen storefront solution and the target implementation plan. FastStore, Store Framework, and older storefront implementations can create different expectations for content, layout, search, filtering, category routing, CMS areas, and URL continuity.
+Pass condition: Demo Migration creates enough evidence to approve, adjust, or rescope the Full Migration with confidence.
 
-Validation should check high-value product pages, category pages, landing pages, search results, filter behavior, breadcrumb paths, metadata, images, redirects, canonical expectations, and important SEO URLs. The review should include pages that generate revenue or organic traffic, not only easy sample URLs.
+### Validate Full Migration Acceptance <a href="#validate-full-migration-acceptance" id="validate-full-migration-acceptance"></a>
 
-A strong result proves that shoppers can find, compare, and buy key products without broken paths or misleading page behavior.
+Full Migration acceptance should compare the approved Demo Migration standard against the full migrated dataset. The review should confirm that known decisions held at scale and that new edge cases did not appear during the full data movement.
 
-### Apps, APIs, Webhooks, and Integration Validation <a href="#apps-apis-webhooks-and-integration-validation" id="apps-apis-webhooks-and-integration-validation"></a>
+| Full Migration review area | What to confirm                                                                                                 | Pass condition                                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Completeness               | Expected products, SKUs, customers, orders, CMS Pages, Blog Posts, and other scoped records are present.        | Missing records are explained by approved filters, exclusions, unsupported scope, or source data issues. |
+| Consistency                | Sample decisions from Demo Migration remain valid at larger scale.                                              | Similar data behaves consistently across the full dataset.                                               |
+| Exceptions                 | Failed, partial, or unusual records are logged and assigned.                                                    | Exceptions have owners and do not block launch-critical approval without visibility.                     |
+| Business readiness         | Catalog, pricing, operations, customer service, storefront, and integration stakeholders approve their samples. | Approval is based on business usability, not only technical transfer.                                    |
+| Launch handoff             | Remaining configuration, storefront, integration, and custom tasks are separated from migration acceptance.     | Teams know what is complete, what remains, and what is outside migration scope.                          |
 
-VTEX migrations often involve external systems. Apps, APIs, webhooks, ERP, PIM, WMS, CRM, marketing systems, tax services, payment providers, fulfillment platforms, and reporting tools may all depend on data values that are invisible in a simple record-count review.
+Pass condition: stakeholders can approve the migrated dataset with a shared understanding of what passed, what was excluded, and what still belongs to target setup or external implementation.
 
-Validation should identify whether these dependencies are migrated, mapped, reconfigured, rebuilt, excluded, or handled through Custom Service. If an external workflow depends on product IDs, SKU IDs, customer IDs, order IDs, seller IDs, or Master Data records, those identifiers should be tested before launch acceptance.
+### Revalidate After Additional Migration Options <a href="#revalidate-after-additional-migration-options" id="revalidate-after-additional-migration-options"></a>
 
-Integration validation should focus on business outcomes: products synchronize correctly, inventory updates are usable, orders reach the right downstream system, customer records remain matchable, and reports can interpret the new VTEX data.
+Additional Migration Options can help handle later data movement on the same migration path, but they should not reduce validation discipline. The main risk is assuming that previous approval covers records, configurations, or business changes that were not part of the original accepted result.
 
-### Strong Validation Samples for VTEX <a href="#strong-validation-samples-for-vtex" id="strong-validation-samples-for-vtex"></a>
+| Follow-up validation area         | What to recheck                                                                                                        | Pass condition                                                                                                                                                                                                                |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| New eligible records              | New products, customers, orders, CMS Pages, Blog Posts, and other supported records added after the earlier migration. | New records are validated as first-time migrated records.                                                                                                                                                                     |
+| Changed catalog behavior          | Updated SKUs, specifications, categories, prices, inventory, or storefront-sensitive values.                           | Changes do not break previously accepted VTEX behavior.                                                                                                                                                                       |
+| Changed business rules            | New trade policies, promotions, marketplace relationships, seller rules, or logistics expectations.                    | Reviewers confirm whether migration, target setup, or external systems own the change.                                                                                                                                        |
+| Add-ons or Custom Service changes | New filters, mappings, configurations, custom fields, or bespoke logic.                                                | Special handling is validated again, not assumed from the earlier run.                                                                                                                                                        |
+| Entity Points review              | New Product, Customer, Order, or Blog Posts records that are migrated for the first time.                              | Records already counted through the service license do not consume Entity Points again simply because another migration action is performed; new eligible records may consume Entity Points when migrated for the first time. |
 
-A good VTEX validation set should include records that expose complexity. The following sample types are especially useful:
+Pass condition: every follow-up migration review distinguishes previously approved records from new or changed data that requires fresh validation.
 
-| Sample type                                                  | Why it should be included                                                           |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| Product with multiple SKUs and specifications                | Confirms product-to-SKU structure, variant behavior, filtering, and display logic.  |
-| Product with attachments, services, kits, or custom behavior | Reveals whether special product behavior is represented or needs separate handling. |
-| SKU under multiple price or trade policy contexts            | Tests whether commercial rules work beyond default pricing.                         |
-| Order with complex fulfillment or marketplace context        | Confirms OMS readability and seller or channel meaning.                             |
-| B2B customer or company account                              | Tests account structure, roles, permissions, pricing, and buyer context.            |
-| Master Data record with custom fields                        | Confirms whether custom business data remains useful after migration.               |
-| High-value category or search path                           | Checks storefront discovery, filter behavior, and search relevance.                 |
-| Priority SEO URL                                             | Reveals URL, redirect, metadata, and page-continuity issues.                        |
-| App- or API-dependent record                                 | Tests integration-sensitive values before launch.                                   |
+### VTEX Validation Priority Matrix <a href="#vtex-validation-priority-matrix" id="vtex-validation-priority-matrix"></a>
 
-Validation should also include negative or edge cases, such as inactive products, out-of-stock SKUs, canceled orders, refunded orders, non-default trade policies, and older records that still matter operationally.
+Use the matrix below to decide where to spend review time first. The best validation plan prioritizes the records and behaviors most likely to affect launch, revenue, operations, support, SEO, or downstream systems.
 
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
+| Priority    | Validation focus                                                                                                         | Review owner                                                       | Why it matters                                                           |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Highest     | Catalog/SKU activation, specifications, price/trade policy behavior, checkout-critical values, and launch-critical URLs. | Catalog, merchandising, pricing, storefront, and SEO teams.        | These issues can block buying, discovery, or launch approval.            |
+| High        | Marketplace/seller context, OMS/logistics records, customer/account data, Master Data, and external IDs.                 | Operations, support, marketplace, integration, and customer teams. | These issues affect fulfillment, support, reporting, and reconciliation. |
+| Medium      | CMS Pages, Blog Posts, historical promotions, older orders, non-critical redirects, and secondary content.               | Content, SEO, and support teams.                                   | These issues affect continuity but may not block launch if documented.   |
+| Conditional | App-owned records, custom checkout values, bespoke integration fields, and Custom Platform data.                         | Technical, app, integration, and Custom Service stakeholders.      | These items require ownership decisions before they can be accepted.     |
 
-A validation issue should be classified by cause. Some findings are data issues, some are target configuration issues, some are implementation decisions, and some indicate scope that belongs in Add-ons or Custom Service.
-
-| Finding type                               | Typical meaning                                                                                | Next action                                                       |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Missing or incorrect migrated value        | The source value did not move as expected or needs mapping review.                             | Review mapping, sample records, and migration settings.           |
-| Correct data but wrong storefront behavior | The target storefront, search, CMS, or theme layer needs configuration or implementation work. | Separate migration data review from storefront setup review.      |
-| Correct order history but checkout failure | Historical order migration does not prove live checkout readiness.                             | Review target payment, shipping, tax, seller, and Checkout setup. |
-| Standard data moved but app data is absent | The missing values are likely app-owned, API-owned, or outside ordinary commerce records.      | Review app, API, webhook, integration, or Custom Service scope.   |
-| Count matches but records are unusable     | Record totals are not enough to prove business meaning.                                        | Validate representative records by workflow and user need.        |
-| Business rule changed intentionally        | The result is a launch decision, not necessarily a migration defect.                           | Document the accepted difference before Full Migration or launch. |
-
-The goal is not to eliminate every difference from the old store. The goal is to confirm which differences are acceptable, which require configuration, and which require migration-scope correction before launch.
+A strong validation process creates a shared approval trail. It does not try to validate every record with equal intensity; it validates the right records deeply enough to protect launch quality.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VTEX validation should prove that migrated data works inside a complex enterprise commerce environment. Catalog records, SKUs, specifications, pricing, trade policies, Checkout, OMS, marketplace structures, Master Data, storefront behavior, apps, APIs, and integrations all need review where they affect the business outcome.
+VTEX validation should prove that migrated data works inside the target operating model. Catalog records, SKUs, specifications, pricing, trade policies, marketplace context, OMS, logistics, Master Data, storefront content, integrations, Add-ons, and Custom Service outputs should each be reviewed through their business purpose.
 
-Use Demo Migration results to test the records and workflows that carry the highest commercial risk. If validation shows that important behavior depends on custom fields, app-owned data, external identifiers, marketplace workflows, or non-standard transformation, review the requirement before Full Migration and confirm whether Add-ons or Custom Service should be included.
+The safest approval process starts with representative Demo Migration samples, turns those samples into pass conditions, applies those conditions during Full Migration, and repeats relevant checks after Additional Migration Options when new or changed data is involved. This gives VTEX stakeholders a practical basis for accepting the migration result without confusing migrated records, target configuration, frontend implementation, and external-system behavior.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is matching record count enough to validate a VTEX migration?**
+**What should be validated first in a VTEX migration?**
 
-No. Matching counts are only a baseline. VTEX validation should also confirm product-to-SKU meaning, specifications, pricing context, trade policies, Checkout behavior, OMS readability, marketplace or seller context, storefront discovery, Master Data, apps, APIs, and integrations where they affect operations.
+Start with the records and behaviors that affect launch usability: products, SKUs, specifications, prices, trade policies, priority categories, customer/order samples, checkout-sensitive data, storefront discovery, and high-value URLs. Lower-priority historical or content records can be reviewed after launch-critical behavior is proven.
 
-**Which VTEX records should be checked first after Demo Migration?**
+**Is record count enough to validate a VTEX migration?**
 
-Start with complex products, SKU-rich catalog items, important categories, trade-policy-sensitive products, B2B accounts, representative orders, marketplace or seller records, Master Data examples, high-value URLs, and integration-dependent records.
+No. Record count confirms only presence. VTEX validation should also prove whether records behave correctly across Catalog, SKUs, specifications, pricing, promotions, trade policies, marketplace operations, OMS, logistics, Master Data, storefront implementation, and integrations.
 
-**Why should VTEX Checkout be validated separately from order history?**
+**Should Demo Migration include complex VTEX cases?**
 
-Historical orders show whether past order data remains readable. Checkout validation proves whether new buyers can add products to cart, receive the right price and promotion context, select shipping and payment options, and create new orders in the target VTEX environment.
+Yes. Demo Migration should include ordinary records and difficult samples. Multi-SKU products, specification-heavy items, marketplace-relevant orders, Master Data examples, custom fields, Add-on outputs, and Custom Service samples are often more useful than simple baseline records.
 
-**How should Master Data be reviewed during VTEX validation?**
+**How should Add-ons be validated for VTEX?**
 
-Master Data should be reviewed by business meaning. Custom fields, entities, account values, external IDs, and workflow-specific records should be checked with the teams or systems that depend on them after launch.
+Validate Add-ons against the approved rule or scope. For example, Data Filter Add-on should be checked through included and excluded records, while Advanced Data Mapping should be checked through source values appearing in the expected target fields. Add-ons should not be treated as full Custom Service unless the accepted scope says so.
 
-**What should happen if VTEX validation finds app or integration gaps?**
+**Do Additional Migration Options require another validation pass?**
 
-App or integration gaps should be classified before Full Migration. Some gaps may be target configuration work, some may require API or webhook reconfiguration, and custom data handling or custom migration logic adjustment is handled through Custom Service.
+Yes. Additional Migration Options should trigger focused revalidation for new records, changed records, changed business rules, Add-ons, Custom Service outputs, and Entity Points impact. Previously approved records should not be assumed to cover new or changed VTEX behavior.

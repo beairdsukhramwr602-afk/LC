@@ -1,264 +1,195 @@
 # WooCommerce Data Model Differences
 
-Migrating to WooCommerce is not only a move into another commerce platform. It is a move toward a WordPress-native commerce model in which product structure, taxonomy, permalink behavior, customer accounts, plugin data, theme logic, and custom fields can all affect how the storefront works after launch.
+WooCommerce migration is a translation into a WordPress-connected commerce data model. Products, customers, orders, coupons, categories, tags, media, and content may look familiar across platforms, but their meaning changes once they depend on WooCommerce product types, WordPress taxonomies, post metadata, plugin-owned fields, checkout configuration, HPOS order storage, permalink rules, themes, builders, and integration workflows.
 
-A WooCommerce migration can preserve visible products, customers, orders, and content while still changing their underlying meaning. The target store may use variable products differently from the Source Platform, organize product discovery through WordPress taxonomies, handle URLs through permalink settings, and rely on plugins or custom code for behavior that was previously native or built into another platform.
-
-That is why the WooCommerce data model review should focus on commercial meaning, not only record presence. The right question is not simply whether the data exists in WooCommerce. The stronger question is whether WooCommerce can still express how the store sells, organizes, routes, filters, and validates that data after migration.
+A successful WooCommerce migration therefore cannot be evaluated only by whether records appear in the Target Platform. It must prove that migrated data still supports the commercial job it performed in the Source Platform: customers can find the right products, choose valid options, see accurate prices and stock, place orders through the intended checkout flow, read historical order context, access accounts, follow important URLs, and keep operational data usable for staff and connected systems.
 
 ### Why WooCommerce Data-Model Differences Matter <a href="#why-woocommerce-data-model-differences-matter" id="why-woocommerce-data-model-differences-matter"></a>
 
-WooCommerce is flexible because it sits inside the WordPress ecosystem. That flexibility is useful, but it also means the target data model is often shaped by more than WooCommerce core records.
-
-Products may depend on variations and attributes. Discovery may depend on categories, tags, attributes, filters, menus, and theme templates. Routes may depend on permalink settings. Customer behavior may depend on account settings, password continuity, customer metadata, or plugin logic. Storefront behavior may depend on extensions that control subscriptions, memberships, product add-ons, wholesale pricing, bundles, search, filtering, reviews, or checkout behavior.
-
-This makes WooCommerce migrations highly interpretation-sensitive. A field can be moved, but the business result may still be wrong if the field no longer drives the same storefront behavior.
-
-### Variable Products Change Product Meaning <a href="#variable-products-change-product-meaning" id="variable-products-change-product-meaning"></a>
-
-The meaning of a WooCommerce product often becomes clearest when the product variation logic is reviewed.
-
-#### Variable Products Are Not Just Product Records With Options <a href="#variable-products-are-not-just-product-records-with-options" id="variable-products-are-not-just-product-records-with-options"></a>
-
-In WooCommerce, a variable product can contain multiple variations, and those variations may carry their own price, stock, SKU, image, weight, dimensions, sale status, and other commerce behavior. That means a migration into WooCommerce must decide which product choices should become true purchasable variations and which choices should remain descriptive information, add-on behavior, or plugin-managed logic.
-
-This distinction matters because many Source Platforms do not separate those meanings the same way. A source store may combine options, modifiers, add-ons, attributes, and variant-like choices in one interface. WooCommerce may require those choices to be separated more deliberately.
-
-#### What Can Go Wrong <a href="#what-can-go-wrong" id="what-can-go-wrong"></a>
-
-A product can look complete while still being commercially wrong if:
-
-* variation choices are flattened into descriptive attributes;
-* descriptive attributes are incorrectly converted into purchasable variations;
-* variation-level images, prices, SKUs, or stock behavior are lost;
-* add-on behavior is mistaken for native variation behavior;
-* plugin-controlled product logic is treated as ordinary product data.
-
-The safest WooCommerce data-model review starts by identifying which product choices actually affect buying behavior.
-
-### Attributes Can Support Both Variation and Discovery <a href="#attributes-can-support-both-variation-and-discovery" id="attributes-can-support-both-variation-and-discovery"></a>
-
-Attributes are one of the most important WooCommerce translation points because they can support more than one storefront purpose.
-
-#### Attributes Must Be Interpreted By Function <a href="#attributes-must-be-interpreted-by-function" id="attributes-must-be-interpreted-by-function"></a>
-
-A WooCommerce attribute may define variation choices, support product filtering, help product comparison, or provide structured product information. The same source-side field should not be migrated mechanically without deciding what it should do in WooCommerce.
-
-For example, `Size` may need to define purchasable variations for apparel. `Material` may be better as a filterable product attribute. `Brand` may belong in an attribute, taxonomy, plugin field, or custom field depending on how the target storefront is designed.
-
-#### Attribute Consistency Matters More in WooCommerce <a href="#attribute-consistency-matters-more-in-woocommerce" id="attribute-consistency-matters-more-in-woocommerce"></a>
-
-WooCommerce can make inconsistent source data more visible. If one product uses `Colour`, another uses `Color`, and another stores color in a custom field, the target store may technically receive all values but still produce weak filtering and confusing product discovery.
-
-A strong WooCommerce migration should therefore review attribute naming, value consistency, and storefront purpose before treating attribute migration as complete.
-
-### Categories, Tags, and Attributes Are Separate Meaning Layers <a href="#categories-tags-and-attributes-are-separate-meaning-layers" id="categories-tags-and-attributes-are-separate-meaning-layers"></a>
-
-WooCommerce uses WordPress-style organization, which makes taxonomy planning especially important.
-
-#### Categories Usually Own Primary Product Structure <a href="#categories-usually-own-primary-product-structure" id="categories-usually-own-primary-product-structure"></a>
-
-Product categories usually carry the main catalog hierarchy. They often shape navigation, browsing, merchandising, collection-like landing pages, and SEO context.
-
-A migration should not treat categories as a loose label set. If the Target Platform is WooCommerce, categories should be reviewed as the store’s primary product-organization structure.
-
-#### Tags Usually Support Looser Grouping <a href="#tags-usually-support-looser-grouping" id="tags-usually-support-looser-grouping"></a>
-
-Product tags can support flexible grouping, discovery, or campaign-style organization, but they should not replace a clear category hierarchy. If a source store used tags as a substitute for structured navigation, the WooCommerce migration may need a cleaner taxonomy plan before launch.
-
-#### Attributes Usually Carry Structured Product Details <a href="#attributes-usually-carry-structured-product-details" id="attributes-usually-carry-structured-product-details"></a>
-
-Attributes are better suited for product characteristics such as size, color, material, capacity, finish, compatibility, or other structured details. Some may also support variation behavior or filtering.
-
-This separation is important because categories, tags, and attributes may all survive migration while still doing the wrong jobs in the target store.
-
-### Permalink Structure Changes Route Meaning <a href="#permalink-structure-changes-route-meaning" id="permalink-structure-changes-route-meaning"></a>
-
-WooCommerce route behavior is closely connected to WordPress permalink structure and WooCommerce-specific URL settings.
-
-#### URLs Are Part of the Data Model <a href="#urls-are-part-of-the-data-model" id="urls-are-part-of-the-data-model"></a>
-
-For WooCommerce, product, category, tag, and content URLs are not only SEO details. They are part of how the store organizes product meaning for customers, search engines, internal links, menus, and marketing campaigns.
-
-A migration can preserve a product but still damage route meaning if the new permalink structure changes important path patterns without clear redirect planning.
-
-#### Route Review Should Happen Early <a href="#route-review-should-happen-early" id="route-review-should-happen-early"></a>
-
-WooCommerce URL planning should confirm:
-
-* product permalink structure;
-* product category base behavior;
-* category and tag URL behavior;
-* blog and CMS page URL continuity;
-* high-value landing-page paths;
-* redirects for changed product, category, and content URLs;
-* internal links and menu destinations.
-
-This does not mean every source URL must be copied exactly. It means route changes should be deliberate, mapped, and validated.
-
-### Customer Records and Customer Account Continuity Are Different <a href="#customer-records-and-customer-account-continuity-are-different" id="customer-records-and-customer-account-continuity-are-different"></a>
-
-Customer migration into WooCommerce should distinguish profile preservation from account-experience continuity.
-
-#### Customer Data Can Survive While Login Behavior Changes <a href="#customer-data-can-survive-while-login-behavior-changes" id="customer-data-can-survive-while-login-behavior-changes"></a>
-
-A migrated WooCommerce customer record may preserve name, email, billing address, shipping address, order relationship, and customer history. That does not automatically mean the returning customer experience remains identical.
-
-Password continuity depends on source compatibility, target handling, and the conditions defined for the specific migration path. When password continuity is not available or not appropriate, the customer profile may still exist, but customers may need a different login or password-reset flow after launch.
-
-#### Account Expectations Should Be Planned <a href="#account-expectations-should-be-planned" id="account-expectations-should-be-planned"></a>
-
-WooCommerce review should clarify:
-
-* whether customer accounts are required, optional, or minimized;
-* how returning customers will access their accounts;
-* whether historical orders should appear in customer accounts;
-* whether billing and shipping addresses remain usable;
-* whether customer roles, groups, memberships, or wholesale access are plugin-dependent;
-* what customer-support messaging may be needed after launch.
-
-This is especially important for stores with repeat buyers, wholesale customers, subscriptions, memberships, or account-based pricing.
-
-### Plugin-Owned Data Can Carry Commercial Meaning <a href="#plugin-owned-data-can-carry-commercial-meaning" id="plugin-owned-data-can-carry-commercial-meaning"></a>
-
-WooCommerce stores often rely on extensions and custom code for behavior that may sit outside the core product, customer, or order model.
-
-#### Extensions Can Change What Data Means <a href="#extensions-can-change-what-data-means" id="extensions-can-change-what-data-means"></a>
-
-A WooCommerce store may use plugins for subscriptions, memberships, bookings, bundles, product add-ons, wholesale pricing, loyalty points, reviews, search, filtering, checkout rules, tax rules, shipping rules, or CRM/ERP integration.
-
-Some of this data may be visible in the admin. Some may be stored as metadata. Some may live in plugin-specific tables or external systems. Some may need to be recreated rather than migrated directly.
-
-#### Plugin Data Should Not Be Treated as Ordinary Fields <a href="#plugin-data-should-not-be-treated-as-ordinary-fields" id="plugin-data-should-not-be-treated-as-ordinary-fields"></a>
-
-Plugin-owned behavior should be reviewed by outcome:
-
-* Does it affect what customers can buy?
-* Does it affect price, eligibility, or checkout behavior?
-* Does it affect product discovery or filtering?
-* Does it affect customer access or account status?
-* Does it affect fulfillment, subscription renewal, or operational workflows?
-* Does it need to move as data, be rebuilt as configuration, or be handled as custom migration logic?
-
-When the answer requires transformation, bespoke handling, extension-aware interpretation, or unsupported source logic, the work belongs under Custom Service rather than being treated as a simple field transfer.
-
-### Custom Fields and Metadata Need Purpose-Based Review <a href="#custom-fields-and-metadata-need-purpose-based-review" id="custom-fields-and-metadata-need-purpose-based-review"></a>
-
-WooCommerce and WordPress can store many kinds of metadata, but metadata alone does not guarantee storefront continuity.
-
-#### Custom Fields Can Be Display-Only or Behavior-Driving <a href="#custom-fields-can-be-display-only-or-behavior-driving" id="custom-fields-can-be-display-only-or-behavior-driving"></a>
-
-Some custom fields are only descriptive. Others drive product tabs, badges, compatibility charts, shipping messages, pricing rules, customer segmentation, or integration behavior. A migration should distinguish between fields that simply need to be preserved and fields that must continue to influence the storefront.
-
-#### Custom Field Migration Requires Target Meaning <a href="#custom-field-migration-requires-target-meaning" id="custom-field-migration-requires-target-meaning"></a>
-
-Before treating custom-field migration as successful, confirm:
-
-* where the field should live in WooCommerce or WordPress;
-* whether it should be visible to customers;
-* whether it should support search, filtering, comparison, or merchandising;
-* whether it is controlled by a plugin or theme;
-* whether it needs mapping, transformation, or custom migration logic adjustment;
-* whether the field is still needed in the new store.
-
-This is where WooCommerce flexibility can be useful, but only when the target meaning is planned.
-
-### Orders, Statuses, and Historical Context May Not Translate One-to-One <a href="#orders-statuses-and-historical-context-may-not-translate-one-to-one" id="orders-statuses-and-historical-context-may-not-translate-one-to-one"></a>
-
-WooCommerce order records can preserve important transaction history, but order meaning can differ across platforms.
-
-#### Order Data Should Be Reviewed Beyond Totals <a href="#order-data-should-be-reviewed-beyond-totals" id="order-data-should-be-reviewed-beyond-totals"></a>
-
-A migrated order may include customer association, line items, totals, taxes, shipping, discounts, status, payment labels, notes, and timestamps. But the target store must still interpret that information correctly.
-
-Differences may appear in:
-
-* order statuses;
-* payment and fulfillment labels;
-* tax and shipping breakdowns;
-* discount representation;
-* refunded or partially fulfilled orders;
-* subscription or recurring-order relationships;
-* admin reporting expectations.
-
-Historical orders should be validated for operational usefulness, not only record count.
-
-### Broader Store Architecture Is a Deliberate Decision <a href="#broader-store-architecture-is-a-deliberate-decision" id="broader-store-architecture-is-a-deliberate-decision"></a>
-
-WooCommerce does not automatically impose one enterprise-style multi-store model. Broader architecture depends on how the business configures WordPress, WooCommerce, hosting, plugins, domains, and store instances.
-
-#### Architecture Should Match The Business Model <a href="#architecture-should-match-the-business-model" id="architecture-should-match-the-business-model"></a>
-
-A business may use one WooCommerce store, separate WooCommerce installations, WordPress multisite, language or currency plugins, marketplace plugins, or custom architecture. Each choice changes how data should be understood and validated.
-
-This matters when the source store uses multiple storefronts, regional catalogs, B2B and B2C separation, marketplace logic, content-heavy experiences, or localized structures.
-
-### What Migrated Data Must Prove In WooCommerce <a href="#what-migrated-data-must-prove-in-woocommerce" id="what-migrated-data-must-prove-in-woocommerce"></a>
-
-WooCommerce migration success should be evaluated by whether the target store preserves the intended storefront and operational meaning.
-
-#### Strong WooCommerce Data-Model Validation Should Prove <a href="#strong-woocommerce-data-model-validation-should-prove" id="strong-woocommerce-data-model-validation-should-prove"></a>
-
-* variable products still represent real purchasable choices;
-* attributes support the correct mix of variation, filtering, and product information;
-* categories, tags, and attributes do distinct jobs;
-* permalink structure and redirects protect important paths;
-* customer profiles and account expectations are clear;
-* order history remains operationally meaningful;
-* plugin-owned behavior is identified and either preserved, rebuilt, or intentionally replaced;
-* custom fields and metadata have target meaning;
-* broader store architecture matches how the business will operate after launch.
-
-### What Usually Needs the Earliest Review <a href="#what-usually-needs-the-earliest-review" id="what-usually-needs-the-earliest-review"></a>
-
-The highest-risk WooCommerce data-model differences usually deserve early review before the migration path is treated as straightforward.
-
-#### Review These Areas First <a href="#review-these-areas-first" id="review-these-areas-first"></a>
-
-* variable-product and variation-level behavior;
-* attribute naming, values, and storefront purpose;
-* category hierarchy, tags, and taxonomy cleanup;
-* permalink structure and high-value route planning;
-* customer account expectations and password-continuity assumptions;
-* plugin-owned product, customer, order, pricing, or checkout behavior;
-* custom fields that influence storefront behavior;
-* order statuses, historical orders, and reporting expectations;
-* broader architecture for multi-store, multilingual, B2B, or content-heavy use cases.
-
-### How Custom Platform Sources Change WooCommerce Data-Model Review <a href="#how-custom-platform-sources-change-woocommerce-data-model-review" id="how-custom-platform-sources-change-woocommerce-data-model-review"></a>
-
-When the Source Platform is a Custom Platform, WooCommerce data-model review needs a more bespoke translation lens.
-
-Custom Platform sources may store product variation, taxonomy meaning, pricing behavior, customer context, route logic, metadata, or plugin-like storefront behavior in structures that do not align neatly with WooCommerce products, variations, taxonomies, permalinks, metadata, or plugin architecture.
-
-In that situation, the key question is not only what data exists. It is how the source-side meaning should be interpreted and rebuilt so the WooCommerce Target Platform remains commercially coherent. Custom Service is the appropriate path when the migration requires bespoke interpretation, custom transformation, Custom Platform handling, extension-aware logic, or custom migration logic adjustment.
+WooCommerce is flexible because commerce data runs inside WordPress. That flexibility gives merchants control over content, URLs, plugins, checkout, custom fields, templates, media, and integrations. It also means that migration planning must separate ordinary WooCommerce records from WordPress site records and from extension-controlled data.
+
+| Data layer     | WooCommerce interpretation                                                                        | Migration planning question                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Product data   | Products may be simple, variable, grouped, external, or extension-controlled                      | Does each product type preserve the way the item is actually bought?                              |
+| Variation data | Variation records can carry their own SKU, price, stock, image, dimensions, and purchasable state | Which source options should become true WooCommerce variations?                                   |
+| Attribute data | Attributes can support variation, filtering, comparison, and product information                  | Which attributes drive buying, discovery, or display only?                                        |
+| Taxonomy data  | Categories, tags, brands, and custom product taxonomies shape navigation and filtering            | Which taxonomy layer owns primary catalog structure?                                              |
+| Order data     | Orders include line items, status, totals, taxes, shipping, payment labels, notes, and metadata   | Does historical order context remain readable and useful?                                         |
+| WordPress data | CMS Pages, Blog Posts, users, media, menus, and URLs influence the commerce journey               | Which content and site records must remain connected to commerce?                                 |
+| Plugin data    | Extensions may store business rules in metadata, custom tables, or external systems               | Is the data standard scope, Add-ons scope, Custom Service scope, or post-migration configuration? |
+
+### WooCommerce Products Are WordPress-Commerce Records <a href="#woocommerce-products-are-wordpress-commerce-records" id="woocommerce-products-are-wordpress-commerce-records"></a>
+
+WooCommerce products are not just generic catalog rows. They are commerce records that also live within the WordPress ecosystem. That means product data can be affected by post status, slug, media relationships, taxonomies, metadata, theme display, search behavior, product visibility, and plugins.
+
+| Product element            | Data-model meaning in WooCommerce                                         | Review priority                                                                            |
+| -------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Product title and slug     | Identifies the product and contributes to URL behavior                    | Confirm naming, duplicate handling, and permalink impact                                   |
+| Short and full description | Supports product detail display, SEO, and merchandising                   | Check formatting, media embeds, shortcodes, and builder content                            |
+| Product type               | Controls how the product is purchased or displayed                        | Confirm whether each item should be simple, variable, grouped, external, or plugin-handled |
+| SKU                        | Supports product identity, lookup, inventory, reporting, and integrations | Check SKU uniqueness and variation-level SKU needs                                         |
+| Images and galleries       | Connect products to WordPress media records                               | Confirm featured images, gallery order, alt text, and variation images                     |
+| Stock status               | Affects purchasability and customer-facing availability                   | Check product-level and variation-level inventory meaning                                  |
+| Visibility                 | Controls whether products appear in catalog, search, or hidden contexts   | Confirm hidden, private, draft, and catalog/search visibility assumptions                  |
+| Metadata                   | Stores extra product context, plugin fields, and custom values            | Classify which metadata must be preserved, mapped, rebuilt, or excluded                    |
+
+### Product Types Change Migration Meaning <a href="#product-types-change-migration-meaning" id="product-types-change-migration-meaning"></a>
+
+WooCommerce product types create different target meanings for similar source records. A source product with options, add-ons, bundles, or external purchasing behavior should not be converted mechanically without understanding how customers are supposed to buy it after migration.
+
+| Source-side pattern                                                                   | Possible WooCommerce interpretation                                | Risk if handled mechanically                                                       |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| One product with no purchasable options                                               | Simple product                                                     | Usually straightforward, but stock, tax, shipping, and media still need validation |
+| Product with selectable options that change price, stock, SKU, image, or availability | Variable product with variations                                   | Options may be flattened into text instead of becoming purchasable choices         |
+| Product family shown as related standalone items                                      | Grouped product or separate simple products                        | Relationship may be lost or wrongly merged                                         |
+| Product sold through another site or quote path                                       | External/affiliate product or custom workflow                      | Checkout expectation may not match target behavior                                 |
+| Product with paid add-ons or configurable inputs                                      | Product add-ons extension, custom fields, or Custom Service review | Add-on logic may be mistaken for native variations                                 |
+| Subscription, booking, membership, bundle, or composite product                       | Extension-governed commerce behavior                               | Active commercial logic may sit outside standard migration scope                   |
+
+### Variations and Attributes Require Separate Interpretation <a href="#variations-and-attributes-require-separate-interpretation" id="variations-and-attributes-require-separate-interpretation"></a>
+
+WooCommerce variable products depend on the relationship between a parent product, attributes, and individual variations. A variation is not just a label. It can carry independent price, SKU, stock, image, weight, dimensions, purchasability, and sale behavior.
+
+| Choice type                                                | Best WooCommerce treatment                              | What to validate                                                                    |
+| ---------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Size/color choices that change purchasable SKU             | Variation attributes and variation records              | Parent product, variation values, SKU, price, stock, images, and default selections |
+| Descriptive information that customers filter by           | Product attributes, taxonomy terms, or custom fields    | Attribute naming, value consistency, filter behavior, and display placement         |
+| Optional personalization or paid add-on fields             | Extension-managed product add-ons or custom fields      | Whether field values affect price, fulfillment, order detail, or customer input     |
+| Compatibility, dimensions, material, or technical specs    | Attributes or custom fields depending on target display | Whether values support filtering, comparison, or display only                       |
+| Source modifiers that do not map to WooCommerce variations | Add-ons or Custom Service review                        | Whether bespoke transformation or extension-aware handling is required              |
+
+The most common WooCommerce data-model mistake is treating every source option as the same kind of WooCommerce field. A purchasable variation, a filterable attribute, an add-on, a custom field, and a descriptive label may all look like “options” in the source store, but they should not be migrated into the same target structure.
+
+### Categories, Tags, Brands, and Product Taxonomies Have Distinct Roles <a href="#categories-tags-brands-and-product-taxonomies-have-distinct-roles" id="categories-tags-brands-and-product-taxonomies-have-distinct-roles"></a>
+
+WooCommerce uses WordPress-style taxonomies to organize product discovery. Product categories usually carry the main catalog hierarchy. Tags support flexible grouping. Brands may depend on WooCommerce or an extension. Custom product taxonomies may support filtering, compatibility, product type, vendor, industry, use case, or merchandising logic.
+
+| Taxonomy type             | Typical WooCommerce role                                                    | Data-model review question                                                              |
+| ------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Product categories        | Primary catalog hierarchy, navigation, merchandising, and SEO landing paths | Does the category tree match how customers browse?                                      |
+| Product tags              | Loose grouping, campaign labels, secondary discovery                        | Are tags useful, or are they compensating for poor category/attribute structure?        |
+| Product brands            | Brand-led discovery, filters, landing pages, and SEO                        | Is brand stored in a native field, taxonomy, attribute, or plugin-specific structure?   |
+| Product attributes        | Structured product traits, variation choices, filters, and comparisons      | Which attributes should be global, local, visible, variation-enabled, or filterable?    |
+| Custom product taxonomies | Plugin/theme/search/filter behavior                                         | Does the target store need the taxonomy for customer experience or internal admin only? |
+
+Taxonomy cleanup is often as important as record transfer. Duplicated values, inconsistent casing, mixed languages, and overlapping category/tag/attribute usage can survive migration while producing poor filtering and weak navigation.
+
+### Orders Depend on WooCommerce and Storage Context <a href="#orders-depend-on-woocommerce-and-storage-context" id="orders-depend-on-woocommerce-and-storage-context"></a>
+
+WooCommerce order data is both a commercial history record and an operational reference. It may include line items, customer association, billing and shipping addresses, coupons, taxes, shipping methods, payment method labels, statuses, refunds, notes, downloads, and metadata. With HPOS, order data can also involve dedicated order tables and compatibility considerations for extensions that interact with order records.
+
+| Order element                  | Data-model meaning                                                              | Validation priority                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Order status                   | Operational stage, reporting category, and support context                      | Map source statuses to readable WooCommerce outcomes                          |
+| Line items                     | Purchased products, quantities, variation choices, taxes, discounts, and totals | Confirm product associations, SKU visibility, and variation meaning           |
+| Billing and shipping addresses | Customer service, fulfillment, tax, and historical order context                | Verify address structure and country/state formatting                         |
+| Payment labels                 | Historical payment method context, not necessarily active gateway logic         | Confirm historical readability without implying payment reprocessing          |
+| Shipping labels                | Historical fulfillment context, not necessarily active shipping-rate logic      | Confirm method names and cost breakdowns remain understandable                |
+| Coupons and discounts          | Commercial adjustment history                                                   | Validate coupon codes, line-level discounts, and totals                       |
+| Refunds and notes              | Support and accounting context                                                  | Confirm refunds, partial refunds, customer notes, and admin notes if in scope |
+| Order metadata                 | Checkout fields, extension data, integration references, and operational notes  | Classify metadata by business value and target destination                    |
+
+Historical order migration should not be judged only by whether the order count matches. Staff should be able to open sample orders and understand what was purchased, who purchased it, what was paid, how it was shipped, and what operational context still matters.
+
+### Customer Data and Account Meaning Are Not the Same <a href="#customer-data-and-account-meaning-are-not-the-same" id="customer-data-and-account-meaning-are-not-the-same"></a>
+
+A WooCommerce customer record may preserve identity, email, names, billing address, shipping address, order association, and account history. That does not automatically preserve the full customer experience. Login behavior, passwords, customer roles, memberships, wholesale access, subscriptions, downloads, loyalty points, or account-based pricing may depend on WordPress users, WooCommerce records, plugins, or external systems.
+
+| Customer-related data          | Possible target meaning                                                    | Review question                                                  |
+| ------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Customer profile               | WooCommerce customer/account record                                        | Is account access required or mainly historical?                 |
+| WordPress user                 | Login identity, role assignment, author/member/subscriber status           | Which roles and capabilities should remain?                      |
+| Billing and shipping addresses | Checkout convenience and historical order context                          | Are addresses complete and formatted correctly?                  |
+| Customer role/group            | Membership, wholesale, B2B, loyalty, pricing, or access behavior           | Is the role native, plugin-owned, or external-system controlled? |
+| Password behavior              | Login continuity or password-reset workflow                                | Is password continuity supported for the migration path?         |
+| Customer metadata              | Marketing preferences, segmentation, external IDs, consent, or plugin data | Which fields are business-critical and where should they live?   |
+
+### Coupons, Taxes, Shipping, Payments, and Checkout Fields Need Purpose-Based Review <a href="#coupons-taxes-shipping-payments-and-checkout-fields-need-purpose-based-review" id="coupons-taxes-shipping-payments-and-checkout-fields-need-purpose-based-review"></a>
+
+WooCommerce checkout data combines migrated history, future configuration, and active store behavior. Historical orders may preserve tax, shipping, payment, discount, and checkout-field context, while active tax rules, shipping zones, payment gateways, fraud tools, and checkout fields often require configuration rather than direct data migration.
+
+| Area            | Migrated-data concern                                         | Configuration or Custom Service concern                                                   |
+| --------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Coupons         | Historical coupon codes, discount amounts, order associations | Active coupon rules, restrictions, usage limits, and expiry logic                         |
+| Taxes           | Historical tax totals, labels, rates, and order breakdowns    | Active tax configuration, tax classes, nexus logic, and external tax apps                 |
+| Shipping        | Historical shipping method labels and costs                   | Active shipping zones, methods, rates, carrier integrations, and fulfillment rules        |
+| Payments        | Historical payment method labels and transaction references   | Active gateway configuration, credentials, token behavior, and payment workflows          |
+| Checkout fields | Custom values attached to customers or orders                 | Field display, validation, conditional logic, storage destination, and HPOS compatibility |
+
+### Plugin and Extension Data Must Be Classified Before Migration <a href="#plugin-and-extension-data-must-be-classified-before-migration" id="plugin-and-extension-data-must-be-classified-before-migration"></a>
+
+WooCommerce stores often depend on plugins for subscriptions, bookings, memberships, product add-ons, bundles, composite products, wholesale pricing, loyalty points, payment workflows, fulfillment, invoices, customer segmentation, B2B features, search, reviews, and analytics. Some plugin outputs may be stored in postmeta, usermeta, order metadata, custom tables, or external systems.
+
+| Plugin-data pattern                                     | Likely handling                                             | Why it matters                                                             |
+| ------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Display-only product metadata                           | Standard scope or Add-ons depending on field structure      | Preserves product information without necessarily driving behavior         |
+| Custom checkout/order fields                            | Add-ons or Custom Service depending on storage and behavior | Affects order readability, admin workflows, and customer support           |
+| Subscription, booking, membership, or wholesale records | Custom Service review may be needed                         | Active relationships and future behavior may not be ordinary data records  |
+| Custom tables                                           | Custom Service review                                       | Data may not be accessible through standard product/order/customer mapping |
+| External IDs and integration references                 | Add-ons or Custom Service depending on transformation needs | Keeps ERP, CRM, PIM, WMS, accounting, or analytics continuity possible     |
+| Active app logic                                        | Configuration, extension setup, or Custom Service           | Data transfer alone cannot recreate active rules or workflows              |
+
+### CMS Pages, Blog Posts, Media, URLs, and SEO Remain Connected to Commerce <a href="#cms-pages-blog-posts-media-urls-and-seo-remain-connected-to-commerce" id="cms-pages-blog-posts-media-urls-and-seo-remain-connected-to-commerce"></a>
+
+WooCommerce data lives within a WordPress site, so commerce migration can be affected by content and route decisions. CMS Pages, Blog Posts, product landing pages, category descriptions, menus, widgets, media attachments, internal links, product embeds, related content, SEO metadata, redirects, and permalink structures can all influence the customer journey.
+
+| Content-commerce element | Data-model concern                                                    | Migration planning implication                                                 |
+| ------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| CMS Pages                | Checkout pages, policy pages, landing pages, product guides, FAQs     | Preserve pages that support buying and compliance                              |
+| Blog Posts               | Content-led discovery and internal linking                            | Preserve links, images, embedded products, and high-value posts where relevant |
+| Media                    | Product images, galleries, downloadable files, embedded assets        | Validate attachment relationships, alt text, filenames, and gallery order      |
+| Menus and widgets        | Navigation and product discovery                                      | Confirm target theme/builder handling and menu destinations                    |
+| Permalinks and redirects | Product, category, tag, page, and post routes                         | Map high-value routes and validate redirects after migration                   |
+| SEO metadata             | Titles, descriptions, canonical values, schema fields, index settings | Determine which SEO fields are standard, plugin-owned, or Custom Service scope |
+
+### Entity Points and WooCommerce Data Scope <a href="#entity-points-and-woocommerce-data-scope" id="entity-points-and-woocommerce-data-scope"></a>
+
+Entity Points planning should reflect which eligible records are migrated for the first time. New Product, Customer, Order, and Blog Posts records consume Entity Points when they are first migrated. Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when migrated for the first time, including when the customer performs a new migration for the same migration path.
+
+| WooCommerce scope area  | Entity Points relevance                                                | Practical review question                                                              |
+| ----------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Products and variations | Product records may be counted according to migration scope            | Which product records are new and eligible for first-time migration?                   |
+| Customers               | Customer records can affect service-license and Entity Points planning | Are new customer records being added after initial scope calculation?                  |
+| Orders                  | Order history can be a major scope driver                              | Are new orders being added and migrated for the first time?                            |
+| Blog Posts              | Content-led WooCommerce stores may include Blog Posts scope            | Are new Blog Posts being migrated for the first time?                                  |
+| Plugin-owned records    | May not map directly to standard Entity Points categories              | Should the work be classified as Add-ons, Custom Service, configuration, or exclusion? |
+
+### WooCommerce Data-Model Decision Matrix <a href="#woocommerce-data-model-decision-matrix" id="woocommerce-data-model-decision-matrix"></a>
+
+| Decision area    | Standard mapping signal                                                                                           | Add-ons signal                                                        | Custom Service signal                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Products         | Simple or variable product data with clear categories, attributes, prices, stock, images, and SKUs                | Extra field mapping, filtering, or supported configuration refinement | Bespoke product structures, custom tables, nonstandard source behavior, or plugin-controlled product logic        |
+| Orders           | Historical orders with readable line items, totals, customer links, taxes, shipping, payment labels, and statuses | Extra metadata mapping or field handling                              | Custom order logic, plugin records, unsupported order schemas, or special HPOS-sensitive interpretation           |
+| Customers        | Customer profiles, addresses, and order associations are clear                                                    | Extra customer metadata or segmentation mapping                       | Membership, wholesale, subscription, loyalty, or external account behavior needs custom review                    |
+| Content and URLs | CMS Pages, Blog Posts, media, slugs, and redirects are clear                                                      | Extra URL, metadata, or field handling                                | Theme/builder reconstruction, shortcode logic, custom routes, or SEO-plugin transformation needs bespoke handling |
+| Integrations     | External IDs are preserved as reference fields                                                                    | Mapping is needed for known integration identifiers                   | Active ERP, CRM, PIM, WMS, payment, fulfillment, or marketplace logic must be interpreted or rebuilt              |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WooCommerce data-model differences matter because the target store is shaped by the WordPress ecosystem as much as by WooCommerce commerce records. Variable products, attributes, categories, tags, permalinks, customer accounts, metadata, plugins, themes, and broader site architecture can all affect whether migrated data remains commercially useful.
+WooCommerce data-model review should focus on business meaning, not record presence alone. Products, variations, attributes, categories, customers, orders, coupons, checkout fields, media, URLs, and WordPress content may all migrate successfully as records while still failing to support the intended storefront or operational workflow.
 
-A WooCommerce migration should therefore be reviewed through meaning and behavior, not only through record preservation. If the store depends on complex variations, custom fields, plugin-owned logic, custom routes, or a Custom Platform source, a representative Demo Migration can help reveal whether the translation is straightforward or whether Custom Service should be considered before full execution.
+A strong WooCommerce migration plan identifies which structures are standard WooCommerce data, which require Add-ons, which depend on configuration after migration, and which require Custom Service review. The most important review areas are variable-product logic, attribute purpose, customer and order meaning, plugin-owned records, HPOS-sensitive order context, checkout metadata, SEO-sensitive routes, and integration references.
 
-Start by reviewing the WooCommerce structures that carry the most business meaning: product variations, taxonomy, route behavior, account expectations, plugin-owned fields, and high-value order history. If those areas are not yet clear, use Demo Migration results and Live Chat to confirm whether the issue is normal WooCommerce interpretation, target-configuration work, or a Custom Service requirement.
+Use representative samples during Demo Migration and Full Migration review. If a sample product, order, customer, checkout field, plugin record, or URL cannot be explained clearly in the Target Platform, the data model needs refinement before the migration result can be treated as reliable.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What is one of the biggest WooCommerce data-model differences?**
+**Why is WooCommerce data-model review different from generic WordPress migration review?**
 
-One of the biggest differences is that product meaning often depends on variable-product behavior. WooCommerce may need clearer separation between true purchasable variations, descriptive attributes, add-on behavior, and plugin-owned product logic.
+WooCommerce adds commerce meaning to WordPress records. Products, variations, orders, customers, coupons, checkout fields, stock, prices, and payment or shipping context need commerce validation, while generic WordPress migration mainly focuses on content, media, users, URLs, and site structure.
 
-**Are categories, tags, and attributes interchangeable in WooCommerce?**
+**Are WooCommerce variations the same as source product options?**
 
-No. Categories usually support primary catalog structure, tags usually support looser grouping, and attributes usually carry structured product characteristics or variation/filtering logic. Treating them as interchangeable can weaken storefront discovery.
+Not always. A WooCommerce variation is a purchasable child option that can carry its own SKU, price, stock, image, and availability. Some source options should become variations, while others may belong in attributes, add-ons, custom fields, or Custom Service review.
 
-**Why does permalink structure matter in a WooCommerce migration?**
+**Does migrating orders mean active checkout and payment logic also moves?**
 
-Permalink structure affects product, category, tag, content, and high-value landing-page routes. A migration can preserve product records but still weaken SEO and customer navigation if URL changes are not planned and redirected properly.
+No. Migrated orders preserve historical context. Active checkout fields, payment gateways, tax rules, shipping methods, fraud tools, and fulfillment workflows usually need configuration, extension setup, Add-ons, or Custom Service review depending on the requirement.
 
-**Does WooCommerce automatically preserve customer login continuity?**
+**Why does plugin-owned WooCommerce data need special review?**
 
-Not always. Customer records can be migrated, but password continuity depends on compatibility and migration-path conditions. If password continuity is not available, customers may need a reset or re-entry process after launch.
+Plugins can store business-critical data in metadata, custom tables, or external systems. Product add-ons, subscriptions, bookings, memberships, wholesale pricing, loyalty points, checkout fields, and integration records may not behave like ordinary product, customer, or order data.
 
-**When does WooCommerce data-model migration require Custom Service?**
+**How should Entity Points be reviewed for WooCommerce migration?**
 
-Custom Service should be considered when the migration requires bespoke interpretation, Custom Platform handling, custom fields that drive behavior, plugin-owned logic, unsupported source structures, custom transformation, or custom migration logic adjustment.
+Entity Points should be reviewed around eligible records migrated for the first time, such as new Product, Customer, Order, and Blog Posts records. Records already counted through the service license do not consume Entity Points again simply because another migration action is performed.

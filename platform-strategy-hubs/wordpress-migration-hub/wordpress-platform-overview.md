@@ -1,120 +1,145 @@
 # WordPress Platform Overview
 
-WordPress is a self-hosted, open-source CMS and application foundation. It can support content websites, blogs, membership sites, publishing workflows, marketing sites, landing pages, learning portals, and commerce implementations when the required commerce behavior is provided by plugins, custom development, or connected systems.
+WordPress is a CMS-connected Target Platform and implementation foundation. It can support publishing sites, content hubs, landing-page systems, membership portals, learning websites, directories, service websites, and commerce-connected implementations, but WordPress itself should not be treated as a native e-commerce platform by default.
 
-A migration to WordPress should not be planned as a simple move into a native store platform. WordPress provides the site framework, content model, user system, media library, theme layer, plugin layer, REST API surface, and extensibility model. Product, checkout, order, subscription, booking, marketplace, or other commerce behavior depends on the specific plugin stack and custom implementation used in the target site.
+A migration to WordPress is strongest when the project separates content structure from business functionality. Posts, CMS Pages, Blog Posts, media, categories, tags, authors, menus, comments, users, roles, and templates form the visible CMS layer. Custom post types, custom taxonomies, custom fields, plugin records, theme settings, builder layouts, SEO metadata, redirects, custom tables, and connected systems often determine whether the migrated site is actually usable after launch.
 
-For migration planning, the most important question is how the current site meaning will be represented inside WordPress. Posts, pages, media, comments, categories, tags, users, menus, templates, theme settings, custom post types, custom taxonomies, custom fields, plugin data, page-builder content, and SEO values may all affect whether the migrated result is operationally useful.
+The main planning question is not only whether content can be transferred into WordPress. It is whether the current site meaning can be represented inside the target WordPress architecture without losing layout context, URL continuity, plugin-controlled behavior, user meaning, or custom application logic.
 
-### WordPress, WordPress.com, and Commerce Plugins Should Be Separated <a href="#wordpress-wordpress-com-and-commerce-plugins-should-be-separated" id="wordpress-wordpress-com-and-commerce-plugins-should-be-separated"></a>
+### What WordPress Means as a Target Platform <a href="#what-wordpress-means-as-a-target-platform" id="what-wordpress-means-as-a-target-platform"></a>
 
-WordPress planning should begin by confirming the intended target environment. A self-hosted WordPress installation gives the merchant control over hosting, themes, plugins, custom code, database behavior, and deployment decisions. WordPress.com is a hosted service with its own plan, feature, plugin, and operational constraints. WooCommerce is a commerce plugin for WordPress, not the same platform layer as WordPress itself.
+WordPress should be understood as a flexible content and application foundation. Its core model supports posts, pages, media, users, comments, categories, tags, taxonomies, themes, templates, menus, widgets, and API-accessible site resources. Many real WordPress sites extend that foundation through plugins, themes, page builders, custom post types, custom fields, shortcodes, custom tables, and external integrations.
 
-This distinction matters because the WordPress migration path owns CMS and application foundation behavior. If the target outcome depends on WooCommerce, Easy Digital Downloads, LearnDash, MemberPress, marketplace extensions, booking plugins, page builders, custom post types, or bespoke plugin data, those requirements should be treated as plugin-dependent or custom implementation scope rather than native WordPress behavior.
+| WordPress layer         | Migration meaning                                                                                              | Planning question                                                                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Core CMS records        | Posts, CMS Pages, Blog Posts, media, categories, tags, comments, users, and menus.                             | Can the source content be represented as native WordPress records without losing authorship, media relationships, formatting, or URL meaning? |
+| Structure layer         | Custom post types, custom taxonomies, archive pages, permalink rules, templates, and relationships.            | Does the target site need a documented content model beyond ordinary posts and pages?                                                         |
+| Metadata layer          | Custom fields, SEO fields, page-builder metadata, plugin settings, and record-level options.                   | Which metadata controls display, filtering, search, SEO, or business behavior?                                                                |
+| Presentation layer      | Blocks, reusable blocks, page builders, themes, templates, menus, widgets, and media output.                   | Which pages need visual review because content storage alone will not prove layout quality?                                                   |
+| Plugin and custom layer | Forms, memberships, courses, bookings, events, directories, commerce plugins, custom tables, and integrations. | Which records belong to WordPress core and which require Add-ons, configuration, exclusion, or Custom Service review?                         |
+| Operational layer       | Hosting, PHP, database, caching, search, security, redirects, deployment, and connected systems.               | Is the target environment prepared to make migrated content behave correctly after Full Migration?                                            |
 
-### What Changes in a Migration to WordPress <a href="#what-changes-in-a-migration-to-wordpress" id="what-changes-in-a-migration-to-wordpress"></a>
+This distinction matters because two WordPress migrations can look similar from the front end while requiring very different migration plans. A basic publishing site may be mostly posts, CMS Pages, Blog Posts, media, and menus. A custom WordPress application may depend on field groups, relationships, custom tables, external IDs, API synchronization, role permissions, or plugin-specific workflows.
 
-Migrating into WordPress changes how content, site structure, user access, design, and plugin-dependent functionality are organized. The result must work inside a target installation where themes, plugins, custom fields, rewrite rules, media handling, and content types shape how migrated data appears and behaves.
+### WordPress Is Different From WooCommerce <a href="#wordpress-is-different-from-woocommerce" id="wordpress-is-different-from-woocommerce"></a>
 
-| Migration area                          | What changes in WordPress                                                                                                                            | Planning implication                                                                                                         |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| CMS foundation                          | Content is organized through posts, pages, media, comments, taxonomies, users, menus, themes, templates, and plugins.                                | Migration scope should distinguish core WordPress records from plugin-owned or custom records.                               |
-| Posts and Blog Posts                    | Blog content may include categories, tags, authors, featured images, excerpts, slugs, comments, blocks, shortcodes, and SEO values.                  | Sample Blog Posts should include formatting, media, links, comments, metadata, and URL-sensitive examples.                   |
-| CMS Pages                               | Pages may depend on block editor content, page builders, templates, reusable blocks, patterns, menus, and embedded media.                            | Page migration should be checked visually, not only by confirming that page titles and bodies exist.                         |
-| Media library                           | Images, documents, galleries, featured images, alt text, captions, and embedded media may be represented separately from the content that uses them. | Media validation should check file availability, attachment relationships, display quality, and SEO-sensitive text.          |
-| Users and roles                         | WordPress users depend on roles, capabilities, author relationships, and plugin-specific account behavior.                                           | User migration should distinguish authors, administrators, subscribers, members, customers, and plugin-defined user meaning. |
-| Custom post types and custom taxonomies | Many WordPress sites store business data outside ordinary posts and pages.                                                                           | Custom post types and taxonomies should be identified before the migration is treated as standard content migration.         |
-| Custom fields and metadata              | Advanced Custom Fields, SEO plugins, page builders, membership plugins, commerce plugins, and custom code may store critical meaning in metadata.    | Custom fields and plugin-owned metadata often need mapping, accepted exclusions, or Custom Service review.                   |
-| Themes and site editing                 | Visual output depends on the active theme, block theme behavior, templates, template parts, theme.json, menus, widgets, and styles.                  | Design continuity may require separate theme, template, block, or page-builder review.                                       |
-| Plugins and integrations                | Forms, memberships, LMS, subscriptions, commerce, SEO, analytics, caching, search, and CRM workflows may depend on plugins or external systems.      | Plugin-dependent records and workflows should be separated from ordinary WordPress records during scope planning.            |
-| SEO and URLs                            | Slugs, permalinks, redirects, canonical values, metadata, schema, breadcrumbs, and media URLs can affect search visibility.                          | SEO-sensitive sites should prepare URL, metadata, and redirect evidence before Demo Migration acceptance.                    |
+WordPress and WooCommerce should be planned separately. WordPress provides the CMS foundation, theme layer, user system, plugin framework, media library, and extensibility model. WooCommerce is a commerce plugin that can run on WordPress, but product, cart, checkout, order, tax, coupon, subscription, and customer-commerce behavior should not be assumed in a WordPress migration unless WooCommerce is part of the target scope.
 
-### Where WordPress Is Often a Strong Target <a href="#where-wordpress-is-often-a-strong-target" id="where-wordpress-is-often-a-strong-target"></a>
+| Target expectation                                   | Correct interpretation                                                           | Migration implication                                                                                                      |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| A content website moving into WordPress              | WordPress is the Target Platform.                                                | Focus on posts, CMS Pages, Blog Posts, media, users, menus, taxonomy, SEO, and layout dependencies.                        |
+| A WooCommerce store moving into WordPress            | WordPress is the foundation and WooCommerce is the commerce layer.               | Commerce records need WooCommerce-specific review rather than generic WordPress treatment.                                 |
+| A membership, booking, LMS, event, or directory site | WordPress is the foundation and plugin/custom structures carry business meaning. | Plugin-owned records and custom fields may require separate mapping, configuration, Add-ons, or Custom Service review.     |
+| A custom WordPress application                       | WordPress acts as an application framework.                                      | Custom post types, custom taxonomies, custom tables, external IDs, integrations, and permission logic need deeper scoping. |
 
-WordPress is often a strong target when the merchant needs flexible content ownership, broad plugin availability, custom publishing structure, theme control, SEO flexibility, and the ability to extend the site through custom post types, custom fields, integrations, or custom development.
+This separation prevents two common planning errors: treating WordPress as if it natively owns commerce behavior, and treating plugin-controlled business records as if they were ordinary pages.
 
-#### Content-led websites and publishing operations <a href="#content-led-websites-and-publishing-operations" id="content-led-websites-and-publishing-operations"></a>
+### Where WordPress Migration Value Comes From <a href="#where-wordpress-migration-value-comes-from" id="where-wordpress-migration-value-comes-from"></a>
 
-WordPress can be a strong fit for sites where pages, Blog Posts, categories, tags, authors, media, navigation, and SEO structure carry business value. This includes blogs, editorial sites, resource centers, marketing websites, landing-page systems, service websites, and brand sites that need long-term content control.
+WordPress is valuable as a migration target when the site depends on long-term content ownership, flexible structure, editorial control, SEO management, plugin extensibility, and implementation freedom. It is not limited to simple pages and posts, but the more customized the target model becomes, the more explicit the migration plan must be.
 
-For these sites, migration quality depends on preserving more than visible text. Authors, slugs, featured images, internal links, category structure, metadata, redirects, embedded media, comments, and page layout may all influence whether the migrated site is ready to use.
+| Value area               | Why it matters in WordPress                                                                                                          | What must be preserved or rebuilt                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Content ownership        | WordPress is widely used for publishing, editorial, marketing, resource, and service-content sites.                                  | Titles, body content, excerpts, authors, statuses, dates, featured images, categories, tags, comments, and internal links.          |
+| Flexible structure       | Custom post types and taxonomies can represent resources, events, profiles, courses, directories, portfolios, or listings.           | Content-type definitions, taxonomy hierarchy, relationships, custom fields, archive behavior, and templates.                        |
+| Media and layout context | Images, documents, galleries, embeds, featured images, captions, alt text, and layout blocks affect usability.                       | Media files, attachment relationships, display sizes, alt text, captions, galleries, embedded media, and important visual sections. |
+| SEO control              | WordPress sites often depend on slugs, permalink structures, metadata, canonical behavior, redirects, and taxonomy archives.         | URL mapping, high-value slugs, redirects, SEO fields, metadata, internal links, schema output, and archive pages.                   |
+| Plugin extensibility     | Plugins can support memberships, forms, bookings, courses, events, SEO, multilingual content, search, security, and commerce layers. | Plugin-owned records, custom tables, settings, shortcodes, field groups, user relationships, and external-system references.        |
+| Implementation control   | Self-hosted WordPress allows control over hosting, theme, plugins, custom code, caching, deployment, and integrations.               | Target environment readiness, plugin compatibility, theme behavior, PHP/database requirements, and deployment responsibilities.     |
 
-#### Sites that need flexible structure beyond standard pages <a href="#sites-that-need-flexible-structure-beyond-standard-pages" id="sites-that-need-flexible-structure-beyond-standard-pages"></a>
+A strong WordPress migration does not only ask whether the data can be imported. It checks whether the target WordPress site can operate with the intended content model, design system, plugins, redirects, and user/account logic.
 
-WordPress works well when the target site needs custom post types, custom taxonomies, custom fields, templates, reusable content patterns, or plugin-defined content structures. These capabilities allow WordPress to represent directories, portfolios, learning content, events, resources, landing pages, membership records, or other structured content types.
+### What Changes When Moving Into WordPress <a href="#what-changes-when-moving-into-wordpress" id="what-changes-when-moving-into-wordpress"></a>
 
-The same flexibility also increases migration planning responsibility. Custom structures should be documented clearly before execution so the migration result can be evaluated against the intended target model rather than against a generic post-and-page structure.
+A migration to WordPress changes how site information is organized. Source pages may become WordPress CMS Pages, Blog Posts, custom post types, taxonomy archives, plugin records, media attachments, or a mix of these elements. The right choice depends on how the target site should be managed after launch.
 
-#### Businesses that rely on a plugin ecosystem <a href="#businesses-that-rely-on-a-plugin-ecosystem" id="businesses-that-rely-on-a-plugin-ecosystem"></a>
+| Source-site element             | WordPress interpretation                                                                                | Planning impact                                                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Standard pages                  | CMS Pages with editor content, template assignment, parent hierarchy, media, and menu relationships.    | Important pages need both record-level and visual review.                                                         |
+| Blog or article content         | Blog Posts with authors, dates, categories, tags, featured images, comments, excerpts, and slugs.       | Blog Posts should preserve publishing context, not only title and body.                                           |
+| Product-like or listing content | Could become custom post types, plugin records, WooCommerce products, or Custom Platform records.       | The target model must be decided before migration, not inferred from front-end appearance.                        |
+| Categories and filters          | Native categories/tags, custom taxonomies, plugin filters, or search/index fields.                      | Filtering and archive behavior should be validated separately from content existence.                             |
+| Media assets                    | Media library records and attachment references.                                                        | Images and files must remain connected to posts, pages, galleries, fields, and SEO text.                          |
+| Users and accounts              | Users with roles, capabilities, authorship, membership/account meaning, or plugin-specific permissions. | Authors, customers, members, subscribers, instructors, vendors, or administrators may require different handling. |
+| Forms and submissions           | Plugin-owned records, custom tables, email workflows, CRM records, or external-system data.             | Form history and workflow behavior may not be native WordPress content.                                           |
+| SEO data                        | Slugs, metadata, redirects, canonical values, schema settings, breadcrumbs, and plugin fields.          | SEO preservation requires explicit evidence and redirect planning.                                                |
 
-WordPress can support many business workflows through plugins, including SEO, forms, memberships, subscriptions, learning management, bookings, events, multilingual content, analytics, CRM connections, search, security, and commerce. This makes WordPress attractive when the business wants extensibility without building every feature from scratch.
+The most important early decision is whether WordPress will receive content as ordinary CMS records or as a structured implementation with custom content types, plugins, and custom fields.
 
-Plugin reliance should be planned carefully. Plugin data may not behave like native WordPress content, and the same visible feature can be stored very differently depending on the plugin, version, configuration, and custom code involved.
+### WordPress Architecture Layers to Confirm Early <a href="#wordpress-architecture-layers-to-confirm-early" id="wordpress-architecture-layers-to-confirm-early"></a>
 
-#### Teams that want ownership of hosting and implementation choices <a href="#teams-that-want-ownership-of-hosting-and-implementation-choices" id="teams-that-want-ownership-of-hosting-and-implementation-choices"></a>
+WordPress migration planning should start by separating content, structure, presentation, plugin behavior, and operational ownership. These layers often appear together on the front end, but they require different migration decisions.
 
-Self-hosted WordPress gives the business control over hosting provider, performance stack, deployment workflow, theme selection, plugin selection, security approach, developer access, and custom code. This can be valuable for teams with the technical capacity to manage a flexible application foundation.
+| Architecture layer       | What belongs there                                                                                                   | Why it matters before migration                                                                                          |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Content layer            | CMS Pages, Blog Posts, media, comments, authors, categories, tags, and menus.                                        | Establishes the ordinary WordPress baseline that can usually be inspected through the admin and REST-accessible records. |
+| Structured-content layer | Custom post types, custom taxonomies, field groups, relationships, archive pages, and templates.                     | Determines whether source content stays editable and searchable instead of becoming flat page text.                      |
+| Presentation layer       | Blocks, reusable blocks, page-builder data, shortcodes, templates, widgets, menus, theme settings, and media output. | Explains why migrated records can exist while the visible page still needs implementation or visual QA.                  |
+| Plugin and custom layer  | Forms, memberships, LMS, events, bookings, directories, donations, custom tables, and integration records.           | Identifies data that may require Add-ons, configuration, accepted exclusions, or Custom Service review.                  |
+| SEO and routing layer    | Slugs, permalinks, canonical settings, redirects, metadata, internal links, sitemap paths, and archive URLs.         | Protects search visibility and prevents content that migrated correctly from becoming hard to find.                      |
+| Operations layer         | Hosting, PHP/database compatibility, caching, security, search, backups, deployment, and connected systems.          | Confirms that the target WordPress environment can support the migrated content after Full Migration.                    |
 
-That control also means the target environment must be prepared deliberately. Hosting, PHP version, database behavior, permalink settings, theme compatibility, plugin compatibility, caching, search, image handling, and security rules can all affect the migrated result.
+This layered view keeps the platform overview practical without turning it into a fit assessment. It helps merchants understand what WordPress can receive, what the target implementation must already support, and where migration scope may extend beyond standard CMS records.
 
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
+### WordPress Planning Boundaries <a href="#wordpress-planning-boundaries" id="wordpress-planning-boundaries"></a>
 
-Deeper planning is usually needed when the source site depends on custom functionality, page-builder layouts, plugin-owned data, complex user roles, commerce records, learning content, multilingual behavior, membership rules, or SEO-sensitive URL structures.
+WordPress is flexible, but that flexibility can hide scope. A migration plan should define which parts of the source site will become native WordPress content, which parts will depend on plugins or custom structures, and which parts belong outside WordPress or outside the migration scope.
 
-#### Plugin-owned commerce or business data <a href="#plugin-owned-commerce-or-business-data" id="plugin-owned-commerce-or-business-data"></a>
+| Boundary                                   | Correct planning interpretation                                                                   | Typical evidence to collect                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| WordPress core vs plugin records           | Core records and plugin records should not be treated as the same data type.                      | Post/page samples, plugin list, custom tables, shortcode examples, field groups, and admin screenshots.                       |
+| CMS content vs commerce behavior           | WooCommerce or another commerce layer should be scoped separately from WordPress CMS content.     | Product/order/customer examples, checkout requirements, subscription/payment/shipping/tax dependencies, and plugin ownership. |
+| Content migration vs design reconstruction | Migrating content does not automatically reproduce a theme, builder, animation, or layout system. | Target theme/builder decision, priority page samples, reusable sections, widgets, templates, and visual acceptance examples.  |
+| Standard fields vs custom behavior         | A custom field may store text, but the target site must still know how to display or use it.      | Field names, field types, display examples, filters, templates, API use, and external-system references.                      |
+| URL movement vs SEO preservation           | Preserving visible content is different from preserving high-value URLs and metadata.             | URL map, redirects, canonical rules, SEO plugin fields, slugs, internal links, and priority pages.                            |
 
-WordPress does not provide native product, cart, checkout, payment, order, subscription, booking, or marketplace behavior by itself. When those workflows exist, they usually belong to a plugin, custom code, or connected system.
+A clear boundary does not reduce WordPress flexibility. It makes that flexibility usable because the migration can be planned around the right target structures rather than around generic page transfer assumptions.
 
-If the target outcome depends on commerce plugins, booking plugins, membership plugins, LMS plugins, event plugins, directories, marketplace tools, or custom business applications, migration planning should identify which records can be migrated, which behavior must be configured, and which plugin-specific data needs Custom Service review.
+### What WordPress Requires From the Target Implementation <a href="#what-wordpress-requires-from-the-target-implementation" id="what-wordpress-requires-from-the-target-implementation"></a>
 
-#### Custom post types, fields, and taxonomies <a href="#custom-post-types-fields-and-taxonomies" id="custom-post-types-fields-and-taxonomies"></a>
+WordPress migration quality depends on the target environment as much as the source data. The target site needs the right post types, taxonomies, plugins, fields, templates, menus, redirects, and operating rules before Full Migration can be evaluated with confidence.
 
-Many WordPress implementations use custom post types, custom taxonomies, and custom fields to store business meaning. These structures can be essential even when they are not visible to a visitor as separate content types.
+| Target requirement               | Why it matters                                                                                         | Migration impact                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| Defined content model            | WordPress can store many content types, but it needs a planned model for each one.                     | Reduces the risk that resources, events, courses, listings, or directories are flattened into pages.      |
+| Confirmed plugin stack           | Plugins may own forms, memberships, LMS records, SEO fields, redirects, builders, and commerce layers. | Determines what can be migrated directly, what needs Add-ons, and what may require Custom Service review. |
+| Stable URL and redirect approach | Slugs, permalink structure, and redirects affect search visibility and user access.                    | Enables targeted validation of high-value pages, archives, media, and internal links.                     |
+| Layout acceptance criteria       | Page builders and themes can change how migrated content appears.                                      | Separates data completion from visual acceptance and implementation work.                                 |
+| Operational ownership            | WordPress requires hosting, updates, backups, security, caching, and plugin maintenance.               | Clarifies responsibilities after migration and prevents unsupported launch assumptions.                   |
 
-A migration can fail in practical terms if custom fields, relationships, template dependencies, or plugin-owned metadata are ignored. For example, a listing, course, event, resource, profile, or product-like record may appear as ordinary content on the front end while being stored as a specialized content type with custom metadata in WordPress.
+These requirements make Article 1 a platform overview: they explain how WordPress behaves as a migration target and what must be understood before deeper fit, data-model, risk, preparation, approach, validation, and pitfall articles.
 
-#### Page builders, blocks, and theme-dependent layout <a href="#page-builders-blocks-and-theme-dependent-layout" id="page-builders-blocks-and-theme-dependent-layout"></a>
+### What Should Be Understood Before Moving Into WordPress <a href="#what-should-be-understood-before-moving-into-wordpress" id="what-should-be-understood-before-moving-into-wordpress"></a>
 
-WordPress content may be built with the block editor, full-site editing, classic editor content, shortcodes, reusable blocks, page builders, custom templates, or theme-specific layout systems. These structures determine how migrated content appears after launch.
+Before choosing WordPress as the Target Platform, merchants should understand which parts of the current site are content, which parts are structure, and which parts are behavior. That separation is the difference between a clean WordPress migration and a site that technically contains records but does not operate as expected.
 
-A title-and-body migration may not preserve layout quality when the source site depends on columns, sliders, tabs, accordions, forms, dynamic sections, custom blocks, or page-builder modules. Visual review should be included for important pages and content templates.
+| Planning checkpoint          | Why it matters                                                                                                     | Evidence to prepare                                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Core content inventory       | Establishes the baseline migration scope.                                                                          | Posts, CMS Pages, Blog Posts, categories, tags, media, comments, authors, menus, and key URLs.                              |
+| Custom structure inventory   | Prevents custom content from being flattened into ordinary pages.                                                  | Custom post types, custom taxonomies, field groups, relationships, templates, archive pages, and sample records.            |
+| Plugin dependency review     | Identifies records that are not native WordPress content.                                                          | Plugin list, plugin versions, data tables, shortcodes, settings, workflow examples, and exported samples where available.   |
+| Layout and theme review      | Clarifies what data migration can and cannot reproduce.                                                            | Page-builder usage, block patterns, templates, widgets, theme settings, menus, and visual acceptance samples.               |
+| User and role review         | Prevents authors, members, customers, subscribers, and administrators from being treated as the same account type. | User roles, capabilities, membership/account rules, author relationships, customer references, and permission samples.      |
+| SEO and redirect review      | Protects traffic, search visibility, and internal linking.                                                         | URL list, slugs, metadata, redirects, canonical rules, sitemap evidence, internal-link samples, and media URL requirements. |
+| Custom Service signal review | Finds scope that cannot be represented by standard WordPress records alone.                                        | Custom tables, bespoke plugin data, external IDs, APIs, CRM/ERP/PIM references, and workflow dependencies.                  |
 
-#### SEO, redirects, and URL continuity <a href="#seo-redirects-and-url-continuity" id="seo-redirects-and-url-continuity"></a>
-
-WordPress sites often have significant SEO value tied to slugs, permalink structure, categories, tags, author archives, media URLs, canonical rules, redirects, metadata, schema, breadcrumbs, and internal links. Migration planning should preserve or intentionally redirect high-value URLs.
-
-SEO risk increases when the source platform uses a different routing model, when many pages have custom slugs, when Blog Posts carry search traffic, or when plugin-generated pages create important indexed URLs.
-
-### What Should Be Understood Early Before Moving into WordPress <a href="#what-should-be-understood-early-before-moving-into-wordpress" id="what-should-be-understood-early-before-moving-into-wordpress"></a>
-
-A WordPress migration should begin with a clear separation between core content, plugin-managed content, custom structures, design dependencies, and external workflows. The more the current site depends on plugins, custom code, or structured metadata, the more important it is to review the target model before Full Migration.
-
-The following points should be understood early:
-
-* WordPress is the CMS and application foundation, not a native commerce system by itself.
-* WooCommerce and other commerce plugins should be treated as plugin-dependent commerce layers, not as native WordPress behavior.
-* Posts, CMS Pages, Blog Posts, categories, tags, comments, users, menus, and media may migrate differently from plugin-owned records.
-* Custom post types, custom taxonomies, custom fields, relationships, and plugin metadata can carry essential business meaning.
-* Page builders, block editor content, shortcodes, templates, and theme behavior can affect layout continuity.
-* SEO continuity depends on slugs, permalink settings, redirects, metadata, schema, internal links, and canonical behavior.
-* Target hosting, PHP, database, theme, plugins, roles, security, caching, and integration settings should be prepared before launch acceptance.
-* Demo Migration should include complex pages, Blog Posts, media, users, custom fields, plugin-dependent records, and URL-sensitive examples.
+A Demo Migration should include simple content and complex examples. Samples should cover media-heavy pages, Blog Posts with authors and categories, custom fields, custom post types, plugin-dependent records, menus, redirects, SEO-sensitive URLs, and user-role examples.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WordPress can be a strong Target Platform when the migration goal is flexible content ownership, open-source control, plugin extensibility, SEO management, and custom site structure. It should be evaluated as a CMS and application foundation rather than as a single fixed commerce platform.
+WordPress can be a strong Target Platform when the migration goal is flexible content ownership, CMS control, plugin extensibility, SEO management, and custom site structure. It should be evaluated as a CMS-connected implementation foundation rather than as a fixed commerce platform.
 
-Before moving into WordPress, identify which parts of the current site are ordinary content and which parts depend on custom fields, custom post types, page builders, themes, plugins, external systems, or commerce extensions. A focused Demo Migration helps confirm whether the target structure is straightforward or whether Add-ons, configuration, mapping, or Custom Service review should be planned before Full Migration.
+Migration planning should separate ordinary WordPress content from plugin-owned records, custom post types, custom fields, custom tables, page-builder layouts, themes, redirects, SEO fields, users, roles, and external-system logic. When that structure is clear before Demo Migration, WordPress can support a well-controlled migration path. When that structure is unclear, Add-ons, configuration work, accepted exclusions, or Custom Service review may be needed before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is WordPress a native e-commerce platform?**
 
-No. WordPress is a CMS and application foundation. E-commerce behavior usually depends on plugins such as WooCommerce or on custom development, connected systems, or other plugin-based commerce structures.
+No. WordPress is a CMS and application foundation. E-commerce behavior usually depends on WooCommerce, another commerce plugin, custom development, or connected systems.
 
 **Is WordPress the same as WooCommerce?**
 
-No. WordPress provides the CMS foundation, while WooCommerce is a commerce plugin that runs on WordPress. A WordPress migration should not automatically be treated as a WooCommerce migration unless the target site uses WooCommerce as the commerce layer.
+No. WordPress provides the CMS foundation, while WooCommerce is a commerce plugin that runs on WordPress. A WordPress migration should not automatically be treated as a WooCommerce migration unless WooCommerce is part of the target scope.
 
 **What WordPress data should be reviewed before migration?**
 
@@ -126,4 +151,4 @@ Plugins can store business-critical data outside ordinary WordPress posts and pa
 
 **What should be included in a WordPress Demo Migration?**
 
-A strong Demo Migration should include ordinary posts and pages, complex Blog Posts, media-heavy content, pages built with the target editor or page builder, users with different roles, custom fields, plugin-dependent records, and URLs with SEO value.
+A strong Demo Migration should include ordinary posts and pages, complex Blog Posts, media-heavy content, users with different roles, custom fields, plugin-dependent records, important menu or layout examples, and URLs with SEO value.

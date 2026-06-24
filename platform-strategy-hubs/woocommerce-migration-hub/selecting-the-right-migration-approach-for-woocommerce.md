@@ -1,166 +1,170 @@
 # Selecting the Right Migration Approach for WooCommerce
 
-Choosing the right migration approach for WooCommerce is not mainly a question of record volume. It is a question of how much interpretation the new WooCommerce store requires before the result can be trusted commercially and operationally.
+WooCommerce approach selection should be based on how much commerce behavior depends on WordPress, WooCommerce settings, extensions, custom fields, order storage, checkout logic, and external systems. A small catalog with clear products and ordinary orders may fit a lighter migration path. A store with subscriptions, bookings, memberships, wholesale rules, custom checkout fields, HPOS-sensitive order metadata, plugin-owned records, or custom tables needs a more controlled approach.
 
-WooCommerce can be a flexible Target Platform because it sits inside WordPress and can support variable products, attributes, categories, tags, permalink planning, customer accounts, plugins, themes, and custom fields. That flexibility is useful, but it also means a WooCommerce migration should not be treated as a simple data transfer when important storefront behavior depends on source-side product logic, taxonomy structure, URL patterns, plugins, or custom development.
+The right approach should not be chosen by record count alone. WooCommerce migrations often look simple because products, posts, pages, users, and media live inside WordPress. The real decision depends on whether the store’s buying logic, order meaning, customer account behavior, URLs, and plugin data can be interpreted through Standard Service, supported through Managed Service, extended through Add-ons, or reviewed as Custom Service scope.
 
-The safest approach is the one that matches the real WooCommerce interpretation burden: how clearly the future product model is defined, how much of the store depends on plugin or theme behavior, how sensitive the URL structure is, and how much validation the business can realistically perform.
+### What Migration Approach Means for WooCommerce <a href="#what-migration-approach-means-for-woocommerce" id="what-migration-approach-means-for-woocommerce"></a>
 
-### What approach means in a WooCommerce migration <a href="#what-approach-means-in-a-woocommerce-migration" id="what-approach-means-in-a-woocommerce-migration"></a>
+Migration approach means deciding how much structure, assistance, extended scope, and custom review the WooCommerce project needs before Demo Migration, Full Migration, and any later migration activity. The approach should make the difference between standard WooCommerce data, WordPress site dependencies, extension-owned behavior, target configuration, accepted exclusions, Add-ons, and Custom Service requirements clear.
 
-In a WooCommerce migration, approach selection decides how much guidance, execution support, and customization are needed to preserve the intended target outcome.
+| Decision layer               | What it answers                                                                                                           | WooCommerce-specific signal                                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Standard Service             | Can the migration run through supported source and target data with normal configuration?                                 | Products, customers, orders, coupons, categories, tags, CMS Pages, Blog Posts, and media have clear standard mapping                          |
+| Managed Service              | Does the merchant need Next-Cart guidance, configuration support, validation assistance, or structured execution support? | Store data is mostly supported, but the team needs help with setup, samples, Demo Migration review, and issue interpretation                  |
+| Add-ons                      | Are there supported extra requirements beyond the basic service license?                                                  | Data filtering, extra mapped fields, or supported configuration adjustments are needed                                                        |
+| Custom Service               | Does the migration involve unsupported, extension-owned, custom-table, or workflow-specific behavior?                     | Subscriptions, bookings, memberships, wholesale rules, custom checkout fields, external IDs, HPOS metadata, or custom plugin data need review |
+| Additional Migration Options | How should later migration activity be handled?                                                                           | New products, customers, orders, Blog Posts, coupons, and plugin fields appear after the first migration run                                  |
 
-A lighter approach may be enough when the future WooCommerce structure is already clear and the customer can validate the result confidently. A more guided approach becomes safer when the store contains many behavior-sensitive areas, such as variable products, taxonomy-led browsing, custom fields, subscriptions, membership logic, wholesale rules, custom checkout behavior, or theme/plugin-driven storefront experience.
+### Why WooCommerce Approach Choice Depends on Store Behavior <a href="#why-woocommerce-approach-choice-depends-on-store-behavior" id="why-woocommerce-approach-choice-depends-on-store-behavior"></a>
 
-A Custom Service approach becomes necessary when the required outcome cannot be handled safely through standard service capability alone. That can happen when source-side logic needs transformation, filtered handling, custom field interpretation, plugin-aware treatment, or custom migration logic adjustment before the data becomes useful in WooCommerce.
+WooCommerce is flexible because it extends WordPress. That flexibility also makes migration approach choice more sensitive. A store may use ordinary WooCommerce products and orders, or it may use extensions that alter product selection, pricing, account permissions, checkout, fulfillment, subscription status, booking slots, downloadable files, memberships, or wholesale access.
 
-### Why WooCommerce approach choice depends on storefront structure <a href="#why-woocommerce-approach-choice-depends-on-storefront-structure" id="why-woocommerce-approach-choice-depends-on-storefront-structure"></a>
-
-WooCommerce migration risk often lies in how data becomes meaningful inside the WordPress and WooCommerce environment. The same product, customer, order, or category record can behave differently depending on how the Target Platform uses variations, taxonomies, permalinks, metadata, plugins, and themes.
-
-A WooCommerce migration is usually easier to control when:
-
-* products and variations are already classified clearly
-* attributes, categories, and tags have defined roles
-* URL and permalink expectations are realistic
-* customer-account continuity is understood
-* important plugin-owned behavior has been identified
-* custom fields are either unnecessary or clearly mapped
-* the customer team can review the migrated storefront carefully
-
-A WooCommerce migration usually needs stronger guidance when:
-
-* product options or variations are inconsistent
-* categories, tags, and attributes overlap in confusing ways
-* source URLs need careful continuity planning
-* important behavior depends on plugins, themes, custom fields, or custom code
-* customer accounts, order history, memberships, subscriptions, wholesale logic, or B2B rules affect ongoing operations
-* the Demo Migration reveals ambiguity that cannot be resolved through ordinary review alone
-
-The approach should reflect the level of interpretation required, not just the number of records being moved.
+| WooCommerce behavior                                                               | Approach implication                                                                                  | Review question                                                                                              |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Simple products and ordinary orders                                                | Often suitable for Standard Service when source data is clean                                         | Are products, customers, orders, coupons, media, and URLs clear?                                             |
+| Variable products with meaningful attributes                                       | May still fit Standard Service, but sample validation is important                                    | Do variation attributes, SKUs, prices, stock, images, and default selections migrate as purchasable options? |
+| Heavy WordPress content around commerce                                            | May require Managed Service or Add-ons depending on CMS Pages, Blog Posts, media, URLs, and SEO needs | Does content drive product discovery or checkout trust?                                                      |
+| Product add-ons, subscriptions, bookings, memberships, bundles, or wholesale logic | Often requires Add-ons, target configuration, Custom Service review, or accepted exclusions           | Is the requirement stored data, active workflow behavior, or extension logic?                                |
+| Custom checkout fields or order metadata                                           | May require Add-ons or Custom Service review                                                          | Are field values needed only for historical orders, or must live checkout behavior continue?                 |
+| HPOS/order-storage sensitivity                                                     | Requires careful order validation and extension compatibility review                                  | Are order records, metadata, and admin views consistent after migration?                                     |
+| External system dependency                                                         | May require Managed Service coordination or Custom Service review                                     | Are ERP, CRM, WMS, shipping, payment, marketplace, or accounting IDs required?                               |
 
 ### Standard Service for WooCommerce <a href="#standard-service-for-woocommerce" id="standard-service-for-woocommerce"></a>
 
-Standard Service can be a good fit when the WooCommerce target structure is already well understood and the customer team is prepared to manage the migration process with guidance from Next-Cart.
+Standard Service can be appropriate when WooCommerce data is structurally clear and the migration mainly concerns supported commerce and WordPress-connected content records. The store should have straightforward products, customers, orders, coupons, categories, tags, media, CMS Pages, Blog Posts, and URLs that do not depend heavily on hidden extension logic.
 
-This approach is often suitable when:
+| Standard Service signal                                                            | Why it supports a lighter approach                                                            | Demo Migration proof                                                                                          |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Products use ordinary simple or variable structures                                | Product meaning can be interpreted through common WooCommerce fields                          | Product name, SKU, price, images, stock, categories, tags, and attributes appear correctly                    |
+| Variable products have clean attribute logic                                       | Parent-child product relationships are understandable                                         | Variations remain purchasable and display correct choices                                                     |
+| Orders use standard WooCommerce fields                                             | Historical order readability is easier to confirm                                             | Status, customer, line items, totals, coupons, tax, shipping, payment labels, refunds, and notes are readable |
+| Customers and accounts are not controlled by complex membership or wholesale rules | Customer migration can focus on identity, addresses, and order history                        | Customer records connect to order history and account data                                                    |
+| WordPress content scope is limited and clean                                       | CMS Pages, Blog Posts, media, and URLs can be sampled without extensive custom interpretation | Key pages, posts, images, internal links, and redirects remain usable                                         |
+| Plugin impact is limited                                                           | Fewer records depend on custom fields, custom tables, or external workflows                   | Store admin review does not reveal missing extension-owned meaning                                            |
 
-* the Source Platform uses a supported migration path
-* products, variations, categories, tags, and attributes can be mapped predictably
-* custom fields or plugin-specific data are limited or not business-critical
-* the customer has already decided how WooCommerce should represent the future catalog
-* URL continuity needs are manageable and already planned
-* the customer can review the Demo Migration and Full Migration carefully
-* the project does not require custom migration logic adjustment
-
-Standard Service should not be chosen just because the store appears small. A smaller WooCommerce migration can still need more support if product logic, plugin data, URLs, or custom fields carry important business meaning.
+Standard Service is not a shortcut for skipping review. Even a standard WooCommerce migration should use Demo Migration to check product purchasability, order readability, customer-account continuity, media display, URL behavior, and important WordPress content.
 
 ### Managed Service for WooCommerce <a href="#managed-service-for-woocommerce" id="managed-service-for-woocommerce"></a>
 
-Managed Service is often the stronger fit when WooCommerce is still the right Target Platform, but the customer does not want the project to depend heavily on internal migration-operation capacity.
+Managed Service is appropriate when the migration is mostly within supported scope but the merchant needs guided execution, configuration support, sample selection, issue interpretation, or validation discipline. WooCommerce stores often benefit from Managed Service when the team is not confident separating standard migration data from plugin behavior and target setup.
 
-This approach is often suitable when:
+| Managed Service signal                                                      | Why Managed Service helps                                                   | Typical support need                                   |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Store has many products, variations, categories, and images                 | Data is supported, but review workload is high                              | Sample planning and validation checklist               |
+| Orders carry refunds, notes, custom checkout fields, or external references | Historical order readability needs careful interpretation                   | Demo Migration review and issue classification         |
+| WordPress content affects commerce traffic                                  | Product discovery depends on pages, posts, menus, SEO fields, and redirects | Content and URL continuity review                      |
+| Plugin list is long but not all plugins require data migration              | Scope must be separated from configuration or exclusions                    | Plugin-scope classification                            |
+| Team needs launch support around Full Migration and later activity          | New records may appear while the target store is being prepared             | Follow-up migration planning and revalidation sequence |
 
-* the customer wants Next-Cart to carry more of the migration execution burden
-* the store has enough complexity that expert coordination reduces avoidable mistakes
-* product variation, taxonomy, customer, order, or URL review needs closer handling
-* the customer team can provide approval and validation but should not manage each migration step alone
-* the migration still stays within standard service capability
+Managed Service does not automatically convert unsupported plugin behavior into standard migration scope. It helps organize the project, clarify what should be reviewed, and coordinate migration decisions around the available service path.
 
-Managed Service is not the same as Custom Service. It can reduce the customer’s operational workload, but it does not automatically include bespoke data transformation, plugin-specific rebuilding, custom field interpretation, or custom migration logic adjustment. Those requirements belong under Custom Service when they affect the migration outcome.
+### Add-ons for WooCommerce <a href="#add-ons-for-woocommerce" id="add-ons-for-woocommerce"></a>
+
+Add-ons are useful when the WooCommerce migration has supported requirements beyond the basic service license but does not require a fully custom migration path. Add-ons should be chosen for specific needs. They are not a substitute for Custom Service, custom development, or target-store build work.
+
+| Add-on use case         | WooCommerce example                                                                                                       | Boundary to confirm                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Data Filter Add-on      | Migrate selected orders, customers, products, categories, CMS Pages, or Blog Posts by date, status, or relevance          | Filtering changes scope but does not rebuild extension workflows                      |
+| Advanced Data Mapping   | Align source fields with WooCommerce attributes, metadata, customer fields, order fields, or product facts when supported | Mapping requires clear source and target meanings                                     |
+| Advanced Data Configure | Apply supported configuration adjustments during migration                                                                | Configuration support is not the same as live gateway, tax, shipping, or plugin setup |
+| Custom Add-ons          | Address supported special requirements that are still bounded and reviewable                                              | Custom Add-ons should not be treated as full Custom Service by default                |
+
+Add-ons should be planned before Demo Migration when possible. If Demo Migration reveals fields or records that need additional supported handling, the approach should be updated before Full Migration.
 
 ### Custom Service for WooCommerce <a href="#custom-service-for-woocommerce" id="custom-service-for-woocommerce"></a>
 
-Custom Service is the safer path when the WooCommerce migration requires customization, modification, or bespoke handling beyond standard service capability.
+Custom Service should be considered when WooCommerce data depends on behavior that cannot be interpreted as ordinary supported migration scope. This is common when extensions, custom tables, code-level logic, external systems, or nonstandard order/customer/product relationships define the store’s commercial meaning.
 
-This approach is often needed when:
+| Custom Service trigger                                                                                  | Why it matters                                                                | Example review outcome                                                                   |
+| ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Subscription, booking, membership, wholesale, bundle, composite, or add-on behavior defines the product | Product meaning is not only name, SKU, price, stock, and image                | Determine whether data, workflow behavior, target configuration, or exclusion applies    |
+| Custom checkout fields affect operations                                                                | Historical orders may depend on field values; live checkout may require setup | Decide whether stored values, active behavior, or both are required                      |
+| Order metadata depends on HPOS, extensions, or custom tables                                            | Order readability may differ across admin screens and integrations            | Review order storage, metadata, extension compatibility, and accepted scope              |
+| Customer account meaning depends on roles, memberships, external IDs, or plugin records                 | Customer migration may require more than email, address, and order history    | Separate standard customer data from account entitlement logic                           |
+| Product pricing or availability depends on code, customer groups, external systems, or plugin rules     | Standard price fields may not represent buying behavior                       | Determine whether target configuration, integration setup, or custom migration is needed |
+| External systems own fulfillment, accounting, CRM, WMS, marketplace, or ERP references                  | WooCommerce may display values that are operationally controlled elsewhere    | Decide what references should migrate and what must remain external                      |
 
-* the Source Platform is a Custom Platform
-* product variation logic requires transformation before it can work in WooCommerce
-* categories, tags, attributes, or filters need restructuring rather than direct transfer
-* custom fields must be interpreted, remapped, merged, split, or rebuilt
-* plugin, module, extension, subscription, membership, marketplace, or wholesale data affects business continuity
-* source-side URLs or identifiers require custom handling
-* selective migration or filtering rules require defined inclusion and exclusion logic
-* the project needs custom migration logic adjustment
+Custom Service does not automatically mean Next-Cart performs the entire store build, plugin configuration, live integration setup, or custom development work. It means the migration requirement needs individual review because standard assumptions are not enough.
 
-Custom Service does not automatically mean Next-Cart performs full migration management. Migration management depends on the final service plan. The key point is that customization and modification work itself belongs under Custom Service.
+### Entity Points and WooCommerce Scope Planning <a href="#entity-points-and-woocommerce-scope-planning" id="entity-points-and-woocommerce-scope-planning"></a>
 
-### How Add-ons fit into a WooCommerce migration approach <a href="#how-add-ons-fit-into-a-woocommerce-migration-approach" id="how-add-ons-fit-into-a-woocommerce-migration-approach"></a>
+Entity Points should be planned according to the records that need to move and the timing of launch. WooCommerce projects often continue receiving new products, customers, orders, Blog Posts, coupons, and media updates while migration work is in progress.
 
-Add-ons may be relevant when a WooCommerce migration needs optional service features that support filtering, mapping, or configuration. They should not be treated as a replacement for Custom Service.
+| Scope area                  | Entity Points consideration                                                                               | Planning implication                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Products                    | New Product records may consume Entity Points when migrated for the first time                            | Track new products created after the first migration run                        |
+| Customers                   | New Customer records may consume Entity Points when migrated for the first time                           | Review registered customers, guest-order customer context, and duplicate emails |
+| Orders                      | New Order records may consume Entity Points when migrated for the first time                              | Plan around active sales before Full Migration                                  |
+| Blog Posts                  | New Blog Posts may consume Entity Points when migrated for the first time                                 | Include commerce-supporting posts in scope review                               |
+| Repeated migration activity | Previously counted records should not be counted again only because another migration action is performed | Keep counted records separate from newly eligible records                       |
 
-For example, a Data Filter Add-on can be relevant when the customer wants to migrate only selected records or exclude records based on clear criteria. Advanced Data Mapping or Advanced Data Configure can be relevant when mapped fields or configuration choices need more deliberate handling.
+Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when migrated for the first time, including when a new migration is performed for the same migration path.
 
-However, when the issue is broader customization, Custom Platform handling, plugin-specific interpretation, custom field transformation, outside-system identifiers, or custom migration logic adjustment, the safer boundary is Custom Service.
+### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
 
-### What Demo Migration should decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
+Demo Migration should be used to confirm whether the chosen WooCommerce approach is sufficient. It should test the records that carry business meaning, not only a few clean products or recent orders.
 
-A Demo Migration should not only confirm that sample records can appear in WooCommerce. It should help decide whether the planned approach is strong enough.
+| Demo Migration sample        | What it should prove                                                                                             | Approach signal                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Simple product               | Basic WooCommerce product fields migrate cleanly                                                                 | Supports Standard Service if other areas are clean               |
+| Variable product             | Attributes, variation SKUs, prices, images, stock, and purchasability are preserved                              | Confirms whether product complexity remains manageable           |
+| Product with extension logic | Add-ons, subscriptions, bundles, bookings, memberships, or wholesale behavior is visible for review              | May require Add-ons, Custom Service, configuration, or exclusion |
+| Order with custom fields     | Checkout values, metadata, line items, taxes, shipping, payment labels, refunds, and notes are readable          | Helps decide Managed Service or Custom Service needs             |
+| Customer with history        | Account details, addresses, roles, and order links remain coherent                                               | Confirms customer-account continuity                             |
+| Content and URL sample       | Product pages, categories, CMS Pages, Blog Posts, media, SEO fields, redirects, and internal links remain usable | Confirms WordPress-connected commerce continuity                 |
 
-For WooCommerce, the Demo Migration should include samples that test:
+A successful Demo Migration should produce clear decisions: continue with the chosen approach, add supported Add-ons, move to Managed Service, request Custom Service review, accept exclusions, or adjust samples before Full Migration.
 
-* simple products and variable products
-* products with important attributes and options
-* category, tag, and attribute behavior
-* high-value URLs or permalink-sensitive products and categories
-* customers with account and order-history importance
-* orders with important status, tax, shipping, discount, or payment context
-* custom fields that affect product display or operations
-* plugin-dependent data or behavior where relevant
-* records from a Custom Platform source if the source is not a supported standard platform
+### How Additional Migration Options Affect Approach Planning <a href="#how-additional-migration-options-affect-approach-planning" id="how-additional-migration-options-affect-approach-planning"></a>
 
-If these samples migrate cleanly and the customer can validate them confidently, Standard Service or Managed Service may be enough depending on execution responsibility. If the samples expose structural ambiguity, custom field pressure, plugin dependency, or transformation requirements, Custom Service should be considered early.
+Additional Migration Options matter when the WooCommerce store keeps changing after the first migration run. The approach should define which new records and changed values need renewed review before launch.
 
-### Signals that the chosen approach is too light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
+| Follow-up scenario                               | Approach implication                                   | Revalidation focus                                                                           |
+| ------------------------------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| New products or product updates are added        | May affect Entity Points and product validation        | New SKUs, variations, images, prices, categories, and stock                                  |
+| New customers and orders are created             | May affect Entity Points and order/customer continuity | New orders, customer links, taxes, shipping, payment labels, refunds, and notes              |
+| Coupons, checkout fields, or plugin data changes | May require renewed scope classification               | Determine whether change is standard data, Add-on scope, Custom Service, setup, or exclusion |
+| Blog Posts, CMS Pages, media, or URLs change     | May affect content and SEO continuity                  | Recheck links, redirects, metadata, and commerce-supporting content                          |
+| Target setup changes after Demo Migration        | May affect interpretation of migrated data             | Revalidate before Full Migration or launch                                                   |
 
-The chosen WooCommerce approach may be too light when the migration plan depends on assumptions that have not been proven.
+Additional Migration Options should be planned as part of launch control, not used to ignore Demo Migration findings. Follow-up migration activity still needs validation when the changed records affect product discovery, checkout support, order readability, customer service, or SEO continuity.
 
-Common warning signs include:
+### WooCommerce Approach Decision Matrix <a href="#woocommerce-approach-decision-matrix" id="woocommerce-approach-decision-matrix"></a>
 
-* product variation rules are still unclear
-* attributes, categories, tags, and filters are not clearly separated
-* permalink and redirect expectations are vague
-* custom fields are listed but their business meaning is not understood
-* plugin-owned data is treated as ordinary product or order data
-* customer-account continuity has not been tested
-* Demo Migration results show differences that the team cannot classify confidently
-* the source is a Custom Platform but the project is still being planned as if it were a standard supported migration path
-
-These signals do not always mean WooCommerce is the wrong Target Platform. They usually mean the migration approach needs more guidance, stronger validation, or Custom Service handling.
-
-### How Custom Platform sources affect WooCommerce approach selection <a href="#how-custom-platform-sources-affect-woocommerce-approach-selection" id="how-custom-platform-sources-affect-woocommerce-approach-selection"></a>
-
-When the Source Platform is a Custom Platform, the valid service-path implication is Custom Service.
-
-That is because the source structure may not follow the standard data model expected from supported platforms. Product options, categories, customer records, order relationships, custom fields, URLs, and outside-system identifiers may need interpretation before they can become useful in WooCommerce.
-
-In that situation, the main question is not whether the migration is “large” or “small.” The better question is which parts of the source require custom handling so WooCommerce can preserve the intended product, customer, order, storefront, and operational meaning.
+| Store condition                                                                                          | Best-fit approach                                   | Why                                                                                        |
+| -------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Simple catalog, ordinary products, clean customers/orders, limited plugins                               | Standard Service                                    | Data can be interpreted through common WooCommerce and WordPress structures                |
+| Supported scope but large review workload or limited internal migration experience                       | Managed Service                                     | Guidance helps sample selection, configuration, validation, and issue handling             |
+| Supported extra fields, filters, or mapping requirements                                                 | Add-ons with Standard or Managed Service            | Need is bounded and can be handled through supported extended scope                        |
+| Plugin-owned data, custom checkout fields, custom tables, complex order metadata, or extension workflows | Custom Service review                               | Store meaning depends on behavior beyond standard migration assumptions                    |
+| Active store with new products, orders, customers, and content before launch                             | Approach plus Additional Migration Options planning | Later migration activity must be scoped, counted, and revalidated correctly                |
+| WooCommerce store also needs theme, checkout, payment, shipping, tax, or plugin setup                    | Migration approach plus target setup plan           | Migration can move data, but live operation requires configuration outside record transfer |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right WooCommerce migration approach is the one that matches the real structure and behavior burden of the Target Platform. Standard Service can work well when the supported migration path is clear, the WooCommerce data model is already understood, and the customer can validate the outcome confidently. Managed Service is stronger when the customer wants Next-Cart to carry more execution responsibility while the project still fits standard service capability. Custom Service becomes the safer path when WooCommerce success depends on customization, modification, Custom Platform handling, plugin-specific interpretation, custom fields, filtered logic, or custom migration logic adjustment.
+WooCommerce approach selection should match the store’s actual commerce behavior. Standard Service may be enough for clean product, customer, order, coupon, content, and media migration. Managed Service helps when the project needs guided execution and disciplined review. Add-ons support bounded extended needs. Custom Service should be considered when plugin-owned data, custom fields, custom tables, HPOS-sensitive order metadata, or external-system references define the store’s meaning.
 
-Review a Demo Migration that includes the WooCommerce product, taxonomy, permalink, customer, order, custom field, and plugin-dependent cases most likely to expose risk. If the result still leaves unresolved interpretation questions, use Live Chat to clarify whether Standard Service, Managed Service, or Custom Service is the safer path before committing to the full migration.
+A strong approach uses Demo Migration as evidence, preserves the Add-ons and Custom Service boundary, plans Entity Points correctly, and treats Additional Migration Options as a controlled follow-up path for new or changed records before launch.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for WooCommerce?**
+**Is Standard Service enough for WooCommerce migration?**
 
-Standard Service may be enough when the Source Platform uses a supported migration path, the WooCommerce target structure is clear, and the customer can validate products, variations, taxonomies, customers, orders, URLs, and important storefront behavior confidently.
+Standard Service can be enough when products, variations, customers, orders, coupons, categories, tags, media, CMS Pages, Blog Posts, and URLs are structurally clear and do not depend heavily on extension-owned behavior, custom tables, or external systems.
 
-**When should I consider Managed Service for WooCommerce?**
+**When should a WooCommerce migration use Managed Service?**
 
-Managed Service is useful when the migration still fits standard service capability, but the customer wants Next-Cart to carry more of the execution burden while the internal team focuses on review, approval, and launch judgment.
+Managed Service is useful when the migration is mostly within supported scope but the team needs help with configuration, sample selection, Demo Migration review, issue interpretation, launch sequencing, or follow-up migration planning.
 
-**When does WooCommerce require Custom Service?**
+**When does WooCommerce require Custom Service review?**
 
-Custom Service should be considered when the project requires customization, modification, Custom Platform handling, custom field transformation, plugin-specific interpretation, filtered logic, outside-system identifier handling, or custom migration logic adjustment.
+Custom Service review is appropriate when subscriptions, bookings, memberships, wholesale rules, product add-ons, custom checkout fields, custom tables, HPOS-sensitive metadata, or external-system references define important store behavior that standard migration assumptions cannot fully interpret.
 
 **Do Add-ons replace Custom Service for WooCommerce?**
 
-No. Add-ons can support specific optional needs such as filtering, mapping, or configuration. Broader customization, custom migration logic, Custom Platform handling, or plugin-specific transformation belongs under Custom Service.
+No. Add-ons support bounded extended requirements such as filtering, supported mapping, or supported configuration adjustments. Custom Service is for requirements that need individual review because data meaning depends on extension behavior, custom logic, unsupported structures, or nonstandard workflows.
 
-**What should the Demo Migration prove before choosing the approach?**
+**How should Additional Migration Options be planned for WooCommerce?**
 
-It should prove whether high-risk WooCommerce cases can be migrated and validated safely, including variable products, attributes, categories, tags, URLs, customer accounts, orders, custom fields, plugin-dependent behavior, and any Custom Platform source data.
+Additional Migration Options should be planned when the store continues receiving new products, customers, orders, Blog Posts, coupons, or plugin-field updates before launch. Records already counted through the service license should not consume Entity Points again only because another migration action is performed.
