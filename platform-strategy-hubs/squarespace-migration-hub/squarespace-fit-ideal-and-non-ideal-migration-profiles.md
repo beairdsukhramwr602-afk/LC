@@ -1,139 +1,129 @@
 # Squarespace Fit: Ideal and Non-Ideal Migration Profiles
 
-Squarespace is often a strong Target Platform for merchants that want a hosted website and commerce environment where storefront design, content management, product presentation, checkout settings, payments, shipping, tax, orders, customer/contact records, extensions, and selected developer integrations are managed inside one SaaS platform. It can be especially attractive when the business values a polished content-and-commerce experience over deep platform ownership or highly customized commerce logic.
+Squarespace is a strong Target Platform when the merchant wants a hosted content-first website with built-in commerce, polished presentation, and a simpler operating model. The fit question is not only whether products, customers, orders, CMS Pages, Blog Posts, and media can be migrated. It is whether the target Squarespace site can support the merchant’s storefront structure, product model, checkout expectations, SEO requirements, design expectations, order history needs, and integration dependencies after migration.
 
-Fit should be evaluated through the store’s real operating model, not only through brand preference or design expectations. A Squarespace migration can be a good direction when products, variants, inventory, categories, customers, orders, content, SEO, and checkout needs can fit its hosted structures. It becomes a higher-risk choice when the source store depends on complex catalog logic, deep B2B rules, multi-store operations, custom checkout behavior, app-owned commerce data, or outside-system workflows that need detailed preservation.
+Squarespace often fits brands that sell through curated content, visual presentation, service pages, editorial storytelling, a manageable catalog, and straightforward commerce operations. It becomes a conditional fit when the source store depends on complex catalog hierarchy, strict category behavior, advanced B2B logic, custom checkout rules, app-specific workflows, or design parity that must be rebuilt rather than migrated as data.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+### What Squarespace Fit Means in Migration Planning <a href="#what-squarespace-fit-means-in-migration-planning" id="what-squarespace-fit-means-in-migration-planning"></a>
 
-The practical question is not whether Squarespace can run a commerce site. The better question is whether the source store’s business model can be represented inside Squarespace without losing the details that customers, staff, and connected systems rely on.
+Squarespace fit should be judged by operating fit after migration. A store can have a clean transfer of products and orders, but still be a poor fit if the business relies on source-platform behavior that Squarespace does not represent directly.
 
-Squarespace is usually a better fit when the target business wants a unified website and store experience, manageable product structures, clear content ownership, modern templates, standard checkout configuration, and limited technical maintenance. It is usually a weaker fit when the target business needs highly flexible catalog relationships, advanced wholesale logic, heavily customized checkout, complex ERP/POS synchronization, or custom app data that must migrate as first-class commerce records.
+| Fit dimension           | Strong Squarespace signal                                                                       | Conditional Squarespace signal                                                                                                                | Weaker Squarespace signal                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Store goal              | Merchant wants a hosted content-and-commerce site with polished visual presentation.            | Merchant wants Squarespace but also needs careful preservation of selected advanced commerce behavior.                                        | Merchant expects a fully customized commerce backend, source-code control, or enterprise workflow parity.                      |
+| Content model           | Pages, Blog Posts, media, product storytelling, and SEO are central to the business.            | Large content libraries, URL history, redirects, or editorial structures require structured migration planning.                               | Source content depends on custom CMS fields, dynamic templates, or application logic with no practical Squarespace equivalent. |
+| Catalog model           | Products, variants, images, inventory, and product pages are relatively manageable.             | Product data includes unusual variants, third-party channel imports, service products, gift cards, downloads, or subscriptions/payment plans. | Catalog depends on complex configurators, custom pricing engines, multi-level catalogs, or real-time external product systems. |
+| Checkout and operations | Payment, shipping, tax, discounts, inventory, and fulfillment can be configured in Squarespace. | Some checkout or fulfillment behavior needs manual setup, external-system review, or accepted simplification.                                 | Custom checkout rules, complex B2B pricing, or source-specific fulfillment logic are central to revenue.                       |
+| Design expectation      | Merchant accepts a Squarespace-native design rebuild and content-first presentation.            | Brand continuity is important, but exact source theme behavior is not required.                                                               | Merchant expects automatic theme transfer or strict custom-coded design parity.                                                |
 
-### What Makes Squarespace a Strong Fit <a href="#what-makes-squarespace-a-strong-fit" id="what-makes-squarespace-a-strong-fit"></a>
+The best-fit Squarespace migrations are clear about the boundary between migrated data, target site setup, visual rebuild work, commerce configuration, integration reconnection, Add-ons, and Custom Service review.
 
-#### Hosted website and commerce in one environment <a href="#hosted-website-and-commerce-in-one-environment" id="hosted-website-and-commerce-in-one-environment"></a>
+### Strong-Fit Squarespace Migration Profiles <a href="#strong-fit-squarespace-migration-profiles" id="strong-fit-squarespace-migration-profiles"></a>
 
-Squarespace is a strong fit for merchants that want the store and the website to operate together. Product pages, content pages, media, navigation, blog-style content, marketing pages, and commerce checkout can live in the same hosted environment. This makes it useful for businesses where content, brand presentation, appointment-style buying, service pages, and product sales are part of one customer journey.
+Squarespace is usually a strong fit when the merchant wants a polished website and practical commerce in the same hosted environment. These merchants often care as much about content quality, brand presentation, SEO continuity, and launch simplicity as they care about catalog and order data.
 
-The migration implication is clear: target quality should be judged by both store data and website experience. Products and orders matter, but CMS Pages, navigation, images, SEO fields, landing pages, and template-controlled presentation can be just as important for launch acceptance.
+| Merchant profile                             | Why Squarespace fits                                                                                                           | Migration planning focus                                                                                                              |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Content-led brand store                      | Squarespace supports a site-first storefront where pages, Blog Posts, images, editorial content, and products work together.   | Preserve priority CMS Pages, Blog Posts, product pages, media, metadata, redirects, and high-value landing pages.                     |
+| Small or mid-sized curated catalog           | Standard product, variant, image, inventory, customer/contact, and order records can be reviewed without heavy custom logic.   | Validate product details, product types, variants, images, stock, order history, customers, contacts, SEO fields, and URL continuity. |
+| Service or creative business adding commerce | Squarespace can combine service presentation, products, downloads, gift cards, appointments, forms, content, and brand pages.  | Separate commerce records from target site setup, service pages, design rebuild, and any app or scheduling configuration.             |
+| Merchant reducing platform maintenance       | Hosted Squarespace ownership can reduce server, plugin, theme, and update burden.                                              | Define which source behavior will be migrated, rebuilt, configured, simplified, or excluded.                                          |
+| Store with moderate SEO requirements         | Squarespace can support page slugs, product URLs, redirects, SEO descriptions, media, and domain planning when reviewed early. | Build a URL and content inventory before Full Migration and validate priority paths after Demo Migration.                             |
 
-#### Lower infrastructure responsibility <a href="#lower-infrastructure-responsibility" id="lower-infrastructure-responsibility"></a>
+A strong Squarespace fit still requires validation. It means Squarespace matches the target operating model well enough that migration decisions can focus on scope clarity rather than platform suitability doubts.
 
-Squarespace is a hosted/SaaS platform, so merchants do not manage server installation, patching, database hosting, or a self-hosted application stack. This can be a strong fit for businesses that want a simpler operating model and prefer target settings, extensions, and template controls over direct infrastructure access.
+### Conditional-Fit Squarespace Migration Profiles <a href="#conditional-fit-squarespace-migration-profiles" id="conditional-fit-squarespace-migration-profiles"></a>
 
-The tradeoff is that highly custom source behavior must fit Squarespace-supported structures, extensions, APIs, or accepted custom scope. Merchants should not choose Squarespace expecting self-hosted-level control over every database relationship, checkout step, or custom workflow.
+Conditional-fit stores can succeed on Squarespace, but only if the merchant accepts Squarespace-supported ways of representing source behavior. These cases need clear pre-migration decisions, not vague assumptions.
 
-#### Strong content-led storefront needs <a href="#strong-content-led-storefront-needs" id="strong-content-led-storefront-needs"></a>
+| Conditional profile                              | Why extra review is needed                                                                                                                                    | What must be decided before Full Migration                                                                                                |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Catalog with complex variants or selling formats | Product variants, service products, gift cards, digital downloads, subscriptions/payment plans, or imported channel orders may not mirror the source exactly. | Which product structures migrate as supported records, which need Add-ons, and which require Custom Service or accepted simplification.   |
+| Content-heavy site with SEO history              | Large page libraries, Blog Posts, media paths, redirects, metadata, and internal links can affect organic traffic after launch.                               | Which CMS Pages and Blog Posts should migrate, which pages should be rebuilt, which URLs must redirect, and which content can be retired. |
+| Store with custom design expectations            | Squarespace presentation depends on templates, sections, Store Pages, media, and target-site styling.                                                         | Which design expectations are required, which are redesigned in Squarespace, and which are outside migration scope.                       |
+| Store with external operations                   | Shipping, fulfillment, accounting, tax, email marketing, CRM, analytics, or third-party channel systems may rely on identifiers or workflows.                 | Which external IDs must be preserved, which integrations must be reconnected, and which data belongs outside the Migration Service.       |
+| Store with special customer/contact meaning      | Contacts may represent customers, subscribers, donors, marketing contacts, or integration-owned profiles.                                                     | Which customer/contact meanings are expected in Squarespace and which belong to marketing tools, CRM tools, or accepted exclusions.       |
 
-Squarespace can be a strong target for brands where visual presentation, content quality, services, portfolios, campaigns, informational pages, and product merchandising work together. This is especially relevant for businesses where commerce is important but not the only purpose of the site.
+Conditional fit becomes manageable when each uncertainty is converted into a Demo Migration test, a target setup task, an Add-on, a Custom Service review item, or an accepted exclusion.
 
-For migration planning, content fit should be treated as part of platform fit. A store that depends on landing pages, product storytelling, blog-style content, image-rich layouts, or SEO-sensitive pages should confirm how those items will be migrated, rebuilt, redirected, or accepted as outside scope.
+### Weaker-Fit Squarespace Migration Profiles <a href="#weaker-fit-squarespace-migration-profiles" id="weaker-fit-squarespace-migration-profiles"></a>
 
-#### Standard product and order structures <a href="#standard-product-and-order-structures" id="standard-product-and-order-structures"></a>
+Squarespace is less suitable when the merchant expects a hosted content-first platform to reproduce a complex custom commerce application. Weak fit does not mean a migration is impossible, but it means the Target Platform decision should be reviewed before the project is scoped.
 
-Squarespace is usually stronger for stores with manageable product catalogs, clear product pages, variants, SKUs, inventory, categories, ordinary customer records, and orders that need readable history. It can work well when the target catalog does not require deeply nested product relationships, advanced marketplace-style attributes, complex configurable bundles, or extensive custom commerce fields.
+| Weaker-fit profile                        | Why Squarespace may not fit                                                                                                                                      | Safer planning response                                                                                                  |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Advanced B2B or wholesale operation       | Customer-specific pricing, quote workflows, approvals, company accounts, purchasing permissions, and custom catalogs may exceed normal Squarespace expectations. | Confirm whether the operating model can be simplified or supported through separate systems before choosing Squarespace. |
+| Highly customized checkout business       | Revenue depends on source-specific checkout steps, pricing rules, validation logic, shipping calculations, or payment flows.                                     | Treat checkout behavior as a platform-fit issue, not merely a migration detail.                                          |
+| Large or deeply structured catalog        | Product hierarchy, collections, filters, merchandising rules, and external product feeds may not translate cleanly into Squarespace.                             | Classify standard product records separately from unsupported catalog architecture and external-system behavior.         |
+| Strict theme or design parity requirement | Squarespace does not receive a source theme as part of ordinary data migration.                                                                                  | Plan a target-site design rebuild and confirm what visual parity is realistic.                                           |
+| Heavy custom backend dependency           | The source store depends on custom database tables, direct code, bespoke modules, or undocumented integrations.                                                  | Require technical discovery and Custom Service review before committing to Squarespace as the target.                    |
 
-When product variants, inventory, shipping, tax, and checkout rules are predictable, migration planning can focus on accurate mapping, target setup, and careful validation rather than broad custom transformation.
+These profiles should be handled with transparent expectations. Squarespace may still work if the merchant accepts simplification, target rebuild work, external systems, or Custom Service review, but it should not be positioned as a direct replacement for every custom source behavior.
 
-#### Extension and developer integration potential <a href="#extension-and-developer-integration-potential" id="extension-and-developer-integration-potential"></a>
+### Fit by Source Platform Pattern <a href="#fit-by-source-platform-pattern" id="fit-by-source-platform-pattern"></a>
 
-Squarespace can support extensions and developer-facing integration paths for selected needs. This can be useful when the target store needs connected services for commerce, marketing, fulfillment, analytics, accounting, or automation.
+The Source Platform affects Squarespace fit because the original data model influences how much interpretation is needed. The point is not to rank Source Platforms. It is to identify where Demo Migration and scope discovery must look closely.
 
-Fit should still be evaluated carefully. Extensions and APIs do not mean every app-owned source record can migrate automatically. Connected-system data, external IDs, webhooks, and automation logic should be reviewed before they are treated as ordinary migration scope.
+| Source pattern                             | Squarespace fit implication                                                                                                                 | What to test                                                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Hosted SaaS store with standard catalog    | Often a stronger fit when catalog, customer, order, and content structures are conventional.                                                | Products, variants, images, inventory, order totals, customers, pages, redirects, and SEO fields.                 |
+| WooCommerce or WordPress-connected store   | Conditional when plugins, page builders, product add-ons, memberships, subscriptions, custom fields, or Blog Posts define business meaning. | CMS Pages, Blog Posts, media, product options, custom fields, customer roles, order metadata, SEO, and redirects. |
+| Open-source cart or custom-coded store     | Fit depends on how much source behavior can be represented in Squarespace.                                                                  | Product structure, custom tables, checkout logic, external IDs, integrations, and accepted exclusions.            |
+| Content-heavy CMS site with light commerce | Strong or conditional depending on URL sensitivity, design expectations, and content complexity.                                            | Priority pages, Blog Posts, media, slugs, metadata, internal links, and product landing paths.                    |
+| Multi-system commerce operation            | Conditional or weaker if external systems own catalog, inventory, orders, fulfillment, tax, or customer records.                            | Ownership of each record type, sync direction, external IDs, and post-migration reconnection needs.               |
 
-### Where Squarespace Is Often a Strong Fit <a href="#where-squarespace-is-often-a-strong-fit" id="where-squarespace-is-often-a-strong-fit"></a>
+Source-pattern review helps prevent a common mistake: assuming that a visually simple Squarespace destination automatically makes every source-store structure simple.
 
-Squarespace is often a strong fit when the target business wants a polished hosted storefront with content and commerce in the same platform. It is especially suitable when the merchant values lower technical maintenance, strong design control through templates, standard commerce administration, and a streamlined launch path.
+### Demo Migration Fit Evidence <a href="#demo-migration-fit-evidence" id="demo-migration-fit-evidence"></a>
 
-| Strong-fit scenario                | Why Squarespace can fit well                                                                                              | Migration planning focus                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Brand-led small or mid-sized store | The business needs attractive pages, product presentation, and manageable commerce features.                              | Validate products, images, variants, categories, SEO fields, pages, and navigation together. |
-| Content-and-commerce website       | Product sales are part of a broader website with service pages, landing pages, blog-style content, or portfolio material. | Treat CMS Pages and storefront content as launch-critical, not secondary.                    |
-| Manageable product catalog         | Products have clear SKUs, variants, inventory, images, and categories without unusual custom logic.                       | Confirm variant and inventory samples before Full Migration.                                 |
-| Design-focused merchant            | The team wants hosted templates and visual control more than direct application ownership.                                | Plan any theme/template rebuild separately from data migration.                              |
-| Standard order-history needs       | Historical orders mainly need readable customer, product, total, tax, payment, shipping, and fulfillment context.         | Validate varied order samples, not only order totals.                                        |
-| Light integration needs            | Connected services support operations but do not own complex source data that must migrate.                               | Reconfigure extensions and identify any external IDs that must remain traceable.             |
+Demo Migration should prove whether Squarespace can preserve business meaning, not just whether records appear in the dashboard. A useful sample includes normal records and difficult records.
 
-### Where Squarespace Is Often a Weaker Fit <a href="#where-squarespace-is-often-a-weaker-fit" id="where-squarespace-is-often-a-weaker-fit"></a>
+| Demo sample area                 | Strong evidence                                                                                                                                                                       | Warning sign                                                                                       |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Products                         | Product names, descriptions, prices, SKUs, images, variants, inventory, visibility, and SEO values appear clearly.                                                                    | Products appear but lose variant, image, inventory, product-type, or product-page meaning.         |
+| Orders                           | Historical order details are readable with purchased items, totals, discounts, taxes, shipping, payment context, fulfillment status, and customer/contact connection where supported. | Orders exist but staff cannot interpret what was purchased, paid, shipped, refunded, or fulfilled. |
+| Customers and contacts           | Customer, contact, subscriber, donor, or marketing meanings are separated and understood.                                                                                             | Contact records are assumed to recreate every account, marketing, or CRM workflow automatically.   |
+| Content and SEO                  | Priority CMS Pages, Blog Posts, media, slugs, metadata, and redirect needs are identified.                                                                                            | Content appears, but high-value URLs, internal links, or page context are not protected.           |
+| Integrations and custom behavior | External IDs, unsupported records, third-party channel orders, and custom requirements are separated from standard migration scope.                                                   | App or custom backend behavior is assumed to migrate as ordinary data.                             |
 
-Squarespace can be a weaker fit when the merchant needs platform flexibility beyond the hosted model or when source-store behavior depends on custom commerce logic. The issue is not only whether data can be moved, but whether the target platform can preserve the operating behavior that the business expects.
+Fit evidence should be reviewed before the merchant treats Squarespace as the final Target Platform. The earlier the mismatch is found, the easier it is to choose Add-ons, Custom Service review, accepted exclusions, or a different target plan.
 
-| Weaker-fit scenario                         | Why the fit is riskier                                                                                                                                   | Safer review question                                                                                                                   |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Highly customized product model             | Source products use deep attributes, complex configurable products, custom option logic, kits, bundles, or rules that do not map cleanly.                | Can the source buying experience be represented with Squarespace product and variant structures, or does it need Custom Service review? |
-| Advanced B2B or wholesale workflows         | Customer groups, account terms, negotiated pricing, approval, quote flows, or restricted checkout may exceed ordinary target expectations.               | Which B2B rules are target settings, external workflow, accepted exclusions, or custom scope?                                           |
-| Complex checkout logic                      | Custom checkout fields, conditional shipping, payment restrictions, tax rules, or app-controlled checkout behavior may not transfer as ordinary records. | What must be configured in Squarespace, and what cannot be migrated as data?                                                            |
-| Deep app-owned commerce data                | Source apps own subscriptions, loyalty, reviews, product options, fulfillment logic, or custom customer data.                                            | Which app records must be migrated, rebuilt, excluded, or handled through Custom Service?                                               |
-| Heavy ERP/POS/accounting dependency         | External systems may rely on source IDs, channel IDs, inventory sync, or historical references.                                                          | Which identifiers must remain traceable after migration?                                                                                |
-| Multi-store or marketplace-style operations | Source operations may involve complex stores, regional catalogs, advanced permissions, or marketplace-style product structures.                          | Is Squarespace the right Target Platform, or should a more commerce-specialized platform be considered?                                 |
+### Add-ons, Custom Service, and Entity Points Fit Signals <a href="#add-ons-custom-service-and-entity-points-fit-signals" id="add-ons-custom-service-and-entity-points-fit-signals"></a>
 
-### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
+Add-ons are useful when the merchant needs specific migration extensions such as additional data handling, filtering, mapping, configuration assistance, or supported extra scope. They are not a substitute for Custom Service, custom development, site design work, or target platform implementation.
 
-The following profiles usually align well with Squarespace when the source data is clean and the target expectations fit hosted platform behavior.
+Custom Service becomes relevant when Squarespace fit depends on non-standard requirements: custom catalog behavior, complex source fields, external-system identifiers, unsupported app records, unusual order data, third-party channel history, or content structures that require tailored evaluation.
 
-| Merchant profile                               | Fit rationale                                                                                         | What should still be checked                                                                             |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Content-led retail brand                       | The business needs a visually strong site where products, pages, images, and campaigns work together. | Confirm high-value CMS Pages, product pages, images, navigation, SEO fields, and redirects.              |
-| Boutique or specialty catalog                  | The store has a focused product range with manageable variants and inventory.                         | Validate products with variants, SKUs, images, categories, tax, shipping, and inventory behavior.        |
-| Service business with product sales            | The website needs service pages, contact content, and a smaller commerce layer.                       | Confirm which records are products, CMS Pages, forms, bookings, content, or outside-scope features.      |
-| Merchant leaving a more technical platform     | The business wants less infrastructure responsibility and more hosted platform simplicity.            | Identify any source custom code, apps, or workflows that will not transfer directly.                     |
-| Store with standard customer and order history | Historical records mainly need readable reference value after migration.                              | Validate orders with discounts, shipping, payment labels, tax, fulfillment, notes, and customer links.   |
-| Team with limited developer capacity           | The merchant wants platform-managed hosting, templates, and admin controls.                           | Confirm whether required custom behavior can be handled by settings, extensions, or accepted exclusions. |
+Entity Points should not be treated as a Squarespace fit score. They help size eligible migration records after the merchant confirms that Squarespace is the right Target Platform. New Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time, while records already counted through the service license do not consume Entity Points again simply because the merchant performs another migration action.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+### Squarespace Fit Decision Matrix <a href="#squarespace-fit-decision-matrix" id="squarespace-fit-decision-matrix"></a>
 
-Higher-risk profiles are not automatically unsuitable, but they need deeper review before Squarespace is selected as the Target Platform.
-
-| Higher-risk profile                       | Why risk increases                                                                                                                          | What should happen before choosing Squarespace                                                       |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Store with advanced product configuration | Variants, options, attributes, add-ons, personalization, bundles, or inventory rules may not translate cleanly.                             | Run representative product samples through Demo Migration and review Custom Service signals.         |
-| B2B or wholesale-heavy business           | Trade pricing, quote flows, customer-group rules, payment terms, and restricted access may carry business meaning outside ordinary records. | Separate customer records from B2B behavior and confirm target handling.                             |
-| Store using many commerce apps            | App-owned records may not live inside standard product, customer, order, or content structures.                                             | Create an app data inventory and classify each item as migrated, rebuilt, excluded, or custom scope. |
-| Integration-dependent operation           | ERP, POS, accounting, fulfillment, CRM, or inventory systems may rely on source IDs and workflow continuity.                                | Identify external identifiers and workflow dependencies before scope is finalized.                   |
-| SEO-sensitive content estate              | Large numbers of pages, URLs, blog/content entries, redirects, and metadata may affect traffic.                                             | Prepare priority URL and content samples for migration and launch review.                            |
-| Store requiring deep admin customization  | Source admin processes, roles, custom fields, or database-level workflows may not have direct Squarespace equivalents.                      | Confirm whether the target operating model is acceptable before migration.                           |
-
-### What Should Be Confirmed Before Choosing Squarespace <a href="#what-should-be-confirmed-before-choosing-squarespace" id="what-should-be-confirmed-before-choosing-squarespace"></a>
-
-Before choosing Squarespace as the Target Platform, the merchant should confirm whether the platform supports the expected operating model and whether the migration scope can preserve the records that matter most.
-
-Key confirmation areas include:
-
-* **Catalog fit:** products, variants, SKUs, inventory, categories, images, product descriptions, and SEO fields.
-* **Variant and option fit:** whether source product choices can be represented in Squarespace without losing buying meaning.
-* **Customer/contact fit:** whether customer records, contact details, addresses, and order relationships remain usable.
-* **Order-history fit:** whether historical orders preserve enough payment, shipping, tax, discount, fulfillment, and customer context.
-* **Checkout fit:** whether payment, shipping, tax, and checkout expectations are target configuration rather than migrated history.
-* **Content fit:** whether CMS Pages, landing pages, blog-style content, menus, images, and metadata are part of migration scope or separate rebuild work.
-* **SEO fit:** whether high-value URLs, redirects, metadata, and page paths can be preserved, redirected, rebuilt, or accepted as outside scope.
-* **Extension and integration fit:** whether apps, APIs, webhooks, external IDs, and connected services require reconfiguration, mapping, exclusion, or Custom Service review.
-* **Service fit:** whether the migration can remain within standard service capability or needs Add-ons, Managed Service, or Custom Service.
+| Decision point          | Better fit for Squarespace                               | Needs caution                               | Needs review before commitment                                        |
+| ----------------------- | -------------------------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
+| Store goal              | Hosted content-first commerce site                       | Some advanced operations                    | Full custom commerce application parity                               |
+| Catalog                 | Manageable product and variant model                     | Special product types or external feeds     | Complex configurator, B2B, or dynamic catalog engine                  |
+| Content and SEO         | Squarespace-native site rebuild acceptable               | Large content/redirect inventory            | Exact CMS/theme/code parity expected                                  |
+| Checkout and operations | Target setup can use Squarespace-supported configuration | Some external-system or workflow dependency | Custom checkout or operational logic must remain identical            |
+| Integrations            | Reconnection is manageable                               | Several external IDs or third-party tools   | Direct database, unsupported app, or undocumented workflow dependency |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Squarespace is often a strong fit for merchants that want a hosted, design-forward website and commerce platform with manageable products, standard order history, content-rich pages, and lower infrastructure responsibility. It is less predictable when the source store depends on complex product logic, advanced B2B workflows, custom checkout behavior, deep app-owned data, or integration dependencies that must be preserved in detail.
+Squarespace is the right Target Platform when the merchant values a hosted content-first site with practical commerce, strong visual presentation, and manageable operations. It is a conditional fit when complex product structures, SEO-sensitive content, third-party systems, custom design expectations, or special customer/order meanings require structured review. It is a weaker fit when the merchant expects Squarespace to reproduce a custom commerce application without simplification, target setup, Add-ons, accepted exclusions, or Custom Service review.
 
-Before selecting Squarespace, compare the source store’s most important business behaviors against what the target store must support after migration. Use representative Demo Migration samples to test complex products, orders, customer records, content pages, SEO paths, and integration-sensitive data before treating the fit decision as settled.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Squarespace a good fit for content-led commerce?**
 
-**Is Squarespace a good target for a content-heavy store?**
+Yes. Squarespace is often a strong fit when pages, Blog Posts, media, product presentation, visual design, and practical commerce need to operate in one hosted environment. The migration plan should still separate migrated data from design rebuild, target setup, redirects, and integrations.
 
-Yes, Squarespace can be a strong target when the business needs product selling and website content in the same hosted environment. CMS Pages, landing pages, images, navigation, SEO fields, and product presentation should be reviewed as part of the fit decision.
+**When is Squarespace a conditional migration fit?**
 
-**Is Squarespace suitable for a large or complex product catalog?**
+Squarespace is conditional when the source store depends on complex variants, custom checkout behavior, large SEO-sensitive content libraries, third-party systems, external IDs, or custom data structures that need Demo Migration review and clear scope decisions.
 
-It depends on the catalog model. A larger catalog with predictable products, variants, inventory, and categories can be a reasonable fit. A catalog with deep attributes, complex custom options, bundles, app-controlled product logic, or advanced inventory rules needs deeper review before Squarespace is selected.
+**Does a strong Squarespace fit mean the source design will migrate automatically?**
 
-**Is Squarespace a strong fit for B2B or wholesale migration?**
+No. Squarespace fit means the target operating model is suitable. Design, templates, sections, layout, menus, and visual rebuild work should be planned separately from data migration.
 
-Squarespace may fit some simpler account or customer scenarios, but advanced wholesale behavior needs careful review. Trade pricing, quote workflows, customer-group rules, payment terms, restricted access, and custom approval logic should be confirmed before choosing Squarespace.
+**When should Custom Service be considered for Squarespace?**
 
-**Should app data affect the Squarespace fit decision?**
-
-Yes. App-owned data can affect product options, subscriptions, reviews, loyalty, fulfillment, customer records, checkout behavior, or external workflows. Those records should be classified before migration scope is finalized.
-
-**What should I test before deciding that Squarespace is the right Target Platform?**
-
-Test representative products, variants, SKUs, inventory, categories, customers, orders, payment and shipping context, CMS Pages, SEO paths, extensions, API-connected records, and outside-system identifiers. If the hardest samples do not translate well, the fit decision should be reviewed before Full Migration.
+Custom Service should be considered when source data or behavior cannot be handled through standard scope or specific Add-ons, especially around custom catalog structures, external-system identifiers, third-party channel records, unsupported content structures, unusual order data, or custom fields.

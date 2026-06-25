@@ -1,153 +1,182 @@
 # Wix Validation Priorities
 
-Validation for a Wix migration should prove that the migrated result works inside a hosted website and commerce environment, not only that records arrived. Wix often combines store data, website content, design structure, business apps, member areas, forms, bookings, blogs, CMS collections, SEO settings, and optional Velo or API-driven behavior. A strong validation process checks the records that customers see, the information staff use, and the connected workflows that keep the business running.
+Wix migration validation should prove that the target site can operate as a hosted website-and-commerce environment, not only that records appear in the Wix dashboard. Wix combines Wix Stores, Wix eCommerce services, site content, members, contacts, apps, Velo/API logic, service plugins, custom catalogs, SEO controls, domains, and external systems. Validation therefore needs to test business meaning across storefront display, product choice behavior, checkout readiness, historical order readability, customer/contact context, content continuity, and integration expectations.
 
-The most useful validation approach is sample-based and outcome-focused. Instead of checking only totals, review representative products, collections, customers, contacts, members, orders, pages, URLs, apps, and integration-sensitive records. The goal is to confirm whether the migrated Wix store can support real browsing, buying, order review, customer service, content continuity, and launch readiness.
+Validation should happen after Demo Migration and again after Full Migration. Demo Migration validation decides whether the mapping, scope, and target expectations are safe enough to continue. Full Migration validation decides whether the target site is ready for launch, handoff, or final correction before traffic moves to Wix.
 
-### What Wix Validation Needs to Prove <a href="#what-wix-validation-needs-to-prove" id="what-wix-validation-needs-to-prove"></a>
+### What Wix Validation Must Prove <a href="#what-wix-validation-must-prove" id="what-wix-validation-must-prove"></a>
 
-A Wix migration should be validated across commerce, content, customer, storefront, and integration layers. Each layer answers a different question.
+A Wix validation plan should confirm three different outcomes: migrated records are present, migrated records keep their business meaning, and target Wix configuration supports live operations. These outcomes are related, but they are not interchangeable.
 
-| Validation layer                 | What to prove                                                                                                                                     | Why it matters                                                                                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Storefront experience            | Shoppers can find products, read details, choose options, view prices, and move toward checkout.                                                  | A product can exist in the dashboard but still fail as a usable storefront item.                                                 |
-| Product structure                | Products, options, choices, variants, modifiers, SKUs, images, inventory, and collections appear with the expected meaning.                       | Wix Stores product behavior may differ from the Source Platform’s product model.                                                 |
-| Customer and audience records    | Customers, contacts, members, subscriptions, and account-related context remain understandable.                                                   | Wix may separate commerce buyers, contact records, member profiles, and app-specific user behavior.                              |
-| Order history                    | Orders remain readable for customer service, finance, and operational review.                                                                     | Historical order value depends on context such as totals, payment labels, shipping labels, discounts, taxes, and customer links. |
-| Checkout readiness               | Live checkout, payment, shipping, tax, delivery, pickup, and fulfillment behavior are configured and tested separately.                           | Migrated historical data does not automatically prove new order workflow readiness.                                              |
-| Content and SEO                  | CMS Pages, Blog Posts, product pages, collection pages, metadata, redirects, and priority URLs support the intended launch experience.            | Wix is also a website platform, so content and URL continuity can affect perceived migration quality.                            |
-| Apps and extensions              | Wix apps and business tools that shape bookings, events, restaurants, forms, memberships, subscriptions, or marketing are identified and checked. | App-owned data and workflows may not behave like standard store records.                                                         |
-| Velo, APIs, and external systems | Custom code, API behavior, third-party IDs, and external-system relationships remain accounted for.                                               | Custom workflows often require mapping, configuration, accepted exclusions, or Custom Service review.                            |
+| Validation layer           | What to prove                                                                                                                | Why it matters for Wix                                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Record presence            | Products, customers, orders, CMS Pages, Blog Posts, media, and eligible supporting records are visible where expected.       | Count checks alone can miss broken options, app-owned records, order context, and site-navigation issues. |
+| Business meaning           | Products, customer/contact records, orders, content, URLs, and app-related data still represent the same commercial purpose. | Wix may store or display similar data differently from the Source Platform.                               |
+| Storefront usability       | Shoppers can find products, select options, enter checkout, understand prices, and receive the intended store experience.    | Wix is a site-builder commerce platform, so visual and navigation context can affect migration quality.   |
+| Administrative readability | Staff can read orders, customer history, fulfillment details, payment labels, notes, discounts, and source references.       | Historical data must remain useful even when live checkout settings are configured separately.            |
+| Launch readiness           | Payment, shipping, tax, domain, redirect, SEO, app, and integration checks are complete before go-live.                      | Migrated history does not automatically configure future transaction behavior.                            |
 
-### Validate Product and Catalog Meaning <a href="#validate-product-and-catalog-meaning" id="validate-product-and-catalog-meaning"></a>
+A clean validation outcome should identify what passed, what needs target setup, what needs an Add-on, what requires Custom Service review, and what is accepted as outside migration scope.
 
-Product validation should start with items that represent the real complexity of the store. Simple products are useful, but they rarely expose the most important Wix migration risks. A stronger sample includes products with multiple choices, variants, modifiers, images, SKUs, inventory rules, sale pricing, product ribbons or labels, collection placement, and SEO-sensitive product URLs.
+### Demo Migration Validation Priorities <a href="#demo-migration-validation-priorities" id="demo-migration-validation-priorities"></a>
 
-#### Product samples to check <a href="#product-samples-to-check" id="product-samples-to-check"></a>
+Demo Migration validation should use representative records, not only easy records. Wix migrations can look clean when simple products and straightforward orders are sampled, while complex product choices, content paths, member data, app behavior, or service-plugin requirements remain untested.
 
-Review product samples that include:
+| Sample group              | Include these records                                                                                                                    | Pass condition                                                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Simple products           | Products with ordinary title, SKU, price, image, description, collection, inventory, and SEO values.                                     | Product data appears correctly and can be found through the expected storefront path.                               |
+| Complex products          | Products with options, choices, variants, modifiers, multiple images, price differences, stock differences, or personalization fields.   | Shopper selections preserve price, SKU, stock, image, fulfillment, or order-detail meaning where supported.         |
+| Collections and discovery | Products assigned to old categories, collections, filters, menus, landing pages, or product groups.                                      | Merchandising and navigation paths remain understandable in Wix.                                                    |
+| Orders                    | Paid, pending, canceled, refunded, discounted, taxed, shipped, and guest orders.                                                         | Staff can read line items, totals, taxes, shipping, payment labels, fulfillment context, notes, and customer links. |
+| Customers and members     | Registered customers, contacts, site members, subscribers, app participants, and guest buyers.                                           | The target meaning of each record is clear and not collapsed into the wrong identity type.                          |
+| Content and SEO           | CMS Pages, Blog Posts, images, internal links, high-value slugs, metadata, and redirects.                                                | Important content remains reachable, readable, and SEO-sensitive paths have a migration or redirect plan.           |
+| App or custom behavior    | Records tied to Wix apps, Velo/API logic, service plugins, custom catalogs, external payment, external shipping, or third-party systems. | The item is classified as standard scope, Add-on scope, Custom Service review, target setup, or accepted exclusion. |
 
-* a simple product with standard price, image, SKU, and inventory;
-* a product with several options, choices, or variant combinations;
-* a product where choices affect price, SKU, inventory, image, or availability;
-* a product with modifiers, personalization, add-ons, or custom option behavior;
-* a digital product if the source store sells downloadable goods;
-* a subscription, recurring, membership-linked, booking-linked, event-linked, or service-like product if used;
-* products assigned to important collections or storefront filters;
-* products with SEO-sensitive titles, descriptions, slugs, metadata, or image alt text.
+Demo Migration should not be approved because most records look correct. It should be approved only when the sample proves the difficult parts of the Wix migration are understood.
 
-The pass condition is not only that the product appears. The product should be easy to find, easy to understand, and usable in the target storefront. Customers should be able to select expected options, see correct prices, view images, understand availability, and move toward checkout without losing important product meaning.
+### Product and Catalog Validation <a href="#product-and-catalog-validation" id="product-and-catalog-validation"></a>
 
-### Validate Collections, Navigation, Filters, and Storefront Discovery <a href="#validate-collections-navigation-filters-and-storefront-discovery" id="validate-collections-navigation-filters-and-storefront-discovery"></a>
+Product validation should confirm more than product count. Wix products must make sense as storefront records, catalog records, search results, product-page content, collection items, checkout items, and order-line references.
 
-Wix stores can depend on more than product records. Collections, menus, product galleries, filters, search behavior, page layout, and app-driven display choices can determine whether customers can actually find the migrated catalog.
+| Product area                  | What to validate                                                                                              | Common Wix-specific failure pattern                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Product identity              | Name, SKU, slug, visibility, status, product URL, and duplicate handling.                                     | Products exist but cannot be found through the expected storefront or old SKU logic.                          |
+| Product content               | Description, rich text, short content, images, galleries, labels, ribbons, and SEO fields.                    | Text or media migrates but loses formatting, image order, alt context, or product-page presentation.          |
+| Pricing and inventory         | Base price, sale price, taxable status, stock quantity, stock status, weight, and fulfillment-related fields. | Price or stock appears correct at product level but fails for variants or options.                            |
+| Product options and choices   | Shopper-selectable options such as size, color, material, style, personalization, and paid choices.           | Options display visually but do not preserve SKU, stock, price, image, or order-detail meaning.               |
+| Variants and modifiers        | Variant-level SKU, price, stock, image, availability, and modifier behavior.                                  | A complex source product is simplified into a product that no longer supports the original purchase decision. |
+| Collections and merchandising | Collection assignment, product groups, filters, search, sort order, product galleries, and landing pages.     | Category data migrates but shopper discovery paths are not rebuilt in Wix.                                    |
+| Custom catalogs               | Products or sellable items supplied through external catalogs, apps, or service plugins.                      | A record looks like a product but belongs to external catalog or Custom Service logic.                        |
 
-Validation should confirm that priority categories or collections remain meaningful in the new Wix store. If the source store used nested categories, brand pages, filtered product lists, landing pages, or custom merchandising paths, the migrated Wix result should be checked from the storefront, not only from the dashboard.
+The strongest product validation samples include simple products, variable products, products with option-specific values, products with many images, products attached to important collections, and products affected by apps or external systems.
 
-| Discovery area       | What to check                                                                                      | Pass condition                                                             |
-| -------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Collections          | Products appear in the expected collections or equivalent Wix structures.                          | Important product groups are usable for browsing and merchandising.        |
-| Menus and navigation | Store pages, product galleries, and collection links appear where customers expect them.           | Priority catalog paths are reachable without manual guesswork.             |
-| Filters and sorting  | Relevant product attributes or choices support expected filtering where applicable.                | Customers can narrow the catalog in ways that match business expectations. |
-| Product galleries    | Product lists display images, names, prices, ribbons, availability, and calls to action correctly. | Storefront presentation supports buying decisions.                         |
-| Search behavior      | Key products can be found through search or planned browsing paths.                                | High-value products are discoverable after migration.                      |
+### Checkout, Cart, Order, Payment, Shipping, and Tax Validation <a href="#checkout-cart-order-payment-shipping-and-tax-validation" id="checkout-cart-order-payment-shipping-and-tax-validation"></a>
 
-### Validate Customers, Contacts, Members, and Audience Context <a href="#validate-customers-contacts-members-and-audience-context" id="validate-customers-contacts-members-and-audience-context"></a>
+Wix order history and live checkout readiness should be validated separately. Migrated historical orders can preserve operational history, but they do not configure payment providers, shipping rates, tax rules, checkout validation, fulfillment workflows, discounts, or service-plugin behavior for future transactions.
 
-Wix can involve several audience-related layers: store customers, contacts, site members, form submissions, subscribers, bookings users, event attendees, restaurant customers, loyalty-related information, and app-specific records. These layers should not be validated as if they were one generic customer table.
+| Area                     | Historical validation                                                                                                                                                               | Live-readiness validation                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Cart and checkout        | Confirm whether historical checkout context or abandoned-checkout data is included, excluded, or separately scoped.                                                                 | Test target checkout flow, required fields, validation, payment, shipping, tax, discounts, and buyer messages.    |
+| Orders                   | Validate order number/reference, status, date, customer link, guest order behavior, line items, totals, discounts, taxes, shipping, payment label, fulfillment, refunds, and notes. | Confirm future orders will be created correctly through Wix checkout after target settings are configured.        |
+| Payments                 | Confirm historical payment labels, transaction references, payment state, and refund context where available.                                                                       | Confirm payment providers and external payment services are configured and tested in Wix.                         |
+| Shipping and fulfillment | Confirm shipping method labels, shipping totals, addresses, tracking references, fulfillment notes, and delivery context.                                                           | Confirm shipping rates, pickup/delivery rules, fulfillment services, and shipping service plugins are configured. |
+| Taxes                    | Confirm tax totals, tax labels, inclusive/exclusive meaning, and historical order readability.                                                                                      | Confirm Wix tax configuration reflects target launch requirements.                                                |
+| Discounts and coupons    | Confirm migrated discount values, coupon references, campaign labels, and order-level promotion history.                                                                            | Confirm active discount rules and campaign behavior are recreated or configured in Wix where needed.              |
 
-A strong review checks whether customer identities, email addresses, phone numbers, addresses, account context, order links, marketing permissions, member status, and app-related relationships remain understandable. If the Source Platform separates wholesale accounts, customer groups, company accounts, memberships, or segmented audiences, the Wix result should be reviewed against the target structures that will actually support those relationships after launch.
+A pass condition for this area should state that historical orders are readable and future checkout has been tested through Wix target configuration. One does not prove the other.
 
-Validation should answer practical questions: Can staff identify the customer? Can they see relevant order history? Can customer service understand the relationship between buyer, contact, member, and app activity? Are marketing or consent-sensitive fields handled within the approved scope?
+### Customer, Contact, Member, and CRM Validation <a href="#customer-contact-member-and-crm-validation" id="customer-contact-member-and-crm-validation"></a>
 
-### Validate Orders and Historical Commerce Context <a href="#validate-orders-and-historical-commerce-context" id="validate-orders-and-historical-commerce-context"></a>
+Wix can involve customers, contacts, site members, subscribers, CRM-style records, marketing consent, form participants, app users, and external-system identifiers. Validation should separate these meanings before approving the migration.
 
-Order validation should focus on readability and operational usefulness. Historical orders are often needed for customer service, finance, returns, disputes, fulfillment review, and business reporting. A migrated order record is useful only when its context remains understandable.
+| Identity area         | What to validate                                                                                                  | Pass condition                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Customers             | Customer names, emails, billing addresses, shipping addresses, order links, and purchase history.                 | Staff can connect customer records to migrated orders without confusion.                                   |
+| Contacts              | Contact records, phone numbers, email values, notes, labels, segmentation, and CRM-style context where supported. | Commerce contacts are not mistaken for full site-member accounts unless that is intended.                  |
+| Members               | Login/account status, member profiles, role-like meaning, subscriber status, and app membership relationships.    | Member-related behavior is classified as migrated data, target setup, app data, or Custom Service review.  |
+| Guest buyers          | Orders placed without a customer account.                                                                         | Guest orders remain readable and do not create misleading account expectations.                            |
+| Marketing and consent | Newsletter status, opt-in fields, tags, communication preferences, and campaign data.                             | Consent and marketing fields are treated carefully and not assumed to transfer as active campaign logic.   |
+| External IDs          | CRM, ERP, shipping, accounting, marketplace, or loyalty identifiers.                                              | External references remain available where needed for reconciliation or are listed as accepted exclusions. |
 
-Review orders that represent different scenarios:
+Customer validation should include both ordinary customers and edge cases: guest buyers, repeat buyers, customers with multiple addresses, members with non-commerce context, subscribers, and customers linked to apps or external systems.
 
-* paid and unpaid orders;
-* fulfilled and unfulfilled orders;
-* canceled, refunded, partially refunded, or partially fulfilled orders;
-* orders with discounts, coupons, gift cards, tax, shipping, delivery, or pickup context;
-* orders linked to customers, members, or contact records;
-* orders with product variants, modifiers, or custom option selections;
-* orders with app, marketplace, external payment, shipping, or accounting references.
+### CMS Pages, Blog Posts, Media, URLs, and SEO Validation <a href="#cms-pages-blog-posts-media-urls-and-seo-validation" id="cms-pages-blog-posts-media-urls-and-seo-validation"></a>
 
-The pass condition is that staff can read the order and understand what happened. The order should show the relevant customer, products, quantities, options, totals, payment labels, shipping labels, status context, and historical notes that matter for daily operations.
+Wix migration quality can depend heavily on site content and search continuity. Product records may be correct while landing pages, Blog Posts, internal links, redirects, images, or SEO fields remain incomplete.
 
-### Validate Checkout, Payment, Shipping, and Tax Separately <a href="#validate-checkout-payment-shipping-and-tax-separately" id="validate-checkout-payment-shipping-and-tax-separately"></a>
+| Site and SEO area            | What to validate                                                                                              | Pass condition                                                               |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| CMS Pages                    | Page title, body content, images, buttons, forms, embedded assets, internal links, and page purpose.          | Important pages are migrated, rebuilt, redirected, or intentionally retired. |
+| Blog Posts                   | Post title, body, publication date, author context, categories, tags, images, internal links, and SEO values. | Blog content remains readable and high-value posts are not orphaned.         |
+| Media                        | Product images, page images, galleries, files, alt text, image references, and reused media.                  | Images load correctly in product, page, and blog contexts.                   |
+| Product and collection URLs  | Product slugs, collection paths, landing pages, and navigation links.                                         | High-value commerce URLs have matching target URLs or redirect handling.     |
+| SEO fields                   | Titles, descriptions, canonical expectations, headings, indexability, and structured data expectations.       | SEO-sensitive records have a planned target representation.                  |
+| Redirects and internal links | Old-to-new redirects, menu links, footer links, blog links, campaign links, and product references.           | Priority shopper and search paths resolve correctly after migration.         |
+| Domain and launch routing    | Domain connection, SSL, primary domain, preview URLs, staging expectations, and launch timing.                | Domain work is separated from data migration and tested before launch.       |
 
-Historical order validation does not prove live checkout readiness. Wix checkout, payment providers, shipping rules, delivery methods, pickup settings, tax behavior, coupons, gift cards, subscriptions, and fulfillment workflows are target configuration concerns.
+A Wix content validation pass should not require perfect source design parity. It should require a clear decision for each important content area: migrated as data, rebuilt in Wix, redirected, replaced, or retired.
 
-These areas should be tested separately from migrated records. A Wix store can have readable migrated orders while still needing additional setup for new transactions. Validation should confirm the target behavior that will be used after launch, especially when the store uses multiple shipping zones, tax rules, local delivery, pickup, third-party fulfillment, external payments, or subscription logic.
+### Apps, Velo, Service Plugins, Custom Catalogs, and External Systems <a href="#apps-velo-service-plugins-custom-catalogs-and-external-systems" id="apps-velo-service-plugins-custom-catalogs-and-external-systems"></a>
 
-| Live setup area                    | What to test                                                                            | Why it is separate from migration acceptance                               |
-| ---------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Payment methods                    | Customers can complete checkout through the intended payment options.                   | Migrated payment labels do not activate payment providers.                 |
-| Shipping and delivery              | Rates, zones, delivery, pickup, and fulfillment expectations work for target scenarios. | Historical shipping methods do not configure live delivery behavior.       |
-| Tax                                | Tax settings match the launch requirements for relevant locations and products.         | Historical tax amounts do not establish future tax calculation.            |
-| Coupons and discounts              | Active promotions behave as intended after setup.                                       | Migrated coupon history does not guarantee active discount rules.          |
-| Subscription or recurring behavior | Recurring purchase expectations are confirmed where applicable.                         | Subscription behavior often depends on app, plan, and configuration logic. |
+Apps and custom logic often determine whether a Wix migration can operate after launch. Validation should identify where the target result depends on Wix apps, Velo/API work, service plugins, custom catalogs, or external systems rather than standard migrated records.
 
-### Validate CMS Pages, Blog Posts, and Content-Led Commerce <a href="#validate-cms-pages-blog-posts-and-content-led-commerce" id="validate-cms-pages-blog-posts-and-content-led-commerce"></a>
+| Dependency type          | Validation focus                                                                                                                           | Pass condition                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Wix apps                 | Bookings, events, restaurants, memberships, pricing plans, loyalty, forms, reviews, donations, subscriptions, and other app-owned records. | App-owned data is classified as supported migration, target setup, Add-on scope, Custom Service, or accepted exclusion.                 |
+| Velo/API logic           | Custom code, calculated fields, custom product behavior, forms, workflows, validation, and external data connections.                      | Required custom behavior has a documented Wix implementation path or exclusion.                                                         |
+| Service plugins          | Custom fees, shipping rates, checkout/cart validation, external payment services, and custom catalog integration.                          | Live behavior is tested separately from historical data migration.                                                                      |
+| External systems         | ERP, CRM, PIM, WMS, marketplace, accounting, tax, shipping, payment, email, analytics, and loyalty systems.                                | Identifiers, sync points, ownership, and post-migration reconciliation requirements are documented.                                     |
+| Custom catalogs          | Sellable items managed outside standard Wix Stores structures.                                                                             | Catalog ownership and checkout integration are reviewed before launch approval.                                                         |
+| Custom fields and tables | Source metadata, custom records, app tables, and business-specific values.                                                                 | Values are either migrated through supported fields, handled through Add-ons, reviewed under Custom Service, or excluded intentionally. |
 
-Wix migrations often involve website content as much as commerce data. CMS Pages, Blog Posts, landing pages, policies, brand pages, galleries, forms, menus, images, and embedded content can shape the launch result. Content validation should check whether important pages are present, readable, linked correctly, and aligned with the intended Wix site structure.
+The validation standard should be direct: standard migrated records should be checked inside Wix; custom behavior should be checked through the feature, app, integration, or service-plugin path that will actually run the target store.
 
-For content-led stores, review the pages that contribute directly to revenue or trust: home page sections, category landing pages, product education pages, policy pages, shipping and return pages, FAQ pages, blog posts with traffic value, and pages used in ads or email campaigns. The result should not be judged only by product records when customers also rely on content to decide what to buy.
+### Add-ons and Custom Service Validation <a href="#add-ons-and-custom-service-validation" id="add-ons-and-custom-service-validation"></a>
 
-### Validate SEO, URLs, Domains, and Redirect Priorities <a href="#validate-seo-urls-domains-and-redirect-priorities" id="validate-seo-urls-domains-and-redirect-priorities"></a>
+Add-ons and Custom Service should be validated by output, not by assumption. The validation question is whether the expected result exists in Wix and supports the intended business use.
 
-SEO validation should focus on priority continuity, not exhaustive perfection. Wix URL structure, page slugs, product URLs, collection paths, blog URLs, metadata, image alt text, canonical expectations, redirects, and domain configuration can affect launch quality.
+| Scope area          | What to validate                                                                                                                | Boundary to preserve                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Standard Add-ons    | Specific configured extensions to normal migration behavior, such as selected extra data handling or mapping.                   | Add-ons solve defined migration needs; they are not a substitute for full custom implementation.                                               |
+| Tailored Add-ons    | Store-specific migration enhancements agreed for the Wix path.                                                                  | The expected output should be checked against the agreed migration outcome, not broad site rebuild expectations.                               |
+| Custom Add-ons      | Highly specific migration handling for selected records or fields.                                                              | Custom Add-ons should not be treated as full Custom Service unless the scope says so.                                                          |
+| Custom Service      | Non-standard Wix migration needs, custom records, app-owned data, external systems, Velo/API logic, or unusual target behavior. | Custom Service review clarifies scope; it does not automatically mean Next-Cart performs every target build, design, app, or integration task. |
+| Accepted exclusions | Data or behavior outside migration scope.                                                                                       | Exclusions should be named clearly so validation does not treat them as defects.                                                               |
 
-Validation should include a short priority URL list. This list should cover top product pages, top category or collection pages, high-traffic blog posts, paid landing pages, backlinks, branded pages, and important policy pages. Each should be checked for target availability, redirect planning, metadata, page title, and customer-facing readability.
+A validation checklist should include every Add-on and Custom Service item agreed during planning. If a required output cannot be validated in Wix, it should stay open until the missing value, behavior, setup, or exclusion is resolved.
 
-A strong pass condition is that the highest-value paths have a clear target outcome. Some URLs may be preserved, some may redirect, and some may intentionally change, but the decision should be visible before launch.
+### Entity Points and Additional Migration Options Validation <a href="#entity-points-and-additional-migration-options-validation" id="entity-points-and-additional-migration-options-validation"></a>
 
-### Validate Apps, Velo, APIs, and External-System Dependencies <a href="#validate-apps-velo-apis-and-external-system-dependencies" id="validate-apps-velo-apis-and-external-system-dependencies"></a>
+Entity Points validation should focus on eligible record scope and duplicate counting. New Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when migrated for the first time, even when the customer performs a new migration for the same migration path.
 
-Wix App Market tools, Wix business apps, Velo code, APIs, webhooks, service plugins, third-party systems, CRM records, ERP references, fulfillment tools, analytics, email platforms, and automation logic can all affect migration quality. These dependencies should be validated as business workflows, not just as data fields.
+| Validation topic        | What to check                                                                             | Pass condition                                                                                 |
+| ----------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Eligible records        | Product, Customer, Order, and Blog Posts records included in the Wix migration scope.     | Counts match the agreed scope and service license logic.                                       |
+| First-time migration    | Newly added eligible records after the previous migration step.                           | New eligible records are counted only when they are migrated for the first time.               |
+| Duplicate protection    | Records already counted through the service license.                                      | Previously counted records are not counted again only because another migration action occurs. |
+| Follow-up activity      | Additional Migration Options after Demo Migration, Full Migration, or launch preparation. | New data, updated records, and changed target configuration are revalidated before acceptance. |
+| Content and SEO effects | New Blog Posts, product URLs, redirects, and internal links after follow-up activity.     | Follow-up migration does not create unresolved content or SEO gaps.                            |
 
-If a source store relies on custom scripts, external IDs, headless behavior, app-owned records, product feeds, subscriptions, bookings, events, restaurants, wholesale workflows, or custom checkout logic, validation should confirm what was migrated, what must be configured separately, what is outside standard service capability, and what belongs in Custom Service review.
+Additional Migration Options should trigger revalidation, not blind approval. Products, customers, orders, Blog Posts, coupons, URLs, app records, and integration references added after the original validation sample may introduce new issues even if the first migration passed.
 
-| Dependency type                     | Validation question                                                                          | Pass condition                                                                     |
-| ----------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Wix apps                            | Does the app support the expected post-migration workflow?                                   | App-related data and setup expectations are confirmed or excluded deliberately.    |
-| Velo code                           | Does custom code depend on migrated identifiers or specific field structures?                | Required custom behavior is accounted for through configuration or Custom Service. |
-| APIs and webhooks                   | Do external systems need stable IDs, events, or mapped fields?                               | Integration-sensitive records are sampled and reviewed.                            |
-| External systems                    | Do CRM, ERP, fulfillment, accounting, analytics, or marketing tools depend on migrated data? | Required relationships are confirmed, remapped, or assigned to follow-up work.     |
-| Custom catalog or checkout behavior | Does the source behavior have a Wix equivalent?                                              | Supported behavior is validated; unsupported behavior is scoped before launch.     |
+### Wix Validation Checklist <a href="#wix-validation-checklist" id="wix-validation-checklist"></a>
 
-### Interpret Demo Migration Results Carefully <a href="#interpret-demo-migration-results-carefully" id="interpret-demo-migration-results-carefully"></a>
+A practical Wix validation checklist should move from record checks to shopper-path checks, staff workflow checks, content/SEO checks, and integration checks.
 
-Demo Migration should be treated as a structured proof sample. It is not a full launch approval by itself. The strongest Demo Migration review checks whether selected samples prove the key areas of the Wix migration: catalog behavior, product choices, variants, modifiers, customers, members, orders, content, SEO, apps, APIs, and integration-sensitive records.
+| Validation stage  | Required checks                                                                                                                       | Owner decision                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Record review     | Products, collections, customers, contacts, members, orders, CMS Pages, Blog Posts, media, and eligible records.                      | Confirm records are present and meaningful.                                   |
+| Storefront review | Product pages, collection pages, menus, filters, search, cart entry, option selection, images, prices, inventory, and mobile display. | Confirm shoppers can browse and choose products correctly.                    |
+| Checkout review   | Payment, shipping, tax, discounts, custom fees, validation, checkout fields, and fulfillment behavior.                                | Confirm future transactions are configured separately from historical orders. |
+| Admin review      | Order history, customer links, guest orders, statuses, refunds, notes, payment labels, shipping context, and external IDs.            | Confirm staff can operate and reconcile records.                              |
+| Content review    | CMS Pages, Blog Posts, landing pages, internal links, media, menus, SEO metadata, redirects, and high-value URLs.                     | Confirm site and search continuity.                                           |
+| Custom review     | Apps, Velo, service plugins, custom catalogs, custom fields, external systems, Add-ons, and Custom Service outputs.                   | Confirm scope, setup, exclusions, or remaining work.                          |
+| Follow-up review  | Additional Migration Options, new eligible records, changed data, and target configuration changes.                                   | Confirm revalidation before final acceptance.                                 |
 
-If Demo Migration results show clean standard records but fail to prove complex products, app-owned data, custom checkout behavior, customer-member relationships, or URL continuity, the sample is too light. The next step should be to expand the sample, adjust Add-on use where appropriate, or move the relevant requirement into Custom Service review.
+The checklist should be used twice: once after Demo Migration to decide whether the migration plan is safe, and again after Full Migration to decide whether the Wix site is launch-ready.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Wix validation should confirm that the migrated store works as a hosted website and commerce environment, not merely that data exists in the target account. The most important proof comes from realistic samples: products with choices and variants, important collections, customer and member records, varied orders, key content pages, priority URLs, app-dependent workflows, and integration-sensitive data.
+Wix validation should prove that migrated data works inside the target site, storefront, checkout, order history, content structure, SEO plan, apps, and integrations. A successful Wix migration is not validated by record counts alone. It is validated when shoppers can use the site, staff can operate the store, content and URLs remain controlled, custom or app-dependent records are classified correctly, and follow-up migration activity is rechecked before acceptance.
 
-Use Demo Migration results to decide whether the Wix migration is ready for Full Migration, needs additional filtering or mapping through Add-ons, requires target setup work, or includes customization that should be reviewed through Custom Service before launch planning continues.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be checked first after a Wix Demo Migration?**
 
-Start with the records that prove the store’s real operating model: complex products, variants, options, modifiers, collections, customers, members, varied orders, priority pages, and important URLs. These samples reveal more than simple record totals.
+Start with representative records: simple and complex products, variant or option-heavy products, important collections, guest and registered customer records, different order statuses, discounted or refunded orders, CMS Pages, Blog Posts, media, and any app or custom records that could affect launch quality.
 
-**Does a successful product count mean the Wix migration is valid?**
+**Does migrated order history prove Wix checkout is ready?**
 
-No. Product count only confirms that records were created. Validation should also check product choices, variants, modifiers, images, SKUs, inventory, collection placement, storefront display, pricing, and checkout usability.
+No. Historical orders and live checkout setup are different validation areas. Order history should be checked for readability, totals, line items, status, payment labels, shipping, tax, refunds, and notes. Live checkout should be tested through Wix payment, shipping, tax, discount, validation, and fulfillment settings.
 
-**Should Wix checkout be validated separately from migrated orders?**
+**How should Wix apps and custom behavior be validated?**
 
-Yes. Migrated orders show historical order context. Live checkout, payment providers, shipping, delivery, pickup, tax, discounts, and fulfillment behavior depend on target setup and should be tested separately.
+Validate them through the function they control. App-owned records, Velo/API logic, service plugins, custom catalogs, external payment services, shipping rules, and third-party systems should be classified as standard scope, Add-on scope, Custom Service review, target setup, or accepted exclusion.
 
-**Why should customers, contacts, and members be reviewed separately?**
+**Do Add-ons replace Custom Service for Wix validation?**
 
-Wix may use different structures for commerce customers, contacts, site members, subscribers, and app-related users. These records should be checked against the way the business will use them after launch.
+No. Add-ons should be validated against specific migration outputs. They are not a substitute for Custom Service, custom development, target design work, app configuration, or integration implementation when those are required.
 
-**When do Wix validation results point to Custom Service?**
+**When should Additional Migration Options be revalidated for Wix?**
 
-Custom Service should be reviewed when validation depends on custom product behavior, app-owned records, Velo code, API relationships, external-system identifiers, custom checkout logic, unsupported data structures, or tailored migration behavior beyond standard service capability.
+Revalidate whenever later migration activity introduces new products, customers, orders, Blog Posts, content changes, URL changes, app records, custom fields, or integration references. New eligible records may affect Entity Points when migrated for the first time, while records already counted through the service license should not be counted again only because another migration action occurs.

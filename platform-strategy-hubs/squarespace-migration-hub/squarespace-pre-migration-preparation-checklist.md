@@ -1,241 +1,186 @@
 # Squarespace Pre-Migration Preparation Checklist
 
-Preparing for a migration to Squarespace should begin with the parts of the source store that must become usable inside a hosted website and commerce platform. Squarespace can be a strong Target Platform for content-led commerce, simple to moderate catalogs, service businesses, appointment-friendly storefronts, portfolio-led sellers, and merchants that want site management, store management, payments, shipping, taxes, marketing, and design in one hosted environment. The preparation work should confirm whether the source store’s products, variants, content, customers, orders, checkout settings, extensions, and integration requirements can be represented acceptably in that environment.
+Squarespace preparation should begin with a clear decision about what the target store is expected to become. Squarespace is a hosted content-first commerce Target Platform, so preparation is not limited to product and order exports. The store owner should also prepare site structure, Store Pages, content, media, SEO, redirects, domains, checkout settings, integrations, and any records that may need Add-ons or Custom Service review.
 
-A good preparation process should make the migration testable before Full Migration. It should clarify which source records can move into standard Squarespace-supported structures, which items require target configuration, which content or design elements need rebuilding, and which app, API, webhook, custom field, or outside-system requirements need Add-ons or Custom Service review.
+A strong preparation phase protects Demo Migration quality. It helps the merchant decide which records should move, which target-side settings must be configured separately, which design or content work is outside migration scope, and which samples should be checked before Full Migration.
 
-### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
+### Confirm the Target Store Role <a href="#confirm-the-target-store-role" id="confirm-the-target-store-role"></a>
 
-Pre-migration preparation is not only a file-collection step. It is the planning work that determines whether Squarespace is ready to receive the source store’s business meaning.
+Before exporting data or requesting a migration setup, define the role Squarespace will play after launch. Squarespace may be used as a content-led storefront with a small product catalog, a portfolio site with commerce, a service-business site with booking or payment needs, a digital product shop, or a compact commerce site with limited operational complexity.
 
-For Squarespace, preparation should clarify:
+| Preparation question                                                              | Why it matters                                                                                                    | Target-side decision                                                                                    |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Will Squarespace be the main storefront or a content site with commerce attached? | Commerce records and site presentation must be planned together.                                                  | Decide how Store Pages, product pages, content pages, navigation, and checkout will support the launch. |
+| Which parts of the source store are still useful?                                 | Old products, outdated pages, inactive customers, and obsolete posts can create unnecessary noise.                | Decide what should migrate, be excluded, redirected, archived, or rebuilt manually.                     |
+| Is the launch mainly a data move, a redesign, or a business-model change?         | Migration cannot automatically rebuild every template, app workflow, checkout setting, or content strategy.       | Separate migration scope from site build, copywriting, design, configuration, and operations work.      |
+| Are third-party systems still part of the future workflow?                        | CRM, fulfillment, tax, shipping, accounting, subscription, donation, and booking tools may own important records. | Identify which data belongs in Squarespace and which data remains external.                             |
 
-* which products, variants, SKUs, images, prices, categories, tags, and inventory records should move;
-* whether source product types fit the target Squarespace product structure;
-* which customer, contact, subscriber, donor, or member-like records carry business value;
-* which historical orders and transactions need to remain readable;
-* which checkout, shipping, payment, tax, discount, and fulfillment settings belong to target configuration rather than migrated data;
-* which CMS Pages, Blog Posts, landing pages, galleries, menus, and design areas matter for launch quality;
-* which URLs, metadata, redirects, and search-entry paths need review;
-* which extensions, APIs, webhooks, outside-system identifiers, or automation workflows affect scope;
-* whether the migration can remain within standard service capability or needs Add-ons, Managed Service, or Custom Service review.
+This early framing prevents Squarespace from being treated like a generic cart replacement. It also gives the Demo Migration a meaningful standard for success.
 
-### 1. Confirm the Target Squarespace Context <a href="#id-1-confirm-the-target-squarespace-context" id="id-1-confirm-the-target-squarespace-context"></a>
+### Prepare Product and Store Page Data <a href="#prepare-product-and-store-page-data" id="prepare-product-and-store-page-data"></a>
 
-Before migration, confirm how the target Squarespace site will be used. A Squarespace site may be primarily content-led, commerce-led, service-led, event-led, membership-oriented, donation-oriented, or portfolio-led. That context changes which source records matter most.
+Squarespace product preparation should consider both commerce data and storefront presentation. Product records may migrate successfully while Store Page layout, navigation, merchandising, product-page sections, and checkout behavior still require target-side setup.
 
-| Evidence to gather                                   | Why it matters                                                                              |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Target Squarespace site plan and commerce capability | Determines which store, payment, shipping, tax, and commerce features are available.        |
-| Target site version and template/design expectations | Helps separate data migration from template, layout, and design rebuild work.               |
-| Store-page structure                                 | Clarifies where products, categories, and catalog browsing should appear.                   |
-| Checkout, payment, shipping, and tax requirements    | Separates migrated order history from live checkout setup.                                  |
-| Extensions and connected services                    | Identifies data or behavior that may be app-owned, reconfigured, excluded, or custom scope. |
-| SEO and URL priorities                               | Protects high-value customer-entry paths and search continuity.                             |
-| Team review responsibilities                         | Confirms who will review products, content, orders, checkout, SEO, and integrations.        |
+| Product area                | What to prepare                                                                                                                                                         | Validation sample to include                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Product types               | Classify physical products, service products, digital downloads, gift cards, subscriptions/payment plans, donation-style products, and unsupported or unusual products. | At least one product from each important product type.                             |
+| Product details             | Clean names, descriptions, SKUs, prices, sale prices, weights, stock values, visibility, SEO titles, SEO descriptions, and product slugs.                               | Products with standard fields and products with missing or unusual values.         |
+| Variants and options        | Review variant names, option choices, SKU combinations, price differences, inventory differences, and variant images.                                                   | Simple products, single-option products, and multi-option variant products.        |
+| Product media               | Prepare main images, galleries, alt text expectations, file quality, image order, and any product-specific media rules.                                                 | Products with multiple images and products that depend on variant-specific images. |
+| Store Pages and collections | Decide which products belong on Store Pages, collection-style pages, menus, filters, landing pages, and promotional sections.                                           | A category or collection that matters for customer browsing.                       |
 
-Squarespace is a hosted platform, so preparation should focus on supported platform structures and target configuration rather than direct reproduction of a source store’s server-side behavior.
+Product preparation should also identify source behaviors that are not simple product data. Bundles, add-ons, custom forms, engraving fields, appointment-style selling, wholesale pricing, advanced subscriptions, marketplace feeds, or external inventory logic may need Add-ons, Custom Service review, manual setup, or accepted exclusion.
 
-### 2. Prepare Product and Variant Samples <a href="#id-2-prepare-product-and-variant-samples" id="id-2-prepare-product-and-variant-samples"></a>
+### Prepare Customer, Contact, Member, and Profile Records <a href="#prepare-customer-contact-member-and-profile-records" id="prepare-customer-contact-member-and-profile-records"></a>
 
-Squarespace product preparation should include representative product records, not only product totals. Products may depend on product type, variants, SKUs, images, prices, inventory, product descriptions, categories, tags, shipping behavior, digital delivery expectations, subscription expectations, and merchandising layout.
+Squarespace customer preparation should separate commerce history from broader site identity. Source stores may combine customers, contacts, newsletter subscribers, donors, members, account users, booking participants, and CRM profiles in one system. Squarespace may represent these meanings differently.
 
-Prepare product samples that include:
+| Record type                | Preparation focus                                                                                                 | Reason to prepare early                                                          |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Customers                  | Names, emails, billing addresses, shipping addresses, phone numbers, order history links, and customer notes.     | Customer records must match order-history expectations.                          |
+| Contacts and subscribers   | Marketing contacts, newsletter subscribers, inquiry contacts, donor contacts, and CRM-style records.              | Not every contact is necessarily a commerce customer.                            |
+| Members and account access | Login expectations, member-only content, customer accounts, subscriptions, courses, appointments, or gated pages. | Access control may require Squarespace setup or external-system handling.        |
+| Guest buyers               | Orders tied to email addresses without target account login.                                                      | Guest order history should be validated separately from account-based customers. |
+| External IDs               | CRM, fulfillment, accounting, tax, loyalty, or customer-service references.                                       | External systems may need original identifiers after launch.                     |
 
-* a simple physical product with ordinary price, SKU, image, inventory, and category assignment;
-* a product with multiple variants such as size, color, style, or another selectable dimension;
-* a product where each variant has its own SKU, price, image, or inventory value;
-* a digital product or product with non-physical delivery expectations;
-* a service-like, event-like, donation-like, or appointment-related selling case where relevant;
-* a product with sale pricing, discounts, or campaign context;
-* a product assigned to multiple categories or tags;
-* a product with important SEO fields, page name, image, or historical URL value;
-* a product connected to an external system, fulfillment process, marketplace, or inventory source.
+Customer preparation should include privacy review. Remove records that are no longer needed, confirm which records are legally and operationally appropriate to move, and decide whether inactive customers or marketing-only contacts should be included.
 
-A sample set should include the hardest product cases. A Demo Migration that includes only simple products may not reveal whether the target Squarespace store can represent the source catalog’s real selling behavior.
+### Prepare Historical Order and Transaction Data <a href="#prepare-historical-order-and-transaction-data" id="prepare-historical-order-and-transaction-data"></a>
 
-### 3. Prepare Categories, Tags, Navigation, and Discovery Paths <a href="#id-3-prepare-categories-tags-navigation-and-discovery-paths" id="id-3-prepare-categories-tags-navigation-and-discovery-paths"></a>
+Order preparation should distinguish migrated history from live commerce configuration. Historical orders can help customer service, accounting review, warranty lookup, and operational continuity, but they do not recreate live checkout, payment, shipping, tax, fulfillment, or subscription workflows.
 
-Squarespace product discovery may depend on store pages, categories, tags, site navigation, product blocks, page sections, search behavior, collection-style pages, and design layout. A product can migrate as a record but still fail commercially if customers cannot find it or understand where it belongs.
+| Order area     | What to prepare                                                                                      | What to check during Demo Migration                                                         |
+| -------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Order status   | Source statuses, fulfillment states, payment states, cancellation states, and refund states.         | Whether migrated labels are understandable for operations teams.                            |
+| Line items     | Product names, variant selections, SKU references, quantities, discounts, tax, shipping, and totals. | Orders with variants, discounts, refunds, shipping fees, tax lines, and manual adjustments. |
+| Customer links | Registered customer orders, guest orders, duplicate emails, and historical address changes.          | Whether orders remain associated with the expected customer or email.                       |
+| Transactions   | Payment labels, transaction references, refunds, charge states, and gateway identifiers.             | Whether transaction data is useful as historical reference.                                 |
+| Fulfillment    | Tracking numbers, carriers, shipment splits, fulfillment notes, and external fulfillment IDs.        | Whether fulfillment details remain readable after migration.                                |
 
-Prepare:
+Recurring payment behavior, subscription renewal, saved payment methods, fraud rules, automated emails, and fulfillment automation should be reviewed as live target operations, not as ordinary historical order data.
 
-| Area                             | Preparation task                                                                                       |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Product categories               | Identify product grouping, browsing structure, and any category pages that affect customer navigation. |
-| Tags or labels                   | Confirm whether tags are only internal organization or customer-facing discovery support.              |
-| Store pages                      | Identify the product pages or catalog areas that should receive migrated products.                     |
-| Menus and navigation             | Prepare the paths customers use to reach products, policies, service pages, and checkout.              |
-| Product blocks and page sections | Identify places where product display is controlled by page design rather than only product data.      |
-| Search-sensitive landing pages   | List pages that receive traffic or help customers choose products.                                     |
+### Prepare Checkout, Payment, Tax, Shipping, Discount, and Fulfillment Settings <a href="#prepare-checkout-payment-tax-shipping-discount-and-fulfillment-settings" id="prepare-checkout-payment-tax-shipping-discount-and-fulfillment-settings"></a>
 
-Review discovery from the storefront perspective. The target site should prove that representative products can be reached through expected customer paths, not only that they exist in the store manager.
+Target checkout settings should be prepared separately from migrated data. A merchant can move product, customer, and order history while still needing to configure payment services, tax rules, shipping methods, discount behavior, fulfillment workflows, notification settings, and operational policies in Squarespace or connected tools.
 
-### 4. Prepare Customer, Contact, Subscriber, and Audience Data <a href="#id-4-prepare-customer-contact-subscriber-and-audience-data" id="id-4-prepare-customer-contact-subscriber-and-audience-data"></a>
+| Operational area | Preparation task                                                                                                   | Boundary to document                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Payment          | Decide payment providers, accepted currencies, transaction workflow, fraud review, and payment notifications.      | Migrated payment history is not the same as live payment processing.      |
+| Tax              | Review tax regions, exemption logic, external tax tools, and historical tax-line expectations.                     | Tax setup should be configured and tested on the target store.            |
+| Shipping         | Define shipping methods, carrier rules, pickup/local delivery rules, fulfillment locations, and shipping labels.   | Historical shipping data does not rebuild live shipping configuration.    |
+| Discounts        | Identify coupons, discount codes, campaign rules, and expired promotions.                                          | Old discounts may be historical references rather than active promotions. |
+| Fulfillment      | Confirm internal fulfillment, dropshippers, warehouse tools, third-party logistics, and tracking responsibilities. | Fulfillment integrations may need separate setup or review.               |
 
-Squarespace may combine commerce, website, email, marketing, donor, member, subscriber, appointment, or contact-related contexts depending on how the target site is used. Migration preparation should identify which people-related records are ordinary customers and which represent a broader audience or external system.
+Preparation should include a simple checkout test plan. The merchant should know which live checkout scenarios must be tested after migration and before DNS or domain launch.
 
-Prepare samples that include:
+### Prepare Content, Media, SEO, URLs, and Domains <a href="#prepare-content-media-seo-urls-and-domains" id="prepare-content-media-seo-urls-and-domains"></a>
 
-* customers with order history;
-* customers with multiple addresses where relevant;
-* guest checkout records where available;
-* subscribers, newsletter contacts, or audience records if they matter to the business;
-* donors, members, appointment clients, or service customers where relevant;
-* customers linked to discounts, subscriptions, memberships, campaigns, or outside systems;
-* customers with external CRM, email marketing, accounting, fulfillment, or analytics identifiers.
+Squarespace migration planning should treat content continuity as a core readiness item. Product and order migration alone does not protect organic traffic, customer navigation, brand presentation, or launch quality.
 
-Do not assume every source contact type becomes the same target record type. Contact, subscriber, customer, donor, and member-like data should be classified before migration scope is finalized.
+| Site area      | Preparation task                                                                                              | Why it matters                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| CMS Pages      | List pages to migrate, rewrite, merge, redirect, exclude, or rebuild manually.                                | Old pages may not match the new Squarespace site structure.               |
+| Blog Posts     | Review post status, authorship, categories/tags, dates, media, internal links, and high-value posts.          | Blog continuity can affect SEO and customer trust.                        |
+| Media          | Prepare image files, video embeds, downloadable files, galleries, alt text expectations, and media ownership. | Missing or low-quality media can make migrated content appear incomplete. |
+| URLs and slugs | Export important product, category, page, post, and landing-page URLs.                                        | Redirect planning depends on knowing the source URL structure.            |
+| SEO metadata   | Review titles, descriptions, canonical expectations, structured content, and indexed pages.                   | Migration should protect search visibility where possible.                |
+| Domains        | Confirm launch domain, subdomain use, DNS timing, SSL readiness, and redirect responsibility.                 | Domain changes can affect launch timing and validation.                   |
 
-### 5. Prepare Order and Transaction Samples <a href="#id-5-prepare-order-and-transaction-samples" id="id-5-prepare-order-and-transaction-samples"></a>
+A practical preparation step is to identify the highest-value URLs before migration begins. These URLs should be included in Demo Migration review and post-launch checks.
 
-Historical order and transaction data should remain useful after migration. For Squarespace, order records may need product lines, totals, discounts, payment labels, shipping labels, tax values, fulfillment status, customer details, notes, refunds, digital delivery context, subscription or donation context, and outside-system references.
+### Prepare Templates, Design, Navigation, and Site-Builder Dependencies <a href="#prepare-templates-design-navigation-and-site-builder-dependencies" id="prepare-templates-design-navigation-and-site-builder-dependencies"></a>
 
-Prepare order samples that include:
+Squarespace stores depend heavily on presentation. Migration can move selected data, but template behavior, layout sections, navigation menus, product-page presentation, mobile display, checkout appearance, and brand design may require target-site setup.
 
-* paid and unpaid orders;
-* fulfilled and unfulfilled orders;
-* refunded, canceled, or partially fulfilled orders;
-* orders with discounts, coupons, sale prices, or manual adjustments;
-* orders with varied shipping and payment labels;
-* orders with tax-sensitive totals;
-* orders connected to digital products, services, donations, appointments, subscriptions, or membership-like behavior where relevant;
-* orders with customer notes or internal notes;
-* orders connected to fulfillment, accounting, CRM, email, analytics, or marketplace systems.
+| Design dependency         | Preparation focus                                                                                               | Recommended action                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Templates and sections    | Source templates, page builders, blocks, custom sections, and landing-page patterns.                            | Decide what will be rebuilt manually in Squarespace.         |
+| Menus and navigation      | Header menus, footer menus, collection links, product navigation, and content hierarchy.                        | Map important navigation paths to target pages.              |
+| Product-page presentation | Image layout, variant selector display, product detail placement, related products, and merchandising sections. | Validate representative products during Demo Migration.      |
+| Mobile behavior           | Mobile menu, content stacking, product images, checkout flow, and responsive sections.                          | Review mobile display before Full Migration acceptance.      |
+| Embedded content          | Forms, maps, calendars, videos, scripts, widgets, and external embeds.                                          | Decide whether each embed is rebuilt, replaced, or excluded. |
 
-Historical order preparation should focus on readability. Live checkout behavior should be prepared separately through target Squarespace configuration.
+This preparation avoids a common misunderstanding: migrated content is not the same as a fully recreated visual site.
 
-### 6. Separate Migrated History from Live Checkout Setup <a href="#id-6-separate-migrated-history-from-live-checkout-setup" id="id-6-separate-migrated-history-from-live-checkout-setup"></a>
+### Prepare Apps, APIs, External Systems, and Unsupported Data <a href="#prepare-apps-apis-external-systems-and-unsupported-data" id="prepare-apps-apis-external-systems-and-unsupported-data"></a>
 
-A common preparation error is treating migrated historical checkout data as live checkout readiness. Past payment, shipping, discount, and tax values can help preserve order history, but live checkout depends on Squarespace settings, payment configuration, shipping rules, tax configuration, fulfillment setup, discounts, and enabled extensions.
+Squarespace may interact with third-party services, custom workflows, API-supported records, and externally owned systems. Preparation should classify these before the migration scope is finalized.
 
-Prepare separate notes for:
+| System type            | Preparation question                                                                                                           | Possible handling                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Commerce APIs          | Does the data align with supported products, inventory, orders, contacts, transactions, profiles, or webhook workflows?        | Include supported records in migration scope where appropriate.                            |
+| External systems       | Does an ERP, CRM, accounting, shipping, tax, fulfillment, subscription, booking, donation, or marketing system own the record? | Keep externally owned records outside ordinary migration or review through Custom Service. |
+| Third-party apps       | Does an app create fields, workflows, discounts, member access, forms, or custom objects?                                      | Identify supported fields, Add-ons, Custom Service review needs, or accepted exclusions.   |
+| Custom source behavior | Does the source store use custom tables, scripts, unusual attributes, or marketplace/channel data?                             | Decide whether the data is migrated, simplified, rebuilt, or excluded.                     |
 
-| Checkout area         | Preparation question                                                                                                                                |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Payment               | Which historical payment labels should remain readable, and which live payment methods must be configured?                                          |
-| Shipping              | Which historical shipping labels should remain readable, and which live shipping rules, rates, pickup, or delivery expectations must be configured? |
-| Tax                   | Which historical tax values should remain readable, and which target tax settings must be prepared?                                                 |
-| Discounts             | Which past discounts should remain understandable, and which active promotions must be rebuilt?                                                     |
-| Fulfillment           | Which fulfillment states should remain readable, and which operational processes must be configured after migration?                                |
-| Special checkout data | Are source checkout fields ordinary order notes, customer data, app-owned data, or custom scope?                                                    |
+Unsupported data should not remain vague. If a record cannot be migrated into a useful Squarespace structure, the preparation file should mark it as manual setup, external-system retention, Custom Service review, or accepted exclusion.
 
-This separation protects launch planning. A migrated order can look acceptable while the target store still needs live checkout configuration and testing.
+### Prepare Demo Migration Samples <a href="#prepare-demo-migration-samples" id="prepare-demo-migration-samples"></a>
 
-### 7. Prepare Content, CMS Pages, Blog Posts, and Design Evidence <a href="#id-7-prepare-content-cms-pages-blog-posts-and-design-evidence" id="id-7-prepare-content-cms-pages-blog-posts-and-design-evidence"></a>
+Demo Migration should be prepared with representative records, not only easy records. The samples should prove whether Squarespace can represent the store’s real operating patterns.
 
-Squarespace is often chosen for its website and content experience, so content preparation matters as much as commerce preparation. Products can migrate correctly while the site still needs page layout, menus, blocks, sections, galleries, images, forms, policy pages, campaign pages, or brand content rebuilt.
+| Sample group | Include examples of                                                                                                                                                | Pass condition                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| Products     | Simple products, variant products, product media, inventory differences, Store Page placement, hidden products, and unusual product types.                         | Product data and presentation expectations can be reviewed clearly. |
+| Orders       | Guest orders, customer-linked orders, refunded orders, discounted orders, taxed orders, shipped orders, subscription/payment-plan examples, and orders with notes. | Historical order information is readable and operationally useful.  |
+| Customers    | Registered customers, guest buyers, contacts, subscribers, members, duplicate emails, and customers with external IDs.                                             | Customer identity is not confused with marketing or member access.  |
+| Content      | High-value pages, Blog Posts, media-heavy pages, internal links, SEO fields, redirects, and old URLs.                                                              | Content and SEO continuity can be tested before launch.             |
+| Integrations | App fields, external references, CRM IDs, fulfillment IDs, tax/shipping/payment references, and unsupported records.                                               | Scope boundaries are visible before Full Migration.                 |
 
-Prepare:
+A weak Demo Migration sample can make the migration appear safer than it is. The preparation checklist should intentionally include edge cases that are important to the merchant.
 
-* CMS Pages that should move or be rebuilt;
-* Blog Posts that should remain available;
-* landing pages that support sales, campaigns, services, events, donations, or memberships;
-* policy pages such as shipping, returns, privacy, terms, delivery, and contact information;
-* gallery, portfolio, or image-heavy pages that affect brand presentation;
-* menus, footer links, button paths, and customer navigation;
-* forms, email capture areas, appointment links, donation paths, or membership entry points where relevant;
-* important images, alt text, page titles, descriptions, and layout expectations.
+### Prepare Add-ons, Custom Service, Entity Points, and Additional Migration Options <a href="#prepare-add-ons-custom-service-entity-points-and-additional-migration-options" id="prepare-add-ons-custom-service-entity-points-and-additional-migration-options"></a>
 
-Content should be prioritized by business value. Pages that affect traffic, trust, sales, customer support, service booking, donations, or campaign conversion should be prepared before lower-value legacy pages.
+Some Squarespace migration requirements are standard, while others need explicit scope handling. Preparation should classify these before the merchant approves the migration path.
 
-### 8. Prepare SEO, URLs, and Redirect Evidence <a href="#id-8-prepare-seo-urls-and-redirect-evidence" id="id-8-prepare-seo-urls-and-redirect-evidence"></a>
+| Scope item                   | Preparation rule                                                                                                                                     | Boundary                                                                                                                                                        |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add-ons                      | Identify specific supported data needs that extend migration output.                                                                                 | Add-ons are not a substitute for Custom Service, custom development, or full site reconstruction.                                                               |
+| Custom Service               | Flag non-standard product behavior, external systems, unsupported structures, app-owned records, or unusual content and commerce requirements.       | Custom Service does not automatically mean every workflow is rebuilt inside Squarespace.                                                                        |
+| Entity Points                | Separate new eligible records from previously counted records.                                                                                       | Records already counted through the service license do not consume Entity Points again only because another migration action occurs on the same migration path. |
+| Additional Migration Options | Plan how later products, customers, orders, Blog Posts, URL changes, or content updates will be rechecked if follow-up migration activity is needed. | Follow-up activity should trigger validation, not automatic launch approval.                                                                                    |
 
-Squarespace migration planning should include URL continuity and search-entry paths. A hosted site migration can change page structure, product routes, collection paths, blog URLs, image paths, or landing-page organization.
+New Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Previously counted records should not be counted again simply because the merchant performs another migration action for the same migration path.
 
-Prepare SEO evidence for:
+### Squarespace Preparation Checklist <a href="#squarespace-preparation-checklist" id="squarespace-preparation-checklist"></a>
 
-| SEO area                    | What to prepare                                                               |
-| --------------------------- | ----------------------------------------------------------------------------- |
-| High-value product URLs     | Products with organic traffic, backlinks, campaigns, or customer recognition. |
-| Category or collection URLs | Browsing paths that should remain understandable after migration.             |
-| CMS Page URLs               | Pages that receive traffic or support customer trust.                         |
-| Blog Post URLs              | Posts with search value, referral traffic, or evergreen support value.        |
-| Metadata                    | Priority titles, descriptions, slugs, and image alt text.                     |
-| Redirect expectations       | Legacy URLs that should point to appropriate target pages.                    |
-| Navigation paths            | Menus and internal links that guide customers to important pages.             |
-
-SEO preparation should not attempt to preserve every low-value path equally. It should identify the pages where continuity matters most.
-
-### 9. Inventory Extensions, APIs, Webhooks, and Connected Services <a href="#id-9-inventory-extensions-apis-webhooks-and-connected-services" id="id-9-inventory-extensions-apis-webhooks-and-connected-services"></a>
-
-Squarespace migrations can involve more than native records. Extensions, APIs, webhooks, email marketing tools, CRM systems, accounting systems, shipping services, appointment systems, donation tools, memberships, analytics, fulfillment services, and other connected systems may carry business meaning outside standard migration data.
-
-Prepare an integration inventory:
-
-| Connected area                     | What to confirm                                                                                                         |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Squarespace extensions             | Whether the extension owns data, changes checkout, affects shipping, supports marketing, or only needs reconfiguration. |
-| Commerce API usage                 | Whether product, order, transaction, or inventory IDs need preservation or mapping.                                     |
-| Webhooks                           | Whether external workflows need to be rebuilt or reconnected.                                                           |
-| Email and CRM tools                | Whether subscriber, contact, customer, or consent data should migrate or be reconnected.                                |
-| Accounting and fulfillment systems | Whether historical IDs, order references, tax values, or shipping data must remain traceable.                           |
-| Analytics and advertising          | Whether tracking continuity, campaign pages, or product feeds need separate setup.                                      |
-| App-owned data                     | Whether data should be migrated, rebuilt, excluded, or reviewed through Custom Service.                                 |
-
-Classify each connected service as migrated, mapped, reconfigured, rebuilt, excluded, or escalated for Custom Service review.
-
-### 10. Choose Demo Migration Samples Deliberately <a href="#id-10-choose-demo-migration-samples-deliberately" id="id-10-choose-demo-migration-samples-deliberately"></a>
-
-Demo Migration should test the records that carry the most business meaning. For Squarespace, that usually includes product structure, content structure, order readability, SEO paths, and connected-system data.
-
-| Sample type                                                           | Why it matters                                                                       |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Product with variants                                                 | Tests variant, SKU, inventory, image, and price interpretation.                      |
-| Digital, service-like, donation-like, or subscription-related product | Tests whether special selling meaning is preserved, rebuilt, or excluded.            |
-| Category or tag path                                                  | Tests storefront discovery and product grouping.                                     |
-| Customer/contact sample                                               | Tests customer, subscriber, donor, member-like, or audience meaning where relevant.  |
-| Varied order                                                          | Tests payment, shipping, tax, discount, fulfillment, notes, and transaction context. |
-| CMS Page or Blog Post                                                 | Tests content structure, page quality, and publishing continuity.                    |
-| High-value URL                                                        | Tests SEO and redirect planning.                                                     |
-| Extension or API-dependent record                                     | Tests app-owned, webhook, or outside-system handling.                                |
-
-If the sample set does not include Squarespace-relevant complexity, Demo Migration may give a false sense of readiness.
-
-### 11. Identify Add-on and Custom Service Signals Early <a href="#id-11-identify-add-on-and-custom-service-signals-early" id="id-11-identify-add-on-and-custom-service-signals-early"></a>
-
-Some Squarespace migrations fit standard service capability. Others need filtering, mapping, configuration, custom handling, or integration-aware review before Full Migration.
-
-Consider Add-ons when the need stays within supported service capability:
-
-* use the Data Filter Add-on when only selected eligible records should migrate;
-* use Advanced Data Mapping when supported source fields need controlled mapping into supported Squarespace target fields;
-* use Advanced Data Configure when migrated values need supported modification before reaching the Target Platform.
-
-Custom Service review should be considered when:
-
-* the Source Platform or Target Platform is Custom Platform;
-* source product structures require non-standard transformation;
-* custom fields or outside-system identifiers must be preserved;
-* extension-owned, API-connected, webhook-triggered, or app-owned data must be migrated or mapped;
-* content, SEO, or URL behavior requires bespoke treatment beyond supported configuration;
-* checkout, shipping, payment, tax, donation, membership, appointment, or subscription-related behavior is custom;
-* tailored migration behavior goes beyond Standard Add-on capability.
+| Checklist area        | Ready when                                                                                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Target role           | The merchant knows whether Squarespace is the main storefront, content-first site with commerce, service-business site, digital product shop, or compact commerce destination. |
+| Product scope         | Product types, variants, media, Store Pages, inventory, SEO fields, and unsupported selling behavior are classified.                                                           |
+| Customer scope        | Customers, contacts, subscribers, members, guest buyers, and external IDs are separated.                                                                                       |
+| Order scope           | Historical orders, transactions, refunds, subscriptions/payment plans, fulfillment data, and external references are prepared for sample validation.                           |
+| Operational setup     | Checkout, payment, tax, shipping, discounts, fulfillment, and notifications are assigned to target configuration or connected services.                                        |
+| Content and SEO       | CMS Pages, Blog Posts, media, URLs, redirects, SEO metadata, domains, and internal links are prepared.                                                                         |
+| Design and navigation | Templates, sections, page layout, menus, product-page display, mobile behavior, and embedded content are assigned to target-site build work where needed.                      |
+| Integrations          | APIs, third-party apps, external systems, unsupported structures, and accepted exclusions are documented.                                                                      |
+| Demo Migration        | Representative samples include ordinary records and high-risk records.                                                                                                         |
+| Scope controls        | Add-ons, Custom Service, Entity Points, Additional Migration Options, and accepted exclusions are clearly separated.                                                           |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Squarespace preparation should make the target result testable before Full Migration begins. Products, variants, SKUs, customers, contacts, orders, transactions, content, URLs, checkout settings, extensions, APIs, webhooks, and outside-system data should be prepared as connected parts of a hosted site and commerce environment.
+Squarespace preparation works best when the merchant treats migration as both a commerce-data project and a hosted site readiness project. Products, customers, orders, content, media, SEO, redirects, design dependencies, checkout settings, and integrations should be prepared before Demo Migration, not discovered during launch.
 
-Build Demo Migration samples from the records that carry the most business meaning. If those samples reveal unsupported product behavior, app-owned data, custom fields, important URL risks, content rebuild requirements, or outside-system dependencies, resolve the requirement through target configuration, Add-ons, or Custom Service review before continuing.
+The strongest preparation outcome is a clear scope map: what should migrate, what should be configured in Squarespace, what should be rebuilt manually, what needs Add-ons, what needs Custom Service review, and what should be excluded. With that map, Demo Migration becomes a meaningful proof step before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should I prepare first for a Squarespace migration?**
+**What should be prepared first before migrating to Squarespace?**
 
-Start with the target Squarespace context, product and variant samples, content and URL priorities, customer/contact records, order samples, checkout requirements, and connected services. These areas show whether the migration is straightforward or needs deeper review.
+Start by defining the target role for Squarespace. The merchant should know whether Squarespace will be the main storefront, a content-first site with commerce, a service-business site, a digital product shop, or a compact commerce destination. That decision affects products, content, SEO, checkout, integrations, and design planning.
 
-**Should I prepare both content and commerce data?**
+**Does Squarespace preparation only require product and order exports?**
 
-Yes. Squarespace often combines website content and commerce in the same target experience. CMS Pages, Blog Posts, menus, images, product pages, policies, landing pages, and SEO paths can be as important as product and order records.
+No. Squarespace preparation should also include CMS Pages, Blog Posts, media, Store Pages, URLs, redirects, SEO metadata, domains, checkout settings, payment, tax, shipping, discounts, fulfillment, integrations, and design dependencies.
 
-**Do historical orders prove that checkout is ready?**
+**How should products be prepared for Squarespace migration?**
 
-No. Historical orders can preserve past payment, shipping, tax, discount, and fulfillment context, but live checkout depends on target Squarespace settings and enabled services.
+Products should be classified by type, variant structure, inventory behavior, media, Store Page placement, SEO fields, visibility, and unsupported selling behavior. Products with variants, unusual options, gift cards, downloads, service products, subscriptions/payment plans, or bundles should be included in Demo Migration samples when relevant.
 
-**Why should extensions and APIs be reviewed before migration?**
+**What order data should be included in Demo Migration samples?**
 
-Extensions, APIs, webhooks, and connected services may own data or workflow behavior outside ordinary product, customer, order, or content records. They should be classified before scope is finalized.
+Demo Migration samples should include guest orders, customer-linked orders, refunded orders, discounted orders, taxed orders, shipped orders, orders with variant products, orders with notes, and any subscription/payment-plan or external fulfillment examples that matter to operations.
 
-**When should Custom Service review be considered for Squarespace?**
+**When should Custom Service be reviewed before migrating to Squarespace?**
 
-Custom Service review should be considered when the migration involves Custom Platform data, app-owned records, custom fields, outside-system identifiers, non-standard product transformation, API or webhook dependencies, or bespoke content and URL handling beyond Standard Add-on capability.
+Custom Service should be reviewed when the source store includes non-standard product behavior, third-party app records, custom fields, external systems, unsupported structures, unusual content relationships, custom workflows, or integration-owned records that cannot be handled through normal migration scope or specific Add-ons.
