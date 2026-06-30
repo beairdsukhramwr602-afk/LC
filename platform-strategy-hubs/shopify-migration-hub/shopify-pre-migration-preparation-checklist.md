@@ -1,14 +1,14 @@
 # Shopify Pre-Migration Preparation Checklist
 
-Shopify preparation should turn source-store complexity into clear Target Store decisions before migration execution begins. A source export can show what exists, but it does not decide how products, variants, collections, customer context, CMS Pages, Blog Posts, URLs, apps, metafields, themes, markets, or external identifiers should work after migration.
+Shopify preparation should turn source-store complexity into clear target store decisions before migration execution begins. A source export can show what exists, but it does not decide how products, variants, collections, customer context, CMS Pages, Blog Posts, URLs, apps, metafields, themes, markets, or external identifiers should work after migration.
 
-A prepared Shopify migration gives each important source-store behavior a target destination. Some records can move through standard supported migration behavior. Some need Shopify configuration. Some need apps, theme work, metafields, metaobjects, mapping decisions, filtering, or Custom Service review. The preparation goal is to make Demo Migration and Full Migration review easier to judge because the expected Shopify outcome is already defined.
+A prepared Shopify migration gives each important source-store behavior a target destination. Some records can move through standard supported migration behavior. Some need Shopify configuration. Some need apps, theme work, metafields, metaobjects, mapping decisions, filtering, or Custom Service review. The preparation goal is to make Demo Migration and full migration review easier to judge because the expected Shopify outcome is already defined.
 
 ### Confirm the Target Store Structure <a href="#confirm-the-target-store-structure" id="confirm-the-target-store-structure"></a>
 
-Start by defining the intended Shopify operating model. Shopify is a hosted SaaS Target Platform, so the migration should prepare for Shopify-defined product, collection, content, URL, customer, order, market, app, and theme structures rather than assuming the Source Platform structure can be copied without interpretation.
+Start by defining the intended Shopify operating model. Shopify is a hosted SaaS Target Platform, so the migration should prepare for Shopify-defined product, collection, content, URL, customer, order, market, app, and theme structures rather than assuming the source platform structure can be copied without interpretation.
 
-Target Store preparation should confirm:
+Target store preparation should confirm:
 
 | Area to confirm                 | Shopify preparation decision                                                                                                                                    | Why it matters                                                                                                                           |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -117,14 +117,14 @@ A dependency inventory should not assume that every source function must be recr
 
 ### Prepare Access, Backups, and Migration Inputs <a href="#prepare-access-backups-and-migration-inputs" id="prepare-access-backups-and-migration-inputs"></a>
 
-Operational readiness should be confirmed before Demo Migration or Full Migration work begins. Missing access, unclear permissions, incomplete backups, or unassigned review responsibilities can delay the project even when the data plan is strong.
+Operational readiness should be confirmed before Demo Migration or full migration work begins. Missing access, unclear permissions, incomplete backups, or unassigned review responsibilities can delay the project even when the data plan is strong.
 
 Prepare these access and control items:
 
 * source-store admin access with permission to review and export relevant records;
 * Shopify admin access with enough permission for migration setup and result review;
 * collaborator access, staff-account permissions, or app/API access where needed;
-* source-store backup or rollback reference appropriate to the Source Platform;
+* source-store backup or rollback reference appropriate to the source platform;
 * target-store backup, duplicate theme, staging theme, or controlled pre-launch review method where relevant;
 * password protection, storefront visibility, domain timing, tax settings, shipping setup, payment-test settings, notification settings, and launch controls;
 * access to app, extension, integration, ERP, PIM, CRM, marketplace, accounting, warehouse, analytics, or fulfillment systems when those systems affect migration review;
@@ -153,7 +153,7 @@ Prepare Demo Migration samples that include:
 
 Each sample should include an expected result. A useful Demo Migration sample explains what must be checked in Shopify: product buying clarity, variant behavior, collection placement, content usefulness, customer context, order history, URL destination, app dependency, metafield placement, or external identifier continuity.
 
-Demo Migration review should not be treated as final launch validation. It is a preparation tool that helps expose whether the target Shopify model is clear enough before Full Migration decisions are made.
+Demo Migration review should not be treated as final launch validation. It is a preparation tool that helps expose whether the target Shopify model is clear enough before full migration decisions are made.
 
 ### Final Preparation Check <a href="#final-preparation-check" id="final-preparation-check"></a>
 
@@ -173,9 +173,9 @@ The final check should make the next step easier, not longer. If preparation sti
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify preparation is strongest when it defines the future Target Store before migration execution begins. Product and variant evidence, collection logic, customer and order context, CMS Pages, Blog Posts, URL priorities, app dependencies, metafields, markets, access, backups, and Demo Migration samples should all point toward a clear Shopify operating model.
+Shopify preparation is strongest when it defines the future target store before migration execution begins. Product and variant evidence, collection logic, customer and order context, CMS Pages, Blog Posts, URL priorities, app dependencies, metafields, markets, access, backups, and Demo Migration samples should all point toward a clear Shopify operating model.
 
-A clean preparation process does not remove every platform difference. It makes those differences visible early enough to assign the right handling path: Shopify configuration, supported migration behavior, Add-ons, Custom Service, validation, or business cleanup. That discipline gives Demo Migration and Full Migration results a practical standard for review.
+A clean preparation process does not remove every platform difference. It makes those differences visible early enough to assign the right handling path: Shopify configuration, supported migration behavior, Add-ons, Custom Service, validation, or business cleanup. That discipline gives Demo Migration and full migration results a practical standard for review.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 

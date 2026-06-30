@@ -1,182 +1,178 @@
 # Selecting the Right Migration Approach for Adobe Commerce
 
-An Adobe Commerce migration approach should be selected by matching enterprise operating requirements to the right level of service responsibility. Record volume matters, but Adobe Commerce decisions are often shaped more strongly by B2B company structures, shared catalogs, buyer-specific pricing, product architecture, website/store/store-view scope, Content Staging, inventory, integrations, extension-owned data, and custom business logic.
+Selecting the right Adobe Commerce migration approach requires more than estimating record volume. Adobe Commerce projects can involve B2B company accounts, shared catalogs, buyer-specific pricing, configurable products, multiple websites and store views, staged content, external identifiers, ERP/PIM/CRM/WMS dependencies, and custom modules. The service path should match how much of that operating model must be migrated, configured, customized, or validated.
 
-The right approach should explain what can move through a supported migration path, what needs Add-ons, what requires Managed Service involvement, what belongs in Custom Service, and how the Entity Points Plan should support the intended scope. It should also define how Demo Migration results will be used before Full Migration and when Additional Migration Options may be needed close to launch.
+The right approach is not automatically the most complex option. Standard Service can be suitable when the expected data is supported, the source structure is clean, and the customer can manage the process and validation. Managed Service can help when execution coordination and launch pressure are high. Add-ons can support bounded filtering, mapping, or configuration within supported behavior. Custom Service becomes important when the project requires unsupported records, custom logic, custom fields, external-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-### Start with Adobe Commerce Operating Complexity <a href="#start-with-adobe-commerce-operating-complexity" id="start-with-adobe-commerce-operating-complexity"></a>
+### Adobe Commerce Approach Selection Starts With Operating Complexity <a href="#adobe-commerce-approach-selection-starts-with-operating-complexity" id="adobe-commerce-approach-selection-starts-with-operating-complexity"></a>
 
-Adobe Commerce complexity usually comes from relationships, scope, and business rules rather than raw record totals. A smaller B2B store can require deeper review than a larger retail catalog if company accounts, shared catalogs, buyer permissions, quote behavior, or contract pricing must remain meaningful after launch. A larger store can be more straightforward when products, customers, orders, content, and URLs follow clean structures.
+Approach selection should begin with the target operating model. Adobe Commerce may be chosen because the merchant needs enterprise catalog governance, B2B purchasing, regional storefronts, complex pricing, integration ownership, or staged content. Those reasons affect the migration service path.
 
-Use the first review to separate size from structural difficulty.
+| Operating signal                              | Approach implication                                                                                             |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Standard catalog and customer/order history   | May fit Standard Service if supported fields and validation capacity are clear.                                  |
+| Large but compatible catalog                  | May fit Standard Service or Managed Service depending on execution workload and customer capacity.               |
+| B2B company accounts and shared catalogs      | Requires deeper preparation; may need Managed Service, Add-ons, or Custom Service depending on source structure. |
+| Buyer-specific pricing or contract visibility | Needs careful scoping because not every price rule is ordinary product price data.                               |
+| Multiple websites and store views             | Increases preparation and validation burden; may justify Managed Service or mapping Add-ons.                     |
+| ERP/PIM/CRM/WMS dependency                    | May require Custom Service if identifiers or owned records must be preserved beyond supported fields.            |
+| Custom modules or unsupported source logic    | Requires Custom Service review before final scope approval.                                                      |
 
-| Review area                    | Lower-complexity signal                                             | Higher-complexity signal                                                                                                                    |
-| ------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Buyer model                    | Mainly retail customers and ordinary customer groups.               | Company accounts, company administrators, company users, roles, permissions, purchase approvals, quote workflows, or B2B account ownership. |
-| Pricing and catalog visibility | Standard product pricing with limited customer-group variation.     | Shared catalogs, buyer-specific pricing, negotiated prices, restricted assortments, tier pricing, or ERP-owned pricing rules.               |
-| Catalog model                  | Mostly simple and configurable products with consistent attributes. | Complex configurable, bundle, grouped, virtual, downloadable, or custom-option behavior tied to business rules.                             |
-| Storefront scope               | One website, one store, and one store view.                         | Multiple websites, stores, store views, languages, brands, regions, domains, or scope-specific content and URLs.                            |
-| Content and campaigns          | Static CMS Pages, Blog Posts, and ordinary promotional content.     | Scheduled campaigns, Content Staging expectations, launch-sensitive landing pages, or regional merchandising timelines.                     |
-| Integrations and custom data   | Most records use native source structures.                          | ERP, PIM, CRM, WMS, tax, payment, procurement, marketplace, extension-owned, or custom-module data controls operational meaning.            |
+A useful service decision should name the data that migrates, the configuration done in Adobe Commerce, the Add-ons needed for supported adjustments, the Custom Service items requiring review, and the validation responsibility after Demo Migration.
 
-The migration approach should match the highest-risk part of the store. Adobe Commerce can use Standard Service for compatible entities while using Add-ons or Custom Service for specific requirements that need additional handling.
+### When Standard Service Can Be Realistic <a href="#when-standard-service-can-be-realistic" id="when-standard-service-can-be-realistic"></a>
 
-### Use Standard Service When the Migration Path Is Structurally Compatible <a href="#use-standard-service-when-the-migration-path-is-structurally-compatible" id="use-standard-service-when-the-migration-path-is-structurally-compatible"></a>
-
-Standard Service is usually the right starting point when the source data fits supported entities and the Adobe Commerce Target Store can accept those entities without bespoke interpretation. It works best when the customer can self-perform the migration process on the Next-Cart website, review Demo Migration results, and proceed to Full Migration after representative records behave correctly.
-
-For Adobe Commerce, Standard Service can be appropriate when enterprise features are not part of the migrated launch scope, or when they will be configured separately in the Target Store without requiring custom source-data transformation. The store can still be commercially important or data-heavy; the key question is whether migrated records fit the supported migration path and can be validated confidently.
+Standard Service can be realistic when the Adobe Commerce migration stays within supported data behavior and the customer has enough internal capacity to prepare, execute, and validate the project. This does not mean the store must be small. It means the scope is understandable, supported, and reviewable.
 
 Standard Service is most appropriate when:
 
-* products, categories, customers, orders, reviews, CMS Pages, Blog Posts, images, URLs, and other selected entities fit a supported migration path;
-* the Target Store website, store, and store-view structure is defined before migration configuration;
-* product types, variants, attributes, and attribute sets can be validated through representative Demo Migration samples;
-* B2B company accounts, shared catalogs, quotes, purchase approvals, and custom buyer permissions are not required in the migrated scope, or will be configured separately outside migration scope;
-* pricing does not depend on unsupported negotiated-pricing logic, contract-pricing rules, or custom commercial behavior;
-* integration-owned identifiers are either not needed, supported in the approved scope, or can be recreated outside migration;
-* the customer has internal owners who can validate catalog, customer, order, content, URL, storefront, and buyer-experience outcomes.
+* product data can be represented through supported catalog records;
+* configurable products, simple products, categories, attributes, images, customers, orders, coupons, reviews, CMS Pages, or Blog Posts are within supported expectations;
+* B2B company logic is not part of the required migration outcome, or is handled separately through configuration and implementation work;
+* pricing complexity is limited to supported fields rather than contract systems, custom rules, or external price ownership;
+* websites, stores, and store views are simple enough for the customer to prepare and validate;
+* extensions and integrations do not own critical records expected in the migrated result;
+* the customer can review Demo Migration samples and classify issues accurately.
 
-Standard Service should not be stretched to cover unclear enterprise behavior. If company structure, shared catalog visibility, account-specific pricing, Content Staging, custom modules, or integration-owned data must survive as operational logic, those requirements should be reviewed before assuming a standard approach is safe.
+Standard Service becomes risky when the customer expects enterprise behavior to transfer automatically. Adobe Commerce configuration, B2B setup, shared catalog assignment, live payment and shipping setup, staged content, integration wiring, and custom module behavior should not be assumed from standard record migration.
 
-### Use Managed Service When Compatible Work Needs Expert-Led Execution <a href="#use-managed-service-when-compatible-work-needs-expert-led-execution" id="use-managed-service-when-compatible-work-needs-expert-led-execution"></a>
+### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
 
-Managed Service is better when the migration path is compatible but the customer wants Next-Cart to handle more of the migration process, coordination, review, or execution support. The need for Managed Service often comes from project governance, launch timing, internal bandwidth, stakeholder coordination, or validation complexity rather than from unsupported data alone.
+Managed Service is safer when the migration remains mostly within supported capability but the project needs more structured execution support. Adobe Commerce projects often involve multiple stakeholders, larger catalogs, launch windows, scope approvals, and validation dependencies. The data may be supported, but the coordination burden can still be high.
 
-Adobe Commerce projects often involve several decision owners. Catalog teams may own product structure and attribute behavior. B2B sales teams may own company accounts, buyer access, quotes, purchase approvals, and shared catalog expectations. Marketing may own CMS Pages, staged content, redirects, and campaign landing pages. Operations may own inventory, fulfillment, and back-office continuity. Finance and IT may own ERP, tax, reporting, payment, and order-history expectations.
+Managed Service may be appropriate when:
 
-Managed Service is a strong fit when:
+| Situation                                                                   | Why Managed Service helps                                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Large catalog with many product types and attributes                        | Execution and sample review need stronger coordination.                                                   |
+| Multiple websites or store views                                            | Scope, localized values, content, and URL validation need organized sequencing.                           |
+| Important B2B records exist but custom migration logic is not yet confirmed | Managed coordination can support preparation while Custom Service items are separated.                    |
+| Launch timing is tight                                                      | A managed process helps align Demo Migration review, Full Migration timing, and later migration activity. |
+| Internal migration capacity is limited                                      | The customer still validates outcomes, but execution support reduces operational load.                    |
+| SEO and content continuity are sensitive                                    | URL, redirect, CMS Page, Blog Posts, and campaign-content review need clear ownership.                    |
 
-* the customer wants Next-Cart to manage migration execution instead of self-performing each step;
-* the data is structurally supported, but the project needs stronger sequencing, coordination, or review support;
-* several departments must approve the migrated result before launch;
-* Demo Migration samples need careful selection across B2B, catalog, pricing, scope, content, URL, inventory, and integration cases;
-* the source store remains active while the Target Store is reviewed;
-* internal teams need help organizing validation findings and deciding whether the scope is ready for Full Migration;
-* the project has a launch window, stakeholder dependency, or business freeze period that requires tighter process control.
+Managed Service should not be used to hide unclear scope. If the problem is unsupported data, custom fields, custom modules, or external-system logic, the project still needs Custom Service review. Managed Service addresses execution and coordination; it does not turn unsupported requirements into supported ones.
 
-Managed Service is not automatically the same as Custom Service. A project can need Managed Service because the process is complex, even when the data is compatible. A project can also require Custom Service even if the customer is comfortable performing available migration actions manually, because the issue is unsupported logic rather than execution ownership.
+### When Add-ons Are Enough <a href="#when-add-ons-are-enough" id="when-add-ons-are-enough"></a>
 
-### Use Add-ons for Compatible Filtering, Mapping, or Configuration Needs <a href="#use-add-ons-for-compatible-filtering-mapping-or-configuration-needs" id="use-add-ons-for-compatible-filtering-mapping-or-configuration-needs"></a>
+Add-ons are appropriate when the requirement is bounded and remains within supported behavior. For Adobe Commerce, Add-ons can help when the merchant needs filtering, mapping, or data configuration that improves the usefulness of supported records.
 
-Add-ons are optional service features that adjust how compatible migration data is filtered, mapped, or configured. They are not the same as Managed Service, and they are not a substitute for Custom Service when the requirement depends on unsupported source logic or bespoke enterprise behavior.
+| Add-on need             | Adobe Commerce example                                                                                  | Boundary                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Data Filter             | Exclude obsolete customers, inactive products, old orders, retired CMS Pages, or irrelevant Blog Posts. | Filtering should not remove records needed for B2B context, support, SEO, or reporting.   |
+| Advanced Data Mapping   | Align supported source fields with Adobe Commerce destinations, such as attributes or customer fields.  | Mapping cannot create unsupported B2B structures or custom module behavior.               |
+| Advanced Data Configure | Adjust supported output behavior for product, customer, order, content, or URL usability.               | Configuration must remain within supported capability.                                    |
+| Custom Add-ons          | Address a bounded need that is feasible inside agreed migration behavior.                               | Unsupported records, external IDs, or bespoke transformations may require Custom Service. |
 
-In Adobe Commerce planning, Add-ons are useful when the core migration path is compatible but the customer needs more control over scope, field alignment, or target behavior.
+The practical test is whether the data already belongs to supported migration behavior. If the answer is yes, an Add-on may help. If the answer is no, the requirement should not be disguised as an Add-on.
 
-| Need                                      | Relevant option                    | Adobe Commerce example                                                                                                                                   |
-| ----------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Narrow the migrated scope                 | Data Filter Add-on                 | Migrate selected order date ranges, customer groups, product statuses, categories, content groups, or launch-relevant historical records.                |
-| Align supported fields more precisely     | Advanced Data Mapping              | Map compatible source values into Adobe Commerce product attributes, customer fields, order references, content fields, or integration reference fields. |
-| Adjust compatible target behavior         | Advanced Data Configure            | Apply agreed configuration behavior for selected migrated records when compatible with the approved migration path.                                      |
-| Modify an Add-on beyond standard coverage | Tailored Add-ons or Custom Add-ons | Adapt filtering, mapping, or configuration handling when the standard Add-on does not fully match the Adobe Commerce requirement.                        |
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
 
-Add-ons work best when the requirement is defined. They should not be used as a catch-all for company-account modeling, shared catalog rule conversion, custom module interpretation, unsupported quote workflows, external-system ownership, or bespoke pricing logic. Those requirements should be reviewed under Custom Service.
+Custom Service should be considered when Adobe Commerce migration expectations go beyond supported standard behavior. Enterprise projects often create custom scope because the source store may use extensions, custom modules, external systems, B2B workflows, pricing engines, integration IDs, or implementation-specific database structures.
 
-### Review Custom Service When Adobe Commerce Needs Bespoke Handling <a href="#review-custom-service-when-adobe-commerce-needs-bespoke-handling" id="review-custom-service-when-adobe-commerce-needs-bespoke-handling"></a>
+Custom Service review is appropriate when the project includes:
 
-Custom Service should be reviewed when the migration depends on structures, relationships, or business logic that are not safe to treat as standard entity transfer. Adobe Commerce projects often need this review when the source store uses custom B2B logic, company-specific pricing, extension-owned records, custom tables, external identifiers, custom checkout behavior, quote workflows, purchase approval structures, or integration-driven commercial rules.
+* B2B company relationships not present as standard exportable records;
+* company hierarchies, role structures, credit rules, approval workflows, or purchasing permissions requiring special handling;
+* shared catalog or buyer-specific pricing logic owned by ERP, spreadsheets, procurement tools, or custom modules;
+* custom product attributes that require bespoke interpretation rather than supported mapping;
+* external identifiers needed by ERP, PIM, CRM, WMS, tax, shipping, fulfillment, analytics, or reporting systems;
+* custom modules, source extensions, or unsupported app data that create business-critical records;
+* custom order, quote, invoice, refund, purchase order, or fulfillment logic;
+* Custom Platform source or target conditions;
+* custom migration logic adjustment beyond standard capability.
 
-Custom Service may be needed when:
+Custom Service should be scoped through representative samples. A general statement such as “we have custom B2B pricing” is not enough. The customer should provide sample companies, products, price lists, orders, fields, external IDs, and expected target behavior.
 
-* a Custom Platform source context is involved;
-* source customer records must become company accounts, buyer roles, account administrators, or approval structures;
-* shared catalog visibility or company-specific pricing depends on custom source logic;
-* source quote, contract, purchase order, dealer, distributor, wholesale, or procurement behavior must remain meaningful after migration;
-* product relationships, product options, bundles, downloadable products, or product-rule behavior depend on unsupported structures;
-* Content Staging, campaign scheduling, catalog rules, or merchandising timelines require special interpretation;
-* order history includes custom operational fields needed by finance, fulfillment, ERP, tax, support, or reporting teams;
-* outside-system identifiers must be preserved for ERP, PIM, CRM, WMS, tax, payment, subscription, loyalty, marketplace, procurement, or reporting systems;
-* custom modules or extensions own business-critical data that standard migration cannot interpret safely.
+### How Entity Points Affect Adobe Commerce Scope Planning <a href="#how-entity-points-affect-adobe-commerce-scope-planning" id="how-entity-points-affect-adobe-commerce-scope-planning"></a>
 
-Custom Service should be scoped before it is promised. Some needs are narrow, such as preserving a specific ERP account ID or mapping a known custom field. Others are broad, such as translating a source wholesale portal into Adobe Commerce company structures, shared catalogs, and buyer permissions. The service plan should define what can be migrated, what should be configured in Adobe Commerce, what needs implementation-side work, what should remain historical reference, and what should be excluded.
+Entity Points help plan service-license capacity, but they do not define complexity by themselves. Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because another migration action occurs on the same migration path.
 
-### Plan Entity Points Around Scope and Launch Value <a href="#plan-entity-points-around-scope-and-launch-value" id="plan-entity-points-around-scope-and-launch-value"></a>
+Adobe Commerce scope should consider Entity Points alongside business complexity:
 
-The Entity Points Plan should reflect the selected entities and expected migration scope. For Adobe Commerce, entity planning should be tied to launch value, business continuity, and validation ownership, not only the desire to carry every historical record.
+| Scope signal     | What it helps estimate                                        | What it does not prove                                                                                             |
+| ---------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Product count    | Catalog volume and Product-related Entity Points consumption. | Whether configurable products, attributes, shared catalogs, visibility, and inventory will be usable.              |
+| Customer count   | Customer and buyer-record volume.                             | Whether B2B company structure, roles, permissions, or customer-group assignments are correct.                      |
+| Order count      | Historical order volume.                                      | Whether invoices, refunds, purchase order references, quotes, company context, and external IDs remain meaningful. |
+| Blog Posts count | Content volume where relevant.                                | Whether CMS Pages, staged content, URLs, redirects, and campaign pages are launch-ready.                           |
 
-| Entity group                | Recommended treatment                                                                                                                                                                                  |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Core launch data            | Products, categories, customers, orders, images, URLs, CMS Pages, Blog Posts, reviews, and other entities required for launch should be included when compatible and valuable.                         |
-| Useful but selective data   | Old orders, inactive products, legacy customers, expired campaign content, retired categories, or obsolete pages may be filtered by business value.                                                    |
-| Structurally uncertain data | Company relationships, shared catalog data, source pricing rules, external IDs, custom fields, custom module records, or extension-owned data should be reviewed before inclusion.                     |
-| Low-value legacy noise      | Duplicate attributes, obsolete campaign pages, unused categories, broken media, retired custom fields, and outdated operational records should often be excluded or archived outside the Target Store. |
+A project with fewer records can still require Custom Service if the records carry complex business meaning. A project with many records can still fit Standard Service or Managed Service if the data is supported and the customer can validate the result.
 
-Entity Points are capacity planning, not complexity scoring. A large standard catalog may need a higher Entity Points Plan but still fit Standard Service. A smaller project with company-specific pricing, custom B2B workflows, integration identifiers, and unsupported data may require Custom Service review even with fewer counted records.
+### How Additional Migration Options Fit Launch Timing <a href="#how-additional-migration-options-fit-launch-timing" id="how-additional-migration-options-fit-launch-timing"></a>
 
-New Product, Customer, Order, and Blog Posts records consume Entity Points when they are migrated for the first time under the service license. Records already counted through the service license should not consume Entity Points again merely because the customer uses later additional migration activity for the same migration path.
+Adobe Commerce projects often continue while the Source Platform remains active. New records and configuration changes may appear after an initial migration run. Additional Migration Options should be planned when the business expects new source records, revised mappings, changed target configuration, or a refreshed target result before launch.
 
-### Use Demo Migration to Confirm the Approach <a href="#use-demo-migration-to-confirm-the-approach" id="use-demo-migration-to-confirm-the-approach"></a>
+Current migration-action planning should distinguish between:
 
-Demo Migration should test the selected approach before Full Migration. For Adobe Commerce, useful samples should not be random. They should include records most likely to expose B2B, catalog, pricing, scope, URL, content, inventory, integration, and custom-data issues.
+| Need                                                                   | Practical action                                         |
+| ---------------------------------------------------------------------- | -------------------------------------------------------- |
+| Add newly created records using the last approved setup                | Continue the Migration with the last used configuration. |
+| Continue after changing mapping or configuration decisions             | Continue the Migration with a new configuration.         |
+| Replace the earlier migrated target result for the same migration path | Perform a new migration.                                 |
 
-Strong Demo Migration samples include:
+For Adobe Commerce, these decisions matter when new products, customers, orders, reviews, CMS Pages, Blog Posts, B2B records, pricing changes, URL changes, or content updates appear before launch. The follow-up action should define what is affected, what must be revalidated, and whether target cleanup is needed.
 
-* a configurable product with associated simple products, option labels, child SKUs, stock behavior, images, categories, and scoped values;
-* products that appear differently by website, store, store view, customer group, or shared catalog;
-* a company account with administrator, users, roles, permissions, and company-specific buying expectations;
-* shared catalog samples that prove product visibility and pricing logic for important buyer groups;
-* customers and orders with taxes, discounts, shipping fees, invoices, refunds, quote context, purchase order references, unusual statuses, or external IDs;
-* CMS Pages, Blog Posts, landing pages, campaign content, and redirects that need SEO and launch review;
-* representative inventory cases for single-source or multi-source expectations;
-* records connected to source extensions, custom fields, procurement systems, or external systems.
+### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
 
-Demo Migration should decide whether the selected approach is still valid. If samples pass, the project can move toward Full Migration with clearer confidence. If samples reveal unsupported structures, unclear target configuration, or mismatched expectations, the service plan should be adjusted before scale increases the cost of correction.
+Demo Migration should test whether the selected service path is strong enough. Adobe Commerce samples should be chosen to expose enterprise complexity, not only ordinary records.
 
-### Plan Additional Migration Options for Adobe Commerce Launch Timing <a href="#plan-additional-migration-options-for-adobe-commerce-launch-timing" id="plan-additional-migration-options-for-adobe-commerce-launch-timing"></a>
+Useful Demo Migration samples include:
 
-Adobe Commerce projects often run while the Source Platform remains active. New products, customers, orders, reviews, CMS Pages, Blog Posts, company-account updates, pricing changes, mapping corrections, or target configuration changes may appear after an earlier migration run. These changes should be planned through Additional Migration Options when they affect the service license and migration path.
+* configurable product with child SKUs, attributes, categories, images, price, stock, and URL behavior;
+* company account with administrator, users, customer group, and shared catalog expectations;
+* shared catalog product with buyer-specific visibility or pricing;
+* multi-store or store-view-specific product and content values;
+* order with invoice, refund, tax, discount, purchase order, quote, company, payment, shipping, and external reference context;
+* CMS Page, Blog Post, campaign page, or landing page with URL and content timing expectations;
+* integration-owned field or custom module record that may require Custom Service review.
 
-Additional Migration Options can be relevant when:
+If Demo Migration reveals unsupported records, unclear B2B expectations, broken shared catalog assumptions, missing external IDs, or weak target-side configuration, the service path should be revised before Full Migration.
 
-* the live source store continues receiving orders close to launch;
-* new products, customers, reviews, CMS Pages, or Blog Posts appear after Full Migration;
-* company records, customer groups, shared catalog assignments, pricing references, or buyer data are adjusted after testing;
-* mapping decisions are corrected after Demo Migration or stakeholder review;
-* target configuration changes make an earlier migrated result unsuitable;
-* SEO URLs, redirects, campaign pages, or content paths require revised handling;
-* extension-related records are excluded first and added later after Custom Service review.
+### Match the Service Path to the Real Migration Decision <a href="#match-the-service-path-to-the-real-migration-decision" id="match-the-service-path-to-the-real-migration-decision"></a>
 
-The key planning question is not whether another migration action can occur. The key question is which follow-up action fits the business need: continuing with the approved configuration, continuing with a revised configuration, or performing a new migration for the same migration path. The choice should consider target cleanup, duplicate risk, Entity Points capacity, validation effort, and launch timing.
+A strong Adobe Commerce approach separates four decisions:
 
-### Match the Approach to the Real Decision <a href="#match-the-approach-to-the-real-decision" id="match-the-approach-to-the-real-decision"></a>
+1. Which supported records should migrate.
+2. Which Adobe Commerce settings must be configured in the target store.
+3. Which supported adjustments need Add-ons.
+4. Which unsupported or custom requirements need Custom Service review.
 
-The strongest Adobe Commerce migration approach separates standard transfer, guided execution, optional Add-ons, custom review, capacity planning, launch timing, and validation responsibility before Full Migration begins.
+| Migration condition                                                                                           | Recommended direction                                              |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Supported catalog, customers, orders, content, and clear customer-led validation                              | Standard Service.                                                  |
+| Supported scope but large execution load, many stakeholders, or high launch pressure                          | Managed Service.                                                   |
+| Supported data needs filtering, mapping, or configuration adjustment                                          | Add-ons with Standard Service or Managed Service.                  |
+| B2B/company/shared catalog/custom pricing/custom module/external ID requirements go beyond supported behavior | Custom Service review.                                             |
+| Active source store keeps changing before launch                                                              | Plan Additional Migration Options and validation responsibilities. |
+| Existing target result must be replaced                                                                       | Perform a new migration with cleanup and review expectations.      |
 
-| Migration situation                                                                                                                          | Recommended approach                                                                |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Compatible source data, clear target structure, and confidence in customer-led execution                                                     | Standard Service with careful Demo Migration review.                                |
-| Compatible source data, larger scope, limited internal capacity, or launch coordination needs                                                | Managed Service with defined validation ownership.                                  |
-| Compatible data requiring selective movement or field alignment                                                                              | Standard Service or Managed Service with Add-ons.                                   |
-| B2B company structures, shared catalogs, custom pricing logic, extension-owned data, external IDs, Custom Platform context, or bespoke logic | Custom Service review before approving scope.                                       |
-| Active source store with new records expected before launch                                                                                  | Plan the appropriate Additional Migration Options and renewed review.               |
-| Changed mapping, corrected target configuration, or intentionally different target output                                                    | Choose the follow-up action deliberately, with cleanup and validation expectations. |
-
-An Adobe Commerce migration approach should not be selected from record totals alone. It should reflect the Target Store’s real operating model: B2B structure, catalog architecture, scope, pricing, URLs, inventory, integrations, custom logic, service responsibility, and launch timing.
+Adobe Commerce approach selection should remain practical. The right service path is the lightest path that still protects the business outcome, validation burden, and launch schedule.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Choosing the right Adobe Commerce migration approach means matching the Target Store’s enterprise burden to the right combination of Standard Service, Managed Service, Add-ons, Custom Service, Entity Points planning, Demo Migration review, Full Migration execution, and Additional Migration Options when they are needed.
+Adobe Commerce migration approach selection should be based on enterprise operating complexity, not record count alone. Standard Service may be enough when supported data and customer-led validation are realistic. Managed Service may be safer when execution coordination is heavy. Add-ons help with supported filtering, mapping, and configuration needs. Custom Service should be reviewed when B2B structures, shared catalogs, custom pricing, external identifiers, custom modules, or bespoke logic exceed supported behavior.
 
-When the approach is selected carefully, Adobe Commerce migration becomes easier to control. Compatible entities can move through the supported migration path, custom requirements can be scoped before they create launch risk, and validation can focus on whether the Target Store is ready to support the intended buyer experience.
+The strongest decision is evidence-based: representative samples, clear service boundaries, Entity Points planning, Additional Migration Options planning, and Demo Migration results should confirm whether the selected approach can protect the Adobe Commerce launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for an Adobe Commerce migration?**
+**When is Standard Service enough for Adobe Commerce?**
 
-Standard Service can be enough when the source data fits a supported migration path, the Adobe Commerce target structure is clear, and the customer can review Demo Migration results confidently. It becomes less suitable when B2B company structures, shared catalogs, custom pricing, extension-owned data, or enterprise launch coordination require additional service responsibility.
+Standard Service may be enough when the migration scope is supported, B2B or custom logic is limited, product and content structures are clear, and the customer can prepare inputs, run the process, review Demo Migration, and validate Full Migration results responsibly.
 
-**When should an Adobe Commerce project use Managed Service?**
+**When should Managed Service be considered?**
 
-Managed Service is useful when the data is broadly compatible but the customer wants Next-Cart to handle more migration execution, coordination, review support, or launch-window handling. It is an execution-responsibility decision, not proof that the data itself is custom.
+Managed Service is useful when supported scope still requires more execution coordination, larger sample review, many stakeholder approvals, complex launch timing, or limited internal migration capacity.
 
-**When does Adobe Commerce need Custom Service?**
+**How are Add-ons different from Custom Service for Adobe Commerce?**
 
-Custom Service should be reviewed when unsupported structures, B2B relationships, shared catalog rules, custom pricing logic, extension-owned records, custom fields, Custom Platform behavior, external IDs, or integration-dependent data must be preserved beyond standard supported behavior.
+Add-ons help with supported filtering, mapping, or configuration. Custom Service handles unsupported records, custom fields, external identifiers, custom modules, B2B structures beyond supported behavior, Custom Platform handling, or bespoke transformation.
 
-**Do Add-ons replace Custom Service for Adobe Commerce?**
+**Do Entity Points measure Adobe Commerce complexity?**
 
-No. Add-ons help with compatible filtering, mapping, or configuration needs. Custom Service is needed when Adobe Commerce requirements depend on bespoke source logic, custom modules, unsupported B2B structures, or enterprise data relationships that need custom review.
+No. Entity Points help plan service-license capacity for eligible records, but complexity depends on business meaning, B2B structure, catalog governance, integrations, custom data, and validation burden.
 
-**How should Additional Migration Options be planned for Adobe Commerce?**
+**What should Demo Migration prove before Full Migration?**
 
-Additional Migration Options should be planned when the source store remains active, mapping changes after testing, or new records appear before launch. Any follow-up activity should be followed by renewed review of the affected Adobe Commerce records, especially products, company data, shared catalog assignments, pricing references, URLs, customers, orders, inventory, and custom data.
+Demo Migration should prove that representative Adobe Commerce records are usable: configurable products, company accounts, shared catalog samples, store-view values, orders, content, URLs, integration-owned fields, and custom-data examples where relevant.

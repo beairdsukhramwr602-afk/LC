@@ -1,168 +1,168 @@
 # WooCommerce Pre-Migration Preparation Checklist
 
-WooCommerce migration preparation should begin with a clear inventory of what makes the store work as a WordPress-connected commerce site. Products, variations, orders, customers, coupons, checkout fields, media, URLs, tax values, shipping methods, payment labels, plugin records, and custom fields may all depend on WordPress structure, WooCommerce settings, extensions, themes, and external systems.
+WooCommerce preparation should gather evidence that proves the target store can preserve both commerce data and WordPress-connected buying context. Products, variations, attributes, orders, customers, coupons, checkout fields, media, URLs, tax values, shipping records, payment labels, plugin data, and custom fields may all depend on WooCommerce settings, WordPress structure, extensions, themes, and outside systems.
 
-Good preparation does not only collect access credentials or export files. It defines which data must be migrated as standard commerce records, which values require Add-ons, which workflows require target configuration, which plugin-owned data needs Custom Service review, and which legacy records can be accepted as exclusions. This helps prevent a Demo Migration from becoming a surface-level record-count check instead of a meaningful proof of store behavior.
+Good preparation is not only a credential checklist. It should clarify what can be migrated as supported WooCommerce data, what requires Add-ons, what needs Custom Service review, what belongs to target-side setup, and what should be accepted as an exclusion. Without that distinction, Demo Migration can become a record-count review instead of a meaningful test of product behavior, order readability, content continuity, and launch readiness.
 
 ### What WooCommerce Preparation Should Confirm First <a href="#what-woocommerce-preparation-should-confirm-first" id="what-woocommerce-preparation-should-confirm-first"></a>
 
-WooCommerce preparation should confirm the role of the target store before individual data fields are reviewed. A WooCommerce migration can support a simple product catalog, a content-heavy commerce site, a plugin-powered store, a subscription or membership business, a wholesale catalog, or a custom checkout workflow. Each case changes what must be sampled, mapped, and tested.
+Preparation should begin with the target operating role. WooCommerce can support a compact catalog, a content-led store, a plugin-powered checkout flow, a subscription or membership business, a wholesale catalog, a downloadable-product store, or a custom WordPress commerce environment. Each target role changes the evidence that must be prepared.
 
-| Preparation question                                                             | Why it matters                                                                | Evidence to collect                                                                  |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Is WooCommerce the main commerce engine or only part of a larger WordPress site? | Defines whether content, media, users, and plugin data are migration-critical | Store map, content inventory, product URL examples, plugin list                      |
-| Which products generate revenue today?                                           | Prevents low-value catalog records from distracting from commercial behavior  | Top-selling products, variable products, sale items, subscriptions, bundles, add-ons |
-| Which plugins affect checkout, pricing, products, customers, or orders?          | Plugin-owned data may not behave like ordinary WooCommerce records            | Active plugin list, custom tables, plugin fields, external-system references         |
-| Are orders stored with HPOS or legacy order storage?                             | Order metadata and extension compatibility may affect validation              | WooCommerce settings, HPOS status, order plugin compatibility notes                  |
-| Which URLs and SEO fields must survive launch?                                   | Product and category discovery depends on clean routes and redirects          | Top traffic URLs, product/category slugs, SEO plugin fields, redirect list           |
-| What data will keep changing before launch?                                      | Determines follow-up migration and revalidation needs                         | Expected new Products, Customers, Orders, Blog Posts, coupons, and content updates   |
+| Preparation question                                                                    | Why it matters                                                                           | Evidence to collect                                                                                       |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Is WooCommerce the main commerce engine or part of a broader WordPress site?            | Defines whether content, media, users, menus, and plugin records are migration-critical. | Site map, content inventory, product URL examples, active plugin list.                                    |
+| Which products create most revenue or support key campaigns?                            | Keeps preparation focused on commercially important product behavior.                    | Top-selling products, variable products, sale items, downloadable items, subscription or bundle examples. |
+| Which extensions affect products, checkout, pricing, customers, orders, or fulfillment? | Extension-owned data may not behave like ordinary WooCommerce fields.                    | Plugin list, custom tables, configuration screenshots, sample records, external-system references.        |
+| Are orders stored under HPOS or legacy order storage?                                   | Order metadata and extension compatibility can affect validation and support use.        | WooCommerce order-storage setting, extension compatibility notes, order metadata examples.                |
+| Which URLs and SEO fields must survive launch?                                          | Product and category discovery depends on clean routes, redirects, and metadata.         | Top traffic URLs, product/category slugs, CMS Pages, Blog Posts, SEO plugin fields, redirect list.        |
+| What will keep changing before launch?                                                  | Determines later migration activity and revalidation needs.                              | Expected new Products, Customers, Orders, Blog Posts, coupons, media, and content updates.                |
 
-### Prepare Product and Variation Scope <a href="#prepare-product-and-variation-scope" id="prepare-product-and-variation-scope"></a>
+This first review prevents the migration from being framed too narrowly. A store may look like a WooCommerce product/customer/order project, but its real launch quality may depend on content pages, product filters, media files, checkout fields, extension data, or URL continuity.
 
-Product preparation should separate simple records from products that carry buying logic. WooCommerce can store many product structures, but migration quality depends on whether the source product model has been classified correctly before Demo Migration.
+### Prepare Product and Variation Evidence <a href="#prepare-product-and-variation-evidence" id="prepare-product-and-variation-evidence"></a>
 
-| Product area                                                          | Preparation action                                                                                                             | Why it matters                                                         |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Simple products                                                       | Confirm SKU, name, description, price, sale price, stock, images, categories, tags, status, visibility, and tax/shipping class | Establishes baseline product migration quality                         |
-| Variable products                                                     | Identify parent products, variation attributes, variation SKUs, prices, stock, images, default selections, and purchasability  | Prevents options from becoming display-only text                       |
-| Product attributes                                                    | Decide which values should be global attributes, variation attributes, visible product facts, or internal metadata             | Supports filters, variations, comparison, and admin consistency        |
-| Categories, tags, and brands                                          | Clean duplicate values, unclear hierarchies, and unused labels                                                                 | Protects navigation, filters, merchandising, and SEO routes            |
-| Reviews                                                               | Decide whether review content, author names, ratings, dates, and product links are required                                    | Keeps social proof connected to the correct products                   |
-| Product add-ons and custom inputs                                     | Separate simple stored values from active pricing, validation, and order-output behavior                                       | Clarifies Add-ons, Custom Service, or target plugin setup              |
-| Subscriptions, bookings, memberships, bundles, and composite products | Identify extension ownership and whether the active workflow must be preserved                                                 | Prevents plugin behavior from being mistaken for standard product data |
+Product preparation should separate ordinary product records from buying logic. WooCommerce product quality depends on whether the source catalog can be interpreted through product types, attributes, variations, stock, categories, tags, tax classes, shipping data, product visibility, reviews, and extension-controlled behavior.
 
-A useful product sample should include at least one simple product, one variable product, one discounted product, one out-of-stock or backorder case, one product with multiple images, one product with reviews, and any product governed by add-ons, subscriptions, bundles, bookings, memberships, or wholesale logic.
+| Product area                                                                       | Preparation action                                                                                                                       | Why it matters                                                                              |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Simple products                                                                    | Confirm SKU, name, description, price, sale price, stock, image, category, tag, visibility, and tax/shipping class.                      | Establishes baseline product migration quality.                                             |
+| Variable products                                                                  | Identify parent products, variation attributes, variation SKUs, variation prices, stock, images, default selections, and purchasability. | Prevents options from becoming display-only text or disconnected child records.             |
+| Product attributes                                                                 | Decide which values should be global attributes, variation attributes, visible product facts, filters, or internal metadata.             | Supports filters, variations, comparison, admin consistency, and customer-facing selection. |
+| Categories, tags, and brands                                                       | Clean duplicate values, unclear hierarchies, unused labels, and inconsistent naming.                                                     | Protects navigation, filters, merchandising, and SEO routes.                                |
+| Product reviews                                                                    | Decide whether review text, rating, author, date, approval status, and product links are required.                                       | Keeps social proof tied to the correct product.                                             |
+| Downloadable and virtual products                                                  | Prepare file access, download limits, shipping exclusion, customer access, and order examples.                                           | Prevents digital-product behavior from being treated as ordinary physical goods.            |
+| Product add-ons, bundles, bookings, subscriptions, memberships, or wholesale logic | Identify extension ownership and whether active behavior must continue after launch.                                                     | Clarifies Add-ons, Custom Service, target setup, or exclusion decisions.                    |
 
-### Prepare Order, Customer, and Account History <a href="#prepare-order-customer-and-account-history" id="prepare-order-customer-and-account-history"></a>
+A useful sample set should include at least one simple product, one variable product, one discounted product, one out-of-stock or backorder case, one product with multiple images, one product with reviews, and one product governed by an extension or custom field. The sample set should prove product meaning, not only product presence.
 
-WooCommerce order and customer preparation should focus on readability and relationships. Historical orders are not only totals. They include customer identity, line items, variation choices, taxes, shipping, discounts, payment labels, refunds, notes, checkout fields, plugin metadata, and external references.
+### Prepare Orders, Customers, Checkout Fields, and HPOS Context <a href="#prepare-orders-customers-checkout-fields-and-hpos-context" id="prepare-orders-customers-checkout-fields-and-hpos-context"></a>
 
-| Data area                      | Preparation action                                                                                                            | Validation sample                                                                 |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Customer accounts              | Review registered customers, guest orders, billing/shipping addresses, duplicate emails, roles, and account metadata          | Customer with multiple orders, guest order, customer with changed address         |
-| Orders                         | Review status, line items, products, variations, totals, coupons, taxes, shipping, payment labels, refunds, and notes         | Paid order, refunded order, discounted order, variable-product order, guest order |
-| Checkout fields                | Identify standard fields, custom fields, conditional fields, delivery instructions, VAT/tax IDs, gift messages, or B2B fields | Order with each required custom field populated                                   |
-| Customer roles and memberships | Separate WordPress roles from WooCommerce customer status and extension-owned memberships                                     | Wholesale user, member, subscriber, learner, donor, or role-based account         |
-| External IDs                   | Collect ERP, CRM, shipping, payment, marketplace, fulfillment, or accounting IDs                                              | Order/customer with external references                                           |
-| HPOS/order storage             | Confirm current WooCommerce order-storage mode and related extension compatibility                                            | Order lookup, admin order screen, metadata visibility                             |
+WooCommerce order and customer preparation should focus on readability, relationships, and account continuity. Historical orders may include customer identity, line items, variation choices, taxes, shipping, discounts, payment labels, refunds, notes, checkout fields, extension metadata, and external references. Customer records may depend on WordPress users, guest orders, roles, addresses, memberships, and plugin-controlled account logic.
 
-If order history must support customer service after launch, sample selection should include real operational cases, not only recent clean orders. Older orders, refunded orders, partially fulfilled orders, orders with custom checkout fields, and orders tied to inactive products often expose migration risk earlier.
+| Data area                      | Preparation action                                                                                                             | Validation sample                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Customer accounts              | Review registered customers, guest orders, billing/shipping addresses, duplicate emails, roles, and account metadata.          | Registered customer with multiple orders, guest order, customer with changed address. |
+| Orders                         | Review statuses, line items, products, variations, totals, coupons, taxes, shipping, payment labels, refunds, and notes.       | Paid order, refunded order, discounted order, variable-product order, guest order.    |
+| Checkout fields                | Identify standard fields, custom fields, conditional fields, delivery instructions, VAT/tax IDs, gift messages, or B2B fields. | Order with each important custom field populated.                                     |
+| Customer roles and memberships | Separate WordPress roles from WooCommerce customer status and extension-owned membership logic.                                | Wholesale user, member, subscriber, learner, donor, or role-based account.            |
+| External IDs                   | Collect ERP, CRM, shipping, payment, marketplace, fulfillment, or accounting references.                                       | Order/customer with external references.                                              |
+| HPOS/order storage             | Confirm current order-storage mode and extension compatibility.                                                                | Order lookup, admin order screen, metadata visibility, plugin field visibility.       |
+
+If historical orders must support customer service after launch, sample selection should include real operational cases, not only recent clean orders. Refunded orders, partially fulfilled orders, orders with custom checkout fields, orders tied to inactive products, and orders created by extensions often expose migration risk earlier than ordinary paid orders.
 
 ### Prepare Checkout, Payment, Shipping, Tax, and Coupon Context <a href="#prepare-checkout-payment-shipping-tax-and-coupon-context" id="prepare-checkout-payment-shipping-tax-and-coupon-context"></a>
 
-WooCommerce migration can preserve historical labels and amounts, but active checkout behavior depends on target configuration, extensions, gateways, tax tools, shipping zones, carrier services, and custom validation. Preparation should separate historical order readability from live operational setup.
+WooCommerce migration can preserve historical labels, amounts, and selected stored values, but active checkout behavior depends on target configuration. Payment gateways, tax rules, shipping zones, carrier services, coupon rules, pickup/delivery flows, fraud tools, and checkout-field logic should be prepared as target-side operating work unless the requirement concerns stored historical data.
 
-| Area            | Prepare for migration                                                                                 | Prepare outside migration                                                        |
-| --------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Payment         | Historical payment labels, transaction references if available, order payment context                 | Live gateway setup, saved payment tokens, fraud rules, gateway credentials       |
-| Shipping        | Historical shipping method labels, amounts, order shipping addresses, tracking references when stored | Live shipping zones, carrier rates, fulfillment rules, pickup/delivery workflows |
-| Tax             | Historical tax totals, tax labels, tax-inclusive or tax-exclusive order context                       | Active tax rates, tax service integrations, jurisdiction setup                   |
-| Coupons         | Coupon records, coupon usage history, discount lines in orders                                        | Active coupon strategy, complex promotion rules, third-party discount logic      |
-| Checkout fields | Stored order/customer field values                                                                    | Active field placement, validation, conditional logic, checkout UX               |
+| Area            | Prepare for migration                                                                     | Prepare outside migration                                                                   |
+| --------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Payment         | Historical payment labels, transaction references where available, order payment context. | Live gateway setup, saved payment tokens, fraud rules, credentials, payment-method testing. |
+| Shipping        | Historical shipping method labels, amounts, addresses, tracking references where stored.  | Shipping zones, carrier rates, fulfillment rules, pickup/delivery workflows.                |
+| Tax             | Historical tax totals, tax labels, tax-inclusive or tax-exclusive order context.          | Active tax rates, tax service integrations, jurisdiction setup, tax display rules.          |
+| Coupons         | Coupon records, usage history where supported, discount lines in orders.                  | Active promotion strategy, complex discount rules, third-party promotion logic.             |
+| Checkout fields | Stored order/customer field values.                                                       | Active field placement, validation, conditional logic, checkout user experience.            |
 
-### Prepare WordPress Site Dependencies <a href="#prepare-wordpress-site-dependencies" id="prepare-wordpress-site-dependencies"></a>
+This separation is important because historical data can be migrated correctly while live checkout is still not ready. Preparation should assign ownership for target-side setup before Full Migration, especially when checkout, tax, shipping, or payment behavior affects launch acceptance.
 
-WooCommerce lives inside WordPress, so commerce preparation should include site structures that affect buying, discovery, trust, and customer support. These items should not be treated as unrelated CMS details when they shape the shopping path.
+### Prepare WordPress Site, Media, URL, and SEO Dependencies <a href="#prepare-wordpress-site-media-url-and-seo-dependencies" id="prepare-wordpress-site-media-url-and-seo-dependencies"></a>
 
-| Site element        | Preparation action                                                                                                              | Why it matters                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| CMS Pages           | Identify checkout-support pages, policy pages, landing pages, size guides, return pages, and product education pages            | These pages support purchase decisions and post-order trust                                     |
-| Blog Posts          | Identify commerce-supporting posts, buying guides, product comparisons, and SEO posts                                           | Blog Posts may drive product traffic and consume Entity Points when migrated for the first time |
-| Media               | Review featured images, galleries, downloadable files, embedded images, PDFs, and product-description assets                    | Broken media weakens product display and content credibility                                    |
-| Menus and widgets   | Identify product/category links, footer policy links, account links, and campaign links                                         | Navigation can break even when products migrate correctly                                       |
-| Themes and builders | Identify shortcodes, blocks, builder templates, custom product layouts, and embedded product widgets                            | Layout may depend on target theme/builder setup rather than migrated records alone              |
-| SEO and redirects   | Collect product, category, page, post, and high-traffic URLs, slugs, meta titles, descriptions, canonical values, and redirects | Launch quality depends on route continuity and search visibility                                |
+WooCommerce lives inside WordPress, so commerce preparation should include the site structures that affect buying, discovery, trust, and support. These elements should not be treated as unrelated CMS details when they shape product discovery or customer confidence.
+
+| Site element                       | Preparation action                                                                                                               | Why it matters                                                                                       |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| CMS Pages                          | Identify checkout-support pages, policy pages, landing pages, size guides, return pages, and product education pages.            | These pages support purchase decisions and post-order trust.                                         |
+| Blog Posts                         | Identify buying guides, product comparisons, SEO posts, campaign posts, and support content.                                     | Blog Posts may drive product traffic and may consume Entity Points when migrated for the first time. |
+| Media                              | Review featured images, galleries, downloadable files, embedded images, PDFs, and product-description assets.                    | Broken media weakens product display and content credibility.                                        |
+| Menus, widgets, and internal links | Identify product/category links, footer policy links, account links, campaign links, and embedded product references.            | Navigation can break even when products migrate correctly.                                           |
+| Themes and builders                | Identify shortcodes, blocks, builder templates, custom product layouts, and embedded product widgets.                            | Layout may depend on target theme or builder setup rather than migrated records alone.               |
+| SEO and redirects                  | Collect product, category, page, post, and high-traffic URLs, slugs, meta titles, descriptions, canonical values, and redirects. | Launch quality depends on route continuity and search visibility.                                    |
+
+WooCommerce preparation should therefore include both commerce records and the WordPress paths around them. A product can migrate correctly while a landing page, redirect, product link, embedded image, or menu path still weakens the customer journey.
 
 ### Prepare Plugin, Extension, and Custom Data Scope <a href="#prepare-plugin-extension-and-custom-data-scope" id="prepare-plugin-extension-and-custom-data-scope"></a>
 
-WooCommerce stores often rely on extensions and plugins for business behavior. Preparation should classify plugin data before migration so the project does not discover late that essential behavior is stored outside standard product, customer, and order records.
+WooCommerce stores often rely on extensions and plugins for business behavior. Preparation should classify plugin data before migration so the project does not discover late that essential behavior is stored outside ordinary WooCommerce records.
 
-| Plugin/data pattern                                                                               | Preparation classification               | Likely handling                                         |
-| ------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------- |
-| Clear extra product, customer, order, or content fields                                           | Field mapping scope                      | Add-ons or supported mapping                            |
-| Product add-ons, personalization, or custom inputs                                                | Stored value plus active behavior review | Add-ons, target plugin setup, or Custom Service         |
-| Subscriptions, bookings, memberships, deposits, bundles, composite products, or wholesale pricing | Extension-owned commerce behavior        | Custom Service review or accepted exclusion             |
-| Custom database tables                                                                            | Non-standard storage                     | Custom Service review                                   |
-| ERP, CRM, PIM, WMS, marketplace, accounting, analytics, or email tools                            | External-system ownership                | Integration mapping or accepted outside-migration setup |
-| Shortcodes, blocks, builder fields, or theme templates                                            | Presentation dependency                  | Target theme/builder planning and validation            |
+| Dependency type                                                                                        | Preparation question                                                                              | Likely handling path                                                              |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Plugin display settings                                                                                | Does the plugin only affect layout or presentation?                                               | Target setup or manual rebuild, usually not migrated data.                        |
+| Supported extra fields                                                                                 | Are the values ordinary supported fields that need better mapping or filtering?                   | Add-ons may fit if the requirement stays within supported behavior.               |
+| Custom checkout fields                                                                                 | Are stored values needed for historical order readability, live checkout behavior, or both?       | Add-ons, Custom Service, or target setup depending on data ownership.             |
+| Custom tables                                                                                          | Does the plugin store important records outside ordinary WooCommerce/WordPress tables?            | Custom Service review when records are business-critical.                         |
+| Subscriptions, bookings, memberships, bundles, composite products, product add-ons, or wholesale rules | Is the requirement stored history, active workflow behavior, or target configuration?             | Custom Service, target setup, accepted exclusion, or external integration review. |
+| External-system references                                                                             | Do ERP, CRM, PIM, accounting, marketplace, shipping, or fulfillment IDs need to remain connected? | Custom Service review or external-system planning.                                |
 
-### Prepare Add-ons, Custom Service, and Exclusions <a href="#prepare-add-ons-custom-service-and-exclusions" id="prepare-add-ons-custom-service-and-exclusions"></a>
+Add-ons and Custom Service should remain separate during preparation. Add-ons help with bounded filtering, mapping, and supported configuration adjustments. Custom Service should be considered when the requirement depends on unsupported structures, plugin-owned records, custom fields, external identifiers, bespoke transformation, or custom migration logic adjustment.
 
-Preparation should identify scope boundaries before the Demo Migration. This prevents merchants from expecting every plugin behavior, custom workflow, or external integration to transfer as part of standard data movement.
+### Prepare Access, Backups, and Target WooCommerce Setup <a href="#prepare-access-backups-and-target-woocommerce-setup" id="prepare-access-backups-and-target-woocommerce-setup"></a>
 
-| Need                                                               | Better classification                  | Preparation evidence                                                    |
-| ------------------------------------------------------------------ | -------------------------------------- | ----------------------------------------------------------------------- |
-| Extra field values with clear source and target meaning            | Add-ons                                | Field list, examples, target destination, sample records                |
-| Data filtering, extra URL handling, or supported metadata handling | Add-ons or target configuration        | Rules, examples, expected output                                        |
-| Plugin-owned active behavior or custom table relationships         | Custom Service review                  | Plugin name, field/table evidence, workflow examples, business priority |
-| Live payment/shipping/tax/fraud/fulfillment behavior               | Target configuration or external setup | Current provider list, target setup plan, accepted exclusions           |
-| Low-value historical data with unclear use                         | Accepted exclusion                     | Business decision and launch impact assessment                          |
+Access preparation should protect both migration execution and validation. The merchant should know who can access the source store, target WordPress/WooCommerce admin, hosting, database exports, media files, redirect tools, DNS, analytics, Search Console, SEO plugins, payment gateway records, shipping tools, and relevant integrations.
 
-Custom Service should be considered when WooCommerce migration requires custom interpretation, custom table handling, extension-specific transformation, non-standard checkout logic, or integration-owned workflow preservation. Custom Service does not automatically mean Next-Cart performs the entire store build or live operational setup.
+| Access or setup area | Preparation requirement                                                                                                           |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Source store         | Admin access, export access, database or file backups where available, media access, plugin list, order/customer/product samples. |
+| Target WooCommerce   | WordPress admin access, WooCommerce setup, user roles, theme or builder decisions, plugin installation plan, staging environment. |
+| Hosting and files    | Backup plan, media transfer plan, file permissions, downloadable-product files, performance expectations.                         |
+| SEO and analytics    | URL lists, redirect tools, SEO metadata exports, analytics/search data, priority landing pages.                                   |
+| Operations           | Payment gateway setup, tax/shipping configuration, fulfillment tools, email notifications, customer-account settings.             |
 
-### Prepare Demo Migration Samples <a href="#prepare-demo-migration-samples" id="prepare-demo-migration-samples"></a>
+The target store should be prepared enough for Demo Migration review. It does not need every final design detail before migration testing, but it should not be an empty or unstable environment where product display, order review, media checks, and URL validation cannot be judged.
 
-Demo Migration should prove WooCommerce migration behavior through representative samples. A shallow sample can make migration look successful while missing the records that carry real store complexity.
+### Prepare Demo Migration Samples and Launch-Window Decisions <a href="#prepare-demo-migration-samples-and-launch-window-decisions" id="prepare-demo-migration-samples-and-launch-window-decisions"></a>
 
-| Sample type      | Include examples that test                                                                                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product samples  | Simple products, variable products, sale products, out-of-stock products, add-on products, downloadable products, subscription/booking/membership/bundle cases if present |
-| Order samples    | Guest orders, registered-customer orders, refunded orders, discounted orders, tax/shipping/payment examples, custom checkout fields, orders with variation line items     |
-| Customer samples | Multiple-address customers, customers with order history, customers with roles/memberships, customers with external IDs                                                   |
-| Content samples  | Product pages, categories, CMS Pages, Blog Posts, embedded media, internal links, SEO fields, redirects                                                                   |
-| Plugin samples   | Product add-ons, custom fields, subscriptions, bookings, memberships, wholesale values, custom tables, external references                                                |
-| URL samples      | High-traffic product/category/page/post paths and routes that changed during redesign or platform planning                                                                |
+Demo Migration should test the records that carry WooCommerce meaning. A narrow sample of clean products and recent orders is not enough when the store depends on variations, extension fields, custom checkout values, content paths, media, or URL continuity.
 
-### Prepare Entity Points and Follow-Up Migration Planning <a href="#prepare-entity-points-and-follow-up-migration-planning" id="prepare-entity-points-and-follow-up-migration-planning"></a>
+| Sample type                  | What it should prove                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Simple product               | Baseline WooCommerce product fields migrate cleanly.                                                              |
+| Variable product             | Attributes, variations, prices, stock, images, and purchasability remain meaningful.                              |
+| Extension-influenced product | Add-ons, subscriptions, bundles, bookings, memberships, or wholesale behavior is classified correctly.            |
+| Order with custom fields     | Checkout values, metadata, line items, taxes, shipping, payment labels, refunds, and notes remain readable.       |
+| Customer with history        | Account details, addresses, roles, and order links remain coherent.                                               |
+| Content and URL sample       | Product pages, categories, CMS Pages, Blog Posts, media, SEO fields, redirects, and internal links remain usable. |
+| HPOS-sensitive order sample  | Order lookup, metadata visibility, and extension-related order information can be reviewed.                       |
 
-Entity Points planning should be tied to migration scope and launch timing. WooCommerce stores often continue receiving new products, customers, orders, Blog Posts, media updates, coupon changes, and plugin data while migration work is underway.
+Launch-window planning should also define what happens if the source store continues to change. If new Products, Customers, Orders, Blog Posts, coupons, or media are created after the first migration run, the team should plan whether to continue migration activity, continue with a new configuration, or perform a new migration. New eligible entities may consume Entity Points when migrated for the first time, while already recorded entities should not consume Entity Points again solely because another migration action occurs on the same migration path.
 
-| Planning area                 | Preparation action                                                                                                            |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Initial scope                 | Confirm which Products, Customers, Orders, Blog Posts, and other relevant records will be counted through the service license |
-| New eligible records          | Track new Product, Customer, Order, and Blog Posts records that may consume Entity Points when migrated for the first time    |
-| Duplicate-consumption control | Do not count records again only because another migration action is performed                                                 |
-| Follow-up review              | Recheck new products, orders, customers, Blog Posts, coupons, URLs, and plugin fields before launch                           |
-| Scope boundary                | Separate standard records, Add-ons, Custom Service candidates, configuration tasks, and exclusions                            |
+### Turning Preparation Into Scope Evidence <a href="#turning-preparation-into-scope-evidence" id="turning-preparation-into-scope-evidence"></a>
 
-Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when migrated for the first time, including when a new migration is performed for the same migration path.
+WooCommerce preparation should end with a scope decision, not a pile of exports. The merchant should know which data is standard migration scope, which needs Add-ons, which needs Custom Service review, which belongs to target setup, and which should be excluded.
 
-### WooCommerce Preparation Readiness Matrix <a href="#woocommerce-preparation-readiness-matrix" id="woocommerce-preparation-readiness-matrix"></a>
+| Prepared evidence                     | Scope decision it supports                                                          |
+| ------------------------------------- | ----------------------------------------------------------------------------------- |
+| Product and variation samples         | Whether product structure fits supported WooCommerce migration behavior.            |
+| Order/customer samples                | Whether historical readability and account continuity can be validated.             |
+| Checkout and HPOS evidence            | Whether custom fields, metadata, and storage assumptions need special review.       |
+| Plugin and custom-data inventory      | Whether Add-ons, Custom Service, setup, integration work, or exclusions are needed. |
+| Content, media, URL, and SEO evidence | Whether WordPress-connected commerce continuity is in scope.                        |
+| Launch-window update plan             | Whether Additional Migration Options and Entity Points planning are required.       |
 
-| Area           | Ready signal                                                                                       | Not-ready signal                                                                               | Recommended action                                                |
-| -------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Products       | Product types, variations, attributes, images, prices, stock, and categories are clear             | Add-ons, bundles, subscriptions, bookings, or custom fields are undocumented                   | Expand product sample and classify extension scope                |
-| Orders         | Statuses, line items, taxes, shipping, payment labels, refunds, notes, and metadata are understood | Order meaning depends on plugins, custom checkout fields, HPOS-sensitive data, or external IDs | Prepare order sample and storage review                           |
-| Customers      | Account links, addresses, roles, and order history are clear                                       | Membership, wholesale, subscription, role, or external account data is unclear                 | Separate standard customer data from plugin-owned account meaning |
-| Checkout       | Historical field values and active configuration are separated                                     | Live payment/shipping/tax/fraud behavior is expected to transfer as data                       | Define target setup and accepted exclusions                       |
-| WordPress site | Pages, posts, media, menus, URLs, redirects, and SEO fields are inventoried                        | Product traffic depends on unreviewed content or builder output                                | Prepare content and URL sample                                    |
-| Plugins        | Plugin-owned fields and custom tables are documented                                               | Required behavior is hidden in extensions or custom code                                       | Decide Add-ons, Custom Service, configuration, or exclusion       |
-| Launch timing  | New records and follow-up activity are tracked                                                     | Final scope is assumed to match the first migration run                                        | Plan Additional Migration Options review                          |
+The practical goal is to make Demo Migration decisive. Preparation should give reviewers enough evidence to approve the approach, request Add-ons, escalate to Custom Service, accept exclusions, or adjust the target setup before Full Migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WooCommerce preparation should make the store’s commerce meaning visible before migration begins. Products, variations, orders, customers, checkout fields, plugins, media, URLs, SEO fields, and WordPress site dependencies should be reviewed according to their role in the buying journey and store operation.
+WooCommerce preparation is strongest when it treats the store as commerce inside WordPress, not as a simple product/order export. Products, variations, attributes, orders, customers, checkout fields, HPOS, coupons, reviews, plugins, custom data, media, URLs, SEO, and content paths all need evidence before the migration approach can be trusted.
 
-A strong preparation plan separates standard migration scope, Add-ons, Custom Service needs, target configuration, external-system setup, accepted exclusions, Entity Points, and follow-up migration planning. This gives Demo Migration a real proof role and reduces the risk of discovering critical WooCommerce behavior only after Full Migration.
+A well-prepared WooCommerce migration separates migrated data from target setup, keeps Add-ons and Custom Service distinct, uses Demo Migration to test meaningful samples, and plans later migration activity before launch. That preparation gives the merchant a clearer path from source data to a usable WooCommerce store.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should a WooCommerce store prepare before migration?**
+**What should be prepared first for a WooCommerce migration?**
 
-A WooCommerce store should prepare product and variation samples, customer and order samples, checkout field examples, plugin and extension lists, media and URL inventories, SEO priorities, HPOS/order-storage context, integration references, and a clear distinction between standard migration scope, Add-ons, Custom Service needs, configuration tasks, and exclusions.
+Start by defining the target store role. A simple catalog, content-led store, subscription business, plugin-powered checkout, wholesale catalog, or custom WordPress commerce environment will each require different evidence.
 
-**Should WordPress content be included in WooCommerce preparation?**
+**Why are variable products important in WooCommerce preparation?**
 
-Yes, when that content supports commerce. CMS Pages, Blog Posts, policy pages, product guides, media, menus, widgets, redirects, and SEO fields may affect product discovery, checkout trust, customer support, and launch continuity.
+Variable products depend on attributes, variations, prices, stock, images, and purchasability. If those relationships are not sampled before Demo Migration, product options may migrate as incomplete or unusable records.
 
-**Why do plugins matter so much in WooCommerce preparation?**
+**Should WooCommerce plugin data be treated as standard migration scope?**
 
-Plugins may own product add-ons, subscriptions, bookings, memberships, wholesale pricing, checkout fields, custom tables, SEO fields, forms, external IDs, or integration workflows. These records may need Add-ons, target configuration, Custom Service review, or accepted exclusion decisions.
+No. Plugin data should be classified first. Some plugin values may fit supported mapping or Add-ons, while custom tables, extension-owned records, active workflow behavior, and external-system references may require Custom Service review or target setup.
 
-**Does preparing WooCommerce orders only mean exporting order records?**
+**How should HPOS affect WooCommerce preparation?**
 
-No. Order preparation should include status meaning, line items, variation details, taxes, shipping, payment labels, refunds, notes, custom checkout fields, customer links, metadata, HPOS/order-storage behavior, and external references.
+HPOS should prompt order-storage and metadata review. The team should confirm current order-storage mode, extension compatibility, order lookup behavior, and whether important order metadata remains visible after migration.
 
-**How should Additional Migration Options be considered during preparation?**
+**How should Additional Migration Options be planned for WooCommerce?**
 
-Additional Migration Options should be considered when the WooCommerce store continues changing before launch. New products, customers, orders, Blog Posts, coupons, URLs, and plugin fields may need renewed review, while records already counted through the service license should not consume Entity Points again only because another migration action is performed.
+Plan them when the source store continues changing before launch. New Products, Customers, Orders, Blog Posts, coupons, or media may need later migration and revalidation, while already recorded entities should not consume Entity Points again solely because another migration action occurs on the same migration path.

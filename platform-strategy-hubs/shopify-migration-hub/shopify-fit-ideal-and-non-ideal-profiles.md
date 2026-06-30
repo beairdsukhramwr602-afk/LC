@@ -2,11 +2,7 @@
 
 Shopify is a strong Target Platform when a merchant wants hosted commerce operations and can translate Source Platform complexity into Shopify’s product, collection, app, theme, metafield, market, customer, order, content, and URL structures. Fit depends less on store size and more on whether the business can operate successfully inside Shopify’s managed platform model.
 
-A reliable Shopify fit decision should be separated into three questions:
-
-* First, whether Shopify can support the intended buying journey.
-* Second, whether source-store complexity can be represented using Shopify-native structures, app-supported behavior, Add-ons, or Custom Services, as needed.
-* Third, whether the team accepts the operational tradeoff of lower infrastructure ownership in exchange for clearer platform boundaries.
+A reliable Shopify fit decision should separate three questions. First, whether Shopify can support the intended buying journey. Second, whether source-store complexity can be represented through Shopify-native structures, app-supported behavior, Add-ons, or Custom Service where needed. Third, whether the team accepts the operational tradeoff of lower infrastructure ownership in exchange for clearer platform boundaries.
 
 ### What Makes Shopify a Strong Fit <a href="#what-makes-shopify-a-strong-fit" id="what-makes-shopify-a-strong-fit"></a>
 
@@ -80,15 +76,15 @@ Shopify fit should be confirmed through concrete migration signals, not general 
 
 This fit review should happen before the migration is treated as straightforward. It gives the team a practical way to identify whether the Shopify plan is ordinary, conditional, service-sensitive, or a better candidate for Shopify Plus or another Target Platform.
 
-### How Fit Affects Migration Planning <a href="#how-fit-affects-migration-planning" id="how-fit-affects-migration-planning"></a>
+### Turning Shopify Fit Into Scope Decisions <a href="#turning-shopify-fit-into-scope-decisions" id="turning-shopify-fit-into-scope-decisions"></a>
 
-A strong Shopify fit usually leads to cleaner migration planning because the Target Platform model is already understood. The team can define which records should migrate, which categories should become collections or redirects, which custom values should become metafields, which apps must be configured, and which representative records should be reviewed during Demo Migration and Full Migration validation.
+Shopify fit should become a scope decision, not just a platform preference. A strong fit usually means the merchant can identify which records should migrate, which source categories should become Shopify collections or redirects, which custom values should become metafields, which app-supported outcomes must be configured, and which representative samples must pass before launch. The store does not need to preserve every legacy structure; it needs to preserve the buying, discovery, customer-service, reporting, and operational outcomes that still matter.
 
-A conditional Shopify fit may still be appropriate, but it should influence scope and service decisions. Add-ons may be useful when supported filtering, mapping, or data configuration is needed. Custom Service should be considered when the Source Platform depends on custom logic, unsupported app or extension data, outside-system identifiers, nonstandard product behavior, or bespoke transformation beyond standard supported behavior.
+A conditional fit should influence service and preparation choices early. Add-ons may be useful when the requirement stays within supported filtering, mapping, or data-configuration behavior. Custom Service should be considered when the Source Platform depends on unsupported app or extension data, outside-system identifiers, custom product logic, bespoke transformation, or custom migration logic adjustment. Target-side Shopify configuration should also be separated from migration output when the need belongs to apps, themes, checkout settings, shipping rules, Markets, or storefront setup.
 
-The Shopify and Shopify Plus distinction should be confirmed before finalizing the plan. Shopify Plus belongs to the same ecosystem, but enterprise governance, advanced B2B expectations, larger integration intensity, expansion structures, or more complex acceptance criteria can change the migration plan. A store that is a weak fit for standard Shopify may be a stronger fit for Shopify Plus when those requirements are real and documented.
+The Shopify and Shopify Plus distinction should be settled before the migration scope is finalized. Shopify Plus belongs to the same ecosystem, but enterprise governance, advanced B2B expectations, expansion stores, organization-level operations, larger integration intensity, and more complex acceptance criteria can change the service path and validation burden. A store that is a poor fit for a standard Shopify plan may still be a better fit for Shopify Plus if the enterprise requirements are real, documented, and worth preserving.
 
-Fit should ultimately produce a decision, not just a preference. The practical output should be a target-store model, a list of conditional assumptions, a decision on Shopify versus Shopify Plus where relevant, and clear evidence for whether the selected Migration Service can support the intended outcome.
+The useful output of fit review is a target-store model with conditional assumptions attached. It should state what Shopify will own natively, what requires app or theme setup, what belongs to Add-ons, what needs Custom Service review, what may need Shopify Plus, and what should be intentionally excluded or simplified. That decision gives later data-model, preparation, service-path, validation, and pitfall-prevention work a stable foundation.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 

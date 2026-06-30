@@ -1,136 +1,162 @@
 # WordPress Validation Priorities
 
-WordPress validation should prove that migrated records are usable inside the target implementation, not only present in the database. A page title, post body, or media file can exist while the layout, taxonomy, custom field, plugin behavior, redirect, user role, or SEO output is still incomplete.
+WordPress validation should prove that migrated records remain usable inside the target site, not only present in the database. A page title, post body, media file, user account, or taxonomy term can appear correctly while the layout, metadata, permissions, internal links, plugin behavior, redirect path, or template output is still incomplete.
 
-The validation priority is to test representative business meaning. WordPress content should remain editable, discoverable, linked, permission-aware, and visible through the intended theme, builder, plugin, and URL structure after Demo Migration and Full Migration.
+For WordPress, the validation burden is shaped by the site model. A content-led website may depend on pages, posts, media, menus, taxonomies, and redirects. A structured-content site may rely on custom post types, custom taxonomies, metadata, relationships, templates, and archives. A membership, LMS, directory, donation, event, or booking site may place business meaning inside plugin records or custom tables. Validation should therefore test representative business meaning, not only exported counts.
 
-### WordPress Validation Layers <a href="#wordpress-validation-layers" id="wordpress-validation-layers"></a>
+### Validation Should Prove Site Usefulness <a href="#validation-should-prove-site-usefulness" id="validation-should-prove-site-usefulness"></a>
 
-| Validation layer       | What to validate                                                                                           | Why it matters                                                                           |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Core CMS content       | CMS Pages, Blog Posts, media, comments, categories, tags, authors, and menus.                              | Confirms the baseline WordPress migration is complete and editorially usable.            |
-| Custom structures      | Custom post types, custom taxonomies, custom fields, relationships, archives, and templates.               | Confirms structured content was not flattened into ordinary pages.                       |
-| Presentation           | Blocks, page builders, shortcodes, widgets, templates, theme output, and media display.                    | Confirms visible pages render correctly after migration.                                 |
-| Plugin and custom data | Forms, memberships, LMS, bookings, events, directories, donations, custom tables, and integration records. | Confirms business data is either migrated, excluded, or routed to Custom Service review. |
-| SEO and routing        | Slugs, permalinks, redirects, canonical values, metadata, internal links, and media URLs.                  | Protects search visibility and user navigation.                                          |
-| Users and access       | Authors, editors, members, subscribers, learners, donors, customers, roles, and capabilities.              | Confirms account meaning and permissions survive migration.                              |
+A WordPress migration is successful when important content is editable, discoverable, linked, permission-aware, and visible through the intended theme, block setup, plugin stack, and URL structure. Counts can support the review, but they cannot replace sample-based proof.
 
-### Core Content Validation <a href="#core-content-validation" id="core-content-validation"></a>
+| Validation layer      | What should be proven                                                                                                       | Why it matters                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Core content          | CMS Pages, Blog Posts, media, comments, categories, tags, authors, menus, and statuses remain usable.                       | Confirms the baseline WordPress site has not lost editorial meaning.           |
+| Structured content    | Custom post types, custom taxonomies, relationships, custom fields, archives, and templates behave as intended.             | Prevents structured records from being flattened into ordinary pages.          |
+| Presentation          | Blocks, shortcodes, widgets, builder output, reusable sections, theme templates, and embedded assets render acceptably.     | Protects the visible site experience.                                          |
+| Users and access      | Authors, editors, members, subscribers, students, donors, or other account types keep the expected role meaning.            | Prevents account records from losing permissions or business context.          |
+| URLs and SEO          | Slugs, permalinks, redirects, canonical values, internal links, metadata, media URLs, and archive paths are checked.        | Protects traffic, navigation, and discoverability.                             |
+| Plugin or custom data | Forms, memberships, LMS, events, directories, bookings, donations, custom tables, or external IDs are scoped and validated. | Separates supported migration output from Custom Service or target-side setup. |
 
-| Sample type | What to check                                                                                                 | Pass condition                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| CMS Pages   | Title, slug, content, hierarchy, template, featured media, menu position, internal links, and status.         | Priority pages are editable, accessible, correctly linked, and visually acceptable.       |
-| Blog Posts  | Title, author, date, categories, tags, excerpt, comments, featured media, slug, and archive behavior.         | Blog history remains browsable, attributable, and discoverable.                           |
-| Media       | Files, filenames, alt text, captions, descriptions, featured image references, galleries, and download links. | Media remains attached to the right records and visible where expected.                   |
-| Comments    | Author, date, status, nesting, related content, and moderation state.                                         | Comment history appears only where expected and remains connected to the correct content. |
-| Menus       | Labels, hierarchy, custom URLs, page references, taxonomy links, and menu locations.                          | Navigation points to valid target URLs and reflects approved structure.                   |
+Validation should begin with the records most likely to expose the WordPress model: homepage, high-traffic pages, recent and older Blog Posts, media-heavy content, custom post type examples, taxonomy archive examples, user/account examples, and plugin-dependent records. A small but well-chosen sample set is more useful than a broad review of only ordinary pages.
 
-### Custom Post Type and Taxonomy Validation <a href="#custom-post-type-and-taxonomy-validation" id="custom-post-type-and-taxonomy-validation"></a>
+### Validate Core Pages, Posts, Menus, and Media <a href="#validate-core-pages-posts-menus-and-media" id="validate-core-pages-posts-menus-and-media"></a>
 
-Custom post types and custom taxonomies should be validated through real examples, not only record counts. Events, courses, listings, directories, resources, staff, locations, portfolios, jobs, or documentation entries must behave as the target WordPress model intends.
+Core content validation checks whether ordinary WordPress records remain usable for editors and visitors. The review should include both admin-side editing and front-end display. A record that looks correct in the admin area may still break through the theme, menu, shortcode, block, or media layer.
 
-| Structure                 | Validation priority                                                                                | Pass condition                                                                         |
-| ------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Custom post types         | Record type, title, slug, fields, status, media, relationships, archive behavior, and edit screen. | Records appear in the correct admin section and render through the expected templates. |
-| Custom taxonomies         | Terms, hierarchy, assignments, archive pages, filters, and URL paths.                              | Grouping and browsing behavior match the target model.                                 |
-| Relationship fields       | Related people, resources, locations, downloads, events, or categories.                            | Relationships remain connected in both admin and front-end output.                     |
-| Archive and listing pages | Sort order, filters, pagination, excerpts, images, and template output.                            | Users can browse structured content without broken filters or missing fields.          |
+| Sample type   | What to check                                                                                                                     | Pass condition                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| CMS Pages     | Title, slug, content, hierarchy, parent/child relationship, template, featured media, menu placement, internal links, and status. | Priority pages are editable, reachable, visually acceptable, and correctly linked.           |
+| Blog Posts    | Title, body, author, date, categories, tags, excerpt, comments, featured image, slug, and archive appearance.                     | Blog history remains browsable, attributable, and discoverable.                              |
+| Media Library | Files, filenames, alt text, captions, descriptions, attachment relationships, galleries, downloads, and featured-image links.     | Media remains attached to the right records and displays without relying on the source site. |
+| Menus         | Labels, hierarchy, menu locations, custom links, page links, taxonomy links, and external links.                                  | Navigation sends visitors to valid target destinations.                                      |
+| Comments      | Author, date, status, nesting, related post/page, and moderation state.                                                           | Comment history is connected to the correct content and appears only where expected.         |
 
-### Metadata, Fields, and Plugin Data Validation <a href="#metadata-fields-and-plugin-data-validation" id="metadata-fields-and-plugin-data-validation"></a>
+Core validation should also confirm whether the target site has changed content strategy. Some pages may be migrated as editable content, some may be rebuilt, some may be redirected, and some may be retired. The validation result should identify which decision was made rather than treating every missing page as a defect.
 
-| Data area        | What to validate                                                                                        | Pass condition                                                                                        |
-| ---------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Custom fields    | Field names, values, field types, repeaters, relationships, display behavior, and editability.          | Fields are present and used by the target templates or plugins as intended.                           |
-| SEO fields       | SEO title, description, canonical value, index settings, schema data, breadcrumbs, and social metadata. | Priority content has approved metadata and search-sensitive values.                                   |
-| Builder metadata | Builder sections, modules, blocks, reusable layouts, shortcodes, and embedded assets.                   | Important pages render acceptably and unsupported builder data is known.                              |
-| Plugin records   | Forms, submissions, courses, bookings, memberships, events, donations, directories, and custom tables.  | Plugin-owned data is migrated, excluded, or scoped for Custom Service with clear acceptance criteria. |
-| External IDs     | CRM, LMS, ERP, PIM, booking, membership, analytics, or middleware identifiers.                          | Required references are preserved or explicitly replaced by the target operating process.             |
+### Validate Custom Post Types and Taxonomies <a href="#validate-custom-post-types-and-taxonomies" id="validate-custom-post-types-and-taxonomies"></a>
 
-### User, Role, and Account Validation <a href="#user-role-and-account-validation" id="user-role-and-account-validation"></a>
+Custom post types and custom taxonomies are one of the most important WordPress validation areas because they often carry the real site structure. Events, resources, staff profiles, locations, courses, listings, documentation entries, portfolios, directories, case studies, downloads, or forms may look like content but behave differently from ordinary pages or Blog Posts.
 
-WordPress users can represent different business meanings. A user may be an author, editor, administrator, member, learner, donor, subscriber, vendor, customer, or plugin-controlled account. Validation should test more than login fields.
+Validation should test the record type, field structure, taxonomy assignments, archive behavior, URL pattern, template output, search/filter behavior, and editor usability. A successful result should show that the migrated record still behaves as the intended content type.
 
-| Account type                                    | Validation priority                                                          | Pass condition                                                                                      |
-| ----------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Authors and editors                             | Authorship, display name, author archives, and permissions.                  | Content attribution and editorial access are correct.                                               |
-| Members or subscribers                          | Role, membership status, profile fields, access level, and plugin ownership. | Access-controlled content behaves according to the target rules.                                    |
-| Learners, donors, booking users, or event users | Plugin records, history, metadata, and external references.                  | User history is usable or accepted as excluded/custom scope.                                        |
-| WooCommerce customers                           | Customer/order meaning, addresses, subscriptions, and commerce behavior.     | Commerce users are validated through WooCommerce-specific scope, not generic WordPress user checks. |
+| Structure                 | Validation priority                                                                       | Failure signal                                                              |
+| ------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Custom post type          | Record type, title, slug, status, fields, media, relationships, archive, and edit screen. | Records appear as ordinary pages or posts and lose their intended workflow. |
+| Custom taxonomy           | Terms, hierarchy, assignments, archive pages, filters, and URL paths.                     | Terms migrate but no longer support browsing or grouping.                   |
+| Relationship fields       | Related people, locations, resources, events, downloads, or categories.                   | Records exist but their connections disappear.                              |
+| Archive and listing pages | Sort order, pagination, filters, excerpts, featured images, and template output.          | Structured content exists in admin but cannot be browsed properly.          |
 
-### SEO, URL, and Redirect Validation <a href="#seo-url-and-redirect-validation" id="seo-url-and-redirect-validation"></a>
+The pass condition should be based on behavior, not labels. If an event appears as a post but no longer has date, venue, organizer, archive, or filter behavior, the record is not validated simply because its title and body migrated.
 
-| URL area             | What to check                                                                                 | Pass condition                                                |
-| -------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Permalinks and slugs | Priority paths, post/page slugs, custom post type URLs, category/tag URLs, and archive paths. | Important URLs resolve to approved target pages or redirects. |
-| Redirects            | Source-to-target mapping, chains, status codes, and high-traffic paths.                       | Redirects are active, direct, and correct for priority URLs.  |
-| Internal links       | Links inside content, menus, widgets, builder modules, and custom fields.                     | Internal navigation does not point to obsolete source paths.  |
-| Media URLs           | Embedded images, downloads, PDFs, galleries, and linked files.                                | Priority media links remain valid and accessible.             |
+### Validate Metadata, Custom Fields, and Plugin-Owned Records <a href="#validate-metadata-custom-fields-and-plugin-owned-records" id="validate-metadata-custom-fields-and-plugin-owned-records"></a>
 
-### Add-ons, Custom Service, and Entity Points Validation <a href="#add-ons-custom-service-and-entity-points-validation" id="add-ons-custom-service-and-entity-points-validation"></a>
+WordPress metadata can be highly meaningful or completely disposable. Custom fields may store display values, SEO fields, schema values, relationship IDs, event dates, membership states, access rules, builder settings, integration IDs, cache fragments, or abandoned plugin residue. Validation should separate valuable fields from noise.
 
-Add-ons and Custom Service outputs should be validated as explicit scope, not as assumptions. Entity Points should also be reviewed when new eligible records are migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action.
+| Data area        | What to validate                                                                                          | Pass condition                                                                                  |
+| ---------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Custom fields    | Field keys, values, field types, repeaters, relationships, serialized values, and editability.            | Required fields are readable and used by the target templates or plugins.                       |
+| SEO metadata     | SEO title, description, canonical value, index settings, schema fields, breadcrumbs, and social metadata. | Priority pages and posts have approved search-sensitive values.                                 |
+| Builder metadata | Blocks, reusable blocks, shortcodes, module settings, templates, and embedded assets.                     | Important pages render acceptably or have an approved rebuild path.                             |
+| Plugin records   | Forms, submissions, memberships, events, courses, bookings, donations, directories, or custom tables.     | Plugin-owned data is migrated, excluded, or scoped for Custom Service with acceptance criteria. |
+| External IDs     | CRM, LMS, ERP, booking, membership, donation, analytics, PIM, or middleware identifiers.                  | Required references are preserved or replaced by a target operating process.                    |
 
-| Scope area     | Validation priority                                                                                              | Pass condition                                                                    |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Add-ons        | Confirm mapped, filtered, configured, or extended data behaves as requested.                                     | Add-on output is visible in approved samples and does not blur into custom logic. |
-| Custom Service | Validate custom post types, custom fields, plugin tables, external IDs, or bespoke records against agreed scope. | Custom output matches documented acceptance criteria.                             |
-| Entity Points  | Review new Product, Customer, Order, and Blog Posts records when relevant to the migration path.                 | New eligible records are counted only when migrated for the first time.           |
-| Exclusions     | Confirm unsupported or out-of-scope records are understood.                                                      | Launch expectations do not depend on excluded data.                               |
+Add-ons can be useful when supported filtering, field mapping, or configuration needs are clear. Custom Service should be reviewed when records depend on unsupported plugin data, custom tables, serialized logic, bespoke transformations, outside-system identifiers, or target implementation-specific interpretation.
 
-### Demo Migration and Full Migration Validation <a href="#demo-migration-and-full-migration-validation" id="demo-migration-and-full-migration-validation"></a>
+### Validate Users, Roles, Permissions, and Account Meaning <a href="#validate-users-roles-permissions-and-account-meaning" id="validate-users-roles-permissions-and-account-meaning"></a>
 
-| Migration stage    | Validation focus                                                 | Evidence to collect                                                                                                                             |
-| ------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Demo Migration     | Representative samples across simple and complex content.        | Pages, Blog Posts, media, custom post types, metadata, users, roles, redirects, builder pages, and plugin examples.                             |
-| Full Migration     | Complete accepted scope and launch-critical records.             | Final content counts, priority URL checks, visual samples, user/account samples, Add-on outputs, Custom Service outputs, and exclusion signoff. |
-| Post-launch review | Remaining configuration, redirect, SEO, or integration behavior. | Issue list, owner, severity, and resolution path.                                                                                               |
+WordPress users can represent many things: authors, editors, administrators, subscribers, members, learners, instructors, donors, agents, vendors, community accounts, or plugin-controlled profiles. A successful validation process should confirm account meaning, not only username and email transfer.
 
-### Additional Migration Options and Follow-Up Revalidation <a href="#additional-migration-options-and-follow-up-revalidation" id="additional-migration-options-and-follow-up-revalidation"></a>
+| Account type                                        | Validation priority                                                                                  | Pass condition                                                                                        |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Authors and editors                                 | Authorship, display name, author archive, role, and editorial permissions.                           | Content attribution and publishing access are correct.                                                |
+| Members or subscribers                              | Role, access level, profile fields, restricted content, membership status, and plugin ownership.     | Account access behaves according to target rules.                                                     |
+| Learners, donors, booking users, or directory users | Plugin history, metadata, external IDs, and related records.                                         | User history is usable, excluded, or custom-scoped by decision.                                       |
+| Commerce-adjacent accounts                          | Customer-like records, order history, addresses, subscriptions, and checkout context where relevant. | Commerce meaning is validated through the appropriate commerce scope rather than generic user checks. |
 
-Additional Migration Options should trigger renewed validation when later activity adds or changes WordPress content, Blog Posts, users, media, plugin records, custom fields, or source-site URLs. Follow-up migration handling should not assume that earlier Demo Migration evidence still covers new records or changed structures.
+Role and capability validation is especially important when the source site uses custom roles. Default roles may be easier to interpret, but custom roles can control private content, dashboards, submission workflows, vendor pages, course progress, downloads, or membership access. The target result should not grant excessive access or remove access that the business depends on.
 
-| Follow-up situation                | Revalidation requirement                                                                      |
-| ---------------------------------- | --------------------------------------------------------------------------------------------- |
-| New Blog Posts or CMS Pages        | Review content, author, date, media, categories, tags, slugs, SEO fields, and internal links. |
-| New users or account-like records  | Review roles, profile fields, membership/plugin meaning, and permissions.                     |
-| Changed custom post type structure | Review target fields, templates, taxonomies, archives, and filters.                           |
-| New redirects or URL changes       | Re-test priority paths and internal links.                                                    |
-| New plugin or custom data          | Confirm whether Add-ons, Custom Service, or exclusion handling is needed.                     |
+### Validate URLs, SEO, Redirects, and Internal Links <a href="#validate-urls-seo-redirects-and-internal-links" id="validate-urls-seo-redirects-and-internal-links"></a>
 
-### WordPress Validation Priority Matrix <a href="#wordpress-validation-priority-matrix" id="wordpress-validation-priority-matrix"></a>
+WordPress validation should treat URLs as part of site continuity. Content may migrate successfully while traffic still suffers because permalink structure, slugs, taxonomy archives, media URLs, canonical values, redirects, or internal links were not handled.
 
-| Priority                  | Validate first when                                                                | Why it comes first                                                    |
-| ------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Content and URL integrity | The site depends on search traffic, editorial archives, or resource content.       | Broken URLs and missing media create immediate launch risk.           |
-| Custom structures         | The site uses custom post types, taxonomies, or fields.                            | Structured content can look present but fail operationally.           |
-| Plugin-owned data         | The site has memberships, LMS, bookings, events, forms, donations, or directories. | Plugin data may require custom interpretation or accepted exclusions. |
-| Users and roles           | Access, authorship, membership, or account history matters.                        | Permission errors can affect both users and staff.                    |
-| Visual output             | Builders, themes, blocks, shortcodes, or custom templates shape important pages.   | Content completion does not prove page usability.                     |
+| URL and SEO area     | What to check                                                                                                          | Pass condition                                                               |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Permalinks and slugs | Priority paths, post/page slugs, parent-child page URLs, category/tag paths, custom post type URLs, and archive paths. | Important paths resolve to approved target pages or redirects.               |
+| Redirects            | Source-to-target mapping, high-traffic paths, chains, status codes, and retired URLs.                                  | Redirects are active, direct, and aligned with the accepted URL plan.        |
+| Internal links       | Links inside page content, menus, widgets, blocks, builder modules, custom fields, and shortcodes.                     | Internal navigation does not point to obsolete source paths.                 |
+| Media URLs           | Embedded images, downloads, PDFs, galleries, sliders, and linked files.                                                | Priority assets load from the target environment.                            |
+| SEO plugin fields    | Titles, descriptions, canonical values, social fields, schema fields, breadcrumbs, and index settings.                 | High-value pages preserve or intentionally revise search-sensitive metadata. |
+
+The validation team should avoid treating SEO as a final afterthought. If the migration changes the permalink model, taxonomy structure, content hierarchy, language setup, or SEO plugin, validation should include traffic-critical pages and representative archive paths.
+
+### Validate Theme, Block, Builder, and Template Output <a href="#validate-theme-block-builder-and-template-output" id="validate-theme-block-builder-and-template-output"></a>
+
+WordPress content is not only stored text. Themes, templates, blocks, block patterns, reusable blocks, widgets, shortcodes, and builders can determine whether migrated content displays correctly. Validation should identify which visible issues belong to migration output, which belong to target theme setup, and which require manual rebuild.
+
+| Presentation area | What to validate                                                                              | Practical decision                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Block content     | Core blocks, reusable blocks, custom blocks, embeds, columns, media, tables, and galleries.   | Preserve, adjust, or rebuild based on target compatibility.            |
+| Shortcodes        | Forms, galleries, sliders, embeds, buttons, downloads, listings, or plugin output.            | Confirm whether shortcode handlers exist and render correctly.         |
+| Page builders     | Elementor, Divi, WPBakery, Beaver Builder, or other builder structures where present.         | Migrate content, rebuild layout, or review Custom Service feasibility. |
+| Theme templates   | Page templates, archive templates, single templates, header/footer areas, and template parts. | Confirm target-side setup and expected visual result.                  |
+| Widgets and menus | Sidebar areas, footer blocks, navigation locations, and custom menu links.                    | Validate display and manual configuration needs.                       |
+
+A page can pass content validation but fail launch readiness if the visible result is unusable. Presentation findings should be classified as migration correction, target-side theme work, manual rebuild, Add-on adjustment, Custom Service review, or accepted limitation.
+
+### Validate Additional Migration Activity Before Launch <a href="#validate-additional-migration-activity-before-launch" id="validate-additional-migration-activity-before-launch"></a>
+
+Many WordPress sites continue publishing while migration work is reviewed. New Blog Posts, CMS Pages, media files, users, comments, custom post type records, taxonomy terms, or plugin records can appear after an initial migration run. Validation should define what must be rechecked when migration activity continues.
+
+| Later migration situation         | Revalidation requirement                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| New CMS Pages or Blog Posts       | Content, author, date, media, categories, tags, slug, SEO fields, and internal links.             |
+| New custom post type records      | Fields, relationships, taxonomy assignments, templates, archives, and URL behavior.               |
+| New users or account-like records | Roles, profile fields, access rules, plugin meaning, and permissions.                             |
+| New redirects or URL changes      | Priority paths, internal links, media URLs, and redirect behavior.                                |
+| New plugin or custom data         | Confirm whether supported migration, Add-ons, Custom Service, exclusion, or manual setup applies. |
+
+Entity Points should be interpreted correctly when new eligible records are migrated. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time, but records already counted through the service license do not consume Entity Points again simply because another migration action occurs on the same migration path.
+
+### Build a WordPress Validation Report <a href="#build-a-wordpress-validation-report" id="build-a-wordpress-validation-report"></a>
+
+A validation report should be practical enough to guide launch decisions. It should identify the sample, expected result, observed result, severity, handling path, owner, and final status.
+
+| Report field     | Purpose                                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Record or sample | Identifies the page, post, media file, user, custom post type record, taxonomy term, URL, plugin record, or template sample.                                  |
+| Expected result  | States what the migrated result should look like or do.                                                                                                       |
+| Observed result  | Describes what appears in the target WordPress site.                                                                                                          |
+| Severity         | Separates launch blockers from minor cleanup.                                                                                                                 |
+| Handling path    | Classifies the issue as migration correction, Add-on adjustment, Custom Service review, target-side setup, manual rebuild, accepted limitation, or exclusion. |
+| Owner            | Assigns responsibility to the merchant, Next-Cart, WordPress implementer, designer, SEO team, or external integration partner.                                |
+| Status           | Confirms whether the issue is open, corrected, accepted, or deferred.                                                                                         |
+
+The report should not become a loose screenshot collection. Each finding should explain the business impact and the path to resolution.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WordPress validation should prove that migrated content works inside the target WordPress implementation. The strongest validation plan checks core CMS records, custom structures, metadata, media, users, plugins, layouts, redirects, SEO data, integrations, Add-ons, Custom Service outputs, and follow-up migration effects.
+WordPress validation should prove that the target site works as a usable CMS environment. Pages, Blog Posts, media, menus, custom post types, taxonomies, custom fields, users, roles, plugin records, presentation output, SEO fields, URLs, redirects, Add-ons, Custom Service outputs, and later migration activity all require sample-based review.
 
-When validation separates WordPress core content from plugin and custom behavior, the project can distinguish completed migration scope from implementation work, accepted exclusions, and items that need further review before launch.
+The strongest validation approach checks content meaning, editing usability, front-end display, permission behavior, URL continuity, and custom-data scope together. A WordPress migration should be approved when the migrated result can support real publishing, navigation, search visibility, account use, and launch operations—not merely because record counts match.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should be validated first in a WordPress migration?**
+**Is checking WordPress record counts enough after migration?**
 
-Start with priority content, media relationships, URLs, redirects, custom post types, custom fields, users, roles, and plugin-owned records that affect launch-critical behavior.
+No. Counts help confirm volume, but they do not prove usability. WordPress validation should also check editable content, media relationships, custom post types, taxonomies, metadata, users, roles, URLs, redirects, plugin records, and front-end display.
 
-**Is checking record counts enough for WordPress?**
+**Why do custom post types need separate validation?**
 
-No. Counts can confirm volume, but WordPress validation must also prove relationships, fields, media, roles, layouts, plugin behavior, SEO data, and redirects.
+Custom post types often carry structured business meaning. Events, listings, courses, resources, directories, or staff profiles need their fields, taxonomy assignments, templates, archives, and URL behavior checked as structured records, not ordinary pages.
 
-**How should WooCommerce-related records be validated?**
+**Should page-builder output be part of validation?**
 
-WooCommerce records should be validated through WooCommerce-specific scope, not as generic WordPress content. Products, Customers, Orders, coupons, checkout, subscriptions, tax, shipping, and payment behavior need separate review.
+Yes, when page builders, blocks, shortcodes, or theme templates affect important pages. Content may migrate while layout or functional sections still need target-side setup, manual rebuild, Add-on adjustment, or Custom Service review.
 
-**When do Add-ons or Custom Service need validation?**
+**How should plugin-owned records be validated?**
 
-They need validation whenever mapped, filtered, configured, custom, plugin-owned, or external-system data is part of accepted scope. Output should be checked against agreed examples.
+Plugin-owned records should be validated against explicit scope. Some may be supported, some may require Add-ons, some may require Custom Service, and some may be excluded or rebuilt in the target environment.
 
-**Do Additional Migration Options require another validation pass?**
+**What needs to be revalidated after later migration activity?**
 
-Yes. Later migration activity can introduce new or changed records, URLs, fields, users, or plugin data. Those changes need renewed review before acceptance.
+Recheck newly migrated records and representative regression samples. For WordPress, that can include new CMS Pages, Blog Posts, custom post type records, media, users, taxonomy terms, SEO fields, redirects, internal links, and plugin-owned records.

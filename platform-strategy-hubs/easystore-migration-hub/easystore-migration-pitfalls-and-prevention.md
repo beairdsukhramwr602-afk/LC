@@ -1,288 +1,265 @@
 # EasyStore Migration Pitfalls and Prevention
 
-EasyStore by JoomShaper migration pitfalls usually appear when the migration is planned as a simple transfer of commerce records instead of a move into a Joomla-based e-commerce extension environment. Products, categories, customers, orders, coupons, inventory, tax, shipping, payment context, and storefront paths may all look acceptable at first glance while still failing to support the merchant’s real operating model after launch.
+EasyStore by JoomShaper migration pitfalls usually appear when the project treats EasyStore as a simple product database instead of a Joomla-based commerce environment. The records may appear in the target store, but launch risk remains if variants are unclear, categories do not support discovery, Joomla menus do not expose key pages, SP Page Builder presentation is misunderstood, or historical order context is confused with live configuration.
 
-The most reliable prevention strategy is to identify the failure pattern before Full Migration. Demo Migration should be used to test the records that reveal structure, not only the records that are easiest to migrate. For EasyStore by JoomShaper, that means testing products with variants, products with multiple images, category and tag relationships, meaningful customer records, orders with discounts or refunds, shipping and tax examples, and storefront paths that depend on Joomla menus, templates, modules, or page-builder layouts.
+Prevention should start before Full Migration. The team should identify the source store’s selling structure, prepare representative Demo Migration samples, separate migrated data from EasyStore/Joomla configuration, and classify custom or extension-owned requirements early. Each pitfall below turns a common assumption into a practical prevention rule.
 
-### Pitfall 1: Treating EasyStore Data as Separate from the Joomla Site <a href="#pitfall-1-treating-easystore-data-as-separate-from-the-joomla-site" id="pitfall-1-treating-easystore-data-as-separate-from-the-joomla-site"></a>
+### Pitfall 1: Treating EasyStore as a Flat Catalog Target <a href="#pitfall-1-treating-easystore-as-a-flat-catalog-target" id="pitfall-1-treating-easystore-as-a-flat-catalog-target"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-The migration is planned as though EasyStore by JoomShaper is only a destination for product, customer, and order records. The surrounding Joomla site structure is reviewed later, after the migrated data is already in place.
+Products are migrated as basic records, but the selling structure behind them is weakened. Variant choices, product images, categories, tags, sale prices, coupons, inventory, shipping-sensitive fields, and custom product data may not be reviewed with enough care.
 
-This creates a gap between migrated store data and the customer-facing storefront. Products may exist in EasyStore, but shoppers may not reach them through the expected menus, landing pages, category paths, internal links, or content sections. Store administrators may also struggle to understand which parts of the future experience are controlled by EasyStore and which parts are controlled by Joomla templates, modules, menus, articles, CMS Pages, Blog Posts, or SP Page Builder layouts.
+This creates a store that looks populated but does not support real buying. Shoppers may see unclear options. Merchants may struggle to manage variant stock. Product pages may lack key images or context. Historical orders may show line items without enough product-choice meaning.
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-* Storefront URLs, menus, and landing pages are not reviewed before Demo Migration.
-* The target Joomla site is still structurally undefined.
-* Product and category migration is discussed without any reference to navigation, templates, or page-builder layout.
-* The merchant expects the old storefront experience to appear automatically after data migration.
-* Store data and site implementation are handled by separate teams without shared validation samples.
+| Warning sign                                                | What it suggests                                                        |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Product review focuses mostly on names and counts           | The selling structure may not be validated.                             |
+| Variant products are not included in Demo Migration samples | Option, price, image, and stock issues may surface late.                |
+| Coupons and sale-price behavior are not sampled             | Historical discount meaning and active promotion setup may be confused. |
+| Custom product fields have no examples                      | Add-on or Custom Service requirements may be hidden.                    |
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Plan the Joomla site context before judging migration quality. Identify the store pages that matter most, including key category pages, product pages, checkout paths, account areas, landing pages, and internal content links. Separate what should be migrated as supported commerce data from what must be configured, rebuilt, or styled inside Joomla.
+Prepare product samples that represent the real catalog. Include simple products, variant-heavy products, discounted products, image-rich products, products with shipping needs, products assigned to important categories, and products with custom or extension-owned fields.
 
-The migration plan should also define who owns non-data work. Next-Cart can migrate supported data according to the selected migration path and purchased service. Joomla layout, menu design, template configuration, module placement, and page-builder implementation may require merchant, developer, or implementation-team work unless they are included in a Custom Service scope.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+For a fashion store, validate a simple accessory, a size-and-color product, a discounted item, a product with multiple images, a stock-sensitive product, and one product that used custom source fields or external identifiers.
 
-Before Demo Migration, choose several high-value products and categories, then map where each should appear in the future Joomla site. Include at least one product reached through a category page, one product linked from a landing page, and one product connected to a content page or guide. After Demo Migration, check both the EasyStore administration area and the storefront path that shoppers are expected to use.
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+Representative products can be found, understood, selected, added to cart, and interpreted in order history. Any unsupported or custom product behavior is classified as Add-on review, Custom Service review, target setup, manual rebuild, or accepted limitation.
 
-Products, categories, and store records are not only present in EasyStore; they also support the intended Joomla storefront path, menu structure, and customer journey.
+### Pitfall 2: Ignoring Joomla Navigation and Storefront Paths <a href="#pitfall-2-ignoring-joomla-navigation-and-storefront-paths" id="pitfall-2-ignoring-joomla-navigation-and-storefront-paths"></a>
 
-### Pitfall 2: Validating Products Without Testing Variant Meaning <a href="#pitfall-2-validating-products-without-testing-variant-meaning" id="pitfall-2-validating-products-without-testing-variant-meaning"></a>
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+The team validates products inside EasyStore administration but does not validate how shoppers reach those products through Joomla. Menus, aliases, SEF URLs, internal links, category paths, account paths, checkout paths, and landing pages may remain incomplete or inconsistent.
 
-The merchant checks whether products migrated, but does not test whether product variants still carry the correct selling meaning. This is especially risky when the Source Platform uses option-level pricing, option-level inventory, product bundles, custom product fields, option-specific images, size/color/material combinations, or source-specific display rules.
+This is a serious issue for content-led Joomla sites. A product can migrate correctly as a record while the customer journey remains broken or hard to follow.
 
-The result may look acceptable in a product list while failing during real product selection. Shoppers may see unclear options, missing images, wrong prices, incomplete stock behavior, or order line items that do not clearly show what was purchased.
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
-
-* Demo Migration samples include only simple products.
-* Variant-heavy products are excluded because they are considered edge cases.
-* Product options are reviewed visually but not tested through add-to-cart and checkout behavior.
-* Inventory is checked at product level only, not at variant or option level where relevant.
-* The source catalog contains old workarounds, duplicate option names, inconsistent SKUs, or app-created product fields.
+| Warning sign                                                   | Risk                                                     |
+| -------------------------------------------------------------- | -------------------------------------------------------- |
+| Products are checked one by one, but menu paths are not tested | Shoppers may not reach important pages.                  |
+| Old product and category URLs are not listed                   | SEO and campaign continuity may be weakened.             |
+| Joomla content pages linking to products are ignored           | Internal links may point to old or missing destinations. |
+| Checkout and account paths are reviewed only after launch      | Buying flow problems may appear too late.                |
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Include structurally representative products in Demo Migration. A strong product sample should include simple products, variant-heavy products, products with multiple images, sale-priced products, products in multiple categories, products with inventory rules, and products that represent the merchant’s highest-value revenue lines.
+Validate priority storefront paths, not only records. Prepare a list of important product URLs, category URLs, content pages, menu items, landing pages, campaign links, and checkout/account paths. Decide which paths should migrate, redirect, be rebuilt, or be intentionally retired.
 
-Product validation should confirm both administrative manageability and shopper-facing selection. If a source product depends on custom product fields, app-owned data, unsupported option logic, external identifiers, or bespoke transformation, review whether Advanced Data Mapping, Advanced Data Configure, or Custom Service is needed.
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+For a store that depends on organic traffic, validate top product pages, top category pages, major menu links, internal links from Joomla content, campaign landing pages, and checkout entry paths before approving launch.
 
-Select a product with several variants, separate images, different stock behavior, and a discount or sale price. After Demo Migration, confirm that the product can be found, selected, added to cart, and reviewed in the order record with clear variant meaning.
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+Priority products and categories are reachable through accepted Joomla/EasyStore paths, and high-value old URLs have a clear migration, redirect, rebuild, or retirement decision.
 
-Variant-heavy products remain understandable to shoppers, manageable to administrators, and readable in order history after migration.
+### Pitfall 3: Confusing SP Page Builder Presentation With Migrated Data <a href="#pitfall-3-confusing-sp-page-builder-presentation-with-migrated-data" id="pitfall-3-confusing-sp-page-builder-presentation-with-migrated-data"></a>
 
-### Pitfall 3: Assuming Categories, Tags, Brands, and Collections Have the Same Meaning as the Source Platform <a href="#pitfall-3-assuming-categories-tags-brands-and-collections-have-the-same-meaning-as-the-source-platfo" id="pitfall-3-assuming-categories-tags-brands-and-collections-have-the-same-meaning-as-the-source-platfo"></a>
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+The team expects page-builder layouts, promotional sections, product blocks, landing pages, or visual merchandising to be reproduced automatically through data migration. EasyStore records may migrate correctly, but the storefront still appears incomplete because the visual presentation depends on Joomla, templates, modules, or SP Page Builder implementation.
 
-The migration treats catalog organization as a direct structure transfer. Categories, tags, brands, collections, menus, filters, and source-specific grouping logic are assumed to behave the same way in EasyStore by JoomShaper.
+This can lead to unfair migration approval or rejection. The issue may not be the product data itself. It may be a separate presentation or implementation task.
 
-This can weaken product discovery. Products may migrate successfully but appear in the wrong commercial context, duplicate categories may survive, tags may carry old internal meanings, and collection or brand logic may not support the future Joomla storefront.
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
-
-* Source categories contain duplicates, outdated labels, or inconsistent hierarchy.
-* Tags are used for internal management, search, promotions, or storefront discovery without clear distinction.
-* Brand or collection logic is not documented before migration.
-* Joomla menus are planned separately from product organization.
-* The merchant expects migrated categories alone to recreate the old browsing experience.
+| Warning sign                                               | Risk                                                             |
+| ---------------------------------------------------------- | ---------------------------------------------------------------- |
+| Landing pages are described as product data                | Presentation scope is being mixed with migration scope.          |
+| SP Page Builder product sections are not inventoried       | Important selling blocks may be missing after migration.         |
+| Custom page layouts are expected to transfer automatically | Manual rebuild or implementation work may be underplanned.       |
+| Visual similarity is used as the only success measure      | Correct data may be rejected because presentation is unfinished. |
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Review catalog organization as a discovery system. Clarify which structures should become EasyStore categories, tags, brands, or collections, and which structures should be handled through Joomla menus, content pages, or storefront implementation.
+Separate commerce records from presentation implementation. Identify product pages, product listing blocks, landing pages, campaign sections, custom layouts, template dependencies, and page-builder sections that affect revenue or SEO continuity. Decide whether each item is migrated data, target implementation, manual rebuild, or custom-scope work.
 
-Avoid migrating old organizational clutter into the target store without review. The goal is not merely to preserve every old grouping. The goal is to preserve useful buying paths and administrative meaning inside the future EasyStore and Joomla environment.
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+For a store that uses SP Page Builder to display featured products on landing pages, validate the migrated product records separately from the landing-page sections that must be configured or rebuilt in Joomla.
 
-Choose a top-selling category and trace how shoppers currently reach it. Then decide which parts of that journey belong to EasyStore product organization and which parts belong to Joomla menu or landing-page structure. Use that path as a validation sample after Demo Migration.
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+The team can explain which storefront presentation elements are migrated data, which are Joomla/SP Page Builder implementation tasks, and which require manual rebuild or Custom Service review.
 
-Products appear in meaningful EasyStore catalog structures and support the intended Joomla browsing paths without preserving outdated source clutter.
+### Pitfall 4: Treating Historical Orders as Live Store Configuration <a href="#pitfall-4-treating-historical-orders-as-live-store-configuration" id="pitfall-4-treating-historical-orders-as-live-store-configuration"></a>
 
-### Pitfall 4: Treating Checkout, Tax, Shipping, and Payment Behavior as Ordinary Data <a href="#pitfall-4-treating-checkout-tax-shipping-and-payment-behavior-as-ordinary-data" id="pitfall-4-treating-checkout-tax-shipping-and-payment-behavior-as-ordinary-data"></a>
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+Historical orders are expected to prove live payment, tax, shipping, checkout, refund, coupon, or notification behavior. Migrated order history may preserve useful commercial context, but live EasyStore configuration still needs setup and testing.
 
-The migration assumes that checkout behavior, tax rules, shipping methods, payment references, coupons, refunds, and order totals will transfer as ordinary data fields. In practice, these areas often combine migrated records, EasyStore configuration, payment gateway setup, shipping-carrier behavior, regional rules, and business-specific settings.
+This can create launch problems when teams approve migration because old orders look readable, even though current checkout, payment integrations, shipping regions, tax rates, or refund workflows have not been tested.
 
-A migrated order can show the right total while still failing to explain how discounts, tax, shipping, refunds, payment status, or gateway references should be interpreted after launch.
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
-
-* Tax, shipping, and payment behavior are not documented before Demo Migration.
-* The merchant expects every source rule to become an EasyStore setting automatically.
-* Coupons are tested only for presence, not for context or future usability.
-* Refunds and payment states are excluded from validation samples.
-* Shipping methods depend on regions, carriers, product dimensions, order totals, or custom rules.
+| Warning sign                                                         | Risk                                          |
+| -------------------------------------------------------------------- | --------------------------------------------- |
+| Payment references are treated as live payment setup                 | Checkout may not be ready.                    |
+| Historical tax amounts are treated as proof of live tax rules        | Current tax configuration may be incomplete.  |
+| Shipping values on old orders are treated as active shipping methods | New checkout shipping behavior may fail.      |
+| Refund samples are not reviewed                                      | Support and financial context may be unclear. |
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Separate migrated historical context from target-store configuration. Some information may be migrated as part of customer, order, coupon, or product records. Other behavior must be configured in EasyStore or through the target Joomla environment.
+Validate order history for readability and support value. Test live configuration separately. Order samples should include ordinary paid orders, variant orders, discounted orders, refunded orders, shipping/tax examples, cancelled orders, and orders tied to important customers.
 
-Demo Migration samples should include orders with discounts, tax, shipping, payment context, refunds where available, and different order states. If the source uses custom checkout logic, third-party payment references, unsupported tax/shipping rules, or external system identifiers, review the requirement before assuming Standard Service is enough.
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+Before launch, review historical orders for commercial context, then place test orders to confirm EasyStore payment, checkout, tax, shipping, coupon, account, and notification behavior.
 
-Use a Demo Migration sample that includes one paid order, one discounted order, one order with shipping and tax, and one refunded or partially refunded order if available. Check whether historical meaning is readable and whether future checkout behavior needs separate EasyStore configuration.
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+Historical orders are useful for support and reference, while live payment, tax, shipping, checkout, coupon, and refund behavior are separately configured and tested.
 
-Historical order context remains understandable, and future checkout, tax, shipping, payment, coupon, and refund behavior is clearly separated into migrated data, target configuration, or Custom Service review.
+### Pitfall 5: Underestimating Customer Identity and Account Context <a href="#pitfall-5-underestimating-customer-identity-and-account-context" id="pitfall-5-underestimating-customer-identity-and-account-context"></a>
 
-### Pitfall 5: Underestimating Historical Order Meaning <a href="#pitfall-5-underestimating-historical-order-meaning" id="pitfall-5-underestimating-historical-order-meaning"></a>
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+Customer names and emails migrate, but customer identity is still weak. Guest buyers, duplicate emails, multiple addresses, Joomla user expectations, customer-order relationships, membership data, loyalty context, CRM references, and external IDs may not remain usable.
 
-The migration is judged by whether old orders appear in EasyStore, but not by whether those orders remain useful for customer service, accounting reference, repeat purchase support, warranty review, fulfillment questions, or internal reporting.
+A customer record has limited value if support teams cannot understand the buyer’s order history or account context.
 
-Historical orders can lose value when line items, variants, discounts, tax, shipping, refunds, payment references, external fulfillment identifiers, or custom statuses are unclear. The problem may not surface until after launch, when staff need to answer customer questions using migrated records.
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
-
-* Order samples are selected randomly instead of by operational importance.
-* Only recent or simple orders are tested.
-* Orders with refunds, discounts, variant products, cancelled states, or external references are excluded.
-* Customer-service staff are not involved in validation.
-* Custom source statuses are not mapped or documented.
+| Warning sign                                          | Risk                                                |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| Customer validation only checks names and emails      | Buyer history may be disconnected.                  |
+| Guest buyers are ignored                              | Historical order context may lose customer meaning. |
+| Joomla user relationships are assumed without testing | Account behavior may not match expectations.        |
+| External customer IDs are undocumented                | CRM, ERP, or support workflows may break.           |
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Choose order samples that represent real support and operational scenarios. Include recent orders, older orders, high-value orders, discounted orders, refunded orders if available, orders with multiple products, orders with variant products, and orders connected to important customers.
+Include different customer types in validation: registered customers, guest buyers, repeat buyers, duplicate contacts, customers with multiple addresses, customers connected to refunded or high-value orders, and customers with custom fields or external references.
 
-Validation should focus on whether the order can be understood by the people who will use it after migration. If custom order statuses, third-party fulfillment data, external identifiers, or source-specific payment references matter, they should be reviewed before Full Migration.
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+For a store with repeat customers and guest checkout history, validate one repeat registered buyer, one guest buyer, one duplicate email example, one customer with multiple addresses, and one customer tied to a refunded order.
 
-Ask customer-service or operations staff to identify order examples they would need after launch. Use those records in Demo Migration and review whether staff can understand what was purchased, what was paid, what was shipped, what was refunded, and what status the order represents.
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+Customer records support lookup, service, historical order review, and account understanding. Unsupported customer fields or external identifiers are classified before launch.
 
-Migrated orders remain useful as operational history, not merely as archived transaction records.
+### Pitfall 6: Hiding Extension-Owned or Custom Data Inside Standard Scope <a href="#pitfall-6-hiding-extension-owned-or-custom-data-inside-standard-scope" id="pitfall-6-hiding-extension-owned-or-custom-data-inside-standard-scope"></a>
 
-### Pitfall 6: Assuming Custom Fields and Extension-Owned Data Are Standard Records <a href="#pitfall-6-assuming-custom-fields-and-extension-owned-data-are-standard-records" id="pitfall-6-assuming-custom-fields-and-extension-owned-data-are-standard-records"></a>
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+Custom fields, extension-owned records, external identifiers, page-builder-specific values, ERP references, CRM data, fulfillment fields, marketplace data, analytics fields, or custom business logic are treated as ordinary EasyStore records. The scope looks simple until validation reveals that important values do not have a supported destination.
 
-The source store contains custom fields, extension-owned data, third-party identifiers, custom Joomla development, external system references, subscription data, membership logic, marketplace data, ERP-connected values, or app-specific records. These elements are treated as if they will migrate like ordinary product, customer, or order data.
+The issue is often ownership, not just field count. Data created by another extension, integration, custom import, or bespoke workflow may need special handling.
 
-This creates false confidence. The visible standard records may migrate correctly, while important hidden relationships or custom meanings are not included in the expected EasyStore result.
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
-
-* The source store relies on extensions, custom code, or external systems, but no inventory of those dependencies exists.
-* Product, customer, or order exports contain fields that no one can explain.
-* Business workflows depend on values outside standard commerce records.
-* The merchant expects custom data to appear in EasyStore without mapping or service review.
-* Custom Platform source data is involved but no Custom Service review has occurred.
+| Warning sign                                                           | Risk                                                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Custom fields are mentioned without sample records                     | Scope cannot be evaluated accurately.                                    |
+| ERP, CRM, fulfillment, or analytics IDs are required after launch      | Outside-system continuity may be at risk.                                |
+| Other Joomla extensions influence product, customer, or order behavior | Standard migration may not cover the needed data.                        |
+| Page-builder or template logic stores important selling context        | Presentation or custom implementation may be mistaken for data transfer. |
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Create an extension and custom-data inventory before migration. Identify which fields, relationships, integrations, identifiers, and workflows are required for the future EasyStore operation. Separate nice-to-have historical data from business-critical data.
+Create a custom-data inventory before approving the migration scope. For each field or record, identify the owner, business purpose, sample value, target expectation, handling path, and validation proof.
 
-When the source includes Custom Platform data, unsupported extension data, bespoke relationships, third-party identifiers, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader transformation requirements, review the case through Custom Service before execution.
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+If product records include ERP item IDs and custom merchandising fields used by page layouts, provide sample products and define whether those values should map to supported EasyStore fields, require Add-on review, need Custom Service, or remain in a separate system.
 
-Before Demo Migration, export a list of custom product fields, customer fields, order fields, and third-party identifiers. Mark each item as required, optional, obsolete, or unknown. Any required or unknown item should be reviewed before Full Migration expectations are finalized.
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+Every special-data expectation is classified as supported scope, Add-on adjustment, Custom Service review, EasyStore/Joomla configuration, third-party integration work, manual rebuild, or accepted exclusion.
 
-Required custom or extension-owned data is either included within supported migration behavior, handled through an appropriate Add-on, reviewed through Custom Service, or deliberately excluded with clear business agreement.
+### Pitfall 7: Reviewing Demo Migration With Too-Narrow Samples <a href="#pitfall-7-reviewing-demo-migration-with-too-narrow-samples" id="pitfall-7-reviewing-demo-migration-with-too-narrow-samples"></a>
 
-### Pitfall 7: Using Weak Demo Migration Samples <a href="#pitfall-7-using-weak-demo-migration-samples" id="pitfall-7-using-weak-demo-migration-samples"></a>
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+Demo Migration is reviewed with easy records only. The team checks a few clean products, ordinary customers, and simple orders, then approves the migration pattern without testing variants, discounts, refunds, tax, shipping, account relationships, storefront paths, SP Page Builder dependencies, or custom data.
 
-Demo Migration is used, but the selected samples are too clean or too narrow. The migration appears successful because simple records migrate correctly, while the records that reveal actual business complexity are not tested.
+This creates late surprises because the review never tested the records most likely to fail.
 
-This creates a misleading result. Problems with variants, categories, images, order history, coupons, refunds, shipping, tax, payment context, custom fields, Joomla paths, or extension-owned data may remain hidden until Full Migration or launch preparation.
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
-
-* Demo Migration samples are chosen for convenience instead of business meaning.
-* Only simple products and ordinary orders are reviewed.
-* Important customer accounts, high-value products, and complex historical records are missing from the sample.
-* Demo Migration is judged by record counts alone.
-* The review team does not document what each sample is supposed to prove.
+| Warning sign                                                  | Risk                                               |
+| ------------------------------------------------------------- | -------------------------------------------------- |
+| Demo samples include only clean products                      | Variant and custom-field issues may be missed.     |
+| Orders with refunds, discounts, shipping, and tax are skipped | Commercial history may be incomplete or confusing. |
+| Storefront routes are not reviewed                            | Products may migrate but remain hard to reach.     |
+| Custom data is deferred without examples                      | Service scope may be wrong.                        |
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Design Demo Migration samples around proof questions. Each sample should exist because it tests a specific part of the migration: product selection, variant meaning, image handling, category discovery, customer history, order readability, discount behavior, refund context, shipping/tax interpretation, payment context, Joomla route expectations, or custom data handling.
+Choose samples deliberately. Include products, customers, orders, URLs, presentation areas, configuration-sensitive behavior, and custom data examples that reveal the store’s real structure.
 
-A useful sample set does not need to include everything. It needs to include the records most likely to reveal whether the migration plan is safe.
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+A strong EasyStore Demo Migration sample should include a simple product, variant product, discounted product, refunded order, tax/shipping order, repeat customer, guest buyer, product category page, important old URL, and one custom-data example.
 
-Build a Demo Migration checklist with one sample for each major proof area: simple product, variant-heavy product, image-rich product, key category, important customer, recent order, discounted order, refunded order, shipping/tax example, and any source record with custom data. Record what each sample is intended to prove before reviewing the result.
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+Demo Migration review proves the expected migration pattern across ordinary records and difficult records. Findings are classified by handling path before Full Migration.
 
-Demo Migration results give enough evidence to decide whether the selected migration path, service model, Add-ons, and validation plan are appropriate before Full Migration.
+### Pitfall 8: Choosing the Wrong Later Migration Action <a href="#pitfall-8-choosing-the-wrong-later-migration-action" id="pitfall-8-choosing-the-wrong-later-migration-action"></a>
 
-### Pitfall 8: Waiting Too Long to Escalate Service Scope <a href="#pitfall-8-waiting-too-long-to-escalate-service-scope" id="pitfall-8-waiting-too-long-to-escalate-service-scope"></a>
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+The merchant continues selling after an earlier migration run but does not define whether the next step should continue from the last used configuration, continue with a new configuration, or perform a new migration. The team treats every additional migration action as if it has the same effect.
 
-The merchant starts with an approach that is too light for the source structure or expected EasyStore result. The project continues under standard assumptions even after custom fields, unsupported extension data, external identifiers, unusual checkout behavior, or Joomla-specific implementation dependencies become visible.
+This can cause validation confusion. Continuing from the last used configuration usually emphasizes newly added source records and selected regression samples. Continuing with a new configuration requires checking the changed mapping, filtering, or setup choices. Performing a new migration requires broader review because the target result may be replaced.
 
-Late escalation increases rework. The issue is not that Standard Service is weak; it is that the selected approach must match the actual migration burden.
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
-
-* Custom fields or extension-owned data are discovered after Demo Migration.
-* Required behavior depends on custom source logic or third-party systems.
-* The merchant wants non-standard transformation but has not reviewed Custom Service.
-* Add-ons are expected to solve broader customization needs.
-* Demo Migration reveals gaps that are treated as minor even though they affect launch readiness.
+| Warning sign                                                            | Risk                                                         |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
+| The team says “run it again” without defining the action                | Expected result is unclear.                                  |
+| Source data changes after Demo Migration                                | New products, customers, orders, or content may be missed.   |
+| Mapping or filtering decisions change after an earlier run              | Validation must include changed fields and affected records. |
+| A refreshed target result is expected but only new records are reviewed | The team may approve the wrong outcome.                      |
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-Use service-path review as an early decision point. Standard Service may fit clear supported data and merchant-led execution. Managed Service may be safer when the merchant wants Next-Cart-led execution within standard service capability and purchased Add-ons. Custom Service should be reviewed when the migration requires customization, modification, Custom Platform handling, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, unsupported extension data, third-party data, or broader bespoke interpretation.
+Decide the intended action before execution. The validation plan should match the action: newly added records for continuation, changed configuration samples for adjusted continuation, and broader target-result review for a new migration.
 
-Add-ons should not be stretched into a substitute for Custom Service. The Data Filter Add-on, Advanced Data Mapping, and Advanced Data Configure can help when their default capability fits the requirement. Tailored Add-ons and Custom Add-ons belong under Custom Service review.
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+If the merchant adds products and orders after Demo Migration but keeps the same configuration, continuation may focus on newly added records. If the merchant changes mapping choices for product data, the changed fields must be validated. If the merchant wants to replace the earlier target result, a new migration requires broader review.
 
-After Demo Migration, classify each issue as data cleanup, target configuration, Add-on review, Custom Service review, or not launch-ready. If several issues point to custom source meaning or unsupported transformation, review the service scope before continuing.
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
-
-The chosen service approach matches the migration burden before Full Migration, and any required Add-on or Custom Service scope is identified before launch-critical work begins.
-
-### Prevention Priorities for EasyStore by JoomShaper Migration <a href="#prevention-priorities-for-easystore-by-joomshaper-migration" id="prevention-priorities-for-easystore-by-joomshaper-migration"></a>
-
-The strongest prevention plan does not attempt to eliminate all complexity. It makes complexity visible early enough to choose the right preparation, service path, and validation samples.
-
-| Prevention priority                     | What it should prove                                                                        | When it matters most                                                                                                |
-| --------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Joomla site context review              | Store data and Joomla structure can support the same customer journey.                      | The store depends on menus, templates, modules, SP Page Builder, content pages, or important URLs.                  |
-| Representative product sampling         | Products remain sellable and manageable after migration.                                    | The catalog includes variants, multiple images, inventory rules, custom fields, or special pricing.                 |
-| Operational order sampling              | Historical orders remain useful after migration.                                            | Orders are needed for support, accounting reference, repeat purchase support, refunds, or fulfillment questions.    |
-| Configuration-sensitive behavior review | Checkout, tax, shipping, payment, coupon, and refund expectations are correctly classified. | The source store uses regional rules, gateways, carriers, custom checkout logic, or non-standard status behavior.   |
-| Custom-data inventory                   | Required non-standard data is not missed.                                                   | The source uses extensions, custom development, third-party systems, external identifiers, or Custom Platform data. |
-| Service-path review                     | The selected service model and Add-ons match the actual project burden.                     | Demo Migration reveals custom transformation, mapping, configuration, or unsupported data requirements.             |
+The team can state which action is being used, what records should be affected, whether configuration is changing, whether target data is expected to be replaced, and which samples prove the result.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-EasyStore by JoomShaper migration pitfalls are usually caused by hidden meaning, not by the absence of obvious records. A product can migrate but lose variant clarity. An order can appear but lose operational usefulness. A category can exist but fail to support storefront discovery. A Joomla page can be rebuilt but remain disconnected from the migrated catalog.
+EasyStore by JoomShaper migration pitfalls are preventable when the project treats the store as Joomla-based commerce rather than a flat product transfer. Product variants, storefront paths, SP Page Builder presentation, customer identity, order history, configuration-sensitive behavior, custom data, Demo Migration samples, and later migration actions all need clear ownership and proof.
 
-The safest migration plan treats EasyStore by JoomShaper as both a commerce destination and a Joomla implementation context. The merchant should test records that reveal structure, document configuration-sensitive behavior, identify custom or extension-owned data early, and escalate service scope when standard assumptions no longer match the required result.
+The strongest prevention method is practical: prepare representative samples, separate migrated data from target configuration, classify custom requirements early, validate storefront access, and define the expected outcome of later migration activity. A migration is ready when the EasyStore result supports real selling, customer service, order lookup, storefront continuity, and operational review.
 
-Use Demo Migration to expose the failure patterns before Full Migration. If the review shows variant ambiguity, Joomla route gaps, custom fields, unsupported extension data, unusual checkout behavior, Custom Platform source data, or service-scope uncertainty, use Live Chat to confirm whether Standard Service, Managed Service, Custom Service, or Add-ons fit the selected migration path before continuing.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do EasyStore migration issues often appear late?**
 
-**What is the most common EasyStore by JoomShaper migration pitfall?**
+They often appear late because the review focuses on clean product records instead of real operating examples. Variants, discounts, refunds, shipping, tax, customer identity, Joomla navigation, SP Page Builder presentation, and custom fields are more likely to reveal migration assumptions.
 
-The most common pitfall is treating migration as a record transfer without accounting for the Joomla site context. EasyStore data, Joomla menus, templates, modules, content pages, and page-builder layouts can all affect the final storefront experience.
+**What is the most common EasyStore catalog pitfall?**
 
-**Why should Demo Migration samples include complex products?**
+The most common catalog pitfall is flattening products without properly reviewing variants, images, categories, tags, pricing, inventory, and custom fields. The store may look populated while shopper choices remain unclear.
 
-Complex products reveal whether variants, images, pricing, inventory, categories, and shopper-facing selection remain meaningful after migration. If Demo Migration uses only simple products, important catalog problems may stay hidden until Full Migration.
+**Should SP Page Builder issues be treated as migration failures?**
 
-**Are checkout, tax, shipping, and payment settings migrated like ordinary records?**
+Not automatically. SP Page Builder issues should be classified carefully. Some are presentation or implementation tasks, some require manual rebuild, and some may involve custom scope. Core product data can be correct even when page layouts still need work.
 
-Not always. Some historical context may migrate with orders or related records, but future checkout, tax, shipping, and payment behavior usually depends on EasyStore configuration and target environment setup. Custom or third-party behavior may require deeper review.
+**How can teams prevent order-history confusion?**
 
-**When should custom fields or extension-owned data be reviewed?**
+Validate historical orders for readability and support value, then test live payment, tax, shipping, checkout, refund, coupon, and notification behavior separately. Historical order records do not prove that live store configuration is finished.
 
-They should be reviewed before execution, especially if they affect products, customers, orders, pricing, fulfillment, reporting, or customer experience. Required custom data may need Advanced Data Mapping, Advanced Data Configure, or Custom Service depending on the requirement.
+**When does EasyStore migration need Custom Service review?**
 
-**How can merchants know whether the chosen migration approach is too light?**
-
-The approach may be too light when Demo Migration reveals unsupported extension data, unclear custom fields, unusual order meaning, third-party identifiers, custom checkout behavior, Custom Platform source data, or transformation needs that exceed standard service capability.
+Custom Service review is needed when the requirement involves unsupported records, custom fields, extension-owned data, external identifiers, bespoke transformations, Custom Platform handling, or custom migration logic beyond supported behavior.

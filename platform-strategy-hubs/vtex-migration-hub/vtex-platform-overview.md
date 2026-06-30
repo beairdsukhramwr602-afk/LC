@@ -1,113 +1,118 @@
 # VTEX Platform Overview
 
-VTEX is an enterprise SaaS Target Platform for businesses that need structured commerce operations across catalog, pricing, sales channels, marketplace, OMS, logistics, customer data, storefront implementation, apps, APIs, and external systems. A VTEX migration should therefore be planned as a platform transition, not only as a transfer of products, customers, orders, and content.
+VTEX migration planning should begin with the operating environment the merchant intends to run after launch. VTEX is not only a storefront destination where products, customers, and orders are copied into a new admin area. It is a modular, headless, API-oriented commerce environment where catalog structure, SKU-level data, pricing, promotions, checkout, orders, logistics, seller relationships, marketplace behavior, Master Data, storefront implementation, and integrations can all affect whether migrated data becomes usable.
 
-The practical value of VTEX comes from how its commerce layers work together. Products become usable through SKUs, specifications, categories, brands, images, attachments, assembly options, services, kits, collections, pricing, stock, trade policies, and storefront availability. Orders become operationally useful when OMS, sellers, logistics, fulfillment, invoices, payment references, and back-office integrations can still be understood. Customer data becomes usable when profiles, B2B or account context, consent, segmentation, Master Data, and external IDs are interpreted correctly.
+That makes VTEX a different Target Platform from a simpler hosted store, a self-hosted open-source platform, or a storefront-first builder. A VTEX migration can involve ordinary commerce records, but the planning burden often sits in how those records support the future operating model. Product data has to make sense as a VTEX catalog and SKU structure. Customer and order records may need to support service, reporting, and business continuity. Marketplace or seller-related expectations need early scoping. Integration and custom data assumptions should be clarified before they become migration promises.
 
-For migration planning, the central question is not whether VTEX can receive store data. The more important question is whether the migrated data can support the intended operating model: direct-to-consumer selling, B2B, marketplace, seller-led commerce, multichannel sales, composable storefronts, or an integration-heavy commerce architecture.
+### Why VTEX Changes Migration Planning <a href="#why-vtex-changes-migration-planning" id="why-vtex-changes-migration-planning"></a>
 
-### VTEX at a Glance <a href="#vtex-at-a-glance" id="vtex-at-a-glance"></a>
+VTEX changes migration planning because the Target Platform is usually selected for more than basic catalog display. Merchants often consider VTEX when they need enterprise commerce flexibility, API-based integration, headless storefront options, marketplace or seller operations, complex logistics, pricing control, or a commerce environment that can connect multiple operational layers.
 
-| Platform area                  | What VTEX changes                                                                                                                                            | Migration planning impact                                                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Catalog                        | Products, SKUs, categories, brands, specifications, attachments, assembly options, services, kits, and collections may all affect sellability and discovery. | Product migration must be judged by buyer-facing and operations-facing behavior, not only by product-count parity.            |
-| Pricing and sales context      | Prices, promotions, trade policies, sales channels, marketplace offers, and external pricing sources may decide what each audience can buy.                  | Price validation should include representative channels and customer contexts.                                                |
-| Marketplace and sellers        | Marketplace, seller, offer, fulfillment, and commission logic can affect both catalog and order interpretation.                                              | Seller-led data should not be flattened into ordinary product and order records without scope review.                         |
-| OMS and logistics              | Order history, status, fulfillment, invoice, pickup, delivery, and external operations references may carry business meaning.                                | Operations teams should validate order readability, not only order existence.                                                 |
-| Master Data and custom records | Customer, account, app, and workflow data may live in Master Data or integration-owned structures.                                                           | Custom records and external IDs should be identified before migration scope is accepted.                                      |
-| Storefront implementation      | FastStore, Store Framework, Legacy CMS Portal, or headless storefront choices affect how migrated data is displayed.                                         | Content, search, facets, URLs, redirects, and CMS behavior need storefront-aware review.                                      |
-| Apps and integrations          | ERP, PIM, WMS, marketplace, payment, anti-fraud, analytics, middleware, and custom apps may own critical behavior.                                           | Integration-sensitive data may need Add-ons, Custom Service, or post-migration implementation outside standard data transfer. |
+The migration question is therefore not only whether source records can be moved. The stronger question is whether the migrated data will support the way VTEX is expected to operate. A product record may need category, brand, specification, SKU, price, promotion, logistics, search, and storefront implications. An order record may need to remain useful in relation to checkout, fulfillment, payment, seller, or customer-service context. A customer-related record may interact with Master Data or integration expectations. A storefront page may depend on a headless implementation rather than a direct page-copy pattern.
 
-### Why VTEX Requires Platform-Level Migration Planning <a href="#why-vtex-requires-platform-level-migration-planning" id="why-vtex-requires-platform-level-migration-planning"></a>
+| Planning area                | Why it matters in VTEX migration                                                                                        |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Catalog and SKUs             | Product structure must support categories, brands, SKUs, specifications, pricing, and search behavior.                  |
+| Checkout and orders          | Cart, order, payment, fulfillment, and customer-service expectations may involve several VTEX services.                 |
+| Logistics                    | Warehouses, pickup points, carriers, shipping rates, inventory, and SKU availability can shape readiness.               |
+| Marketplace and sellers      | Seller relationships and marketplace assumptions may create scope beyond ordinary product/order migration.              |
+| Master Data and integrations | Custom records, customer-related structures, and external systems may require mapping, setup, or Custom Service review. |
+| Storefront implementation    | Headless storefronts and custom front ends may require separate launch validation beyond data migration.                |
 
-VTEX is usually selected for operating models that need more structure than a simple hosted storefront. Its strength is the ability to coordinate catalog, pricing, seller context, checkout, order management, logistics, storefront experience, and integration workflows across one commerce environment.
+This does not mean every VTEX migration is large or custom. It means VTEX should be scoped as an operating environment. The migration plan should identify which parts are supported migrated records, which parts are VTEX configuration, which parts require Add-ons, and which parts need Custom Service evaluation.
 
-That strength also increases planning responsibility. A product that appears in VTEX may still be incomplete if its SKU activation, specifications, pricing, trade policy availability, marketplace context, or storefront visibility is not ready. A customer record may still be incomplete if segmentation, B2B/account context, consent, Master Data, or external IDs are missing. An order may still be incomplete if finance, support, fulfillment, or marketplace teams cannot understand the migrated status and references.
+### VTEX as a Modular Commerce Environment <a href="#vtex-as-a-modular-commerce-environment" id="vtex-as-a-modular-commerce-environment"></a>
 
-| Planning question                                                 | Why it matters in VTEX                                                                                                                    |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| What does the target commerce model need to support?              | VTEX can support B2C, B2B, marketplace, multichannel, and composable storefront operations, but each model changes validation priorities. |
-| Which catalog structures control buying behavior?                 | SKUs, specifications, attachments, services, kits, and collections may determine product selection and sellability.                       |
-| Which pricing rules must remain commercially meaningful?          | Trade policies, promotions, price tables, sales channels, and marketplace pricing may not behave like simple source-store prices.         |
-| Which operational systems must recognize migrated records?        | ERP, PIM, WMS, OMS, payment, marketplace, and middleware references may decide whether the migrated store can operate.                    |
-| Which data belongs to VTEX and which belongs to external systems? | Some records should be migrated, while others should be mapped, excluded, reconstructed, or handled through Custom Service.               |
+VTEX is best understood through connected commerce services rather than one flat store database. Catalog, checkout, orders, logistics, payments, pricing, promotions, search, recommendations, account management, B2B, VTEX Sales App, CMS, Master Data, and integration capabilities may all be relevant depending on the merchant’s business model.
 
-### Where VTEX Is Often a Strong Target <a href="#where-vtex-is-often-a-strong-target" id="where-vtex-is-often-a-strong-target"></a>
+For migration planning, this modularity creates two responsibilities. First, each migrated data area must be interpreted through the VTEX function that will use it. Product data should not be reviewed only as product rows. Customer data should not be reviewed only as contact fields. Order history should not be reviewed only as totals and dates. Second, data migration should be separated from VTEX-side setup and implementation. The migration may preserve supported records, but checkout behavior, logistics configuration, payment setup, marketplace operation, headless storefront work, and external integrations may still need separate preparation.
 
-VTEX is often a strong Target Platform when the business needs enterprise SaaS commerce with governed catalog operations, multichannel selling, complex pricing, marketplace structures, and integration depth. It is most effective when the merchant is prepared to define how target data should behave inside VTEX rather than expecting a one-to-one copy of the previous platform.
+The most important distinction is ownership. Some information belongs to the migration scope. Some belongs to platform configuration. Some belongs to external systems. Some belongs to implementation work. If those boundaries are not defined early, VTEX can look like a strong strategic choice while the migration scope remains unclear.
 
-| Strong-fit signal                   | What it means for migration                                                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| SKU-rich catalog operations         | Demo Migration should include complex SKUs, required specifications, images, pricing, stock, and storefront availability.                   |
-| Structured merchandising            | Categories, brands, specifications, filters, facets, search, and collections should be reviewed as business logic, not decorative metadata. |
-| Channel and trade-policy complexity | Sales context should be validated across the channels and audiences that matter for launch.                                                 |
-| Marketplace or seller operations    | Seller, offer, fulfillment, commission, and marketplace references may require dedicated review.                                            |
-| B2B or mixed B2B/B2C commerce       | Customer/account data, pricing visibility, buyer roles, approval expectations, and external IDs may require deeper scoping.                 |
-| Integration-heavy operations        | ERP, PIM, WMS, marketplace, payment, analytics, middleware, and custom apps should be mapped before migration acceptance.                   |
+### Core VTEX Structures That Affect Migration <a href="#core-vtex-structures-that-affect-migration" id="core-vtex-structures-that-affect-migration"></a>
 
-### Where VTEX Needs Careful Scoping <a href="#where-vtex-needs-careful-scoping" id="where-vtex-needs-careful-scoping"></a>
+VTEX migration planning should pay special attention to the relationship between catalog data and operational commerce behavior. Product titles and descriptions are only part of the story. Categories, brands, SKUs, specifications, prices, promotions, inventory, search behavior, seller relationships, and storefront presentation may all determine whether a migrated product is usable.
 
-VTEX can still be a suitable Target Platform when the project includes conditional complexity, but those conditions need to be handled early. The migration becomes harder when the Source Platform contains custom product options, unusual bundles, marketplace logic, direct database dependencies, extension-owned data, or storefront behavior that is not represented by ordinary commerce entities.
+| VTEX structure         | Migration implication                                                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Categories             | Source categories may need review for VTEX catalog organization, storefront browsing paths, and search behavior.              |
+| Brands                 | Brand records should be preserved where they affect catalog management, filtering, or storefront experience.                  |
+| SKUs                   | SKU structure can affect inventory, pricing, logistics, sales channels, and product display.                                  |
+| Specifications         | Source attributes, option fields, or technical details may need careful mapping into usable VTEX specifications.              |
+| Pricing and promotions | Price tables, channel rules, coupons, and promotion logic should not be assumed to transfer as simple product fields.         |
+| Logistics              | Inventory and fulfillment meaning may depend on warehouses, pickup points, carriers, rates, or SKU-level availability.        |
+| Orders                 | Historical order data should remain interpretable, but it does not configure live checkout, payment, or fulfillment behavior. |
+| Master Data            | Custom or customer-related data may need separate mapping, integration planning, or Custom Service review.                    |
 
-| Conditional area                               | What should be clarified before migration                                                                                                                         |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product options and custom buying flows        | Decide whether the target needs SKU specifications, attachments, assembly options, services, kits, accepted exclusions, or Custom Service review.                 |
-| Advanced pricing and promotions                | Confirm whether prices, campaigns, coupons, discounts, trade policies, or marketplace pricing are migration scope, configuration scope, or external-system scope. |
-| Marketplace and seller data                    | Separate seller catalog, order, fulfillment, commission, and offer requirements from ordinary catalog migration.                                                  |
-| Master Data and app-owned fields               | Identify which custom records must migrate, which only need reference preservation, and which need later implementation.                                          |
-| Storefront redesign or headless implementation | Treat storefront rendering, CMS behavior, search, URL paths, redirects, and content placement as separate readiness layers.                                       |
-| External workflow dependencies                 | Confirm whether ERP, PIM, WMS, payment, anti-fraud, analytics, marketplace, and middleware records depend on migrated IDs or custom fields.                       |
+The source store may not organize these relationships in the same way. A Source Platform may use product variants, option tables, collections, tags, custom fields, apps, scripts, marketplace feeds, or external systems to express behavior that VTEX expects to manage through distinct commerce services. That translation is where VTEX migration planning becomes strategic rather than mechanical.
 
-### Migration Scope Signals for VTEX <a href="#migration-scope-signals-for-vtex" id="migration-scope-signals-for-vtex"></a>
+### Where VTEX Migration Complexity Usually Appears <a href="#where-vtex-migration-complexity-usually-appears" id="where-vtex-migration-complexity-usually-appears"></a>
 
-A VTEX migration should classify each requirement by migration ownership. Some requirements fit Standard Service, some can be handled through Add-ons, some need Managed Service coordination, and some require Custom Service because the target result depends on custom interpretation or implementation-specific logic.
+VTEX migration complexity usually appears when the source business model depends on rules, relationships, or external systems that are not visible in a simple export. A merchant may have clean Products, Customers, and Orders, but still depend on channel-specific prices, seller rules, B2B workflows, payment logic, fulfillment regions, custom customer records, marketplace feeds, or a headless storefront implementation.
 
-| Requirement type                                                                                                                        | Typical handling signal                                                                                      |
-| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Core products, customers, orders, CMS Pages, Blog Posts, and related standard entities                                                  | Usually suitable for Standard Service when source data is accessible and target behavior is straightforward. |
-| Additional fields, filters, selected mappings, or supported adjustments                                                                 | May be suitable for Add-ons when the requirement stays within supported migration logic.                     |
-| Complex coordination, sample design, stakeholder review, or launch-risk management                                                      | Often suitable for Managed Service when the merchant needs more guided execution.                            |
-| Custom records, non-standard app data, marketplace-specific interpretation, external workflow dependencies, or target-structure changes | Should be reviewed for Custom Service.                                                                       |
-| New records added after the initial migration scope                                                                                     | Should be reviewed through Additional Migration Options and revalidated before acceptance.                   |
+The highest-risk assumption is that source structures can move into VTEX with the same operational meaning. A category may not be just a category. It may be a merchandising structure, a storefront browsing paths path, a SEO asset, or a search/filtering dependency. A SKU may not be just a SKU. It may control inventory, logistics, marketplace seller availability, price table behavior, or storefront display. A customer record may not be only contact data. It may connect to Master Data, B2B identity, segmentation, external CRM records, or integration logic.
 
-### What Demo Migration Should Prove for VTEX <a href="#what-demo-migration-should-prove-for-vtex" id="what-demo-migration-should-prove-for-vtex"></a>
+| Source assumption                             | VTEX planning response                                                                                         |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Product options are ordinary variants.        | Check how options, SKUs, specifications, and storefront display should be represented in VTEX.                 |
+| Marketplace data is normal catalog data.      | Separate seller, marketplace, offer, fulfillment, and order expectations before confirming scope.              |
+| Pricing can be copied from product fields.    | Review price tables, channel-specific logic, promotions, and external pricing systems.                         |
+| Customer data is only profile data.           | Confirm whether Master Data, B2B, segmentation, CRM, or custom records matter.                                 |
+| Storefront pages migrate like CMS pages.      | Separate migrated content from headless storefront implementation and redirect planning.                       |
+| Integrations can be reconnected after launch. | Identify systems that own catalog, inventory, order, price, customer, or fulfillment meaning before migration. |
 
-Demo Migration is especially important for VTEX because simple sample records may hide the real migration challenge. The sample set should include records that represent the actual business model, not only the cleanest products or newest orders.
+A strong VTEX migration plan makes those assumptions visible before Demo Migration. The goal is not to make scope larger than necessary. The goal is to prevent a migration from being approved while important operating relationships remain unplanned.
 
-| Sample type                       | What it should prove                                                                                           |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Complex product/SKU examples      | SKU structure, images, categories, specifications, pricing, stock, activation, and storefront discoverability. |
-| Pricing and trade-policy examples | Correct commercial behavior across representative channels, audiences, or sales contexts.                      |
-| Marketplace/seller examples       | Seller, offer, fulfillment, marketplace, and order-context readability.                                        |
-| Customer and Master Data examples | Customer profile completeness, segmentation, consent, B2B/account context, custom fields, and external IDs.    |
-| Order examples                    | Historical order readability across status, payment, fulfillment, invoice, logistics, and support use cases.   |
-| Storefront/content examples       | CMS Pages, Blog Posts, URLs, redirects, metadata, search, facets, and priority landing paths.                  |
-| Integration-sensitive examples    | ERP, PIM, WMS, marketplace, payment, middleware, app, and API reference continuity.                            |
+### VTEX in Relation to Nearby Platforms <a href="#vtex-in-relation-to-nearby-platforms" id="vtex-in-relation-to-nearby-platforms"></a>
+
+VTEX should be distinguished from nearby enterprise and modern commerce platforms without turning the overview into a comparison article. Adobe Commerce and Magento Open Source help clarify what VTEX is not. Adobe Commerce belongs to the Magento family and often centers enterprise Magento structures such as B2B, shared catalogs, and multi-store governance. Magento Open Source centers self-hosted extensibility, modules, custom attributes, store views, and developer-managed implementation. VTEX should be planned around modular SaaS commerce, headless implementation, core services, marketplace possibilities, Master Data, and integration architecture.
+
+Shopware also provides a useful contrast, but only at the architectural level. Both VTEX and Shopware can involve modern commerce architecture and extensibility. VTEX planning should still keep its own identity: enterprise SaaS commerce with VTEX services, catalog/SKU/specification structure, marketplace/seller implications, and API-based integration expectations.
+
+This relationship framing matters because it prevents the wrong migration assumptions. A merchant coming from Magento may expect extension-like control. A merchant considering Adobe Commerce may expect enterprise B2B structures to behave the same way. A merchant comparing Shopware may focus on flexibility while missing VTEX-specific service boundaries. VTEX migration planning should translate those expectations into scope, preparation, service path, and validation proof.
+
+### What Should Be Proven Early <a href="#what-should-be-proven-early" id="what-should-be-proven-early"></a>
+
+Before Full Migration, a VTEX project should prove whether the Target Platform scope is defined well enough to support the merchant’s intended operation. The proof does not need to cover every record immediately, but it should include representative examples that expose the real migration burden.
+
+Strong early proof includes catalog samples, SKU-rich products, specification-heavy products, pricing examples, promotion examples, order history samples, customer records, marketplace or seller examples where relevant, logistics-sensitive SKUs, Master Data dependencies, important URLs, and storefront expectations. If headless storefront work is part of the project, the merchant should also define which responsibilities belong to data migration and which belong to implementation.
+
+| Early proof area          | What it should answer                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------------- |
+| Catalog sample            | Does source product structure translate into usable VTEX catalog and SKU data?               |
+| Specification sample      | Are attributes, technical fields, or option values mapped with business meaning?             |
+| Pricing/promotion sample  | Are price and promotion expectations simple records, configured behavior, or external logic? |
+| Marketplace/seller sample | Are seller relationships, offers, fulfillment, and order expectations part of scope?         |
+| Order/customer sample     | Does historical data remain useful for support, reporting, and continuity?                   |
+| Integration sample        | Which external systems own data that cannot be treated as ordinary migration content?        |
+| Storefront/URL sample     | Does launch continuity require redirects, headless implementation, or content rebuilding?    |
+
+If these examples are unclear, Standard Service may be too light, Add-ons may be needed for supported filtering or mapping, or Custom Service may be required for unsupported records, app-owned data, bespoke transformation, outside-system identifiers, or custom migration logic adjustment.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VTEX is a strong Target Platform for merchants that need enterprise SaaS commerce, structured catalog and SKU operations, trade-policy control, marketplace or seller architecture, OMS and logistics depth, storefront flexibility, Master Data, and integration-heavy workflows. Its migration value depends on whether the target environment preserves business meaning, not only whether records arrive.
+VTEX migration should be planned as a move into a modular, headless, enterprise commerce environment. The migration must preserve useful commerce data while clarifying how catalog, SKUs, specifications, pricing, promotions, checkout, orders, logistics, marketplace operations, Master Data, integrations, and storefront implementation will work after launch.
 
-Before moving to Full Migration, use Demo Migration to test the records that define the real operating model: complex SKUs, required specifications, price and trade-policy examples, marketplace or seller records, B2B/account data, historical orders, Master Data, storefront paths, CMS Pages, Blog Posts, redirects, and integration references. If the sample results show unsupported custom logic, external dependencies, or target-structure gaps, review Add-ons, Managed Service, or Custom Service before finalizing the migration approach.
+The strongest VTEX migration plan is not the one that promises the widest data transfer. It is the one that separates migrated records, VTEX configuration, implementation work, Add-ons, Custom Service requirements, and validation proof before the merchant depends on the new environment.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is VTEX a good Target Platform for simple stores?**
+**Is VTEX only suitable for enterprise migration projects?**
 
-VTEX can support simple selling, but it is usually strongest when the business needs enterprise SaaS commerce, structured catalog operations, multichannel sales, marketplace context, B2B or mixed selling models, and integration depth. A simpler hosted platform may be easier when the business only needs a basic product catalog and checkout flow.
+VTEX is most often relevant when the merchant needs a more advanced commerce operating environment, but fit should be judged by operating requirements rather than company size alone. Catalog structure, integration needs, marketplace expectations, logistics complexity, and storefront implementation matter more than a simple size label.
 
-**What makes VTEX migration more complex than a basic hosted-store migration?**
+**Why is SKU structure important in a VTEX migration?**
 
-VTEX migration can involve products, SKUs, specifications, attachments, assembly options, services, kits, collections, trade policies, pricing, marketplace records, OMS context, logistics, Master Data, storefront implementation, apps, APIs, and external integrations. These layers need to be reviewed together because they affect whether the migrated store can operate normally.
+SKU structure can affect inventory, pricing, logistics, channel behavior, search, and storefront presentation. A product may appear migrated but still fail business use if SKU-level meaning is lost or mapped incorrectly.
 
-**Does migrating products to VTEX automatically make them sellable?**
+**Can VTEX marketplace or seller data be treated as normal product data?**
 
-No. Product records still need correct SKU structure, required specifications, images, pricing, stock, activation, category placement, trade-policy availability, and storefront visibility. Demo Migration should include complex product examples to confirm sellability.
+Not safely. Marketplace and seller-related expectations may involve ownership, offers, fulfillment, order handling, and integration behavior. They should be scoped separately from ordinary product migration.
 
-**Should marketplace or seller data be treated as ordinary product and order data?**
+**Does migrating data into VTEX complete a headless storefront launch?**
 
-No. Marketplace and seller data can include seller relationships, offers, received SKU suggestions, commissions, fulfillment context, sales-channel mapping, and external marketplace references. These details should be scoped separately when they affect daily operations.
+No. Data migration can support catalog, customer, order, URL, or content continuity where scoped, but headless storefront implementation, design, rendering, checkout presentation, and integration behavior may require separate work.
 
-**What should be confirmed before judging a VTEX Demo Migration?**
+**When should VTEX migration require Custom Service review?**
 
-Demo Migration should prove that representative products, SKUs, prices, trade policies, customers, orders, sellers, storefront paths, search behavior, CMS Pages, Blog Posts, URLs, apps, APIs, Master Data, and integration references work in the intended target context. Record counts alone are not enough.
+Custom Service should be considered when the requirement involves unsupported records, Master Data complexity, seller or marketplace-specific data, external-system identifiers, bespoke transformation, or custom migration logic beyond supported behavior.

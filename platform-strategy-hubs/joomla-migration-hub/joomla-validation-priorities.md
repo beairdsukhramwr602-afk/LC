@@ -1,204 +1,173 @@
 # Joomla Validation Priorities
 
-Joomla validation should prove that the migrated site still works as a CMS and application environment, not only that records exist in the new installation. Articles, categories, menus, modules, templates, users, access levels, custom fields, tags, media, multilingual associations, routes, and extension records all shape the final site experience.
+Joomla validation should prove that migrated data still functions inside a Joomla site, not only that records are present in the administrator area. Joomla can hold content, menus, categories, users, access levels, modules, templates, custom fields, tags, media, redirects, multilingual relationships, and extension records. Those elements work together to create the page a visitor sees and the administration experience a site owner uses.
 
-For Joomla migrations that involve commerce, validation must also confirm where store behavior actually lives. Joomla core does not provide one universal product, cart, checkout, order, payment, shipping, tax, coupon, or inventory model. Those meanings belong to the installed commerce extension, custom component, plugin stack, integration layer, or Custom Platform implementation. A migrated Joomla site can appear structurally complete while still failing to prove commerce readiness if extension-owned data is not validated separately.
+For migration planning, the most important validation question is whether each record keeps its practical meaning after it reaches Joomla. An article without its menu path may not support the same URL. A user without the correct group or access level may not see the intended content. A module without the correct position or assignment may not appear where the site relies on it. A commerce record may look complete only after the owning extension proves product, customer, order, checkout, payment, shipping, tax, coupon, and inventory behavior.
 
-### What Joomla Validation Is Trying to Prove <a href="#what-joomla-validation-is-trying-to-prove" id="what-joomla-validation-is-trying-to-prove"></a>
+### Validation Should Prove Joomla Usability <a href="#validation-should-prove-joomla-usability" id="validation-should-prove-joomla-usability"></a>
 
-A strong Joomla validation review should answer three questions:
+Joomla validation should begin with relationship proof. A record-level review can confirm whether data exists, but it cannot prove whether the site is ready to use. The stronger review asks whether content, navigation, access, language, media, layout, and extension behavior still support the intended visitor and administrator experience.
 
-1. Does the migrated Joomla site preserve the intended content and application structure?
-2. Do menus, modules, templates, routes, users, access rules, media, custom fields, tags, and multilingual relationships make the migrated records usable?
-3. If commerce exists, has the correct extension or custom implementation been validated as the owner of product, customer, order, checkout, payment, shipping, tax, inventory, and coupon behavior?
+| Validation question               | Joomla proof required                                                                                                                | Failure signal                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Is the record present?            | Content, users, categories, menu items, modules, media, fields, and supported extension records appear in the expected Joomla areas. | Counts look acceptable, but important samples are missing or disconnected.                   |
+| Does the record preserve meaning? | Menus, categories, routes, access levels, language assignments, custom fields, and metadata support the intended purpose.            | Data exists but no longer behaves like the source page, customer area, or storefront record. |
+| Does the page experience work?    | Visitor-facing pages render with the expected content, module context, template behavior, media, and permissions.                    | The administrator record exists, but the public page is incomplete or hard to reach.         |
+| Is extension ownership clear?     | Commerce, membership, directory, booking, or form data is validated inside the component or extension that owns it.                  | Joomla users or articles are confused with complete commerce or membership records.          |
+| Is launch risk classified?        | Findings are separated into migration correction, Joomla setup, Add-ons, Custom Service, manual rebuild, or accepted limitation.     | All findings are treated as generic cleanup with no owner or handling path.                  |
 
-The most important validation error is not always missing data. It is often misplaced meaning. A migrated user account may exist, but it may not behave as a customer record inside a commerce extension. A migrated category may exist, but it may not connect to the menu path that shoppers or visitors use. A product record may move into a Joomla commerce extension, but its options, tax context, customer-group visibility, multilingual fields, or plugin-dependent behavior may still need closer review.
+Validation should include ordinary examples and edge cases. A simple Joomla site may only need representative content, menu, user, media, and redirect samples. A commerce-connected or membership-heavy Joomla site needs deeper samples covering extension-owned records, restricted access, checkout-related paths, customer identity, custom fields, and multilingual behavior where applicable.
 
-### Core Joomla Structures to Validate First <a href="#core-joomla-structures-to-validate-first" id="core-joomla-structures-to-validate-first"></a>
+### Validate Core Content and Category Relationships <a href="#validate-core-content-and-category-relationships" id="validate-core-content-and-category-relationships"></a>
 
-Core Joomla validation should begin with the structures that control site meaning and navigation. These checks help confirm that migrated records are not isolated from the site experience.
+Core content validation should confirm whether Joomla articles, categories, featured content, custom fields, tags, metadata, and media remain useful after migration. Content can be technically present but still fail if it loses page purpose, category assignment, access boundary, language assignment, or media reference.
 
-| Validation area         | What the result must prove                                                             | Strong sample choices                                                                                                        | What often gets missed                                                                                    |
-| ----------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Articles and CMS Pages  | Content is readable, assigned correctly, and still supports the intended page purpose. | High-traffic pages, old policy pages, long-form pages, pages with embedded media, and pages using custom fields.             | Content can exist without the correct menu path, access rule, media reference, tag, or module context.    |
-| Categories              | Category hierarchy and assignments still reflect the intended content organization.    | Parent categories, deep child categories, mixed content categories, and categories used in menus or modules.                 | Categories may migrate as records while losing their practical role in navigation or filtering.           |
-| Menus and routes        | Visitors can reach the expected pages through the intended navigation paths.           | Main menu items, hidden system menu items, landing pages, multilingual menu items, and legacy high-value URLs.               | A page may load in the administrator area but fail as a visitor-facing route.                             |
-| Modules and positions   | Page context is still supported by the right surrounding blocks and layout areas.      | Menu modules, search modules, login modules, category displays, custom HTML modules, and modules assigned to selected pages. | Modules can exist but appear on the wrong pages, in the wrong positions, or under the wrong access rules. |
-| Templates and overrides | The migrated structure still renders through the intended visual and layout system.    | Pages with template overrides, custom layouts, special module positions, and commerce-related pages.                         | Data may be present while the rendered page no longer matches the expected storefront or content layout.  |
-| Media                   | Images, documents, and embedded media remain connected to the records that use them.   | Product-like content, long-form articles, downloadable files, category images, and media-heavy pages.                        | Broken references, duplicate media paths, missing thumbnails, and disconnected downloads.                 |
+A practical sample set should include high-traffic pages, long-form pages, policy pages, landing pages, content assigned to nested categories, content with custom fields, tagged content, pages with embedded media, and pages that support commerce, membership, or lead generation. These samples help reveal whether the migrated Joomla structure is usable rather than merely populated.
+
+| Content area           | What to validate                                                                                               | Useful sample choices                                                                                 |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Articles and CMS Pages | Title, alias, body content, status, category, metadata, language, access, custom fields, and media references. | High-traffic pages, policy pages, content-rich landing pages, pages with images or documents.         |
+| Categories             | Parent-child structure, assignments, status, language, access, metadata, and relationship to menus or modules. | Deep category trees, categories used in navigation, categories used by commerce or directory content. |
+| Custom fields          | Field values, display context, repeatable patterns, optional values, and template dependency.                  | Records where fields affect display, filtering, structured content, or business interpretation.       |
+| Tags                   | Tag assignments and discovery use.                                                                             | Tagged articles, category pages, or content modules that depend on tags.                              |
+| Media                  | Images, documents, downloads, thumbnails, paths, and embedded references.                                      | Media-heavy articles, product-like pages, downloadable files, and category images.                    |
+
+The pass condition is that content can still be found, interpreted, edited, and presented in Joomla with the expected context. If content has to be reconnected manually to menus, modules, language records, or media, validation should classify that as a real launch task rather than a cosmetic issue.
+
+### Validate Menus, Aliases, Routes, and Redirect-Sensitive Pages <a href="#validate-menus-aliases-routes-and-redirect-sensitive-pages" id="validate-menus-aliases-routes-and-redirect-sensitive-pages"></a>
+
+Joomla routing depends heavily on menus, aliases, categories, language structure, and extension behavior. Validation should therefore check public-facing URLs and route context, not just the presence of menu records. A migrated page may exist in Joomla but still fail if visitors reach a different URL, lose the expected module context, or land on the wrong language version.
+
+High-value URL samples should include primary navigation pages, hidden menu paths, category pages, content pages with external links, landing pages used in campaigns, pages with SEO-sensitive metadata, and commerce or membership paths where applicable. Validation should compare what the user expects to reach with what Joomla actually renders.
+
+| Route validation area    | Proof required                                                                           | Risk signal                                                                |
+| ------------------------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Menu hierarchy           | Menu items preserve the intended navigation structure and target records.                | Pages are present but detached from the expected navigation path.          |
+| Aliases and SEF paths    | Important aliases and search-friendly paths produce the expected pages or redirect plan. | URLs change without explanation or land on the wrong content.              |
+| Hidden menus             | System or hidden menu paths still support important routes.                              | A page works in the backend but not as a stable public route.              |
+| Metadata                 | Titles, descriptions, and route-specific metadata are retained or rebuilt where needed.  | SEO-sensitive pages lose page-level meaning even when content migrates.    |
+| Redirect-sensitive pages | Old high-value URLs have an accepted redirect or replacement plan.                       | Broken links, irrelevant redirects, or duplicate paths appear near launch. |
+
+A route should not pass only because it loads. It should land on the intended page, in the intended language, with the intended layout, access rule, metadata, and module context.
 
 ### Validate Users, Groups, Access Levels, and Permissions <a href="#validate-users-groups-access-levels-and-permissions" id="validate-users-groups-access-levels-and-permissions"></a>
 
-Joomla user validation should not stop at account presence. Joomla sites often use user groups, access levels, and permissions to control what visitors, customers, editors, members, staff, or partners can see and do.
+Joomla user validation should prove identity and visibility, not only account transfer. Joomla sites often use user groups, access levels, permissions, and extension-specific customer records to control what visitors, members, customers, editors, staff, or partners can access.
 
-A useful validation sample should include:
+The strongest validation sample includes public users, registered users, custom groups, restricted pages, restricted menu items, restricted modules, administrator or editor-like accounts, and commerce or membership customers where applicable. The review should separate Joomla account meaning from extension-owned customer meaning.
 
-* a public visitor path;
-* a registered user account;
-* a user assigned to one or more custom groups;
-* a restricted page or menu item;
-* a module visible only to certain groups;
-* a content-editing or administrator-like account where relevant;
-* a commerce customer account if commerce is handled by a specific extension.
+| User/access area           | Pass condition                                                                | Failure signal                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| User accounts              | Users can be identified and used in the intended Joomla context.              | Accounts exist but cannot perform expected actions or access expected content.                         |
+| User groups                | Group relationships preserve the expected visibility or workflow meaning.     | Users inherit too much access, too little access, or wrong group membership.                           |
+| Access levels              | Content, menus, modules, and extension areas appear to the correct audiences. | Restricted content becomes public, or public content becomes restricted.                               |
+| Administrative roles       | Staff, editors, or administrators retain appropriate management capability.   | Editorial workflow breaks or risky permissions are introduced.                                         |
+| Commerce/customer identity | Customer behavior is checked inside the owning commerce extension.            | A Joomla user exists but addresses, order history, shopper groups, or checkout identity do not follow. |
 
-The key question is whether each account still has the right practical meaning. A Joomla user account is not automatically a complete commerce customer. Customer addresses, order history, shopper groups, loyalty records, tax treatment, or checkout behavior may belong to the commerce component rather than Joomla core.
+Permissions should be tested through user behavior, not only configuration screens. A restricted page should be visited as the correct user type. A customer record should be opened in the relevant commerce extension. An editor account should be tested against the workflow it actually supports.
 
-| User and access area           | Pass condition                                                               | Risk signal                                                                                     |
-| ------------------------------ | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| User account                   | The user can be identified and used in the intended site context.            | The account exists but cannot access the intended content or extension area.                    |
-| User group                     | Group membership preserves the expected access or workflow meaning.          | Users are moved without their group relationships or inherit the wrong permissions.             |
-| Access level                   | Restricted content, menus, and modules appear only for the correct audience. | Public, registered, customer-only, or staff-only boundaries are blurred.                        |
-| Commerce customer meaning      | Customer behavior is validated inside the owning commerce extension.         | A Joomla user exists, but addresses, shopper groups, orders, or checkout context do not follow. |
-| Administrative or editor roles | Administrative and content-management permissions remain appropriate.        | Excess access, missing access, or broken editorial workflow after migration.                    |
+### Validate Modules, Templates, Overrides, and Page Assembly <a href="#validate-modules-templates-overrides-and-page-assembly" id="validate-modules-templates-overrides-and-page-assembly"></a>
 
-### Validate Custom Fields, Tags, and Content Relationships <a href="#validate-custom-fields-tags-and-content-relationships" id="validate-custom-fields-tags-and-content-relationships"></a>
+A Joomla page is rarely just the main content record. Modules, template positions, template overrides, layouts, plugins, and styling rules often complete the visitor experience. Validation should confirm whether the page still renders with the surrounding elements that make it usable.
 
-Joomla custom fields and tags can carry meaning that is easy to underestimate. They may support page filtering, content labeling, product-like content, member profiles, directory listings, structured data, or extension behavior. Validation should check both the values and where those values appear.
+Representative page samples should include a homepage, a category page, a content page, a login or account-related page, a search result path, a multilingual page, and commerce or extension pages where applicable. Pages that use custom HTML modules, menu modules, banners, filtered lists, or special template positions should receive special attention.
 
-Strong samples include records with:
+| Page assembly element | What to validate                                                                                            | Common launch issue                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Modules               | Assignment, position, language, access level, ordering, and visibility.                                     | Modules are imported or recreated but appear on the wrong pages or for the wrong users.      |
+| Templates             | Correct template assignment and layout behavior for important pages.                                        | Content exists but renders through an unexpected layout.                                     |
+| Overrides             | Template or layout overrides still support the intended display where rebuilt or retained.                  | The migrated data is correct but the page no longer looks or functions as expected.          |
+| Plugins               | Content, routing, media, search, form, or commerce behavior triggered by plugins is checked where relevant. | Stored content loses behavior because a plugin dependency was not carried into target setup. |
+| Extension pages       | Component output is validated through public pages, not only administrator records.                         | Products, forms, directories, or bookings exist but do not render correctly.                 |
 
-* filled custom fields;
-* empty optional custom fields;
-* repeated field patterns;
-* fields used by templates or overrides;
-* tagged content used for navigation or discovery;
-* records where fields influence display, filtering, or business interpretation.
+The pass condition is practical: the important pages still make sense to visitors and administrators. When layout behavior belongs to target-side theme or template setup, the validation report should not classify incorrectly it as migrated content failure.
 
-The pass condition is not simply that fields and tags exist. The migrated site should prove that field values still appear in the correct context, remain attached to the right records, and support the intended visitor or administrator experience. If a field is used by a custom extension, plugin, or template override, validation should include that rendered behavior rather than only the stored value.
+### Validate Multilingual Structure <a href="#validate-multilingual-structure" id="validate-multilingual-structure"></a>
 
-### Validate Routing, Aliases, Metadata, and Redirect-Sensitive Pages <a href="#validate-routing-aliases-metadata-and-redirect-sensitive-pages" id="validate-routing-aliases-metadata-and-redirect-sensitive-pages"></a>
+Joomla multilingual validation should prove that language-specific content, menus, modules, categories, associations, metadata, media, and extension records still work together. Translated records alone do not prove readiness. Visitors should reach the intended language version and move between translations where equivalent content exists.
 
-Joomla routing is closely tied to menus, aliases, categories, language structure, and extension routing behavior. URL validation should therefore focus on the pages and paths that matter most to discovery, customer communication, and internal operations.
+A useful multilingual sample set includes fully translated pages, pages translated into only some languages, language-specific menus, language-specific modules, categories assigned to languages, media references by language, and extension-owned language fields where applicable.
 
-Validation should include:
+| Multilingual area            | What the result must prove                                                                   | Failure signal                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Language-specific content    | Articles, categories, metadata, media, and fields carry the correct language meaning.        | Translated records exist but appear under the wrong language or wrong page path.                   |
+| Language menus               | Each language has the right navigation path and landing structure.                           | Language pages load without the expected menu context.                                             |
+| Language associations        | Equivalent pages are linked where the site expects language switching.                       | Visitors cannot move between translated versions or land on unrelated content.                     |
+| Modules by language          | Modules appear only in the intended language context.                                        | Banners, menus, footer content, or search modules show in the wrong language.                      |
+| Extension-owned translations | Commerce, form, directory, or membership records preserve language behavior where supported. | Product pages or customer-facing labels are translated in content but not in the owning component. |
 
-* high-traffic content pages;
-* important landing pages;
-* menu-generated URLs;
-* category paths;
-* multilingual paths;
-* commerce extension paths where applicable;
-* pages with known external links;
-* pages with SEO-sensitive metadata.
+Multilingual validation should also record accepted limitations. If some language relationships are rebuilt manually or handled through target-side setup, the validation report should state that clearly.
 
-A good result proves that visitors can reach the expected destination and that the destination still has the right content, language, menu context, module context, and metadata. A redirect or route that lands on the wrong page should not be treated as acceptable only because the page loads.
+### Validate Extension-Owned and Commerce Records Separately <a href="#validate-extension-owned-and-commerce-records-separately" id="validate-extension-owned-and-commerce-records-separately"></a>
 
-### Validate Multilingual Structure and Language Associations <a href="#validate-multilingual-structure-and-language-associations" id="validate-multilingual-structure-and-language-associations"></a>
+Joomla extensions can own data that Joomla core does not define. A commerce extension may own products, categories, options, customer records, orders, payments, shipment methods, tax logic, coupons, discounts, inventory, and storefront routes. A membership, booking, directory, form, event, or page-builder extension can have equally important records outside ordinary content migration.
 
-Joomla multilingual validation should prove that translated content remains connected, selectable, and reachable in the intended language structure. This is especially important when the site uses language-specific menus, modules, categories, articles, or extension records.
+Validation should identify the owning component before judging the result. A Joomla category is not automatically a product category. A Joomla user is not automatically a commerce customer. A Joomla article is not automatically a product page. Each extension record should be validated inside its own structure and public output.
 
-| Multilingual area                 | What to validate                                                                    | Strong sample choices                                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Language-specific articles        | Translated pages preserve the correct language assignment and content relationship. | Pages available in all key languages and pages available in only some languages.                      |
-| Language menus                    | Each language has the intended navigation path and landing structure.               | Main menus, hidden menus, language-specific landing pages, and menu aliases.                          |
-| Language switcher behavior        | Visitors can move between language versions where an equivalent exists.             | High-value pages with known translations and pages with intentionally missing translations.           |
-| Modules by language               | Modules appear in the correct language context.                                     | Footer modules, category modules, banners, search modules, and commerce modules.                      |
-| Extension-owned multilingual data | Commerce or custom extension records preserve their own language behavior.          | Product pages, checkout text, categories, customer-facing labels, and custom fields where applicable. |
+| Extension data type                        | Validation focus                                                                                                                  | Handling path when unsupported                                                             |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Commerce products                          | Product fields, categories, options, images, pricing, tax context, inventory, and public routes.                                  | Custom Service review, manual rebuild, or accepted exclusion.                              |
+| Customers and orders                       | Customer identity, addresses, order history, totals, statuses, payment/shipping context, and ownership by the commerce component. | Custom Service review where records are unsupported or custom.                             |
+| Membership or restricted-content records   | Subscription or membership status, access rules, user links, and restricted content behavior.                                     | Custom Service review or target-side configuration.                                        |
+| Booking, event, directory, or form records | Record fields, submitted data, public display, notification or workflow expectations.                                             | Custom Service review, integration work, or manual rebuild.                                |
+| Page-builder or layout data                | Editability, display, reusable blocks, and relationship to content records.                                                       | Manual rebuild, target setup, or Custom Service review if data transformation is required. |
 
-The most common missed gap is assuming that translated records alone prove multilingual readiness. A translated article still needs the right menu path, module context, language association, metadata, media, and access behavior.
+This classification protects the project from approving a Joomla migration that preserves core CMS data but leaves business-critical extension behavior unproven.
 
-### Validate Extension-Owned Commerce Data Separately <a href="#validate-extension-owned-commerce-data-separately" id="validate-extension-owned-commerce-data-separately"></a>
+### Validate Demo Migration and Later Migration Activity <a href="#validate-demo-migration-and-later-migration-activity" id="validate-demo-migration-and-later-migration-activity"></a>
 
-When a Joomla migration includes commerce, validation must identify the component or custom implementation that owns commerce data. The proof standard changes depending on whether the target is Joomla itself, a Joomla commerce extension, or a custom Joomla implementation.
+Demo Migration should provide evidence, not just reassurance. For Joomla, a useful Demo Migration sample should test at least one ordinary content page, one menu-linked page, one media-heavy page, one restricted page, one user or group example, one multilingual example if applicable, one redirect-sensitive page, and one extension-owned record where extensions are part of scope.
 
-When the target is a named Joomla commerce extension, validation should follow the extension-specific commerce model. When the target is Joomla itself, validation should focus on Joomla core structures and custom Joomla implementation data.
+Later migration activity should also be validated according to what changed. If new content, users, media, redirects, form submissions, products, customers, or orders appear after the first run, the next review should focus on new eligible records and representative regression samples. If the configuration changes, the affected mapping, filtering, or handling rules need renewed validation. If a new migration replaces the earlier target result, the broader target result needs review again.
 
-If a Joomla commerce extension is the real target, validation should follow the data model and behavior of that extension. Product, category, customer, order, tax, shipping, payment, inventory, coupon, and checkout proof should not be generalized as Joomla core proof.
+| Migration activity                        | Validation emphasis                                                                                            |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Continue with the last used configuration | Newly added source records and regression samples from previously reviewed Joomla areas.                       |
+| Continue with a new configuration         | Newly migrated records plus the records affected by changed mapping, filtering, or configuration.              |
+| Perform a new migration                   | Refreshed target result, replaced earlier migrated data, critical relationships, and launch-readiness samples. |
 
-| Commerce proof area                            | What the result must prove                                                                             | Strong sample choices                                                                                                |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| Product or catalog records                     | Commerce records are readable and usable inside the owning extension.                                  | Simple products, variant/options-heavy products, downloadable products, disabled products, and products with media.  |
-| Customer meaning                               | Customer-related records retain the extension-specific account, group, address, or checkout meaning.   | Returning customers, guest orders, customer groups, and accounts with multiple addresses.                            |
-| Order history                                  | Historical orders remain understandable for service, accounting, and customer review needs.            | Recent orders, old orders, cancelled orders, refunded orders, multi-item orders, and orders with discounts or taxes. |
-| Checkout context                               | Payment, shipping, tax, and checkout-related meaning is reviewed against the target extension.         | Orders using different shipping/payment/tax conditions and customer groups.                                          |
-| Coupons, discounts, inventory, and store rules | Extension-owned business logic is either preserved, mapped, reconfigured, or identified for follow-up. | Active coupons, expired coupons, stock-sensitive products, tax-sensitive products, and rule-heavy records.           |
-| Extension modules and plugins                  | Storefront and workflow behavior still appears in the expected Joomla context.                         | Cart modules, product modules, payment plugins, shipping plugins, and extension-specific search or filter modules.   |
+Entity Points should remain a planning control, not a validation substitute. Newly migrated eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path.
 
-### Design Strong Demo Migration Validation Samples <a href="#design-strong-demo-migration-validation-samples" id="design-strong-demo-migration-validation-samples"></a>
+### Build a Joomla Validation Report <a href="#build-a-joomla-validation-report" id="build-a-joomla-validation-report"></a>
 
-Demo Migration validation should use samples that expose Joomla’s real complexity. A small sample is useful only if it includes records that prove the important patterns.
+A Joomla validation report should turn findings into launch decisions. It should not only list screenshots, counts, or vague notes. Each finding should identify the sample, the expected result, the observed result, severity, likely owner, handling path, and final status.
 
-A stronger Joomla validation sample usually includes:
+| Report field    | Purpose                                                                                                                        |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Sample          | Identifies the article, menu item, user, module, route, extension record, product, order, or multilingual page being reviewed. |
+| Expected result | States what the migrated result should prove.                                                                                  |
+| Observed result | Describes what Joomla actually shows or does.                                                                                  |
+| Severity        | Separates launch blockers from acceptable cleanup.                                                                             |
+| Handling path   | Classifies correction, Joomla setup, Add-on adjustment, Custom Service review, manual rebuild, or accepted limitation.         |
+| Owner           | Assigns responsibility to the merchant, Next-Cart, Joomla setup team, developer, or external partner.                          |
+| Status          | Confirms whether the finding is open, corrected, accepted, deferred, or outside scope.                                         |
 
-* content with menu and module dependencies;
-* categories used for both organization and navigation;
-* records with custom fields and tags;
-* media-heavy pages;
-* restricted content or restricted modules;
-* multilingual pages with associations;
-* user accounts from different groups or access levels;
-* commerce records from the installed commerce component, if commerce is in scope;
-* custom extension records or plugin-owned data where the implementation depends on them.
-
-A weak sample includes only ordinary content records with no menu, module, access, multilingual, media, or extension context. That kind of sample can create false confidence because it proves record movement without proving site behavior.
-
-### Interpret Validation Results Correctly <a href="#interpret-validation-results-correctly" id="interpret-validation-results-correctly"></a>
-
-Joomla validation results should be interpreted by pattern, not only by isolated pass or fail outcomes.
-
-| Validation finding                                                  | Likely meaning                                                                                           | Recommended interpretation                                                                     |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Records exist, but pages are hard to reach                          | Menu, alias, routing, or module assignment may need review.                                              | Treat as a site-structure issue, not a content-presence issue.                                 |
-| Users exist, but access behavior is wrong                           | User group, access level, or permission meaning has shifted.                                             | Review groups, access levels, and restricted samples before launch planning.                   |
-| Content appears, but layout is wrong                                | Template, override, module position, media, or extension display behavior may not match.                 | Validate rendered pages, not only administrator records.                                       |
-| Multilingual records exist, but language switching feels incomplete | Language menus, associations, modules, or extension multilingual behavior may be incomplete.             | Validate by language journey, not only by translated record count.                             |
-| Product or order data is present, but store behavior is incomplete  | Commerce data may belong to a component or custom implementation not fully proven by Joomla core checks. | Validate against the owning commerce extension or Custom Platform scope.                       |
-| Custom fields are present, but business meaning is unclear          | Field values may not be attached, displayed, mapped, or interpreted correctly.                           | Review representative records and the templates, plugins, or extensions that use those fields. |
-
-### Often-Missed Joomla Validation Gaps <a href="#often-missed-joomla-validation-gaps" id="often-missed-joomla-validation-gaps"></a>
-
-Joomla migration validation often fails when review is limited to visible pages or record counts. The following gaps deserve deliberate attention:
-
-* menu items that point to records but no longer reproduce the expected route;
-* modules that exist but are assigned to the wrong pages, positions, languages, or access levels;
-* custom fields that are stored but not displayed or interpreted as intended;
-* tags that exist but no longer support discovery or content grouping;
-* user groups and access levels that are present but do not protect the right content;
-* media files that exist but are disconnected from content or extension records;
-* multilingual records that lack correct associations, menus, or language-specific modules;
-* template overrides that no longer match the migrated data structure;
-* extension records that were moved without proving extension behavior;
-* commerce data that is reviewed as generic Joomla content instead of extension-owned store data.
-
-### When Validation Should Trigger Follow-Up Review <a href="#when-validation-should-trigger-follow-up-review" id="when-validation-should-trigger-follow-up-review"></a>
-
-Validation should lead to follow-up review when the migrated result exposes a structural mismatch, not only when records are missing. Follow-up review is especially important when:
-
-* commerce ownership is unclear;
-* custom extension records appear in business-critical workflows;
-* custom fields or outside-system identifiers determine how records are used;
-* multilingual paths behave inconsistently;
-* access rules expose or hide the wrong information;
-* high-value routes lead to the wrong destination;
-* migrated content requires a tailored mapping or configuration adjustment;
-* Custom Platform data is part of the migration path.
-
-Filtering, mapping, and data configuration needs can sometimes be handled with Add-ons when they fit available behavior. Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom extension data, outside-system identifiers, and custom migration logic adjustment are handled through Custom Service because customization or bespoke handling is required.
+The report should include enough representative samples to prove the Joomla migration pattern. A weak report can approve present records while missing broken routes, wrong access rules, disconnected modules, unsupported extension data, or unvalidated commerce behavior.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Joomla validation should prove that migrated data still works inside Joomla’s real site structure. Content, menus, modules, templates, users, access levels, media, custom fields, tags, routes, multilingual associations, and extension records should be checked together because they shape the visitor and administrator experience. When commerce exists, the decisive proof must come from the owning commerce extension or custom implementation, not from Joomla core record checks alone.
+Joomla validation should prove that migrated records still work as a site, not only as database entries. Content, categories, menus, routes, users, access levels, modules, templates, custom fields, media, multilingual relationships, and extension-owned records all contribute to the final result.
 
-Use Demo Migration results to validate representative Joomla structures before treating the migration scope as stable. If the sample exposes unclear commerce ownership, custom extension behavior, access-rule mismatch, multilingual gaps, or route-sensitive issues, review the findings with Next-Cart through Live Chat before moving toward the full migration.
+The strongest validation process reviews representative records, tests public-facing behavior, separates Joomla core from extension-owned data, classifies findings by handling path, and confirms whether the result is usable for visitors, administrators, customers, editors, and launch stakeholders. A Joomla migration should be approved because the target result works in context, not because counts look acceptable.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is checking migrated articles enough to validate a Joomla migration?**
+**Is checking record counts enough to validate a Joomla migration?**
 
-No. Articles are only one part of Joomla validation. Menus, categories, modules, templates, media, tags, custom fields, access levels, routes, and multilingual associations can all affect whether the migrated content works correctly for visitors and administrators.
+No. Record counts can confirm basic completeness, but Joomla validation also needs relationship checks. Content should connect to categories, menus, routes, access rules, modules, templates, media, language assignments, and extension-owned behavior where applicable.
 
-**How should commerce data be validated in a Joomla migration?**
+**Why should Joomla menus and routes be validated separately?**
 
-Commerce data should be validated inside the extension or custom implementation that owns it. Product, customer, order, checkout, payment, shipping, tax, inventory, and coupon behavior should not be treated as Joomla core behavior unless the migration scope specifically defines how those records are represented.
+Menus and aliases strongly influence visitor-facing paths, page context, metadata, and module assignment. A page may exist in Joomla while the expected URL, navigation path, or public display is still wrong.
 
-**What makes a strong Joomla Demo Migration validation sample?**
+**Should Joomla users be validated as customers?**
 
-A strong sample includes records that expose real site complexity: menu-linked content, module-dependent pages, custom fields, media, user groups, restricted content, multilingual associations, and extension-owned commerce records where applicable. A sample made only of simple content records is usually too narrow.
+Only when the owning commerce extension uses them that way. Joomla core users should be checked for identity, groups, access levels, and permissions. Customer addresses, shopper groups, order history, or checkout context may belong to the commerce extension instead.
 
-**What should be reviewed if migrated users exist but customer history does not look complete?**
+**How should extension-owned records be validated?**
 
-Review whether customer meaning belongs to Joomla core users, a commerce extension, or a custom implementation. A Joomla user account may migrate successfully while customer addresses, shopper groups, order history, or checkout context still depend on extension-owned records.
+They should be validated inside the component or extension that owns them and through representative public output where relevant. Unsupported or custom extension records should be classified for Custom Service review, manual rebuild, target setup, or accepted exclusion.
 
-**When should validation findings move into Custom Service review?**
+**Does continuing migration activity change Joomla validation?**
 
-Custom Service review is appropriate when validation exposes Custom Platform data, custom extension behavior, outside-system identifiers, tailored transformation needs, or custom migration logic adjustment. Add-ons can support filtering, mapping, or data configuration when available behavior fits the requirement, but bespoke handling belongs under Custom Service.
+Yes. Newly added source records, changed configuration, or a new migration can change what needs to be reviewed. Validation should match the action performed and should include regression samples from important Joomla relationships.

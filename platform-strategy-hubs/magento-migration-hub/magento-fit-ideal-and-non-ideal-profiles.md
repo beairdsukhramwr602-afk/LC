@@ -1,328 +1,146 @@
 # Magento Fit: Ideal and Non-Ideal Profiles
 
-Magento is a strong Target Platform when a business needs structured catalog control, SKU-level product variation, attribute governance, multi-store or multi-language scope, URL continuity, and room for custom implementation. It is less suitable when the merchant wants the lowest possible configuration burden, has only basic catalog needs, or cannot define the custom behavior that must remain usable after migration.
+Magento Open Source is a strong Target Platform when the merchant needs structured commerce control and is prepared to own the implementation decisions that come with that control. The fit question is not whether Magento can support complexity in theory. The fit question is whether the business has the catalog structure, operational need, implementation ownership, and validation capacity to make Magento’s flexibility useful after migration.
 
-Fit should be evaluated by operational value, not by platform reputation alone. Magento can support sophisticated catalog and store structures, but that flexibility creates planning responsibility. A good fit is a merchant whose product, customer, content, SEO, inventory, or integration needs justify that responsibility and whose team can validate the migrated store beyond record counts.
+A store with many Products is not automatically a Magento fit. A smaller catalog with configurable products, rich attributes, multiple store views, SEO-sensitive URLs, customer-group logic, or extension-dependent workflows may be a better candidate than a large but simple catalog. A business that wants minimal setup, limited maintenance, and a standardized SaaS storefront may be less suitable even if the source data can be migrated.
 
-### What Makes Magento a Strong Fit <a href="#what-makes-magento-a-strong-fit" id="what-makes-magento-a-strong-fit"></a>
+Magento fit should be judged through the target operating model: how products will be modeled, how attributes will support discovery and operations, how storefront scope will work, how URLs and content will be preserved, how customer and order history will be used, and who will maintain Magento after launch.
 
-Magento fit depends on whether the target business benefits from structure. Product types, configurable products, product attributes, attribute sets, websites, stores, store views, customer groups, inventory behavior, URL rewrites, extensions, and integrations can create a precise Target Store. They also require clear decisions before Full Migration.
+### What Magento Fit Means in Migration Planning <a href="#what-magento-fit-means-in-migration-planning" id="what-magento-fit-means-in-migration-planning"></a>
 
-A store may be a strong Magento candidate when the migration goal is not only to move data, but to preserve how the business sells, organizes, filters, localizes, prices, and manages products. Magento is especially useful when source records need to become deliberate target structures rather than flat products, simple pages, and basic customer accounts.
+Magento fit is a relationship between business needs and implementation responsibility. Magento Open Source gives merchants structural control, but that control creates planning obligations. A good candidate can explain why Magento is needed, what target behavior matters, and who will own configuration, extensions, hosting, performance, and validation.
 
-| Fit factor                    | Strong Magento signal                                                                                                    | Weak or risky fit signal                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Catalog structure             | Products depend on configurable, grouped, bundle, virtual, downloadable, or relationship-based behavior.                 | Most products are simple and do not require advanced target modeling.                       |
-| Product attributes            | Attributes affect filtering, search, comparison, promotion logic, product pages, reporting, or merchandising.            | Attribute data is inconsistent, duplicated, unclear, or not useful to customers or staff.   |
-| Store scope                   | The business needs websites, stores, store views, languages, localized values, or differentiated storefront experiences. | One simple storefront is sufficient, with no meaningful scope or localization requirement.  |
-| Customer and commercial logic | Customer groups, discounts, tax classes, or segmentation influence customer experience or operations.                    | Customer records are basic contact records without pricing, tax, group, or service meaning. |
-| SEO continuity                | Product, category, CMS Page, Blog Posts, and priority URL continuity matter at launch.                                   | Organic-search continuity is low priority or route evidence is unavailable.                 |
-| Customization                 | Extensions, custom fields, integrations, APIs, or outside-system identifiers carry operational meaning.                  | Custom behavior exists but cannot be explained, tested, or maintained.                      |
-| Validation capacity           | The merchant can review product behavior, scope, URLs, inventory, customers, orders, and workflows.                      | The merchant can only compare totals and cannot validate Magento-specific behavior.         |
+| Fit dimension              | Strong Magento signal                                                                           | Conditional Magento signal                                                      | Weaker Magento signal                                                                |
+| -------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Catalog structure          | Products need configurable, grouped, bundle, virtual, downloadable, or attribute-rich modeling. | Product complexity exists but source data is inconsistent or poorly documented. | Products are simple and do not need Magento’s structural depth.                      |
+| Attribute use              | Attributes support filters, product pages, search, comparison, reporting, or integrations.      | Attributes are valuable but messy, duplicated, or inconsistently named.         | Attributes are mostly old internal labels with little customer or operational value. |
+| Store scope                | Multiple stores, languages, brands, regions, or localized values need clear scope handling.     | Multi-store goals exist but websites, stores, and store views are not defined.  | One simple storefront needs limited localization or scope control.                   |
+| SEO and content continuity | Product, category, CMS Page, Blog Posts, and URL rewrite evidence matters.                      | Important URLs exist but are not fully inventoried.                             | SEO continuity is low priority or better handled by a simpler platform.              |
+| Extensions and custom data | The merchant can identify modules, custom fields, and external identifiers.                     | Extension data exists but ownership and target use require discovery.           | Custom requirements are vague but expected to transfer automatically.                |
+| Implementation ownership   | The merchant has developers, agency support, or an internal owner for Magento setup.            | Ownership exists but launch responsibilities are not clearly assigned.          | The team wants a low-configuration storefront with minimal technical responsibility. |
 
-Magento is not automatically the best choice just because a store is large. A smaller store with complex product rules, attribute-led discovery, or multi-language requirements can be a stronger fit than a larger store with simple products and limited operating needs.
+A strong Magento fit does not require perfection. It requires enough evidence to separate supported migration scope, Add-ons, Custom Service needs, and target-side implementation work.
 
-### Ideal Migration Profiles for Magento <a href="#ideal-migration-profiles-for-magento" id="ideal-migration-profiles-for-magento"></a>
+### Strong-Fit Magento Profiles <a href="#strong-fit-magento-migration-profiles" id="strong-fit-magento-migration-profiles"></a>
 
-Magento is usually strongest when the business needs platform flexibility and has enough internal or agency support to manage the decisions that come with that flexibility.
+Magento Open Source is usually a strong fit for merchants that need control over catalog architecture, data structure, storefront scope, and implementation choices. These merchants often value flexibility more than simplicity and are willing to support the target environment after migration.
 
-#### Catalog-led retail businesses <a href="#catalog-led-retail-businesses" id="catalog-led-retail-businesses"></a>
+| Merchant profile                       | Why Magento fits                                                                                     | Migration planning focus                                                                                       |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Configurable-product retailer          | Products depend on selectable options, associated SKUs, and variation-level inventory.               | Confirm simple/configurable relationships, attribute values, images, URLs, and inventory behavior.             |
+| Attribute-heavy catalog                | Product discovery depends on specifications, compatibility fields, filters, or comparison data.      | Normalize attributes and decide which values are visible, searchable, filterable, or internal.                 |
+| Multi-brand or multi-language merchant | Storefront values differ by website, store, or store view.                                           | Prepare scope evidence for product names, descriptions, categories, CMS Pages, Blog Posts, URLs, and metadata. |
+| SEO-sensitive business                 | Product, category, content, and legacy URLs carry traffic value.                                     | Build redirect and URL evidence before launch-sensitive migration.                                             |
+| Integration-oriented merchant          | ERP, PIM, inventory, accounting, shipping, tax, or marketplace systems depend on stable identifiers. | Classify external IDs, integration fields, and supported versus custom data.                                   |
+| Implementation-owned commerce team     | The merchant has technical ownership for hosting, extensions, performance, and configuration.        | Separate migrated data from target implementation and post-migration setup.                                    |
 
-Magento is a strong fit for merchants whose catalog depends on meaningful product relationships, product types, variations, attributes, categories, and merchandising context. Apparel, parts, equipment, digital products, kits, and configurable-product catalogs often need more than a basic product table.
+These profiles share one pattern: Magento is chosen because the business needs a structured commerce environment, not merely because it wants a new storefront. The migration should preserve business meaning in Magento’s data structures and leave target-side setup responsibilities visible.
 
-A catalog-led migration should prepare representative records before Demo Migration. Samples should include configurable products with associated simple products, products with multiple attribute sets, category assignments, images, metadata, inventory values, related products, cross-sells, up-sells, bundle behavior, grouped-product behavior, or downloadable-product behavior.
+### Conditional-Fit Magento Profiles <a href="#conditional-fit-magento-profiles" id="conditional-fit-magento-profiles"></a>
 
-#### Stores with variant-rich products <a href="#stores-with-variant-rich-products" id="stores-with-variant-rich-products"></a>
+Many merchants fall into a conditional-fit category. Magento may be appropriate, but the migration plan should slow down before scope is accepted. The usual issue is not platform suitability alone. It is unclear evidence.
 
-Magento can be a strong fit when variations need SKU-level control. Configurable products can present one storefront product while each option is represented by an associated simple product with its own SKU and inventory behavior.
+A conditional-fit merchant may have rich product data but weak attribute discipline. It may want multiple store views but lack a complete localization plan. It may depend on modules but not know which fields they own. It may have valuable SEO routes but no URL inventory. It may expect Magento to support future complexity while current source data remains inconsistent.
 
-This fit becomes weaker when the original store stores product choices as unstructured option text and the merchant cannot define how those choices should behave after migration. A color, size, material, subscription term, personalized value, or kit selection may require different handling depending on whether it affects SKU identity, price, inventory, filtering, fulfillment, or customer choice.
+| Conditional scenario           | What to clarify                                                                      | Why it changes migration planning                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Messy attributes               | Which values should be cleaned, merged, excluded, mapped, or preserved.              | Attribute quality affects filters, search, product pages, and admin maintenance. |
+| Partially defined store views  | Which values are global and which vary by language, brand, or region.                | Store-view mistakes can overwrite localized content or route behavior.           |
+| Extension-owned fields         | Which modules own important product, customer, order, or checkout data.              | Unsupported module data may need Custom Service review.                          |
+| Unclear customer group meaning | Whether groups affect discounts, tax class, segmentation, or service treatment.      | Customer data may carry commercial meaning beyond account identity.              |
+| Weak URL evidence              | Which product, category, CMS Page, Blog Posts, and custom routes matter.             | SEO continuity cannot be validated from record counts alone.                     |
+| Limited validation capacity    | Who can review product types, attributes, scope, URLs, inventory, and custom fields. | Magento migration requires behavior-level approval, not only data presence.      |
 
-#### Attribute-heavy catalogs <a href="#attribute-heavy-catalogs" id="attribute-heavy-catalogs"></a>
+Conditional fit does not mean Magento should be avoided. It means the merchant should not treat the project as straightforward until the missing evidence is gathered. Demo Migration samples should include the areas that make fit uncertain.
 
-Magento fits merchants that use attributes to support customer discovery and operational control. Attributes can influence product pages, search, layered navigation, comparisons, reporting, promotions, and product-family templates through attribute sets.
+### Weaker-Fit or Non-Ideal Magento Profiles <a href="#weaker-fit-or-non-ideal-magento-profiles" id="weaker-fit-or-non-ideal-magento-profiles"></a>
 
-This profile requires discipline. Attribute names, values, units, visibility, searchability, filterability, and internal use should be reviewed before migration. Weak attribute governance can make Magento feel powerful in the admin area while creating noisy filters, inconsistent product pages, and confusing storefront discovery.
+Magento Open Source becomes a weaker fit when the business wants a simple target experience but carries no clear need for Magento’s structural flexibility. It also becomes risky when the merchant wants Magento-level control without implementation ownership.
 
-#### Multi-store, multi-language, or multi-market merchants <a href="#multi-store-multi-language-or-multi-market-merchants" id="multi-store-multi-language-or-multi-market-merchants"></a>
+| Weaker-fit pattern                                | Why it may be unsuitable                                                                             | Safer direction                                                                   |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Basic catalog and limited customization           | Magento may add unnecessary configuration, hosting, maintenance, and validation burden.              | Consider whether a simpler hosted Target Platform meets the business need.        |
+| No technical owner                                | Magento requires ongoing ownership of setup, extensions, upgrades, performance, and troubleshooting. | Confirm agency, developer, or internal responsibility before migration.           |
+| Vague custom requirements                         | The team knows custom fields or modules exist but cannot explain them.                               | Run discovery or Custom Service review before scope is accepted.                  |
+| Poor attribute discipline with no cleanup plan    | Filters, search, product pages, and reports may become noisy or misleading.                          | Clean or map attributes before relying on Magento structure.                      |
+| Undefined multi-store goals                       | The merchant wants multiple storefronts or languages without scope decisions.                        | Define websites, stores, store views, values, URLs, and content before migration. |
+| Adobe Commerce expectations inside a Magento plan | Enterprise B2B, shared catalog, staging, or governance needs may belong to Adobe Commerce.           | Confirm the actual Target Platform before migration planning continues.           |
 
-Magento can support businesses that need more than one storefront experience from the same commerce foundation. Websites, stores, and store views can support different brands, root categories, languages, localized content, market-specific configuration, and storefront-specific values.
+A weaker Magento fit should be addressed honestly. The answer may be a simpler platform, a more detailed discovery phase, or a shift toward Adobe Commerce if enterprise capabilities are truly required. The wrong answer is to proceed as if Magento structure will resolve undefined business requirements by itself.
 
-This makes Magento a strong fit for businesses with real scope requirements. It also means fit depends on planning. Product names, descriptions, URL keys, categories, CMS Pages, Blog Posts, pricing assumptions, and visibility may need different handling across websites, stores, or store views.
+### Source Platform Expectations That Need Translation <a href="#source-platform-expectations-that-need-translation" id="source-platform-expectations-that-need-translation"></a>
 
-#### SEO-sensitive stores <a href="#seo-sensitive-stores" id="seo-sensitive-stores"></a>
+Magento fit often depends on where the merchant is coming from. A Shopify or BigCommerce merchant may expect app-managed behavior and standardized variant logic. A WooCommerce merchant may expect WordPress content, plugin fields, and permalink patterns. A PrestaShop or OpenCart merchant may expect module-owned product data and PHP-cart customization. A custom platform may contain undocumented tables, external identifiers, and business rules that were never designed for Magento.
 
-Magento is a strong fit when the merchant is prepared to manage URL continuity, metadata, route structure, product/category paths, CMS Pages, Blog Posts, and redirects carefully. Stores with established organic traffic, high-value landing pages, category authority, or content-led acquisition should treat SEO continuity as part of platform fit.
+These expectations should be translated before the target fit is accepted.
 
-A Magento migration can be structurally successful while still harming launch quality if priority routes are not preserved, redirected, or tested. Strong candidates can provide route samples and identify the pages that matter most.
+| Source expectation                     | Magento fit question                                                                                                  |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Product variants or options            | Should they become configurable relationships, custom options, bundle structures, or custom review items?             |
+| Product attributes                     | Are values clean enough to become useful Magento attributes, filters, comparison fields, or internal classifications? |
+| Category hierarchy                     | Does the old taxonomy support Magento navigation, root categories, URLs, and product discovery?                       |
+| Customer groups                        | Do groups carry pricing, tax, discount, or segmentation meaning that must be preserved?                               |
+| CMS Pages and Blog Posts               | Which content should migrate, redirect, be rebuilt, or remain outside Magento scope?                                  |
+| App, plugin, module, or extension data | Is the data supported, Add-ons-appropriate, Custom Service scope, target setup, or excluded expectation?              |
+| External IDs                           | Are ERP, PIM, accounting, CRM, marketplace, or warehouse identifiers needed after launch?                             |
+| SEO routes                             | Which product, category, content, and custom URLs require redirect planning or target validation?                     |
 
-#### Integration-dependent operations <a href="#integration-dependent-operations" id="integration-dependent-operations"></a>
-
-Magento often fits merchants that need commerce records to work with ERP systems, PIM systems, warehouse platforms, marketplaces, fulfillment tools, CRM systems, analytics platforms, marketing systems, custom APIs, or bespoke modules.
-
-This is a strong fit when integration needs are known and maintainable. It is a risk when outside-system identifiers, custom fields, or extension-owned records are not documented. Data migration should be separated from integration setup, synchronization design, and post-launch operational testing.
-
-### Conditional Fit Scenarios <a href="#conditional-fit-scenarios" id="conditional-fit-scenarios"></a>
-
-Some merchants can succeed with Magento, but only after clarifying gaps that would make the project unsafe if treated as straightforward.
-
-#### Growing stores moving beyond a simpler platform <a href="#growing-stores-moving-beyond-a-simpler-platform" id="growing-stores-moving-beyond-a-simpler-platform"></a>
-
-A growing merchant may choose Magento because the current platform no longer supports desired product structure, scope, integrations, or customization. Growth can justify Magento when the business can name the requirements that matter.
-
-Growth alone is not enough. The merchant should identify whether Magento is needed for configurable products, store views, attribute governance, integration control, SEO continuity, custom workflows, or a longer-term implementation roadmap.
-
-#### Stores with messy but valuable catalog data <a href="#stores-with-messy-but-valuable-catalog-data" id="stores-with-messy-but-valuable-catalog-data"></a>
-
-Magento can support a cleaner catalog model, but unclear source data does not become meaningful automatically. Duplicate attributes, inconsistent option values, weak SKU patterns, mixed categories, and legacy internal labels can create poor target behavior.
-
-This scenario can still be a good fit if the merchant accepts that cleanup, mapping, exclusion, or Custom Service review may be needed. It is risky when the merchant expects Magento to fix poor data quality without decisions.
-
-#### Merchants with extension-owned behavior <a href="#merchants-with-extension-owned-behavior" id="merchants-with-extension-owned-behavior"></a>
-
-Magento can fit stores that depend on extensions or custom modules, but only when the role of those extensions is understood. Some extensions only affect storefront presentation. Others own subscriptions, rewards, product enrichment, checkout fields, B2B-like workflows, search rules, shipping restrictions, payment workflows, or integration identifiers.
-
-Add-ons can support filtering, mapping, and data configuration. Custom Service should be considered when a requirement depends on unsupported extension data, custom fields, outside-system identifiers, Custom Platform interpretation, or bespoke transformation logic.
-
-#### Stores considering Magento Open Source instead of Adobe Commerce <a href="#stores-considering-magento-open-source-instead-of-adobe-commerce" id="stores-considering-magento-open-source-instead-of-adobe-commerce"></a>
-
-Magento Open Source and Adobe Commerce are related, but they should not be treated as identical Target Platforms. Magento Open Source can be appropriate for merchants that want Magento’s open-source foundation and are prepared to manage hosting, implementation, extensions, and development decisions. Adobe Commerce may be more relevant when the project depends on enterprise capabilities, licensing, infrastructure assumptions, or B2B-oriented workflows.
-
-Magento fit should be judged against the exact target environment. A migration plan for Magento Open Source should not assume Adobe Commerce-only capabilities, and an Adobe Commerce project should not be flattened into ordinary Magento Open Source assumptions.
-
-### Non-Ideal or Higher-Risk Profiles <a href="#non-ideal-or-higher-risk-profiles" id="non-ideal-or-higher-risk-profiles"></a>
-
-Magento is not a strong fit for every merchant. Some cases may require another Target Platform, a simpler implementation path, or more discovery before the migration should proceed.
-
-| Profile                                           | Why Magento fit is weaker                                                                                            | Safer direction                                                               |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Basic catalog with limited customization          | Magento’s structural depth may add unnecessary setup and maintenance burden.                                         | Consider whether a simpler hosted Target Platform can meet the business need. |
-| No implementation ownership                       | Magento requires decisions around configuration, extensions, design, performance, and testing beyond data migration. | Confirm who will own implementation before migration scope is finalized.      |
-| Undefined custom behavior                         | Custom fields, modules, or workflows are known to exist but cannot be explained or tested.                           | Pause for discovery or Custom Service review.                                 |
-| Poor attribute discipline                         | Attribute values are duplicated, inconsistent, or not meaningful enough to support filtering or merchandising.       | Clean, map, merge, or exclude weak attributes before relying on them.         |
-| Unclear multi-store expectations                  | The merchant wants multiple languages, brands, or markets but has not defined website/store/store-view behavior.     | Define scope assumptions before Full Migration.                               |
-| SEO routes are not documented                     | Priority product, category, CMS Page, Blog Posts, and legacy routes are unknown.                                     | Build route evidence before launch-sensitive migration.                       |
-| Adobe Commerce needs hidden inside a Magento plan | The business expects enterprise/B2B behavior not available in the selected Magento environment.                      | Confirm whether Adobe Commerce is the real Target Platform.                   |
-
-Magento becomes especially risky when the merchant wants a low-effort migration but has high-complexity business rules. The mismatch between expectation and platform responsibility can create scope gaps, weak validation, and launch friction.
+This translation prevents Magento from becoming a vague destination for every source behavior. It forces the merchant to decide which old behaviors belong in Magento data, which belong in implementation, and which should not be preserved.
 
 ### Fit Signals to Confirm Before Migration <a href="#fit-signals-to-confirm-before-migration" id="fit-signals-to-confirm-before-migration"></a>
 
-A Magento fit decision should be supported by evidence. The following signals help determine whether Magento is a practical Target Platform and whether the migration should be treated as standard, assisted, or custom.
+A Magento fit decision should be based on representative evidence. The merchant should prepare examples that reveal the target burden: product types, attributes, scope, customers, orders, inventory, URLs, content, and custom data.
 
-| Fit signal               | What to confirm                                                                                                   | Why it matters                                                                |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Product-type inventory   | Which products should become simple, configurable, grouped, bundle, virtual, downloadable, or related structures. | Product records must behave correctly, not merely exist.                      |
-| Attribute plan           | Which attributes are visible, searchable, filterable, comparable, operational, or excluded.                       | Attribute quality affects storefront discovery and admin maintenance.         |
-| Scope plan               | Which websites, stores, and store views will exist and which values should vary by scope.                         | Scope affects localization, category roots, content, URLs, and configuration. |
-| Customer group meaning   | Whether groups influence pricing, tax, discounts, segmentation, or service treatment.                             | Customer data may carry commercial meaning beyond account identity.           |
-| URL and content evidence | Priority product, category, CMS Page, Blog Posts, and redirect needs.                                             | SEO-sensitive routes need proof before launch.                                |
-| Inventory expectations   | Whether stock, salable state, sources, stocks, and fulfillment assumptions matter.                                | Inventory behavior can affect order readiness and customer availability.      |
-| Custom data inventory    | Extensions, custom fields, external IDs, custom modules, and integration-owned records.                           | Unsupported or bespoke data may require Custom Service review.                |
-| Validation capacity      | Who can review representative records and business behavior after Demo Migration.                                 | Magento fit depends on behavior-level validation.                             |
+Strong fit is likely when the merchant can confirm:
 
-A strong fit decision does not require every target implementation detail to be complete. It does require the assumptions that affect migration meaning, service scope, and validation responsibility to be visible.
+* product types and variation logic are understood;
+* attributes have customer-facing, operational, or integration value;
+* websites, stores, and store views have a defined purpose;
+* category and URL continuity matters and can be evidenced;
+* customer groups are meaningful or intentionally simple;
+* inventory expectations can be validated beyond total quantities;
+* extension and custom-field dependencies are identified;
+* a technical owner can maintain Magento after migration;
+* Demo Migration can be reviewed by people who understand Magento structure.
 
-### How Fit Affects Migration Planning <a href="#how-fit-affects-migration-planning" id="how-fit-affects-migration-planning"></a>
+Fit is conditional when several of these points are valuable but undefined. Fit is weaker when most of them are unnecessary, undocumented, or unsupported by the merchant’s implementation capacity.
 
-Magento fit should shape the migration path. A straightforward catalog, clean attributes, simple customer structure, and limited custom data may fit Standard Service when the supported entities and expected target behavior are clear.
+### How Fit Shapes the Migration Scope <a href="#how-fit-shapes-the-migration-scope" id="how-fit-shapes-the-migration-scope"></a>
 
-Managed Service can be more appropriate when the merchant wants Next-Cart involvement in setup coordination, migration execution support, or guided handling of a more complex migration path. Add-ons may help when the project needs filtering, mapping, or data configuration within supported behavior.
+Magento fit should directly affect service-path decisions, but Article 2 should keep the service discussion at a planning level. Standard Service may fit when the source data is supported, product structures are ordinary, attribute behavior is clear, and the merchant can validate the results. Managed Service may be safer when the scope is supported but execution coordination, setup timing, or validation discipline requires more involvement. Add-ons may help with supported filtering, mapping, or data configuration. Custom Service should be considered when the requirement involves unsupported module data, custom fields, external identifiers, Custom Platform interpretation, bespoke transformation, or custom migration logic adjustment.
 
-Custom Service should be considered when the Magento fit depends on custom fields, unsupported extension data, Custom Platform interpretation, outside-system identifiers, bespoke transformation logic, or nonstandard source behavior. Custom Service is also relevant when the merchant needs Magento-specific behavior preserved in a way that cannot be addressed through standard mapping alone.
+This service relationship should not be treated as a formula. A large store can still fit a supported path if data is clean and the team can validate it. A smaller store may need Custom Service if the business depends on custom fields or extension-owned behavior. Magento fit is determined by structure and responsibility, not only record volume.
 
-Additional Migration Options should be considered only when later migration activity affects records that need renewed review. Follow-up activity can reduce freshness gaps, but it does not replace Demo Migration review, Full Migration validation, or launch-readiness checks.
+### Magento and Adobe Commerce Fit Boundaries <a href="#magento-and-adobe-commerce-fit-boundaries" id="magento-and-adobe-commerce-fit-boundaries"></a>
+
+Magento Open Source and Adobe Commerce should be evaluated together only when the comparison improves the decision. Magento Open Source may be the right destination when the merchant needs open-source flexibility and is ready to own implementation. Adobe Commerce may be the better target when enterprise workflows, B2B company accounts, shared catalogs, Content Staging, governance, infrastructure assumptions, or enterprise integrations are central to the business.
+
+The boundary matters because a merchant may say “Magento” while expecting Adobe Commerce capabilities. That mismatch should be corrected before migration scope is finalized. Magento Open Source planning should not include Adobe Commerce-only assumptions, and Adobe Commerce planning should not be reduced to standard Magento catalog migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Magento is a strong Target Platform for merchants that need structured catalog modeling, attribute governance, store-scope control, SEO continuity, integration flexibility, and room for custom implementation. It is a weaker fit for merchants that want a low-configuration storefront, cannot define custom behavior, or lack the capacity to validate Magento-specific outcomes.
+Magento Open Source is a strong fit for merchants that need structured product modeling, attribute governance, store-scope flexibility, SEO-sensitive URL control, extension-driven implementation, and ownership over a configurable commerce environment. It is a weaker fit when the business needs a simple storefront, has no implementation owner, cannot define custom behavior, or expects Adobe Commerce enterprise features inside a Magento Open Source plan.
 
-The best Magento fit decision begins with representative product, customer, content, URL, inventory, and custom-data evidence. When those inputs are clear, the migration plan can separate standard migration scope, Add-ons, Managed Service support, Custom Service review, and post-migration implementation work more accurately.
-
-Next-Cart can help assess whether Magento is the right Target Platform for your migration path and identify which data, configuration, Add-ons, or Custom Service considerations should be reviewed before Full Migration.
+A strong fit decision depends on evidence: product-type samples, attribute plans, store-view expectations, customer group meaning, URL and content inventories, extension data, external identifiers, and validation ownership. When that evidence is clear, Magento can be planned as a powerful migration destination rather than a loosely defined technical upgrade.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Magento only suitable for large stores?**
+**Is Magento Open Source only suitable for large stores?**
 
-No. Magento fit depends more on structure than size. A smaller store with configurable products, attribute-led filtering, multiple store views, custom fields, or integration needs may be a better Magento candidate than a larger store with simple products and limited operational requirements.
+No. Magento fit depends more on structure than size. A smaller store with configurable products, rich attributes, multiple store views, SEO-sensitive URLs, or integration requirements may be a better Magento candidate than a larger store with a simple catalog and limited operational needs.
 
-**Is Magento a good fit for a simple product catalog?**
+**Is Magento Open Source a good fit for a simple catalog?**
 
-It can be, but it may not be the most efficient choice if the business does not need Magento’s structural depth. A simple catalog should justify Magento through future scope, integrations, customization, SEO control, or implementation strategy.
+It can be, but it may not be the most efficient choice if the business does not need Magento’s catalog depth, attribute governance, store scope, extension flexibility, or implementation control.
 
 **How does Magento fit differ from Adobe Commerce fit?**
 
-Magento Open Source and Adobe Commerce share important foundations, but Adobe Commerce can involve additional capabilities, licensing, infrastructure, B2B functions, and enterprise workflows. Confirm the exact Target Platform before migration planning begins.
+Magento Open Source is better framed around open-source implementation ownership and extensible catalog control. Adobe Commerce fit becomes more relevant when enterprise B2B, shared catalogs, Content Staging, governance, and larger operational complexity are central to the target plan.
 
-**Should messy product attributes stop a Magento migration?**
+**Should messy attributes prevent a Magento migration?**
 
-Not always. Messy attributes are a warning sign, not an automatic blocker. They should be cleaned, mapped, merged, excluded, or reviewed through Custom Service when they affect storefront discovery, product pages, filtering, reporting, or integrations.
+Not automatically. Messy attributes are a warning sign. They should be cleaned, mapped, merged, excluded, or reviewed through Custom Service if they affect storefront discovery, product pages, reporting, integrations, or admin usability.
 
-**When should Custom Service be considered for a Magento migration?**
+**When should Custom Service be considered for Magento?**
 
-Custom Service should be considered when the migration depends on unsupported extension data, custom fields, outside-system identifiers, Custom Platform interpretation, bespoke transformation logic, or source behavior that cannot be handled through supported standard migration behavior.
-
-\
-Magento is a strong Target Platform when a business needs structured catalog control, SKU-level product variation, attribute governance, multi-store or multi-language scope, URL continuity, and room for custom implementation. It is less suitable when the merchant wants the lowest possible configuration burden, has only basic catalog needs, or cannot define the custom behavior that must remain usable after migration.
-
-Fit should be evaluated by operational value, not by platform reputation alone. Magento can support sophisticated catalog and store structures, but that flexibility creates planning responsibility. A good fit is a merchant whose product, customer, content, SEO, inventory, or integration needs justify that responsibility and whose team can validate the migrated store beyond record counts.
-
-### What Makes Magento a Strong Fit <a href="#what-makes-magento-a-strong-fit" id="what-makes-magento-a-strong-fit"></a>
-
-Magento fit depends on whether the target business benefits from structure. Product types, configurable products, product attributes, attribute sets, websites, stores, store views, customer groups, inventory behavior, URL rewrites, extensions, and integrations can create a precise Target Store. They also require clear decisions before Full Migration.
-
-A store may be a strong Magento candidate when the migration goal is not only to move data, but to preserve how the business sells, organizes, filters, localizes, prices, and manages products. Magento is especially useful when source records need to become deliberate target structures rather than flat products, simple pages, and basic customer accounts.
-
-| Fit factor                    | Strong Magento signal                                                                                                    | Weak or risky fit signal                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Catalog structure             | Products depend on configurable, grouped, bundle, virtual, downloadable, or relationship-based behavior.                 | Most products are simple and do not require advanced target modeling.                       |
-| Product attributes            | Attributes affect filtering, search, comparison, promotion logic, product pages, reporting, or merchandising.            | Attribute data is inconsistent, duplicated, unclear, or not useful to customers or staff.   |
-| Store scope                   | The business needs websites, stores, store views, languages, localized values, or differentiated storefront experiences. | One simple storefront is sufficient, with no meaningful scope or localization requirement.  |
-| Customer and commercial logic | Customer groups, discounts, tax classes, or segmentation influence customer experience or operations.                    | Customer records are basic contact records without pricing, tax, group, or service meaning. |
-| SEO continuity                | Product, category, CMS Page, Blog Posts, and priority URL continuity matter at launch.                                   | Organic-search continuity is low priority or route evidence is unavailable.                 |
-| Customization                 | Extensions, custom fields, integrations, APIs, or outside-system identifiers carry operational meaning.                  | Custom behavior exists but cannot be explained, tested, or maintained.                      |
-| Validation capacity           | The merchant can review product behavior, scope, URLs, inventory, customers, orders, and workflows.                      | The merchant can only compare totals and cannot validate Magento-specific behavior.         |
-
-Magento is not automatically the best choice just because a store is large. A smaller store with complex product rules, attribute-led discovery, or multi-language requirements can be a stronger fit than a larger store with simple products and limited operating needs.
-
-### Ideal Migration Profiles for Magento <a href="#ideal-migration-profiles-for-magento" id="ideal-migration-profiles-for-magento"></a>
-
-Magento is usually strongest when the business needs platform flexibility and has enough internal or agency support to manage the decisions that come with that flexibility.
-
-#### Catalog-led retail businesses <a href="#catalog-led-retail-businesses" id="catalog-led-retail-businesses"></a>
-
-Magento is a strong fit for merchants whose catalog depends on meaningful product relationships, product types, variations, attributes, categories, and merchandising context. Apparel, parts, equipment, digital products, kits, and configurable-product catalogs often need more than a basic product table.
-
-A catalog-led migration should prepare representative records before Demo Migration. Samples should include configurable products with associated simple products, products with multiple attribute sets, category assignments, images, metadata, inventory values, related products, cross-sells, up-sells, bundle behavior, grouped-product behavior, or downloadable-product behavior.
-
-#### Stores with variant-rich products <a href="#stores-with-variant-rich-products" id="stores-with-variant-rich-products"></a>
-
-Magento can be a strong fit when variations need SKU-level control. Configurable products can present one storefront product while each option is represented by an associated simple product with its own SKU and inventory behavior.
-
-This fit becomes weaker when the original store stores product choices as unstructured option text and the merchant cannot define how those choices should behave after migration. A color, size, material, subscription term, personalized value, or kit selection may require different handling depending on whether it affects SKU identity, price, inventory, filtering, fulfillment, or customer choice.
-
-#### Attribute-heavy catalogs <a href="#attribute-heavy-catalogs" id="attribute-heavy-catalogs"></a>
-
-Magento fits merchants that use attributes to support customer discovery and operational control. Attributes can influence product pages, search, layered navigation, comparisons, reporting, promotions, and product-family templates through attribute sets.
-
-This profile requires discipline. Attribute names, values, units, visibility, searchability, filterability, and internal use should be reviewed before migration. Weak attribute governance can make Magento feel powerful in the admin area while creating noisy filters, inconsistent product pages, and confusing storefront discovery.
-
-#### Multi-store, multi-language, or multi-market merchants <a href="#multi-store-multi-language-or-multi-market-merchants" id="multi-store-multi-language-or-multi-market-merchants"></a>
-
-Magento can support businesses that need more than one storefront experience from the same commerce foundation. Websites, stores, and store views can support different brands, root categories, languages, localized content, market-specific configuration, and storefront-specific values.
-
-This makes Magento a strong fit for businesses with real scope requirements. It also means fit depends on planning. Product names, descriptions, URL keys, categories, CMS Pages, Blog Posts, pricing assumptions, and visibility may need different handling across websites, stores, or store views.
-
-#### SEO-sensitive stores <a href="#seo-sensitive-stores" id="seo-sensitive-stores"></a>
-
-Magento is a strong fit when the merchant is prepared to manage URL continuity, metadata, route structure, product/category paths, CMS Pages, Blog Posts, and redirects carefully. Stores with established organic traffic, high-value landing pages, category authority, or content-led acquisition should treat SEO continuity as part of platform fit.
-
-A Magento migration can be structurally successful while still harming launch quality if priority routes are not preserved, redirected, or tested. Strong candidates can provide route samples and identify the pages that matter most.
-
-#### Integration-dependent operations <a href="#integration-dependent-operations" id="integration-dependent-operations"></a>
-
-Magento often fits merchants that need commerce records to work with ERP systems, PIM systems, warehouse platforms, marketplaces, fulfillment tools, CRM systems, analytics platforms, marketing systems, custom APIs, or bespoke modules.
-
-This is a strong fit when integration needs are known and maintainable. It is a risk when outside-system identifiers, custom fields, or extension-owned records are not documented. Data migration should be separated from integration setup, synchronization design, and post-launch operational testing.
-
-### Conditional Fit Scenarios <a href="#conditional-fit-scenarios" id="conditional-fit-scenarios"></a>
-
-Some merchants can succeed with Magento, but only after clarifying gaps that would make the project unsafe if treated as straightforward.
-
-#### Growing stores moving beyond a simpler platform <a href="#growing-stores-moving-beyond-a-simpler-platform" id="growing-stores-moving-beyond-a-simpler-platform"></a>
-
-A growing merchant may choose Magento because the current platform no longer supports desired product structure, scope, integrations, or customization. Growth can justify Magento when the business can name the requirements that matter.
-
-Growth alone is not enough. The merchant should identify whether Magento is needed for configurable products, store views, attribute governance, integration control, SEO continuity, custom workflows, or a longer-term implementation roadmap.
-
-#### Stores with messy but valuable catalog data <a href="#stores-with-messy-but-valuable-catalog-data" id="stores-with-messy-but-valuable-catalog-data"></a>
-
-Magento can support a cleaner catalog model, but unclear source data does not become meaningful automatically. Duplicate attributes, inconsistent option values, weak SKU patterns, mixed categories, and legacy internal labels can create poor target behavior.
-
-This scenario can still be a good fit if the merchant accepts that cleanup, mapping, exclusion, or Custom Service review may be needed. It is risky when the merchant expects Magento to fix poor data quality without decisions.
-
-#### Merchants with extension-owned behavior <a href="#merchants-with-extension-owned-behavior" id="merchants-with-extension-owned-behavior"></a>
-
-Magento can fit stores that depend on extensions or custom modules, but only when the role of those extensions is understood. Some extensions only affect storefront presentation. Others own subscriptions, rewards, product enrichment, checkout fields, B2B-like workflows, search rules, shipping restrictions, payment workflows, or integration identifiers.
-
-Add-ons can support filtering, mapping, and data configuration. Custom Service should be considered when a requirement depends on unsupported extension data, custom fields, outside-system identifiers, Custom Platform interpretation, or bespoke transformation logic.
-
-#### Stores considering Magento Open Source instead of Adobe Commerce <a href="#stores-considering-magento-open-source-instead-of-adobe-commerce" id="stores-considering-magento-open-source-instead-of-adobe-commerce"></a>
-
-Magento Open Source and Adobe Commerce are related, but they should not be treated as identical Target Platforms. Magento Open Source can be appropriate for merchants that want Magento’s open-source foundation and are prepared to manage hosting, implementation, extensions, and development decisions. Adobe Commerce may be more relevant when the project depends on enterprise capabilities, licensing, infrastructure assumptions, or B2B-oriented workflows.
-
-Magento fit should be judged against the exact target environment. A migration plan for Magento Open Source should not assume Adobe Commerce-only capabilities, and an Adobe Commerce project should not be flattened into ordinary Magento Open Source assumptions.
-
-### Non-Ideal or Higher-Risk Profiles <a href="#non-ideal-or-higher-risk-profiles" id="non-ideal-or-higher-risk-profiles"></a>
-
-Magento is not a strong fit for every merchant. Some cases may require another Target Platform, a simpler implementation path, or more discovery before the migration should proceed.
-
-| Profile                                           | Why Magento fit is weaker                                                                                            | Safer direction                                                               |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Basic catalog with limited customization          | Magento’s structural depth may add unnecessary setup and maintenance burden.                                         | Consider whether a simpler hosted Target Platform can meet the business need. |
-| No implementation ownership                       | Magento requires decisions around configuration, extensions, design, performance, and testing beyond data migration. | Confirm who will own implementation before migration scope is finalized.      |
-| Undefined custom behavior                         | Custom fields, modules, or workflows are known to exist but cannot be explained or tested.                           | Pause for discovery or Custom Service review.                                 |
-| Poor attribute discipline                         | Attribute values are duplicated, inconsistent, or not meaningful enough to support filtering or merchandising.       | Clean, map, merge, or exclude weak attributes before relying on them.         |
-| Unclear multi-store expectations                  | The merchant wants multiple languages, brands, or markets but has not defined website/store/store-view behavior.     | Define scope assumptions before Full Migration.                               |
-| SEO routes are not documented                     | Priority product, category, CMS Page, Blog Posts, and legacy routes are unknown.                                     | Build route evidence before launch-sensitive migration.                       |
-| Adobe Commerce needs hidden inside a Magento plan | The business expects enterprise/B2B behavior not available in the selected Magento environment.                      | Confirm whether Adobe Commerce is the real Target Platform.                   |
-
-Magento becomes especially risky when the merchant wants a low-effort migration but has high-complexity business rules. The mismatch between expectation and platform responsibility can create scope gaps, weak validation, and launch friction.
-
-### Fit Signals to Confirm Before Migration <a href="#fit-signals-to-confirm-before-migration" id="fit-signals-to-confirm-before-migration"></a>
-
-A Magento fit decision should be supported by evidence. The following signals help determine whether Magento is a practical Target Platform and whether the migration should be treated as standard, assisted, or custom.
-
-| Fit signal               | What to confirm                                                                                                   | Why it matters                                                                |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Product-type inventory   | Which products should become simple, configurable, grouped, bundle, virtual, downloadable, or related structures. | Product records must behave correctly, not merely exist.                      |
-| Attribute plan           | Which attributes are visible, searchable, filterable, comparable, operational, or excluded.                       | Attribute quality affects storefront discovery and admin maintenance.         |
-| Scope plan               | Which websites, stores, and store views will exist and which values should vary by scope.                         | Scope affects localization, category roots, content, URLs, and configuration. |
-| Customer group meaning   | Whether groups influence pricing, tax, discounts, segmentation, or service treatment.                             | Customer data may carry commercial meaning beyond account identity.           |
-| URL and content evidence | Priority product, category, CMS Page, Blog Posts, and redirect needs.                                             | SEO-sensitive routes need proof before launch.                                |
-| Inventory expectations   | Whether stock, salable state, sources, stocks, and fulfillment assumptions matter.                                | Inventory behavior can affect order readiness and customer availability.      |
-| Custom data inventory    | Extensions, custom fields, external IDs, custom modules, and integration-owned records.                           | Unsupported or bespoke data may require Custom Service review.                |
-| Validation capacity      | Who can review representative records and business behavior after Demo Migration.                                 | Magento fit depends on behavior-level validation.                             |
-
-A strong fit decision does not require every target implementation detail to be complete. It does require the assumptions that affect migration meaning, service scope, and validation responsibility to be visible.
-
-### How Fit Affects Migration Planning <a href="#how-fit-affects-migration-planning" id="how-fit-affects-migration-planning"></a>
-
-Magento fit should shape the migration path. A straightforward catalog, clean attributes, simple customer structure, and limited custom data may fit Standard Service when the supported entities and expected target behavior are clear.
-
-Managed Service can be more appropriate when the merchant wants Next-Cart involvement in setup coordination, migration execution support, or guided handling of a more complex migration path. Add-ons may help when the project needs filtering, mapping, or data configuration within supported behavior.
-
-Custom Service should be considered when the Magento fit depends on custom fields, unsupported extension data, Custom Platform interpretation, outside-system identifiers, bespoke transformation logic, or nonstandard source behavior. Custom Service is also relevant when the merchant needs Magento-specific behavior preserved in a way that cannot be addressed through standard mapping alone.
-
-Additional Migration Options should be considered only when later migration activity affects records that need renewed review. Follow-up activity can reduce freshness gaps, but it does not replace Demo Migration review, Full Migration validation, or launch-readiness checks.
-
-### Conclusion <a href="#conclusion" id="conclusion"></a>
-
-Magento is a strong Target Platform for merchants that need structured catalog modeling, attribute governance, store-scope control, SEO continuity, integration flexibility, and room for custom implementation. It is a weaker fit for merchants that want a low-configuration storefront, cannot define custom behavior, or lack the capacity to validate Magento-specific outcomes.
-
-The best Magento fit decision begins with representative product, customer, content, URL, inventory, and custom-data evidence. When those inputs are clear, the migration plan can separate standard migration scope, Add-ons, Managed Service support, Custom Service review, and post-migration implementation work more accurately.
-
-Next-Cart can help assess whether Magento is the right Target Platform for your migration path and identify which data, configuration, Add-ons, or Custom Service considerations should be reviewed before Full Migration.
-
-### Common Questions <a href="#common-questions" id="common-questions"></a>
-
-**Is Magento only suitable for large stores?**
-
-No. Magento fit depends more on structure than size. A smaller store with configurable products, attribute-led filtering, multiple store views, custom fields, or integration needs may be a better Magento candidate than a larger store with simple products and limited operational requirements.
-
-**Is Magento a good fit for a simple product catalog?**
-
-It can be, but it may not be the most efficient choice if the business does not need Magento’s structural depth. A simple catalog should justify Magento through future scope, integrations, customization, SEO control, or implementation strategy.
-
-**How does Magento fit differ from Adobe Commerce fit?**
-
-Magento Open Source and Adobe Commerce share important foundations, but Adobe Commerce can involve additional capabilities, licensing, infrastructure, B2B functions, and enterprise workflows. Confirm the exact Target Platform before migration planning begins.
-
-**Should messy product attributes stop a Magento migration?**
-
-Not always. Messy attributes are a warning sign, not an automatic blocker. They should be cleaned, mapped, merged, excluded, or reviewed through Custom Service when they affect storefront discovery, product pages, filtering, reporting, or integrations.
-
-**When should Custom Service be considered for a Magento migration?**
-
-Custom Service should be considered when the migration depends on unsupported extension data, custom fields, outside-system identifiers, Custom Platform interpretation, bespoke transformation logic, or source behavior that cannot be handled through supported standard migration behavior.
+Custom Service should be considered when the migration depends on unsupported module data, custom fields, external identifiers, Custom Platform interpretation, bespoke transformation, or custom migration logic adjustment beyond supported migration behavior.

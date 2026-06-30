@@ -1,169 +1,161 @@
 # Selecting the Right Migration Approach for Shift4Shop
 
-Choosing the right migration approach for Shift4Shop is not only a question of how many records need to move. A store with a modest catalog can still need careful handling if products depend on option behavior, customer-specific pricing, restricted visibility, wholesale access, SEO routes, custom fields, or connected operational systems. A larger store can sometimes move more straightforwardly when the data structure is consistent and the expected result fits standard Shift4Shop behavior.
+Choosing the right Shift4Shop migration approach depends on more than the number of records being moved. A store with a moderate catalog can still require careful handling if it relies on Advanced Options, customer-group pricing, wholesale rules, SEO-sensitive content, custom fields, or integration-dependent order history. A larger store may be straightforward if its source data is clean and its business rules are simple.
 
-The approach should be chosen by looking at the business meaning behind the data. Products, customers, orders, coupons, CMS Pages, Blog Posts, and other supported records may appear ordinary in a source export, but the migration plan needs to decide whether those records carry pricing rules, buyer access, navigation meaning, fulfillment context, SEO value, or source-specific logic that must still make sense after launch.
+The approach should be selected by comparing source-store complexity with the target Shift4Shop operating model. Core records may be suitable for a standard migration path, but preparation findings may show that Add-ons, Custom Service, or managed review is needed for specific areas. The right approach should reduce launch risk without overbuilding the migration scope.
 
-For Shift4Shop, the strongest approach is the one that matches the actual burden of the migration: customer-led execution when the data is clean and the merchant can review confidently, Next-Cart-led execution when coordination is the main challenge, and Custom Service when the expected result depends on customization, modified behavior, Custom Platform source handling, or custom migration logic adjustment.
+### Start with the Platform Migration Scope <a href="#start-with-the-platform-migration-scope" id="start-with-the-platform-migration-scope"></a>
 
-### What Approach Means for a Shift4Shop Migration <a href="#what-approach-means-for-a-shift4shop-migration" id="what-approach-means-for-a-shift4shop-migration"></a>
+Begin by defining what the Shift4Shop migration must actually preserve. The scope should separate core data transfer from business logic, storefront behavior, SEO continuity, and operational dependencies. Without that separation, the project can become either too shallow or unnecessarily complex.
 
-A Shift4Shop migration approach is the working plan for how the selected migration path will be executed, reviewed, and adjusted before launch. It should define who leads execution, what can be handled through standard service capability, which optional Add-ons are useful, and which requirements need Custom Service review before Full Migration.
+A basic scope may focus on Products, Categories, Customers, Orders, Reviews, Coupons, and content records. A fuller scope may also need product options, Advanced Options, option templates, SmartCategories, gift certificates, quantity discounts, customer groups, B2B pricing rules, Extra Pages, Blog Posts, redirects, custom fields, and integration-related data.
 
-The approach should answer practical questions before the main migration begins:
+| Scope area      | Straightforward signal                                                        | Complexity signal                                                                                    | Approach implication                                                                    |
+| --------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Catalog         | Products use simple SKUs, descriptions, prices, images, and categories        | Products rely on options, Advanced Options, option templates, bundles, rich media, or custom fields  | May need additional mapping, sample validation, or Custom Service for specific records. |
+| Customers       | Customers are mostly retail accounts with standard addresses                  | Customer groups drive wholesale pricing, tax treatment, visibility, or account-level rules           | Needs careful customer-group review and possibly managed validation.                    |
+| Orders          | Order history is needed mostly for reference                                  | Orders support accounting, fulfillment, support, warranties, or B2B reorder workflows                | Requires stronger order-sample review and possible custom handling.                     |
+| SEO and content | Only priority product and category URLs need redirects                        | Extra Pages, Blog Posts, legacy URLs, metadata, reviews, and Product Q\&A carry organic value        | May require Add-ons, redirect planning, or content-specific handling.                   |
+| Integrations    | External systems can be reconnected after launch with minimal data dependency | Product feeds, ERP, fulfillment, tax, marketplace, or accounting workflows depend on migrated fields | Requires integration review before selecting the final path.                            |
 
-| Planning question                                              | Why it matters for Shift4Shop                                                                                                                                                          |
-| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Which source records are ready for standard migration?         | Clean products, categories, customers, orders, coupons, reviews, CMS Pages, and Blog Posts are easier to evaluate when their business meaning is already clear.                        |
-| Which product structures need extra review?                    | Product options, specifications, images, technical content, groups, kits, or source-specific product fields may affect how buyers understand and purchase items after migration.       |
-| Which customer rules must remain meaningful?                   | Customer groups, wholesale access, customer-specific pricing, payment expectations, tax behavior, and restricted visibility can make customer data more than ordinary account history. |
-| Which storefront and SEO elements are launch-critical?         | URLs, redirects, metadata, content pages, category paths, navigation, and high-value landing pages should be reviewed before launch instead of treated as cosmetic cleanup.            |
-| Which data depends on apps, custom fields, or outside systems? | Integration-owned or custom source behavior may not have a direct standard destination and may require Add-ons, configuration planning, or Custom Service.                             |
+Scope selection should also identify what should not be migrated. Old 3dcart-era custom fields, inactive discounts, obsolete categories, abandoned content, retired customer groups, and disconnected integration records can inflate scope without improving the new store. Exclusion decisions are part of selecting the right path.
 
-The approach is not a label chosen after pricing. It is the decision framework that determines whether the migration can proceed through a standard path, whether Next-Cart should manage execution, or whether the project needs custom planning before the expected Shift4Shop outcome can be trusted.
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-### Why Approach Choice Depends on Shift4Shop-Specific Burden <a href="#why-approach-choice-depends-on-shift4shop-specific-burden" id="why-approach-choice-depends-on-shift4shop-specific-burden"></a>
+Standard Service may be enough when the migration mainly involves supported core data, clean source records, and limited business-rule complexity. It is strongest when the source store has conventional Products, clear Categories, usable Customers, readable Orders, standard Reviews, active Coupons, and content that does not need unusual restructuring.
 
-Shift4Shop can support a broad hosted commerce environment, so migration planning often has to distinguish between records that can move cleanly and business behavior that must be re-established in the Target Platform. This is where approach choice becomes important.
+A Standard Service path can still require preparation and validation. The difference is that the expected migration behavior is clear enough that the project does not depend on extensive custom mapping or manual reconstruction. For Shift4Shop, this path is most suitable when product options are simple, customer groups do not control complex pricing, and SEO priorities can be handled through normal redirect and content planning.
 
-Entity Points help determine migration capacity for counted data, but they do not measure every source of difficulty. A store with fewer products can still be complex if its catalog relies on customer-group pricing, restricted product visibility, legacy URLs, custom product fields, or integration-shaped order behavior. A store with more products may be easier when categories, options, customers, orders, and content are consistent.
+| Standard Service fit | What should be true                                                                                 | Validation focus                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Product data         | Product fields are clean, option logic is simple, images are accessible, and categories are defined | Confirm product display, purchasability, category placement, and image transfer.   |
+| Customer data        | Customers have standard account details and addresses without complex segmentation                  | Confirm account identity, email matching, addresses, and group assignment if used. |
+| Order history        | Orders are needed for reference more than process recreation                                        | Confirm order totals, dates, statuses, products, taxes, shipping, and discounts.   |
+| SEO content          | Redirect needs are known and content scope is manageable                                            | Confirm priority URLs, metadata, Extra Pages, and Blog Posts if included.          |
+| Review scope         | Demo migration samples represent the real store                                                     | Confirm that sample results are strong enough to support full migration.           |
 
-| Shift4Shop burden area         | What makes the approach heavier                                                                                                                          | Approach implication                                                                                                            |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog and product structure  | Product options, specifications, technical content, kits, bundles, replacement relationships, or inconsistent SKUs shape buying decisions.               | Standard Service may fit when structures are clean; Custom Service should be reviewed when source logic needs transformation.   |
-| Customer and pricing behavior  | Customer groups, wholesale access, customer-specific pricing, tax treatment, payment expectations, or restricted visibility affect what each buyer sees. | Managed Service may help with coordination; Custom Service is needed when behavior requires tailored interpretation.            |
-| Orders and operational history | Orders carry payment meaning, shipping context, discounts, refunds, notes, fulfillment signals, or status history needed for business review.            | The Demo Migration sample should include difficult order examples before the final approach is confirmed.                       |
-| Content, navigation, and SEO   | Old URLs, category paths, landing pages, metadata, internal links, and redirects affect discovery and launch continuity.                                 | Standard review may be enough for documented routes; custom handling may be needed for unusual source routing.                  |
-| Integrations and custom fields | App-owned records, ERP/accounting data, custom fields, API data, or external identifiers shape the expected result.                                      | These requirements often require Custom Service review if they must be migrated, transformed, or preserved as business context. |
+Standard Service should not be selected merely because it is simpler. It should be selected when the source data and target-store expectations genuinely fit a predictable migration path.
 
-A strong approach does not try to make every migration heavier than necessary. It identifies where standard capability is enough and where the project would be unsafe if custom behavior were treated as ordinary data.
+### When Managed Service Is a Better Fit <a href="#when-managed-service-is-a-better-fit" id="when-managed-service-is-a-better-fit"></a>
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+Managed Service becomes a better fit when the business needs more guidance, coordination, or review support during migration. The data may still be migratable through ordinary paths, but the decision environment is more complex. This often happens when several teams are involved, when the store has active revenue risk, or when preparation reveals many areas that need confirmation before full migration.
 
-Standard Service is usually enough when the Shift4Shop migration path fits standard service capability and the merchant can lead the migration review with confidence. It is strongest when the source store is already organized and the expected result does not depend on custom interpretation.
+For Shift4Shop, Managed Service is especially useful when stakeholders need help interpreting demo results across catalog, customer, order, SEO, and integration areas. A product manager may care about options and categories, a sales team may care about customer groups and wholesale pricing, a support team may care about historical Orders, and a marketing team may care about URLs and content. Managed coordination helps connect these review areas into a usable migration decision.
 
-With Standard Service, the customer purchases a 1-year service license for the selected migration path and self-performs the E-commerce Platform Migration on the Next-Cart website, with 24/7 expert support and any purchased Add-ons. This can work well for Shift4Shop when the merchant has enough internal knowledge to judge Demo Migration results and make ordinary configuration decisions after migration.
+| Managed Service signal            | Why it matters                                                                   | What the managed process should clarify                                     |
+| --------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Multiple business owners          | Catalog, sales, support, SEO, and operations may judge success differently       | Who validates each data area and what counts as acceptable.                 |
+| B2B or wholesale rules            | Customer groups and quantity pricing can affect revenue and buyer access         | Which rules migrate, which are rebuilt, and which require testing.          |
+| SEO-sensitive migration           | Losing product, category, Extra Page, or Blog Post visibility can affect traffic | Which URLs and content records are priority items.                          |
+| Demo findings need interpretation | Technical transfer may pass while business usability is still uncertain          | Which issues are migration defects, source-data issues, or setup decisions. |
+| Launch timing is sensitive        | Review delays can become launch risk                                             | Which decisions must be made before full migration.                         |
 
-Standard Service is usually a good fit when:
+Managed Service does not replace preparation. It makes preparation and validation easier to coordinate when the migration has enough moving parts that a self-directed review could miss important dependencies.
 
-* products have clear SKUs, categories, images, descriptions, options, prices, and review expectations;
-* categories and navigation are straightforward enough for the merchant to evaluate after migration;
-* customer accounts do not depend on complicated access, pricing, payment, tax, or visibility rules;
-* order history is needed mainly for reference, reporting, or customer-service lookup;
-* coupons and promotions are simple enough to review without custom rule interpretation;
-* content pages, Blog Posts, SEO metadata, and high-value URLs are documented for post-migration review;
-* any filtering, mapping, or value adjustment fits available Standard Add-on capability;
-* the merchant can review Demo Migration samples and decide whether the result is acceptable before Full Migration.
+### When Add-ons Should Be Considered <a href="#when-add-ons-should-be-considered" id="when-add-ons-should-be-considered"></a>
 
-Standard Service should not be chosen just because the store is small. It should be chosen when the store is understandable enough for a customer-led process and does not depend on custom migration logic adjustment.
+Add-ons should be considered when the base migration does not include a useful migration requirement that is still predictable enough to handle through an available service enhancement. Add-ons are not a substitute for custom development. They are best used for recognizable needs that extend the standard scope without turning the project into a custom build.
 
-### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
+For Shift4Shop, Add-on consideration often appears around SEO, content, recent data handling, additional records, or specific supported options that improve launch readiness. The decision should be based on business value. A record should not be added only because it exists; it should be added because it supports search visibility, customer experience, staff workflow, or post-launch continuity.
 
-Managed Service is safer when the migration still fits standard service capability, but the merchant wants Next-Cart to perform the migration and reduce execution burden. For Shift4Shop, this often applies when the data itself is not custom, but the migration needs stronger coordination across catalog, customers, orders, SEO, timing, and review.
+| Add-on consideration              | When it may be useful                                                                        | What to confirm first                                                        |
+| --------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| SEO and redirect support          | Priority product, category, Extra Page, or Blog Post URLs need continuity                    | Which URLs carry traffic, rankings, backlinks, campaigns, or customer value. |
+| Additional content records        | Store content supports trust, policies, buying guidance, B2B information, or organic traffic | Which pages should migrate, be rewritten, consolidated, or excluded.         |
+| Recent data handling              | Source-store activity continues close to launch                                              | Which new Customers, Orders, Products, or updates must be captured.          |
+| Reviews or user-generated content | Reviews and Product Q\&A support conversion or search value                                  | Which records are useful, clean, and tied to active Products.                |
+| Expanded sample review            | The store has several high-risk record patterns                                              | Which samples must be included to validate realistic migration outcomes.     |
 
-Managed Service is often a better approach when:
-
-| Managed Service signal                                | Why it matters                                                                                                                    |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| The catalog is large but structurally consistent      | The migration may not require customization, but execution and review coordination can be demanding.                              |
-| The source store remains active before launch         | Timing, Demo Migration interpretation, Full Migration planning, and Recent Data Migration expectations need careful coordination. |
-| The merchant has limited migration experience         | Next-Cart-led execution reduces the risk of mishandling a migration that still fits standard capability.                          |
-| SEO and content review are important but documented   | The work may require organized review rather than custom route logic.                                                             |
-| Customer and order samples need expert interpretation | Next-Cart can perform the migration while the merchant validates the business outcome.                                            |
-
-Managed Service does not automatically include customization. It means Next-Cart performs the migration for the customer using standard service capability and any purchased Add-ons. If the project requires modified mapping logic, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment, Managed Service alone is not the correct service path.
+Add-ons should remain separate from Custom Service decisions. If the need is supported, repeatable, and clearly scoped, an Add-on may be enough. If the need requires unique mapping, business-rule reconstruction, or custom interpretation, Custom Service should be reviewed instead.
 
 ### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
 
-Custom Service is needed when the expected Shift4Shop result requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or broader bespoke handling. The trigger is not simply a high-value store or a large catalog. The trigger is that standard service capability cannot safely produce the expected result.
+Custom Service is needed when the migration requirement cannot be handled reliably through the standard path or available Add-ons. This usually means the source data contains unique structures, custom fields, unusual relationships, legacy workarounds, or business logic that must be interpreted before it can become usable in Shift4Shop.
 
-Custom Service should be reviewed when the migration includes requirements such as:
+Shift4Shop migration projects may require Custom Service when source products use complex variant structures that need to become options or Advanced Options, when customer-specific pricing needs reconstruction, when wholesale accounts rely on nonstandard rules, when integration-created fields control fulfillment or reporting, or when legacy 3dcart-era customizations do not translate cleanly into current Shift4Shop usage.
 
-| Custom Service trigger                                    | Why Standard or Managed Service is not enough                                                                                                                              |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Custom product structures                                 | Source-side product logic, option behavior, technical attributes, custom fields, or bundled relationships may need transformation before they make sense in Shift4Shop.    |
-| Buyer-specific business logic                             | Customer groups, wholesale rules, customer-specific pricing, restricted visibility, tax treatment, or payment expectations may require tailored interpretation.            |
-| Custom checkout, pricing, or order behavior               | Source workflows may depend on scripts, apps, database rules, or manual processes that are not ordinary migration records.                                                 |
-| App-owned or integration-owned data                       | ERP, accounting, shipping, tax, CRM, marketplace, or API systems may own data that must be reconnected or interpreted outside standard migration capability.               |
-| Legacy URL or content structures needing bespoke handling | Old routes, redirected content, source-specific URL patterns, and high-value landing pages may require custom review when standard route handling is not enough.           |
-| Custom Platform source cases                              | A non-standard Source Platform requires analysis of source structure, custom fields, external identifiers, and transformation needs before a reliable plan can be defined. |
+| Custom Service trigger           | Example in a Shift4Shop migration                                                                  | Why ordinary transfer may not be enough                                    |
+| -------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Complex product behavior         | Product choices affect price, stock, image, shipping, or fulfillment in nonstandard ways           | Field transfer alone may not preserve how the product should be sold.      |
+| Customer-specific commerce rules | Wholesale buyers, tax-exempt accounts, special pricing, or visibility rules require interpretation | Customer data may need to be mapped to target behavior, not only imported. |
+| Legacy custom fields             | Old fields created for 3dcart-era workflows still affect operations                                | The field meaning must be confirmed before migration or exclusion.         |
+| Integration-dependent records    | ERP, accounting, marketplace, fulfillment, or product-feed data relies on source-specific values   | External system continuity may require special mapping or documentation.   |
+| Content restructuring            | Extra Pages, Blog Posts, policy pages, or landing pages need consolidation or route changes        | Content may need editorial and SEO decisions, not only transfer.           |
 
-Custom Service does not automatically mean Next-Cart performs every part of the migration for the merchant. Migration management can be included in the final plan, but the defining feature of Custom Service is the need for customization or bespoke migration handling.
+Custom Service should be scoped narrowly. The goal is not to make every part of the migration custom. The goal is to identify the parts where standard handling would create operational loss, customer confusion, SEO risk, or staff workflow problems.
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+### How Entity Points Affect Planning <a href="#how-entity-points-affect-planning" id="how-entity-points-affect-planning"></a>
 
-Add-ons can help when the requirement is focused and fits the appropriate Add-on category. They should not be treated as a substitute for Custom Service when the project requires new logic, modified behavior, or platform-specific transformation.
+Entity Points affect planning because they determine how much data can be migrated within the selected package or purchased allowance. They should be reviewed before full migration, especially when the source store contains duplicates, inactive records, old content, archived Orders, test Customers, unused Coupons, or legacy product structures.
 
-| Add-on                  | Useful Shift4Shop scenario                                                                                                                                  | Boundary to watch                                                                                                                            |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | The merchant wants to migrate only selected products, customers, orders, or Blog Posts rather than all scanned records.                                     | Entered counts are used for Entity Points and plan selection; they are not migration filters. Filtering must be configured before execution. |
-| Advanced Data Mapping   | Source values need clearer alignment with supported Shift4Shop structures, such as categories, selected product fields, customer groups, or order statuses. | Mapping cannot remove Target Platform limitations or make unsupported source behavior native to Shift4Shop.                                  |
-| Advanced Data Configure | Selected values should be revised or adjusted so the migrated result is cleaner or more destination-ready.                                                  | Configuration is useful for supported value changes; custom transformation or modified Add-on behavior belongs in Custom Service.            |
+Entity Points planning should not focus only on total volume. The same data count can represent very different migration effort depending on complexity. A catalog with many simple Products may be easier to plan than a smaller catalog where every Product uses options, Advanced Options, rich media, reviews, and integration-created fields.
 
-Standard Add-ons can be used with Standard Service, Managed Service, or Custom Service when their available settings and supported behavior fit the requirement. A Tailored Add-on is a modified version of a Standard Add-on and is handled through Custom Service. A Custom Add-on is a new or project-specific Add-on and is also reviewed through Custom Service.
+| Entity Points planning area | What to check                                                                                              | Planning decision                                                                  |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Products and variants       | Product count, option patterns, Advanced Options, duplicate products, inactive products, and test products | Decide what should migrate, clean, merge, or exclude before full migration.        |
+| Customers                   | Active accounts, inactive accounts, duplicate emails, customer groups, and B2B accounts                    | Avoid consuming scope on records that do not support the target store.             |
+| Orders                      | Full history, recent history, archived Orders, test Orders, and business-critical order ranges             | Choose the order range that supports support, accounting, and customer continuity. |
+| Content records             | Extra Pages, Blog Posts, duplicate pages, thin pages, and old campaign pages                               | Preserve useful content and exclude records that only add clutter.                 |
+| Duplicate consumption       | Records repeated across exports or duplicated by source-store workarounds                                  | Confirm whether duplicates will consume points without creating value.             |
 
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
+Duplicate-consumption awareness matters. If the source store contains repeated records, old test data, duplicate Customers, duplicate products, or inactive content, those records may consume migration capacity without improving the new Shift4Shop store. Cleanup and exclusion decisions can make Entity Points planning more accurate and reduce avoidable cost.
 
-Demo Migration should test whether the chosen approach is strong enough before broader execution. For Shift4Shop, a useful Demo Migration sample should include records that expose the real migration questions, not just the easiest records to move.
+### How Additional Migration Options Affect the Approach <a href="#how-additional-migration-options-affect-the-approach" id="how-additional-migration-options-affect-the-approach"></a>
 
-A strong sample should include:
+Additional Migration Options should be considered when they directly support the migration role. They should not be added automatically. Each option should answer a specific problem: preserving newer data, protecting SEO continuity, improving review accuracy, managing additional records, or supporting a launch sequence.
 
-* ordinary products and products with options, images, reviews, categories, and supporting content;
-* products affected by customer groups, wholesale pricing, visibility rules, quantity pricing, or special purchasing context;
-* customers representing retail buyers, wholesale buyers, customer groups, tax cases, and customer-specific pricing where applicable;
-* orders with discounts, taxes, shipping methods, payment context, refunds, notes, unusual statuses, or fulfillment context;
-* coupons and promotional records that show whether source logic can be reviewed inside Shift4Shop;
-* CMS Pages, Blog Posts, high-value landing pages, SEO metadata, internal links, and old URL examples;
-* custom-field, integration-owned, or Custom Platform source samples if those records affect the expected result.
+For Shift4Shop, Additional Migration Options may affect the approach when the source store continues to change during the project, when SEO-sensitive records need special handling, when a demo migration needs broader samples, or when launch timing requires a more controlled final transfer.
 
-| Demo Migration outcome                                       | What it means for the approach                                                                                        |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Records migrate cleanly and business meaning is clear        | The current approach may be sufficient if the merchant can validate representative samples.                           |
-| Records migrate but require configuration decisions          | Standard or Managed Service may still fit, but review and configuration planning should happen before Full Migration. |
-| Add-on needs become clear                                    | The approach should be updated before execution, especially for filtering, mapping, or value configuration.           |
-| Custom behavior cannot be explained through standard results | The project should move into Custom Service review before Full Migration.                                             |
+| Additional Migration Option need | When it affects approach selection                                                            | What to decide                                                                      |
+| -------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Recent data coverage             | Orders, Customers, Products, or updates continue after demo migration                         | Decide how recent records will be handled before launch.                            |
+| Preserve order references        | Staff need historical Orders for support, accounting, reorders, or warranty lookup            | Decide the order range and validation samples.                                      |
+| SEO-focused handling             | Priority URLs and content records need continuity                                             | Decide which redirects, metadata, and pages are business-critical.                  |
+| Expanded review samples          | Demo migration must test multiple product, customer, order, content, and integration patterns | Decide which sample records are required before full migration.                     |
+| Launch sequencing                | The store needs controlled timing around final data movement                                  | Decide what changes freeze, what updates continue, and who validates final results. |
 
-Demo Migration is early evidence, not final validation. It should help decide whether the chosen service path is appropriate before the store moves into broader execution.
+Additional Migration Options should make the chosen approach more precise. If an option does not improve validation, launch readiness, or business continuity, it should not be added merely to expand the scope.
 
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
+### Choosing the Right Path Before Full Migration <a href="#choosing-the-right-path-before-full-migration" id="choosing-the-right-path-before-full-migration"></a>
 
-The chosen approach is too light when migration output appears complete at the record level but fails to preserve the business meaning needed for Shift4Shop launch. These warning signs should be reviewed before Full Migration rather than accepted as cleanup for later.
+The final approach should connect preparation findings to a clear migration path. Standard Service may be enough for clean core data. Managed Service may be better when review coordination matters. Add-ons may cover supported enhancements. Custom Service may be needed for unique mapping, business logic, or integration-dependent records. Entity Points and Additional Migration Options help refine the practical scope.
 
-| Warning sign                                                                                                                     | Safer response                                                                                       |
-| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Product records move, but option behavior, specifications, visibility, or technical content no longer support buying decisions.  | Reassess mapping, configuration, and whether custom product handling is needed.                      |
-| Customers move, but pricing groups, wholesale access, tax treatment, payment expectations, or restricted visibility are unclear. | Review customer segmentation and pricing logic before continuing.                                    |
-| Orders move, but payment meaning, shipping context, discounts, refunds, notes, or fulfillment interpretation cannot be trusted.  | Expand sample review and confirm whether order context requires custom handling.                     |
-| Content pages exist, but navigation, metadata, internal links, redirects, or high-value URLs are not launch-ready.               | Review SEO and route requirements before Full Migration.                                             |
-| Source records depend on app-owned data, custom fields, external identifiers, or integrations that have not been planned.        | Escalate to Custom Service review if the expected result depends on that data.                       |
-| The merchant expects manual cleanup to repair large parts of the Target Platform after migration.                                | Reconsider the approach; repeated manual repair is often a sign that the selected path is too light. |
+The decision should be made before full migration begins, not after demo migration exposes unresolved assumptions. A strong approach gives each data area a clear handling plan and each risk area a validation path.
 
-A lighter approach can be efficient when it fits the project. It becomes risky when it hides planning work that should be handled before migration execution.
+| Decision question                     | Choose the simpler path when                                                                      | Choose a more supported path when                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Can core records migrate predictably? | Products, Customers, Orders, Categories, Coupons, Reviews, and content are clean and conventional | Core records contain custom fields, source workarounds, or business-rule dependencies. |
+| Is review easy to coordinate?         | One owner can validate the main data areas with clear samples                                     | Multiple teams must review catalog, B2B, order history, SEO, and integrations.         |
+| Are Add-ons enough?                   | Needs are supported and clearly scoped                                                            | Needs require custom interpretation or unique mapping.                                 |
+| Is Custom Service justified?          | Data can move and remain useful without custom handling                                           | Standard handling would lose operational meaning or customer-facing behavior.          |
+| Is the scope aligned with value?      | Included records support launch, service, sales, or SEO continuity                                | The scope includes outdated, duplicate, or low-value records.                          |
+
+A well-chosen Shift4Shop migration approach should be easy to explain: what moves through the core path, what receives extra support, what needs custom handling, what is excluded, and how the result will be validated before launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Shift4Shop migration approach depends on how much business meaning must be preserved, not only how many records are included in the migration. Standard Service can fit clean, well-understood migrations where the merchant can lead review. Managed Service is safer when the migration fits standard capability but execution should be performed by Next-Cart. Custom Service is needed when the expected result depends on customization, modified Add-ons, Custom Platform handling, custom fields, integration-owned data, or custom migration logic adjustment.
+The right Shift4Shop migration approach is based on business fit, data complexity, and launch risk. Record count matters, but product behavior, customer groups, wholesale pricing, order history, SEO continuity, integrations, custom fields, and legacy 3dcart references often matter more.
 
-Before choosing the final approach, use Demo Migration to test the records that carry the most business meaning in the Shift4Shop plan. If the sample reveals unclear pricing, buyer segmentation, product behavior, SEO continuity, custom fields, or integration dependencies, use Live Chat to review whether Standard Service, Managed Service, Add-ons, or Custom Service is the safer path before Full Migration.
+A strong approach starts with scope, tests whether Standard Service is enough, identifies when Managed Service is useful, separates Add-ons from Custom Service, accounts for Entity Points, and uses Additional Migration Options only when they support a clear migration objective. When these decisions are made before full migration, the project is easier to validate and less likely to carry avoidable risk into launch.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Can a Shift4Shop migration use Standard Service?**
+**How should a business choose a Shift4Shop migration approach?**
 
-Yes. Standard Service can fit when the source data is clean, the expected Shift4Shop result fits standard service capability, and the merchant can review Demo Migration output confidently. It is usually strongest for migrations with conventional products, customers, orders, categories, coupons, and content.
+Start by reviewing the source-store scope, product complexity, customer groups, order-history needs, SEO requirements, integrations, and custom data. Then decide which areas fit the standard path and which areas need added support or custom handling.
 
-**When is Managed Service better for a Shift4Shop migration?**
+**When is Standard Service enough for Shift4Shop migration?**
 
-Managed Service is better when the migration fits standard service capability but the merchant wants Next-Cart to perform the migration and coordinate execution. It is often useful for larger catalogs, active stores, launch-sensitive timing, and merchants who want expert handling without custom migration logic.
+Standard Service may be enough when core data is clean, product options are simple, customer rules are limited, order history is mainly for reference, and SEO requirements are clear.
 
-**When does a Shift4Shop migration require Custom Service?**
+**When should Add-ons be considered?**
 
-Custom Service is required when the expected result needs customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or bespoke handling. This can include custom product structures, customer-specific pricing logic, custom fields, integration-owned data, Custom Platform source handling, or source behavior that does not map cleanly into supported Shift4Shop structures.
+Add-ons should be considered when a supported enhancement improves launch readiness, SEO continuity, recent data handling, content coverage, or validation depth.
 
-**Can Add-ons solve all Shift4Shop migration issues?**
+**When is Custom Service needed?**
 
-No. Standard Add-ons can help with focused filtering, mapping, and data configuration needs when the requirement fits available settings and supported behavior. Requirements that exceed Standard Add-on capability should be reviewed as Custom Service.
+Custom Service is needed when source data requires unique mapping, business-rule interpretation, custom-field handling, integration-dependent processing, or restructuring that cannot be handled through the standard path or Add-ons.
 
-**Should Demo Migration be used before deciding the final approach?**
+**Why do Entity Points matter when selecting the approach?**
 
-Yes. Demo Migration is a practical way to test whether the selected approach is strong enough. The sample should include records that reveal product options, pricing rules, customer groups, order context, SEO routes, content, and any custom or integration-dependent data that may affect the Shift4Shop result.
+Entity Points affect scope and cost planning. Duplicate, inactive, outdated, or low-value records can consume capacity without improving the target store, so record cleanup and exclusion decisions should happen before full migration.

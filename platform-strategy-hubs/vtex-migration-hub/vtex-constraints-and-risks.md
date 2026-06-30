@@ -1,171 +1,177 @@
 # VTEX Constraints and Risks
 
-A VTEX migration can fail even when the core records appear to move successfully. The main risk is not only missing products, customers, orders, CMS Pages, or Blog Posts. The larger risk is that migrated data may not behave correctly across VTEX Catalog, SKUs, specifications, trade policies, pricing, promotions, marketplace operations, OMS, logistics, Master Data, apps, APIs, and storefront implementation.
+VTEX migration risk is structural because the target environment connects catalog, SKUs, specifications, pricing, promotions, checkout, orders, logistics, marketplace operations, Master Data, storefront implementation, and external systems. A migration can appear successful when records are present, yet still fail if products are not purchasable, specifications do not support discovery, seller context is lost, pricing behavior is misread, or order history is confused with live operational setup.
 
-VTEX is a strong Target Platform for merchants with structured catalog, multichannel, marketplace, B2B/B2C, and integration requirements. That strength also creates migration constraints. Product data must become active and sellable. SKUs must preserve purchasable choices. Specifications must support filtering and discovery. Trade policies and pricing must reflect the right commercial context. Orders must remain meaningful inside operational history. Custom fields, Master Data, app data, and external identifiers must be classified before migration scope is approved.
+Risk control should not begin with a generic warning list. It should begin by identifying which source assumptions may break when interpreted through VTEX. A field that worked inside the source store may belong to VTEX catalog, a price table, Master Data, an integration, a custom front end, or no target structure at all. The migration plan should name those constraints before Full Migration, not after launch review.
 
-A reliable VTEX migration plan should identify these constraints before Demo Migration, not after Full Migration. The goal is to decide which risks can be handled through standard mapping, which need Add-ons, and which require Custom Service or separate target-side implementation work.
+### VTEX Risk Comes From Relationship Gaps <a href="#vtex-risk-comes-from-relationship-gaps" id="vtex-risk-comes-from-relationship-gaps"></a>
 
-### Why VTEX Migration Risk Is Structural <a href="#why-vtex-migration-risk-is-structural" id="why-vtex-migration-risk-is-structural"></a>
+VTEX risk usually appears between records rather than inside one record type. A product record depends on SKU structure. SKU availability depends on inventory and logistics. Pricing may depend on sales channels, price tables, promotions, or external systems. Orders may depend on checkout, payment, fulfillment, seller context, and historical status interpretation. Storefront behavior may depend on specifications, search, CMS components, routing, and custom implementation.
 
-VTEX migration risk is structural because business meaning is distributed across multiple platform layers. A source-store field may look simple, but its target behavior may depend on catalog architecture, SKU activation, sales channel rules, pricing context, OMS status meaning, marketplace ownership, logistics setup, Master Data, or storefront implementation.
+That means a simple completeness review is not enough. The merchant should ask whether migrated data still carries the relationships needed for the target operation.
 
-| Risk signal                                                                       | Why it matters in VTEX                                                                                                                      | What to confirm before migration                                                                                          |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Product choices affect stock, price, fulfillment, or customization.               | The choice may need SKU, specification, attachment, assembly option, service, kit, app behavior, or custom logic.                           | Whether each choice is a purchasable unit, product detail, customer input, bundle component, service, or custom workflow. |
-| Product fields are used for filtering, comparison, search, or merchandising.      | VTEX specifications and category-linked specification groups determine much of catalog discovery.                                           | Which fields must remain structured, searchable, filterable, or operationally useful.                                     |
-| The same product is sold under different channels, prices, or availability rules. | Trade policies, pricing, promotions, and marketplace context may change commercial behavior.                                                | Which sales contexts need separate review during Demo Migration.                                                          |
-| Marketplace or seller data affects offer ownership or order flow.                 | Marketplace migration is not just product and order transfer. Seller, offer, commission, SKU matching, and channel context may be involved. | Whether marketplace history and seller context must be migrated, configured, integrated, or excluded.                     |
-| Custom fields or forms affect checkout, fulfillment, reporting, or integrations.  | Master Data, apps, APIs, and custom checkout behavior may be outside ordinary entity mapping.                                               | Which values are business-critical and which system owns them after launch.                                               |
-| Storefront redesign is happening with migration.                                  | VTEX storefront implementation can change navigation, layout, search, URL behavior, and content presentation.                               | Which source content is migrated data and which is target storefront work.                                                |
+| Relationship gap      | What can break in VTEX                                                | Risk control                                                                             |
+| --------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Product to SKU        | Products exist but cannot be purchased correctly.                     | Validate simple, multi-SKU, option-heavy, and inventory-sensitive examples.              |
+| SKU to specifications | Filters, product detail, search, or comparison lose useful structure. | Normalize values by purpose and category relevance.                                      |
+| SKU to price/channel  | Prices work in one context but fail in another.                       | Test representative sales channels, customer contexts, and pricing scenarios.            |
+| Order to fulfillment  | History exists but staff cannot interpret delivery or seller context. | Review refunded, cancelled, marketplace, and multi-fulfillment examples.                 |
+| Content to storefront | Data migrates but the customer journey remains incomplete.            | Separate data migration from storefront implementation, redirects, and search readiness. |
 
-The safest planning approach is to treat VTEX constraints as business-behavior questions. A record-level migration can succeed technically while still producing weak customer experience, incomplete operations, or unreliable reporting if these behavior questions are not addressed.
+The strongest mitigation is early sample design. Samples should represent the business model, not only easy records.
 
-### Catalog and SKU Activation Constraints <a href="#catalog-and-sku-activation-constraints" id="catalog-and-sku-activation-constraints"></a>
+### Catalog and SKU Structure Can Fail Without Looking Empty <a href="#catalog-and-sku-structure-can-fail-without-looking-empty" id="catalog-and-sku-structure-can-fail-without-looking-empty"></a>
 
-VTEX catalog quality depends on how products, SKUs, categories, brands, specifications, images, and activation requirements work together. A product may exist in VTEX but still be incomplete, inactive, hard to find, or commercially wrong.
+The most common VTEX catalog risk is a false completeness signal. Products may migrate, categories may exist, and SKUs may appear, but shoppers or staff may still face wrong choices, inactive items, missing specifications, inaccurate images, broken discoverability, or incomplete purchasing paths.
 
-| Constraint                                                                            | Migration risk                                                                                                   | Prevention focus                                                                                              |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Products require usable SKU relationships.                                            | Product pages may display incomplete options, inactive SKUs, wrong SKU images, or unavailable purchasable items. | Test representative products with simple SKUs, multiple SKUs, image variation, and stock-sensitive choices.   |
-| SKU activation depends on required catalog information.                               | Migrated SKUs may exist but not be available for sale.                                                           | Confirm required specifications, images, prices, inventory, and activation conditions during Demo Migration.  |
-| Source variants may not equal VTEX SKUs.                                              | Product options may be over-split into too many SKUs or flattened into unusable product text.                    | Classify each option by stock, price, fulfillment, display, and customer-input meaning.                       |
-| Categories and brands shape discovery.                                                | Product organization may migrate as record structure but fail as shopper navigation.                             | Review department/category/subcategory placement, brand values, and category-specific specification behavior. |
-| Attachments, assembly options, services, kits, and collections carry special meaning. | Customization, bundles, paid services, and merchandising groups may be lost or misrepresented.                   | Separate ordinary variant mapping from advanced catalog behavior and Custom Service candidates.               |
+This risk is highest when the source store uses configurable products, variant-heavy products, bundles, product builders, marketplace listings, subscription options, custom add-ons, or app-managed attributes. Those structures should not be forced into VTEX as ordinary catalog fields without deciding what each choice controls.
 
-Catalog risk is highest when the source store uses custom product builders, bundles, add-on choices, subscription logic, store-specific modifiers, marketplace offer data, or product fields originally created for a different platform architecture. These areas should not be treated as routine product migration until their VTEX meaning is clear.
+| Source assumption                                    | VTEX constraint                                                                  | Migration consequence                                                      | Mitigation cue                                                                 | Validation signal                                               |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| Every source option should become a SKU.             | SKUs should represent sellable units or versions.                                | Catalog becomes over-split, hard to manage, or commercially confusing.     | Classify each option by price, stock, logistics, display, and customer choice. | Representative products show correct purchasable SKU behavior.  |
+| Product attributes can move as plain text.           | Specifications may support filtering, detail, comparison, and category behavior. | Search and discovery weaken even though product pages contain information. | Review specification purpose before mapping.                                   | Filter and product-detail examples match business expectations. |
+| Category paths are only admin organization.          | Categories may affect storefront navigation, search, and SEO continuity.         | Catalog grouping migrates but customer discovery remains incomplete.       | Separate catalog category, navigation, and URL/redirect decisions.             | Priority category journeys can be tested after migration.       |
+| Bundles and configurable kits are ordinary products. | Component logic may depend on pricing, inventory, or storefront implementation.  | Bundles appear but do not behave as expected.                              | Escalate bundle-like behavior to setup, integration, or Custom Service review. | Bundle examples have an accepted target handling path.          |
 
-### Specification, Attribute, and Category-Linked Risk <a href="#specification-attribute-and-category-linked-risk" id="specification-attribute-and-category-linked-risk"></a>
+Catalog risk should be reviewed before Article 6 service-path decisions are accepted. Otherwise the chosen service path may be too light for the actual product structure.
 
-Specifications are one of the most important VTEX migration constraints because they influence filtering, product details, SKU differences, category behavior, and storefront experience. Source attributes should not be moved mechanically into descriptions or generic custom fields when they support discovery or operations.
+### Specification and Search Risk Can Damage Discovery <a href="#specification-and-search-risk-can-damage-discovery" id="specification-and-search-risk-can-damage-discovery"></a>
 
-| Source pattern                                                 | VTEX risk                                                                            | Better review question                                                                                                |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Large attribute sets with inconsistent values.                 | Filters become noisy, duplicated, incomplete, or difficult to maintain.              | Which values should be normalized, mapped, excluded, or handled as plain product detail?                              |
-| Attributes used differently across categories.                 | A specification may be too broad, too narrow, or applied to the wrong product group. | Should the value be category-specific, SKU-specific, product-level, or excluded?                                      |
-| Variant-defining attributes mixed with descriptive attributes. | Shoppers may not see correct SKU choices or comparison values.                       | Does the value define a purchasable variation or simply describe the product?                                         |
-| Custom operational attributes.                                 | Fulfillment, reporting, or integration values may disappear from usable workflows.   | Does the value need storefront visibility, back-office visibility, external synchronization, or Master Data handling? |
-| Inherited or source-specific metadata.                         | Obsolete platform fields may clutter VTEX without business value.                    | Which fields still support commercial, operational, or compliance decisions?                                          |
+Specifications are a high-impact VTEX risk area because they can shape filtering, search, category browsing, comparison, and product-detail quality. Source attributes are often inconsistent: duplicate values, mixed units, old labels, app-generated fields, category-specific attributes used globally, or descriptive values mixed with variant-defining values.
 
-The risk is not only field loss. The risk is wrong field purpose. A successful VTEX migration should preserve structured values where they matter and avoid carrying unnecessary source-platform noise into the new catalog.
+If those values are mapped mechanically, VTEX can inherit a messy catalog. If they are dropped too aggressively, shoppers may lose search and filter paths that drive conversion. The migration plan should distinguish values that support customer discovery from values that support operations, compliance, integrations, or historical reference.
 
-### Pricing, Promotion, Trade Policy, and Channel Risk <a href="#pricing-promotion-trade-policy-and-channel-risk" id="pricing-promotion-trade-policy-and-channel-risk"></a>
+| Warning sign                                                    | Why it matters                                                | Prevention                                                                        |
+| --------------------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Many near-duplicate attribute values exist in the source store. | Filters can become noisy or misleading.                       | Normalize or exclude low-value values before accepting mapping.                   |
+| Category-specific values are used across unrelated products.    | Specifications may appear in the wrong browsing context.      | Review representative categories separately.                                      |
+| Variant-defining and descriptive fields are mixed.              | SKU selection and product information may blur.               | Decide whether the value defines a purchasable version or describes the product.  |
+| Search behavior depends on tags or app fields.                  | Product discovery may not survive ordinary catalog migration. | Identify search-critical fields before scope approval.                            |
+| Operational fields are visible to shoppers in the source store. | Target storefront may inherit clutter.                        | Define which fields belong to storefront, back office, integration, or exclusion. |
 
-VTEX commercial behavior may depend on price tables, promotions, coupons, trade policies, sales channels, B2B/B2C context, marketplace rules, and external pricing authority. A default product price is only one part of the risk picture.
+The pass condition is not that every source attribute appears in VTEX. The pass condition is that product discovery and product understanding remain useful without carrying unnecessary source-platform noise.
 
-| Commercial area                   | Common risk                                                                        | Prevention focus                                                                                       |
-| --------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Base SKU price                    | Price appears correct in one context but not in another.                           | Validate representative SKUs across the expected sales contexts.                                       |
-| Price tables and fixed prices     | Customer-specific or channel-specific values are flattened into a single price.    | Confirm whether differentiated pricing should migrate, be configured, or remain external-system owned. |
-| Promotions and coupons            | Historical rules are mistaken for launch-ready rules, or active rules are omitted. | Decide which rules must exist after launch and which only explain past order history.                  |
-| Trade policies and sales channels | Products are available, unavailable, or priced incorrectly by channel.             | Test the same SKU under the channels, regions, stores, or business contexts that matter.               |
-| Marketplace pricing               | Seller, offer, and channel conditions are not represented.                         | Clarify whether marketplace data is migrated, rebuilt, integrated, or excluded.                        |
+### Commercial Logic Risk Sits Outside Simple Price Migration <a href="#commercial-logic-risk-sits-outside-simple-price-migration" id="commercial-logic-risk-sits-outside-simple-price-migration"></a>
 
-Pricing and trade-policy risk should be reviewed with business examples. A clean migration of default prices does not prove that B2B pricing, marketplace selling, promotional behavior, sales-channel availability, or ERP-owned pricing will work correctly.
+VTEX commercial behavior may involve base SKU prices, price tables, sales-channel conditions, promotions, coupons, B2B rules, marketplace seller prices, and external pricing systems. A source platform may store those rules in product fields, customer groups, catalogs, scripts, apps, modules, ERP feeds, or marketplace integrations. Treating them as simple product data creates risk.
 
-### Marketplace, Seller, OMS, and Logistics Risk <a href="#marketplace-seller-oms-and-logistics-risk" id="marketplace-seller-oms-and-logistics-risk"></a>
+The merchant should separate four questions: what prices should appear at launch, what historical price data must remain readable, what commercial rules must be configured in VTEX, and what values are owned by external systems. Without that separation, a migrated price can look correct in a sample while failing in a channel, region, customer segment, or marketplace scenario.
 
-VTEX is often used for marketplace, seller, order, fulfillment, and logistics operations. These areas create risk because they connect historical data, operational configuration, seller relationships, shipping behavior, and external systems.
+| Commercial risk                                            | Example                                                       | Safer handling                                                               |
+| ---------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Default price hides channel-specific pricing.              | One SKU has different B2B, marketplace, or regional prices.   | Test multiple commercial contexts, not only the base SKU price.              |
+| Promotion history is confused with active promotion setup. | Old coupon records exist but launch rules are not configured. | Separate historical order context from active promotion behavior.            |
+| External pricing system remains the system of record.      | ERP overwrites launch prices after go-live.                   | Define ownership and synchronization timing.                                 |
+| Seller price is treated as product price.                  | Marketplace offer logic is flattened.                         | Identify seller-owned prices and marketplace responsibilities.               |
+| Tax or payment assumptions are inferred from old orders.   | Live checkout behaves differently from history.               | Configure and test VTEX-side tax, payment, and checkout behavior separately. |
 
-| Operating area                    | What can go wrong                                                                                                                             | How to reduce risk                                                                                                     |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Marketplace and seller context    | Seller ownership, offer relationships, SKU matching, commission meaning, or channel context may be flattened into generic product/order data. | Identify which marketplace records must remain meaningful and which must be rebuilt or integrated.                     |
-| OMS order history                 | Historical orders may lose payment, fulfillment, delivery, seller, status, or invoice context.                                                | Validate representative orders from different payment, shipping, fulfillment, cancellation, and marketplace scenarios. |
-| Logistics and delivery context    | Shipping methods, warehouse references, pickup/delivery context, or fulfillment rules may not translate directly.                             | Separate historical order readability from live logistics setup for new orders.                                        |
-| External ERP/WMS/OMS dependencies | The migration may move data that an external system should own after launch.                                                                  | Define system of record for products, prices, inventory, customers, orders, and fulfillment updates.                   |
-| Return or post-order workflows    | Past statuses may not align with target operational workflows.                                                                                | Decide whether historical values are preserved for reference or mapped into operational statuses.                      |
+Commercial risk should be reviewed with real business examples. The most useful samples are rarely the simplest SKUs; they are products with differentiated pricing, active promotions, channel rules, seller context, or external-system ownership.
 
-The key constraint is ownership. VTEX may display, process, synchronize, or reference operational data, but not every source-store value should become a migrated VTEX record. Some values should be retained for history, some should be configured in VTEX, and some should remain with connected systems.
+### Marketplace, Seller, and Operational Ownership Risk <a href="#marketplace-seller-and-operational-ownership-risk" id="marketplace-seller-and-operational-ownership-risk"></a>
 
-### Master Data, Checkout, Apps, and Integration Risk <a href="#master-data-checkout-apps-and-integration-risk" id="master-data-checkout-apps-and-integration-risk"></a>
+VTEX marketplace and seller-related data can create serious migration ambiguity. A source marketplace may have seller ownership, commissions, offer relationships, product matching, inventory ownership, seller fulfillment, channel pricing, split orders, or marketplace governance rules. Some of this information may be historical context. Some may need active configuration. Some may belong to external marketplace, ERP, OMS, or middleware systems.
 
-Master Data, custom checkout fields, apps, APIs, and integrations create some of the most easily underestimated VTEX migration risks. They often hold business-critical information that does not appear in standard product, customer, order, CMS Page, or Blog Post exports.
+The risk appears when seller context is flattened into product or order fields. A migrated product may lose who owns the offer. A historical order may lose seller or fulfillment meaning. A marketplace catalog may migrate as products without preserving relationships needed for operations.
 
-| Risk area                                 | Why it is risky                                                                                    | Required classification                                                                      |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Master Data records                       | Custom records may support forms, customer context, business workflows, or integration references. | Determine whether the data migrates, is rebuilt, stays external, or requires Custom Service. |
-| Custom checkout fields                    | Values may affect fulfillment, compliance, personalization, or reporting.                          | Decide whether the field must display, store, export, synchronize, or trigger behavior.      |
-| App-owned data                            | App settings and records may not be part of standard migration scope.                              | Identify whether the app data is migratable, reconfigured, excluded, or custom.              |
-| API and middleware references             | External IDs may connect products, customers, orders, inventory, pricing, or fulfillment.          | Confirm which identifiers must be preserved for post-launch synchronization.                 |
-| Payment, fraud, tax, or analytics context | Historical labels may be confused with live provider configuration.                                | Separate order-history context from target-side provider setup.                              |
+| Marketplace area               | What goes wrong                                                  | Risk control                                                                    |
+| ------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Seller records                 | Seller identity is treated as a product label.                   | Decide whether seller context is historical, operational, or integration-owned. |
+| Offers                         | Offer relationships are flattened into catalog data.             | Review product-to-offer and seller-to-SKU examples.                             |
+| Marketplace orders             | Split fulfillment, seller status, or seller references are lost. | Validate marketplace order examples separately from ordinary orders.            |
+| Commission or governance logic | Business rules are assumed to migrate as records.                | Treat rules as setup, integration, or Custom Service candidates.                |
+| External marketplace IDs       | Reconciliation loses continuity.                                 | Preserve only identifiers needed for reporting, support, or integrations.       |
 
-This area often determines whether Standard Service is enough, Add-ons can support the requirement, or Custom Service is needed. The decision should be based on business-critical behavior, not simply on whether a custom field exists.
+Marketplace risk should be scoped before migration execution. If seller or offer behavior is launch-critical, it should not be hidden inside ordinary catalog or order migration assumptions.
 
-### Storefront, Content, Search, and URL Risk <a href="#storefront-content-search-and-url-risk" id="storefront-content-search-and-url-risk"></a>
+### Checkout, Orders, OMS, Logistics, and Payments Need Separate Validation Paths <a href="#checkout-orders-oms-logistics-and-payments-need-separate-validation-paths" id="checkout-orders-oms-logistics-and-payments-need-separate-validation-paths"></a>
 
-VTEX migration often happens alongside storefront modernization. That can improve the launch outcome, but it also increases risk when source content, navigation, search behavior, or URL structure is assumed to transfer automatically.
+Order history and operational readiness are different VTEX concerns. Migrated orders can help staff understand past purchases, refunds, cancellations, taxes, payment references, fulfillment status, customer links, and seller context. Live VTEX operation depends on checkout behavior, payment providers, fraud controls, logistics setup, warehouses, pickup points, shipping rates, inventory updates, and order orchestration.
 
-| Storefront area      | Migration risk                                                                                                  | Prevention focus                                                                              |
-| -------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| CMS Pages            | Source layouts, page-builder structures, scripts, or embedded widgets may not become equivalent target content. | Decide which pages are migrated as content, rebuilt in the storefront, or excluded.           |
-| Blog Posts           | Editorial content may lose metadata, authorship, tags, media, or URL structure.                                 | Confirm Blog Posts scope, formatting expectations, and Entity Points impact where applicable. |
-| Navigation and menus | Source navigation may not match VTEX category, collection, search, or storefront architecture.                  | Treat navigation as target experience design when needed, not only data transfer.             |
-| Search and filters   | Product discovery can weaken if specifications and category logic are not configured well.                      | Test search, filtering, sorting, and product listing pages with difficult catalog examples.   |
-| URLs and redirects   | SEO-sensitive product, category, CMS Page, Blog Post, campaign, or landing-page URLs may break.                 | Prioritize high-value URLs and verify redirect destinations, not just redirect existence.     |
+A common risk is approving migrated order history as if it proves launch readiness. Historical data can be readable while new checkout flows are still untested. A migrated fulfillment status can preserve support context while live logistics rules remain incomplete.
 
-The risk is highest when the merchant expects a visual clone of the source storefront. Migration can preserve data, but target storefront behavior, layout, search experience, merchandising modules, and interactive components may require separate implementation work.
+| Area                 | Migration risk                                                             | Validation direction                                                                          |
+| -------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Checkout fields      | Custom values may be missing, misplaced, or unsupported.                   | Decide whether each field belongs to history, checkout setup, Master Data, or Custom Service. |
+| Payment references   | Historical labels are mistaken for live payment configuration.             | Treat old payments as context and test live payment providers separately.                     |
+| Fulfillment status   | Staff may misread past status after status mapping.                        | Validate completed, cancelled, refunded, and partially fulfilled order samples.               |
+| Logistics references | Warehouse, carrier, pickup, or delivery meaning may not transfer directly. | Separate historical readability from VTEX logistics setup.                                    |
+| OMS context          | Orders appear but operational ownership is unclear.                        | Confirm which data supports lookup, reporting, and post-launch workflows.                     |
 
-### Additional Migration Options and Follow-Up Risk <a href="#additional-migration-options-and-follow-up-risk" id="additional-migration-options-and-follow-up-risk"></a>
+Order and logistics risk should be handled with sample-based review. Use ordinary orders, marketplace orders, cancelled orders, refunded orders, multi-item orders, and fulfillment-sensitive orders to prove that the migrated history remains useful.
 
-Additional Migration Options can be useful when launch timing requires later migration activity. In VTEX, follow-up activity should not be treated as a simple rerun when the catalog, pricing, marketplace, OMS, Master Data, or storefront structures changed after the initial migration review.
+### Master Data and Custom Records Can Change Scope Late <a href="#master-data-and-custom-records-can-change-scope-late" id="master-data-and-custom-records-can-change-scope-late"></a>
 
-Follow-up migration risk is higher when new products introduce new specifications, new SKUs rely on different activation requirements, new pricing rules depend on trade policies, new marketplace records involve seller context, or new custom checkout/Master Data values enter the source store after Demo Migration. In those cases, the follow-up action should include renewed review of the changed structures, not only record transfer.
+Master Data and custom records are often where a VTEX migration changes from ordinary scope to specialized scope. The source store may include custom customer fields, CRM records, sales-team notes, B2B identifiers, form submissions, loyalty values, compliance fields, external IDs, or workflow records. Some may fit supported migration behavior. Some may need Add-ons. Some may require Custom Service. Some may be better handled by external systems.
 
-New Product, Customer, Order, and Blog Posts records consume Entity Points when they are migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when they are migrated for the first time, including when the customer performs a new migration for the same migration path.
+Late discovery is the main risk. If custom records are identified only after Demo Migration, the merchant may have already chosen an approach that cannot preserve the required data meaning. The plan should identify custom-data ownership before scope is locked.
 
-### Add-ons, Custom Service, and Constraint Ownership <a href="#add-ons-custom-service-and-constraint-ownership" id="add-ons-custom-service-and-constraint-ownership"></a>
+| Custom-data pattern                  | Scope risk                                                           | Handling path                                                                          |
+| ------------------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Master Data record used for workflow | Standard migration may not include the behavior or record structure. | Custom Service or VTEX-side rebuild may be needed.                                     |
+| External customer or product ID      | Downstream systems may fail to match records.                        | Preserve through supported mapping, Add-ons, or Custom Service depending on structure. |
+| Custom checkout field                | Compliance, fulfillment, or personalization value may be lost.       | Classify by display, storage, export, and workflow need.                               |
+| App or middleware record             | The data may not belong to standard commerce records.                | Review app ownership and supported migration behavior.                                 |
+| Custom Platform source field         | Structure may need bespoke interpretation.                           | Custom Service review is usually needed.                                               |
 
-Add-ons and Custom Service should be separated during VTEX risk planning. Add-ons can support eligible mapping, filtering, configuration, or value-handling requirements within available service capability. Custom Service is required when the migration depends on unsupported data structures, Custom Platform interpretation, source-specific logic, custom APIs, app-owned records, marketplace behavior, or Master Data logic that cannot be handled through standard mapping.
+The important boundary is clear: Add-ons help when the requirement remains inside supported filtering, mapping, or configuration. Custom Service is for unsupported records, custom data structures, bespoke transformation, external-system complexity, Custom Platform handling, or custom migration logic adjustment.
 
-| Constraint type            | Usually standard scope when                                                       | Add-ons may help when                                                               | Custom Service is needed when                                                                                     |
-| -------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Catalog and SKU data       | Products, SKUs, categories, brands, images, and basic specifications map clearly. | Field transformation, filtering, or supported configuration adjustments are needed. | Product builders, custom bundles, app-owned catalog records, or unsupported SKU logic must be interpreted.        |
-| Pricing and channel data   | Default prices and basic channel context are enough.                              | Selective price, rule, or value adjustments fit available capability.               | Pricing depends on custom code, external authority, marketplace conditions, or unsupported account/channel logic. |
-| Customer and order history | Standard customer and order fields preserve useful history.                       | Select fields or values need supported mapping.                                     | Master Data, B2B, seller, fulfillment, invoice, or integration meaning must be preserved beyond ordinary history. |
-| Storefront and content     | CMS Pages, Blog Posts, and priority URLs have clear target representation.        | Metadata, filtering, or supported content adjustments are needed.                   | Layouts, components, route behavior, search logic, or storefront apps must be rebuilt or custom handled.          |
-| Integration context        | External IDs are clear and supported.                                             | Data cleanup or selected mapping support is enough.                                 | Middleware, API workflows, app-owned data, or synchronization rules require custom interpretation.                |
+### Storefront, CMS, Search, and URL Risk Should Not Be Hidden Inside Catalog Migration <a href="#storefront-cms-search-and-url-risk-should-not-be-hidden-inside-catalog-migration" id="storefront-cms-search-and-url-risk-should-not-be-hidden-inside-catalog-migration"></a>
 
-A clear ownership decision prevents scope confusion. Some constraints belong to migration mapping, some belong to Add-ons, some belong to Custom Service, and some belong to target setup or external-system implementation outside ordinary migration scope.
+VTEX can support headless and implementation-specific storefront approaches. That means storefront readiness should not be assumed from catalog migration. Product data can migrate while customer-facing pages, search behavior, content routing, redirects, CMS components, menu behavior, and SEO continuity still need implementation and validation.
 
-### VTEX Risk Review Matrix <a href="#vtex-risk-review-matrix" id="vtex-risk-review-matrix"></a>
+This risk is especially high when the source store uses page-builder content, custom category landing pages, blog content, app-managed reviews, storefront-specific merchandising, or custom search rules. A product may be migrated correctly in the catalog but remain hard to find or poorly presented in the target storefront.
 
-A VTEX migration should include risk review across all major operating layers, not only catalog records. The matrix below helps decide where the project needs deeper planning before Full Migration.
+| Storefront risk              | What can go wrong                                                           | Prevention focus                                                                              |
+| ---------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Product pages                | Data exists but display is incomplete or implementation-dependent.          | Validate representative product pages, images, specifications, SKU choices, and availability. |
+| Category or collection pages | Source navigation does not translate into VTEX browsing paths.              | Separate catalog category data from storefront navigation and SEO routing.                    |
+| CMS Pages and Blog Posts     | Content value is lost because content is treated as ordinary commerce data. | Decide what migrates, what is rebuilt, what redirects, and what is excluded.                  |
+| Search and filters           | Discovery weakens despite catalog transfer.                                 | Validate specification-driven filters and priority search journeys.                           |
+| URL continuity               | Existing traffic lands incorrectly after launch.                            | Prepare redirect and priority URL decisions before go-live.                                   |
 
-| Review area                       | Low-risk signal                                                 | Higher-risk signal                                                                                                | Review priority                                                       |
-| --------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Product/SKU model                 | Simple catalog with clear SKU variations and standard fields.   | Configurators, bundles, services, attachments, assembly options, kits, or inconsistent variants.                  | Validate difficult product samples before scope approval.             |
-| Specifications and discovery      | Clean attributes mapped to known product/SKU purposes.          | Noisy attributes, category-specific values, duplicate filters, or operational metadata mixed with display fields. | Normalize and classify fields before Demo Migration.                  |
-| Pricing and trade policies        | One main pricing context with limited rules.                    | Multiple trade policies, B2B pricing, promotions, seller conditions, or external price authority.                 | Validate pricing by sales context.                                    |
-| Marketplace and seller operations | No marketplace/seller dependency or only historical references. | Seller ownership, offer matching, commission, marketplace orders, or multichannel synchronization.                | Separate historical preservation from live marketplace setup.         |
-| OMS and logistics                 | Orders only need readable historical context.                   | Fulfillment status, invoice, delivery, pickup, warehouse, or external OMS/WMS references matter.                  | Validate representative order histories and external ownership.       |
-| Master Data and custom checkout   | No business-critical custom records.                            | Custom forms, app-owned data, compliance fields, or integration keys are required.                                | Classify for Add-ons, Custom Service, or exclusion.                   |
-| Storefront and URLs               | Content has clear target pages and limited SEO sensitivity.     | Source theme clone expectations, complex landing pages, search behavior, or high-value URL dependencies.          | Separate data migration from storefront implementation.               |
-| Follow-up migration handling      | New records are structurally similar to tested samples.         | New records introduce untested specifications, pricing, marketplace, Master Data, or storefront changes.          | Revalidate changed structures before follow-up migration is accepted. |
+Storefront risk belongs in migration planning because merchants often judge launch quality through the customer-facing experience. The migration team should avoid claiming storefront readiness until both migrated data and implementation-dependent presentation are reviewed.
+
+### Risk Review Should End With Ownership, Not Only Severity <a href="#risk-review-should-end-with-ownership-not-only-severity" id="risk-review-should-end-with-ownership-not-only-severity"></a>
+
+VTEX risk classification should identify who owns each issue. Some findings are migration corrections. Some are VTEX-side configuration. Some are storefront implementation. Some belong to integrations. Some require Add-ons. Some require Custom Service. Some are accepted differences because the source behavior should not be recreated.
+
+A risk review that only says “high,” “medium,” or “low” is not enough. The action path matters more than the label.
+
+| Finding type                                                                                 | Likely owner or action path                                      |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Supported field mapped incorrectly                                                           | Migration correction or Add-on adjustment.                       |
+| Supported records need filtering or mapping control                                          | Add-ons where the requirement remains within supported behavior. |
+| Unsupported custom records, Master Data structures, external IDs, or bespoke transformations | Custom Service review.                                           |
+| Checkout, payment, logistics, channel, or promotion setup                                    | VTEX-side configuration and validation.                          |
+| Headless storefront display, routing, content rendering, or CMS components                   | Implementation team or storefront setup.                         |
+| External ERP, CRM, PIM, WMS, OMS, or marketplace system ownership                            | Integration owner and data-governance review.                    |
+
+This ownership view prevents a useful risk review from turning into a vague warning document. A risk is controlled only when the merchant knows what must be migrated, configured, rebuilt, integrated, escalated, or accepted.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VTEX constraints and risks come from platform structure. Products, SKUs, specifications, pricing, promotions, trade policies, marketplace records, OMS history, logistics context, Master Data, apps, APIs, storefront content, URLs, and external systems can all affect whether migrated data is usable after launch.
+VTEX migration constraints come from the relationships between catalog, SKUs, specifications, pricing, sales channels, marketplace context, checkout, orders, logistics, Master Data, storefront implementation, and external systems. The most serious risks occur when source-store structures are transferred as records without deciding what they should do inside VTEX.
 
-A strong VTEX migration plan identifies where data can move through standard mapping, where Add-ons are appropriate, where Custom Service is needed, and where target-side implementation or external-system setup should be handled separately. The highest-risk samples should be tested early: complex products, specification-heavy categories, channel-specific pricing, marketplace orders, B2B/customer context, Master Data records, custom checkout fields, integration identifiers, CMS Pages, Blog Posts, and SEO-sensitive URLs.
+A strong VTEX migration plan controls risk through representative samples, purpose-based mapping, commercial-context review, custom-data classification, storefront-readiness separation, and ownership assignment. The migration should not be approved only because records are present. It should be approved when the target data supports the operating model the merchant expects to run after launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why can a VTEX migration be risky even when products and orders are transferred?**
+**Why can VTEX migration risk remain hidden after records appear in the target store?**
 
-VTEX data must behave across Catalog, SKUs, specifications, trade policies, pricing, promotions, OMS, logistics, marketplace context, Master Data, apps, APIs, and storefront implementation. Products and orders may exist in the Target Platform but still be incomplete, inactive, incorrectly priced, hard to find, or weak as operational history.
+VTEX risk often sits in relationships between records and services. Products, SKUs, prices, specifications, orders, logistics, and storefront behavior may all depend on separate setup or integration decisions, so visible records do not automatically prove operational readiness.
 
-**What is the biggest catalog risk in a VTEX migration?**
+**What is the biggest catalog risk in VTEX migration?**
 
-The biggest catalog risk is misclassifying source product choices. A choice may need to become a SKU, specification, attachment, assembly option, service, kit, collection, app behavior, or custom logic. Incorrect classification can damage product availability, filtering, pricing, fulfillment, and shopper experience.
+The biggest catalog risk is treating source options, attributes, bundles, and custom product behavior as ordinary product fields. VTEX catalog planning should distinguish products, SKUs, specifications, prices, availability, and storefront behavior before accepting the migration result.
 
-**Are VTEX pricing and trade policy risks part of data migration or store configuration?**
+**Are VTEX pricing and promotion risks part of migration or setup?**
 
-They can involve both. Some values may be migrated, some may need supported mapping or Add-ons, and some may belong to target configuration or external pricing systems. The important step is to identify which system owns each commercial value after launch.
+They can involve both. Historical price and promotion data may be useful for order context, while active pricing, price tables, promotions, coupons, sales-channel rules, and external pricing ownership may require VTEX setup, integration, or custom handling.
 
-**When do VTEX custom fields or Master Data create Custom Service risk?**
+**When does Master Data create Custom Service risk?**
 
-Custom Service risk appears when custom fields, Master Data, app-owned records, API references, marketplace data, or checkout values carry business-critical behavior that cannot be preserved through standard migration capability or available Add-ons.
+Custom Service risk appears when Master Data or custom records must be transformed, preserved, synchronized, or used in ways beyond supported migration behavior. External identifiers, workflow records, custom checkout fields, and app-owned data should be reviewed early.
 
-**Should Additional Migration Options be used without rechecking VTEX risks?**
+**How should VTEX migration risks be assigned after review?**
 
-No. If later migration activity introduces new SKUs, specifications, pricing logic, marketplace records, Master Data values, custom checkout fields, or storefront-sensitive content, the changed structures should be reviewed before the follow-up action is treated as low risk.
+Each finding should be classified by action path: migration correction, Add-on adjustment, Custom Service review, VTEX-side configuration, storefront implementation, external integration, manual cleanup, or accepted limitation.

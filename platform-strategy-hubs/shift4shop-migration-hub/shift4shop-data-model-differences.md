@@ -1,170 +1,172 @@
 # Shift4Shop Data Model Differences
 
-A migration to Shift4Shop is not only a transfer of products, customers, orders, categories, and content into a hosted e-commerce platform. It is a translation of business meaning into the way Shift4Shop organizes catalog administration, storefront presentation, customer treatment, pricing context, marketing rules, shipping and payment-related workflows, SEO routes, integrations, and store-management responsibilities.
+A Shift4Shop migration should translate source data into the way Shift4Shop organizes products, storefront content, customers, orders, pricing, SEO routes, and business rules. The main challenge is not only whether records can be moved. The harder question is whether the migrated records still mean the same thing inside a hosted Shift4Shop store.
 
-This matters because data that looks familiar across platforms can behave differently after migration. A product option in the Source Platform may represent a customer-facing buying choice, a technical specification, a merchandising note, or a custom field that does not have the same native role in Shift4Shop. A customer group may be simple segmentation in one store but pricing, tax, wholesale, or B2B visibility logic in another. A content page may be ordinary informational copy, a legal policy page, a high-value search route, or part of a buyer journey that should not be treated as disposable content.
+Many source platforms store commercial meaning in different places. Product choices may live in attributes, variants, option sets, custom fields, app records, scripts, or theme-dependent layouts. Customer pricing may be controlled by groups, price levels, custom notes, ERP identifiers, coupon rules, or manual staff procedures. Storefront content may be attached to product pages, category pages, CMS Pages, Blog Posts, landing pages, menu structures, or page-builder blocks. A clean Shift4Shop migration depends on classifying those meanings before deciding how they should be represented.
 
-The purpose of data-model planning is to make the migrated Shift4Shop store understandable and usable, not merely populated. The result should prove that products can be managed, buyers can be interpreted, orders can be reviewed, storefront routes still make sense, and business logic has a clear place in the Target Platform.
+### How Shift4Shop Changes Data Interpretation <a href="#how-shift4shop-changes-data-interpretation" id="how-shift4shop-changes-data-interpretation"></a>
 
-### How Shift4Shop Changes Data Meaning <a href="#how-shift4shop-changes-data-meaning" id="how-shift4shop-changes-data-meaning"></a>
+Shift4Shop is a hosted commerce platform, so many future-store decisions are shaped by the target platform’s native product management, storefront administration, SEO tools, customer tools, promotional features, and integration options. Data that was flexible or developer-controlled in a source store may need to become more structured in Shift4Shop.
 
-Shift4Shop gives merchants a hosted commerce environment where many store functions are expected to live inside a single administrative structure. That can simplify future ownership, but it also means the migration has to decide how source-side data should become Shift4Shop-ready structure.
+That difference affects how migration records should be interpreted. A source field may look like a simple product attribute but actually control buying behavior. A customer note may look descriptive but represent wholesale approval. A category may look like a navigation label but carry SEO value. A historical order status may look like a normal order field but reflect a custom fulfillment workflow that no longer exists in the same form.
 
-| Source-side data question                                     | Shift4Shop migration meaning                                                                                                                    | What the migrated result should prove                                                                 |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Are products just records, or do they carry buying logic?     | Options, categories, prices, descriptions, images, inventory context, and product-page content must support how shoppers choose products.       | Representative products should be understandable, purchasable, and manageable in the Target Platform. |
-| Are customer groups ordinary labels or commercial rules?      | Groups may affect pricing, tax treatment, B2B access, marketing segmentation, or account review.                                                | Customer records should retain the context needed to support future buyer treatment.                  |
-| Are orders only historical records or operational references? | Order history may need payment, shipping, tax, status, fulfillment, and customer-service meaning.                                               | Staff should be able to interpret migrated orders without losing business context.                    |
-| Are URLs simple routes or high-value search assets?           | Product, category, CMS, and other important routes may affect SEO continuity and customer navigation.                                           | Important routes should be reviewed for redirect, preservation, or rebuild decisions.                 |
-| Does external software own part of the meaning?               | ERP, accounting, fulfillment, shipping, tax, marketplace, CRM, or API workflows may control outcomes that are not fully stored in the platform. | Connected-system responsibilities should be separated from data that can live natively in Shift4Shop. |
+| Source-store meaning         | Shift4Shop planning question                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Product attributes           | Are they descriptive details, selectable options, search/filter information, or operational references? |
+| Product choices              | Should they become options, Advanced Options, separate products, or rebuilt target-side configuration?  |
+| Categories                   | Do they support browsing, SEO, merchandising, internal organization, or outdated source structure?      |
+| Customer groups              | Do they only segment buyers, or do they control pricing, tax, access, and order behavior?               |
+| Discounts and quantity rules | Are they active selling rules, historical promotions, wholesale logic, or obsolete campaigns?           |
+| Content pages                | Do they support conversion, SEO, policy communication, product education, or only legacy navigation?    |
+| Integration fields           | Are they supported fields, external IDs, app-owned data, or Custom Service requirements?                |
 
-The strongest data model outcome is not the one that preserves every source-side shape exactly. It is the one that preserves the business meaning that still matters and gives that meaning a workable home in Shift4Shop.
+A data model review should therefore begin with business meaning. Once the meaning is clear, the migration path can decide whether standard migration behavior is enough, whether Add-ons should adjust supported filtering or mapping, or whether Custom Service is needed for unsupported records, app-owned data, external identifiers, or bespoke transformation.
 
-### Core Shift4Shop Structural Layers <a href="#core-shift4shop-structural-layers" id="core-shift4shop-structural-layers"></a>
+### Product Records, Options, and Advanced Options <a href="#product-records-options-and-advanced-options" id="product-records-options-and-advanced-options"></a>
 
-A Shift4Shop migration usually touches several structural layers. Each layer should be reviewed for what it means in the future store, not only for whether a corresponding record exists.
+Shift4Shop product data can include more than a product name, SKU, price, image, and description. Product options, variants, Advanced Options, option templates, product images, video, categories, inventory, product reviews, quantity discounts, and detailed content can all affect how the product works in the storefront. That makes product meaning one of the most important data-model areas to review before migration.
 
-#### Product and catalog structure <a href="#product-and-catalog-structure" id="product-and-catalog-structure"></a>
+Source platforms often use different structures for product choice. A Shopify source store may rely on variants and metafields. A WooCommerce source may rely on attributes, variations, plugins, and custom fields. A Magento or Adobe Commerce source may use product types, configurable products, attribute sets, customer groups, and custom modules. A legacy or Custom Platform source may store choices in a custom table or hard-coded form.
 
-The product and catalog layer includes products, categories, product names, SKUs, descriptions, images, prices, options, inventory context, reviews, specifications, downloadable files, related products, merchandising content, and the information customers use to decide what to buy.
+A Shift4Shop migration should decide what each product choice actually does.
 
-In Shift4Shop, a product should become a manageable selling unit. That is different from simply moving a product row into the Target Platform. A source product may contain option logic, custom attributes, compatibility notes, technical documents, wholesale-specific pricing, subscription-like context, or content blocks that shaped the buying decision. Those details need to be interpreted before they are treated as ordinary product text.
+| Product-choice pattern           | Better interpretation before migration                                                                              |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Size, color, material, pack size | Usually buying choices that may need option or variant-style handling.                                              |
+| Price-changing options           | May need Advanced Options or a target-side pricing decision.                                                        |
+| Inventory-changing options       | Should be checked carefully because stock meaning may attach to the option, not only the parent product.            |
+| Option templates                 | Useful when many products share the same buying choices and should remain easy to administer.                       |
+| Technical specifications         | Often better treated as product information, tabs, custom fields, or structured content rather than buying options. |
+| Bundled or grouped choices       | Need review because bundle behavior may not mean the same thing across platforms.                                   |
 
-A good data-model review separates product meaning into practical categories: what should become a customer-facing buying choice, what should become product information, what should support search and merchandising, what belongs in custom fields or content, and what should be retired because it is obsolete source clutter.
+The risk is flattening product complexity. If all source fields become static descriptions, buyers may lose the ability to choose the right version. If all descriptive fields become options, the target catalog may become harder to manage. A strong migration separates product information from product behavior.
 
-#### Category, navigation, and discovery meaning <a href="#category-navigation-and-discovery-meaning" id="category-navigation-and-discovery-meaning"></a>
+### Categories, SmartCategories, and Storefront Discovery <a href="#categories-smartcategories-and-storefront-discovery" id="categories-smartcategories-and-storefront-discovery"></a>
 
-Categories are not only containers. In many stores, they control how shoppers browse, how products are grouped, how internal teams manage merchandising, and how search engines understand the site. A Source Platform may use categories, collections, menus, landing pages, filters, tags, or custom navigation logic in ways that do not map one-for-one into Shift4Shop.
+Categories and subcategories in Shift4Shop can support browsing, storefront organization, SEO discovery, merchandising, and customer understanding. Source stores may use categories differently. Some platforms distinguish categories from collections, menus, tags, brands, filters, or dynamic product groups. Some legacy stores use categories for internal organization rather than customer-facing navigation.
 
-During migration, category data should be reviewed for its buyer-facing purpose. A category that receives search traffic, supports seasonal merchandising, or organizes technical product families has more value than an unused administrative grouping. A category may also depend on navigation labels, page content, meta information, internal linking, or product assignment rules.
+Shift4Shop also offers dynamic category-style behavior such as SmartCategories, which can group products by rules such as active discounts, release date, free shipping, or keyword-based criteria. That matters because not every source category should be treated as a static category in the target store. Some source groupings may be better rebuilt as dynamic merchandising logic, while others should remain stable navigation structures.
 
-The migration result should prove that important categories still help customers find products. It should not only prove that category names were created.
+| Source grouping              | Shift4Shop interpretation risk                                             |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| Main categories              | Usually important for navigation and SEO continuity.                       |
+| Deep subcategories           | May help browsing or may preserve obsolete source clutter.                 |
+| Tags or labels               | May not have the same role as categories and should be classified.         |
+| Sale or new-arrival groups   | May be better handled as dynamic or campaign-driven organization.          |
+| Brand/manufacturer groupings | May need mapping, metadata, filters, or navigation decisions.              |
+| SEO landing categories       | Should be reviewed as URL and content assets, not only product containers. |
 
-#### Product options, variants, specifications, and custom fields <a href="#product-options-variants-specifications-and-custom-fields" id="product-options-variants-specifications-and-custom-fields"></a>
+Category migration should preserve usable discovery, not only hierarchy. A target store can have the right number of categories and still be difficult to browse if source groupings are carried forward without cleanup.
 
-Product options are a common source of data-model mismatch. In the Source Platform, an option may represent a sellable variation, a display-only specification, a personalization instruction, a required checkout choice, a custom manufacturing detail, or an integration-owned value.
+### Customer Data, Groups, and Buyer Treatment <a href="#customer-data-groups-and-buyer-treatment" id="customer-data-groups-and-buyer-treatment"></a>
 
-That distinction matters in Shift4Shop because the destination structure should match how the customer buys and how the merchant manages the product after launch. If every source-side option is moved without interpretation, the product may look complete while still being difficult to manage, price, filter, or validate.
+Customer records in Shift4Shop can carry different meanings depending on the business model. For a simple retail store, a customer record may primarily support contact information, order history, account access, and marketing. For wholesale, B2B, reseller, or mixed B2C/B2B stores, customer data may also affect pricing, tax treatment, visibility, minimum order behavior, reorder patterns, and service expectations.
 
-For complex products, the merchant should identify examples that reveal the real structure. Good samples include products with multiple options, quantity breaks, technical specifications, compatibility notes, bundled or grouped behavior, image-dependent choices, and any product where the wrong interpretation would affect purchase accuracy.
+Customer groups should be reviewed by operational meaning. A group may represent a loyalty segment, a wholesale approval level, a tax-exempt buyer type, a distributor class, a region, a VIP buyer, or an internal reporting label. Those meanings are not interchangeable.
 
-#### Customer, group, and buyer context <a href="#customer-group-and-buyer-context" id="customer-group-and-buyer-context"></a>
+| Customer data area        | Migration meaning to confirm                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| Account details           | Whether names, emails, phone numbers, addresses, and account records support customer lookup.      |
+| Customer groups           | Whether groups control pricing, visibility, tax status, or only segmentation.                      |
+| Customer-specific pricing | Whether price treatment is customer-level, group-level, quantity-based, or external-system-driven. |
+| Tax-exempt status         | Whether exemption is supported by target configuration, customer data, or manual review.           |
+| Historical order links    | Whether customer records connect usefully to order history.                                        |
+| External IDs              | Whether ERP, CRM, accounting, or sales-rep identifiers must be preserved through Custom Service.   |
 
-Customer data can mean very different things depending on the store. For a simple retail store, customer migration may focus on profile identity, addresses, account status, and order association. For a wholesale, B2B, or hybrid B2B/B2C business, customer records may also carry pricing, tax, payment, access, approval, or relationship meaning.
+A migration can move customer names and emails correctly while still losing buyer treatment. That is why customer groups, pricing evidence, and representative order samples should be reviewed together.
 
-Shift4Shop can support customer and pricing contexts that are more meaningful than ordinary contact records. That creates a migration responsibility: buyer records should not be flattened if the future store depends on different treatment for wholesale customers, retail customers, repeat purchasers, tax-exempt buyers, dealers, members, or other customer groups.
+### Pricing, Discounts, Coupons, and Quantity Rules <a href="#pricing-discounts-coupons-and-quantity-rules" id="pricing-discounts-coupons-and-quantity-rules"></a>
 
-The data-model question is not simply whether customers moved. It is whether the migrated customer structure gives the merchant enough context to manage buyer relationships in the Target Platform. If pricing, access, or tax behavior depends on customer grouping, those groups must be reviewed as commercial structure rather than harmless labels.
+Pricing data is rarely just one price field. A Shift4Shop target store may need ordinary product pricing, sale pricing, quantity discounts, customer-group pricing, customer-specific price lists, coupons, gift certificates, tax rules, shipping-related charges, or promotion logic. Source stores may define these rules differently, especially when promotions come from apps, modules, custom code, or ERP systems.
 
-#### Pricing, promotion, tax, and rule meaning <a href="#pricing-promotion-tax-and-rule-meaning" id="pricing-promotion-tax-and-rule-meaning"></a>
+The data model question is whether each rule should migrate as a record, be rebuilt in Shift4Shop, be retired, or be handled by an integration. Active commercial rules should receive priority because they affect revenue immediately after launch. Historical or expired promotions may be useful for reference, but they should not be mixed with rules that must work in the new storefront.
 
-Pricing data can appear simple while hiding important business logic. A source store may use base prices, sale prices, customer-specific prices, quantity discounts, coupons, promotional rules, tax treatment, or manual account exceptions. Some of that information may live in the platform; some may come from an ERP, accounting system, tax service, spreadsheet, or custom code.
+| Rule type             | Review question                                                                   |
+| --------------------- | --------------------------------------------------------------------------------- |
+| Regular product price | Is it the active selling price or only a base price for later rules?              |
+| Sale price            | Is it active, scheduled, expired, customer-specific, or campaign-related?         |
+| Quantity discount     | Does it apply to all buyers, selected groups, B2B buyers, or product families?    |
+| Coupon                | Is the coupon active, limited, reusable, customer-specific, or historical?        |
+| Gift certificate      | Is it a product, payment-like credit, code record, or customer-service liability? |
+| External price list   | Is the source of truth inside the store, ERP, CRM, or another system?             |
 
-In a Shift4Shop migration, pricing and rule-related data should be interpreted by outcome. The merchant should know which prices should appear by default, which discounts or promotions are still active, which buyer groups receive different treatment, and which old source rules should not be carried into the future store.
+A pricing review should not aim to migrate every old promotion. It should preserve rules needed for launch and classify the rest as historical, retired, manually rebuilt, or outside the migration scope.
 
-This is also where standard data transfer can become misleading. A migrated price field may look correct on a product page, while the true commercial requirement depends on customer group, quantity, coupon eligibility, tax status, or payment context. Those requirements should be documented before they are treated as part of normal migrated data.
+### Orders, Statuses, and Operational History <a href="#orders-statuses-and-operational-history" id="orders-statuses-and-operational-history"></a>
 
-#### Order, payment, shipping, and fulfillment context <a href="#order-payment-shipping-and-fulfillment-context" id="order-payment-shipping-and-fulfillment-context"></a>
+Order data in Shift4Shop migration planning should be interpreted as operational history, not only as transaction rows. Orders may support customer service, finance review, refunds, reorders, B2B account support, warranty questions, and fulfillment reference. A source order can contain line items, taxes, discounts, shipping, payment references, status history, customer notes, staff notes, tracking numbers, external IDs, and integration-created fields.
 
-Orders are historical records, but they are rarely just history. They may support customer service, accounting review, refund lookup, reorder behavior, fulfillment investigation, warranty support, tax reporting, or staff decision-making after launch.
+The main data-model difference is that order history may not reproduce every source workflow. Some statuses may be platform-specific. Some payment details may only be historical context. Some fulfillment or refund information may need staff-readable preservation rather than live workflow recreation.
 
-When migrating into Shift4Shop, order history should be reviewed for the context the business still needs. Order items, customer association, billing and shipping addresses, payment status, shipping method, taxes, discounts, coupons, fulfillment status, and notes may all affect how staff understand past transactions.
+| Order component         | Migration interpretation                                                     |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| Order status            | Should be mapped to useful target status meaning, not copied blindly.        |
+| Payment references      | Should preserve historical context without implying live payment setup.      |
+| Refunds and adjustments | Need representative validation because exceptions often expose mapping gaps. |
+| Shipping and tracking   | Should remain readable for support and fulfillment history.                  |
+| Customer link           | Should connect orders to the right buyer when supported.                     |
+| External IDs            | May need Custom Service when outside-system reconciliation depends on them.  |
 
-The target outcome should be realistic. Some historical operational behavior may not be recreated as live workflow inside Shift4Shop. The important question is whether staff can still interpret migrated order history accurately enough for post-launch business use and whether current workflows are configured separately where needed.
+Order migration should be judged by staff usefulness. A technically imported order that cannot explain what happened, who bought it, how it was fulfilled, or how it connects to outside systems may not meet the business need.
 
-#### Storefront content, CMS pages, and SEO routes <a href="#storefront-content-cms-pages-and-seo-routes" id="storefront-content-cms-pages-and-seo-routes"></a>
+### SEO Routes, Extra Pages, Blog Posts, and Content Records <a href="#seo-routes-extra-pages-blog-posts-and-content-records" id="seo-routes-extra-pages-blog-posts-and-content-records"></a>
 
-Storefront content includes more than visible page text. CMS Pages, policy pages, buying guides, landing pages, blog-like content where applicable, category copy, product copy, meta data, image alt context, internal links, and important URL patterns may all contribute to search visibility and buyer trust.
+Storefront content is a major source of data-model mismatch. Shift4Shop can include product pages, category pages, Extra Pages, Blog Posts, SEO metadata, navigation structures, product reviews, product Q\&A, and other content-related records. Source stores may store similar information in CMS Pages, Blog Posts, page builders, apps, static files, theme sections, or custom templates.
 
-In migration planning, content should be classified by business value. A privacy policy page, high-ranking buying guide, major category landing page, and outdated announcement page should not be handled with the same priority. Some content should be preserved closely, some should be rewritten for Shift4Shop, and some should be retired.
+The migration plan should classify content by function. Some pages are essential for SEO continuity. Some help customers understand products. Some support policies, compliance, trust, or brand explanation. Some are obsolete and should not be recreated. Treating all content as equal creates unnecessary work; treating content as decorative creates launch risk.
 
-SEO route meaning is especially important when the Source Platform uses historical URL structures, custom slugs, or older route patterns. If those routes support search traffic or customer bookmarks, the migration should identify which URLs require preservation, redirects, or deliberate rebuild decisions.
+| Content record           | Planning question                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| Product URLs             | Which routes need preservation, redirects, or SEO review?                                        |
+| Category URLs            | Which categories carry search value or important navigation value?                               |
+| Extra Pages / CMS Pages  | Which pages support trust, policy, conversion, or customer education?                            |
+| Blog Posts               | Which posts carry organic traffic, internal links, or product discovery value?                   |
+| Product reviews and Q\&A | Which records support buyer confidence and product-page freshness?                               |
+| Embedded media           | Which files, scripts, forms, or layout elements need manual rebuilding or Custom Service review? |
 
-#### Theme, design, and presentation-dependent meaning <a href="#theme-design-and-presentation-dependent-meaning" id="theme-design-and-presentation-dependent-meaning"></a>
+Content migration should preserve useful storefront meaning. A page title and body text may migrate, but the result still needs review if the source page depended on custom layout, embedded forms, app widgets, or old routes.
 
-Some source data only makes sense because of how the old store displayed it. A product field may appear as a tab, badge, comparison block, specification table, quote prompt, compatibility notice, or shipping disclaimer because of theme logic or custom presentation.
+### Integrations, Custom Fields, and 3dcart-Era Records <a href="#integrations-custom-fields-and-3dcart-era-records" id="integrations-custom-fields-and-3dcart-era-records"></a>
 
-That presentation-dependent meaning does not automatically transfer as native Shift4Shop data. It should be reviewed as part of the future storefront experience. If the content is important to conversion, compliance, B2B ordering, or product understanding, the merchant should decide where that meaning belongs in the Target Platform.
+Shift4Shop can work with integrations and API-connected workflows, but integration-owned data should be handled carefully. Source stores may use ERP, CRM, accounting, shipping, fulfillment, tax, marketplace, review, email, analytics, or payment systems that create or modify records. Some fields may exist only for an outside system and may not have a native Shift4Shop destination.
 
-This distinction prevents a common data-model error: assuming that because a value exists in the source export, the migrated store will display and use it the same way. Data existence and storefront meaning are not the same thing.
+Older 3dcart-era records can also appear in exports, staff notes, admin references, integration labels, or historical documentation. Those references can be useful clues, but they should be interpreted against the current Shift4Shop target plan. A legacy label does not automatically prove current compatibility or migration scope.
 
-#### Integration and outside-system ownership <a href="#integration-and-outside-system-ownership" id="integration-and-outside-system-ownership"></a>
+| Data source                               | Handling path                                                                |
+| ----------------------------------------- | ---------------------------------------------------------------------------- |
+| Supported native field                    | Standard migration or supported mapping may be enough.                       |
+| Supported field needing changed placement | Add-ons may help when mapping or configuration is within supported behavior. |
+| App-owned or integration-owned data       | Custom Service or separate integration work may be needed.                   |
+| Custom fields and external IDs            | Custom Service review is appropriate when they must remain operational.      |
+| 3dcart-era labels                         | Use as source context, then confirm the actual field, record, or workflow.   |
+| Target-side integration setup             | Usually configuration and testing, not ordinary data migration.              |
 
-Many stores depend on systems outside the e-commerce platform. ERP, accounting, shipping, fulfillment, tax, CRM, marketplace, PIM, inventory, review, email, or API-driven workflows may create, update, enrich, or consume commerce data.
-
-A migration to Shift4Shop should identify which system owns each important data outcome. If the Source Platform displays inventory from an external system, the migration should not treat inventory as purely platform-owned data. If customer pricing comes from ERP logic, customer records in Shift4Shop may need to be understood in relation to that external source. If fulfillment status is updated by another system, order history and live operational workflows should be reviewed separately.
-
-Integration-owned meaning often affects migration scope. Some values can be migrated into Shift4Shop, some need reconnection after launch, and some require Custom Service review if the source behavior depends on custom fields, outside-system identifiers, third-party data, or custom migration logic adjustment.
-
-### How Source Platform Data May Translate Differently <a href="#how-source-platform-data-may-translate-differently" id="how-source-platform-data-may-translate-differently"></a>
-
-The same source data can translate into different Shift4Shop planning decisions depending on how the merchant uses it. The table below shows common interpretation differences.
-
-| Source Platform pattern                                          | Possible Shift4Shop interpretation                                        | Planning implication                                                                                           |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Product options used for size, color, material, or configuration | Customer-facing buying choices that should remain clear and purchasable   | Test products with representative option combinations, price differences, images, and inventory expectations.  |
-| Product attributes used for specifications or compatibility      | Product information, filters, descriptions, tabs, or custom-field context | Decide which attributes affect buying decisions and which are internal reference only.                         |
-| Customer groups used for wholesale or tax treatment              | Commercial buyer structure, not simple segmentation                       | Prepare customer-group examples and pricing/tax validation samples.                                            |
-| Categories used as SEO landing pages                             | Storefront discovery and route assets                                     | Identify high-value category URLs, metadata, content, and product assignment behavior.                         |
-| Coupons and discounts used for active promotions                 | Rule-driven commercial behavior                                           | Confirm which rules should continue, expire, simplify, or require manual configuration.                        |
-| Order notes used by staff for fulfillment or service             | Operational context attached to order history                             | Decide whether the notes must migrate as reviewable history, live workflow, or external-system context.        |
-| Custom fields used by apps, integrations, or staff               | Source-specific meaning that may not have a native target role            | Classify as native field, custom-field context, content, integration dependency, or Custom Service review.     |
-| Historical 3DCart labels in exports or records                   | Legacy source-context naming rather than current destination framing      | Check whether the record reflects old naming only or an older behavior assumption that affects interpretation. |
-
-This review prevents source-side labels from controlling the destination design. Shift4Shop should receive data in a way that supports the future business, not in a way that mechanically preserves every source-side habit.
-
-### Custom Platform Source Interpretation <a href="#custom-platform-source-interpretation" id="custom-platform-source-interpretation"></a>
-
-When the Source Platform is a Custom Platform, or when the source store is heavily modified, data-model review becomes more important. Custom sources often contain business meaning that ordinary exports do not explain. Product relationships, customer roles, special prices, fulfillment rules, external identifiers, approval steps, custom order states, or integration fields may be stored in ways that are specific to that business.
-
-A Custom Platform source case should not be treated as a simple field-matching exercise. The first task is to understand what the source data means. A field may look like a product attribute but actually drive pricing. A customer note may represent approval status. An order code may connect to warehouse routing. An external ID may be required by accounting or fulfillment.
-
-When that meaning affects the expected migration outcome, Custom Service review is the correct path. Custom Service can evaluate Custom Platform handling, custom fields, third-party data, outside-system identifiers, and custom migration logic adjustment. The goal is not to force all source behavior into standard fields, but to decide what should become native Shift4Shop data, what should be configured separately, what should be reconnected through systems, and what requires tailored handling.
-
-### What Migrated Data Must Prove After Translation <a href="#what-migrated-data-must-prove-after-translation" id="what-migrated-data-must-prove-after-translation"></a>
-
-After migration, Shift4Shop data should be reviewed by business proof, not only by record counts.
-
-| Data area                  | What the migrated result must prove                                                                                                      |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Products                   | Representative products are accurate, purchasable, understandable, and manageable inside Shift4Shop.                                     |
-| Categories and navigation  | Important product groupings, menus, and discovery paths still help shoppers find what they need.                                         |
-| Options and specifications | Buying choices, technical details, and custom product information have the right target meaning.                                         |
-| Customers and groups       | Buyer records retain the context needed for account review, pricing, tax, marketing, or B2B treatment.                                   |
-| Pricing and promotions     | Active prices, discounts, coupons, and buyer-specific rules are interpreted correctly or marked for configuration.                       |
-| Orders                     | Staff can review historical orders with the customer, product, payment, shipping, tax, discount, and fulfillment context they need.      |
-| Content and SEO routes     | High-value pages, product/category URLs, metadata, and internal links have preservation or redirect decisions.                           |
-| Integrations               | External ownership of inventory, pricing, fulfillment, tax, accounting, or API-driven workflows is clearly separated from migrated data. |
-| Custom-source meaning      | Custom fields, third-party values, and outside-system identifiers are classified before they affect launch readiness.                    |
-
-A successful Shift4Shop migration should leave the merchant with usable commerce structure, not only imported records. The Target Platform should make products easier to manage, customer meaning easier to understand, storefront continuity easier to protect, and operational dependencies easier to review.
+The safest approach is to identify the system of record for each important field. When data is only meaningful because an outside system uses it, migration planning should include that outside system, not only the Shift4Shop admin view.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shift4Shop data-model differences matter because migration changes how business meaning is organized inside the Target Platform. Products become sellable structures, categories become discovery paths, customers may carry pricing or B2B meaning, orders become historical and operational references, content affects buyer trust and SEO continuity, and integrations may own part of the business truth.
+Shift4Shop data model differences are most important where ordinary-looking records carry commercial meaning. Product options can control price and stock. Categories can support navigation and SEO. Customer groups can control buyer treatment. Promotions can affect revenue. Orders can support operational history. Content can preserve discovery and trust. Integrations can own fields that are not native store data.
 
-A strong migration plan identifies those meanings before execution. The more the source store depends on custom fields, buyer groups, pricing rules, content-rich product pages, integrations, or historical route structure, the more important it becomes to decide what each data layer should become in Shift4Shop.
+A strong Shift4Shop migration should therefore translate source records by function, not only by field name. The target result should preserve the meaning that helps buyers shop, staff manage the store, and the business continue operating after launch.
 
-Before running a Full Migration, use Demo Migration and Live Chat to review representative products, categories, customers, orders, content pages, routes, pricing examples, and integration-sensitive records. The right sample should prove how data behaves in Shift4Shop, not merely whether it appears there.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do product options matter so much in a Shift4Shop migration?**
 
-**Are Shift4Shop data model differences only about product data?**
+Product options can affect buying choices, price, inventory, fulfillment, and product-page clarity. They should be reviewed separately from descriptive specifications because not every source attribute should become a selectable option.
 
-No. Product structure is important, but data-model differences can also affect customers, customer groups, pricing context, orders, content, SEO routes, integrations, and custom fields. A strong review considers how each data type supports the future store.
+**Are Shift4Shop categories the same as source-store categories or collections?**
 
-**Why do customer groups need special attention in a Shift4Shop migration?**
+Not always. Source stores may use categories, collections, tags, menus, or dynamic groups differently. Shift4Shop category planning should preserve useful browsing and SEO meaning rather than mechanically copying every source grouping.
 
-Customer groups may affect more than segmentation. They can influence wholesale treatment, pricing, tax handling, marketing, or B2B access expectations. If those groups matter commercially, they should be reviewed as part of buyer structure, not as ordinary labels.
+**Should customer groups always migrate as-is?**
 
-**Do historical orders always behave the same way after migration?**
+No. Customer groups should be reviewed by purpose. A group used only for marketing segmentation is different from a group controlling wholesale pricing, tax exemption, visibility, or B2B ordering.
 
-No. Migrated orders can preserve useful history, but live operational workflows may depend on target configuration, payment setup, shipping setup, fulfillment processes, or external systems. Order review should confirm the business context staff need after launch.
+**Can historical orders recreate the original source workflow?**
 
-**What happens to custom fields from the Source Platform?**
+Historical orders should preserve useful support and operational context, but they do not automatically recreate old payment, fulfillment, refund, or integration workflows inside Shift4Shop.
 
-Custom fields should be classified before migration. Some may become native target data, some may become content or reference information, some may depend on integrations, and some may require Custom Service if they carry business meaning beyond standard migration capability.
+**When do custom fields require Custom Service?**
 
-**Should SEO URLs be reviewed as part of the data model?**
-
-Yes. Important product, category, CMS, and other storefront URLs may carry search value and customer-navigation value. URL patterns, metadata, page content, and redirect needs should be reviewed before launch.
+Custom Service should be considered when custom fields, app-owned data, external IDs, or integration-created records must remain operational and do not fit supported migration behavior.

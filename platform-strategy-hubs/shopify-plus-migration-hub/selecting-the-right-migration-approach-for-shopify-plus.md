@@ -1,173 +1,178 @@
 # Selecting the Right Migration Approach for Shopify Plus
 
-Choosing the right Shopify Plus migration approach means matching the Migration Service to the business structure that must work after the data moves. Shopify Plus projects often involve more than products, customers, orders, pages, and redirects. They may include companies, company locations, buyer permissions, catalogs, pricing access, B2B and direct-to-consumer coexistence, organization governance, multiple stores, markets, metafields, metaobjects, apps, integrations, and external-system identifiers.
+Selecting the right Shopify Plus migration approach means matching service responsibility to enterprise operating complexity. Shopify Plus belongs to the Shopify family, but the migration decision changes when the target environment includes organization-level management, expansion stores, B2B companies, Markets, localized content, custom apps, automation, and integrations with systems such as ERP, PIM, OMS, WMS, CRM, tax, shipping, loyalty, or subscription platforms.
 
-A lighter approach can be suitable when the future Shopify Plus model is already clear and the Source Platform data can move through supported structures with limited interpretation. A stronger approach is needed when B2B rules, catalog visibility, custom fields, app-owned records, integration keys, or multi-store governance must be interpreted before the result can be trusted. The right decision is not simply whether Shopify Plus is powerful enough. The decision is whether the selected service path gives the migration enough planning, execution responsibility, customization, and review discipline for the Target Platform outcome.
+The best approach is not automatically the most complex service path. It is the lightest path that can still protect the intended Shopify Plus outcome. Some Plus migrations can use Standard Service when data is supported and the customer can review results confidently. Others need Managed Service because execution, sequencing, or team coordination is risky. Add-ons can handle bounded supported adjustments. Custom Service is required when unsupported data, custom logic, external-system identifiers, or bespoke transformation affects the outcome.
 
-### Start with the Platform Migration Scope <a href="#start-with-the-platform-migration-scope" id="start-with-the-platform-migration-scope"></a>
+### Start With Enterprise Scope, Not Record Count <a href="#start-with-enterprise-scope-not-record-count" id="start-with-enterprise-scope-not-record-count"></a>
 
-Shopify Plus migration scope should start with the operating model that the business expects to run after migration. A store moving into Shopify Plus may need to preserve standard commerce records and enterprise structures at the same time. The scope review should separate what can move through standard supported handling, what needs closer managed coordination, what can be addressed with Add-ons, and what requires Custom Service.
+Record count is only one planning signal. A Shopify Plus migration with fewer records can still be complex if those records represent B2B companies, regional catalogs, product restrictions, multi-store content, ERP-controlled pricing, localized URLs, or custom data. A larger migration can remain straightforward when the source data fits supported Shopify structures and review ownership is clear.
 
-A useful Shopify Plus scope assessment should answer these questions before service selection:
+Begin by classifying the enterprise scope:
 
-| Scope question                                                                                                  | Why it affects the migration approach                                                                                              |
-| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Are B2B companies and company locations clearly defined?                                                        | Company structure affects buyer access, payment terms, tax context, catalog assignment, checkout behavior, and validation samples. |
-| Are catalogs, prices, visibility rules, quantity rules, and volume pricing documented?                          | Catalog-controlled access can turn a simple product migration into a commercial-rule migration.                                    |
-| Will B2B and direct-to-consumer activity share one store, separate stores, or a market-based structure?         | Store and market governance changes how records, URLs, content, customer accounts, and launch checks are planned.                  |
-| Do products rely on complex variants, metafields, metaobjects, category metafields, or app-controlled behavior? | These structures can require advanced mapping, data configuration, or custom interpretation.                                       |
-| Are ERP, CRM, subscription, fulfillment, wholesale, or reporting systems part of the record meaning?            | External identifiers and integration logic may require Custom Service if they must remain usable after migration.                  |
-| Can the internal team operate and validate the migration confidently?                                           | Limited review capacity can make Managed Service safer even when the data itself is not highly custom.                             |
+| Scope area                    | Approach question                                                                                             | Service-path implication                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Organization and stores       | Is the migration going into one store, multiple expansion stores, or separate B2B/D2C stores?                 | Multi-store scope often increases sequencing and validation needs even when records are supported. |
+| B2B                           | Do companies, buyers, catalogs, price lists, payment terms, or restricted products need to be represented?    | B2B structures can require careful mapping, Shopify setup, integrations, or Custom Service review. |
+| Markets and localization      | Are countries, currencies, domains, languages, and localized content part of launch?                          | International scope increases URL, content, pricing, and validation complexity.                    |
+| Product governance            | Are products controlled by PIM, ERP, merchandising rules, bundles, subscriptions, or custom fields?           | Supported data may fit Add-ons; app-owned or bespoke logic may require Custom Service.             |
+| Order and fulfillment context | Are historical orders needed for finance, support, B2B account management, or external-system reconciliation? | Readability and external references may affect scope.                                              |
+| Apps and integrations         | Which systems own business-critical data or workflows?                                                        | External-system ownership often determines whether standard migration is enough.                   |
 
-The approach should be chosen after the real business burden is visible. Shopify Plus can support enterprise migration outcomes, but it cannot automatically infer how a legacy customer group becomes a company, how a branch account becomes a company location, how source price lists should become catalogs, or how a custom field should support downstream operations.
+The migration approach should follow the hardest business-critical scope area. Shopify Plus planning fails when the easiest entity type controls the service decision while B2B, localization, or integration complexity is left for later.
 
 ### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-Standard Service may be enough when the Shopify Plus target model is already defined, the source data aligns with supported migration behavior, and the customer can actively operate, review, and validate the process. It is strongest when the migration is structurally clear rather than exploratory.
+Standard Service may be suitable when the selected entities are supported, the target Shopify Plus structure is already clear, and the customer can perform available migration actions and review results without intensive coordination.
 
-For Shopify Plus, Standard Service is usually strongest when:
+Standard Service is usually realistic when:
 
-* companies, company locations, buyer contacts, permissions, payment terms, and catalog assignments are simple or already mapped;
-* B2B catalog logic is limited, documented, and not dependent on hidden custom rules;
-* product variants, collections, customers, orders, CMS Pages, Blog Posts, and redirects can move without major transformation;
-* metafields, metaobjects, apps, or external IDs are either outside scope, already prepared, or not business-critical;
-* one store, one market structure, or a clearly defined set of stores is already confirmed;
-* Demo Migration samples show that representative records keep acceptable Shopify Plus meaning;
-* the customer has enough internal capacity to review buyer access, catalogs, checkout behavior, URLs, and operational samples.
+* the migration is focused on supported products, variants, collections, customers, orders, CMS Pages, Blog Posts, images, reviews, coupons, or other supported entities;
+* the target uses one store or a clearly scoped set of stores;
+* B2B structures are not central to the migration result or are being configured separately in Shopify Plus;
+* Markets, domains, localized content, and redirects are straightforward or handled outside migration scope;
+* app-owned data and custom fields are not business-critical migration requirements;
+* customer and order history is mainly needed for reference;
+* the customer can review Demo Migration and Full Migration results confidently;
+* no unsupported source structures or bespoke transformations control the launch outcome.
 
-Standard Service does not mean the migration is unmanaged by quality standards. It means the customer remains more hands-on in configuration decisions, data review, Demo Migration assessment, and final approval. For Shopify Plus, that requires a capable internal reviewer who understands B2B account logic, catalog assignments, product structure, and operational dependencies.
+Standard Service can still be used in a Shopify Plus environment. The Plus plan alone does not require a custom approach. The deciding factor is whether the required result stays within supported behavior and whether the customer can own execution and validation responsibility.
 
-A Shopify Plus project should not remain on a lighter approach only because the entity list looks manageable. A small number of records can still be complex if the records carry company hierarchy, custom pricing, external IDs, or app-dependent workflow meaning.
+### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
 
-### When Managed Service Is a Better Fit <a href="#when-managed-service-is-a-better-fit" id="when-managed-service-is-a-better-fit"></a>
+Managed Service may be safer when the migration remains within supported capability but the execution environment is too coordination-heavy for a customer-led path. Shopify Plus projects often involve multiple stakeholders: merchandising, localization, wholesale, operations, customer support, finance, SEO, IT, integration partners, and leadership. Even when data structures are supported, sequencing and approval can become the main risk.
 
-Managed Service is often the better fit when Shopify Plus is the right Target Platform but the customer needs Next-Cart to carry more migration execution and coordination responsibility. This is common when the business has many stakeholders, several data owners, multiple review cycles, or limited internal migration capacity.
+Managed Service is especially useful when:
 
-Managed Service is often appropriate when:
+| Managed Service signal     | Shopify Plus context                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Multi-store launch         | Data must be assigned, reviewed, or sequenced across several stores.                                  |
+| Complex catalog review     | Product, variant, collection, image, metafield, and status behavior needs structured sample approval. |
+| B2B/D2C mix                | Customer, company, catalog, pricing, and account context needs coordinated review.                    |
+| International rollout      | Markets, domains, redirects, languages, and localized content must be checked carefully.              |
+| Limited internal bandwidth | The customer needs Next-Cart-led execution support while internal teams validate results.             |
+| High launch sensitivity    | The business cannot afford unclear responsibility during Demo Migration and Full Migration.           |
 
-* the target Shopify Plus model is viable, but the customer does not want to operate the migration process independently;
-* company, company-location, buyer-contact, catalog, and order-history samples require coordinated review;
-* multiple teams need to confirm products, B2B structure, content, SEO, fulfillment, finance, and customer support outcomes;
-* the Demo Migration requires structured interpretation, but does not reveal the need for bespoke transformation;
-* the project involves many records, several stores, markets, domains, languages, or regional operating contexts;
-* the business wants stronger migration coordination while retaining responsibility for business-rule approval and launch decisions.
+Managed Service does not convert unsupported data into supported data. If the need involves app-owned records, custom fields, external identifiers, bespoke transformation, or unsupported source structures, Custom Service should be reviewed even when Managed Service is also useful for execution support.
 
-Managed Service is not a substitute for defining the target model. The customer still needs to confirm how company structure, catalogs, pricing, account access, store governance, and integrations should behave. Managed Service is most useful when the main pressure is execution and coordination, not when the source data requires unsupported transformation or custom migration logic adjustment.
+### Where Add-ons Fit in Shopify Plus Migration <a href="#where-add-ons-fit-in-shopify-plus-migration" id="where-add-ons-fit-in-shopify-plus-migration"></a>
 
-For Shopify Plus, Managed Service often fits enterprise teams that know what the result should be but need a more controlled path to reach it. It can reduce coordination risk when internal teams are busy with merchandising, B2B rollout, ERP readiness, theme work, app setup, and launch planning at the same time.
+Add-ons fit when the requirement is supported, specific, and bounded. They should not be used as a general label for enterprise customization. For Shopify Plus, Add-ons are often useful when the team needs better control over which records migrate, where supported values go, or how supported output should be configured.
 
-### When Add-ons Should Be Considered <a href="#when-add-ons-should-be-considered" id="when-add-ons-should-be-considered"></a>
+| Add-on type             | Shopify Plus example                                                                                             | Boundary check                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Data Filter Add-on      | Exclude inactive products, outdated CMS Pages, old orders, or irrelevant Blog Posts from a specific store scope. | Filtering should not remove records needed for B2B support, SEO, finance, or compliance review.    |
+| Advanced Data Mapping   | Map supported source fields into appropriate Shopify destinations or custom-data structures where feasible.      | Mapping cannot recreate unsupported app behavior or external-system logic.                         |
+| Advanced Data Configure | Adjust supported migration output so Shopify Plus data is easier to review or use.                               | Configuration must remain inside supported behavior.                                               |
+| Custom Add-ons          | Handle a bounded special need that has a defined source, target, and acceptance rule.                            | Unsupported records, bespoke transformation, or custom logic should move to Custom Service review. |
 
-Add-ons should be considered when the project has a specific extra requirement that can be handled within supported migration behavior. They should not be used as a vague answer to every Shopify Plus complexity. Add-ons are useful when the need is bounded, identifiable, and compatible with the selected migration path.
+The clearest test is whether the requirement can be described as a supported adjustment. If yes, an Add-on may fit. If the requirement depends on unsupported data, custom application behavior, external-system identity, or a unique transformation rule, Custom Service is the safer framing.
 
-For Shopify Plus, Add-ons may be relevant for:
+### When Custom Service Becomes Necessary <a href="#when-custom-service-becomes-necessary" id="when-custom-service-becomes-necessary"></a>
 
-| Add-on direction        | Shopify Plus use case                                                                                                                                                         |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Excluding retired products, inactive customers, old orders, irrelevant Blog Posts, obsolete CMS Pages, or source records that should not enter the Shopify Plus launch scope. |
-| Advanced Data Mapping   | Aligning supported fields, categories, product structures, customer context, or other supported data structures where source and target meaning need clearer mapping.         |
-| Advanced Data Configure | Applying extra supported setup where the migration needs more configuration than the default handling.                                                                        |
+Custom Service should be considered when the Shopify Plus migration depends on requirements outside supported standard behavior. The trigger is not simply enterprise size. The trigger is a business-critical expectation that needs custom evaluation, bespoke handling, unsupported data interpretation, custom migration logic adjustment, Custom Platform handling, or external-system alignment.
 
-Add-ons work best when the requirement is narrow enough to describe clearly. For example, filtering old orders by date range is different from transforming legacy B2B account logic into companies, locations, catalogs, payment terms, and external IDs. The first may fit an Add-on. The second may require Custom Service if the source logic is nonstandard or depends on business interpretation outside supported handling.
+Common Shopify Plus Custom Service triggers include:
 
-A Shopify Plus migration should treat Add-ons as precision support, not a workaround for unclear scope. If a requirement involves app-owned data, custom source tables, unsupported fields, external-system identifiers, bespoke pricing relationships, or custom migration logic adjustment, the safer review path is usually Custom Service.
+* B2B companies, locations, catalogs, pricing, or payment terms that come from custom source structures;
+* ERP, PIM, OMS, WMS, CRM, loyalty, subscription, or marketplace identifiers that must remain usable after migration;
+* app-owned records that are not part of ordinary source exports;
+* custom fields that need transformation into metafields, metaobjects, app structures, or external systems;
+* multi-store source data that must be split, merged, or reorganized in a non-standard way;
+* localized content, URL structures, or regional catalogs that require bespoke interpretation;
+* custom product logic such as bundles, kits, subscriptions, personalization, build-your-own products, or quoting workflows;
+* Custom Platform source data with no supported structure;
+* migration output that must align with external integration rules.
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+Custom Service should be scoped through examples, not vague enterprise labels. The customer should provide representative products, companies, customers, orders, URLs, custom fields, integration identifiers, and target expectations. Without examples, Custom Service discussions can sound precise while the real requirement remains undefined.
 
-Custom Service is needed when the Shopify Plus result depends on customization, modification, bespoke handling, Custom Platform interpretation, unsupported data, custom fields, app-dependent relationships, external-system identifiers, or custom migration logic adjustment. It is the right path when standard supported handling and bounded Add-ons cannot preserve the business meaning of the data.
+### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
 
-For Shopify Plus, Custom Service should be considered when:
+Demo Migration should decide whether the selected approach is strong enough before Full Migration. For Shopify Plus, the sample set should test the highest-risk target structures, not only ordinary products and orders.
 
-* source-side customer groups, account hierarchies, wholesale portals, or branch structures must become Shopify Plus companies and company locations through custom interpretation;
-* catalog visibility, pricing, quantity rules, volume pricing, or buyer-specific access depends on custom logic rather than clean exportable fields;
-* company IDs, location IDs, ERP IDs, CRM IDs, sales-rep assignments, contract references, or other external identifiers must remain usable;
-* metafields, metaobjects, category metafields, custom product attributes, or app-owned records carry launch-critical meaning;
-* the Source Platform is a Custom Platform or a heavily modified supported platform;
-* subscription, fulfillment, ERP, marketplace, loyalty, approval, or reporting workflows make migrated records meaningful only when surrounding relationships are preserved;
-* the business needs a transformation that is not simply field mapping, filtering, or supported data configuration.
+| Demo Migration sample              | Decision it should support                                                                                                              |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Variant-heavy product              | Whether product options, variants, SKUs, images, and inventory remain usable.                                                           |
+| B2B company or customer sample     | Whether company, buyer, catalog, pricing, and account context need standard setup, Add-ons, Custom Service, or separate implementation. |
+| Market-specific product or content | Whether localization, URL, visibility, and pricing assumptions are understood.                                                          |
+| High-value redirect                | Whether old URLs have accepted Shopify Plus destinations.                                                                               |
+| Custom-data sample                 | Whether metafields, metaobjects, app data, or custom identifiers are handled correctly.                                                 |
+| Integration-owned record           | Whether external-system ownership has been preserved or intentionally excluded.                                                         |
+| Exception order                    | Whether refunds, discounts, fulfillment, payment context, tax, and external references remain readable.                                 |
+| Expansion-store sample             | Whether store-specific assignment and review responsibility are clear.                                                                  |
 
-Custom Service does not automatically mean Next-Cart performs complete migration management. Migration management is included only when it is part of the final plan. The key distinction is that Custom Service creates the path for bespoke handling when the project cannot be safely treated as a standard supported migration.
+If Demo Migration fails because the selected approach cannot preserve business-critical meaning, the response should be scope correction. The team should not approve Full Migration while hoping enterprise issues will become clearer later.
 
-For Shopify Plus, Custom Service is often less about record volume and more about meaning. A small B2B catalog with custom contract pricing and ERP-linked locations may require more custom planning than a larger but cleaner direct-to-consumer catalog.
+### Entity Points and Shopify Plus Planning <a href="#entity-points-and-shopify-plus-planning" id="entity-points-and-shopify-plus-planning"></a>
 
-### How Entity Points Affect Planning <a href="#how-entity-points-affect-planning" id="how-entity-points-affect-planning"></a>
+Entity Points help estimate eligible migration volume. They do not measure enterprise complexity by themselves. Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path. Newly migrated eligible entities may consume Entity Points when first migrated.
 
-Entity Points affect Shopify Plus planning when record volume, entity selection, or later inclusion decisions change the capacity required under the selected service license and Entity Points Plan. They should be used for capacity planning, not as a shortcut for risk scoring.
+For Shopify Plus, this means Entity Points should be interpreted alongside the operating model. A modest number of B2B companies or custom product records can require more planning than a large set of simple products. A large order history may be manageable when it is needed only for reference, but more complex when finance, support, ERP identifiers, and B2B account context rely on historical records.
 
-Shopify Plus projects should review Entity Points around counted records such as products, customers, orders, Blog Posts, and other supported entities included in the migration scope. The review becomes especially important when the business plans to filter records, include additional historical orders, migrate more Blog Posts or CMS Pages, add B2B-related customer data, or expand the scope after Demo Migration.
+| Planning signal  | What it helps estimate                             | What it does not decide                                             |
+| ---------------- | -------------------------------------------------- | ------------------------------------------------------------------- |
+| Product count    | Migration volume and possible Entity Points usage. | Variant meaning, B2B visibility, market availability, or app logic. |
+| Customer count   | Buyer-record volume.                               | Company structure, buyer roles, permissions, or external IDs.       |
+| Order count      | Historical volume.                                 | Payment, fulfillment, finance, and integration usefulness.          |
+| Blog Posts count | Content volume.                                    | Localization, URL strategy, internal links, or SEO value.           |
 
-Entity Points should not be confused with complexity. A complex company hierarchy, pricing relationship, app dependency, or custom identifier can create service-scope risk even if the counted record volume is not large. Conversely, a high-volume but clean catalog may require capacity planning without necessarily requiring Custom Service.
+Entity Points should support planning, not replace service-path evaluation.
 
-The current Entity Points rule should remain clear in Shopify Plus planning: Entity Points consumption depends on whether migrated entities are new to the migration license record. Already recorded entities do not deduct Entity Points again solely because the customer performs later migration activity for the same migration path. If later activity includes new counted records, remaining Entity Points should be reviewed before the project proceeds.
+### Additional Migration Options and Launch Timing <a href="#additional-migration-options-and-launch-timing" id="additional-migration-options-and-launch-timing"></a>
 
-### How Additional Migration Options Affect the Approach <a href="#how-additional-migration-options-affect-the-approach" id="how-additional-migration-options-affect-the-approach"></a>
+Shopify Plus launch windows often require later migration activity because source stores continue operating while the target environment is reviewed. The team may need to continue the migration with the last used configuration, continue with a new configuration, or perform a new migration if the target result should be refreshed.
 
-Additional Migration Options matter in Shopify Plus projects when source-store activity or configuration changes continue after the first migration activity. Enterprise and B2B stores often keep receiving new orders, adding customers, changing products, modifying prices, updating content, or refining company and catalog setup while the launch project is still active.
+The approach should define:
 
-For Shopify Plus, Additional Migration Options should be planned around platform-specific change areas:
+* which records may change before launch;
+* whether the configuration remains the same;
+* whether earlier migrated target data should remain or be replaced;
+* who performs the migration action;
+* which stores, markets, B2B records, URLs, and integrations must be revalidated;
+* whether new eligible entities may consume Entity Points.
 
-* new products, variants, customers, orders, CMS Pages, or Blog Posts added before launch;
-* changed company, company-location, buyer-contact, catalog, payment-term, or checkout settings;
-* new filtering requirements after the business decides to exclude or include records differently;
-* changed mapping assumptions for product structure, customer account context, B2B identity, or content ownership;
-* updated URL, redirect, collection, market, or SEO-sensitive structures;
-* Add-on output that changes review samples;
-* Custom Service output that requires renewed validation.
+This is especially important when several teams validate different areas. A later migration action can affect products, customers, companies, orders, Blog Posts, redirects, localized content, and integration references. The chosen approach should include a revalidation plan, not only a launch date.
 
-Additional Migration Options should not be treated as a generic fix for unresolved Shopify Plus planning. They can help handle later migration activity, but they still require clear source tracking, service-scope decisions, Demo Migration review, and platform-specific validation. If the company model, catalog logic, or custom data scope changes after the first migration activity, the selected approach should include renewed review of the affected records and behaviors.
+### Signals That the Approach Is Too Light <a href="#signals-that-the-approach-is-too-light" id="signals-that-the-approach-is-too-light"></a>
 
-### Choosing the Right Path Before Full Migration <a href="#choosing-the-right-path-before-full-migration" id="choosing-the-right-path-before-full-migration"></a>
+A Shopify Plus approach is too light when it treats enterprise governance as ordinary Shopify record transfer. The warning signs usually appear in review responsibility, target structure, and unsupported expectations.
 
-The right Shopify Plus path should be chosen before Full Migration based on the actual burden shown by source review, target setup, Demo Migration, and service-scope classification. A practical decision sequence is:
+| Warning signal                                                                        | Likely response                                                                                   |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Multi-store data ownership is unclear.                                                | Clarify store-level scope or consider Managed Service.                                            |
+| B2B companies, buyers, catalogs, or pricing cannot be explained through examples.     | Prepare B2B evidence and review Custom Service if needed.                                         |
+| Markets, localized URLs, currencies, or languages are treated as post-launch details. | Add market planning and validation before Full Migration.                                         |
+| App-owned or external-system fields are business-critical.                            | Review Custom Service rather than relying on ordinary mapping.                                    |
+| Demo Migration samples are approved by only one team.                                 | Assign review owners for merchandising, B2B, localization, operations, finance, and integrations. |
+| Entity Points are used as the main complexity measure.                                | Reframe scope around operating meaning and validation burden.                                     |
+| Later migration activity has no revalidation plan.                                    | Define action type, affected records, and post-action review.                                     |
 
-1. Confirm the Shopify Plus target model: companies, locations, catalogs, stores, markets, products, content, integrations, and launch responsibilities.
-2. Identify which requirements fit supported standard handling.
-3. Separate bounded Add-on needs from broader Custom Service needs.
-4. Review Entity Points for counted records and likely scope changes.
-5. Decide whether the customer can operate the project directly or needs Managed Service support.
-6. Use Demo Migration results to confirm whether the selected approach is strong enough.
-7. Plan Additional Migration Options only where later activity or source changes are likely to affect launch readiness.
-
-The decision should be made with representative examples, not abstract confidence. The strongest Shopify Plus samples usually include complex products, key companies, multiple locations, important buyer contacts, assigned catalogs, B2B pricing examples, representative orders, SEO-sensitive URLs, custom fields, integration identifiers, and any app-dependent records that influence launch operations.
-
-| Project condition                                                                                                                                | Likely service-path implication                                               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| Clean source data, clear Shopify Plus setup, capable internal reviewers                                                                          | Standard Service may be enough.                                               |
-| Clear target model but heavy execution, many stakeholders, or limited internal migration capacity                                                | Managed Service is often safer.                                               |
-| Narrow filtering, mapping, or configuration needs within supported behavior                                                                      | Add-ons may be appropriate.                                                   |
-| Custom company logic, bespoke pricing interpretation, app-owned data, external IDs, Custom Platform source, or custom migration logic adjustment | Custom Service should be reviewed.                                            |
-| Frequent source changes before launch                                                                                                            | Additional Migration Options should be planned with renewed validation scope. |
+These signals should be resolved before Full Migration. Waiting until launch makes it harder to separate migration issues, Shopify Plus setup gaps, integration timing, and unsupported expectations.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Shopify Plus migration approach is the one that matches the real enterprise burden behind the data. Standard Service can work when the Target Platform structure is clear, supported handling is enough, and the customer can review results carefully. Managed Service is safer when execution and coordination would place too much pressure on the internal team. Add-ons support bounded filtering, mapping, or configuration needs. Custom Service is the stronger path when Shopify Plus readiness depends on bespoke transformation, app-dependent data, external IDs, Custom Platform handling, or custom migration logic adjustment.
+The right Shopify Plus migration approach is the lightest service path that can still protect the enterprise operating outcome. Standard Service can be appropriate when supported data and customer-led validation are realistic. Managed Service is safer when execution and stakeholder coordination create risk. Add-ons fit bounded supported adjustments. Custom Service is needed for unsupported data, custom fields, external-system identifiers, bespoke transformations, Custom Platform handling, or custom migration logic adjustment.
 
-Entity Points should support capacity planning, while Additional Migration Options should support platform-specific follow-up migration planning when source activity or configuration changes continue before launch. Neither should be used as a substitute for defining the Shopify Plus target model. The safest approach is the one confirmed by real source evidence, realistic Demo Migration samples, service-scope boundaries, and a clear validation plan before Full Migration.
-
-For Shopify Plus projects with B2B structure, catalog-controlled pricing, organization governance, custom data, or integration dependencies, use Demo Migration results and Live Chat discussion to confirm whether Standard Service, Managed Service, selected Add-ons, Custom Service, or Additional Migration Options should shape the final migration path.
+A strong approach is evidence-based. It defines the target organization structure, store scope, B2B requirements, Markets and localization, catalog governance, integrations, Entity Points planning, Demo Migration samples, and later migration activity before Full Migration begins.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Shopify Plus always a Custom Service migration?**
 
-No. Shopify Plus does not automatically require Custom Service. Standard Service or Managed Service may be suitable when the Shopify Plus target model is clear and the source data can move through supported handling. Custom Service becomes relevant when the project requires bespoke handling, unsupported custom data, Custom Platform interpretation, or custom migration logic adjustment.
+No. Shopify Plus does not automatically require Custom Service. Standard Service or Managed Service can be appropriate when the data is supported, the target structure is clear, and validation responsibility is realistic.
 
-**When is Standard Service enough for Shopify Plus?**
+**When is Managed Service safer for Shopify Plus?**
 
-Standard Service is usually enough when company structure, catalogs, products, customers, orders, content, and URLs are clearly prepared, the Demo Migration result is acceptable, and the customer can actively operate and validate the migration.
+Managed Service is safer when the migration remains within supported behavior but execution requires stronger coordination across stores, B2B, Markets, products, content, URLs, orders, and multiple review teams.
 
-**When should a Shopify Plus project use Managed Service?**
+**How are Add-ons different from Custom Service for Shopify Plus?**
 
-Managed Service is often better when Shopify Plus is the right Target Platform but the business wants Next-Cart to carry more migration execution and coordination responsibility. It is useful when internal teams need to focus on review, setup confirmation, and launch decisions instead of operating the migration process themselves.
+Add-ons support bounded filtering, mapping, or configuration within supported behavior. Custom Service handles unsupported data, app-owned records, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-**Can Add-ons substitute for Custom Service in a Shopify Plus migration?**
+**Do Entity Points measure Shopify Plus complexity?**
 
-No. Add-ons support specific extra requirements such as filtering, advanced mapping, or advanced data configuration. Custom Service is needed when the project depends on bespoke handling, unsupported structures, external-system identifiers, Custom Platform handling, or custom migration logic adjustment.
+No. Entity Points help estimate eligible migration volume, but Shopify Plus complexity also depends on B2B, Markets, integrations, store structure, custom data, and validation responsibility.
 
-**How should Entity Points be reviewed for Shopify Plus?**
+**Why should Additional Migration Options be planned before launch?**
 
-Entity Points should be reviewed around counted records such as products, customers, orders, Blog Posts, CMS Pages, and other included entities. They help confirm whether the selected service license and Entity Points Plan can cover the planned scope. They should not be used as a risk score or a substitute for custom-scope review.
-
-**Do Additional Migration Options remove the need for validation?**
-
-No. Additional Migration Options can help address later migration activity, but Shopify Plus outcomes still need renewed validation when affected records, mappings, company data, catalog assignments, URLs, content, Add-on output, or Custom Service output change before launch.
+Source stores often keep changing while Shopify Plus is reviewed. Planning later migration activity helps the team decide which records should be updated, whether configuration changed, who performs the action, and what must be revalidated.

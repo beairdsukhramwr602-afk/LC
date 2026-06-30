@@ -1,226 +1,174 @@
 # VTEX Pre-Migration Preparation Checklist
 
-VTEX migration preparation should make the target result easier to scope, test, and approve. The preparation phase should not only collect product, customer, order, CMS Pages, and Blog Posts exports. It should also clarify how those records are expected to behave across VTEX Catalog, SKUs, specifications, pricing, promotions, trade policies, marketplace operations, OMS, logistics, Master Data, apps, APIs, storefront implementation, and external systems.
+VTEX preparation should prove that the target environment can interpret migrated data inside a connected enterprise commerce operation. A useful checklist is not a generic export list. It is an evidence plan that connects source records with VTEX catalog structure, SKUs, specifications, pricing, promotions, customer records, orders, marketplace context, logistics, Master Data, storefront implementation, and external systems.
 
-The main preparation challenge is separation. Some source-store information should migrate as records. Some behavior should be configured in VTEX. Some dependencies should be rebuilt through apps, APIs, storefront implementation, or external-system integration. Some requirements may fit Add-ons, while others require Custom Service because they involve custom logic, app-owned data, Custom Platform interpretation, tailored transformation, or unsupported migration behavior.
+Preparation also needs to separate migrated data from VTEX-side implementation. Products, customers, orders, CMS Pages, Blog Posts, and related records may be migrated when supported, but storefront architecture, app configuration, integrations, live payment setup, logistics rules, seller operations, search behavior, promotions, and custom business processes may still require VTEX configuration or implementation work. When that separation is unclear, Demo Migration can look acceptable while launch readiness remains weak.
 
-A strong VTEX preparation checklist produces evidence, not assumptions. It gives the migration team representative samples, gives stakeholders a shared review standard, and makes Demo Migration meaningful before Full Migration is approved.
+### Define the Target VTEX Operating Model <a href="#define-the-target-vtex-operating-model" id="define-the-target-vtex-operating-model"></a>
 
-### What VTEX Preparation Should Prove <a href="#what-vtex-preparation-should-prove" id="what-vtex-preparation-should-prove"></a>
+The first preparation task is to define how VTEX will operate after launch. Some merchants use VTEX primarily as a commerce platform with strong catalog and checkout capabilities. Others use VTEX as part of a marketplace operation, B2B environment, headless storefront, multi-region architecture, or integration-heavy enterprise stack. Each scenario changes what should be prepared before migration.
 
-Pre-migration preparation should prove that the project team understands what must be migrated, what must be configured, what must be rebuilt, and what must be validated separately. For VTEX, preparation should be organized by operating layer because a clean record transfer can still fail if the data cannot support selling, discovery, pricing, fulfillment, seller operations, customer service, reporting, or storefront experience.
+The team should identify which operating layers are part of launch and which are future scope. A project involving only supported product and order history requires a different preparation package from a project involving marketplace sellers, Master Data, PIM-owned enrichment, ERP-owned pricing, external inventory, headless storefront routing, or B2B account structures.
 
-| Preparation layer                | What to prepare                                                                                                                    | What it should prove                                                                   |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Target VTEX context              | Account, workspaces, storefront approach, trade policies, apps, integrations, and enabled commerce layers.                         | The target environment is ready to interpret migrated data correctly.                  |
-| Catalog and SKU structure        | Products, SKUs, categories, brands, specifications, images, stock, services, kits, collections, attachments, and assembly options. | Products will be active, discoverable, purchasable, and commercially meaningful.       |
-| Pricing and channel behavior     | Base prices, price tables, promotions, trade policies, sales channels, marketplace pricing, and external pricing owners.           | Price and availability expectations are not hidden inside source-store assumptions.    |
-| Marketplace, OMS, and logistics  | Seller relationships, marketplace order context, status meaning, delivery/pickup behavior, invoices, and fulfillment references.   | Historical and operational order data can be reviewed with the right business context. |
-| Customers, B2B, and Master Data  | Customer records, account relationships, custom entities, custom fields, consent, segmentation, and external IDs.                  | Customer meaning is preserved beyond name, email, and address fields.                  |
-| Storefront and content           | Navigation, search, filters, CMS Pages, Blog Posts, landing pages, metadata, redirects, and priority URLs.                         | Migrated data can support launch discovery, SEO continuity, and content expectations.  |
-| Apps, APIs, and external systems | ERP, PIM, WMS, CRM, accounting, payment, anti-fraud, marketplace, analytics, and custom frontend dependencies.                     | Ownership is clear for values that cannot be treated as ordinary migrated records.     |
-| Service scope                    | Data Filter Add-on, Advanced Data Mapping, Advanced Data Configure, other Add-ons, and Custom Service signals.                     | The selected service path matches the real migration workload.                         |
+| VTEX operating layer         | Preparation question                                                                                                          | Why it matters before migration                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Catalog and SKUs             | Which source product structures must become usable VTEX products, SKUs, categories, brands, and specifications?               | The migration must preserve sellable meaning, not only product names and counts.  |
+| Pricing and promotions       | Which prices, price tables, coupons, discounts, or campaign rules are migrated data, and which are target-side configuration? | Commercial logic can be flattened if pricing ownership is not clarified.          |
+| Marketplace and sellers      | Are seller relationships, received SKUs, offers, commissions, or marketplace order context part of the expectation?           | Marketplace data may require custom interpretation or separate configuration.     |
+| Customers and B2B            | Are customer profiles, segmentation, corporate accounts, buyer relationships, or custom fields required?                      | Customer meaning can extend beyond ordinary contact records.                      |
+| Orders and fulfillment       | What historical order context must remain readable for service, finance, operations, or support?                              | Order history must be useful without being confused with live checkout setup.     |
+| Master Data and integrations | Which custom entities, external IDs, app data, or integration-owned fields matter after launch?                               | Standard record migration may not preserve custom operational meaning.            |
+| Storefront and content       | Which pages, URLs, metadata, search behavior, navigation, and content assets affect launch continuity?                        | Headless or composable storefront work must not be mistaken for record migration. |
 
-Preparation is complete only when each layer has representative examples, known exclusions, ownership decisions, and review criteria. A simple export checklist is not enough for VTEX when commercial behavior depends on several connected platform layers.
-
-### Confirm Target Account, Storefront, and Commerce Context <a href="#confirm-target-account-storefront-and-commerce-context" id="confirm-target-account-storefront-and-commerce-context"></a>
-
-Before selecting samples or reviewing Demo Migration output, confirm the target VTEX operating context. VTEX projects may involve different storefront approaches, trade policies, sales channels, marketplaces, seller operations, apps, integrations, and implementation environments. Migration planning should reflect the target account that will actually be used for launch review.
-
-| Item to confirm                   | Preparation detail                                                                                                                            | Why it matters                                                                                                           |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Account and environment           | Confirm the account, workspace or test environment, launch account, review access, and stakeholder responsibilities.                          | Reviewers need to know where migrated data will be evaluated and which environment represents launch behavior.           |
-| Storefront approach               | Identify whether the project uses Store Framework, FastStore, headless implementation, legacy storefront areas, or another frontend approach. | Storefront implementation affects navigation, product display, content rendering, search, routing, and URL expectations. |
-| Trade policies and sales channels | List sales channels, regions, B2B/B2C contexts, marketplaces, seller channels, or customer groups that affect availability and pricing.       | A product that looks correct in one context may be unavailable or incorrectly priced in another.                         |
-| Apps and extensions               | Inventory VTEX IO apps, storefront apps, search apps, payment apps, marketplace apps, promotion apps, and business-process apps.              | App-owned data or app-controlled behavior may require separate setup, Custom Service, or exclusion.                      |
-| Integration stack                 | Document ERP, PIM, WMS, OMS, CRM, accounting, payment, anti-fraud, marketplace, analytics, and data warehouse dependencies.                   | External systems may own product enrichment, price authority, inventory, order updates, or customer attributes.          |
-| Operational stakeholders          | Identify catalog, merchandising, pricing, B2B, marketplace, operations, logistics, support, SEO, and integration reviewers.                   | Each reviewer should know which samples and pass conditions they are responsible for approving.                          |
-
-This context prevents a common preparation problem: evaluating migrated records without knowing the target operating model. VTEX preparation should make the target environment readable before the first Demo Migration sample is judged.
+This operating model gives the rest of the checklist a clear purpose. The merchant is not preparing for VTEX in general; the merchant is preparing for a specific VTEX launch scenario.
 
 ### Prepare Catalog, SKU, and Specification Evidence <a href="#prepare-catalog-sku-and-specification-evidence" id="prepare-catalog-sku-and-specification-evidence"></a>
 
-Catalog preparation is usually the most important VTEX readiness task because products and SKUs are separate concepts, categories structure the catalog, brands and specifications affect product meaning, and SKU activation depends on required information. Prepare samples that represent the real catalog, not only ordinary products.
+Catalog preparation is usually the highest-value VTEX readiness task because source products often need to be interpreted through VTEX products, SKUs, categories, brands, and specifications. A source platform may treat variants, attributes, options, custom fields, bundles, collections, personalization choices, or channel-specific catalog values differently from VTEX. Preparation should expose those differences before migration execution.
 
-| Sample type                               | Include                                                                                                                      | Readiness question                                                                                         |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Baseline product                          | Name, description, brand, category, image, SKU, stock, and price.                                                            | Does a normal product migrate into a usable VTEX product/SKU structure?                                    |
-| Multi-SKU product                         | Multiple SKU choices with different images, prices, stock, specifications, or availability.                                  | Do source variants become sellable and understandable VTEX SKUs?                                           |
-| Specification-heavy product               | Product and SKU specifications used for filters, comparison, compliance, or merchandising.                                   | Are structured values preserved for discovery and operation instead of being buried in descriptions?       |
-| Category-sensitive product                | Products tied to important departments, categories, subcategories, or category-specific specification groups.                | Does category placement support navigation and the right specification behavior?                           |
-| Stock-sensitive product                   | SKU-level inventory differences, fulfillment-sensitive items, warehouse-dependent items, or channel-specific stock concerns. | Can reviewers distinguish migrated stock records from live inventory configuration requirements?           |
-| Attachment or customization product       | Products with personalization, required customer input, optional services, warranty, gift wrap, or custom add-on behavior.   | Should the source choice be mapped, configured, implemented, excluded, or reviewed through Custom Service? |
-| Assembly, kit, collection, or bundle case | Products involving grouped SKUs, product combinations, special collections, services, or bundle-like selling logic.          | Does the requirement fit available migration handling, target setup, Add-ons, or Custom Service?           |
-| Marketplace-relevant product              | Seller, marketplace, offer, external ID, received SKU, channel, or commission-related context.                               | Is marketplace meaning part of migration scope or separate marketplace configuration/integration work?     |
+A strong catalog sample set should include simple products and structurally difficult products. The team should prepare products with multiple SKUs, category-sensitive specifications, different images by SKU, search/facet values, brand relationships, stock differences, price variations, discontinued products, and commercial edge cases. Products tied to apps, PIM systems, ERP records, marketplace sellers, or custom source fields should be marked clearly.
 
-Catalog samples should include commercially important products, edge cases, and products that are structurally difficult. Simple records confirm baseline transfer, but they rarely prove VTEX readiness.
+| Catalog evidence            | What to prepare                                                                           | Readiness value                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Baseline product            | Product name, description, category, brand, SKU, image, price, and stock.                 | Confirms the ordinary migration path.                                      |
+| Multi-SKU product           | Size, color, model, package, region, or other sellable choices.                           | Tests whether source options become usable VTEX SKUs.                      |
+| Specification-heavy product | Values used for filters, comparison, compliance, merchandising, or search.                | Confirms structured product meaning is not buried in descriptions.         |
+| Category-sensitive product  | Products tied to category-specific attributes or navigation logic.                        | Tests whether category placement and specification behavior stay aligned.  |
+| Marketplace-linked product  | Seller, offer, received SKU, external ID, or marketplace-specific value.                  | Clarifies whether marketplace context belongs in migration scope.          |
+| Custom or app-owned product | Custom fields, app values, bundle rules, personalization choices, or external references. | Identifies Add-ons, Custom Service, exclusion, or target-side setup needs. |
 
-### Prepare Pricing, Promotions, and Trade Policy Evidence <a href="#prepare-pricing-promotions-and-trade-policy-evidence" id="prepare-pricing-promotions-and-trade-policy-evidence"></a>
+Catalog preparation should not try to force every source behavior into ordinary product migration. Its purpose is to decide which values migrate as supported records, which need supported mapping or filtering, which require Custom Service, and which should be rebuilt or configured in VTEX.
 
-VTEX pricing and availability can depend on base prices, fixed prices, price tables, promotions, coupons, trade policies, sales channels, marketplace context, B2B eligibility, and external pricing authority. Preparation should distinguish historical pricing information from live pricing behavior expected after launch.
+### Prepare Pricing, Promotion, and Channel Inputs <a href="#prepare-pricing-promotion-and-channel-inputs" id="prepare-pricing-promotion-and-channel-inputs"></a>
 
-| Commercial evidence           | What to gather                                                                                                       | Why it matters                                                                                              |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Base prices                   | Ordinary SKU price examples, currency expectations, and tax-display assumptions where relevant.                      | Establishes the simplest price baseline before complex rules are reviewed.                                  |
-| Fixed prices and price tables | Customer-specific, B2B, regional, channel-specific, or marketplace-related price examples.                           | Prevents price differentiation from being flattened into one default value.                                 |
-| Promotions and coupons        | Active, expired, category-specific, customer-specific, order-value, shipping, and campaign examples.                 | Separates promotion history from launch-ready promotional configuration.                                    |
-| Trade policies                | Products or SKUs that differ by sales channel, marketplace, region, customer segment, logistics, or payment context. | Proves that channel-specific behavior has review samples, not just general product records.                 |
-| Discounts in orders           | Orders where discount labels, totals, coupons, or promotion sources matter for history and support.                  | Helps reviewers interpret historical order totals without assuming live rules were configured by migration. |
-| External pricing owner        | ERP, PIM, marketplace, pricing engine, or custom service that controls prices after launch.                          | Clarifies whether migration should preserve values, references, or only historical context.                 |
+VTEX preparation should treat commercial rules as a separate readiness area because pricing and promotions may depend on source logic that is not visible in ordinary product exports. Base prices, price tables, promotional rules, coupons, customer-specific pricing, regional behavior, marketplace pricing, and B2B conditions should be reviewed before the migration approach is chosen.
 
-Preparation should include examples where the same SKU behaves differently across commercial contexts. If no such examples exist, that is useful evidence. If they do exist, they should be tested before Full Migration, not discovered during launch review.
+Prepare examples that show ordinary pricing and exception pricing. Include active and expired promotions where historical review matters, customer- or segment-specific pricing where applicable, SKU-level price differences, channel-specific values, marketplace pricing assumptions, and any external system that owns price authority. If the source platform depends on an ERP, PIM, pricing engine, marketplace connector, or custom promotion module, the preparation package should identify who owns that value after migration.
 
-### Prepare Marketplace, Seller, OMS, and Logistics Samples <a href="#prepare-marketplace-seller-oms-and-logistics-samples" id="prepare-marketplace-seller-oms-and-logistics-samples"></a>
+| Commercial input                      | Preparation detail                                                             | Planning decision                                                                 |
+| ------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| Base price                            | Normal SKU prices and currency assumptions.                                    | Confirms baseline migrated price expectations.                                    |
+| Price tables or differentiated prices | Customer group, B2B, regional, channel, or marketplace price examples.         | Decides whether values are migrated, configured, or custom-scoped.                |
+| Promotions and coupons                | Active, historical, category-specific, customer-specific, or cart-level rules. | Separates historical promotional data from live campaign setup.                   |
+| Tax and display assumptions           | Source tax behavior, display expectations, and order-history tax examples.     | Prevents historical tax context from being mistaken for target tax configuration. |
+| External price owner                  | ERP, PIM, pricing engine, marketplace connector, or custom script.             | Identifies integration responsibility and Custom Service signals.                 |
 
-VTEX often supports marketplace, seller, OMS, and logistics workflows that cannot be reduced to generic order history. Order records may need to remain readable for customer service, finance, seller operations, fulfillment, shipping, pickup, delivery, and integration reconciliation.
+Commercial preparation should produce acceptance examples. The team should know which migrated values must be visible, which values are only historical references, and which commercial rules must be configured directly in VTEX.
 
-| Sample area                                       | What to include                                                                                                  | Review purpose                                                                                 |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Standard completed order                          | Customer, products, quantities, totals, discounts, shipping, payment label, and status.                          | Establishes ordinary historical order readability.                                             |
-| Cancelled, refunded, or partially fulfilled order | Cancellation reason, refund context, partial shipment, replacement, or service case information.                 | Confirms exception history does not become misleading.                                         |
-| Marketplace order                                 | Marketplace role, seller identity, received SKU, offer context, commission or channel references where relevant. | Prevents seller and marketplace meaning from being flattened into ordinary order notes.        |
-| Seller-handled order                              | Seller responsibility, fulfillment status, invoice context, and delivery ownership.                              | Clarifies whether seller order context is in scope, historical only, or external-system owned. |
-| Pickup or delivery example                        | Delivery channel, pickup point, shipping estimate, carrier, tracking, or warehouse reference.                    | Keeps logistics meaning visible when order history is reviewed.                                |
-| ERP or WMS-integrated order                       | External IDs, invoice numbers, fulfillment references, status sync, or reconciliation keys.                      | Identifies values that support operations after migration.                                     |
+### Prepare Customer, B2B, and Master Data Context <a href="#prepare-customer-b2b-and-master-data-context" id="prepare-customer-b2b-and-master-data-context"></a>
 
-The preparation goal is not to recreate live OMS flows through migration. The goal is to decide which order fields and references must remain understandable, which belong to target configuration, and which require integration or Custom Service review.
+Customer preparation for VTEX should go beyond names, emails, phone numbers, and addresses. Enterprise environments often carry customer segmentation, B2B account relationships, custom fields, consent values, external identifiers, CRM references, loyalty details, and Master Data entities that influence service, marketing, pricing, or reporting.
 
-### Prepare Customer, B2B, Consent, and Master Data Evidence <a href="#prepare-customer-b2b-consent-and-master-data-evidence" id="prepare-customer-b2b-consent-and-master-data-evidence"></a>
+The team should prepare representative customer samples: ordinary customers, repeat buyers, guest customers, customers with multiple addresses, customers linked to many orders, duplicate records, B2B buyers, corporate accounts, customers with custom fields, and customers tied to external systems. When Master Data or external systems are involved, the preparation package should identify the entity, source owner, target expectation, sample record, and validation owner.
 
-Customer preparation should go beyond names, emails, and addresses. VTEX projects may involve B2C customers, B2B accounts, custom customer fields, segmentation, trade-policy eligibility, consent preferences, Master Data entities, and external IDs used by apps or integrations.
+| Customer or data context           | Preparation question                                                      | Likely handling path                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Standard customer profile          | Are supported contact and address fields sufficient?                      | Standard Service or Managed Service may be enough.                                      |
+| Customer segmentation              | Is the segment needed for pricing, promotions, service, or reporting?     | Supported mapping, Add-ons, target setup, or Custom Service depending on structure.     |
+| B2B account context                | Are company, buyer, approval, or role relationships expected?             | Requires careful scope review and may need Custom Service or target-side configuration. |
+| Master Data entity                 | Is the record a standard customer/order/product field or a custom entity? | Custom Service review is likely if the entity must migrate.                             |
+| External identifier                | Does ERP, CRM, WMS, marketplace, or accounting continuity depend on it?   | Custom Service or supported mapping depending on destination and behavior.              |
+| Consent or privacy-sensitive value | Is the value required, valid, and legally usable after migration?         | Requires merchant-side governance and careful validation.                               |
 
-| Data area                      | What to prepare                                                                                                          | Readiness question                                                                                           |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| Ordinary customers             | Name, email, phone, addresses, account status, order relationship, and communication preference where available.         | Can customer records be reviewed clearly after migration?                                                    |
-| B2B or account-based customers | Company context, buyer roles, account hierarchy, approval needs, shared addresses, price eligibility, or purchase rules. | Is B2B meaning supported by migration, target setup, external systems, or Custom Service?                    |
-| Segmentation and eligibility   | Groups, tags, lists, trade-policy eligibility, marketing lists, or commercial segmentation.                              | Does the segment affect commerce behavior or only reporting/marketing history?                               |
-| Consent and preference data    | Newsletter status, opt-in/opt-out values, privacy preferences, and communication flags.                                  | Which values must be preserved, excluded, or revalidated for policy and business reasons?                    |
-| Master Data entities           | Entity names, fields, schemas, relationships, external IDs, and operational use cases.                                   | Is the custom data part of ordinary migration scope, Add-ons, Custom Service, or target-side implementation? |
-| App-owned customer fields      | Loyalty, subscription, personalization, approval, membership, wallet, or account extension values.                       | Which app or external system owns the value after launch?                                                    |
+This step prevents customer data from being approved by count alone. The result should support service, segmentation, account lookup, order review, and any approved business process that depends on customer meaning.
 
-Master Data and custom customer information should be classified by business use. A field that only appears in the source database may not need migration. A field that controls eligibility, service, reporting, integrations, compliance, or user experience may need structured planning.
+### Prepare Orders, Logistics, and Operational History <a href="#prepare-orders-logistics-and-operational-history" id="prepare-orders-logistics-and-operational-history"></a>
 
-### Prepare Storefront, Search, Content, and URL Evidence <a href="#prepare-storefront-search-content-and-url-evidence" id="prepare-storefront-search-content-and-url-evidence"></a>
+Historical orders should be prepared as operational evidence, not as proof that live VTEX checkout and fulfillment are configured. Migrated order history may support customer service, finance review, reconciliation, and reporting, but live payment, shipping, tax, promotions, OMS behavior, logistics, seller handling, and notifications still require VTEX-side setup and testing.
 
-VTEX storefront readiness may involve Store Framework, FastStore, headless frontend work, search configuration, route planning, filters, CMS Pages, Blog Posts, campaign pages, landing pages, product detail pages, and SEO-sensitive URLs. Migration preparation should separate data migration from storefront implementation.
+Prepare order examples that expose the real source history. Include completed orders, canceled orders, refunded orders, partially fulfilled orders, discounted orders, tax-sensitive orders, orders with multiple shipments, marketplace orders, seller-related orders, B2B orders, payment-reference examples, and orders with external IDs. If the source uses an external OMS, ERP, WMS, payment gateway, marketplace connector, or fulfillment system, identify which values must remain visible after migration and which must be reconnected through implementation work.
 
-| Storefront area                 | What to prepare                                                                                                            | Why it matters                                                                                                   |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Product detail pages            | High-value products with images, specifications, price visibility, availability, services, attachments, and buying flow.   | Confirms migrated data can support the intended customer-facing product experience.                              |
-| Category and listing pages      | Important departments, categories, subcategories, collections, filters, and merchandising-sensitive listings.              | Helps detect navigation and discovery gaps before launch.                                                        |
-| Search and facets               | Priority search terms, filters, facet groups, autocomplete expectations, synonyms, and merchandising-sensitive queries.    | Specifications and category data may need cleanup before they can support search quality.                        |
-| CMS Pages and Blog Posts        | Brand pages, buying guides, landing pages, support pages, campaign pages, and editorial content.                           | Content may need migration, rebuilding, restructuring, or exclusion depending on target storefront architecture. |
-| URLs and redirects              | Priority product, category, content, campaign, and organic landing-page URLs.                                              | SEO-sensitive paths should have redirect and metadata planning before Full Migration.                            |
-| Metadata and structured content | Page titles, meta descriptions, canonical expectations, image alt text, heading priorities, and sitemap concerns.          | Preserves discoverability signals where they matter.                                                             |
-| Frontend dependencies           | Custom components, route logic, product cards, account pages, cart behavior, checkout customizations, and content sources. | Separates migrated data from implementation work.                                                                |
+| Order evidence                    | What to prepare                                                           | What it should prove                                                 |
+| --------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Ordinary completed order          | Line items, totals, customer link, payment reference, fulfillment status. | Historical readability and baseline order transfer.                  |
+| Refunded or canceled order        | Refund values, cancellation reason, status history, payment references.   | Exception history remains understandable.                            |
+| Discounted or tax-sensitive order | Coupons, promotions, tax values, shipping, fees, adjustments.             | Financial context remains reviewable.                                |
+| Marketplace or seller order       | Seller references, offer context, fulfillment owner, marketplace status.  | Marketplace meaning is migrated, excluded, or separately configured. |
+| Integration-linked order          | ERP, OMS, WMS, CRM, accounting, or support identifiers.                   | External continuity requirements are scoped correctly.               |
 
-Storefront preparation should not assume the source theme can be copied into VTEX through migration. The important question is which data must be available for the target storefront to present, search, filter, and route correctly.
+Preparation should define the difference between historical order usability and live VTEX operation. That distinction reduces false launch confidence.
 
-### Prepare Apps, APIs, and External-System Ownership <a href="#prepare-apps-apis-and-external-system-ownership" id="prepare-apps-apis-and-external-system-ownership"></a>
+### Prepare Storefront, Search, URL, and Content Inputs <a href="#prepare-storefront-search-url-and-content-inputs" id="prepare-storefront-search-url-and-content-inputs"></a>
 
-VTEX migrations often depend on app and integration context. ERP, PIM, WMS, CRM, accounting, payment, anti-fraud, marketplace, analytics, search, personalization, loyalty, subscription, and custom frontend systems may own values that appear in the source platform but should not be blindly migrated.
+VTEX storefront preparation should be handled separately from catalog preparation. Products and SKUs can migrate while storefront implementation, routing, search, facets, navigation, content pages, CMS behavior, redirects, and SEO-sensitive URLs still require target-side work.
 
-| Dependency type             | What to document                                                                                                      | Planning implication                                                                         |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| ERP                         | Product codes, price authority, stock, invoices, customers, orders, fulfillment, and accounting references.           | Decide which values are migrated as history and which remain system-owned after launch.      |
-| PIM                         | Product enrichment, images, categories, specifications, translations, approval workflows, and brand data.             | Catalog fields may need mapping from the PIM model, not only the source commerce platform.   |
-| WMS/logistics               | Warehouse IDs, carrier rules, shipping methods, pickup points, delivery promises, tracking, and fulfillment statuses. | Migration should preserve useful references while live fulfillment is configured separately. |
-| Marketplace systems         | Seller IDs, offer IDs, received SKUs, commission context, channel rules, and marketplace matching logic.              | Marketplace context may require Custom Service or separate implementation.                   |
-| Payment and anti-fraud      | Provider references, authorization states, transaction IDs, gift cards, fraud review, and reporting labels.           | Historical payment labels should be distinguished from live payment configuration.           |
-| VTEX IO and storefront apps | App name, related records, owned fields, storefront impact, and launch dependency.                                    | App-owned data may require app setup, mapping, Custom Service, or exclusion.                 |
-| APIs and middleware         | External IDs, synchronization keys, webhook needs, feed behavior, and ownership rules.                                | Integration references should be preserved only when they remain useful and correctly owned. |
+The team should prepare top product URLs, category URLs, search and filter examples, priority landing pages, CMS Pages, Blog Posts, metadata examples, redirect priorities, navigation notes, product-page expectations, and pages tied to campaigns or organic search. For headless or composable storefronts, route behavior and frontend ownership should be clarified before migration validation begins.
 
-A good dependency inventory prevents two weak outcomes: losing values that matter to operations, or migrating obsolete technical fields that clutter the new environment without supporting business decisions.
+| Storefront input             | Preparation purpose                                                   |
+| ---------------------------- | --------------------------------------------------------------------- |
+| Priority URLs                | Protect traffic and customer landing paths during launch.             |
+| Category and search examples | Confirm that specifications and categories support discovery.         |
+| CMS Pages and Blog Posts     | Decide what migrates, what is rebuilt, and what is redirected.        |
+| Metadata and content assets  | Support search continuity and page-quality review where supported.    |
+| Redirect plan                | Prevent URL continuity from being deferred until launch week.         |
+| Storefront ownership         | Separate migrated data from frontend implementation and routing work. |
+| Search/facet examples        | Confirm that structured values support discovery after migration.     |
 
-### Choose Demo Migration Samples Deliberately <a href="#choose-demo-migration-samples-deliberately" id="choose-demo-migration-samples-deliberately"></a>
+Storefront preparation should result in a practical launch map: what the migration provides, what VTEX configuration provides, what the frontend team builds, and what SEO or content owners must validate.
 
-Demo Migration should test the VTEX areas with the highest business risk. It should include ordinary records, but it should also include the structural cases that determine whether the migration approach is realistic.
+### Identify Apps, APIs, External Systems, and Custom Scope <a href="#identify-apps-apis-external-systems-and-custom-scope" id="identify-apps-apis-external-systems-and-custom-scope"></a>
 
-| Demo Migration sample                        | Include when                                                                                              | What it should prove                                                                         |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Baseline catalog sample                      | Ordinary products represent a meaningful share of the catalog.                                            | Standard product, SKU, category, image, price, and stock movement is understandable.         |
-| Complex SKU sample                           | Variants, specifications, stock, price, images, or availability differ by SKU.                            | Product choices remain sellable and discoverable.                                            |
-| Attachment, service, kit, or assembly sample | Customization, services, bundles, kits, or add-on choices affect selling.                                 | Requirements are classified for standard handling, Add-ons, target setup, or Custom Service. |
-| Trade policy or price-table sample           | Pricing or availability changes by channel, customer, region, B2B context, or marketplace.                | Commercial behavior can be evaluated in the right target context.                            |
-| Marketplace or seller sample                 | Seller, offer, marketplace order, received SKU, or commission context matters.                            | Marketplace meaning is not misread as generic product or order data.                         |
-| Master Data or custom field sample           | Custom entities, app-owned fields, external IDs, or checkout values affect business processes.            | Custom data ownership and service path are clear.                                            |
-| Storefront and URL sample                    | Important products, categories, CMS Pages, Blog Posts, landing pages, or organic URLs carry launch value. | Search, navigation, content, and SEO-sensitive paths can be reviewed.                        |
-| Integration-sensitive sample                 | ERP, PIM, WMS, payment, marketplace, or middleware references affect review.                              | External-system meaning is preserved or explicitly assigned outside migration.               |
+VTEX migrations often depend on systems outside the core source store. ERP, PIM, WMS, OMS, CRM, accounting, tax, fraud, search, marketplace, loyalty, subscription, personalization, analytics, and middleware systems may own data that the merchant expects to see in VTEX. Preparation should identify those dependencies before Demo Migration.
 
-Sample selection should be documented before the Demo Migration starts. Each sample should have a reason, a reviewer, and a pass condition.
+Each dependency should be recorded with its business purpose, data owner, source fields, target expectation, sample records, and required handling path. The classification should separate supported migration, Add-ons, Custom Service, exclusion, manual rebuild, and VTEX-side setup.
 
-### Identify Add-ons and Custom Service Signals Early <a href="#identify-add-ons-and-custom-service-signals-early" id="identify-add-ons-and-custom-service-signals-early"></a>
+| Requirement type                                                                                    | Better planning path                                                                |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Supported data that needs filtering                                                                 | Consider a Data Filter Add-on when the filter is clear and supported.               |
+| Supported fields that need careful destination alignment                                            | Consider Advanced Data Mapping when the target field is supported.                  |
+| Supported output that needs bounded configuration                                                   | Consider Advanced Data Configure when behavior remains within supported capability. |
+| Custom entities, app data, external IDs, bespoke transformations, or unsupported records            | Review for Custom Service.                                                          |
+| Storefront implementation, VTEX apps, integrations, payments, logistics, and live operational setup | Prepare as target-side implementation or configuration.                             |
 
-Preparation should identify where the migration can use standard handling, where Add-ons may support filtering or mapping needs, and where Custom Service is more appropriate. Add-ons and Custom Service should not be used interchangeably.
+The key boundary is practical: Add-ons adjust supported filtering, mapping, or configuration; Custom Service is for unsupported, custom, external-system, or bespoke migration requirements.
 
-| Preparation signal                                                                                            | Likely handling path                                                             | Reasoning                                                                               |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Only selected eligible records should migrate.                                                                | Data Filter Add-on, where available.                                             | Estimated entity numbers do not act as migration filters.                               |
-| Supported field mapping needs controlled adjustment.                                                          | Advanced Data Mapping, if the mapping fits available capability.                 | Mapping changes can help when both source and target fields are supported.              |
-| Supported values need configured transformation.                                                              | Advanced Data Configure, if the change fits available service capability.        | Configuration can help when the value change is supported and bounded.                  |
-| Custom Platform source.                                                                                       | Custom Service.                                                                  | Custom source interpretation requires tailored review.                                  |
-| Product configurator, bundle, service, kit, attachment, or assembly behavior does not fit supported handling. | Custom Service or separate target implementation.                                | The requirement may involve tailored logic rather than simple record transfer.          |
-| Marketplace, seller, received SKU, commission, or offer matching must be preserved.                           | Custom Service review.                                                           | Marketplace data carries workflow meaning that standard entity mapping may not capture. |
-| Master Data, app-owned records, custom checkout fields, or external IDs are business-critical.                | Custom Service review.                                                           | Custom data structures require ownership and mapping decisions.                         |
-| ERP/PIM/WMS/payment/anti-fraud/headless dependencies affect launch behavior.                                  | Custom Service, integration work, or target-side implementation.                 | External systems may own live behavior after launch.                                    |
-| Storefront implementation, search, layout, component behavior, or route logic is expected to change.          | Separate implementation or Custom Service review if migration logic is affected. | Storefront build work should not be hidden inside migration assumptions.                |
+### Prepare Demo Migration Samples and Review Ownership <a href="#prepare-demo-migration-samples-and-review-ownership" id="prepare-demo-migration-samples-and-review-ownership"></a>
 
-Preparation should produce a written service-scope view before Full Migration: what stays standard, what needs Add-ons, what needs Custom Service, what requires target configuration, and what remains outside migration scope.
+Demo Migration should be designed to test VTEX meaning, not only record presence. The sample set should include ordinary records and the records most likely to expose structural gaps. Each sample should have an owner who can approve the result from a business perspective.
 
-### Plan for Follow-Up Migration Review <a href="#plan-for-follow-up-migration-review" id="plan-for-follow-up-migration-review"></a>
+| Sample area                  | Reviewer                              | What the sample should prove                                                              |
+| ---------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Catalog and SKUs             | Catalog or merchandising owner        | Products, SKUs, categories, brands, specifications, images, and stock remain usable.      |
+| Pricing and promotions       | Commercial or pricing owner           | Migrated commercial values are understandable and target-side setup needs are known.      |
+| Customers and B2B            | CRM, support, or account owner        | Profiles, addresses, segmentation, and business context remain useful.                    |
+| Orders and logistics         | Operations, finance, or support owner | Historical orders remain readable for service and reconciliation.                         |
+| Master Data and integrations | Technical or data owner               | Custom entities, external IDs, and integration values are scoped correctly.               |
+| Storefront and SEO           | Frontend, content, or SEO owner       | URLs, content, search, navigation, and launch-sensitive pages have a clear handling plan. |
 
-VTEX stores often continue changing while migration preparation is underway. New products, SKUs, specifications, prices, promotions, marketplace records, customers, orders, CMS Pages, Blog Posts, Master Data, and app records may appear after Demo Migration. Additional Migration Options can help with later activity, but they should not bypass review when the new data introduces new structures.
+A sample should fail the preparation gate if nobody can explain what success looks like. VTEX readiness depends on owner-approved evidence, not only migration output.
 
-| Later change                                                        | Preparation action                                                         | Entity Points note                                                                                                                           |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| New records that match already-tested structures.                   | Review whether the follow-up action can proceed with limited revalidation. | New eligible Product, Customer, Order, or Blog Posts records may consume Entity Points when migrated for the first time.                     |
-| New products with different SKU/specification behavior.             | Add them to revalidation samples before follow-up activity is approved.    | Records already counted through the service license do not consume Entity Points again simply because another migration action is performed. |
-| New price tables, trade policies, promotions, or marketplace rules. | Recheck commercial behavior, not only record existence.                    | New eligible records may consume Entity Points when first migrated, even on the same migration path.                                         |
-| New Master Data, app-owned fields, or integration keys.             | Confirm ownership and whether Custom Service is needed.                    | Duplicate consumption should not be assumed for records already counted through the service license.                                         |
-| New CMS Pages, Blog Posts, landing pages, or SEO-sensitive URLs.    | Recheck content routing, metadata, redirects, and storefront presentation. | Blog Posts follow the same first-time migration principle when eligible.                                                                     |
+### Plan the Launch Window and Later Migration Activity <a href="#plan-the-launch-window-and-later-migration-activity" id="plan-the-launch-window-and-later-migration-activity"></a>
 
-The follow-up plan should identify which changes are safe because they match tested patterns and which changes require renewed review because they introduce new VTEX behavior.
+Many merchants keep the source store active while VTEX is prepared. New products, customers, orders, Blog Posts, content updates, price changes, marketplace records, or integration updates may appear after the first migration run. Preparation should define how later migration activity will be handled before launch.
 
-### VTEX Preparation Readiness Matrix <a href="#vtex-preparation-readiness-matrix" id="vtex-preparation-readiness-matrix"></a>
+The team should decide whether later activity should continue with the last used configuration, continue with a new configuration, or require a new migration. The choice affects what needs to be revalidated. A configuration change may require renewed review of fields, filters, mappings, or affected records. A new migration may require broader target review if earlier migrated data is replaced.
 
-Use the matrix below before Demo Migration and again before Full Migration. The goal is to confirm that preparation is broad enough to support a meaningful review.
-
-| Readiness area            | Minimum evidence                                                                | Strong readiness signal                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Target context            | Account, storefront approach, trade policies, apps, and integrations are known. | Reviewers know which target environment and sales contexts must approve results.                                                 |
-| Catalog/SKU structure     | Ordinary and complex product samples are selected.                              | Samples include SKU variation, specifications, attachments, services, kits, collections, stock, and category-sensitive products. |
-| Pricing/trade policies    | Base prices and major rules are listed.                                         | Channel-specific, B2B, marketplace, promotion, and external pricing examples are prepared.                                       |
-| Marketplace/OMS/logistics | Ordinary order samples are available.                                           | Seller, marketplace, pickup, delivery, refund, partial fulfillment, invoice, and external references are represented.            |
-| Customer/Master Data      | Customer profiles and addresses are prepared.                                   | B2B, segmentation, consent, Master Data, app-owned fields, and external IDs are classified.                                      |
-| Storefront/content/URLs   | Priority products and categories are known.                                     | Search, facets, CMS Pages, Blog Posts, landing pages, redirects, metadata, and frontend dependencies are documented.             |
-| Apps/integrations         | Main systems are listed.                                                        | Ownership is assigned for each app/API/external-system value that affects launch behavior.                                       |
-| Service path              | Basic service expectation is known.                                             | Standard handling, Add-ons, Custom Service, target setup, and exclusions are separated.                                          |
-| Follow-up handling        | Data changes are expected.                                                      | Additional Migration Options review includes structural revalidation and Entity Points implications.                             |
+Entity Points should be understood correctly during this planning. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Eligible entities already recorded through the service license do not consume Entity Points again only because another migration action occurs on the same migration path.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VTEX migration preparation should turn a complex platform move into a controlled review process. Catalog, SKUs, specifications, trade policies, pricing, promotions, marketplace records, OMS history, logistics context, customer data, Master Data, storefront content, CMS Pages, Blog Posts, URLs, apps, APIs, and external-system references should be prepared as connected business evidence.
+VTEX preparation should create a practical evidence package for an enterprise commerce environment. The merchant should prepare catalog and SKU samples, pricing and promotion examples, customer and B2B context, Master Data expectations, historical order samples, storefront and URL inputs, integration dependencies, Demo Migration samples, ownership assignments, and launch-window decisions.
 
-The strongest preparation set includes ordinary records and difficult examples. It shows where the migration can remain within standard handling, where Add-ons may help, where Custom Service should be reviewed, and where target configuration or external-system implementation must be handled separately. That preparation makes Demo Migration useful and reduces the risk of approving a record transfer that does not support the intended VTEX launch.
+A strong preparation process makes the difference between a record transfer and a controlled VTEX migration. It shows what should migrate, what should be configured in VTEX, what needs Add-ons, what requires Custom Service review, and what must be validated before Full Migration.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should be prepared first before migrating to VTEX?**
+**What should be prepared first for a VTEX migration?**
 
-Start with the target VTEX context: account, storefront approach, trade policies, sales channels, marketplace or seller setup, apps, integrations, and operational reviewers. After that, prepare catalog, pricing, customer, order, storefront, Master Data, and integration samples.
+Start with the target operating model. Clarify whether VTEX will support ordinary catalog migration, marketplace operations, B2B, headless storefronts, complex integrations, or custom Master Data. That decision determines which evidence matters most.
 
-**Which VTEX catalog samples are most useful before Demo Migration?**
+**Why are catalog and SKU samples so important for VTEX?**
 
-Use samples that expose real structure: multi-SKU products, specification-heavy products, category-sensitive products, products with different images or stock by SKU, attachments, assembly options, services, kits, collections, marketplace-related products, and high-value products that affect launch confidence.
+VTEX catalog meaning depends on products, SKUs, categories, brands, and specifications. Representative samples reveal whether source products become usable VTEX records or whether mapping, configuration, custom handling, or manual setup is needed.
 
-**Should pricing and trade policies be prepared before migration?**
+**Should storefront readiness be prepared separately from product migration?**
 
-Yes. VTEX pricing and availability may depend on base prices, price tables, promotions, trade policies, sales channels, B2B context, marketplace behavior, or external pricing systems. Preparing examples early prevents reviewers from mistaking a correct default price for complete commercial readiness.
+Yes. Product and SKU migration can support storefront work, but URLs, routing, search, facets, navigation, CMS Pages, Blog Posts, metadata, and frontend implementation require separate planning and validation.
 
-**Does migrating historical orders configure live VTEX OMS and logistics behavior?**
+**When should Master Data or external systems be reviewed?**
 
-No. Historical order migration can preserve readable order context, but live OMS, logistics, fulfillment, pickup, delivery, invoicing, and integration behavior require target configuration and separate validation.
+They should be reviewed before Demo Migration if they contain customer context, custom entities, external IDs, integration values, segmentation, marketplace data, or operational fields that the business expects to use after launch.
 
-**When should VTEX preparation raise Custom Service review?**
+**How should later migration activity be planned for VTEX?**
 
-Raise Custom Service review when the project involves Custom Platform source data, custom product logic, marketplace or seller workflow data, Master Data entities, app-owned records, custom checkout fields, external-system references, integration-dependent values, or any requirement that needs tailored migration logic beyond available standard handling and Add-ons.
+Define whether the next action should continue with the last used configuration, continue with a new configuration, or perform a new migration. Then decide which products, customers, orders, Blog Posts, fields, mappings, and launch-critical samples must be revalidated.

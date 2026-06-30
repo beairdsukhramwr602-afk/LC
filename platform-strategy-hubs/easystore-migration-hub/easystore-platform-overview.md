@@ -1,196 +1,127 @@
 # EasyStore Platform Overview
 
-EasyStore by JoomShaper is a Joomla e-commerce extension for merchants who want online selling to operate inside a Joomla-based website. Its value is not limited to creating products, categories, checkout, orders, coupons, inventory, customers, refunds, tax, shipping, payments, analytics, and store administration. Its value is that commerce can live inside the wider Joomla site environment, where content, menus, page layouts, templates, extensions, and site navigation may already support the merchant’s brand and customer journey.
+EasyStore by JoomShaper is a Joomla e-commerce extension for merchants who want online selling to operate inside a Joomla website. Migration into EasyStore should therefore be planned as a move into a Joomla-managed commerce environment, not as a simple transfer into a separate hosted storefront. Products, variants, categories, orders, customers, coupons, inventory, shipping, tax, payment settings, refunds, reviews, and store administration all need to be understood alongside the Joomla site that presents and supports them.
 
-A migration to EasyStore by JoomShaper should therefore be planned as a move into an extension-based Joomla commerce model. The migration result must preserve more than record presence. Products should remain sellable. Variants should remain understandable. Orders should remain useful. Customers should remain connected to the right commercial history. Storefront paths, category pages, product pages, checkout behavior, and account areas should make sense inside the Joomla implementation.
+That distinction shapes the entire migration plan. A product record may migrate cleanly, but the customer-facing result still depends on Joomla menus, template behavior, page layouts, modules, internal links, and extension configuration. Historical orders may appear in the target environment, but their usefulness depends on line-item meaning, customer context, payment references, tax, shipping, refunds, and status interpretation. EasyStore can be a strong target when the merchant wants commerce and content to remain close together, but that strength only helps when the migration plan respects the boundary between migrated commerce data and Joomla-side implementation work.
 
-For merchants already committed to Joomla, this can be a practical Target Platform choice. EasyStore by JoomShaper can support a store experience that remains close to Joomla site management and can connect store presentation with JoomShaper’s broader design ecosystem, especially where SP Page Builder is part of the storefront workflow. For merchants moving from a platform where commerce, content, theme behavior, checkout behavior, and extensions are tightly integrated in a different way, the migration requires earlier planning around what should become native EasyStore data, what should remain Joomla content, and what may need configuration or Custom Service review.
+### EasyStore by JoomShaper as a Joomla Commerce Environment <a href="#easystore-by-joomshaper-as-a-joomla-commerce-environment" id="easystore-by-joomshaper-as-a-joomla-commerce-environment"></a>
 
-### What Changes in a Migration to EasyStore by JoomShaper  <a href="#what-changes-in-a-migration-to-easystore-by-joomshaper" id="what-changes-in-a-migration-to-easystore-by-joomshaper"></a>
+EasyStore belongs to the Joomla extension ecosystem. Its migration significance comes from the way commerce records sit inside a broader Joomla site rather than replacing the entire website structure with a standalone commerce stack. The target store may depend on EasyStore records for selling, while Joomla continues to control content pages, menus, site navigation, modules, templates, access behavior, and page-building choices.
 
-Moving to EasyStore by JoomShaper changes how the store is organized because commerce is placed inside a Joomla extension environment. The Source Platform may have handled catalog structure, page routes, theme behavior, customer accounts, checkout settings, and operational rules in one system. In EasyStore by JoomShaper, those areas can involve both EasyStore configuration and the surrounding Joomla site structure.
+| Planning area         | EasyStore by JoomShaper implication                                                                                                                   | Migration consequence                                                                                    |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Commerce records      | Products, variants, categories, orders, customers, coupons, reviews, inventory, shipping, tax, and payment context must become usable EasyStore data. | Record counts are not enough; the selling meaning of each record type must be preserved where supported. |
+| Joomla site structure | Menus, aliases, content pages, modules, templates, and layout tools may shape the storefront experience.                                              | Storefront continuity requires Joomla implementation review in addition to data migration.               |
+| Design workflow       | SP Page Builder or JoomShaper templates may influence product-page and landing-page presentation.                                                     | Layout expectations should be separated from migrated catalog data.                                      |
+| Extension behavior    | Source data may include fields or workflows created by apps, plugins, modules, or custom code.                                                        | Unsupported or bespoke behavior may need Add-ons or Custom Service review.                               |
+| Operations            | Checkout, shipping, tax, payment gateways, refunds, analytics, and notifications may require target-side configuration.                               | Migration should not be treated as automatic store setup.                                                |
 
-The practical change is that migration planning must connect store records with site behavior. Product data, customer records, order history, shipping rules, tax rules, payment assumptions, categories, product pages, menus, and design layout should be reviewed as connected parts of the future store.
+The practical planning question is not only whether data can be moved. The more important question is whether the migrated result supports the way the merchant expects to sell, manage, and present products inside Joomla.
 
-| Migration area                 | What changes in EasyStore by JoomShaper                                                                                                          | Why it matters during planning                                                                                                |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Store foundation               | The store operates as a Joomla e-commerce extension rather than as a separate commerce stack.                                                    | Store data, menus, templates, modules, and content structure may all affect the final customer experience.                    |
-| Product catalog                | Products must be interpreted through EasyStore’s product, variant, category, tag, image, pricing, and inventory structure.                       | A product should remain commercially understandable, not merely visible in the target administration area.                    |
-| Customer and order records     | Customers, orders, refunds, discounts, totals, tax, shipping, and payment context must remain useful after migration.                            | Historical data should support customer service, accounting reference, and operational continuity.                            |
-| Storefront presentation        | Product pages, category pages, checkout paths, account areas, and navigation may depend on Joomla menus, templates, and page-building decisions. | Storefront continuity requires planning beyond data migration.                                                                |
-| Extensions and custom behavior | Source behavior may be controlled by custom fields, plugins, third-party services, or bespoke logic.                                             | Non-standard behavior may require mapping review, Add-on review, or Custom Service instead of ordinary migration assumptions. |
+### What Changes When the Store Moves to EasyStore <a href="#what-changes-when-the-store-moves-to-easystore" id="what-changes-when-the-store-moves-to-easystore"></a>
 
-#### Product data becomes part of an EasyStore catalog structure  <a href="#product-data-becomes-part-of-an-easystore-catalog-structure" id="product-data-becomes-part-of-an-easystore-catalog-structure"></a>
+A Source Platform may manage catalog structure, page routes, checkout behavior, customer accounts, payment settings, and storefront layout inside one system. EasyStore separates some of those responsibilities. Commerce records belong to EasyStore. Site structure belongs to Joomla. Presentation may depend on Joomla templates, modules, or SP Page Builder layouts. Payment, shipping, tax, checkout, and notification behavior may need target-side configuration.
 
-Products are not just names, descriptions, prices, and images. In a real store, product data carries buying meaning. A migrated EasyStore by JoomShaper product should preserve the information shoppers need to compare, choose, and purchase the item, while also preserving the management structure the merchant needs after launch.
+This separation makes migration planning more precise. A clean EasyStore migration should identify which information becomes store data, which information remains site content, which expectations are configuration tasks, and which source-specific behavior needs deeper review.
 
-That planning is especially important for products with variants, multiple images, category relationships, tags, sale pricing, inventory rules, shipping requirements, or source-specific display behavior. If these details are unclear in the Source Platform, the migrated result may look complete while still being difficult to manage or confusing for shoppers.
+| Source expectation                                    | EasyStore migration interpretation                                                                                                                            |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product pages migrate exactly as they appear now.     | Product data may migrate, but page presentation, menus, modules, and layouts may need Joomla-side implementation.                                             |
+| Product options behave the same automatically.        | Variants and product choices must be reviewed against EasyStore’s supported product structure.                                                                |
+| Historical orders only need totals and order numbers. | Useful order history should preserve line items, customer context, discounts, tax, shipping, payment references, refunds, and status meaning where supported. |
+| Customer accounts are only contact records.           | Customer records should support order lookup, repeat purchase context, and account continuity where the selected migration path allows.                       |
+| Store settings transfer as data.                      | Shipping, tax, payment, checkout, notification, and analytics behavior often needs configuration in EasyStore or Joomla.                                      |
 
-#### Orders and customers need operational meaning  <a href="#orders-and-customers-need-operational-meaning" id="orders-and-customers-need-operational-meaning"></a>
+This does not make EasyStore a difficult target by default. It means that the project should avoid treating a Joomla e-commerce extension as if it were an isolated catalog database.
 
-Customer and order migration should not be judged only by whether customer names and order numbers appear in EasyStore. A useful result should preserve account context, customer identity, ordered products, line items, totals, discounts, taxes, shipping details, payment references, refund context, and order status meaning as far as the selected migration path and supported behavior allow.
+### Catalog Structure Matters Early <a href="#catalog-structure-matters-early" id="catalog-structure-matters-early"></a>
 
-This matters because historical orders often remain useful after launch. Merchants may need them for customer service, repeat purchase support, revenue review, warranty reference, fulfillment questions, or internal reporting. If the source order structure contains custom statuses, external identifiers, third-party fulfillment references, or app-owned fields, those details should be reviewed before assuming that standard record migration will preserve the full operating meaning.
+EasyStore product migration should preserve selling meaning, not only product visibility. Products may include names, descriptions, prices, SKUs, images, categories, tags, variants, sale offers, coupons, inventory values, shipping requirements, and review context. If the source catalog uses inconsistent options, custom fields, bundled logic, app-created data, or special pricing rules, the target result should be reviewed before Full Migration rather than assumed to fit automatically.
 
-#### Storefront structure depends on Joomla context  <a href="#storefront-structure-depends-on-joomla-context" id="storefront-structure-depends-on-joomla-context"></a>
+A strong early catalog review uses representative products. The merchant should identify ordinary products, variant-heavy products, discounted products, image-heavy products, products with special shipping requirements, products that belong to important categories, and products whose source behavior depends on custom or third-party logic.
 
-EasyStore by JoomShaper sits inside Joomla, so storefront planning should include Joomla site decisions. Product pages, category pages, menus, internal links, content sections, metadata, checkout paths, customer account areas, and landing pages may depend on how the Joomla site is built.
+| Catalog sample                             | Why it should be reviewed                                                            |
+| ------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Simple product                             | Proves ordinary product fields, images, category assignment, and price display.      |
+| Variant-heavy product                      | Tests option meaning, variant generation, inventory handling, and price differences. |
+| Discounted or coupon-sensitive product     | Shows whether promotional context needs mapping, configuration, or manual setup.     |
+| Product with shipping requirements         | Helps separate migrated product data from shipping configuration.                    |
+| Product with source-specific custom fields | Identifies Add-on or Custom Service needs before the issue appears late.             |
 
-For stores using SP Page Builder, custom Joomla templates, custom modules, or other extensions, the storefront experience may involve more than EasyStore records. Migration planning should separate what Next-Cart migrates as supported commerce data from what the merchant, developer, or implementation team must configure inside the Joomla site.
+The target catalog should be easy for the merchant to manage and clear enough for shoppers to understand. If the product record appears but its buying choices are confusing, the migration result is not yet operationally strong.
 
-#### Configuration-sensitive behavior must be reviewed early  <a href="#configuration-sensitive-behavior-must-be-reviewed-early" id="configuration-sensitive-behavior-must-be-reviewed-early"></a>
+### Storefront Continuity Depends on Joomla Site Decisions <a href="#storefront-continuity-depends-on-joomla-site-decisions" id="storefront-continuity-depends-on-joomla-site-decisions"></a>
 
-Tax, shipping, payments, checkout behavior, coupons, refunds, inventory, email notifications, analytics, and store settings are not always simple record transfers. Some of these areas may need to be configured inside EasyStore after the data migration. Others may depend on how the Source Platform stored rules, relationships, or third-party identifiers.
+EasyStore can support online selling inside Joomla, but the final storefront experience is not controlled by product records alone. Product pages, category pages, checkout entry points, internal links, landing pages, content blocks, menus, templates, and page-builder layouts may all affect how the customer reaches and understands the store.
 
-A strong migration plan identifies which behavior is expected from migrated data, which behavior must be configured in EasyStore, and which behavior requires deeper review because it is custom, third-party, or outside standard service capability.
+This matters most when the source store is content-led or SEO-sensitive. A merchant may expect old category URLs, product links, landing pages, or guide pages to continue supporting discovery after migration. Those paths should be documented before launch. Data migration can support the records that populate the store, but Joomla-side structure and presentation still require planning.
 
-### Where EasyStore by JoomShaper Is Often a Strong Target  <a href="#where-easystore-by-joomshaper-is-often-a-strong-target" id="where-easystore-by-joomshaper-is-often-a-strong-target"></a>
+The strongest migration plan separates three layers: commerce data, Joomla structure, and presentation implementation. Mixing those layers leads to unrealistic expectations. Separating them makes it easier to decide what Next-Cart should migrate, what should be configured in EasyStore, and what the merchant or implementation team should rebuild inside Joomla.
 
-EasyStore by JoomShaper is often strongest when the merchant wants commerce to remain close to Joomla site management. It can be a practical Target Platform when the business values Joomla content structure, design control, page-building workflows, and extension-based site ownership.
+### Operational Settings Need Target-Side Review <a href="#operational-settings-need-target-side-review" id="operational-settings-need-target-side-review"></a>
 
-It is also a stronger target when the merchant’s catalog and operations can be clearly represented inside EasyStore. Clean product records, understandable variants, organized categories, defined customer records, and predictable order history make the migration easier to plan, test, and validate.
+EasyStore includes store-management areas such as inventory, orders, customer profiles, refunds, analytics, shipping, tax, checkout, coupons, reviews, and payment integrations. Some information in these areas may migrate as records. Other behavior must be configured, tested, or reconnected after migration.
 
-#### Joomla-centered merchants  <a href="#joomla-centered-merchants" id="joomla-centered-merchants"></a>
+| Operational area    | Migration planning focus                                                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Orders              | Preserve useful history, line items, totals, discounts, tax, shipping, refunds, payment context, and customer links where supported. |
+| Customers           | Keep buyer identity and order relationship meaningful rather than only migrating contact fields.                                     |
+| Shipping and tax    | Decide which values are historical data and which rules must be configured in EasyStore.                                             |
+| Payment gateways    | Treat live payment setup as target-side configuration, not as ordinary historical data transfer.                                     |
+| Reviews and coupons | Confirm whether records are supported, source-owned, extension-owned, or require special handling.                                   |
 
-EasyStore by JoomShaper is a strong target when Joomla is part of the merchant’s future website strategy. Some businesses do not want commerce separated from the site that already manages content, brand pages, landing pages, service pages, or educational material. For these merchants, EasyStore can support a more unified Joomla-managed experience.
+This is where Demo Migration becomes valuable. It lets the merchant inspect representative products, orders, customers, and storefront relationships before the final launch decision.
 
-The migration implication is that the store should be planned with the site, not after the site. Products, categories, menus, content pages, and design areas should be reviewed together so the future store feels coherent to shoppers.
+### When EasyStore by JoomShaper Is a Strong Target <a href="#when-easystore-by-joomshaper-is-a-strong-target" id="when-easystore-by-joomshaper-is-a-strong-target"></a>
 
-#### Content-rich stores and brand-led catalogs  <a href="#content-rich-stores-and-brand-led-catalogs" id="content-rich-stores-and-brand-led-catalogs"></a>
+EasyStore is often a strong target when Joomla remains the merchant’s preferred site foundation. It is especially relevant for businesses that value Joomla content management, JoomShaper design workflows, product presentation inside a content-rich site, and practical store administration without moving the entire website to another commerce platform.
 
-EasyStore by JoomShaper can fit merchants whose stores depend on content and presentation, not only product grids. Examples include boutique catalogs, product-led brand sites, education-oriented sellers, service-and-product businesses, creators, small retailers, and merchants whose buying journey uses landing pages, guides, articles, or rich page sections.
+| Strong-fit condition                                | Why EasyStore can work well                                                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Joomla is part of the future website plan           | Commerce can remain connected to existing or planned Joomla site management.                                    |
+| Catalog structure is explainable                    | Products, variants, categories, images, and inventory can be mapped and validated with less ambiguity.          |
+| Storefront content matters                          | Product discovery can be planned around Joomla pages, menus, templates, and content paths.                      |
+| Operations are practical rather than heavily custom | Orders, customers, shipping, tax, coupons, reviews, and refunds can be reviewed through representative samples. |
+| Design control is important                         | SP Page Builder or Joomla templates can support presentation work separately from data migration.               |
 
-In these cases, the migration should preserve the catalog while also supporting the content paths that help customers understand the products. Product and category data should be validated alongside the Joomla page structure that will guide shoppers to those products.
+A strong fit still needs careful planning. EasyStore does not remove the need to review data meaning, configuration responsibility, extension ownership, and validation proof. It gives Joomla-centered merchants a useful target when those responsibilities are understood.
 
-#### Merchants with manageable product and variant complexity  <a href="#merchants-with-manageable-product-and-variant-complexity" id="merchants-with-manageable-product-and-variant-complexity"></a>
+### Migration Planning Should Separate Data, Configuration, and Implementation <a href="#migration-planning-should-separate-data-configuration-and-implementation" id="migration-planning-should-separate-data-configuration-and-implementation"></a>
 
-EasyStore by JoomShaper is easier to plan when the catalog is well organized. Products with clear SKUs, prices, images, categories, tags, and variant rules are better candidates than catalogs where years of changes have created duplicate categories, inconsistent options, missing images, unclear inventory, or mixed product logic.
+The cleanest EasyStore migration plan identifies three types of work before Full Migration.
 
-This does not mean that complex catalogs are impossible. It means that complex catalogs need more disciplined planning. Representative products should be selected for Demo Migration so the merchant can validate how EasyStore handles simple products, variant-heavy products, image-rich products, sale products, and records with important inventory or shipping behavior.
+| Work type             | Examples                                                                                                               | Typical responsibility                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Migrated data         | Supported products, categories, customers, orders, coupons, reviews, images, and related records.                      | Next-Cart under the selected migration path.                           |
+| Target configuration  | Shipping methods, tax rules, payment integrations, checkout options, notifications, analytics, and store settings.     | Merchant, developer, or implementation team, depending on the project. |
+| Joomla implementation | Menus, templates, modules, SP Page Builder layouts, landing pages, internal links, redirects, and visual presentation. | Merchant, developer, or Joomla implementation team.                    |
 
-#### Stores that need design control inside Joomla  <a href="#stores-that-need-design-control-inside-joomla" id="stores-that-need-design-control-inside-joomla"></a>
+Add-ons may help when supported data needs filtering, mapping, or bounded configuration. Custom Service should be reviewed when source data contains unsupported extension records, custom fields, outside-system identifiers, bespoke transformations, Custom Platform handling, or custom migration logic adjustment.
 
-EasyStore by JoomShaper may be especially relevant when JoomShaper design tools, SP Page Builder, Joomla templates, or custom Joomla layouts are part of the target experience. In that context, migration planning should account for both data continuity and presentation readiness.
+### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The migration should not assume that the old storefront design automatically becomes the new one. Instead, it should support the data foundation that the Joomla implementation will use: products, categories, product pages, checkout paths, customer account areas, and any content relationships that must be recreated or configured in the new site.
+EasyStore by JoomShaper is best understood as a Joomla commerce environment. Its migration value comes from keeping selling activity close to Joomla content, site structure, and design workflows while still providing store-management features for products, variants, orders, customers, shipping, tax, payments, coupons, reviews, refunds, inventory, and analytics.
 
-| Strong target signal                            | Why it supports EasyStore by JoomShaper                                                                                | Planning focus                                                                 |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Joomla is the desired website foundation        | Commerce can be managed inside the same broader site environment.                                                      | Clarify how store data, menus, content, and templates will work together.      |
-| Product structure is understandable             | Products, categories, tags, variants, images, pricing, and inventory can be mapped and validated more reliably.        | Select representative product samples before Demo Migration.                   |
-| Content and commerce need to support each other | Joomla pages and store records can be planned as connected customer journeys.                                          | Identify key landing pages, product routes, category pages, and content links. |
-| Store operations are not deeply bespoke         | Orders, customers, coupons, tax, shipping, payment context, and refunds are easier to test against EasyStore behavior. | Confirm which settings are migrated, configured, or reviewed separately.       |
-| Design control matters                          | Joomla templates, SP Page Builder, and EasyStore presentation can be planned deliberately.                             | Separate data migration from layout implementation.                            |
+A successful migration should preserve supported commerce records and also account for the Joomla context that shapes the storefront. The strongest plans separate migrated data from EasyStore configuration and Joomla implementation. That separation helps merchants avoid unrealistic launch assumptions and gives them a clearer path for testing products, orders, customers, checkout behavior, and storefront presentation before going live.
 
-### Where Deeper Planning Is Usually Needed  <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-Deeper planning is needed when the source store contains meaning that cannot be understood from basic record counts. This is common when products use complex options, orders depend on custom statuses, checkout behavior is heavily customized, shipping and tax rules are unusual, or storefront navigation is tightly connected to legacy routes and content pages.
+**Is EasyStore by JoomShaper the same as a hosted EasyStore platform?**
 
-The goal is not to make every migration complicated. The goal is to identify the parts of the source store where ordinary-looking data may carry hidden business meaning.
+No. EasyStore by JoomShaper should be treated as a Joomla e-commerce extension. Migration planning should account for Joomla site structure, templates, menus, modules, page-building workflows, and extension behavior.
 
-#### Catalog and product-variant complexity  <a href="#catalog-and-product-variant-complexity" id="catalog-and-product-variant-complexity"></a>
+**Does product migration automatically rebuild the Joomla storefront?**
 
-Products deserve deeper review when the source catalog uses multiple option layers, option-level pricing, option-level inventory, product bundles, digital products, special images, custom product fields, or source-specific display rules. These structures can affect how shoppers choose products and how merchants manage stock after launch.
+No. Product data may support the future storefront, but menus, templates, SP Page Builder layouts, landing pages, redirects, internal links, and visual presentation usually need Joomla-side planning or implementation.
 
-| Catalog planning area | What to check                                                                  | Why it matters                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| Product variants      | Size, color, material, package, bundle, or other option structures             | Variant meaning affects shopper selection, pricing, inventory, and order line interpretation.        |
-| Product images        | Main images, gallery images, option-specific images, or missing images         | Image structure affects product trust and storefront quality.                                        |
-| Categories and tags   | Category depth, duplicate categories, tags, collections, and product placement | Discovery depends on clean organization, not only product migration.                                 |
-| Custom product fields | Fields added by source apps, extensions, custom code, or manual workarounds    | Non-standard data may need Advanced Data Mapping, Advanced Data Configure, or Custom Service review. |
+**What product data should be reviewed before migration?**
 
-#### Joomla site structure and storefront presentation  <a href="#joomla-site-structure-and-storefront-presentation" id="joomla-site-structure-and-storefront-presentation"></a>
+Review products that represent the real catalog: simple products, variants, products with multiple images, discounted products, products with special shipping requirements, important category assignments, and products with source-specific custom fields.
 
-Joomla context deserves deeper planning because the store experience may depend on menus, templates, modules, page-builder sections, landing pages, and internal links. A product can migrate correctly but still be hard to find if menu structure, category routes, or page placement is not planned.
+**Can EasyStore support stores with variants and inventory?**
 
-This is especially important for stores with organic search traffic, paid campaign landing pages, affiliate links, bookmarked product URLs, content-heavy category pages, or custom navigation. These stores should identify high-value URLs and key entry paths before migration so route continuity and redirect planning can be handled deliberately.
+EasyStore by JoomShaper presents product variants and inventory management as key store features. The migration plan should still validate representative variant-heavy products and inventory-sensitive records before launch.
 
-#### Checkout, tax, shipping, and payment behavior  <a href="#checkout-tax-shipping-and-payment-behavior" id="checkout-tax-shipping-and-payment-behavior"></a>
+**When should Custom Service be considered?**
 
-Checkout-related behavior should be reviewed before migration because it often combines data, settings, integrations, and business rules. Shipping methods may depend on regions, carriers, product dimensions, order totals, or custom logic. Tax rules may depend on country, region, product type, customer type, or source-specific configuration. Payment behavior may depend on gateway setup, status rules, payment references, or third-party services.
-
-These areas should not be treated as ordinary data fields. The migration plan should identify which information is part of supported commerce data, which settings need to be configured in EasyStore, and which requirements need deeper service review.
-
-#### Extension-owned and custom source behavior  <a href="#extension-owned-and-custom-source-behavior" id="extension-owned-and-custom-source-behavior"></a>
-
-A source store may contain behavior created by extensions, custom code, third-party integrations, external databases, ERP systems, marketing tools, marketplace connectors, membership systems, subscription services, or custom Joomla development. These behaviors may not be visible in a standard product, customer, or order export.
-
-When this kind of source behavior affects the expected EasyStore result, it should be reviewed before execution. Standard Service may be enough for clear supported data. Custom Service should be reviewed when the source includes Custom Platform data, unsupported extension data, bespoke relationships, third-party identifiers, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader transformation requirements.
-
-#### Historical order interpretation  <a href="#historical-order-interpretation" id="historical-order-interpretation"></a>
-
-Order history often looks simple until it is used. Merchants may need old orders for support, repeat buying, warranty review, fulfillment questions, finance checks, or customer account history. A migrated order should therefore be validated for more than order number and total.
-
-Important samples should include orders with discounts, refunds, tax, shipping charges, different payment states, multiple products, variant products, cancelled or failed status if relevant, and records that connect to important customers. If the source platform used custom order statuses or external fulfillment references, those should be identified before migration.
-
-### What Should Be Understood Early Before Moving into EasyStore by JoomShaper  <a href="#what-should-be-understood-early-before-moving-into-easystore-by-joomshaper" id="what-should-be-understood-early-before-moving-into-easystore-by-joomshaper"></a>
-
-The strongest EasyStore by JoomShaper migrations start with a clear understanding of what the future Joomla store is supposed to become. The merchant should know how products will be organized, how Joomla content will support store discovery, which operational settings matter, which source behaviors are standard, and where custom review may be needed.
-
-#### 1. Joomla is part of the commerce decision  <a href="#id-1-joomla-is-part-of-the-commerce-decision" id="id-1-joomla-is-part-of-the-commerce-decision"></a>
-
-EasyStore by JoomShaper should be chosen with Joomla in mind. The merchant is not only choosing a place to store products and orders; the merchant is choosing a Joomla-based environment where store data, menus, templates, content pages, and extension decisions may shape the customer experience.
-
-This means the migration should begin with the intended site model. The merchant should know whether the future store will be a small catalog, a content-rich product site, a brand-led storefront, a service-and-product website, or a more customized Joomla commerce project.
-
-#### 2. The product catalog must be reviewed as selling structure  <a href="#id-2-the-product-catalog-must-be-reviewed-as-selling-structure" id="id-2-the-product-catalog-must-be-reviewed-as-selling-structure"></a>
-
-Products, variants, categories, tags, images, prices, inventory, coupons, and sale behavior should be reviewed as a commercial system. A good migration result lets shoppers choose the correct product and lets the merchant manage the product confidently after launch.
-
-A weak plan treats the catalog as a list of records. A stronger plan identifies the product examples that reveal structure: simple products, variant-heavy products, products with multiple images, products in several categories, discounted products, products with special shipping needs, and products that represent the merchant’s main revenue lines.
-
-#### 3. Store data and Joomla content have different responsibilities  <a href="#id-3-store-data-and-joomla-content-have-different-responsibilities" id="id-3-store-data-and-joomla-content-have-different-responsibilities"></a>
-
-Not every part of the old store should be treated as EasyStore data. Some information may belong in products, categories, customers, orders, coupons, or store settings. Other information may belong in Joomla articles, CMS Pages, Blog Posts, menus, page-builder layouts, template areas, or custom modules.
-
-Before migration, those boundaries should be clarified. This prevents the Demo Migration from being judged against the wrong expectation. It also helps the merchant understand which work belongs to migration, which work belongs to Joomla site implementation, and which work may need Custom Service review.
-
-#### 4. The service approach depends on structural burden  <a href="#id-4-the-service-approach-depends-on-structural-burden" id="id-4-the-service-approach-depends-on-structural-burden"></a>
-
-The selected migration approach should match the complexity of the source store and the desired EasyStore result. Standard Service may be suitable when the source data is clear, supported data types align with the selected migration path, and the merchant can self-perform the migration process on the Next-Cart website with 24/7 expert support.
-
-Managed Service may be safer when the merchant wants Next-Cart-led execution using standard service capability and purchased Add-ons. Custom Service should be reviewed when the migration requires custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom fields, unsupported extension data, third-party data, external identifiers, or broader bespoke interpretation.
-
-#### 5. Demo Migration should test meaning, not only record movement  <a href="#id-5-demo-migration-should-test-meaning-not-only-record-movement" id="id-5-demo-migration-should-test-meaning-not-only-record-movement"></a>
-
-A useful Demo Migration sample should include records that reveal how EasyStore by JoomShaper will behave after migration. For this platform, that usually means simple products, variant-heavy products, products with multiple images, key categories, representative customers, recent and older orders, discount examples, tax and shipping examples, refunds if available, and any records that depend on source-specific logic.
-
-The Demo Migration should answer practical questions: Are products sellable? Are variants understandable? Are categories useful? Are customer records readable? Is order history meaningful? Are discounts, taxes, shipping, and payment context clear enough? Are Joomla routes, menus, and storefront expectations aligned with the migration result?
-
-| Early question                             | What the answer should clarify                                                              |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Why is Joomla part of the target strategy? | Whether EasyStore fits the future operating model.                                          |
-| Which products reveal catalog complexity?  | Which samples should be used to validate variants, pricing, images, and inventory.          |
-| Which content and routes drive discovery?  | Which menus, pages, internal links, and URLs need planning.                                 |
-| Which rules are configuration-sensitive?   | Whether tax, shipping, payment, coupon, refund, or checkout behavior needs setup or review. |
-| Which data is custom or extension-owned?   | Whether the project needs Add-on review or Custom Service.                                  |
-
-### Conclusion  <a href="#conclusion" id="conclusion"></a>
-
-EasyStore by JoomShaper should be evaluated as a Joomla e-commerce extension target, not only as a place to receive exported store records. The central migration question is whether the merchant’s products, variants, categories, customers, orders, discounts, tax, shipping, payment context, storefront routes, and Joomla presentation layer can become reliable inside the future EasyStore environment.
-
-When the source data is clean and the merchant wants commerce to remain close to Joomla site management, EasyStore by JoomShaper can be a strong Target Platform. When the source store depends on complex variants, custom fields, unusual checkout logic, extension-owned data, non-standard order meaning, or highly specific Joomla implementation needs, the migration should be planned with stronger mapping, service-path review, and representative Demo Migration validation.
-
-Use Demo Migration results to test whether EasyStore by JoomShaper preserves operating meaning, not only whether records appear in the target store. If the source store includes complex variants, custom fields, Joomla-specific content dependencies, unusual shipping or tax rules, unsupported extension data, or Custom Platform source data, review the migration path through Live Chat so the right Standard Service, Managed Service, Custom Service, and Add-on boundaries are clear before execution.
-
-### FAQs  <a href="#faqs" id="faqs"></a>
-
-**What makes migration to EasyStore by JoomShaper different from moving to a standalone store platform?**
-
-EasyStore by JoomShaper operates inside Joomla. That means products, categories, checkout behavior, customers, orders, menus, templates, content pages, page-builder sections, and extension behavior may all affect the final store experience. Migration planning should connect commerce data with Joomla site structure.
-
-**Is EasyStore by JoomShaper a good Target Platform for Joomla-based merchants?**
-
-It can be a strong Target Platform when the merchant wants commerce to remain inside a Joomla-managed website and can clearly define the future store structure. It is usually strongest when the catalog, variants, categories, customers, and orders can be represented cleanly inside EasyStore and supported by the Joomla site implementation.
-
-**Can product variants be migrated to EasyStore by JoomShaper?**
-
-Product variants can be included when they are supported by the selected migration path and can be mapped into the target structure. Variant-heavy products should be selected for Demo Migration so pricing, inventory, images, and shopper-facing option behavior can be reviewed before Full Migration.
-
-**Should Joomla pages and EasyStore data be planned together?**
-
-Yes. Product pages, category pages, CMS Pages, Blog Posts, menus, landing pages, internal links, and design sections may work together in a Joomla-based store. Planning them separately can create gaps between migrated data and the customer-facing storefront.
-
-**When does migration to EasyStore by JoomShaper require Custom Service?**
-
-Custom Service should be reviewed when the source store includes Custom Platform data, custom fields, unsupported extension data, bespoke product logic, unusual order structures, third-party identifiers, custom Joomla development, Tailored Add-ons, Custom Add-ons, or any transformation that requires custom migration logic adjustment beyond standard service capability.
+Custom Service should be considered when the source includes unsupported extension data, custom fields, third-party identifiers, bespoke product logic, Custom Platform handling, or custom migration logic adjustment beyond supported behavior.

@@ -1,203 +1,177 @@
 # WooCommerce Validation Priorities
 
-WooCommerce validation must prove more than record transfer. Because WooCommerce commerce data operates inside WordPress, a migration is successful only when products remain purchasable, variations behave correctly, customer and order history remain readable, checkout-related context is preserved where applicable, plugin-owned fields are classified correctly, and store URLs, media, SEO, and content-commerce paths still support the customer journey.
+WooCommerce validation must prove that the migrated store can still operate as a commerce system, not merely that records exist in the database. Products need to remain purchasable, variations need to behave correctly, orders need to remain readable, customers need to retain useful account and history context, and catalog discovery must still help shoppers find the right items.
 
-Validation should therefore combine record checks with behavior checks. A WooCommerce Demo Migration or Full Migration should be reviewed through representative samples that expose the real store structure: simple products, variable products, product add-ons, subscriptions, bookings, memberships, coupons, orders, guest customers, registered users, CMS Pages, Blog Posts, redirects, SEO metadata, custom fields, and integration references.
+That makes WooCommerce validation broader than a count comparison. A product count may match while variation choices fail. Order totals may appear while refunds, coupons, tax labels, shipping values, checkout fields, or plugin metadata are unclear. Customer records may migrate while account roles, membership context, wholesale status, or subscription references require separate review.
 
-### What WooCommerce Validation Should Prove <a href="#what-woocommerce-validation-should-prove" id="what-woocommerce-validation-should-prove"></a>
+A strong validation process combines representative samples, admin review, storefront testing, and service-scope acceptance. The goal is not to inspect every record manually. The goal is to prove that the important data patterns, commercial behaviors, and operational references are usable before the store is accepted.
 
-WooCommerce validation should confirm that migrated records still support the store operations they represented in the Source Platform. A product that exists but has broken variation choices is not validated. An order that exists but no longer shows tax, shipping, payment, coupon, refund, or metadata context clearly is not validated. A customer account that exists but loses membership, wholesale, or subscription meaning may require deeper review.
+### What WooCommerce Validation Should Prove Before Launch <a href="#what-woocommerce-validation-should-prove-before-launch" id="what-woocommerce-validation-should-prove-before-launch"></a>
 
-| Validation layer       | What should be proven                                                                                              | Why it matters                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Product structure      | Products, variations, attributes, categories, tags, brands, images, stock, and visibility remain usable            | Customers must still find and buy the intended items                   |
-| Order history          | Statuses, totals, line items, tax, shipping, payment labels, notes, refunds, coupons, and metadata remain readable | Staff need usable history for service, reporting, and reconciliation   |
-| Customer/account data  | Registered users, guest customers, billing/shipping details, roles, and account-related fields retain meaning      | Customer continuity depends on more than email addresses               |
-| Checkout context       | Checkout fields, payment labels, shipping labels, tax values, and order metadata are interpreted correctly         | Historical data should not be mistaken for live checkout configuration |
-| WordPress site data    | CMS Pages, Blog Posts, media, menus, URLs, redirects, SEO, and builder content remain connected to commerce        | Store discovery and trust often depend on content-commerce continuity  |
-| Plugin and custom data | Extension-owned records, custom fields, custom tables, and external IDs are classified and checked                 | WooCommerce behavior often depends on plugin-specific storage          |
-| Service-scope outputs  | Add-ons and Custom Service deliverables are validated against agreed expectations                                  | Non-standard scope needs explicit acceptance criteria                  |
+WooCommerce validation should answer one central question: can the target store use the migrated data in the way the business expects? The answer depends on the type of data being tested. Product validation proves buying paths. Order validation proves historical readability. Customer validation proves account continuity. Plugin validation proves whether special behavior has been migrated, rebuilt, excluded, or assigned to deeper service handling.
 
-### Validate Product and Variation Behavior <a href="#validate-product-and-variation-behavior" id="validate-product-and-variation-behavior"></a>
+| Validation area             | What must be proven                                                                                           | Practical acceptance signal                                                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Products and variations     | Product type, price, SKU, stock, attribute, image, visibility, and purchasability remain correct              | A representative shopper can select the right product or variation and add it to cart without confusion                                   |
+| Catalog discovery           | Categories, tags, attributes, brands, filters, search paths, and product URLs support browsing                | Customers can reach important products through the intended category, filter, search, and menu paths                                      |
+| Customers and accounts      | Registered users, guest customers, billing/shipping details, order links, and account roles remain meaningful | Staff can identify customers and understand their commercial history without manual reconstruction                                        |
+| Orders and HPOS context     | Order status, totals, line items, taxes, shipping, coupons, refunds, notes, and metadata are readable         | Staff can use order history for support, reconciliation, and reference after launch                                                       |
+| Checkout-related context    | Historical payment, shipping, tax, coupon, and custom checkout values are separated from live checkout setup  | The team does not mistake stored historical data for active target-store configuration                                                    |
+| WordPress site connection   | CMS Pages, Blog Posts, media, menus, URLs, redirects, and SEO fields remain connected to commerce paths       | Important product, category, landing, and content-commerce paths remain usable                                                            |
+| Plugin-owned or custom data | Extension fields, custom fields, custom tables, external IDs, and special workflows are classified            | Each non-standard requirement has a clear outcome: standard scope, Add-ons, Custom Service, target setup, external handling, or exclusion |
 
-WooCommerce product validation should start with customer-facing purchasability, not only product counts. Variable products require especially careful review because parent product records, attributes, and child variations must work together.
+Validation should start from the store’s business patterns. A small store with simple products may validate quickly through product pages, categories, customers, and orders. A store with variable products, bundles, subscriptions, wholesale rules, checkout customizations, or external systems needs more deliberate sampling because the risk is in relationships and behavior, not only in record transfer.
 
-| Product sample                                               | Validation priority                                                                                             | Pass condition                                                                                             |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Simple product                                               | Title, SKU, price, stock, images, category, visibility, product URL, and add-to-cart behavior                   | Product is visible where expected and can be purchased or hidden according to business rules               |
-| Variable product                                             | Parent product, variation attributes, child SKUs, prices, stock, images, default selections, and purchasability | Customers can select valid combinations and each variation reflects the correct commercial meaning         |
-| Product with add-ons or personalization                      | Add-on fields, option labels, price impact, order-line display, and fulfillment notes                           | Add-on information is either migrated, rebuilt, excluded, or routed to Custom Service review intentionally |
-| Subscription, booking, membership, bundle, or composite item | Extension ownership, product display, historical order meaning, and post-migration configuration needs          | Store team understands which data is migrated and which behavior depends on target extension setup         |
-| Product with brand or custom taxonomy                        | Brand, taxonomy placement, filter use, archive pages, and SEO-sensitive paths                                   | Product discovery remains consistent with the target catalog plan                                          |
+### Validate Product, Variation, and Attribute Behavior <a href="#validate-product-variation-and-attribute-behavior" id="validate-product-variation-and-attribute-behavior"></a>
 
-A useful validation sample should include the most complex items, not just the most common ones. Stores should include products with variation-level stock, sale pricing, gallery images, special tax or shipping behavior, category overlap, custom attributes, and extension-controlled purchase logic.
+WooCommerce product validation should begin with purchasability. A product is not fully validated because its title, image, or SKU exists. It is validated when the right shopper can see the right product, understand the options, choose a valid configuration, add it to cart, and produce an order record that preserves the expected details.
 
-### Validate Attributes, Categories, Tags, and Catalog Discovery <a href="#validate-attributes-categories-tags-and-catalog-discovery" id="validate-attributes-categories-tags-and-catalog-discovery"></a>
+Variable products deserve special attention because parent products, attributes, and individual variations must work together. WooCommerce allows each variation to carry its own price, stock, image, SKU, weight, dimensions, shipping class, tax class, and downloadable or virtual state. Validation must therefore sample both product-level and variation-level meaning.
 
-WooCommerce catalog discovery depends on the relationship between product taxonomies, attributes, URLs, themes, search, filters, and SEO. Validation should confirm that the catalog remains navigable and commercially understandable.
+| Product sample                                                  | What to validate                                                                                                                                                        | Pass condition                                                                                        |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Simple product                                                  | Title, slug, SKU, regular/sale price, stock, tax class, category, image, gallery, visibility, and add-to-cart behavior                                                  | Product displays correctly and can be purchased or hidden according to the intended rule              |
+| Variable product                                                | Parent product, global/local attributes, variation combinations, default selection, variation SKUs, prices, stock, images, tax/shipping differences, and purchasability | Customers can select valid options and each variation reflects the correct commercial meaning         |
+| Downloadable or virtual product                                 | File access, download limits, expiry values, shipping behavior, product type, and order status expectation                                                              | Non-physical products preserve delivery and fulfillment meaning where the target setup supports it    |
+| Product with add-ons or personalization                         | Option labels, price impact, required fields, order-line display, and fulfillment notes                                                                                 | The add-on requirement is migrated, configured, reviewed as Custom Service, or intentionally excluded |
+| Bundle, composite, booking, membership, or subscription product | Extension ownership, product display, purchase logic, historical order meaning, and active workflow expectations                                                        | The team understands which data is migrated and which behavior depends on target extension setup      |
 
-| Discovery element  | What to validate                                                                                                  | Common failure signal                                                        |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Product categories | Hierarchy, parent-child relationships, category names, slugs, product assignments, menu usage, and SEO pages      | Products exist but customers cannot browse the catalog naturally             |
-| Tags               | Tag cleanup, campaign tags, duplicate terms, and customer-facing usefulness                                       | Source tags clutter the target store or duplicate category meaning           |
-| Brands             | Brand taxonomy, brand attribute, brand plugin behavior, archive pages, and filters                                | Brand data appears as plain text but no longer supports discovery            |
-| Attributes         | Global attributes, local attributes, variation-enabled attributes, filterable attributes, and display-only values | Product options work, but filters or specification display are wrong         |
-| Search and filters | Theme, block, plugin, or search-extension behavior                                                                | Migrated values exist but storefront filtering does not expose them properly |
+The validation sample should include products that are structurally difficult, commercially important, and operationally sensitive. A good sample includes high-revenue products, products with many variations, products with variation-level stock, products with special tax or shipping behavior, products with sale pricing, products with custom attributes, products linked to extensions, and products that depend on images or downloadable files.
 
-Validation should distinguish between data transfer and storefront behavior. A taxonomy term can exist in WordPress while still failing to appear in navigation, filters, breadcrumbs, or search results because the target theme, block layout, or extension has not been configured.
+### Validate Catalog Discovery and Product Taxonomies <a href="#validate-catalog-discovery-and-product-taxonomies" id="validate-catalog-discovery-and-product-taxonomies"></a>
 
-### Validate Customers, Accounts, and User Meaning <a href="#validate-customers-accounts-and-user-meaning" id="validate-customers-accounts-and-user-meaning"></a>
+WooCommerce catalog quality depends on how products are organized, filtered, searched, and linked. Categories, tags, attributes, brands, and other product taxonomies are not only labels. They influence browsing paths, menu destinations, breadcrumbs, archive pages, SEO landing pages, faceted filters, and customer confidence.
 
-WooCommerce customer data can involve WordPress users, guest customers, billing and shipping details, account history, roles, memberships, wholesale groups, subscriptions, loyalty context, and external identifiers. Validation should clarify what each customer record is expected to do after migration.
+Validation should therefore review catalog discovery as a behavior chain. A product category can exist while the menu link points to a weaker page. Attribute values can exist while storefront filters do not expose them. Brand information can migrate as plain text while the target store needs a brand taxonomy, brand archive, or filterable value.
 
-| Customer/account pattern            | What to validate                                                                                     | Pass condition                                                                     |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Registered customer                 | User account, email, username, display name, billing/shipping addresses, order association, and role | Customer can be identified and tied to historical order context                    |
-| Guest customer                      | Order-level billing/shipping details and email continuity                                            | Guest history remains readable even without a registered account                   |
-| Wholesale or B2B customer           | Role, group, pricing context, tax status, approval status, and plugin ownership                      | Business-customer meaning is preserved, rebuilt, or intentionally excluded         |
-| Subscription or membership customer | Plugin records, access state, renewal context, and historical order links                            | Active business logic is not assumed to migrate as ordinary customer data          |
-| External-system customer            | CRM, ERP, loyalty, marketplace, or support-system identifiers                                        | External references remain usable or are flagged for post-migration reconciliation |
+| Discovery element           | Validation focus                                                                                                      | Common failure signal                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Product categories          | Hierarchy, parent-child relationships, names, slugs, assignments, menu usage, and category landing pages              | Products exist but customers cannot browse naturally           |
+| Product tags                | Cleanup, duplicate values, campaign terms, internal tags, and storefront usefulness                                   | Tags clutter the store or duplicate category meaning           |
+| Attributes                  | Global attributes, local attributes, variation-enabled attributes, display-only attributes, and filterable attributes | Product options work but filters or specifications are wrong   |
+| Brands or custom taxonomies | Taxonomy ownership, product assignment, archive pages, filters, and SEO relevance                                     | Brand data survives but no longer supports discovery           |
+| Search and filters          | Theme, block, search plugin, filter plugin, and storefront behavior                                                   | Values exist in admin but shoppers cannot use them effectively |
 
-Customer validation should not treat email count as sufficient. Account meaning is often stored in roles, metadata, plugin tables, memberships, subscriptions, or external systems that need separate handling.
+Validation should include top category paths, high-search products, important filters, brand landing paths, and category pages with SEO value. The pass condition is not simply that terms exist. The pass condition is that the migrated taxonomy plan supports the customer journey and target-store merchandising decisions.
 
-### Validate Orders, HPOS Context, and Historical Commerce Records <a href="#validate-orders-hpos-context-and-historical-commerce-records" id="validate-orders-hpos-context-and-historical-commerce-records"></a>
+### Validate Customers, Orders, and HPOS Context <a href="#validate-customers-orders-and-hpos-context" id="validate-customers-orders-and-hpos-context"></a>
 
-WooCommerce order validation must separate historical record readability from live checkout behavior. Migrated orders should preserve enough detail for staff to understand what happened, but payment gateways, shipping calculators, tax engines, fraud tools, and fulfillment workflows usually depend on target configuration or connected systems.
+WooCommerce customer and order validation should separate identity, account access, historical readability, and active store behavior. Registered customers, guest customers, WordPress users, billing and shipping addresses, order history, account roles, memberships, wholesale groups, subscription references, and external IDs may all have different storage and validation needs.
 
-| Order element               | What to validate                                                                           | Why it matters                                                                                           |
-| --------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| Order status                | Status mapping and operational meaning                                                     | Staff need to distinguish completed, pending, refunded, failed, cancelled, and custom statuses correctly |
-| Line items                  | Product names, SKUs, variation details, quantities, prices, discounts, and product links   | Order history should show what was actually purchased                                                    |
-| Totals                      | Subtotal, discount, tax, shipping, fees, refunds, and grand total                          | Financial history needs readable context even when reporting is handled elsewhere                        |
-| Shipping and payment labels | Method names, transaction references, and gateway labels where migrated                    | Staff need historical context without assuming live gateway continuity                                   |
-| Coupons and discounts       | Code, amount, discount type, and order-level application                                   | Promotions should remain understandable in past orders                                                   |
-| Notes and metadata          | Customer notes, admin notes, fulfillment details, custom checkout fields, and external IDs | Operational context often sits outside standard order columns                                            |
-| HPOS/order storage          | Order visibility and compatibility in the target WooCommerce setup                         | Extension compatibility and order access should be checked before acceptance                             |
+Order validation also needs to account for the target WooCommerce order-storage context. High-Performance Order Storage affects how order data is stored and how extensions interact with order records. Validation should confirm that orders are visible, readable, and compatible with the target environment and required operational extensions.
 
-Validation should include orders with refunds, coupons, guest checkout, registered customers, custom statuses, variation line items, shipping/tax differences, and extension-owned metadata.
+| Record pattern                   | What to validate                                                                                                      | Pass condition                                                                                              |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Registered customer              | User account, email, username, display name, billing/shipping addresses, order link, role, and metadata               | Customer identity and history are understandable in admin and account context                               |
+| Guest customer                   | Order-level email, billing/shipping values, customer notes, and support visibility                                    | Guest order history remains readable without pretending a registered account exists                         |
+| Wholesale or membership customer | Role, group, price list, approval state, tax status, membership access, and plugin ownership                          | Business-customer meaning is preserved, rebuilt, excluded, or routed to Custom Service review intentionally |
+| Historical order                 | Status, line items, product references, variation details, totals, taxes, shipping, fees, coupons, refunds, and notes | Staff can understand what happened without relying on the old store                                         |
+| HPOS-sensitive order             | Admin visibility, metadata display, reports, extension screens, exports, and external references                      | Orders remain usable in the target order-storage context                                                    |
 
-### Validate Checkout Fields, Payments, Shipping, Taxes, and Coupons <a href="#validate-checkout-fields-payments-shipping-taxes-and-coupons" id="validate-checkout-fields-payments-shipping-taxes-and-coupons"></a>
+The order sample should include completed, pending, cancelled, failed, refunded, and custom-status orders if those statuses exist. It should also include orders with coupons, shipping differences, tax differences, guest checkout, registered customers, variation line items, product add-ons, refunds, admin notes, customer notes, and external references.
 
-WooCommerce migration should not imply that live checkout rules are automatically recreated. Validation should confirm which elements are historical data, which are target configuration, and which are plugin or Custom Service scope.
+### Validate Checkout, Coupons, Payments, Shipping, and Tax Context <a href="#validate-checkout-coupons-payments-shipping-and-tax-context" id="validate-checkout-coupons-payments-shipping-and-tax-context"></a>
 
-| Commerce function | Validation focus                                                                   | Acceptance question                                                                 |
-| ----------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Checkout fields   | Historical field values, field labels, required fields, and plugin ownership       | Are migrated field values readable where orders need them?                          |
-| Payment data      | Gateway labels, transaction references, paid status, and refund context            | Is historical payment context understandable without assuming gateway recreation?   |
-| Shipping data     | Shipping method labels, zones, rates, tracking fields, and fulfillment metadata    | Are historical shipping records readable, and are live rates configured separately? |
-| Tax data          | Tax amounts, labels, rates, exemptions, and tax-inclusive or tax-exclusive meaning | Do migrated orders retain tax context for service and review?                       |
-| Coupons           | Coupon code, usage, discount amount, validity, and historical application          | Can staff understand prior discounts and test target coupon behavior separately?    |
+Historical checkout data and live checkout behavior are different validation categories. Migrated orders can preserve payment labels, shipping labels, tax values, coupon codes, checkout fields, and notes from past transactions. That does not prove that the target store’s payment gateways, shipping rules, tax settings, coupon behavior, checkout fields, fraud tools, or fulfillment integrations are configured for future orders.
 
-Live checkout validation should be handled on the configured Target Platform after migration setup. Historical checkout data and live checkout configuration are related, but they are not the same validation task.
+| Area            | Historical validation                                                                        | Live readiness validation                                                              |
+| --------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Payment         | Payment method label, transaction reference, order note, and gateway metadata where included | Target payment gateway is configured and a test order follows the expected status path |
+| Shipping        | Shipping method label, charge, address, tracking or fulfillment metadata where included      | Target shipping zones, methods, rates, classes, and fulfillment steps are tested       |
+| Tax             | Historical tax amounts, labels, classes, and order totals are readable                       | Target tax rules calculate correctly for future orders                                 |
+| Coupons         | Code, discount amount, discount type, and historical order application are understandable    | Active coupon rules behave correctly in cart and checkout if they are reused           |
+| Checkout fields | Stored field values and metadata are visible where required                                  | Target checkout form collects the right fields for new orders                          |
 
-### Validate WordPress Content, Media, URLs, and SEO Continuity <a href="#validate-wordpress-content-media-urls-and-seo-continuity" id="validate-wordpress-content-media-urls-and-seo-continuity"></a>
+A useful validation process reviews a migrated historical order and then places a target test order. The first proves continuity of past commerce records. The second proves live target readiness. Treating those as the same test creates false confidence.
 
-WooCommerce storefront quality often depends on WordPress content and presentation. Product pages may link to CMS Pages, Blog Posts may support buying decisions, media may be reused across products and pages, and SEO paths may depend on permalinks, redirects, canonical values, and plugin metadata.
+### Validate WordPress Site Connections That Affect Commerce <a href="#validate-wordpress-site-connections-that-affect-commerce" id="validate-wordpress-site-connections-that-affect-commerce"></a>
 
-| WordPress-connected layer | What to validate                                                                  | Pass condition                                                                |
-| ------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| CMS Pages                 | Store policy pages, landing pages, buying guides, and product-linked content      | Important content remains accessible and linked to commerce journeys          |
-| Blog Posts                | Buying education, SEO articles, internal links, images, and categories            | Blog content remains readable and does not break product discovery paths      |
-| Media                     | Product images, galleries, featured images, alt text, file references, and embeds | Images appear correctly and are not disconnected from products or content     |
-| Permalinks and slugs      | Product URLs, category URLs, page URLs, redirects, and canonical paths            | Important customer and search paths resolve intentionally                     |
-| SEO metadata              | Titles, descriptions, canonical values, schema-related plugin data, and redirects | SEO-sensitive values are preserved, rebuilt, or flagged for target-side setup |
-| Themes and builders       | Product templates, blocks, shortcodes, menus, widgets, and layout dependencies    | Migrated content is not accepted until visible presentation is checked        |
+WooCommerce runs inside WordPress, so commerce validation must include the parts of the WordPress site that affect buying behavior. Product pages, category pages, landing pages, Blog Posts, CMS Pages, menus, media, internal links, redirects, SEO fields, blocks, builders, and theme templates can all shape the shopping path.
 
-A WooCommerce validation pass should include both back-office data checks and customer-facing walkthroughs of product pages, category pages, cart paths, checkout paths, policy pages, and high-value landing pages.
+This does not mean every WordPress site element belongs to WooCommerce scope. It means WooCommerce validation should include the WordPress-controlled paths that materially affect commerce. A product may be migrated correctly while the main navigation, content landing page, buying guide, comparison page, or SEO redirect path is broken.
 
-### Validate Plugins, Custom Fields, Custom Tables, and Integrations <a href="#validate-plugins-custom-fields-custom-tables-and-integrations" id="validate-plugins-custom-fields-custom-tables-and-integrations"></a>
+| Site connection           | What to validate                                                                                | Why it matters                                                  |
+| ------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Product and category URLs | Slugs, redirects, canonical expectations, internal links, and menu paths                        | SEO and customer access depend on stable destinations           |
+| Product media             | Featured images, galleries, variation images, alt text, and downloadable files                  | Product trust and option clarity often depend on media accuracy |
+| Content-commerce pages    | Landing pages, buying guides, campaign pages, and product links                                 | Content often drives discovery and conversion                   |
+| Theme and template output | Product layout, category display, filter placement, image sizing, and add-to-cart visibility    | Data can be correct while storefront presentation is weak       |
+| SEO fields                | Titles, descriptions, indexability settings, redirects, and structured content where applicable | Search performance can be affected by URL and metadata loss     |
 
-WooCommerce stores often depend on extensions and custom code. Some plugin data is ordinary metadata, some sits in custom tables, and some belongs to external systems. Validation must classify these records before deciding whether they are standard scope, Add-ons scope, Custom Service scope, or post-migration configuration.
+Validation should prioritize commercially important paths. Review the homepage-to-product path, category-to-product path, search-to-product path, content-to-product path, cart path, checkout path, and order confirmation path. The goal is a connected buying journey, not isolated record checks.
 
-| Dependency type                  | Validation priority                                                                     | Handling signal                                                               |
-| -------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Product add-ons                  | Field labels, prices, input values, order-line display, and fulfillment notes           | Often needs extension-aware review or Custom Service discussion               |
-| Subscriptions                    | Subscription records, renewal logic, payment-token dependency, and customer association | Active subscription behavior usually needs target plugin and gateway planning |
-| Bookings and appointments        | Booking date, availability, resource, staff, and calendar logic                         | Historical booking data and live booking rules should be separated            |
-| Memberships or wholesale pricing | Roles, groups, access rules, pricing levels, tax treatment, and approval states         | Group/account meaning may require plugin-aware mapping                        |
-| Custom fields                    | Product/order/customer field names, values, display locations, and business purpose     | Decide whether field data is standard, Add-ons, Custom Service, or excluded   |
-| Custom tables                    | Table ownership, relationships, keys, and target plugin compatibility                   | Usually requires Custom Service review before acceptance                      |
-| External systems                 | ERP, PIM, CRM, WMS, marketplace, payment, tax, shipping, or automation references       | Validate IDs and context, not only visible storefront data                    |
+### Validate Plugin-Owned Data, Custom Fields, and Custom Service Outputs <a href="#validate-plugin-owned-data-custom-fields-and-custom-service-outputs" id="validate-plugin-owned-data-custom-fields-and-custom-service-outputs"></a>
 
-If a field or table affects purchasing, fulfillment, reporting, access, pricing, subscriptions, bookings, or integration reconciliation, it should not be accepted as a low-priority cosmetic detail.
+WooCommerce stores frequently depend on extensions and custom development. Subscriptions, bookings, memberships, bundles, composite products, product add-ons, wholesale rules, loyalty points, gift cards, marketplace connectors, CRM fields, ERP references, tax engines, shipping tools, and reporting extensions can add records or behavior beyond standard WooCommerce structures.
 
-### Validate Add-ons and Custom Service Outputs <a href="#validate-add-ons-and-custom-service-outputs" id="validate-add-ons-and-custom-service-outputs"></a>
+Plugin-owned data should not be validated as if it were ordinary product or order data. Some values may be display-only. Some may be historical references. Some may drive live behavior. Some may require target extension configuration. Some may depend on custom tables, APIs, or external systems and need Custom Service review.
 
-Add-ons and Custom Service outputs should be validated against the exact agreed scope. Add-ons can extend migration handling for defined cases, but they do not replace Custom Service when the store depends on custom logic, unsupported extension structures, bespoke tables, external workflows, or target-side development.
+| Plugin/custom data type  | Validation question                                                                          | Appropriate outcome                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Display metadata         | Does the value need to appear in admin, storefront, order history, or exports?               | Standard scope, Add-ons, or accepted exclusion depending on supportability |
+| Product behavior         | Does the data control add-ons, bundles, bookings, subscriptions, memberships, or pricing?    | Target extension setup or Custom Service review may be required            |
+| Account entitlement      | Does the data control membership, access, wholesale approval, credit, or loyalty state?      | Business-rule review and acceptance criteria are required                  |
+| Order workflow           | Does the data affect fulfillment, refunds, delivery dates, invoices, or support processes?   | Operational sample validation is required                                  |
+| External reference       | Does the data connect to ERP, CRM, marketplace, accounting, fulfillment, or support systems? | External-system reconciliation plan is required                            |
+| Custom table or API data | Is the storage outside standard WooCommerce/WordPress records?                               | Custom Service review is usually needed before acceptance                  |
 
-| Scope type          | Validation focus                                                                            | Acceptance standard                                                                           |
-| ------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Standard Add-ons    | Defined additional fields, filters, mapping, or configuration support                       | Output matches the purchased Add-on scope and is visible in the agreed location               |
-| Tailored Add-ons    | Store-specific handling agreed before migration                                             | Edge cases are checked against the documented expectation, not assumed broadly                |
-| Custom Add-ons      | Non-standard but bounded extension of migration handling                                    | Validation confirms the custom Add-on output without expanding it into general Custom Service |
-| Custom Service      | Bespoke data handling, custom tables, extension-owned structures, or special workflow logic | Output is validated against agreed rules, sample records, and acceptance criteria             |
-| Accepted exclusions | Data or behavior intentionally not migrated                                                 | Exclusions remain documented so missing behavior is not treated as a migration defect         |
+Validation of Custom Service outputs should use the approved requirement, not a vague expectation. If the requirement says a custom field must appear in migrated orders and be available for staff review, validation should confirm exactly that. If the requirement says an external ID must remain attached to products for reconciliation, validation should test that specific ID in the target store.
 
-Validation should also confirm that Add-ons and Custom Service are not mixed together in review language. A migrated custom field does not mean all plugin behavior was recreated.
+### Validate Add-ons, Entity Points, and Later Migration Activity <a href="#validate-add-ons-entity-points-and-later-migration-activity" id="validate-add-ons-entity-points-and-later-migration-activity"></a>
 
-### Demo Migration and Full Migration Validation Priorities <a href="#demo-migration-and-full-migration-validation-priorities" id="demo-migration-and-full-migration-validation-priorities"></a>
+Add-ons and Custom Service serve different roles and should remain separate during validation. Add-ons cover supported extended options such as selected field handling, mapping, filtering, or configuration choices where the requirement fits supported service boundaries. Custom Service applies when data or behavior depends on unsupported structures, bespoke logic, custom tables, external systems, or plugin-specific handling beyond standard coverage.
 
-A Demo Migration should prove whether the WooCommerce migration approach can preserve representative store behavior. A Full Migration should confirm complete scope, remaining exceptions, and customer-facing readiness.
+Entity Points also need practical validation when the migration scope involves selective transfers, repeated runs, or later activity. The team should know which data was included, which data may require additional handling, and how later migration activity affects already-consumed scope.
 
-| Migration stage           | Validation priority                                                                        | Sample requirement                                                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Demo Migration            | Test the hardest representative cases before committing to scale                           | Include variable products, plugin-driven products, guest and registered orders, refunds, coupons, media, URLs, and custom fields     |
-| Pre-Full Migration review | Confirm unresolved questions, service scope, Add-ons, Custom Service needs, and exclusions | Do not proceed with unknown product/checkout/order/plugin behavior unresolved                                                        |
-| Full Migration            | Confirm full record scope and customer-facing continuity                                   | Review counts, samples, storefront paths, admin visibility, and operational reports                                                  |
-| Go-live acceptance        | Confirm target configuration and live business readiness                                   | Payment, shipping, tax, stock, extensions, email, analytics, and external systems should be checked separately from migrated history |
+| Scope item                   | What to validate                                                                             | Acceptance signal                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Add-ons                      | Supported extended requirement, selected mapping/filtering/configuration, and sample output  | The result matches the selected option and is visible in the expected target location |
+| Custom Service               | Custom requirement, source evidence, transformation rule, output location, and sample record | The agreed custom result is present and usable according to the acceptance criteria   |
+| Entity Points                | Included data quantity, repeated-use implications, and excluded or later-added data          | The team understands scope consumption and follow-up needs                            |
+| Additional Migration Options | Relevant later migration activity, timing, data changes, and acceptance responsibility       | Later activity does not overwrite or confuse validated target results                 |
+| Demo Migration samples       | Representative product, customer, order, plugin, media, and URL samples                      | Samples expose real complexity instead of only easy records                           |
 
-The right validation sample should intentionally include difficult records. If a Demo Migration only includes straightforward simple products and ordinary orders, it does not prove much about WooCommerce migration readiness.
+Validation should end with a clear acceptance log. That log should identify what passed, what requires target configuration, what belongs to Custom Service review, what is intentionally excluded, and what should be checked again after later migration activity.
 
-### Additional Migration Options and WooCommerce Revalidation <a href="#additional-migration-options-and-woocommerce-revalidation" id="additional-migration-options-and-woocommerce-revalidation"></a>
+### Building a WooCommerce Acceptance Sample <a href="#building-a-woocommerce-acceptance-sample" id="building-a-woocommerce-acceptance-sample"></a>
 
-Additional Migration Options should trigger renewed validation for changed WooCommerce records. Follow-up migration activity can add new products, customers, orders, CMS Pages, Blog Posts, or other eligible records, and those new records may consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action for the same migration path.
+A strong WooCommerce validation sample is not random. It should be selected to represent the store’s commercial complexity. The sample should include common records, edge cases, high-value items, high-risk workflows, and records tied to plugins or external systems.
 
-| Follow-up activity          | Revalidation priority                                                                              | Why it matters                                                                            |
-| --------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| New products or variations  | Product type, attributes, stock, images, category, URL, and purchasability                         | New catalog data may introduce structures not present in the first validation sample      |
-| New customers or orders     | Account links, order status, checkout fields, coupons, tax, shipping, payment labels, and metadata | New live activity may carry different operational context                                 |
-| New CMS Pages or Blog Posts | Content formatting, media, internal links, redirects, and SEO metadata                             | Commerce-related content may affect launch quality                                        |
-| New plugin or custom data   | Field ownership, custom tables, extension dependencies, and external IDs                           | Follow-up data can expose previously unseen plugin behavior                               |
-| Repeated migration action   | Duplicate handling, changed records, and scope boundaries                                          | Revalidation should confirm what changed without double-counting already licensed records |
+| Sample category     | Include examples such as                                                                                                                   | Reason for inclusion                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Product complexity  | Simple products, variable products, downloadable products, virtual products, bundles, add-ons, subscriptions, bookings, and memberships    | Product behavior is where many WooCommerce migrations fail visibly |
+| Catalog structure   | Top categories, nested categories, brands, filter attributes, tags, and SEO-sensitive category pages                                       | Discovery and navigation must remain commercially useful           |
+| Customer patterns   | Registered users, guest customers, wholesale accounts, membership accounts, customers with multiple addresses, and customers with metadata | Account meaning often sits beyond the email field                  |
+| Order patterns      | Coupons, refunds, taxes, shipping differences, custom statuses, variation line items, notes, checkout fields, and external IDs             | Order history must remain usable for staff and reporting           |
+| Site paths          | Product URLs, category URLs, landing pages, content-to-product links, redirects, menus, and SEO metadata                                   | Commerce continuity depends on more than WooCommerce records       |
+| Plugin dependencies | Subscription, booking, membership, wholesale, add-on, loyalty, gift card, ERP, CRM, and fulfillment-related records                        | Extension behavior requires explicit scope classification          |
 
-Follow-up validation should focus on the delta: what changed, what is newly migrated, what was updated, and which previously accepted assumptions no longer hold.
-
-### WooCommerce Validation Priority Matrix <a href="#woocommerce-validation-priority-matrix" id="woocommerce-validation-priority-matrix"></a>
-
-| Priority area           | Low-risk signal                                         | Higher-risk signal                                                                                    | Validation action                                                               |
-| ----------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Products                | Mostly simple products with basic categories and images | Variable, bundled, composite, subscription, booking, or add-on products                               | Validate purchasability, product type, variation logic, and extension ownership |
-| Orders                  | Ordinary statuses and limited metadata                  | Refunds, coupons, custom statuses, checkout fields, HPOS, external IDs, or plugin data                | Validate historical readability and storage compatibility                       |
-| Customers               | Basic registered and guest customers                    | Memberships, wholesale groups, subscriptions, loyalty, or external account IDs                        | Validate account meaning and plugin-owned records                               |
-| Checkout                | Standard historical labels                              | Custom fields, payment tokens, tax engines, shipping integrations, or fulfillment automation          | Separate migrated history from live target configuration                        |
-| Content and URLs        | Simple product/page paths                               | SEO-critical redirects, builder content, internal links, product-linked content, or custom permalinks | Validate customer-facing paths and search visibility                            |
-| Plugins and custom data | Limited display-only metadata                           | Custom tables, custom workflows, subscription/booking/membership logic, or external systems           | Confirm Add-ons, Custom Service, or exclusion handling                          |
-| Follow-up migration     | Small amount of simple new data                         | New complex products, orders, or plugin fields after initial validation                               | Revalidate changed records and Entity Points impact                             |
+The final validation decision should be evidence-based. If the sample proves the major data patterns and commercial behaviors, the store can move toward acceptance with confidence. If the sample exposes unclear plugin data, broken variation logic, weak order readability, missing customer meaning, or unstable URL paths, the issue should be resolved or formally excluded before launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WooCommerce validation should prove that migrated data still works as commerce data inside WordPress. The strongest validation process checks record presence, storefront behavior, admin readability, extension ownership, URL continuity, order history, customer meaning, and service-scope expectations together.
+WooCommerce validation is the point where migration quality becomes visible. It should prove that products are purchasable, variations are accurate, catalog discovery works, customers and orders remain meaningful, checkout-related history is readable, WordPress site paths remain connected, and extension-owned requirements have clear outcomes.
 
-A WooCommerce migration should be accepted only after representative samples confirm products remain purchasable, orders remain understandable, customers remain identifiable, content-commerce paths remain usable, and plugin or custom data is either migrated, rebuilt, excluded, or escalated through the appropriate service path.
+The strongest validation approach is not the longest checklist. It is a representative proof process built around the store’s actual business patterns. When the validation sample includes complex products, important customers, varied orders, plugin dependencies, media, URLs, SEO paths, and service-scope outputs, the target WooCommerce store can be accepted with far greater confidence.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should be validated first after a WooCommerce Demo Migration?**
+**Why is product count not enough for WooCommerce validation?**
 
-Start with the records most likely to expose structural problems: variable products, plugin-driven products, orders with refunds or custom fields, guest and registered customers, coupons, media, category paths, redirects, and SEO-sensitive URLs.
+Product count only proves that records exist. WooCommerce product quality depends on product type, attributes, variations, prices, stock, images, categories, visibility, purchasability, and storefront behavior.
 
-**Is product count enough to validate WooCommerce migration quality?**
+**Should variable products receive extra validation?**
 
-No. Product count only confirms volume. WooCommerce validation must also confirm variation behavior, attributes, images, categories, stock, visibility, product URLs, purchasability, and extension-owned product data.
+Yes. Variable products rely on parent products, attributes, and child variations working together. Variation-level price, stock, SKU, image, shipping, tax, and downloadable settings should be sampled carefully.
 
-**Should WooCommerce orders be validated against live checkout behavior?**
+**How should historical orders be validated?**
 
-Historical orders and live checkout configuration should be reviewed separately. Migrated orders should preserve readable historical context, while live payment, shipping, tax, and checkout rules depend on target configuration and extensions.
+Historical orders should be checked for readable statuses, line items, variation details, totals, taxes, shipping, coupons, refunds, notes, payment labels, customer links, and metadata. Live checkout behavior should be tested separately.
 
-**Why do plugins matter during WooCommerce validation?**
+**What WooCommerce data usually needs Custom Service review?**
 
-Plugins can control product add-ons, subscriptions, bookings, memberships, wholesale pricing, checkout fields, custom tables, and external integrations. If plugin-owned data is not classified, validation may miss business-critical behavior.
+Custom Service review is usually needed when requirements involve custom tables, plugin-specific workflows, bespoke fields, external-system references, API-based data, or transformation logic beyond supported migration options.
 
-**Do Additional Migration Options require another validation pass?**
+**How should the validation sample be selected?**
 
-Yes. Follow-up migration activity should be revalidated for changed products, customers, orders, CMS Pages, Blog Posts, custom fields, plugin data, URLs, and Entity Points impact.
+The sample should include high-value, complex, and operationally sensitive records: variable products, add-ons, subscriptions, bookings, memberships, wholesale accounts, refunded orders, guest orders, SEO-sensitive URLs, and plugin-dependent records.

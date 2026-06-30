@@ -1,169 +1,177 @@
 # AmeriCommerce Data Model Differences
 
-A migration to AmeriCommerce should not be judged only by whether products, customers, and orders appear in the Target Platform. AmeriCommerce is built for merchants whose commerce data often carries business rules, buyer relationships, storefront context, pricing logic, fulfillment meaning, and integration dependencies. When those layers exist in the Source Platform, the migration has to preserve the commercial meaning behind the records, not only their visible fields.
+AmeriCommerce migrations depend on how much business meaning sits behind each visible record. Product, customer, order, and content data may look familiar at export level, but the relationships between buyers, storefronts, catalogs, pricing rules, and operational systems often decide whether the migrated store remains usable.
 
-The main data-model question is simple: _does each migrated record still support the way the merchant sells, prices, segments buyers, presents products, and fulfills orders after launch?_ A product that appears in the catalog may still be incomplete if its kit structure, subscription context, restricted availability, or technical attributes are lost. A customer record may still be incomplete if it no longer carries the buyer type, portal access, pricing relationship, or tax context that shaped the account. An order may still be incomplete if it loses the invoice, payment, vendor, fulfillment, or integration context needed for business review.
+The main review is not whether records can be moved into AmeriCommerce. It is whether each record keeps the right commercial role after migration: who can buy, what they can see, which price applies, which storefront owns the experience, and which external process still depends on the record.
 
-AmeriCommerce can be a strong destination for complex commerce models, but that strength also makes data-model interpretation more important. The clearer the source structure is before migration, the easier it is to decide what should become native AmeriCommerce data, what should be configured after migration, what should be validated through representative samples, and what requires Custom Service.
+### Why AmeriCommerce Data Meaning Needs Separate Review <a href="#why-americommerce-data-meaning-needs-separate-review" id="why-americommerce-data-meaning-needs-separate-review"></a>
 
-### Core Data Model Layers in AmeriCommerce <a href="#core-data-model-layers-in-americommerce" id="core-data-model-layers-in-americommerce"></a>
+AmeriCommerce should be reviewed as a relationship-heavy commerce destination. A simple record inventory can understate the real migration scope because the same data type can carry different responsibilities depending on storefront, buyer type, catalog structure, and integration history.
 
-AmeriCommerce data should be understood as a set of connected business layers. These layers may not exist in the same form on the Source Platform, and the migration plan should account for how each layer will be represented after translation.
+A product may be more than a SKU. It may belong to specific storefronts, participate in customer-specific pricing, use options or kits, carry SEO value, and connect to external inventory or fulfillment logic. A customer may be more than a login. It may represent a buyer relationship, a purchasing rule, a tax or payment condition, or a sales-account workflow.
 
-| Data-model layer                      | What it may include                                                                                                                         | Why it matters during migration                                                                                                                                         |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Catalog and product structure**     | Products, product groups, kits, variants, configurable choices, subscriptions, attributes, specifications, images, and product content      | Product data must support buying decisions, not only recreate item records. Complex product relationships should remain understandable and purchasable.                 |
-| **Buyer and account structure**       | Customers, buyer groups, customer types, B2B accounts, portal access, tax status, payment expectations, and account-level rules             | Customer data may control what buyers can see, how they are priced, and how they order. Losing this meaning can break B2B workflows even when customer records migrate. |
-| **Storefront and microstore context** | Multiple storefronts, branded sites, customer-specific microstores, restricted catalogs, content areas, navigation, URLs, and theme context | Storefront assignment can affect visibility, SEO continuity, buyer access, and brand-specific presentation.                                                             |
-| **Rule and pricing logic**            | Customer-specific pricing, quantity pricing, discounts, rewards, budgets, tax treatment, payment logic, and rule conditions                 | Rules are business logic. They should be reviewed as decision structures rather than treated as ordinary fields.                                                        |
-| **Order and operational history**     | Orders, invoices, payment context, shipment details, fulfillment notes, vendor involvement, status history, and reorder context             | Historical records must remain useful for service, accounting, fulfillment review, customer support, and repeat purchasing.                                             |
-| **Integration and custom context**    | ERP, accounting, CRM, shipping, tax, marketplace, API/headless workflows, custom fields, external identifiers, and third-party data         | Some meaning may live outside the Source Platform. That context must be identified before deciding what can migrate through standard service capability.                |
+| Data area                   | Migration meaning to review                                                       | Why it matters in AmeriCommerce planning                                              |
+| --------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Products and SKUs           | Commercial availability, option behavior, bundle or kit meaning, visibility rules | Products often connect catalog structure, pricing, and storefront access.             |
+| Customers and accounts      | Buyer identity, customer type, company relationship, tax or payment expectations  | Customer records may influence access, pricing, and order behavior.                   |
+| Orders                      | Transaction history, buyer context, fulfillment state, support value              | Imported order history must remain useful for service, reporting, and account review. |
+| Storefronts and microstores | Store ownership, audience segmentation, URL structure, catalog boundaries         | Multi-store assumptions can change how records should be grouped or separated.        |
+| Rules and integrations      | Pricing, discounts, shipping, tax, ERP, CRM, and fulfillment dependencies         | Rules may need configuration, mapping, exclusion, or Custom Service review.           |
 
-These layers are connected. A buyer group can affect catalog visibility. A microstore can affect which products and content appear. A pricing rule can depend on customer type, product group, quantity, or account status. An order can depend on payment, invoice, vendor, fulfillment, or integration data. Treating each entity as isolated can produce a migration that looks complete but does not support the merchant’s operating model.
+A controlled AmeriCommerce migration should therefore begin with data meaning, not only data quantity.
 
-### Product and Catalog Meaning <a href="#product-and-catalog-meaning" id="product-and-catalog-meaning"></a>
+### Product, Catalog, and SKU Structure Differences <a href="#product-catalog-and-sku-structure-differences" id="product-catalog-and-sku-structure-differences"></a>
 
-Product data in AmeriCommerce can represent more than sellable items. It can support product groups, kits, configurable products, subscription products, technical specifications, buyer-specific availability, rich content, and recurring or repeat-purchase behavior. A product migration should therefore preserve the structure that helps buyers choose the right item.
+Product migration into AmeriCommerce needs a careful review of how the source platform represents sellable items. Many source stores mix simple products, variant products, grouped products, configurable products, bundles, kits, subscriptions, digital products, and custom product forms. The migration plan must decide which relationships should become native AmeriCommerce product behavior and which relationships should be rebuilt as configuration.
 
-#### Products may need relationship context <a href="#products-may-need-relationship-context" id="products-may-need-relationship-context"></a>
+A product record should be evaluated through three questions: what the shopper sees, what the buyer can choose, and what the operation must fulfill. If a source product uses variants only as display choices, the mapping may be straightforward. If variants also control price, inventory, supplier logic, volume pricing, or restricted access, the record needs deeper review.
 
-A source product may translate differently depending on how it is used. A kit may need to remain understandable as a grouped purchase. A subscription product may require recurring-purchase context. A technical product may depend on specifications, compatibility notes, documents, or content that explains how the item should be selected. A replacement part may depend on category placement, related products, or searchable attributes.
+| Source catalog pattern               | Data-model concern                                               | AmeriCommerce migration implication                                           |
+| ------------------------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Simple SKU catalog                   | Products have limited option or pricing complexity               | Standard product migration may be practical if categories and URLs are clean. |
+| Variant-heavy catalog                | Options may control price, inventory, images, or fulfillment     | Sample products should prove option behavior before full migration.           |
+| Kits, bundles, or assembled products | One visible product may depend on several operational components | Relationship meaning may require configuration or Custom Service review.      |
+| Customer-specific catalog            | Product availability changes by buyer type or account            | Product data must be reviewed with customer and pricing rules.                |
+| Subscription or recurring products   | Purchase logic extends beyond static catalog data                | Subscription behavior may need external-system review or exclusion planning.  |
 
-The migration implication is that product completeness cannot be measured only by name, SKU, price, image, and description. Strong product translation should preserve the relationships that affect purchase behavior. If those relationships are inconsistent in the Source Platform, the merchant should decide whether to preserve, simplify, or rebuild them before expecting AmeriCommerce to make the catalog usable.
+Catalog cleanup should not flatten meaningful product relationships. Removing duplicate or outdated records is useful, but reducing structured product behavior into plain SKU fields can damage the target-store experience.
 
-#### Product complexity should be separated from product clutter <a href="#product-complexity-should-be-separated-from-product-clutter" id="product-complexity-should-be-separated-from-product-clutter"></a>
+### Category, Storefront, and Microstore Relationships <a href="#category-storefront-and-microstore-relationships" id="category-storefront-and-microstore-relationships"></a>
 
-AmeriCommerce can support complex product models, but complexity is valuable only when it is organized. A catalog with deliberate kits, subscriptions, product groups, or technical attributes is different from a catalog that accumulated duplicate SKUs, inconsistent options, obsolete categories, or internal notes inside customer-facing fields.
+AmeriCommerce migrations can involve more than one storefront context. Categories, menus, landing pages, product visibility, and SEO routes may differ across stores or microstores. That makes category migration more than a parent-child hierarchy task.
 
-During migration planning, the merchant should separate commercially meaningful product structure from historical clutter. Meaningful structure should be preserved or mapped carefully. Obsolete or inconsistent source behavior should be reviewed before it becomes part of the Target Platform.
+A source category should be reviewed for its business role. Some categories organize navigation. Others control product discovery, segmentation, seasonal merchandising, B2B purchasing, or campaign landing pages. If category records are migrated without understanding these roles, the new store may preserve labels while losing merchandising logic.
 
-### Customer and Account Meaning <a href="#customer-and-account-meaning" id="customer-and-account-meaning"></a>
+| Structure to review                | What can change during migration                            | Evidence to prepare                                           |
+| ---------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
+| Primary categories                 | Product placement, breadcrumb logic, menu hierarchy         | Category tree export and representative product examples.     |
+| Secondary or promotional groupings | Campaign visibility, seasonal navigation, sales collections | Landing pages, redirects, and current navigation screenshots. |
+| Storefront-specific categories     | Which audience sees which products                          | Storefront or microstore assignment examples.                 |
+| Hidden or internal categories      | Operational organization not intended for shoppers          | Decision on whether to migrate, rebuild, or exclude.          |
+| Legacy categories                  | Old SEO routes or deprecated merchandising structures       | Redirect list and traffic-sensitive URL inventory.            |
 
-Customer data in AmeriCommerce may carry buyer relationship meaning. For B2B, wholesale, distributor, dealer, member, corporate, or hybrid B2B/B2C businesses, a customer is not always just a login record. The customer may belong to a group, receive negotiated pricing, access restricted products, use tax-exempt purchasing, rely on account-level payment terms, or purchase through a portal or microstore.
+When a source store uses multi-store architecture, the key migration question is whether the target should preserve separate storefront meaning or consolidate it into simpler navigation. That decision affects Products, Categories, CMS content, URLs, and customer access.
 
-#### Buyer identity affects what the customer can do <a href="#buyer-identity-affects-what-the-customer-can-do" id="buyer-identity-affects-what-the-customer-can-do"></a>
+### Customer, Account, and Buyer Relationship Differences <a href="#customer-account-and-buyer-relationship-differences" id="customer-account-and-buyer-relationship-differences"></a>
 
-A migrated customer may need to prove more than successful login. The account may need to show the correct catalog, pricing, tax treatment, payment expectations, order history, invoice history, reorder behavior, and portal access. If buyer groups or account types are lost, the Target Platform can appear populated while still failing the workflows that made the source store valuable.
+Customer records in AmeriCommerce migration planning should be reviewed as buyer relationships, not only contact records. Depending on the source platform, a customer may represent an individual shopper, a business buyer, a wholesale account, a purchasing department, a salesperson-managed account, or a record synchronized with CRM or ERP.
 
-This matters most when customer-specific behavior was partially configured, partially manual, or stored outside standard customer fields. Staff memory, spreadsheets, ERP records, or account-manager notes may contain rules that are not obvious in a basic export. Those cases should be documented before migration so the intended AmeriCommerce account model is clear.
+The migration plan should identify which customer fields are required for login continuity, order lookup, segmentation, pricing, tax behavior, and communication history. Email, name, phone, address, and password-related handling are only the baseline. Buyer classification often determines whether the data remains commercially useful.
 
-#### Customer segmentation should be intentional <a href="#customer-segmentation-should-be-intentional" id="customer-segmentation-should-be-intentional"></a>
+| Customer-related data    | Why it may not map cleanly                                                   | Review priority                                          |
+| ------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Customer groups or types | Source groups may control price, access, tax, or payment terms               | Confirm group purpose before mapping.                    |
+| Company accounts         | Several users may belong to one buying organization                          | Separate contact data from account-level buying rules.   |
+| Tax exemption status     | Tax behavior may rely on certificates, customer type, or external validation | Confirm whether it should migrate as data or be rebuilt. |
+| Payment terms            | Source stores may store terms outside standard customer fields               | Identify whether accounting or ERP owns the final rule.  |
+| Sales-rep assignment     | Account ownership may exist in CRM rather than commerce data                 | Confirm reporting and account-management requirements.   |
 
-Not every customer distinction should be migrated as a long-term rule. Some historical exceptions may be obsolete. Some old customer groups may reflect temporary promotions or outdated pricing policies. Some B2B accounts may need new segmentation after migration because the future business model differs from the source structure.
+A customer migration is successful only when the target store can support the right buyer treatment. Preserving every customer field is less important than preserving the fields that control access, pricing, service, and order review.
 
-AmeriCommerce migration planning should ask which customer distinctions should continue, change, merge, or retire. That decision keeps the Target Platform from inheriting unnecessary source complexity.
+### Pricing, Discounts, Rewards, and Rule-Based Data <a href="#pricing-discounts-rewards-and-rule-based-data" id="pricing-discounts-rewards-and-rule-based-data"></a>
 
-### Order and History Meaning <a href="#order-and-history-meaning" id="order-and-history-meaning"></a>
+Pricing data can be one of the most sensitive parts of an AmeriCommerce migration. Base prices, sale prices, customer-specific prices, volume tiers, discounts, coupons, gift certificates, rewards, shipping rules, and tax conditions may exist in separate source tables or app-created logic.
 
-Orders, invoices, and historical transactions can carry operational meaning. AmeriCommerce merchants may need order history for customer service, reorder support, accounting review, fulfillment follow-up, invoice lookup, payment review, vendor context, or reporting continuity. A migrated order should therefore remain useful, not merely visible.
+Some pricing elements should migrate as records. Others should be rebuilt as AmeriCommerce configuration. A rule that worked in the source platform may depend on condition order, app behavior, date windows, product groups, or customer groups. Moving the visible value without the rule context can create launch-day revenue errors.
 
-#### Order records should support business review <a href="#order-records-should-support-business-review" id="order-records-should-support-business-review"></a>
+| Rule type                         | Data question                                                              | Migration decision                                    |
+| --------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Customer-specific pricing         | Is the price tied to customer group, company account, or individual buyer? | Map only after buyer hierarchy is confirmed.          |
+| Volume or quantity pricing        | Does the rule apply by product, category, customer type, or order value?   | Test representative scenarios before full migration.  |
+| Coupons and promotions            | Are conditions still active and commercially valid?                        | Migrate active rules only when source logic is clear. |
+| Gift certificates or store credit | Does the balance need financial reconciliation?                            | Prepare balance evidence and redemption rules.        |
+| Rewards or loyalty data           | Is the program native, app-based, or external?                             | Review ownership before including it in scope.        |
 
-Order translation should preserve the information needed to understand what was purchased, who purchased it, under which buyer or storefront context, how it was priced, how it was paid, and what fulfillment or invoice information matters after launch. If source orders rely on custom statuses, external payment references, vendor assignments, shipping notes, or accounting identifiers, those details should be reviewed early.
+Pricing migration should be tested with real buyer examples. A clean price export is not enough if buyers see different results by customer type, storefront, quantity, location, or promotion eligibility.
 
-A common weak outcome is an order that imports as a historical transaction but no longer explains the commercial situation behind it. For AmeriCommerce, stronger order migration keeps the record useful for support and operations even when not every source-side workflow becomes native target behavior.
+### Orders, Payments, Fulfillment, and Operational History <a href="#orders-payments-fulfillment-and-operational-history" id="orders-payments-fulfillment-and-operational-history"></a>
 
-#### Historical data may have different launch value <a href="#historical-data-may-have-different-launch-value" id="historical-data-may-have-different-launch-value"></a>
+Order history should remain useful after migration. AmeriCommerce planning should evaluate which order fields support customer service, account management, reporting, refunds, fulfillment review, and repeat-order behavior.
 
-Not all historical records need the same treatment. Recent orders may be needed for active support and fulfillment. Older orders may matter mainly for reference. Subscription-related or B2B order history may need extra attention because customers may use it to reorder, confirm account activity, or review invoice context.
+A source order may contain visible line items plus hidden operational context. Payment gateway details, shipment tracking, tax calculation, discount application, salesperson ownership, internal notes, purchase order references, and fulfillment system identifiers can all affect whether the history is usable.
 
-The migration plan should define which order history is launch-critical and which history is reference-only. That distinction helps the team interpret Demo Migration results more accurately.
+| Order component                 | Why it matters                                               | Common migration treatment                              |
+| ------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------- |
+| Line items and totals           | Supports customer service and purchase history               | Usually migrated when source data is consistent.        |
+| Payment method references       | Helps order interpretation but may not recreate transactions | Preserve descriptive history where appropriate.         |
+| Shipment and fulfillment data   | Supports service review and operational traceability         | Map tracking and fulfillment states where available.    |
+| Discounts and tax lines         | Explains why order totals look the way they do               | Preserve values even when rules are rebuilt separately. |
+| Internal notes or custom fields | May support sales, support, or ERP reconciliation            | Include only if business use is confirmed.              |
 
-### Storefront, Discovery, and Route Meaning <a href="#storefront-discovery-and-route-meaning" id="storefront-discovery-and-route-meaning"></a>
+Historical orders do not need to behave like active checkout objects. They need to be accurate, readable, and connected to the right customer and product context.
 
-AmeriCommerce can support multiple storefront and microstore contexts. That means storefront assignment, catalog visibility, customer access, navigation, page content, and URL behavior may be part of the data model. Migration quality depends on whether those contexts remain understandable after the move.
+### Content, URL, SEO, and Storefront Data <a href="#content-url-seo-and-storefront-data" id="content-url-seo-and-storefront-data"></a>
 
-#### Storefront context can change product and customer meaning <a href="#storefront-context-can-change-product-and-customer-meaning" id="storefront-context-can-change-product-and-customer-meaning"></a>
+Content migration into AmeriCommerce can involve CMS pages, landing pages, blog content, navigation labels, metadata, redirects, and storefront-specific route behavior. Merchants should avoid treating content as separate from data migration when content supports search visibility or buyer education.
 
-The same product may not belong to every storefront. The same customer may not see every catalog. The same content page may matter to one brand, region, dealer group, or portal but not another. When a source store has multiple storefronts, microsites, customer portals, or branded experiences, the migration plan should not treat catalog and content data as globally identical.
+The most important question is which URLs and content assets still carry business value. Some pages should be migrated because they rank, convert, or support account workflows. Other pages should be redirected, consolidated, or retired.
 
-AmeriCommerce is strongest when storefront boundaries are deliberate. The merchant should identify which storefronts matter, which customers and products belong to each context, which content and routes are business-critical, and which old contexts can be retired.
+| Content or route type    | Migration risk                                                         | Review action                                             |
+| ------------------------ | ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| Product URLs             | Search rankings and customer bookmarks may depend on route continuity  | Build redirect rules for changed paths.                   |
+| Category URLs            | Navigation and SEO may be tied to category structure                   | Review category hierarchy before final URLs are accepted. |
+| CMS pages                | Policy, support, B2B, brand, or landing content may support conversion | Decide migrate, rewrite, redirect, or retire.             |
+| Blog or resource content | Organic traffic may depend on article URLs and metadata                | Preserve valuable content and redirect changed routes.    |
+| Multi-store routes       | Similar pages may exist under different storefront contexts            | Confirm which store owns each route.                      |
 
-#### SEO and content meaning should be reviewed with route ownership <a href="#seo-and-content-meaning-should-be-reviewed-with-route-ownership" id="seo-and-content-meaning-should-be-reviewed-with-route-ownership"></a>
+Content and URL review should happen before migration execution, not after launch. Once redirects and page ownership are decided, data mapping and target-store configuration become more stable.
 
-Product, category, CMS, blog, and landing-page routes may affect search continuity, customer bookmarks, dealer access, or sales workflows. For a simple store, route review may focus on common product and category URLs. For an AmeriCommerce migration with multiple storefronts or portals, route meaning can be more specific because the same business may have different audience paths.
+### Integrations, Custom Fields, and External-System Data <a href="#integrations-custom-fields-and-external-system-data" id="integrations-custom-fields-and-external-system-data"></a>
 
-The migrated result should prove that high-value routes, navigation paths, and customer-facing content still support discovery. If source URLs, internal links, or content pages depend on custom logic or external systems, that should be reviewed before launch.
+AmeriCommerce migrations often require review of data that commerce exports do not fully explain. ERP, CRM, fulfillment, email marketing, marketplace, accounting, subscription, and tax systems may own identifiers or rules that appear only as custom fields in the source platform.
 
-### Rules, Pricing, Rewards, and Budgets as Business Logic <a href="#rules-pricing-rewards-and-budgets-as-business-logic" id="rules-pricing-rewards-and-budgets-as-business-logic"></a>
+Custom fields should not be migrated blindly. Each custom value needs a business interpretation: display-only, reporting-only, operationally required, integration-owned, obsolete, or sensitive. This classification prevents unnecessary scope expansion while protecting fields that carry real operational value.
 
-Pricing and rule data should be treated as business logic, not as passive data. AmeriCommerce may support customer-specific pricing, discounts, quantity behavior, rewards, recurring budgets, payment expectations, tax treatment, and other rule-driven outcomes. These rules can be central to buyer trust and revenue.
+| Custom or external data type | Typical owner                               | Migration handling                                       |
+| ---------------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| ERP identifiers              | ERP or accounting system                    | Preserve when needed for reconciliation or future sync.  |
+| CRM account IDs              | CRM or sales process                        | Confirm whether customer records need the link.          |
+| Fulfillment codes            | Warehouse, 3PL, or shipping system          | Validate only if fulfillment continuity depends on them. |
+| Marketing tags               | Email or segmentation platform              | Rebuild if the target segmentation model is changing.    |
+| App-created fields           | Source platform extension or custom process | Review supportability before including in scope.         |
 
-#### Rules need conditions, priority, and test examples <a href="#rules-need-conditions-priority-and-test-examples" id="rules-need-conditions-priority-and-test-examples"></a>
+The migration scope should separate visible store data from external-system control data. Visible data can often move as records. Control data needs ownership review.
 
-A pricing rule is incomplete if the team knows only that “special pricing exists.” The useful migration question is who receives it, which products it affects, whether quantity matters, whether it overlaps with discounts or rewards, and whether it should continue after launch.
+### How Data Model Differences Affect Migration Scope <a href="#how-data-model-differences-affect-migration-scope" id="how-data-model-differences-affect-migration-scope"></a>
 
-Rules should be tested with representative examples. A wholesale buyer, a dealer account, a loyalty customer, a budget-controlled buyer, and a retail customer may all need different validation samples. The goal is not to move every old exception blindly; it is to preserve the commercial rules that should shape the future buying experience.
+AmeriCommerce migration scope should be based on relationships, not only entity counts. A small catalog with complex pricing and buyer rules may require more careful planning than a large catalog with simple product records. A modest customer list can carry high risk if customer groups, account rules, or tax status determine purchasing behavior.
 
-#### Some rules may require Add-ons or Custom Service <a href="#some-rules-may-require-add-ons-or-custom-service" id="some-rules-may-require-add-ons-or-custom-service"></a>
+The following scope review helps convert data-model findings into migration decisions.
 
-Standard Add-ons can help when filtering, mapping, or data configuration matches available settings and supported behavior. If the expected result requires Tailored Add-ons, Custom Add-ons, custom fields, Custom Platform handling, outside-system identifiers, or custom migration logic adjustment, the requirement should be reviewed through Custom Service.
+| Scope signal                                 | What it suggests                                                  | Planning response                                     |
+| -------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------- |
+| Products have rule-dependent options or kits | Catalog meaning is not fully visible in product fields            | Select representative samples for early review.       |
+| Customer groups control price or access      | Customer data affects commerce behavior                           | Map buyer treatment before moving customers.          |
+| Multi-store or microstore history exists     | Storefront boundaries may affect data ownership                   | Decide what remains separate in the target structure. |
+| Legacy discounts and rewards are active      | Financial and promotional logic may not transfer as plain records | Confirm which rules should be rebuilt or excluded.    |
+| Custom fields drive integrations             | External systems may depend on migrated identifiers               | Document ownership before adding scope.               |
 
-This distinction matters because a rule-heavy AmeriCommerce migration is not automatically difficult, but undocumented or non-standard rule behavior can quickly move beyond ordinary data translation.
-
-### Integrations, Custom Fields, and External Meaning <a href="#integrations-custom-fields-and-external-meaning" id="integrations-custom-fields-and-external-meaning"></a>
-
-AmeriCommerce merchants may use ERP, accounting, CRM, fulfillment, shipping, tax, marketplace, API/headless, or reporting systems that influence commerce data. Some of these systems may own the real business meaning behind product availability, customer pricing, inventory visibility, order status, invoice handling, vendor assignment, or payment review.
-
-#### External systems can own the meaning behind visible records <a href="#external-systems-can-own-the-meaning-behind-visible-records" id="external-systems-can-own-the-meaning-behind-visible-records"></a>
-
-A source storefront may display data that is actually controlled somewhere else. For example, inventory may be updated by an ERP, tax status may come from accounting, shipping rules may depend on a carrier or freight workflow, and customer pricing may be maintained outside the store. If those ownership relationships are unclear, migration can preserve records while breaking business operations.
-
-Before migration, the merchant should identify which system owns each important outcome. The target-store data model should then be planned around native AmeriCommerce data, post-migration configuration, integration reconnection, and any Custom Service requirements.
-
-#### Custom fields need business interpretation <a href="#custom-fields-need-business-interpretation" id="custom-fields-need-business-interpretation"></a>
-
-Custom fields are not automatically important, and they are not automatically safe to ignore. Some custom fields contain internal notes, obsolete references, or temporary source-side workarounds. Others contain buyer identifiers, ERP keys, vendor references, product compatibility data, subscription context, or fulfillment instructions.
-
-The right question is what the field does for the business. If a custom field affects pricing, visibility, buyer access, fulfillment, reporting, or integration matching, it should be reviewed as business meaning. If it is obsolete, it should not be carried forward simply because it exists.
-
-### Custom Platform Source Interpretation <a href="#custom-platform-source-interpretation" id="custom-platform-source-interpretation"></a>
-
-When the Source Platform is a Custom Platform or a heavily modified store, AmeriCommerce data-model planning starts with source interpretation. The migration team may need to understand custom database structure, outside-system identifiers, custom product relationships, app-owned data, third-party records, custom customer segmentation, and non-standard order logic before deciding how the data can translate.
-
-Custom Platform cases should be reviewed through Custom Service because the work involves interpretation, transformation, or custom migration logic adjustment. The goal is not to force custom source behavior into ordinary AmeriCommerce fields. The goal is to determine which business meanings should become target data, target configuration, connected-system responsibility, or custom handling.
-
-### What Migrated Data Must Prove After Translation <a href="#what-migrated-data-must-prove-after-translation" id="what-migrated-data-must-prove-after-translation"></a>
-
-A strong AmeriCommerce migration should prove that important business meanings still work in the Target Platform. The table below summarizes the main proof areas for data-model review.
-
-| Proof area                            | What the migrated result should demonstrate                                                                                                                                   |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Product and catalog meaning**       | Products, groups, kits, subscriptions, attributes, content, and visibility rules still help buyers choose and purchase correctly.                                             |
-| **Buyer and account meaning**         | Customer groups, account relationships, portal access, pricing context, tax treatment, and payment expectations remain clear.                                                 |
-| **Storefront and microstore meaning** | Products, customers, content, navigation, and routes appear in the right storefront or microstore context.                                                                    |
-| **Rule and pricing meaning**          | Pricing, discounts, rewards, budgets, quantity behavior, and account-specific rules produce expected examples.                                                                |
-| **Order and history meaning**         | Orders, invoices, payment context, fulfillment notes, vendor context, and reorder information remain useful for support and operations.                                       |
-| **Integration and custom meaning**    | External identifiers, custom fields, API/headless dependencies, and connected-system responsibilities are either preserved, reconnected, or marked for Custom Service review. |
-
-The migrated data does not have to reproduce every source-side habit. It has to support the future operating model clearly. When the merchant can explain what each major data layer should provide, Demo Migration becomes more useful, and the full migration approach becomes easier to confirm.
+A strong AmeriCommerce data model review produces a practical migration map. It shows which records can move normally, which relationships require testing, which rules should be rebuilt, and which legacy records no longer justify migration effort.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-AmeriCommerce data-model differences matter because the platform often serves businesses with structured buyer relationships, multi-store or microstore contexts, complex product models, rule-driven pricing, operational workflows, and integration dependencies. In that environment, migration quality depends on whether the meaning behind the data survives translation.
+AmeriCommerce data model differences matter because many records carry relationship meaning. Products connect to storefronts, buyers, pricing, content, and operations. Customers may control access, discounts, tax treatment, and account workflows. Orders may support more than purchase history.
 
-The strongest AmeriCommerce migrations are planned around business meaning: who can buy, what they can see, how products are organized, how prices are determined, which storefront context applies, how orders are reviewed, and which systems own operational truth. If those meanings are clear before migration, AmeriCommerce can become a structured Target Platform instead of a place where source complexity is simply copied forward.
+A controlled migration should translate this meaning before records are moved at scale. When product, buyer, storefront, rule, content, and integration relationships are reviewed together, the migrated store is more likely to support real business use instead of only preserving exported data.
 
-Before starting a full AmeriCommerce migration, use Demo Migration and Live Chat to review representative products, buyers, storefronts, pricing, orders, custom fields, and integration examples. A small but meaningful sample is more useful than a broad sample that does not prove the data model behind the business.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do AmeriCommerce data model differences matter during migration?**
 
-**Does AmeriCommerce require every source data structure to transfer exactly?**
+They matter because AmeriCommerce migration planning often depends on relationships between products, buyers, storefronts, pricing, content, and external systems. The same record can behave differently depending on customer type, store context, or rule ownership.
 
-No. The goal is not exact source reproduction. The goal is to preserve the business meaning that should continue in AmeriCommerce. Some source structures may be simplified, reconfigured, reconnected through integrations, or reviewed through Custom Service.
+**Should every custom field be migrated to AmeriCommerce?**
 
-**Why is customer data more complex in an AmeriCommerce migration?**
+No. Custom fields should be classified by business use. Fields that support reporting, customer service, ERP sync, pricing, or fulfillment may be important. Obsolete, duplicate, or display-only fields may not justify migration.
 
-Customer records may carry buyer-group, portal, pricing, tax, payment, account, and B2B relationship meaning. If those meanings are lost, customer records can migrate successfully while buyer workflows fail.
+**Why should pricing rules be reviewed separately from product data?**
 
-**Should pricing rules be treated as data or configuration?**
+Pricing rules may depend on customer groups, quantities, product groups, date ranges, coupons, or external systems. Moving base product prices does not prove that buyer-specific or promotional pricing will behave correctly.
 
-They should be treated as business logic. Some pricing details may migrate as data, some may need configuration, and some may require Add-ons or Custom Service depending on how the rule works and what outcome the merchant expects.
+**How should multi-store or microstore data be handled?**
 
-**What product examples should be reviewed during Demo Migration?**
+Storefront boundaries should be reviewed before migration. Products, categories, customers, pages, and URLs may need different treatment if the source store separated audiences, brands, regions, or buyer groups across storefronts.
 
-Review products that expose real catalog meaning: kits, subscriptions, configurable products, technical products, buyer-restricted items, replacement parts, content-rich products, and products tied to special pricing or storefront visibility.
+**What makes order history usable after migration?**
 
-**When does a Custom Platform source require Custom Service?**
-
-Custom Platform source cases require Custom Service when source structure, custom fields, outside-system identifiers, third-party data, or non-standard business logic must be interpreted or transformed before it can fit AmeriCommerce.
+Order history is usable when customers, line items, totals, discounts, tax values, payment references, fulfillment details, and internal context remain readable enough for support, reporting, and account review.

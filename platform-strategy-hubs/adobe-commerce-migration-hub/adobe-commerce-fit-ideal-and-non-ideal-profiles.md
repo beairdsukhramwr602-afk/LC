@@ -1,163 +1,187 @@
 # Adobe Commerce Fit: Ideal and Non-Ideal Profiles
 
-Adobe Commerce is a strong Target Platform when the migration goal is to support an enterprise commerce operating model, not only to recreate storefront records. It is best suited for merchants that need governed catalog structure, B2B company-account behavior, shared catalogs, buyer-specific pricing visibility, scoped storefronts, staged content, and integration-aware operations.
+Adobe Commerce fit should be assessed through operating requirements, not through platform reputation alone. The platform can support enterprise commerce structures that are not usually needed by smaller stores, including B2B company accounts, shared catalogs, advanced catalog governance, multi-store scope, customer groups, staged merchandising, and integration-heavy workflows. Those capabilities can be valuable when they match how the business sells, but they can also create unnecessary migration burden when the merchant only needs a simpler storefront.
 
-Adobe Commerce is a weaker fit when the business needs a simple storefront, basic product management, minimal configuration responsibility, or a short path to launch without enterprise governance. The platform can support complex commerce operations, but it also requires stronger planning, clearer ownership, and deeper validation than simpler Target Platforms.
+A good fit decision should answer a practical question: does Adobe Commerce solve a real business-structure problem that simpler commerce platforms or Magento Open Source would not solve as effectively? The answer depends on catalog complexity, customer structure, sales workflow, governance needs, implementation ownership, operational maturity, and validation capacity.
 
-A practical fit decision should focus on business behavior: whether the source store’s customer, catalog, pricing, storefront, content, and operational rules can be represented safely in Adobe Commerce through supported structures, configuration, Add-ons, or Custom Service review.
+### What Adobe Commerce Fit Means in Migration Planning <a href="#what-adobe-commerce-fit-means-in-migration-planning" id="what-adobe-commerce-fit-means-in-migration-planning"></a>
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+Adobe Commerce fit is not only a platform-selection issue. It changes the migration plan because the target environment may need to preserve more than ordinary Products, Customers, Orders, Categories, CMS pages, discounts, and redirects. An Adobe Commerce migration may also need to consider company accounts, customer roles, customer groups, shared catalog expectations, quote workflows, approval rules, multiple websites, store views, staged content, integration identifiers, and custom modules.
 
-Adobe Commerce fit should be measured by operating-model alignment rather than company size alone. A merchant with a large catalog may not need Adobe Commerce if the store only requires straightforward product listings and basic checkout. A smaller merchant may be a strong fit if the business depends on company accounts, restricted catalogs, negotiated pricing, approval flows, multiple storefront scopes, or integration-led operations.
+That does not mean every Adobe Commerce migration must be complex. A merchant can use Adobe Commerce without every enterprise feature being in scope. The important fit question is whether the business has enough operational need and internal ownership to justify the platform’s structure.
 
-The central fit question is whether the business needs Adobe Commerce-level control over catalog governance, buyer access, pricing visibility, storefront scope, campaign timing, and connected systems after migration.
+| Fit dimension           | What it reveals for migration planning                                                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Business model          | Whether B2C, B2B, hybrid, wholesale, marketplace-adjacent, or multi-brand needs affect data scope.                                             |
+| Catalog governance      | Whether attributes, attribute sets, product types, pricing rules, shared catalogs, or merchandising workflows need careful migration planning. |
+| Customer structure      | Whether customer groups, company accounts, roles, approvals, credit, or account hierarchy require review.                                      |
+| Storefront scope        | Whether websites, stores, store views, languages, brands, currencies, or regional catalog differences must be preserved.                       |
+| Integration ownership   | Whether ERP, PIM, CRM, OMS, WMS, tax, payment, fulfillment, or analytics systems depend on migrated identifiers.                               |
+| Implementation capacity | Whether the merchant has technical and operational resources to configure, validate, and maintain the target environment.                      |
 
-When the answer is clear, Adobe Commerce can provide a strong foundation for a governed target store. When the answer depends on undocumented custom logic, hidden B2B rules, incomplete pricing records, unowned integrations, or unsupported source structures, Adobe Commerce may still be appropriate, but the migration requires deeper preparation before the service path is finalized.
+Adobe Commerce fit should therefore be judged by how the business operates after launch. The more the merchant depends on governed catalog rules, enterprise customer structures, multi-store scope, or integrations, the more important Adobe Commerce becomes as a deliberate migration target rather than a generic upgrade path.
 
-### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
+### Strong-Fit Adobe Commerce Migration Profiles <a href="#strong-fit-adobe-commerce-migration-profiles" id="strong-fit-adobe-commerce-migration-profiles"></a>
 
-#### B2B distributors, manufacturers, and wholesalers <a href="#b2b-distributors-manufacturers-and-wholesalers" id="b2b-distributors-manufacturers-and-wholesalers"></a>
+Adobe Commerce is a strong fit when the merchant needs enterprise commerce structure and is prepared to own the operational complexity that comes with it. These merchants usually need a platform that can support more than a basic storefront and ordinary product catalog.
 
-Adobe Commerce is a strong fit for businesses that sell to organizations rather than only individual shoppers. Company accounts, company users, company administrators, shared catalogs, account-specific pricing, quote behavior, purchase order expectations, payment restrictions, and shipping restrictions may all influence how buyers use the target store.
+A strong-fit merchant often has B2B, wholesale, or hybrid B2B/B2C requirements. Company accounts, buyer roles, approval workflows, negotiated pricing, shared catalogs, tax rules, and customer-group logic may shape how the business sells. For these merchants, migration planning should not treat Customers as simple contact records or Products as a flat catalog. The target environment needs to preserve the commercial structure that revenue teams depend on.
 
-This profile is strongest when the merchant can explain how source customer records map to company accounts, buying roles, customer groups, account permissions, catalog access, and pricing visibility. If wholesale accounts, dealer portals, distributor terms, contract pricing, or approval workflows are central to the business, Adobe Commerce can be suitable, but those relationships should be documented before migration scope is accepted.
+Adobe Commerce is also a strong fit for merchants with complex catalog governance. This includes businesses with configurable products, bundles, grouped products, attribute-heavy catalogs, attribute sets, custom options, product relationships, category depth, merchandising rules, and catalog-specific pricing logic. These structures can be valuable in Adobe Commerce, but only if the migration plan preserves their meaning and the validation process proves they are usable.
 
-#### Merchants with shared catalogs or buyer-specific pricing <a href="#merchants-with-shared-catalogs-or-buyer-specific-pricing" id="merchants-with-shared-catalogs-or-buyer-specific-pricing"></a>
+Multi-store and multi-brand merchants can also be strong Adobe Commerce candidates. When a business manages multiple websites, localized store views, regional catalogs, brand-specific content, or market-specific customer groups, Adobe Commerce can provide a structured environment for those differences. Migration planning must then define which records belong globally, which belong to a specific website, and which vary by store view.
 
-Adobe Commerce fits merchants that need different companies, customer groups, or buyer segments to see different catalogs, prices, or purchasing terms. Shared catalogs can support restricted product visibility and company-specific pricing behavior, which is important for B2B, wholesale, distributor, and mixed B2B/B2C operations.
+Integration-heavy merchants are another strong-fit group. Adobe Commerce often fits businesses where commerce data connects to ERP, PIM, CRM, OMS, WMS, tax systems, payment systems, fulfillment partners, or reporting pipelines. These integrations can raise migration risk because product IDs, customer identifiers, order references, pricing rules, or inventory relationships may need to remain understandable after migration.
 
-The fit depends on the quality of the source pricing and visibility logic. A source customer group, a custom wholesale-price extension, an ERP-owned contract-price table, and a manually maintained price list may all represent different target behaviors. Adobe Commerce can support advanced pricing structures, but migration planning must define which data is migrated, which rules are configured, which assumptions are excluded, and which requirements need Custom Service review.
+| Strong-fit profile                           | Why Adobe Commerce may fit                                                                                | Migration implication                                                                        |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| B2B or wholesale merchant                    | Needs company accounts, roles, approvals, customer groups, pricing governance, or shared catalog logic.   | Customer and catalog migration must preserve business relationships, not only record counts. |
+| Multi-brand or regional business             | Needs websites, stores, store views, localized content, or market-specific catalog rules.                 | Scope must define global vs scoped data carefully.                                           |
+| Catalog-governed merchant                    | Uses attributes, attribute sets, configurable products, bundles, category depth, and merchandising rules. | Product samples must prove that catalog meaning survives migration.                          |
+| Integration-heavy operation                  | Depends on ERP, PIM, OMS, CRM, WMS, tax, payment, or fulfillment systems.                                 | External identifiers and integration-owned fields may require Custom Service review.         |
+| Enterprise team with implementation capacity | Has technical, operational, and validation resources.                                                     | Adobe Commerce setup, configuration, and post-migration review can be handled responsibly.   |
 
-#### Multi-brand, multi-region, or multi-language merchants <a href="#multi-brand-multi-region-or-multi-language-merchants" id="multi-brand-multi-region-or-multi-language-merchants"></a>
+For these merchants, Adobe Commerce is not simply “more powerful.” It is more appropriate because the business already has enterprise structures that need a target platform capable of representing them.
 
-Adobe Commerce is a strong fit when the target store needs multiple websites, stores, or store views for brands, regions, languages, currencies, catalogs, tax contexts, or localized content. Its scope model can support enterprise storefront structure, but the target scope must be planned before migrated data is considered complete.
+### Conditional-Fit Adobe Commerce Profiles <a href="#conditional-fit-adobe-commerce-profiles" id="conditional-fit-adobe-commerce-profiles"></a>
 
-This profile fits best when the merchant already knows how the target store should be organized at launch. Localized product values, region-specific categories, multilingual CMS Pages, localized URLs, store-view metadata, and storefront-specific availability should be represented in migration samples and validation priorities.
+Adobe Commerce is a conditional fit when the merchant may benefit from enterprise capability but does not yet have the full operational maturity, implementation capacity, or scope clarity needed for a clean migration. These cases are not poor fits, but they require sharper planning before the platform decision is treated as final.
 
-#### Enterprise catalogs with structured product governance <a href="#enterprise-catalogs-with-structured-product-governance" id="enterprise-catalogs-with-structured-product-governance"></a>
+A growing Magento Open Source merchant is a common conditional profile. The merchant may already understand Magento-family catalog concepts, attributes, product types, extensions, and store scope, but Adobe Commerce adds enterprise capability that must be justified by business requirements. If the merchant is moving to Adobe Commerce only because it sounds like the natural next step, the migration plan may become heavier than necessary.
 
-Adobe Commerce fits businesses with product structures that need more than a flat product list. Configurable products, grouped products, bundle products, downloadable products, gift cards, attributes, attribute sets, categories, related products, up-sells, cross-sells, advanced pricing, inventory context, and SEO-sensitive product URLs can all require careful target modeling.
+Adobe Commerce may also be conditional for merchants planning B2B in phases. A business may want company accounts, customer roles, shared catalogs, or approval workflows later, but launch may begin with simpler B2C or wholesale behavior. In that case, migration planning should distinguish immediate launch scope from future-state configuration. Trying to migrate every future requirement at once can increase cost and validation burden without improving launch readiness.
 
-This profile is strongest when the merchant wants long-term catalog governance. Product families should have clear attribute sets. Configurable products should preserve parent-child SKU relationships. Bundle and grouped products should be tested through representative examples. Attributes should support merchandising, layered navigation, search, reporting, and internal maintenance rather than becoming inconsistent placeholders for source fields.
+Another conditional profile is the content- and merchandising-led business that wants staged content, promotions, campaign control, and advanced storefront management but has limited internal governance. Adobe Commerce can support deeper merchandising workflows, but migration success depends on whether teams can prepare content, URLs, campaign assets, category structures, and validation ownership.
 
-#### Campaign-driven teams using scheduled content and merchandising <a href="#campaign-driven-teams-using-scheduled-content-and-merchandising" id="campaign-driven-teams-using-scheduled-content-and-merchandising"></a>
+| Conditional-fit profile                          | Why the fit is conditional                                                                      | Planning response                                                                   |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Magento Open Source merchant considering upgrade | Familiar architecture, but enterprise features may or may not justify added scope.              | Compare current Magento needs against Adobe Commerce-only operational requirements. |
+| Business planning phased B2B                     | Future B2B capability matters, but launch may not need full B2B scope.                          | Separate launch scope from later configuration and validation.                      |
+| Multi-store merchant with uneven source data     | Adobe Commerce can support scope, but source content or catalog governance may be inconsistent. | Clean store-view, URL, catalog, and content evidence before migration.              |
+| Integration-heavy merchant without clear owners  | Enterprise integration need exists, but ownership is unclear.                                   | Identify system owners and external identifiers before selecting the service path.  |
+| Merchant with limited implementation bandwidth   | Platform fit may be valid, but execution risk is high.                                          | Consider Managed Service, implementation support, and staged validation.            |
 
-Adobe Commerce is a strong fit for merchants that coordinate product launches, seasonal campaigns, content updates, price changes, and merchandising calendars. Content Staging can influence products, categories, price rules, CMS Pages, CMS blocks, and other campaign-sensitive areas.
+Conditional fit should not be interpreted as hesitation. It means Adobe Commerce may be appropriate, but the migration plan must be phased, scoped, and validated with discipline.
 
-This profile fits best when marketing, merchandising, and operations teams can identify active campaigns, scheduled updates, launch-sensitive pages, promotion windows, and pricing changes. Migration timing and validation should account for which content is live, which updates are scheduled, and which commercial rules must be correct near launch.
+### Weaker-Fit or Non-Ideal Adobe Commerce Profiles <a href="#weaker-fit-or-non-ideal-adobe-commerce-profiles" id="weaker-fit-or-non-ideal-adobe-commerce-profiles"></a>
 
-#### Integration-heavy commerce operations <a href="#integration-heavy-commerce-operations" id="integration-heavy-commerce-operations"></a>
+Adobe Commerce is less practical when the merchant does not need enterprise commerce structure or cannot support the implementation and validation burden. A simple store with a small catalog, straightforward customer records, limited content complexity, and no B2B or multi-store requirements may not gain enough operational value from Adobe Commerce to justify the complexity of the target environment.
 
-Adobe Commerce often fits merchants whose commerce operation connects to ERP, PIM, CRM, WMS, fulfillment, tax, payment, shipping, analytics, marketplace, marketing, support, or business intelligence systems. In these environments, migration success depends on preserving operational meaning, not only storefront-visible content.
+It can also be a weak fit when the merchant expects a fully managed SaaS experience. Adobe Commerce gives significant flexibility, but that flexibility comes with implementation, configuration, hosting, extension, integration, security, and operational ownership. Merchants that want the platform to hide technical complexity may be better served by a more standardized hosted SaaS platform.
 
-A strong-fit merchant can identify which system owns product truth, inventory truth, customer truth, pricing truth, account truth, and order-processing truth. Critical identifiers, custom fields, status values, SKU conventions, account codes, and reporting references should be known before migration configuration begins. If those dependencies are unclear, Adobe Commerce may still be a strong Target Platform, but the project becomes higher risk until ownership and identifier requirements are documented.
+Adobe Commerce is also risky when the merchant has unclear custom requirements. If the source store depends on custom fields, extensions, modules, private integrations, ERP identifiers, or custom pricing logic, those requirements may still be valid, but they must be scoped before migration. Without that clarity, Adobe Commerce can become a place where unclear source complexity is carried forward rather than resolved.
 
-### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
+| Weaker-fit signal                                               | Why it weakens the case for Adobe Commerce                                                           | Better decision path                                                   |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Simple catalog and ordinary checkout needs                      | Enterprise structures may add more burden than value.                                                | Consider whether Magento Open Source or hosted SaaS is more practical. |
+| No B2B, multi-store, or integration-heavy requirements          | Adobe Commerce-specific strengths may not be needed.                                                 | Choose based on actual operating requirements, not platform status.    |
+| No internal technical or implementation ownership               | The merchant may struggle to configure and maintain the target environment.                          | Confirm partner, developer, or internal ownership before migration.    |
+| Source data is highly inconsistent and undocumented             | Migration risk may be hidden rather than solved.                                                     | Prepare data evidence and scope before committing.                     |
+| Expectation of direct feature equivalence from another platform | Adobe Commerce may require configuration, extension, or custom handling rather than direct transfer. | Validate assumptions through Demo Migration and service-path review.   |
 
-#### Merchants moving from a simpler platform into enterprise operations <a href="#merchants-moving-from-a-simpler-platform-into-enterprise-operations" id="merchants-moving-from-a-simpler-platform-into-enterprise-operations"></a>
+A weaker fit does not mean Adobe Commerce is unsuitable forever. It means the merchant should not choose it until the business case, technical ownership, and migration scope are clear enough to support the platform responsibly.
 
-Adobe Commerce can fit merchants that are intentionally moving from a simpler platform into a more governed commerce model. The migration may be an opportunity to formalize catalog structure, customer segmentation, account rules, pricing visibility, storefront scope, and integration requirements.
+### Source Platform Expectations That Need Translation <a href="#source-platform-expectations-that-need-translation" id="source-platform-expectations-that-need-translation"></a>
 
-This profile is conditional because the target operating model may not exist yet. If the merchant cannot define how the target store should behave, the migration can become a platform implementation project rather than a straightforward data transfer. Preparation should identify which target behaviors are required at launch and which can be configured after launch.
+Adobe Commerce fit often depends on whether the merchant understands how source-platform assumptions will change in the target environment. A Source Platform may define products, options, customer accounts, store views, B2B records, content, and integrations differently from Adobe Commerce.
 
-#### Merchants with partial B2B requirements <a href="#merchants-with-partial-b2b-requirements" id="merchants-with-partial-b2b-requirements"></a>
+For example, product options from a hosted SaaS platform may not behave like Adobe Commerce configurable products, custom options, bundles, or grouped products. Customer segments or tags may not map cleanly to customer groups, company accounts, buyer roles, or shared catalog rules. Source storefront pages may not translate directly into Adobe Commerce CMS pages, landing pages, category pages, or staged content. ERP identifiers and integration-owned fields may not belong to standard migration scope.
 
-Some merchants have wholesale customers, dealer pricing, distributor accounts, or sales-representative relationships, but do not yet operate a full B2B model. Adobe Commerce may fit if those needs are expected to become central after migration.
+| Source expectation                      | Adobe Commerce translation question                                                                                         |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Product options or variants             | Should they become configurable products, simple variations, custom options, bundles, grouped products, or custom handling? |
+| Customer tags, groups, or account types | Should they become customer groups, company accounts, buyer roles, shared catalog logic, or remain outside migration scope? |
+| Wholesale pricing                       | Is it standard price data, customer-group pricing, shared catalog logic, custom pricing, or integration-owned behavior?     |
+| Storefront languages or regions         | Should they become websites, stores, store views, localized content, or separate launch phases?                             |
+| CMS pages and landing pages             | Should they migrate, be rebuilt, redirected, staged, or excluded?                                                           |
+| App or extension data                   | Is it supported data, Add-on scope, Custom Service scope, or external-system work?                                          |
+| Order and payment history               | Is the goal historical readability, operational reporting, or integration continuity?                                       |
 
-The fit is conditional when source records do not clearly distinguish companies, buyers, customer groups, pricing rules, and approval responsibilities. These projects often need careful sample review, mapping decisions, and possible Custom Service assessment before Adobe Commerce fit can be confirmed.
+These translation questions should be answered before the merchant treats Adobe Commerce fit as confirmed. Fit is weaker when the business expects source behavior to copy directly into Adobe Commerce without target-side configuration or validation.
 
-#### Merchants with custom or extension-heavy source stores <a href="#merchants-with-custom-or-extension-heavy-source-stores" id="merchants-with-custom-or-extension-heavy-source-stores"></a>
+### Fit Signals to Confirm Before Migration <a href="#fit-signals-to-confirm-before-migration" id="fit-signals-to-confirm-before-migration"></a>
 
-Adobe Commerce can be appropriate for merchants whose current store depends on custom modules, extension-owned fields, private pricing logic, custom checkout behavior, or external identifiers. The platform can support sophisticated operations, but migration fit depends on whether those structures are standard, configurable, or custom-scope items.
+A serious Adobe Commerce fit decision should be supported by evidence. The merchant should be able to show representative catalog records, customer structures, B2B rules, store scope, content requirements, integrations, and validation owners before migration planning proceeds too far.
 
-This profile is conditional because the source may contain business-critical data outside normal migration coverage. Add-ons may help when the data is available in supported structures and needs filtering, mapping, or configuration. Custom Service should be considered when the source depends on unsupported records, bespoke transformation, Custom Platform behavior, outside-system identifiers, or custom migration logic.
+The most useful fit signals are practical. They identify whether Adobe Commerce is solving a real operating problem and whether the merchant can validate the migrated result.
 
-#### Merchants with strict launch timing <a href="#merchants-with-strict-launch-timing" id="merchants-with-strict-launch-timing"></a>
+| Fit signal                   | Evidence to prepare                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| B2B or wholesale requirement | Company account examples, buyer roles, approval needs, credit terms, price lists, customer groups, or shared catalog expectations. |
+| Multi-store scope            | Website, store, store-view, language, brand, region, currency, and catalog differences.                                            |
+| Catalog governance           | Attribute sets, configurable products, bundles, grouped products, custom options, category depth, and merchandising rules.         |
+| Integration dependency       | ERP, PIM, CRM, OMS, WMS, tax, payment, shipping, or analytics identifiers.                                                         |
+| Content and campaign needs   | CMS pages, landing pages, scheduled content, redirects, metadata, category content, and launch timing.                             |
+| Validation ownership         | Teams responsible for catalog, B2B, customer, order, content, integration, and storefront review.                                  |
 
-Adobe Commerce can fit time-sensitive projects, but enterprise storefronts usually need more validation than simple stores. Shared catalogs, buyer permissions, staged campaigns, product architecture, scoped content, priority URLs, and integrations all increase the amount of evidence needed before launch.
+If these signals are strong, Adobe Commerce can be evaluated with confidence. If they are vague, the merchant should refine scope before selecting the service path or approving Demo Migration results.
 
-The fit is conditional when the timeline does not allow enough time for source review, Demo Migration sample validation, issue reconciliation, configuration decisions, and go-live readiness checks. A compressed timeline may still work if scope is controlled and responsibilities are clear, but it should not rely on late validation.
+### How Fit Shapes the Migration Scope <a href="#how-fit-shapes-the-migration-scope" id="how-fit-shapes-the-migration-scope"></a>
 
-### Weaker-Fit Profiles <a href="#weaker-fit-profiles" id="weaker-fit-profiles"></a>
+Adobe Commerce fit should directly influence the migration scope. A strong-fit B2B merchant needs different migration planning from a merchant using Adobe Commerce mainly for catalog control and multi-store presentation. A business with integration-heavy operations needs different evidence from a merchant focused on content staging and merchandising governance.
 
-#### Simple storefronts with limited governance needs <a href="#simple-storefronts-with-limited-governance-needs" id="simple-storefronts-with-limited-governance-needs"></a>
+The fit decision should shape four parts of the migration plan.
 
-Adobe Commerce may be excessive for merchants that need a straightforward product catalog, basic customer accounts, basic orders, simple checkout, and limited administrative responsibility. A more lightweight Target Platform may reduce implementation cost, validation burden, training needs, and operational complexity.
+First, it should define which business structures are in scope. Products, Customers, Orders, Categories, CMS pages, Blog Posts, Reviews, Coupons, and redirects may not be enough if company accounts, customer groups, shared catalogs, staged content, or integration identifiers are essential.
 
-This does not mean Adobe Commerce cannot support simple stores. It means the merchant may be paying for and managing enterprise capabilities that the business does not need.
+Second, it should clarify what belongs to migrated data versus Adobe Commerce setup. Some values can be migrated. Others must be configured, rebuilt, installed, connected, or validated in the target environment.
 
-#### Merchants without internal ownership <a href="#merchants-without-internal-ownership" id="merchants-without-internal-ownership"></a>
+Third, it should guide service-path selection. Standard Service may fit supported, well-structured records. Managed Service may be safer when execution coordination is important. Add-ons may help with supported filtering, mapping, or configuration. Custom Service may be required for unsupported extension/module data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-Adobe Commerce is a weaker fit when no one can own catalog structure, customer-account rules, shared catalog decisions, pricing visibility, storefront scope, launch timing, or integration dependencies. Enterprise platforms work best when business and technical owners can define target behavior before launch.
+Fourth, it should define validation priorities. A merchant that chooses Adobe Commerce for B2B must validate company and customer structure. A merchant that chooses it for multi-store scope must validate website/store/store-view meaning. A merchant that chooses it for integration continuity must validate external references and ownership boundaries.
 
-If the merchant expects the migration to decide those rules automatically, the project is likely underprepared. Next-Cart can support migration execution according to the selected Migration Service and agreed scope, but the customer remains responsible for confirming that the target result matches business expectations.
+| Fit driver                             | Scope implication                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| B2B operations                         | Customer records may need company-account, role, approval, customer-group, and shared-catalog review.               |
+| Multi-store operations                 | Website, store, store-view, localized content, category, and URL scope must be clarified.                           |
+| Catalog governance                     | Product types, attributes, attribute sets, category structure, and merchandising rules need representative samples. |
+| Integration dependency                 | External identifiers and system-owned records may require Custom Service review.                                    |
+| Content staging or campaign operations | CMS pages, landing pages, redirects, media, and launch timing may need separate preparation.                        |
 
-#### Merchants avoiding platform configuration decisions <a href="#merchants-avoiding-platform-configuration-decisions" id="merchants-avoiding-platform-configuration-decisions"></a>
+The best Adobe Commerce fit decisions lead to a clearer migration scope. If the platform choice does not change the migration plan, the business case for Adobe Commerce should be reviewed again.
 
-Adobe Commerce is not ideal when the merchant wants migration to bypass target-store configuration work. Websites, stores, store views, attributes, attribute sets, catalog relationships, customer groups, shared catalogs, payment assumptions, shipping assumptions, content behavior, and integration references may all require decisions before the migrated result can be trusted.
+### Magento Open Source and Adobe Commerce Fit Boundaries <a href="#magento-open-source-and-adobe-commerce-fit-boundaries" id="magento-open-source-and-adobe-commerce-fit-boundaries"></a>
 
-A merchant that wants to avoid those decisions may be better served by a simpler Target Platform or by narrowing the launch scope before selecting Adobe Commerce.
+Adobe Commerce belongs to the Magento family, so the relationship with Magento Open Source matters. Both platforms share important commerce concepts, including product types, attributes, attribute sets, categories, websites, stores, store views, customers, and orders. That shared foundation makes Magento Open Source experience useful when planning Adobe Commerce migration.
 
-#### Projects with undocumented critical custom logic <a href="#projects-with-undocumented-critical-custom-logic" id="projects-with-undocumented-critical-custom-logic"></a>
+However, Adobe Commerce should not be treated as a renamed Magento Open Source hub. Adobe Commerce fit becomes stronger when the merchant needs enterprise capability that changes migration planning: B2B company accounts, customer roles, shared catalogs, advanced governance, Content Staging, enterprise integrations, and more rigorous operational validation.
 
-Adobe Commerce can support complex business models, but undocumented source logic increases migration risk. Custom pricing formulas, hidden buyer permissions, extension-owned records, external account identifiers, special order statuses, ERP-owned references, or custom checkout rules may not be safely handled as ordinary store data.
+Magento Open Source may be more practical when the merchant wants implementation flexibility but does not need Adobe Commerce-specific enterprise structures. Adobe Commerce may be more practical when the merchant has business operations that require enterprise commerce governance and has the capacity to configure and validate those structures.
 
-If business-critical logic cannot be located, explained, or tested, Adobe Commerce fit should remain conditional until the custom scope is reviewed. These projects often need Custom Service assessment before the migration path is finalized.
+| Fit boundary          | Magento Open Source leaning                                                | Adobe Commerce leaning                                                                       |
+| --------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Business model        | B2C or simpler custom commerce.                                            | B2B, wholesale, hybrid B2B/B2C, enterprise accounts.                                         |
+| Catalog need          | Flexible catalog and attribute control.                                    | Catalog governance plus shared catalogs, merchandising control, or enterprise pricing needs. |
+| Store scope           | Website/store/store-view structure without enterprise governance pressure. | Multi-brand, multi-region, or governed storefront operations.                                |
+| Customer structure    | Customer groups and ordinary accounts.                                     | Company accounts, buyer roles, approvals, shared catalog relationships.                      |
+| Operational ownership | Implementation ownership focused on open-source flexibility.               | Enterprise implementation, governance, and validation ownership.                             |
 
-### Fit Signals by Business Area <a href="#fit-signals-by-business-area" id="fit-signals-by-business-area"></a>
-
-| Business area         | Strong Adobe Commerce fit                                                                                                      | Conditional or weaker fit signal                                                                                                 |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Customer model        | Company accounts, company users, buying roles, buyer permissions, and customer-group meaning are known.                        | Source customer records are unclear, company relationships are undocumented, or buyer permissions are hidden in custom logic.    |
-| Catalog structure     | Product types, attributes, attribute sets, variants, bundles, categories, and merchandising relationships are well understood. | The source catalog is inconsistent, attributes are ungoverned, variants are unclear, or product relationships are not validated. |
-| Pricing visibility    | Shared catalogs, customer groups, negotiated prices, or account-specific visibility are intentional target behaviors.          | Pricing rules are scattered across spreadsheets, extensions, ERP references, or undocumented manual processes.                   |
-| Storefront scope      | Websites, stores, store views, languages, regions, currencies, and localized content are planned.                              | The merchant has not decided whether storefronts, regions, or languages need separate target scopes.                             |
-| Content and campaigns | CMS Pages, Blog Posts, scheduled campaigns, and priority content are reviewed before launch.                                   | Staged updates or campaign timing are unknown, or launch-sensitive pages are not included in validation.                         |
-| Integrations          | Ownership of product, customer, pricing, inventory, and order truth is clear across connected systems.                         | External identifiers, sync rules, and operational references are undocumented.                                                   |
-| Team readiness        | Business, technical, and operational owners can validate the target result.                                                    | No owner is available to approve catalog, B2B, pricing, content, URL, or integration behavior.                                   |
-
-### How Fit Affects Service Planning <a href="#how-fit-affects-service-planning" id="how-fit-affects-service-planning"></a>
-
-Adobe Commerce fit does not automatically determine the Migration Service. A strong-fit Adobe Commerce project may still use Standard Service when source data maps cleanly to supported structures and the customer is prepared to configure and validate the migration. Managed Service may fit when the customer wants Next-Cart to perform migration execution and coordinate the process under an agreed scope.
-
-Add-ons may be appropriate when the project needs filtering, mapping, or data configuration beyond the default setup. Custom Service should be considered when the migration depends on unsupported source structures, custom fields, extension-owned data, outside-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic.
-
-Entity Points should be treated as capacity planning, not as a measure of Adobe Commerce suitability. A project can have a manageable number of counted records and still require Custom Service because of B2B relationships, shared catalog logic, staged content, integrations, or custom data structures.
-
-### How Fit Affects Validation Readiness <a href="#how-fit-affects-validation-readiness" id="how-fit-affects-validation-readiness"></a>
-
-A good Adobe Commerce fit should produce clear validation evidence. The merchant should be able to select representative products, customer accounts, company accounts, company users, shared catalog assignments, buyer-specific prices, store-view content, priority URLs, CMS Pages, Blog Posts, staged content, and integration-sensitive records for Demo Migration review and final validation.
-
-If the merchant cannot define representative samples, the fit may still be valid, but readiness is incomplete. Adobe Commerce validation should prove that migrated records behave correctly for the intended target business model. The customer remains responsible for final verification before launch and after any selected Additional Migration Options.
+This boundary keeps the Adobe Commerce fit decision practical. The question is not whether Adobe Commerce is “better” than Magento Open Source. The question is whether Adobe Commerce-specific enterprise capability is necessary for the merchant’s target operating model.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Adobe Commerce is strongest when the merchant needs enterprise commerce control and is prepared to define how that control should work in the target store. B2B structures, shared catalogs, governed pricing, scoped storefronts, staged content, complex catalogs, and integrations can all make Adobe Commerce a strong Target Platform.
+Adobe Commerce is a strong migration target when the merchant needs enterprise commerce structures and can support the governance, implementation, and validation effort those structures require. It is especially relevant for B2B or hybrid businesses, multi-store operations, catalog-governed merchants, integration-heavy organizations, and teams that need more than ordinary storefront migration.
 
-It is weaker when the business wants simplicity, minimal configuration, limited validation, or an automatic migration decision in place of target-store planning. The best fit decision is not whether Adobe Commerce can handle complexity. It is whether the merchant needs that complexity, can define it, and can validate it before launch.
+It is a weaker fit when the merchant only needs a simple catalog, straightforward checkout, limited customer structure, and minimal technical ownership. The fit decision should not be based on platform prestige or a generic desire to “upgrade.” It should be based on whether Adobe Commerce changes the migration plan in a useful and necessary way.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Adobe Commerce only for very large catalogs?**
+**Who is Adobe Commerce best suited for?**
 
-No. Catalog size alone does not determine Adobe Commerce fit. A smaller catalog can be a strong fit if the business needs B2B company accounts, shared catalogs, scoped storefronts, staged content, governed pricing, or complex integrations. A larger catalog may be a weaker fit if the operation is simple and does not need enterprise platform structure.
+Adobe Commerce is best suited for merchants with enterprise commerce requirements, such as B2B company accounts, wholesale workflows, shared catalog expectations, multi-store scope, complex catalog governance, integration-heavy operations, and the internal or partner capacity to manage implementation and validation.
 
-**Does needing B2B automatically mean Adobe Commerce is the right Target Platform?**
+**Is Adobe Commerce always better than Magento Open Source?**
 
-Not automatically. Adobe Commerce can be a strong fit for B2B operations, but the merchant still needs to define company accounts, buyer roles, catalog visibility, pricing rules, purchasing behavior, and validation samples. Undocumented B2B logic may require deeper planning or Custom Service review.
+No. Adobe Commerce and Magento Open Source share a Magento-family foundation, but they serve different operating needs. Magento Open Source may be more practical when the merchant wants implementation flexibility without Adobe Commerce-specific enterprise requirements.
 
-**Can a simple store migrate to Adobe Commerce?**
+**Is Adobe Commerce a good choice for simple stores?**
 
-Yes, but the merchant should confirm that Adobe Commerce capabilities justify the added implementation, administration, and validation responsibility. If the target store only needs a simple catalog and checkout, a simpler platform may be more practical.
+Usually not if the store only needs a simple catalog, ordinary customer accounts, standard checkout, and limited integrations. In that case, Adobe Commerce may add more complexity than value.
 
-**Is Custom Service required for every Adobe Commerce migration?**
+**How does B2B affect Adobe Commerce fit?**
 
-No. Custom Service is not required when the source data maps cleanly to supported structures and the customer can manage the standard migration process. Custom Service becomes more relevant when the project depends on unsupported records, custom fields, extension-owned data, outside-system identifiers, bespoke transformation, or custom migration logic.
+B2B strengthens Adobe Commerce fit when company accounts, buyer roles, approval rules, customer groups, shared catalogs, credit terms, or negotiated pricing affect how the business sells and how migrated records must be validated.
 
-**Do Entity Points determine whether Adobe Commerce is a good fit?**
+**Should Adobe Commerce fit be judged before choosing the service path?**
 
-No. Entity Points help plan counted migration capacity. They do not measure platform suitability, B2B complexity, custom logic, integration dependency, or validation effort.
-
-**What is the strongest sign that Adobe Commerce is a good fit?**
-
-The strongest sign is a clear enterprise operating model. The merchant knows how catalogs, companies, customers, prices, storefronts, content, integrations, and validation responsibilities should work in the target store after launch.
+Yes. Fit should come before service-path selection because the platform decision defines what needs to migrate, what needs target-side configuration, what may require Add-ons, what may require Custom Service, and what must be validated before launch.<br>

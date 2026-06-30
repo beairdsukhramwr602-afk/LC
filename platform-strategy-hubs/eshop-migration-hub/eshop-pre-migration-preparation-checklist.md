@@ -1,253 +1,186 @@
 # EShop Pre-Migration Preparation Checklist
 
-Preparing for migration to EShop by Ossolution Team means preparing both the commerce data and the Joomla environment that will receive it. EShop is not only a product-and-order destination. It is a Joomla MVC-based e-commerce extension where catalog records, customer groups, checkout fields, tax rules, shipping methods, payment plugins, modules, templates, multilingual content, and custom development can all affect the final store.
+Preparing for migration to EShop by Ossolution Team means preparing both the commerce records and the Joomla environment that will receive them. EShop is not only a destination for product and order tables. It is a Joomla shopping cart extension where products, options, attributes, manufacturers, custom fields, checkout fields, coupons, vouchers, tax classes, shipping methods, payment plugins, modules, templates, multilingual content, and custom implementation can all affect whether the migrated store is usable.
 
-The purpose of preparation is to make the Demo Migration meaningful. A weak preparation process collects record counts and waits to see what happens. A stronger process identifies which records prove the store’s real operating model: products with options, products with attributes, products assigned to customer groups, orders with coupons and vouchers, customers with different address patterns, multilingual records, quote-mode examples, downloadable products, and any data shaped by custom fields, plugins, or Joomla overrides.
+Strong preparation turns Demo Migration into a real decision tool. Weak preparation only checks record counts and waits for issues to appear. Strong preparation selects examples that prove the store’s actual operating model: option-heavy products, attribute-rich products, customer groups, custom checkout fields, multilingual products, products with attachments or downloads, coupon and voucher orders, tax-sensitive orders, shipping-sensitive orders, and records shaped by Joomla modules, template overrides, plugins, or custom fields.
 
-Use this checklist to clarify what should be reviewed before migration, what evidence should be gathered, and which items may require Add-on review or Custom Service before execution.
+The goal is not to solve every implementation task before data movement begins. The goal is to know what must be preserved as data, what must be configured in EShop, what belongs to Joomla implementation, and what should be reviewed through Add-ons or Custom Service before execution.
 
-### Preparation Priorities Before Migrating to EShop <a href="#preparation-priorities-before-migrating-to-eshop" id="preparation-priorities-before-migrating-to-eshop"></a>
+### What Preparation Means for EShop <a href="#what-preparation-means-for-eshop" id="what-preparation-means-for-eshop"></a>
 
-A strong EShop migration starts by separating four layers of readiness: target environment readiness, source data readiness, configuration readiness, and implementation readiness. These layers should be reviewed together because EShop store behavior depends on how migrated records interact with Joomla configuration and EShop settings.
+EShop preparation should organize the project around the layers that shape the future store. Product and order data are only one layer. Joomla site structure, target configuration, extension behavior, and storefront presentation also influence the result. A clean preparation process separates those layers before Demo Migration so the review does not confuse missing configuration with missing data, or Joomla layout work with migration output.
 
-| Preparation layer                | What to clarify                                                                                                                                | Why it matters before migration                                                                                      |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Joomla and EShop environment     | Joomla version, EShop installation, extension compatibility, menus, modules, templates, and implementation responsibilities.                   | The migrated store must operate inside a working Joomla and EShop environment, not only appear as imported records.  |
-| Catalog data                     | Products, categories, manufacturers, options, attributes, labels, downloads, reviews, product custom fields, pricing, stock, and images.       | Catalog structure determines whether products remain understandable, searchable, comparable, and buyable.            |
-| Customer and sales data          | Customers, customer groups, addresses, orders, coupons, discounts, vouchers, checkout fields, quotes, order statuses, and comments.            | Historical records should remain useful for support, account review, operational reference, and customer continuity. |
-| Configuration-sensitive behavior | Tax classes, tax rates, geo-zones, currencies, stock statuses, shipping methods, payment plugins, catalog mode, cart mode, and quote behavior. | Some behavior must be configured or validated in EShop rather than assumed from migrated records.                    |
-| Joomla implementation layer      | Menus, aliases, metadata, modules, themes, layout overrides, multilingual records, and custom plugins.                                         | Storefront continuity depends on site implementation as well as migration output.                                    |
+| Preparation layer                | What to review                                                                                                                           | Why it matters for EShop                                                                                  |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Joomla environment               | Joomla version, EShop installation, menus, modules, templates, extensions, and administrative access.                                    | Migrated data must operate inside a working Joomla and EShop setup.                                       |
+| Catalog structure                | Products, categories, manufacturers, options, attributes, custom fields, attachments, images, tabs, labels, and reviews.                 | Catalog meaning decides whether shoppers can understand and buy products after migration.                 |
+| Customer and order history       | Customers, customer groups, addresses, order lines, order statuses, coupons, vouchers, tax, shipping, payment context, and comments.     | Historical records must remain useful for service, reporting, account review, and operational continuity. |
+| Configuration-sensitive behavior | Tax classes, geo zones, currencies, length and weight units, shipping methods, payment plugins, checkout fields, emails, and store mode. | Some behavior must be configured and tested in the target store rather than assumed from historical data. |
+| Joomla presentation              | Menus, aliases, metadata, SEF URLs, modules, templates, multilingual routes, and redirects.                                              | Data can be present while storefront discovery or page presentation remains incomplete.                   |
+| Custom or extension-owned data   | Custom tables, plugins, third-party identifiers, ERP fields, bespoke checkout logic, and unsupported source values.                      | These areas may need Add-ons or Custom Service depending on ownership and transformation needs.           |
 
-This preparation should not become an attempt to solve every implementation issue before migration. The goal is to identify what the migration must preserve, what the target store must be configured to support, and which unclear areas should be tested during Demo Migration.
+Preparation is strongest when each layer has evidence. A statement such as “we have product options” is not enough. The migration plan should identify which products prove option behavior, whether options affect price, SKU, image, stock, or order-line output, and whether those values must remain selectable in EShop.
 
-### 1. Confirm the Target Joomla and EShop Environment <a href="#id-1-confirm-the-target-joomla-and-eshop-environment" id="id-1-confirm-the-target-joomla-and-eshop-environment"></a>
+### Confirm Joomla and EShop Readiness <a href="#confirm-joomla-and-eshop-readiness" id="confirm-joomla-and-eshop-readiness"></a>
 
-Before preparing data samples, confirm that the target Joomla site and EShop installation are ready enough to receive and review migrated data. The target environment should not be treated as an afterthought because EShop behavior is shaped by Joomla menus, modules, templates, themes, extensions, and configuration.
+Before selecting Demo Migration samples, confirm that the target environment is ready enough to make the review meaningful. EShop is built for Joomla, so target readiness includes more than installing an extension. The team should know which Joomla version will be used, which EShop version is planned, which template or theme will support the storefront, which menus will expose the store, and which modules or plugins are part of launch-critical behavior.
 
-At minimum, the preparation process should confirm which Joomla version will be used, which EShop version is installed, which Joomla template or theme is planned, whether modules are already assigned, and whether any layout overrides or custom plugins are expected. If the target site is still being designed, the migration plan should still identify the expected storefront structure so Demo Migration results can be judged correctly.
+If the target website is still under design, the migration can still be scoped, but the unresolved areas should be named clearly. Demo Migration should not be blamed for missing menus, incomplete modules, unfinished template work, or payment plugins that have not been configured. Those are launch-readiness items that need ownership alongside migration validation.
 
-#### Environment items to confirm <a href="#environment-items-to-confirm" id="environment-items-to-confirm"></a>
+| Readiness item                   | Evidence to prepare                                                                                                        | Decision supported                                                                           |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Joomla version and hosting state | Target version, server notes, access level, extension compatibility expectations.                                          | Whether the environment can receive and review migrated records.                             |
+| EShop installation               | Installed version, enabled features, store mode, administrative access, and basic configuration status.                    | Whether product, customer, and order samples can be inspected in context.                    |
+| Storefront structure             | Menus for categories, products, cart, checkout, customer account, search, manufacturer pages, or quote-related paths.      | Whether shoppers will be able to reach migrated content after launch.                        |
+| Modules and templates            | Mini cart module, product modules, category modules, theme notes, overrides, and launch-critical page layouts.             | Whether visual review depends on Joomla implementation work.                                 |
+| Plugins and integrations         | Payment plugins, shipping plugins, content plugins, search plugins, email tools, affiliate links, CRM or ERP dependencies. | Whether behavior belongs to migrated data, target configuration, or custom integration work. |
 
-* Target Joomla version and EShop installation state.
-* Administrative access needed to review migrated EShop data.
-* Planned store mode, such as ordinary shopping behavior, Catalog Mode, quote-oriented selling, or a mixed model.
-* Joomla menu structure for product, category, manufacturer, cart, checkout, customer, quote, and search areas.
-* EShop theme, Joomla template, module placement, and any layout override expectations.
-* Known custom plugins, payment plugins, shipping plugins, or third-party services that may affect store behavior.
+The target environment does not need to be perfect before Demo Migration, but it must be understandable. When a missing target setting affects review, mark it as configuration pending rather than assuming the migration failed.
 
-If the target environment is incomplete, the migration can still be planned, but the team should be clear about which items will be validated immediately after Demo Migration and which items depend on later Joomla implementation work.
+### Prepare Catalog Structure and Product Samples <a href="#prepare-catalog-structure-and-product-samples" id="prepare-catalog-structure-and-product-samples"></a>
 
-### 2. Inventory the Source Catalog Structure <a href="#id-2-inventory-the-source-catalog-structure" id="id-2-inventory-the-source-catalog-structure"></a>
+Product preparation should go deeper than product counts. EShop catalog records can include products, multi-level categories, manufacturers, images, options, attributes, custom fields, attachments, downloads, extra tabs, product labels, reviews, related products, discounts, specials, stock values, dimensions, weight, and SEO fields. A sample that contains only simple products will not test whether the store’s real catalog can survive the move.
 
-Catalog preparation should go deeper than counting products. EShop has separate catalog concepts that can carry different meanings: products, categories, manufacturers, options, attributes, attribute groups, labels, downloads, reviews, tags, images, attachments, related products, discounts, specials, product custom fields, and product tabs.
+Select catalog samples that represent how the business sells. For a simple catalog, that may mean ordinary physical products with categories, images, stock, and tax class. For a structured catalog, it may require products with size and color choices, manufacturer relationships, specification tables, product PDFs, download files, reviews, related products, labels, customer-group prices, or special prices.
 
-The source catalog should be reviewed for the structures that matter most to shopper choice and merchant management. A product that looks simple in an export may depend on option-level pricing, downloadable files, customer group visibility, special prices, stock checkout settings, minimum and maximum quantities, quote mode, custom product fields, or source-specific product page layout.
+| Product sample                           | What it proves                                                                                               | Why it should be included                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Simple product                           | Baseline product fields, price, SKU, category, image, published state, stock, and description.               | Establishes the ordinary migration result.                               |
+| Option-heavy product                     | Size, color, package, required choice, price-changing option, SKU-changing option, or image-changing option. | Tests whether shopper choice remains buyable and readable on orders.     |
+| Attribute-heavy product                  | Specifications, comparison values, grouped attributes, or technical details.                                 | Confirms informational values are not confused with selectable options.  |
+| Product with manufacturer                | Brand, maker, supplier, or public manufacturer relationship.                                                 | Tests catalog discovery and manufacturer page expectations.              |
+| Product with custom fields or tabs       | Extra product details, structured notes, or source-specific values.                                          | Reveals fields that may need Add-ons or Custom Service review.           |
+| Product with attachments or downloads    | Manuals, certificates, digital assets, or downloadable products.                                             | Tests file relationships, access expectations, and product completeness. |
+| Product with discount or special price   | Promotional pricing, customer group pricing, or date-sensitive price meaning.                                | Separates historical pricing data from live promotion configuration.     |
+| Product with reviews or related products | Buyer confidence and merchandising context.                                                                  | Confirms supporting records are not ignored during validation.           |
 
-#### Product evidence to gather <a href="#product-evidence-to-gather" id="product-evidence-to-gather"></a>
+This preparation helps the merchant avoid approving a migration based on clean samples that do not represent the real catalog. The most useful Demo Migration samples are not always the easiest records. They are the records most likely to reveal whether the target data model can carry the old store’s meaning.
 
-Prepare examples for each major product pattern in the source store:
+### Separate Options, Attributes, Custom Fields, and Attachments <a href="#separate-options-attributes-custom-fields-and-attachments" id="separate-options-attributes-custom-fields-and-attachments"></a>
 
-| Product sample type                       | Why it should be included in preparation                                                                                     |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Simple product                            | Establishes the baseline for title, SKU, price, description, image, category, stock, and published state.                    |
-| Option-heavy product                      | Tests shopper-facing selections such as size, color, format, package, add-ons, required choices, and price-changing options. |
-| Attribute-heavy product                   | Tests specification and comparison information that should not be confused with selectable options.                          |
-| Discount or special-price product         | Shows whether promotional pricing and customer group price assumptions need mapping or configuration review.                 |
-| Product assigned to customer groups       | Reveals whether group-specific price, tax, or visibility behavior needs special attention.                                   |
-| Downloadable product                      | Tests whether files, download relationships, and product delivery expectations require preparation beyond ordinary products. |
-| Product with shipping rules               | Shows whether weight, dimensions, shipping requirement, shipping cost, or stock behavior matters.                            |
-| Quote-mode or call-for-price product      | Clarifies whether the product is meant to be purchased directly, quoted, or displayed without ordinary cart behavior.        |
-| Product with custom fields or attachments | Identifies data that may require Advanced Data Mapping, Advanced Data Configure, or Custom Service review.                   |
+One of the most important EShop preparation tasks is separating values that look similar in the source store but serve different purposes. Options are shopper-facing choices. Attributes are usually product information or specifications. Custom fields may carry structured product detail, operational notes, or values created by old apps. Attachments can support product documents, manuals, certificates, downloadable assets, or other files.
 
-This evidence should be gathered before Demo Migration so the sample is not random. Random samples often miss the records that reveal migration complexity.
+Many source stores blur these boundaries. A platform may call variant choices attributes. Another may store every custom product value as a metafield. Another may use an app to create personalized options or add-on services. EShop preparation should translate business meaning before field mapping.
 
-### 3. Separate Options from Attributes Before Mapping <a href="#id-3-separate-options-from-attributes-before-mapping" id="id-3-separate-options-from-attributes-before-mapping"></a>
+| Source value pattern                                                                           | Possible EShop meaning                                                | Preparation question                                                                                            |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Size, color, bundle, packaging, engraving, personalization, or add-on service                  | Product option, checkout field, or custom handling.                   | Does the shopper choose it before purchase, and does it affect price, SKU, image, stock, or order-line meaning? |
+| Material, compatibility, dimensions, care details, technical specifications, or warranty notes | Attribute, product custom field, extra tab, or description structure. | Should the value support comparison, detail display, filtering, or internal reference?                          |
+| PDF manual, certificate, specification sheet, or digital file                                  | Product attachment or downloadable product handling.                  | Must the file be publicly visible, available after purchase, or attached only for reference?                    |
+| App-created product field                                                                      | Add-on review or Custom Service review.                               | Is the value a standard product detail, a hidden operational value, or behavior created by custom code?         |
+| Old variant matrix                                                                             | Product options, separate products, or custom interpretation.         | Does the source variant structure have a clean equivalent in EShop?                                             |
 
-One of the most important preparation tasks for EShop is to separate shopper-facing product options from product attributes. Options represent choices a shopper may need to make before adding a product to the cart. Attributes represent product information or specifications, often useful for comparison and detail display.
+This separation should happen before Demo Migration sample selection. A sample product with complex choices can prove whether option values remain understandable in the storefront and on historical orders. A sample product with specifications can prove whether attribute or custom-field values remain useful without creating false checkout behavior.
 
-Many Source Platforms blur this distinction. Some call everything an attribute. Some use variants, modifiers, configurable products, custom fields, product add-ons, or app-created option sets. If the source structure is not clarified before migration, the Demo Migration may show products that technically exist but do not preserve buying meaning.
+### Prepare Customer, Order, and Checkout Evidence <a href="#prepare-customer-order-and-checkout-evidence" id="prepare-customer-order-and-checkout-evidence"></a>
 
-#### Questions to answer before Demo Migration <a href="#questions-to-answer-before-demo-migration" id="questions-to-answer-before-demo-migration"></a>
+Customer and order preparation should focus on operating meaning. EShop can work with customer accounts, customer groups, addresses, order history, order statuses, payment and shipping context, coupons, vouchers, custom checkout fields, and Joomla user relationships. The source store should be reviewed for the records that prove how customers and orders need to remain useful after migration.
 
-* Which source fields represent choices shoppers must select?
-* Which source fields represent product specifications or comparison information?
-* Do any choices affect price, stock, SKU, image, weight, or order line meaning?
-* Are any choices required before add-to-cart?
-* Are any product details stored in custom fields, app fields, extension tables, or free-form descriptions?
-* Do historical orders record the selected options clearly enough for customer service review?
+Do not select only the newest or cleanest orders. Select orders that show the store’s real commercial patterns: option selections, discounts, vouchers, taxes, shipping methods, payment methods, customer comments, guest checkout, registered accounts, multiple addresses, customer groups, multilingual orders, downloadable products, and custom checkout values.
 
-When options or attributes are source-specific, unsupported, or tied to custom logic, they should be flagged before execution. Advanced Data Mapping or Advanced Data Configure may help when the needed handling fits standard Add-on capability. Custom Service should be reviewed when the source structure requires bespoke interpretation or custom migration logic adjustment.
+| Evidence area          | Sample to prepare                                                                                                   | What the sample should prove                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Customer identity      | Registered customer, guest customer, customer with multiple addresses, customer tied to Joomla user identity.       | Whether account context and historical recognition remain understandable.                                |
+| Customer groups        | Retail, wholesale, reseller, member, tax-exempt, or special-price group.                                            | Whether group meaning needs mapping, configuration, or manual target setup.                              |
+| Order lines            | Orders with product options, attributes visible in history, downloadable items, or custom product choices.          | Whether purchased-item meaning remains readable for customer service.                                    |
+| Discounts and vouchers | Coupon order, voucher order, special-price order, customer-group price order.                                       | Whether historical promotion context remains available and whether live rules need target configuration. |
+| Tax and shipping       | Orders with geo-zone tax, multiple shipping methods, weight/dimension sensitivity, or pickup/delivery behavior.     | Whether totals and historical method labels remain clear.                                                |
+| Payment context        | Payment method, transaction reference, plugin label, paid/unpaid status, refund context.                            | Whether historical records remain useful without assuming live gateway behavior transfers automatically. |
+| Checkout fields        | Billing field, shipping field, delivery note, VAT field, company field, event/date field, or custom checkout input. | Whether the field belongs to ordinary order data, target configuration, or Custom Service review.        |
 
-### 4. Prepare Categories, Manufacturers, Discovery, and Storefront Paths <a href="#id-4-prepare-categories-manufacturers-discovery-and-storefront-paths" id="id-4-prepare-categories-manufacturers-discovery-and-storefront-paths"></a>
+Order history does not need to recreate every live checkout rule. A historical payment method can remain a label while a live payment plugin must be configured separately. A historical shipping method can remain evidence while live shipping rates require target setup. Preparation should keep that boundary clear.
 
-EShop catalog discovery can involve categories, manufacturers, aliases, metadata, page headings, modules, search behavior, filters, and Joomla menus. Preparing this layer helps prevent a migrated catalog from becoming hard to navigate even if the product records are present.
+### Review Tax, Shipping, Payment, Currency, and Store Configuration <a href="#review-tax-shipping-payment-currency-and-store-configuration" id="review-tax-shipping-payment-currency-and-store-configuration"></a>
 
-The source store should be reviewed for category depth, duplicate categories, manufacturer relationships, product placement, category descriptions, high-value SEO paths, internal links, and landing pages. If the future EShop store will use product filter modules, product modules, category modules, manufacturer modules, search modules, or cart modules, the relevant data should be prepared with those display expectations in mind.
+EShop supports many configuration-sensitive areas, including tax classes, tax rates, geo zones, currencies, shipping methods, payment gateways, store modes, order statuses, length classes, weight classes, email notifications, checkout fields, and invoice behavior. Some of these areas may exist as migrated historical context. Others must be configured in the target store before launch.
 
-#### Discovery items to document <a href="#discovery-items-to-document" id="discovery-items-to-document"></a>
+The preparation task is to classify each requirement. Historical records need enough context to remain understandable. Live behavior needs configuration, plugin readiness, and testing. Custom behavior needs review before it is included in migration scope.
 
-* Parent and child category structure.
-* Category names, aliases, metadata, descriptions, and images where relevant.
-* Manufacturer names and manufacturer-page expectations.
-* Products assigned to multiple categories or manufacturers.
-* Product tags, labels, reviews, and search/filter expectations.
-* High-value product, category, manufacturer, and content URLs.
-* Joomla menus or modules that will expose catalog areas after migration.
+| Configuration area    | Historical data question                                                                                    | Target setup question                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Tax classes and rates | Do old orders show tax totals and labels needed for support or reporting?                                   | Are target tax rules, geo zones, and VAT expectations configured for future checkout?      |
+| Shipping methods      | Do old orders preserve method names, costs, and delivery context?                                           | Are shipping plugins, weight/length units, pickup rules, and rate logic ready for testing? |
+| Payment methods       | Do historical orders show method names, statuses, transaction references, and refund notes where available? | Are live payment plugins installed, configured, and validated separately?                  |
+| Currencies            | Do historical records preserve useful currency context?                                                     | Is the future currency setup clear, including exchange-rate expectations if relevant?      |
+| Order statuses        | Can old statuses be mapped into understandable target statuses?                                             | Are future workflow statuses, emails, and staff processes defined?                         |
+| Checkout fields       | Which historical fields should remain attached to orders?                                                   | Which future fields need configuration, validation, and display testing?                   |
 
-This preparation belongs before migration because discovery problems are often mistaken for migration errors after launch. Some issues are data issues, some are configuration issues, and some are Joomla implementation issues.
+This review prevents a common misunderstanding: migrated history and live store behavior are related, but they are not the same task. EShop preparation should preserve what the business needs from the old store while confirming that new checkout behavior is configured and tested in the target environment.
 
-### 5. Prepare Customer, Customer Group, and Checkout Field Evidence <a href="#id-5-prepare-customer-customer-group-and-checkout-field-evidence" id="id-5-prepare-customer-customer-group-and-checkout-field-evidence"></a>
+### Prepare Joomla Presentation, SEO, and Multilingual Evidence <a href="#prepare-joomla-presentation-seo-and-multilingual-evidence" id="prepare-joomla-presentation-seo-and-multilingual-evidence"></a>
 
-Customer preparation should identify more than names and email addresses. EShop customer records may include account information, billing and shipping addresses, customer groups, and checkout field values. Customer groups can affect discount, special price, tax, or selling behavior, so group meaning should be documented before migration.
+EShop storefront continuity depends on Joomla presentation as well as migrated records. Menus, aliases, metadata, SEF URLs, modules, templates, theme files, layout overrides, multilingual routes, category pages, manufacturer pages, search behavior, and content plugins can influence how shoppers discover and use the store.
 
-Checkout fields also deserve early review. Billing and delivery fields may include required fields, optional fields, source-specific fields, or custom fields added to support business workflows. These fields can affect order readability, customer service, B2B review, delivery handling, or internal reporting.
+Prepare evidence from the source store and target Joomla plan before Demo Migration. The evidence does not need to be exhaustive, but it should cover pages that matter to traffic, conversion, customer support, and brand trust.
 
-#### Customer and checkout evidence to gather <a href="#customer-and-checkout-evidence-to-gather" id="customer-and-checkout-evidence-to-gather"></a>
+| Presentation area          | Evidence to gather                                                                                                      | Why it matters                                                                            |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Category and product paths | High-traffic URLs, SEO-sensitive products, category trees, manufacturer pages, and landing pages.                       | Redirect and route planning depends on knowing which paths must remain discoverable.      |
+| Metadata and page headings | Product titles, category metadata, manufacturer metadata, page titles, and descriptions.                                | Search visibility can be damaged if metadata is ignored.                                  |
+| Joomla modules             | Mini cart, product modules, category modules, related products, search modules, content modules, or promotional blocks. | Migrated data may need module assignment to appear in the storefront.                     |
+| Templates and themes       | EShop theme notes, Joomla template notes, layout overrides, CSS expectations, and screenshots.                          | Visual continuity may require implementation work beyond data migration.                  |
+| Multilingual content       | Product/category translations, associations, aliases, menus, checkout language, and module language assignments.        | Language structure must be validated across Joomla and EShop, not only in product fields. |
+| Content plugins            | Products displayed inside articles, search plugins, video displays, affiliate integrations, or email tools.             | Some storefront behavior may depend on plugins rather than ordinary product pages.        |
 
-* Customer groups and the business purpose of each group.
-* Customers assigned to different groups.
-* Customers with multiple addresses.
-* Customers with incomplete, unusual, or legacy address formatting.
-* Checkout fields used for billing and delivery.
-* Custom checkout fields created by extensions, manual workflows, or business-specific requirements.
-* Customer records connected to important historical orders.
+If SEO and presentation evidence is missing, Demo Migration can still proceed, but the review should not treat migrated records as launch-ready pages. A product existing in EShop administration is not the same as a product being reachable, correctly routed, properly translated, and presented in the intended Joomla layout.
 
-If customer groups or checkout fields carry business logic rather than simple labels, they should be included in Demo Migration samples. Group and field names alone are not enough; the preparation should clarify what those groups and fields are expected to mean after migration.
+### Identify Add-ons and Custom Service Review Areas <a href="#identify-add-ons-and-custom-service-review-areas" id="identify-add-ons-and-custom-service-review-areas"></a>
 
-### 6. Prepare Order Samples That Prove Commercial History <a href="#id-6-prepare-order-samples-that-prove-commercial-history" id="id-6-prepare-order-samples-that-prove-commercial-history"></a>
+EShop migrations often include requirements that are not simply standard record movement. Some needs may fit Add-ons, while others require Custom Service. The preparation checklist should identify these areas early so the migration path is not selected too lightly.
 
-Order preparation should focus on operational usefulness. EShop order records can include product line items, product model, quantity, unit price, total price, selected options, subtotal, tax, shipping, coupon, voucher, final total, payment method, shipping method, comments, order status, customer details, payment details, and shipping details.
+Add-ons can be useful when the requirement fits a defined optional capability, such as filtering unwanted records, supporting available mapping needs, or adjusting available configuration. Custom Service should be reviewed when the project involves Custom Platform data, unsupported extension data, bespoke source structures, custom fields needing interpretation, third-party identifiers, custom checkout logic, integration-owned records, or custom migration logic adjustment.
 
-A meaningful Demo Migration should include orders that reveal these layers. It should not include only recent ordinary orders if the store has refunds, coupons, vouchers, quote behavior, customer group pricing, tax complexity, unusual shipping methods, failed or cancelled orders, or custom statuses.
+| Requirement pattern                                                               | Likely review path              | Reason                                                                                          |
+| --------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Excluding archived records, test orders, obsolete products, or inactive customers | Data Filter Add-on review.      | Filtering can be appropriate when criteria are clear and supported.                             |
+| Mapping clear source values into supported EShop fields                           | Advanced Data Mapping review.   | Mapping can help when the source meaning is understood and the target destination is available. |
+| Adjusting available migration configuration                                       | Advanced Data Configure review. | Configuration support can help when the change fits standard capability.                        |
+| Custom fields with unclear meaning                                                | Custom Service review.          | Bespoke interpretation may be required before values can be migrated safely.                    |
+| Third-party plugin or integration data                                            | Custom Service review.          | Ownership and target behavior may sit outside standard EShop records.                           |
+| Tailored Add-ons or Custom Add-ons                                                | Custom Service review.          | Bespoke service handling belongs under Custom Service.                                          |
 
-#### Order samples to prepare <a href="#order-samples-to-prepare" id="order-samples-to-prepare"></a>
+The preparation output should not describe everything as an Add-on. Add-ons and Custom Service have different roles. Keeping that boundary clear protects the merchant from approving a scope that cannot preserve the old store’s actual operating meaning.
 
-| Order sample                        | What it helps prove                                                                          |
-| ----------------------------------- | -------------------------------------------------------------------------------------------- |
-| Ordinary completed order            | Baseline order identity, customer link, line items, totals, and status meaning.              |
-| Order with product options          | Whether selected shopper choices remain readable in historical order lines.                  |
-| Order with coupon or discount       | Whether promotional context and totals remain interpretable.                                 |
-| Order with voucher                  | Whether voucher-related value is preserved or needs review.                                  |
-| Order with tax and shipping         | Whether tax, shipping cost, shipping method, and totals remain useful.                       |
-| Order with different payment method | Whether payment method context is readable for historical reference.                         |
-| Order with custom or unusual status | Whether source status meaning needs mapping, cleanup, or Custom Service review.              |
-| Order with customer comment         | Whether operational notes and customer-entered information remain available where supported. |
-| Quote-related order or request      | Whether quote-mode selling has implications for migration and validation.                    |
+### Plan Demo Migration Validation Samples <a href="#plan-demo-migration-validation-samples" id="plan-demo-migration-validation-samples"></a>
 
-Historical order validation should not be confused with future checkout configuration. Old orders need to remain readable and commercially meaningful. Live checkout behavior still depends on EShop configuration, payment plugins, shipping plugins, tax settings, and target-site testing.
+Demo Migration should be planned, not treated as a random preview. For EShop, the sample should prove whether catalog structure, customer context, order meaning, configuration-sensitive data, Joomla presentation, multilingual content, and custom records can be reviewed reliably.
 
-### 7. Document Tax, Geo-Zone, Currency, Shipping, and Payment Settings <a href="#id-7-document-tax-geo-zone-currency-shipping-and-payment-settings" id="id-7-document-tax-geo-zone-currency-shipping-and-payment-settings"></a>
+A strong Demo Migration sample includes records that reveal risk. It should include clean baseline records and difficult records. It should include ordinary products, option-heavy products, attribute-heavy products, products with attachments, products with manufacturer associations, products with reviews or related products, orders with coupons and vouchers, orders with tax and shipping context, customers in different groups, multilingual records, and fields that may need Add-ons or Custom Service.
 
-Tax, shipping, payment, and currency behavior is configuration-sensitive in EShop. These areas should be documented before migration so the team can separate historical order context from target checkout setup.
+| Demo Migration sample group | Required examples                                                                                                                            | Validation purpose                                               |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Products                    | Simple product, option-heavy product, attribute-heavy product, manufacturer-linked product, discounted product, attachment/download product. | Confirms product meaning and catalog completeness.               |
+| Customers                   | Registered customer, guest customer, customer with multiple addresses, customer group example.                                               | Confirms account and buyer-history continuity.                   |
+| Orders                      | Option order, coupon/voucher order, tax-sensitive order, shipping-sensitive order, payment-method example, custom-field order.               | Confirms historical order readability and support usefulness.    |
+| Joomla presentation         | High-value category, product URL, module-dependent page, multilingual page, SEO-sensitive page.                                              | Separates migrated data review from site-implementation review.  |
+| Custom or unsupported areas | Custom field, plugin-owned value, external ID, integration reference, special checkout behavior.                                             | Determines whether Add-ons or Custom Service should be reviewed. |
 
-Prepare evidence for countries, zones, geo-zones, tax rates, tax classes, currencies, stock statuses, order statuses, length units, weight units, and any special regional or customer group logic. Shipping methods should be reviewed by type, such as flat, price-based, item-based, free, weight-based, quantity-based, postcode-based, carrier-based, or custom methods. Payment methods should be reviewed by gateway, offline method, payment reference behavior, and expected order status behavior.
-
-#### Configuration checklist <a href="#configuration-checklist" id="configuration-checklist"></a>
-
-* Countries, zones, and geo-zones used by the source store.
-* Tax classes and tax rates assigned to products or customer groups.
-* Currencies and exchange-rate expectations.
-* Stock statuses, out-of-stock status, stock checkout behavior, and threshold behavior.
-* Order statuses and the business meaning of each status.
-* Shipping methods, carrier integrations, regional rules, free shipping conditions, weight rules, quantity rules, postcode rules, and custom logic.
-* Payment gateways, offline payment methods, payment references, gateway statuses, and refund expectations.
-
-These settings may not all be migrated as direct records. Some may need to be configured in EShop, tested after migration, or reviewed through Custom Service if the source behavior depends on custom rules or third-party systems.
-
-### 8. Prepare Multilingual and Multicurrency Requirements <a href="#id-8-prepare-multilingual-and-multicurrency-requirements" id="id-8-prepare-multilingual-and-multicurrency-requirements"></a>
-
-EShop multilingual behavior should be prepared carefully because the way translations are represented in the target may differ from the Source Platform. EShop can support multilingual content across store records, but the migration plan must identify which records require translation and how source translations are structured.
-
-Preparation should include translated products, categories, manufacturers, options, attributes, attribute groups, labels, downloads, messages, custom fields, lengths, and weights where relevant. If the source store uses separate records per language, language-specific URLs, third-party translation extensions, or custom translation tables, those structures should be identified before migration.
-
-Multicurrency expectations should also be reviewed. The source store may store historical order currency, display prices in multiple currencies, or depend on exchange-rate logic. The preparation should clarify whether currency data is needed for historical reference, live storefront display, or both.
-
-### 9. Inventory Joomla Modules, Themes, Layout Overrides, and Custom Development <a href="#id-9-inventory-joomla-modules-themes-layout-overrides-and-custom-development" id="id-9-inventory-joomla-modules-themes-layout-overrides-and-custom-development"></a>
-
-Because EShop operates inside Joomla, the source and target implementation layers should be reviewed before migration. This does not mean Next-Cart migrates or rebuilds every Joomla layout element by default. It means the migration plan should identify which site-level elements influence the expected store result.
-
-Relevant items include EShop themes, Joomla templates, product/category/manufacturer/cart/search modules, menu assignments, template overrides, layout overrides, custom plugins, payment plugins, shipping plugins, user plugins, membership integrations, search plugins, notify plugins, and newsletter integrations.
-
-#### Customization signals to flag early <a href="#customization-signals-to-flag-early" id="customization-signals-to-flag-early"></a>
-
-* Source data stored by custom Joomla extensions or third-party plugins.
-* Product custom fields that are not standard source fields.
-* Checkout fields that affect order handling or internal workflows.
-* Custom payment, shipping, quote, notify, user, membership, or search plugins.
-* Layout overrides that change how product, category, cart, checkout, or customer pages display data.
-* External identifiers from ERP, CRM, fulfillment, marketplace, subscription, or accounting systems.
-* Data relationships that are not visible in ordinary source exports.
-
-When these items affect the expected migration result, they should be reviewed before execution. Some may be implementation tasks outside migration. Others may require Advanced Data Mapping, Advanced Data Configure, Tailored Add-ons, Custom Add-ons, or Custom Service.
-
-### 10. Choose Demo Migration Samples Deliberately <a href="#id-10-choose-demo-migration-samples-deliberately" id="id-10-choose-demo-migration-samples-deliberately"></a>
-
-Demo Migration should be used to test meaning, not only record movement. For EShop, that means selecting samples that expose catalog complexity, sales-history meaning, configuration-sensitive behavior, multilingual content, and Joomla display dependencies.
-
-A strong sample set should include ordinary records and edge cases. Ordinary records confirm the baseline. Edge cases reveal whether the migration plan understands the store’s real operating structure.
-
-| Sample group         | Include examples that test                                                                                                                                                                                                               |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Products             | Simple products, option-heavy products, attribute-heavy products, discounted products, downloadable products, quote-mode products, products with shipping rules, products with customer group behavior, and products with custom fields. |
-| Catalog organization | Parent/child categories, manufacturers, labels, reviews, tags, multiple category assignments, category aliases, metadata, and search/filter expectations.                                                                                |
-| Customers            | Customers from different customer groups, customers with multiple addresses, customers with incomplete addresses, and customers connected to important orders.                                                                           |
-| Orders               | Orders with options, coupons, discounts, vouchers, tax, shipping, multiple payment methods, custom statuses, comments, billing details, and shipping details.                                                                            |
-| Configuration        | Tax classes, geo-zones, currencies, stock statuses, order statuses, shipping methods, payment methods, and checkout field behavior.                                                                                                      |
-| Joomla/site context  | Menus, aliases, modules, themes, layout overrides, multilingual records, and high-value routes that affect storefront review.                                                                                                            |
-
-After Demo Migration, review each sample against its intended purpose. If a sample looks incomplete, determine whether the issue is source-data quality, target configuration, unsupported data, missing Add-on review, or a Custom Service requirement.
-
-### Practical Preparation Sequence <a href="#practical-preparation-sequence" id="practical-preparation-sequence"></a>
-
-Preparation does not need to be chaotic. The work should move from identity and environment, to catalog structure, to sales history, to configuration, to custom behavior, and finally to Demo Migration sample selection.
-
-1. Confirm the target Joomla and EShop environment.
-2. Inventory products, categories, manufacturers, options, attributes, downloads, labels, reviews, and product custom fields.
-3. Separate shopper-facing options from product attributes and specifications.
-4. Document customer groups, customers, addresses, and checkout fields.
-5. Select order samples that show products, options, totals, discounts, coupons, vouchers, tax, shipping, payment methods, statuses, comments, and customer context.
-6. Document taxes, geo-zones, currencies, stock statuses, order statuses, shipping plugins, and payment plugins.
-7. Review multilingual, multicurrency, module, theme, layout override, and custom development requirements.
-8. Identify which items are ordinary migration expectations, which require target configuration, which may use Add-ons, and which should be reviewed through Custom Service.
-9. Run Demo Migration with representative samples.
-10. Use Demo Migration results to decide whether the migration path is ready for Full Migration or needs cleanup, configuration review, Add-on review, or Custom Service review.
-
-This sequence gives the merchant and migration team a practical way to judge the source store before execution instead of discovering preventable issues during launch preparation.
-
-### What to Escalate Before Execution <a href="#what-to-escalate-before-execution" id="what-to-escalate-before-execution"></a>
-
-Some findings should be escalated before Demo Migration or Full Migration because they may change the service approach, sample design, or expected result.
-
-Escalate early when the source store includes Custom Platform data, unsupported extension data, product custom fields that need bespoke interpretation, checkout fields that need transformation, custom product option behavior, custom customer group pricing, unusual tax or geo-zone logic, custom order statuses, plugin-owned payment or shipping data, multilingual restructuring, ERP or CRM identifiers, quote workflows, membership integrations, marketplace connectors, or custom Joomla development that affects store output.
-
-Escalation does not automatically mean the project is too complex. It means the migration should not be planned as an ordinary record movement. The earlier those requirements are identified, the easier it is to decide whether Standard Service, Managed Service, Add-ons, or Custom Service is the right fit.
+The review should produce a clear decision: ready for standard execution, ready with Add-ons, safer under Managed Service, or requiring Custom Service review. A Demo Migration that is only checked for record counts does not provide enough evidence for an EShop project.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Preparing for EShop migration means proving that the future Joomla store has enough structure to receive meaningful commerce data. Products, categories, manufacturers, options, attributes, customers, customer groups, orders, coupons, vouchers, taxes, shipping, payments, multilingual records, modules, themes, and custom fields should be reviewed before migration because they shape what the result must preserve.
+EShop preparation works best when it treats the target store as a Joomla commerce environment, not only a product-and-order destination. The merchant should prepare the Joomla environment, EShop installation, catalog samples, product options, attributes, custom fields, attachments, customers, customer groups, orders, coupons, vouchers, tax, shipping, payment context, multilingual records, presentation dependencies, and custom data before approving the migration scope.
 
-The best preparation work does not try to make every source store perfect. It identifies the records that matter, the settings that need configuration, the samples that should be tested, and the custom behaviors that require early review. That makes Demo Migration more useful and reduces the risk of discovering structural gaps only after Full Migration.
+The strongest preparation output is a set of representative samples and responsibility notes. It should show what must be migrated, what must be configured in EShop, what belongs to Joomla implementation, what may fit Add-ons, and what needs Custom Service review. That evidence makes Demo Migration useful because it tests the store’s real operating meaning instead of only proving that records can appear in the target system.
 
-Before starting migration to EShop, prepare representative product, customer, order, configuration, multilingual, and Joomla implementation samples, then use Demo Migration and Live Chat to confirm whether the selected migration path can meet the expected result through Standard Service, Managed Service, purchased Add-ons, or Custom Service.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What should I prepare before migrating to EShop?**
 
-**What should be prepared first before migrating to EShop?**
+Prepare the target Joomla and EShop environment, product examples, categories, manufacturers, options, attributes, custom fields, attachments, customers, customer groups, orders, checkout fields, tax, shipping, payment context, multilingual records, SEO-sensitive paths, modules, templates, and custom data notes.
 
-Start with the target Joomla and EShop environment, then review the source catalog. EShop migration depends heavily on how products, categories, options, attributes, customer groups, checkout fields, taxes, shipping, payments, modules, and themes will work inside the target Joomla site.
+**Why do product options need special preparation?**
 
-**Why are product options and attributes important before EShop migration?**
+Product options can affect shopper choice, price, SKU, image, stock, and order-line meaning. A product may look migrated while the actual buying choice is incomplete, so option-heavy products should be included in Demo Migration samples.
 
-Options and attributes serve different purposes in EShop. Options are shopper-facing choices, while attributes describe product information or comparison details. If the source store mixes these concepts, they should be clarified before Demo Migration so products remain understandable and buyable.
+**Should tax, shipping, and payment settings be treated as migrated data?**
 
-**What order should the samples be selected for Demo Migration?**
+Historical tax, shipping, and payment context can remain useful on old orders, but future checkout behavior usually needs target-side configuration and testing in EShop. Preparation should separate historical evidence from live configuration.
 
-Choose orders that prove commercial meaning: orders with product options, coupons, discounts, vouchers, tax, shipping, different payment methods, custom statuses, customer comments, billing details, shipping details, and customer group context. Ordinary orders alone may not reveal the important migration issues.
+**When should custom fields be reviewed before migration?**
 
-**Should taxes, shipping methods, and payment gateways be prepared as data or configuration?**
+Custom fields should be reviewed when they affect product display, customer identity, checkout behavior, order meaning, integrations, reporting, or external systems. Clear supported fields may fit mapping review, while unclear or bespoke fields may require Custom Service.
 
-Both historical context and target configuration should be reviewed. Historical orders should remain readable with their tax, shipping, and payment information, while live checkout behavior must be configured and tested inside EShop using the correct plugins and settings.
+**What should Demo Migration prove for EShop?**
 
-**When should Custom Service be reviewed before EShop migration?**
-
-Custom Service should be reviewed when the source includes Custom Platform data, unsupported extension data, custom product or checkout fields, plugin-owned data, multilingual restructuring, custom order structures, external identifiers, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment beyond standard service capability.
+Demo Migration should prove that representative products, options, attributes, customers, orders, discounts, vouchers, tax, shipping, payment context, multilingual records, Joomla presentation dependencies, and custom data can be reviewed in a way that supports the final scope decision.

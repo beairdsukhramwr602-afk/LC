@@ -1,231 +1,176 @@
 # Square Constraints and Risks
 
-Square can be a strong Target Platform for merchants that want a closer connection between online selling, point-of-sale activity, inventory, customers, and order records. That strength also creates the main migration risk: Square should not be judged only by whether records appear after migration, but by whether the migrated result still supports the way the business sells, fulfills, reviews, and serves customers.
+Square migration risk is rarely limited to whether data can be transferred. The larger risk is whether the migrated result supports how Square will be used for selling, inventory, customer lookup, order review, online presentation, and operational reporting. A Square store can appear populated while still failing important business tests: staff cannot find the right sellable item, modifiers are misused as variations, inventory is assigned without location meaning, historical orders lack useful context, or Square Online pages and redirects are not ready for launch.
 
-Most Square migration risks are structural and operational. Items can appear, variations can exist, customers can be present, historical orders can be visible, and redirects can resolve while the target still feels unsafe for daily use. The real question is whether Square’s unified commerce model has been defined clearly enough for the migrated data to behave as intended.
+These risks are structural because Square connects catalog, locations, inventory, orders, payments, customers, and Square Online more tightly than many storefront-first platforms. A weak assumption in one data area can affect another. Product option errors can affect inventory. Category assumptions can affect online navigation. Customer identity problems can affect order lookup. Payment-history assumptions can affect stakeholder expectations about future payment setup.
 
-### Where Square risk usually concentrates <a href="#where-square-risk-usually-concentrates" id="where-square-risk-usually-concentrates"></a>
+Risk control should therefore follow a clear chain: identify the source assumption, explain the Square constraint, define the migration consequence, describe the operational impact, choose a mitigation cue, and validate the result with representative samples.
 
-Square migration risk usually concentrates in a focused set of pressure points rather than across every migrated record equally.
+### Square Risk Comes From Operating Assumptions <a href="#square-risk-comes-from-operating-assumptions" id="square-risk-comes-from-operating-assumptions"></a>
 
-#### Item and variation structure <a href="#item-and-variation-structure" id="item-and-variation-structure"></a>
+Many Square migration issues begin with a source-store assumption that sounds reasonable but is not specific enough. “Products and orders migrated” is not a complete acceptance standard. Square needs product structures that can be sold, inventory that can be interpreted, customers that can be searched, orders that preserve meaningful history, and Square Online content that supports launch continuity.
 
-Square depends heavily on the relationship between items, item variations, item options, and modifiers. Risk increases when the Source Platform used a looser product model where sellable versions, cosmetic choices, personalization inputs, add-ons, and inventory-sensitive choices were mixed together.
+A strong Square risk review asks what each data area must do after migration:
 
-#### Inventory and location-aware behavior <a href="#inventory-and-location-aware-behavior" id="inventory-and-location-aware-behavior"></a>
+| Data area     | Risk question                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| Catalog       | Can staff and customers understand the item, variation, modifier, category, price, tax, and image structure? |
+| Inventory     | Are stock values attached to the right sellable variation and location?                                      |
+| Orders        | Does historical order data preserve enough context for support and review?                                   |
+| Payments      | Are stakeholders separating historical payment labels from live Square payment setup?                        |
+| Customers     | Can staff identify useful customer profiles and related order history?                                       |
+| Square Online | Are pages, navigation, URLs, redirects, SEO fields, images, and storefront display reviewed after migration? |
+| Integrations  | Are app, plugin, external-system, and custom-field expectations classified correctly?                        |
 
-Square often brings inventory closer to day-to-day operations. If stock visibility, location rules, fulfillment assumptions, or variation-level inventory were unclear in the Source Platform, the migrated result may look complete while still creating operational mismatch.
+This approach prevents risk review from becoming a generic warning list. Every risk should connect a platform constraint to a business consequence.
 
-#### Historical-order interpretation <a href="#historical-order-interpretation" id="historical-order-interpretation"></a>
+### Catalog and Item-Library Risk <a href="#catalog-and-item-library-risk" id="catalog-and-item-library-risk"></a>
 
-Historical orders can support continuity, support review, and reporting context, but they should not automatically be treated like ordinary live Square orders. Risk increases when staff do not know how imported historical records should be interpreted after launch.
+Catalog risk appears when the source product model is transferred without adapting it to Square’s item-library logic. The issue may not be visible from product count alone. A catalog can have the expected number of items but still be hard to sell if product choices are structured poorly.
 
-#### Customer-profile usefulness <a href="#customer-profile-usefulness" id="customer-profile-usefulness"></a>
+The most common catalog risk is variation/modifier confusion. Source platforms may use product options for every choice: size, color, flavor, add-ons, bundles, engraving, appointment type, pickup preference, or service customization. Square needs a cleaner distinction. True sellable versions should usually be variations. Sale-time adjustments may be modifiers. Custom business logic may need target-side setup or Custom Service review.
 
-Customer records are only useful when they preserve the information teams actually need. Risk increases when customer context depends on tags, notes, loyalty context, CRM fields, app-owned metadata, or outside-system identifiers that have not been classified before migration.
+| Assumption                                        | Square constraint                                                                    | Consequence                                                                                     | Mitigation cue                                                     | Validation signal                                                             |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Every source option should become a variation.    | Square variations represent sellable versions of an item.                            | Staff see cluttered choices, inventory becomes misleading, or online display becomes confusing. | Classify options as variations, modifiers, setup, or custom scope. | Sample products show correct selling, display, and inventory behavior.        |
+| Categories should mirror the old storefront tree. | Square catalog categories and Square Online navigation may serve different purposes. | Product organization may transfer while customer browsing or SEO continuity remains incomplete. | Separate catalog grouping from online navigation and redirects.    | Important categories, pages, and product paths are reviewed in Square Online. |
+| Product images only need to transfer.             | Images must support catalog and online presentation.                                 | Items exist but launch display looks incomplete or inconsistent.                                | Validate images on representative catalog and storefront samples.  | Product pages and item records display the intended primary images.           |
+| Bundle logic is ordinary catalog data.            | Bundle behavior may depend on source apps, custom rules, or inventory logic.         | Component stock, pricing, or fulfillment expectations may fail.                                 | Identify bundles before scope confirmation.                        | Bundle examples are either supported, configured, excluded, or escalated.     |
 
-#### Multiple websites and shared governance <a href="#multiple-websites-and-shared-governance" id="multiple-websites-and-shared-governance"></a>
+The most important mitigation is early sample testing. Square product review should include simple products, variant-heavy products, modifier-heavy products, bundle-like products, service items, tax-sensitive items, and image-heavy items.
 
-Square can support more than one website under an account, but multi-site use increases the need to define what stays shared and what should differ by storefront. Without that governance, items, categories, navigation, and site-specific intent can become confusing.
+### Inventory, Locations, and Fulfillment Risk <a href="#inventory-locations-and-fulfillment-risk" id="inventory-locations-and-fulfillment-risk"></a>
 
-#### Route and destination continuity <a href="#route-and-destination-continuity" id="route-and-destination-continuity"></a>
+Inventory risk grows when merchants assume a stock number is enough. Square inventory depends on sellable item variations and locations. A source platform may store global stock, warehouse stock, channel-level stock, supplier stock, backorder states, or marketplace availability. Those structures may not translate automatically into Square’s operational model.
 
-Redirect capability does not remove the need to prioritize important URLs. Risk increases when high-value product, category, landing-page, or campaign paths are mapped without checking whether the destination still matches the original customer or search intent.
+For single-location businesses, inventory risk may be limited to SKU accuracy and stock-count validation. For multi-location businesses, the risk is larger. A source warehouse may not equal a Square location. A retail store, pickup point, restaurant location, pop-up location, or fulfillment center may need its own interpretation. If the mapping is wrong, a product may look available in Square while staff cannot trust where it is actually available.
 
-### Constraint 1: Item variation design can preserve products while weakening sellable reality <a href="#constraint-1-item-variation-design-can-preserve-products-while-weakening-sellable-reality" id="constraint-1-item-variation-design-can-preserve-products-while-weakening-sellable-reality"></a>
+| Risk pattern                                                              | Operational impact                                               | Control method                                                                       |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Global stock becomes location stock without review.                       | The merchant cannot trust available quantity by Square location. | Confirm whether source quantities are global, warehouse-based, or location-specific. |
+| SKU-level variants are missing or inconsistent.                           | Inventory cannot be attached confidently to sellable variations. | Validate SKU and variation samples before accepting scope.                           |
+| Online-only or in-store-only products are not identified.                 | Products may appear in the wrong selling channel.                | Review channel visibility and fulfillment expectations separately.                   |
+| Backorder, preorder, or negative-stock behavior is assumed to carry over. | Staff may misread availability after launch.                     | Treat these as target-side setup, exclusion, or custom review items.                 |
+| Bundle inventory is treated as a simple stock field.                      | Component availability and reporting may be incorrect.           | Escalate bundle/component logic when it affects selling or fulfillment.              |
 
-#### Description <a href="#description" id="description"></a>
+Inventory should be validated through working examples, not only totals. The merchant should be able to select a migrated item variation, view the expected stock behavior, and understand which location or channel the stock represents.
 
-A Square item is not enough by itself to prove product continuity. The migrated structure must also preserve which choices define the product customers actually buy.
+### Orders, Payments, Refunds, and Reporting Risk <a href="#orders-payments-refunds-and-reporting-risk" id="orders-payments-refunds-and-reporting-risk"></a>
 
-This becomes sensitive when the Source Platform used a broad variant concept for different kinds of meaning: true purchasable versions, optional add-ons, personalization, visual distinctions, inventory-sensitive choices, or source-side shortcuts. If those meanings are carried into Square without classification, the target can preserve product presence while weakening the buying decision.
+Order history is valuable when it remains useful for support, customer service, reporting context, and operational review. The risk is assuming that historical order data can recreate every source-platform payment, refund, fulfillment, tax, discount, or reporting behavior inside Square.
 
-Square also has practical variation limits at the item level, so unusually large variation matrices should be reviewed before they are treated as routine migration cases.
+A source order may contain line items, payment method labels, transaction IDs, refunds, tips, service charges, discounts, tax lines, shipping charges, fulfillment status, delivery details, customer notes, staff notes, app metadata, marketplace references, and accounting identifiers. Some information may be migrated where supported. Some may need Custom Service review. Some may remain historical context only.
 
-#### Who it affects <a href="#who-it-affects" id="who-it-affects"></a>
+Payment risk deserves explicit handling. Migrated payment history does not configure Square to process future payments. It does not set up payment hardware, gateway rules, checkout behavior, payouts, or reconciliation with a previous processor. If stakeholders expect old payment behavior to become live Square setup, the migration plan will create false confidence.
 
-This affects merchants with option-heavy best sellers, product families with many purchasable combinations, variation-specific pricing, variation-level inventory, or products where a small number of complex items carry a large share of revenue.
+| Assumption                                              | Risk                                                                          | Mitigation                                                                                          |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Historical orders only need dates and totals.           | Support teams cannot answer customer, refund, item, or fulfillment questions. | Validate representative complete orders, refunded orders, discounted orders, and high-value orders. |
+| Payment labels equal live payment setup.                | Stakeholders may expect the migration to configure future payment processing. | Separate historical payment context from Square payment configuration.                              |
+| Refunds and service charges always map cleanly.         | Historical financial review may be incomplete or confusing.                   | Review refunded, partially refunded, tipped, and service-charge examples.                           |
+| Marketplace or app order IDs are ordinary order fields. | External reconciliation may break.                                            | Identify required external identifiers and decide whether Add-ons or Custom Service are needed.     |
+| Order status names should match exactly.                | Staff may misread historical fulfillment or support status.                   | Validate status interpretation rather than only matching labels.                                    |
 
-#### Mitigation strategy <a href="#mitigation-strategy" id="mitigation-strategy"></a>
+Order migration should be accepted only when the merchant can interpret representative history inside Square. Counts alone do not prove the result is useful.
 
-Classify sellable reality before full execution. Identify which choices must remain true item variations, which should become modifiers, which can be simplified, and which products should be included in the Demo Migration sample because they expose the highest buying-risk scenarios.
+### Customer Profile and Identity Risk <a href="#customer-profile-and-identity-risk" id="customer-profile-and-identity-risk"></a>
 
-### Constraint 2: Confusing variations, options, and modifiers can damage operational meaning <a href="#constraint-2-confusing-variations-options-and-modifiers-can-damage-operational-meaning" id="constraint-2-confusing-variations-options-and-modifiers-can-damage-operational-meaning"></a>
+Customer risk appears when source customer accounts are treated as equivalent to Square customer profiles. The old platform may include registered accounts, guest buyers, customer groups, wholesale roles, tax exemptions, loyalty memberships, saved addresses, subscriptions, newsletter flags, CRM references, and marketplace identities. Square may preserve useful profile and order context where supported, but it should not be assumed to recreate every account behavior.
 
-#### Description <a href="#description-1" id="description-1"></a>
+Identity quality matters because Square may be used by staff during live selling, support, customer lookup, and repeat-buyer review. Duplicate customers, inconsistent emails, missing phone numbers, old addresses, guest orders, and external IDs can make customer data look complete while reducing usefulness.
 
-Square separates product structure more deliberately than many source platforms. Item variations, item options, and modifiers do not carry the same meaning.
+| Identity issue                                                          | Business impact                                        | Mitigation cue                                                                | Validation signal                                                                 |
+| ----------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Duplicate profiles                                                      | Staff cannot identify repeat buyers confidently.       | Review duplicate patterns before migration.                                   | High-value customers show expected profile and order context.                     |
+| Guest buyers mixed with registered accounts                             | Historical lookup becomes confusing.                   | Test guest-order examples separately.                                         | Guest orders remain readable without creating false account expectations.         |
+| Customer groups or wholesale roles assumed to transfer as live behavior | Pricing, permission, or tax expectations may be wrong. | Treat group behavior as target setup, Add-on review, or Custom Service scope. | Stakeholders confirm what is migrated versus configured.                          |
+| Loyalty or CRM references are hidden in app fields                      | Marketing and support context may be lost.             | Identify external IDs and app-owned fields before scope lock.                 | Required references are either mapped, custom-handled, or excluded intentionally. |
 
-Risk appears when the migration treats every customer-facing choice as the same kind of data. If too many choices become variations, the catalog can become bloated and harder to govern. If true sellable differences are pushed into modifier-like behavior, inventory, pricing, reporting, or fulfillment meaning can weaken. The storefront may still look usable, but the business may no longer be able to interpret what was sold with enough precision.
+The safest customer-risk control is to define how Square customer data will be used after launch. Support lookup, repeat-buyer review, loyalty planning, marketing, and reporting can require different levels of detail.
 
-#### Who it affects <a href="#who-it-affects-1" id="who-it-affects-1"></a>
+### Square Online, URL, SEO, and Site-Presentation Risk <a href="#square-online-url-seo-and-site-presentation-risk" id="square-online-url-seo-and-site-presentation-risk"></a>
 
-This affects stores that rely on add-ons, customization, food or service modifiers, personalization, build-your-own flows, or products where customer selections affect price, inventory, fulfillment, or reporting in different ways.
+Square Online risk appears when catalog migration is mistaken for storefront readiness. A merchant may successfully migrate catalog data while still needing page setup, navigation review, redirects, SEO field validation, image checks, content decisions, domain planning, and launch testing.
 
-#### Mitigation strategy <a href="#mitigation-strategy-1" id="mitigation-strategy-1"></a>
+This risk is especially important for merchants moving from a content-rich or SEO-heavy Source Platform. A source category might have been both a product group and a landing page. A CMS Page may have supported buying guidance. Blog Posts may have brought traffic. Product URLs may have earned backlinks. The migration plan should not assume all of this becomes a finished Square Online experience automatically.
 
-Create a clear classification rule before migration. Define what changes the sellable unit, what changes the purchase-time experience only, and what must remain visible for staff, inventory, and reporting after launch.
+| Site risk                                          | What goes wrong                                                       | Prevention                                                                             |
+| -------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Catalog categories are treated as full navigation. | Products exist, but storefront browsing feels incomplete.             | Review Square Online navigation and page hierarchy after catalog migration.            |
+| Old URLs are not mapped or redirected.             | Search traffic and customer bookmarks may land incorrectly.           | Identify priority product, category, CMS Page, and Blog Post URLs before launch.       |
+| CMS Pages are treated as ordinary product data.    | Important trust, policy, buying-guide, or landing content is missing. | Decide which pages migrate, rebuild, redirect, or retire.                              |
+| Blog Posts are ignored without review.             | Content-driven traffic may be lost.                                   | Include Blog Posts only where they are part of scope and validation.                   |
+| Domain and launch settings are assumed to migrate. | The store may not be launch-ready even when data is present.          | Treat domain, navigation, theme, and checkout-adjacent setup as separate launch tasks. |
 
-### Constraint 3: Inventory risk becomes more visible when location and variation logic are unclear <a href="#constraint-3-inventory-risk-becomes-more-visible-when-location-and-variation-logic-are-unclear" id="constraint-3-inventory-risk-becomes-more-visible-when-location-and-variation-logic-are-unclear"></a>
+Square Online should be validated as a customer-facing experience. The merchant should check not only whether products exist, but whether important landing paths, product pages, navigation routes, and content decisions support launch goals.
 
-#### Description <a href="#description-2" id="description-2"></a>
+### App Data, Custom Logic, and External-System Risk <a href="#app-data-custom-logic-and-external-system-risk" id="app-data-custom-logic-and-external-system-risk"></a>
 
-Square often makes inventory more operationally central than storefront-first systems. Inventory may need to remain meaningful by variation, by location, and by fulfillment expectation.
+Square migration can become risky when the source store depends on app, plugin, module, integration, or custom-code behavior. Examples include loyalty balances, subscriptions, booking rules, delivery settings, restaurant modifiers, marketplace listings, ERP IDs, accounting references, bundle logic, customer segmentation, custom attributes, or reporting metadata.
 
-A migration can preserve counts while still producing an unsafe result if SKUs are inconsistent, variation logic is unclear, locations were not mapped deliberately, or stock expectations differ between online selling and in-person operations. The risk is not only inaccurate numbers. It is staff and customers acting on inventory information that no longer reflects the way the business actually operates.
+The risk is not simply that custom data may be missing. The deeper risk is that the merchant may not recognize which business processes depend on that data until after migration. If a staff workflow, accounting export, loyalty process, fulfillment step, or marketing segment depends on an app-owned field, the field needs classification before scope is accepted.
 
-#### Who it affects <a href="#who-it-affects-2" id="who-it-affects-2"></a>
+Add-ons and Custom Service should be separated clearly:
 
-This affects omnichannel sellers, multi-location businesses, merchants with limited stock, businesses using Square POS alongside online selling, and teams that depend on inventory visibility for customer trust or staff decisions.
+| Need                                                                | Better path                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Filter supported records from migration scope.                      | Add-on when within supported behavior.                        |
+| Map supported fields differently.                                   | Add-on when the target behavior is supported.                 |
+| Configure supported data output within bounded rules.               | Add-on when no bespoke migration logic is needed.             |
+| Migrate unsupported app/plugin/module data.                         | Custom Service review.                                        |
+| Transform custom fields or external identifiers with bespoke logic. | Custom Service review.                                        |
+| Recreate business behavior from custom source logic.                | Custom Service review or target-side implementation planning. |
 
-#### Mitigation strategy <a href="#mitigation-strategy-2" id="mitigation-strategy-2"></a>
+This boundary protects both quality and expectations. Add-ons adjust supported migration behavior. Custom Service is for requirements that need customization, unsupported records, bespoke transformation, external-system logic, or custom migration logic adjustment.
 
-Define inventory truth explicitly. Clarify which products require variation-level accuracy, which locations matter, how fulfillment expectations should work, and which inventory-sensitive examples must be validated before launch.
+### Scope, Entity Points, and Migration-Action Risk <a href="#scope-entity-points-and-migration-action-risk" id="scope-entity-points-and-migration-action-risk"></a>
 
-### Constraint 4: Historical orders can confuse staff if their purpose is not defined <a href="#constraint-4-historical-orders-can-confuse-staff-if-their-purpose-is-not-defined" id="constraint-4-historical-orders-can-confuse-staff-if-their-purpose-is-not-defined"></a>
+Square scope risk appears when volume planning is treated as the same thing as feasibility planning. Entity Points help plan selected entity volume, but they do not prove that every field, option, business rule, image, URL, app record, or integration dependency can be migrated into Square as the merchant imagines.
 
-#### Description <a href="#description-3" id="description-3"></a>
+Entity Points should be read alongside supported scope, Add-ons, Custom Service needs, Square-side setup, and validation evidence. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because later migration activity occurs on the same migration path.
 
-Historical orders should not be treated as simple archive records without a post-migration policy.
+Later migration activity also needs the right action choice. A merchant may need to continue the migration with the last used configuration, continue with a new configuration, or perform a new migration. The risk is assuming all later runs have the same effect. Continuing migration activity may be appropriate when new source records need to be added without replacing the previous target result. A new migration may be appropriate when the earlier target result should be replaced according to a revised scope or setup.
 
-Square’s order workflows are connected to payment, fulfillment, and support behavior. Imported historical orders may be useful for continuity and customer service, but staff need to understand what those records mean and what actions should or should not be performed against them. Without that guidance, the migrated target can create confusion around cancellations, refunds, reporting interpretation, or support handling.
+For Square, this distinction matters when catalog changes, new orders, customer updates, Square Online decisions, or target setup changes occur between the first migration and launch. The action choice should be tied to validation ownership: after later migration activity, the merchant must confirm what changed, what stayed stable, and whether the Square result still supports launch.
 
-#### Who it affects <a href="#who-it-affects-3" id="who-it-affects-3"></a>
+### Square Risk Review Matrix <a href="#square-risk-review-matrix" id="square-risk-review-matrix"></a>
 
-This affects businesses importing meaningful order history, support teams that frequently reference old orders, merchants with refund-sensitive workflows, and teams that need historical context for customer service after launch.
+A final Square risk review should connect assumptions to proof. The matrix below can guide review without becoming a generic checklist.
 
-#### Mitigation strategy <a href="#mitigation-strategy-3" id="mitigation-strategy-3"></a>
+| Risk area                | What to prove before accepting the result                                                                                                                                      |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Catalog structure        | Items, variations, modifiers, categories, images, prices, taxes, and discounts support Square selling.                                                                         |
+| Inventory and locations  | Stock values are meaningful for the correct sellable variations and locations.                                                                                                 |
+| Orders and payments      | Historical order context is readable, and payment history is not confused with live payment setup.                                                                             |
+| Customers                | Profiles, guest buyers, duplicates, external IDs, and order links support intended lookup and support workflows.                                                               |
+| Square Online            | Products, pages, navigation, URLs, redirects, SEO fields, images, and domain-related launch tasks are reviewed separately from catalog presence.                               |
+| Custom data              | App, plugin, module, custom-field, external-ID, and integration requirements are classified as supported, Add-on, Custom Service, target setup, or excluded scope.             |
+| Later migration activity | The team can state whether the next action is continuation from the previous setup, continuation with changed configuration, or a new migration, and can validate the outcome. |
 
-Define the role of imported orders before full migration. Decide whether they are primarily reference records, support records, reporting context, or workflow-sensitive records, then validate representative historical orders in the Demo Migration before staff rely on them.
-
-### Constraint 5: Customer profiles can exist while useful customer context is weakened <a href="#constraint-5-customer-profiles-can-exist-while-useful-customer-context-is-weakened" id="constraint-5-customer-profiles-can-exist-while-useful-customer-context-is-weakened"></a>
-
-#### Description <a href="#description-4" id="description-4"></a>
-
-Customer presence does not guarantee customer usefulness.
-
-Square customer profiles can be valuable when they preserve the information staff need for service, retention, segmentation, and relationship context. Risk appears when the Source Platform stores important customer meaning in tags, notes, loyalty tools, CRM fields, external systems, app-owned metadata, or custom fields that have not been classified.
-
-If that information is ignored or flattened, names and emails may migrate while the practical value of the customer profile declines.
-
-#### Who it affects <a href="#who-it-affects-4" id="who-it-affects-4"></a>
-
-This affects merchants with segmented customer models, loyalty-sensitive workflows, CRM dependence, repeat-customer service expectations, internal customer notes, account-based selling, or custom customer fields.
-
-#### Mitigation strategy <a href="#mitigation-strategy-4" id="mitigation-strategy-4"></a>
-
-Define what makes a customer profile useful after migration. Separate information that must remain operational, information that can be archived, and information that requires Custom Service because it depends on custom fields, outside-system identifiers, app-owned data, bespoke transformation, or custom migration logic adjustment.
-
-### Constraint 6: Multiple websites increase governance pressure <a href="#constraint-6-multiple-websites-increase-governance-pressure" id="constraint-6-multiple-websites-increase-governance-pressure"></a>
-
-#### Description <a href="#description-5" id="description-5"></a>
-
-Multiple websites can be useful when the business genuinely needs separate storefront contexts under one Square account. They also increase the risk of unclear assignment and shared structure.
-
-Items, categories, navigation, content, and customer-facing paths may need to be shared in some areas and separated in others. If the migration does not define those rules, the target can look unified while making it harder to govern what each website is meant to sell or communicate.
-
-#### Who it affects <a href="#who-it-affects-5" id="who-it-affects-5"></a>
-
-This affects multi-brand businesses, region-specific storefronts, businesses separating product lines, and teams that want more than one online experience under a common operating model.
-
-#### Mitigation strategy <a href="#mitigation-strategy-5" id="mitigation-strategy-5"></a>
-
-Define website governance before full execution. Clarify which items belong to which site, what stays shared, how category intent should differ, and which website-specific journeys should be tested before the target is accepted.
-
-### Constraint 7: Redirect support does not guarantee route continuity <a href="#constraint-7-redirect-support-does-not-guarantee-route-continuity" id="constraint-7-redirect-support-does-not-guarantee-route-continuity"></a>
-
-#### Description <a href="#description-6" id="description-6"></a>
-
-Square Online can support redirects, but redirect existence is not the same as route continuity.
-
-A redirect may work technically while still sending customers or search engines to a weak destination. Risk increases when important product, category, campaign, blog, or landing-page URLs are mapped only to the closest available page rather than to the page that best preserves the original intent.
-
-This is especially important when the migration changes domain structure, category paths, product organization, or high-value landing pages.
-
-#### Who it affects <a href="#who-it-affects-6" id="who-it-affects-6"></a>
-
-This affects merchants with meaningful organic traffic, paid campaign landing pages, affiliate links, high-value product pages, important category pages, or historical URLs used by customers and support teams.
-
-#### Mitigation strategy <a href="#mitigation-strategy-6" id="mitigation-strategy-6"></a>
-
-Prioritize URLs by value. Focus first on routes that carry traffic, revenue, backlinks, campaign value, customer trust, or support usage. Then validate whether each destination still supports the original journey closely enough.
-
-### Constraint 8: Surface-level validation can miss Square’s operational risk <a href="#constraint-8-surface-level-validation-can-miss-square-s-operational-risk" id="constraint-8-surface-level-validation-can-miss-square-s-operational-risk"></a>
-
-#### Description <a href="#description-7" id="description-7"></a>
-
-Square migrations can look complete before they are operationally safe.
-
-Items, customers, orders, images, and routes may appear in the target, but that does not prove that Square is ready for launch. The target may still need to prove variation behavior, modifier meaning, inventory logic, location handling, historical-order interpretation, customer-profile usefulness, website assignment, and route destination quality.
-
-This is why broad record totals and quick storefront checks are not enough for Square. The validation burden is wider because Square’s value depends on operational meaning across connected commerce layers.
-
-#### Who it affects <a href="#who-it-affects-7" id="who-it-affects-7"></a>
-
-This affects any business where Square is expected to support real operations, not only a storefront: omnichannel sellers, inventory-sensitive merchants, customer-service-heavy teams, multi-site businesses, and stores with complex item structures.
-
-#### Mitigation strategy <a href="#mitigation-strategy-7" id="mitigation-strategy-7"></a>
-
-Plan validation around Square’s most sensitive operating scenarios. Use representative products, locations, customer records, orders, websites, and priority URLs rather than relying only on totals or random samples.
-
-### What usually deserves the earliest risk review <a href="#what-usually-deserves-the-earliest-risk-review" id="what-usually-deserves-the-earliest-risk-review"></a>
-
-The strongest Square risk review usually starts with the parts of the store that reveal whether the target model has been governed clearly.
-
-Review early:
-
-* products with the most sensitive variation and modifier decisions
-* inventory-sensitive items and locations
-* historical orders that staff will reference after launch
-* customer profiles with meaningful metadata or relationship context
-* website assignments where multiple sites are involved
-* product, category, and landing-page URLs with traffic or revenue value
-* workflows that connect online selling, in-person selling, fulfillment, and support
-
-These areas reveal whether Square is preserving operational truth or only creating a cleaner-looking target.
-
-### When Square risk usually increases <a href="#when-square-risk-usually-increases" id="when-square-risk-usually-increases"></a>
-
-Square risk usually increases when:
-
-* variation design is still described loosely
-* variation, option, and modifier boundaries are unclear
-* inventory expectations by variation or location are not defined
-* historical orders have no staff-use policy
-* customer metadata has not been classified
-* multiple websites are being used without clear assignment rules
-* important URLs are treated as a broad redirect task instead of a priority map
-* validation is still based on totals rather than representative operating scenarios
-* Custom Platform source behavior is being treated as if it can be handled through standard service capability without review
-
-These signals do not mean Square is the wrong Target Platform. They mean the migration needs sharper definition before the result can be trusted.
+The strongest risk review does not try to eliminate every possible issue in advance. It makes the important assumptions visible before they become launch problems.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Square migration risk is strongest where the platform asks the business to define operational meaning more clearly than the Source Platform required. The main risk areas are item variation design, variation-versus-modifier classification, inventory and location logic, historical-order interpretation, customer-profile usefulness, multiple-website governance, route continuity, and under-scoped validation.
+Square migration constraints come from the way Square connects item-library data, sellable variations, modifiers, inventory locations, order history, payment context, customer profiles, Square Online presentation, integrations, and service scope. The most serious risks occur when source-store assumptions are accepted without proving how they will behave in Square. A strong Square migration plan identifies structural risks early, separates supported data from setup and customization needs, protects Add-ons and Custom Service boundaries, and validates representative examples before launch.
 
-A Square migration becomes safer when those pressure points are defined early and tested through representative examples. The goal is not only to move records into Square. It is to confirm that the migrated result still supports real selling, fulfillment, customer service, inventory decisions, website management, and route continuity after launch.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-Review the Square pressure points that carry the most business value before treating the migration plan as safe. If the target still depends on unclear variation design, customer metadata transformation, Custom Platform handling, or custom migration logic adjustment, Live Chat can help determine whether the migration should remain within standard service capability or be planned through Custom Service.
+**Why is Square migration risk different from a normal online-store migration?**
 
-### FAQs <a href="#faqs" id="faqs"></a>
+Square migration risk is different because Square supports POS-connected commerce, inventory, payments, customer profiles, orders, and Square Online. A product or order can look migrated while still failing staff, inventory, payment-context, or storefront-readiness expectations.
 
-**What is the biggest Square migration risk?**
+**Can migrated Square payment history configure live Square payments?**
 
-The biggest risk is treating Square as a simple storefront target. Square connects catalog, inventory, orders, customers, locations, and online selling more tightly, so the migrated result must prove operational meaning, not only record presence.
+No. Historical payment labels or references may help interpret past orders where supported, but live Square payment processing, hardware, account setup, checkout behavior, and future payment workflows are Square-side operational setup tasks.
 
-**Why are Square item variations important during migration?**
+**What Square catalog risks should be reviewed first?**
 
-Item variations are closely tied to what customers can buy and how the business manages pricing, inventory, and fulfillment. If variation logic is unclear, products may appear in Square while the sellable result is still wrong.
+Start with item variations, modifiers, categories, taxes, discounts, images, SKU behavior, and bundle-like products. These areas affect how items are sold, displayed, reported, and validated in Square.
 
-**Are Square modifiers the same as product variations?**
+**When do Square risks require Custom Service?**
 
-No. Modifiers are purchase-time additions or adjustments, while item variations usually define different sellable versions of an item. Confusing the two can create catalog bloat, inventory gaps, pricing issues, or weaker reporting.
+Custom Service should be considered when risk comes from unsupported app data, custom fields, external IDs, bespoke transformation, bundle logic, integration dependencies, or custom migration logic adjustment beyond supported migration behavior.
 
-**Does Square redirect support remove SEO risk?**
+**Why should later migration activity be validated again?**
 
-No. Redirect support helps, but the business still needs to prioritize important legacy URLs and confirm that each destination preserves the original customer or search intent.
-
-**When should a Square migration require Custom Service?**
-
-Custom Service should be planned when the migration depends on Custom Platform handling, app-owned or outside-system data, custom fields, bespoke transformation, custom migration logic adjustment, or Square-specific representation decisions that go beyond standard service capability.
+Later migration activity can add new source records, apply changed configuration, or replace an earlier migrated result. The merchant should verify what changed, confirm that previously accepted data still behaves as expected when relevant, and make sure the Square store remains ready for launch.

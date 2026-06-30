@@ -262,18 +262,18 @@ Commercially important custom, extension, and integration-dependent records are 
 
 #### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
-Entity Points help define counted data capacity for the purchased service license. They do not measure Adobe Commerce complexity, B2B readiness, integration risk, custom-module difficulty, validation depth, or launch safety. A store can fit within an Entity Points Plan and still require Managed Service, Add-ons, or Custom Service because the migration outcome depends on complex business rules.
+Entity Points help define counted data capacity for the purchased service license. They do not measure Adobe Commerce complexity, B2B readiness, integration risk, custom-module difficulty, validation depth, or launch safety. A store can fit within an Entity Points and still require Managed Service, Add-ons, or Custom Service because the migration outcome depends on complex business rules.
 
 This pitfall occurs when teams treat capacity as proof that the migration approach is simple. For Adobe Commerce, the harder questions often concern data relationships, buyer visibility, pricing behavior, scope, integration continuity, and validation readiness.
 
 #### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
 
-| Warning sign                                                                                              | What it suggests                                          |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| The plan focuses only on product, customer, order, and content counts.                                    | Capacity is being confused with migration complexity.     |
-| B2B, pricing, integrations, and custom modules are discussed after purchase.                              | Service scope may be under-planned.                       |
-| Stakeholders expect every business rule to be handled because the Entity Points Plan has enough capacity. | Outcome expectations need clarification before execution. |
-| Validation samples are chosen by record volume rather than business importance.                           | Risk-based validation is missing.                         |
+| Warning sign                                                                                         | What it suggests                                          |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| The plan focuses only on product, customer, order, and content counts.                               | Capacity is being confused with migration complexity.     |
+| B2B, pricing, integrations, and custom modules are discussed after purchase.                         | Service scope may be under-planned.                       |
+| Stakeholders expect every business rule to be handled because the Entity Points has enough capacity. | Outcome expectations need clarification before execution. |
+| Validation samples are chosen by record volume rather than business importance.                      | Risk-based validation is missing.                         |
 
 #### Prevention <a href="#prevention-8" id="prevention-8"></a>
 
@@ -287,7 +287,7 @@ Estimate Entity Points separately from migration complexity. Then create a secon
 
 #### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
 
-The Entity Points Plan supports the expected counted data capacity, while service scope separately covers Adobe Commerce complexity, Add-ons, Custom Service requirements, validation expectations, and launch-readiness work. Records already counted through the service license do not consume Entity Points again simply because another migration action is performed; new eligible Product, Customer, Order, or Blog Posts records may consume Entity Points when migrated for the first time.
+The Entity Points supports the expected counted data capacity, while service scope separately covers Adobe Commerce complexity, Add-ons, Custom Service requirements, validation expectations, and launch-readiness work. Records already counted through the service license do not consume Entity Points again simply because another migration action is performed; new eligible Product, Customer, Order, or Blog Posts records may consume Entity Points when migrated for the first time.
 
 ### Pitfall 10: Waiting Until Launch to Handle New or Changed Data <a href="#pitfall-10-waiting-until-launch-to-handle-new-or-changed-data" id="pitfall-10-waiting-until-launch-to-handle-new-or-changed-data"></a>
 

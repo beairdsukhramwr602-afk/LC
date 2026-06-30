@@ -1,184 +1,165 @@
 # Selecting the Right Migration Approach for EShop
 
-Moving to EShop by Ossolution Team is not only a decision about transferring records into another e-commerce extension. It is a decision about how much of the source store’s commercial meaning can be translated into EShop’s Joomla MVC-based structure through standard service capability, how much requires Next-Cart-led execution, and how much requires custom interpretation before the result can be trusted.
+Selecting the right migration approach for EShop by Ossolution Team depends on how much business meaning must survive beyond basic product, customer, and order records. EShop is a Joomla shopping cart extension, so the migration approach must account for catalog structure, product options, attributes, custom fields, checkout data, customer groups, order history, tax, shipping, payment context, multilingual content, Joomla presentation, modules, templates, plugins, and custom implementation.
 
-The right migration approach depends on the source store’s structure and the expected EShop result. A simple catalog with clear products, categories, customers, orders, coupons, and reviews may be suitable for a straightforward migration path. A store with complex product options, product attributes, customer group pricing, custom checkout fields, multilingual data, extension-owned records, quote workflows, downloadable products, non-standard order statuses, custom payment or shipping logic, or Joomla-specific implementation requirements needs a more careful service decision.
+A light approach can work when the source data is clean, the selected migration path supports the needed records, and the merchant can manage target review confidently. A stronger approach is needed when the store has complex catalog rules, custom checkout fields, integration-owned data, multilingual restructuring, Joomla implementation dependencies, or bespoke behavior that cannot be explained through standard records alone.
 
-A strong approach decision should answer one question early: **is the migration mostly about moving supported records into EShop, or is it about interpreting a customized commerce model inside EShop and Joomla?**
+The right approach is not the most elaborate option by default. It is the approach that matches the actual burden of translating the source store into a usable EShop environment.
 
-### Why Approach Choice Depends on EShop-Specific Migration Burden <a href="#why-approach-choice-depends-on-eshop-specific-migration-burden" id="why-approach-choice-depends-on-eshop-specific-migration-burden"></a>
+### What the Right EShop Approach Must Decide <a href="#what-the-right-eshop-approach-must-decide" id="what-the-right-eshop-approach-must-decide"></a>
 
-EShop can support a broad Joomla-based store model. Its documentation covers catalog records such as products, categories, manufacturers, options, attributes, labels, downloads, and reviews; sales records such as orders, customers, customer groups, coupons, discounts, vouchers, checkout fields, and quotes; system records such as countries, currencies, zones, geo zones, taxes, stock statuses, order statuses, lengths, and weights; and implementation layers such as payment plugins, shipping plugins, themes, modules, multilingual behavior, and developer customization.
+An EShop migration approach should decide three things before execution: whether the data fits supported service capability, who should manage execution and validation, and which requirements need Add-ons or Custom Service. These decisions should be made before final approval because EShop projects often combine ordinary commerce records with Joomla-specific implementation responsibilities.
 
-That breadth is useful, but it also means the migration approach should not be chosen by record count alone. Two stores with similar product, customer, and order volumes can require different approaches if one store uses simple products and ordinary orders while the other depends on option-level buying rules, customer group pricing, custom checkout fields, multilingual translation layers, quote mode, or plugin-owned behavior.
+| Decision area                  | What to evaluate                                                                                                                                        | Why it matters for EShop                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Supported data fit             | Products, categories, manufacturers, customers, orders, reviews, coupons, options, attributes, fields, and store records included in the selected path. | Standard execution is strongest when the needed data has clear source meaning and supported target destinations. |
+| Execution ownership            | Whether the merchant will self-manage or wants Next-Cart-led execution.                                                                                 | Larger or more sensitive EShop projects may need Managed Service even when the data itself is standard.          |
+| Optional service support       | Whether filtering, mapping, or available configuration help is needed.                                                                                  | Add-ons can support defined needs without turning the whole project into a custom engagement.                    |
+| Custom requirement review      | Custom Platform data, unsupported extension data, third-party identifiers, bespoke checkout fields, and custom logic.                                   | These areas may require Custom Service instead of ordinary service assumptions.                                  |
+| Target implementation boundary | Joomla menus, modules, templates, payment plugins, shipping plugins, tax setup, emails, and redirects.                                                  | Some responsibilities belong to target setup and implementation rather than migration output.                    |
 
-#### Supported data is not the same as complete business behavior <a href="#supported-data-is-not-the-same-as-complete-business-behavior" id="supported-data-is-not-the-same-as-complete-business-behavior"></a>
+This decision prevents the common mistake of choosing an approach based only on volume. A small EShop migration can need Custom Service if it includes bespoke checkout fields or unsupported plugin data. A large migration can still fit a standard path when records are clean, supported, and easy to validate.
 
-Standard migration capability can transfer supported data according to the selected migration path and available settings. That is different from saying every source behavior automatically becomes native EShop behavior. Some data becomes EShop records. Some behavior must be configured inside EShop after migration. Some source logic may need Add-on review. Some requirements may need Custom Service because they involve transformation, unsupported data, third-party identifiers, or custom migration logic adjustment.
+### When Standard Service Can Fit EShop <a href="#when-standard-service-can-fit-eshop" id="when-standard-service-can-fit-eshop"></a>
 
-For EShop, this distinction is especially important in areas such as tax classes, geo zones, shipping plugins, payment plugins, checkout fields, quote workflows, customer groups, multilingual translations, and Joomla layout behavior. These areas can affect launch readiness even when the underlying records migrate successfully.
+Standard Service can fit an EShop migration when the source store has a clear catalog structure, supported records, and a merchant team that can operate the Next-Cart workflow and validate the result. It is best for stores where products, categories, manufacturers, customers, orders, reviews, coupons, and common catalog fields can be migrated without bespoke interpretation.
 
-#### Joomla implementation can change the migration burden <a href="#joomla-implementation-can-change-the-migration-burden" id="joomla-implementation-can-change-the-migration-burden"></a>
+For EShop, Standard Service fit also depends on whether product options and attributes are understandable. Options should represent shopper choices. Attributes should represent product information or specifications. If source values are clean and the target destinations are clear, the project may not need a more complex service path.
 
-Because EShop operates inside Joomla, the final store experience can depend on more than EShop records. Joomla menus, modules, templates, theme files, layout overrides, aliases, metadata, product/category/manufacturer pages, search/filter modules, cart modules, and multilingual site structure can shape how the migrated data appears to shoppers.
+| Standard Service fit signal          | What it usually means                                                                                           | EShop-specific validation point                                             |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Clean catalog records                | Products, categories, manufacturers, images, descriptions, prices, and stock values are consistent.             | Product pages can be reviewed without heavy data cleanup or interpretation. |
+| Understandable product options       | Source choices such as size, color, package, or format have clear meaning.                                      | Option values should remain buyable and readable on order lines.            |
+| Clear attributes and specifications  | Technical values are descriptive rather than purchase-controlling.                                              | Attribute or custom-field placement can be reviewed without custom logic.   |
+| Ordinary customer and order history  | Customers, addresses, order lines, statuses, coupons, vouchers, tax, shipping, and payment labels are readable. | Historical data remains useful for service and reporting.                   |
+| Merchant-led validation is realistic | The team can review samples, compare records, and manage configuration follow-up.                               | Standard execution does not remove the need for target review.              |
 
-A migration approach that is sufficient for clean record movement may still be too light if the merchant expects Next-Cart to interpret custom Joomla layouts, plugin behavior, extension-owned data, or site presentation logic. Those expectations should be separated early so the purchased service matches the real work.
-
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
-
-Standard Service is usually suitable when the migration is structurally clear and the merchant can self-perform the migration process on the Next-Cart website using standard service capability, 24/7 expert support, and any purchased Add-ons that fit the requirement.
-
-For EShop, Standard Service is strongest when the source store has clean supported data and the expected target result can be represented without custom interpretation. The merchant should be able to identify the main records, confirm the selected migration path, run Demo Migration, review results, adjust available settings if needed, and proceed to Full Migration with confidence.
-
-#### Clear catalog structure <a href="#clear-catalog-structure" id="clear-catalog-structure"></a>
-
-A Standard Service approach is more likely to fit when products, categories, manufacturers, product images, reviews, coupons, customers, and orders are well organized. Product options should be understandable. Product attributes should be distinct from shopper selections. Categories should not be duplicated or overloaded with unclear meaning. Manufacturers should be usable as a product organization layer rather than a collection of inconsistent legacy labels.
-
-Products with ordinary prices, images, quantities, stock statuses, categories, and manufacturer relationships are easier to review through Demo Migration. Standard Service may still work for products with options or attributes, but only when those structures are consistent enough for the merchant to validate without bespoke interpretation.
-
-#### Manageable sales history <a href="#manageable-sales-history" id="manageable-sales-history"></a>
-
-Standard Service is more realistic when customer and order history can be interpreted from ordinary source records. Orders should have recognizable line items, quantities, totals, payment method references, shipping method references, order statuses, discounts, tax, and customer details. If order records contain unusual status logic, heavily customized checkout fields, external fulfillment identifiers, or app-owned metadata that must appear in EShop in a specific way, the project may require a heavier approach.
-
-The merchant should also know which historical order details matter after launch. If order history is mainly for reference, ordinary readable migration may be enough. If historical order data must support accounting reconciliation, external system matching, warranty review, customer group analysis, or custom service workflows, the approach should be reviewed more carefully.
-
-#### Target-side configuration is acceptable <a href="#target-side-configuration-is-acceptable" id="target-side-configuration-is-acceptable"></a>
-
-Standard Service can fit when the merchant understands that some EShop behavior is configured in the target environment rather than migrated as a direct record. Shipping plugins, payment plugins, tax classes, geo zones, currencies, order statuses, stock statuses, checkout behavior, Catalog Mode, Shopping Cart Mode, and module placement may need target-side setup and review.
-
-The key is expectation control. If the merchant expects supported records to migrate and accepts that EShop settings must be configured around those records, Standard Service can be appropriate. If the merchant expects Next-Cart to recreate customized business logic or third-party plugin behavior, Custom Service review is safer.
+Standard Service should not be chosen simply because the store is small. It should be chosen because the source data is clear, the destination structure is suitable, and no unsupported custom behavior is essential to preserve.
 
 ### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
 
-Managed Service is safer when the migration still fits standard service capability and purchased Add-ons, but the merchant wants Next-Cart-led execution instead of managing the migration steps independently.
+Managed Service is safer when the migration can still use standard service capability, but the merchant wants Next-Cart-led execution and coordinated review. This can be appropriate for EShop projects with larger catalogs, tighter launch windows, multiple stakeholders, detailed order history, multilingual content, or a need for careful execution oversight.
 
-For EShop, this often applies when the store is not necessarily custom, but the review burden is high. The source data may be mostly supported, yet the merchant needs stronger execution support because catalog organization, order history, customer groups, discounts, coupons, tax context, or Demo Migration interpretation requires careful handling.
+Managed Service does not automatically solve custom data or unsupported logic. It improves execution ownership when the migration path is otherwise suitable. If the project needs bespoke interpretation, custom field transformation, unsupported extension handling, or custom migration logic adjustment, Custom Service should be reviewed instead.
 
-#### Larger or operationally important catalogs <a href="#larger-or-operationally-important-catalogs" id="larger-or-operationally-important-catalogs"></a>
+| Managed Service signal   | Why it matters                                                                                              | Boundary to keep clear                                                        |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Large product catalog    | More samples, more categories, more manufacturer relationships, and more validation work.                   | Large volume alone does not mean custom handling is required.                 |
+| Detailed order history   | Orders may include options, vouchers, coupons, tax, shipping, payment labels, comments, and status history. | Historical readability still depends on available source and target fields.   |
+| Multilingual storefront  | Products, categories, aliases, modules, metadata, and language relationships need coordinated review.       | Joomla language setup may require target implementation beyond migration.     |
+| Launch pressure          | The merchant needs tighter coordination and less self-managed execution risk.                               | Target configuration and business approval still need merchant participation. |
+| Multiple internal owners | Marketing, operations, support, finance, and technical teams may validate different records.                | Managed execution does not replace ownership of business decisions.           |
 
-A merchant with a large catalog may still have standard data. The challenge is not always customization; it may be confidence. Products, categories, manufacturers, options, attributes, images, reviews, downloads, and labels can require disciplined sample selection and result review. Managed Service can reduce execution burden when the merchant wants Next-Cart to run the migration process while the merchant focuses on reviewing business meaning.
+Managed Service is often a practical fit when the migration is not technically custom but is operationally sensitive. The project may benefit from Next-Cart-led execution, structured review, and clearer coordination without changing the underlying data capability.
 
-Managed Service is especially useful when the merchant has enough catalog complexity to make self-review difficult, but not enough bespoke logic to require Custom Service. The distinction matters: Managed Service is Next-Cart-led execution using standard capability, not a substitute for custom migration logic.
+### Where Add-ons Support EShop Migration <a href="#where-add-ons-support-eshop-migration" id="where-add-ons-support-eshop-migration"></a>
 
-#### Standard records with many validation points <a href="#standard-records-with-many-validation-points" id="standard-records-with-many-validation-points"></a>
+Add-ons can support an EShop migration when the need fits a defined optional service capability. They are most useful when the merchant needs filtering, supported mapping, or available configuration assistance. Add-ons should not be used as a generic explanation for custom behavior.
 
-Some EShop migrations require many validation points even when the data is standard. Product options must be checked separately from attributes. Customer groups must be checked in relation to customer records and pricing expectations. Orders must be reviewed with discounts, coupons, vouchers, tax, shipping, payment method, shipping method, status, comments, and customer details. Multilingual fields may need review if supported by the selected migration path and relevant source structure.
+EShop projects often expose Add-on opportunities during preparation. The merchant may want to exclude outdated records, map known source values into clearer target fields, adjust available configuration choices, or refine what is included in the migration. These needs can be valid when they are specific and supported.
 
-Managed Service can be safer when the merchant wants help coordinating those checks. It does not automatically include customization, but it can provide a stronger operational path when the work is mainly execution and review rather than bespoke transformation.
+| Need                                                                       | Add-on relevance                                                                        | Boundary to watch                                                           |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Exclude archived products, test orders, old customers, or inactive records | Data Filter Add-on may help when criteria are clear and supported.                      | Filtering is not transformation of a custom business model.                 |
+| Map clear source values into supported EShop destinations                  | Advanced Data Mapping may help when the old value has known meaning.                    | Bespoke interpretation or unsupported fields may need Custom Service.       |
+| Adjust available migration configuration                                   | Advanced Data Configure may help when the setting fits standard capability.             | Custom migration logic adjustment belongs under Custom Service.             |
+| Preserve specific optional records                                         | Add-on review may help when the record type is supported as an optional service path.   | Unsupported extension data should not be described as ordinary Add-on work. |
+| Reduce noise before launch                                                 | Filtering or mapping may help remove records that no longer belong in the target store. | Data removal decisions should be approved before execution.                 |
 
-#### Migration timing or operational pressure is high <a href="#migration-timing-or-operational-pressure-is-high" id="migration-timing-or-operational-pressure-is-high"></a>
+Add-ons work best when the merchant can state the requirement precisely. A vague request such as “bring everything exactly as it was” is not an Add-on requirement. It is a signal that the data model and custom dependencies need closer review.
 
-A merchant preparing for launch, redesign, platform retirement, or agency handoff may choose Managed Service because the cost of poor execution is higher than the complexity of the data alone suggests. EShop migrations can involve coordination between store records and Joomla implementation work. If the merchant has limited internal capacity to run the migration process, interpret Demo Migration results, and coordinate follow-up tasks, Managed Service may be the more practical approach.
+### When Custom Service Should Be Reviewed <a href="#when-custom-service-should-be-reviewed" id="when-custom-service-should-be-reviewed"></a>
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+Custom Service should be reviewed when the EShop migration depends on data or behavior that cannot be handled safely through standard service capability and available Add-ons. This includes Custom Platform data, unsupported extension data, custom fields requiring interpretation, plugin-owned records, third-party identifiers, bespoke checkout logic, integration-owned data, Tailored Add-ons, Custom Add-ons, and custom migration logic adjustment.
 
-Custom Service is needed when the expected migration outcome requires customization, modification, bespoke interpretation, Custom Platform handling, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or transformation beyond standard service capability.
+EShop’s Joomla foundation can make custom needs more likely because old stores may have used extensions, template overrides, modules, content plugins, custom database tables, or external systems to shape storefront behavior. The presence of custom data does not automatically make the migration impossible, but it should be classified before scope is approved.
 
-For EShop, Custom Service should be reviewed early when source data or expected target behavior depends on custom fields, extension data, plugin-owned records, unusual checkout structure, multilingual restructuring, custom product relationships, external identifiers, developer logic, or Joomla implementation behavior that cannot be handled through ordinary migration settings.
+| Custom Service trigger                                 | Why Standard Service or Add-ons may not be enough                                             | Evidence to prepare                                                               |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Custom checkout fields with business rules             | Field display, validation, email output, invoice output, or order meaning may be bespoke.     | Field list, sample orders, screenshots, and target expectations.                  |
+| Unsupported extension data                             | Records may not belong to standard product, customer, order, or category structures.          | Extension names, database samples, export examples, and ownership notes.          |
+| Plugin-owned payment or shipping behavior              | Historical labels may migrate, but live behavior may depend on plugins or custom code.        | Plugin list, method examples, order samples, and future behavior requirements.    |
+| Integration identifiers                                | ERP, accounting, CRM, fulfillment, inventory, or affiliate identifiers may need preservation. | Source field list, sample values, destination expectation, and integration owner. |
+| Custom product fields or tabs with operational meaning | Values may affect fulfillment, compliance, selection, or reporting.                           | Product examples and business explanation for each field.                         |
+| Tailored Add-ons or Custom Add-ons                     | Bespoke handling is broader than a standard optional feature.                                 | Required output, transformation logic, and approval criteria.                     |
 
-#### Product and catalog structures require bespoke interpretation <a href="#product-and-catalog-structures-require-bespoke-interpretation" id="product-and-catalog-structures-require-bespoke-interpretation"></a>
+Custom Service should be discussed early when the source store includes hidden dependencies. Waiting until after Demo Migration can make the review harder because the sample may already be missing the records that explain the real requirement.
 
-Custom Service may be required when product data includes structures that do not map cleanly to ordinary EShop product, option, attribute, category, manufacturer, download, or review behavior. Examples include source product bundles, configurable product logic, option-level inventory rules, custom product builders, source app fields, ERP-linked product identifiers, subscription fields, membership rules, or product data stored outside the ordinary product tables.
+### How Demo Migration Should Test the Approach <a href="#how-demo-migration-should-test-the-approach" id="how-demo-migration-should-test-the-approach"></a>
 
-EShop’s own structure distinguishes shopper-facing options from product attributes used for comparison or specification. If the source platform does not separate those meanings clearly, the migration may need custom interpretation. The same is true when source custom fields must become EShop product custom fields or when the merchant expects source-specific catalog behavior to be preserved rather than simply migrated as text.
+Demo Migration should test whether the selected approach is strong enough. For EShop, a useful sample does not only prove that products, customers, and orders can appear. It proves that the store’s most important operating meanings can be reviewed inside EShop and Joomla.
 
-#### Checkout, order, and customer data are customized <a href="#checkout-order-and-customer-data-are-customized" id="checkout-order-and-customer-data-are-customized"></a>
+The sample should include ordinary records and risk-bearing records. It should include products with options, products with attributes, products with manufacturers, downloadable products, products with attachments, products with custom fields, customers in different groups, orders with coupons or vouchers, orders with tax and shipping context, payment-method examples, multilingual records, and any data that may require Add-ons or Custom Service.
 
-Custom Service should be reviewed when source checkout fields, address fields, customer group assignments, tax behavior, quote behavior, payment references, shipping references, order statuses, refund context, or customer/order metadata must be transformed into a specific EShop structure.
+| Demo Migration area           | What to test                                                                                                   | Approach decision supported                                                       |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Product options               | Required choices, price-changing choices, SKU-changing choices, image-changing choices, and order-line output. | Whether standard handling preserves shopper choice.                               |
+| Attributes and product fields | Specifications, custom fields, tabs, attachments, and extra product information.                               | Whether mapping or Custom Service review is needed.                               |
+| Customers and groups          | Customer identity, addresses, Joomla user relationship, customer groups, and account history.                  | Whether customer continuity is understandable.                                    |
+| Orders and commercial history | Order lines, statuses, coupons, vouchers, tax, shipping, payment labels, comments, and custom fields.          | Whether historical records remain operationally useful.                           |
+| Joomla presentation           | Menus, aliases, modules, templates, multilingual pages, metadata, and SEO-sensitive paths.                     | Whether target implementation responsibilities are separate from migration scope. |
+| Custom or unsupported data    | Third-party identifiers, plugin-owned records, bespoke fields, and old extension data.                         | Whether Custom Service should be reviewed before proceeding.                      |
 
-This is common when the source store has custom checkout forms, B2B account fields, membership fields, wholesale pricing rules, external customer IDs, ERP order numbers, custom fulfillment statuses, or app-owned order data. Standard migration may preserve supported order records, but it should not be assumed to reproduce custom operational meaning without review.
+The Demo Migration review should produce a service-path decision. If the sample is clean, standard execution may be appropriate. If the sample is clean but operationally sensitive, Managed Service may be safer. If specific supported optional needs appear, Add-ons may be useful. If core meaning depends on custom or unsupported data, Custom Service should be reviewed.
 
-#### Plugin, module, or Joomla development behavior affects the expected result <a href="#plugin-module-or-joomla-development-behavior-affects-the-expected-result" id="plugin-module-or-joomla-development-behavior-affects-the-expected-result"></a>
+### Entity Points and Additional Migration Options <a href="#entity-points-and-additional-migration-options" id="entity-points-and-additional-migration-options"></a>
 
-EShop supports payment plugins, shipping plugins, miscellaneous plugins, modules, themes, layout customization, and developer extension points. That flexibility is valuable, but it can also create migration scope questions. If the source store depends on plugin-owned behavior and the merchant expects that behavior to appear inside EShop, the requirement may move beyond ordinary data migration.
+Entity Points planning matters when the EShop migration includes large record volumes or record types that may be counted separately. Products, categories, customers, orders, reviews, coupons, and other supported entities should be reviewed according to the selected service scope. Duplicate consumption should be avoided by understanding which records are included, which records are optional, and which records are filtered out.
 
-Custom Service is the correct review path when the source includes unsupported extension data, custom Joomla development, custom modules, layout overrides that depend on migrated records, bespoke search/filter behavior, third-party integrations, or external service identifiers that must be interpreted during migration.
+Entity Points should not be treated as a substitute for data-model review. A store can have a moderate number of records but still require careful planning because options, checkout fields, multilingual values, or custom data make the migration more complex. Record count helps estimate scope, but meaning determines approach.
 
-#### Multilingual or multicurrency structure needs restructuring <a href="#multilingual-or-multicurrency-structure-needs-restructuring" id="multilingual-or-multicurrency-structure-needs-restructuring"></a>
+Additional Migration Options should be evaluated only where they solve a real EShop need. They are relevant when the merchant must preserve useful continuity after the initial migration, reduce launch risk, or handle changes that occur between Demo Migration, execution, and launch.
 
-EShop multilingual behavior may not match the source platform’s multilingual model. Some source platforms use separate records per language, while EShop can use record-level translation fields in supported areas. If the source data must be restructured into EShop’s multilingual model, Custom Service may be required.
+| Planning area                   | What to confirm                                                                                   | EShop-specific concern                                                             |
+| ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Entity Points                   | Which supported records are counted and which optional records matter.                            | Large product, order, review, coupon, or customer volumes may affect planning.     |
+| Duplicate consumption           | Whether the same record type is counted once or repeated through unnecessary selections.          | Poor selection can waste scope without improving the final store.                  |
+| Recent changes before launch    | Whether new products, orders, customers, or updates must be considered after initial execution.   | Active EShop-bound stores may need continuity planning.                            |
+| SEO and relationship continuity | Whether URL, category, manufacturer, product, or customer/order relationships must remain stable. | Additional options should support a specific continuity need, not general anxiety. |
+| Final validation window         | Whether the merchant can review and approve records before launch.                                | Extra options do not replace structured validation.                                |
 
-Currency, tax, geo-zone, and localization behavior can also create approach questions. Standard migration may move supported records, but target-side currency, tax, zone, and payment/shipping configuration still needs review. When the source uses custom currency conversion, region-specific tax logic, marketplace localization, or multilingual content stored through third-party systems, Custom Service review is safer.
-
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
-
-Add-ons can support a migration when the requirement fits an optional service feature rather than a bespoke project need. For EShop, Add-ons are most relevant when the merchant needs filtering, supported mapping, or available configuration assistance within the purchased service.
-
-Add-ons should not be used as a catch-all explanation for custom behavior. A Standard Add-on can help when its ready-made capability fits the requirement. A Tailored Add-on or Custom Add-on belongs under Custom Service. If the requirement involves unsupported extension data, Custom Platform handling, custom fields requiring bespoke interpretation, third-party identifiers, or custom migration logic adjustment, Custom Service should be reviewed instead.
-
-| Need                                                      | Add-on relevance                                                                                | Boundary to watch                                                                                      |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Excluding outdated or unwanted records                    | The Data Filter Add-on may help when filtering fits available criteria.                         | Filtering is not the same as transforming custom data into a new business model.                       |
-| Mapping clear source values into supported target fields  | Advanced Data Mapping may help when the mapping requirement fits supported behavior.            | Bespoke restructuring, unsupported extension data, or plugin-owned meaning may require Custom Service. |
-| Adjusting available migration configuration               | Advanced Data Configure may help when the needed configuration fits standard Add-on capability. | Custom migration logic adjustment, Tailored Add-ons, and Custom Add-ons require Custom Service.        |
-| Handling Custom Platform or unsupported source structures | Add-ons alone are not the right framing.                                                        | Custom Platform and unsupported data handling should be reviewed through Custom Service.               |
-
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
-
-Demo Migration should be used to test whether the selected approach is strong enough. For EShop, a weak Demo Migration review only counts records. A strong Demo Migration review selects examples that prove how the migrated data behaves inside EShop and Joomla.
-
-The sample should include products that reveal the main catalog patterns, not only the cleanest records. It should include ordinary products, option-heavy products, attribute-heavy products, products assigned to manufacturers, discounted products, products with special pricing, downloadable products, products with customer group relevance, products with tax class or shipping implications, products with custom fields, and products with multiple images where applicable.
-
-Order samples should include records with options, coupons, vouchers, tax, shipping, payment method, shipping method, order status, customer comments, billing details, shipping details, and any source-specific identifiers that matter after launch. Customer samples should include different customer groups, multiple addresses, and records that connect to important orders.
-
-#### Demo Migration review questions <a href="#demo-migration-review-questions" id="demo-migration-review-questions"></a>
-
-| Demo Migration area                          | What the review should decide                                                                          | What the result means for approach choice                                                                             |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Product options and attributes               | Do shopper selections and comparison/specification data keep their intended meaning?                   | Misalignment may require mapping review or Custom Service.                                                            |
-| Customer groups and pricing context          | Are customers assigned correctly, and do customer group assumptions remain understandable?             | Unclear pricing or tax behavior may require deeper review.                                                            |
-| Orders and statuses                          | Are order lines, totals, options, methods, comments, and statuses readable?                            | Missing operational meaning may indicate the approach is too light.                                                   |
-| Tax, shipping, payment, and checkout context | Which behavior is migrated data, and which behavior must be configured in EShop?                       | Configuration gaps may be acceptable; custom logic gaps may require Custom Service.                                   |
-| Multilingual and Joomla presentation         | Do translated fields, aliases, metadata, modules, menus, and page behavior support the intended store? | Joomla implementation gaps should be separated from migration gaps; custom interpretation may require Custom Service. |
+The right use of Entity Points and Additional Migration Options is practical. They should clarify scope and continuity rather than complicate the project. When a need is unclear, prepare examples first and decide whether the requirement belongs to standard scope, Add-ons, Custom Service, target configuration, or Joomla implementation.
 
 ### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
 
-The chosen approach is too light when the migration plan assumes that EShop will automatically reproduce behavior that actually depends on custom source logic, target configuration, Joomla implementation, or unsupported data.
+An EShop approach is too light when the migration plan assumes that the target extension will automatically reproduce behavior that actually depends on custom source logic, target configuration, Joomla implementation, or unsupported records. The warning signs usually appear during preparation or Demo Migration review.
 
-#### The Demo Migration looks complete but the store is not usable <a href="#the-demo-migration-looks-complete-but-the-store-is-not-usable" id="the-demo-migration-looks-complete-but-the-store-is-not-usable"></a>
+| Warning sign                                      | What it suggests                                                                                           | Stronger response                                                         |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Products appear but buying choices are incomplete | Options, variant values, or custom product selections were not interpreted correctly.                      | Review mapping, Add-ons, or Custom Service depending on source ownership. |
+| Attributes become confusing or misplaced          | Specifications, filters, custom fields, and checkout choices may be mixed together.                        | Reclassify fields before final execution.                                 |
+| Orders exist but are not useful for support       | Order lines, option values, totals, statuses, payment context, shipping context, or comments lack meaning. | Expand order samples and review field handling.                           |
+| Customer groups lose business purpose             | Group assignment may affect pricing, tax, access, reporting, or customer service.                          | Confirm group meaning and target configuration.                           |
+| Live checkout is expected to work automatically   | Payment, shipping, tax, email, and checkout behavior need target setup and testing.                        | Assign target-side configuration ownership.                               |
+| Joomla presentation is ignored                    | Menus, modules, templates, aliases, metadata, and redirects may not be ready.                              | Separate migration validation from Joomla implementation work.            |
+| Custom fields are treated as ordinary records     | Field meaning may depend on old apps, extensions, plugins, or custom code.                                 | Review Custom Service before approving scope.                             |
 
-If products appear but options do not preserve shopper choice, attributes are placed in the wrong context, category paths are unclear, customer groups do not support the intended pricing/tax review, or orders are present but operationally confusing, the project may need a stronger approach.
-
-This does not always mean Full Migration should stop. It means the result should be classified correctly: configuration review, data cleanup, Add-on review, or Custom Service review. Treating every issue as a small adjustment can create launch risk.
-
-#### Custom fields and plugin-owned data are treated as ordinary records <a href="#custom-fields-and-plugin-owned-data-are-treated-as-ordinary-records" id="custom-fields-and-plugin-owned-data-are-treated-as-ordinary-records"></a>
-
-If source product fields, checkout fields, customer fields, order metadata, shipping references, payment references, or third-party identifiers come from custom code or extensions, the migration approach should not assume they are standard records. EShop can support custom fields and plugin development, but preserving source-specific meaning may require custom mapping or custom migration logic adjustment.
-
-#### Joomla implementation work is mistaken for migration work <a href="#joomla-implementation-work-is-mistaken-for-migration-work" id="joomla-implementation-work-is-mistaken-for-migration-work"></a>
-
-Menus, modules, themes, template overrides, aliases, metadata, multilingual routing, and storefront layouts can shape the final EShop experience. Some of that work belongs to Joomla site implementation, not data migration. If the merchant expects the migration to rebuild the entire Joomla presentation layer automatically, the approach should be clarified before execution.
-
-#### Service boundaries are unclear <a href="#service-boundaries-are-unclear" id="service-boundaries-are-unclear"></a>
-
-A migration plan is too light when the merchant cannot say which requirements belong to Standard Service, which are covered by purchased Add-ons, which are target-side configuration tasks, which belong to the Joomla implementation team, and which need Custom Service. EShop migrations benefit from flexible Joomla architecture, but flexibility only helps when responsibilities are explicit.
+A stronger approach does not always mean Custom Service. Sometimes the correct response is better preparation, a better Demo Migration sample, Managed Service, or Add-ons. The important point is to classify the issue correctly before the merchant relies on the result for launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right EShop migration approach depends on how much meaning must be preserved beyond basic record movement. Standard Service can fit clean supported data and ordinary EShop structures. Managed Service is safer when the same standard capability applies but the merchant wants Next-Cart-led execution and coordinated review. Custom Service should be reviewed when the source store contains Custom Platform data, unsupported extension data, custom fields, complex checkout structures, plugin-owned behavior, multilingual restructuring, bespoke identifiers, Joomla custom development, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+The right EShop migration approach depends on the store’s actual data meaning, not only record volume. Standard Service can fit clean supported data when the merchant can self-manage execution and validation. Managed Service is safer when the migration is standard in capability but operationally sensitive. Add-ons can support defined filtering, mapping, or available configuration needs. Custom Service should be reviewed when the project depends on Custom Platform data, unsupported extension data, bespoke fields, plugin-owned records, integration identifiers, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
 
-Before committing to Full Migration, use Demo Migration to test the parts of the store that carry real operating meaning: product options, attributes, customer groups, orders, taxes, shipping, payment context, checkout fields, multilingual data, modules, themes, and Joomla presentation dependencies. A good approach is not the lightest one. It is the one that matches the actual burden of translating the source store into a reliable EShop environment.
+Demo Migration should be used to prove the approach before execution. The sample should test product options, attributes, custom fields, attachments, manufacturers, customers, customer groups, orders, coupons, vouchers, tax, shipping, payment context, multilingual content, Joomla presentation, and custom data. A good approach is the one that gives the future EShop store enough structure, context, and validation confidence to operate after launch.
 
-If you are preparing to migrate to EShop, use Demo Migration and Live Chat to confirm whether your source data fits Standard Service, whether Managed Service is safer for execution, whether Add-ons can support filtering or mapping needs, or whether Custom Service is required for custom fields, unsupported extension data, plugin-owned behavior, multilingual restructuring, or Joomla-specific implementation requirements.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Can Standard Service work for an EShop migration?**
 
-**Can I use Standard Service for an EShop migration?**
-
-Yes, Standard Service can be suitable when the selected migration path supports the needed data, the source records are clean, product options and attributes are understandable, and the merchant can self-perform the migration process on the Next-Cart website with 24/7 expert support. It is strongest when the expected result does not require bespoke transformation or unsupported source behavior.
+Yes. Standard Service can work when the selected migration path supports the needed records, product options and attributes are understandable, customer and order data is clean, and the merchant can manage execution and validation through the Next-Cart website with expert support.
 
 **When is Managed Service better for EShop?**
 
-Managed Service is better when the migration can still use standard service capability and purchased Add-ons, but the merchant wants Next-Cart-led execution. It can be useful for larger catalogs, detailed order history, customer group review, or high-pressure launch situations where the work is mainly careful execution rather than custom logic.
+Managed Service is better when the data can still fit standard capability but the project needs Next-Cart-led execution, coordinated validation, larger-scope handling, multilingual review, or tighter launch control.
 
-**When should Custom Service be reviewed?**
+**Do Add-ons replace Custom Service?**
 
-Custom Service should be reviewed when the source includes Custom Platform data, unsupported extension data, product custom fields requiring bespoke interpretation, custom checkout fields, plugin-owned records, third-party identifiers, multilingual restructuring, custom Joomla development, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+No. Add-ons support defined optional needs such as filtering, mapping, or available configuration. Custom Service is needed when the requirement involves Custom Platform data, unsupported extension data, bespoke interpretation, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
 
-**Do Add-ons replace Custom Service for EShop migration?**
+**What should Demo Migration test before choosing the final approach?**
 
-No. Add-ons support focused service features such as filtering, mapping, or configuration when the requirement fits Add-on capability. Custom Service is broader and is required when the migration needs customization, modification, unsupported data handling, Custom Platform handling, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+Demo Migration should test representative products, options, attributes, custom fields, attachments, customers, customer groups, orders, coupons, vouchers, tax, shipping, payment context, multilingual records, Joomla presentation dependencies, and any custom or unsupported data.
 
-**What should Demo Migration prove before Full Migration?**
+**Can live payment, shipping, and tax behavior be migrated automatically?**
 
-Demo Migration should prove that the selected approach can preserve operating meaning. For EShop, this means testing product options, attributes, categories, manufacturers, customer groups, orders, order statuses, coupons, vouchers, tax, shipping, payment context, checkout fields, multilingual data, and Joomla presentation dependencies where they matter to the future store.
+Historical payment, shipping, and tax context can remain useful on old orders, but future live behavior usually requires target-side configuration, plugin setup, and testing in EShop.

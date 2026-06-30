@@ -1,145 +1,183 @@
 # Selecting the Right Migration Approach for BigCommerce
 
-Selecting the right migration approach for BigCommerce depends on how much structure the Target Platform must preserve, not only how many records need to move. A store with a moderate record count can still require stronger planning when product choices, segmented pricing, storefront scope, redirects, app data, or external identifiers carry business meaning.
+The right BigCommerce migration approach depends on how much of the source store can become supported BigCommerce data without losing business meaning. A simple product catalog may fit a straightforward path. A variant-heavy catalog, segmented pricing structure, multi-channel setup, custom fields, app-owned records, external identifiers, or SEO-sensitive redirect plan may require stronger preparation, Add-ons, Managed Service, or Custom Service review.
 
-BigCommerce is a hosted commerce platform, but many migrations into BigCommerce involve more than a simple transfer of products, customers, orders, and content. Products may need variants, variant options, modifiers, custom fields, metafields, price-list behavior, customer-group logic, category placement, channel assignment, CMS Pages, Blog Posts, redirects, and app-related context to remain useful after migration. The right Migration Service should match that interpretation burden.
+Service-path choice should not begin with store size alone. BigCommerce complexity often comes from product choices, pricing rules, channel assignments, storefront continuity, customer segmentation, integrations, and target-side configuration. A large store can still follow a manageable path when the data is supported and reviewable. A smaller store can need Custom Service when app or custom data is central to operations.
 
 ### What Migration Approach Means for BigCommerce <a href="#what-migration-approach-means-for-bigcommerce" id="what-migration-approach-means-for-bigcommerce"></a>
 
-Migration approach determines how much responsibility, guidance, configuration support, and custom handling should be included before Full Migration begins. For BigCommerce, the approach should be chosen after reviewing how the future store will represent catalog choices, customer segments, storefront boundaries, pricing behavior, URL continuity, and custom data.
+A BigCommerce migration approach is a decision about scope, responsibility, support level, and validation depth. The approach should define which records should move into BigCommerce, which target-side settings must be configured in BigCommerce, which Add-ons are needed for supported adjustments, which requirements need Custom Service, and which Demo Migration samples must pass before Full Migration.
 
-A lighter approach can work when the Source Platform is supported, the target BigCommerce structure is already clear, and the customer can review the Demo Migration confidently. A more guided approach is safer when the customer wants Next-Cart to carry more execution responsibility or when BigCommerce structure needs closer coordination. Custom Service becomes necessary when the migration requires bespoke transformation, Custom Platform handling, app-aware interpretation, custom field handling, outside-system identifiers, or custom migration logic adjustment.
+| Work type                          | BigCommerce example                                                                                                      | Service-path implication                                                                 |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Supported migrated records         | Products, categories, customers, orders, images, content pages, redirects, and supported related fields.                 | May fit Standard Service or Managed Service depending on execution and validation needs. |
+| Supported adjustments              | Filtering, mapping, or configuration changes for supported product, customer, order, content, or redirect data.          | May require Add-ons.                                                                     |
+| Custom or unsupported requirements | App-owned data, custom fields, external identifiers, bespoke pricing logic, feed data, or special transformation.        | Requires Custom Service review.                                                          |
+| Target-side setup                  | Storefront theme, checkout settings, payment setup, tax rules, shipping settings, apps, channels, and live integrations. | Must be configured and tested in BigCommerce rather than treated as migrated records.    |
 
-The best approach is the one that prevents ambiguity from being discovered only after Full Migration.
+The right path protects the merchant from two opposite mistakes: choosing too light a path for complex business data, or escalating every platform-specific detail to Custom Service when a supported Add-on or target-side setup task is enough.
 
-### Why BigCommerce Approach Choice Depends on Structure <a href="#why-bigcommerce-approach-choice-depends-on-structure" id="why-bigcommerce-approach-choice-depends-on-structure"></a>
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-BigCommerce migration complexity often sits in how commerce behavior is represented. Product, category, customer, order, content, and URL data may appear straightforward until the migration must preserve how buyers actually browse, select, price, and purchase.
+Standard Service may be enough when the BigCommerce scope is supported, the source data is clean, and the merchant can prepare inputs and validate the result confidently. This usually means products, categories, customers, orders, images, pages, redirects, and related fields can be migrated without bespoke transformation or unsupported app-data handling.
 
-| BigCommerce area                                          | Approach impact                                                                                                                       |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Product options, variants, variant options, and modifiers | Determines whether product-choice logic can be mapped predictably or needs deeper interpretation.                                     |
-| Customer groups, price lists, and bulk pricing            | Affects whether segmented commercial rules can be validated through standard handling or require additional configuration review.     |
-| Categories, category trees, and product assignments       | Determines whether discovery, merchandising, and storefront structure are simple enough for standard migration or need guided review. |
-| Channels and storefront scope                             | Adds risk when products, content, routes, or currencies must behave differently across storefront contexts.                           |
-| Redirects, CMS Pages, and Blog Posts                      | Affects SEO continuity and whether URL evidence needs more deliberate handling.                                                       |
-| Custom fields, metafields, apps, and external IDs         | Often determines whether Add-ons are enough or Custom Service is required.                                                            |
+Standard Service is strongest when product choices are simple or clearly structured, pricing is not heavily segmented, channel expectations are limited, customer data is mostly standard, and the merchant can review Demo Migration samples without intensive coordination.
 
-When these areas are documented and sample-tested, Standard Service or Managed Service may be enough. When their meaning is unclear, Custom Service should be considered earlier rather than after failed validation.
+| Standard Service readiness signal                                               | BigCommerce-specific reason                                                   |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Products have clear SKUs, options, variants, images, and categories.            | Catalog review can focus on supported BigCommerce product structures.         |
+| Modifiers or shopper customization are limited or easy to identify.             | The catalog is less likely to need special interpretation.                    |
+| Pricing is mostly base price, sale price, or simple supported discount context. | Advanced price-list or B2B pricing complexity is limited.                     |
+| Channels are simple or not part of launch complexity.                           | Product visibility and storefront scope are easier to validate.               |
+| Customers and orders are ordinary historical records.                           | Buyer lookup and order history can be checked through representative samples. |
+| Redirects and content scope are clear.                                          | SEO continuity can be reviewed without custom content transformation.         |
 
-### Standard Service for BigCommerce <a href="#standard-service-for-bigcommerce" id="standard-service-for-bigcommerce"></a>
+Standard Service becomes risky when the merchant cannot explain how source product options, pricing, channels, or app data should appear in BigCommerce. A supported record type does not automatically mean every source behavior is supported.
 
-Standard Service is suitable when the migration path is supported, the BigCommerce target structure is known, and the customer team can manage review and acceptance with normal guidance.
+### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
 
-Standard Service is often a strong fit when:
+Managed Service may be safer when the data is mostly supported but the execution path needs coordination, sequencing, and expert handling. This can happen when the merchant has a large catalog, many product options, important redirects, high-value order history, launch-sensitive SEO, multi-channel visibility, or limited internal capacity for migration execution.
 
-* product choices can be represented predictably through BigCommerce products, variants, variant options, modifiers, or product fields;
-* category and category-tree expectations are already defined;
-* customer groups, price lists, and bulk-pricing rules are documented clearly enough for validation;
-* channels or storefront scope are simple or already mapped;
-* CMS Pages, Blog Posts, and redirects are not unusually complex;
-* app data, custom fields, metafields, and external identifiers are limited or non-critical;
-* the customer team can review the Demo Migration and Full Migration thoroughly;
-* the project does not require custom migration logic adjustment.
+Managed Service can reduce operational strain, but it does not convert unsupported app records into standard migration scope. It is best understood as a stronger execution and coordination path for supported or clearly scoped data. If unsupported records or bespoke transformations are involved, Custom Service may still be required.
 
-Standard Service should not be selected only because the store appears small. A smaller BigCommerce migration can still need stronger handling if product-choice rules, price-list behavior, storefront scope, or app data has important business meaning.
+| Managed Service fit                     | BigCommerce scenario                                                                                     |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Supported scope with many review points | Products, variants, categories, images, customers, orders, pages, and redirects need coordinated review. |
+| High-value SEO continuity               | Redirects, product URLs, category URLs, pages, and metadata require careful launch sequencing.           |
+| Variant-heavy catalog                   | Product choices are supported but need disciplined sample review.                                        |
+| Multi-channel or pricing sensitivity    | Channel assignments, price lists, or customer group pricing require structured validation.               |
+| Limited merchant bandwidth              | The merchant wants Next-Cart-led execution support while retaining final result verification.            |
 
-### Managed Service for BigCommerce <a href="#managed-service-for-bigcommerce" id="managed-service-for-bigcommerce"></a>
+Managed Service should be chosen for execution support and review discipline, not as a substitute for scope clarity. The merchant still needs acceptance criteria and representative samples.
 
-Managed Service is appropriate when BigCommerce is the right Target Platform, but the customer wants Next-Cart to carry more of the migration execution responsibility. It is useful when the project remains within standard service capability, yet the internal team does not want to manage the migration process alone.
+### When Add-ons Can Solve the Need <a href="#when-add-ons-can-solve-the-need" id="when-add-ons-can-solve-the-need"></a>
 
-Managed Service is often a good fit when:
+Add-ons are useful when the requirement is supported, bounded, and specific. They help with filtering, mapping, or data configuration within supported behavior. They are not a replacement for Custom Service when the requirement involves unsupported records, external systems, bespoke transformations, or app-owned data that BigCommerce does not receive as ordinary migration data.
 
-* the customer wants more operational guidance through Demo Migration and Full Migration;
-* the project includes several areas that need careful review, such as products, variants, modifiers, customer groups, price lists, categories, channels, and redirects;
-* internal stakeholders can provide business decisions, access, and validation, but should not manage each migration step independently;
-* migration success depends on coordinated review rather than bespoke transformation;
-* the project does not require custom migration logic adjustment.
+| Add-on need                  | BigCommerce example                                                                                             | Boundary check                                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Filter records               | Move selected products, customers, orders, pages, Blog Posts, or inactive records according to agreed criteria. | The filter should be clear and should not remove records needed for service, reporting, or SEO continuity. |
+| Map supported fields         | Align source fields with supported BigCommerce destinations.                                                    | Mapping cannot create unsupported BigCommerce behavior.                                                    |
+| Configure supported output   | Adjust supported data handling to improve BigCommerce usability.                                                | Configuration must remain within migration capability.                                                     |
+| Handle bounded special needs | Apply a specific supported adjustment to products, categories, URLs, customers, or orders.                      | If custom logic or unsupported records are involved, Custom Service is safer.                              |
 
-Managed Service is not the same as Custom Service. Managed Service changes execution responsibility; Custom Service changes how special data, custom behavior, unsupported structures, or bespoke migration requirements are handled.
+Good Add-on requests are written as precise acceptance criteria. Weak Add-on requests use broad language such as “make it match our old store” without defining the supported fields or behavior.
 
-### Custom Service for BigCommerce <a href="#custom-service-for-bigcommerce" id="custom-service-for-bigcommerce"></a>
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
 
-Custom Service is the safer path when BigCommerce migration success depends on customization, modification, or bespoke handling beyond standard service capability.
+Custom Service should be considered when the BigCommerce migration requirement goes beyond supported standard behavior. The trigger is not the merchant’s size. The trigger is custom data, unsupported source structures, bespoke transformation, app records, external identifiers, Custom Platform handling, or custom migration logic adjustment.
 
-Custom Service should be considered when:
+BigCommerce custom needs often appear around product options, custom fields, metafields, pricing, ERP data, subscriptions, reviews, marketplace feeds, B2B-like structures, customer segmentation, loyalty records, and headless or app-connected storefront behavior.
 
-* the Source Platform is a Custom Platform;
-* product-choice logic does not map cleanly into BigCommerce products, variants, variant options, modifiers, or product fields;
-* custom fields, metafields, or app-owned data need interpretation or transformation;
-* customer groups, price lists, storefront assignments, or pricing rules require special handling;
-* external IDs must remain aligned with ERP, CRM, fulfillment, marketplace, review, subscription, loyalty, tax, shipping, or analytics systems;
-* selective migration or filtering requires defined inclusion and exclusion logic;
-* legacy URLs, redirects, CMS Pages, Blog Posts, or route structures require custom treatment;
-* the project needs custom migration logic adjustment.
+| Custom Service trigger                                                                          | Why it changes the approach                                                       |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Source product options do not fit cleanly into variants, variant options, or modifiers.         | The catalog may need bespoke interpretation before BigCommerce can use it.        |
+| App-owned subscriptions, loyalty, bundles, reviews, feeds, or marketplace records are expected. | The data may not belong to standard platform records.                             |
+| Custom fields or external identifiers must remain usable for ERP, CRM, accounting, or support.  | Supported mapping may not preserve business meaning.                              |
+| Advanced pricing logic depends on custom or external rules.                                     | Price lists or bulk pricing may not fully represent the source behavior.          |
+| Source content depends on page builders, scripts, or custom storefront logic.                   | BigCommerce content and redirects may require special handling or manual rebuild. |
+| A Custom Platform is part of the source or target situation.                                    | Source structures may need direct analysis before mapping can be trusted.         |
 
-Custom Service does not automatically mean Next-Cart performs full migration management. Migration management depends on the final service plan. The Custom Service boundary is about the customization or bespoke handling needed to make the migrated BigCommerce store meaningful.
+Custom Service should be scoped through examples. The merchant should provide representative products, customers, orders, content records, custom fields, app exports, external identifiers, and expected outcomes. Without examples, custom discussion stays too abstract to produce a reliable service path.
 
-### How Add-ons Fit Into the BigCommerce Approach <a href="#how-add-ons-fit-into-the-bigcommerce-approach" id="how-add-ons-fit-into-the-bigcommerce-approach"></a>
+### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
 
-Add-ons can support a BigCommerce migration when the project needs optional filtering, mapping, or configuration support within supported service behavior. They should not be used as a substitute for Custom Service.
+Demo Migration should decide whether the selected BigCommerce approach is strong enough. It should not be treated as a basic preview of record counts. The sample set should prove that BigCommerce-specific data meaning survives the migration.
 
-A Data Filter Add-on can be useful when the customer wants to migrate only selected products, customers, orders, categories, reviews, CMS Pages, Blog Posts, or historical records. Advanced Data Mapping or Advanced Data Configure can be useful when certain fields, mapped values, or target settings need more deliberate handling.
+| Demo Migration sample                    | Decision it should support                                         |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| Simple product                           | Baseline product, category, image, price, and inventory mapping.   |
+| Variant-heavy product                    | Whether options and variants behave correctly.                     |
+| Modifier-like product                    | Whether shopper customization needs another path.                  |
+| Product with custom fields or metafields | Whether mapping is supported or Custom Service is needed.          |
+| Price-list or bulk-pricing example       | Whether pricing expectations are supported, configured, or custom. |
+| Channel-specific product                 | Whether channel assignment and visibility need review.             |
+| Customer with group or custom field      | Whether customer identity and segmentation are preserved.          |
+| Discounted or refunded order             | Whether historical order context remains readable.                 |
+| Priority URL or content page             | Whether SEO and redirect expectations need adjustment.             |
 
-Add-ons are usually appropriate for bounded service enhancements. Custom Service is more appropriate when the project involves Custom Platform handling, source-side logic transformation, app-specific data interpretation, custom field rebuilding, outside-system identifiers, or custom migration logic adjustment.
+The approach is too light if Demo Migration cannot explain product choices, pricing, channel scope, customer segmentation, redirects, or app-owned data. The correct response is to adjust scope before Full Migration, not to hope that the full run will solve the mismatch.
 
 ### Entity Points and BigCommerce Scope Planning <a href="#entity-points-and-bigcommerce-scope-planning" id="entity-points-and-bigcommerce-scope-planning"></a>
 
-Entity Points planning should account for the BigCommerce records that need to be migrated and accepted, especially Products, Customers, Orders, and Blog Posts. The key planning question is not only whether the Entity Points Plan has enough capacity, but whether the scoped records represent the business data the customer actually needs in the Target Platform.
+Entity Points help plan selected entity volume, but they do not prove that source data fits BigCommerce. Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path. New eligible records may consume Entity Points when migrated for the first time.
 
-If additional migration activity occurs later for the same service license, Entity Points should be evaluated according to whether the records are new to that service license record. Records that were already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when migrated for the first time.
+For BigCommerce, Entity Points should be reviewed alongside structure and complexity. A small source store may need Custom Service if it depends on app-owned fields, external IDs, custom pricing, or storefront logic. A larger store may fit Standard Service or Managed Service when the records are supported and the merchant can validate them.
 
-This matters for BigCommerce when new products, customers, orders, or Blog Posts are added after an earlier migration step, or when the customer decides to include a broader historical scope after reviewing the Demo Migration.
+| Scope signal     | What it helps estimate                           | What it does not prove                                                                          |
+| ---------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Product count    | Catalog volume and possible Entity Points usage. | Whether variants, modifiers, custom fields, images, categories, and channels map correctly.     |
+| Customer count   | Buyer-record volume.                             | Whether groups, custom fields, duplicates, external IDs, and buyer relationships remain useful. |
+| Order count      | Historical order volume.                         | Whether refunds, discounts, payment context, fulfillment, and custom statuses remain readable.  |
+| Blog Posts count | Content volume when relevant.                    | Whether URLs, redirects, metadata, and content presentation are launch-ready.                   |
 
-### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
+Entity Points should support planning, not replace service-path evaluation.
 
-A Demo Migration should test the BigCommerce cases most likely to affect approach selection. It should not only prove that records can appear in the Target Platform; it should show whether the migration approach is strong enough for the actual store structure.
+### Later Migration Actions and Launch Timing <a href="#later-migration-actions-and-launch-timing" id="later-migration-actions-and-launch-timing"></a>
 
-For BigCommerce, Demo Migration samples should include:
+BigCommerce launch timing can require additional migration activity after Demo Migration or after an initial Full Migration run. The merchant may need to continue the migration with the last used configuration, continue with a new configuration, or perform a new migration. The chosen action should match the business outcome.
 
-* products with variants, variant options, modifiers, and custom fields;
-* products that depend on price lists, bulk pricing, or customer-group behavior;
-* categories and category-tree structures that matter for discovery and merchandising;
-* products or content assigned to different channels or storefront contexts;
-* CMS Pages, Blog Posts, and redirects that protect SEO-sensitive paths;
-* customers and orders with important pricing, tax, shipping, discount, payment, or fulfillment context;
-* app-owned data, metafields, external IDs, and integration-dependent records;
-* Custom Platform records when the Source Platform is unsupported.
+* Continuing with the last used configuration is usually relevant when the source store keeps receiving new eligible records and the configuration remains acceptable.
+* Continuing with a new configuration is relevant when filters, mapping, or configuration choices need to change.
+* Performing a new migration is relevant when the earlier target result should be replaced with a refreshed result.
 
-If the Demo Migration confirms that the chosen structure is clear and reviewable, Standard Service or Managed Service may be sufficient depending on the desired execution responsibility. If it exposes unresolved interpretation, the approach should be strengthened before Full Migration.
+The service path should clarify who performs the action and who validates the result. Under Standard Service and Custom Service without Expert Handle, the customer performs available migration actions and verifies the result. Under Managed Service and Custom Service with Expert Handle, Next-Cart can perform migration actions based on the customer’s request and agreed scope, while the customer remains responsible for final result verification and migration outcome.
 
-### How Additional Migration Options Affect Approach Planning <a href="#how-additional-migration-options-affect-approach-planning" id="how-additional-migration-options-affect-approach-planning"></a>
+For BigCommerce, later migration actions most often affect new products, customers, orders, Blog Posts, redirects, pricing changes, channel assignment changes, or revised mapping decisions. Each action should trigger the right validation set.
 
-Additional Migration Options may become relevant when the customer needs to continue migration activity after an earlier migration step, use a different configuration, or perform a new migration for the same migration path. In BigCommerce, this should be planned around changed records, new records, and renewed validation needs.
+### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
 
-Additional Migration Options should not be treated as a substitute for readiness, Demo Migration review, or Full Migration validation. If product options, price lists, category assignments, redirects, channel scope, custom fields, metafields, or app-dependent data changed after the earlier migration activity, those changes still need review in BigCommerce.
+A BigCommerce approach is too light when it treats platform-specific complexity as ordinary record transfer. The warning signs usually appear in catalog meaning, pricing, channel scope, redirects, customer segmentation, or app data.
 
-The safer approach is to treat follow-up migration activity as a reason to re-check the affected BigCommerce structures, not as proof that the store is ready for launch.
+| Warning signal                                                                                        | Likely response                                                    |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Product choices cannot be classified as variants, variant options, modifiers, setup, or custom scope. | Rework catalog scope before selecting the final path.              |
+| Price lists, customer-group pricing, or bulk pricing are business-critical but not sampled.           | Add pricing samples and review Add-ons or Custom Service needs.    |
+| Channel assignments or product visibility differ by storefront.                                       | Strengthen channel preparation and validation.                     |
+| Redirects, CMS Pages, or Blog Posts are high-value but loosely scoped.                                | Treat content and SEO continuity as launch-critical evidence.      |
+| Custom fields, metafields, app data, or external IDs are central to operations.                       | Review Custom Service rather than assuming ordinary field mapping. |
+| Demo Migration uses only simple products and clean orders.                                            | Expand the sample set before Full Migration.                       |
+| Source data continues changing near launch without a later-action plan.                               | Define timing, migration action, ownership, and revalidation.      |
+
+These signals should be handled before Full Migration. Waiting until launch makes it harder to distinguish migration issues from target-side BigCommerce setup gaps.
+
+### Choosing the Practical Path <a href="#choosing-the-practical-path" id="choosing-the-practical-path"></a>
+
+The practical BigCommerce approach is the lightest path that still protects the business outcome. Standard Service may be enough when supported records and customer-led validation are realistic. Managed Service is safer when supported scope requires stronger coordination. Add-ons are appropriate when supported records need filtering, mapping, or configuration. Custom Service is necessary when unsupported, custom, app-owned, external-system, or bespoke transformation needs must be evaluated.
+
+A reliable approach can be summarized in four statements:
+
+* which records should migrate into BigCommerce;
+* which BigCommerce settings, apps, channels, or storefront behaviors must be configured separately;
+* which Add-ons or Custom Service requirements are in scope;
+* which Demo Migration samples must pass before Full Migration.
+
+If those statements are clear, the approach is usually ready to proceed. If they are unclear, the merchant should refine scope before treating service-path selection as complete.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right BigCommerce migration approach should match the store’s structural burden. Standard Service can work well when the migration path is supported, the BigCommerce model is already clear, and the customer can validate the outcome confidently. Managed Service is stronger when the project still fits standard service capability but the customer wants Next-Cart to carry more execution responsibility. Custom Service becomes the safer path when product-choice logic, price lists, channels, redirects, custom fields, apps, external IDs, Custom Platform data, or bespoke transformation affects migration success.
+BigCommerce migration approach selection should be grounded in how the merchant expects BigCommerce to operate after launch. Standard Service, Managed Service, Add-ons, and Custom Service each have a role, but none should be chosen from record counts alone. The right approach accounts for catalog structure, variants, modifiers, price lists, channels, customers, orders, redirects, content, apps, Entity Points, later migration actions, and Demo Migration evidence.
 
-Use the Demo Migration to decide whether the selected approach is strong enough. If the sample results expose unclear product choices, segmented pricing, storefront scope, route continuity, app-owned behavior, or custom data interpretation, clarify the service path before Full Migration rather than trying to repair the approach after launch risk appears.
+A practical service path protects both migration execution and business validation. It should explain what migrates, what must be configured in BigCommerce, what needs Add-ons, what requires Custom Service, and what must be proven before launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for a BigCommerce migration?**
+**When is Standard Service enough for a BigCommerce migration?**
 
-Standard Service may be enough when the Source Platform is supported, the target BigCommerce structure is clear, and the customer can validate products, variants, modifiers, categories, customer groups, price lists, channels, redirects, customers, orders, and content confidently.
+Standard Service may be enough when the BigCommerce scope is supported, product structures are clear, pricing and channels are manageable, customers and orders are straightforward, redirects and content are scoped, and the merchant can validate the result confidently.
 
-**When should a BigCommerce migration use Managed Service?**
+**When should Managed Service be considered?**
 
-Managed Service is useful when the project fits standard service capability but the customer wants Next-Cart to carry more migration execution responsibility while the internal team focuses on business decisions and validation.
+Managed Service is useful when the migration remains within supported capability but needs stronger execution support, coordination, sample review, launch sequencing, or help managing catalog, redirect, pricing, or channel validation pressure.
 
-**When does BigCommerce require Custom Service?**
+**How are Add-ons different from Custom Service?**
 
-Custom Service should be considered when the migration requires Custom Platform handling, custom field interpretation, app-aware data handling, external identifier preservation, selective transformation, storefront-specific handling, or custom migration logic adjustment.
+Add-ons adjust supported filtering, mapping, or configuration. Custom Service handles unsupported records, app-owned data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-**Do Add-ons replace Custom Service for BigCommerce?**
+**Do Entity Points decide whether a BigCommerce migration is complex?**
 
-No. Add-ons support bounded filtering, mapping, or configuration needs. Custom Service is required when the project needs broader customization, bespoke transformation, Custom Platform handling, app-specific interpretation, or custom migration logic adjustment.
+No. Entity Points help estimate eligible migration volume. Complexity depends on data meaning, such as variants, modifiers, custom fields, price lists, channels, redirects, customer segmentation, and app-owned records.
 
-**Should Additional Migration Options change the service approach?**
+**What should Demo Migration prove before Full Migration?**
 
-They can affect the review scope. If follow-up migration activity introduces new or changed products, customers, orders, Blog Posts, price rules, redirects, channels, or custom data, the customer should revalidate those BigCommerce structures before relying on the migrated store.
+Demo Migration should prove that representative BigCommerce records work as expected: products, variants, modifiers, pricing examples, customer records, order samples, redirects, content, channel assignments, and any custom or integration-owned examples where relevant.

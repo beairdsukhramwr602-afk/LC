@@ -6,17 +6,15 @@ The most important early decision is how Source Platform data should behave afte
 
 ### What Shopify Means as a Target Platform <a href="#what-shopify-means-as-a-target-platform" id="what-shopify-means-as-a-target-platform"></a>
 
-Shopify is a hosted SaaS commerce platform. That matters because the migration target is not just a database; it is an administered commerce environment with Shopify-defined catalog structures, storefront conventions, app extension points, theme behavior, market settings, and URL patterns.
+Shopify is a hosted SaaS commerce environment. Merchants do not usually move to Shopify to keep the same server-level, database-level, or extension-level control they had on a self-hosted platform. They move into a platform-defined operating model where commerce data, storefront configuration, themes, apps, checkout-adjacent settings, market settings, and admin workflows need to work together.
 
-For many merchants, Shopify is attractive because it reduces responsibility for hosting, server maintenance, security patching, and core platform upkeep. That benefit does not remove migration planning. It changes the planning focus. Instead of deciding how to preserve every previous technical structure, the merchant must decide how the business should operate inside Shopify after launch.
+That distinction matters because Shopify migration quality is measured by target-store usability, not by record transfer alone. A product can exist in Shopify but still need better option and variant handling. A category can become a collection, a menu path, a filter input, or a cleanup decision. A custom field can become useful as a metafield only when it has a real storefront, operational, integration, reporting, or support purpose.
 
-Shopify commonly becomes a strong target when the store can be organized around clear products, purchasable variants, collections, navigable storefront paths, useful customer and order history, and deliberately selected apps. The platform can also support more complex stores, but complexity must be translated into Shopify-compatible structures rather than assumed to transfer unchanged.
-
-The most important early distinction is between record presence and operational readiness. A product record may exist in Shopify, but the buying experience may still depend on options, variants, images, metafields, app behavior, or theme presentation. A customer record may transfer, but the returning-customer experience may still need separate planning. A URL may redirect, but the destination must still preserve a meaningful customer journey.
+Shopify also establishes an important baseline for hosted SaaS migration planning. Its core migration distinction is that platform-defined structures, app dependencies, theme behavior, redirects, and target-store configuration shape the final outcome as much as the data import itself.
 
 ### How Shopify Shapes Migration Planning <a href="#how-shopify-shapes-migration-planning" id="how-shopify-shapes-migration-planning"></a>
 
-Shopify shapes migration planning by separating data movement from target-store configuration. Some information can move into standard Shopify structures. Some information needs mapping or configuration decisions. Some behavior belongs to apps, themes, integrations, or Custom Service review instead of ordinary migration handling.
+Shopify changes migration planning by forcing a clear separation between migrated records and target-store behavior. The migration plan should identify which information can become Shopify-native data, which information depends on configuration, and which behavior belongs outside ordinary data migration.
 
 | Planning area             | Shopify orientation                                                                                                        | Early migration question                                                                                            |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -84,11 +82,15 @@ In these situations, the migration path should identify whether the requirement 
 
 ### Shopify Migration Planning Priorities <a href="#shopify-migration-planning-priorities" id="shopify-migration-planning-priorities"></a>
 
-A Shopify migration should begin with a target-store model that is practical for Shopify, not with the assumption that every Source Platform structure should be preserved exactly. The strongest early planning priorities are product interpretation, collection strategy, content and URL continuity, customer and order usefulness, app-equivalent behavior, and custom-data purpose.
+A strong Shopify migration plan should convert platform fit into concrete target-store decisions before execution begins. The first decision is the target operating model: which Shopify plan, storefront structure, theme, apps, sales channels, market settings, and operational workflows must be ready at launch. Without that operating model, the migration scope can look complete while the store still depends on unfinished app setup, theme display, redirects, or market configuration.
 
-The Shopify and Shopify Plus distinction should also be confirmed before scope decisions become final. Shopify Plus belongs to the same Shopify ecosystem, but enterprise requirements such as larger operational governance, B2B expectations, integrations, expansion structures, or more complex acceptance criteria may change the planning and validation burden.
+The second decision is catalog translation. Source Platform products may include configurable products, custom options, bundle logic, product builders, product attributes, category relationships, or app-managed purchasing behavior. Shopify needs those source structures interpreted through products, options, variants, SKUs, collections, tags, product type, product category, metafields, metaobjects, app-supported behavior, or Custom Service review. The migration should preserve commercial meaning, not every legacy structure exactly as stored.
 
-For a standard Shopify target, the early migration plan should prove that representative products, collections, customers, orders, content, URLs, metafields, apps, and theme-dependent displays can support the intended selling model. If those assumptions are clear, later service selection, preparation, validation, and launch decisions become more reliable.
+The third decision is customer and order continuity. Customer records, addresses, tags, segments, order history, payment context, fulfillment context, refunds, discounts, and support notes can help the business continue operating after launch. They should not be confused with identical account behavior, password continuity, loyalty behavior, subscription behavior, or app-specific customer experiences unless those outcomes are explicitly scoped and validated.
+
+The fourth decision is discoverability. Shopify collections, menus, filters, product search behavior, CMS Pages, Blog Posts, handles, redirects, domains, and theme presentation all influence whether customers can still find products and content after migration. URL continuity should be planned around high-value routes and realistic Shopify destinations rather than a mechanical copy of every old path.
+
+The final decision is custom-data responsibility. Useful custom fields may become metafields, app data, reporting inputs, integration identifiers, or Custom Service scope. Obsolete extension residue should not be migrated simply because it exists. Shopify works best when migration scope is aligned with how the target store will actually operate, display information, support customers, and validate launch readiness.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 

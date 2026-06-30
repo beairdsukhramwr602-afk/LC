@@ -1,169 +1,190 @@
 # Shopware Data Model Differences
 
-A migration to Shopware can preserve familiar records while changing how those records express storefront context, selling rules, visibility, pricing, and route behavior.
+A Shopware migration should not be evaluated only by whether Products, Customers, Orders, Categories, Coupons, Reviews, CMS content, and related records arrive in the target store. Shopware can preserve familiar commerce records while changing how those records express storefront context, product discoverability, pricing behavior, content meaning, customer interaction, and operational ownership.
 
-This matters because Shopware is not only a destination for products, customers, orders, categories, and content. It is a Target Platform where sales channels, Rule Builder logic, product visibility, properties, variants, advanced pricing, SEO structure, media, and extension-shaped behavior can all influence whether migrated data still works commercially.
+That difference matters because Shopware is built around a modular, API-first commerce architecture. Core commerce data, sales channels, storefront presentation, Administration workflows, APIs, extensions, rules, translations, and the Data Abstraction Layer work together to determine how the store behaves. A migrated product can exist in the database and still be incomplete if it is not visible in the right sales channel, connected to the right properties, grouped into the right variant structure, presented through the right content experience, or supported by the right commercial logic.
 
-The purpose of this article is to explain how Shopware changes the meaning of migrated data. It does not decide whether Shopware is the right fit, define the preparation checklist, or select the migration approach. Those questions belong to the surrounding articles in this hub.
+### Shopware Data Translation Starts With Operating Context <a href="#shopware-data-translation-starts-with-operating-context" id="shopware-data-translation-starts-with-operating-context"></a>
+
+Data translation into Shopware begins by deciding what each source record means in the future operating model. Some values are direct commerce records. Some are sales-channel decisions. Some are storefront or CMS context. Some are configuration. Some are extension-created behavior. Some are external-system references that need to remain usable for staff, integrations, or reporting.
+
+| Source-store pattern                                | Shopware translation question                                                                              | Migration implication                                                                           |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| One storefront with simple catalog records          | Should the target operate as one Shopware sales channel or multiple contexts?                              | Storefront structure should be confirmed before judging imported records.                       |
+| Multiple languages, markets, domains, or sub-stores | Which contexts belong to sales channels, languages, currencies, domains, or content structures?            | The same product record may need different visibility, content, or routing behavior by context. |
+| Attribute-heavy products                            | Which values should become properties, variant options, custom fields, filters, or informational text?     | Attribute transfer alone may not preserve search, filtering, comparison, or buying logic.       |
+| Rule-based pricing, shipping, or promotions         | Which behavior is migrated data and which behavior is Shopware configuration or custom scope?              | Commercial logic may need separate setup or validation beyond record transfer.                  |
+| Extension-owned fields or custom workflows          | Which records are supported, which are target-side configuration, and which require Custom Service review? | Unsupported app, plugin, module, or custom behavior should be classified before migration.      |
+
+This translation lens prevents a common failure: treating Shopware as a neutral container for old data. Shopware can become a better-structured target, but only when old source meanings are interpreted into the correct target concepts.
 
 ### Sales Channels Change Storefront Meaning <a href="#sales-channels-change-storefront-meaning" id="sales-channels-change-storefront-meaning"></a>
 
-In Shopware, storefront context is strongly connected to sales channels. A product, category, route, language, market, or commercial behavior may need to be understood within the correct sales-channel context rather than as one universal storefront value.
+Sales channels are one of the most important Shopware concepts for migration planning. They can define how products, categories, domains, storefronts, languages, currencies, customer-facing content, and routes are organized for different buying contexts. A source platform may have handled these contexts through separate stores, store views, language folders, marketplace feeds, theme logic, or manual configuration. Shopware asks the merchant to clarify the target storefront context more deliberately.
 
-This creates an important migration difference. A source store may use one storefront, substore, language area, marketplace view, or customer-facing context in a looser way. In Shopware, those contexts may need to become clearer sales-channel decisions.
+A product that exists in Shopware is not automatically ready for every customer-facing context. The product still needs the right visibility, category placement, route behavior, content relationship, and commercial availability in the relevant sales channel.
 
-A migrated record can therefore exist correctly at the data level while still being commercially wrong if it appears in the wrong channel, is missing from the intended channel, or behaves differently across channels than the business expects.
+| Sales-channel data area                 | What must be translated                                                            | Failure signal                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Product availability                    | Which products should appear in each storefront context.                           | Products exist but are missing from the intended channel.                       |
+| Category and navigation context         | Which category paths belong to each customer-facing experience.                    | Category trees import but do not support the intended journey.                  |
+| Domains and language context            | Which URL, language, and regional assumptions must continue.                       | Pages resolve but use the wrong market, language, or destination intent.        |
+| Pricing, shipping, and payment behavior | Which conditions depend on channel context.                                        | Checkout behavior differs from customer expectations even though records exist. |
+| Content and Shopping Experiences        | Which landing pages, content blocks, and merchandising areas support each channel. | Commerce data is present but content-led buying paths are incomplete.           |
 
-### Product Records Carry More Than Basic Product Data <a href="#product-records-carry-more-than-basic-product-data" id="product-records-carry-more-than-basic-product-data"></a>
+The migration question is not only “did the record migrate?” It is “does the record operate correctly inside the right Shopware sales-channel context?”
 
-Shopware product structure includes more than a product name, SKU, description, price, and stock value.
+### Product Meaning Depends on Structure, Not Only Fields <a href="#product-meaning-depends-on-structure-not-only-fields" id="product-meaning-depends-on-structure-not-only-fields"></a>
 
-A product may need supporting meaning through:
+Shopware product migration should preserve product meaning, not just product names, SKUs, descriptions, prices, and stock. Products can depend on manufacturer data, media, categories, properties, variant relationships, visibility, SEO fields, tax and price behavior, reviews, cross-selling context, custom fields, and integration references.
 
-* manufacturer information
-* tax rate and price structure
-* stock and deliverability behavior
-* visibility and sales-channel assignment
-* media and product presentation
-* properties and specifications
-* variants
-* SEO settings
-* cross-selling or rating-related context
-* custom fields or extension-supported behavior
+This creates a stronger data-model review than a basic product import check. A product can look present while still failing customer-facing or operational expectations if the surrounding structure is missing.
 
-During migration, this means product quality should not be judged only by whether a product appears in the admin area or storefront. The more important question is whether the product still has the structure needed to sell, display, rank, filter, and behave correctly in Shopware.
+| Product area   | Shopware meaning                                                                  | Review focus                                                                                      |
+| -------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Product record | Core item identity, descriptions, SKU, media, status, and commercial baseline.    | Confirm that important products are complete, active where expected, and understandable to staff. |
+| Variants       | Selectable product differences under a parent/product structure.                  | Confirm that buying choices remain clear and purchasable.                                         |
+| Properties     | Descriptive values that can support filtering, comparison, and product discovery. | Confirm that source attributes did not become dead text where filters are needed.                 |
+| Categories     | Browsing, merchandising, content, and discovery structure.                        | Confirm category relationships support future navigation, not only old hierarchy.                 |
+| Custom fields  | Business-specific values used by staff, integrations, or storefront logic.        | Confirm which values are supported, which need mapping, and which require custom handling.        |
 
-### Product Visibility Becomes a Data-Model Layer <a href="#product-visibility-becomes-a-data-model-layer" id="product-visibility-becomes-a-data-model-layer"></a>
+The most important product samples are usually not the simplest products. The best samples are variant-heavy, property-heavy, high-revenue, high-traffic, integration-linked, promotion-sensitive, or operationally important products.
 
-Product visibility is a core Shopware difference because product presence and product availability are not identical.
+### Properties and Variants Need Deliberate Interpretation <a href="#properties-and-variants-need-deliberate-interpretation" id="properties-and-variants-need-deliberate-interpretation"></a>
 
-A product may exist in Shopware but still need the right sales-channel assignment and visibility behavior before it can be found, displayed, or purchased in the intended storefront context.
+Source platforms often use different concepts for product options, attributes, variations, configurable products, grouped products, and product families. Shopware may require those concepts to be separated into product variants, properties, filters, or custom fields depending on how the values are used.
 
-This affects migration review because visibility is part of product meaning. If the source platform treated product availability more broadly, the migration may need careful interpretation so the product does not become too visible, not visible enough, or visible in the wrong customer-facing context.
+The distinction is important because descriptive data and buying-choice data are not the same thing. A value used only to describe a product may belong in a different place from a value that determines a purchasable variant. A technical specification used for filtering may require different handling from a hidden value used only by an ERP or PIM.
 
-### Properties and Variants Change Product Structure Meaning <a href="#properties-and-variants-change-product-structure-meaning" id="properties-and-variants-change-product-structure-meaning"></a>
+| Source value use                                       | Better Shopware interpretation                                              | Why it matters                                                                       |
+| ------------------------------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Customer selects the value before purchase             | Variant-related structure may be needed.                                    | Buying choices must remain selectable and tied to the correct SKU or stock behavior. |
+| Customer filters or compares products by the value     | Property/filter meaning may be needed.                                      | Discovery and category browsing depend on structured values.                         |
+| Staff or external systems use the value internally     | Custom field or integration reference may be more appropriate.              | Internal meaning should not be forced into customer-facing filters.                  |
+| The value is descriptive copy                          | Product description, specification content, or content block may be enough. | Over-structuring descriptive text can create unnecessary migration complexity.       |
+| The value drives pricing, availability, or fulfillment | Rule, configuration, custom field, or integration review may be needed.     | Commercial behavior may not be preserved by field migration alone.                   |
 
-Shopware product structure often depends on the relationship between product properties and variants.
+A strong Shopware data migration therefore separates product values by function. The same source “attribute” can become several different target meanings depending on how the merchant uses it.
 
-Properties can help describe products, support filtering, and form part of how product variations are expressed. Variants then represent selectable product differences under a product structure rather than always behaving like separate standalone records.
+### Categories, Content, and Shopping Experiences Are Connected <a href="#categories-content-and-shopping-experiences-are-connected" id="categories-content-and-shopping-experiences-are-connected"></a>
 
-This creates a common migration challenge: source platforms may represent variants, options, attributes, configurable products, or product families differently. The migrated Shopware result should not only preserve the values. It should preserve the buying logic those values support.
+Shopware category migration should not be reduced to moving a parent-child hierarchy. Categories can support navigation, product discovery, landing-page meaning, SEO value, storefront content, and merchandising. In Shopware, content and commerce can also interact through Shopping Experiences and other content structures, so category and CMS review should happen together when category pages carry more than a product list.
 
-A product family can look complete while still being wrong if the target structure weakens variant selection, filter behavior, product grouping, or how customers understand product choices.
+This is especially important for merchants whose source store used categories as SEO landing pages, campaign pages, buying guides, brand pages, or content-rich shopping paths. The target store may need to preserve both the structural category relationship and the content purpose behind the page.
 
-### Pricing and Rule-Driven Behavior Can Become More Explicit <a href="#pricing-and-rule-driven-behavior-can-become-more-explicit" id="pricing-and-rule-driven-behavior-can-become-more-explicit"></a>
+| Area                               | Data relationship to preserve                                          | Validation question                                                               |
+| ---------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Category hierarchy                 | Parent-child browsing structure and merchandising logic.               | Do customers still reach the right product groups through expected paths?         |
+| Category content                   | Intro text, media, landing-page blocks, and content-led merchandising. | Does the page still explain and sell the category, not just list products?        |
+| Shopping Experiences / CMS content | Reusable content areas, landing pages, and presentation context.       | Are content blocks connected to the right storefront purpose?                     |
+| SEO routes                         | Product, category, and content destinations with search intent.        | Do priority URLs resolve to pages that still satisfy the original intent?         |
+| Sales-channel context              | Channel-specific category or content expectations.                     | Are category and content experiences correct for the relevant storefront context? |
 
-Shopware can express commercial behavior through explicit rules and pricing structures.
+Content migration into Shopware should preserve the customer journey. If content only moves as isolated text or disconnected pages, the target store may lose the relationship between buying intent, discovery, and conversion.
 
-That changes migration meaning because price is not always just one stored product value. The business may need to consider advanced pricing, customer or cart conditions, promotion logic, shipping/payment availability, product visibility, category visibility, and other rule-dependent behavior.
+### Pricing, Promotions, and Rules Change Commercial Meaning <a href="#pricing-promotions-and-rules-change-commercial-meaning" id="pricing-promotions-and-rules-change-commercial-meaning"></a>
 
-When the source store used extensions, custom logic, customer groups, manual configuration, or implicit rules to create commercial behavior, that behavior needs a Shopware meaning. Otherwise, the product, price, and customer record may migrate while the commercial decision behind them becomes unclear.
+Shopware can express commercial behavior through structured rules, conditions, pricing, promotions, shipping, payment availability, visibility decisions, flows, and configuration. That means migration planning should distinguish between static values and conditional business logic.
 
-### Categories and Navigation Depend on Context <a href="#categories-and-navigation-depend-on-context" id="categories-and-navigation-depend-on-context"></a>
+A source store may have stored commercial behavior in discount tables, customer groups, custom code, extensions, app settings, spreadsheets, or ERP rules. Shopware may require those assumptions to be rebuilt, configured, mapped, or reviewed as custom behavior rather than simply imported.
 
-Category migration into Shopware is not only about moving category names and hierarchy.
+| Commercial area                   | Data-model question                                                           | Migration consequence                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Base product prices               | Are prices simple migrated values or part of broader price logic?             | Standard data transfer may be enough only when pricing is straightforward.        |
+| Advanced or conditional pricing   | Which customer, quantity, channel, cart, or product conditions matter?        | Rule/configuration planning may be required before launch.                        |
+| Promotions and discounts          | Are source promotions transferable records or behavior that must be rebuilt?  | Imported coupon data may not preserve full commercial logic.                      |
+| Shipping and payment availability | Which rules control eligibility and customer experience?                      | Checkout readiness requires scenario-based validation.                            |
+| Workflow automation               | Which outcomes were created by apps, plugins, custom code, or manual process? | Custom Service or target-side rebuild may be needed when behavior is unsupported. |
 
-Categories can affect navigation, storefront structure, landing-page meaning, product discovery, SEO relevance, and sales-channel context. If the source platform used categories loosely, duplicated categories across storefronts, or depended on theme or extension behavior for navigation, the Shopware category model may require clearer governance.
+Commercial behavior should be tested through representative scenarios. Checking only a product price or coupon record will not prove that Shopware reproduces the intended buying conditions.
 
-A successful category migration should preserve how customers browse and understand the store, not only whether the category records exist.
+### Customers and Orders Need Business Context <a href="#customers-and-orders-need-business-context" id="customers-and-orders-need-business-context"></a>
 
-### SEO and Route Meaning Can Shift <a href="#seo-and-route-meaning-can-shift" id="seo-and-route-meaning-can-shift"></a>
+Customer and order records should remain usable for account review, customer service, reporting, segmentation, support history, and operational continuity. Shopware migration should preserve not only customer and order counts, but also the meaning attached to those records.
 
-Shopware route behavior can be more structured than the source platform, especially when SEO settings, product/category routes, sales-channel context, and URL templates affect how pages are reached.
+Customer context can include account identity, addresses, group-like logic, segmentation assumptions, communication preferences, custom fields, and integration references. Order context can include line items, taxes, shipping, payment method, status, discounts, historical totals, fulfillment references, and customer-service interpretation.
 
-This means route continuity is not only a redirect-list issue. The migrated Shopware result should preserve customer intent across important product, category, landing-page, and content destinations.
+| Record area                 | Meaning to preserve                                             | Review focus                                                          |
+| --------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Customer identity           | Account and contact details remain recognizable.                | Customer service can identify and support the customer.               |
+| Addresses and contact data  | Billing, shipping, and communication context remains usable.    | Address and contact records are complete and associated correctly.    |
+| Historical orders           | Past purchases remain understandable.                           | Order lines, totals, taxes, shipping, payment, and status make sense. |
+| Segmentation or group logic | Customer-facing or operational classification remains usable.   | Important classifications are mapped, configured, or documented.      |
+| Integration identifiers     | ERP, CRM, fulfillment, or external references remain traceable. | Staff can reconcile records with outside systems where required.      |
 
-A path can technically resolve while still being wrong if it sends users to a less relevant destination, loses channel context, weakens page intent, or breaks the relationship between product discovery and SEO structure.
+Historical data does not need to behave exactly like new checkout data, but it must remain interpretable. A migrated order that exists but cannot be understood by support staff is not a successful operational outcome.
 
-### Media and Layout Context Affect Product Meaning <a href="#media-and-layout-context-affect-product-meaning" id="media-and-layout-context-affect-product-meaning"></a>
+### Translations and Localization Affect More Than Text <a href="#translations-and-localization-affect-more-than-text" id="translations-and-localization-affect-more-than-text"></a>
 
-Media migration can be more important than simple image transfer.
+Shopware’s data structure can include language and translation behavior that affects products, categories, properties, content, routes, and storefront presentation. Translation planning is especially important when the source store used store views, language folders, regional domains, multilingual content, or duplicated product records to represent language or market differences.
 
-Shopware product presentation may depend on image order, product galleries, media assignment, storefront layout, theme behavior, landing pages, shopping experiences, and extension-supported presentation logic.
+Localization is not only text replacement. It can affect discovery, SEO continuity, customer trust, pricing perception, shipping/payment expectations, and content relevance. When language and market meaning are unclear, migrated records may appear correct in one context but incomplete or misleading in another.
 
-If the source store used media and layout to explain product differences, buying choices, brand story, or category navigation, those relationships should be reviewed as part of the data model. A product with all images present can still feel incomplete if media no longer supports the intended buying journey.
+| Localization area              | Migration question                                           | Risk if ignored                                           |
+| ------------------------------ | ------------------------------------------------------------ | --------------------------------------------------------- |
+| Product names and descriptions | Which languages need complete product content?               | Storefronts show fallback, missing, or inconsistent copy. |
+| Properties and filters         | Are filter labels and values translated appropriately?       | Customers cannot compare or filter products clearly.      |
+| Categories and content         | Do localized browsing and content paths remain meaningful?   | Navigation works structurally but fails customer intent.  |
+| SEO URLs and metadata          | Which language or market paths matter for search continuity? | Priority organic destinations lose relevance.             |
+| Sales channels and domains     | Which storefront context owns each language or market?       | Records appear in the wrong customer-facing context.      |
 
-### Customers and Orders Need Context, Not Only History <a href="#customers-and-orders-need-context-not-only-history" id="customers-and-orders-need-context-not-only-history"></a>
+Multilingual migration samples should include products, categories, filters, content pages, and priority URLs, not only language strings.
 
-Customer and order migration into Shopware should preserve usable business context.
+### Extensions, Apps, Plugins, and Custom Fields Can Carry Critical Meaning <a href="#extensions-apps-plugins-and-custom-fields-can-carry-critical-meaning" id="extensions-apps-plugins-and-custom-fields-can-carry-critical-meaning"></a>
 
-Customer records may need to remain useful for login, account review, segmentation, communication, customer-group logic, and support reference. Order records may need to remain meaningful for service history, purchase interpretation, reporting, and customer-service review.
+Shopware’s extensibility is a strength, but migration planning should identify where important business meaning lives outside standard commerce records. Plugins, apps, custom fields, custom entities, storefront themes, API integrations, ERP/PIM/CRM connections, search extensions, checkout customizations, and merchandising logic can all shape how the store works.
 
-A migration can preserve customer and order counts while still weakening the business if customer context, order-line meaning, tax/payment/shipping interpretation, or historical reference becomes difficult to understand after launch.
+Some extension-related requirements may be handled through supported configuration, Add-ons for supported filtering or mapping, or target-side setup. Others require Custom Service because they involve unsupported extension data, custom fields, bespoke transformation, Custom Platform handling, outside-system identifiers, or custom migration logic adjustment.
 
-### Extensions, Themes, Custom Fields, and Integrations Can Carry Store Meaning <a href="#extensions-themes-custom-fields-and-integrations-can-carry-store-meaning" id="extensions-themes-custom-fields-and-integrations-can-carry-store-meaning"></a>
+| Dependency type                                      | Data-model implication                                           | Planning path                                                                        |
+| ---------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Custom fields used for display or operations         | Values may need mapping or custom handling.                      | Identify field purpose and target use before migration.                              |
+| Extension-owned catalog or checkout behavior         | Standard entities may not contain the full business logic.       | Classify whether behavior is target configuration, Add-ons scope, or Custom Service. |
+| ERP, PIM, OMS, CRM, or search integration references | External identifiers may be required for post-launch operations. | Preserve traceability where the outside system remains active.                       |
+| Theme or storefront customizations                   | Presentation meaning may not be part of core data.               | Decide what will be rebuilt, migrated, simplified, or replaced.                      |
+| Custom source structures                             | Records may require interpretation before they fit Shopware.     | Use Custom Service when source data cannot be mapped through supported behavior.     |
 
-Shopware can support structured native commerce logic, but many real stores still depend on extensions, themes, custom fields, integrations, and custom behavior.
+The safest migration scope is the one that separates transferable records from behavior and dependencies that must be rebuilt or specially handled.
 
-This is one of the most important Shopware data-model realities. Some source-store meaning may not belong cleanly to products, categories, customers, or orders. It may come from surrounding systems or custom logic that shaped the storefront experience.
+### What Shopware Data Must Prove After Migration <a href="#what-shopware-data-must-prove-after-migration" id="what-shopware-data-must-prove-after-migration"></a>
 
-Examples include:
+A Shopware data review should prove that the target store can operate with the migrated information. Record counts help confirm presence, but they cannot prove product meaning, storefront context, rule behavior, content continuity, or operational usability.
 
-* extension-supported filters or product displays
-* custom checkout or pricing logic
-* theme-owned product presentation
-* integration-owned inventory or fulfillment context
-* custom fields used by staff or external systems
-* special route, content, or merchandising behavior
+| Proof area                           | What should be demonstrated                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Catalog usability                    | Products, variants, properties, media, categories, and visibility support the intended buying journey.           |
+| Sales-channel readiness              | Products, categories, domains, languages, and storefront content appear in the correct contexts.                 |
+| Commercial logic                     | Pricing, promotions, shipping, payment, and rule-dependent behavior are configured or scoped correctly.          |
+| Content and SEO continuity           | Priority product, category, CMS, and landing-page destinations preserve intent.                                  |
+| Customer and order usability         | Staff can recognize, support, and interpret migrated customer and order records.                                 |
+| Extension and integration continuity | Required custom fields, identifiers, or external-system relationships remain usable or are clearly out of scope. |
 
-When those layers matter, the migration review should classify what must be preserved natively in Shopware, what can be simplified, what needs Add-on support, and what requires Custom Service.
-
-### Custom Platform Sources Need a Translation Lens <a href="#custom-platform-sources-need-a-translation-lens" id="custom-platform-sources-need-a-translation-lens"></a>
-
-When the Source Platform is a Custom Platform, Shopware data-model review usually needs a more deliberate translation lens.
-
-The source may carry storefront context, product structure, pricing behavior, route logic, extension-like behavior, or outside-system identifiers in a structure that does not align neatly with Shopware sales channels, Rule Builder logic, product visibility, properties, variants, or SEO settings.
-
-In that situation, the key question is not only which data exists. The key question is how source-side meaning should be interpreted so the Shopware target remains commercially coherent. Custom Platform migration into Shopware requires Custom Service because non-standard structure, custom fields, outside-system identifiers, and custom migration logic adjustment belong outside standard service capability.
-
-### What Migrated Data Must Prove After Translation <a href="#what-migrated-data-must-prove-after-translation" id="what-migrated-data-must-prove-after-translation"></a>
-
-Because Shopware changes the structure of commercial meaning, migrated data should prove more than record presence.
-
-The migrated result should show that:
-
-* products are assigned to the correct sales channels
-* visibility supports the intended storefront behavior
-* product properties and variants express real buying choices
-* pricing and rule-dependent behavior remain commercially understandable
-* categories support the intended browsing and discovery structure
-* SEO routes still represent the right destinations
-* media and presentation context still support the product journey
-* customer and order history remains usable
-* extension-shaped or custom-field meaning has a clear target interpretation
-
-This proof layer belongs more deeply to the validation article, but the data-model article needs to make the expectation clear: Shopware migration success depends on translated meaning, not only transferred records.
+The strongest Shopware data model review ends with operational proof. The target store should not merely contain old data; it should make that data meaningful in Shopware’s commerce structure.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopware data-model differences matter because the Target Platform can make storefront context, product visibility, rule-driven behavior, properties, variants, route logic, and extension-shaped meaning more explicit than they were in the source store.
+Shopware changes migration planning because familiar store records can take on new meaning inside a modular, API-first commerce environment. Sales channels, products, variants, properties, categories, content, translations, rules, custom fields, extensions, and external systems all influence whether migrated data remains usable.
 
-That structure can make the future store stronger, but only if the business understands how source data should be interpreted inside Shopware. A migration that preserves records without preserving their commercial meaning can create a store that looks complete while behaving incorrectly.
+A successful Shopware migration translates source data into target meaning. Products should support discovery and purchase. Categories and content should preserve customer intent. Customer and order records should remain operationally useful. Commercial behavior should be configured, validated, or scoped separately when it is not part of ordinary record transfer. That translation work is what separates a complete import from a store that is actually ready to operate on Shopware.
 
-Before treating a Shopware migration as structurally ready, review the sales-channel, product, rule, route, customer, order, media, and extension-dependent meanings that affect real selling. If those meanings are not clear in the source store, use Demo Migration results and Live Chat to identify whether the concern is normal mapping, Add-on-supported configuration, or a Custom Service requirement.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the biggest Shopware data-model difference to understand?**
 
-One of the biggest differences is that Shopware often expresses storefront meaning through sales channels, product visibility, rules, properties, variants, and SEO settings. A migrated record can exist while still behaving incorrectly if those layers are not interpreted in the right context.
+The biggest difference is that Shopware data meaning depends strongly on context. Products, categories, content, rules, translations, and visibility may need to be reviewed by sales channel, storefront purpose, and business behavior rather than only by record presence.
 
 **Why are sales channels important in a Shopware migration?**
 
-Sales channels define where products, categories, routes, and storefront behavior belong. If sales-channel assignment is wrong, products or content may appear in the wrong context or fail to appear where customers expect them.
+Sales channels can shape product visibility, domains, languages, currencies, storefront behavior, content context, and customer-facing routes. A product can exist in Shopware but still be wrong if it does not appear or behave correctly in the intended sales channel.
 
-**How do properties and variants affect Shopware product migration?**
+**How should product attributes from another platform be interpreted in Shopware?**
 
-Properties and variants influence how product choices, filtering, and product families are represented. If source options, attributes, or configurable product logic are translated poorly, the product may migrate but the buying journey can become confusing.
+They should be classified by use. Some values may become properties, some may support variants, some may belong in custom fields, some may remain descriptive content, and some may require custom handling because they drive pricing, fulfillment, or integration behavior.
 
-**Why does Rule Builder matter in Shopware data migration?**
+**Does Shopware content migration only involve CMS pages?**
 
-Rule Builder can influence commercial behavior such as pricing, promotions, payment availability, shipping availability, visibility, category access, and workflow logic. If source-side rules are unclear, the migrated Shopware store may not preserve the intended business behavior.
+No. Content migration may include Shopping Experiences, category content, landing pages, media, navigation meaning, SEO routes, and content blocks that support the buying journey. Content should be reviewed together with the commerce context it supports.
 
-**Does every extension or custom field require Custom Service?**
+**Do extensions or custom fields always require Custom Service?**
 
-No. Some simple values may fit within standard service capability or Add-on-supported configuration. Custom Service is needed when extension data, custom fields, outside-system identifiers, bespoke transformation, platform limitations, or custom migration logic adjustment must be handled beyond standard service capability.
-
-**Why is record count not enough to judge Shopware migration quality?**
-
-Record count only shows whether data exists. Shopware migration quality also depends on whether products are visible in the right context, rules behave correctly, routes preserve intent, customer and order history remains useful, and extension-shaped meaning still supports the business.
+No. Some supported fields or mapping needs may fit Standard Service, Managed Service, or Add-ons. Custom Service becomes relevant when unsupported extension data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment is required.

@@ -66,17 +66,19 @@ Visible pricing is not enough. BigCommerce validation should confirm that the ri
 
 ### Validate Customer, Account, and Order Context <a href="#validate-customer-account-and-order-context" id="validate-customer-account-and-order-context"></a>
 
-Customer and order validation should confirm that migrated records still support account continuity, customer-service workflows, and commercial history. A customer can exist in BigCommerce while account expectations, address behavior, pricing group assignment, or order-history usability still creates friction.
+Customer and order validation should confirm that migrated records still support account continuity, customer-service workflows, and commercial history. A customer can exist in BigCommerce while account expectations, address behavior, pricing group assignment, or order-history usability still creates friction. The review should therefore connect customer records to the business questions staff will answer after launch.
 
-Validation should review:
+Validation should include returning customers with order history, customers with multiple addresses or important account attributes, customers tied to pricing or reseller logic, orders with tax and shipping context, discounted orders, refunded or cancelled orders, and records that carry external references. The team should also check whether customer groups, price-list eligibility, loyalty references, CRM identifiers, or B2B expectations are migrated, configured, custom-handled, or intentionally excluded.
 
-* returning customers with order history;
-* customers with multiple addresses or important account attributes;
-* customers tied to pricing, loyalty, reseller, or B2B logic;
-* order records with tax, shipping, discount, payment, fulfillment, or support meaning;
-* customer-service scenarios that depend on migrated history.
+| Validation sample                                                       | What it should prove                                                                                      |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Returning customer with several orders                                  | Staff can recognize the buyer and review useful purchase history.                                         |
+| Customer tied to a group, reseller rule, or special pricing expectation | Pricing context is either migrated, configured in BigCommerce, or clearly separated from migration scope. |
+| Order with tax, shipping, discount, and payment context                 | Historical order review remains understandable for support and reporting.                                 |
+| Order with refund, cancellation, or fulfillment exception               | Exceptional history does not become unreadable after migration.                                           |
+| Customer or order with external IDs                                     | Integration, ERP, CRM, or accounting references are mapped, escalated, or excluded intentionally.         |
 
-The practical test is whether the customer team can support post-launch questions confidently. If order history exists but key context is unclear, the migration may still require explanation, additional mapping, or acceptance criteria before launch.
+The practical test is whether the customer team can support post-launch questions confidently. If order history exists but key context is unclear, the migration may still require explanation, additional mapping, Custom Service review, or stronger acceptance criteria before launch.
 
 ### Validate Content, URL, Redirect, and SEO Continuity <a href="#validate-content-url-redirect-and-seo-continuity" id="validate-content-url-redirect-and-seo-continuity"></a>
 
@@ -129,6 +131,24 @@ Additional Migration Options may become relevant when the customer continues mig
 If additional migration activity introduces new or changed products, customers, orders, Blog Posts, categories, price lists, redirects, channel assignments, custom fields, metafields, or app-dependent data, those areas should be reviewed again. Follow-up migration activity can reduce data freshness gaps, but it does not prove that the affected BigCommerce structures are launch-ready.
 
 Entity Points should also be interpreted correctly during later migration activity. Records already counted through the same service license do not consume Entity Points again simply because the customer performs another migration action. New eligible records may consume Entity Points when they are migrated for the first time.
+
+### Build a BigCommerce Validation Report <a href="#build-a-bigcommerce-validation-report" id="build-a-bigcommerce-validation-report"></a>
+
+A BigCommerce validation report should separate record presence from business usability. The review should not only say that products, categories, customers, orders, redirects, or custom fields were checked. It should state what the business expected, what BigCommerce shows, why the difference matters, and who owns the follow-up action.
+
+| Report field     | Purpose                                                                                                                                                                       |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sample or record | Identifies the product, variant, modifier, customer, order, category, price list, redirect, page, or integration record under review.                                         |
+| Expected result  | Describes the intended BigCommerce outcome in business terms.                                                                                                                 |
+| Observed result  | Records what the reviewer actually sees in BigCommerce.                                                                                                                       |
+| Severity         | Separates launch blockers from cleanup items, accepted limitations, and target-side setup tasks.                                                                              |
+| Handling path    | Classifies the finding as migration correction, Add-on adjustment, Custom Service review, BigCommerce setup, app or integration work, manual cleanup, or accepted limitation. |
+| Owner            | Assigns responsibility to the merchant, Next-Cart, a BigCommerce setup owner, an app partner, or an external technical team.                                                  |
+| Status           | Confirms whether the item is open, corrected, deferred, accepted, or ready for launch.                                                                                        |
+
+This report discipline is especially important for BigCommerce because a finding may belong to several different workstreams. A missing customer group assignment may be a migration issue. A pricing rule that exists but is not applied to the intended buyer may be a target-side configuration issue. A custom field that appears but no longer drives an app workflow may require Custom Service review or integration work. A redirect that resolves to a low-value destination may be an SEO acceptance decision rather than a data-transfer defect.
+
+The report should make those distinctions visible. That prevents launch review from becoming a vague list of concerns and helps the team decide whether the store is blocked, ready with minor cleanup, or ready only after a specific follow-up action.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 

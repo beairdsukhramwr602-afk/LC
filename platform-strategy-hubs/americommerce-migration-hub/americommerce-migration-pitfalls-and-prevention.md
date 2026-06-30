@@ -1,302 +1,301 @@
 # AmeriCommerce Migration Pitfalls and Prevention
 
-AmeriCommerce migration problems usually occur when the project treats a structured commerce environment as if it were only about product, customer, and order transfers. The platform can support B2B buyer relationships, multi-store and microstore contexts, product groups, kits, subscriptions, pricing rules, rewards, budgets, fulfillment logic, vendor workflows, integrations, API-driven activity, and customer-specific storefront behavior. Those capabilities are useful only when the business meaning behind them is identified before migration and tested after migration.
+AmeriCommerce migration pitfalls usually appear when a project treats complex commerce relationships as ordinary storefront data. A store may contain recognizable products, customers, and orders after migration, while the business logic behind buyer access, account pricing, storefront context, and operational history is incomplete.
 
-A pitfall is different from a constraint. A constraint is a known risk area that must be planned around. A pitfall is a recurring failure pattern: the migration appears to be moving data, but the result no longer supports how the business sells, prices, presents products, manages buyers, or fulfills orders. AmeriCommerce migrations are most exposed to this problem when source data contains hidden rules, informal account exceptions, disconnected spreadsheets, custom fields, external identifiers, or integration-owned behavior that ordinary record review does not explain.
+Pitfall prevention depends on identifying where AmeriCommerce data carries meaning beyond the record itself. The safest migration plan separates what should migrate directly, what needs configuration, what requires Add-ons or Custom Service review, and what should be rebuilt or retired.
 
-The prevention goal is not to make every historical behavior survive unchanged. The goal is to decide which behaviors should be preserved, which should be reconfigured in AmeriCommerce, which should be simplified, and which require Custom Service review before the migration path is treated as launch-ready.
-
-### Pitfall Summary <a href="#pitfall-summary" id="pitfall-summary"></a>
-
-The most common AmeriCommerce migration pitfalls cluster around one pattern: business rules are assumed to be obvious because staff understand them, but they are not documented clearly enough for migration, configuration, or validation.
-
-| Pitfall area                      | What usually causes it                                                                 | What prevention should prove                                                               |
-| --------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Buyer relationships               | Customer groups, portals, account rules, or pricing exceptions are not documented      | Each important buyer type can see, price, order, and review history correctly              |
-| Storefront and microstore context | Store boundaries are mixed with branding, catalog, access, or route assumptions        | Each selling context has clear ownership, content, catalog visibility, and buyer access    |
-| Product structure                 | Groups, kits, subscriptions, options, and technical details are not classified         | Product relationships support real purchasing decisions after migration                    |
-| Pricing and rule behavior         | Discounts, budgets, rewards, or customer-specific pricing are treated as simple values | Active rules are documented, tested, and assigned to the correct buyers or products        |
-| Orders and operations             | Order history moves without invoice, fulfillment, vendor, payment, or status context   | Representative orders still explain what happened and what the business must do next       |
-| Integrations and custom data      | External systems or custom source structures own important behavior                    | Ownership is documented and Custom Service is used where standard capability is not enough |
-
-### Pitfall 1: Treating B2B Customers as Ordinary Customer Records <a href="#pitfall-1-treating-b2b-customers-as-ordinary-customer-records" id="pitfall-1-treating-b2b-customers-as-ordinary-customer-records"></a>
+### Pitfall 1: Treating Buyer Records as Simple Customer Data <a href="#pitfall-1-treating-buyer-records-as-simple-customer-data" id="pitfall-1-treating-buyer-records-as-simple-customer-data"></a>
 
 **What Goes Wrong**
 
-Customer records may appear complete after migration, while the buyer relationships behind them are incomplete. Names, emails, addresses, and order histories can move, but the merchant may lose the commercial meaning that made those customers different: wholesale status, dealer access, customer type, corporate account context, tax exemption, payment expectations, budget control, approval habits, or restricted catalog visibility.
+Buyer records can be migrated as names, emails, addresses, and order history while losing the commercial context that made them useful. For AmeriCommerce merchants, customers may represent retail buyers, wholesale accounts, dealers, distributors, corporate accounts, tax-exempt buyers, portal users, or customer-specific purchasing relationships.
 
-This problem is especially damaging in AmeriCommerce because the platform is often chosen for structured buyer relationships. If customer segmentation is treated as background detail, the migrated store may look correct in a customer list while failing to deliver the buyer experience that matters most.
+If these records are validated only as contacts, the migrated store may not preserve product visibility, price treatment, payment expectations, approval context, or account history.
 
 **Early Warning Signs**
 
-The merchant describes buyers as “special customers,” “dealers,” “wholesale accounts,” or “approved customers” without a clear source field, group, portal, or pricing rule that explains the distinction. Staff may know which customers receive special treatment, but the source data may not show it consistently. Some exceptions may live in spreadsheets, emails, ERP notes, CRM records, or staff memory.
+Staff describe customers by relationship type, but the source data does not clearly identify the fields that control those relationships. Different buyers receive different prices, catalog access, payment terms, or tax treatment, yet the migration scope only mentions Customers.
 
-Another warning sign is when Demo Migration review checks only whether customer records appear, not whether the right buyers can log in, see the right products, receive the correct pricing, and place orders under the expected account conditions.
+Another warning sign is when customer groups, account notes, special pricing, and external customer IDs are treated as optional cleanup rather than migration-critical context.
 
 **Prevention**
 
-Before migration, classify the buyer relationships that matter. At minimum, the merchant should identify customer groups, portal users, account types, tax-exempt buyers, pricing tiers, payment expectations, restricted catalog access, approval requirements, and repeat-order patterns. Where the source data does not contain this information consistently, the missing logic should be documented before migration execution.
+Create a buyer-context inventory before migration. Identify customer groups, account types, special pricing relationships, tax treatment, portal access, payment terms, external identifiers, and order-history expectations.
 
-Demo Migration should include representative buyer records, not only ordinary customers. The sample should include at least one buyer from each important group and enough order history to prove that the customer context still makes sense after migration.
+| Buyer context             | Prevention action                                                      | Validation sample                                                        |
+| ------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Wholesale or dealer buyer | Confirm group assignment, catalog visibility, and pricing expectation. | One account with restricted products and quantity or contract pricing.   |
+| Tax-exempt buyer          | Identify tax context and supporting record fields.                     | One buyer whose historical orders show exemption behavior.               |
+| Corporate or portal buyer | Map account/storefront relationship and buyer access.                  | One buyer tied to a portal, customer store, or account-specific context. |
+| External-system customer  | Preserve required IDs and ownership notes.                             | One record used by ERP, CRM, accounting, or fulfillment systems.         |
 
 **Recommendation Example**
 
-For a distributor migrating into AmeriCommerce, select sample buyers such as a retail customer, a wholesale account, a dealer, a tax-exempt customer, and a corporate buyer with account-specific pricing. Review not only profile details, but also catalog access, pricing display, order history, payment expectations, and any budget or allowance behavior that should remain meaningful.
+For a merchant with retail, wholesale, and dealer customers, validate one buyer from each relationship type. Confirm the migrated account, product visibility, pricing context, address data, order history, and external identifiers before approving the sample.
 
 **Pass Condition**
 
-The pitfall is prevented when each important buyer type can be identified, configured or reviewed appropriately, and validated through realistic buying scenarios. Customer migration should prove buyer meaning, not only customer record presence.
+The pitfall is prevented when customers are validated as buyers with business context. The merchant should know which buyer relationships migrated directly, which require configuration, and which need separate operational handling.
 
-### Pitfall 2: Blurring Multi-Store, Microstore, and Portal Boundaries <a href="#pitfall-2-blurring-multi-store-microstore-and-portal-boundaries" id="pitfall-2-blurring-multi-store-microstore-and-portal-boundaries"></a>
+### Pitfall 2: Flattening Storefront, Microstore, or Portal Structure <a href="#pitfall-2-flattening-storefront-microstore-or-portal-structure" id="pitfall-2-flattening-storefront-microstore-or-portal-structure"></a>
 
 **What Goes Wrong**
 
-AmeriCommerce can be used for multiple storefronts, microstores, portals, and branded selling contexts. Migration problems appear when those contexts are not separated clearly before data moves. Products may appear in the wrong storefront, customers may gain access to the wrong catalog, content may be assigned to the wrong audience, or routes from different contexts may be treated as interchangeable.
+AmeriCommerce migrations can lose meaning when multiple storefronts, customer-specific stores, branded portals, or regional selling contexts are treated as one generic storefront. The visible store may still function, but buyer-specific paths, catalog boundaries, account experiences, and content context can become unclear.
 
-The result can be confusing even when the records themselves are present. A multi-store or microstore migration fails when the destination cannot show which audience each storefront serves and which data belongs to each selling context.
+This problem is especially damaging when secondary storefronts support wholesale, corporate, dealer, or customer-specific revenue.
 
 **Early Warning Signs**
 
-The source store has several brands, customer-specific sites, regional catalogs, dealer portals, departmental buying areas, or access-controlled storefronts, but the migration plan describes them as one store. Another warning sign is when storefront differences are explained through URLs, theme names, or staff habit rather than clear catalog, customer, content, and order ownership.
+The source environment contains several storefronts, microsites, domains, customer portals, brand-specific catalogs, or private buying areas, but the migration plan does not explain which contexts should continue. Staff may also disagree about whether a storefront should remain separate, merge into the main store, redirect, or retire.
 
-Risk also increases when the merchant wants to simplify the storefront structure during migration but has not decided which contexts should be merged, retired, redirected, or preserved.
+Risk increases when teams validate only the main storefront.
 
 **Prevention**
 
-Create a storefront and microstore map before migration. The map should identify each selling context, its audience, catalog visibility, customer access rules, high-value content, important URLs, order ownership, reporting expectations, and differences that must still exist after launch. If some source contexts should not continue, the retirement decision should be documented rather than discovered during validation.
+Document every selling context and decide its future role before migration. Each context should be classified as active, consolidated, redirected, rebuilt, or retired.
 
-For Demo Migration, include samples from more than one storefront or microstore if those contexts are launch-critical. Do not validate only the main storefront and assume the same outcome applies everywhere.
+| Storefront condition           | Risk                                                                           | Prevention decision                                                      |
+| ------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Active customer-specific store | Buyer may lose access or see the wrong catalog.                                | Preserve the relationship between buyer, catalog, content, and URL path. |
+| Brand or regional store        | Products and content may merge without a clear business reason.                | Define which catalog and pages remain separate.                          |
+| Wholesale or dealer portal     | Restricted pricing or product access may become visible to the wrong audience. | Validate portal access with real buyer samples.                          |
+| Retired storefront             | Old pages may be recreated unnecessarily.                                      | Decide redirect, archive, or exclusion path before Full Migration.       |
 
 **Recommendation Example**
 
-For a merchant with separate dealer, retail, and regional storefronts, prepare a table showing which product categories, buyer groups, CMS Pages, pricing rules, and order samples belong to each context. Use Demo Migration to verify that each context still behaves as a distinct selling environment where that distinction matters.
+For a business with a primary store and two dealer portals, validate one dealer buyer, one restricted product, one portal landing page, one order, and one portal-specific URL from each portal. This proves the selling context rather than only the page design.
 
 **Pass Condition**
 
-The pitfall is prevented when every important storefront, microstore, or portal has a clear owner, audience, catalog scope, content scope, buyer-access expectation, and validation sample. The migrated result should prove context separation, not merely storefront existence.
+The pitfall is prevented when every active selling context has a defined purpose, audience, catalog, content path, and validation sample. No storefront should continue only because it existed in the source environment.
 
-### Pitfall 3: Moving Product Complexity Without Product Meaning <a href="#pitfall-3-moving-product-complexity-without-product-meaning" id="pitfall-3-moving-product-complexity-without-product-meaning"></a>
+### Pitfall 3: Preserving Products Without Preserving Commercial Meaning <a href="#pitfall-3-preserving-products-without-preserving-commercial-meaning" id="pitfall-3-preserving-products-without-preserving-commercial-meaning"></a>
 
 **What Goes Wrong**
 
-A product-heavy AmeriCommerce migration can fail when complex catalog data is moved without deciding what the complexity means. Product groups, kits, configurable items, subscription products, replacement parts, technical specifications, and buyer-specific product availability are not automatically useful because they exist. They are useful only when they help customers choose, reorder, compare, subscribe, or purchase correctly.
+Product records can migrate cleanly while losing the structure customers need to buy. Product options, kits, grouped items, technical attributes, buyer-specific availability, category relationships, pricing behavior, or integration-owned identifiers can become incomplete if products are treated as flat records.
 
-If product structure is inconsistent in the Source Platform, migration may preserve clutter rather than commercial logic. The destination can end up with products that exist but are difficult to navigate, hard to buy, or disconnected from the buying experience AmeriCommerce is expected to support.
+The migrated catalog may look complete to administrators but feel confusing to buyers.
 
 **Early Warning Signs**
 
-The source catalog contains duplicated SKUs, mixed option styles, unclear parent-child relationships, outdated kits, inconsistent specifications, internal-only notes, subscription-like products handled manually, or categories used as temporary workarounds. Staff may describe the catalog as “complex” but struggle to explain which structures affect real buying decisions.
+Products have option-dependent pricing, custom fields, technical specifications, replacement relationships, kits, bundles, subscriptions, customer-specific availability, or external IDs. Staff cannot explain which fields affect buying behavior and which fields are only descriptive.
 
-Another warning sign is when product validation focuses only on product count, image presence, and price fields, without reviewing product relationships, subscription context, technical data, or buyer-specific availability.
+Another warning sign is when catalog validation checks only names, SKUs, images, and prices.
 
 **Prevention**
 
-Classify the catalog before migration. Separate sellable product structure from internal reference data, historical clutter, source-side workaround data, and custom-field context. Decide which product groups, kits, subscriptions, specifications, and option structures should be preserved as buying logic and which should be cleaned, simplified, or reviewed through Custom Service.
+Classify products by behavior before migration. Ordinary products, option-heavy products, kits, grouped products, restricted products, and integration-dependent products should be sampled separately.
 
-Demo Migration should include product samples that reveal complexity. A strong sample includes ordinary products, grouped products, kits, configurable products, subscription products, technical products, restricted products, and products with important content or media.
+| Product type                  | What can fail                                                                | Prevention focus                                                            |
+| ----------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Option-heavy product          | Options display but do not affect price, SKU, or required choices correctly. | Validate product selection and resulting order detail.                      |
+| Kit or grouped product        | Component meaning becomes unclear.                                           | Decide whether to migrate, configure, rebuild, or document as an exception. |
+| Restricted product            | Wrong buyers can see or purchase the item.                                   | Test buyer-specific visibility and catalog rules.                           |
+| Integration-dependent product | External workflows cannot identify the migrated product.                     | Preserve SKU, vendor, ERP, marketplace, or custom field references.         |
 
 **Recommendation Example**
 
-For a merchant selling technical replacement parts, select products that include compatibility details, grouped purchasing options, kits, replacement relationships, and customer-specific availability. Review whether the migrated product pages help the buyer choose correctly rather than simply checking that the SKU migrated.
+For a catalog with technical products and kits, test one ordinary product, one configurable product, one kit, one restricted product, and one product tied to an external system. Validate the storefront display, buyer eligibility, order output, and back-office meaning.
 
 **Pass Condition**
 
-The pitfall is prevented when migrated product structure supports the intended buying decision. A product should not only exist in AmeriCommerce; it should carry the relationships, content, and purchase context needed for the customer to understand and buy it correctly.
+The pitfall is prevented when product validation proves commercial usability, not only product presence. Customers should be able to find, understand, configure, and purchase the approved product sample correctly.
 
-### Pitfall 4: Assuming Pricing Rules, Discounts, Rewards, and Budgets Are Simple Fields <a href="#pitfall-4-assuming-pricing-rules-discounts-rewards-and-budgets-are-simple-fields" id="pitfall-4-assuming-pricing-rules-discounts-rewards-and-budgets-are-simple-fields"></a>
+### Pitfall 4: Migrating Pricing Rules Without Rule Ownership <a href="#pitfall-4-migrating-pricing-rules-without-rule-ownership" id="pitfall-4-migrating-pricing-rules-without-rule-ownership"></a>
 
 **What Goes Wrong**
 
-Pricing-related behavior can be mistaken for ordinary data. A price, discount, reward, budget, quantity break, or customer-specific rule may look like a field, but it often functions as business logic. If that logic is not defined, migrated data can produce incorrect pricing, missing discounts, unexpected buyer eligibility, or confusion over which historical rules should still apply.
+Pricing data may migrate while pricing logic remains ambiguous. AmeriCommerce projects can involve customer-specific pricing, wholesale rates, quantity pricing, discount rules, coupons, tax handling, manual adjustments, or pricing supplied by external systems.
 
-This pitfall is common when AmeriCommerce is chosen for relationship-based selling. The platform may support deeper rule-driven commerce, but migration cannot safely recreate rules that the merchant has not explained.
+If no one defines which system owns price behavior, the migrated store may show values that look plausible but do not match the approved selling model.
 
 **Early Warning Signs**
 
-Different customers see different prices, but the source does not show why. Discounts have overlapping conditions. Rewards or budgets apply to some buyers but not others. Quantity breaks exist inconsistently across product groups. Staff cannot tell whether a rule is still active, obsolete, seasonal, contractual, or manually applied.
+Different buyers receive different prices, but the rule source is unclear. Discounts overlap, quantity pricing varies by product or group, or staff cannot say whether pricing comes from the storefront, ERP, spreadsheet, manual process, or customer agreement.
 
-Risk also increases when the merchant says, “Just move all pricing rules,” without identifying active rules, affected buyers, rule priority, expiration decisions, or validation samples.
+Risk increases when the migration request says to move all discounts and pricing rules without identifying active, obsolete, or externally owned behavior.
 
 **Prevention**
 
-Create a rule inventory before migration. The inventory should list active pricing rules, customer-specific prices, quantity breaks, discounts, rewards, budgets, tax treatment, payment expectations, affected products, affected customer groups, and whether each rule should continue, change, or retire.
+Create a pricing ownership map. Identify each pricing behavior, its source system, affected buyers, affected products, rule priority, expiration decision, and validation sample.
 
-Standard Add-ons such as Advanced Data Mapping or Advanced Data Configure may help when the requirement fits available settings and supported behavior. If rules require modified logic, custom transformation, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment, the requirement belongs in Custom Service.
+| Pricing behavior        | Ownership question                                                   | Validation sample                                              |
+| ----------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Wholesale pricing       | Does the Target Platform or an external system own the buyer price?  | One wholesale buyer buying an eligible product.                |
+| Quantity pricing        | Which products and customer groups receive breaks?                   | One product with multiple quantity levels.                     |
+| Customer-specific price | Is the price contractual, manual, imported, or calculated elsewhere? | One customer/product combination with a known expected result. |
+| Discounts or coupons    | Which rules remain active after migration?                           | One order sample that proves the intended discount outcome.    |
 
 **Recommendation Example**
 
-For a merchant with wholesale and contract pricing, choose sample buyers and products that trigger different pricing outcomes. Validate a regular buyer, a wholesale buyer, a contract customer, a budget-controlled buyer, and a discounted product category. Confirm that the outcome matches the intended rule, not merely the source price value.
+For a merchant with contract pricing and discounts, validate buyer/product combinations rather than isolated prices. Confirm one retail price, one wholesale price, one customer-specific price, one quantity break, and one discounted order.
 
 **Pass Condition**
 
-The pitfall is prevented when the merchant can explain active pricing and rule behavior, identify which rules should continue, and validate representative buyer/product combinations after Demo Migration. The migrated result should prove pricing logic, not only pricing data.
+The pitfall is prevented when pricing behavior has a clear owner and sample evidence. Migrated pricing should support the approved future model, not blindly preserve every legacy rule.
 
-### Pitfall 5: Preserving Subscription Products Without Subscription Context <a href="#pitfall-5-preserving-subscription-products-without-subscription-context" id="pitfall-5-preserving-subscription-products-without-subscription-context"></a>
+### Pitfall 5: Migrating Orders Without Operational Evidence <a href="#pitfall-5-migrating-orders-without-operational-evidence" id="pitfall-5-migrating-orders-without-operational-evidence"></a>
 
 **What Goes Wrong**
 
-Subscription products can be mishandled when the migration treats them as ordinary products. Product names, prices, and customer records may move, but recurring frequency, product grouping, billing expectations, renewal meaning, customer eligibility, cancellation context, or fulfillment timing may not be preserved in the way the merchant expects.
+Order history can move without preserving the evidence staff need after launch. A migrated order may show customer name, products, and total while losing invoice meaning, payment context, fulfillment notes, shipping references, tax treatment, vendor identifiers, status history, or external IDs.
 
-This is a high-risk area because subscription behavior often touches product setup, customer relationships, payment expectations, order history, and operational workflow at the same time.
+For B2B, wholesale, fulfillment-heavy, or integration-heavy merchants, order history often functions as operational evidence.
 
 **Early Warning Signs**
 
-The source store has recurring products, repeat-order programs, membership products, replenishment items, subscription kits, or manually managed renewal workflows, but the merchant has not clarified what should happen after migration. Another warning sign is when subscription history is expected to behave like future subscription automation without confirming platform configuration and supported behavior.
+Staff use past orders to answer customer service questions, support reorders, reconcile invoices, coordinate vendors, confirm taxes, or review shipment history. Source orders include custom statuses, staff notes, special payment references, external IDs, or fulfillment details that are not part of a simple order record.
 
-Risk is especially high when subscription behavior is partly controlled by an app, custom module, external billing system, CRM, ERP, or manual staff process.
+The risk is high when Demo Migration review checks only order totals.
 
 **Prevention**
 
-Separate subscription product data from subscription operating logic. Identify which products are subscription-based, what frequency or renewal behavior matters, how customers enrolled, what history should be retained, and what system controls billing or fulfillment. If the source behavior depends on custom logic or an external billing system, it should be reviewed before migration execution.
+Define what order history must prove. Choose samples that include ordinary orders and operationally complex orders.
 
-Demo Migration should include at least one subscription product, one customer with subscription-related history, and one order that shows how subscription context is expected to appear after migration.
+| Order sample                       | Evidence to check                                                      | Prevention value                                          |
+| ---------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| Completed retail order             | Customer, products, totals, tax, payment, and shipment.                | Confirms baseline order readability.                      |
+| Wholesale or account order         | Buyer context, pricing, payment terms, invoice reference, and history. | Confirms account-service usefulness.                      |
+| Discounted order                   | Coupon, manual adjustment, quantity price, or customer-specific rule.  | Confirms revenue context remains understandable.          |
+| Vendor or fulfillment-linked order | Vendor, shipment, tracking, status, and external identifiers.          | Protects reconciliation and fulfillment review.           |
+| Exception order                    | Cancelled, refunded, partially fulfilled, or manually edited state.    | Reveals whether non-standard history remains explainable. |
 
 **Recommendation Example**
 
-For a replenishment business, review one ordinary product, one subscription product, one customer with recurring purchase history, and one order tied to recurring fulfillment. Confirm whether AmeriCommerce should preserve historical context only, support future subscription setup, or require additional configuration or Custom Service review.
+For a merchant that uses past orders for account service, validate orders from ordinary customers, wholesale accounts, discounted transactions, exceptions, and external-system workflows. Confirm staff can answer why the order happened and what it means.
 
 **Pass Condition**
 
-The pitfall is prevented when subscription products are not validated as ordinary products. The merchant should be able to distinguish migrated product data, historical subscription context, future subscription behavior, and any external billing or fulfillment responsibility.
+The pitfall is prevented when migrated order history supports real staff review. A reviewer should be able to understand buyer, product, price, tax, payment, fulfillment, and external reference context without relying entirely on the old platform.
 
-### Pitfall 6: Migrating Orders Without Operational Context <a href="#pitfall-6-migrating-orders-without-operational-context" id="pitfall-6-migrating-orders-without-operational-context"></a>
+### Pitfall 6: Treating Content and SEO as a Redirect-Only Task <a href="#pitfall-6-treating-content-and-seo-as-a-redirect-only-task" id="pitfall-6-treating-content-and-seo-as-a-redirect-only-task"></a>
 
 **What Goes Wrong**
 
-Order history can migrate but still fail operational review. AmeriCommerce merchants may need order data to explain invoices, payment status, fulfillment steps, shipping decisions, vendor involvement, tax treatment, budgets, customer approvals, or integration activity. If order validation checks only order totals and customer names, the result may miss the operational details staff need after launch.
+Content and SEO risk can be underestimated when migration planning focuses only on redirect lists. AmeriCommerce projects may include product pages, category pages, landing pages, CMS content, blog content, brand pages, portal pages, and customer-service pages that support buying confidence.
 
-This pitfall is especially important for B2B, multi-vendor, fulfillment-heavy, or integration-heavy merchants because orders often serve as evidence of the business process, not just transaction history.
+Redirects are important, but they do not replace page quality, internal linking, content context, or buyer-specific route decisions.
 
 **Early Warning Signs**
 
-The merchant relies on past orders to answer customer service questions, repeat B2B purchases, verify invoices, coordinate vendors, reconcile payments, review fulfillment, or support account managers. Source orders include custom statuses, staff notes, external identifiers, vendor references, invoice numbers, shipping instructions, or payment context that may not be standard order fields.
+The source store has indexed pages, high-traffic categories, B2B landing pages, dealer pages, customer-service pages, or old AmeriCommerce URLs, but no one has classified which pages should migrate, redirect, merge, rewrite, or retire.
 
-Risk increases when order review after Demo Migration checks only that the expected number of orders appears.
+Another warning sign is when content review happens after theme or navigation work is already considered finished.
 
 **Prevention**
 
-Define what order history must prove after migration. The merchant should identify the order fields, statuses, invoice references, payment details, fulfillment notes, vendor information, shipping context, customer account context, and external identifiers that matter operationally. Some historical data may be preserved as reference information rather than recreated as active workflow behavior.
+Create a content and URL inventory. Classify pages by business value and decide whether each page should migrate as content, redirect to a replacement, merge into another page, be rebuilt manually, or be excluded.
 
-Choose validation samples that include ordinary orders and operationally complex orders: B2B orders, discounted orders, tax-exempt orders, vendor-linked orders, subscription-related orders, fulfilled and partially fulfilled orders, cancelled orders, and orders with important internal or external identifiers.
+| Page type               | Risk                                                         | Prevention action                                                     |
+| ----------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Product page            | Search traffic may land on weak or incorrect product detail. | Validate product URL, content, image quality, and redirect behavior.  |
+| Category page           | Discovery path may weaken even when products migrated.       | Validate hierarchy, product listing, page title, and redirect target. |
+| Landing page            | Conversion context may disappear.                            | Preserve or rebuild content that supports buyer decisions.            |
+| Portal or customer page | Restricted content may be exposed or lost.                   | Confirm access boundaries and route handling.                         |
+| Legacy page             | Old links may produce errors or irrelevant destinations.     | Decide redirect, retirement, or manual content rebuild.               |
 
 **Recommendation Example**
 
-For a merchant with vendor-managed fulfillment, validate an order that includes vendor context, shipping method, payment status, invoice reference, product detail, customer group, and any external system identifier needed for staff to reconcile or service the order after launch.
+For a merchant with high-value category and dealer pages, validate URLs from analytics, search results, customer emails, internal navigation, and account-specific entry points. Check the landing experience, not only whether a redirect exists.
 
 **Pass Condition**
 
-The pitfall is prevented when order history supports real business review. Staff should be able to understand what happened, who bought, what was charged, how it was fulfilled, and which external or internal reference matters after migration.
+The pitfall is prevented when important pages have assigned outcomes and validation evidence. The migrated store should preserve discoverability and buyer confidence for commercially meaningful routes.
 
-### Pitfall 7: Ignoring Integration Ownership <a href="#pitfall-7-ignoring-integration-ownership" id="pitfall-7-ignoring-integration-ownership"></a>
+### Pitfall 7: Ignoring Integration and Custom Data Boundaries <a href="#pitfall-7-ignoring-integration-and-custom-data-boundaries" id="pitfall-7-ignoring-integration-and-custom-data-boundaries"></a>
 
 **What Goes Wrong**
 
-AmeriCommerce may be part of a larger operational system that includes ERP, accounting, fulfillment, shipping, tax, CRM, marketplace, analytics, API, or headless commerce layers. A migration can appear successful inside the Target Platform while breaking downstream workflows because no one clarified which system owns each business outcome.
+AmeriCommerce may sit inside a wider operational stack. ERP, accounting, fulfillment, tax, shipping, CRM, marketplace, analytics, PIM, or custom API systems may own data that appears in the storefront. Migration can fail if these dependencies are assumed to be native platform data.
 
-This pitfall usually appears after launch planning begins. The data may be present, but connected workflows do not behave as expected because the source of truth has changed or was never identified.
+The result may look complete in the store while connected workflows fail after launch.
 
 **Early Warning Signs**
 
-Product data comes from one system, inventory from another, pricing from another, and fulfillment status from another. Staff cannot clearly explain whether AmeriCommerce, the Source Platform, an ERP, an accounting system, a CRM, or an API layer controls customer records, inventory, order status, invoices, tax, shipping, or reporting.
+Different systems control products, inventory, pricing, customers, invoices, fulfillment, or reporting. Staff cannot clearly identify the system of record for each field. Custom fields exist without clear business owners, or external identifiers are expected to reconnect automatically.
 
-Another warning sign is when the merchant expects migration to reconnect integrations automatically without confirming credentials, field ownership, sync direction, webhook/API behavior, or launch timing.
+Risk increases when integration reconnection is treated as an afterthought.
 
 **Prevention**
 
-Create an integration ownership map before migration. For each important business outcome, identify the system of record, downstream systems, sync direction, timing, field ownership, required identifiers, and whether the migration service is expected to migrate data, preserve reference values, or support reconnection planning.
+Create an ownership map for integration and custom data. Identify the field, business meaning, source system, target destination, sync direction, owner, and validation method.
 
-If integration-owned data, external identifiers, custom fields, or API-driven behavior require transformation beyond standard migration capability, those requirements should be reviewed through Custom Service.
+| Dependency          | Boundary question                                              | Migration impact                                                   |
+| ------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------ |
+| ERP product ID      | Does AmeriCommerce own the ID or only store it for reference?  | Determines whether it must be preserved as a required identifier.  |
+| Inventory feed      | Which system owns stock availability?                          | Prevents migrated inventory from conflicting with future sync.     |
+| Customer account ID | Which system owns buyer identity?                              | Protects CRM, account management, and order-history relationships. |
+| Invoice or order ID | Which system owns financial evidence?                          | Supports reconciliation and customer service.                      |
+| Custom field        | Is the field active, archival, integration-owned, or obsolete? | Determines whether it should migrate, transform, or retire.        |
 
 **Recommendation Example**
 
-For an integration-heavy merchant, document ownership for products, customers, price lists, inventory, order status, invoice references, shipment tracking, tax, payment status, and reporting. Use Demo Migration to check whether the migrated records retain the identifiers and context needed for reconnection, even if the live integration is validated separately.
+For an integration-heavy merchant, map product, customer, order, inventory, invoice, tax, shipping, and reporting ownership before Full Migration. Validate whether migrated records retain the identifiers required for reconnection.
 
 **Pass Condition**
 
-The pitfall is prevented when ownership is clear before launch. The migrated store should not be expected to control data that belongs to another system, and external systems should not depend on values that were never prepared, mapped, or preserved.
+The pitfall is prevented when integration-owned data is not mistaken for ordinary platform data. Every required external identifier should have an owner, destination, and validation sample.
 
-### Pitfall 8: Expecting Custom Source Behavior to Transfer Automatically <a href="#pitfall-8-expecting-custom-source-behavior-to-transfer-automatically" id="pitfall-8-expecting-custom-source-behavior-to-transfer-automatically"></a>
+### Pitfall 8: Approving Launch With Weak Validation Samples <a href="#pitfall-8-approving-launch-with-weak-validation-samples" id="pitfall-8-approving-launch-with-weak-validation-samples"></a>
 
 **What Goes Wrong**
 
-Custom source behavior often contains hidden business meaning. A merchant may depend on custom checkout logic, proprietary pricing scripts, modified customer fields, special approval flows, custom subscription handling, app-owned data, non-standard database tables, or external identifiers. AmeriCommerce may still be the right Target Platform, but standard migration capability should not be expected to recreate custom behavior without review.
+A migration can pass surface review when validation samples are too clean. If samples include only ordinary products, ordinary customers, and ordinary orders, the project may miss the records that reveal actual risk: restricted buyers, customer-specific pricing, microstore context, complex products, discounted orders, external IDs, and legacy content paths.
 
-The failure pattern is simple: the project assumes custom source behavior is ordinary platform data. The migration then moves what can be moved, but the business process behind the data is missing or incomplete.
-
-**Early Warning Signs**
-
-The Source Platform is heavily modified, custom-built, or extended by private modules. Important data does not appear in ordinary exports. Staff refer to custom fields without knowing where they live. Developers are needed to explain pricing, checkout, account approval, subscription, vendor, or integration behavior. Some outcomes depend on scripts, middleware, APIs, or outside databases.
-
-Risk also increases when a Custom Platform source is involved or when the merchant cannot separate native source data from custom business logic.
-
-**Prevention**
-
-Identify custom behavior before choosing the migration approach. Custom Platform handling, custom fields, outside-system identifiers, third-party data, integration-owned behavior, Tailored Add-ons, Custom Add-ons, and custom migration logic adjustment should be reviewed through Custom Service. Standard Service or Managed Service may still fit other parts of the migration, but customization or modification requirements need the correct service path.
-
-The merchant should provide source evidence: exports, screenshots, field lists, workflow notes, database references where available, API notes, and representative records that reveal custom behavior.
-
-**Recommendation Example**
-
-For a merchant moving from a heavily modified platform, select source records that contain custom buyer fields, custom pricing behavior, custom checkout notes, and external order identifiers. Review whether each item can be handled through standard service capability, an Add-on, or Custom Service.
-
-**Pass Condition**
-
-The pitfall is prevented when custom behavior is identified before execution and routed correctly. A migration should not be considered straightforward until custom fields, custom logic, external identifiers, and non-standard source structures have a defined handling plan.
-
-### Pitfall 9: Choosing Demo Migration Samples That Are Too Easy <a href="#pitfall-9-choosing-demo-migration-samples-that-are-too-easy" id="pitfall-9-choosing-demo-migration-samples-that-are-too-easy"></a>
-
-**What Goes Wrong**
-
-Demo Migration can be misleading if the sample includes only clean products, ordinary customers, simple orders, and records that do not reveal AmeriCommerce-specific migration risk. The Demo Migration may look successful while leaving buyer rules, storefront boundaries, product relationships, pricing logic, subscription context, integrations, and custom fields untested.
-
-This pitfall does not come from Demo Migration itself. It comes from choosing samples that are too safe to prove anything important.
+Weak validation creates false confidence.
 
 **Early Warning Signs**
 
-The merchant wants to review a sample but does not choose representative records. The sample avoids complex buyers, restricted products, microstores, rules, subscriptions, vendor orders, or integration-sensitive records. Reviewers focus on whether data appears rather than whether the migrated result supports real business scenarios.
+Demo Migration review is based on the first products or customers that appear. Staff say the sample looks fine without comparing expected behavior to actual results. High-risk business scenarios are postponed until after Full Migration.
 
-Another warning sign is when Demo Migration is treated as final validation rather than early evidence.
+Another warning sign is when exception handling has no owner or status.
 
 **Prevention**
 
-Build Demo Migration samples around known risk. Include a mix of ordinary and difficult records: buyer groups, portal users, restricted catalogs, microstore examples, complex products, kits, subscriptions, pricing rules, rewards, budgets, fulfillment-heavy orders, vendor-linked orders, and integration-sensitive identifiers. The sample should be small enough to review carefully but diverse enough to reveal whether the migration approach is sound.
+Build a validation sample set around business risk. Each major data relationship should have at least one sample with an expected result and a pass condition.
 
-Review outcomes should be classified clearly. A result may pass, need configuration review, need data cleanup, need Add-on review, need Custom Service review, or be not launch-ready.
+| Sample category | Include at minimum                                                                    | Reason                                         |
+| --------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Product         | Standard product, complex product, restricted product, integration-dependent product. | Proves catalog and buying behavior.            |
+| Buyer           | Retail buyer, wholesale buyer, tax-exempt buyer, portal or account buyer.             | Proves customer treatment.                     |
+| Order           | Ordinary order, discounted order, B2B order, exception order, external-system order.  | Proves history and staff usability.            |
+| Content         | Product URL, category URL, landing page, portal page, legacy path.                    | Proves discoverability and content continuity. |
+| Custom data     | Product, customer, and order fields used by staff or integrations.                    | Proves that non-standard data remains usable.  |
 
 **Recommendation Example**
 
-Instead of selecting only the newest products and customers, choose a sample that includes a wholesale buyer, a restricted product, a subscription product, a kit, a discounted order, a tax-exempt customer, a vendor-related order, a microstore page, and an integration-sensitive identifier. This sample will reveal more than a large but easy data set.
+Before approving Full Migration, the merchant should review a sample set that includes both ordinary records and difficult records. Each sample should state expected behavior, actual result, issue owner, and approval status.
 
 **Pass Condition**
 
-The pitfall is prevented when Demo Migration produces useful evidence. The sample should help the merchant decide whether the selected migration approach is appropriate, whether preparation is sufficient, and whether any requirement should move into Add-on review or Custom Service review before Full Migration.
+The pitfall is prevented when validation evidence covers the business model, not only the easiest records. Launch approval should be based on representative proof and documented exceptions.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-AmeriCommerce migration pitfalls usually occur when the business meaning behind the data is not made visible early enough. Buyer relationships, storefront boundaries, product structures, pricing rules, subscription behavior, operational context, integrations, and custom source logic can all be part of the expected outcome. If those areas are treated as ordinary records, the migration may appear complete while the future store is not ready to support the business.
+AmeriCommerce migration pitfalls are rarely caused by missing records alone. They usually appear when buyer relationships, storefront context, product behavior, pricing rules, order evidence, content routes, integrations, or custom data are not given enough structure before migration.
 
-The safest AmeriCommerce migration plans prevent failure by making hidden logic explicit. Each important rule, buyer group, storefront context, product relationship, order dependency, and integration responsibility should be prepared before execution and validated with representative samples before launch decisions are made.
+A stronger migration plan identifies the business meaning behind each data area, assigns ownership where behavior belongs outside the migration scope, and validates representative samples before launch decisions are made.
 
-If your AmeriCommerce migration involves B2B buyers, microstores, complex products, subscriptions, pricing rules, vendors, integrations, or custom source data, use Demo Migration and Live Chat to review the highest-risk examples before Full Migration. The goal is to confirm that the migrated result supports how the business actually sells, prices, fulfills, and manages customers after launch.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the most common AmeriCommerce migration pitfall?**
 
-The most common pitfall is treating structured commerce behavior as ordinary data. Customer records, products, orders, and prices may migrate, but buyer access, pricing rules, storefront context, subscriptions, fulfillment meaning, or integration ownership may be incomplete if they were not documented and validated.
+The most common pitfall is treating relationship-based commerce data as ordinary storefront data. Buyer groups, pricing rules, storefront context, and operational order history need validation beyond basic record presence.
 
-**How can merchants prevent B2B buyer problems during AmeriCommerce migration?**
+**Why can customer migration be risky for AmeriCommerce stores?**
 
-They should document buyer groups, customer types, portals, account rules, special pricing, tax treatment, payment expectations, restricted catalog access, and representative order history before migration. Demo Migration should include buyers that reveal those differences, not only ordinary customer records.
+Customer records may carry account, buyer group, tax, pricing, portal, or external-system context. If those relationships are not identified, the migrated customer can exist without supporting the intended buying experience.
 
-**Why are multi-store and microstore migrations more vulnerable to mistakes?**
+**Should old storefronts or microstores always be preserved?**
 
-They involve more than multiple storefront names. Each context may have its own audience, catalog visibility, content, routes, pricing rules, buyer access, and order expectations. If those boundaries are not mapped before migration, the destination can mix data that should remain separated.
+No. Each selling context should be reviewed for current business value. Some should remain separate, some should merge, some should redirect, and some should retire.
 
-**When does an AmeriCommerce migration require Custom Service review?**
+**How can merchants prevent pricing problems during AmeriCommerce migration?**
 
-Custom Service review is needed when the migration involves customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom fields, outside-system identifiers, app-owned data, integration-dependent behavior, or non-standard source structures that go beyond standard migration capability.
+They should identify active pricing behavior, affected buyers and products, rule ownership, external dependencies, and validation samples before Full Migration.
 
-**Should Demo Migration include only clean records?**
+**What makes validation samples strong enough for AmeriCommerce migration?**
 
-No. A useful Demo Migration sample should include both ordinary records and high-risk examples. For AmeriCommerce, that often means buyer groups, restricted catalogs, microstore examples, complex products, kits, subscriptions, pricing rules, rewards, budgets, vendor-linked orders, fulfillment-sensitive records, and integration identifiers.
+Strong samples include ordinary and complex records across products, buyers, orders, content, and custom data. The sample set should prove how the business operates, not only whether records appear.

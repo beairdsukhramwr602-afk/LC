@@ -1,310 +1,152 @@
 # EShop Validation Priorities
 
-Validation for an EShop migration should prove that the migrated store works as an EShop-powered Joomla commerce environment, not only that records arrived in the administration area. EShop can represent a wide range of catalog, sales, configuration, and Joomla implementation details, so validation must test whether the business meaning of the source store remains usable inside the Target Platform.
+Validation for EShop by Ossolution Team should prove that the migrated store works as a Joomla shopping cart environment, not only that records appear in administration. EShop can carry catalog structure, product options, attributes, custom fields, attachments, manufacturers, customer groups, orders, checkout fields, coupons, vouchers, tax classes, shipping methods, payment references, multilingual content, modules, templates, and integration-sensitive data. Those records need to be validated as connected business meaning.
 
-For EShop by Ossolution Team, the most important validation areas are products, categories, manufacturers, options, attributes, customer groups, customers, orders, discounts, coupons, vouchers, checkout fields, tax, shipping, payment, multilingual data, modules, themes, layout behavior, and Joomla routes. These areas should be reviewed together because a result can look correct in one layer while still failing commercially in another layer. A product can be present but not buyable. An option can display but not price correctly. An order can exist but lose the meaning of the selected options. A category can migrate but not support useful storefront discovery.
+A product can exist but lose the option that made it purchasable. An order can exist but no longer show the selected product choice, coupon, voucher, tax context, or shipping method that explains the total. A category can migrate but not support the Joomla menu, module, metadata, or SEF URL path that shoppers use to reach it. Validation should therefore move beyond record counts and confirm whether the migrated EShop store remains usable for shoppers, store administrators, support teams, and future implementation work.
 
-A strong validation process should therefore answer a practical question: **does the migrated EShop store preserve the meaning that merchants, shoppers, administrators, and implementation teams need after launch?**
+The strongest validation review begins with representative samples. Simple products are useful, but they are not enough. EShop validation should include option-heavy products, attribute-rich products, products with attachments or downloads, manufacturer-linked products, customer group examples, coupon and voucher orders, tax-sensitive and shipping-sensitive orders, multilingual records, SEO-sensitive pages, module-dependent storefront paths, and any custom or integration-owned values that influence operations.
 
-### What Validation Is Trying to Prove <a href="#what-validation-is-trying-to-prove" id="what-validation-is-trying-to-prove"></a>
+### What Validation Must Prove for EShop <a href="#what-validation-must-prove-for-eshop" id="what-validation-must-prove-for-eshop"></a>
 
-Validation is not a generic inspection step. It is the proof stage where the merchant decides whether the migration result is reliable enough to continue toward Full Migration, launch preparation, or additional service review.
+EShop validation should answer whether the target store preserves business meaning in the areas that matter after launch. The review should show what migrated correctly, what requires target-side configuration, what depends on Joomla implementation, and what needs Add-ons or Custom Service review. Without that separation, teams often treat every mismatch as a migration defect or overlook real migration gaps because the visible pages look acceptable.
 
-In an EShop migration, validation should prove five things.
+| Validation area           | What must be proven                                                                                                                                                               | Why it matters for EShop                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Catalog meaning           | Products, categories, manufacturers, options, attributes, images, custom fields, attachments, tabs, labels, reviews, and related products remain usable.                          | EShop separates many catalog roles that may be blended in the source store.                        |
+| Commercial history        | Customers, customer groups, addresses, orders, order lines, selected options, totals, discounts, coupons, vouchers, tax, shipping, payment context, and statuses remain readable. | Administrators need historical records for support, account review, reporting, and reconciliation. |
+| Target configuration      | Tax classes, geo zones, currencies, stock statuses, order statuses, shipping methods, payment plugins, checkout fields, and emails are distinguished from migrated records.       | Future checkout behavior usually depends on target setup, not only historical data transfer.       |
+| Joomla storefront context | Menus, aliases, metadata, SEF URLs, modules, templates, search paths, category pages, product pages, cart, checkout, and account pages remain coherent.                           | EShop data becomes useful to shoppers only when Joomla presentation exposes it correctly.          |
+| Special handling          | Multilingual records, custom fields, source extensions, plugin-owned values, external identifiers, and custom implementation are classified.                                      | Unsupported or bespoke data should not be silently approved as standard scope.                     |
 
-#### The catalog still supports shopping and management <a href="#the-catalog-still-supports-shopping-and-management" id="the-catalog-still-supports-shopping-and-management"></a>
+Validation should produce a decision, not a vague impression. A strong review can say which areas pass, which need configuration, which need Joomla implementation work, which need an Add-on, and which require Custom Service review before the project proceeds.
 
-The migrated catalog should be understandable to shoppers and manageable by the merchant. Products should retain the details needed for selection, pricing, stock review, shipping decisions, product comparison, and storefront organization. Categories, manufacturers, product images, labels, downloads, reviews, options, attributes, and custom fields should be checked as part of the same catalog system rather than as isolated records.
+### Validate Product and Catalog Meaning <a href="#validate-product-and-catalog-meaning" id="validate-product-and-catalog-meaning"></a>
 
-This is especially important because EShop separates several catalog meanings that some source platforms may combine. Options are shopper-facing selections. Attributes are product specifications used for comparison and information. Categories organize browsing. Manufacturers support another discovery or classification layer. Custom fields may carry project-specific product meaning. Validation should confirm that these roles remain clear after migration.
+Catalog validation should begin with the products that represent the store’s real selling model. EShop supports products, categories, manufacturers, images, product options, attributes, custom fields, attachments, downloads, extra product tabs, labels, reviews, related products, discounts, specials, stock values, dimensions, weights, and SEO fields. Validation should confirm that these elements remain meaningful inside EShop rather than merely appearing as isolated fields.
 
-#### Sales history remains readable and useful <a href="#sales-history-remains-readable-and-useful" id="sales-history-remains-readable-and-useful"></a>
+The most common validation mistake is approving a catalog after checking only product names, prices, and images. That misses the structures that determine whether shoppers can compare, choose, and buy. Product options should be checked where they affect selection, price, SKU, image, stock, or order-line meaning. Attributes should be checked where they support specifications, comparison, or structured product information. Manufacturers should be checked where brand discovery, supplier grouping, or catalog filtering matters. Attachments and downloads should be checked where product documents, manuals, certificates, or digital assets matter.
 
-Customer and order records should preserve usable commercial history. A migrated order should show the customer, products, quantities, selected options, unit prices, totals, discounts, coupons, vouchers, tax, shipping, payment method, shipping method, comments, and order status in a way that makes sense for post-migration reference.
+| Product sample                      | Validation question                                                                                                                | Acceptance signal                                                                                   |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Simple product                      | Did the basic product fields, price, image, category, status, stock, and description remain coherent?                              | The product is readable, assigned correctly, and manageable in EShop.                               |
+| Option-heavy product                | Did required choices, price-changing values, SKU-changing values, image-changing values, or stock-sensitive options remain usable? | A shopper can select the option and the order record preserves the chosen value.                    |
+| Attribute-rich product              | Did specifications remain informational rather than being confused with shopper choices?                                           | Attributes support comparison and product detail without distorting purchase behavior.              |
+| Manufacturer-linked product         | Did brand or manufacturer association remain useful?                                                                               | Manufacturer pages, references, or filters can still support discovery where planned.               |
+| Product with custom fields or tabs  | Did structured extra information retain meaning?                                                                                   | Important custom values are placed correctly or flagged for Add-ons or Custom Service review.       |
+| Product with attachment or download | Did files remain connected to the right product?                                                                                   | Shoppers or administrators can access the expected files according to the intended target behavior. |
+| Discounted or special-price product | Did promotional meaning survive as data or configuration?                                                                          | The team understands whether the value is historical, migrated, or target-configured.               |
 
-The validation question is not only whether the order count is correct. The better question is whether a store administrator can understand what the customer bought, how the order was priced, what adjustments were applied, how payment and shipping were recorded, and what status the order represents.
+Validation should also test category and product discovery from the storefront. A product that looks correct in administration may still be difficult to find if categories, menus, modules, aliases, or search behavior are incomplete. Product validation and storefront validation should therefore be connected.
 
-#### Configuration-sensitive behavior is separated from migrated records <a href="#configuration-sensitive-behavior-is-separated-from-migrated-records" id="configuration-sensitive-behavior-is-separated-from-migrated-records"></a>
+### Validate Customers, Groups, and Order History <a href="#validate-customers-groups-and-order-history" id="validate-customers-groups-and-order-history"></a>
 
-Some EShop behavior depends on configuration rather than direct data migration. Tax classes, tax rates, geo zones, currencies, stock statuses, order statuses, shipping plugins, payment plugins, Catalog Mode, Shopping Cart Mode, quote behavior, and checkout settings may need target-side review.
+EShop validation should treat customers and orders as commercial history, not only as database records. Customer records may connect to Joomla users, customer groups, addresses, order history, checkout fields, coupons, vouchers, and order statuses. Orders may include product options, quantities, unit prices, discounts, totals, tax, shipping, payment method references, comments, invoice context, and status history. These relationships explain what happened commercially.
 
-Validation should separate three outcomes: data that migrated correctly, settings that must be configured in EShop, and requirements that need Add-on or Custom Service review. This prevents the merchant from treating every mismatch as a migration failure when some differences are actually target configuration decisions.
+A migrated order should allow a store administrator to answer practical questions: who placed the order, what the customer bought, which option values were selected, what discount or voucher was used, how tax and shipping appeared, which payment method was recorded, which status applied, and whether special checkout fields need to remain visible. If those details are unclear, the order count is not enough evidence.
 
-#### Joomla presentation supports the migrated store <a href="#joomla-presentation-supports-the-migrated-store" id="joomla-presentation-supports-the-migrated-store"></a>
+| Record type             | What to inspect                                                                                  | Why it matters                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Registered customer     | Joomla user connection, customer profile, addresses, customer group, and account history.        | EShop may rely on Joomla user context as well as commerce-specific customer records.    |
+| Guest customer          | Name, email, billing address, shipping address, and order association.                           | Guest orders should remain useful for support even without a full account.              |
+| Customer group          | Group assignment, pricing expectations, tax/shipping relevance, or membership-like segmentation. | Group meaning can affect how administrators interpret history and future configuration. |
+| Option order            | Selected product options, option price effect, SKU or image effect, and order-line readability.  | Historical orders must explain what the customer actually chose.                        |
+| Coupon or voucher order | Discount source, amount, code, and total calculation context.                                    | Promotions should remain understandable for service and reporting.                      |
+| Tax and shipping order  | Tax line, geo-zone context, shipping method reference, weight or destination relevance.          | Historical totals must be explainable even when future rules are configured separately. |
+| Payment-context order   | Payment method label, transaction reference where available, status, and comments.               | Payment meaning helps reconciliation and support.                                       |
 
-Because EShop operates inside Joomla, validation should include the storefront and site implementation layer. Product pages, category pages, manufacturer pages, comparison pages, wishlist pages, shopping cart pages, checkout pages, customer pages, quote pages, menus, aliases, metadata, modules, themes, template overrides, and multilingual routing can affect whether migrated data is usable to shoppers.
+Customer and order validation should include recent records, older records, ordinary records, and edge cases. Clean recent orders may pass while older or more complex records reveal hidden differences in statuses, customer groups, checkout fields, or option handling.
 
-A technically complete migration may still be incomplete from a launch perspective if shoppers cannot find products, compare product attributes, select options, understand pricing, complete checkout, or navigate account/order areas inside the Joomla site.
+### Validate Configuration-Sensitive Behavior <a href="#validate-configuration-sensitive-behavior" id="validate-configuration-sensitive-behavior"></a>
 
-#### Custom and extension-owned data is classified correctly <a href="#custom-and-extension-owned-data-is-classified-correctly" id="custom-and-extension-owned-data-is-classified-correctly"></a>
+Some EShop behavior is driven by target configuration rather than migrated historical records. Tax classes, tax rates, geo zones, currencies, length and weight classes, stock statuses, order statuses, shipping methods, payment plugins, checkout fields, notification emails, Catalog Mode, Quote Cart Mode, and one-page checkout behavior may need target-side setup and testing. Validation should separate what has migrated from what must be configured.
 
-If the source store includes custom fields, unsupported extension data, third-party identifiers, bespoke order structures, custom checkout fields, custom product logic, external integration data, or Custom Platform data, validation should confirm whether the result is acceptable under standard service capability or whether Custom Service review is needed.
+This distinction protects the review from two opposite errors. The first error is blaming migration for settings that were never configured in the target store. The second error is approving the migration because data exists while future checkout behavior has not been tested. EShop validation should include both historical-record review and live-behavior testing where launch readiness depends on configuration.
 
-The pass condition is not that every custom source behavior automatically appears in EShop. The pass condition is that the merchant understands which data has migrated, which behavior requires target configuration, and which requirements need custom migration logic adjustment or a broader service decision.
+| Behavior area       | Validation method                                                                                | Decision output                                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Tax                 | Compare historical tax examples and test target tax configuration where future checkout matters. | Identify migrated tax context versus target tax setup.                        |
+| Shipping            | Review historical shipping method labels and test target shipping rules or plugins.              | Confirm whether shipping evidence is historical, configured, or custom.       |
+| Payment             | Review payment references on historical orders and verify active payment plugins separately.     | Separate order history from future payment acceptance.                        |
+| Currencies          | Check historical currency display, conversion context, and target currency settings.             | Confirm whether currency behavior is preserved, configured, or out of scope.  |
+| Checkout fields     | Inspect migrated billing/shipping/custom fields and test future checkout fields.                 | Decide whether fields are standard, configurable, mapping-related, or custom. |
+| Order statuses      | Review source status meanings and target status mapping.                                         | Confirm support teams can understand order state after migration.             |
+| Emails and invoices | Review whether templates and invoice behavior are migration data, target setup, or design work.  | Prevent late confusion between data migration and Joomla/EShop configuration. |
 
-### Named Validation Priorities <a href="#named-validation-priorities" id="named-validation-priorities"></a>
+A good validation report should name configuration gaps explicitly. For example, a historical order may show a shipping method correctly, while the future shipping plugin still needs target setup. That is not the same issue as a missing shipping value in migrated order history.
 
-The following priorities should guide EShop Demo Migration and Full Migration review.
+### Validate Joomla Storefront and SEO Context <a href="#validate-joomla-storefront-and-seo-context" id="validate-joomla-storefront-and-seo-context"></a>
 
-| Validation priority              | What the review should prove                                                                                                                 | Strong samples to include                                                                                                                               |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog structure                | Products, categories, manufacturers, images, labels, reviews, and downloads remain meaningful in EShop.                                      | Simple products, image-rich products, downloadable products, products assigned to multiple categories, manufacturer-linked products, reviewed products. |
-| Options and attributes           | Shopper selections and product specifications are not confused.                                                                              | Products with required options, priced options, multiple option types, comparison attributes, and attribute groups.                                     |
-| Customer and order history       | Customers, groups, addresses, orders, totals, statuses, discounts, coupons, vouchers, tax, shipping, and payment references remain readable. | Recent orders, older orders, discounted orders, voucher/coupon orders, tax/shipping examples, orders with selected product options.                     |
-| Configuration-sensitive behavior | Settings-dependent behavior is identified separately from migrated records.                                                                  | Tax-class products, geo-zone examples, currency examples, shipping method examples, payment method examples, stock-status examples.                     |
-| Joomla storefront behavior       | Migrated records support usable Joomla storefront pages and navigation.                                                                      | Key products, top categories, manufacturer pages, comparison pages, cart/checkout flow, customer account pages, module-driven pages.                    |
-| Multilingual content             | Translations remain complete and usable where multilingual behavior is part of the target plan.                                              | Translated products, categories, attributes, options, manufacturers, labels, downloads, lengths, weights, and messages.                                 |
-| Custom or extension-owned data   | Non-standard source meaning is classified for acceptance, Add-on review, or Custom Service review.                                           | Products with custom fields, custom checkout fields, plugin-owned records, external identifiers, unusual order statuses, Custom Platform samples.       |
+Because EShop operates inside Joomla, validation must include how migrated commerce records appear in the site. Product and category records need storefront paths, menus, aliases, metadata, SEF URLs, modules, templates, layout overrides, search behavior, comparison paths, cart flow, checkout path, account pages, and redirects where relevant. A store can pass backend review and still fail the shopper journey.
 
-This table should guide review planning, but it should not replace actual inspection. Each priority needs representative examples from the merchant’s real store because EShop behavior can vary significantly depending on catalog structure, Joomla implementation, plugins, multilingual setup, and configuration choices.
+Storefront validation should focus on high-value paths first. Identify the categories that drive traffic, products that represent core revenue, manufacturer pages if they matter, campaign pages, account/order pages, cart and checkout pages, and any module-driven pages that expose catalog data. Then confirm that migrated records can support those paths.
 
-### Product and Catalog Validation <a href="#product-and-catalog-validation" id="product-and-catalog-validation"></a>
+| Storefront item       | What to validate                                                                                | Practical pass condition                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Product page          | Product content, images, options, attributes, reviews, related products, metadata, and layout.  | The page supports selection, trust, and purchase intent.                      |
+| Category page         | Product assignment, ordering, image, metadata, menu path, filter/search expectations.           | Shoppers can discover the right products through planned navigation.          |
+| Manufacturer page     | Manufacturer association and page behavior where brand discovery matters.                       | Products appear under the expected manufacturer context.                      |
+| Cart and checkout     | Add-to-cart, option capture, totals, shipping/tax/payment steps, customer fields.               | A test purchase path works according to target configuration.                 |
+| Customer account      | Login, profile, address, order history, downloadable content if relevant.                       | Returning buyers can review the information the business expects to preserve. |
+| SEO-sensitive page    | Alias, metadata, SEF URL, redirect plan, and page title.                                        | Important pages have a clear continuity plan.                                 |
+| Module-dependent page | Mini cart, product module, category module, manufacturer module, search or content plugin area. | Joomla modules display migrated records correctly where used.                 |
 
-Catalog validation should begin with products, but it should not stop at product names and prices. EShop catalog meaning depends on how products relate to categories, manufacturers, options, attributes, images, labels, downloads, reviews, pricing rules, stock settings, tax classes, dimensions, weights, shipping requirements, and publication state.
+This review should not turn every layout issue into a migration issue. Instead, it should identify whether the issue belongs to migrated data, EShop configuration, Joomla menus/modules/templates, redirects, or custom implementation.
 
-#### What to validate <a href="#what-to-validate" id="what-to-validate"></a>
+### Validate Multilingual, Custom, and Integration-Owned Data <a href="#validate-multilingual-custom-and-integration-owned-data" id="validate-multilingual-custom-and-integration-owned-data"></a>
 
-Review whether products are present, readable, and commercially usable. Product titles, aliases, descriptions, SKUs, prices, images, categories, manufacturers, quantities, stock statuses, dimensions, weights, tags, related products, downloads, and published state should be checked where they matter to the selected migration path.
+EShop supports multilingual use cases and can sit inside Joomla sites that also rely on multilingual menus, translated content, language-specific metadata, translated product/category names, option labels, attributes, modules, and checkout text. Validation should include active languages rather than checking only the default language. If the source platform stored translations through custom fields, apps, or a separate translation layer, those records should be reviewed carefully.
 
-For products that use discounts, special prices, customer groups, quote mode, call-for-price behavior, minimum and maximum quantities, or shipping-specific settings, validation should include those records rather than relying only on ordinary products.
+Custom and integration-owned data also needs explicit classification. Source stores may include external identifiers, ERP fields, CRM references, affiliate data, membership or subscription logic, custom checkout fields, source app records, modified product relationships, or plugin-owned behavior. Some values can be mapped into supported fields. Some belong to target configuration. Some require Add-ons. Some require Custom Service because the old meaning is not part of ordinary EShop records.
 
-#### Strong validation samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
-
-A strong EShop catalog sample should include:
-
-* a simple product with ordinary price and image behavior
-* a product with multiple product images
-* a product assigned to an important category and manufacturer
-* a product with required options
-* a product with comparison attributes
-* a product with discount or special pricing
-* a product with customer group relevance
-* a product with stock, threshold, minimum quantity, or maximum quantity behavior
-* a downloadable product if downloads matter
-* a product with custom fields or attachments if the source uses them
-
-These samples reveal whether the catalog can actually support selling, comparison, browsing, and administration after migration.
-
-#### What often gets missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
-
-Merchants often review only visible product pages and miss hidden management details. Option values may appear but not affect price or selection as expected. Attributes may be migrated but placed in a way that does not support comparison. Manufacturer relationships may be present but not exposed in navigation. Product images may migrate without the intended ordering or completeness. Product custom fields may require separate review because they are not always equivalent across platforms.
-
-For EShop, the options-versus-attributes distinction deserves special attention. If a source platform used one structure for both shopper choices and product specifications, the migrated result should be inspected carefully before it is accepted.
-
-### Category, Manufacturer, and Discovery Validation <a href="#category-manufacturer-and-discovery-validation" id="category-manufacturer-and-discovery-validation"></a>
-
-Discovery validation proves that shoppers can reach and understand the catalog inside the Joomla site. EShop supports categories, manufacturers, product search, filters, comparison, modules, and storefront pages. Joomla menus, aliases, metadata, themes, and modules can also affect discovery.
-
-#### What to validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
-
-Review category hierarchy, category names, descriptions, images, aliases, metadata, product assignments, and parent-child relationships. Manufacturer records should be checked for product relationships, display usefulness, and any storefront role they are expected to play. If the target store uses product filters, search modules, category modules, manufacturer modules, or custom landing pages, validate whether the migrated catalog supports those entry points.
-
-#### Strong validation samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
-
-The best samples are not always the largest categories. Include high-revenue categories, SEO-sensitive categories, deeply nested categories, categories with many products, categories with only a few important products, manufacturer-led product groups, and pages that shoppers commonly enter from search, ads, email, or internal links.
-
-#### What often gets missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
-
-A category can exist in EShop but still fail as a discovery path if product assignments, aliases, metadata, menu placement, or module output are not reviewed. Manufacturer data can also become a passive admin record if the target storefront does not expose it where shoppers expect it. Validation should connect migrated organization records to real navigation behavior.
-
-### Options, Attributes, and Comparison Validation <a href="#options-attributes-and-comparison-validation" id="options-attributes-and-comparison-validation"></a>
-
-Options and attributes are one of the most important EShop validation areas because they carry different kinds of product meaning.
-
-#### What to validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
-
-Options should be reviewed as buying choices. Check whether required options are required, whether option values appear correctly, whether pricing adjustments behave as expected, whether option selections appear in cart/order context, and whether option-heavy products remain understandable to shoppers.
-
-Attributes should be reviewed as product information and comparison data. Check whether attribute groups, attribute names, and values appear in the right product context and whether they support comparison or specification review as intended.
-
-#### Strong validation samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
-
-Use products that expose the difference between selection and specification. For example, review products with size or color choices as option samples, and products with technical specifications, material details, dimensions, or compatibility information as attribute samples. Include products where options affect price, shipping, stock, or order line meaning if those structures exist in the source store.
-
-#### What often gets missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
-
-The most common validation mistake is treating options and attributes as interchangeable. If a shopper-facing choice becomes only an informational attribute, the product may no longer be buyable in the intended way. If a comparison attribute becomes an option, the storefront may ask shoppers to make unnecessary selections. Either mistake can make the migration look complete while damaging product usability.
-
-### Customer, Customer Group, and Checkout Field Validation <a href="#customer-customer-group-and-checkout-field-validation" id="customer-customer-group-and-checkout-field-validation"></a>
-
-Customer validation should prove more than the presence of names and emails. In EShop, customer groups, addresses, billing fields, delivery fields, checkout fields, and sales history can all affect post-migration usefulness.
-
-#### What to validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
-
-Review customer identity, email addresses, phone numbers, billing addresses, delivery addresses, account relationships, customer group assignment, and order connections. If the source store uses customer group pricing, customer group tax behavior, wholesale groups, member pricing, or segmented discounts, validate representative customers from each group.
-
-Custom checkout fields should be reviewed separately. Billing and delivery field structures may not map cleanly from every source platform, especially if the source used app-added fields, custom checkout logic, or third-party integration data.
-
-#### Strong validation samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
-
-Include ordinary retail customers, customers with multiple addresses, customers assigned to special groups, customers with several orders, customers with discounted orders, customers with quote or wholesale relevance, and records with custom checkout fields.
-
-#### What often gets missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
-
-Customer records may look correct while group assignment, address structure, or checkout-field meaning is incomplete. The merchant should test whether customer service staff can use the migrated record to answer real questions: who bought the product, where it shipped, what group the customer belongs to, which fields were captured, and how the order should be interpreted.
-
-### Order, Coupon, Voucher, Tax, and Status Validation <a href="#order-coupon-voucher-tax-and-status-validation" id="order-coupon-voucher-tax-and-status-validation"></a>
-
-Order validation is one of the strongest tests of migration quality because an order combines many layers: product, option, customer, pricing, discount, tax, shipping, payment, status, and comments.
-
-#### What to validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
-
-Check order numbers, customer links, ordered products, product options, quantities, unit prices, totals, subtotal, tax, shipping, coupon, voucher, final total, payment method, shipping method, customer comments, payment details, shipping details, and order status.
-
-If the source store used custom statuses, external fulfillment identifiers, payment gateway references, refund notes, or accounting-specific fields, validate whether those fields are included, transformed, omitted, or marked for Custom Service review.
-
-#### Strong validation samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
-
-Use orders that contain:
-
-* one simple product
-* multiple products
-* products with selected options
-* coupon discounts
-* vouchers
-* tax
-* shipping cost
-* different payment methods
-* different shipping methods
-* completed, pending, canceled, refunded, or failed status where applicable
-* customer comments
-* older historical data
-* recent operational data
-
-#### What often gets missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
-
-Order validation often fails when merchants check totals but ignore line-item meaning. If a product option does not appear in the order, customer service may not know which version was purchased. If a coupon or voucher is missing, revenue history may be harder to interpret. If tax and shipping are present but not understandable, financial review becomes weaker. If order statuses do not translate clearly, historical order records may need mapping or configuration review.
-
-### Tax, Shipping, Payment, and System Configuration Validation <a href="#tax-shipping-payment-and-system-configuration-validation" id="tax-shipping-payment-and-system-configuration-validation"></a>
-
-EShop uses configuration-sensitive structures for many operational areas. Validation should clarify which elements are migrated as data and which must be configured in the target environment.
-
-#### What to validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
-
-Review countries, zones, geo zones, currencies, tax rates, tax classes, stock statuses, order statuses, length and weight units, shipping plugin behavior, payment plugin behavior, and checkout configuration. If the store depends on a specific shipping method, payment gateway, tax region, or currency behavior, validate examples that prove those assumptions.
-
-#### Strong validation samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
-
-Select products and orders that expose operational rules: taxable and non-taxable products, products assigned to different tax classes, orders from different zones, orders using different shipping methods, orders using different payment methods, products with weight or dimensions, and products with stock-sensitive behavior.
-
-#### What often gets missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
-
-Merchants often expect operational behavior to migrate like ordinary records. In practice, tax, shipping, payment, stock, currency, and checkout behavior may require target-side configuration even after data migration is complete. Validation should separate migration accuracy from configuration readiness.
-
-### Multilingual and Multicurrency Validation <a href="#multilingual-and-multicurrency-validation" id="multilingual-and-multicurrency-validation"></a>
-
-Multilingual validation matters when the merchant expects EShop to support multiple storefront languages. EShop multilingual behavior should be reviewed through actual translated records, not assumed from a default-language migration.
-
-#### What to validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Check translated categories, products, product custom fields, messages, attributes, attribute groups, options, manufacturers, labels, downloads, lengths, and weights where relevant. Review whether translated titles, descriptions, aliases, metadata, option names, attribute labels, and storefront messages appear correctly.
-
-Currency validation should check whether currency records, display expectations, pricing context, and order history remain understandable. If multicurrency behavior depends on configuration or external services, validate what belongs to migration and what belongs to target setup.
-
-#### Strong validation samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
-
-Use products and categories that exist in each important language, not only the default language. Include option-heavy products, attribute-heavy products, manufacturer-linked products, and checkout/order examples that expose language or currency assumptions.
-
-#### What often gets missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
-
-A multilingual store can appear acceptable in the default language while translated names, aliases, metadata, messages, or option labels are incomplete. If the merchant uses multilingual SEO, localized navigation, or language-specific product presentation, validation should include real shopper paths in each language.
-
-### Joomla Modules, Themes, Layouts, and Routes Validation <a href="#joomla-modules-themes-layouts-and-routes-validation" id="joomla-modules-themes-layouts-and-routes-validation"></a>
-
-EShop data becomes useful only when it is displayed correctly inside the Joomla site. Modules, themes, layouts, template overrides, menus, aliases, metadata, and routes can affect how migrated data appears.
-
-#### What to validate <a href="#what-to-validate-7" id="what-to-validate-7"></a>
-
-Review product pages, category pages, manufacturer pages, comparison pages, wishlist pages, cart pages, checkout pages, customer pages, and quote pages. Check whether search, filter, product, category, manufacturer, and cart modules display the migrated data as intended. Confirm that menus, aliases, metadata, page titles, and page headings support the expected storefront paths.
-
-If the site uses custom theme files, template overrides, custom modules, or developer-built plugins, validation should identify whether those dependencies are implementation tasks or migration concerns.
-
-#### Strong validation samples <a href="#strong-validation-samples-7" id="strong-validation-samples-7"></a>
-
-Use high-value product URLs, category URLs, manufacturer paths, cart and checkout flows, account pages, search/filter results, module-driven landing pages, and translated routes if multilingual behavior matters.
-
-#### What often gets missed <a href="#what-often-gets-missed-7" id="what-often-gets-missed-7"></a>
-
-The most common mistake is validating only the administration area. A record can exist in EShop while the frontend page, module output, route, alias, metadata, or template display is not ready. For launch planning, storefront validation is not optional.
-
-### What Makes a Strong Validation Sample <a href="#what-makes-a-strong-validation-sample" id="what-makes-a-strong-validation-sample"></a>
-
-A strong validation sample is not a random subset of products and orders. It should be deliberately chosen to expose the store’s most important structures.
-
-Good samples usually include:
-
-* high-revenue products
-* simple products
-* option-heavy products
-* attribute-heavy products
-* products with customer group pricing or discounts
-* products with tax, shipping, weight, or stock sensitivity
-* products in important categories and manufacturers
-* translated products and categories
-* customers from different groups
-* orders with options, coupons, vouchers, tax, shipping, payment methods, comments, and different statuses
-* records with custom fields or plugin-owned meaning
-* storefront paths that matter for traffic, SEO, campaigns, or support workflows
-
-The goal is to find issues early. A Demo Migration sample that only includes ordinary records can create false confidence.
-
-### What Often Gets Missed <a href="#what-often-gets-missed-8" id="what-often-gets-missed-8"></a>
-
-The most common missed issues in EShop validation are not always missing records. They are meaning gaps:
-
-* product options appear but do not preserve shopper selection behavior
-* attributes migrate but do not support comparison or specification review
-* customer groups appear but do not preserve pricing or tax relevance
-* orders exist but selected options, statuses, coupons, vouchers, comments, or tax/shipping context are hard to interpret
-* checkout fields exist but do not carry the source meaning the merchant expects
-* tax, shipping, payment, and stock behavior needs target configuration but is mistaken for migrated data
-* translated content is incomplete outside the default language
-* Joomla modules, aliases, metadata, routes, and template output are not validated
-* custom fields, custom plugins, external identifiers, or extension-owned records are assumed to be standard data
-
-These issues should be classified before launch so the merchant can decide whether they require configuration review, data cleanup, Add-on review, Custom Service review, or additional implementation work.
-
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
-
-Validation results should be interpreted consistently. Not every issue has the same meaning.
-
-| Result category             | What it means                                                                                                                                                                                                                             | Recommended response                                                                                                          |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Pass                        | The migrated result preserves the required meaning for the reviewed sample.                                                                                                                                                               | Continue reviewing other representative samples and prepare for the next migration step.                                      |
-| Needs configuration review  | The data is present, but EShop or Joomla settings must be adjusted.                                                                                                                                                                       | Review target-side tax, shipping, payment, stock, order status, checkout, module, menu, theme, or multilingual configuration. |
-| Needs data cleanup          | The issue comes from inconsistent, duplicate, incomplete, or unclear source data.                                                                                                                                                         | Clean source records or clarify source meaning before relying on Full Migration results.                                      |
-| Needs Add-on review         | The requirement may fit filtering, mapping, or configuration support through available Add-ons.                                                                                                                                           | Review whether Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure can support the desired result.          |
-| Needs Custom Service review | The requirement involves Custom Platform data, unsupported extension data, custom fields, bespoke transformation, third-party identifiers, plugin-owned behavior, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment. | Review the requirement through Custom Service before treating it as launch-ready.                                             |
-| Not launch-ready            | The issue affects shopper experience, order interpretation, customer service, operational reliability, or storefront continuity.                                                                                                          | Do not proceed to launch until the issue is resolved, revalidated, or deliberately accepted.                                  |
-
-This interpretation step protects the merchant from two mistakes: accepting a weak migration result too quickly, or escalating a simple configuration issue as if it were a custom migration problem.
+| Special area            | What to include in validation                                                                              | Outcome to record                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Multilingual products   | Translated names, descriptions, options, attributes, metadata, aliases, and category relationships.        | Confirm whether translations remain complete or require implementation work.      |
+| Multilingual storefront | Language-specific menus, modules, routes, checkout labels, and redirects.                                  | Confirm whether shoppers can use the intended language paths.                     |
+| Custom product values   | Source custom fields, tabs, attachments, product files, or app-owned data.                                 | Decide whether values are supported, need mapping, or need Custom Service review. |
+| Integration identifiers | ERP, CRM, affiliate, fulfillment, membership, or reporting IDs.                                            | Decide whether identifiers must be preserved and where they should live.          |
+| Custom checkout data    | Billing/shipping custom fields, delivery notes, personalization fields, or business-specific order values. | Confirm whether data appears on customer/order records or needs custom handling.  |
+| Plugin-owned behavior   | Payment, shipping, search, filter, email, analytics, or marketing extension data.                          | Separate historical evidence from active plugin behavior and custom logic.        |
+
+The validation goal is not to force every old behavior into EShop automatically. The goal is to decide what must be preserved as migrated data, what should be recreated through EShop or Joomla configuration, and what requires a service-path decision before approval.
+
+### Turning Demo Migration Results Into an Acceptance Decision <a href="#turning-demo-migration-results-into-an-acceptance-decision" id="turning-demo-migration-results-into-an-acceptance-decision"></a>
+
+Demo Migration should become a decision checkpoint. A strong EShop review does not simply say that the sample looks correct. It records which sample groups passed, which differences are expected target configuration, which issues need follow-up, and whether the current service path is still appropriate.
+
+| Result pattern                                                                                                         | Meaning                                                                           | Recommended decision                                                |
+| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Core products, customers, and orders are correct; no complex unsupported areas appear.                                 | The selected path likely fits the ordinary data burden.                           | Continue with standard execution and routine validation.            |
+| Records migrate, but filtering, mapping, or available configuration adjustments are needed.                            | Scope is mostly understood, but optional service support may improve reliability. | Review relevant Add-ons before approval.                            |
+| The merchant needs Next-Cart-led coordination, sample review, and execution support.                                   | Complexity may be manageable but operational risk is high.                        | Consider Managed Service.                                           |
+| Custom fields, unsupported extension data, external identifiers, or bespoke checkout behavior affect business meaning. | Standard assumptions may not preserve the store’s operating model.                | Review Custom Service before approval.                              |
+| Joomla menus, modules, templates, payment plugins, shipping plugins, redirects, or layout work remain incomplete.      | Some launch risks belong to implementation, not data migration alone.             | Create a separate target-readiness checklist before final approval. |
+
+The final acceptance decision should be evidence-based. Products, options, attributes, customers, orders, discounts, vouchers, tax, shipping, payment context, multilingual content, Joomla storefront paths, and custom records should all be represented in the validation notes where they matter. That evidence protects the project from approving an easy sample while ignoring the records that actually determine launch success.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-EShop validation should prove that the migrated store is commercially understandable, operationally useful, and ready to function inside Joomla. The most important areas are products, categories, manufacturers, options, attributes, customer groups, customers, orders, coupons, vouchers, tax, shipping, payment, checkout fields, multilingual content, modules, themes, layouts, aliases, metadata, and custom or plugin-owned data.
+EShop validation should prove whether the target Joomla store preserves catalog meaning, customer and order history, configuration-sensitive behavior, storefront continuity, multilingual structure, and custom or integration-owned data. The review should not stop at totals or visible product pages. It should test the records that carry real business meaning.
 
-A strong review does not rely on record counts alone. It uses representative samples to test how catalog meaning, order history, configuration-sensitive behavior, and Joomla presentation work together. When a validation issue appears, the merchant should classify it carefully as configuration review, data cleanup, Add-on review, Custom Service review, or a launch-blocking problem.
+The best validation output is a practical acceptance decision. It shows what passed, what needs target configuration, what belongs to Joomla implementation, what may fit Add-ons, and what should be reviewed through Custom Service. That makes Demo Migration useful as a decision checkpoint instead of a superficial preview.
 
-Use Demo Migration results to validate the EShop migration against real products, customers, orders, options, attributes, customer groups, checkout fields, multilingual records, and Joomla storefront paths. If validation reveals custom fields, unsupported extension data, plugin-owned behavior, third-party identifiers, Custom Platform data, or transformation needs, use Live Chat to review whether the selected migration path, Add-ons, or Custom Service should be adjusted before Full Migration.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What should be validated first after an EShop Demo Migration?**
 
-**What should be validated first after migrating to EShop?**
+Start with representative products, options, attributes, categories, manufacturers, customers, customer groups, orders, coupons, vouchers, tax, shipping, payment context, and storefront paths. The first review should prove meaning, not only record counts.
 
-Start with the records that prove the store can operate: important products, categories, options, attributes, customers, customer groups, orders, discounts, tax, shipping, payment references, and checkout fields. Then review Joomla storefront paths, modules, aliases, metadata, theme output, and multilingual content if they affect the target store.
+**Why are product options important in EShop validation?**
 
-**Why are product options and attributes separate validation priorities?**
+Options may affect shopper choice, price, SKU, image, stock, and order-line meaning. A product can look present while the buying choice is incomplete, so option-heavy products need direct review.
 
-In EShop, options and attributes carry different meanings. Options are shopper-facing selections that can affect purchasing, while attributes describe product specifications and support comparison. Confusing them can make products look complete while still damaging buying behavior or product information.
+**Should tax, shipping, and payment behavior be validated as migrated data?**
 
-**Should tax, shipping, and payment behavior be treated as migrated data?**
+Historical tax, shipping, and payment context should be checked on old orders. Future checkout behavior should be tested through EShop configuration and active plugins. These are related but not identical validation tasks.
 
-Not always. Some tax, shipping, payment, currency, stock, and checkout behavior depends on EShop configuration or plugin setup in the target environment. Validation should separate migrated records from target-side configuration and custom requirements.
+**How should Joomla storefront issues be handled during validation?**
 
-**How should multilingual EShop data be validated?**
+Storefront issues should be classified by ownership. Some relate to migrated data, while others belong to Joomla menus, modules, templates, aliases, redirects, payment plugins, shipping plugins, or target configuration.
 
-Review actual translated products, categories, options, attributes, manufacturers, labels, downloads, messages, aliases, metadata, and storefront paths. A default-language pass is not enough when the target store depends on multilingual selling or localized SEO.
+**When does validation indicate Custom Service may be needed?**
 
-**When should validation lead to Custom Service review?**
-
-Custom Service should be reviewed when validation reveals Custom Platform data, unsupported extension data, product custom fields, custom checkout fields, plugin-owned behavior, third-party identifiers, bespoke transformations, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment needs beyond standard service capability.
+Custom Service should be reviewed when important meaning depends on custom fields, unsupported extension data, external identifiers, bespoke checkout behavior, integration-owned records, Custom Platform handling, Tailored Add-ons, or Custom Add-ons.

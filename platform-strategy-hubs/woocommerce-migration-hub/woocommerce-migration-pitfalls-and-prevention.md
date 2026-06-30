@@ -1,319 +1,282 @@
 # WooCommerce Migration Pitfalls and Prevention
 
-WooCommerce migration problems usually appear when the project treats WooCommerce as either a simple WordPress content move or a simple cart-to-cart transfer. WooCommerce is neither. It is a WordPress-connected commerce platform where products, variations, orders, customers, checkout behavior, payment and shipping context, plugins, custom fields, custom tables, theme display, media, and URLs often work together.
+WooCommerce migration pitfalls usually appear when the project treats the store as a set of transferable records instead of a connected commerce operation. Products, variations, attributes, orders, customers, checkout context, WordPress content, plugins, media, URLs, SEO, and external references all influence whether the migrated store can actually operate after launch.
 
-A WooCommerce migration can look successful while still weakening the store. Products can appear, orders can import, customers can exist, and pages can load, yet important buying behavior may still be incomplete. The main prevention discipline is to test commercial meaning, not only record presence.
+The most damaging issues are rarely simple count mismatches. They are relationship failures: variation choices that no longer sell correctly, attributes that no longer support filters, orders that are readable only in part, customers that lose account meaning, checkout history that is mistaken for live configuration, plugin data that is assumed to be standard scope, or URL paths that weaken discovery.
 
-| Pitfall area                       | What usually fails                                                | Prevention focus                                                                                             |
-| ---------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| WordPress-connected commerce scope | WooCommerce and WordPress responsibilities are mixed together     | Separate commerce records, CMS content, theme display, and plugin behavior                                   |
-| Products and variations            | Products exist but buying choices are weaker                      | Validate variation logic, attributes, SKUs, price, stock, images, and product add-ons                        |
-| Orders and HPOS                    | Order history imports but loses operational readability           | Check statuses, totals, taxes, shipping, payment labels, refunds, notes, metadata, and storage compatibility |
-| Checkout and extensions            | Stored values migrate but live checkout behavior is not recreated | Separate historical data from active workflow configuration                                                  |
-| URLs and SEO                       | Paths resolve but route meaning weakens                           | Validate high-value product, category, content, and redirect destinations                                    |
+Pitfall prevention should therefore combine scope classification, representative samples, Demo Migration review, target-store configuration planning, and clear acceptance conditions. Every major risk should have a warning sign, prevention action, recommendation example, and pass condition before launch.
 
-### Pitfall 1: Treating WooCommerce as Generic WordPress Content <a href="#pitfall-1-treating-woocommerce-as-generic-wordpress-content" id="pitfall-1-treating-woocommerce-as-generic-wordpress-content"></a>
+### Pitfall 1: Validating Records Instead of Commerce Behavior <a href="#pitfall-1-validating-records-instead-of-commerce-behavior" id="pitfall-1-validating-records-instead-of-commerce-behavior"></a>
 
 #### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-The migration is planned as if WooCommerce products, customers, orders, coupons, checkout fields, and plugin records behave like ordinary WordPress posts, pages, media, or users. The result may preserve site content while weakening store operations.
+The migration team checks product, customer, and order counts but does not prove that the migrated store can sell, display, filter, support, and report on the data correctly. WooCommerce may show migrated records in admin while customer-facing behavior remains incomplete.
 
-WooCommerce uses WordPress infrastructure, but commerce meaning depends on WooCommerce data, settings, extensions, taxonomies, order storage, payment and shipping labels, product relationships, and checkout behavior. Treating the store as generic WordPress content creates scope gaps before Demo Migration even begins.
+A product record may exist without a working buying path. A customer may exist without useful account history. An order may appear without enough tax, shipping, coupon, refund, or note context for staff to understand what happened.
 
 #### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-| Warning sign                                                                                  | Why it matters                                          |
-| --------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| The project inventory lists pages and posts carefully but summarizes WooCommerce data broadly | Commerce scope may be underdefined                      |
-| Product and order samples are not selected before Demo Migration                              | The highest-risk records may not be tested              |
-| Plugin records are described as “WordPress data” without ownership review                     | Extension behavior may be mistaken for standard content |
-| WooCommerce and WordPress SEO paths are reviewed together without commerce priority           | Product and category revenue paths may be missed        |
+| Warning sign                                          | Why it matters                                       |
+| ----------------------------------------------------- | ---------------------------------------------------- |
+| Validation begins with record totals only             | Relationship and behavior failures may remain hidden |
+| Storefront product paths are not tested               | Products can exist but still fail commercially       |
+| Admin review is separated from customer-facing review | Staff and shoppers may see different problems        |
+| Only easy products or recent orders are sampled       | Complex patterns remain untested                     |
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Separate the project into commerce data, WordPress site content, presentation, plugin-owned records, target configuration, and excluded behavior. WooCommerce products, variations, orders, customers, coupons, taxes, shipping, payments, and checkout metadata need commerce-specific validation. CMS Pages, Blog Posts, media, menus, redirects, and SEO fields need site-continuity validation.
+Validate the store as a commerce workflow. Review records, relationships, storefront display, add-to-cart behavior, cart behavior, checkout readiness, order readability, customer/account history, filters, menus, URLs, media, and plugin-owned data. Use representative samples rather than random samples.
 
 #### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-Create a scope map with separate rows for products, variations, categories, customers, orders, coupons, checkout fields, CMS Pages, Blog Posts, media, URLs, plugins, custom fields, custom tables, and integrations before Demo Migration.
+Choose a variable product with variation-level stock, a refunded order with coupon use, a registered customer with multiple orders, a product category with SEO value, and a plugin-dependent product. Validate each from both storefront and admin perspectives.
 
 #### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-The team can explain which requirements are WooCommerce commerce data, which are WordPress site content, which are plugin behavior, and which need Add-ons, Custom Service, target setup, or exclusion.
+The migrated store proves that important data patterns remain usable for shoppers, staff, reporting, and operational follow-up, not merely that records were transferred.
 
-### Pitfall 2: Preserving Products but Weakening Product Choice Logic <a href="#pitfall-2-preserving-products-but-weakening-product-choice-logic" id="pitfall-2-preserving-products-but-weakening-product-choice-logic"></a>
+### Pitfall 2: Treating Variable Products as Simple Product Rows <a href="#pitfall-2-treating-variable-products-as-simple-product-rows" id="pitfall-2-treating-variable-products-as-simple-product-rows"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-Products migrate, but customers can no longer choose the right item clearly. Variable products may lose variation-specific SKU, image, price, stock, default option, or attribute meaning. Product add-ons, bundles, composite products, subscriptions, bookings, memberships, or wholesale rules may be mistaken for normal product fields.
+Variable products are reviewed like ordinary products, so parent-child relationships, attributes, variation combinations, variation-level prices, stock, SKUs, images, tax classes, shipping classes, downloadable settings, and default selections are not tested deeply enough.
 
-WooCommerce product quality depends on purchasable behavior, not only product presence. A product page can look complete while the actual buying path is incomplete.
+This pitfall creates visible customer-facing problems. Shoppers may see unavailable options, confusing dropdowns, missing variation images, incorrect prices, or combinations that cannot be purchased.
 
 #### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-| Warning sign                                                                         | Review focus                                       |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------- |
-| Simple products are sampled more heavily than variable products                      | Variation behavior may remain untested             |
-| Attribute values are present but not tied to purchasable choices                     | Customers may see confusing options                |
-| Product add-ons or booking/subscription behavior is treated as ordinary product data | Extension behavior may require separate handling   |
-| Product images migrate but variation images are not checked                          | High-value products may look or behave incorrectly |
+| Warning sign                                                            | Review focus                                                |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Simple products dominate the validation sample                          | Variation complexity may be under-tested                    |
+| Attribute values exist but are not tied to purchasable choices          | Customers may see options that do not behave correctly      |
+| Variation images and stock are skipped                                  | High-value products may look incomplete or sell incorrectly |
+| Products with many combinations are excluded from Demo Migration review | The sample may avoid the riskiest catalog structure         |
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Use high-revenue and structurally complex products in Demo Migration. Validate product type, SKU, price, sale price, stock, categories, tags, brands, attributes, variation relationships, images, gallery media, reviews, downloadable files, and product-specific metadata. Classify extension-driven product behavior separately from standard WooCommerce product data.
+Select complex variable products deliberately. Validate the parent product, global and local attributes, variation combinations, default variation, SKU, GTIN or other identifier where used, regular price, sale price, stock, backorder state, images, shipping class, tax class, downloadable or virtual settings, and add-to-cart behavior.
 
 #### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-For each major product pattern, test a complete path from category listing to product page, option selection, cart, checkout, order record, and admin review.
+For a clothing product with size and color variations, test several valid combinations and at least one unavailable combination. Confirm that each selected variation displays the correct price, image, stock message, SKU, and cart/order-line detail.
 
 #### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-Important products remain purchasable and understandable, and extension-dependent product behavior is either migrated within agreed scope, configured separately, reviewed as Custom Service, or accepted as excluded.
+Important variable products remain understandable and purchasable, and variation-level commercial meaning is preserved or clearly assigned to target configuration, Add-ons, Custom Service review, or accepted exclusion.
 
-### Pitfall 3: Validating Categories and Attributes by Presence Only <a href="#pitfall-3-validating-categories-and-attributes-by-presence-only" id="pitfall-3-validating-categories-and-attributes-by-presence-only"></a>
+### Pitfall 3: Checking Categories and Attributes by Presence Only <a href="#pitfall-3-checking-categories-and-attributes-by-presence-only" id="pitfall-3-checking-categories-and-attributes-by-presence-only"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-Product categories, tags, brands, and attributes exist after migration, but they no longer support discovery, filtering, navigation, variation choice, or reporting in a useful way. WooCommerce taxonomies can look complete while customer browsing becomes weaker.
+Categories, tags, attributes, brands, and custom taxonomies exist in the target store, but they no longer support product discovery, filtering, navigation, variation selection, merchandising, or SEO landing paths.
+
+WooCommerce catalog data can look complete in admin while shoppers experience weak browsing. A category may survive but lose menu placement. Attributes may appear on products but fail to support filters. Brands may be migrated as text while the store needs brand archives or filterable brand values.
 
 #### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-| Warning sign                                                             | Why it matters                                    |
-| ------------------------------------------------------------------------ | ------------------------------------------------- |
-| Categories are checked only by count                                     | Navigation quality may still fail                 |
-| Attributes are not separated by variation, filter, and descriptive roles | Product choice and filtering may become confusing |
-| Brand, tag, or custom taxonomy scope is unclear                          | Product discovery may be inconsistent             |
-| Menus and category landing pages are not sampled together                | Customers may reach weaker destinations           |
+| Warning sign                                                         | Why it matters                                         |
+| -------------------------------------------------------------------- | ------------------------------------------------------ |
+| Categories are checked only by count                                 | Catalog hierarchy and product placement may still fail |
+| Attributes are not separated by variation, filter, and display roles | Option selection and discovery can become confused     |
+| Brand handling is not decided                                        | Brand paths may become inconsistent                    |
+| Menus, filters, and category pages are not sampled together          | Customer browsing behavior remains unproven            |
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Validate taxonomy meaning, not only taxonomy survival. Review category hierarchy, product-category assignment, product tags, brands, attribute labels, attribute values, variation attributes, filter behavior, menu usage, and SEO-sensitive category URLs.
+Validate taxonomy meaning. Review category hierarchy, slugs, product assignments, menu usage, category landing pages, product tags, brands, variation attributes, filterable attributes, descriptive attributes, breadcrumbs, internal links, and SEO-sensitive archive paths.
 
 #### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-Choose several top category paths and confirm the migrated product set, filters, attribute values, menus, URLs, and landing-page meaning still support buying intent.
+Pick several top category paths and confirm the migrated product set, filters, attribute values, brand handling, URL structure, menu placement, and landing-page content all support the intended buying journey.
 
 #### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-The store’s important product discovery paths remain clear, navigable, and commercially useful after migration.
+The store’s important discovery paths remain clear, navigable, and commercially useful after migration.
 
-### Pitfall 4: Misreading Historical Orders as Live Checkout Behavior <a href="#pitfall-4-misreading-historical-orders-as-live-checkout-behavior" id="pitfall-4-misreading-historical-orders-as-live-checkout-behavior"></a>
+### Pitfall 4: Confusing Historical Order Readability With Live Checkout Readiness <a href="#pitfall-4-confusing-historical-order-readability-with-live-checkout-readiness" id="pitfall-4-confusing-historical-order-readability-with-live-checkout-readiness"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-Historical order records migrate, but the team assumes that payment, shipping, tax, coupon, checkout, fraud, fulfillment, or subscription behavior has also been recreated. Historical order readability and live checkout behavior are different responsibilities.
+Historical orders migrate with payment labels, shipping labels, tax values, coupon codes, checkout fields, and notes, so the team assumes live checkout behavior has also been recreated. Historical order readability and live checkout readiness are different responsibilities.
 
-WooCommerce orders may preserve labels and values from prior systems, but active checkout still depends on target configuration, extensions, payment gateways, shipping rules, tax settings, and operational integrations.
+Past orders may preserve useful information, but future payment, shipping, tax, coupon, checkout, fraud, fulfillment, and email behavior depends on target-store configuration, extensions, gateway setup, shipping zones, tax settings, and operational integrations.
 
 #### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-| Warning sign                                                          | Risk                                                       |
-| --------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Payment and shipping values are checked only inside historical orders | Live payment and shipping may remain unconfigured          |
-| Tax totals are readable but target tax rules are not reviewed         | Future orders may calculate differently                    |
-| Coupon records migrate but promotion behavior is not tested           | Active discounts may behave differently                    |
-| Checkout fields appear in old orders but not in live checkout         | Stored values are being confused with active form behavior |
+| Warning sign                                                        | Risk                                                                |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Payment and shipping are checked only inside migrated orders        | Future checkout may remain unconfigured                             |
+| Tax values are readable but target tax rules are not tested         | New orders may calculate differently                                |
+| Coupon codes migrate but cart behavior is not reviewed              | Active promotions may not work as expected                          |
+| Custom checkout fields appear in history but not in target checkout | Stored historical values are being confused with live form behavior |
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Separate historical order validation from live store configuration. Validate order statuses, line items, totals, discounts, taxes, shipping, billing/shipping addresses, payment labels, refunds, notes, metadata, and customer links for history. Validate payment gateways, shipping methods, tax rules, coupons, and checkout fields separately as target-store readiness.
+Separate historical order validation from target checkout testing. Validate past orders for status, line items, variation details, totals, tax, shipping, coupons, refunds, payment labels, notes, metadata, and customer links. Validate live checkout through target configuration, test orders, payment gateway testing, shipping/tax tests, coupon tests, and order status review.
 
 #### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-Review one migrated historical order for readability, then place a target test order to confirm current checkout behavior. Treat the two results as different evidence.
+Review a migrated refunded order with coupon use for historical readability, then place a new target test order using the active payment, shipping, tax, and coupon setup. Treat the two tests as separate evidence.
 
 #### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-Historical orders remain readable for service and reporting, and live checkout readiness is confirmed separately through target configuration and testing.
+Historical order history remains readable for service and reporting, and live checkout readiness is proven separately through target-store testing.
 
 ### Pitfall 5: Ignoring HPOS and Order-Storage Compatibility <a href="#pitfall-5-ignoring-hpos-and-order-storage-compatibility" id="pitfall-5-ignoring-hpos-and-order-storage-compatibility"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-Orders appear in WooCommerce, but admin views, reports, extension screens, metadata display, or external workflows behave inconsistently because order storage and extension compatibility were not reviewed. High-Performance Order Storage can affect how order-related data is stored and how extensions interact with it.
+Orders appear in WooCommerce, but admin views, reports, metadata, extension screens, exports, or integrations behave inconsistently because the order-storage context was not reviewed. High-Performance Order Storage can affect how order data is stored and how extensions interact with order records.
+
+The risk increases when the store depends on subscriptions, fulfillment tools, accounting exports, CRM connections, invoice plugins, reporting plugins, or other order-related extensions.
 
 #### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-| Warning sign                                   | Why it matters                                           |
-| ---------------------------------------------- | -------------------------------------------------------- |
-| HPOS status is not documented before migration | Storage behavior may surprise validation teams           |
-| Extension compatibility is assumed             | Order-related plugin data may not display correctly      |
-| Order metadata is not sampled                  | Important custom values may be missing from admin review |
-| Reports and external references are not tested | Operational confidence may be incomplete                 |
+| Warning sign                         | Why it matters                                         |
+| ------------------------------------ | ------------------------------------------------------ |
+| HPOS status is not documented        | Order-storage assumptions may be wrong                 |
+| Extension compatibility is assumed   | Important order screens or workflows may fail          |
+| Order metadata is not sampled        | Custom checkout or fulfillment values may be invisible |
+| Reports and exports are not reviewed | Operational teams may lose confidence after launch     |
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Confirm whether the target WooCommerce environment uses HPOS and whether required extensions are compatible. Validate order admin views, metadata, customer links, status history, refunds, notes, reporting screens, exported order references, and integration fields.
+Confirm the target order-storage context and required extension compatibility before acceptance. Validate order admin views, customer links, status history, refunds, notes, metadata, reporting screens, exports, fulfillment references, external IDs, and extension-owned order fields.
 
 #### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-Select orders with refunds, tax, shipping, coupon use, custom checkout fields, and plugin metadata, then review them in WooCommerce admin and any operational extensions used after launch.
+Select orders with refunds, taxes, shipping differences, custom checkout fields, product add-ons, subscriptions or membership references, and external IDs. Review those orders in WooCommerce admin and in any operational screens used by the business.
 
 #### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-Order history remains readable in the target order-storage context, and important order-related extensions or external references have a confirmed review outcome.
+Order history remains readable in the target order-storage context, and important order-related extensions or external references have a documented validation outcome.
 
 ### Pitfall 6: Treating Plugin-Owned Data as Standard WooCommerce Scope <a href="#pitfall-6-treating-plugin-owned-data-as-standard-woocommerce-scope" id="pitfall-6-treating-plugin-owned-data-as-standard-woocommerce-scope"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-The store depends on subscriptions, bookings, memberships, wholesale rules, product add-ons, bundles, composite products, loyalty points, gift cards, CRM fields, ERP references, or marketplace connectors, but the migration assumes these are normal WooCommerce records.
+The store depends on subscriptions, bookings, memberships, wholesale rules, product add-ons, bundles, composite products, loyalty points, gift cards, marketplace connectors, CRM fields, ERP references, tax engines, shipping tools, or custom reporting, but these requirements are assumed to be ordinary WooCommerce product, customer, or order data.
 
-WooCommerce plugin ecosystems are powerful, but plugin data may live in custom fields, custom tables, separate APIs, external systems, or runtime configuration. Standard migration scope should not be assumed to cover active plugin workflows.
+WooCommerce extensions may store values in custom fields, custom tables, separate APIs, external systems, or runtime configuration. Standard data transfer should not be assumed to recreate active plugin behavior.
 
 #### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
 | Warning sign                                                 | Scope implication                                         |
 | ------------------------------------------------------------ | --------------------------------------------------------- |
 | The plugin list is long but not classified                   | Supported and unsupported requirements are mixed together |
-| Custom fields are present but their business role is unclear | Migrated data may not drive the expected behavior         |
-| Extension workflows are not sampled                          | Active store logic may not transfer automatically         |
+| Custom fields are present but their business role is unclear | Migrated values may not drive expected behavior           |
+| Extension workflows are not included in sample validation    | Active store logic may remain untested                    |
 | External IDs are missing from sample checks                  | Integrations may lose continuity                          |
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Classify plugin-owned data by type: display-only value, historical reference, customer/account entitlement, product-selection behavior, order/fulfillment workflow, external-system ID, or active target configuration. Use Add-ons only for supported extended requirements. Use Custom Service review when behavior depends on custom tables, code-level logic, APIs, or nonstandard plugin structures.
+Classify plugin-owned data by business role: display-only value, historical reference, product-selection behavior, account entitlement, order workflow, external-system ID, or active target configuration. Use Add-ons only where the requirement fits supported extended options. Use Custom Service review when the requirement involves custom tables, plugin-specific logic, unsupported structures, APIs, or external-system handling.
 
 #### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-For each critical extension, document the exact records it owns, where those records appear, whether they must migrate, and whether the target store must also recreate active workflow behavior.
+For each critical extension, document the records it owns, where those records appear, whether they must migrate, whether target configuration is required, and how the output will be validated.
 
 #### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-No critical plugin requirement remains hidden inside generic WooCommerce scope; each is assigned to standard scope, Add-ons, Custom Service review, target configuration, external-system handling, or accepted exclusion.
+No critical extension requirement remains hidden inside generic WooCommerce scope. Each requirement is assigned to standard scope, Add-ons, Custom Service review, target configuration, external-system handling, or accepted exclusion.
 
 ### Pitfall 7: Preserving Customers Without Preserving Account Meaning <a href="#pitfall-7-preserving-customers-without-preserving-account-meaning" id="pitfall-7-preserving-customers-without-preserving-account-meaning"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-Customer records migrate, but customer account meaning changes. Guest orders, registered accounts, WordPress users, roles, membership access, wholesale status, subscription/customer references, password transition, and billing/shipping history may not align with the post-launch customer experience.
+Customer records migrate, but customer meaning changes. Registered accounts, guest customers, WordPress users, billing/shipping addresses, order links, roles, membership access, wholesale approval, subscription references, password transition, consent fields, and external customer IDs may not align with the post-launch customer experience.
+
+The result can be a store where emails and names exist but support teams cannot understand customer history or returning customers cannot access expected account context.
 
 #### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-| Warning sign                                       | Why it matters                                    |
-| -------------------------------------------------- | ------------------------------------------------- |
-| Customer validation focuses only on email and name | Account history and permissions may be incomplete |
-| Guest orders are not sampled                       | Order/customer linking may be misunderstood       |
-| Roles and memberships are not reviewed             | Account entitlement may fail                      |
-| Password transition plan is vague                  | Returning customers may need support at launch    |
+| Warning sign                                              | Why it matters                                 |
+| --------------------------------------------------------- | ---------------------------------------------- |
+| Customer validation focuses only on email and name        | Account meaning and history may be incomplete  |
+| Guest orders are not sampled                              | Order/customer linking may be misunderstood    |
+| Roles, memberships, and wholesale groups are not reviewed | Entitlement or pricing behavior may fail       |
+| Password and account-access communication is vague        | Returning customers may need support at launch |
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Validate customers as account and service-history records. Review customer identity, WordPress user relationship, billing/shipping addresses, order history links, guest-order behavior, roles, membership/wholesale/subscription indicators, custom fields, consent fields, and communication plan.
+Validate customers as account, commerce-history, and support-context records. Review customer identity, WordPress user relationship, billing/shipping addresses, order history links, guest-order behavior, roles, membership or wholesale indicators, subscription references, custom fields, consent fields, external IDs, and account-access communication.
 
 #### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-Sample a registered customer, guest-order customer, wholesale/membership customer, customer with refunds, and customer with multiple addresses or metadata.
+Sample a registered customer, a guest customer, a wholesale or membership customer, a customer with refunds, a customer with multiple addresses, and a customer with plugin metadata or external references.
 
 #### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-Returning-customer expectations are clear, customer/order history is readable, and any account access limitations are planned before launch.
+Returning-customer expectations are clear, customer/order history is readable, account meaning is preserved where supported, and any access limitations are planned before launch.
 
 ### Pitfall 8: Weakening URLs, SEO, and Content-Commerce Paths <a href="#pitfall-8-weakening-urls-seo-and-content-commerce-paths" id="pitfall-8-weakening-urls-seo-and-content-commerce-paths"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-Products and pages load, but important customer and search paths become weaker. WooCommerce URLs sit inside WordPress permalink, taxonomy, product, category, blog, CMS, media, redirect, and SEO structures. Route continuity is not proven by page existence alone.
+WooCommerce records migrate, but important product URLs, category URLs, content links, redirects, media paths, SEO metadata, internal links, menus, and landing pages lose continuity. The store may function technically while discovery, search visibility, and conversion paths become weaker.
+
+This pitfall often occurs when product data and WordPress site content are reviewed separately. WooCommerce product pages depend on WordPress-controlled slugs, media, menus, blocks, themes, redirects, and SEO configuration.
 
 #### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-| Warning sign                                             | Risk                                |
-| -------------------------------------------------------- | ----------------------------------- |
-| Product URLs and blog URLs are reviewed separately       | Content-commerce journeys may break |
-| Redirects are checked only by technical status           | Destination quality may be weak     |
-| SEO fields are not sampled on products and categories    | Search visibility may be reduced    |
-| Builder/theme output is not tested with migrated content | Important pages may display poorly  |
+| Warning sign                                                           | Why it matters                                              |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------- |
+| SEO validation focuses only on product titles                          | URLs, metadata, redirects, and category paths may be missed |
+| Product and category URLs are not mapped                               | Search and internal links may break                         |
+| Content pages with product links are not sampled                       | Buying paths from content may weaken                        |
+| Images migrate but gallery, variation, and alt-text use is not checked | Product trust and search signals may decline                |
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-Validate product URLs, category URLs, CMS Pages, Blog Posts, media paths, redirects, canonical values, meta titles, meta descriptions, internal links, menus, widgets, landing pages, and top content-commerce journeys. Test commercial destination quality, not only redirect existence.
+Validate product URLs, category URLs, redirects, internal links, canonical expectations, titles, descriptions, indexability settings, product media, gallery images, variation images, category landing pages, CMS Pages, Blog Posts, menus, and important content-to-product paths.
 
 #### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-Map top product, category, blog, help, policy, and landing-page URLs to target destinations and check that each destination still serves the original customer intent.
+Review a high-ranking category page, a high-revenue product page, a buying guide that links to products, a campaign landing page, and a product with variation images. Confirm each path reaches the expected target destination and retains useful metadata.
 
 #### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-High-value routes preserve discovery, trust, buying intent, and SEO-sensitive continuity after migration.
+Important SEO and content-commerce paths remain accessible, coherent, and commercially useful after migration.
 
-### Pitfall 9: Using Demo Migration as a Count Check Instead of a Behavior Check <a href="#pitfall-9-using-demo-migration-as-a-count-check-instead-of-a-behavior-check" id="pitfall-9-using-demo-migration-as-a-count-check-instead-of-a-behavior-check"></a>
+### Turning Pitfall Prevention Into an Acceptance Process <a href="#turning-pitfall-prevention-into-an-acceptance-process" id="turning-pitfall-prevention-into-an-acceptance-process"></a>
 
-#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+Pitfall prevention works best when each risk is converted into acceptance evidence. The team should not rely on broad statements such as “products look fine” or “orders migrated.” Each major WooCommerce data pattern should have a sample, a validation action, an expected result, and an owner for unresolved issues.
 
-Demo Migration is reviewed by totals and easy samples. The store passes basic checks, but high-risk behaviors remain untested until Full Migration or launch.
+| Risk category                  | Required evidence                                                                           | Owner decision                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Product and variation behavior | Sample product pages, cart tests, variation checks, media checks, and order-line checks     | Accept, correct, configure, route to Custom Service, or exclude                       |
+| Catalog discovery              | Category paths, filters, attributes, brands, menus, and SEO-sensitive archive checks        | Accept structure or revise taxonomy/navigation plan                                   |
+| Customers and accounts         | Registered, guest, wholesale, membership, and metadata samples                              | Accept account continuity or define access limitations                                |
+| Orders and HPOS                | Historical order samples, metadata checks, refunds, reports, exports, and extension screens | Accept readability or correct storage/extension issues                                |
+| Plugins and custom data        | Critical extension inventory, field ownership, output location, and sample validation       | Assign to standard scope, Add-ons, Custom Service, target configuration, or exclusion |
+| URLs and SEO                   | Redirect checks, product/category URLs, metadata samples, media paths, and content links    | Accept, remap, redirect, or correct target SEO setup                                  |
 
-#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
-
-| Warning sign                                               | Missed evidence                                        |
-| ---------------------------------------------------------- | ------------------------------------------------------ |
-| Samples focus on simple products                           | Variation and extension behavior may fail later        |
-| Orders are checked by count only                           | Readability, metadata, and HPOS behavior may be missed |
-| Customer samples exclude guest, member, or wholesale cases | Account continuity may be underreviewed                |
-| URLs are checked visually but not by route purpose         | Redirect and SEO issues may remain hidden              |
-
-#### Prevention <a href="#prevention-8" id="prevention-8"></a>
-
-Build a Demo Migration sample set around risk. Include high-revenue products, complex variable products, orders with refunds/coupons/taxes/shipping/payment labels, custom checkout fields, guest and registered customers, plugin-controlled records, top URLs, CMS Pages, Blog Posts, media-heavy pages, and integration references.
-
-#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
-
-Use one validation sheet that records expected result, actual result, business impact, owner, and decision for each WooCommerce sample.
-
-#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
-
-Demo Migration proves the highest-risk WooCommerce behaviors, not only that common record types exist.
-
-### Pitfall 10: Mishandling Follow-Up Migration Activity <a href="#pitfall-10-mishandling-follow-up-migration-activity" id="pitfall-10-mishandling-follow-up-migration-activity"></a>
-
-#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
-
-After the first migration run, the source store keeps receiving products, customers, orders, coupons, Blog Posts, media updates, and plugin-field changes. Later migration activity is performed without enough revalidation, causing stale assumptions, duplicate review gaps, or missed changes.
-
-#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
-
-| Warning sign                                                              | Why it matters                            |
-| ------------------------------------------------------------------------- | ----------------------------------------- |
-| New records are not tracked between migration runs                        | Launch scope may be incomplete            |
-| Previously migrated records and newly eligible records are mixed together | Entity Points planning may become unclear |
-| Additional Migration Options are treated as a quick technical step        | Renewed validation may be skipped         |
-| Plugin or checkout changes happen after Demo Migration                    | Earlier evidence may no longer apply      |
-
-#### Prevention <a href="#prevention-9" id="prevention-9"></a>
-
-Use Additional Migration Options as a planning and revalidation checkpoint. Track new products, customers, orders, Blog Posts, coupons, and relevant plugin-field changes after the first migration run. Separate records already counted through the service license from new eligible records. Revalidate high-risk WooCommerce samples after later migration activity.
-
-#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
-
-Before launch, compare the source store’s changed records against the last validated migration sample set, then rerun checks for products, orders, customers, URLs, and plugin-owned fields affected by those changes.
-
-#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
-
-Later migration activity does not obscure what changed, which new records are in scope, which records were already counted, and which WooCommerce behaviors require renewed validation.
+A practical acceptance process also records what is intentionally not included. Exclusions should be visible before launch, especially for plugin behavior, external integrations, live checkout configuration, account access expectations, and SEO-sensitive redirects.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WooCommerce migration pitfalls are best prevented by treating WooCommerce as a commerce system inside WordPress, not as ordinary CMS content or a simple cart clone. The safest projects define commerce scope, plugin ownership, order-storage expectations, checkout boundaries, URL meaning, and validation samples before Full Migration.
+WooCommerce migration pitfalls are preventable when validation follows the way WooCommerce actually operates. The store is not only a product table or an order archive. It is a connected system of products, variations, attributes, customers, orders, checkout context, WordPress site paths, plugin data, media, URLs, SEO, and operational dependencies.
 
-A strong WooCommerce migration should prove that products remain purchasable, orders remain readable, customers understand account continuity, URLs preserve commercial intent, and plugin-dependent requirements have clear ownership. When requirements go beyond supported migration scope, Add-ons and Custom Service should be evaluated deliberately instead of allowing hidden complexity to surface at launch.
+The strongest prevention method is structured evidence. Complex products, important catalog paths, varied orders, sensitive customers, plugin-owned requirements, HPOS-sensitive records, and SEO-critical pages should all be tested before launch acceptance. When every major risk has a warning sign, prevention action, recommendation example, and pass condition, the migration is far less likely to hide problems until customers and staff encounter them.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why do WooCommerce migrations often need more review than they first appear to require?**
-
-WooCommerce is flexible because it runs inside WordPress and can be extended by plugins, custom fields, custom tables, themes, and integrations. That flexibility means a store may depend on behavior that is not visible from product and order counts alone.
-
 **What is the most common WooCommerce migration pitfall?**
 
-One common pitfall is treating products, orders, customers, checkout fields, and plugin data as ordinary WordPress content. WooCommerce commerce behavior needs separate validation from CMS Pages, Blog Posts, media, menus, and general site content.
+The most common pitfall is validating record presence instead of commerce behavior. Products, customers, and orders may exist, but the store still needs to prove purchasability, discovery, account meaning, order readability, and operational usability.
 
-**Can Add-ons prevent all WooCommerce migration risks?**
+**Why are variable products high-risk during WooCommerce migration?**
 
-No. Add-ons can support defined extra requirements when they are within supported scope. Custom tables, extension workflows, code-level behavior, external systems, or nonstandard logic may require Custom Service review or separate target configuration.
+Variable products depend on parent products, attributes, and child variations working together. Variation-level price, stock, SKU, image, tax, shipping, and downloadable settings can fail even when the parent product appears correct.
 
-**Why does HPOS matter during WooCommerce validation?**
+**How can historical orders be validated without confusing them with live checkout?**
 
-HPOS affects WooCommerce order-storage behavior and can influence how order data, metadata, and extensions interact with order records. Stores using HPOS or HPOS-sensitive extensions should validate order admin views, metadata, reports, and extension compatibility carefully.
+Validate historical orders for readable statuses, line items, totals, tax, shipping, coupons, refunds, payment labels, notes, and metadata. Then separately test live payment, shipping, tax, coupon, checkout, and order-status behavior in the target store.
 
-**Should Additional Migration Options be validated after use?**
+**When should plugin-owned data be reviewed as Custom Service?**
 
-Yes. Additional Migration Options can introduce new products, customers, orders, Blog Posts, coupons, or updated plugin fields. Those changes should trigger renewed validation of affected WooCommerce records and behaviors.
+Plugin-owned data should be reviewed as Custom Service when it depends on custom tables, bespoke workflows, unsupported fields, extension-specific logic, external systems, APIs, or transformation requirements beyond supported migration options.
+
+**How should WooCommerce migration pitfalls be prevented before launch?**
+
+Use representative samples, classify plugin and custom requirements, test complex product behavior, review catalog discovery, validate customers and orders, confirm HPOS/order-storage context, check URLs and SEO paths, and document unresolved items before acceptance.

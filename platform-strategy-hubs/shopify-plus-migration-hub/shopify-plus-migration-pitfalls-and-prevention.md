@@ -1,315 +1,285 @@
 # Shopify Plus Migration Pitfalls and Prevention
 
-Shopify Plus migration pitfalls usually appear when the Target Platform looks enterprise-ready before the business model behind it has been proven. The store may contain products, customers, orders, CMS Pages, Blog Posts, companies, catalogs, redirects, metafields, apps, and integration identifiers, but the commercial result can still be wrong if buyers reach the wrong account context, company locations inherit the wrong settings, catalogs expose the wrong products, or stores under the organization are treated as if they share more meaning than they actually do.
+Shopify Plus migration pitfalls usually appear when a project treats Plus as ordinary Shopify with a larger business attached. The core Shopify data model still matters, but Plus migrations often carry organization-level decisions, expansion-store scope, B2B structures, Markets, custom data, integrations, app governance, and enterprise validation ownership. When those areas are not planned, record counts can look correct while the launch model is still unstable.
 
-A strong Shopify Plus migration plan should prevent those failures before launch. Prevention means translating B2B relationships, catalog pricing, buyer permissions, storefront boundaries, custom data, and integration dependencies into testable target behavior. It also means distinguishing ordinary migration cleanup from issues that require Add-ons, Custom Service, or renewed validation after Additional Migration Options.
+The safest prevention method is to identify which Plus capabilities affect the target operating model before Full Migration. Each major assumption should have an owner, a representative sample, a validation method, and a handling path. That keeps Shopify Plus migration from becoming a late-stage argument about whether a missing workflow is a data issue, setup issue, app issue, integration issue, or unsupported expectation.
 
-### Why Shopify Plus Pitfalls Are Different <a href="#why-shopify-plus-pitfalls-are-different" id="why-shopify-plus-pitfalls-are-different"></a>
-
-Shopify Plus pitfalls are different because the platform often formalizes business relationships that were previously scattered across customer groups, price lists, tags, account notes, ERP identifiers, custom fields, wholesale workarounds, multiple storefronts, apps, or manual sales-team processes. A basic Shopify migration can often be judged by whether core storefront data appears correctly. A Shopify Plus migration also needs proof that commercial rules still work.
-
-The most common failure pattern is not a missing record. It is a record that exists without the right business meaning. A company can exist while the wrong location receives the wrong buyer contact. A catalog can be assigned while pricing or product visibility remains commercially wrong. A store can be live while a regional market, B2B storefront path, or direct-to-consumer customer path is still unclear.
-
-For that reason, Shopify Plus pitfall prevention should focus on four questions:
-
-| Prevention question                                               | Why it matters                                                                                                                                     |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Does the target structure reflect the real business relationship? | Companies, locations, contacts, catalogs, and buyer permissions must match how the merchant sells.                                                 |
-| Does commercial behavior prove the intended outcome?              | Product visibility, pricing, quantity rules, payment terms, checkout behavior, and account access matter more than setup presence alone.           |
-| Is custom meaning classified correctly?                           | Metafields, metaobjects, app-owned records, external IDs, and custom workflows may require Add-ons or Custom Service rather than ordinary mapping. |
-| Is validation renewed after later migration activity?             | Additional Migration Options can reduce freshness gaps, but key company, catalog, account, and storefront scenarios still need rechecking.         |
-
-### Pitfall 1: Treating Shopify Plus as Standard Shopify With More Capacity <a href="#pitfall-1-treating-shopify-plus-as-standard-shopify-with-more-capacity" id="pitfall-1-treating-shopify-plus-as-standard-shopify-with-more-capacity"></a>
+### Pitfall 1: Treating Shopify Plus as Only a Larger Shopify Store <a href="#pitfall-1-treating-shopify-plus-as-only-a-larger-shopify-store" id="pitfall-1-treating-shopify-plus-as-only-a-larger-shopify-store"></a>
 
 #### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-The business chooses Shopify Plus because it is seen as a stronger version of Shopify, but the migration plan does not define which Plus-specific structures must carry the future business model. Companies, company locations, catalogs, markets, storefront boundaries, apps, and organization-level governance may be mentioned, but not translated into concrete target behavior.
+The migration is planned like a standard Shopify migration even though the target environment includes organization-level management, multiple stores, B2B, international markets, custom apps, or enterprise integrations. Products, customers, and orders may migrate, but the Plus operating model remains incomplete.
 
-That creates a high-risk migration because the Target Platform can look advanced while still being vague. Teams may assume that Shopify Plus capability will absorb unresolved source-side complexity, even though unclear company relationships, pricing rules, buyer access, and store-boundary decisions still need explicit planning.
+This creates a false pass. The team sees migrated records in Shopify, but regional teams, B2B sellers, finance, fulfillment, SEO, or IT cannot approve the result because the records do not support their workflows.
 
 #### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-* The project explains the platform choice as “moving to Plus” without explaining what Plus must formalize.
-* B2B requirements are described as wholesale, distributor, dealer, or enterprise needs without company-location detail.
-* Catalogs are discussed as setup items rather than product-visibility and pricing controls.
-* Store, market, or organization planning exists, but the business cannot explain which environment owns which customer journey.
-* Custom data and app dependencies are treated as ordinary Shopify data before their target behavior is understood.
+| Signal                                                                                        | Risk                                                                        |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| The migration scope only lists products, customers, and orders.                               | Plus-specific structures may be underplanned.                               |
+| Organization, stores, B2B, Markets, and integrations are discussed only after Demo Migration. | The sample set may not test enterprise requirements.                        |
+| A Shopify hub article is reused with only Plus wording added.                                 | Enterprise distinction may be missing.                                      |
+| One team approves records that other teams depend on.                                         | B2B, localization, finance, fulfillment, or IT may reject the result later. |
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Define Shopify Plus as a structural Target Platform choice before migration scope is finalized. Identify the specific areas where Shopify Plus must preserve or improve business behavior:
+Define the Shopify Plus operating model before migration. Identify whether the launch includes one store, multiple stores, expansion stores, B2B and D2C together, B2B-only stores, regional markets, localized content, or external-system dependencies.
 
-* company and company-location structure;
-* buyer contacts, permissions, payment terms, tax context, and checkout behavior;
-* B2B catalogs, product visibility, pricing, quantity rules, and volume pricing;
-* B2B plus direct-to-consumer coexistence;
-* stores, markets, languages, currencies, domains, and governance boundaries;
-* metafields, metaobjects, apps, integrations, external IDs, and custom workflows.
+Then build the sample set around that model. Validation should include ordinary Shopify records and Plus-specific samples: B2B company context, market-sensitive products, localized content, external IDs, app-owned fields, and high-value redirects.
 
 #### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-Before the Demo Migration, select several high-value company, catalog, buyer, store, and integration scenarios and use them to confirm what Shopify Plus must prove. If those scenarios cannot be described clearly, the migration plan is not ready for reliable execution.
+A merchant migrating to Shopify Plus with D2C and B2B sales should validate a normal retail product, a B2B-restricted product, a company-linked buyer, a market-specific product page, a high-value old URL, and an ERP-owned order reference before approving Full Migration.
 
 #### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-The business can explain why Shopify Plus is required as a Target Platform structure, and the migration plan identifies the company, catalog, store, market, custom-data, and validation scenarios that prove that structure.
+The team can state which Plus operating areas are in scope, which are Shopify-side setup, which require apps or integrations, which need Add-ons, and which require Custom Service review.
 
-### Pitfall 2: Flattening Company and Company-Location Meaning <a href="#pitfall-2-flattening-company-and-company-location-meaning" id="pitfall-2-flattening-company-and-company-location-meaning"></a>
+### Pitfall 2: Underplanning B2B Companies and Buyer Context <a href="#pitfall-2-underplanning-b2b-companies-and-buyer-context" id="pitfall-2-underplanning-b2b-companies-and-buyer-context"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-Companies and company locations are created in Shopify Plus, but they do not preserve the real customer relationship. This often happens when source-side B2B meaning lived in customer groups, tags, notes, price lists, address records, sales-rep assignments, ERP references, custom checkout rules, or manual account workflows.
+B2B requirements are treated as ordinary customer migration. Source customer groups, wholesale accounts, company fields, buyer roles, price lists, payment terms, sales-rep assignments, or ERP account IDs are expected to appear naturally in Shopify Plus without clear mapping, setup, or integration planning.
 
-A company record can be technically present while the business relationship is still wrong. The wrong buyer may be attached to a location, a location may carry the wrong tax or payment context, an external ID may be missing, or historical order context may no longer make sense to account managers and buyers.
+The migration may preserve contact records while losing the structure that B2B teams need to sell, support, and manage accounts.
 
 #### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-* Company creation is treated as a record import rather than a relationship translation task.
-* Locations exist, but the team cannot explain their business purpose.
-* Buyer contacts are connected to companies without confirming location-level access.
-* Tax, billing, shipping, payment terms, and checkout rules are reviewed separately from the company-location model.
-* ERP, CRM, accounting, fulfillment, or reporting identifiers are not included in sample checks.
+| Signal                                                           | Risk                                                         |
+| ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| Wholesale accounts are described only as customers.              | Company, buyer, location, and catalog meaning may be missed. |
+| Pricing and payment terms are not included in sample review.     | B2B selling context may remain unproven.                     |
+| ERP or CRM account IDs are treated as optional notes.            | External-system continuity may break.                        |
+| B2B and D2C customers are reviewed together without distinction. | Buyer context may be flattened.                              |
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Use real B2B accounts to test the company model. For each important company sample, confirm:
+Separate B2B validation from customer validation. Prepare samples for companies, buyers, customer profiles, addresses, price expectations, payment terms, catalogs, external IDs, and order history. Decide which elements are migrated, which are configured in Shopify Plus, which belong to integrations, and which require Custom Service.
 
-* which company represents the buyer organization;
-* which company locations matter;
-* which contacts should access each location;
-* which address, tax, payment, and checkout settings should apply;
-* which external IDs are required by downstream systems;
-* how historical orders and customer account context should remain understandable.
+Do not assume a source customer group equals a Shopify Plus B2B company or catalog. Translate the source structure into the target operating requirement.
 
 #### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-Choose one national account with several locations, one account with negotiated payment terms, one account with sensitive pricing, and one account that depends on ERP identifiers. Use those samples to check whether Shopify Plus represents the relationship accurately, not just whether company records exist.
+For a wholesaler migrating from a source platform with customer groups and negotiated pricing, validate one company, two buyers, a restricted product catalog expectation, an account payment-term example, and one historical order linked to the account.
 
 #### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-Priority B2B customers land in the correct company and company-location context, with contacts, permissions, tax assumptions, payment terms, checkout behavior, and external identifiers aligned well enough for real purchasing and internal support.
+B2B companies, buyers, catalog/pricing expectations, payment terms, account identifiers, and customer-order context are either migrated, configured, integrated, scoped for Custom Service, or intentionally excluded.
 
-### Pitfall 3: Assuming Catalog Assignment Proves Correct Pricing and Product Access <a href="#pitfall-3-assuming-catalog-assignment-proves-correct-pricing-and-product-access" id="pitfall-3-assuming-catalog-assignment-proves-correct-pricing-and-product-access"></a>
+### Pitfall 3: Mixing Markets, Localization, and Store Scope <a href="#pitfall-3-mixing-markets-localization-and-store-scope" id="pitfall-3-mixing-markets-localization-and-store-scope"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-B2B catalogs are assigned, but product visibility, pricing, quantity rules, or volume pricing still fails for important buyers. Catalogs can appear correct at a setup level while the commercial outcome is wrong. This is especially risky when the Source Platform used customer groups, price lists, contract pricing, hidden categories, account-specific products, regional catalogs, dealer tiers, or custom visibility logic.
+Markets, languages, currencies, domains, regional catalogs, and country-specific content are treated as ordinary content migration. The project assumes one product or page result will work for every region, or that multiple regional stores can be validated with the same sample set.
 
-The pitfall is treating catalog assignment as proof. The real proof is whether a buyer in a specific company or company location sees the right products at the right prices under the intended checkout and account context.
+The result may be readable in the primary store while international storefronts show incomplete content, wrong availability, inconsistent URLs, or unclear pricing and tax expectations.
 
 #### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-* Catalog validation stops after confirming that catalogs exist.
-* Sensitive pricing is not tested through buyer scenarios.
-* Products with customer-specific visibility are reviewed only in the admin or storefront preview.
-* Quantity rules and volume pricing are not tested with realistic order quantities.
-* Catalog behavior that depends on apps, metafields, external systems, or custom logic is not separated from ordinary migration mapping.
+| Signal                                                                            | Risk                                          |
+| --------------------------------------------------------------------------------- | --------------------------------------------- |
+| Regional requirements are listed after products and content are already approved. | Market-specific differences may be missed.    |
+| Localized content is reviewed only in the default language.                       | International storefront quality may be weak. |
+| Domains and redirects are not tested by market.                                   | SEO and customer landing paths may fail.      |
+| Currency, duties, tax, and shipping expectations are treated as migrated data.    | Live Shopify setup may remain incomplete.     |
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Validate catalogs through commercial outcomes. The sample set should include:
+Create a market-readiness checklist before Full Migration. Identify primary market, secondary markets, countries or regions, domains or subfolders, localized product content, collection expectations, CMS Pages, Blog Posts, high-value redirects, currency and pricing expectations, duties/import taxes, payment methods, and shipping rules.
 
-| Catalog sample                             | What to test                                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------------------------- |
-| High-value company catalog                 | Confirm product access, expected pricing, and account context.                        |
-| Location-specific purchasing case          | Confirm whether the location sees the right product and pricing rules.                |
-| Sensitive product group                    | Confirm hidden, restricted, or account-specific products do not appear incorrectly.   |
-| Quantity-rule or volume-pricing product    | Confirm order-size behavior and price breaks.                                         |
-| Blended B2B and direct-to-consumer product | Confirm B2B buyers and retail customers do not see the wrong access or price context. |
+Validate representative records for each market that matters at launch. Some findings may be migration issues, but many will be Shopify Plus setup, localization, SEO, tax, shipping, payment, or integration tasks.
 
 #### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-Build catalog checks around commercially sensitive accounts, not only the largest catalog. A smaller catalog with negotiated pricing or restricted products may carry more launch risk than a broad default catalog.
+For a merchant launching in the US, Canada, and the EU, validate one product, one collection, one page, one blog post, and one redirect in each market experience. Then separately confirm currency, duties, taxes, payment, and shipping setup.
 
 #### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-The right buyer, in the right company or company-location context, sees the right products, prices, quantity rules, and checkout expectations on the paths that matter commercially.
+Each launch market has an accepted content, product, URL, localization, pricing, domain, and setup plan. Any regional gaps are assigned to migration correction, Shopify setup, app/integration work, or accepted exclusion.
 
-### Pitfall 4: Confusing B2B and Direct-to-Consumer Account Behavior <a href="#pitfall-4-confusing-b2b-and-direct-to-consumer-account-behavior" id="pitfall-4-confusing-b2b-and-direct-to-consumer-account-behavior"></a>
+### Pitfall 4: Flattening Product and Custom-Data Meaning <a href="#pitfall-4-flattening-product-and-custom-data-meaning" id="pitfall-4-flattening-product-and-custom-data-meaning"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-Customer records move, but the buyer experience no longer matches the way different customer types should purchase. Shopify Plus projects often combine B2B and direct-to-consumer selling, or they separate those audiences across stores, markets, catalogs, account paths, apps, or custom storefront logic. If those differences are not defined, customers may see the wrong account context, the wrong content, the wrong products, or the wrong pricing.
+Enterprise product data is forced into ordinary Shopify product fields even when the source store depends on product attributes, technical specifications, regulatory fields, merchandising data, bundles, subscription logic, personalization, or PIM-owned values. The migrated catalog may be present but not usable for merchandising, filtering, B2B catalogs, search, or integrations.
 
-This pitfall can be hard to detect because ordinary customer counts may pass. The failure appears when buyers sign in, choose a company location, review account history, see assigned catalogs, place orders, or contact support.
+Shopify Plus can use metafields and metaobjects for custom data, but those structures require deliberate planning. They do not automatically recreate every source custom field or app behavior.
 
 #### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-* Customer import is treated as proof of account continuity.
-* B2B sign-in paths and direct-to-consumer account paths are not tested separately.
-* Buyers who access more than one company location are not used as samples.
-* Launch communication does not match the actual account experience.
-* Support teams cannot explain what returning customers should expect after launch.
+| Signal                                                                                    | Risk                                                            |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Custom fields are listed without source examples.                                         | Mapping cannot be validated.                                    |
+| PIM fields are treated as product descriptions or tags.                                   | Structured product governance may be lost.                      |
+| Bundles, subscriptions, or custom product builders are expected to migrate like variants. | App-owned logic may be unsupported.                             |
+| Metafields are mentioned as a catch-all destination.                                      | Field type, definition, display, and validation may be ignored. |
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Design account-access samples around real customer journeys:
+Inventory custom data by source owner, business purpose, target destination, and validation proof. Decide whether each field belongs in a standard Shopify field, metafield, metaobject, app, external system, Add-on scope, Custom Service scope, or exclusion.
 
-* B2B buyer with one company location;
-* B2B buyer with multiple locations;
-* company main contact or location admin;
-* retail customer with ordinary account history;
-* customer who has both B2B and direct-to-consumer history;
-* buyer affected by payment terms, order review, tax assumptions, or catalog access.
+Use samples that show real complexity: variant-specific values, product specifications, B2B-only fields, regulatory fields, integration IDs, app-generated fields, and structured content that may need metaobjects.
 
 #### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-Run account-access checks with the same buyer personas the business uses in sales and support. If a buyer journey cannot be explained clearly, the issue should be addressed before launch communication is finalized.
+For a manufacturer migrating to Shopify Plus, validate one configurable product with technical attributes, one product with regulatory data, one product controlled by PIM, one product with variant-specific custom fields, and one product with app-owned subscription data.
 
 #### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-Representative B2B and direct-to-consumer customers can reach the intended account experience, understand their buying context, see the right information, and continue purchasing without avoidable confusion.
+Custom data has a defined target and owner. Supported fields are mapped and validated. Unsupported fields, app-owned data, external identifiers, or bespoke transformations are assigned to Custom Service, app import, API work, integration work, manual rebuild, or accepted exclusion.
 
-### Pitfall 5: Assuming Stores, Markets, or Organization Governance Share Meaning Automatically <a href="#pitfall-5-assuming-stores-markets-or-organization-governance-share-meaning-automatically" id="pitfall-5-assuming-stores-markets-or-organization-governance-share-meaning-automatically"></a>
+### Pitfall 5: Confusing Historical Orders With Enterprise Operations <a href="#pitfall-5-confusing-historical-orders-with-enterprise-operations" id="pitfall-5-confusing-historical-orders-with-enterprise-operations"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-The business treats Shopify Plus organization, stores, or markets as if they automatically share product meaning, collection structure, settings, theme behavior, navigation, customer context, inventory assumptions, or validation coverage. The result is a migration that validates one storefront path and assumes the rest are ready.
+Migrated historical orders are expected to prove that Shopify Plus payment, checkout, tax, duties, fulfillment, shipping, notifications, B2B orders, and integrations are ready. Order history may migrate with readable context, but live operations still need target-side configuration and testing.
 
-Shopify Plus can support broader governance, but each store or market context still needs a clear role. A regional store, brand store, wholesale store, direct-to-consumer store, or localized market may require separate product visibility, content, domain, language, currency, redirect, and customer-journey checks.
+The risk is especially high when finance, fulfillment, support, and B2B teams depend on different parts of order history. A support team may care about customer context, finance may care about totals and tax, fulfillment may care about shipping details, and IT may care about external IDs.
 
 #### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-* “Organization” is used as shorthand for shared storefront behavior.
-* Store-specific products, menus, content, themes, or settings are assumed rather than reviewed.
-* Market, language, currency, or domain decisions are postponed until late in the project.
-* Redirect and SEO checks are performed for only one storefront path.
-* Validation treats multiple stores or markets as one environment.
+| Signal                                                         | Risk                                                                         |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Historical payment context is treated as live payment setup.   | Checkout readiness may be untested.                                          |
+| Orders are validated only by count and total.                  | Refunds, taxes, duties, fulfillment, and external references may be unclear. |
+| B2B orders are reviewed like retail orders.                    | Company, buyer, payment-term, or account context may be missing.             |
+| Live test orders are postponed until after launch preparation. | Operational defects may surface late.                                        |
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Map every store and market to a commercial role. Confirm:
+Validate order history for support, finance, fulfillment, B2B account management, and integration reference value. Separately test live Shopify Plus checkout, payments, taxes, duties, shipping, fulfillment, notifications, apps, and permissions.
 
-* which products, collections, CMS Pages, Blog Posts, menus, and URLs belong in each context;
-* which domains, languages, currencies, markets, and regional rules matter;
-* which customer journeys belong to each store or market;
-* which governance decisions should be centralized and which must remain local;
-* which redirects and SEO-sensitive paths require separate checks.
+Use exception orders in the sample set: refunded orders, partially fulfilled orders, discounted orders, tax-sensitive orders, B2B orders, orders with payment terms, orders with external IDs, and orders with marketplace or channel references.
 
 #### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-For a merchant with separate B2B, retail, regional, or brand storefronts, validate each environment through its own high-risk customer journey rather than assuming one successful storefront test proves the whole organization.
+For a B2B/D2C Plus migration, validate one D2C order, one B2B order with company context, one refunded order, one tax-sensitive order, one partially fulfilled order, and one ERP-referenced order. Then place new test orders through the target checkout and fulfillment process.
 
 #### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-Each store, market, or governed environment has a defined commercial role and passes the product, content, URL, customer, and operational checks needed for that role.
+Historical orders are readable for support and finance, external references are handled correctly, and live Shopify Plus checkout, tax, duty, payment, fulfillment, shipping, and notification workflows are tested separately.
 
-### Pitfall 6: Carrying Legacy Custom Logic Into Shopify Plus Without Reclassification <a href="#pitfall-6-carrying-legacy-custom-logic-into-shopify-plus-without-reclassification" id="pitfall-6-carrying-legacy-custom-logic-into-shopify-plus-without-reclassification"></a>
+### Pitfall 6: Assuming Apps and Integrations Will Reconnect Themselves <a href="#pitfall-6-assuming-apps-and-integrations-will-reconnect-themselves" id="pitfall-6-assuming-apps-and-integrations-will-reconnect-themselves"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-The migration plan carries old wholesale behavior, custom fields, app-owned records, scripts, ERP logic, pricing workarounds, account rules, or storefront conventions into Shopify Plus as if they should be recreated exactly. That can preserve complexity that no longer fits the future Target Platform, or it can hide genuine Custom Service needs inside ordinary migration scope.
+The migration preserves core records, but app and integration dependencies are not rebuilt or validated. ERP, PIM, OMS, WMS, CRM, tax, shipping, subscription, loyalty, marketplace, personalization, analytics, or automation systems may own fields and workflows that cannot be recovered from core Shopify records alone.
 
-Shopify Plus gives merchants stronger native structures, but not every legacy behavior should be preserved as-is. Some source-side logic should be simplified into Shopify Plus companies, locations, catalogs, metafields, metaobjects, markets, or app configuration. Other behavior may require Custom Service because it depends on unsupported data, external-system identifiers, app-owned records, bespoke transformation, or custom migration logic adjustment.
+This pitfall often appears after data migration looks successful. The product exists, but the PIM does not recognize it. The customer exists, but CRM segmentation is broken. The order exists, but ERP reconciliation fails. The inventory value exists, but the WMS remains disconnected.
 
 #### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-* The team says behavior must work “like before” without deciding whether the old behavior is still desirable.
-* App, ERP, CRM, fulfillment, subscription, loyalty, or reporting dependencies are not classified separately.
-* External IDs are not included in migration samples.
-* Custom fields are treated as ordinary fields without confirming target use.
-* Add-ons and Custom Service are used interchangeably.
+| Signal                                                               | Risk                                                                |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| App and integration inventory is not prepared before Demo Migration. | Missing dependencies may appear late.                               |
+| External IDs are not included in validation samples.                 | Systems may not reconnect reliably.                                 |
+| Automation rules are tested only after Full Migration.               | Tags, statuses, metafields, or triggers may not behave as expected. |
+| Integration partners are not assigned validation ownership.          | No team can approve external-system continuity.                     |
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Classify legacy logic before migration scope is finalized:
+Create a dependency map before migration. For each app or external system, identify the data it owns, the workflow it controls, the identifier it needs, the target setup required, and the validation owner. Then classify requirements as supported migration, Add-on adjustment, Custom Service, app import, API/integration work, manual rebuild, or exclusion.
 
-| Legacy item                               | Prevention question                                                                                  |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Custom B2B role or approval logic         | Can Shopify Plus company/contact/checkout behavior support it, or is custom handling needed?         |
-| Contract pricing or price-list workaround | Should it become catalog pricing, app behavior, or Custom Service scope?                             |
-| External IDs                              | Which systems need them after launch, and where should they live in Shopify Plus?                    |
-| Custom fields                             | Are metafields, metaobjects, or category metafields appropriate, or is deeper transformation needed? |
-| App-owned records                         | Can they be migrated, configured, rebuilt, or excluded with a clear decision?                        |
+Apps and integrations should be validated with records that contain their actual dependencies, not generic clean samples.
 
 #### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-For each high-risk legacy behavior, assign one outcome: standard mapping, Add-ons, Custom Service, target-side configuration, app reimplementation, or intentional exclusion. Do not leave custom behavior in an undefined middle state.
+For a merchant with ERP and PIM integrations, validate one product with PIM ID, one order with ERP reference, one customer with CRM ID, one inventory record with WMS relationship, and one workflow that depends on a tag or metafield.
 
 #### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-Custom logic, app dependencies, external identifiers, and bespoke data structures are classified before launch, with Add-ons and Custom Service separated clearly enough to avoid scope confusion.
+Every business-critical app or integration has an owner, dependency record, validation sample, target setup plan, and accepted handling path.
 
-### Pitfall 7: Treating Additional Migration Options as a Substitute for Full Revalidation <a href="#pitfall-7-treating-additional-migration-options-as-a-substitute-for-full-revalidation" id="pitfall-7-treating-additional-migration-options-as-a-substitute-for-full-revalidation"></a>
+### Pitfall 7: Leaving Redirects and SEO Continuity Too Late <a href="#pitfall-7-leaving-redirects-and-seo-continuity-too-late" id="pitfall-7-leaving-redirects-and-seo-continuity-too-late"></a>
 
 #### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-The business uses Additional Migration Options to reduce the gap between earlier migration activity and launch, but assumes that later migration activity automatically proves the Shopify Plus target is ready. Additional migration activity can help bring newer records into scope, but it does not replace the need to recheck company relationships, catalog assignments, pricing, buyer access, custom data, integrations, URLs, and store or market behavior.
+Products, collections, CMS Pages, and Blog Posts are migrated before URL and redirect planning is complete. The team assumes high-value URLs can be recreated exactly or redirected later without considering Shopify path behavior, market-specific URLs, domains, localized content, or reserved/fixed paths.
 
-This pitfall is especially risky for Shopify Plus because the most important launch failures are often structural. A new order can be present, but its company context, catalog pricing, tax expectation, payment terms, or integration identifier may still need review.
+This can weaken launch confidence even when core data migration succeeds. SEO, paid campaigns, email links, affiliate links, B2B portals, and customer bookmarks can all depend on URL continuity.
 
 #### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-* Later migration activity is treated as launch validation.
-* The team only checks new record counts after Additional Migration Options.
-* Entity Points planning is discussed without sample revalidation.
-* Company, catalog, account, and store-boundary scenarios are not revisited after later migration activity.
-* The business assumes no records need rechecking because they were migrated before.
+| Signal                                                           | Risk                                                 |
+| ---------------------------------------------------------------- | ---------------------------------------------------- |
+| Redirects are assigned to the SEO team after migration approval. | Data and URL review may become disconnected.         |
+| Top URLs are not part of Demo Migration validation.              | High-value landing paths may fail late.              |
+| Market-specific or localized URLs are ignored.                   | International traffic may land incorrectly.          |
+| Old source URL patterns are assumed to be fully reproducible.    | Shopify URL constraints may force redirect strategy. |
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Use Additional Migration Options as part of launch preparation, not as proof by itself. After later migration activity, rerun high-risk Shopify Plus samples:
+Prepare URL and redirect evidence before Full Migration. Include top product URLs, top collection URLs, CMS Pages, Blog Posts, campaign URLs, regional URLs, localized URLs, and URLs tied to B2B buyer flows. Validate accepted destinations, redirect behavior, and any known Shopify constraints.
 
-* companies and company locations;
-* buyer contacts and permissions;
-* catalog access and pricing;
-* payment terms, tax context, and checkout behavior;
-* new and updated products, customers, orders, CMS Pages, Blog Posts, and redirects;
-* metafields, metaobjects, external IDs, app outputs, and integration-dependent records;
-* store, market, domain, language, and currency behavior where relevant.
-
-The Entity Points rule should also stay clear: newly migrated Product, Customer, Order, and Blog Posts records consume Entity Points when they are migrated for the first time under the service license. Records already recorded through that service license do not consume Entity Points again only because additional migration activity is performed for the same migration path.
+Treat SEO continuity as a launch-readiness requirement, not a cosmetic cleanup task.
 
 #### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-After using Additional Migration Options, compare a new B2B order, an updated company account, a changed catalog product, and a recent redirect against the same validation standards used during the Demo Migration and Full Migration review.
+For a global Shopify Plus launch, review the top revenue-driving product URLs, top category or collection URLs, highest-traffic content pages, market-specific URLs, and old B2B login or ordering paths before approving go-live.
 
 #### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-Later migration activity has been followed by renewed checks of the company, catalog, buyer, account, custom-data, URL, and store-boundary scenarios most likely to affect launch readiness.
+High-value URLs have accepted Shopify Plus destinations, redirect behavior has been tested where supported, and unresolved URL constraints are documented with owner and mitigation plan.
 
-### How Custom Platform Sources Increase Pitfall Risk <a href="#how-custom-platform-sources-increase-pitfall-risk" id="how-custom-platform-sources-increase-pitfall-risk"></a>
+### Pitfall 8: Using the Wrong Later Migration Action <a href="#pitfall-8-using-the-wrong-later-migration-action" id="pitfall-8-using-the-wrong-later-migration-action"></a>
 
-A Custom Platform source makes Shopify Plus pitfall prevention more sensitive because business meaning may exist outside predictable platform structures. Custom B2B roles, contract-pricing rules, customer hierarchies, account permissions, approval flows, external identifiers, bespoke checkout behavior, workflow triggers, or custom content structures may not fit directly into Shopify Plus companies, company locations, catalogs, markets, metafields, metaobjects, or store governance.
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-The key question is not only whether the data can be moved. The stronger question is whether the commercial meaning behind the source data can be represented, simplified, transformed, or intentionally excluded in Shopify Plus without weakening the business. When the source-side behavior is unclear, Custom Service may be needed to assess unsupported structures, external IDs, custom fields, app-owned records, or bespoke transformation requirements.
+The source store continues changing after an earlier migration run, but the team does not define whether the next action should continue with the last used configuration, continue with a new configuration, or perform a new migration. Enterprise teams then validate the wrong outcome.
 
-Custom Platform sources should receive earlier checks for:
+This matters because Shopify Plus launch windows often involve ongoing orders, customer changes, new products, content edits, regional updates, B2B account changes, and integration adjustments. The validation expectation changes depending on the migration action.
 
-* company and customer relationship logic;
-* catalog, pricing, and visibility rules;
-* buyer account, permission, and approval behavior;
-* external identifiers used by ERP, CRM, accounting, fulfillment, analytics, or reporting systems;
-* source-side fields that need metafields, metaobjects, or Custom Service handling;
-* app, subscription, loyalty, membership, marketplace, or integration dependencies;
-* storefront paths, URLs, content structures, and SEO-sensitive redirects.
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+
+| Signal                                                                                   | Risk                                                                       |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| The team says to “run it again” without specifying the action.                           | Scope and validation expectations are unclear.                             |
+| Configuration changes are requested after Demo Migration.                                | Changed mapping or filtering needs separate validation.                    |
+| A refreshed target result is expected but only new records are checked.                  | Earlier migrated data may remain or be replaced differently than expected. |
+| Entity Points are discussed as if every repeated action consumes the same records again. | License planning may be misunderstood.                                     |
+
+#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+
+Define the intended action before execution. Use continuation with the last used configuration when the target setup remains acceptable and the focus is newly added source records. Use continuation with a new configuration when mapping, filtering, or setup choices need adjustment. Use a new migration when the earlier migrated target result should be replaced with a refreshed scope.
+
+Afterward, validate the records affected by that action. Entity Points should be interpreted correctly: newly migrated eligible entities may consume Entity Points when first migrated, but already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path.
+
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+
+A Shopify Plus merchant completes Demo Migration, keeps selling for three weeks, adds new products, receives new B2B orders, and changes custom-field mapping. The team should validate newly added records and the changed mapping, not only repeat the original clean samples.
+
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+
+The team can state the selected migration action, the affected records, whether configuration changed, whether target data should be replaced, and which enterprise samples must be revalidated.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopify Plus migration pitfalls usually come from assuming that enterprise capability automatically creates enterprise clarity. The safer approach is to define commercial structure early, classify custom logic before scope becomes fixed, and validate the scenarios where Shopify Plus changes business meaning.
+Shopify Plus migration pitfalls are preventable when the project treats Plus as an enterprise operating model rather than a larger Shopify store. Organization scope, B2B, Markets, product governance, custom data, order history, apps, integrations, redirects, and later migration actions all need explicit ownership before launch.
 
-Companies, company locations, catalogs, buyer access, stores, markets, custom data, integrations, URLs, and Additional Migration Options all need role-appropriate review. The final question is not whether the Target Platform contains the migrated records. The final question is whether the Target Platform can support the intended B2B, direct-to-consumer, governance, and operational behavior with enough proof to launch confidently.
-
-Before launch, review the Shopify Plus areas most likely to hide structural mistakes: company-location relationships, catalog pricing, account access, store or market boundaries, custom data, integrations, and recently updated records. If the result still feels unclear, Live Chat can help identify whether the issue is a mapping concern, an Add-ons decision, or a Custom Service requirement.
+The strongest prevention plan uses representative samples, separates migration output from Shopify Plus setup, assigns validation responsibility across business teams, preserves Add-ons and Custom Service boundaries, and treats SEO, B2B, localization, and integrations as launch-readiness issues rather than late cleanup.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What is one of the most common Shopify Plus migration pitfalls?**
+**Why do Shopify Plus migration issues often appear late?**
 
-One common pitfall is treating Shopify Plus as standard Shopify with more capacity instead of defining the company, catalog, buyer access, store, market, and governance structures the business needs.
+They often appear late because record counts can pass before enterprise context is validated. B2B, Markets, organization scope, custom data, integrations, redirects, and team ownership may not be visible from simple product, customer, and order totals.
 
-**Why are catalogs a common Shopify Plus migration risk?**
+**What is the biggest Shopify Plus migration pitfall?**
 
-Catalogs affect which products B2B customers can access and which prices apply. If catalog validation only checks setup records, the business may miss whether the right company or location sees the right products at the right prices.
+The biggest pitfall is treating Shopify Plus as ordinary Shopify. Plus projects often require stronger review of organization structure, B2B companies, market-specific content, external-system identifiers, apps, and enterprise validation ownership.
 
-**Why can companies and company locations be migrated incorrectly even when records exist?**
+**How can B2B migration problems be prevented?**
 
-A company can exist while its locations, contacts, permissions, tax context, payment terms, checkout settings, or external identifiers do not match the real business relationship.
+Validate companies, buyers, account identifiers, catalogs, pricing expectations, payment terms, and B2B order context separately from ordinary customer profiles. Decide which needs are migrated, configured, integrated, scoped for Custom Service, or excluded.
 
-**Do Additional Migration Options remove the need to validate Shopify Plus again?**
+**Should Shopify Plus redirects be planned before Full Migration?**
 
-No. Additional Migration Options can help update migration activity before launch, but Shopify Plus scenarios still need renewed checks for companies, catalogs, buyer access, custom data, URLs, integrations, and store or market behavior.
+Yes. High-value product, collection, content, campaign, regional, and B2B URLs should be reviewed before Full Migration. Redirect planning should account for Shopify URL behavior and launch-market expectations.
 
-**When does a Custom Platform source increase Shopify Plus migration risk?**
+**When should Custom Service be considered for Shopify Plus?**
 
-A Custom Platform source increases risk when important B2B rules, pricing logic, account permissions, identifiers, workflow triggers, or operational behavior do not map cleanly into Shopify Plus structures. Those cases usually need earlier interpretation and may require Custom Service.
+Custom Service should be considered when unsupported data, app-owned records, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment is needed to preserve business-critical meaning.
+
+**How should teams validate another migration action before launch?**
+
+They should define whether the action continues with the last used configuration, continues with a new configuration, or performs a new migration. Then they should validate newly affected records, changed configuration, replaced target results, and enterprise-critical samples.

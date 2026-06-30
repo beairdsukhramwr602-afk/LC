@@ -1,6 +1,6 @@
 # Selecting the Right Migration Approach for Shopify
 
-Selecting a Shopify migration approach should begin with the Target Store operating model, not only the number of records being moved. Shopify is a hosted SaaS Target Platform with platform-defined structures for products, options, variants, collections, content, customer records, orders, redirects, apps, metafields, metaobjects, Markets, and storefront behavior. A migration path is sound only when the selected service responsibility matches those structures clearly.
+Selecting a Shopify migration approach should begin with the target store operating model, not only the number of records being moved. Shopify is a hosted SaaS Target Platform with platform-defined structures for products, options, variants, collections, content, customer records, orders, redirects, apps, metafields, metaobjects, Markets, and storefront behavior. A migration path is sound only when the selected service responsibility matches those structures clearly.
 
 A strong approach separates compatible transfer work, guided execution, optional filtering or mapping, custom handling, Entity Points capacity, and post-launch timing needs before Full Migration begins. That separation prevents a common Shopify planning mistake: treating every requirement as either a simple standard migration or a fully custom project, when many stores need a mixed approach.
 
@@ -23,7 +23,7 @@ The migration approach should follow the highest-risk scope area, not the easies
 
 ### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-Standard Service may be enough when the selected migration path supports the required entities, the Shopify Target Store model is already clear, and the customer is comfortable performing available migration actions on the Next-Cart website.
+Standard Service may be enough when the selected migration path supports the required entities, the Shopify target store model is already clear, and the customer is comfortable performing available migration actions on the Next-Cart website.
 
 Standard Service is usually suitable when:
 
@@ -46,7 +46,7 @@ Managed Service is especially useful when:
 
 * internal teams do not have enough time to manage the migration steps directly;
 * the store has many products, variants, collections, customers, orders, CMS Pages, Blog Posts, redirects, or market-specific samples to coordinate;
-* Demo Migration results need structured review before Full Migration;
+* Demo Migration results need structured review before full migration;
 * product, collection, URL, customer, order, and content results must be reviewed by several stakeholders;
 * the source store remains active and launch timing requires tighter coordination;
 * the migration is compatible but operational pressure makes self-performing the process risky;
@@ -104,31 +104,31 @@ The practical question is not only how many records exist. The stronger question
 
 ### How Additional Migration Options Affect the Approach <a href="#how-additional-migration-options-affect-the-approach" id="how-additional-migration-options-affect-the-approach"></a>
 
-Additional Migration Options affect the approach when the Source Platform remains active, scope changes after an earlier run, or launch timing requires refreshed data close to cutover. For Shopify, the practical question is whether later activity changes only a small set of records, changes the configuration used to generate Shopify output, or requires a new migration run for the same migration path.
+Additional Migration Options affect the approach when the source platform remains active, scope changes after an earlier run, or launch timing requires refreshed data close to cutover. For Shopify, the practical question is whether later activity changes only a small set of records, changes the configuration used to generate Shopify output, or requires a new migration run for the same migration path.
 
 Use Additional Migration Options when:
 
-* the Source Platform continues receiving orders close to launch;
+* the source platform continues receiving orders close to launch;
 * new products, customers, orders, reviews, CMS Pages, Blog Posts, or content updates appear after migration;
-* product, collection, URL, or content decisions change after Demo Migration or Full Migration;
+* product, collection, URL, or content decisions change after Demo Migration or full migration;
 * Shopify configuration changes make earlier migrated results unsuitable;
 * filtering, mapping, or configuration decisions are corrected after review;
 * custom-scope records are intentionally excluded first and added later after review;
-* launch timing requires a final refresh before the Target Store goes live.
+* launch timing requires a final refresh before the target store goes live.
 
 The selected option should account for duplicate risk, target cleanup, validation effort, Entity Points capacity, launch timing, and whether the changed scope affects products, variants, collections, URLs, apps, Markets, or customer and order history. If records have already been counted in the service license record, migrating those same counted records again should not be treated as a new Entity Points deduction only because additional migration activity is performed. New Products, Customers, Orders, and Blog Posts still consume Entity Points when they are migrated for the first time under the service license.
 
 ### Choosing the Right Path Before Full Migration <a href="#choosing-the-right-path-before-full-migration" id="choosing-the-right-path-before-full-migration"></a>
 
-The right Shopify approach should be chosen before Full Migration, after representative samples expose the real migration behavior.
+The right Shopify approach should be chosen before full migration, after representative samples expose the real migration behavior.
 
 | Migration situation                                                                                                                                                                         | Recommended path                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Compatible source data, clear Shopify Target Store model, and customer confidence in self-performing migration steps                                                                        | Standard Service with representative Demo Migration review.                                                                                                 |
+| Compatible source data, clear Shopify target store model, and customer confidence in self-performing migration steps                                                                        | Standard Service with representative Demo Migration review.                                                                                                 |
 | Compatible source data, limited internal capacity, launch pressure, or need for Next-Cart-led execution                                                                                     | Managed Service with defined review responsibility.                                                                                                         |
 | Compatible data requiring selective movement, field alignment, or agreed configuration behavior                                                                                             | Standard Service or Managed Service with appropriate Add-ons.                                                                                               |
 | App-owned data, custom product logic, complex source categories, external identifiers, subscriptions, loyalty, wholesale records, Custom Platform source context, or bespoke transformation | Custom Service review before approving scope.                                                                                                               |
-| Active Source Platform with new records or updates expected before launch                                                                                                                   | Plan the suitable Additional Migration Option and define the required revalidation scope.                                                                   |
+| Active source platform with new records or updates expected before launch                                                                                                                   | Plan the suitable Additional Migration Option and define the required revalidation scope.                                                                   |
 | Changed mapping, corrected Shopify configuration, revised scope, or intentionally refreshed earlier migrated results                                                                        | Choose between continuing with the last used configuration, continuing with a new configuration, or performing a new migration for the same migration path. |
 
 A strong Shopify approach does not force every requirement into one service path. It identifies compatible migration work, guided execution needs, optional filtering or mapping, custom review, Entity Points capacity, launch-timing requirements, and final review responsibility before the migration moves into production execution.
@@ -143,7 +143,7 @@ Standard Service, Managed Service, Add-ons, Custom Service, Entity Points planni
 
 **Is Standard Service enough for a Shopify migration?**
 
-Standard Service can be enough when the selected migration path supports the required entities, the Shopify Target Store model is clear, and Demo Migration confirms that representative products, collections, customers, orders, content, and URLs behave correctly.
+Standard Service can be enough when the selected migration path supports the required entities, the Shopify target store model is clear, and Demo Migration confirms that representative products, collections, customers, orders, content, and URLs behave correctly.
 
 **When should a Shopify project use Managed Service?**
 

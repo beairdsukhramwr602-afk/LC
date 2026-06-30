@@ -1,152 +1,131 @@
 # BigCommerce Fit: Ideal and Non-Ideal Profiles
 
-BigCommerce is a strong Target Platform when a business wants hosted commerce operations without flattening the way its catalog, pricing, storefront, and integration data works. It is usually a better fit when the future store needs structured product choices, category-led discovery, customer-group or price-list context, channel or storefront planning, redirect control, and app-connected business processes that can be validated clearly after migration.
+BigCommerce is usually a strong Target Platform when a business wants hosted SaaS governance without reducing the store to a basic catalog. It can fit merchants that need structured product choices, category-led discovery, customer-group or price-list context, channel or storefront planning, redirect control, API/app-connected workflows, and enough platform definition to reduce infrastructure burden.
 
-The fit question is not whether BigCommerce can receive common store records. Products, categories, customers, orders, CMS Pages, Blog Posts, and related records may all be part of the migration scope, but good fit depends on whether the business can define what those records must mean in BigCommerce. A store with fewer records but complicated product choices or pricing rules may require more planning than a larger store with simple products and a single customer-facing context.
+Fit should not be judged only by platform popularity or record volume. A smaller store with complicated product choices, price lists, and external-system dependencies may require more careful BigCommerce planning than a larger catalog with ordinary products and public pricing. A merchant with clean data may still be a weak fit if the future store depends on behavior BigCommerce does not natively reproduce or that cannot be handled through supported migration scope, Add-ons, Custom Service, target-side setup, or connected apps.
 
-### What Makes BigCommerce a Strong Fit <a href="#what-makes-bigcommerce-a-strong-fit" id="what-makes-bigcommerce-a-strong-fit"></a>
+### What BigCommerce Fit Means in Migration Planning <a href="#what-bigcommerce-fit-means-in-migration-planning" id="what-bigcommerce-fit-means-in-migration-planning"></a>
 
-BigCommerce is often a strong fit when hosted platform governance and structured commerce behavior are both important. The platform can support businesses that want SaaS operations while still needing explicit control over product structure, customer context, pricing rules, storefront channels, redirects, custom fields, metafields, and integrations.
+BigCommerce fit is an operating-model decision. The merchant is choosing not only where store records should land, but how the future store should sell, price, present, redirect, and integrate those records. Products, categories, customers, orders, CMS Pages, Blog Posts, images, redirects, custom fields, and metafields may all migrate as data, but the more important question is whether they support the right commercial behavior in BigCommerce.
 
-| Strong-fit signal                           | Why it matters for migration                                                                                                        |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Product choices affect buying behavior      | Options, variants, modifiers, and customization fields need deliberate interpretation.                                              |
-| Pricing varies by customer or context       | Customer groups, price lists, bulk pricing, and negotiated pricing need commercial continuity.                                      |
-| Category discovery is important             | Category trees, product assignments, navigation, and landing-page structure influence revenue and SEO.                              |
-| Storefront or channel governance matters    | Multi-Storefront or channel planning requires clear assignment of products, categories, content, pricing, and URLs.                 |
-| App or external-system data carries meaning | Custom fields, metafields, ERP IDs, subscriptions, reviews, search, merchandising, or fulfillment logic may affect migration scope. |
+A strong fit often appears when the merchant can define product-choice rules, pricing context, customer segments, storefront scope, integration needs, and launch expectations clearly. A conditional fit appears when the merchant wants BigCommerce but still needs deeper investigation into custom product logic, customer-group behavior, price lists, Multi-Storefront expectations, app-owned data, or SEO continuity. A weaker fit appears when the merchant expects BigCommerce to reproduce an old platform’s custom commerce application without simplifying, rebuilding, or scoping special behavior.
 
-A strong BigCommerce fit usually appears when the business can explain the operating model behind the future store. The migration plan should not only answer which entities move; it should also clarify which customer groups matter, which pricing contexts must remain accurate, which storefronts need different treatment, and which custom or app-managed data must be preserved through Add-ons or Custom Service.
+| Fit dimension     | Strong BigCommerce signal                                                | Conditional signal                                           | Weaker signal                                                                               |
+| ----------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Catalog structure | Products, variants, modifiers, and categories can be classified clearly. | Product choices need sample review and mapping decisions.    | Product builders, bundles, or custom configurators drive the core buying path.              |
+| Pricing           | Public, sale, bulk, customer-group, or price-list logic is defined.      | Pricing varies by segment, source rules, or external system. | Pricing depends on custom quote engines, negotiated workflows, or unsupported app behavior. |
+| Storefront scope  | One storefront or clearly planned channel/storefront contexts.           | Multi-Storefront or channel rules need planning.             | Storefront behavior depends heavily on custom front-end logic or source-specific templates. |
+| Content and URLs  | Important pages and redirects are identified.                            | SEO and redirect logic require prioritization.               | Content architecture, CMS behavior, or URL strategy is central and hard to reproduce.       |
+| Integrations      | Apps and external systems are known and separable.                       | App-owned data or external IDs need scope review.            | Core operations depend on unsupported integrations or custom data flows.                    |
 
-### Ideal Migration Profiles for BigCommerce <a href="#ideal-migration-profiles-for-bigcommerce" id="ideal-migration-profiles-for-bigcommerce"></a>
+A BigCommerce fit decision becomes reliable when the merchant can explain which old behaviors should survive, which should change, which should be rebuilt, and which can be retired.
 
-BigCommerce is often well suited to merchants that want a hosted platform but still need structured control over catalog, pricing, and storefront behavior.
+### Strong-Fit BigCommerce Migration Profiles <a href="#strong-fit-bigcommerce-migration-profiles" id="strong-fit-bigcommerce-migration-profiles"></a>
 
-#### Businesses with option-heavy or choice-sensitive catalogs <a href="#businesses-with-option-heavy-or-choice-sensitive-catalogs" id="businesses-with-option-heavy-or-choice-sensitive-catalogs"></a>
+BigCommerce is often a strong fit for merchants that want a hosted platform but still need serious commerce structure. These merchants usually do not want to manage the same infrastructure and extension burden that may exist in open-source systems, but they also do not want to flatten catalog, pricing, or storefront complexity into a minimal hosted setup.
 
-BigCommerce can be a strong fit when product choices affect price, SKU behavior, inventory, personalization, or customer experience. These stores often need careful separation between true sellable variants, modifier-style choices, custom product fields, and surrounding custom logic.
+Strong-fit profiles include merchants with option-heavy catalogs, stores with category-driven buying journeys, merchants using customer groups or price lists, teams that need API and app integration, and businesses that expect future growth across channels or storefronts. The common factor is not size. It is the ability to define how BigCommerce should organize and expose the commerce data after migration.
 
-A good candidate can usually identify which product choices should become purchasable variations, which should remain customer-input or modifier-style choices, and which require Custom Service because the original behavior is app-driven, rule-driven, or outside normal supported structures.
+| Strong-fit profile                                        | Why BigCommerce can fit                                                                                                  | Migration focus                                                                                        |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Mid-market merchant leaving a self-hosted platform        | Hosted SaaS reduces infrastructure burden while preserving structured commerce planning.                                 | Translate product options, categories, customer/pricing logic, redirects, and custom fields carefully. |
+| Merchant with option-heavy products                       | BigCommerce can support structured product choices when variants, modifiers, and custom fields are classified correctly. | Validate best-selling products and complex option patterns.                                            |
+| Merchant with wholesale or segmented pricing              | Customer groups, price lists, and pricing context can be planned explicitly.                                             | Confirm which customers see which pricing and how source pricing rules translate.                      |
+| Merchant with category-led discovery                      | Category trees and product assignments can support shopper paths and SEO when planned.                                   | Preserve high-value category paths, product assignments, and redirects.                                |
+| Merchant with app/API operations                          | BigCommerce’s API and app ecosystem can support connected commerce.                                                      | Separate migrated records from integrations, app-owned data, and external IDs.                         |
+| Merchant planning multiple storefront or channel contexts | Channel and storefront planning can support broader customer-facing structures.                                          | Confirm assignments, currencies, menus, visibility, and storefront-specific expectations.              |
 
-#### Businesses with customer-group or price-list requirements <a href="#businesses-with-customer-group-or-price-list-requirements" id="businesses-with-customer-group-or-price-list-requirements"></a>
+Strong fit does not mean low effort. It means BigCommerce matches the future operating model closely enough that migration work can focus on clean translation, preparation, service path, validation, and launch readiness.
 
-BigCommerce is often a strong fit when pricing is not one public value for every customer. Customer groups, price lists, bulk pricing, negotiated pricing, wholesale expectations, loyalty segments, regional differences, or external pricing feeds can all make fit stronger when the business can define how pricing should operate in the Target Platform.
+### Conditional-Fit BigCommerce Migration Profiles <a href="#conditional-fit-bigcommerce-migration-profiles" id="conditional-fit-bigcommerce-migration-profiles"></a>
 
-The fit is weaker when pricing differences are undocumented or spread across apps, spreadsheets, sales-team exceptions, or external systems that are not included in the migration plan.
+BigCommerce becomes a conditional fit when the business goal is plausible but the migration assumptions need stronger evidence. These projects may still succeed, but the merchant should not proceed as if the move were a basic product/customer/order transfer.
 
-#### Businesses with category-led buying journeys <a href="#businesses-with-category-led-buying-journeys" id="businesses-with-category-led-buying-journeys"></a>
+Conditional scenarios often involve configurable products, complex modifiers, customer-group pricing, price lists, B2B-like buyer behavior, product catalogs spread across channels, stores with high SEO dependence, app-managed reviews or subscriptions, ERP-driven product data, custom fields, custom checkout-adjacent behavior, or unusual order/customer records. The issue is not that BigCommerce cannot be used. The issue is that the migration path needs sample-based proof before Full Migration.
 
-BigCommerce can fit stores where categories are central to browsing, merchandising, search traffic, and campaign landing paths. In these cases, category trees and product assignments are part of the sales experience, not just a catalog archive.
+| Conditional scenario                              | What to confirm                                                                                    | Why it matters                                                                               |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Product choices are complex                       | Which choices become variants, variant options, modifiers, custom fields, or Custom Service scope. | Product-choice mistakes can change the buying path.                                          |
+| Pricing varies by customer or segment             | Whether customer groups, price lists, bulk pricing, or external pricing logic are involved.        | Wrong pricing can harm revenue and customer trust.                                           |
+| Multi-Storefront or channel planning matters      | Which products, categories, content, currencies, and URLs belong in each context.                  | Visibility and discovery may vary by storefront.                                             |
+| SEO traffic depends on old paths                  | Which product, category, CMS Page, and Blog Post URLs need redirect planning.                      | A technically complete migration can still weaken traffic continuity.                        |
+| Apps or external systems own key data             | Which data is supported, Add-on suitable, Custom Service scope, target-side setup, or excluded.    | App-owned data often does not behave like ordinary platform records.                         |
+| Source platform has custom fields or external IDs | Which fields must be preserved and how BigCommerce should use them.                                | Hidden identifiers may connect to ERP, CRM, accounting, fulfillment, or reporting workflows. |
 
-This profile is especially relevant for stores with many product families, technical products, parts, equipment, accessories, collections, or buying paths that depend on clear category hierarchy.
+Conditional fit should result in a clear next step: run Demo Migration with representative samples, adjust scope, prepare Add-ons, evaluate Custom Service, simplify source behavior, or decide that BigCommerce is not the right target for the current operating model.
 
-#### Businesses planning multiple storefront or channel contexts <a href="#businesses-planning-multiple-storefront-or-channel-contexts" id="businesses-planning-multiple-storefront-or-channel-contexts"></a>
+### Weaker-Fit or Non-Ideal BigCommerce Profiles <a href="#weaker-fit-or-non-ideal-bigcommerce-profiles" id="weaker-fit-or-non-ideal-bigcommerce-profiles"></a>
 
-BigCommerce can be a strong fit when the merchant needs separate storefront experiences, brand contexts, regional experiences, language or currency expectations, B2B-like access paths, or channel-specific product presentation under more centralized governance.
+BigCommerce may be a weaker fit when the merchant’s primary requirement is direct reproduction of a highly customized source commerce application. This can happen when the old store depends on custom checkout logic, quote workflows, marketplace seller structures, subscription engines, membership systems, ERP-owned pricing, external product builders, deeply customized front-end behavior, or custom database records that drive the buying experience.
 
-The strongest candidates know why each storefront or channel exists. Fit becomes harder to prove when multiple storefronts are planned because the capability is available, but the business has not decided product scope, customer audience, content ownership, pricing context, URL behavior, and validation responsibility for each context.
+A weaker fit does not always mean the merchant should avoid BigCommerce. Sometimes the correct strategy is to use BigCommerce as the future commerce core while simplifying, rebuilding, or replacing old behavior. But the migration should not promise direct parity where the source system depended on code, extensions, modules, apps, or external systems that BigCommerce does not natively reproduce.
 
-#### Businesses with manageable custom-data and integration needs <a href="#businesses-with-manageable-custom-data-and-integration-needs" id="businesses-with-manageable-custom-data-and-integration-needs"></a>
+| Weaker-fit signal                                  | Why it creates risk                                                                                                       |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Marketplace or multi-vendor logic is central       | Seller ownership, commissions, vendor fulfillment, and split operations may not fit ordinary BigCommerce migration scope. |
+| B2B behavior depends on custom workflows           | Company accounts, quotes, approvals, negotiated pricing, and permissions may require separate platform or app planning.   |
+| Custom checkout logic drives conversion            | Checkout-adjacent behavior is not the same as migrating products and orders.                                              |
+| Product configuration depends on external builders | Standard variants or modifiers may not reproduce the source buying experience.                                            |
+| ERP or PIM systems own live product/pricing truth  | Migration may only move a snapshot unless future integration ownership is planned.                                        |
+| CMS or front-end architecture is central           | BigCommerce content and storefront setup may need rebuilding rather than direct data transfer.                            |
 
-BigCommerce can fit stores that rely on apps, custom fields, metafields, external IDs, ERP or CRM references, reviews, subscriptions, search, merchandising, fulfillment, or reporting systems, as long as those dependencies are inventoried and classified before migration.
+A non-ideal BigCommerce project should be reframed before migration. The merchant should decide what BigCommerce will own, what connected systems will own, what should be rebuilt, and what should be excluded. Without that decision, the migration may succeed technically while failing the operating model.
 
-The fit is strongest when the business separates normal migrated records from custom data, Add-ons, and Custom Service requirements early. It weakens when custom behavior is discovered only after Demo Migration review.
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
 
-### Conditional Fit Scenarios <a href="#conditional-fit-scenarios" id="conditional-fit-scenarios"></a>
+BigCommerce fit often depends on the platform the merchant is leaving. A Shopify merchant may assume apps, metafields, variant behavior, and redirects will translate directly. A Shopify Plus merchant may expect enterprise-level segmentation, B2B, Markets, or expansion-store behavior to carry over unchanged. A Magento or Adobe Commerce merchant may expect configurable products, attributes, attribute sets, customer groups, multi-store scope, URL rewrites, and custom modules to map directly. A WooCommerce merchant may expect WordPress content, plugins, categories, tags, and URL structures to behave the same way.
 
-Some stores can be good BigCommerce candidates, but only after key assumptions are clarified. Conditional fit does not mean BigCommerce is a poor choice; it means the migration path should not be confirmed until the unresolved areas are made explicit.
+These expectations should be reviewed as translation questions rather than accepted as direct equivalents.
 
-| Conditional scenario                          | What must be clarified before fit is confirmed                                                                  |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Products have many option combinations        | Decide which choices are variants, modifiers, custom fields, or custom logic.                                   |
-| Pricing depends on customer relationships     | Confirm customer groups, price lists, bulk pricing, and external pricing ownership.                             |
-| Multi-Storefront is planned                   | Define storefront purpose, product scope, category structure, URLs, content, pricing, and validation ownership. |
-| Source data comes from apps or custom fields  | Identify which data can be mapped, which needs Add-ons, and which needs Custom Service.                         |
-| Existing URLs carry traffic or external links | Prioritize high-value redirects and validate route continuity after migration.                                  |
+| Source expectation                           | BigCommerce fit question                                                                   |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Shopify variants, options, and metafields    | Which values become variants, modifiers, custom fields, metafields, or app/custom scope?   |
+| Magento configurable products and attributes | Which attributes affect product choice, filtering, SEO, pricing, or external systems?      |
+| WooCommerce plugins and WordPress content    | Which behavior is product data, CMS content, plugin data, or target-side setup?            |
+| PrestaShop/OpenCart modules                  | Which module-owned fields are supported and which require Custom Service review?           |
+| Legacy category and URL patterns             | Which paths still matter for discovery, SEO, and customer support?                         |
+| Custom platform fields                       | Which identifiers or business rules must survive inside BigCommerce or a connected system? |
 
-These scenarios should be resolved before the business treats BigCommerce as a final Target Platform decision. If the unresolved area affects revenue, search visibility, buyer access, pricing, fulfillment, or compliance, the migration should include stronger sample design and clearer acceptance criteria before Full Migration.
+This translation step protects BigCommerce fit from vague optimism. It shows whether the merchant is moving to BigCommerce because the future operating model fits, or simply because the current source store needs to be replaced.
 
-### Non-Ideal or Higher-Risk Profiles <a href="#non-ideal-or-higher-risk-profiles" id="non-ideal-or-higher-risk-profiles"></a>
+### Fit Signals to Confirm Before Choosing BigCommerce <a href="#fit-signals-to-confirm-before-choosing-bigcommerce" id="fit-signals-to-confirm-before-choosing-bigcommerce"></a>
 
-BigCommerce may still be usable for many businesses, but some profiles create higher fit risk. The issue is usually not that BigCommerce lacks value. The issue is that the business model, data ownership, or operating requirements are not ready for the platform structure.
+Before selecting BigCommerce as the Target Platform, the merchant should confirm the business outcome behind the migration. Strong fit is likely when the team can define how products should be selected, how prices should appear, how customer groups should work, how categories should guide discovery, how channels or storefronts should be assigned, and which URLs or content need continuity.
 
-#### Stores choosing BigCommerce only because it is hosted <a href="#stores-choosing-bigcommerce-only-because-it-is-hosted" id="stores-choosing-bigcommerce-only-because-it-is-hosted"></a>
+The merchant should also identify where BigCommerce should not be expected to recreate old behavior automatically. Live integrations, custom checkout rules, unusual product builders, quote workflows, marketplace logic, subscription behavior, app-specific merchandising, custom front-end components, or source-specific theme logic may need separate implementation, Add-ons, Custom Service, or exclusion.
 
-Hosted infrastructure is a useful reason to consider BigCommerce, but it is not enough to prove fit. If the business does not need product-choice structure, customer-group or price-list planning, category-led discovery, storefront/channel governance, redirects, custom fields, or API-connected integrations, the platform may add structure without enough practical benefit.
+Good fit evidence includes real examples: a complex product family, a price-list or customer-group case, a high-value category path, a channel assignment case, a redirect sample, a customer with order history, and a custom field or app-owned record. If the team cannot provide these examples, the BigCommerce decision may still be right, but migration scope is not ready.
 
-A simpler Target Platform may be easier to operate when the store has simple products, one customer group, limited content, no segmented pricing, and no meaningful channel or storefront complexity.
+### Turning BigCommerce Fit Into a Migration Scope Decision <a href="#turning-bigcommerce-fit-into-a-migration-scope-decision" id="turning-bigcommerce-fit-into-a-migration-scope-decision"></a>
 
-#### Stores with undefined product-choice behavior <a href="#stores-with-undefined-product-choice-behavior" id="stores-with-undefined-product-choice-behavior"></a>
+Fit should lead directly into scope discipline. A strong-fit BigCommerce merchant can focus on clean product, customer, order, category, content, redirect, and app-boundary planning. A conditional-fit merchant should invest more effort in Demo Migration samples, field mapping, data filtering, pricing review, storefront and channel planning, and Custom Service evaluation. A weaker-fit merchant may need to simplify the future operating model before confirming BigCommerce as the target.
 
-BigCommerce fit becomes risky when source product options are inconsistent, undocumented, or commercially unclear. If size, color, personalization, bundles, add-ons, uploads, subscriptions, warranties, or configuration choices are all mixed together without clear meaning, migration can place data into the Target Platform without preserving how customers buy.
-
-These stores need product-choice classification before fit can be judged confidently.
-
-#### Stores with pricing rules that no one owns <a href="#stores-with-pricing-rules-that-no-one-owns" id="stores-with-pricing-rules-that-no-one-owns"></a>
-
-BigCommerce can support structured pricing scenarios, but only when the pricing logic is known. Fit weakens when negotiated prices, wholesale rules, customer discounts, bulk pricing, price lists, or external pricing updates are spread across staff knowledge, apps, spreadsheets, or integrations without a clear source of truth.
-
-If pricing ownership is unclear, the migration may preserve visible prices while missing the commercial rules that matter to high-value customers.
-
-#### Stores expecting apps to transfer automatically <a href="#stores-expecting-apps-to-transfer-automatically" id="stores-expecting-apps-to-transfer-automatically"></a>
-
-BigCommerce fit weakens when the store depends on app behavior that is expected to appear automatically after migration. Reviews, subscriptions, personalization, search, merchandising, loyalty, tax, fulfillment, shipping rules, reporting, and B2B-like workflows may require reconfiguration, app replacement, mapping, or Custom Service.
-
-The right fit discussion should separate records that can be migrated from behavior that must be rebuilt, configured, or validated outside ordinary entity movement.
-
-#### Stores with uncontrolled storefront expansion plans <a href="#stores-with-uncontrolled-storefront-expansion-plans" id="stores-with-uncontrolled-storefront-expansion-plans"></a>
-
-A merchant may want multiple storefronts, brands, or regions, but fit becomes risky when no one has defined what changes by storefront. Products, categories, customer groups, price lists, content, domains, redirects, language, currency, integrations, and operational ownership can all become confusing if storefront expansion is treated as a design preference rather than a governance decision.
-
-BigCommerce is a better fit when storefront separation has a business reason and a validation plan.
-
-### Fit Signals to Confirm Before Migration <a href="#fit-signals-to-confirm-before-migration" id="fit-signals-to-confirm-before-migration"></a>
-
-A BigCommerce fit review should produce practical answers before migration begins. The strongest signals are specific, testable, and tied to commercial outcomes.
-
-| Fit signal                   | A strong answer looks like                                                                                      |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Product-choice ownership     | Key products are classified by variants, modifiers, custom fields, app behavior, or Custom Service need.        |
-| Pricing ownership            | Customer groups, price lists, bulk pricing, negotiated prices, and external pricing systems are documented.     |
-| Discovery ownership          | Category trees, navigation, landing pages, and high-value URLs are prioritized.                                 |
-| Storefront/channel ownership | Each storefront or channel has a clear product, content, pricing, domain, and validation purpose.               |
-| Custom-data ownership        | Custom fields, metafields, app data, outside-system identifiers, and integration dependencies are inventoried.  |
-| Review ownership             | The team knows which stakeholders must approve catalog, pricing, customer, order, URL, and custom-data samples. |
-
-If these answers are weak, the problem may not be BigCommerce itself. The problem may be that the migration plan is not ready to use BigCommerce safely.
-
-### How Fit Affects Migration Planning <a href="#how-fit-affects-migration-planning" id="how-fit-affects-migration-planning"></a>
-
-BigCommerce fit directly affects migration planning because the same record count can produce very different implementation burdens. A store with many simple products may be a cleaner migration than a smaller store with complex product options, customer-specific pricing, app-owned product data, multiple storefront contexts, and external IDs tied to operations.
-
-When fit is strong and the data structure is straightforward, Standard Service may be sufficient for a clearly supported migration path. When the store needs reviewer coordination, sample planning, product-choice interpretation, pricing review, storefront/channel checks, or launch sequencing, Managed Service may be more appropriate. When the scope requires filtering, mapping, or data configuration within supported behavior, Add-ons may be needed. When the store depends on unsupported app data, custom fields, outside-system identifiers, Custom Platform sources, or bespoke transformation, Custom Service should be considered.
-
-Additional Migration Options should not be used as a reason to postpone fit decisions. Follow-up migration activity may help handle new or changed data later, but the original Target Platform fit still depends on whether BigCommerce can represent the business model that must go live.
+This distinction prevents a common mistake: treating BigCommerce’s hosted architecture as proof that migration will be simple. Hosted SaaS reduces infrastructure responsibility, but it does not remove the need to interpret source product behavior, pricing rules, customer segmentation, storefront discovery, redirects, and custom data. The practical scope should state what migrates into BigCommerce, what must be configured in BigCommerce, what belongs to an Add-on, what requires Custom Service, and what will remain outside the migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-BigCommerce is a strong fit when hosted governance and structured commerce behavior solve a real business problem. It works best for merchants that can define their product choices, pricing context, customer segments, category discovery, storefront or channel needs, URLs, custom data, and app dependencies before migration begins.
+BigCommerce is a strong Target Platform for merchants that want hosted SaaS commerce with serious catalog, pricing, storefront, content, and integration structure. It is strongest when the business can define product-choice behavior, customer and pricing context, category discovery, channel or storefront scope, redirect needs, and integration boundaries before migration.
 
-A Demo Migration should include the cases that prove fit: option-heavy products, segmented pricing scenarios, customer groups, price lists, category paths, storefront/channel examples, high-value URLs, custom fields, metafields, app-related data, and external identifiers. If those samples reveal ambiguity, resolve the fit issue before expanding the migration scope.
+It becomes conditional or weaker when the merchant expects BigCommerce to reproduce custom source behavior without scoping special requirements. The best fit decision is not based on platform reputation or record count. It is based on whether the future BigCommerce store can support the commercial behavior the business needs after launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is BigCommerce a good fit only for large stores?**
+**Who is usually the best fit for BigCommerce migration?**
 
-No. BigCommerce can fit smaller stores when product choices, pricing context, categories, storefront needs, or custom data require structured handling. Store size matters less than whether the platform structure supports the business model.
+BigCommerce is usually strongest for merchants that want hosted SaaS operations with structured catalog, product-choice, pricing, category, storefront, redirect, and integration needs that can be planned and validated clearly.
 
-**What makes BigCommerce a stronger fit than a simpler hosted platform?**
+**Is BigCommerce a good fit for stores with complex products?**
 
-BigCommerce becomes more compelling when the store needs clearer handling of product options, variants, modifiers, customer groups, price lists, category structure, storefront/channel assignments, redirects, custom fields, metafields, apps, or external integrations.
+It can be. Complex products need careful review so source choices become the right BigCommerce structure, such as variants, variant options, modifiers, custom fields, metafields, target-side setup, Add-ons, or Custom Service scope.
 
-**When is BigCommerce a weaker migration target?**
+**When is BigCommerce a weaker fit?**
 
-BigCommerce is a weaker fit when the business only wants hosted convenience and does not need the product, pricing, storefront, URL, custom-data, or integration structure that BigCommerce planning requires.
+BigCommerce is weaker when the merchant expects direct reproduction of custom checkout logic, marketplace operations, external product builders, ERP-owned pricing, quote workflows, subscriptions, or app-owned data without simplifying, rebuilding, or scoping those requirements.
 
-**Should customer groups and price lists affect the fit decision?**
+**How does BigCommerce compare with Shopify for migration fit?**
 
-Yes. If customer segmentation or price-list behavior affects buying outcomes, those rules should be treated as fit-critical. They need clear evidence, migration scope decisions, and validation ownership.
+Both are hosted SaaS commerce platforms, but BigCommerce fit often needs stronger attention to product options, modifiers, price lists, customer groups, channels, redirects, and API/app-connected data. The right comparison depends on the store’s future operating model, not on platform labels alone.
 
-**Can Additional Migration Options fix a poor BigCommerce fit decision later?**
+**What should be confirmed before choosing BigCommerce?**
 
-No. Additional Migration Options can support later migration activity, but they do not correct unclear product logic, pricing ownership, storefront governance, custom-data classification, or platform-fit assumptions that should have been resolved before launch.
+Confirm product-choice samples, customer/pricing logic, important categories, channel or storefront assumptions, high-value URLs, content needs, app-owned data, custom fields, external identifiers, and who will validate the Target Platform result.

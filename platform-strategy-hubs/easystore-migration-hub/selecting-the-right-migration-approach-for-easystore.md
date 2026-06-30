@@ -1,216 +1,167 @@
 # Selecting the Right Migration Approach for EasyStore
 
-EasyStore by JoomShaper migration planning should not begin with a generic choice between doing the migration yourself or asking for help. The better question is whether the source store can become a reliable EasyStore implementation inside Joomla without losing the meaning of products, variants, categories, customers, orders, configuration-sensitive behavior, storefront routes, or extension-dependent data.
+Selecting the right EasyStore by JoomShaper migration approach depends on how much of the store is ordinary commerce data, how much belongs to Joomla site structure, and how much depends on configuration, SP Page Builder presentation, custom fields, third-party extensions, or external systems. The safest approach is not the most complex one by default. It is the one that matches the real evidence in the source store and the expected target operation.
 
-Because EasyStore operates as a Joomla e-commerce extension, the right migration approach depends on both commerce data and site context. A simple catalog with clean products, clear categories, ordinary customer records, and readable order history may be suitable for a lighter approach. A store that depends on custom fields, source extensions, unusual checkout logic, complex product options, Joomla-specific content relationships, or third-party identifiers usually needs deeper review before the service path is chosen.
+EasyStore sits inside Joomla, so service choice should separate supported migration records from target-side implementation. Products, categories, customers, orders, coupons, inventory-related values, and historical context may be part of migration scope when supported. Menus, aliases, templates, page-builder layouts, payment setup, tax rules, shipping methods, checkout configuration, notifications, and integration setup may require Joomla/EasyStore configuration or separate implementation work.
 
-### Why Approach Choice Depends on EasyStore-Specific Migration Burden <a href="#why-approach-choice-depends-on-easystore-specific-migration-burden" id="why-approach-choice-depends-on-easystore-specific-migration-burden"></a>
+### Start With Scope, Not Service Names <a href="#start-with-scope-not-service-names" id="start-with-scope-not-service-names"></a>
 
-The selected migration approach should reflect the burden carried by the source store and the target EasyStore environment. In this context, burden means the amount of interpretation, configuration, mapping, validation, and possible customization required before the migrated result can be trusted.
+The first decision is not whether the merchant wants the lightest or most assisted path. The first decision is what must actually be moved, configured, mapped, rebuilt, or reviewed. If the scope is ordinary and supported, a straightforward approach may be enough. If the source store contains variant complexity, custom data, extension-owned records, external identifiers, or storefront presentation requirements, the approach needs stronger planning.
 
-A migration to EasyStore by JoomShaper can involve several connected layers:
+| Scope question                                                                                               | Why it affects approach                                                    |
+| ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Are products simple, variant-heavy, or custom-field-heavy?                                                   | Determines whether standard mapping is likely to preserve selling meaning. |
+| Are categories, tags, images, coupons, inventory, and order history clean enough to review?                  | Affects whether Demo Migration findings can be judged confidently.         |
+| Does customer identity depend on Joomla users, customer groups, memberships, or external records?            | May require Managed Service, Custom Service, or separate configuration.    |
+| Does storefront continuity depend on menus, URLs, SP Page Builder, templates, or modules?                    | Separates data migration from site implementation and SEO planning.        |
+| Are tax, shipping, payment, refund, or checkout expectations live configuration rather than historical data? | Prevents configuration work from being confused with migrated output.      |
 
-* commerce records such as products, categories, customers, orders, coupons, reviews, and inventory;
-* configuration-sensitive areas such as tax, shipping, payment, checkout, refunds, and store settings;
-* Joomla site structure such as menus, templates, modules, CMS Pages, Blog Posts, landing pages, and internal links;
-* presentation tools such as SP Page Builder or custom Joomla layouts;
-* source extensions, custom fields, third-party identifiers, and integration-owned data.
+A service path should be chosen after these questions are understood, not before.
 
-The right approach is not determined by record volume alone. A small store can require Custom Service if its key behavior depends on custom data. A larger store can remain suitable for Standard Service if the source data is clean, supported, and structurally predictable.
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-#### The central approach question <a href="#the-central-approach-question" id="the-central-approach-question"></a>
+Standard Service may be suitable when the store structure is clear, source data is clean, required records are within supported migration behavior, and the merchant can review and manage target-side setup. This path works best when EasyStore is expected to receive ordinary commerce data and the merchant has a realistic understanding of what still belongs to Joomla/EasyStore configuration.
 
-Before selecting the approach, the merchant should be able to answer this question:
+Standard Service is more likely to fit when products are mostly simple or consistently variant-based, categories are understandable, customer and order history does not depend on unusual custom fields, and the launch plan does not require bespoke transformation of source logic.
 
-> Can the expected EasyStore result be achieved through standard service capability and applicable Add-ons, or does the migration require custom interpretation, transformation, or logic adjustment?
+| Standard Service fit signal                                                | Why it supports a lighter approach                                   |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Product, category, customer, and order records are structurally ordinary   | Standard supported behavior is more likely to preserve core meaning. |
+| Variants follow consistent size, color, material, or package patterns      | Mapping can be reviewed through representative samples.              |
+| Joomla menus, templates, and SP Page Builder work are handled separately   | Data migration is not expected to recreate the entire visual site.   |
+| Tax, shipping, payment, and checkout setup will be configured in EasyStore | Live operation is not confused with historical records.              |
+| The merchant can validate Demo Migration samples carefully                 | Customer-led review is practical and informed.                       |
 
-If the answer is clear, the service path is usually easier to choose. If the answer is uncertain, Demo Migration and support review should be used before Full Migration.
-
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
-
-Standard Service is usually appropriate when the source store is structurally clear and the merchant can self-perform the migration process on the Next-Cart website with 24/7 expert support. For EasyStore by JoomShaper, this normally means the source data can be interpreted without bespoke logic and the target Joomla/EasyStore setup is already prepared well enough for the migrated records to be reviewed.
-
-A Standard Service path is often reasonable when products, categories, customers, and orders have ordinary structures, when product variants do not rely on source-specific behavior, and when storefront implementation work can be handled separately in Joomla after the commerce data is migrated.
-
-#### Good Standard Service signals <a href="#good-standard-service-signals" id="good-standard-service-signals"></a>
-
-Standard Service is a stronger candidate when the merchant has:
-
-* clear product names, descriptions, SKUs, prices, images, categories, tags, and inventory values;
-* manageable product variants that can be represented in EasyStore without custom transformation;
-* customer records that do not depend on unusual membership, group, credit, or approval logic;
-* order history that is needed for reference but does not require bespoke status reconstruction;
-* coupons, reviews, CMS Pages, Blog Posts, and other supported records that can be reviewed through ordinary migration output;
-* tax, shipping, payment, and checkout expectations that can be configured or reviewed within normal EasyStore setup;
-* a Joomla site implementation team or merchant-side owner who can handle menus, templates, page layout, and visual presentation after migration.
-
-Standard Service should still include careful Demo Migration review. The merchant should not assume that a lighter service path removes the need to validate products, variants, orders, customer records, and store navigation context.
-
-#### Where Standard Service can become too light <a href="#where-standard-service-can-become-too-light" id="where-standard-service-can-become-too-light"></a>
-
-Standard Service becomes risky when the source store looks simple in record counts but contains hidden structure. Examples include option-level pricing, product bundles, app-owned product fields, external order identifiers, custom customer groups, source-specific checkout fields, or historical order statuses that have operational meaning.
-
-If those details are important to the expected EasyStore result, the approach should be reviewed before Full Migration rather than after launch preparation has already begun.
+Even under Standard Service, preparation remains important. A straightforward service path can still produce weak results if the merchant selects poor samples or expects migration to replace target-side setup.
 
 ### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
 
-Managed Service is safer when the migration can still be handled through standard service capability and purchased Add-ons, but the merchant wants Next-Cart-led execution. This can be useful when the merchant lacks time, internal migration experience, or confidence in coordinating data transfer, Demo Migration review, and Full Migration timing.
+Managed Service is safer when the merchant needs more guidance around sequencing, review, interpretation, or launch coordination. EasyStore projects can benefit from this when the merchant understands the target outcome but needs help separating migration findings from Joomla/EasyStore configuration issues.
 
-For EasyStore by JoomShaper, Managed Service can be a practical fit when the project is not heavily custom but still needs organized execution because the store must coordinate product data, customer and order history, coupon behavior, Joomla readiness, and launch timing.
+Managed Service can be useful when the store has several moving parts: products with variants, product images, categories and tags, coupons, inventory, customer/order history, refunds, shipping/tax examples, SP Page Builder layouts, priority URLs, and a Joomla site implementation timeline. The need is not necessarily custom migration logic. The need may be better coordination and review.
 
-#### Managed Service fits execution burden, not custom logic <a href="#managed-service-fits-execution-burden-not-custom-logic" id="managed-service-fits-execution-burden-not-custom-logic"></a>
+| Managed Service signal                                                | What the merchant likely needs                                                 |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Demo Migration findings are hard to classify                          | Help distinguishing data issues, configuration tasks, and implementation gaps. |
+| Source records are mostly supported but operational review is complex | Guided sample selection and review sequencing.                                 |
+| Joomla site setup and migration timing affect each other              | Coordination between data migration, site readiness, and launch decisions.     |
+| Important customers/orders/products require careful review            | Stronger validation support before Full Migration.                             |
+| The merchant is changing site structure while migrating               | Help avoiding confused expectations about menus, URLs, and presentation.       |
 
-Managed Service should not be treated as a substitute for Custom Service. If the project needs custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, Custom Platform handling, unsupported extension data interpretation, or bespoke transformation, those requirements belong under Custom Service review.
+Managed Service should not be used as a substitute for Custom Service when the requirement is unsupported data transformation. It is strongest when the path is supported but the review burden is high.
 
-Managed Service is most useful when the migration work is within standard service capability but the merchant wants Next-Cart to carry out the migration process. The key distinction is execution responsibility, not customization scope.
+### When Add-ons Can Improve the Result <a href="#when-add-ons-can-improve-the-result" id="when-add-ons-can-improve-the-result"></a>
 
-#### Strong Managed Service scenarios <a href="#strong-managed-service-scenarios" id="strong-managed-service-scenarios"></a>
+Add-ons are useful when supported data needs bounded filtering, mapping, or configuration adjustment. They are not a replacement for Custom Service, and they should not be used to promise unsupported extension-data migration. For EasyStore, Add-ons may help when the source data is supported but needs clearer control before being placed into the target structure.
 
-Managed Service may be safer when:
+| Add-on need             | EasyStore example                                                                    | Boundary                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| Data filtering          | Excluding obsolete products, old customers, test orders, or inactive records         | Works when records are supported and filter rules are clear. |
+| Advanced Data Mapping   | Mapping source fields into supported EasyStore/Joomla destinations where appropriate | Does not create unsupported target behavior.                 |
+| Advanced Data Configure | Adjusting supported output behavior within defined migration capability              | Not a bespoke rewrite of source business logic.              |
+| Selective cleanup       | Avoiding unwanted legacy records in the target result                                | Depends on clear rules and supported data access.            |
 
-* the merchant wants Next-Cart-led migration execution while retaining a standard migration scope;
-* the store has many products, customers, or orders but the data structure is predictable;
-* the merchant needs help coordinating Demo Migration findings and Full Migration timing;
-* the migration includes purchased Add-ons that remain within standard Add-on capability;
-* the Joomla site is being prepared by another team and the commerce data migration needs tighter coordination;
-* the merchant wants to reduce operational disruption during the transition.
+Add-ons work best when the merchant can define the rule. If the request is “make this custom source behavior work exactly the same way in EasyStore,” that is no longer a simple Add-on question.
 
-Managed Service should still be paired with clear merchant-side validation. Next-Cart can execute the migration, but the merchant still needs to confirm whether the migrated result matches real store operations.
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+Custom Service should be considered when EasyStore migration expectations involve unsupported records, custom fields, extension-owned data, outside-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment. These cases require deeper review because the source data may not fit supported migration behavior cleanly.
 
-Custom Service is needed when the expected EasyStore result requires customization, modification, Custom Platform handling, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke interpretation. In EasyStore by JoomShaper migration, Custom Service signals often appear where source commerce data is entangled with custom fields, extensions, third-party systems, or Joomla-specific implementation requirements.
+For EasyStore by JoomShaper, Custom Service signals often appear around custom product fields, complex variants, third-party Joomla extensions, SP Page Builder-driven presentation logic, external ERP/CRM/order IDs, loyalty or membership records, subscription-like behavior, marketplace feeds, specialized fulfillment data, or source code customizations.
 
-A Custom Service review should happen before the migration is treated as standard. The purpose is to determine whether the data can be interpreted, transformed, mapped, or handled in a way that matches the merchant’s expected EasyStore outcome.
+| Custom Service signal                                                           | Why standard migration may not be enough                                              |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Product data comes from custom fields or third-party extension logic            | The data may not have a supported EasyStore destination.                              |
+| Customer identity depends on memberships, external IDs, or custom account rules | Customer records may need bespoke handling or separate system review.                 |
+| Orders contain external fulfillment, accounting, or ERP references              | Historical order usefulness may depend on preserving outside-system identifiers.      |
+| Presentation depends on SP Page Builder layouts or custom modules               | Visual structure may require implementation or custom handling beyond data migration. |
+| Source behavior comes from a Custom Platform or custom-coded workflow           | Migration logic may need custom review before scope is realistic.                     |
 
-#### Custom Service signals in EasyStore migration <a href="#custom-service-signals-in-easystore-migration" id="custom-service-signals-in-easystore-migration"></a>
+The goal is not to escalate every complex project. The goal is to avoid hiding unsupported expectations inside ordinary product, customer, or order migration.
 
-Custom Service should be reviewed when the source store includes:
+### Demo Migration Should Test the Chosen Approach <a href="#demo-migration-should-test-the-chosen-approach" id="demo-migration-should-test-the-chosen-approach"></a>
 
-* Custom Platform data or a source platform that does not follow a standard supported structure;
-* custom product fields that affect product display, filtering, pricing, inventory, or order interpretation;
-* source extension data that must remain useful in EasyStore;
-* bespoke product relationships such as bundles, kits, subscriptions, memberships, deposits, booking rules, or conditional options;
-* custom customer groups, account approval workflows, membership logic, credit limits, or special pricing rules;
-* third-party identifiers from ERP, CRM, fulfillment, marketplace, payment, loyalty, or accounting systems;
-* custom order statuses, fulfillment references, refund structures, or operational notes that cannot be treated as ordinary order fields;
-* Joomla-specific content or extension relationships that need custom interpretation;
-* a requirement to modify Standard Add-ons into Tailored Add-ons;
-* a need for Custom Add-ons or project-specific migration handling.
+Demo Migration should not only show whether data appears in EasyStore. It should test whether the selected approach is strong enough. If the merchant selected a lighter path, the Demo Migration should confirm that ordinary supported records behave well enough. If the project contains custom signals, Demo Migration should reveal whether those expectations need Add-ons, Custom Service, target configuration, or manual rebuild.
 
-#### Custom Service and migration execution are separate questions <a href="#custom-service-and-migration-execution-are-separate-questions" id="custom-service-and-migration-execution-are-separate-questions"></a>
+| Demo Migration review area | What it should prove                                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Products and variants      | Selling choices, prices, images, categories, and stock meaning remain understandable.                            |
+| Customers and orders       | Buyer identity, customer-order links, order totals, discounts, refunds, tax, and shipping context remain usable. |
+| Joomla site continuity     | Store entry points, priority URLs, menus, and content links have a realistic handling plan.                      |
+| Configuration boundary     | Payment, tax, shipping, checkout, reviews, coupons, and notifications are not confused with migrated data.       |
+| Custom scope               | Extension-owned data, custom fields, external identifiers, and bespoke logic are correctly classified.           |
 
-Custom Service does not automatically mean Next-Cart performs every part of the migration for the customer. It means the project requires custom review, planning, and handling beyond standard service capability. Whether Next-Cart also manages execution depends on the final plan.
+If Demo Migration reveals repeated uncertainty, the migration approach may be too light. The response should be a targeted adjustment, not a blind move to the most complex path.
 
-This distinction matters because a merchant may need Custom Service for a specific transformation while still participating actively in site setup, validation, and Joomla implementation work.
+### Entity Points Should Be Planned Around Eligible New Records <a href="#entity-points-should-be-planned-around-eligible-new-records" id="entity-points-should-be-planned-around-eligible-new-records"></a>
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+Entity Points planning matters when Products, Customers, Orders, or Blog Posts are included in migration scope. For EasyStore, the merchant should understand which eligible records are expected to be migrated and whether later migration activity may include newly created source records.
 
-Add-ons can help when the migration requirement is specific enough to be handled as an optional service feature. For EasyStore by JoomShaper, Add-ons are most relevant when the merchant needs filtering, mapping, or configuration support around records that still fit within the available service capability.
+Entity Points should not be framed as a penalty for rechecking or continuing migration activity. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path. Newly migrated eligible records may consume Entity Points when they are migrated for the first time.
 
-Add-ons should not be used as a catch-all answer for custom projects. If the requirement changes the underlying migration logic, depends on unsupported source behavior, or requires bespoke transformation, Custom Service is the correct review path.
+| Planning situation                                                                                  | Entity Points implication                                                                      |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| The same already recorded Product, Customer, Order, or Blog Post is migrated again on the same path | It should not consume Entity Points again simply because another action occurs.                |
+| New Products, Customers, Orders, or Blog Posts were created after the earlier migration run         | They may consume Entity Points when migrated for the first time.                               |
+| A new migration replaces earlier migrated target data                                               | Target replacement does not automatically mean every already recorded entity is counted again. |
+| Scope expands to include a new eligible data type                                                   | Newly included eligible records should be planned as part of Entity Points usage.              |
 
-| Requirement type                                             | Possible service direction       | Why this matters                                                                                 |
-| ------------------------------------------------------------ | -------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Excluding old, inactive, test, or irrelevant records         | Data Filter Add-on may help      | Filtering can narrow the migration scope when the source records are identifiable and supported. |
-| Aligning source fields with EasyStore-ready fields           | Advanced Data Mapping may help   | Mapping can clarify how supported fields should be interpreted in the Target Platform.           |
-| Adjusting supported configuration behavior                   | Advanced Data Configure may help | Configuration support can help when the need fits standard Add-on capability.                    |
-| Modifying a Standard Add-on beyond its ready-made capability | Custom Service review            | A modified Standard Add-on becomes a Tailored Add-on and belongs under Custom Service.           |
-| Creating new project-specific handling                       | Custom Service review            | Custom Add-ons and bespoke logic require review and quotation through Custom Service.            |
-| Interpreting Custom Platform or unsupported extension data   | Custom Service review            | These cases usually require custom migration logic adjustment or broader bespoke handling.       |
+This planning should stay practical. The merchant needs to know how scope and newly created records affect planning, not read a licensing manual inside the platform article.
 
-#### Add-on decisions should follow the Demo Migration evidence <a href="#add-on-decisions-should-follow-the-demo-migration-evidence" id="add-on-decisions-should-follow-the-demo-migration-evidence"></a>
+### Additional Migration Options Should Match the Launch Window <a href="#additional-migration-options-should-match-the-launch-window" id="additional-migration-options-should-match-the-launch-window"></a>
 
-The best Add-on decisions often come after reviewing representative Demo Migration results. If the sample output shows that certain records should be excluded, mapped differently, or configured differently, an Add-on may provide a focused solution. If the issue reveals a deeper structural mismatch, Custom Service should be considered instead.
+Additional Migration Options are useful when the source store continues changing during review or launch preparation. For EasyStore projects, changes may include new products, new customer records, new orders, new refunds, updated coupons, changed product variants, or new content that affects store presentation.
 
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
+The selected migration action should match the intended target outcome.
 
-Demo Migration should clarify whether the selected approach is strong enough for the actual EasyStore result the merchant expects. It should not be treated as a simple record-count test.
+| Launch-window need                                                          | Suitable action logic                                                            |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Add new source records using the same setup                                 | Continue the migration with the last used configuration.                         |
+| Add new records while changing mapping, filtering, or configuration choices | Continue the migration with a new configuration.                                 |
+| Rebuild the target result because the earlier output should be replaced     | Perform a new migration.                                                         |
+| Recheck only site implementation work                                       | Treat as Joomla/EasyStore setup or manual review rather than migration activity. |
 
-For EasyStore by JoomShaper, Demo Migration should show whether the migrated data works as usable store data inside the target Joomla/EasyStore environment. The merchant should test products, variants, categories, customers, orders, coupons, reviews, inventory, and configuration-sensitive areas against practical use cases.
+The merchant should validate the result according to the action taken. Continuing with unchanged configuration requires different review than replacing an earlier target result with a new migration.
 
-#### Demo Migration questions for approach selection <a href="#demo-migration-questions-for-approach-selection" id="demo-migration-questions-for-approach-selection"></a>
+### Signals the Chosen Approach Is Too Light <a href="#signals-the-chosen-approach-is-too-light" id="signals-the-chosen-approach-is-too-light"></a>
 
-A useful Demo Migration should answer questions such as:
+A migration approach should be reconsidered when findings show that assumptions are not controlled. The warning sign is not simply that the project is complex. The warning sign is that the selected path cannot explain or resolve the important complexity.
 
-* Do products appear with the correct names, descriptions, SKUs, prices, images, categories, tags, and inventory context?
-* Are variant-heavy products understandable to shoppers and manageable by the merchant?
-* Do customer records remain readable and connected to the right order history?
-* Are order totals, line items, discounts, taxes, shipping details, payment references, refunds, and statuses clear enough for historical use?
-* Are CMS Pages, Blog Posts, and store-related content expectations aligned with Joomla implementation work?
-* Are coupons and reviews useful after migration?
-* Are tax, shipping, payment, and checkout expectations handled by migrated records, EasyStore configuration, or separate setup work?
-* Are custom fields, extension-owned data, or third-party identifiers missing from the standard result?
-* Does the result point to Standard Service, Managed Service, Add-on review, or Custom Service review before Full Migration?
+| Warning signal                                                                     | Likely response                                                    |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Product variants or options lose important selling meaning                         | Review mapping, configuration, or Custom Service need.             |
+| Customer/order history cannot support real service use cases                       | Recheck samples, scope, or custom data expectations.               |
+| SP Page Builder or template-dependent presentation is expected from data migration | Separate implementation from migration, or review custom handling. |
+| External IDs or extension-owned records are required after launch                  | Consider Custom Service or separate integration work.              |
+| Demo Migration findings cannot be classified                                       | Managed Service or deeper scope review may be safer.               |
+| Launch-window changes are undefined                                                | Clarify Additional Migration Options before Full Migration.        |
 
-#### How to interpret Demo Migration findings <a href="#how-to-interpret-demo-migration-findings" id="how-to-interpret-demo-migration-findings"></a>
-
-Demo Migration results should be interpreted as approach evidence. A clean result across representative samples usually supports the selected approach. A result that exposes missing meaning, unclear mappings, or unsupported source behavior should be used to adjust the approach before proceeding.
-
-| Demo Migration finding                                                                        | Likely interpretation                                    | Recommended action                                                                            |
-| --------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Core products, customers, and orders migrate clearly                                          | The selected approach may be appropriate                 | Continue validation and prepare for Full Migration when other checks pass.                    |
-| Product variants migrate but need clearer field alignment                                     | The approach may need Add-on review                      | Review Advanced Data Mapping or Advanced Data Configure if the need fits standard capability. |
-| Old, inactive, duplicate, or test data appears in samples                                     | Filtering may be useful                                  | Review whether Data Filter Add-on fits the migration goal.                                    |
-| Custom product fields or extension data are missing                                           | Standard assumptions may be too light                    | Review Custom Service before Full Migration.                                                  |
-| Orders appear but statuses, references, or refund context are unclear                         | Historical order meaning needs deeper review             | Review mapping, configuration, or Custom Service depending on the source structure.           |
-| Joomla menus, templates, or page-builder expectations are not represented by migrated records | Site implementation work is separate from data migration | Clarify what belongs to migration and what belongs to Joomla setup.                           |
-
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
-
-A migration approach is too light when it cannot explain how the expected EasyStore result will be achieved. The warning signs often appear before Full Migration, but they are easy to dismiss if the team focuses only on record counts.
-
-#### Common warning signs <a href="#common-warning-signs" id="common-warning-signs"></a>
-
-The selected approach should be reconsidered when:
-
-* the merchant cannot identify which product samples prove the catalog structure;
-* variant-heavy products are reviewed only superficially;
-* custom fields or extension-owned data are considered important but have not been mapped;
-* tax, shipping, payment, or checkout behavior is assumed to transfer without configuration review;
-* historical orders are judged only by order number and total;
-* Joomla menus, templates, SP Page Builder layouts, or route expectations are not included in planning;
-* source records include third-party identifiers that must remain useful after migration;
-* Demo Migration reveals missing meaning but the plan still proceeds without Add-on or Custom Service review;
-* the merchant expects Next-Cart to solve implementation work that actually belongs to Joomla site setup;
-* the project includes Custom Platform data but has not been routed to Custom Service review.
-
-#### What to do when the approach is too light <a href="#what-to-do-when-the-approach-is-too-light" id="what-to-do-when-the-approach-is-too-light"></a>
-
-When the approach appears too light, the right response is not to force the migration forward. The better response is to classify the problem:
-
-* If the issue is record selection, review Data Filter Add-on.
-* If the issue is supported field interpretation, review Advanced Data Mapping.
-* If the issue is supported configuration behavior, review Advanced Data Configure.
-* If the issue is custom, unsupported, extension-owned, third-party, or transformation-heavy, review Custom Service.
-* If the issue belongs to Joomla site design, menus, templates, or page layout, assign it to the implementation plan rather than treating it as migrated data.
-
-This classification prevents the project from confusing migration output, target configuration, site implementation, and custom service work.
+The right response is to adjust the approach based on evidence. A well-chosen service path is specific, not simply heavier.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right EasyStore by JoomShaper migration approach depends on how much interpretation the source store requires before it can become reliable inside a Joomla-based EasyStore environment. Standard Service can fit clear source data and predictable target expectations. Managed Service can help when the migration remains within standard service capability but the merchant wants Next-Cart-led execution. Custom Service should be reviewed when the project depends on custom fields, unsupported extension data, Custom Platform sources, Tailored Add-ons, Custom Add-ons, third-party identifiers, or custom migration logic adjustment.
+Selecting the right EasyStore by JoomShaper migration approach requires a clear separation between supported data migration, Joomla/EasyStore configuration, SP Page Builder presentation, Add-ons, Custom Service, Entity Points planning, and later migration activity. EasyStore’s Joomla context makes that separation especially important because commerce records and site structure may affect each other at launch.
 
-Use Demo Migration to test whether the selected approach is strong enough before Full Migration. If the sample result shows unclear product variants, missing custom meaning, weak order interpretation, or configuration-sensitive gaps, review the migration path through Live Chat so the correct Standard Service, Managed Service, Custom Service, and Add-on boundaries are confirmed before execution.
+Standard Service can be enough for ordinary supported data with clear merchant review. Managed Service is safer when sequencing and interpretation need guidance. Add-ons help with bounded filtering, mapping, or configuration within supported behavior. Custom Service should be reviewed when the requirement involves unsupported data, custom fields, extension-owned records, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for migrating to EasyStore by JoomShaper?**
+**Is Standard Service enough for an EasyStore migration?**
 
-Standard Service may be enough when the source data is clear, supported by the selected migration path, and suitable for customer-led migration on the Next-Cart website with 24/7 expert support. It becomes less suitable when the source store depends on custom fields, unsupported extension data, Custom Platform handling, or bespoke transformation.
+It may be enough when the source data is structurally ordinary, required records are supported, variants are consistent, and the merchant can manage Joomla/EasyStore configuration and validation. If custom fields, extension-owned data, or presentation expectations are important, the approach should be reviewed more carefully.
 
-**When should Managed Service be used for EasyStore migration?**
+**When should Managed Service be considered?**
 
-Managed Service is useful when the migration can be handled through standard service capability and purchased Add-ons, but the merchant wants Next-Cart to perform the migration. It is not a substitute for Custom Service when the project requires custom migration logic adjustment or broader bespoke handling.
+Managed Service is useful when the merchant needs help sequencing preparation, interpreting Demo Migration results, coordinating Joomla readiness, or separating migration findings from target-side configuration and implementation work.
 
-**When does EasyStore migration need Custom Service?**
+**Can Add-ons handle EasyStore custom data?**
 
-Custom Service should be reviewed when the migration includes Custom Platform data, unsupported source extension data, custom product fields, third-party identifiers, unusual order structures, Tailored Add-ons, Custom Add-ons, or transformation needs beyond standard service capability.
+Add-ons can help with supported filtering, mapping, or bounded configuration. They should not be treated as a solution for unsupported extension-owned records, bespoke transformations, external identifiers, or custom migration logic.
 
-**Can Add-ons solve EasyStore migration complexity?**
+**When does EasyStore migration require Custom Service review?**
 
-Add-ons can help with focused needs such as filtering, advanced mapping, or supported configuration adjustments. They should not be used as a replacement for Custom Service when the requirement is custom, unsupported, extension-owned, or transformation-heavy.
+Custom Service should be reviewed when the migration expectation involves unsupported records, custom fields, third-party extension data, outside-system identifiers, Custom Platform handling, bespoke transformation, or custom migration logic adjustment.
 
-**What should Demo Migration prove before choosing the final approach?**
+**Do Additional Migration Options affect EasyStore validation?**
 
-Demo Migration should prove whether products, variants, categories, customers, orders, discounts, taxes, shipping details, payment references, refunds, and content-related expectations are understandable in the target EasyStore environment. It should also show whether the selected approach needs an Add-on review or a Custom Service review before Full Migration.
+Yes. Continuing with the same configuration, continuing with a new configuration, and performing a new migration create different validation expectations. The merchant should check the result according to the action taken and the records affected.

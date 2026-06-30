@@ -1,225 +1,173 @@
 # EasyStore Validation Priorities
 
-Validation for an EasyStore by JoomShaper migration should prove that the migrated store works as a Joomla-based commerce environment, not merely that records appear in the target administration area. Products, variants, categories, customers, orders, coupons, inventory, refunds, tax, shipping, payment context, checkout behavior, storefront routes, and Joomla presentation decisions all affect whether the migrated result is usable after launch.
+Validation for an EasyStore by JoomShaper migration should prove that the migrated store works as a Joomla-based commerce environment, not only that records appear in the administration area. Products, variants, categories, customers, orders, coupons, inventory, refunds, tax, shipping, payment context, checkout paths, Joomla menus, and storefront presentation all affect whether the result is usable after launch.
 
-The strongest validation process connects migrated data with both shopper-facing behavior and merchant-facing operations. A product should be sellable. A variant should be clear. A category should support discovery. A customer record should remain useful for service and account reference. An order should preserve enough commercial meaning for support, finance, fulfillment, and historical review. The Joomla site should guide customers to the right product and checkout paths.
+The strongest validation process connects migrated records with the shopper journey and the merchant’s operating needs. A product should be sellable. A variant should be clear. A category should help shoppers find the right item. A customer record should remain useful for service and order reference. A historical order should preserve enough commercial meaning for support, finance, fulfillment, and refund review. The Joomla site should guide customers to the right product, account, cart, and checkout paths.
 
-### What Validation Is Trying to Prove <a href="#what-validation-is-trying-to-prove" id="what-validation-is-trying-to-prove"></a>
+### Validation Should Prove EasyStore Usability <a href="#validation-should-prove-easystore-usability" id="validation-should-prove-easystore-usability"></a>
 
-Validation should answer a practical question: does the migrated result preserve the meaning the business needs to operate on EasyStore by JoomShaper?
+EasyStore validation should answer a practical question: does the migrated result preserve the meaning the business needs to operate in EasyStore by JoomShaper? The answer depends on three connected layers.
 
-For this platform, the answer depends on three connected layers.
+| Validation layer   | What it covers                                                                                                                    | Proof needed                                                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Commerce records   | Products, variants, categories, tags, customers, orders, coupons, reviews, inventory, refunds, tax, shipping, and payment context | Records are present, readable, and commercially meaningful.                                             |
+| Joomla storefront  | Menus, aliases, category paths, product paths, account paths, checkout paths, templates, modules, and content links               | Customers can reach important buying paths without broken or confusing navigation.                      |
+| Operating behavior | Tax, shipping, checkout, payment integrations, inventory, refunds, coupons, notifications, analytics, and custom data             | The team can distinguish migrated history from target-side configuration and custom-scope requirements. |
 
-#### The commerce data layer <a href="#the-commerce-data-layer" id="the-commerce-data-layer"></a>
+Validation should not treat these layers as separate checkboxes. Product records may be correct while storefront access remains weak. A customer profile may migrate while order relationships are difficult to use. A tax value may appear on historical orders while live tax configuration still needs target-side setup. The review should identify which issues are migration results, which are EasyStore or Joomla configuration tasks, and which need Add-ons, Custom Service, manual rebuild, or accepted limitation.
 
-The commerce data layer includes products, categories, tags, brands, collections, customers, orders, coupons, reviews, inventory, refunds, taxes, shipping information, payment context, and other store records supported by the selected migration path. These records should be checked for accuracy, completeness, and business meaning.
+### Validate Products, Variants, and Catalog Meaning <a href="#validate-products-variants-and-catalog-meaning" id="validate-products-variants-and-catalog-meaning"></a>
 
-A migrated product is not successful just because its name appears in the target store. It must carry the information needed for a customer to choose it and for the merchant to manage it. A migrated order is not successful just because the total appears. It should remain understandable as a historical transaction.
+Product validation should prove that the catalog remains commercially understandable inside EasyStore. The review should include both the EasyStore administration area and the customer-facing product experience.
 
-#### The Joomla storefront layer <a href="#the-joomla-storefront-layer" id="the-joomla-storefront-layer"></a>
+The sample set should include ordinary products and products that reveal the real selling structure: variant-heavy products, image-rich products, discounted products, stock-sensitive products, shipping-sensitive products, and records that depended on source-specific fields or extensions. Variants deserve special attention because a variant issue may not be visible from a product list alone. A product can look complete in administration while shoppers see unclear choices, missing images, wrong price differences, or confusing stock availability.
 
-EasyStore by JoomShaper operates inside Joomla, so validation must include the site layer around the store. Product pages, category pages, menu links, account paths, checkout paths, landing pages, templates, modules, and SP Page Builder sections may influence whether migrated data is actually reachable and useful.
+| Product sample             | Validation focus                                                                                      | Failure signal                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Simple product             | Name, SKU, description, price, image, category, and visibility                                        | Product appears but lacks enough shopper-facing information to support buying.  |
+| Variant-heavy product      | Option names, option values, price differences, stock, images, and line-item meaning                  | Shoppers cannot clearly choose size, color, material, or other product options. |
+| Discounted product         | Sale price, coupon context, promotion history, and price visibility                                   | Active pricing expectations are confused with historical discount records.      |
+| Shipping-sensitive product | Weight, dimensions, shipping class, delivery expectation, and location-sensitive rules where relevant | Product data does not support the intended shipping setup.                      |
+| Custom-field product       | Source-specific fields, extension-owned values, ERP references, or special merchandising fields       | The record needs Add-on review, Custom Service review, or manual handling.      |
 
-This is where many weak validations fail. A product can migrate correctly as a record but still be difficult to find if menus, category routes, content links, or page layouts are not aligned with the new Joomla site.
+A good product validation process checks whether products can be found, understood, selected, added to cart, and interpreted in order history. Product validation is incomplete if it only confirms that item counts and product names match.
 
-#### The operating-behavior layer <a href="#the-operating-behavior-layer" id="the-operating-behavior-layer"></a>
+### Validate Categories, Tags, and Storefront Discovery <a href="#validate-categories-tags-and-storefront-discovery" id="validate-categories-tags-and-storefront-discovery"></a>
 
-Some areas are not simple static records. Tax, shipping, payment, checkout, coupons, refunds, order statuses, inventory behavior, notifications, analytics, custom fields, third-party identifiers, and extension-owned behavior may require configuration, mapping, cleanup, Add-on review, or Custom Service review.
+EasyStore supports product organization through store records such as categories, tags, and product grouping behavior, but discovery also depends on Joomla site structure. Menus, aliases, internal links, landing pages, modules, templates, and SP Page Builder sections can influence whether migrated products are reachable and persuasive.
 
-Validation should separate what migrated correctly from what must be configured or reviewed separately. Without that separation, a merchant may mistake a configuration gap for a migration failure, or mistake a custom-data problem for a standard record issue.
+Validation should include top-level categories, deeper categories where hierarchy matters, high-revenue categories, low-product-count categories with strategic value, and categories connected to landing pages or campaigns. If tags, brands, collections, or similar groupings are used, the review should check whether those groupings still make sense after migration.
 
-### Priority 1: Product and Variant Validation <a href="#priority-1-product-and-variant-validation" id="priority-1-product-and-variant-validation"></a>
+| Discovery area           | What to validate                                                                            | Why it matters                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| EasyStore categories     | Names, hierarchy, product placement, visibility, and shopper-facing page behavior           | Categories must support browsing and product discovery.                      |
+| Tags or grouping records | Product grouping, filtering meaning, and merchandising purpose                              | Grouping data should not migrate as labels that no longer help shoppers.     |
+| Joomla menus             | Store entry points, category links, product links, account links, and checkout links        | Products can exist while customers cannot reach them easily.                 |
+| Internal links           | Links from content pages, landing pages, campaign pages, and Blog Posts                     | Important traffic paths may point to old or missing destinations.            |
+| SP Page Builder sections | Product blocks, promotional layouts, custom product displays, and landing-page presentation | Visual selling areas may need separate implementation beyond data migration. |
 
-Product validation should prove that the catalog remains commercially understandable inside EasyStore by JoomShaper. The review should include both the target administration area and the customer-facing product page.
+The validation goal is not to recreate every old path automatically. It is to prove that priority paths have an accepted outcome: migrated, redirected, rebuilt, configured, or intentionally retired.
 
-#### What to validate <a href="#what-to-validate" id="what-to-validate"></a>
+### Validate Customers, Accounts, and Buyer History <a href="#validate-customers-accounts-and-buyer-history" id="validate-customers-accounts-and-buyer-history"></a>
 
-Check product names, SKUs, descriptions, short descriptions where applicable, prices, sale prices, images, gallery images, category placement, tags, brands, collections, visibility, stock status, inventory quantities, weight or shipping-relevant values, and any fields that influence buying decisions.
+Customer validation should prove that customer records remain useful inside the EasyStore and Joomla environment. Names and emails are not enough. The review should confirm whether identity, address information, account context, and order relationships remain clear enough for post-launch operations.
 
-For variant products, validate option names, option values, price differences, stock behavior, image behavior, shopper-facing labels, and line-item meaning after checkout. Variants deserve special attention because a variant problem may not be obvious from the product list alone. A product can look complete in administration while shoppers see unclear options, missing images, wrong price behavior, or confusing stock availability.
+A strong sample set includes a recent buyer, a repeat buyer, a high-value customer, a customer with multiple addresses, a guest buyer where applicable, a duplicate-contact example, and a customer connected to refunded, discounted, or variant-heavy orders. If the source store used membership values, customer groups, wholesale fields, approval workflows, loyalty data, external IDs, CRM references, or Joomla user relationships, those examples should be reviewed separately.
 
-#### Strong validation samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
+| Customer validation area   | Proof required                                                                       | Common issue                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Contact details            | Names, emails, phone numbers, billing addresses, and shipping addresses are readable | Records exist but cannot support customer service.                |
+| Account context            | Joomla user/account expectations are understood and tested where relevant            | Commerce customers are mistaken for full Joomla account behavior. |
+| Customer-order links       | Important customer profiles connect to useful historical order context               | Support teams cannot trace purchases from the customer record.    |
+| Duplicate or guest records | Guest buyers, duplicate emails, and incomplete profiles are understood               | Identity becomes confusing after migration.                       |
+| Custom customer data       | Membership, CRM, loyalty, tax ID, company, or external identifiers are classified    | Custom Service review is needed but discovered too late.          |
 
-Use products that reveal the real catalog structure, not only clean examples. Include simple products, variant-heavy products, discounted products, image-rich products, products assigned to important categories, products with shipping requirements, and products that depended on source-specific fields or extensions.
+Customer validation should focus on usefulness. A migrated customer record has limited value if support teams cannot find the buyer’s history or understand the commercial context behind past orders.
 
-| Product sample type        | Why it matters                                                             | What the validation should prove                                                         |
-| -------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Simple product             | Establishes the baseline result for ordinary catalog records.              | Names, descriptions, pricing, images, category placement, and inventory are correct.     |
-| Variant-heavy product      | Reveals option, price, image, and stock interpretation.                    | Shoppers can choose the correct variant and the merchant can manage the variant clearly. |
-| Discounted product         | Tests sale price, coupon context, or promotion-related assumptions.        | Pricing meaning is understandable and not confused with historical discount behavior.    |
-| Shipping-sensitive product | Tests dimensions, weight, delivery rules, or special handling assumptions. | Product data supports the intended shipping configuration.                               |
-| Custom-field product       | Reveals source-specific or extension-owned catalog meaning.                | Standard migration is sufficient, or Add-on / Custom Service review is required.         |
+### Validate Orders, Refunds, and Commercial Context <a href="#validate-orders-refunds-and-commercial-context" id="validate-orders-refunds-and-commercial-context"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
+Order validation should prove that historical commerce records remain readable and useful. Orders can include product line items, variants, discounts, coupons, taxes, shipping charges, payment references, refund context, statuses, addresses, and customer relationships. The validation process should preserve historical meaning without confusing that history with live EasyStore configuration.
 
-The most common miss is validating catalog records without validating selling behavior. For EasyStore by JoomShaper, product validation should confirm that the product is understandable in the storefront, assigned to the right discovery paths, supported by images, connected to the right variant choices, and usable in the checkout journey.
+Order samples should include ordinary paid orders and edge cases: discounted orders, refunded orders, variant orders, shipping-sensitive orders, tax-sensitive orders, high-value orders, cancelled orders, and orders linked to important customer profiles. If source orders used external IDs, ERP references, marketplace references, custom statuses, or integration-owned fields, those examples should be flagged for special review.
 
-### Priority 2: Category, Tag, and Storefront Discovery Validation <a href="#priority-2-category-tag-and-storefront-discovery-validation" id="priority-2-category-tag-and-storefront-discovery-validation"></a>
+| Order sample               | What to confirm                                           | Why it matters                                                         |
+| -------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Ordinary paid order        | Number, date, customer, line items, totals, and addresses | Establishes basic historical readability.                              |
+| Variant order              | Selected option values and line-item names                | Proves product choices remain understandable after migration.          |
+| Discounted or coupon order | Coupon, discount, sale price, and final total meaning     | Prevents confusion between historical discounts and active promotions. |
+| Refunded order             | Partial/full refund context and status readability        | Supports customer service and financial reference.                     |
+| Shipping/tax order         | Shipping method, tax amount, region, address, and total   | Helps separate historical context from target-side tax/shipping setup. |
 
-Category and discovery validation should prove that shoppers can find important products through the intended Joomla site structure. EasyStore categories and tags may be only part of the discovery experience. Joomla menus, landing pages, internal links, modules, templates, and page-builder layouts may also shape how shoppers browse.
+Payment references should be treated as historical context. Live payment integrations, payment methods, checkout flow, tax rules, and shipping methods still need EasyStore/Joomla configuration and testing.
 
-#### What to validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
+### Validate Configuration-Sensitive Behavior Separately <a href="#validate-configuration-sensitive-behavior-separately" id="validate-configuration-sensitive-behavior-separately"></a>
 
-Validate category names, category hierarchy where relevant, product placement, tags, brands, collections, menu links, category page access, product page access, internal links from Joomla content, and high-value landing paths. If the source store had important organic-search pages, campaign landing pages, affiliate links, or bookmarked product URLs, those paths should be checked against the target Joomla structure.
+Some EasyStore areas are not simple migrated records. Inventory behavior, tax setup, shipping rules, payment integrations, checkout settings, coupons, refunds, account creation, emails, analytics, and store notifications may involve target-side configuration. Validation should separate migrated data from settings the merchant must configure in EasyStore or Joomla.
 
-#### Strong validation samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
+| Configuration-sensitive area | Validation question                                                                         | Likely handling                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Inventory                    | Do stock values, variant stock, and availability behavior support selling?                  | Migration validation plus target setup review.       |
+| Tax                          | Are historical tax values readable, and are live tax rules configured separately?           | Target-side configuration and testing.               |
+| Shipping                     | Are historical shipping values readable, and are new shipping regions/methods set up?       | Target-side configuration and checkout testing.      |
+| Payment                      | Are payment references useful, and are live integrations configured?                        | Target-side setup, not proof from historical orders. |
+| Coupons and promotions       | Are migrated or historical discounts understandable, and are active promotions intentional? | Migration validation plus EasyStore configuration.   |
+| Checkout and account paths   | Can shoppers move from product to cart, checkout, account, and order confirmation?          | Joomla/EasyStore setup and storefront testing.       |
 
-A strong sample should include a top-level category, a deeper category if hierarchy matters, a high-revenue category, a low-product-count category with strategic importance, a category connected to content or campaigns, and products that appear in more than one discovery path.
+This distinction prevents false conclusions. A checkout issue may be a target configuration problem, not a data migration problem. A historical tax value may be correct even if live tax setup still needs work. A coupon may migrate as history but still require new promotion configuration.
 
-If tags, brands, or collections support browsing, include records that prove whether those grouping methods still make sense after migration. Validation should not stop at whether categories exist. It should prove whether category structure helps the customer move from interest to product selection.
+### Validate SP Page Builder and Presentation Boundaries <a href="#validate-sp-page-builder-and-presentation-boundaries" id="validate-sp-page-builder-and-presentation-boundaries"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
+JoomShaper positions EasyStore alongside SP Page Builder, and store presentation may depend on page-builder layouts, templates, modules, product blocks, landing pages, and promotional content. These elements can shape the customer experience even when core commerce records migrate correctly.
 
-Merchants often check products one by one while ignoring how customers actually reach them. This is a serious gap for a Joomla-based store because the storefront experience may depend on the relationship between store data and Joomla navigation. A product can be correct, but the customer journey can still be weak if menus, content paths, landing pages, or category pages do not lead shoppers to the right product.
+Validation should identify which presentation areas are migrated data, which are Joomla or SP Page Builder implementation tasks, and which are intentionally rebuilt manually. Product pages, product-listing layouts, homepage sections, campaign landing pages, custom product blocks, and checkout-entry paths should be checked when they affect revenue or SEO continuity.
 
-### Priority 3: Customer and Account Validation <a href="#priority-3-customer-and-account-validation" id="priority-3-customer-and-account-validation"></a>
+| Presentation dependency  | Validation proof                                                   | Correct interpretation                                           |
+| ------------------------ | ------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Product page layout      | Product information appears clearly and supports shopper decisions | Data migration and visual presentation are related but separate. |
+| Product listing blocks   | Important products appear in expected page sections                | Page-builder placement may need manual implementation.           |
+| Landing pages            | Campaign or SEO pages reach relevant product/category paths        | Redirects, internal links, and content rebuild may be required.  |
+| Template/module behavior | Store pages render consistently and remain usable                  | Template work is not automatically solved by data migration.     |
+| Custom display fields    | Special fields appear where the business needs them                | Custom Service or manual implementation may be needed.           |
 
-Customer validation should prove that customer records remain useful inside the EasyStore and Joomla environment. Names and email addresses are only the beginning. The stronger question is whether identity, account context, address information, and order relationships remain clear enough for post-launch operations.
+Presentation validation should avoid judging migration only by visual similarity. The stronger question is whether the migrated records and target implementation together support the intended selling journey.
 
-#### What to validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
+### Validate Custom Data and Special Handling <a href="#validate-custom-data-and-special-handling" id="validate-custom-data-and-special-handling"></a>
 
-Validate customer names, email addresses, phone numbers, billing addresses, shipping addresses, account status where relevant, and the relationship between customers and order history. If the source store used customer groups, membership structures, wholesale rules, approval workflows, loyalty information, external identifiers, Joomla user relationships, or source-specific customer fields, those items should be reviewed separately.
+EasyStore may operate with other Joomla extensions, custom fields, SP Page Builder addons, ERP or CRM integrations, analytics tools, fulfillment systems, marketplace feeds, or bespoke source logic. Validation should classify special handling clearly instead of treating every visible source value as ordinary migration scope.
 
-#### Strong validation samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
+Add-ons and Custom Service should remain separate. Add-ons can support bounded filtering, mapping, or configuration within supported behavior. Custom Service is needed when requirements involve unsupported records, custom fields, extension-owned data, outside-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-Choose customers with different operating patterns. Include a recent buyer, a repeat buyer, a high-value customer, a customer with multiple addresses, a customer with refunded or cancelled orders, and a customer connected to any source-specific group, custom field, external identifier, or account rule.
+| Finding during validation                                                 | Likely classification                                        |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Supported record needs field mapping adjustment                           | Add-on review may be enough.                                 |
+| Supported records need filtering or exclusion                             | Add-on review may be enough.                                 |
+| Product/customer/order data comes from a custom Joomla extension          | Custom Service review is needed.                             |
+| External IDs must remain connected to ERP, CRM, fulfillment, or reporting | Custom Service review is needed.                             |
+| Page-builder layout must reproduce source presentation                    | Implementation or Custom Service review, depending on scope. |
+| Live payment/shipping/tax behavior is not configured                      | Target-side setup, not migrated data.                        |
 
-#### What often gets missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
+Validation should result in a clear issue classification. Unclear findings should not remain hidden inside a generic cleanup list.
 
-The most common customer-validation gap is stopping at contact data. Customer data is useful only if it supports real post-launch work. Support teams may need to find previous purchases, answer refund questions, confirm shipping details, or understand customer history. If customer records are present but disconnected from meaningful order context, the migration may create friction after launch.
+### Build an EasyStore Validation Report <a href="#build-an-easystore-validation-report" id="build-an-easystore-validation-report"></a>
 
-### Priority 4: Order History and Commercial Context Validation <a href="#priority-4-order-history-and-commercial-context-validation" id="priority-4-order-history-and-commercial-context-validation"></a>
+The validation report should support launch decisions. It should identify the record, expected result, observed result, severity, owner, handling path, and final status. The report should include representative examples instead of only easy passes.
 
-Order validation should prove that historical commerce records remain readable and useful. Orders contain more than order numbers and totals. They can include line items, variants, discounts, coupons, taxes, shipping charges, payment references, refund context, statuses, addresses, and customer relationships.
+| Report field     | Purpose                                                                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Record or sample | Identifies the product, variant, category, customer, order, URL, layout, or custom record being reviewed.                                                      |
+| Expected result  | States what should appear or work in EasyStore/Joomla.                                                                                                         |
+| Observed result  | Describes what was found during review.                                                                                                                        |
+| Severity         | Separates launch blockers from acceptable cleanup.                                                                                                             |
+| Handling path    | Classifies the issue as migration correction, Add-on adjustment, Custom Service review, target configuration, manual rebuild, accepted limitation, or cleanup. |
+| Owner            | Assigns responsibility to the merchant, Next-Cart, Joomla/EasyStore implementer, or external partner.                                                          |
+| Status           | Confirms whether the issue is open, corrected, accepted, or deferred.                                                                                          |
 
-#### What to validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
-
-Validate order numbers, order dates, customers, billing and shipping addresses, line items, product names, variant labels, quantities, prices, discounts, coupons, taxes, shipping charges, payment method references, fulfillment or delivery context, refund records where applicable, and order statuses.
-
-If the Source Platform used custom statuses, external fulfillment references, marketplace identifiers, ERP references, subscription references, payment metadata, or third-party order fields, those details should not be assumed to behave like ordinary order fields.
-
-#### Strong validation samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
-
-A strong order sample should include recent orders, older orders, refunded orders, discounted orders, taxed orders, shipped orders, orders with multiple products, orders with variant products, orders using different payment methods, and orders connected to repeat customers. If the source store contains failed payments, cancelled orders, manual orders, partially refunded orders, or external fulfillment records, include representative examples.
-
-#### What often gets missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
-
-Order totals can be misleading. A total may match while line items, discounts, taxes, shipping charges, payment context, or refund meaning remain unclear. The useful validation question is whether the merchant can understand what was bought, by whom, under which conditions, and what happened after purchase.
-
-### Priority 5: Checkout, Tax, Shipping, Payment, and Coupon Validation <a href="#priority-5-checkout-tax-shipping-payment-and-coupon-validation" id="priority-5-checkout-tax-shipping-payment-and-coupon-validation"></a>
-
-Checkout-related validation should distinguish migrated historical context from future EasyStore configuration. Some information may appear inside migrated orders. Future tax rules, shipping rules, payment methods, coupon behavior, checkout settings, notifications, and refund workflows may need to be configured inside EasyStore and Joomla after migration.
-
-#### What to validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
-
-Validate coupon records and discount examples, historical tax and shipping information inside orders, payment references where supported, refund context, checkout-related assumptions, and any configuration-sensitive behavior that affects the future purchase flow.
-
-Tax and shipping rules deserve especially careful review if the source store used region-specific rates, product-specific rules, carrier integrations, order-total conditions, customer-type conditions, or custom logic. Payment behavior should be checked for gateway expectations, order status mapping, payment references, and post-payment handling.
-
-#### Strong validation samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
-
-Use order and product samples that expose different checkout conditions: discounted orders, taxed orders, shipped orders, refunded orders, orders using different payment methods, products with special shipping needs, and customers from different regions where relevant.
-
-#### What often gets missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
-
-A common mistake is expecting every checkout rule to migrate as static data. Some checkout behavior is configuration, not migrated record content. Validation should identify whether the observed issue belongs to migrated data, EasyStore configuration, Joomla setup, source cleanup, Add-on review, or Custom Service review.
-
-### Priority 6: Joomla Storefront, Route, and Presentation Validation <a href="#priority-6-joomla-storefront-route-and-presentation-validation" id="priority-6-joomla-storefront-route-and-presentation-validation"></a>
-
-Because EasyStore by JoomShaper operates inside Joomla, storefront validation should prove that migrated commerce data is usable in the actual site experience. The review should include the paths customers use, not only the target administration area.
-
-#### What to validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
-
-Validate product page access, category page access, menu links, internal links from Joomla content, account paths, checkout paths, high-value URLs, landing pages, template rendering, module placement, and SP Page Builder sections where relevant. If the merchant expects content and commerce to support each other, validate the relationship between Joomla articles, CMS Pages, Blog Posts, landing pages, and EasyStore records.
-
-#### Strong validation samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
-
-Choose high-value product pages, important category pages, campaign landing pages, content-linked products, account-area paths, checkout paths, and pages that use custom templates, modules, or page-builder layouts. These samples should prove whether migrated data can be reached and understood in the customer-facing experience.
-
-#### What often gets missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
-
-Storefront validation often gets treated as a design task only. That is too narrow. Design, navigation, routing, and data structure work together in Joomla. If the product exists but the path to it is broken, unclear, or disconnected from the site’s content structure, the migration result is not ready for launch.
-
-### Priority 7: Custom Fields, Extensions, and Custom Platform Source Validation <a href="#priority-7-custom-fields-extensions-and-custom-platform-source-validation" id="priority-7-custom-fields-extensions-and-custom-platform-source-validation"></a>
-
-Custom and extension-owned data should be validated separately because it often carries business meaning outside ordinary product, customer, or order fields. Source platforms may store important information in custom fields, third-party app data, bespoke extension tables, ERP references, membership systems, marketplace connectors, external identifiers, or custom Joomla development.
-
-#### What to validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Validate whether custom fields, extension-owned fields, third-party identifiers, and bespoke relationships are expected to migrate, be mapped, be configured, be transformed, or be excluded. If these fields affect product display, pricing, inventory, customer segmentation, fulfillment, reporting, checkout, order interpretation, or storefront behavior, they should not be treated as minor notes.
-
-#### Strong validation samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
-
-Select records where custom data visibly matters. This may include a product with custom display fields, an order with third-party fulfillment references, a customer with group or membership data, a product connected to an external inventory system, or a source record created by a non-standard extension.
-
-#### What often gets missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
-
-Custom data is often missed because it is invisible in ordinary exports or hidden behind source extensions. If the merchant validates only standard product, customer, and order fields, the migration may appear complete while important operating meaning remains outside the target structure. Custom Platform source data, unsupported extension data, Tailored Add-ons, Custom Add-ons, and custom migration logic adjustment should be reviewed through Custom Service.
-
-### What Makes a Strong Validation Sample <a href="#what-makes-a-strong-validation-sample" id="what-makes-a-strong-validation-sample"></a>
-
-A strong validation sample is representative, not merely large. It should include ordinary records, high-value records, edge cases, and records that reveal source-specific complexity. It should also include records the merchant understands well enough to judge.
-
-For EasyStore by JoomShaper, a strong validation set should connect commerce data with Joomla site context. Product samples should prove sellability. Category samples should prove discovery. Customer and order samples should prove operational usefulness. Storefront samples should prove that migrated records are reachable through the actual Joomla implementation. Custom samples should reveal whether the project needs Add-on review or Custom Service review.
-
-| Validation sample area           | Strong sample choice                                                                                        | What it should prove                                                        |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Products and variants            | Simple, variant-heavy, image-rich, discounted, shipping-sensitive, and custom-field products                | Products remain sellable, understandable, and manageable.                   |
-| Categories and discovery         | High-value categories, deeper categories, content-linked products, and campaign paths                       | Shoppers can find important products through the Joomla storefront.         |
-| Customers                        | Recent buyers, repeat buyers, customers with multiple addresses, and customers with special account context | Customer identity and commercial history remain useful.                     |
-| Orders                           | Recent, older, refunded, discounted, taxed, shipped, and variant-heavy orders                               | Historical order meaning remains readable for support and operations.       |
-| Configuration-sensitive behavior | Tax, shipping, payment, coupon, checkout, and refund examples                                               | Setup needs are separated from migrated historical context.                 |
-| Custom or extension-owned data   | Records with source-specific fields, third-party identifiers, or bespoke relationships                      | Add-on or Custom Service review needs are identified before Full Migration. |
-
-### What Often Gets Missed <a href="#what-often-gets-missed-7" id="what-often-gets-missed-7"></a>
-
-The most common validation failure is judging the migration by record presence. Record counts are useful, but they do not prove business readiness. Products may be present but difficult to buy. Orders may be present but hard to interpret. Customers may be present but disconnected from useful history. Categories may exist but fail to support browsing. Storefront routes may work for some pages but not for key product or campaign paths.
-
-Another common gap is separating EasyStore validation from Joomla validation. EasyStore by JoomShaper should be validated as a Joomla e-commerce environment. The data layer, menu layer, template layer, module layer, route layer, and page-builder layer may all affect whether the migration is actually launch-ready.
-
-A third gap is under-reviewing configuration-sensitive behavior. Tax, shipping, payment, coupon, checkout, refund, notification, and analytics behavior may involve target setup. Validation should not treat these areas as if every behavior is automatically transferred as static data.
-
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
-
-Validation should produce a decision, not a vague list of issues. Each result should be assigned to the next action it requires.
-
-| Result category             | What it means                                                                                                                                                                                       | Recommended response                                                                                       |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Pass                        | The sample preserves expected meaning and behaves acceptably in EasyStore and the Joomla site context.                                                                                              | Continue with the planned migration path and use the sample as a benchmark for Full Migration review.      |
-| Needs configuration review  | Data is present, but EasyStore, Joomla, checkout, tax, shipping, payment, storefront, or account settings need adjustment.                                                                          | Configure the target environment, then retest the affected samples.                                        |
-| Needs data cleanup          | Source data is inconsistent, incomplete, duplicated, outdated, or unclear.                                                                                                                          | Clean the source data or define the accepted target interpretation before continuing.                      |
-| Needs Add-on review         | The issue may be addressable through filtering, advanced mapping, or advanced configuration within applicable Add-on capability.                                                                    | Review whether Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure fits the requirement. |
-| Needs Custom Service review | The issue involves Custom Platform data, unsupported extension data, custom fields, bespoke logic, third-party identifiers, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment. | Review the requirement through Custom Service before treating the migration as launch-ready.               |
-| Not launch-ready            | The migrated result does not preserve key selling, operational, or storefront meaning.                                                                                                              | Do not proceed to launch until the cause is corrected, reconfigured, remapped, cleaned, or escalated.      |
-
-This classification keeps validation practical. A failed sample should not merely be labeled as wrong. It should be assigned to configuration work, data cleanup, Add-on review, Custom Service review, or launch blocking.
+A validation report should not approve the store simply because record counts look correct. It should prove that migrated data supports real buying, customer service, order lookup, storefront continuity, and post-launch operation.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-EasyStore by JoomShaper validation should prove that migrated data remains useful inside a Joomla commerce environment. The strongest review tests product sellability, variant clarity, category discovery, customer-account meaning, historical order readability, checkout-related configuration, storefront routes, Joomla presentation, and custom or extension-owned data behavior.
+EasyStore by JoomShaper validation should prove that migrated data works as commerce inside a Joomla site. Products, variants, categories, customers, orders, refunds, coupons, inventory, tax, shipping, payment context, checkout paths, Joomla menus, SP Page Builder presentation, and custom data all affect launch confidence.
 
-A migration result is stronger when the merchant can explain why each sample passed. If a record appears but its meaning is unclear, the issue should be classified before Full Migration. Some issues may require target configuration or source cleanup. Others may require Add-on review or Custom Service review.
+The strongest validation process uses representative samples, separates migrated records from target-side setup, classifies special-handling findings clearly, and checks whether the result supports real selling. A migration should be approved because the EasyStore result makes operational sense, not because records are merely present.
 
-Use Demo Migration results to validate the records that reveal the real EasyStore by JoomShaper operating model: variant-heavy products, important categories, repeat customers, complex orders, discount examples, tax and shipping examples, payment context, refund history, Joomla storefront paths, and any custom or extension-owned data. If the result is unclear, use Live Chat before Full Migration so the right configuration, Add-on, Managed Service, or Custom Service boundary is confirmed.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is record-count matching enough to validate an EasyStore migration?**
 
-**What should be validated first after migrating to EasyStore by JoomShaper?**
+No. Record counts help confirm completeness, but EasyStore validation also needs meaning checks. Products, variants, categories, customers, orders, storefront paths, checkout behavior, configuration-sensitive areas, and custom data should be reviewed through representative samples.
 
-Start with products, variants, categories, customers, and orders because they carry the core selling and operational meaning of the store. Then validate checkout-related behavior, Joomla storefront paths, and any custom or extension-owned data that affects the expected launch result.
+**Should SP Page Builder layouts be validated as part of migration review?**
 
-**Is it enough to check whether products, customers, and orders appear in EasyStore?**
+Yes, when those layouts affect storefront presentation, landing pages, product blocks, or buying paths. However, page-builder layout work should be separated from ordinary data migration so the team knows whether an issue is migrated data, Joomla implementation, or manual rebuild.
 
-No. Record presence is only the first check. The stronger validation question is whether products are sellable, variants are understandable, customer records remain useful, order history is readable, and storefront paths work inside the Joomla site.
+**Which order examples are most useful for validation?**
 
-**Which products should be included in Demo Migration validation?**
+Use ordinary paid orders plus exception examples: variant orders, discounted orders, refunded orders, tax-sensitive orders, shipping-sensitive orders, cancelled orders, high-value orders, and orders tied to important customer profiles.
 
-Use products that reveal catalog structure: simple products, variant-heavy products, products with multiple images, discounted products, products in important categories, products with inventory or shipping details, and products with custom fields or source-specific behavior.
+**When should Custom Service be considered during validation?**
 
-**How should tax, shipping, payment, coupon, and checkout behavior be validated?**
+Custom Service should be considered when validation finds unsupported records, custom fields, extension-owned data, external identifiers, bespoke transformations, Custom Platform handling, or custom migration logic requirements outside supported behavior.
 
-Validate these areas as configuration-sensitive behavior. Some historical context may migrate as part of order data, while future checkout, tax, shipping, payment, and coupon behavior may need to be configured inside EasyStore by JoomShaper. Samples should show whether the target setup matches the intended business rules.
+**How should live payment, tax, and shipping behavior be validated?**
 
-**When should validation lead to Custom Service review?**
-
-Custom Service should be reviewed when validation exposes Custom Platform data, unsupported extension data, custom fields, bespoke product or order logic, third-party identifiers, external-system dependencies, Tailored Add-ons, Custom Add-ons, or any requirement that needs custom migration logic adjustment beyond standard service capability.
+Historical values should be checked for readability, but live payment, tax, and shipping behavior should be tested separately through EasyStore and Joomla configuration. Historical order data does not prove that current checkout setup is complete.

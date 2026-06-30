@@ -1,167 +1,131 @@
 # Square Platform Overview
 
-Square is a commerce ecosystem, not only an online storefront destination. It connects catalog structure, item variations, modifiers, inventory, customer profiles, orders, payments, point-of-sale activity, and online selling inside one operating model.
+Square is best understood as a POS-connected commerce environment, not simply as another online storefront destination. A migration into Square should therefore answer a practical operating question: will the migrated data support how the business sells, fulfills, manages inventory, reviews orders, serves customers, and presents products online after launch?
 
-That makes a migration to Square different from a migration into a storefront-only platform. The success question is not only whether products, customers, orders, and content appear after migration. The stronger question is whether the migrated result still supports the way the business sells, fulfills, tracks, and interprets commerce activity after launch.
+That question changes the whole planning conversation. Product records need to work as Square item-library records. Variations and sale-time choices need to remain clear enough for staff and shoppers. Inventory should make sense in relation to Square locations. Historical orders and payment context should remain useful without being confused with live payment setup. Square Online may need separate attention for pages, product visibility, URLs, SEO fields, domains, and online presentation. A strong Square migration plan connects these areas instead of treating them as isolated record groups.
 
-For many merchants, Square is attractive because it can reduce operational fragmentation. A shared catalog and customer foundation can support online selling, in-person selling, pickup, delivery, location-aware inventory, and support workflows. That advantage is strongest when the business has already defined what must remain commercially and operationally true after the move.
+### What Square Means as a Target Platform <a href="#what-square-means-as-a-target-platform" id="what-square-means-as-a-target-platform"></a>
 
-The tradeoff is that Square can expose unclear source-store logic quickly. Products that looked acceptable in the old platform may need clearer item, variation, modifier, inventory, and location meaning in Square. Customer and order records may also need to remain useful for real workflows, not merely present as imported history.
+Square is a Target Platform for merchants that want commerce data to support daily operations. Many Target Platforms begin with the storefront and then extend into payments, order management, inventory, and integrations. Square often works in the opposite direction for planning purposes: the item library, POS workflow, payments, locations, inventory, customer profiles, reporting, and Square Online presentation need to be considered together.
 
-### What Changes in a Migration to Square <a href="#what-changes-in-a-migration-to-square" id="what-changes-in-a-migration-to-square"></a>
+This makes Square especially relevant for merchants that sell in person, sell through Square Online, manage a practical product catalog, need fast checkout, care about payment-connected order records, or want one operating environment for staff-facing and customer-facing commerce. The migration should not be judged only by whether products, customers, orders, images, and content can be moved. It should be judged by whether those records will remain usable inside the Square environment the merchant intends to run.
 
-A move to Square often changes how store data is interpreted because Square connects storefront data with operating workflows.
+| Square area              | Migration significance                                                                                                                                   |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Item library             | Product data must become usable Square items, item variations, categories, images, discounts, taxes, and related catalog records.                        |
+| Variations and modifiers | Product choices may need to be separated into sellable variations, item options, or sale-time modifiers rather than copied as generic option text.       |
+| Locations and inventory  | Stock review may need location meaning, sellable availability, and inventory-state awareness rather than one flat quantity.                              |
+| Orders and payments      | Historical order and payment context should support lookup, reporting, and customer service, while live payment setup remains Square-side configuration. |
+| Customers                | Customer profiles should support buyer lookup, order association, repeat-sale context, and practical segmentation where supported data exists.           |
+| Square Online            | Online display, product visibility, URLs, redirects, pages, SEO fields, and domains need separate planning beyond catalog transfer.                      |
 
-#### Catalog structure becomes operational structure <a href="#catalog-structure-becomes-operational-structure" id="catalog-structure-becomes-operational-structure"></a>
+The practical result is that Square migration planning starts from operating behavior. The same migrated product can affect a staff POS screen, an online product page, an inventory count, a reporting view, and a customer service conversation. If the migration plan ignores that connected behavior, the target store may look complete in a file-level audit while still feeling incomplete to the business team.
 
-In Square, the item library is not only a place to display products online. It helps define what the business sells, how choices are represented, how orders are created, and how inventory is interpreted.
+### Why Square Is Different from a Storefront-First Platform <a href="#why-square-is-different-from-a-storefront-first-platform" id="why-square-is-different-from-a-storefront-first-platform"></a>
 
-This means product migration into Square should be judged by sellable accuracy. A product can appear complete while still being weaker if its variations, modifiers, categories, images, or inventory-relevant fields no longer match how customers actually buy and how staff actually fulfill.
+A storefront-first platform usually treats website catalog presentation as the main planning center. Product pages, collections, search, checkout, CMS content, themes, apps, and redirects often dominate the migration discussion. Square can support online selling through Square Online, but Square migration planning needs a broader operating lens because the item library also supports POS activity, orders, payments, inventory, and business workflows.
 
-#### Variations and modifiers need deliberate separation <a href="#variations-and-modifiers-need-deliberate-separation" id="variations-and-modifiers-need-deliberate-separation"></a>
+This difference is not a value judgment. It is a planning distinction. A merchant moving from a storefront-heavy Source Platform may expect every source storefront behavior to have a direct Square equivalent. That expectation should be checked early. Square may be a strong fit when the merchant wants operational simplicity, POS-connected commerce, practical online selling, and clear staff workflows. It may need more careful planning when the Source Platform depends on advanced storefront merchandising, custom checkout rules, deep content structures, marketplace seller logic, B2B account behavior, or app-managed data that does not belong to Square’s standard commerce records.
 
-Square item variations and modifiers serve different commercial purposes. Variations usually represent distinct purchasable units, while modifiers often represent purchase-time choices, add-ons, or adjustments that do not always need to become separate inventory-tracked units.
+| Storefront-first assumption                             | Square planning implication                                                                                       |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Products are primarily website listings.                | Products also need to work as item-library records for POS, reporting, inventory, and online display.             |
+| Options and variants are mainly shopper-facing choices. | Square item variations, item options, and modifiers should be reviewed for sale-time usability and staff clarity. |
+| Inventory is one storewide stock number.                | Inventory may need location-aware review and should be connected to item variations.                              |
+| Payment data is just part of historical orders.         | Historical payment context is different from configuring live Square payment processing.                          |
+| Customer accounts map directly into target accounts.    | Square customer profiles may not preserve every source-account behavior or permission model.                      |
+| Storefront pages define launch readiness.               | Square Online readiness also depends on item visibility, URLs, domains, redirects, and target-side setup.         |
 
-This distinction matters because a source platform may have used options, variants, add-ons, personalization fields, or custom product logic differently. During migration, the important planning question is whether Square should treat each choice as a sellable unit, a modifier, or a different structure that requires review.
+A Square migration therefore needs careful separation between migrated records and Square configuration. Migration can bring supported records into the Target Platform, but payment setup, POS hardware, staff permissions, fulfillment settings, tax configuration, live checkout behavior, domains, and many integration decisions still need to be prepared or confirmed directly in Square.
 
-#### Inventory becomes more visible after migration <a href="#inventory-becomes-more-visible-after-migration" id="inventory-becomes-more-visible-after-migration"></a>
+### Core Square Commerce Areas to Plan Around <a href="#core-square-commerce-areas-to-plan-around" id="core-square-commerce-areas-to-plan-around"></a>
 
-Square is often selected because inventory can support both online and in-person operations. That makes inventory more than a product field. It becomes part of the operating model.
+The safest way to plan a Square migration is to treat Square as a set of connected working layers. Each layer gives migrated data a different meaning. If the layers are planned separately, the merchant may approve a catalog that does not support inventory, an order history that is hard to interpret, or a Square Online launch that still needs significant configuration.
 
-If inventory is important by variation, location, fulfillment method, or channel, the migrated result needs to preserve the right meaning. A migration that transfers item records but weakens stock interpretation can create operational confusion even when the catalog looks visually complete.
+| Square layer                 | What to clarify before migration                                                                                                     | What to validate after migration                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Item library                 | Which source products, SKUs, prices, images, categories, discounts, taxes, and product choices should become Square catalog records. | Items, variations, modifiers, categories, images, prices, taxes, and discounts are understandable and usable. |
+| Locations                    | Which locations matter for selling, fulfillment, reporting, pickup, or operational segmentation.                                     | Location-related inventory, availability, and operational expectations are not flattened incorrectly.         |
+| Inventory                    | Whether the migration should carry current stock, stock by location, or only catalog records without inventory expectations.         | Inventory quantities and availability match the intended Square operating model.                              |
+| Orders                       | Which historical order details are needed for service, accounting reference, reporting, or customer support.                         | Dates, totals, discounts, taxes, customer links, statuses, refunds, and references remain interpretable.      |
+| Payments                     | Which payment details are historical references and which live payment settings must be configured in Square.                        | Historical payment context is clear, while live processing assumptions are not treated as migrated data.      |
+| Customers                    | Whether source customers are account holders, buyers, guest purchasers, loyalty members, or CRM records.                             | Customer profiles, contact data, and order associations support realistic business use.                       |
+| Square Online                | Which online pages, products, URLs, redirects, SEO fields, and domain expectations matter.                                           | Storefront display and URL continuity are ready enough for launch review.                                     |
+| Integrations and custom data | Which apps, plugins, external systems, or custom fields own important information.                                                   | Supported migration output, Add-ons needs, and Custom Service needs are separated clearly.                    |
 
-#### Customer profiles must remain useful <a href="#customer-profiles-must-remain-useful" id="customer-profiles-must-remain-useful"></a>
+This layered view keeps planning anchored in Square’s real operating environment. The merchant is not only deciding what can be moved; the merchant is deciding how the moved data will be used by staff, customers, reporting workflows, and Square Online after launch.
 
-Customer migration into Square should not be evaluated solely by the number of imported customers. The more important question is whether customer profiles still support the workflows the business depends on after launch.
+### What Usually Migrates Into Square <a href="#what-usually-migrates-into-square" id="what-usually-migrates-into-square"></a>
 
-That can include repeat purchasing, support lookup, marketing segmentation, order interpretation, and staff understanding of customer history. If important customer meaning came from tags, custom fields, third-party systems, account behavior, or outside-system identifiers, that meaning should be reviewed before treating the migration as straightforward.
+Square migration scope commonly starts with familiar e-commerce records such as products, categories, customers, orders, images, coupons or discounts, and supported supporting fields. The important step is to interpret those records through Square’s model.
 
-#### Historical orders need clear expectations <a href="#historical-orders-need-clear-expectations" id="historical-orders-need-clear-expectations"></a>
+A product is not only a product page. It may become a Square item with variations, images, pricing, taxes, categories, and inventory implications. A source option may become a variation, an item option, a modifier, or a configuration detail that needs review. A category may support item organization, Square Online navigation, or internal management, depending on how the target store is configured. An order may be useful for reporting and customer service but should not be confused with live checkout setup. A customer record may support lookup and order history, but it may not reproduce every source account, password, membership, or B2B permission model.
 
-Historical orders often matter for reporting, customer service, warranty questions, repeat purchasing, and continuity. In Square, however, order interpretation is closely connected to commerce workflows.
+Square Online introduces another layer. Some storefront material may map as product-related content, CMS Pages, Blog Posts, URLs, SEO fields, redirects, images, or domain-related setup. Other presentation details may need to be rebuilt in Square rather than migrated as data. Merchants should identify this distinction before judging migration completeness.
 
-A migrated order should be understood as historical context unless the migration plan defines a stronger operational role. Teams should know what staff can safely use those records for after launch and what should not be assumed about payment, refund, cancellation, fulfillment, or live operational behavior.
+| Source expectation            | Square interpretation question                                                                 |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| Product options               | Should these become variations, modifiers, item options, or target-side configuration?         |
+| Complex categories            | Are they needed for item organization, online navigation, reporting, or only legacy structure? |
+| Order history                 | Which details must remain useful for service, reporting, refunds, or customer lookup?          |
+| Customer accounts             | Are they customer profiles, buyer records, loyalty references, or account-login structures?    |
+| CMS Pages and Blog Posts      | Should they be migrated, rebuilt, redirected, or handled outside Square’s catalog model?       |
+| Custom fields and app records | Are they supported records, Add-ons candidates, Custom Service items, or excluded scope?       |
 
-#### Online visibility and URL continuity should be prioritized by value <a href="#online-visibility-and-url-continuity-should-be-prioritized-by-value" id="online-visibility-and-url-continuity-should-be-prioritized-by-value"></a>
+This is where early source-data review and scope planning matter. The merchant does not need every original record to behave exactly as it did before. The merchant needs a clear target expectation for what Square should own, what Square should display, what Square should report, and what should be configured separately.
 
-Square migrations can involve storefront and URL changes. If organic traffic, product landing pages, category paths, or local search journeys matter, priority URLs should be identified early.
+### Platform Characteristics That Affect Migration Scope <a href="#platform-characteristics-that-affect-migration-scope" id="platform-characteristics-that-affect-migration-scope"></a>
 
-The goal is not always to preserve every historical path with equal effort. The stronger approach is to protect the pages that carry commercial value, search visibility, customer trust, or operational reachability.
+Square scope is shaped by several characteristics that should be confirmed before Full Migration. The first is catalog structure. Square item-library records should remain understandable to people who sell, fulfill, and manage them. If a previous platform used complex nested options, product builders, configurable bundles, or app-generated choices, the migration plan should decide which parts can be represented as Square data and which parts require Add-ons, Custom Service, target setup, or manual rebuilding.
 
-### Where Square Is Often a Strong Target <a href="#where-square-is-often-a-strong-target" id="where-square-is-often-a-strong-target"></a>
+The second characteristic is operational location. A one-location retailer may only need straightforward item and stock review. A merchant with several locations needs stronger inventory and fulfillment validation. If location meaning is not clarified, inventory can look mathematically correct while still being operationally confusing.
 
-Square is often a strong target when the business values unified commerce operations more than deep storefront customization.
+The third characteristic is the relationship between Square and Square Online. Online launch readiness is not proven by catalog migration alone. Product visibility, images, page layout, menus, URLs, redirects, SEO fields, domain readiness, and live checkout setup may require separate review. Square Online should be treated as the online presentation layer of a Square operating environment, not as the only target destination.
 
-#### Merchants combining online and in-person selling <a href="#merchants-combining-online-and-in-person-selling" id="merchants-combining-online-and-in-person-selling"></a>
+The fourth characteristic is integration dependency. Payment records, accounting exports, loyalty data, appointment records, delivery apps, reviews, subscriptions, external IDs, marketing consent, or custom reporting references may come from systems outside the main store export. These records should not be assumed to migrate through Standard Service unless they are supported and clearly scoped.
 
-Square is often suitable for businesses that want online orders, in-person sales, catalog updates, customer profiles, and inventory activity to stay connected. This is especially valuable when the business wants fewer disconnected systems and clearer day-to-day operational control.
+### When Square Needs Extra Planning <a href="#when-square-needs-extra-planning" id="when-square-needs-extra-planning"></a>
 
-#### Catalogs that can be expressed through clear items, variations, and modifiers <a href="#catalogs-that-can-be-expressed-through-clear-items-variations-and-modifiers" id="catalogs-that-can-be-expressed-through-clear-items-variations-and-modifiers"></a>
+Square needs extra planning when the Source Platform contains business logic that does not translate cleanly into Square’s operating model. Warning signs include advanced product configurators, deeply nested category structures, custom checkout steps, marketplace sellers, complex subscriptions, B2B company accounts, external inventory ownership, app-managed loyalty data, custom fields, or heavy content-commerce relationships.
 
-Square works best when the business can define what each item is, which choices should become variations, which choices should become modifiers, and which choices require special handling.
+Extra planning does not automatically mean Square is the wrong Target Platform. It means the merchant needs a more precise scope and a stronger review path. Some needs may be handled with Add-ons when they involve supported filtering, mapping, or configuration adjustments. Some needs may require Custom Service when unsupported records, custom fields, external-system identifiers, app-owned data, or bespoke transformation must be evaluated. Some needs may be target-side configuration rather than migrated data.
 
-This does not mean every catalog must be simple. It means the sellable logic must be understandable enough to represent clearly.
+The planning goal is to prevent false confidence. A Square migration can succeed even when the Source Platform is complex, but only if the merchant understands which parts of the old operating model are being preserved, which parts are being reinterpreted inside Square, and which parts must be rebuilt or configured after migration.
 
-#### Businesses that depend on inventory clarity <a href="#businesses-that-depend-on-inventory-clarity" id="businesses-that-depend-on-inventory-clarity"></a>
+### Square Migration Planning Priorities <a href="#square-migration-planning-priorities" id="square-migration-planning-priorities"></a>
 
-Square can be a strong fit when inventory accuracy matters across channels, locations, pickup, delivery, or in-person workflows. The fit is strongest when the business can define how stock should behave at the variation and location level.
+Square planning becomes clearer when the merchant turns the platform thesis into a few concrete decisions. The first decision is operating fit: whether Square should become the main environment for selling, payments, locations, inventory, customer lookup, and online presentation. If that answer is uncertain, service-path decisions should wait until the business confirms what Square is expected to own after launch.
 
-#### Teams that need centralized customer and order context <a href="#teams-that-need-centralized-customer-and-order-context" id="teams-that-need-centralized-customer-and-order-context"></a>
+The second decision is data meaning. Products, options, categories, customers, orders, CMS Pages, Blog Posts, images, URLs, and discounts should not be reviewed only as export rows. They should be reviewed through the Square environment they will enter. Item variations affect sellable choices and stock review. Modifiers affect sale-time customization. Locations affect inventory interpretation. Square Online affects product visibility, redirects, SEO fields, domains, and page readiness.
 
-Square can be useful when staff need accessible customer profiles and order history for support, repeat purchases, and operational review. The migration should preserve usable meaning, not only raw records.
+The third decision is scope confidence. When the source store contains custom fields, app-owned records, unusual product logic, external identifiers, or storefront behavior that Square does not natively reproduce, the plan should separate ordinary supported records from Add-ons needs, Custom Service evaluation, and target-side rebuilding. This keeps the migration expectation realistic without weakening the value of Square as the Target Platform.
 
-#### Local, service-adjacent, and operationally driven commerce <a href="#local-service-adjacent-and-operationally-driven-commerce" id="local-service-adjacent-and-operationally-driven-commerce"></a>
-
-Square is often practical for businesses where commerce is tied closely to local operations: pickup, delivery, events, services, appointments, multi-location selling, or staff-assisted selling.
-
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
-
-Square is not automatically the safest target when the source store depends on advanced storefront behavior, heavy customization, or platform-specific workflows that Square does not reproduce in the same way.
-
-#### Complex product-choice logic <a href="#complex-product-choice-logic" id="complex-product-choice-logic"></a>
-
-Deeper planning is needed when source products rely on nested options, advanced variants, bundled logic, personalization fields, custom product builders, or checkout-time choices that affect price, SKU, inventory, fulfillment, or reporting.
-
-The risk is not simply that the product has many choices. The risk is that those choices may not have a clear Square equivalent without deliberate mapping.
-
-#### App-driven or custom data <a href="#app-driven-or-custom-data" id="app-driven-or-custom-data"></a>
-
-If important business meaning lives in third-party app data, custom fields, outside-system identifiers, or custom platform logic, the migration should not be treated as a routine record transfer. That type of requirement may need Custom Service review.
-
-#### Historical order workflows <a href="#historical-order-workflows" id="historical-order-workflows"></a>
-
-If staff expect historical orders to support operational actions after launch, the intended use should be defined clearly. Imported history can support continuity, but teams should not assume old-platform order behavior will work like native Square order behavior unless that has been reviewed.
-
-#### Multi-location inventory expectations <a href="#multi-location-inventory-expectations" id="multi-location-inventory-expectations"></a>
-
-Square can support location-aware operations, but unclear source inventory discipline can become more visible after migration. If the business needs reliable stock by location, variation, or fulfillment workflow, this should be planned and validated early.
-
-#### SEO-sensitive storefronts <a href="#seo-sensitive-storefronts" id="seo-sensitive-storefronts"></a>
-
-If search traffic is important, deeper planning is needed around priority URLs, landing pages, redirects, product visibility, and category continuity. Square may be a good target, but SEO continuity needs its own migration plan.
-
-### What Should Be Understood Early Before Moving into Square <a href="#what-should-be-understood-early-before-moving-into-square" id="what-should-be-understood-early-before-moving-into-square"></a>
-
-Before treating Square as the final target platform, the business should clarify what must remain operationally true after migration.
-
-#### How customers choose and buy products <a href="#how-customers-choose-and-buy-products" id="how-customers-choose-and-buy-products"></a>
-
-The business should define which choices must remain true sellable units, which choices should become purchase-time modifiers, and which choices require special review.
-
-#### How inventory should behave <a href="#how-inventory-should-behave" id="how-inventory-should-behave"></a>
-
-The business should identify whether inventory must remain accurate by variation, location, channel, pickup, delivery, or fulfillment method.
-
-#### What customer profiles must support <a href="#what-customer-profiles-must-support" id="what-customer-profiles-must-support"></a>
-
-The team should define what customer history, profile details, segmentation context, or support workflows need to remain useful after migration.
-
-#### What historical orders are for <a href="#what-historical-orders-are-for" id="what-historical-orders-are-for"></a>
-
-The business should decide whether historical orders are needed mainly for reference, reporting, customer service, repeat purchasing, or another workflow. That expectation affects how those records should be reviewed.
-
-#### Which URLs and pages matter most <a href="#which-urls-and-pages-matter-most" id="which-urls-and-pages-matter-most"></a>
-
-If online visibility matters, the business should identify priority products, categories, landing pages, and redirects before migration decisions become launch pressure.
-
-#### Which requirements may need Custom Service <a href="#which-requirements-may-need-custom-service" id="which-requirements-may-need-custom-service"></a>
-
-Custom Platform sources, third-party app data, custom fields, outside-system identifiers, custom product logic, and non-standard transformation requirements should be identified early because they may need Custom Service rather than a standard migration approach.
+A strong Square plan should therefore connect fit, data meaning, risk, preparation, service choice, validation, and failure prevention without turning them into separate checklists. Each planning area supports the same outcome: migrated data should be understandable, operational, and ready to support the way the business intends to sell in Square.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Square is often a strong migration target when the business wants a unified commerce operating model and can define how catalog, inventory, customer, order, and storefront behavior should work after launch. Its strength is not simply that records can be brought together. Its strength is that commerce activity can become easier to operate when the underlying meaning is governed clearly.
+Square is a strong Target Platform when the merchant wants commerce data to support practical selling, payment-connected operations, customer service, inventory review, and online presentation inside one Square-centered environment. It is not best planned as a simple storefront transfer. The migration should preserve supported records in a way that makes sense for Square’s item library, variations, modifiers, locations, inventory, orders, payments, customers, and Square Online setup.
 
-The safest way to evaluate Square is to judge operational truth, not record presence. Products should still be sellable in the right way, inventory should still support real workflows, customer profiles should remain useful, order history should be interpreted correctly, and priority URLs should continue to support customer discovery.
+A successful Square migration begins with the right platform thesis: records should not only arrive in Square; they should be usable in the way the business intends to sell, fulfill, report, and support customers after launch.
 
-Use a Demo Migration sample that includes representative items, variations, modifiers, inventory-sensitive products, meaningful customer records, operationally important orders, and priority storefront paths. If the sample shows unclear product-choice logic, app-owned data, Custom Platform behavior, or non-standard requirements, review the scope through Live Chat before assuming a standard migration approach is enough.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Square mainly a POS platform or an online store platform for migration planning?**
 
-**Is Square the same as Square Online?**
+Square should be planned as a POS-connected commerce environment. Square Online may be important, but products, inventory, orders, payments, customers, and locations also affect how migrated data will be used.
 
-No. Square is the broader commerce ecosystem that can include catalog, payments, point-of-sale activity, customers, inventory, and operational tools. Square Online is the storefront layer connected to that broader ecosystem.
+**Can a Square migration copy every feature from the previous platform?**
 
-**Why does Square require a different migration mindset?**
+Not always. Supported records can be migrated according to the selected scope, but custom checkout logic, advanced storefront behavior, external app data, POS hardware setup, payment configuration, and some content or integration behavior may need Add-ons, Custom Service, Square-side setup, or separate rebuilding.
 
-Square connects storefront data with operational workflows. That means migrated data must remain useful for selling, fulfillment, inventory, customer support, and order interpretation, not only appear as transferred records.
+**Why do item variations and modifiers matter so much in Square?**
 
-**Are Square item variations the same as modifiers?**
+They affect how products are sold, selected, priced, displayed, and reviewed. A source option that looks simple on the old storefront may need a different structure in Square if it affects inventory, staff POS behavior, or sale-time customization.
 
-No. Item variations usually represent distinct purchasable units, while modifiers usually represent purchase-time choices or add-ons. During migration, this distinction affects product meaning, inventory behavior, pricing, reporting, and customer experience.
+**Does Square Online make Square the same as a storefront-first platform?**
 
-**Is Square a good target for stores with complex products?**
+No. Square Online provides the online presentation layer, but the migration still needs to respect Square’s item library, POS, payments, locations, inventory, customer records, and operational setup.
 
-It can be, but complex product logic needs careful review. If source products rely on advanced variants, add-ons, personalization, bundles, or custom product builders, the migration should test whether Square can preserve the required buying behavior clearly.
+**What should be confirmed before starting a Square migration?**
 
-**Does moving to Square automatically preserve inventory behavior?**
-
-No. Inventory behavior should be reviewed by variation, location, channel, and fulfillment expectation where relevant. A migrated item can exist while its stock meaning is still incomplete or operationally confusing.
-
-**Should historical orders be validated differently in Square?**
-
-Yes. Historical orders should be reviewed for how staff will actually use them after launch. They may support reporting, customer service, or continuity, but they should not automatically be treated as native live operational orders.
-
-**When should a Square migration be reviewed as Custom Service?**
-
-Custom Service should be reviewed when the project involves a Custom Platform, app-owned data, custom fields, outside-system identifiers, custom product logic, bespoke transformation, or any requirement that goes beyond standard service capability.
+Confirm the future Square operating model, item-library expectations, variation and modifier needs, location and inventory rules, historical order expectations, customer profile requirements, Square Online launch needs, integrations, and any custom data that may require Add-ons or Custom Service.

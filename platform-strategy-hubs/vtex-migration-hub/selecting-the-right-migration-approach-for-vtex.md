@@ -1,162 +1,162 @@
 # Selecting the Right Migration Approach for VTEX
 
-Choosing the right migration approach for VTEX requires more than checking whether products, customers, and orders can be transferred. VTEX often combines Catalog, SKUs, specifications, pricing, trade policies, marketplace operations, OMS, logistics, Master Data, apps, APIs, and storefront implementation into one operating environment. The right approach should match how much of that operating model must be migrated, reviewed, configured, or customized before Full Migration.
+The right VTEX migration approach depends on how much of the merchant’s commerce operation must be interpreted, transformed, configured, or validated beyond ordinary record movement. VTEX can support sophisticated catalog structures, storefront implementations, marketplace operations, B2B scenarios, Master Data, integrations, and external services. That strength also means migration planning must separate supported record transfer from target-side implementation and custom business logic.
 
-A lighter approach can work when VTEX is receiving clean commerce data and the merchant can handle target-side setup and review. A heavier approach is safer when the project depends on enterprise commerce behavior, marketplace or seller relationships, external identifiers, custom checkout fields, app-owned data, or bespoke transformation logic. The decision should be based on structural evidence from preparation and Demo Migration results, not only record count.
+A small VTEX migration can require careful service-path selection if source data depends on custom fields, external identifiers, marketplace relationships, or headless storefront assumptions. A large migration can still fit a lighter path when the data is supported, the target structure is clear, and the merchant can validate the result confidently. The decision should be made from evidence, not from platform reputation or record count alone.
 
-### How to Classify the VTEX Migration Approach <a href="#how-to-classify-the-vtex-migration-approach" id="how-to-classify-the-vtex-migration-approach"></a>
+### What Migration Approach Means for VTEX <a href="#what-migration-approach-means-for-vtex" id="what-migration-approach-means-for-vtex"></a>
 
-VTEX approach selection works best when the project is classified by operational burden. A migration with many records can still be manageable if the structure is predictable. A smaller migration can require deeper service review if its records depend on complex SKU behavior, trade policies, marketplace relationships, or external systems.
+A VTEX migration approach is a decision about scope, responsibility, support level, configuration, and validation burden. It should explain which records are expected to migrate, which behaviors must be configured in VTEX, which values require Add-ons, which requirements need Custom Service, and which launch tasks belong to the merchant’s implementation team.
 
-| Decision layer            | What to assess                                                                                                                                              | Approach implication                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Data structure            | Products, SKUs, categories, brands, specifications, images, stock, customers, orders, CMS Pages, and Blog Posts                                             | Determines whether ordinary supported migration handling is likely enough.                                     |
-| VTEX configuration burden | Trade policies, sales channels, pricing rules, promotions, logistics, payment, checkout, storefront, and app setup                                          | Usually remains target-side setup unless the data itself requires migration handling or custom interpretation. |
-| Execution burden          | Record volume, launch timing, review capacity, team availability, and tolerance for customer-led execution                                                  | Helps separate Standard Service from Managed Service when the migration remains within standard capability.    |
-| Transformation burden     | Product-to-SKU restructuring, specification remapping, marketplace/seller interpretation, external IDs, Master Data, custom fields, or unsupported app data | Pushes the project toward Add-ons or Custom Service depending on whether the need is supported or bespoke.     |
-| Validation burden         | Demo Migration proof, stakeholder review, downstream system checks, and Full Migration acceptance criteria                                                  | Confirms whether the selected approach can produce a reliable VTEX outcome.                                    |
+The approach should separate four layers of work:
 
-The practical question is: can the current store’s business meaning be represented in VTEX through supported migration behavior, standard configuration, optional Add-ons, Next-Cart-led execution, or does it require Custom Service?
+| Work layer                            | VTEX example                                                                                                                                   | Service-path implication                                                                 |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Supported migrated records            | Products, SKUs, categories, brands, customers, orders, images, CMS Pages, Blog Posts, and supported related fields.                            | May fit Standard Service or Managed Service depending on execution and validation needs. |
+| Supported migration adjustments       | Filtering, mapping, or configuration of supported records and fields.                                                                          | May require Add-ons.                                                                     |
+| Custom or unsupported migration needs | Master Data entities, app-owned values, marketplace-specific context, external IDs, bespoke transformation, or Custom Platform interpretation. | Requires Custom Service review.                                                          |
+| VTEX-side implementation              | Storefront, apps, integrations, live checkout, payments, logistics, search, promotions, seller setup, and operational configuration.           | Should be prepared and validated outside ordinary record migration.                      |
 
-### Standard Service for VTEX <a href="#standard-service-for-vtex" id="standard-service-for-vtex"></a>
+This separation protects the migration from two common mistakes: choosing too light an approach because the record types sound familiar, or choosing Custom Service for work that is actually supported migration adjustment or VTEX-side implementation.
 
-Standard Service may be enough when the Source Platform data is supported, the VTEX target structure is predictable, and the customer can manage the migration steps and review the outcome. This is most realistic when the project is primarily about transferring supported commerce records into a VTEX environment that the customer or implementation team will configure separately.
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-| Standard Service signal                                          | What it means for VTEX                                                                                                                 | What still needs separate ownership                                                                                               |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Product and SKU relationships are clean                          | Products, SKUs, images, prices, stock, brands, and categories can be reviewed without custom restructuring.                            | VTEX catalog activation, required specifications, storefront display, search behavior, and merchandising setup still need review. |
-| Specifications are predictable                                   | Product and SKU specifications can be mapped without unusual inheritance, naming, or category-dependent interpretation.                | Missing or incomplete VTEX-required specification values must be corrected before launch.                                         |
-| Customers and orders are conventional                            | Customer accounts, addresses, order totals, statuses, items, payments, shipping, taxes, and discounts remain readable after migration. | Operational teams still need to confirm how historical records should be used after launch.                                       |
-| Marketplace or seller structures are not part of migration scope | The migration does not need to recreate seller relationships, marketplace order meaning, or seller-specific identifiers.               | Marketplace operations must be configured outside the standard migration if needed.                                               |
-| Master Data and app-owned records are not required               | The project can launch without migrating custom VTEX Master Data documents, app records, or API-owned objects.                         | Any excluded custom data should be documented so stakeholders understand what will not appear in VTEX.                            |
-| Storefront rebuild is separate from data migration               | Store Framework, FastStore, CMS, search, facets, content, and URL behavior are handled by the implementation team.                     | Storefront teams must still validate product, category, CMS Page, Blog Post, and SEO continuity.                                  |
+Standard Service may be appropriate when the source data fits supported migration behavior, the VTEX target structure is predictable, and the merchant can manage setup, review, and approval responsibilities. It is strongest when products and SKUs are ordinary, categories and brands are clear, customer records are standard, order history needs readable reference value, and custom platform logic is limited.
 
-Standard Service is a good fit when the migration path is supported and the customer has enough internal capacity to run Demo Migration, review results, make target-side configuration decisions, and approve Full Migration.
+Standard Service should not be judged by volume alone. A large supported catalog can be feasible if the product/SKU relationship is clean and the merchant can validate representative samples. A smaller store may be unsuitable if key records depend on custom source fields, Master Data, marketplace ownership, or external system interpretation.
 
-### Managed Service for VTEX <a href="#managed-service-for-vtex" id="managed-service-for-vtex"></a>
+| Standard Service readiness signal                                       | VTEX-specific reason                                                                  |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Products and SKUs have clear source structures.                         | VTEX catalog mapping can be reviewed without bespoke transformation.                  |
+| Specifications, categories, and brands are stable and supported.        | Product discovery and merchandising values can be validated through ordinary samples. |
+| Customers and orders are mostly standard records.                       | Historical context can remain useful without custom account reconstruction.           |
+| Pricing and promotions do not require special transformation.           | Commercial setup can be handled through supported migration or VTEX configuration.    |
+| Marketplace, B2B, and Master Data expectations are limited or excluded. | The migration is less likely to depend on unsupported or custom data.                 |
+| The merchant can validate the result.                                   | Customer-led review remains practical.                                                |
 
-Managed Service is safer when the migration remains inside standard service capability but the customer wants Next-Cart-led execution. It helps when the project is operationally demanding, review-heavy, or time-sensitive, even if the data itself does not require bespoke migration logic.
+Standard Service becomes risky when the merchant cannot describe what a passing VTEX sample should look like. If success criteria are unclear, the issue is not only execution; the scope itself needs refinement.
 
-| Managed Service signal                        | Why it matters for VTEX                                                                                                           | Boundary to keep clear                                                                   |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Large catalog, SKU, customer, or order volume | More records increase execution and review coordination even when the structure is supported.                                     | Volume alone does not create Custom Service if the data model remains standard.          |
-| Multiple business teams must review results   | Catalog, merchandising, operations, finance, fulfillment, marketplace, and storefront teams may each need different proof points. | Managed Service coordinates standard execution; it does not replace business acceptance. |
-| Launch timing leaves limited room for retries | Next-Cart-led execution can reduce customer-side process errors and coordination delays.                                          | Timing pressure should not hide unresolved custom-data or integration needs.             |
-| Demo Migration needs guided interpretation    | The customer may need help deciding whether sample results are acceptable before Full Migration.                                  | Structural gaps found in the sample may still require Add-ons or Custom Service.         |
-| Standard Add-ons are included                 | Managed Service can include purchased Standard Add-ons when their default behavior fits the project.                              | Add-on behavior that needs tailoring belongs in Custom Service.                          |
+### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
 
-Managed Service should be chosen for execution support within standard capability. It should not be used as a substitute for Custom Service when VTEX needs bespoke transformation, unsupported data handling, or custom migration logic.
+Managed Service may be safer when the migration remains within supported capability but the project needs stronger execution support, sequencing, and coordination. The data may not require custom transformation, yet the merchant may not have the bandwidth or experience to manage migration actions, sample review, issue coordination, and launch timing independently.
 
-### Add-ons for VTEX Migration Scope <a href="#add-ons-for-vtex-migration-scope" id="add-ons-for-vtex-migration-scope"></a>
+For VTEX, Managed Service is often relevant when catalog volume is large, product/SKU review is time-sensitive, multiple stakeholders must approve different layers, or launch planning involves both migration and VTEX implementation work. Managed Service can help coordinate the migration process, but it does not convert unsupported requirements into supported ones.
 
-Add-ons are useful when the VTEX migration needs supported filtering, mapping, or value configuration beyond a basic transfer, but the requirement still fits available Add-on behavior. They help narrow the gap between generic data movement and a cleaner VTEX-ready result.
+| Managed Service fit                                      | VTEX scenario                                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Supported data with high review burden                   | Large catalog, many SKUs, many images, or broad historical order scope.                          |
+| Multiple business owners must approve samples            | Catalog, pricing, operations, support, SEO, storefront, and integration teams all need review.   |
+| Launch window is tight                                   | Migration activity must be coordinated with target setup and source-store changes.               |
+| Merchant needs execution support                         | Next-Cart-led execution is useful while the merchant remains responsible for final verification. |
+| Standard scope is clear but operational pressure is high | The project needs coordination, not bespoke migration logic.                                     |
 
-| Add-on area             | VTEX use case                                                                                                                    | When it is appropriate                                             | When it is not enough                                                                          |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Migrate selected products, customers, orders, CMS Pages, Blog Posts, or other eligible records instead of every eligible record. | The selection rule is clear and fits supported filtering behavior. | The filter needs custom business logic, multi-system reconciliation, or manual interpretation. |
-| Advanced Data Mapping   | Align supported source fields with VTEX product fields, SKU fields, specifications, customer fields, or order-related values.    | The source and target fields are known, supported, and reviewable. | The field needs transformation logic, external lookup, or custom source interpretation.        |
-| Advanced Data Configure | Adjust supported values before they reach VTEX, such as selected names, statuses, categories, or field values.                   | The adjustment is within available configuration behavior.         | The adjustment changes business rules, creates new data structures, or depends on custom code. |
-| Custom Add-ons          | Address a project-specific need that can be scoped separately from full Custom Service execution.                                | The requirement is specific, bounded, and accepted as custom work. | The broader migration depends on many custom relationships, systems, or logic paths.           |
+Managed Service should be selected for execution and coordination. Custom Service should still be considered if the migration requires unsupported records, external identifiers, Master Data interpretation, bespoke transformation, or custom migration logic adjustment.
 
-Add-ons should not be presented as full VTEX implementation work. They can improve supported migration handling, but they do not configure trade policies, build storefronts, reconstruct marketplaces, replace ERP/PIM/WMS integrations, or guarantee that app-owned data can be migrated without custom review.
+### When Add-ons Are the Right Tool <a href="#when-add-ons-are-the-right-tool" id="when-add-ons-are-the-right-tool"></a>
 
-### Custom Service for VTEX <a href="#custom-service-for-vtex" id="custom-service-for-vtex"></a>
+Add-ons help when the requirement is supported, bounded, and specific. They are useful for filtering records, mapping supported fields, or configuring supported migration output. They should not be used as a substitute for Custom Service when the underlying requirement is unsupported or custom.
 
-Custom Service is required when VTEX migration success depends on interpretation, transformation, unsupported data, Custom Platform source handling, or project-specific migration logic. VTEX often reaches this threshold when the store’s operating model is embedded in marketplace workflows, Master Data, external systems, apps, checkout customizations, or storefront-specific behavior.
+A strong Add-on request is written as a concrete acceptance criterion. For example, the merchant may need to exclude obsolete products, map supported source fields to supported VTEX destinations, or adjust supported output behavior for reviewability. A weak Add-on request uses vague language such as “make the VTEX structure match our old custom workflow,” which may actually require Custom Service or target-side implementation.
 
-| Custom Service trigger                                 | Why standard handling is not enough                                                                                               | Typical review focus                                                                                         |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Custom Platform source                                 | The source structure must be interpreted before it can become VTEX-ready data.                                                    | Source extraction, field meaning, entity relationships, accepted exclusions, and transformation rules.       |
-| Complex product-to-SKU transformation                  | Source variants, options, bundles, kits, services, attachments, or assembly logic do not map cleanly to ordinary VTEX structures. | Product/SKU grouping, specification strategy, activation requirements, image behavior, and business meaning. |
-| Trade policy, price table, or promotion reconstruction | Selling logic affects which products, prices, customers, or channels are valid in different contexts.                             | Migration scope versus target-side configuration, required price data, and business acceptance criteria.     |
-| Marketplace or seller architecture is central          | Seller relationships, marketplace order meaning, fulfillment responsibility, or channel identifiers must remain usable.           | Seller identifiers, order context, marketplace records, OMS interpretation, and downstream operations.       |
-| Master Data or app-owned records are required          | Important data lives outside ordinary product, customer, and order entities.                                                      | Document schemas, API availability, mapping feasibility, data ownership, and accepted exclusions.            |
-| External systems must keep usable identifiers          | ERP, PIM, WMS, OMS, finance, marketplace, or middleware references must survive migration.                                        | External IDs, reference fields, reconciliation rules, and post-migration integration testing.                |
-| Storefront behavior depends on migrated data           | Search, facets, CMS Pages, Blog Posts, URLs, redirects, and metadata affect launch continuity.                                    | Content/data boundaries, redirect strategy, storefront ownership, and SEO-sensitive records.                 |
+| Add-on need             | VTEX example                                                                                                      | Boundary check                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Data filtering          | Exclude inactive products, old customers, unnecessary Blog Posts, or historical orders outside the agreed window. | Filtering should not remove records needed for reporting, service, or SEO continuity.               |
+| Advanced Data Mapping   | Align supported source fields with supported VTEX product, SKU, customer, order, or content destinations.         | Mapping cannot create unsupported VTEX behavior.                                                    |
+| Advanced Data Configure | Adjust supported data handling to improve reviewability or target usability.                                      | Configuration must remain within supported capability.                                              |
+| Custom Add-ons          | Handle a bounded special requirement within agreed supported scope.                                               | Unsupported app data, Master Data entities, or external-system logic require Custom Service review. |
 
-Custom Service does not automatically mean Next-Cart performs the full migration execution. A project may need only custom migration logic, or it may need custom work plus Next-Cart-led migration management if that is included in the final plan.
+Add-ons are strongest when the source and target meaning is clear. They are weakest when the merchant is using them to avoid deciding whether a requirement is custom.
+
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
+
+Custom Service should be considered when VTEX migration success depends on data, behavior, or interpretation beyond supported standard capability. The trigger is not simply enterprise size. The trigger is the need for custom migration logic, bespoke transformation, unsupported records, Custom Platform handling, Master Data interpretation, external identifiers, app-owned values, marketplace-specific reconstruction, or integration-sensitive data handling.
+
+Custom Service can be relevant even when the visible record count is small. A limited product set may require custom handling if each product depends on external PIM enrichment, nonstandard specifications, seller offers, custom pricing logic, or source-specific bundle behavior. A larger project may not need Custom Service if the records are supported and target-side implementation handles the operational behavior.
+
+| Custom Service trigger                              | Why it changes the approach                                                                        |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Master Data entities must migrate                   | Custom entities may not behave like ordinary customer, product, or order fields.                   |
+| External identifiers must remain usable             | ERP, PIM, WMS, OMS, CRM, marketplace, or accounting continuity may depend on precise preservation. |
+| Marketplace or seller context must be reconstructed | Seller, offer, commission, fulfillment, or received-SKU meaning may require custom interpretation. |
+| Product/SKU logic requires transformation           | Bundles, kits, assemblies, personalization, attachments, or service logic may not map cleanly.     |
+| Storefront-sensitive data must be reshaped          | URLs, CMS content, search/facet behavior, routing, or metadata may need bespoke handling.          |
+| Source platform is custom or heavily modified       | The source structure itself may require custom extraction and interpretation.                      |
+
+Custom Service should be scoped from examples. The merchant should provide representative records, expected outcomes, and business reasons for preserving the custom value. Without examples, Custom Service planning can become abstract and difficult to validate.
+
+### Demo Migration as the Service-Path Evidence Gate <a href="#demo-migration-as-the-service-path-evidence-gate" id="demo-migration-as-the-service-path-evidence-gate"></a>
+
+Demo Migration should test whether the selected approach is sufficient before Full Migration. For VTEX, the sample set should challenge the data relationships most likely to affect launch: products and SKUs, specifications, prices, promotions, customers, orders, marketplace context, Master Data, integrations, and storefront-sensitive records.
+
+| Demo Migration sample                  | What it should decide                                                                               |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Simple product and SKU                 | Whether baseline catalog migration works cleanly.                                                   |
+| Multi-SKU product                      | Whether source variants become usable VTEX SKUs.                                                    |
+| Specification-heavy product            | Whether discovery, search, filter, and merchandising values remain structured.                      |
+| Commercial rule example                | Whether price, promotion, or channel context is migrated, configured, or excluded correctly.        |
+| Customer with business context         | Whether customer and account meaning remains usable.                                                |
+| Operational order                      | Whether historical order context remains readable for service and finance.                          |
+| Master Data or integration-owned value | Whether the requirement is supported, excluded, or custom-scoped.                                   |
+| Storefront-sensitive record            | Whether content, URLs, search, and SEO assumptions need separate implementation or custom handling. |
+
+If Demo Migration shows that representative records preserve usable meaning, the selected approach may be appropriate. If it exposes repeated structural gaps, missing external references, marketplace ambiguity, custom field loss, or storefront-sensitive mismatch, the approach should be revised before Full Migration.
 
 ### Entity Points and VTEX Scope Planning <a href="#entity-points-and-vtex-scope-planning" id="entity-points-and-vtex-scope-planning"></a>
 
-Entity Points help define service license scope, but they should not be treated as a substitute for VTEX complexity review. A VTEX migration with ordinary records can consume Entity Points predictably while still requiring careful review because of catalog, channel, marketplace, or integration meaning.
+Entity Points should support scope planning without replacing complexity review. Product, Customer, Order, and Blog Posts records may consume Entity Points when they are migrated for the first time. New eligible records may also consume Entity Points when later migration activity brings them into scope for the first time.
 
-| Entity Points consideration                                                                                                                  | VTEX implication                                                                                                     |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time.                                 | Scope planning should estimate eligible records before deciding whether the service license is sufficient.           |
-| Records already counted through the service license do not consume Entity Points again simply because another migration action is performed. | Follow-up planning should not duplicate-count the same eligible records.                                             |
-| New eligible records may consume Entity Points when migrated for the first time.                                                             | New products, customers, orders, or Blog Posts added after the first migration need scope review.                    |
-| Entity Points do not measure complexity by themselves.                                                                                       | A small number of records can still require Custom Service if the VTEX structure is custom or integration-sensitive. |
+Already recorded eligible entities do not consume Entity Points again simply because the merchant continues migration activity or performs another migration action on the same migration path. That rule is important for VTEX projects where launch windows may include new products, customers, orders, or Blog Posts after the first migration run.
 
-The strongest approach uses Entity Points for scope planning and uses Demo Migration evidence for complexity planning.
+Entity Points do not measure VTEX complexity by themselves. A migration with modest record volume may still require Custom Service if Master Data, external identifiers, seller context, or bespoke product/SKU transformation is required. A larger migration may fit Standard Service or Managed Service if the records are supported and reviewable.
 
-### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
+### Later Migration Actions and Launch Timing <a href="#later-migration-actions-and-launch-timing" id="later-migration-actions-and-launch-timing"></a>
 
-Demo Migration should pressure-test the selected approach before Full Migration. A VTEX sample should include the records most likely to reveal whether the project fits Standard Service, Managed Service, Add-ons, or Custom Service.
+VTEX launch plans often need later migration activity because the source store remains active during review, implementation, or staging. New products, customers, orders, Blog Posts, price updates, catalog changes, or content changes may appear before launch. The service path should define how those later changes will be handled.
 
-| Demo Migration sample area   | Include examples that test                                                                                                       | What the result should prove                                                                       |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Catalog and SKUs             | Multi-SKU products, specification-heavy categories, images, brands, stock, attachments, services, kits, and collections          | Product structure remains usable and reviewable in VTEX.                                           |
-| Pricing and channels         | Price variations, promotions, trade policy-sensitive products, customer-specific selling scenarios, or marketplace price context | Selling data is either migrated correctly or clearly assigned to target-side configuration.        |
-| Customers and B2B context    | Customer accounts, addresses, segmentation, business-account identifiers, consent-related fields, and external references        | Customer meaning remains usable for account, marketing, and service teams.                         |
-| Orders and operations        | Discounts, taxes, shipping, payment labels, statuses, fulfillment context, marketplace orders, and seller references             | Historical orders remain readable for service, finance, and operations.                            |
-| Master Data and integrations | Custom fields, API-owned values, ERP/PIM/WMS/OMS identifiers, app fields, and middleware references                              | Required external references are preserved, mapped, excluded, or moved into Custom Service review. |
-| Storefront-sensitive records | Categories, CMS Pages, Blog Posts, URLs, redirects, metadata, search/facet examples, and content relationships                   | Storefront and SEO teams can identify what migrated and what needs implementation work.            |
+The team should decide whether later activity should continue with the last used configuration, continue with a new configuration, or require a new migration. Continuing with the same configuration usually focuses validation on new records plus regression samples. Continuing with a new configuration requires validation of affected fields, filters, mappings, and record types. A new migration requires broader target review if earlier migrated data is replaced or refreshed.
 
-If the sample lands clearly and the remaining work is target-side configuration, Standard Service or Managed Service may be enough. If the sample exposes repeated structural gaps, unclear external references, missing custom fields, marketplace ambiguity, or storefront-sensitive data loss, the approach should be revised before Full Migration.
+The important point is not the action label alone. The important point is whether the business expects an append-like outcome, a changed configuration outcome, or a refreshed target result. VTEX projects should decide that before launch pressure increases.
 
-### How Additional Migration Options Affect VTEX Approach Planning <a href="#how-additional-migration-options-affect-vtex-approach-planning" id="how-additional-migration-options-affect-vtex-approach-planning"></a>
+### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
 
-Additional Migration Options matter when the merchant needs follow-up migration activity after an initial migration stage. For VTEX, follow-up handling should be planned carefully because new records may interact with trade policies, marketplace operations, OMS flows, Master Data, integrations, and storefront launch readiness.
+A VTEX migration approach is too light when it treats enterprise structure as ordinary record transfer. The warning signs often appear in sample review, not in the first scope estimate.
 
-| Follow-up situation                                                                 | VTEX planning implication                                                                     | Service-path question                                                                  |
-| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| New products, customers, orders, or Blog Posts were added after the first migration | New eligible records may need migration and first-time Entity Points review.                  | Can the same approach handle the new records without changing scope?                   |
-| Catalog structure changed                                                           | New SKUs, specifications, categories, kits, services, or attachments may need renewed review. | Does the change still fit Standard Service/Add-ons, or does it require Custom Service? |
-| Pricing, trade policy, or marketplace context changed                               | Follow-up migration may affect data tied to selling channels or seller operations.            | Is the logic migrated data, target-side configuration, or custom interpretation?       |
-| Master Data, apps, or integrations changed                                          | New external IDs or custom fields may affect downstream usability.                            | Is the additional data supported, excluded, or custom-scoped?                          |
-| Storefront or SEO launch assumptions changed                                        | CMS Pages, Blog Posts, URLs, metadata, or redirects may need renewed validation.              | Does the migration approach still support launch continuity?                           |
+| Warning signal                                                           | Likely response                                                                                 |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Product/SKU relationships are unclear.                                   | Strengthen catalog scope or review Custom Service.                                              |
+| Specifications required for search or filters are missing or flattened.  | Review supported mapping, Add-ons, or custom transformation.                                    |
+| Pricing, promotions, or channel values do not preserve business meaning. | Separate migrated data from VTEX configuration and custom logic.                                |
+| Marketplace or seller context is expected but not represented.           | Review marketplace scope, target setup, or Custom Service.                                      |
+| Master Data or external IDs are business-critical.                       | Review Custom Service unless a supported mapping path is clearly available.                     |
+| Storefront-sensitive data is approved only by product count.             | Add URL, content, search, navigation, and SEO validation.                                       |
+| The merchant cannot name review owners.                                  | Managed Service may help execution, but scope and acceptance criteria still need to be defined. |
 
-Additional Migration Options should not be treated as a way to bypass approach selection. The same rule remains: if new or changed records introduce custom interpretation, unsupported data, or integration-sensitive behavior, the approach should be reviewed before the next migration activity.
-
-### VTEX Approach Decision Matrix <a href="#vtex-approach-decision-matrix" id="vtex-approach-decision-matrix"></a>
-
-| Project condition                                                          | Standard Service | Managed Service                      | Add-ons                                 | Custom Service                                               |
-| -------------------------------------------------------------------------- | ---------------- | ------------------------------------ | --------------------------------------- | ------------------------------------------------------------ |
-| Clean supported products, SKUs, customers, and orders                      | Strong fit       | Optional if execution help is needed | Optional only for supported adjustments | Usually unnecessary                                          |
-| Large volume with predictable structure                                    | Possible         | Strong fit                           | Optional                                | Usually unnecessary                                          |
-| Supported fields need filtering, mapping, or value configuration           | Possible         | Possible                             | Strong fit                              | Only if customization is needed                              |
-| Product/SKU/specification restructuring is required                        | Weak fit         | Weak fit                             | Limited                                 | Strong fit                                                   |
-| Marketplace, seller, or OMS meaning must be reconstructed                  | Weak fit         | Weak fit                             | Limited                                 | Strong fit                                                   |
-| Master Data, apps, APIs, or external identifiers are required              | Weak fit         | Weak fit                             | Limited unless supported and bounded    | Strong fit                                                   |
-| Storefront, CMS, search, URL, and SEO data need coordinated interpretation | Conditional      | Conditional                          | Possible for supported records          | Strong fit when transformation or custom ownership is needed |
-| Customer wants Next-Cart-led execution but data remains supported          | Possible         | Strong fit                           | Optional                                | Only if custom work is required                              |
-
-The decision matrix should be applied after source review and Demo Migration, not before. It helps prevent two common mistakes: choosing a too-light approach for enterprise VTEX complexity, or over-scoping Custom Service when the real need is execution support or supported Add-on handling.
+These signals should be resolved before Full Migration. Continuing with a weak approach usually turns preparation gaps into launch defects.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right VTEX migration approach depends on how deeply the existing store depends on catalog structure, selling logic, marketplace operations, Master Data, integrations, and storefront behavior. Standard Service can work when supported data is clean and reviewable. Managed Service is safer when execution burden is high but the data remains within standard capability. Add-ons help with supported filtering, mapping, or configuration needs. Custom Service is required when VTEX success depends on bespoke transformation, unsupported records, Custom Platform interpretation, external-system references, or custom migration logic.
+The right VTEX migration approach is the lightest service path that can still protect the target operating outcome. Standard Service can fit supported, reviewable records. Managed Service is useful when execution and coordination burden are high. Add-ons support bounded filtering, mapping, and configuration within supported behavior. Custom Service is required when the requirement depends on custom data, unsupported records, external identifiers, Master Data, marketplace interpretation, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-Demo Migration should confirm whether the selected approach can produce a usable VTEX outcome before Full Migration. If the sample exposes structural uncertainty, integration-sensitive data, marketplace ambiguity, or storefront-sensitive gaps, resolve the approach before moving forward.
+Demo Migration should confirm whether the approach is strong enough before Full Migration. If representative samples show structural gaps, unclear ownership, external-system dependency, marketplace ambiguity, or storefront-sensitive loss, the service path should be revised before the full VTEX migration proceeds.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for a VTEX migration?**
 
-Standard Service may be enough when the Source Platform data is supported, the VTEX target structure is predictable, and the customer can manage review and target-side setup. Complex SKU logic, trade policies, marketplace data, Master Data, integrations, or custom fields should be reviewed before assuming Standard Service is enough.
+Standard Service may be enough when supported records are clean, products and SKUs are predictable, customer and order data are standard, and the merchant can validate the result responsibly. Marketplace, Master Data, external identifiers, or bespoke logic should be reviewed before assuming Standard Service is enough.
 
 **When should Managed Service be chosen for VTEX?**
 
-Managed Service is useful when the migration still fits standard service capability but the customer wants Next-Cart-led execution. It is especially helpful when catalog volume, order history, review coordination, or launch timing makes customer-led execution less practical.
+Managed Service is useful when the data remains within supported capability but the merchant needs Next-Cart-led execution, stronger coordination, sample-review discipline, or help managing migration timing around launch.
 
-**Do VTEX trade policies or marketplace structures require Custom Service?**
+**How are Add-ons different from Custom Service for VTEX?**
 
-They require Custom Service when the migration must interpret, transform, or reconstruct selling logic, seller relationships, marketplace order context, or external identifiers beyond supported migration and Add-on behavior. If those elements are handled as target-side configuration only, they may not need migration customization.
+Add-ons handle supported filtering, mapping, or configuration needs. Custom Service handles unsupported records, app-owned values, Master Data entities, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-**Can Add-ons handle VTEX-specific mapping needs?**
+**Do Entity Points determine VTEX migration complexity?**
 
-Add-ons can help when filtering, mapping, or value configuration fits available supported behavior. If the requirement needs tailored logic, external lookup, unsupported records, or a project-specific transformation path, Custom Service should be reviewed.
+No. Entity Points help plan eligible record volume, but VTEX complexity depends on catalog structure, marketplace context, Master Data, integrations, storefront assumptions, and validation burden.
 
-**What should Demo Migration prove before the final VTEX approach is chosen?**
+**What should Demo Migration prove before the VTEX approach is approved?**
 
-Demo Migration should prove whether products, SKUs, specifications, prices, customers, orders, marketplace context, external references, storefront-sensitive data, and integration-relevant records land in VTEX with usable meaning. If the sample exposes repeated structural gaps, the approach should be revised before Full Migration.
+Demo Migration should prove that representative products, SKUs, specifications, prices, customers, orders, marketplace values, Master Data examples, integration references, and storefront-sensitive records land with usable meaning or are assigned to the right handling path.

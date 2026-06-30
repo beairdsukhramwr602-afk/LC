@@ -1,157 +1,190 @@
 # AmeriCommerce Constraints and Risks
 
-AmeriCommerce migration risk usually comes from the same qualities that make the platform attractive: structured B2B selling, multiple storefront or microstore contexts, flexible product models, rule-driven commerce, subscriptions, vendor or fulfillment workflows, and integration-connected operations. These capabilities can support a sophisticated future store, but they also make migration planning less forgiving when the source data does not clearly explain how the business works.
+AmeriCommerce migration risk usually appears when visible data is separated from the rules and relationships that made it useful in the source store. A catalog can import cleanly while buyer pricing fails, a customer list can appear complete while account treatment changes, and content can move while storefront routes lose search or conversion value.
 
-The main constraint is not the presence of product, customer, and order records. The main constraint is whether those records carry enough meaning to rebuild the intended AmeriCommerce operating model. Customer data may define buyer access and pricing. Product data may control kits, groups, subscriptions, technical choices, or buyer-specific availability. Order history may need invoice, payment, fulfillment, vendor, or external-system context. Storefront data may represent separate brands, portals, regions, departments, or customer-specific microstores.
+The safest risk review focuses on structural causes. For AmeriCommerce, those causes often involve buyer relationships, multi-store boundaries, product configuration, pricing rules, historical order context, integrations, and legacy platform assumptions.
 
-A lower-risk AmeriCommerce migration starts by identifying these meaning layers before execution. A higher-risk migration treats AmeriCommerce as a simple record destination and discovers too late that important rules, relationships, and ownership boundaries were never defined.
+### Where AmeriCommerce Migration Risk Concentrates <a href="#where-americommerce-migration-risk-concentrates" id="where-americommerce-migration-risk-concentrates"></a>
 
-### Where Risk Concentrates in AmeriCommerce Migration <a href="#where-risk-concentrates-in-americommerce-migration" id="where-risk-concentrates-in-americommerce-migration"></a>
+AmeriCommerce risk is rarely limited to record volume. It concentrates where the source platform used business rules, custom fields, external systems, or storefront segmentation to make records behave correctly.
 
-Risk tends to concentrate in areas where business behavior is shaped by configuration, relationships, or external systems rather than by simple record fields.
+A merchant may have a manageable number of Products, Customers, Orders, Coupons, and CMS pages, but still face elevated risk if those records depend on pricing tiers, account rules, microstore structures, ERP identifiers, or custom source logic. Risk should be judged by how records behave, not only how many records exist.
 
-| Risk area                                        | Why it matters in AmeriCommerce                                                                                                                    | Typical migration concern                                                                                        |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Buyer groups and B2B account structure           | Customer records may control pricing, catalog visibility, tax treatment, payment expectations, approval behavior, or portal access.                | Customers can appear migrated while the buyer experience no longer reflects the business relationship.           |
-| Storefront and microstore boundaries             | One merchant may use separate storefronts, branded portals, regional sites, customer-specific microstores, or shared administration.               | Products, content, routes, customers, or rules may land in the wrong context if boundaries are not defined.      |
-| Product flexibility                              | Product groups, kits, configurable structures, subscriptions, specifications, and buyer-specific availability may carry commercial meaning.        | Product records may exist but fail to guide the buyer toward the correct purchase.                               |
-| Rule-driven pricing and discounts                | Pricing, rewards, budgets, quantity breaks, account rules, and discount logic may affect revenue and buyer trust.                                  | Historical rules may be incomplete, obsolete, conflicting, or difficult to validate after migration.             |
-| Order, invoice, fulfillment, and vendor context  | AmeriCommerce may be used as part of a wider operation involving shipping, vendor assignment, payment review, accounting, or fulfillment handling. | Order history may migrate without enough context for staff to interpret past transactions or continue workflows. |
-| Integrations, APIs, and external ownership       | ERP, accounting, CRM, shipping, tax, marketplace, or headless/API layers may own part of the business outcome.                                     | The migrated store may be blamed for behavior that actually depends on external systems.                         |
-| Custom fields and non-standard source structures | Custom Platform sources, modified platforms, or app-owned data may store important meaning outside standard entities.                              | Important data may need Custom Service review before the migration path can be considered predictable.           |
+| Risk concentration     | Why it matters                                                              | Early mitigation direction                                                |
+| ---------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Buyer relationships    | Customer data may control access, pricing, tax, or account workflow         | Confirm customer types, company accounts, and buyer rules before mapping. |
+| Catalog rules          | Options, kits, variants, and product visibility may carry commercial logic  | Test representative products before full migration.                       |
+| Storefront boundaries  | Products, pages, URLs, and customers may belong to different store contexts | Decide what remains separate, merged, redirected, or retired.             |
+| Pricing and promotions | Revenue behavior may depend on rule conditions and customer eligibility     | Rebuild rules from business examples, not only exported tables.           |
+| Integrations           | External systems may own identifiers, statuses, or fulfillment logic        | Document system ownership before including custom fields.                 |
 
-### Named Constraints and Mitigation Direction <a href="#named-constraints-and-mitigation-direction" id="named-constraints-and-mitigation-direction"></a>
+The review should separate ordinary migration effort from risk that can change launch outcomes.
 
-The constraints below do not automatically make AmeriCommerce a poor Target Platform. They indicate where planning must become more specific before the migration result can be trusted.
+### Buyer Relationship and Account-Rule Risk <a href="#buyer-relationship-and-account-rule-risk" id="buyer-relationship-and-account-rule-risk"></a>
 
-#### Buyer relationship ambiguity <a href="#buyer-relationship-ambiguity" id="buyer-relationship-ambiguity"></a>
+AmeriCommerce migrations can become risky when source customer records are treated as simple contacts. If the source store uses customer groups, company accounts, tax status, purchasing rules, or sales-rep assignments, the migration plan must preserve the buyer relationship behind the record.
 
-Buyer relationship ambiguity appears when customer records do not clearly show how buyers should be treated after migration. AmeriCommerce can support structured buyer experiences, but a migration cannot safely infer which customers need wholesale pricing, restricted product access, tax-exempt handling, corporate account context, payment expectations, or portal behavior when those relationships are scattered across staff knowledge, spreadsheets, emails, or inconsistent source data.
+The risk is not just losing a field. It is changing what the buyer can do after launch. A buyer may see the wrong product set, receive the wrong price, lose account-specific terms, or lose order visibility if account rules are mapped without enough context.
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                                           |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Wholesale merchants, distributors, dealer networks, corporate-account sellers, member-based businesses, and hybrid B2B/B2C stores.                                                                                                                                          |
-| **Why risk increases**  | The same customer record may represent more than a buyer identity. It may also define catalog access, price treatment, tax handling, approval behavior, or payment expectation.                                                                                             |
-| **Mitigation strategy** | Document buyer groups, customer types, account relationships, pricing examples, restricted catalog examples, tax cases, and representative order histories before migration. Demo Migration review should include real buyer scenarios, not only generic customer accounts. |
+| Risk pattern                             | Early warning sign                                                  | Mitigation                                                      |
+| ---------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Customer groups are named inconsistently | Groups such as wholesale, dealer, VIP, trade, or tax-exempt overlap | Confirm what each group controls before migration.              |
+| Company and contact records are mixed    | Multiple users appear under one business relationship               | Decide whether account-level structure must be rebuilt.         |
+| Tax or payment terms are stored as notes | Important rules exist outside standard fields                       | Identify whether accounting, ERP, or commerce owns the rule.    |
+| Buyer access differs by storefront       | Customers can see different products in different contexts          | Test buyer examples across storefront or microstore boundaries. |
 
-#### Storefront and microstore boundary confusion <a href="#storefront-and-microstore-boundary-confusion" id="storefront-and-microstore-boundary-confusion"></a>
+A buyer-risk review should produce sample accounts for Demo Migration, not only a customer export.
 
-AmeriCommerce can be useful when a merchant needs multiple storefronts, microstores, branded portals, or customer-specific buying environments. The constraint is that these contexts must be intentional. If the source business has several storefront-like experiences but cannot explain which products, buyers, content, routes, prices, or order behavior belong to each context, the migration may preserve data while weakening the operating structure.
+### Product Structure and Catalog-Behavior Risk <a href="#product-structure-and-catalog-behavior-risk" id="product-structure-and-catalog-behavior-risk"></a>
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                                                |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Multi-brand sellers, franchise-like operations, regional storefronts, dealer portals, customer-specific microstores, departmental catalogs, and businesses consolidating several selling contexts.                                                                               |
-| **Why risk increases**  | Storefront boundaries may affect catalog visibility, navigation, content, pricing, user access, order routing, reporting, or SEO continuity. Treating every context as the same storefront can erase business distinctions.                                                      |
-| **Mitigation strategy** | Map each storefront or microstore to its intended audience, product set, content responsibility, route requirements, customer access rules, pricing differences, and operational owner. Retire obsolete contexts before migration rather than carrying them forward by accident. |
+Product data can look complete while catalog behavior remains incomplete. AmeriCommerce migration risk increases when the source platform uses variants, options, bundles, kits, subscription behavior, volume pricing, or custom product fields to control what shoppers can select and what operations must fulfill.
 
-#### Product structure without commercial logic <a href="#product-structure-without-commercial-logic" id="product-structure-without-commercial-logic"></a>
+If those relationships are flattened into plain product records, the target store may show the right names and SKUs but fail at pricing, selection, availability, inventory, or fulfillment interpretation.
 
-AmeriCommerce product flexibility is valuable when the merchant knows why product groups, kits, configurable items, subscriptions, specifications, or product relationships exist. It becomes a constraint when the source catalog is large, technical, or heavily customized but the business cannot distinguish meaningful structure from historical clutter.
+| Catalog constraint                   | What can go wrong                                                     | Risk control                                         |
+| ------------------------------------ | --------------------------------------------------------------------- | ---------------------------------------------------- |
+| Options and variants                 | Buyer selections do not control price, image, SKU, or stock correctly | Validate complex representative products.            |
+| Kits or bundles                      | Component relationships are lost or misread                           | Decide whether to migrate, rebuild, or simplify.     |
+| Customer-specific product visibility | Restricted products become visible to the wrong audience              | Test customer-group access before launch.            |
+| Category-dependent merchandising     | Products appear in the wrong navigation path                          | Review category and storefront assignments together. |
+| Custom product fields                | Operational or integration values are dropped                         | Classify custom fields by business use.              |
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Catalog-heavy merchants, parts sellers, subscription sellers, technical-product businesses, kit or bundle sellers, and stores with many product options or custom attributes.                                                                     |
-| **Why risk increases**  | Product data may include mixed meanings: sellable choice, compatibility information, internal reference, recurring-product context, kit logic, customer-specific availability, or obsolete source-side workaround.                                |
-| **Mitigation strategy** | Classify high-value product examples before migration. Identify which structures should become sellable product behavior, which should remain product information, which should be excluded, and which require custom migration logic adjustment. |
+Catalog risk should be reviewed with real product examples. A sample set should include high-revenue products, option-heavy products, restricted products, discounted products, and legacy products that may no longer deserve migration.
 
-#### Rule and pricing dependency <a href="#rule-and-pricing-dependency" id="rule-and-pricing-dependency"></a>
+### Storefront, Microstore, and Navigation Risk <a href="#storefront-microstore-and-navigation-risk" id="storefront-microstore-and-navigation-risk"></a>
 
-AmeriCommerce can support relationship-based selling through pricing rules, discounts, rewards, budgets, quantity behavior, payment expectations, and tax treatment. The constraint is that rules must be active, explainable, and testable. If old rules are copied forward without review, the Target Platform can inherit outdated exceptions that confuse buyers or harm revenue.
+AmeriCommerce planning often needs a careful decision about storefront boundaries. Source stores may use separate storefronts, brand sites, dealer portals, regional stores, or microstores to separate audiences. These boundaries can affect catalog visibility, content ownership, URL structure, pricing, and customer access.
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                                     |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Wholesale sellers, contract-price businesses, loyalty or rewards programs, account-budget models, member pricing, discount-heavy stores, and businesses with customer-specific pricing.                                                                               |
-| **Why risk increases**  | Rules often overlap. A customer may qualify for a price list, discount, tax rule, budget, reward, or payment expectation at the same time. The intended priority may not be obvious from source records alone.                                                        |
-| **Mitigation strategy** | Separate active rules from obsolete rules. Document affected customer groups, products, quantities, dates, exceptions, and expected outcomes. Include pricing and rule examples in Demo Migration review so results can be judged against real business expectations. |
+The risk appears when storefront separation is treated as a design preference rather than a data relationship. If several storefronts are merged without route planning, SEO value may be lost. If storefronts are preserved without catalog governance, duplicate or conflicting Products and Categories may remain.
 
-#### Subscription and recurring-commerce interpretation <a href="#subscription-and-recurring-commerce-interpretation" id="subscription-and-recurring-commerce-interpretation"></a>
+| Storefront decision           | Risk if ignored                                             | Review question                                  |
+| ----------------------------- | ----------------------------------------------------------- | ------------------------------------------------ |
+| Preserve separate storefronts | More configuration, mapping, and validation may be required | Which data truly needs separate store ownership? |
+| Consolidate storefronts       | Buyer paths, URLs, and product visibility may change        | Which redirects and access rules are required?   |
+| Retire old microstores        | Legacy links or account workflows may break                 | Which pages and buyer groups still use them?     |
+| Rebuild navigation            | Category history may no longer match target browsing        | Which categories support SEO or conversion?      |
 
-Subscription products can carry more meaning than ordinary product records. Frequency, grouping, buyer eligibility, renewal expectation, payment context, fulfillment cadence, and customer communication can all affect how a subscription should behave after migration. Risk increases when subscription data exists in the source but the business cannot explain which parts should continue, change, or be rebuilt.
+Storefront-risk mitigation should include route samples, category examples, customer scenarios, and content ownership decisions.
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                      |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Who it affects**      | Subscription-product sellers, replenishment businesses, membership-like product programs, recurring-order models, and sellers combining subscriptions with kits or grouped products.                                                                   |
-| **Why risk increases**  | A recurring purchase may involve product structure, payment context, fulfillment timing, customer expectation, and external system behavior, not only a product flag.                                                                                  |
-| **Mitigation strategy** | Identify representative subscription products and customer examples before migration. Confirm what should be preserved as data, what needs target configuration, and what depends on external billing, payment, communication, or fulfillment systems. |
+### Pricing, Discount, and Revenue-Rule Risk <a href="#pricing-discount-and-revenue-rule-risk" id="pricing-discount-and-revenue-rule-risk"></a>
 
-#### Order history without operational context <a href="#order-history-without-operational-context" id="order-history-without-operational-context"></a>
+Pricing risk is high because price outcomes affect revenue immediately after launch. Base prices may migrate cleanly while customer-specific prices, quantity tiers, discounts, gift certificates, store credit, rewards, or tax conditions behave differently.
 
-Order data may be technically present but operationally incomplete if invoice history, fulfillment status, vendor assignment, payment review, shipping decisions, tax handling, or internal notes are not interpreted correctly. AmeriCommerce merchants often care about order history because it supports reorder behavior, customer service, account review, vendor coordination, and reporting.
+AmeriCommerce migration planning should treat pricing as rule behavior. A value in an export is only part of the evidence. The rule condition, eligible buyer, eligible product, priority, date range, and exception handling are just as important.
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Who it affects**      | B2B sellers, vendors or marketplace-style operations, fulfillment-heavy businesses, accounting-sensitive merchants, and stores where staff regularly use order history to support customers.                                                     |
-| **Why risk increases**  | The order record may not fully explain what happened. Important meaning may sit in invoices, payment systems, fulfillment systems, vendor workflows, shipping tools, ERP records, or staff notes.                                                |
-| **Mitigation strategy** | Select order samples that reveal real operational needs: wholesale reorders, split or partial fulfillment, vendor-related orders, tax-sensitive orders, payment-review cases, high-value accounts, and orders with external-system dependencies. |
+| Revenue rule                       | Risk                                                             | Mitigation evidence                             |
+| ---------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| Customer-specific price            | Buyer sees standard retail pricing instead of negotiated pricing | Buyer-price matrix and test accounts.           |
+| Quantity discount                  | Volume price fails by product, category, or customer type        | Test orders at several quantities.              |
+| Coupon or promotion                | Expired or conflicting promotion becomes active                  | Active-promotion list and retirement decisions. |
+| Gift certificate or credit balance | Financial balance is inaccurate or unsupported                   | Balance export and reconciliation sample.       |
+| Tax exemption                      | Exempt buyers are charged incorrectly                            | Exemption status and validation rules.          |
 
-#### Integration and system-of-record uncertainty <a href="#integration-and-system-of-record-uncertainty" id="integration-and-system-of-record-uncertainty"></a>
+Revenue-rule risk should be resolved before launch readiness is judged. Post-launch correction can create refunds, manual credits, and customer-service pressure.
 
-AmeriCommerce can participate in a wider commerce stack, including ERP, accounting, fulfillment, shipping, tax, CRM, marketplace, API, or headless layers. The constraint is ownership. If nobody knows which system owns product truth, inventory truth, customer truth, order truth, pricing truth, or reporting truth, migration planning becomes speculative.
+### Content, URL, and SEO Continuity Risk <a href="#content-url-and-seo-continuity-risk" id="content-url-and-seo-continuity-risk"></a>
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Integration-heavy merchants, headless/API-driven businesses, ERP-connected sellers, accounting-sensitive stores, marketplace-connected operations, and businesses with external fulfillment or tax systems.                                                                                    |
-| **Why risk increases**  | A migrated record can look correct while the workflow remains broken because the required downstream or upstream system was not considered.                                                                                                                                                    |
-| **Mitigation strategy** | Document systems of record, data owners, integration direction, launch-critical reconnections, reporting dependencies, and data that should not be treated as native AmeriCommerce content. Integration-dependent requirements may require Custom Service or separate implementation planning. |
+Content and SEO risks appear when route structure changes without a migration plan. Product URLs, category URLs, CMS pages, blog posts, landing pages, redirects, metadata, and internal links can all affect discoverability and buyer trust.
 
-#### Custom source interpretation <a href="#custom-source-interpretation" id="custom-source-interpretation"></a>
+AmeriCommerce migrations should identify which URLs need preservation, redirection, consolidation, or retirement. Pages that have little value do not need to be carried forward blindly, but traffic-sensitive pages need deliberate treatment.
 
-Custom Platform sources and heavily modified Source Platforms create a different kind of constraint. The issue is not only whether AmeriCommerce can receive data. The issue is whether the source data can be interpreted correctly before it is transformed. Custom fields, app-owned records, external identifiers, proprietary product logic, custom checkout behavior, or modified database relationships may contain business meaning that ordinary exports do not explain.
+| SEO or content asset   | Risk                                               | Mitigation                                          |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------- |
+| Product URLs           | Ranking, bookmarks, or campaign links break        | Prepare redirect mapping for changed paths.         |
+| Category URLs          | Navigation and organic search lose continuity      | Review category hierarchy before URL acceptance.    |
+| CMS pages              | Policies, support content, and B2B pages disappear | Classify pages by business value.                   |
+| Blog or resource pages | Organic content traffic is lost                    | Preserve valuable content or redirect it carefully. |
+| Multi-store routes     | Similar pages conflict across storefronts          | Confirm route ownership before migration.           |
 
-| Constraint detail       | Practical meaning                                                                                                                                                                                                                                    |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Who it affects**      | Custom Platform migrations, heavily modified legacy stores, stores with app-owned data, proprietary workflows, custom fields, external identifiers, or non-standard database structures.                                                             |
-| **Why risk increases**  | Standard migration capability depends on recognizable source structures. When the source does not behave like a standard platform, interpretation must happen before execution.                                                                      |
-| **Mitigation strategy** | Use Custom Service review to inspect source structure, define required transformations, classify custom fields, identify external identifiers, and decide whether Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment are needed. |
+SEO risk is not solved by importing content alone. The migrated store must preserve or intentionally redirect the paths that customers and search engines already use.
 
-### What Deserves Earliest Review <a href="#what-deserves-earliest-review" id="what-deserves-earliest-review"></a>
+### Order History and Operational-Context Risk <a href="#order-history-and-operational-context-risk" id="order-history-and-operational-context-risk"></a>
 
-The earliest review should focus on the areas that can change the migration approach, not only the areas that are easiest to count.
+Order history can lose value if it is migrated as transaction records without operational context. AmeriCommerce planning should identify which order details are needed for customer service, reporting, account management, repeat purchases, fulfillment lookup, and reconciliation.
 
-| Early review item                    | Why it should be reviewed early                                                                                         | What a useful review should produce                                                                                                       |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Buyer groups and account rules       | These affect customer meaning, pricing, access, and validation samples.                                                 | A list of buyer groups, account types, pricing examples, restricted catalog examples, and tax/payment expectations.                       |
-| Storefront and microstore boundaries | These affect catalog visibility, content ownership, routes, customer access, and reporting.                             | A map of storefronts or microstores with their audiences, product scope, content scope, and operational differences.                      |
-| Product structures and subscriptions | These affect product translation, buyer experience, recurring-product interpretation, and Demo Migration sample choice. | Representative products showing groups, kits, configurable choices, subscriptions, technical attributes, and buyer-specific availability. |
-| Active commercial rules              | These affect pricing accuracy, buyer trust, margin, discounts, rewards, and budgets.                                    | A documented rule set showing active rules, affected customers/products, expected outcomes, and rules to retire.                          |
-| Order and fulfillment examples       | These affect customer service, account review, vendor handling, payment context, and post-launch staff confidence.      | Representative orders showing invoices, fulfillment status, vendor context, payment review, tax cases, and external dependencies.         |
-| Integration ownership                | These affect whether migration can be judged inside AmeriCommerce alone.                                                | A system-of-record map for product, customer, inventory, pricing, order, tax, fulfillment, reporting, and API/headless responsibilities.  |
-| Custom source fields and identifiers | These affect whether standard migration capability is enough.                                                           | A Custom Service review scope for custom fields, app-owned data, external identifiers, third-party data, and transformation rules.        |
+Historical orders may include payment references, fulfillment statuses, shipment tracking, taxes, discounts, notes, salesperson context, purchase order numbers, and external system IDs. Some of these fields may not affect storefront browsing, but they may be essential for operations.
 
-### When Risk Increases <a href="#when-risk-increases" id="when-risk-increases"></a>
+| Order-history element   | Risk if missing                         | Mitigation                                              |
+| ----------------------- | --------------------------------------- | ------------------------------------------------------- |
+| Customer link           | Orders cannot support account review    | Validate order-to-customer matching.                    |
+| Line item detail        | Support cannot explain past purchases   | Preserve product names, SKUs, quantities, and totals.   |
+| Discount and tax values | Totals appear unexplained or incorrect  | Preserve historical values even when rules are rebuilt. |
+| Fulfillment status      | Service teams lose shipment context     | Map status and tracking fields where available.         |
+| External references     | ERP or accounting reconciliation breaks | Preserve confirmed identifiers.                         |
 
-Risk increases when complexity exists but ownership is unclear. An AmeriCommerce migration becomes harder to control when the merchant knows that buyer rules, pricing exceptions, product relationships, subscription behavior, or integration dependencies matter, but cannot show where those rules live or how they should behave after migration.
+The goal is not to recreate every historical checkout behavior. The goal is reliable historical visibility.
 
-Risk also increases when the project tries to preserve every historical behavior without deciding whether that behavior still belongs in the Target Platform. Older exceptions, unused discounts, duplicated product relationships, obsolete storefronts, retired buyer groups, and inconsistent custom fields can make the future store harder to validate. Migration is a good moment to separate business-critical structure from accumulated source-side noise.
+### Integration, Custom Field, and External-System Risk <a href="#integration-custom-field-and-external-system-risk" id="integration-custom-field-and-external-system-risk"></a>
 
-Risk is highest when the source is custom, heavily modified, or integration-driven and the expected result is described only as “make it work the same.” That expectation is not specific enough for AmeriCommerce planning. The requirement should be translated into concrete outcomes: which buyers see which products, which price is applied, which storefront context is used, which order information staff need, which system owns each workflow, and which custom behavior requires Custom Service review.
+AmeriCommerce risk increases when source-store data depends on systems outside the storefront. ERP, CRM, accounting, fulfillment, marketing automation, marketplace, subscription, tax, and shipping systems may own information that appears in commerce only as a custom field or synchronized status.
+
+Custom fields should be reviewed before they are accepted into migration scope. Some fields are critical identifiers. Some are display values. Some are obsolete. Some are sensitive. Treating all custom fields equally can expand scope without improving the target store.
+
+| External dependency     | Risk                                        | Control decision                              |
+| ----------------------- | ------------------------------------------- | --------------------------------------------- |
+| ERP product ID          | SKU reconciliation fails                    | Preserve if ERP remains the system of record. |
+| CRM account ID          | Sales account continuity weakens            | Map only when account management needs it.    |
+| Fulfillment status code | Warehouse processing loses context          | Confirm current fulfillment workflow.         |
+| Marketing segment       | Customer communication logic changes        | Decide whether to rebuild segmentation.       |
+| Subscription reference  | Recurring process may not transfer natively | Review external ownership before migration.   |
+
+Integration risk should be documented with ownership, current use, required target behavior, and validation examples.
+
+### Custom Source and Legacy-Platform Risk <a href="#custom-source-and-legacy-platform-risk" id="custom-source-and-legacy-platform-risk"></a>
+
+AmeriCommerce migrations may involve source stores that have accumulated custom code, app-created fields, outdated microstores, or old business rules. Risk increases when old structures are migrated because they exist, not because they still serve the business.
+
+Legacy data should be reviewed for current use. Some records need preservation for operational continuity. Others should be retired, redirected, archived, or rebuilt in a cleaner target structure.
+
+| Legacy signal             | Why it creates risk                                | Recommended control                            |
+| ------------------------- | -------------------------------------------------- | ---------------------------------------------- |
+| Old customer groups       | May duplicate newer account logic                  | Confirm active buyer treatment.                |
+| Deprecated product fields | May no longer support fulfillment or merchandising | Exclude or archive when no current use exists. |
+| Abandoned microstores     | May contain stale URLs or obsolete catalog rules   | Redirect or retire intentionally.              |
+| Custom source exports     | Field meaning may be unclear                       | Require field dictionary or business examples. |
+| Historical promotions     | Old rules may conflict with current pricing        | Migrate only active, confirmed rules.          |
+
+Legacy-platform risk should be reduced through interpretation, not automatic preservation.
+
+### AmeriCommerce Risk Review Matrix <a href="#americommerce-risk-review-matrix" id="americommerce-risk-review-matrix"></a>
+
+A final risk review should connect each constraint to evidence and mitigation. The matrix below can guide scope decisions before Demo Migration or full migration.
+
+| Risk area             | Evidence needed                                           | Pass condition                                                            |
+| --------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Buyer rules           | Sample customers, groups, account terms, tax examples     | Target buyers receive the right access, price, and account treatment.     |
+| Product structure     | Complex product samples and option/kit rules              | Products behave correctly for selection, pricing, stock, and fulfillment. |
+| Storefront boundaries | Store or microstore map, route samples, category examples | Products, pages, and buyers belong to the correct target context.         |
+| Revenue rules         | Pricing matrix, active coupons, gift certificate balances | Checkout scenarios calculate expected prices and discounts.               |
+| Order history         | Representative historical orders and external references  | Orders remain readable for service, reporting, and account review.        |
+| Integrations          | Field ownership map and system dependencies               | Required identifiers and statuses remain available for future operations. |
+
+Risk is controlled when the migration plan can prove expected behavior with evidence, not only when files import successfully.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-AmeriCommerce is not risky because it is complex. It becomes risky when the business complexity behind the migration is undocumented, inconsistent, or assigned to the wrong system. Buyer relationships, storefront boundaries, product structures, rules, subscriptions, order context, integrations, and custom source logic must be clear enough to migrate, configure, and validate.
+AmeriCommerce migration risk comes from the relationships that surround visible records. Buyer rules, storefront boundaries, product behavior, pricing logic, SEO routes, order context, and integrations can all change the result even when the imported data appears complete.
 
-The safest AmeriCommerce migration plan identifies constraints before execution and treats them as planning inputs rather than post-migration surprises. When the merchant can explain the commercial meaning behind the data, AmeriCommerce can be evaluated as a structured Target Platform instead of a place where records are simply deposited.
+A strong risk review identifies where business behavior depends on configuration, external systems, or legacy assumptions. When those dependencies are documented early, the migration plan can separate ordinary data transfer from the areas that need deeper mapping, rebuild work, exclusion decisions, or validation proof.
 
-Use Demo Migration and Live Chat to review the constraints that matter most to your AmeriCommerce migration path, especially buyer groups, storefront boundaries, product structures, pricing rules, subscriptions, representative orders, integrations, and any Custom Platform or heavily modified Source Platform data that may require Custom Service review.
-
-### FAQs <a href="#faqs" id="faqs"></a>
-
-**Does every AmeriCommerce migration require Custom Service?**
-
-No. Custom Service is not required just because AmeriCommerce supports advanced commerce behavior. It becomes relevant when the migration requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom fields, external identifiers, third-party data, or source behavior that standard migration capability cannot interpret predictably.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the biggest risk in an AmeriCommerce migration?**
 
-The biggest risk is usually unclear business meaning. Product, customer, and order records may be present, but AmeriCommerce migration quality depends on whether buyer groups, storefront boundaries, pricing rules, product relationships, subscriptions, fulfillment context, and integrations are clear enough to rebuild and validate.
+The biggest risk is usually losing business meaning behind visible records. Customer groups, storefront boundaries, product options, pricing rules, and integrations can all affect how migrated data behaves after launch.
 
-**Are B2B customer groups always risky to migrate?**
+**Does every AmeriCommerce migration require Custom Service?**
 
-No. B2B customer groups are lower risk when they are documented, active, and tied to clear pricing, access, tax, payment, or ordering expectations. They become higher risk when the rules exist mostly in staff memory, spreadsheets, manual approvals, or inconsistent source records.
+No. Custom Service becomes relevant when the source store has unsupported custom behavior, custom fields that require transformation, external-system dependencies, or data relationships that cannot be handled through supported migration behavior alone.
+
+**Why are buyer rules risky during migration?**
+
+Buyer rules may control access, price, tax treatment, payment terms, or account workflows. If those rules are not reviewed, customers may see the wrong catalog, receive the wrong pricing, or lose order visibility.
+
+**How should legacy microstores be handled?**
+
+Legacy microstores should be reviewed for current business value. Active storefronts may need preservation or careful rebuilding. Obsolete microstores may be better retired with redirect planning and data cleanup.
 
 **Why do integrations affect AmeriCommerce migration risk?**
 
-Integrations affect risk because outside systems may control important outcomes such as inventory, pricing, tax, fulfillment, payment status, accounting, reporting, or customer data. The migration plan should identify which data belongs in AmeriCommerce and which outcomes depend on external systems after launch.
-
-**Should old pricing rules and discounts always be migrated?**
-
-No. Pricing rules, discounts, rewards, and budgets should be reviewed before migration. Some rules may still be active and business-critical, while others may be obsolete, duplicated, or based on historical exceptions that should not shape the future Target Platform.
+Integrations may own identifiers, statuses, or rules that are not fully explained by storefront exports. ERP, CRM, fulfillment, marketing, tax, and accounting systems should be reviewed before custom fields or external references are included in scope.

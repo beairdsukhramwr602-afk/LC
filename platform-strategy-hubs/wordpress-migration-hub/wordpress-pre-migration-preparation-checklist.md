@@ -1,220 +1,186 @@
 # WordPress Pre-Migration Preparation Checklist
 
-WordPress migration preparation should define what the target site must preserve before data is moved. WordPress can receive standard CMS records, but many real WordPress projects depend on custom post types, plugin records, metadata, page-builder layouts, user roles, media relationships, SEO fields, redirects, forms, memberships, LMS records, booking records, directory listings, or external-system references. Preparation should therefore separate ordinary WordPress content from plugin-owned, implementation-owned, and externally owned records.
+WordPress preparation should prove how the site will operate after migration, not only which database records or files can be transferred. A WordPress site may contain posts, pages, custom post types, taxonomies, media, menus, users, comments, metadata, block content, builder content, plugin settings, theme dependencies, redirects, and integrations. Some of those records may be standard WordPress content. Some may belong to plugins, custom code, external systems, or a commerce layer such as WooCommerce.
 
-The preparation goal is not to list every possible WordPress file or plugin. It is to make the migration scope clear enough that Demo Migration can test the right samples, Full Migration can preserve meaningful records, and unsupported or custom behavior can be handled through Add-ons, accepted exclusions, or Custom Service review before launch pressure begins.
+Preparation should therefore classify content by ownership and future use. The strongest WordPress migration plan defines what should migrate as supported content, what must be rebuilt or configured in WordPress, what requires Add-ons, what requires Custom Service review, and what should be intentionally excluded. This keeps the migration scope practical while protecting the site’s editorial, SEO, publishing, and operational continuity.
 
-### Why WordPress Preparation Needs More Than a Content Inventory <a href="#why-wordpress-preparation-needs-more-than-a-content-inventory" id="why-wordpress-preparation-needs-more-than-a-content-inventory"></a>
+### Define the Target WordPress Role First <a href="#define-the-target-wordpress-role-first" id="define-the-target-wordpress-role-first"></a>
 
-WordPress is flexible because it can represent content through posts, CMS Pages, Blog Posts, custom post types, custom taxonomies, media, user records, metadata, templates, blocks, plugins, and custom tables. That flexibility creates preparation risk: two source sites can both “move to WordPress” while requiring very different migration logic.
+The first preparation decision is the role WordPress will play after migration. WordPress can be a content publishing environment, a brand website, a documentation site, a blog-led storefront, a landing-page system, a membership site, a multilingual content site, or the CMS layer around a WooCommerce store. Each role changes the evidence that must be prepared.
 
-| Preparation layer    | What to clarify before migration                                                                                         | Why it matters                                                                                                |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| Platform role        | Whether WordPress is the final CMS, a companion CMS, a content layer for a storefront, or a Custom Platform destination. | Prevents generic WordPress assumptions from hiding commerce, membership, LMS, directory, or application data. |
-| Content model        | Which records should become CMS Pages, Blog Posts, custom post type entries, taxonomy terms, media, or plugin records.   | Protects editability, archive behavior, filtering, and future content management.                             |
-| Plugin ownership     | Which records are controlled by plugins, custom tables, APIs, or external systems.                                       | Determines whether standard handling, Add-ons, exclusions, or Custom Service review is required.              |
-| Presentation layer   | Which parts of the site depend on themes, builders, blocks, shortcodes, widgets, menus, or templates.                    | Prevents confusing data migration with layout reconstruction.                                                 |
-| SEO and URL behavior | Which slugs, permalink patterns, redirects, canonical values, and SEO fields must be preserved.                          | Reduces post-launch traffic, indexing, and internal-link risk.                                                |
-| Validation samples   | Which records must be included in Demo Migration samples.                                                                | Makes Demo Migration a meaningful proof step rather than a random data sample.                                |
+A content-only site may need careful post, page, taxonomy, media, author, and URL preparation. A publishing-heavy site needs stronger attention to categories, tags, authors, archives, comments, redirects, featured images, and metadata. A plugin-heavy site may need custom post type, shortcode, block, custom table, and integration review. A WordPress site that also uses WooCommerce needs scope separation: WordPress preparation should cover the CMS and site architecture, while WooCommerce preparation should own products, product variations, orders, checkout behavior, payment context, shipping, taxes, coupons, and customer commerce records.
 
-### Confirm the Target WordPress Role <a href="#confirm-the-target-wordpress-role" id="confirm-the-target-wordpress-role"></a>
+| Target WordPress role      | Preparation priority                                                                     | Why it matters                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Content website            | Pages, posts, menus, media, metadata, URLs, redirects.                                   | The migration must preserve discoverable, readable, editable content.                  |
+| Blog or publication        | Posts, categories, tags, authors, comments, archives, featured images.                   | Editorial history and traffic continuity depend on relationships, not just post count. |
+| Plugin-driven site         | Custom post types, custom taxonomies, metadata, custom tables, shortcodes, integrations. | Standard content migration may not capture plugin-owned behavior.                      |
+| Membership or account site | Users, roles, permissions, profiles, protected content, plugin ownership.                | User records and access rules may not translate as ordinary content.                   |
+| WordPress plus WooCommerce | CMS scope plus commerce scope separation.                                                | Content and commerce data need connected planning without merging responsibilities.    |
 
-A WordPress migration should begin by defining what WordPress is expected to do after launch. WordPress may be a simple CMS, a headless content source, a marketing site, a publishing hub, a membership site, a learning site, a booking site, a directory, or a companion to a separate commerce platform.
+This role definition should be completed before sample selection. Otherwise, Demo Migration may test easy pages while missing the records that actually determine whether the WordPress target is usable.
 
-| Target role                    | Preparation requirement                                                                                   | Watch point                                                                                                      |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Standard CMS site              | Confirm CMS Pages, Blog Posts, media, menus, users, categories, tags, and SEO fields.                     | Do not over-scope plugin data that is no longer needed.                                                          |
-| Content-heavy publishing site  | Confirm authors, dates, categories, tags, comments, featured media, archives, and editorial redirects.    | Blog Posts should not be flattened into CMS Pages.                                                               |
-| Custom content site            | Confirm custom post types, custom taxonomies, field groups, relationships, archives, and search behavior. | Target structures must exist before migrated records can be useful.                                              |
-| Plugin-driven operational site | Identify memberships, LMS, events, bookings, forms, directories, donations, or marketplace records.       | Plugin records may require special handling or Custom Service review.                                            |
-| WooCommerce-connected project  | Separate WordPress CMS scope from WooCommerce commerce scope.                                             | Product, Customer, Order, coupon, tax, and shipping behavior should not be treated as generic WordPress content. |
-| Headless or composable setup   | Confirm whether WordPress stores source content, exposes API content, or only receives selected records.  | External IDs and API relationships may matter more than visible layout.                                          |
+### Prepare Core Content and Site Structure <a href="#prepare-core-content-and-site-structure" id="prepare-core-content-and-site-structure"></a>
 
-### Inventory Core WordPress Content <a href="#inventory-core-wordpress-content" id="inventory-core-wordpress-content"></a>
+Core WordPress preparation should start with the content types the merchant expects to use after launch. Standard posts and pages usually matter, but the surrounding structure can matter just as much: authors, publish dates, slugs, parent pages, categories, tags, featured images, comments, excerpts, menus, media references, and SEO metadata can all affect how the migrated site works.
 
-Core WordPress content is the easiest preparation layer to miss because it feels obvious. Each core record still needs ownership, relationship, and validation decisions before migration.
+The merchant should prepare representative examples from each content area rather than relying only on totals. A page count can confirm volume, but it does not prove that page hierarchy, block content, images, embedded media, internal links, menus, or redirects will work. A post count can confirm editorial size, but it does not prove that categories, tags, authors, archives, and comment context remain useful.
 
-| Record type          | What to prepare                                                                                                           | Demo Migration sample requirement                                                                                     |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| CMS Pages            | Page hierarchy, slugs, status, parent pages, templates, featured media, internal links, menu placement, and SEO metadata. | Include top-level pages, nested pages, landing pages, policy pages, and pages with forms or builder layouts.          |
-| Blog Posts           | Titles, slugs, dates, authors, excerpts, featured images, categories, tags, comments, and publish status.                 | Include high-traffic posts, older posts, scheduled/draft examples, posts with comments, and posts with complex media. |
-| Media                | Image files, document files, captions, alt text, titles, descriptions, attachment relationships, and embedded usage.      | Include featured images, galleries, downloadable files, embedded media, and reused media assets.                      |
-| Categories and tags  | Blog taxonomy structure, source category hierarchy, tag cleanup, archive URLs, and redirect needs.                        | Include posts assigned to multiple categories/tags and archive pages with SEO value.                                  |
-| Menus and navigation | Menu hierarchy, custom links, category links, page links, footer menus, and mobile navigation assumptions.                | Include primary, footer, utility, and custom menu examples.                                                           |
-| Comments             | Comment status, moderation state, author details, nested replies, spam exclusions, and privacy expectations.              | Include approved comments, nested comments, and posts with comment-history value.                                     |
+| Content area         | Evidence to prepare                                                       | Review purpose                                                          |
+| -------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Pages                | Parent/child pages, landing pages, policy pages, forms, embedded content. | Confirms hierarchy, layout dependencies, and internal links.            |
+| Posts                | Recent posts, older posts, high-traffic posts, posts with comments.       | Confirms editorial history, archives, authors, and public presentation. |
+| Categories and tags  | Main categories, nested structures, high-use tags, unused terms.          | Confirms classification and archive behavior.                           |
+| Menus and navigation | Primary menu, footer menu, contextual menus, custom links.                | Separates content migration from navigation setup.                      |
+| Media library        | Featured images, galleries, PDFs, downloadable files, reused images.      | Confirms media attachment, display, and file-reference continuity.      |
+| Comments             | Approved comments, pending comments, spam/irrelevant comments if present. | Clarifies what should migrate and what should be excluded.              |
 
-Preparation should also identify content that should not be migrated. Drafts, test pages, duplicate posts, obsolete media, spam comments, unused tags, and legacy landing pages can inflate scope and reduce launch clarity.
+Preparation should also identify content that should not migrate. Old drafts, test pages, outdated landing pages, duplicate media, broken embeds, obsolete tags, and irrelevant comments can create noise in the target site. A migration is often the right moment to preserve important history while avoiding unnecessary clutter.
 
 ### Prepare Custom Post Types and Taxonomies <a href="#prepare-custom-post-types-and-taxonomies" id="prepare-custom-post-types-and-taxonomies"></a>
 
-Custom post types and custom taxonomies often define the real shape of a WordPress site. Events, resources, courses, staff profiles, locations, portfolios, testimonials, directories, jobs, documentation entries, case studies, and listings may all use different target structures.
+Custom post types and custom taxonomies are one of the most important WordPress preparation areas because they can look like normal content while depending on plugin or theme registration. WordPress can store custom post type content alongside other post types, but the target site must be able to recognize and display that content correctly after migration.
 
-| Source structure             | Preparation task                                                                                                        | Why it matters                                                                            |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Custom post type records     | Confirm the target post type name, labels, archive behavior, editor support, REST/API exposure, and template ownership. | Records may migrate but remain hidden or uneditable if the target post type is not ready. |
-| Custom taxonomies            | Confirm hierarchy, term relationships, archive URLs, and whether taxonomy terms replace source categories.              | Filtering and archive behavior can break if terms are mapped to the wrong taxonomy.       |
-| Relationship fields          | Identify parent-child, related content, location, staff, event, product-like, or resource relationships.                | Relationships may require field mapping or Custom Service review.                         |
-| Field groups                 | Confirm field names, field types, repeaters, media fields, relationship fields, and conditional fields.                 | Metadata must match how the target template expects to read it.                           |
-| Archive and detail templates | Confirm how each record type is displayed after migration.                                                              | Data can be correct while public output is incomplete.                                    |
+Examples include portfolio items, testimonials, events, case studies, downloads, directory entries, real estate listings, documentation entries, courses, recipes, product-like content outside WooCommerce, or any plugin-defined content structure. Custom taxonomies may classify those records with topics, locations, industries, brands, series, event types, resource types, or other custom grouping systems.
 
-A clean preparation package should include representative examples for every custom content type, not only the highest-volume type.
+| Custom structure    | Preparation question                                                        | Possible handling path                                                         |
+| ------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Custom post type    | Which plugin, theme, or custom code registers it?                           | Supported migration, Custom Service, or target rebuild depending on ownership. |
+| Custom taxonomy     | Is it hierarchical or flat, and which records use it?                       | Supported mapping, Add-on, or Custom Service if behavior is non-standard.      |
+| Custom fields       | Are values editorial, display-related, SEO-related, or integration-related? | Supported fields, Add-ons, Custom Service, or exclusion.                       |
+| Archive pages       | Does the post type need public archive behavior?                            | WordPress setup, theme configuration, or custom development.                   |
+| Template dependency | Does the content rely on a theme or builder template?                       | Target-side setup or Custom Service review.                                    |
 
-### Prepare Custom Fields, Metadata, and Plugin Data <a href="#prepare-custom-fields-metadata-and-plugin-data" id="prepare-custom-fields-metadata-and-plugin-data"></a>
+A good preparation package should include at least one sample record for each meaningful custom post type and taxonomy. For each sample, identify the source owner, field set, public URL, related taxonomy terms, media usage, and target expectation. Without that evidence, custom structures may be counted as content but fail as usable WordPress records.
 
-WordPress metadata can carry critical meaning without being visible in the editor or on the front end. Preparation should classify metadata by business value rather than migrate every hidden field blindly.
+### Prepare Metadata, Custom Fields, and Plugin-Owned Data <a href="#prepare-metadata-custom-fields-and-plugin-owned-data" id="prepare-metadata-custom-fields-and-plugin-owned-data"></a>
 
-| Data type                            | Preparation decision                                                                                                      | Recommended action                                                                                 |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| SEO plugin metadata                  | Decide which SEO titles, descriptions, canonical values, index rules, schema fields, and social fields must be preserved. | Map priority fields and test high-value pages in Demo Migration.                                   |
-| Builder metadata                     | Identify builder layouts, module settings, shortcode data, reusable blocks, and serialized configuration.                 | Decide whether layout should be preserved, rebuilt, accepted as simplified, or handled separately. |
-| Custom field groups                  | Confirm which fields are required for display, filtering, search, relationships, or integrations.                         | Prepare field mapping and sample records with every critical field type.                           |
-| Form records                         | Separate form definitions, submissions, notifications, CRM links, and file uploads.                                       | Decide whether submission history is in scope or excluded.                                         |
-| Membership/LMS/event/booking records | Identify operational records, user relationships, payments, schedules, progress, tickets, attendance, and access rules.   | Confirm whether plugin-specific migration is supported or needs Custom Service review.             |
-| Custom tables                        | Identify table ownership, primary keys, foreign keys, external IDs, and target equivalents.                               | Use Custom Service review when records do not map to ordinary WordPress entities.                  |
+WordPress metadata can carry significant business meaning. Post meta, user meta, term meta, plugin fields, builder fields, SEO fields, redirect settings, form entries, membership fields, event details, directory fields, and structured content values may all be stored outside the visible post body. Preparation should decide whether those values are part of the migration scope, target-side setup, Custom Service review, or accepted exclusion.
 
-Not every metadata field should be migrated. Some fields are cache, old plugin state, layout residue, temporary imports, tracking data, or abandoned settings. Preparation should distinguish reusable business data from technical clutter.
+The most important distinction is ownership. A field may be visible in the WordPress admin, but that does not mean it is ordinary WordPress content. It may be created by a plugin, a theme, custom code, a page builder, a SEO tool, a form tool, a membership plugin, a translation plugin, or an external integration.
 
-### Prepare Users, Roles, Authors, and Account-Like Records <a href="#prepare-users-roles-authors-and-account-like-records" id="prepare-users-roles-authors-and-account-like-records"></a>
+| Data type             | Preparation action                                                               | Why it matters                                                               |
+| --------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| SEO metadata          | Identify titles, descriptions, canonicals, social fields, schema-related fields. | SEO continuity may depend on fields outside the content body.                |
+| Page builder data     | Identify builder plugin, layout storage, reusable templates, global blocks.      | Content may render poorly if builder data or target setup is missing.        |
+| Shortcodes and embeds | List critical shortcode patterns and embedded content.                           | Migrated text may show broken shortcodes if supporting plugins are absent.   |
+| Form entries          | Decide whether submissions should migrate or remain archived elsewhere.          | Forms often store data in plugin-specific tables.                            |
+| Membership fields     | Identify roles, access rules, profiles, subscriptions, and protected content.    | User and access behavior may require Custom Service or target configuration. |
+| Custom tables         | List plugin or custom tables with business-critical data.                        | Standard content migration may not include them.                             |
 
-WordPress user records can represent many different meanings. A user may be an author, editor, subscriber, member, learner, donor, vendor, directory owner, customer, staff member, or API identity. Preparation should define user meaning before migration.
+Add-ons may help when the data remains within supported filtering, mapping, or configuration behavior. Custom Service should be considered when the requirement involves unsupported plugin data, custom fields, custom tables, bespoke transformation, external identifiers, or custom migration logic adjustment.
 
-| User/account pattern       | Preparation requirement                                                                                | Risk if skipped                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| Blog authors               | Preserve author assignment, display name, author archive expectations, and historical posts.           | Blog Posts may show generic authors or lose editorial attribution.        |
-| Administrators and editors | Review roles, capabilities, inactive accounts, security risk, and required users after launch.         | Old privileged accounts may migrate unnecessarily.                        |
-| Members/subscribers        | Confirm membership level, access status, renewal state, subscription references, and plugin ownership. | Login may work while entitlement or access history is wrong.              |
-| LMS learners               | Separate user accounts from enrollments, progress, quizzes, certificates, and course access.           | User records may migrate without learning history.                        |
-| Donors or form contacts    | Confirm whether the record belongs in WordPress, a donation plugin, CRM, or external system.           | Contact history may be incomplete or duplicated.                          |
-| WooCommerce customers      | Separate commerce scope from generic WordPress user handling.                                          | Customer, Order, billing, shipping, and subscription meaning may be lost. |
+### Prepare Users, Roles, Authors, and Access Expectations <a href="#prepare-users-roles-authors-and-access-expectations" id="prepare-users-roles-authors-and-access-expectations"></a>
 
-Password handling should be planned separately. When password hashes cannot be safely or compatibly preserved, the migration plan should include password reset, activation, or customer/member communication expectations.
+User preparation should separate author identity, administrative access, subscriber records, membership records, and commerce customer records. WordPress roles and capabilities determine what users can do inside the site, but user meaning varies widely across sites. A user may be an author, editor, administrator, subscriber, customer, member, instructor, vendor, directory owner, forum participant, or imported account from another system.
 
-### Prepare Themes, Builders, Blocks, Menus, and Widgets <a href="#prepare-themes-builders-blocks-menus-and-widgets" id="prepare-themes-builders-blocks-menus-and-widgets"></a>
+The merchant should prepare user samples by use case rather than by count only. For a publication, authors and editors may matter most. For a membership site, roles, access rules, user meta, protected content, and plugin ownership matter more. For a WooCommerce site, customer commerce records should be planned in the WooCommerce hub, while WordPress still needs to account for the user accounts and roles that support site access.
 
-Data migration does not automatically recreate the WordPress presentation layer. Preparation should identify where the target site relies on theme templates, block patterns, reusable blocks, page-builder modules, shortcodes, menus, widgets, and global template parts.
+| User-related area     | Evidence to prepare                                            | Scope note                                                                      |
+| --------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Authors               | Users tied to important posts or pages.                        | Needed for editorial continuity.                                                |
+| Editors/admins        | Active staff accounts and required roles.                      | Often target-side setup and security review, not simple migration.              |
+| Subscribers           | Subscriber records, newsletter connections, membership status. | May involve plugin or external-system ownership.                                |
+| User metadata         | Profile fields, preferences, membership fields, IDs.           | May require mapping, Custom Service, or exclusion.                              |
+| Passwords/access      | Authentication expectations and reset plan.                    | Password behavior should not be assumed without platform-specific confirmation. |
+| WooCommerce customers | Commerce accounts and order associations.                      | Belongs mainly to WooCommerce migration planning.                               |
 
-| Presentation layer     | Preparation task                                                                                         | Acceptance decision                                                               |
-| ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Block editor content   | Identify reusable blocks, block patterns, embeds, media references, and invalid block risks.             | Decide whether block structure must remain editable or only visually acceptable.  |
-| Classic editor content | Review HTML cleanup, shortcodes, embeds, tables, and inline styling.                                     | Decide whether legacy markup is acceptable or should be cleaned.                  |
-| Page builders          | Inventory builder plugin, module types, serialized settings, templates, and dynamic fields.              | Decide whether builder content is migrated, rebuilt, simplified, or excluded.     |
-| Theme templates        | Identify archive, single, page, header, footer, and taxonomy templates.                                  | Confirm whether template setup is implementation scope, not data migration scope. |
-| Menus/widgets          | Prepare menus, sidebars, footer widgets, custom links, and reusable navigation blocks.                   | Confirm which structural elements are migrated versus manually configured.        |
-| Shortcodes             | Identify active shortcodes, obsolete shortcodes, embedded forms, galleries, sliders, and plugin outputs. | Decide whether shortcodes remain supported or need replacement.                   |
+Preparation should avoid migrating unnecessary admin accounts, inactive users, spam accounts, or compromised records. User migration affects security and governance, not only content ownership.
 
-This step prevents a common misunderstanding: content can be migrated accurately while the new site still needs theme or builder work to display it correctly.
+### Prepare Media, Blocks, Builders, Themes, and Navigation <a href="#prepare-media-blocks-builders-themes-and-navigation" id="prepare-media-blocks-builders-themes-and-navigation"></a>
 
-### Prepare SEO, URLs, Redirects, and Search Visibility <a href="#prepare-seo-urls-redirects-and-search-visibility" id="prepare-seo-urls-redirects-and-search-visibility"></a>
+WordPress presentation depends on more than content records. A migrated page may carry the correct text but lose its intended meaning if media files, image sizes, reusable blocks, block patterns, page-builder structures, menus, widgets, theme templates, or shortcodes are not prepared.
 
-WordPress URL continuity depends on slugs, parent hierarchy, permalink settings, custom post type rewrite rules, taxonomy archive paths, media paths, redirect tools, SEO plugin fields, theme output, and server/CDN rules.
+The target WordPress environment should be reviewed as an editable site, not only as a database. The merchant should decide which presentation elements are migration scope, which are rebuild tasks, which belong to theme or builder setup, and which can be retired.
 
-| SEO/URL item          | What to prepare                                                                                    | Priority sample                                                                           |
-| --------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| High-value URLs       | Export source URLs, traffic-priority URLs, backlink-sensitive URLs, and conversion pages.          | Top landing pages, high-traffic posts, evergreen resources, and campaign pages.           |
-| Slugs and permalinks  | Confirm target permalink structure and parent-child page paths.                                    | Nested pages, posts, custom post types, and taxonomy archives.                            |
-| Redirects             | Prepare old URL to new URL mapping and define who configures redirects.                            | Changed paths, removed pages, merged content, media URLs, and archive paths.              |
-| SEO metadata          | Identify SEO title, meta description, canonical, index/noindex, schema, and social preview fields. | Priority pages, Blog Posts, taxonomy archives, and custom post type records.              |
-| Internal links        | Identify content-body links, menus, widgets, builder links, custom fields, and shortcode links.    | Pages with many internal references or old absolute URLs.                                 |
-| Search/facet behavior | Confirm how search, archives, filters, and plugin search indexes should behave.                    | Custom post type archives, resource filters, directory filters, and search landing pages. |
+| Presentation layer | Preparation question                                                       | Typical outcome                                            |
+| ------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Media files        | Are image/file paths, featured images, galleries, and documents available? | Migrate, relink, replace, or archive.                      |
+| Blocks             | Does content use core blocks, reusable blocks, or custom blocks?           | Validate rendering and editing after migration.            |
+| Page builders      | Which builder owns layout data?                                            | Target plugin setup, Custom Service, or manual rebuild.    |
+| Menus              | Which menus are active and where do they appear?                           | Target-side navigation setup plus validation.              |
+| Widgets/sidebars   | Are widgets still used or theme-dependent?                                 | Rebuild, replace, or retire.                               |
+| Theme templates    | Does content depend on template files or theme settings?                   | Theme implementation task, not ordinary content migration. |
 
-SEO preparation should be evidence-based. The migration plan should not promise complete SEO preservation without knowing which SEO plugin, redirect mechanism, permalink settings, and content paths are in scope.
+This preparation prevents a common WordPress problem: approving content because records exist while the public site still feels incomplete, broken, or difficult to edit.
 
-### Prepare Integrations and External-System Ownership <a href="#prepare-integrations-and-external-system-ownership" id="prepare-integrations-and-external-system-ownership"></a>
+### Prepare URLs, Redirects, SEO, and Search Continuity <a href="#prepare-urls-redirects-seo-and-search-continuity" id="prepare-urls-redirects-seo-and-search-continuity"></a>
 
-Many WordPress sites rely on systems outside WordPress for operational truth. Preparation should decide whether each record should be migrated into WordPress, referenced by WordPress, synchronized through an integration, or excluded.
+WordPress migration can affect search visibility when slugs, permalink structures, taxonomies, archives, media URLs, pagination, canonical fields, or plugin-generated URLs change. Preparation should identify the pages and posts that matter most before migration, not after traffic drops.
 
-| External dependency                                   | What to prepare                                                                        | Scope decision                                                                       |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| CRM and marketing tools                               | Contact IDs, tags, segments, consent, forms, automation triggers, and hidden fields.   | Migrate, map, preserve references, reconnect, or exclude.                            |
-| LMS, membership, donation, booking, and event systems | Operational records, payments, attendance, progress, access rules, and external IDs.   | Confirm whether plugin-specific records are supported or need Custom Service review. |
-| ERP, PIM, catalog, or inventory systems               | Display copies, product-like records, sync rules, and ownership of authoritative data. | Avoid treating synchronized display data as standalone WordPress truth.              |
-| Analytics and tracking                                | Tracking codes, events, goals, pixels, tag manager settings, and conversion paths.     | Usually implementation/configuration scope, not ordinary data migration.             |
-| Payment and subscription systems                      | Tokens, invoices, subscriptions, billing references, and renewal states.               | Do not promise continuity without plugin/system-specific confirmation.               |
-| Custom APIs and middleware                            | External IDs, sync keys, payload mappings, and workflow dependencies.                  | Use Custom Service review when transformation or preservation is non-standard.       |
+The merchant should collect priority URLs, high-traffic pages, high-value posts, important category or tag archives, redirect rules, SEO metadata, canonical expectations, XML sitemap behavior, internal link patterns, and media/document URLs. If WooCommerce is part of the same site, product, category, cart, checkout, account, and order-related URLs should be handled in the WooCommerce workflow rather than diluted inside the WordPress CMS scope.
 
-The safest preparation method is to assign ownership: WordPress-owned, plugin-owned, external-system-owned, implementation-owned, or Custom Service review.
+| SEO/URL input               | Preparation purpose                                                 |
+| --------------------------- | ------------------------------------------------------------------- |
+| Priority URL list           | Protects high-value landing paths and search traffic.               |
+| Current permalink structure | Helps detect slug or path changes after migration.                  |
+| Redirect map                | Defines old-to-new handling for changed URLs.                       |
+| SEO metadata export         | Preserves fields that may not live in the visible page body.        |
+| Internal link samples       | Confirms whether links point to valid target content.               |
+| Archive pages               | Protects category, tag, author, date, and custom taxonomy archives. |
+| Media/document URLs         | Prevents broken downloads and image references.                     |
 
-### Plan Demo Migration Samples <a href="#plan-demo-migration-samples" id="plan-demo-migration-samples"></a>
+Redirect planning should be specific. A broad statement that redirects will be handled later is not enough for a content-heavy WordPress migration. The preparation should identify which URLs are business-critical, which can be redirected broadly, and which can be intentionally retired.
 
-Demo Migration is most useful when samples represent real migration risk. A sample limited to ordinary posts and pages may look successful while missing the records that will decide launch readiness.
+### Prepare Demo Migration Samples <a href="#prepare-demo-migration-samples" id="prepare-demo-migration-samples"></a>
 
-| Sample group                  | Include examples of                                                                                    | Why it should be tested                                              |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| Core CMS content              | CMS Pages, Blog Posts, media, categories, tags, comments, menus, and users.                            | Confirms baseline WordPress record handling.                         |
-| Custom content                | Custom post types, custom taxonomies, custom fields, relationships, and archive examples.              | Confirms structured content meaning.                                 |
-| Plugin-owned data             | Forms, memberships, LMS, events, bookings, directories, donations, or other active plugin records.     | Confirms whether standard handling is enough.                        |
-| Builder/theme-dependent pages | Block pages, classic editor pages, builder layouts, reusable sections, shortcodes, and embedded forms. | Confirms the difference between data preservation and visual output. |
-| SEO-sensitive records         | Priority URLs, redirects, SEO metadata, taxonomy archives, and media-heavy pages.                      | Confirms URL and search visibility assumptions.                      |
-| Integration-sensitive records | External IDs, CRM-linked forms, system-owned profiles, and custom workflow references.                 | Confirms whether hidden fields and references survive.               |
+Demo Migration should test the WordPress structures most likely to reveal scope problems. The sample set should be compact enough to review thoroughly and diverse enough to expose content, metadata, plugin, user, media, and URL risks.
 
-Demo Migration findings should be converted into decisions: proceed as planned, adjust mapping, add Add-ons, exclude unsupported data, or request Custom Service review.
+| Sample type             | What it should prove                                                         |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| Standard page           | Page hierarchy, body content, media, internal links, and editability.        |
+| Standard post           | Author, date, category, tag, featured image, comments, and archive behavior. |
+| Custom post type record | Whether custom structure survives and displays correctly.                    |
+| Custom taxonomy example | Whether grouping and archive expectations remain usable.                     |
+| Metadata-heavy page     | Whether SEO, custom fields, or builder values are handled correctly.         |
+| Media-rich page         | Whether images, galleries, documents, and embedded content remain connected. |
+| User/author example     | Whether user identity and content ownership are preserved.                   |
+| Priority URL            | Whether redirect and permalink assumptions are valid.                        |
+| Plugin-owned example    | Whether Add-ons, Custom Service, setup, or exclusion is needed.              |
 
-### Decide Add-ons, Custom Service, and Accepted Exclusions <a href="#decide-add-ons-custom-service-and-accepted-exclusions" id="decide-add-ons-custom-service-and-accepted-exclusions"></a>
+Demo Migration should decide whether the selected approach is sufficient. If custom post types, metadata, builder content, user roles, redirects, or plugin-owned records fail the sample review, the plan should be corrected before Full Migration.
 
-Preparation should not treat every unusual record as Custom Service, but it should not hide custom requirements inside ordinary migration scope either.
+### Prepare Service Scope and Launch-Window Decisions <a href="#prepare-service-scope-and-launch-window-decisions" id="prepare-service-scope-and-launch-window-decisions"></a>
 
-| Requirement                                                 | Likely path                                                         | Preparation evidence needed                                                          |
-| ----------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Filter or reduce standard content scope                     | Data Filter Add-on or accepted exclusion.                           | Clear inclusion/exclusion rules for pages, posts, media, users, or comments.         |
-| Adjust field mapping within supported scope                 | Advanced Data Mapping or Advanced Data Configure where appropriate. | Source fields, target fields, sample records, and expected output.                   |
-| Preserve plugin data with supported structure               | Add-ons or scoped configuration.                                    | Plugin type, record samples, target equivalents, and validation plan.                |
-| Transform custom post types, custom tables, or external IDs | Custom Service review.                                              | Source schema, target structure, business logic, and pass conditions.                |
-| Recreate layouts, templates, or custom front-end behavior   | Usually implementation or Custom Service review depending on scope. | Target theme/builder strategy and expected visual/editing outcome.                   |
-| Preserve commerce behavior                                  | WooCommerce or commerce-plugin-specific planning.                   | Confirm whether commerce scope belongs to WordPress, WooCommerce, or another target. |
+WordPress preparation should conclude with a clear service-scope decision. Standard Service may be enough when the scope is ordinary supported WordPress content and the merchant can validate the result. Managed Service may be safer when the site is large, content-heavy, operationally sensitive, or difficult for the merchant to coordinate alone. Add-ons may be relevant when supported filtering, mapping, or configuration needs are clear. Custom Service should be considered when plugin data, custom fields, custom tables, external IDs, builder dependencies, membership behavior, or custom migration logic adjustment must be handled beyond supported behavior.
 
-Add-ons extend or refine supported migration scope. Custom Service is for non-standard structures, transformations, custom platform behavior, or requirements that cannot be handled by ordinary configuration alone.
+The launch window also matters. Content may continue changing between Demo Migration and launch. New posts, pages, media files, users, comments, or URL changes may appear. The merchant should plan whether later migration activity will continue with the last used configuration, continue with a new configuration, or require a new migration into a refreshed target result. This planning should remain role-specific; it is useful when it affects WordPress readiness, not as a standalone feature explanation.
 
-### Prepare for Additional Migration Options <a href="#prepare-for-additional-migration-options" id="prepare-for-additional-migration-options"></a>
+| Decision area            | Preparation output                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| Supported content scope  | Confirm posts, pages, taxonomies, media, comments, and supported records.                         |
+| Add-ons need             | Define filtering, mapping, or configuration requirements within supported behavior.               |
+| Custom Service need      | Identify unsupported plugin/custom data, custom fields, custom tables, or bespoke transformation. |
+| Target setup             | Separate themes, plugins, menus, redirects, roles, and templates from migrated data.              |
+| Later migration activity | Decide how new or changed source records will be handled before launch.                           |
+| Accepted exclusions      | Document what should not migrate and why.                                                         |
 
-Additional Migration Options matter when the source WordPress-related content remains active after initial migration activity. Preparation should define how changes will be handled before teams begin editing both sites.
-
-| Preparation question                           | Why it matters                                                                                      | Recommended response                                                                          |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Which records may change after Demo Migration? | Blog Posts, CMS Pages, users, media, comments, and form submissions may continue changing.          | Track changed records and avoid uncontrolled edits on both sides.                             |
-| Which new records may appear before launch?    | New Blog Posts, CMS Pages, users, and eligible records may need later migration handling.           | Separate newly created records from records already counted through the service license.      |
-| Which plugin records are time-sensitive?       | Form submissions, memberships, LMS progress, bookings, events, and donations may change frequently. | Decide whether they are migrated, excluded, frozen, or handled through Custom Service review. |
-| Which URLs may change before launch?           | New slugs, redirected pages, merged posts, and unpublished content can affect launch continuity.    | Update redirect and SEO review before Full Migration acceptance.                              |
-| Which teams can edit source and target?        | Parallel editing can create conflict.                                                               | Define freeze windows, ownership, and launch-day editing rules.                               |
-
-Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action for the same migration path. New eligible Product, Customer, Order, or Blog Posts records may consume Entity Points when migrated for the first time, including when the customer performs a new migration for the same migration path.
-
-### WordPress Preparation Readiness Matrix <a href="#wordpress-preparation-readiness-matrix" id="wordpress-preparation-readiness-matrix"></a>
-
-| Readiness area     | Ready signal                                                                                                  | Not ready signal                                                                               | Next action                                                          |
-| ------------------ | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Core content       | CMS Pages, Blog Posts, media, users, comments, categories, tags, and menus are inventoried.                   | Source content volume exists but relationships, statuses, authors, or media usage are unclear. | Complete content inventory and select Demo Migration samples.        |
-| Custom structure   | Custom post types, taxonomies, field groups, and templates are documented.                                    | Custom content is described only as pages or posts.                                            | Prepare structure map and field samples.                             |
-| Plugin data        | Active plugin-owned records are classified by ownership and target handling.                                  | Plugins are listed but their data records are not reviewed.                                    | Separate supported, excluded, Add-on, and Custom Service candidates. |
-| Layout layer       | Theme, builder, block, shortcode, menu, and widget expectations are separated from data migration.            | Visual continuity is assumed from data migration alone.                                        | Define accepted layout outcomes and implementation scope.            |
-| SEO and URLs       | Priority paths, redirects, metadata, archives, and internal links are identified.                             | SEO is deferred until after migration.                                                         | Prepare URL/redirect/metadata review before Demo Migration.          |
-| Integrations       | CRM, forms, LMS, membership, booking, donation, analytics, and API ownership is known.                        | Hidden IDs and external-system references are undocumented.                                    | Prepare integration ownership table.                                 |
-| Service scope      | Add-ons, Custom Service, and accepted exclusions are separated.                                               | Custom requirements are hidden inside standard content expectations.                           | Confirm service path before Full Migration.                          |
-| Follow-up handling | Additional Migration Options, freeze windows, changed records, and Entity Points implications are understood. | Teams continue editing without a follow-up plan.                                               | Create launch-window data change rules.                              |
+A strong preparation package is specific enough that the migration path can be selected and evaluated without guessing.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-WordPress preparation is strongest when it treats the target site as a structured CMS environment, not only a destination for pages and posts. The most important work happens before migration: defining the target role of WordPress, separating core content from plugin and custom records, documenting metadata and layout dependencies, preparing SEO and URL decisions, identifying external-system ownership, and choosing meaningful Demo Migration samples.
+WordPress preparation should focus on evidence, ownership, and launch usability. The merchant should define the target WordPress role, prepare core content, classify custom post types and taxonomies, identify metadata and plugin-owned data, review users and roles, gather media and presentation dependencies, protect URLs and SEO, choose Demo Migration samples, and separate supported migration scope from Add-ons, Custom Service, target-side setup, and accepted exclusions.
 
-A well-prepared WordPress migration gives each record a clear destination, each custom requirement an owner, and each launch-sensitive dependency a validation path. That preparation makes it easier to decide when Standard Service is enough, when Add-ons can refine the scope, and when Custom Service review is needed for non-standard WordPress structures or custom platform behavior.
+A WordPress migration is ready to proceed when the team can explain what each important record means in the target site, how it should be displayed or edited, which dependencies must be configured, and which samples must pass before launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Should a WordPress migration preparation checklist include WooCommerce data?**
+**What should be prepared first for a WordPress migration?**
 
-Only when WooCommerce is part of the target scope. WordPress and WooCommerce should be planned separately because WooCommerce commerce records such as products, customers, orders, coupons, tax settings, shipping settings, and subscriptions carry different migration meaning from generic WordPress content.
+Start by defining the target role of WordPress after migration. A content site, publication, membership site, plugin-driven site, and WordPress plus WooCommerce environment require different evidence and validation samples.
 
-**What WordPress records should be prepared before Demo Migration?**
+**Should custom post types be prepared separately from standard posts and pages?**
 
-Prepare representative CMS Pages, Blog Posts, media, categories, tags, users, comments, menus, custom post types, taxonomies, custom fields, plugin records, builder pages, SEO-sensitive URLs, and integration-linked records. The sample should include records that prove migration risk, not only records that are easy to move.
+Yes. Custom post types may depend on plugins, themes, or custom code. Prepare sample records, taxonomies, metadata, public URLs, and target expectations before assuming they can migrate like standard posts or pages.
 
-**Do WordPress plugins automatically migrate with the site data?**
+**Do WordPress plugins automatically migrate with content data?**
 
-No. Plugin files, plugin settings, plugin-owned records, custom tables, and external integrations need separate review. Some plugin data may be excluded, handled by Add-ons, configured in the target site, or reviewed as Custom Service scope.
+No. Plugin-owned records, settings, custom tables, shortcodes, builder layouts, memberships, form entries, and integrations may require setup, Add-ons, Custom Service review, manual rebuild, or exclusion depending on the requirement.
+
+**How should WordPress URL and SEO preparation be handled?**
+
+Prepare priority URLs, permalink structures, redirect rules, SEO metadata, archive pages, internal links, and media/document URLs. High-value pages and posts should be tested during Demo Migration rather than left for launch-week cleanup.
 
 **When should Custom Service be considered for WordPress preparation?**
 
-Custom Service should be considered when the migration requires non-standard custom post type transformation, custom table handling, plugin-specific operational records, external ID preservation, custom field relationships, custom platform behavior, or target logic that cannot be handled through supported configuration alone.
-
-**How do Additional Migration Options affect WordPress preparation?**
-
-Additional Migration Options matter when source content, users, Blog Posts, plugin records, or other eligible records may change between migration activity and launch. Preparation should define freeze windows, changed-record tracking, revalidation needs, and Entity Points implications for newly migrated eligible records.
+Custom Service should be considered when the migration requirement involves unsupported plugin data, custom post type behavior, custom fields, custom tables, external identifiers, bespoke transformation, or custom migration logic adjustment beyond supported behavior.

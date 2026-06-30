@@ -1,294 +1,265 @@
 # Squarespace Migration Pitfalls and Prevention
 
-Squarespace migration problems often appear when a store is treated as a simple record-transfer project even though the target result depends on hosted-platform structure, site design, content pages, product types, variants, SKUs, inventory, customers, contacts, orders, checkout settings, extensions, APIs, webhooks, and connected services. A Squarespace site can be a strong target for content-led commerce and streamlined hosted operations, but migration planning needs to respect the difference between migrated data, target configuration, design reconstruction, extension behavior, and custom scope.
+Squarespace migration problems usually appear when a project treats Squarespace as a simple cart destination instead of a hosted content-first commerce Target Platform. Products, Store Pages, templates, sections, pages, Blog Posts, media, checkout settings, customer/contact records, orders, inventory, subscriptions or payment plans, SEO controls, redirects, domains, apps, APIs, and external integrations can all affect the final result.
 
-Pitfall prevention should begin before Full Migration. The safest Squarespace migrations identify what belongs in standard data structures, what needs target-site configuration, what must be rebuilt in the site editor, what depends on extensions or outside systems, what can be handled through Add-ons, and what should move into Custom Service review.
+The prevention approach is not to overcomplicate every project. It is to identify which parts of the Source Platform can move as records, which parts must be configured inside Squarespace, which parts require Add-ons, and which parts need Custom Service review before launch decisions are made.
 
-### Pitfall 1: Treating Squarespace Like a Fully Open Custom Platform <a href="#pitfall-1-treating-squarespace-like-a-fully-open-custom-platform" id="pitfall-1-treating-squarespace-like-a-fully-open-custom-platform"></a>
+### Pitfall 1: Treating Squarespace as a Generic Cart Migration <a href="#pitfall-1-treating-squarespace-as-a-generic-cart-migration" id="pitfall-1-treating-squarespace-as-a-generic-cart-migration"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-The source store’s custom code, checkout behavior, content structure, or app-driven workflows are expected to move into Squarespace exactly as they worked before. This creates unrealistic expectations because Squarespace is a hosted platform with controlled commerce, site design, checkout, extension, and developer surfaces.
+The migration is planned around products, customers, and orders only. Store Pages, site pages, Blog Posts, templates, sections, media, navigation, redirects, checkout setup, and domain launch work are treated as secondary details even though they shape how Squarespace operates after migration.
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-* The source store depends on custom server-side logic or direct database behavior.
-* Product, customer, order, checkout, or content behavior is controlled by custom code.
-* The merchant expects the old admin workflow or storefront structure to be reproduced exactly.
-* External systems own product, inventory, customer, order, or marketing data.
-* Custom fields carry business meaning that has not been classified.
+The scope mentions record counts but not Store Pages, site structure, content, SEO, redirects, design expectations, or launch responsibilities. The merchant expects the old storefront experience to appear automatically after the data transfer.
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Classify each source behavior before migration. Decide whether it should become migrated data, Squarespace configuration, content reconstruction, design work, extension setup, outside-system work, accepted exclusion, or Custom Service scope.
+Define Squarespace as a hosted content-first commerce Target Platform at the start of the project. Separate migrated records from site setup, design implementation, checkout configuration, integration work, and launch tasks. Confirm which pages, product discovery paths, commerce settings, and content areas must be ready before the target store can be accepted.
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-Before Full Migration, list custom checkout fields, custom content blocks, external IDs, product-specific rules, and app-owned records. Assign each item to a target handling decision instead of assuming it will move automatically.
+For a content-led brand moving from a plugin-based store, include representative products, Store Pages, landing pages, Blog Posts, media, product URLs, redirects, and checkout configuration in the Demo Migration review instead of checking product records alone.
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-The migration scope reflects Squarespace’s hosted-platform boundaries, and custom source behavior has been configured, rebuilt, excluded, or escalated intentionally.
+The migration plan identifies migrated records, Squarespace configuration tasks, site/content rebuild expectations, SEO and redirect responsibilities, Add-ons, Custom Service review points, and accepted exclusions before Full Migration.
 
-### Pitfall 2: Flattening Product Types, Variants, SKUs, or Inventory Meaning <a href="#pitfall-2-flattening-product-types-variants-skus-or-inventory-meaning" id="pitfall-2-flattening-product-types-variants-skus-or-inventory-meaning"></a>
+### Pitfall 2: Assuming Product Structures Will Behave the Same Way <a href="#pitfall-2-assuming-product-structures-will-behave-the-same-way" id="pitfall-2-assuming-product-structures-will-behave-the-same-way"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-Products appear in Squarespace, but the migrated product structure does not preserve how customers buy or how the merchant manages stock. Product types, variants, SKUs, inventory, prices, images, categories, tags, and fulfillment assumptions may lose meaning if they are treated as flat product fields.
+Products appear in Squarespace, but their selling behavior, product types, variants, options, images, inventory, service-product handling, digital downloads, gift cards, or subscription/payment-plan context no longer match the source experience.
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-* Source variants affect price, SKU, inventory, image, or fulfillment.
-* Product options include personalization, add-ons, bundles, subscriptions, or digital access behavior.
-* Inventory depends on outside systems or channel-specific stock rules.
-* Categories and tags drive browsing or merchandising.
-* Demo Migration samples include only simple products.
+The source catalog includes complex option logic, product builders, bundled items, custom price rules, downloadable products, service products, gift cards, recurring purchase behavior, or specialized inventory rules, but the migration sample checks only simple products.
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Use product samples that expose real selling complexity. Validate products from the storefront and admin perspectives. Confirm whether source product behavior fits Squarespace product structures, target configuration, extension behavior, accepted exclusion, or Custom Service scope.
+Group products by selling model before migration. Test ordinary products, variant-heavy products, media-heavy products, service products, digital or gift-card-style products, low-stock products, hidden products, SEO-sensitive products, and products controlled by apps or external systems. Use Add-ons for supported field or mapping needs, and use Custom Service review when source product logic has no direct Squarespace equivalent.
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-Include a simple product, a product with multiple variants, a product with SKU-specific stock, a product with important categories and tags, a digital or service-like product where relevant, and a product connected to outside inventory or fulfillment.
+If the source store has products with many variants and custom configuration choices, choose a Demo Migration sample that includes the largest variant sets, products with multiple images, products with important SEO fields, and products connected to inventory or fulfillment systems.
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-Products remain recognizable, sellable, correctly organized, and operationally useful in Squarespace.
+Key product types, variants, options, images, inventory values, visibility rules, product SEO values, and unsupported product behaviors have documented outcomes in Squarespace before launch.
 
-### Pitfall 3: Migrating Products Without Validating Storefront Discovery <a href="#pitfall-3-migrating-products-without-validating-storefront-discovery" id="pitfall-3-migrating-products-without-validating-storefront-discovery"></a>
+### Pitfall 3: Confusing Store Pages and Product Discovery With Categories Alone <a href="#pitfall-3-confusing-store-pages-and-product-discovery-with-categories-alone" id="pitfall-3-confusing-store-pages-and-product-discovery-with-categories-alone"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-Products migrate into Squarespace but are hard to find. Store pages, categories, tags, navigation, featured sections, product collection pages, search behavior, and merchandising paths may not reflect how customers browse the source store.
+Categories or collections migrate as expected, but shoppers cannot find products naturally because Store Pages, navigation, filters, product landing pages, summary sections, menus, and content-commerce pathways were not rebuilt for Squarespace.
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-* The source store uses category-led or collection-led browsing.
-* Tags or filters help customers narrow product choices.
-* Navigation menus are manually curated.
-* Product pages receive organic traffic or backlinks.
-* Storefront validation focuses only on product existence.
+The source store depends on nested categories, custom landing pages, faceted filters, brand pages, collection pages, editorial buying guides, or menu-driven product discovery. The project scope treats category mapping as enough.
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Validate product discovery as part of migration acceptance. Check store pages, categories, tags, product links, navigation paths, search behavior, and priority landing paths in the Squarespace storefront.
+Audit product discovery as a storefront journey, not only as taxonomy migration. Identify priority Store Pages, category/tag structures, navigation labels, content landing pages, internal links, filters, and homepage or campaign paths that must guide shoppers to products after migration.
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-Review one top product page, one category-heavy product group, one tagged group, one navigation path, and one high-value product URL before accepting product migration quality.
+For a store where product discovery starts from editorial pages or seasonal landing pages, validate the migrated products together with Store Pages, internal links, image blocks, page sections, and redirect rules.
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-Representative products can be found through the customer-facing paths the merchant expects after launch.
+Priority products can be found through Squarespace navigation, Store Pages, search/discovery paths, content links, and key landing pages, not only through the admin product list.
 
-### Pitfall 4: Treating Website Content as Secondary to Commerce Records <a href="#pitfall-4-treating-website-content-as-secondary-to-commerce-records" id="pitfall-4-treating-website-content-as-secondary-to-commerce-records"></a>
+### Pitfall 4: Treating Historical Orders as Checkout Configuration <a href="#pitfall-4-treating-historical-orders-as-checkout-configuration" id="pitfall-4-treating-historical-orders-as-checkout-configuration"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-Products and orders receive attention, but the site’s real value sits in content pages, landing pages, blog posts, galleries, policies, menus, forms, images, SEO metadata, and design sections. A migration can appear successful at the commerce-data level while the customer journey remains incomplete.
+Historical orders migrate, but the live Squarespace checkout is not ready. Payment providers, shipping rates, tax settings, discount behavior, fulfillment workflows, notifications, and subscription/payment-plan requirements are not configured or tested before launch.
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-* The source site is content-led or service-led with commerce as one part of the site.
-* Blog posts, landing pages, portfolio pages, or informational pages drive traffic.
-* Policies, size guides, FAQs, or support pages affect purchase decisions.
-* Page layout is expected to match the old site closely.
-* Content samples are not included in Demo Migration review.
+The merchant reviews old orders but has not tested a new checkout transaction, shipping rule, tax calculation, discount code, fulfillment update, refund process, or payment-provider path inside Squarespace.
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Separate content readiness from commerce readiness. Prepare priority CMS Pages, Blog Posts, navigation paths, images, page slugs, metadata, forms, and design-dependent content before migration validation.
+Separate historical order migration from live checkout readiness. Validate order history for readability and customer context, then separately test Squarespace payment, tax, shipping, discount, fulfillment, notification, and subscription or payment-plan workflows with target-store settings enabled.
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-Create a priority list of product pages, CMS Pages, Blog Posts, policy pages, high-traffic landing pages, and important navigation items. Decide which should migrate, which should be rebuilt, and which can be excluded.
+Before launch, complete at least one test order for each major shipping zone, tax scenario, payment method, discount type, and fulfillment process while separately checking migrated historical orders for totals, items, taxes, discounts, and customer links.
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-Important content paths are migrated, rebuilt, redirected, or intentionally accepted as outside migration scope.
+Historical orders are readable and reconciled, and live checkout, payment, shipping, tax, discount, fulfillment, refund, and notification workflows have passed target-store testing.
 
-### Pitfall 5: Ignoring SEO and URL Continuity Until Launch <a href="#pitfall-5-ignoring-seo-and-url-continuity-until-launch" id="pitfall-5-ignoring-seo-and-url-continuity-until-launch"></a>
+### Pitfall 5: Misreading Customers, Contacts, Members, and Profiles <a href="#pitfall-5-misreading-customers-contacts-members-and-profiles" id="pitfall-5-misreading-customers-contacts-members-and-profiles"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-The Squarespace site launches with products and content in place, but important URLs, metadata, page names, redirects, image context, or entry paths are missing. Search visibility and returning-customer continuity can suffer even when data counts look acceptable.
+Customer-related data is moved as a single record type even though the source store used separate meanings for buyers, contacts, members, subscribers, donors, account holders, marketing contacts, loyalty participants, or external CRM identities.
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-* Product, category, blog, or content URLs have search value.
-* The source store has backlinks to specific pages.
-* Page slugs, metadata, or navigation labels are important.
-* Redirect planning is postponed until the end.
-* SEO validation checks only the homepage or a few product pages.
+The source system has multiple customer-like tables or app records. The merchant expects member accounts, newsletter status, customer history, donor context, subscriber records, and CRM segments to behave the same way after migration without defining which meanings Squarespace should preserve.
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Prepare SEO and URL samples before migration acceptance. Prioritize high-value product URLs, category or collection paths, Blog Posts, CMS Pages, landing pages, metadata, page names, image context, and redirects.
+Map customer-related records by business meaning. Separate commerce buyers, contacts, members, subscribers, donors, profiles, marketing records, account expectations, and external CRM or email-platform identifiers. Confirm what belongs in the Migration Service, what belongs to target configuration, and what requires Custom Service or external-system handling.
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-Build a launch-priority URL list before Full Migration. Use it to validate whether pages are present, redirected, rebuilt, renamed, or accepted as out of scope.
+For a membership-driven store, validate buyers with order history separately from site members, newsletter contacts, subscribers, and external CRM records. Do not assume one migrated customer record proves every account-related workflow is preserved.
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-Important SEO and customer-entry paths are accounted for before launch readiness is approved.
+Customer/contact/member/profile meanings are documented, representative samples validate correctly, and unsupported or external-system-owned records are assigned to Add-ons, Custom Service, external setup, or accepted exclusions.
 
-### Pitfall 6: Confusing Order History with Live Checkout Readiness <a href="#pitfall-6-confusing-order-history-with-live-checkout-readiness" id="pitfall-6-confusing-order-history-with-live-checkout-readiness"></a>
+### Pitfall 6: Underestimating Content, Media, URL, and SEO Work <a href="#pitfall-6-underestimating-content-media-url-and-seo-work" id="pitfall-6-underestimating-content-media-url-and-seo-work"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-Migrated historical orders show past payment, shipping, tax, discount, and transaction context, so the team assumes the live Squarespace checkout is ready. New checkout behavior depends on target payment, shipping, tax, discount, fulfillment, and commerce settings.
+Products and orders look acceptable, but content continuity suffers. CMS Pages, Blog Posts, media, images, metadata, slugs, redirects, internal links, domain settings, page structure, and search visibility are incomplete or inconsistent after launch.
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-* Payment or shipping labels appear in old orders, but live settings have not been tested.
-* Tax rules have not been reviewed in the target site.
-* Discounts, gift cards, or promotions are expected to work without configuration.
-* Source checkout fields carried fulfillment or customer-service meaning.
-* Orders are validated only by count or total value.
+The source site has SEO-sensitive product URLs, long-running Blog Posts, important landing pages, image-heavy pages, embedded media, category pages, custom slugs, or ranking pages, but the migration checklist focuses on products and orders.
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Separate historical order validation from live checkout testing. Migrated orders can preserve useful history where supported, but payment, shipping, tax, discounts, and checkout flows must be configured and tested in Squarespace.
+Prepare a content and SEO inventory before Full Migration. Identify high-value pages, Blog Posts, product URLs, Store Pages, redirects, metadata, images, alt text, internal links, and domain-launch dependencies. Validate content samples alongside commerce samples.
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-Review historical orders for readability, then separately test a new target checkout using representative products, shipping methods, tax scenarios, discounts, and payment settings.
+For a store where organic traffic depends on blog content and product pages, include top traffic URLs, top revenue product URLs, priority Blog Posts, image-heavy pages, and redirects in Demo Migration validation.
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-Historical order context remains readable, and live checkout behavior is configured and tested separately before launch.
+Priority CMS Pages, Blog Posts, media, product URLs, redirects, SEO metadata, internal links, and domain-launch steps have been validated or assigned to a clear post-migration action owner.
 
-### Pitfall 7: Treating Contacts, Customers, Subscribers, and Donors as One Data Type <a href="#pitfall-7-treating-contacts-customers-subscribers-and-donors-as-one-data-type" id="pitfall-7-treating-contacts-customers-subscribers-and-donors-as-one-data-type"></a>
+### Pitfall 7: Expecting Templates and Design to Transfer as Data <a href="#pitfall-7-expecting-templates-and-design-to-transfer-as-data" id="pitfall-7-expecting-templates-and-design-to-transfer-as-data"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-People-related records are migrated or reviewed too broadly. Squarespace can involve customers, contacts, subscribers, donors, form submitters, members, and marketing audiences depending on the site’s features and integrations. These records may have different meanings and migration expectations.
+The target store has migrated records, but the storefront does not match brand expectations because templates, sections, product page layouts, navigation, mobile presentation, content blocks, and visual styling were assumed to migrate automatically.
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-* The source site has newsletter subscribers, members, donors, form submissions, or marketing audiences.
-* Customers and contacts are used differently.
-* Email marketing, memberships, donations, or scheduling are part of the site experience.
-* External CRM or email platforms own contact identifiers.
-* People-related samples include only ordinary customers.
+The merchant asks for exact visual parity, old theme behavior, custom page layouts, custom checkout presentation, or special product display behavior, but the migration scope does not include design rebuild or Custom Service review.
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Classify each people-related record type by business use. Decide which records are customers, which are contacts, which are subscribers or audience records, which are external-system records, and which are out of scope.
+Separate data migration from Squarespace site implementation. Decide which design expectations can be handled through Squarespace setup, which require manual rebuild, which require external design work, and which should be excluded from Migration Service scope. Validate the storefront as a shopper experience, not only as a data table.
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-Prepare samples for a store customer, newsletter subscriber, donor or member where relevant, form contact, and CRM-connected contact before accepting the people-data result.
+For a brand-led store, create a launch-critical design checklist covering homepage sections, product listing pages, product detail layout, navigation, footer links, mobile views, checkout presentation, and priority landing pages.
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-People-related records retain their intended meaning or are clearly assigned to target setup, external-system work, exclusion, or Custom Service review.
+The merchant has accepted which design elements are target-site setup, which are manual rebuild work, which require Custom Service review, and which are outside migration scope.
 
-### Pitfall 8: Assuming Extensions, APIs, or Webhooks Resume Automatically <a href="#pitfall-8-assuming-extensions-apis-or-webhooks-resume-automatically" id="pitfall-8-assuming-extensions-apis-or-webhooks-resume-automatically"></a>
+### Pitfall 8: Overlooking API, App, and External-System Boundaries <a href="#pitfall-8-overlooking-api-app-and-external-system-boundaries" id="pitfall-8-overlooking-api-app-and-external-system-boundaries"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-The migrated Squarespace site has products, content, and orders, but connected operations fail because extensions, APIs, webhooks, external inventory systems, CRM tools, email platforms, fulfillment workflows, accounting systems, or analytics tools were not reviewed.
+Records migrate into Squarespace, but connected operations fail because external systems, apps, inventory feeds, fulfillment platforms, accounting tools, email systems, analytics, payment systems, or CRM identifiers were not considered.
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-* External systems depend on product, customer, order, or transaction IDs.
-* Inventory or fulfillment is managed outside the store.
-* Webhooks trigger operational workflows.
-* Extensions control merchandising, marketing, tax, shipping, fulfillment, or reporting.
-* The merchant expects connected services to work immediately after migration.
+The source store uses external systems to control inventory, fulfillment, subscriptions, customer segmentation, product feeds, tax logic, shipping, email automations, analytics, or order exports. The migration plan does not list these dependencies.
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-Create an extension and integration inventory. Classify each connected system as migrated, mapped, reconfigured, rebuilt, excluded, or escalated. Validate integration-sensitive records when IDs or workflow continuity matter.
+Inventory every external dependency before launch. Identify which data should migrate, which identifiers must be preserved or cross-referenced, which integrations must be reconnected in Squarespace, and which behaviors require Add-ons or Custom Service review. Treat API availability as a planning boundary, not a guarantee that every source behavior can be recreated.
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-List each extension, API connection, webhook, CRM, email platform, accounting system, fulfillment system, inventory service, analytics tool, and channel integration. Document whether it owns data and how it will be handled after migration.
+For a store connected to fulfillment and accounting systems, validate migrated orders with external references, SKU consistency, fulfillment status, tax and shipping values, customer email identity, and export readiness.
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-Connected-system expectations are explicit, and extension-owned or integration-sensitive data is not mistaken for standard migration data.
+Critical integrations and external identifiers are documented, test records validate correctly, and unsupported workflows have an owner outside standard record migration.
 
-### Pitfall 9: Choosing a Service Approach That Is Too Light <a href="#pitfall-9-choosing-a-service-approach-that-is-too-light" id="pitfall-9-choosing-a-service-approach-that-is-too-light"></a>
+### Pitfall 9: Treating Add-ons as a Substitute for Custom Service <a href="#pitfall-9-treating-add-ons-as-a-substitute-for-custom-service" id="pitfall-9-treating-add-ons-as-a-substitute-for-custom-service"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
-The migration begins under a standard assumption, but source review or Demo Migration reveals unsupported product behavior, complex content reconstruction, external IDs, extension-owned records, checkout fields, or API/webhook dependencies that were not included in scope.
+The project uses Add-ons to cover extra fields or specific mapping requirements, but the source store actually depends on custom workflows, unsupported structures, integration logic, or target implementation work that requires Custom Service review.
 
-#### Early Warning Signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
 
-* Complex products or variants fail to preserve business meaning.
-* CMS Pages or Blog Posts need more than ordinary record migration.
-* Orders require custom fields or external references to remain useful.
-* Extension-owned data is missing from the migrated result.
-* API or webhook dependencies are discovered late.
-* Demo Migration avoids the hardest samples.
+The source store includes custom product builders, custom checkout rules, unusual subscription behavior, custom databases, complex customer/account workflows, app-owned entities, specialized fulfillment logic, or strict design parity expectations. The proposed handling only lists Add-ons.
 
 #### Prevention <a href="#prevention-8" id="prevention-8"></a>
 
-Use Demo Migration to test the records most likely to expose difficulty. Use Add-ons for supported filtering, mapping, or data configuration needs. Move customized Add-ons, Custom Platform handling, extension-owned data, outside-system identifiers, and tailored transformation into Custom Service review.
+Use Add-ons for defined additional migration needs and use Custom Service for requirements that need assessment beyond standard supported migration behavior. Do not use Add-ons as a substitute for Custom Service, target-store build work, custom development, or third-party integration setup.
 
-#### Recommendation Example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
 
-If Demo Migration shows missing external IDs, non-standard product meaning, unreconciled content paths, or integration-owned records, classify each gap as target configuration, Add-on-supported adjustment, accepted exclusion, or Custom Service review.
+If a source store has product configurators and custom checkout validation, scope supported product fields separately from the custom workflow. The product records may be migration-ready while the workflow requires Custom Service review or accepted exclusion.
 
-#### Pass Condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
 
-The selected approach matches the real Squarespace migration burden, and unresolved custom requirements are not delayed until launch review.
+Add-on items are specific and bounded, Custom Service review points are explicit, and unsupported expectations are not hidden inside general migration wording.
 
-### Pitfall 10: Validating Only Record Counts <a href="#pitfall-10-validating-only-record-counts" id="pitfall-10-validating-only-record-counts"></a>
+### Pitfall 10: Skipping Revalidation After Follow-Up Migration Activity <a href="#pitfall-10-skipping-revalidation-after-follow-up-migration-activity" id="pitfall-10-skipping-revalidation-after-follow-up-migration-activity"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
 
-The migration is accepted because product, customer, order, page, or blog counts appear reasonable. Later, the team discovers broken product variants, missing SKU or inventory meaning, incomplete content paths, weak order readability, checkout setup gaps, SEO losses, or disconnected services.
+After the main migration, new products, customers, orders, Blog Posts, content updates, or changed source records are handled through follow-up migration activity, but the target store is not revalidated. New data may affect URLs, inventory, product display, orders, customers, redirects, SEO, integrations, or launch readiness.
 
-#### Early Warning Signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
+#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
 
-* Validation focuses on totals instead of representative records.
-* Product samples exclude variants, SKUs, inventory, categories, or tags.
-* Content samples exclude high-value CMS Pages or Blog Posts.
-* Order samples exclude payment, shipping, tax, discounts, notes, or transaction context.
-* Extensions, APIs, webhooks, and outside-system IDs are not reviewed.
+The merchant assumes a later migration activity only adds records and does not require renewed review. New eligible records, changed records, content updates, order activity, or post-Demo changes are present, but validation remains limited to the original sample.
 
 #### Prevention <a href="#prevention-9" id="prevention-9"></a>
 
-Validate by business meaning, not only by count. Use sample groups that represent the actual Squarespace launch outcome: complex products, key content pages, priority URLs, meaningful customer/contact records, varied orders, checkout scenarios, extension-owned records, and integration-sensitive identifiers.
+Treat Additional Migration Options as a reason to recheck affected Squarespace areas. Validate newly migrated products, customers, orders, Blog Posts, content, redirects, inventory, order totals, and integration references when they are relevant. New Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time; records already counted through the service license do not consume Entity Points again simply because another migration action occurs.
 
-#### Recommendation Example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
 
-Build a validation checklist that includes record totals and representative records. Count matching should be treated as one signal, not final acceptance.
+If new products and Blog Posts are migrated shortly before launch, revalidate product visibility, Store Pages, images, URLs, redirects, metadata, internal links, inventory values, and content formatting before the target store is accepted.
 
-#### Pass Condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
 
-The migrated Squarespace site is accepted because its products, content, customers, orders, checkout boundaries, SEO, extensions, and integrations are usable, not merely because totals appear correct.
+Follow-up migration activity has a defined validation checklist, newly migrated eligible records are scoped correctly for Entity Points, and affected commerce, content, SEO, and integration areas are rechecked before launch.
+
+### Squarespace Pitfall Prevention Checklist <a href="#squarespace-pitfall-prevention-checklist" id="squarespace-pitfall-prevention-checklist"></a>
+
+| Prevention area        | What to confirm before launch                                                             | Why it matters                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Target role            | Squarespace is being used as a hosted content-first commerce Target Platform.             | Prevents generic cart assumptions.              |
+| Catalog                | Product types, variants, Store Pages, inventory, media, and SEO are sampled.              | Prevents catalog display and selling errors.    |
+| Checkout               | Payment, tax, shipping, discounts, fulfillment, refunds, and notifications are tested.    | Prevents operational launch failure.            |
+| Customers and contacts | Buyers, contacts, members, subscribers, donors, and profiles are separated by meaning.    | Prevents account and CRM confusion.             |
+| Content and SEO        | CMS Pages, Blog Posts, URLs, redirects, media, metadata, and internal links are reviewed. | Protects search and content continuity.         |
+| Design                 | Templates, sections, navigation, mobile views, and storefront presentation are assigned.  | Prevents mistaken design-transfer expectations. |
+| Integrations           | External systems, identifiers, feeds, exports, apps, and APIs are checked.                | Prevents disconnected operations.               |
+| Scope extensions       | Add-ons and Custom Service are separated clearly.                                         | Prevents under-scoping.                         |
+| Follow-up handling     | Additional Migration Options trigger targeted revalidation.                               | Prevents late-stage data drift.                 |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Most Squarespace migration pitfalls can be prevented when the source store is reviewed as a combined website, content, commerce, and integration environment. Products, variants, content pages, SEO paths, customers, contacts, orders, checkout configuration, extensions, APIs, webhooks, and outside systems all affect whether the target site is useful after migration.
+Squarespace migration pitfalls are usually preventable when merchants plan for Squarespace as both a hosted site environment and a commerce Target Platform. A successful migration does not depend only on whether products, customers, and orders appear in the target admin. It depends on whether Store Pages, content, SEO, checkout, customer/contact meaning, integrations, design expectations, Entity Points, Add-ons, Custom Service, and follow-up migration handling have all been reviewed in the right role.
 
-Before approving Full Migration or launch readiness, review the failure patterns most relevant to the source site. If any pitfall appears in source review or Demo Migration, resolve the scope through target configuration, Add-ons, Custom Service review, or an accepted exclusion before treating the migration as complete.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do Squarespace migrations need content and SEO review?**
 
-**What is the most common Squarespace migration pitfall?**
+Squarespace stores often depend on pages, Blog Posts, media, Store Pages, URLs, redirects, templates, and internal links. Product and order migration can be technically successful while content continuity still needs additional review.
 
-The most common pitfall is treating Squarespace migration as a simple transfer of product, customer, order, and page records. Squarespace sites often depend on content structure, design expectations, SEO paths, variants, checkout settings, extensions, APIs, and connected services.
+**Can migrated order history prove that Squarespace checkout is ready?**
 
-**Can product counts match while the Squarespace migration still has problems?**
+No. Historical orders and live checkout configuration are separate. Payment, shipping, tax, discounts, fulfillment, refunds, and notifications should be tested inside Squarespace before launch.
 
-Yes. Product counts can match while variants, SKUs, inventory, categories, tags, images, SEO fields, or storefront discovery paths remain incomplete or commercially weak.
+**When do Squarespace requirements need Custom Service review?**
 
-**Why should content and SEO be reviewed separately?**
+Custom Service review is appropriate when the source store depends on unsupported product logic, custom checkout behavior, unusual customer/account structures, external-system rules, custom design parity, or records that do not fit standard supported migration behavior.
 
-Squarespace is often used as a website and commerce platform together. CMS Pages, Blog Posts, landing pages, page slugs, metadata, redirects, images, and navigation can affect traffic, trust, and conversion even when commerce records migrate correctly.
+**Do Add-ons replace Custom Service for Squarespace migration?**
 
-**Do Squarespace extensions and integrations migrate automatically?**
+No. Add-ons address defined additional migration needs. They are not a substitute for Custom Service, target-site implementation, custom development, or third-party integration setup.
 
-No. Extensions, API connections, webhooks, CRM systems, email platforms, fulfillment tools, accounting systems, analytics tools, and external inventory systems should be reviewed separately. Some may be reconfigured, rebuilt, mapped, excluded, or escalated to Custom Service.
+**What should be checked after Additional Migration Options are used?**
 
-**When should a Squarespace pitfall trigger Custom Service review?**
-
-Custom Service review should be considered when the issue involves Custom Platform data, extension-owned records, outside-system identifiers, custom fields, non-standard product or content transformation, API/webhook dependencies, or tailored migration behavior beyond Standard Add-on capability.
+Affected products, customers, orders, Blog Posts, content, URLs, redirects, inventory, SEO values, and integration references should be revalidated according to the data and business areas touched by the follow-up migration activity.

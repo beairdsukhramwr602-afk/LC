@@ -1,206 +1,194 @@
 # Joomla Data Model Differences
 
-Migration into Joomla is not a simple transfer into one fixed store database. Joomla is a CMS and application foundation where business meaning is distributed across content records, category trees, menu routing, module assignments, templates, users, access levels, custom fields, tags, media references, language structure, extensions, plugins, and custom development. Commerce data only has clear product, order, checkout, payment, shipping, tax, inventory, and coupon meaning when the component or custom implementation that owns those records is identified.
+Joomla data model differences begin with one important distinction: Joomla is not organized around one universal store schema. It is a CMS and application framework where content, menus, modules, templates, users, languages, access rules, media, custom fields, and extensions work together to create the public site. Commerce records may exist in a Joomla environment, but their meaning depends on the component or custom implementation that owns them.
 
-That distinction changes how migrated data should be interpreted. A page may not be just a page. It may be an article reached through a menu item, displayed inside a template layout, surrounded by modules, restricted by access level, tagged for discovery, associated with a language, connected to media, and affected by plugins. A user may not be just a customer. The same account may carry CMS login meaning, author permissions, group membership, restricted content access, commerce customer data, or extension-specific roles. A product may not belong to Joomla core at all; it may belong to a Joomla e-commerce extension, such as VirtueMart, Phoca Cart, EasyStore, or another commerce component, or to a custom component.
+For migration planning, this means Joomla data should not be reduced to a simple page export. A visible page can depend on an article record, a menu item, a category, an alias, a template assignment, module positions, access levels, language associations, metadata, plugins, and extension-owned routes. The data model is layered, and the migration must preserve the relationships that make the records usable.
 
-The strongest Joomla migration plans therefore translate meaning layer by layer. The target result should prove that data is not only present, but also reachable, classified, permissioned, displayed, localized, routed, and owned by the correct Joomla core structure, extension, or custom implementation.
+### Joomla Data Meaning Is Layered <a href="#joomla-data-meaning-is-layered" id="joomla-data-meaning-is-layered"></a>
 
-### Why Joomla Data Translation Is Layered <a href="#why-joomla-data-translation-is-layered" id="why-joomla-data-translation-is-layered"></a>
+Joomla separates site content from site assembly. Articles may hold the main body content, categories may organize records, menus may define routes and navigation, modules may place supporting content, templates may control presentation, and plugins may alter output or behavior. These layers can be easy to miss when migration is evaluated only by record counts.
 
-Many e-commerce platforms centralize store meaning around a native catalog, customer, cart, checkout, order, payment, shipping, tax, discount, and storefront model. Joomla works differently. Joomla core provides the site and application framework. Content, navigation, presentation, access control, and extension behavior combine to create the final experience.
+A Joomla migration should therefore ask which layer owns the business meaning. A policy page may be mostly an article. A landing page may depend heavily on a menu item, assigned modules, and template output. A members-only page may depend on access levels and user groups. A commerce page may be rendered by a component rather than Joomla core content.
 
-A migration into Joomla may involve several distinct layers:
+| Joomla layer                 | What it may own                                                                | Migration implication                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Articles                     | Main content bodies, page text, editorial records, landing content             | Article transfer is important, but it does not recreate the full page alone.              |
+| Categories                   | Content organization, editorial grouping, archive structure                    | Categories help structure content but may not define the public URL by themselves.        |
+| Menus and aliases            | Navigation, routes, SEF URLs, entry points, page context                       | Menu relationships often matter as much as the content record.                            |
+| Modules                      | Sidebar blocks, banners, menus, forms, related content, page-specific displays | Module assignment and position can affect whether a migrated page looks complete.         |
+| Templates and overrides      | Layout, output, presentation, page-specific design behavior                    | These may require setup, review, or rebuilding rather than ordinary data migration.       |
+| Users, groups, access levels | Login, permissions, restricted content, contributor roles                      | User data must be interpreted by access meaning, not only account fields.                 |
+| Extensions and plugins       | Commerce, forms, downloads, directories, memberships, routing, integrations    | Extension-owned records may require Add-ons, Custom Service, or target-side setup review. |
 
-| Joomla layer                | What it usually controls                                                                                  | Why it changes migration meaning                                                                                                |
-| --------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Core content                | Articles, categories, fields, tags, media, metadata, authorship, publishing state, language assignment    | Content must retain structure, ownership, classification, visibility, and editorial context, not only text.                     |
-| Navigation and routing      | Menus, menu items, aliases, SEF URLs, default pages, language menus, route behavior                       | A migrated record may exist but still fail if users, search engines, or internal links cannot reach it correctly.               |
-| Presentation layer          | Templates, child templates, layouts, overrides, modules, module positions, menu assignments               | Visual and page-context meaning may depend on template/module configuration outside the migrated record itself.                 |
-| User and access layer       | Users, user groups, access levels, permissions, registration behavior, login context                      | Account meaning may differ between CMS users, content authors, members, administrators, customers, or extension-owned profiles. |
-| Extension layer             | Components, modules, plugins, templates, languages, libraries, packages, third-party records              | Business behavior may be owned by installed extensions rather than Joomla core.                                                 |
-| Commerce layer              | Products, carts, orders, checkout, shipping, payment, taxes, stock, coupons, customer-commerce records    | Commerce meaning is extension-dependent unless a specific Joomla commerce component or custom implementation is defined.        |
-| Custom implementation layer | Custom components, custom database tables, plugin-owned records, integrations, outside-system identifiers | Bespoke logic often requires Custom Service review because standard data assumptions may not preserve business meaning.         |
+The practical difference is that Joomla migration is relationship-sensitive. Moving records without preserving their ownership and context can produce a site where data exists but public pages, restricted areas, routes, and extension behavior no longer work as expected.
 
-The practical issue is not whether Joomla can store data. The issue is where each piece of data belongs, what controls its behavior, and what must be validated after migration.
+### Articles, Categories, and Menus Do Different Jobs <a href="#articles-categories-and-menus-do-different-jobs" id="articles-categories-and-menus-do-different-jobs"></a>
 
-### Content Records: Articles Are Not the Whole Page <a href="#content-records-articles-are-not-the-whole-page" id="content-records-articles-are-not-the-whole-page"></a>
+Joomla articles, categories, and menus are often confused because they can all appear to describe the same page. In practice, they perform different jobs. Articles store content. Categories organize content. Menus create navigation entries and often define public routes. A migrated article may not be reachable in the same way unless the related menu structure and alias behavior are reviewed.
 
-Joomla articles usually hold the main body content, publishing metadata, authoring context, category assignment, language assignment, access level, custom fields, tags, images, intro/full text behavior, and other editorial attributes. That makes articles important, but an article alone does not always define the complete page experience.
+This distinction is especially important for SEO-sensitive sites. A page URL may come from a menu alias rather than from the article title alone. A category may support organization, while the menu item determines the public path that search engines and visitors use. When menus are ignored, migrated content may be present but disconnected from its original entry point.
 
-A source page may need to become a Joomla article, but the final front-end page may also depend on a menu item, alias, layout choice, module assignments, template override, language association, access rule, media reference, and plugin behavior. Treating article body text as the only meaningful data can leave the migrated site technically populated but operationally incomplete.
+| Source expectation                  | Joomla interpretation                                                                        | What to check during migration                                               |
+| ----------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| A page is a content record          | The article may hold content, but the menu item may define access and URL context.           | Validate the article and its menu route together.                            |
+| A category is a storefront category | Joomla categories may organize content; commerce categories may belong to a store extension. | Separate Joomla content categories from extension-owned commerce categories. |
+| A URL can be rebuilt from a title   | Joomla routes may depend on menu aliases, category paths, language, and component routing.   | Review high-value URLs and redirects as relationship records.                |
+| A navigation item is only design    | Menus can affect routing, page context, modules, breadcrumbs, and metadata.                  | Validate menus as structural data, not decoration.                           |
 
-For Joomla migration planning, article translation should answer several questions:
+A strong Joomla data review should treat menus as part of the data model. They are not just front-end navigation labels. They can carry URL, access, language, metadata, and page-context meaning.
 
-| Source meaning                                     | Joomla interpretation question                                                                                                | Migration implication                                                                     | Validation proof                                                                                                                     |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Static page, blog post, CMS page, or resource page | Should it become a Joomla article, category blog item, featured article, custom component record, or extension-owned content? | Content type should match how the target site will manage and display it after migration. | Content opens from the intended menu route, has the correct category, language, access level, media, metadata, and publishing state. |
-| Page title and body                                | Which title, alias, intro text, full text, images, metadata, and custom fields should be preserved?                           | Body transfer alone may miss SEO, editorial, media, field, and routing meaning.           | The migrated page displays correctly in the intended layout and retains required metadata and field values.                          |
-| Source publishing status                           | How should published, unpublished, archived, scheduled, featured, or restricted content behave in Joomla?                     | Publishing state affects visibility and editorial workflow, not just record storage.      | Sample records match expected visibility for public users, logged-in users, editors, and administrators.                             |
-| Content ownership                                  | Should author, created date, modified date, access level, and workflow context be preserved?                                  | Editorial trust can be weakened if authorship or lifecycle data is flattened.             | Historical and operational content samples show correct ownership and dates where required.                                          |
+### Modules, Templates, and Overrides Shape Page Meaning <a href="#modules-templates-and-overrides-shape-page-meaning" id="modules-templates-and-overrides-shape-page-meaning"></a>
 
-Articles should therefore be validated as managed content records and as reachable site experiences.
+Joomla modules and templates can make a migrated record look complete or incomplete. A source page may include a main article plus a sidebar module, a contact block, a menu module, a banner, a login panel, a language switcher, a related-content block, or a custom HTML module. If the article migrates but the module assignments are missing or changed, the page may lose visible business context.
 
-### Categories, Menus, and Routes Do Different Jobs <a href="#categories-menus-and-routes-do-different-jobs" id="categories-menus-and-routes-do-different-jobs"></a>
+Templates and overrides add another layer. They can change how articles, categories, components, and modules are displayed. A migrated record may contain the right text and metadata, but if the old page depended on a template override or custom layout, the target display may need manual setup or custom review.
 
-Joomla categories organize content. Menus and menu items control navigation, routing, page entry points, layout selection, and often module context. These roles overlap in the visible website, but they are not the same data model.
+| Page element        | Data-model role                                       | Migration planning question                                                         |
+| ------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Module position     | Places supporting content in a layout area            | Should the module be migrated, rebuilt, reassigned, or excluded?                    |
+| Menu assignment     | Controls where a module appears                       | Is the module tied to a specific page, language, menu branch, or user group?        |
+| Template assignment | Changes the layout for selected pages                 | Does the target need a matching template relationship or new design setup?          |
+| Template override   | Alters component or content output                    | Is this presentation logic, custom behavior, or a Custom Service signal?            |
+| Custom HTML module  | Stores reusable content outside the main article body | Does the content need to remain editable, visible, and assigned to the right pages? |
 
-A common migration mistake is assuming that a source category tree can automatically become the Joomla navigation structure. A category may organize content internally, while a menu item decides whether a user reaches a category blog, a single article, a featured view, a component view, a login page, a commerce section, or a custom route. The same category can be reached through different menu structures, and a menu item can point to something that is not a content category at all.
-
-The target Joomla structure should clarify:
-
-* which source categories should become Joomla content categories;
-* which source navigation items should become Joomla menu items;
-* which aliases and SEF URLs should be preserved, changed, or redirected;
-* which menu items are language-specific;
-* which menu items control layout, modules, and page context;
-* which links are internal content links, commerce-extension links, or custom component routes.
-
-For migration validation, a page should not pass only because its record exists in the administrator area. It should pass when the correct URL resolves, the intended menu item is active, the right modules appear, the page title and metadata are correct, access behavior is correct, and internal links remain usable.
-
-### Modules, Templates, and Overrides Shape Output <a href="#modules-templates-and-overrides-shape-output" id="modules-templates-and-overrides-shape-output"></a>
-
-Joomla pages are often assembled from more than the main component output. Modules can display menus, banners, custom HTML, login forms, language switchers, breadcrumbs, related content, search boxes, carts, filters, product blocks, or extension-specific widgets. They may be assigned to specific positions, templates, pages, menu items, languages, and access levels.
-
-Templates and child templates define the visual framework. Template overrides can change how Joomla core views or extension views render output. Page builders or template frameworks may add another layer of configuration that affects layout, content blocks, and design behavior.
-
-This means presentation data can be separate from content data. A migrated article may be correct, but the front-end result may still be wrong if a module assignment, position, override, layout, template dependency, or extension widget is missing.
-
-| Presentation dependency                 | Migration meaning                                                                                | Risk if ignored                                                                                                   |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| Module position and assignment          | Controls surrounding page content and contextual blocks.                                         | Pages appear incomplete, navigation disappears, language switchers are missing, or commerce blocks do not appear. |
-| Template or child template              | Controls site structure, styling, layout regions, and sometimes framework behavior.              | Content appears in the wrong layout or loses expected visual hierarchy.                                           |
-| Template override                       | Changes how Joomla or extension output is rendered.                                              | Migrated data may be present but displayed differently from the operational source site.                          |
-| Page-builder or framework configuration | May own layout sections, reusable blocks, or content presentation outside standard articles.     | Key page design or landing-page content may not map cleanly into Joomla core structures.                          |
-| Extension module                        | May expose carts, product filters, account areas, search blocks, listings, or promotional areas. | Commerce or application behavior appears missing even when component records exist.                               |
-
-Presentation dependencies are especially important for Joomla sites that have been heavily customized over time. The target migration plan should distinguish data that can be migrated as records from display behavior that may need configuration, reconstruction, or Custom Service review.
+This is why Joomla migration validation should include representative page assemblies, not only lists of articles. The target result must prove that pages are reachable, visible, and contextually complete.
 
 ### Users, User Groups, Access Levels, and Customers Are Separate Meanings <a href="#users-user-groups-access-levels-and-customers-are-separate-meanings" id="users-user-groups-access-levels-and-customers-are-separate-meanings"></a>
 
-Joomla core users are site accounts. User groups, access levels, and permissions determine what those users can see and do. A user may be a registered visitor, author, editor, administrator, member, staff user, partner, wholesaler, vendor, student, or restricted-content subscriber depending on how the Joomla site and its extensions are configured.
+Joomla user data should not be treated automatically as customer data. Joomla users may represent administrators, authors, members, registered visitors, restricted-content users, event participants, students, partners, staff, or commerce customers depending on the implementation. User groups and access levels add more meaning because they control what a user can see or do.
 
-Commerce customer meaning is not automatically the same as Joomla core user meaning. A Joomla commerce extension may store customer profiles, billing addresses, shipping addresses, order history, tax identifiers, reward data, vendor data, subscription data, or checkout preferences in extension-owned tables. A user account may connect to those records, but the relationship depends on the extension or custom implementation.
+Commerce extensions may keep separate customer records, addresses, order relationships, shopper groups, or checkout profiles. A user account may connect to a commerce customer, but that relationship belongs to the commerce extension or custom component. Migration planning should avoid merging these meanings too early.
 
-The migration plan should avoid flattening all accounts into a generic customer list. It should clarify:
+| Record type        | Joomla meaning                                             | Common migration risk                                                               |
+| ------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Joomla user        | Login identity and account record                          | Treated as a complete customer profile without checking extension-owned buyer data. |
+| User group         | Permission grouping or role assignment                     | Treated as a marketing segment instead of access control.                           |
+| Access level       | Visibility rule for content, modules, menus, or components | Lost during migration, exposing or hiding content incorrectly.                      |
+| Commerce customer  | Buyer profile stored by an extension or custom component   | Assumed to be fully represented by Joomla core users.                               |
+| Administrator role | Back-end operational permission                            | Migrated without validating operational access and security expectations.           |
 
-* whether source accounts are CMS users, customers, members, administrators, authors, vendors, or another role;
-* which Joomla user groups and access levels must exist in the target;
-* which permissions and restricted-content rules are operationally important;
-* whether commerce customer records are owned by a Joomla commerce extension;
-* whether login behavior, registration rules, password handling, MFA, or account activation requires special review;
-* whether user IDs or outside-system identifiers are used by integrations, subscriptions, CRM systems, ERP systems, or custom workflows.
-
-A successful Joomla user migration should prove both account continuity and access meaning. Users should not only exist; they should belong to the right groups, see the right content, avoid restricted areas they should not access, and remain connected to any extension-owned customer or member records where applicable.
+A Joomla migration should preserve identity relationships only where they are supported and understood. If customer history, restricted content, membership rules, or commerce profiles depend on extension-owned data, the service path may require Custom Service review.
 
 ### Custom Fields, Tags, Media, and Metadata Carry Business Context <a href="#custom-fields-tags-media-and-metadata-carry-business-context" id="custom-fields-tags-media-and-metadata-carry-business-context"></a>
 
-Joomla custom fields can extend articles, contacts, users, or other supported contexts depending on configuration and extensions. Field groups, field types, display behavior, access settings, and language assignments can make custom fields operationally important. A source attribute may become a Joomla field, but only if the target context and field behavior are defined.
+Joomla custom fields, tags, media, and metadata can carry more business value than their names suggest. Custom fields may support content filtering, profile data, structured landing pages, directories, membership data, product-like information, or integration identifiers. Tags may support discovery and related content. Media may include embedded images, downloadable files, protected documents, product-related assets, and reused page resources. Metadata may affect SEO continuity and social sharing.
 
-Tags can classify content across category boundaries. They may support discovery, filtering, related-content logic, internal organization, or editorial workflows. Tags should not be treated as simple category duplicates unless the source and target site strategy supports that choice.
+These records should be classified by business purpose before migration. A custom field used only for editorial notes has a different risk level from a custom field that stores membership status, external IDs, product attributes, event details, or structured SEO content.
 
-Media is also not just file transfer. Images, PDFs, documents, downloads, galleries, and embedded assets may be referenced inside article bodies, custom fields, modules, templates, extension records, or custom layouts. The target result should preserve file location, path references, alt text, captions, links, and front-end display where those details matter.
+| Data area     | Why it matters                                                                          | Review priority                                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Custom fields | May store structured values attached to articles, users, contacts, or extension records | Identify whether fields are editorial, searchable, access-sensitive, integration-related, or business-critical. |
+| Tags          | May replace or supplement categories for discovery and grouping                         | Check whether tags affect navigation, filtering, related content, or internal workflows.                        |
+| Media         | May be referenced by articles, modules, extensions, or templates                        | Review paths, embedded links, alt text, protected files, and reused assets.                                     |
+| Metadata      | May be stored at article, menu, category, extension, or plugin level                    | Validate titles, descriptions, aliases, redirects, and high-value SEO records.                                  |
 
-Metadata, aliases, page titles, browser titles, descriptions, canonical expectations, and search-engine-facing content may exist in multiple Joomla layers. A Joomla migration should distinguish content metadata from menu-item metadata and extension-owned SEO data.
+This review helps prevent a common Joomla error: migrating visible content while losing structured values that make the content useful for search, filtering, access, integrations, or editorial management.
 
-### Multilingual Structure Changes More Than Text <a href="#multilingual-structure-changes-more-than-text" id="multilingual-structure-changes-more-than-text"></a>
+### Multilingual Records Depend on More Than Translated Text <a href="#multilingual-records-depend-on-more-than-translated-text" id="multilingual-records-depend-on-more-than-translated-text"></a>
 
-Joomla multilingual sites may use language-specific content, language-specific menu structures, language associations, language switchers, localized modules, translated categories, language-specific aliases, and extension-owned language behavior. A multilingual migration is not just translation import.
+Joomla multilingual migration is not only a text translation issue. Multilingual structure may include language-specific articles, categories, menus, modules, aliases, metadata, language associations, template assignments, and extension-owned translations. A migrated target can have translated content but still fail if language relationships, menus, or modules are disconnected.
 
-The target structure should define how each language will be represented and connected. Content may need language assignment, category alignment, associated menu items, module visibility, translated metadata, localized media references, and language-aware routing. Commerce extensions may also maintain their own product, category, attribute, checkout, email, or configuration translations.
+The migration plan should identify whether the source uses Joomla core multilingual features, extension-specific language behavior, custom translation fields, or external translation workflows. Each pattern changes what must be preserved and validated.
 
-Multilingual validation should therefore sample complete user journeys in each important language. A translated article should open through the correct language menu. A language switcher should lead to the associated page where expected. Menu aliases should not collide. Restricted content should remain restricted in every language. Extension-owned commerce records should be checked against the component that owns them.
+| Multilingual element        | Migration meaning                              | Validation focus                                                      |
+| --------------------------- | ---------------------------------------------- | --------------------------------------------------------------------- |
+| Language-specific article   | Content in a target language                   | Confirm the article exists and carries correct language assignment.   |
+| Language-specific menu item | Public route for translated content            | Confirm each language has correct navigation and URL behavior.        |
+| Language association        | Relationship between translated versions       | Confirm translated pages remain connected where needed.               |
+| Language-specific module    | Supporting content for a language              | Confirm modules display in the correct language and menu context.     |
+| Extension-owned translation | Translation stored outside Joomla core content | Confirm whether the extension data is supported, custom, or excluded. |
 
-### Extensions and Plugins Define Many Joomla Data Boundaries <a href="#extensions-and-plugins-define-many-joomla-data-boundaries" id="extensions-and-plugins-define-many-joomla-data-boundaries"></a>
+Multilingual review should include sample pages from each important language. The target should prove that users can move through translated content naturally, not only that translated records exist.
 
-Joomla extensions are not minor add-ons to a fixed core commerce system. They often define the business function itself. Components may own major application areas. Modules may render contextual output. Plugins may alter content processing, authentication, user behavior, search, routing, fields, forms, commerce workflows, or integration events. Templates affect presentation, while language packs, libraries, files, and packages may support broader implementation behavior.
+### Extensions and Plugins Define Many Data Boundaries <a href="#extensions-and-plugins-define-many-data-boundaries" id="extensions-and-plugins-define-many-data-boundaries"></a>
 
-This extension architecture is central to Joomla data model planning. A source site may contain records that look like normal business data but actually belong to a specific component or custom extension. The target Joomla site may need the same extension, a replacement extension, a supported commerce component, a custom component, or a rebuilt structure.
+Joomla’s extensibility is one of its strengths, but it also makes migration planning more precise. Components, modules, plugins, templates, and packages may each store data or control behavior. A form component may own submissions. A download extension may own file records and access rules. A membership extension may own subscriptions. A commerce extension may own products and orders. A plugin may transform content output or connect the site to an external system.
 
-For Joomla-related e-commerce work, extension ownership is decisive. When a Joomla extension owns the commerce model, product and order interpretation should follow that extension’s platform logic rather than generic Joomla assumptions.
+The migration plan should identify which data belongs to Joomla core and which belongs to installed extensions. Supported extension records may fit the ordinary scope. Unsupported extension data, custom tables, custom components, and modified extensions may require Custom Service.
 
-Unknown, abandoned, unsupported, or highly customized extensions require deeper review. The issue is not only whether records can be read. It is whether the target has a compatible place for the records, whether relationships can be preserved, and whether behavior depends on extension code that will exist after migration.
+| Extension dependency | What it may control                                                                                 | Service implication                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Component            | Primary feature data such as store records, forms, directories, downloads, memberships, or bookings | Supported components may be handled normally; unsupported or custom components need review. |
+| Module               | Display blocks, navigation, banners, feeds, search boxes, login blocks, or custom HTML              | Often requires layout and assignment validation.                                            |
+| Plugin               | Rendering, authentication, routing, field behavior, integrations, or event-driven processing        | May require Custom Service if it stores or transforms important data.                       |
+| Template             | Site presentation and overrides                                                                     | Usually a setup/design concern unless custom logic or data relationships are involved.      |
+| External integration | CRM, ERP, POS, PIM, analytics, payment, shipping, or membership systems                             | External IDs and sync rules require special review.                                         |
+
+Joomla migration is most reliable when extension ownership is documented before service scope is accepted. Without that ownership map, the project can confuse standard content migration with unsupported extension migration.
 
 ### Commerce Data Is Extension-Dependent <a href="#commerce-data-is-extension-dependent" id="commerce-data-is-extension-dependent"></a>
 
-Joomla core should not be treated as having one universal product, order, cart, checkout, payment, shipping, tax, inventory, review, coupon, or customer-commerce model. Those meanings are supplied by the installed commerce component, by another business extension, or by a custom implementation.
+Joomla core does not define one native product, cart, checkout, order, payment, tax, coupon, shipping, inventory, or review model. Those records belong to the selected commerce extension or custom component. This matters because two Joomla-based stores can have completely different data models even though both run inside Joomla.
 
-That changes how commerce migration should be planned:
+For a Joomla commerce migration, the owning extension determines how product data is interpreted. One extension may treat product options, attributes, manufacturers, prices, tax rules, addresses, orders, invoices, shipment methods, or payment plugins differently from another. A custom component may store these records in bespoke tables.
 
-| Commerce data area           | Joomla core meaning                                           | Extension-dependent meaning                                                                                                                        | Planning consequence                                                                       |
-| ---------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Products and catalog records | Joomla core does not define one native product catalog model. | A commerce extension may define products, variants, options, attributes, categories, prices, stock, images, and downloads.                         | Identify the commerce component before deciding how catalog data should be interpreted.    |
-| Customers and addresses      | Joomla core can store users, groups, and access behavior.     | A commerce extension may store customer profiles, billing addresses, shipping addresses, tax IDs, company data, or account preferences.            | Do not assume Joomla users equal commerce customers without extension context.             |
-| Orders and order history     | Joomla core does not define one native order history model.   | A commerce extension owns order statuses, line items, totals, taxes, shipping, payments, coupons, invoices, and customer relationships.            | Validate order meaning against the target extension or custom implementation.              |
-| Cart and checkout            | Joomla core does not provide one universal checkout workflow. | Checkout is defined by the installed commerce extension, plugins, payment integrations, shipping logic, tax configuration, and template overrides. | Checkout continuity requires extension-specific review, not generic Joomla review.         |
-| Discounts and coupons        | Joomla core does not define universal coupon behavior.        | Coupon and promotion behavior depends on the commerce extension or custom code.                                                                    | Discount data should be migrated only into a target model that can represent it correctly. |
-| Reviews and ratings          | Joomla core does not supply one native commerce review model. | Reviews may belong to a commerce extension, content extension, comments system, rating plugin, or custom table.                                    | Ownership must be identified before review data can be interpreted.                        |
+| Commerce record                    | Joomla-core status                                      | Migration planning implication                                                    |
+| ---------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Products and product categories    | Not native Joomla core store records                    | Identify the commerce component or custom implementation.                         |
+| Customers and addresses            | May be linked to Joomla users but often extension-owned | Preserve account relationships only where supported and meaningful.               |
+| Orders and order statuses          | Extension-owned or custom-owned                         | Validate historical context through the commerce component.                       |
+| Coupons, taxes, shipping, payments | Extension-specific configuration or records             | Separate migrated data from target-side setup and payment/shipping configuration. |
+| Product reviews and inventory      | Extension-dependent                                     | Confirm whether records are supported, custom, or excluded.                       |
 
-If the target is a Joomla commerce extension, the extension-specific migration plan should own the commerce structure. If the target is Joomla itself without a known commerce component, migration planning should not promise store behavior that Joomla core does not define. If the source or target is a custom Joomla implementation, Custom Service review may be needed to define the data model, relationships, and custom migration logic adjustment.
+The strongest Joomla commerce planning starts with the extension name and implementation state, not with the assumption that Joomla itself owns the store data.
 
-### Custom Joomla Implementations Require Data Ownership Review <a href="#custom-joomla-implementations-require-data-ownership-review" id="custom-joomla-implementations-require-data-ownership-review"></a>
+### Custom Joomla Implementations Require Ownership Review <a href="#custom-joomla-implementations-require-ownership-review" id="custom-joomla-implementations-require-ownership-review"></a>
 
-Long-running Joomla sites often include custom components, modified extensions, direct database changes, bespoke fields, custom plugins, external integrations, import/export bridges, CRM or ERP identifiers, membership logic, booking logic, directory records, learning records, subscription records, or specialized workflows. These structures may be central to the business even if they are invisible to casual front-end review.
+Some Joomla sites include custom components, modified extensions, bespoke database tables, template overrides with business logic, plugin-driven workflows, or integrations with external systems. These cases should be reviewed before migration expectations are finalized because standard records may not explain the actual data relationships.
 
-Custom implementation data should be classified before migration:
+Custom implementations are not automatically impossible, but they need clearer ownership and acceptance rules. The project should identify which records must be preserved, which fields drive business behavior, which IDs are required by external systems, and which target-side behavior must be rebuilt rather than migrated.
 
-| Custom data signal                   | What it may indicate                                                                      | Migration implication                                                                                 |
-| ------------------------------------ | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Custom database tables               | Business records may be outside Joomla core and outside supported commerce components.    | Custom Service review is usually needed to understand ownership, relationships, and target structure. |
-| Modified extension tables            | A familiar extension may not behave like its standard version.                            | Standard assumptions may fail unless modifications are identified.                                    |
-| Plugin-owned records                 | Behavior may be triggered by events, not obvious administrator screens.                   | Data and behavior should be reviewed together.                                                        |
-| External identifiers                 | Records may be connected to ERP, CRM, fulfillment, POS, membership, or reporting systems. | Mapping must preserve identifiers when they remain operationally necessary.                           |
-| Custom fields used as business logic | Fields may drive filtering, access, pricing, workflows, or integrations.                  | Field mapping may need more than label-to-label transfer.                                             |
-| Custom routes or aliases             | URL behavior may depend on custom routing code or menu structures.                        | SEO and navigation validation must include route-level proof.                                         |
+| Custom signal                | Why it changes migration planning                                                       |
+| ---------------------------- | --------------------------------------------------------------------------------------- |
+| Custom component             | Data structure and business logic may be unique to the site.                            |
+| Modified extension           | Standard extension assumptions may no longer match the actual implementation.           |
+| Custom database tables       | Records may not have a supported source reader or target destination.                   |
+| Plugin-generated output      | Visible content may not exist as ordinary article body text.                            |
+| External IDs                 | ERP, CRM, POS, membership, or reporting continuity may depend on preserved identifiers. |
+| Template override with logic | Display or workflow behavior may need rebuilding instead of data transfer.              |
 
-Custom Service does not simply mean a larger migration. It means the implementation includes customization, non-standard structure, extension-owned data, custom fields, outside-system identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment that should be reviewed before the final migration approach is chosen.
+Custom Service review is appropriate when required business data sits outside supported Joomla structures or when bespoke transformation is needed. Add-ons may help with supported filtering, mapping, or configuration, but they should not be treated as a substitute for custom handling.
 
 ### What Migrated Joomla Data Must Prove <a href="#what-migrated-joomla-data-must-prove" id="what-migrated-joomla-data-must-prove"></a>
 
-Data model translation is only successful when the target Joomla environment preserves operational meaning. The target result should prove more than record counts.
+A Joomla data migration should prove that the target records remain usable in context. That proof is not limited to whether the data exists. It should show that site structure, access, routing, language, media, extension ownership, and commerce relationships still make sense.
 
-| Proof area             | What should be checked                                                                                                                                           | Strong sample examples                                                                                                                     |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Content meaning        | Articles, categories, authorship, publishing state, custom fields, tags, metadata, media, language, and access level behave as expected.                         | Public article, restricted article, unpublished article, article with custom fields, translated article, media-heavy article.              |
-| Navigation and routing | Menu items, aliases, SEF URLs, breadcrumbs, page titles, internal links, and language-specific menus route users correctly.                                      | Top navigation item, nested menu item, legacy URL, category page, single article route, language route.                                    |
-| Presentation context   | Modules, template positions, overrides, and layouts support the intended front-end experience.                                                                   | Home page, category listing, content detail page, login area, commerce landing page, language-specific page.                               |
-| User/access meaning    | Users, groups, access levels, permissions, login behavior, and extension-linked profiles remain meaningful.                                                      | Administrator, editor, registered user, restricted member, wholesale user, commerce customer.                                              |
-| Extension ownership    | Component, module, plugin, and custom records are assigned to the correct owner or replacement structure.                                                        | Commerce product, order, custom component record, directory listing, subscription record, booking record.                                  |
-| Commerce boundaries    | Product, order, checkout, payment, shipping, tax, stock, coupon, and customer-commerce data are validated against the owning extension or custom implementation. | Configurable product, historical order, discounted order, tax-sensitive order, customer with multiple addresses, product with stock rules. |
-| Multilingual behavior  | Language assignment, associations, menus, modules, metadata, aliases, and extension-owned translations work together.                                            | English source page, translated page, language switcher path, localized commerce record, translated menu route.                            |
+| Data area                     | Proof required                                                                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Articles and categories       | Content exists, remains organized, and supports the intended pages or editorial workflows.                                        |
+| Menus, aliases, and redirects | Important routes and public entry points remain reachable or redirected appropriately.                                            |
+| Modules and templates         | Page-level context is preserved or intentionally rebuilt in the target.                                                           |
+| Users and access levels       | Login, permission, restricted content, and role meaning remain clear.                                                             |
+| Multilingual records          | Translated content remains connected to correct menus, language assignments, and visible pages.                                   |
+| Extensions and custom data    | Ownership, support status, and service path are clearly classified.                                                               |
+| Commerce records              | Products, customers, orders, and related records are interpreted through the correct commerce component or custom implementation. |
 
-A Joomla migration should be accepted only when the target site demonstrates the relationships that make the data useful. Content should be reachable. Menus should route correctly. Modules should support the page context. Users should retain correct access meaning. Commerce data should belong to the correct component. Custom implementation data should have a defined target structure.
+The right acceptance standard is not “all Joomla data was moved.” The stronger standard is that migrated Joomla records still support the site experience, operational access, content management, SEO continuity, and extension-specific business processes that the merchant expects to preserve.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Joomla data model differences come from the way Joomla separates content, navigation, presentation, access control, extensions, and custom implementation logic. The same source record can become an article, category, menu item, user, access rule, custom field, tag, media reference, extension-owned record, or custom component record depending on the target architecture. Commerce data needs an even sharper boundary because Joomla core does not define one universal store model.
+Joomla data model differences come from how Joomla separates content, routes, access, layout, languages, extensions, and custom implementations. Articles, categories, menus, modules, users, access levels, media, metadata, custom fields, templates, plugins, and commerce extension records each carry different migration meaning.
 
-A reliable Joomla migration starts by identifying what owns each meaning. Joomla core structures should carry site, content, access, routing, media, and presentation meaning. Joomla commerce extensions should carry extension-specific product, customer, order, checkout, and store-operation meaning. Custom structures should be reviewed before they are assumed to fit standard migration behavior.
+A successful Joomla migration depends on ownership clarity. Joomla core content should be separated from extension-owned data, custom fields should be classified by business purpose, menus and aliases should be treated as structural records, and commerce data should be interpreted through the component that owns it. When custom components, unsupported extension data, external IDs, or bespoke logic affect the target result, Custom Service review should happen before the migration scope is accepted.
 
-Before approving a Joomla migration plan, use the Demo Migration result to test whether core content, menus, modules, users, access levels, custom fields, tags, media, routes, multilingual associations, and extension-owned records behave correctly in the target environment. If the result exposes unclear ownership, custom tables, unsupported extension data, or commerce records without a defined target component, request review through Live Chat before finalizing the migration approach.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Does Joomla have a native product and order data model?**
 
-No. Joomla core does not define one universal product, cart, checkout, order, payment, shipping, tax, inventory, or coupon model. Those meanings depend on the installed Joomla commerce extension, another business component, or a custom implementation.
+No. Joomla core is not a complete native e-commerce data model by itself. Product, order, cart, payment, shipping, tax, inventory, and review records depend on the commerce extension or custom component used by the site.
 
 **Are Joomla categories the same as menus?**
 
-No. Categories organize content, while menus and menu items control navigation, routing, page entry points, layouts, and often module context. A migration should preserve both structures when both carry operational meaning.
+No. Categories organize content, while menus define navigation entries, aliases, routes, page context, and often public URL behavior. Both may be needed to preserve a page correctly.
 
 **Can Joomla users be treated as customers during migration?**
 
-Only when the target structure supports that interpretation. Joomla core users handle login, groups, access levels, and permissions. Commerce customer data may be stored separately by a Joomla commerce extension and should be mapped against that extension’s model.
+Not automatically. Joomla users represent login and permission identities. Commerce customer profiles may belong to a store extension or custom component, and the relationship between the two should be validated separately.
 
 **What happens to modules and templates during a Joomla migration?**
 
-Modules, template positions, child templates, overrides, and page-builder structures may affect how migrated data appears. They should be reviewed as presentation dependencies, especially when the source site relies on custom layouts, menu-specific modules, or extension widgets.
-
-**How should multilingual Joomla data be validated?**
-
-Validation should check language-specific articles, menus, categories, aliases, modules, metadata, associations, language switcher behavior, and extension-owned translated records. A translated record is not enough if routing, access, or page context fails.
+Modules and templates often require setup or validation beyond ordinary content migration. Their assignments, positions, overrides, and display behavior can affect whether migrated pages look and work as expected.
 
 **When does Joomla custom data require Custom Service review?**
 
-Custom Service review is usually needed when the migration involves custom database tables, modified extensions, plugin-owned records, outside-system identifiers, bespoke relationships, unsupported extension data, Custom Platform handling, or custom migration logic adjustment.
+Custom Service review is appropriate when the required data is stored in unsupported extensions, custom components, modified tables, custom fields with business logic, external identifiers, or bespoke transformation requirements beyond supported migration behavior.

@@ -1,179 +1,177 @@
 # Selecting the Right Migration Approach for WordPress
 
-Selecting the right WordPress migration approach depends on what the target WordPress site must preserve after launch. A simple publishing site may fit a standard migration path, while a plugin-heavy, custom-field-driven, membership, LMS, booking, directory, multilingual, or commerce-connected site may require more review before the service path is clear.
+The right WordPress migration approach depends on how the target site must work after launch. WordPress may be a simple content destination, but it can also be a plugin-driven CMS, a publication platform, a membership environment, a documentation site, a landing-page system, or the content layer around WooCommerce. Record volume matters, but it is not the only decision factor. The more important question is whether the content structures, ownership boundaries, plugins, metadata, URLs, users, and presentation dependencies fit a supported migration path.
 
-WordPress is flexible because content can live in core records, custom post types, custom taxonomies, metadata, media relationships, users, roles, page-builder layouts, plugin tables, custom tables, themes, menus, widgets, redirects, and external systems. The right approach is therefore not determined by record count alone. It is determined by how much business meaning can be interpreted through supported WordPress structures and how much requires configuration, Add-ons, or Custom Service review.
+Approach selection should match three things: the type of WordPress data being moved, the level of execution support the merchant needs, and the amount of custom or unsupported behavior in scope. Standard Service, Managed Service, Add-ons, and Custom Service each have a place, but the decision should be made from evidence rather than from broad labels such as simple, complex, small, or large.
 
 ### What Migration Approach Means for WordPress <a href="#what-migration-approach-means-for-wordpress" id="what-migration-approach-means-for-wordpress"></a>
 
-A WordPress migration approach defines how the migration should be planned, executed, reviewed, and scoped. It should clarify whether the project can stay within supported standard capability, whether Next-Cart-led execution is helpful, whether Add-ons can cover structured adjustments, or whether custom interpretation is needed.
+A WordPress migration approach is a decision about scope, responsibility, support level, and proof. It should explain which content is expected to migrate, which settings or presentation elements must be configured in WordPress, which needs can be handled through Add-ons, which requirements need Custom Service review, and what Demo Migration must prove before Full Migration.
 
-| Approach layer               | WordPress decision question                                                                                              | Practical meaning                                                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Standard Service             | Can the site be migrated through predictable WordPress records and supported fields?                                     | Suitable when CMS Pages, Blog Posts, media, comments, users, categories, tags, and basic metadata are the main scope. |
-| Managed Service              | Can the scope stay within standard capability, but the customer wants Next-Cart-led execution?                           | Suitable when execution support and migration handling are the main needs, not custom data interpretation.            |
-| Add-ons                      | Are there supported filtering, mapping, or configuration adjustments that improve the result?                            | Useful when the adjustment is structured and supported without bespoke logic.                                         |
-| Custom Service               | Does important meaning live in custom post types, plugin records, custom fields, custom tables, or custom relationships? | Required when the migration needs project-specific interpretation, customization, or non-standard handling.           |
-| Additional Migration Options | Will later data movement require renewed scope and validation review?                                                    | Relevant when follow-up migration activity may add new records or change migration expectations before launch.        |
+WordPress makes this decision more nuanced because standard-looking content can be owned by plugins, themes, builders, custom code, or external systems. A page may depend on block patterns, page-builder data, custom fields, reusable components, forms, embeds, or shortcode output. A custom post type may be stored as content, but it may not display or remain editable unless the target WordPress environment has the right registration and templates.
 
-The approach should be selected before Full Migration. Demo Migration should then confirm whether the selected path is realistic for the records that matter most.
+| Work type                      | WordPress example                                                                                 | Service-path implication                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Supported content migration    | Posts, pages, categories, tags, media, comments, and supported records.                           | May fit Standard Service or Managed Service depending on coordination needs.      |
+| Supported filtering or mapping | Excluding obsolete pages, mapping supported metadata, adjusting supported output.                 | Add-ons may be suitable when the behavior remains supported.                      |
+| Custom or unsupported data     | Plugin tables, custom fields, builder data, external IDs, membership records, bespoke structures. | Custom Service review may be required.                                            |
+| Target-side setup              | Theme, plugins, menus, redirects, templates, roles, forms, integrations.                          | Should be configured and validated in WordPress, not assumed as migrated content. |
 
-### Why WordPress Approach Choice Depends on Site Structure <a href="#why-wordpress-approach-choice-depends-on-site-structure" id="why-wordpress-approach-choice-depends-on-site-structure"></a>
+This separation prevents two mistakes: choosing too light an approach for a plugin-heavy site, or escalating ordinary supported content into a custom project without clear need.
 
-WordPress projects can look similar from the front end while having very different migration requirements behind the scenes. One site may use only posts, pages, categories, tags, media, and users. Another may use custom post types, field groups, page-builder data, membership records, events, bookings, LMS progress, directory listings, donations, forms, multilingual relationships, SEO plugin metadata, and external-system IDs.
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-| WordPress structure                     | Approach implication                                                                                     | Review priority                                                                                                                        |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Core CMS records                        | Usually easier to evaluate through Standard Service or Managed Service.                                  | Confirm titles, content, slugs, authors, media, taxonomies, comments, and statuses.                                                    |
-| Custom post types and custom taxonomies | May still be feasible when structures are clear, but often need Custom Service review.                   | Confirm target post types, taxonomy relationships, archive behavior, and templates.                                                    |
-| Metadata and custom fields              | Requires field-level review because hidden data may control display, search, filtering, or integrations. | Separate reusable business data from cache, plugin residue, and abandoned fields.                                                      |
-| Plugin-owned records                    | Usually approach-sensitive because data ownership may not match standard WordPress entities.             | Identify whether records are memberships, LMS progress, bookings, forms, events, directories, subscriptions, or commerce records.      |
-| Builder/theme data                      | Often affects presentation more than entity migration.                                                   | Decide whether layout should be preserved, rebuilt, simplified, or excluded.                                                           |
-| SEO and redirects                       | Can be standard or custom depending on permalink and metadata requirements.                              | Confirm high-value URLs, canonical values, slugs, redirects, and internal links.                                                       |
-| WooCommerce-connected scope             | Should not be treated as generic WordPress content.                                                      | Separate WordPress CMS data from commerce data such as Products, Customers, Orders, coupons, subscriptions, taxes, and shipping logic. |
+Standard Service may be enough when the WordPress scope is supported, structurally clear, and manageable for customer-led preparation and validation. It is strongest when the migration focuses on ordinary content records and the target WordPress environment is already prepared to receive and display them.
 
-A light approach is acceptable only when the site meaning remains understandable after standard data movement. When records depend on plugin logic, custom code, or target implementation decisions, approach selection must become more conservative.
+A Standard Service candidate usually has clean posts and pages, conventional taxonomies, limited custom fields, manageable media, simple author relationships, few plugin-owned records, and clear URL expectations. The merchant should be able to prepare inputs, run or coordinate required steps, review Demo Migration samples, configure target-side WordPress settings, and verify the final result.
 
-### Standard Service for WordPress <a href="#standard-service-for-wordpress" id="standard-service-for-wordpress"></a>
+| Standard Service readiness signal              | Why it matters for WordPress                                              |
+| ---------------------------------------------- | ------------------------------------------------------------------------- |
+| Most content is standard posts and pages.      | The core content structure is easier to validate.                         |
+| Categories and tags are clean.                 | Archive and classification behavior can be checked without heavy mapping. |
+| Media references are stable.                   | Images and documents are less likely to require custom handling.          |
+| Custom post types are limited or not required. | Plugin/theme dependency risk is lower.                                    |
+| SEO and redirects are straightforward.         | Launch continuity can be controlled with a clear URL plan.                |
+| The merchant can validate samples.             | Customer-led execution depends on confident review.                       |
 
-Standard Service may be enough when the source site mostly uses ordinary WordPress-compatible content and the customer can manage the migration process through the Next-Cart website.
+Standard Service is not automatically the right choice for a small site. A small site with membership logic, custom fields, plugin tables, page-builder dependencies, or high SEO sensitivity may require a stronger approach. Conversely, a larger site can remain suitable for Standard Service when the content structure is predictable and the merchant can validate it effectively.
 
-| Standard-fit signal                         | Why it supports Standard Service                                                                           | Watch point                                                                                                 |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Core CMS content is the main scope          | CMS Pages, Blog Posts, media, comments, categories, tags, and users are predictable WordPress records.     | Confirm whether SEO metadata, page hierarchy, and media references are included in the expected result.     |
-| Customization is limited                    | Few custom post types, custom fields, or plugin-controlled records are business-critical.                  | Do not ignore hidden metadata that controls display or search.                                              |
-| Target WordPress setup is ready             | Permalinks, users, roles, theme assumptions, plugins, and basic settings are available for testing.        | A target site that is not ready can make standard migration results appear incomplete.                      |
-| Layout expectations are realistic           | The customer understands that data migration is not the same as full page-builder or theme reconstruction. | Builder layouts, shortcodes, and templates may need separate implementation work.                           |
-| WooCommerce is not the main migration scope | The migration is primarily WordPress CMS content rather than commerce records.                             | WooCommerce data should be assessed through the relevant commerce scope, not generic WordPress assumptions. |
+### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
 
-Standard Service is not the same as a low-effort launch. WordPress still requires review of slugs, internal links, featured images, post statuses, authors, taxonomy assignments, metadata, and redirects. The key question is whether the result can be achieved through standard capability without bespoke interpretation.
+Managed Service may be safer when the scope remains supported but execution risk is high. WordPress sites often have many moving parts even when the records themselves are not custom. A merchant may need help coordinating content samples, migration timing, source access, target setup assumptions, Demo Migration review, and launch-window decisions.
 
-### Managed Service for WordPress <a href="#managed-service-for-wordpress" id="managed-service-for-wordpress"></a>
+Managed Service is especially useful when the merchant lacks internal migration bandwidth, the site is content-heavy, the URL/SEO impact is important, content keeps changing close to launch, or several teams must review different areas such as editorial, SEO, development, and operations. It can reduce coordination risk, but it does not turn unsupported plugin data into supported content migration.
 
-Managed Service may be safer when the migration can remain within standard capability but the customer wants Next-Cart-led execution and operational support.
+| Managed Service fit              | WordPress scenario                                                                             |
+| -------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Large content inventory          | Many posts, pages, media files, authors, comments, and archive structures need orderly review. |
+| SEO-sensitive migration          | Priority URLs, redirects, metadata, and internal links need structured validation.             |
+| Multiple stakeholders            | Editorial, SEO, development, and operations teams need coordinated review.                     |
+| Time-sensitive launch            | The merchant wants Next-Cart-led execution based on agreed request and scope.                  |
+| Supported but complex sample set | Demo Migration requires more structured review across content types.                           |
 
-| Managed Service signal                       | Why it matters                                                                                                                      | Boundary to preserve                                                                 |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Large standard content volume                | Many CMS Pages, Blog Posts, media files, comments, categories, tags, and users create workload even when the structure is standard. | High volume alone does not make unsupported plugin data supported.                   |
-| Customer prefers assisted execution          | The customer wants help running Demo Migration, reviewing results, and preparing Full Migration.                                    | Managed Service changes execution support, not the underlying supported scope.       |
-| Add-ons are part of the plan                 | Supported filtering, mapping, or configuration adjustments may need careful execution.                                              | Tailored or unsupported Add-on behavior moves toward Custom Service review.          |
-| Launch coordination matters                  | Content freeze, data freshness, final checks, and post-migration review need more coordination.                                     | Launch management should not hide unresolved target-site readiness issues.           |
-| Business team has limited migration capacity | The customer can validate results but does not want to manage migration steps independently.                                        | Customer-side validation still remains necessary for content meaning and acceptance. |
-
-Managed Service is appropriate when the migration path is clear but execution discipline matters. It should not be used to avoid Custom Service review when plugin-owned data, custom fields, custom tables, custom user roles, or WooCommerce records define the project outcome.
+Managed Service should be chosen for execution support and coordination, not because the site contains unreviewed custom data. If the core problem is unsupported plugin data, custom tables, bespoke transformation, or custom migration logic adjustment, Custom Service should be evaluated.
 
 ### How Add-ons Fit Into the WordPress Approach <a href="#how-add-ons-fit-into-the-wordpress-approach" id="how-add-ons-fit-into-the-wordpress-approach"></a>
 
-Add-ons can help when the desired WordPress outcome needs supported adjustments but does not require bespoke migration logic. They are useful for structured scope refinement, mapping, or configuration.
+Add-ons are appropriate when the requirement is supported, bounded, and specific. They can help adjust filtering, mapping, or configuration within supported migration behavior. For WordPress, Add-ons may be useful when the merchant needs to exclude irrelevant records, map supported fields more carefully, or configure supported output to better match the target site’s needs.
 
-| Add-on type                | WordPress use case                                                                                               | Not a substitute for                                                                             |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Data Filter Add-on         | Migrate only selected CMS Pages, Blog Posts, users, comments, or eligible records according to a supported rule. | Custom logic that decides scope record by record without a clear filter.                         |
-| Advanced Data Mapping      | Map supported source fields into supported WordPress fields or metadata where the relationship is clear.         | Complex plugin structures, custom tables, or unsupported relationship fields.                    |
-| Advanced Data Configure    | Adjust supported values such as statuses, labels, or selected field values before migration.                     | Bespoke transformation, target plugin configuration, or custom-code interpretation.              |
-| Standard Add-ons           | Apply standard optional handling where it fits the supported migration path.                                     | Expanding the service beyond supported entity or field behavior.                                 |
-| Tailored or Custom Add-ons | Address more specific supported adjustments when reviewed and agreed.                                            | Replacing Custom Service when the requirement itself needs custom development or interpretation. |
+A strong Add-on request should be written as an acceptance criterion, not a vague request for customization. For example, excluding outdated draft pages is a different need from migrating a plugin’s custom table. Mapping a supported metadata field is different from recreating a page-builder layout that depends on plugin logic.
 
-Add-ons should be planned before Full Migration because they affect how Demo Migration should be interpreted. A Demo Migration without the expected Add-ons may not prove the final migration outcome.
+| Add-on use case    | WordPress example                                                              | Boundary check                                                                          |
+| ------------------ | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Data filtering     | Exclude obsolete posts, test pages, spam comments, old media, or unused terms. | The exclusion should not remove records needed for SEO, legal, or editorial continuity. |
+| Advanced mapping   | Align supported metadata, author fields, categories, or page attributes.       | Mapping cannot create unsupported target behavior.                                      |
+| Data configuration | Adjust supported output for cleaner target usability.                          | Configuration must remain within supported behavior.                                    |
+| Custom Add-ons     | Handle a bounded special need that is feasible within agreed scope.            | Unsupported plugin/custom-table logic may require Custom Service instead.               |
 
-### Custom Service for WordPress <a href="#custom-service-for-wordpress" id="custom-service-for-wordpress"></a>
+Add-ons and Custom Service should not be treated as interchangeable. Add-ons refine supported migration behavior. Custom Service addresses requirements beyond the supported path.
 
-Custom Service is the right path when the WordPress migration depends on customization, custom interpretation, unsupported plugin data, custom fields, custom tables, custom post type logic, custom taxonomy logic, Custom Platform behavior, or project-specific transformation.
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
 
-| Custom Service trigger                              | Why Standard or Managed Service may be insufficient                                                                                             | Evidence to gather                                                                                     |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Custom post types define the site                   | Records such as events, courses, listings, resources, staff, locations, portfolios, or directories may require target structures and templates. | Export samples, target post type definitions, taxonomy relationships, and template expectations.       |
-| Plugin-owned records carry business meaning         | Membership, LMS, booking, donation, form, event, directory, multilingual, or subscription records may not map to ordinary WordPress entities.   | Plugin names, database ownership, record examples, field meanings, and acceptance expectations.        |
-| Custom fields control output                        | Metadata may drive display, filters, search, relationships, access, downloads, or integrations.                                                 | Field groups, field types, repeaters, relationship fields, media fields, and target field definitions. |
-| Custom tables or external IDs are required          | Important records may live outside standard WordPress tables or depend on external systems.                                                     | Table samples, key relationships, IDs, API references, and downstream system dependencies.             |
-| Page-builder layout must be preserved               | Builder data may be serialized, theme-specific, or dependent on target plugins.                                                                 | Target builder availability, layout examples, shortcode usage, and rebuild expectations.               |
-| WooCommerce or commerce-plugin records are critical | Products, Customers, Orders, coupons, subscriptions, taxes, and shipping logic are commerce scope, not generic WordPress content.               | Confirm whether the migration should be handled as WooCommerce or another commerce-plugin project.     |
+Custom Service should be considered when the migration requirement depends on unsupported or custom WordPress behavior. This may include plugin-owned data, custom post type behavior, custom taxonomies with non-standard relationships, custom fields, custom tables, builder-specific data, membership records, form entries, external identifiers, multilingual plugin data, custom redirects, or bespoke transformation.
 
-Custom Service does not automatically mean Next-Cart performs every migration-management task. It means the project requires customization, modification, or bespoke handling. Execution ownership should be agreed as part of the final plan.
+The trigger is not simply that the site is large. The trigger is that the expected result cannot be achieved through supported migration behavior, Add-ons, and target-side setup alone. A small WordPress site can need Custom Service if it depends on plugin-owned business data. A large publication site may not need Custom Service if its posts, pages, taxonomies, users, media, and URLs remain within supported scope.
+
+| Custom Service trigger       | Why it changes the approach                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| Plugin-owned custom tables   | Data may not live in standard WordPress records.                              |
+| Builder-specific layout data | Migrated content may not render or remain editable without custom handling.   |
+| Custom post type behavior    | The content may require target registration, templates, and field mapping.    |
+| Membership/access logic      | Roles, permissions, protected content, and subscriptions may be plugin-owned. |
+| External identifiers         | CRM, LMS, ERP, directory, or reporting IDs may need bespoke preservation.     |
+| Multilingual structures      | Language relationships and translated URLs may depend on plugin behavior.     |
+
+Custom Service should be scoped with examples. The merchant should provide representative records, field samples, source ownership, target expectations, and validation criteria. Without examples, custom discussion becomes too abstract to estimate or approve responsibly.
 
 ### Entity Points and WordPress Scope Planning <a href="#entity-points-and-wordpress-scope-planning" id="entity-points-and-wordpress-scope-planning"></a>
 
-Entity Points planning helps customers understand how eligible records affect scope when they are migrated for the first time. For WordPress, the most relevant records may include CMS Pages, Blog Posts, media-related records, users, comments, categories, tags, and other eligible records defined for the migration path.
+Entity Points can affect WordPress planning when eligible records are part of the selected migration scope, but they do not measure complexity by themselves. A high number of standard posts may be easier than a small set of custom post types with plugin-owned metadata. A modest page count can still require careful service selection if those pages depend on builder layouts, redirects, forms, or membership rules.
 
-| Entity Points scenario                                                               | WordPress planning implication                                                                                                                                                                     |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Core CMS records are migrated for the first time                                     | Eligible records should be included in scope estimates before service license selection.                                                                                                           |
-| Custom records are eligible and supported                                            | The team should confirm whether they are counted as eligible entities or handled through a reviewed custom scope.                                                                                  |
-| New records appear before launch                                                     | New eligible records may consume Entity Points when migrated for the first time.                                                                                                                   |
-| A later migration action repeats records already counted through the service license | Those records do not consume Entity Points again simply because another migration action is performed.                                                                                             |
-| A new migration is performed for the same migration path                             | Previously counted records still should not be counted again only because the migration action is repeated; new eligible records may still consume Entity Points when migrated for the first time. |
+Entity Points should be used as volume planning, not as proof that the content is supported or unsupported. The duplicate-consumption rule also matters: if an entity has already been recorded through the migration service license, migrating that same recorded entity again does not consume additional Entity Points simply because another migration action occurs on the same migration path. New eligible records may consume Entity Points when migrated for the first time.
 
-Entity Points estimates should not replace structure review. A small WordPress site with custom fields, plugin records, and custom tables may require more approach review than a large content site with predictable posts and pages.
+| Scope signal           | What it helps estimate                  | What it does not prove                                                  |
+| ---------------------- | --------------------------------------- | ----------------------------------------------------------------------- |
+| Post/page volume       | Content volume and review workload.     | Whether metadata, layout, URLs, or plugin data are supported.           |
+| Media volume           | File and reference review workload.     | Whether all embeds, galleries, or file paths remain usable.             |
+| User volume            | Author/account review workload.         | Whether roles, passwords, memberships, or user meta behave as expected. |
+| Custom post type count | Structural complexity signal.           | Whether the target can display or edit those records correctly.         |
+| Comment volume         | Moderation and history review workload. | Whether all comments should migrate.                                    |
+
+Entity Points should support service-path planning, not replace platform-specific scope review.
 
 ### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
 
-Demo Migration should prove whether the selected WordPress approach is realistic. The sample should include simple records and the records most likely to expose approach risk.
+Demo Migration should test whether the selected WordPress approach is realistic. It should not only preview a few easy records. A strong sample set should include the structures most likely to expose migration decisions: pages, posts, custom post types, taxonomies, metadata, media, user/author records, URL behavior, and plugin-owned examples.
 
-| Demo Migration sample                                        | What it proves                                                                        | Approach decision impact                                                               |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Standard CMS Page                                            | Content, slug, hierarchy, featured media, internal links, and metadata behavior.      | Helps confirm Standard Service feasibility.                                            |
-| Blog Post with author, media, comments, categories, and tags | Editorial relationships, taxonomy handling, comment history, and media references.    | Confirms whether publishing data remains readable.                                     |
-| Custom post type record                                      | Business-specific content meaning and target structure readiness.                     | May confirm supported mapping or trigger Custom Service review.                        |
-| Custom-field-heavy record                                    | Metadata preservation, mapping, and target display requirements.                      | Helps decide between Add-ons and Custom Service.                                       |
-| Page-builder or shortcode-heavy page                         | Layout and presentation expectations.                                                 | Clarifies whether migration should cover data only or require separate implementation. |
-| Plugin-dependent record                                      | Membership, LMS, booking, event, form, donation, directory, or multilingual behavior. | Often determines whether Custom Service review is required.                            |
-| SEO-sensitive URL                                            | Slug, permalink, metadata, redirect, canonical, and internal-link continuity.         | Confirms whether additional SEO handling is needed.                                    |
-| WooCommerce-connected sample                                 | Product/customer/order or commerce-plugin meaning.                                    | Prevents generic WordPress approach selection from hiding commerce scope.              |
+| Demo Migration sample | Decision it should support                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| Standard page         | Whether hierarchy, body content, media, and internal links survive.                             |
+| Standard post         | Whether author, date, category, tag, featured image, comments, and archive behavior are usable. |
+| Custom post type      | Whether the content can migrate, display, and remain meaningful.                                |
+| Metadata-heavy record | Whether supported fields map correctly or require Add-ons/Custom Service.                       |
+| Media-rich page       | Whether galleries, documents, embeds, and featured images remain connected.                     |
+| User/author sample    | Whether ownership and role expectations are acceptable.                                         |
+| Priority URL          | Whether permalink and redirect planning is sufficient.                                          |
+| Plugin-owned example  | Whether Custom Service, setup, exclusion, or manual rebuild is needed.                          |
 
-Demo Migration should not be accepted only because simple posts look correct. For WordPress, the records that are hardest to interpret often determine whether the chosen approach is safe.
+If Demo Migration reveals broken custom structures, missing metadata, unusable builder content, plugin-owned records outside supported scope, or unclear URL behavior, the approach should be corrected before Full Migration.
 
-### How Additional Migration Options Affect Approach Planning <a href="#how-additional-migration-options-affect-approach-planning" id="how-additional-migration-options-affect-approach-planning"></a>
+### Additional Migration Options and Launch Timing <a href="#additional-migration-options-and-launch-timing" id="additional-migration-options-and-launch-timing"></a>
 
-Additional Migration Options matter when the customer expects more data movement after an initial migration activity. In WordPress projects, follow-up handling can affect approach planning when new CMS Pages, Blog Posts, users, comments, media, form submissions, membership updates, custom post type records, or plugin-owned records are created before launch.
+WordPress sites often continue changing during migration planning. New posts may be published, pages may be edited, media may be uploaded, comments may be approved, users may be added, redirects may change, or SEO metadata may be updated. The selected approach should include a practical launch-window plan for handling those changes.
 
-| Follow-up situation                    | Approach impact                                                                                | Validation requirement                                                                                       |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| New standard CMS records are added     | Standard or Managed Service may still be appropriate if the records follow the same structure. | Recheck titles, slugs, media, categories, tags, authors, and statuses.                                       |
-| New custom post type records are added | Custom Service review may be needed if the target structure or fields are not already proven.  | Revalidate custom fields, taxonomy relationships, templates, and archive behavior.                           |
-| New plugin-owned records are added     | Follow-up handling may be unsafe without confirming plugin data ownership.                     | Review plugin tables, field meaning, user relationships, and target plugin readiness.                        |
-| New users or memberships are added     | Access, roles, permissions, and membership states may need renewed review.                     | Confirm user roles, account links, restrictions, and privacy-sensitive fields.                               |
-| New commerce-plugin activity appears   | The project may need commerce-specific review rather than generic WordPress handling.          | Separate CMS records from Products, Customers, Orders, coupons, subscriptions, taxes, and shipping behavior. |
+The merchant may need to continue the migration with the last used configuration, continue the migration with a new configuration, or perform a new migration into a refreshed target result. The correct choice depends on what changed and what result is expected. Continuing with the same configuration may suit newly added posts or pages. Continuing with a new configuration may suit updated field mapping or filters. A new migration may be appropriate when the target result should be replaced according to a revised scope.
 
-Additional Migration Options should be used with renewed validation. They should not be treated as permission to skip scope review, field review, or acceptance testing.
+| Launch-window situation                                | Planning implication                                                              |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| New posts or pages are published after an earlier run. | Plan how the new records will be added and validated.                             |
+| Content mapping or filtering needs to change.          | Validate the changed configuration and affected samples.                          |
+| The target result should be rebuilt.                   | Plan a new migration and broader target review.                                   |
+| SEO metadata changes late.                             | Recheck priority URLs, metadata, redirects, and internal links.                   |
+| User or membership records change.                     | Decide whether those records should be included, excluded, or handled separately. |
 
-### WordPress Approach Decision Matrix <a href="#wordpress-approach-decision-matrix" id="wordpress-approach-decision-matrix"></a>
+Additional Migration Options should be discussed only when they affect WordPress timing, responsibility, or validation. They should not become a standalone explanation inside every service-path decision.
 
-| Primary condition                                                                            | Recommended direction                                                           | Reasoning                                                               |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Mostly standard CMS Pages, Blog Posts, media, comments, users, categories, and tags          | Standard Service                                                                | The target meaning fits predictable WordPress structures.               |
-| Standard-capability project with limited internal capacity                                   | Managed Service                                                                 | The main need is assisted execution rather than custom interpretation.  |
-| Supported filtering, mapping, or value adjustment is required                                | Add-ons with Standard or Managed Service                                        | The adjustment is structured and can be reviewed before Full Migration. |
-| Custom post types, custom taxonomies, custom fields, or plugin-owned records define the site | Custom Service review                                                           | Business meaning may not survive through ordinary WordPress records.    |
-| WooCommerce or another commerce plugin is central                                            | Commerce-specific review or Custom Service review                               | Commerce records should not be treated as generic WordPress content.    |
-| Target requires builder/theme reconstruction                                                 | Separate implementation planning, possibly Custom Service review for data scope | Data migration alone may not reproduce the visual site.                 |
-| Follow-up data movement is expected before launch                                            | Additional Migration Options with renewed validation                            | New records and changed structures should be tested before acceptance.  |
+### Choosing the Practical WordPress Path <a href="#choosing-the-practical-wordpress-path" id="choosing-the-practical-wordpress-path"></a>
 
-The safest approach is the lightest service path that can still preserve the records, relationships, and operational meaning the target WordPress site needs after launch.
+The practical WordPress approach is the lightest path that still protects the target site’s purpose. Standard Service is appropriate when supported content, customer-led execution, and manageable validation are realistic. Managed Service is safer when supported scope needs stronger coordination. Add-ons help when supported filtering, mapping, or configuration needs are clear. Custom Service is required when unsupported plugin data, custom fields, custom tables, external identifiers, bespoke transformation, or custom migration logic adjustment must be evaluated.
+
+The final decision should be summarized with four statements:
+
+| Decision statement                   | What it should clarify                                                             |
+| ------------------------------------ | ---------------------------------------------------------------------------------- |
+| What will migrate                    | Posts, pages, taxonomies, media, users, comments, metadata, and supported records. |
+| What must be configured              | Themes, plugins, menus, templates, redirects, roles, forms, and integrations.      |
+| What needs Add-ons or Custom Service | Supported adjustments versus unsupported/custom requirements.                      |
+| What must pass Demo Migration        | Representative records, URLs, metadata, users, media, and plugin-owned samples.    |
+
+When those statements are clear, the WordPress migration approach is usually ready to proceed. When they are vague, the next step should be scope clarification rather than moving directly to Full Migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right WordPress migration approach depends on structure, ownership, and target expectations. Standard Service can be enough for predictable CMS content. Managed Service helps when the scope is standard but execution support matters. Add-ons help with supported filtering, mapping, and configuration. Custom Service becomes necessary when custom post types, metadata, plugins, custom tables, WooCommerce scope, or external relationships define the migration outcome.
+Selecting the right WordPress migration approach requires more than counting pages, posts, users, or media files. The decision should account for site role, content structure, custom post types, taxonomies, metadata, plugins, builders, users, roles, URLs, SEO, Add-ons, Custom Service, Entity Points, Demo Migration samples, and launch-window timing.
 
-Demo Migration should confirm the approach with representative records before Full Migration. Additional Migration Options should be paired with renewed validation when more data movement is expected. A WordPress approach is safe only when it reflects how the site actually stores meaning, not just how many visible pages or posts it contains.
+The strongest approach is the one that keeps supported content moving efficiently while separating target-side setup, plugin dependencies, unsupported data, custom requirements, and validation proof. WordPress migration should proceed when the merchant can state what will migrate, what must be configured, what needs service support, and what must be proven before launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for a WordPress migration?**
 
-Standard Service may be enough when the migration mainly involves predictable WordPress content such as CMS Pages, Blog Posts, media, comments, users, categories, tags, and supported metadata. If custom post types, plugin records, custom fields, page-builder data, memberships, bookings, LMS records, directories, forms, or WooCommerce records are critical, the project needs deeper review before Standard Service is selected.
+Standard Service may be enough when the site mainly contains supported posts, pages, taxonomies, media, comments, and ordinary user/author records, and the merchant can prepare inputs and validate the result responsibly.
 
-**When should a WordPress migration use Managed Service?**
+**When is Managed Service safer for WordPress?**
 
-Managed Service is useful when the migration can stay within standard capability but the customer wants Next-Cart-led execution. It is appropriate for workload, coordination, and assisted migration handling. It does not replace Custom Service when the requirement itself depends on unsupported plugin data, custom logic, custom tables, or bespoke field interpretation.
-
-**When does WordPress require Custom Service?**
-
-Custom Service should be reviewed when business meaning lives in custom post types, custom taxonomies, custom fields, metadata, custom tables, page-builder structures, membership records, LMS data, booking records, directory records, form submissions, multilingual relationships, WooCommerce data, or external-system IDs that need project-specific handling.
+Managed Service is safer when the migration remains supported but execution coordination is difficult. Large content inventories, SEO-sensitive launches, many stakeholders, and tight timing can make structured execution support valuable.
 
 **Do Add-ons replace Custom Service for WordPress?**
 
-No. Add-ons help with supported filtering, mapping, or configuration. Custom Service is needed when the migration requires unsupported field interpretation, plugin-specific handling, custom table migration, bespoke transformations, Custom Platform interpretation, or project-specific logic adjustment.
+No. Add-ons help with supported filtering, mapping, or configuration. Custom Service is needed when requirements involve unsupported plugin data, custom fields, custom tables, external identifiers, bespoke transformation, or custom migration logic adjustment.
 
-**Should Additional Migration Options change the WordPress approach?**
+**How should Entity Points be understood in WordPress planning?**
 
-Additional Migration Options should prompt renewed review when new records, plugin data, custom post type entries, user changes, or commerce-related activity appears before launch. They do not automatically change the service path, but they can reveal whether the selected approach remains safe.
+Entity Points help plan eligible migration volume. They do not prove complexity or feasibility. Already recorded entities do not consume Entity Points again just because another migration action occurs on the same migration path.
+
+**What should Demo Migration prove for WordPress?**
+
+Demo Migration should prove that representative pages, posts, custom post types, taxonomies, metadata, media, users, URLs, and plugin-owned samples are handled correctly enough to support the chosen approach before Full Migration.

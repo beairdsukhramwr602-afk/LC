@@ -1,314 +1,265 @@
 # Shopware Migration Pitfalls and Prevention
 
-A Shopware migration should be validated to determine whether the Target Platform is most likely to reshape commercial meaning. The goal is not only to confirm that products, customers, orders, categories, media, and URLs are present. The stronger question is whether Shopware now supports the intended sales-channel context, product visibility, rule-driven behavior, pricing logic, browsing structure, customer experience, and extension-shaped outcomes after migration.
+Shopware migration pitfalls usually come from treating the target store as a simple record destination instead of a connected commerce environment. Products, variants, properties, categories, sales channels, rules, content, custom fields, extensions, and integrations all shape how the migrated store behaves. When those relationships are not planned and validated, the migration can appear complete while the storefront, checkout, search, reporting, or operations still fail in practical use.
 
-Shopware can make a migrated store look polished before every commercial dependency has been proven. Products may exist, variants may appear, sales channels may be assigned, rules may be configured, media may be displayed, and routes may be resolved. Those signals are useful, but they do not prove that the target is ready for launch. Validation should focus first on the cases where Shopware changes meaning: sales-channel assignment, Rule Builder behavior, product visibility, product structure, advanced prices, category entry points, SEO routes, customer-account expectations, and extension-dependent behavior.
+The most effective prevention strategy is to identify where the source store’s assumptions differ from Shopware’s operating model. Some problems require mapping changes. Some require target configuration. Some require extension setup, custom fields, storefront implementation, or Custom Service. The goal is not to eliminate every complexity before migration. The goal is to recognize each complexity early enough to assign the right service path, preparation work, and validation proof.
 
-This article explains the Shopware-specific validation priorities that should receive the closest review after Demo Migration, Full Migration, or any high-risk migration stage.
+### Pitfall 1: Treating Sales Channels as a Minor Configuration Detail <a href="#pitfall-1-treating-sales-channels-as-a-minor-configuration-detail" id="pitfall-1-treating-sales-channels-as-a-minor-configuration-detail"></a>
 
-### What Shopware Validation Is Trying to Prove <a href="#what-shopware-validation-is-trying-to-prove" id="what-shopware-validation-is-trying-to-prove"></a>
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-Shopware validation should prove that the migrated store works as a coherent commerce system, not only as a set of transferred records.
+Migrated products and categories may be present in Shopware, but they do not appear in the correct storefront, language, currency, domain, or customer-facing context. Teams may assume this is a data failure when the real issue is sales-channel alignment.
 
-#### Sales-channel context still matches the intended storefront model <a href="#sales-channel-context-still-matches-the-intended-storefront-model" id="sales-channel-context-still-matches-the-intended-storefront-model"></a>
+Shopware’s sales-channel model can affect product visibility, navigation, domains, currencies, languages, and storefront behavior. When migration planning focuses only on the data import, reviewers may miss the target context where customers will actually browse and buy.
 
-A product or category can exist in Shopware without being usable in the right sales channel. Validation should confirm that the correct records appear in the correct sales-channel context and that each channel still represents the intended market, storefront, language, currency, or customer-facing model.
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
 
-#### Rule-driven behavior still produces the expected commercial outcome <a href="#rule-driven-behavior-still-produces-the-expected-commercial-outcome" id="rule-driven-behavior-still-produces-the-expected-commercial-outcome"></a>
+| Signal                                                         | What it may indicate                                                  |
+| -------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Products exist in Administration but not on storefront pages.  | Missing or incorrect sales-channel visibility.                        |
+| Localized storefronts show default-language content.           | Language or translation context is incomplete.                        |
+| Categories appear in one channel but not another.              | Category assignment or navigation scope was not validated by channel. |
+| Prices or availability differ unexpectedly across storefronts. | Currency, rule, or channel-specific configuration is not aligned.     |
 
-Rule Builder logic can affect important behavior across pricing, shipping, payment, promotions, flows, product visibility, and category visibility. Validation should confirm the expected outcome, not merely the presence of a rule.
+#### Prevention <a href="#prevention" id="prevention"></a>
 
-#### Product visibility and product structure still support buying decisions <a href="#product-visibility-and-product-structure-still-support-buying-decisions" id="product-visibility-and-product-structure-still-support-buying-decisions"></a>
+Define the target sales-channel model before migration. Identify which products, categories, languages, currencies, domains, and storefronts matter for launch. Prepare representative samples from each important channel, then validate the migrated records from the Administration and from the storefront.
 
-Product presence does not prove product usefulness. Validation should confirm that visible products, restricted products, properties, variants, media, and buying choices still support the way customers should evaluate and purchase products.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-#### Pricing and promotion behavior still makes business sense <a href="#pricing-and-promotion-behavior-still-makes-business-sense" id="pricing-and-promotion-behavior-still-makes-business-sense"></a>
+For a merchant launching Shopware with multiple regional storefronts, the migration scope should not simply say that Products and Categories will migrate. It should identify which products belong to which sales channels, which translated values are expected, which categories drive each storefront, and which URLs or redirects are critical for launch.
 
-Advanced pricing, customer-sensitive pricing, promotional logic, and condition-based behavior should be tested with realistic examples. Validation should confirm whether the migrated structure still supports the intended pricing result in the relevant channel and customer context.
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-#### Routes, category entry points, and SEO meaning still support discovery <a href="#routes-category-entry-points-and-seo-meaning-still-support-discovery" id="routes-category-entry-points-and-seo-meaning-still-support-discovery"></a>
+Products, categories, navigation, language, currency, and storefront visibility behave correctly in every launch-relevant sales channel.
 
-A route that resolves can still be weak if the destination no longer matches customer intent. Validation should confirm that important product, category, and content paths still support search meaning, navigation meaning, and sales-channel context.
+### Pitfall 2: Flattening Product Variants and Properties <a href="#pitfall-2-flattening-product-variants-and-properties" id="pitfall-2-flattening-product-variants-and-properties"></a>
 
-### Validation Priority 1: Sales-Channel Assignment <a href="#validation-priority-1-sales-channel-assignment" id="validation-priority-1-sales-channel-assignment"></a>
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-The first Shopware validation priority is usually sales-channel assignment because sales channels shape storefront context.
+Source-store option structures are migrated into Shopware without preserving the commercial meaning of variants, properties, filters, inherited values, media, stock, and selection behavior. Customers may see duplicated products, broken options, incomplete filters, wrong images, or variants that cannot be purchased correctly.
 
-#### What to check <a href="#what-to-check" id="what-to-check"></a>
+Shopware product structures can rely on parent-child relationships, inherited values, product properties, translated labels, and category assignments. A flat import may preserve product names and SKUs while losing the relationships that make the catalog usable.
 
-Review whether products, categories, languages, currencies, domains, customer-facing content, and route behavior appear in the intended sales channels. The review should confirm whether each important channel still represents a real selling context, not only whether the channel exists.
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
+| Signal                                                      | What it may indicate                                                      |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Variant options appear as separate products.                | Parent-child relationship mapping is incomplete.                          |
+| Filters are missing or inconsistent.                        | Properties or property groups were not mapped correctly.                  |
+| Variant images, prices, or stock values are wrong.          | Inheritance or variant-specific values were not reviewed.                 |
+| Product listings include duplicates or incomplete families. | Source options did not translate cleanly into Shopware product structure. |
 
-A strong sample should include:
+#### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-* products assigned to the most important sales channels
-* categories that appear differently across channels
-* products that should be visible in one channel but restricted in another
-* market-, language-, or brand-specific channel examples
-* products or categories that carry high traffic, revenue, or campaign importance
-* records where the Source Platform used storefront separation differently from Shopware
+Prepare catalog samples that include simple products, complex variants, property-heavy products, products with category assignments, products with media galleries, and products with custom fields. Validate the migrated catalog from both product detail pages and listing/filter behavior.
 
-#### What often gets missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-Teams often confirm that sales channels exist but fail to confirm whether the right products, categories, URLs, and customer-facing behavior are assigned to each one. That can create a target storefront that looks organized internally but behaves incorrectly for real customers.
+A fashion catalog should include sample products with size and color variants, variant-specific SKUs, variant images, category assignments, and filterable attributes. If those samples fail during Demo Migration review, the mapping should be corrected before full migration.
 
-### Validation Priority 2: Rule Builder Outcomes <a href="#validation-priority-2-rule-builder-outcomes" id="validation-priority-2-rule-builder-outcomes"></a>
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-Rule Builder behavior deserves focused validation because a rule can exist while the commercial result is still wrong.
+Variant products display as intended, inherit appropriate values, preserve purchasable options, support filtering, and remain understandable to customers and store teams.
 
-#### What to check <a href="#what-to-check-1" id="what-to-check-1"></a>
+### Pitfall 3: Underestimating Rule-Driven Commercial Logic <a href="#pitfall-3-underestimating-rule-driven-commercial-logic" id="pitfall-3-underestimating-rule-driven-commercial-logic"></a>
 
-Review the outcomes supported by rules, especially pricing, shipping, payment, promotions, product visibility, category visibility, and customer-sensitive conditions. The test should ask whether the intended behavior triggers in the correct context.
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
+Discounts, shipping availability, payment conditions, customer-group behavior, tax expectations, or checkout behavior do not match the old store because source-store rules were treated as ordinary data. In Shopware, commercial behavior may depend on rules and configuration, not just migrated records.
 
-A strong sample should include:
+This pitfall is especially common when the old platform used apps, scripts, custom code, or external systems to control price adjustments, customer eligibility, shipping methods, or checkout restrictions.
 
-* products or orders affected by advanced prices
-* cart or order cases affected by promotional rules
-* customer or customer-group examples that should see different behavior
-* shipping or payment conditions that should appear only under specific rules
-* product or category visibility rules that affect storefront access
-* examples where multiple conditions may overlap
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
+| Signal                                               | What it may indicate                                           |
+| ---------------------------------------------------- | -------------------------------------------------------------- |
+| Discounts apply to the wrong carts or fail to apply. | Promotion conditions were not rebuilt as Shopware logic.       |
+| Shipping methods appear for ineligible regions.      | Shipping rules or delivery conditions are incomplete.          |
+| Payment methods appear or disappear unexpectedly.    | Payment availability conditions were not mapped or configured. |
+| Customer-group pricing behaves inconsistently.       | Customer segmentation or rule context is incomplete.           |
 
-A rule can be present but unusable if conditions, priority, assignment, or evaluation context are wrong. Validation should therefore test outcomes rather than stop at rule existence.
+#### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-### Validation Priority 3: Product Visibility, Properties, and Variants <a href="#validation-priority-3-product-visibility-properties-and-variants" id="validation-priority-3-product-visibility-properties-and-variants"></a>
+Document source-store commercial logic before migration. Separate what is migrated as data from what must be configured in Shopware. Use Demo Migration to test realistic checkout scenarios, including standard products, variant products, discounts, different customer groups, shipping regions, and payment methods.
 
-Shopware validation should review the product cases most likely to affect product discovery and buying logic.
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-#### What to check <a href="#what-to-check-2" id="what-to-check-2"></a>
+If the source store applies free shipping only for certain countries, customer groups, or cart values, that behavior should be captured as a rule requirement. The migrated store should then be tested with eligible and ineligible carts before launch.
 
-Review whether products are visible in the intended sales channels, whether properties still support filtering and comparison, whether variants represent sellable differences clearly, and whether media and product information still support confident buying decisions.
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
+Pricing, promotions, shipping, payment, and customer conditions behave correctly in representative storefront and checkout scenarios.
 
-A strong sample should include:
+### Pitfall 4: Treating Shopping Experiences and SEO Content as Secondary <a href="#pitfall-4-treating-shopping-experiences-and-seo-content-as-secondary" id="pitfall-4-treating-shopping-experiences-and-seo-content-as-secondary"></a>
 
-* products with variants and meaningful property sets
-* products with different visibility expectations by channel
-* high-revenue or high-traffic products
-* products with important media galleries
-* products where variants affect price, availability, delivery, or customer choice
-* products where the Source Platform used a different option or attribute model
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
+The migration preserves catalog records but loses the content and URL context that supports discovery, trust, and conversion. Product pages may exist, but landing pages, category content, CMS layouts, metadata, redirects, navigation links, or campaign destinations are missing or inconsistent.
 
-Teams often validate products as records while missing whether those products are discoverable, filterable, and understandable in the storefront. In Shopware, this can weaken the buying journey even when the product data appears complete.
+Shopware storefront presentation may depend on Shopping Experiences, CMS content, category descriptions, media, navigation, and URL planning. If content and SEO are reviewed only after data migration, launch teams may discover gaps too late.
 
-### Validation Priority 4: Category Entry Points and Browsing Structure <a href="#validation-priority-4-category-entry-points-and-browsing-structure" id="validation-priority-4-category-entry-points-and-browsing-structure"></a>
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-Shopware category validation should focus on the customer-facing browsing path, not only the category tree.
+| Signal                                                        | What it may indicate                                                      |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Important landing pages are missing or rebuilt late.          | Content migration and storefront implementation were not scoped together. |
+| Product/category URLs do not match redirect expectations.     | SEO continuity was not validated before launch.                           |
+| Category pages are technically present but commercially weak. | Product data moved, but merchandising context did not.                    |
+| Campaign links or internal links break after migration.       | URL inventory and navigation review were incomplete.                      |
 
-#### What to check <a href="#what-to-check-3" id="what-to-check-3"></a>
+#### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Review whether important categories still make sense as storefront entry points, whether product assignments support natural browsing, whether category visibility behaves correctly by channel, and whether navigation remains manageable after migration.
+Identify high-value product URLs, category URLs, landing pages, campaign pages, CMS content, and navigation paths before migration. Decide which items should migrate, which should be rebuilt in Shopware, and which should redirect. Validate those decisions before final launch review.
 
-#### Strong validation samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-A strong sample should include:
+For a merchant with strong organic traffic to category pages, the preparation file should include priority category URLs, target Shopware category mapping, metadata expectations, redirect requirements, and content ownership for any Shopping Experiences that need rebuilding.
 
-* top-navigation categories
-* high-revenue categories
-* categories that receive search, campaign, or direct traffic
-* categories with channel-specific visibility expectations
-* product groups that depend on precise category assignment
-* categories where the Source Platform used custom navigation or landing-page behavior
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
+High-value content, URLs, navigation paths, metadata, and redirects are present, rebuilt, or intentionally redirected with clear launch ownership.
 
-A category can exist while the browsing experience becomes weaker. Validation should prove that customers can still move through the intended discovery path and that the business can still manage category meaning after launch.
+### Pitfall 5: Assuming Custom Fields and Extensions Are Included by Default <a href="#pitfall-5-assuming-custom-fields-and-extensions-are-included-by-default" id="pitfall-5-assuming-custom-fields-and-extensions-are-included-by-default"></a>
 
-### Validation Priority 5: Advanced Pricing, Promotions, and Commercial Conditions <a href="#validation-priority-5-advanced-pricing-promotions-and-commercial-conditions" id="validation-priority-5-advanced-pricing-promotions-and-commercial-conditions"></a>
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-Shopware validation should test pricing and promotion behavior with examples that expose real commercial logic.
+Important business context stored in custom fields, plugins, apps, external integrations, or custom code is missing after migration because it was assumed to be part of standard platform data. Teams may discover after launch that ERP identifiers, merchandising flags, loyalty fields, B2B attributes, or extension-owned records were not migrated.
 
-#### What to check <a href="#what-to-check-4" id="what-to-check-4"></a>
+Not all custom or extension-managed data belongs to the standard migration scope. Some items may require Add-ons if the requirement is supported mapping or configuration. Others may require Custom Service when unsupported records, bespoke transformation, custom fields, external-system identifiers, or custom migration logic are involved.
 
-Review advanced prices, customer-sensitive pricing, quantity-sensitive behavior, campaign-related discounts, and rule-supported conditions that affect the displayed or calculated price. The goal is to confirm whether the Target Platform supports the expected commercial result, not whether a price field was imported.
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
+| Signal                                                       | What it may indicate                                                    |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Critical operational fields are not visible after migration. | Custom fields were not included in scope or mapping.                    |
+| Plugin behavior is expected but not configured.              | Extension setup is being confused with data migration.                  |
+| External-system IDs are missing from migrated records.       | Integration identifiers were not included in migration planning.        |
+| Staff cannot reproduce old workflows in Shopware.            | Source behavior depended on custom code or apps outside standard scope. |
 
-A strong sample should include:
+#### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-* products with advanced prices
-* products affected by customer-specific or customer-group-sensitive pricing
-* products with pricing differences by channel or context
-* promotion examples that depend on cart, product, customer, or order conditions
-* high-value products where pricing errors would create immediate business risk
+Create an extension and custom-data inventory before migration. Identify which fields and behaviors are native Shopware targets, which are supported mapping needs, which require Add-ons, and which require Custom Service or separate implementation work. Confirm expectations during Demo Migration rather than after full migration.
 
-#### What often gets missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-Pricing validation can be too shallow when teams check only base prices. In Shopware, price behavior may depend on rules, channels, customers, product structure, and promotion logic, so representative examples are more useful than broad record sampling.
+If the source store uses custom product flags to control ERP synchronization or marketplace publishing, those fields should be listed before migration with sample records and target-field expectations. If there is no standard target equivalent, the requirement should be reviewed as Custom Service or integration work.
 
-### Validation Priority 6: SEO Routes and Destination Meaning <a href="#validation-priority-6-seo-routes-and-destination-meaning" id="validation-priority-6-seo-routes-and-destination-meaning"></a>
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-Shopware route validation should focus on whether high-value paths still carry the right customer and search meaning.
+Custom fields, extension-owned records, external identifiers, and integration-critical data are either migrated within scope, rebuilt/configured in Shopware, assigned to Custom Service, or explicitly excluded from acceptance.
 
-#### What to check <a href="#what-to-check-5" id="what-to-check-5"></a>
+### Pitfall 6: Validating Orders Without Operational Context <a href="#pitfall-6-validating-orders-without-operational-context" id="pitfall-6-validating-orders-without-operational-context"></a>
 
-Review product routes, category routes, content routes, channel-specific URL behavior, redirects, canonical expectations, and destination relevance. The question is not only whether a URL resolves. It is whether the destination remains the most useful page for the original customer intent.
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
+Historical orders migrate, but support teams cannot use them effectively. Order numbers, customer relationships, line items, status labels, tax values, shipping values, payment context, refunds, discounts, or external references may be incomplete or difficult to interpret.
 
-A strong sample should include:
+Order validation is not only about historical storage. It affects customer service, accounting review, operational lookup, reporting continuity, and integration reconciliation.
 
-* high-traffic product URLs
-* high-traffic category URLs
-* campaign landing pages
-* URLs with strong backlink or search value
-* channel-specific URLs
-* routes where source behavior depended on custom SEO logic or extensions
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
+| Signal                                                   | What it may indicate                                              |
+| -------------------------------------------------------- | ----------------------------------------------------------------- |
+| Orders exist but staff cannot interpret statuses.        | Source order states were not mapped into usable Shopware context. |
+| Line items lack product or variant clarity.              | Product/order relationship mapping is incomplete.                 |
+| Refunds, discounts, or shipping adjustments are unclear. | Financial context was not validated with edge-case orders.        |
+| ERP or accounting references are missing.                | External identifiers were not preserved within scope.             |
 
-A redirect or rewritten route can technically work while still weakening SEO continuity. Validation should confirm destination quality, channel context, and page purpose rather than treating resolution alone as success.
+#### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-### Validation Priority 7: Customer-Account and Order Context <a href="#validation-priority-7-customer-account-and-order-context" id="validation-priority-7-customer-account-and-order-context"></a>
+Validate representative historical orders, not only recent simple orders. Include orders with discounts, tax differences, shipping adjustments, refunds, guest checkout, variant products, custom statuses, and external references where relevant. Confirm what historical order data is intended for lookup versus active operational processing.
 
-Customer and order validation should focus on usefulness, recognition, and launch trust.
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-#### What to check <a href="#what-to-check-6" id="what-to-check-6"></a>
+A merchant with frequent customer-service inquiries about older orders should include sample records from different order statuses and financial conditions. The validation plan should confirm that support agents can identify the customer, items, totals, fulfillment context, and any important external references.
 
-Review whether customer records remain recognizable, whether login or reset expectations are clear, whether customer groups or customer-sensitive behavior still make sense, and whether historical orders provide enough context for customer service, reporting, and operational reference.
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
+Historical orders are understandable and searchable for the business purposes they are expected to support after migration.
 
-A strong sample should include:
+### Pitfall 7: Skipping Indexing, Search, and Performance-Aware Review <a href="#pitfall-7-skipping-indexing-search-and-performance-aware-review" id="pitfall-7-skipping-indexing-search-and-performance-aware-review"></a>
 
-* repeat customers
-* customers with meaningful order history
-* customer groups or segments tied to pricing, visibility, payment, shipping, or promotions
-* orders with complex product structures
-* orders that reveal shipping, payment, tax, discount, or fulfillment context
-* customer-account cases likely to affect launch communication
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
+The migrated store appears correct in the Administration, but storefront search, filters, product listings, or customer-facing performance do not reflect the imported data correctly. Teams may mistake this for missing data when the issue is indexing, cache, search configuration, or storefront implementation.
 
-Customer validation often stops at record presence. A better review asks whether the returning-customer experience is understandable and whether historical order context remains useful after migration.
+Shopware’s architecture uses indexing and asynchronous processing patterns, so validation should include customer-facing discovery behavior, not only backend record review.
 
-### Validation Priority 8: Media, CMS Pages, and Storefront Presentation Context <a href="#validation-priority-8-media-cms-pages-and-storefront-presentation-context" id="validation-priority-8-media-cms-pages-and-storefront-presentation-context"></a>
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-Shopware validation should include the records and presentation context that help customers trust the storefront.
+| Signal                                                 | What it may indicate                                                 |
+| ------------------------------------------------------ | -------------------------------------------------------------------- |
+| Newly imported products do not appear in search.       | Indexing or search configuration needs review.                       |
+| Filters return incomplete results.                     | Properties, category assignments, or indexing are incomplete.        |
+| Storefront results differ from Administration records. | Sales-channel, cache, or storefront consumption needs validation.    |
+| Large catalog pages feel unstable after import.        | Performance, indexing, or storefront implementation needs attention. |
 
-#### What to check <a href="#what-to-check-7" id="what-to-check-7"></a>
+#### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Review whether product media, category imagery, CMS Pages, landing pages, layouts, and content blocks still support the intended customer journey. The review should prioritize high-value presentation areas rather than attempting to inspect every content asset equally.
+Include search terms, filters, key categories, and product listing pages in validation. Confirm indexing and cache-related tasks with the implementation team. If the target uses a custom storefront or external search layer, validate the integration path as part of launch readiness.
 
-#### Strong validation samples <a href="#strong-validation-samples-7" id="strong-validation-samples-7"></a>
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-A strong sample should include:
+A large catalog should be tested with priority search terms, category filters, property filters, and high-value products after migration and indexing. If results are incomplete, the issue should be assigned to mapping, indexing, search configuration, or storefront implementation.
 
-* best-selling product media
-* important category images or landing-page assets
-* campaign or brand pages
-* CMS Pages that support trust, policies, sizing, support, or conversion
-* pages or layouts affected by themes, extensions, or custom content behavior
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-#### What often gets missed <a href="#what-often-gets-missed-7" id="what-often-gets-missed-7"></a>
+Customers can find migrated products through expected search, filtering, category, and storefront discovery paths.
 
-A store can pass core product and order checks while still feeling incomplete because media, layout, and trust content are weak. Shopware validation should include the presentation layers that materially affect customer confidence.
+### Pitfall 8: Treating Demo Migration as a Visual Preview Only <a href="#pitfall-8-treating-demo-migration-as-a-visual-preview-only" id="pitfall-8-treating-demo-migration-as-a-visual-preview-only"></a>
 
-### Validation Priority 9: Extensions, Custom Fields, and Integration-Shaped Meaning <a href="#validation-priority-9-extensions-custom-fields-and-integration-shaped-meaning" id="validation-priority-9-extensions-custom-fields-and-integration-shaped-meaning"></a>
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-Many Shopware targets depend on meaning outside the core record model.
+Demo Migration is reviewed only for obvious visual defects instead of being used to test the migration assumptions that will control the full dataset. Teams approve the demo too quickly, then encounter structural problems during full migration or launch review.
 
-#### What to check <a href="#what-to-check-8" id="what-to-check-8"></a>
+For Shopware, Demo Migration should test representative complexity: variants, properties, categories, translations, sales channels, customer groups, orders, custom fields, URLs, content, and extension-dependent records where relevant.
 
-Review extension-shaped behavior, custom fields, external identifiers, integration-owned context, theme-dependent behavior, and any surrounding logic the business still expects after launch. The question is whether the business outcome remains usable, not only whether a field exists.
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-8" id="strong-validation-samples-8"></a>
+| Signal                                                       | What it may indicate                                        |
+| ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Demo review focuses only on homepage or a few products.      | The sample does not test migration risk.                    |
+| Edge-case products are excluded from the sample.             | Variant, property, or custom-field issues may appear later. |
+| Orders are not reviewed with financial or status complexity. | Historical records may be unusable after full migration.    |
+| Issues are noted but not converted into acceptance criteria. | Full migration may repeat unresolved demo findings.         |
 
-A strong sample should include:
+#### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-* products or customers with important custom fields
-* records linked to ERP, PIM, marketplace, shipping, tax, search, merchandising, or personalization systems
-* extension-dependent storefront behavior
-* theme-dependent navigation or trust behavior
-* records that require outside-system identifiers after launch
-* custom behavior that was treated as business-critical in the Source Platform
+Design Demo Migration samples around risk, not convenience. Include records that represent the real complexity of the source store and the intended Shopware operating model. Convert findings into mapping changes, scope decisions, Add-ons, Custom Service review, or validation requirements before full migration.
 
-#### What often gets missed <a href="#what-often-gets-missed-8" id="what-often-gets-missed-8"></a>
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-Teams often validate only the native Shopware record and miss the behavior that external systems, extensions, custom fields, or theme logic used to support. That can produce a target that looks complete but fails in the workflows that made the original store operationally useful.
+If a merchant has multilingual products, complex variants, custom product flags, and high-value SEO pages, the demo sample should include all four patterns. Approving a demo that includes only ordinary products creates a false sense of readiness.
 
-### What Makes a Shopware Validation Sample Strong <a href="#what-makes-a-shopware-validation-sample-strong" id="what-makes-a-shopware-validation-sample-strong"></a>
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-A strong Shopware validation sample is not random. It is chosen to expose the areas where Shopware most often changes meaning.
-
-A useful sample should include:
-
-* the sales channels most likely to reveal context ambiguity
-* products with variants, properties, media, visibility rules, and advanced prices
-* rules that affect pricing, shipping, payment, promotions, product visibility, or category visibility
-* categories and routes with commercial or SEO importance
-* customer accounts and orders that matter to repeat purchase, support, or reporting
-* CMS Pages and presentation assets that support trust and conversion
-* extension-, custom-field-, or integration-dependent records
-* examples from any Custom Platform source that require interpretation rather than simple field movement
-
-This sample is stronger than broad random checking because it tests whether Shopware is preserving the intended operating model.
-
-### What Often Gets Missed in Shopware Validation <a href="#what-often-gets-missed-in-shopware-validation" id="what-often-gets-missed-in-shopware-validation"></a>
-
-Several mistakes weaken Shopware validation:
-
-* treating sales-channel creation as proof of correct storefront context
-* treating rule presence as proof of correct rule-driven behavior
-* checking product existence without checking visibility, properties, variants, and buying logic
-* checking base prices without testing advanced pricing or rule-dependent pricing behavior
-* validating routes without judging destination meaning
-* checking customers without reviewing customer-account expectations
-* checking orders without reviewing whether historical context remains useful
-* reviewing extensions, custom fields, and integrations only superficially
-* using samples that are broad but not risky enough to reveal actual migration issues
-
-These mistakes usually create false confidence because the target looks organized while the most important commercial behavior remains unproven.
-
-### How Custom Platform Sources Change Shopware Validation Priorities <a href="#how-custom-platform-sources-change-shopware-validation-priorities" id="how-custom-platform-sources-change-shopware-validation-priorities"></a>
-
-When the Source Platform is a **Custom Platform**, Shopware validation needs a tighter evidence standard.
-
-The reason is practical: more of the target behavior may depend on how source-side storefront context, product structure, pricing logic, route behavior, customer data, custom fields, or integration-owned meaning was interpreted during migration. In those cases, validation should include:
-
-* more representative high-risk channel samples
-* closer review of product visibility, variant, property, and pricing reconstruction
-* tighter judgment around Rule Builder outcomes and route meaning
-* more careful review of customer-account expectations and historical order usefulness
-* deeper review of extension-shaped behavior, custom fields, outside-system identifiers, and integration dependencies
-* a clear distinction between acceptable Shopware formalization and unacceptable loss of business meaning
-
-This does not change the basic validation priorities. It raises the level of evidence required before the migrated result should be trusted.
+Demo Migration proves the representative Shopware mapping assumptions before full migration proceeds.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Shopware validation is strongest when it focuses on the areas where the platform is most likely to change commercial meaning: sales-channel context, Rule Builder outcomes, product visibility, product structure, advanced pricing, category entry points, SEO routes, customer-account expectations, media and content presentation, and extension-shaped behavior.
+Shopware migration pitfalls are preventable when teams validate relationships, not just records. Sales channels, products, variants, properties, rules, content, custom fields, extensions, search, orders, and integrations must be reviewed as connected parts of the target operating model.
 
-That is what makes the validation result useful. A Shopware target can look polished while still weakening the areas that determine whether customers can find, evaluate, buy, and trust the store. The safest review is a deliberate sample that tests the highest-risk channel, rule, product, pricing, route, customer, content, and extension cases before launch decisions are locked.
+The safest approach is to identify risk patterns before migration, test them during Demo Migration, assign ownership for target configuration or custom requirements, and use full migration review to prove the store is usable. When each pitfall has a warning signal, prevention action, recommendation, and pass condition, the Shopware migration becomes easier to control and safer to launch.
 
-Validate the Shopware examples that carry the most commercial meaning before approving the result: important sales channels, rule-driven outcomes, visible and restricted products, advanced pricing cases, high-value routes, customer-account scenarios, CMS Pages, media, and extension-shaped records. If the result leaves uncertainty around whether a difference is acceptable Shopware formalization or a real continuity problem, Live Chat can help interpret the evidence before the migration moves forward.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What is the most common Shopware migration pitfall?**
 
-**What should be validated first in a Shopware migration?**
+One common pitfall is treating the migration as a simple product and order transfer while underestimating sales channels, variants, properties, rules, content, custom fields, and extensions.
 
-Start with the sales channels and products most likely to expose context ambiguity, then review Rule Builder outcomes, product visibility, advanced pricing, category entry points, high-value routes, customer-account scenarios, and extension-shaped behavior.
+**Why do Shopware variants need special attention?**
 
-**Why is Rule Builder such an important Shopware validation priority?**
+Variants may depend on parent-child relationships, inherited values, properties, images, prices, and stock behavior. If those relationships are flattened or misread, products can become difficult to browse, filter, or purchase.
 
-Rule Builder can affect pricing, shipping, payment, promotions, flows, product visibility, and category visibility. Validation should prove that the intended behavior still triggers correctly, not only that a rule exists.
+**Are custom fields automatically included in a Shopware migration?**
 
-**Why is product visibility different from product presence in Shopware?**
+Not always. Custom fields and extension-owned records should be reviewed during scope planning. Some mapping needs may fit Add-ons, while unsupported records or bespoke transformations may require Custom Service.
 
-A product can exist in the catalog without being visible in the correct sales channel or customer-facing context. Validation should confirm whether the product is searchable, browsable, purchasable, restricted, or hidden in the way the business expects.
+**How should Demo Migration be used for Shopware?**
 
-**What makes a Shopware validation sample strong?**
+Demo Migration should test representative risk patterns, including variants, properties, categories, sales channels, translations, orders, custom fields, URLs, content, and extension-dependent records where relevant.
 
-A strong sample includes the records most likely to expose meaning changes: high-value sales channels, rule-sensitive cases, products with variants and properties, advanced pricing examples, important category and route paths, customer-account scenarios, and extension- or integration-dependent records.
+**How can teams avoid confusing migration issues with configuration issues?**
 
-**How should Custom Platform source data be validated when moving to Shopware?**
-
-Custom Platform source data should be validated with more precise samples because source-side storefront context, product structure, route behavior, pricing logic, custom fields, and integrations may require interpretation. The review should prove that the translated Shopware result remains commercially usable, not merely that records arrived.
+Each issue should be assigned to the correct owner: migration mapping, Shopware target configuration, extension setup, storefront implementation, external integration, or out-of-scope custom work.
