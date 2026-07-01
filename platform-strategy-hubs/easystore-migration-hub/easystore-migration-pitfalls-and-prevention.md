@@ -236,6 +236,50 @@ If the merchant adds products and orders after Demo Migration but keeps the same
 
 The team can state which action is being used, what records should be affected, whether configuration is changing, whether target data is expected to be replaced, and which samples prove the result.
 
+### Pitfall 9: Treating Joomla Store Setup as Outside Migration Risk <a href="#pitfall-9-treating-joomla-store-setup-as-outside-migration-risk" id="pitfall-9-treating-joomla-store-setup-as-outside-migration-risk"></a>
+
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+
+The migrated EasyStore records are treated as complete while the surrounding Joomla setup remains unresolved. Products, customers, and orders may exist, but storefront access still depends on menus, aliases, modules, templates, SP Page Builder content, plugin output, language settings, and checkout configuration.
+
+#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+
+The review happens mostly inside the administrator area. Product pages are not opened through real menu paths, important storefront links are not tested, SP Page Builder dependencies are not reviewed, and checkout-related modules or templates are left for post-launch setup without acceptance criteria.
+
+#### Prevention <a href="#prevention-8" id="prevention-8"></a>
+
+Validate EasyStore as a Joomla-based selling environment. The project should separate migrated records from target-side Joomla setup, then test both together through customer-facing paths. Launch-critical pages, navigation, module placement, template behavior, and checkout access should be part of the validation plan.
+
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+
+For a store that uses Joomla menu items and SP Page Builder landing pages to drive product discovery, validate a product page, product category page, landing page, checkout path, customer account page, and key navigation path before approving the migration result.
+
+#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+
+EasyStore data is not only present in the target; it is reachable and usable through the intended Joomla storefront structure. Any remaining page, module, template, or presentation rebuild work is documented and excluded from migration acceptance only when that boundary is clear.
+
+### Pitfall 10: Treating Add-ons and Custom Service as Interchangeable Fixes <a href="#pitfall-10-treating-add-ons-and-custom-service-as-interchangeable-fixes" id="pitfall-10-treating-add-ons-and-custom-service-as-interchangeable-fixes"></a>
+
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
+
+The project assumes that any unsupported field, custom workflow, extension-owned record, or unusual storefront behavior can be solved by a small adjustment. This creates scope confusion when Add-ons can handle bounded supported changes but business-critical custom logic needs Custom Service review.
+
+#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
+
+Custom fields, ERP references, CRM IDs, checkout modifications, page-builder-driven product content, external fulfillment data, or bespoke Joomla extension records are mentioned late. The team asks for them to be “included” without sample records, target expectations, or validation proof.
+
+#### Prevention <a href="#prevention-9" id="prevention-9"></a>
+
+Classify requirements by handling path before Full Migration. Add-ons should be used for supported, bounded adjustments. Custom Service should be used when the requirement involves unsupported records, custom structures, bespoke transformations, outside-system continuity, or business-critical logic that needs separate analysis.
+
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+
+If a product has an additional supported field that needs different handling, an Add-on may be enough. If the product depends on a custom Joomla component, external inventory identifiers, and page-builder-specific merchandising logic, Custom Service review is the safer path.
+
+#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+
+Every special requirement has a documented handling path. Add-ons and Custom Service remain separate, and the merchant understands which items are included, excluded, configured in EasyStore/Joomla, rebuilt manually, or reviewed as custom work.
+
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 EasyStore by JoomShaper migration pitfalls are preventable when the project treats the store as Joomla-based commerce rather than a flat product transfer. Product variants, storefront paths, SP Page Builder presentation, customer identity, order history, configuration-sensitive behavior, custom data, Demo Migration samples, and later migration actions all need clear ownership and proof.

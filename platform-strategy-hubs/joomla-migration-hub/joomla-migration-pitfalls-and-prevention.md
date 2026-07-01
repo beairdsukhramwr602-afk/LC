@@ -6,11 +6,17 @@ The safest prevention method is to identify ownership before migration, test rep
 
 ### Pitfall 1: Treating Joomla as a Flat Content Store <a href="#pitfall-1-treating-joomla-as-a-flat-content-store" id="pitfall-1-treating-joomla-as-a-flat-content-store"></a>
 
-**What goes wrong:** Articles, categories, users, and media are migrated as independent records, but the relationships that make them usable are not validated. Pages may lose menu paths, module context, access rules, language assignment, metadata, or extension behavior.
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-**Early warning signs:** The migration scope mentions articles and users but not menus, aliases, modules, access levels, custom fields, tags, media references, multilingual structure, or extensions. Demo samples are selected by record type rather than by real page or workflow.
+Articles, categories, users, and media are migrated as independent records, but the relationships that make them usable are not validated. Pages may lose menu paths, module context, access rules, language assignment, metadata, or extension behavior.
 
-**Prevention:** Plan validation around page outcomes and administrator use cases. Include sample content pages, menu-linked pages, restricted pages, multilingual pages, media-heavy pages, and extension-owned records where relevant.
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+
+The migration scope mentions articles and users but not menus, aliases, modules, access levels, custom fields, tags, media references, multilingual structure, or extensions. Demo samples are selected by record type rather than by real page or workflow.
+
+#### Prevention <a href="#prevention" id="prevention"></a>
+
+Plan validation around page outcomes and administrator use cases. Include sample content pages, menu-linked pages, restricted pages, multilingual pages, media-heavy pages, and extension-owned records where relevant.
 
 | Isolated assumption    | Better Joomla validation question                                                                         |
 | ---------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -19,17 +25,27 @@ The safest prevention method is to identify ownership before migration, test rep
 | The category exists.   | Does the category still support navigation, grouping, filtering, metadata, and extension relationships?   |
 | The media file exists. | Is the media still connected to the record, page, or extension output that uses it?                       |
 
-**Recommendation example:** Select a policy page, a landing page, a media-heavy page, a restricted page, and an extension page as validation samples instead of checking only a random list of content records.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-**Pass condition:** The migrated Joomla result proves usable page behavior, not just record presence. Important relationships are preserved, rebuilt, excluded with intent, or classified for additional handling.
+Select a policy page, a landing page, a media-heavy page, a restricted page, and an extension page as validation samples instead of checking only a random list of content records.
+
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
+
+The migrated Joomla result proves usable page behavior, not just record presence. Important relationships are preserved, rebuilt, excluded with intent, or classified for additional handling.
 
 ### Pitfall 2: Ignoring Menu, Alias, and Route Meaning <a href="#pitfall-2-ignoring-menu-alias-and-route-meaning" id="pitfall-2-ignoring-menu-alias-and-route-meaning"></a>
 
-**What goes wrong:** Joomla pages are approved because content appears in the administrator area, while public URLs, aliases, menu hierarchy, metadata, and redirect-sensitive paths are not checked. This can damage navigation, SEO continuity, campaign links, and customer access to important pages.
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-**Early warning signs:** The review focuses on article titles and body content but does not include menu paths, hidden menus, SEF URLs, aliases, redirect plans, language routes, or high-value external links.
+Joomla pages are approved because content appears in the administrator area, while public URLs, aliases, menu hierarchy, metadata, and redirect-sensitive paths are not checked. This can damage navigation, SEO continuity, campaign links, and customer access to important pages.
 
-**Prevention:** Treat menus and routes as validation priorities. Identify high-value URLs, campaign pages, category paths, hidden-menu routes, multilingual paths, and commerce extension paths before Full Migration.
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+
+The review focuses on article titles and body content but does not include menu paths, hidden menus, SEF URLs, aliases, redirect plans, language routes, or high-value external links.
+
+#### Prevention <a href="#prevention-1" id="prevention-1"></a>
+
+Treat menus and routes as validation priorities. Identify high-value URLs, campaign pages, category paths, hidden-menu routes, multilingual paths, and commerce extension paths before Full Migration.
 
 | Route risk                         | Prevention action                                            | Pass condition                                                       |
 | ---------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------- |
@@ -38,29 +54,49 @@ The safest prevention method is to identify ownership before migration, test rep
 | Hidden route is missing.           | Check system or hidden menus that support public pages.      | Important non-visible navigation paths still work.                   |
 | Extension route changes.           | Validate route behavior inside the owning extension.         | Product, form, directory, or member pages load correctly.            |
 
-**Recommendation example:** Before launch, review the top traffic URLs, menu-generated paths, language-specific URLs, and any commerce or membership routes that customers use regularly.
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-**Pass condition:** Important pages are reachable through the intended public paths, and any changed URLs have accepted redirect or replacement handling.
+Before launch, review the top traffic URLs, menu-generated paths, language-specific URLs, and any commerce or membership routes that customers use regularly.
+
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+
+Important pages are reachable through the intended public paths, and any changed URLs have accepted redirect or replacement handling.
 
 ### Pitfall 3: Confusing Joomla Users With Commerce Customers <a href="#pitfall-3-confusing-joomla-users-with-commerce-customers" id="pitfall-3-confusing-joomla-users-with-commerce-customers"></a>
 
-**What goes wrong:** Joomla user accounts are treated as full customer records even when addresses, order history, shopper groups, tax behavior, loyalty information, or checkout context belongs to the commerce extension. The migrated site may preserve logins but lose customer meaning.
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-**Early warning signs:** User validation checks only names and emails. Customer addresses, order links, access groups, shopper groups, membership status, or commerce component records are not included in samples.
+Joomla user accounts are treated as full customer records even when addresses, order history, shopper groups, tax behavior, loyalty information, or checkout context belongs to the commerce extension. The migrated site may preserve logins but lose customer meaning.
 
-**Prevention:** Separate Joomla account validation from extension customer validation. Joomla core users should be tested for groups, access levels, permissions, and login behavior. Commerce customers should be checked inside the owning component for addresses, orders, prices, shopper groups, and checkout context where supported.
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-**Recommendation example:** Validate one public visitor, one registered user, one restricted member, one staff/editor account, one commerce customer with orders, and one commerce customer with address or pricing context.
+User validation checks only names and emails. Customer addresses, order links, access groups, shopper groups, membership status, or commerce component records are not included in samples.
 
-**Pass condition:** User identity, access behavior, permissions, and commerce customer meaning are each proven in the system area that owns them.
+#### Prevention <a href="#prevention-2" id="prevention-2"></a>
+
+Separate Joomla account validation from extension customer validation. Joomla core users should be tested for groups, access levels, permissions, and login behavior. Commerce customers should be checked inside the owning component for addresses, orders, prices, shopper groups, and checkout context where supported.
+
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+
+Validate one public visitor, one registered user, one restricted member, one staff/editor account, one commerce customer with orders, and one commerce customer with address or pricing context.
+
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+
+User identity, access behavior, permissions, and commerce customer meaning are each proven in the system area that owns them.
 
 ### Pitfall 4: Treating Access Control as a Minor Setting <a href="#pitfall-4-treating-access-control-as-a-minor-setting" id="pitfall-4-treating-access-control-as-a-minor-setting"></a>
 
-**What goes wrong:** User groups, access levels, and permissions are treated as simple settings instead of business-critical visibility controls. Restricted content may become public, customer-only pages may disappear, editor workflows may fail, or staff accounts may gain risky access.
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-**Early warning signs:** The source has member areas, staff-only pages, customer-only pages, partner content, restricted downloads, or editorial workflows, but validation does not include role-based testing.
+User groups, access levels, and permissions are treated as simple settings instead of business-critical visibility controls. Restricted content may become public, customer-only pages may disappear, editor workflows may fail, or staff accounts may gain risky access.
 
-**Prevention:** Test access with representative users. Each restricted page, menu item, module, download, or extension area should be viewed from the perspective of the audience it is meant to serve.
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+
+The source has member areas, staff-only pages, customer-only pages, partner content, restricted downloads, or editorial workflows, but validation does not include role-based testing.
+
+#### Prevention <a href="#prevention-3" id="prevention-3"></a>
+
+Test access with representative users. Each restricted page, menu item, module, download, or extension area should be viewed from the perspective of the audience it is meant to serve.
 
 | Access area                | What can go wrong                                                  | Prevention check                                   |
 | -------------------------- | ------------------------------------------------------------------ | -------------------------------------------------- |
@@ -69,29 +105,49 @@ The safest prevention method is to identify ownership before migration, test rep
 | Modules by access          | Login, member, or customer modules appear to the wrong audience.   | Test key pages under each user state.              |
 | Administrator/editor roles | Staff cannot manage content or receive excessive permissions.      | Test practical administrator and editor workflows. |
 
-**Recommendation example:** For a membership site, test login, restricted content, member menus, restricted modules, and staff editing behavior before accepting the migration result.
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-**Pass condition:** Access boundaries behave as intended for public visitors, registered users, members, customers, editors, administrators, and any custom group that affects site operation.
+For a membership site, test login, restricted content, member menus, restricted modules, and staff editing behavior before accepting the migration result.
+
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+
+Access boundaries behave as intended for public visitors, registered users, members, customers, editors, administrators, and any custom group that affects site operation.
 
 ### Pitfall 5: Approving Content Without Page Assembly <a href="#pitfall-5-approving-content-without-page-assembly" id="pitfall-5-approving-content-without-page-assembly"></a>
 
-**What goes wrong:** Content is approved even though modules, template positions, layout overrides, plugins, media, and extension output are not working around it. The page may contain the right text but fail as a real visitor-facing page.
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-**Early warning signs:** The review compares content fields but does not open public pages, inspect module placement, check template assignment, test plugin-dependent behavior, or validate extension output.
+Content is approved even though modules, template positions, layout overrides, plugins, media, and extension output are not working around it. The page may contain the right text but fail as a real visitor-facing page.
 
-**Prevention:** Validate page assembly for representative pages. The review should include page content, modules, layout behavior, media, access state, language, and extension areas together.
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-**Recommendation example:** Open the homepage, a key landing page, a category page, a restricted page, a multilingual page, and a commerce or form page in the frontend. Confirm that the visible result supports the intended visitor action.
+The review compares content fields but does not open public pages, inspect module placement, check template assignment, test plugin-dependent behavior, or validate extension output.
 
-**Pass condition:** Important pages are usable in context. If templates, overrides, modules, or plugins require target-side setup, the remaining work is documented and assigned before launch.
+#### Prevention <a href="#prevention-4" id="prevention-4"></a>
+
+Validate page assembly for representative pages. The review should include page content, modules, layout behavior, media, access state, language, and extension areas together.
+
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+
+Open the homepage, a key landing page, a category page, a restricted page, a multilingual page, and a commerce or form page in the frontend. Confirm that the visible result supports the intended visitor action.
+
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+
+Important pages are usable in context. If templates, overrides, modules, or plugins require target-side setup, the remaining work is documented and assigned before launch.
 
 ### Pitfall 6: Underestimating Multilingual Relationships <a href="#pitfall-6-underestimating-multilingual-relationships" id="pitfall-6-underestimating-multilingual-relationships"></a>
 
-**What goes wrong:** Translated records are migrated, but language menus, associations, modules, metadata, media, and extension-language behavior are not validated. Visitors may land on the wrong language page, lose language switching, or see mixed-language modules.
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-**Early warning signs:** The project counts translated articles but does not review language-specific menus, language modules, associations, metadata, route behavior, or extension-owned translations.
+Translated records are migrated, but language menus, associations, modules, metadata, media, and extension-language behavior are not validated. Visitors may land on the wrong language page, lose language switching, or see mixed-language modules.
 
-**Prevention:** Build a multilingual validation sample. Include pages with complete translation sets, pages with partial translations, language-specific menus, language-specific modules, language switcher behavior, and extension-owned translated records where applicable.
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+
+The project counts translated articles but does not review language-specific menus, language modules, associations, metadata, route behavior, or extension-owned translations.
+
+#### Prevention <a href="#prevention-5" id="prevention-5"></a>
+
+Build a multilingual validation sample. Include pages with complete translation sets, pages with partial translations, language-specific menus, language-specific modules, language switcher behavior, and extension-owned translated records where applicable.
 
 | Multilingual failure                      | Prevention method                                  | Pass condition                                                         |
 | ----------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -100,17 +156,27 @@ The safest prevention method is to identify ownership before migration, test rep
 | Modules appear in wrong language.         | Check module language assignment and access.       | Language-specific modules display in the correct context.              |
 | Extension data is only partly translated. | Validate translations inside the owning extension. | Customer-facing extension pages preserve intended language behavior.   |
 
-**Recommendation example:** Test a high-value page available in all languages, a page available in only some languages, a language-specific menu path, and an extension page with translated labels or fields.
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-**Pass condition:** Language-specific content, menus, modules, associations, routes, and extension records behave according to the intended multilingual structure.
+Test a high-value page available in all languages, a page available in only some languages, a language-specific menu path, and an extension page with translated labels or fields.
+
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+
+Language-specific content, menus, modules, associations, routes, and extension records behave according to the intended multilingual structure.
 
 ### Pitfall 7: Hiding Extension-Owned Data Inside Core Joomla Scope <a href="#pitfall-7-hiding-extension-owned-data-inside-core-joomla-scope" id="pitfall-7-hiding-extension-owned-data-inside-core-joomla-scope"></a>
 
-**What goes wrong:** Commerce, membership, booking, directory, event, form, page-builder, or custom-component records are described as normal Joomla content. The migration scope appears simple, but important data may live in extension tables, custom fields, plugins, or outside-system integrations.
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-**Early warning signs:** The source site depends on major extensions, but the scope only names articles, categories, users, and media. Business-critical records do not have sample records, destination expectations, or validation proof.
+Commerce, membership, booking, directory, event, form, page-builder, or custom-component records are described as normal Joomla content. The migration scope appears simple, but important data may live in extension tables, custom fields, plugins, or outside-system integrations.
 
-**Prevention:** Inventory extension-owned data before migration. For each extension, identify the owner, record types, source examples, target expectation, supportability, validation method, and handling path.
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+
+The source site depends on major extensions, but the scope only names articles, categories, users, and media. Business-critical records do not have sample records, destination expectations, or validation proof.
+
+#### Prevention <a href="#prevention-6" id="prevention-6"></a>
+
+Inventory extension-owned data before migration. For each extension, identify the owner, record types, source examples, target expectation, supportability, validation method, and handling path.
 
 | Extension-owned requirement                              | Likely handling path                                                           |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -121,29 +187,49 @@ The safest prevention method is to identify ownership before migration, test rep
 | Custom component tables or outside IDs must be preserved | Custom Service review.                                                         |
 | Layout or page-builder output must be rebuilt            | Manual rebuild, target setup, or Custom Service review depending on data need. |
 
-**Recommendation example:** For a Joomla commerce site, provide one product, one customer, one order, one checkout-related record, one payment/shipping example, and one custom field sample from the commerce extension before confirming scope.
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-**Pass condition:** Extension-owned records are classified as supported, Add-on-adjustable, Custom Service candidates, target-side setup, manual rebuild, or accepted exclusion.
+For a Joomla commerce site, provide one product, one customer, one order, one checkout-related record, one payment/shipping example, and one custom field sample from the commerce extension before confirming scope.
+
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+
+Extension-owned records are classified as supported, Add-on-adjustable, Custom Service candidates, target-side setup, manual rebuild, or accepted exclusion.
 
 ### Pitfall 8: Validating Demo Migration Too Narrowly <a href="#pitfall-8-validating-demo-migration-too-narrowly" id="pitfall-8-validating-demo-migration-too-narrowly"></a>
 
-**What goes wrong:** Demo Migration is reviewed through simple examples that do not represent the site’s real risk areas. Ordinary articles may pass while restricted pages, menu-linked pages, multilingual pages, media-heavy pages, and extension-owned records remain untested.
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-**Early warning signs:** Demo samples are chosen because they are easy to check. No sample includes access rules, multilingual structure, route sensitivity, custom fields, modules, commerce records, or extension output.
+Demo Migration is reviewed through simple examples that do not represent the site’s real risk areas. Ordinary articles may pass while restricted pages, menu-linked pages, multilingual pages, media-heavy pages, and extension-owned records remain untested.
 
-**Prevention:** Choose samples by relationship complexity. At minimum, include ordinary content, menu-linked content, restricted content, media-heavy content, multilingual content where relevant, and extension-owned records if extensions are in scope.
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-**Recommendation example:** Do not approve Demo Migration after checking only five normal articles. Include a menu-linked page, a restricted page, a multilingual page, a media-heavy page, a user-group example, and a commerce or extension-owned record where applicable.
+Demo samples are chosen because they are easy to check. No sample includes access rules, multilingual structure, route sensitivity, custom fields, modules, commerce records, or extension output.
 
-**Pass condition:** Demo Migration proves the selected approach can preserve the Joomla relationships that matter most to launch, or it clearly identifies what must change before Full Migration.
+#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+
+Choose samples by relationship complexity. At minimum, include ordinary content, menu-linked content, restricted content, media-heavy content, multilingual content where relevant, and extension-owned records if extensions are in scope.
+
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+
+Do not approve Demo Migration after checking only five normal articles. Include a menu-linked page, a restricted page, a multilingual page, a media-heavy page, a user-group example, and a commerce or extension-owned record where applicable.
+
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+
+Demo Migration proves the selected approach can preserve the Joomla relationships that matter most to launch, or it clearly identifies what must change before Full Migration.
 
 ### Pitfall 9: Choosing the Wrong Later Migration Action <a href="#pitfall-9-choosing-the-wrong-later-migration-action" id="pitfall-9-choosing-the-wrong-later-migration-action"></a>
 
-**What goes wrong:** The source Joomla site continues changing after an earlier migration run, but the team does not define whether the next action should continue with the last used configuration, continue with a new configuration, or perform a new migration. The validation plan then checks the wrong outcome.
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
-**Early warning signs:** New articles, users, media, menus, redirects, form submissions, products, customers, or orders were added after the earlier run, but the next migration action is described only as “run it again.” Configuration changes are requested without a new validation plan.
+The source Joomla site continues changing after an earlier migration run, but the team does not define whether the next action should continue with the last used configuration, continue with a new configuration, or perform a new migration. The validation plan then checks the wrong outcome.
 
-**Prevention:** Define the intended action before execution. Continuing with the last used configuration usually focuses on newly added source records and regression samples. Continuing with a new configuration requires validation of the changed mapping, filtering, or handling rules. Performing a new migration requires broader review of the refreshed target result.
+#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+
+New articles, users, media, menus, redirects, form submissions, products, customers, or orders were added after the earlier run, but the next migration action is described only as “run it again.” Configuration changes are requested without a new validation plan.
+
+#### Prevention <a href="#prevention-8" id="prevention-8"></a>
+
+Define the intended action before execution. Continuing with the last used configuration usually focuses on newly added source records and regression samples. Continuing with a new configuration requires validation of the changed mapping, filtering, or handling rules. Performing a new migration requires broader review of the refreshed target result.
 
 | Later action                              | Validation focus                                                              |
 | ----------------------------------------- | ----------------------------------------------------------------------------- |
@@ -151,9 +237,42 @@ The safest prevention method is to identify ownership before migration, test rep
 | Continue with a new configuration         | New records plus changed mapping, filtering, or configuration behavior.       |
 | Perform a new migration                   | Replaced target result, refreshed relationships, and launch-critical samples. |
 
-**Recommendation example:** If the source adds new content and orders after Demo Migration, continuing with the previous configuration may be enough. If mapping rules or supported output handling changes, validate the changed records. If the target should be rebuilt from a refreshed result, validate the broader target again.
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
 
-**Pass condition:** The team can explain which action was used, what data should be affected, what configuration changed, and which samples prove the expected result.
+If the source adds new content and orders after Demo Migration, continuing with the previous configuration may be enough. If mapping rules or supported output handling changes, validate the changed records. If the target should be rebuilt from a refreshed result, validate the broader target again.
+
+#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+
+The team can explain which action was used, what data should be affected, what configuration changed, and which samples prove the expected result.
+
+### Pitfall 10: Treating Frontend Rebuild Work as Migration Completion <a href="#pitfall-10-treating-frontend-rebuild-work-as-migration-completion" id="pitfall-10-treating-frontend-rebuild-work-as-migration-completion"></a>
+
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
+
+The migrated records are treated as complete even though the frontend still depends on Joomla templates, template overrides, modules, menu assignments, plugins, media paths, extension output, and custom layout behavior. The project may approve the migration because data exists, while visitors still experience broken pages or incomplete commercial journeys.
+
+#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
+
+The review is limited to administrator records. Key pages are not opened in the frontend, template assignments are not checked, module positions are not reviewed, and extension output is not tested through real visitor paths. Stakeholders describe remaining layout work as minor even though it controls navigation, trust, conversion, or access to important content.
+
+#### Prevention <a href="#prevention-9" id="prevention-9"></a>
+
+Separate migrated records from frontend assembly, then validate both. The migration plan should identify which pages must be rebuilt, which templates and modules must be configured, which plugin output must be tested, and which extension pages need stakeholder approval before launch.
+
+| Frontend dependency | Validation requirement                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------- |
+| Template assignment | Important pages use the intended template or layout.                                        |
+| Module placement    | Navigation, login, commerce, language, and content modules appear in the correct context.   |
+| Template override   | Critical output still supports the intended visitor action.                                 |
+| Extension page      | Products, forms, memberships, bookings, or customer areas load through usable public paths. |
+
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+
+For a Joomla store with a custom homepage, restricted member area, multilingual landing pages, and commerce extension pages, validate the frontend journey from navigation to content access or purchase intent instead of approving the project from administrator record checks alone.
+
+#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+
+Migration completion is accepted only when launch-critical frontend pages, routes, modules, templates, access states, and extension outputs are usable or when remaining rebuild work is explicitly documented, assigned, and excluded from migration acceptance.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 

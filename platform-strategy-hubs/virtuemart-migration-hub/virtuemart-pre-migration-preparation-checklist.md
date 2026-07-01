@@ -1,179 +1,143 @@
 # VirtueMart Pre-Migration Preparation Checklist
 
-VirtueMart migration preparation should begin with the structure that will make the future Joomla store usable, not only with a count of products, customers, and orders. VirtueMart is a Joomla e-commerce extension with its own catalog, shopper, pricing, order, payment, shipment, calculation, and configuration layers. A reliable migration plan needs evidence for how those layers work in the Source Platform and how they should operate after migration.
+VirtueMart preparation should begin with the structures that make the future Joomla store usable, not only with a count of products, customers, and orders. VirtueMart is a Joomla-connected commerce environment, so the migration plan has to account for both commerce records and the Joomla site layer that presents those records to shoppers.
 
-VirtueMart 4.6.4 is the stable release baseline for migration planning. Older operational VirtueMart installations may still be used when their Joomla environment and extension stack remain functional, but older behavior should be confirmed before assuming it matches the current stable release. Joomla 6 or beta-version expectations should be verified separately before they influence migration planning.
+A strong preparation process gives the migration team enough evidence to understand product relationships, custom fields, child products, shopper groups, prices, taxes, payment and shipment logic, multilingual content, order history, storefront routes, modules, templates, and extension-owned data before the first meaningful validation step.
 
-### Why Preparation Matters Before Moving to VirtueMart <a href="#why-preparation-matters-before-moving-to-virtuemart" id="why-preparation-matters-before-moving-to-virtuemart"></a>
+### What VirtueMart Preparation Needs to Prove <a href="#what-virtuemart-preparation-needs-to-prove" id="what-virtuemart-preparation-needs-to-prove"></a>
 
-VirtueMart can support detailed Joomla-based commerce, but that flexibility makes preparation important. Products may depend on parent/child relationships, custom fields, shopper groups, pricing rules, downloadable files, media records, manufacturer data, categories, payment methods, shipment methods, tax rules, discounts, currencies, languages, order statuses, templates, modules, and plugin behavior.
+VirtueMart preparation should prove that the store’s commercial meaning can be understood before data is moved. A product record is not only a product name and SKU. It may depend on custom fields, child-product relationships, shopper-group pricing, calculation rules, stock behavior, manufacturer data, categories, media, downloadable files, or Joomla display logic.
 
-A migration plan that only prepares exported records is too light for many VirtueMart projects. The merchant should know which source structures must become VirtueMart catalog data, which expectations must be configured in VirtueMart or Joomla, and which requirements need Add-on review or Custom Service before the migration process begins.
+The goal is to prepare usable evidence. The merchant should be able to explain what the important source records mean, which records must become standard VirtueMart data, which parts belong to Joomla configuration, and which requirements need Add-ons or Custom Service review.
 
-### 1. Confirm the VirtueMart and Joomla Target Environment <a href="#id-1-confirm-the-virtuemart-and-joomla-target-environment" id="id-1-confirm-the-virtuemart-and-joomla-target-environment"></a>
+| Preparation question                       | What the answer should clarify                                                                                      | Why it matters for VirtueMart                                                                       |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| What kind of products does the store sell? | Simple products, variants, child products, downloadable products, grouped products, or custom-field-driven products | VirtueMart product meaning often depends on relationships and custom fields, not only product rows. |
+| How are prices determined?                 | Base prices, shopper-group prices, tax handling, discounts, currencies, and calculation rules                       | Price meaning can be lost if commercial rules are treated as ordinary product fields.               |
+| How do customers buy?                      | Shopper groups, account behavior, checkout fields, payment methods, shipment methods, and order-status flow         | Customer and order records need operational context after migration.                                |
+| How is the storefront assembled?           | Joomla menus, aliases, modules, templates, overrides, category pages, and product-page layout                       | Migrated data can be correct but still fail as a storefront if the Joomla layer is not ready.       |
+| What data is custom or extension-owned?    | Plugin fields, integration identifiers, custom database records, or modified VirtueMart behavior                    | Unsupported or bespoke data may require Custom Service rather than standard preparation.            |
 
-The first preparation step is to confirm the intended Joomla and VirtueMart versions. VirtueMart operates inside Joomla, so the target environment affects templates, modules, plugin compatibility, routing, language behavior, access control, and extension support.
+### Confirm the Joomla and VirtueMart Target Environment <a href="#confirm-the-joomla-and-virtuemart-target-environment" id="confirm-the-joomla-and-virtuemart-target-environment"></a>
 
-For a new VirtueMart target store, the merchant should confirm the Joomla version, VirtueMart version, PHP and database environment, template framework, required modules, payment plugins, shipment plugins, language setup, currency setup, and required third-party extensions. If the project targets an older operational VirtueMart installation, the merchant should identify the exact version and avoid assuming current stable release behavior.
+VirtueMart runs inside Joomla, so the target environment should be confirmed before migration planning becomes detailed. The Joomla version, VirtueMart version, hosting environment, PHP and database compatibility, template framework, module positions, language setup, user access model, and installed extensions can all influence the final result.
 
-| Preparation item                | What to confirm                                                                              | Why it matters                                                                                                            |
-| ------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Joomla version                  | The target Joomla version and supported hosting environment                                  | VirtueMart behavior depends on the Joomla site foundation, installed extensions, template layer, and compatibility stack. |
-| VirtueMart version              | The intended VirtueMart version for the migration                                            | Stable release behavior, older-version behavior, and beta-version behavior should not be treated as interchangeable.      |
-| Template and module layer       | The Joomla template, menu structure, module positions, and storefront layout requirements    | Migrated data may be correct but still fail as a storefront if the Joomla presentation layer is not prepared.             |
-| Payment and shipment plugins    | The target payment and shipment methods and their configuration responsibilities             | Payment and shipment behavior usually depends on configuration and plugins, not only migrated records.                    |
-| Multilingual and currency setup | Languages, translations, currencies, exchange-rate expectations, and country/region behavior | Language and currency behavior must be planned before validation can prove storefront readiness.                          |
+Preparation should include a basic target inventory. That inventory does not need to be overly complex, but it should be specific enough to prevent assumptions during validation. The merchant should know whether the target store is a fresh VirtueMart installation, an existing Joomla site with VirtueMart already configured, or a broader rebuild that combines data migration with theme, module, template, and extension work.
 
-### 2. Audit Product and Catalog Structure <a href="#id-2-audit-product-and-catalog-structure" id="id-2-audit-product-and-catalog-structure"></a>
+| Target area                 | Confirm before migration                                                                                          | Risk if ignored                                                                              |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Joomla foundation           | Joomla version, user setup, menus, languages, access levels, template framework, and required extensions          | Store data may arrive into a target environment that cannot display or operate it correctly. |
+| VirtueMart installation     | VirtueMart version, store configuration, currencies, taxes, order statuses, payment plugins, and shipment plugins | Validation may confuse missing configuration with migration failure.                         |
+| Template and modules        | Product layout, category layout, cart module, search/filter modules, checkout presentation, and overrides         | Products may exist but appear incomplete, broken, or commercially misleading.                |
+| Language and currency setup | Required languages, translations, currency behavior, regional display, and fallback expectations                  | Multilingual or multicurrency records may appear incomplete if the target is not prepared.   |
+| Extension stack             | Payment, shipment, SEO, analytics, ERP, CRM, inventory, subscription, or custom extensions                        | Plugin-owned behavior may need separate review outside standard data migration.              |
 
-VirtueMart catalog preparation should go beyond product names, descriptions, SKUs, and prices. The merchant should identify how source products are organized, how shoppers choose product variations, how stock is tracked, and how products are displayed in categories or menus.
+### Prepare Product, Category, and Catalog Evidence <a href="#prepare-product-category-and-catalog-evidence" id="prepare-product-category-and-catalog-evidence"></a>
 
-#### Product types and catalog relationships <a href="#product-types-and-catalog-relationships" id="product-types-and-catalog-relationships"></a>
+VirtueMart catalog preparation should separate ordinary product fields from the structures that give products selling meaning. Good evidence includes product types, category depth, manufacturer relationships, media behavior, inventory rules, child products, custom fields, downloadable files, and product-page expectations.
 
-Products should be grouped into meaningful samples before Demo Migration. A strong sample set usually includes simple products, products with child products or variants, products with custom fields, products with multiple media files, products assigned to several categories, products with manufacturer data, products with tax or discount behavior, downloadable products, and products that represent the store’s highest-value revenue lines.
+The sample set for Demo Migration should not include only clean products. It should include products that expose real complexity. A useful sample often includes a simple product, a product with child products, a product with custom fields, a product with several categories, a product with manufacturer data, a product with multiple media files, a product with discount or tax behavior, a downloadable product, and a product that represents a high-value selling path.
 
-Parent/child product structures deserve particular attention. If the Source Platform treats variants as option combinations, standalone SKUs, child products, configurable products, or custom-field-driven selections, the migration plan should determine how those structures should appear in VirtueMart.
+| Product sample              | Evidence to prepare                                                                                    | Validation purpose                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Simple product              | SKU, name, price, stock, category, manufacturer, image, description                                    | Confirms baseline product migration and display.                        |
+| Child-product structure     | Parent product, child products, SKU differences, price differences, stock behavior, selectable choices | Tests whether variant-like meaning becomes usable VirtueMart structure. |
+| Custom-field product        | Field names, field purpose, display location, shopper selection, price modifier, plugin dependency     | Prevents functional fields from being reduced to incomplete notes.      |
+| Discounted or taxed product | Price, tax rule, discount, currency, shopper group, calculation order                                  | Tests commercial interpretation rather than only product visibility.    |
+| Media-heavy product         | Main image, gallery, downloadable files, documents, external files                                     | Confirms selling assets remain usable after migration.                  |
 
-#### Categories, manufacturers, and discovery structure <a href="#categories-manufacturers-and-discovery-structure" id="categories-manufacturers-and-discovery-structure"></a>
+Categories should also be prepared carefully. VirtueMart categories may support storefront discovery, but Joomla menus and routes can shape how shoppers and search engines reach those pages. Preparation should identify important category paths, SEO-sensitive pages, redirected URLs, products assigned to multiple categories, and any categories that should be excluded, merged, or cleaned before migration.
 
-Category preparation should include category depth, product placement, duplicate categories, orphaned products, manufacturer relationships, menu expectations, and SEO-sensitive category routes. VirtueMart categories can support storefront discovery, but Joomla menus and templates may also shape how categories appear to shoppers.
+### Prepare Custom Fields, Child Products, and Product Relationship Logic <a href="#prepare-custom-fields-child-products-and-product-relationship-logic" id="prepare-custom-fields-child-products-and-product-relationship-logic"></a>
 
-The merchant should identify the categories that matter most for organic traffic, paid campaign entry points, internal navigation, and customer buying behavior. These categories should be included in Demo Migration validation rather than relying only on random migrated records.
+VirtueMart custom fields are often the area where migration planning needs the most discipline. A custom field may be a simple specification, a shopper-selectable option, a pricing modifier, a related-product reference, a downloadable file, a display note, or a plugin-owned behavior. The same label can carry different meanings across stores.
 
-#### Media, downloads, and product content <a href="#media-downloads-and-product-content" id="media-downloads-and-product-content"></a>
+Preparation should document what each important field does, not only where it appears. If a field affects price, stock, checkout, order-line readability, product comparison, or buyer choice, it should be treated as functional data during review.
 
-Product media should be prepared as a quality issue, not just a file-transfer issue. The source store may contain main images, gallery images, downloadable files, PDFs, manuals, technical documents, videos, or externally hosted media references. The merchant should identify which media assets are required for selling and which can be recreated, replaced, or excluded.
+| VirtueMart structure       | Preparation focus                                                                            | Possible service implication                                                                       |
+| -------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Custom fields              | Purpose, source equivalent, display behavior, price effect, order-line effect                | Supported mapping may be enough when the meaning is simple; bespoke logic may need Custom Service. |
+| Child products             | Parent relationship, child SKUs, stock, price differences, category behavior, media behavior | Requires clear sample validation because source platforms model variants differently.              |
+| Shopper-selectable choices | Options customers choose before purchase                                                     | Must remain understandable on product pages and historical order lines.                            |
+| Related products           | Relationship type, display purpose, and business importance                                  | May need separate mapping or manual configuration depending on source structure.                   |
+| Plugin-generated fields    | Extension owner, database location, and expected output                                      | Often requires Custom Service review if the data is not standard VirtueMart scope.                 |
 
-Downloadable products require separate preparation because product access, file availability, order relationship, and customer expectations may depend on the source platform’s download logic. If downloadable products involve license keys, membership rules, subscriptions, or external delivery services, Custom Service review may be needed.
+Child-product relationships should be prepared from real examples. A source store may model variants as configurable products, option combinations, separate SKUs, grouped products, matrix records, or app-generated structures. The migration plan should not assume that every source variant structure becomes a perfect VirtueMart child-product structure without review.
 
-### 3. Prepare Custom Fields, Attributes, and Product Selection Logic <a href="#id-3-prepare-custom-fields-attributes-and-product-selection-logic" id="id-3-prepare-custom-fields-attributes-and-product-selection-logic"></a>
+### Prepare Shopper Groups, Customers, and Account Context <a href="#prepare-shopper-groups-customers-and-account-context" id="prepare-shopper-groups-customers-and-account-context"></a>
 
-VirtueMart custom fields can carry important product meaning. They may represent product variation, shopper selection, additional information, display logic, technical specifications, related products, pricing modifiers, or plugin-driven behavior. A source product field that looks like a simple attribute may become operationally important in VirtueMart.
+VirtueMart stores can use shopper groups to control commercial behavior. Shopper groups may influence prices, tax display, payment access, shipment access, discounts, catalog visibility, or B2B/B2C segmentation. Preparation should identify each group, its purpose, and whether customers must remain assigned to that group after migration.
 
-Preparation should separate fields into clear groups:
+Customer preparation should include registered customers, guest orders, billing addresses, shipping addresses, company details, tax identifiers, contact information, account status, Joomla user relationship, and order-history expectations. If the source platform separates users, customers, buyers, companies, or account contacts, those relationships should be reviewed before migration.
 
-| Source field type          | Preparation question                                        | Likely migration concern                                                                                        |
-| -------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Shopper-selectable options | Does the field affect what the customer buys?               | Selection logic, price changes, stock meaning, and order line readability need review.                          |
-| Technical specifications   | Does the field help shoppers compare products?              | Product information may belong in product description, custom fields, specifications, or another display layer. |
-| Pricing modifiers          | Does the field affect product price or discount behavior?   | Standard mapping may not preserve every pricing rule without review.                                            |
-| Plugin-owned fields        | Was the field created by a source extension or custom code? | Custom Service may be needed if the field is not part of standard supported data.                               |
-| Display-only notes         | Is the field informational only?                            | It may still matter for storefront clarity, search, or product comparison.                                      |
+| Customer evidence        | What to include                                                               | Why it matters                                                            |
+| ------------------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Shopper groups           | Group name, business purpose, pricing effect, access effect, sample customers | Preserves commercial segmentation.                                        |
+| Joomla user relationship | Login identity, email, username, account status, access expectations          | VirtueMart customer behavior depends on Joomla user context.              |
+| Addresses                | Billing, shipping, company, tax ID, region, country, phone, default address   | Order support and checkout continuity depend on address quality.          |
+| Customer samples         | Retail buyer, B2B buyer, guest order, international buyer, repeat buyer       | Validates multiple customer scenarios, not only one clean account.        |
+| Privacy and cleanup      | Inactive accounts, test accounts, duplicate customers, outdated addresses     | Prevents unnecessary or poor-quality data from entering the target store. |
 
-A good preparation file should list the field name, source location, sample product, business purpose, expected VirtueMart location, and whether the field affects price, stock, checkout, order history, or storefront display.
+### Prepare Orders, Payment, Shipment, Tax, and Calculation Rules <a href="#prepare-orders-payment-shipment-tax-and-calculation-rules" id="prepare-orders-payment-shipment-tax-and-calculation-rules"></a>
 
-### 4. Document Shopper Groups, Pricing, Discounts, and Calculation Rules <a href="#id-4-document-shopper-groups-pricing-discounts-and-calculation-rules" id="id-4-document-shopper-groups-pricing-discounts-and-calculation-rules"></a>
+VirtueMart order history should remain readable for customer service, accounting reference, warranty review, refund questions, and operational continuity. Preparation should include order numbers, dates, statuses, products, product options, discounts, taxes, currencies, payment methods, shipment methods, addresses, customer groups, invoices, notes, and any external references.
 
-VirtueMart stores often rely on shopper groups, customer-specific behavior, tax rules, discount rules, and calculation logic. These structures should be documented before migration because they influence what customers see, what they pay, and how orders are interpreted after launch.
+Payment and shipment behavior require special attention because historical records and live configuration are different concerns. Migrating a payment method name is not the same as configuring a payment gateway for future checkout. Preserving a shipment label in order history is not the same as recreating source shipping logic in VirtueMart.
 
-#### Shopper groups and customer segmentation <a href="#shopper-groups-and-customer-segmentation" id="shopper-groups-and-customer-segmentation"></a>
+| Area                   | Evidence to prepare                                                                            | Validation question                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Orders                 | Statuses, products, options, totals, discounts, taxes, currencies, payment and shipment labels | Can staff interpret historical orders accurately after migration?                          |
+| Payment context        | Payment method names, transaction references, captured status, refunds, gateway notes          | Are historical references preserved without implying live gateway configuration?           |
+| Shipment context       | Shipment method names, rates, tracking references, regions, carrier notes                      | Are historical shipment details readable and operationally useful?                         |
+| Calculation rules      | Tax, discount, fee, shopper-group, country, region, and currency behavior                      | Which rules are historical records, configuration tasks, Add-ons, or Custom Service items? |
+| Invoices and documents | Invoice numbers, documents, PDF expectations, legal reference needs                            | Which documents must be preserved, recreated, or treated as external records?              |
 
-The merchant should identify all shopper groups, their business purpose, and whether they control pricing, visibility, tax behavior, discounts, payment access, shipment access, or B2B/B2C segmentation. Customer records should be reviewed against those groups so the target store does not lose commercial context.
+### Prepare Joomla Storefront, SEO, Multilingual, and Template Dependencies <a href="#prepare-joomla-storefront-seo-multilingual-and-template-dependencies" id="prepare-joomla-storefront-seo-multilingual-and-template-dependencies"></a>
 
-#### Pricing and discount behavior <a href="#pricing-and-discount-behavior" id="pricing-and-discount-behavior"></a>
+VirtueMart migration readiness also depends on the Joomla storefront. Products and categories may need Joomla menus, aliases, SEF URL behavior, redirects, modules, search/filter presentation, cart modules, template overrides, and language configuration. These elements shape how migrated data becomes a usable storefront.
 
-Preparation should include base prices, sale prices, quantity-based pricing, customer-group pricing, coupons, discounts, tax-inclusive or tax-exclusive display expectations, and any source rules that modify totals at checkout. If the source store uses custom pricing plugins or external systems, standard migration assumptions may be too light.
+SEO-sensitive pages should be identified before validation. The merchant should prepare important product URLs, category URLs, landing pages, redirects, canonical expectations, metadata, and search-entry pages. If the new VirtueMart site changes routes, validation should include both content accuracy and discoverability risk.
 
-#### Tax and calculation rules <a href="#tax-and-calculation-rules" id="tax-and-calculation-rules"></a>
+Multilingual stores need language-specific samples. Preparation should include translated product names, descriptions, categories, custom fields, menus, modules, payment and shipment labels, checkout labels, and fallback behavior. Multilingual readiness is weak if validation only checks the default language.
 
-VirtueMart calculation rules should be prepared with source evidence. The merchant should identify tax rates, tax categories, country and region behavior, tax display expectations, discount order, fee rules, and any rules that depend on shopper group, product type, country, shipment method, or payment method.
+### Prepare Add-ons, Custom Service, and Demo Migration Samples <a href="#prepare-add-ons-custom-service-and-demo-migration-samples" id="prepare-add-ons-custom-service-and-demo-migration-samples"></a>
 
-### 5. Prepare Customer, Address, and Order History Samples <a href="#id-5-prepare-customer-address-and-order-history-samples" id="id-5-prepare-customer-address-and-order-history-samples"></a>
+Preparation should classify requirements before Full Migration. Some needs may fit standard supported migration. Some may fit Add-ons. Some may require Custom Service because they involve unsupported extension data, Custom Platform sources, bespoke transformations, custom migration logic adjustment, or non-standard VirtueMart behavior.
 
-Customer and order preparation should focus on operating meaning. Historical records may be used for customer service, warranty questions, repeat purchases, accounting reference, delivery disputes, revenue review, and support history. A migrated order that only preserves an order number and total is often not enough.
+Demo Migration samples should be selected intentionally. Random records rarely expose the risks that matter most in VirtueMart projects. A strong sample includes the records most likely to prove catalog logic, pricing logic, customer segmentation, order readability, storefront continuity, and custom-data boundaries.
 
-#### Customer and address data <a href="#customer-and-address-data" id="customer-and-address-data"></a>
-
-Customer samples should include registered customers, guest customers if supported by the source, B2B customers, customers in special shopper groups, customers with multiple addresses, international customers, and customers with recent orders. Address data should be checked for country, state/region, postal code, company fields, VAT/tax identifiers, phone numbers, and delivery notes where relevant.
-
-#### Order history and status meaning <a href="#order-history-and-status-meaning" id="order-history-and-status-meaning"></a>
-
-Order samples should include simple orders, multi-product orders, discounted orders, taxed orders, shipped orders, refunded or cancelled orders where available, downloadable-product orders, international orders, orders using different payment methods, orders using different shipment methods, and orders that contain variant or custom-field selections.
-
-Order statuses should be documented with their business meaning. If the source platform uses custom statuses or workflow-specific status labels, the merchant should decide whether those statuses can be mapped into VirtueMart meaningfully or require deeper review.
-
-### 6. Prepare Payment, Shipment, Currency, and Multilingual Requirements <a href="#id-6-prepare-payment-shipment-currency-and-multilingual-requirements" id="id-6-prepare-payment-shipment-currency-and-multilingual-requirements"></a>
-
-Payment, shipment, currency, and language behavior often depends on configuration and plugins. These areas should not be treated as ordinary migrated records.
-
-#### Payment methods <a href="#payment-methods" id="payment-methods"></a>
-
-The merchant should identify each payment method, gateway, offline payment workflow, payment status behavior, transaction reference, and post-order handling expectation. If the source platform stores gateway-specific identifiers or plugin-owned metadata, those details may require Custom Service review.
-
-#### Shipment methods <a href="#shipment-methods" id="shipment-methods"></a>
-
-Shipment preparation should document flat rates, weight-based rates, country or region restrictions, free shipping conditions, carrier integrations, pickup options, shipment tracking, delivery notes, and rules that depend on shopper group, product type, cart value, or destination.
-
-#### Currency and multilingual behavior <a href="#currency-and-multilingual-behavior" id="currency-and-multilingual-behavior"></a>
-
-For multilingual or multicurrency stores, the merchant should identify source languages, translated product content, translated categories, translated custom fields, translated checkout labels, currency display rules, exchange-rate expectations, default language, default currency, and any records that are incomplete in one language. Multilingual validation should use real shopper paths, not only admin-side record checks.
-
-### 7. Prepare Joomla Storefront, Template, Module, and SEO Dependencies <a href="#id-7-prepare-joomla-storefront-template-module-and-seo-dependencies" id="id-7-prepare-joomla-storefront-template-module-and-seo-dependencies"></a>
-
-VirtueMart lives inside Joomla, so storefront preparation should include the Joomla site layer. Menus, modules, templates, overrides, route behavior, metadata, canonical expectations, internal links, landing pages, and search visibility may affect whether the migrated store feels complete.
-
-The merchant should list high-value product URLs, category URLs, landing pages, menu items, internal links, module positions, template overrides, checkout entry paths, account pages, and SEO-sensitive redirects. The migration should not assume that source storefront layout, module placement, or design behavior automatically transfers into Joomla and VirtueMart.
-
-### 8. Identify Custom Platform, Extension-Owned, and Integration Data <a href="#id-8-identify-custom-platform-extension-owned-and-integration-data" id="id-8-identify-custom-platform-extension-owned-and-integration-data"></a>
-
-Custom Platform sources, extension-owned data, ERP references, marketplace connectors, loyalty systems, membership systems, subscription tools, payment gateway metadata, fulfillment integrations, or custom Joomla development should be identified before execution.
-
-The preparation question is simple: can the expected result be handled through standard service capability, supported behavior, and applicable Add-ons, or does it require custom migration logic adjustment? Custom Service should be reviewed when the source includes unsupported data structures, bespoke relationships, third-party identifiers, custom fields beyond standard mapping, or transformation requirements that standard capability cannot cover.
-
-### Demo Migration Sample Planning <a href="#demo-migration-sample-planning" id="demo-migration-sample-planning"></a>
-
-A Demo Migration should include records that expose the store’s real structure. Random samples may show that records can move, but they often fail to prove whether the migrated result is operationally meaningful.
-
-| Sample area      | Recommended examples                                                                                                     | What the sample should prove                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| Products         | Simple products, parent/child products, custom-field-heavy products, downloadable products, products with several images | Product meaning, selection behavior, media handling, file access, and admin usability.  |
-| Categories       | High-traffic categories, deep categories, categories used in menus, categories with many assigned products               | Storefront discovery, product placement, URL expectations, and navigation readiness.    |
-| Customers        | Shopper-group customers, international customers, repeat customers, customers with multiple addresses                    | Customer segmentation, address accuracy, account readability, and shopper history.      |
-| Orders           | Discounted orders, taxed orders, refunded/cancelled orders, orders with different payment and shipment methods           | Order line meaning, totals, statuses, payment/shipment context, and support usefulness. |
-| Custom data      | Plugin-owned fields, external IDs, custom statuses, integration references                                               | Whether Add-on review or Custom Service review is needed.                               |
-| Storefront paths | Product URLs, category URLs, menu paths, checkout entry points, account pages                                            | Joomla/VirtueMart navigation, SEO continuity, and customer-facing readiness.            |
-
-### What to Escalate Before Execution <a href="#what-to-escalate-before-execution" id="what-to-escalate-before-execution"></a>
-
-Escalation is appropriate when the source data contains meaning that cannot be interpreted confidently through standard supported behavior. The merchant should raise these issues before Full Migration rather than discovering them after the target store is populated.
-
-Escalate early when:
-
-* product selection logic depends on custom fields, source extensions, or bespoke pricing behavior;
-* shopper groups control pricing, tax, visibility, payment, or shipment access;
-* tax, discount, payment, or shipment rules depend on multiple conditions;
-* order history includes custom statuses, external identifiers, or plugin-owned details;
-* multilingual or multicurrency data is incomplete, inconsistent, or source-specific;
-* Joomla templates, modules, overrides, or routes must preserve specific storefront behavior;
-* source data comes from a Custom Platform or heavily modified system;
-* the target project depends on beta, unsupported, or not-yet-confirmed Joomla/VirtueMart compatibility.
+| Demo Migration sample                                 | Why to include it                               | Decision it supports                                                    |
+| ----------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------- |
+| Child-product or custom-field product                 | Tests product relationship and selection logic  | Confirms whether standard handling is enough.                           |
+| Shopper-group customer                                | Tests customer segmentation and pricing context | Confirms whether customer group meaning is preserved.                   |
+| Order with discounts, tax, shipment, and payment data | Tests historical order readability              | Confirms whether support and accounting teams can use migrated history. |
+| Multilingual product/category                         | Tests translated content and language behavior  | Confirms whether multilingual setup needs more work.                    |
+| Plugin-owned or custom data example                   | Tests data outside ordinary records             | Confirms whether Custom Service review is needed.                       |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VirtueMart preparation should produce a clear operating picture before migration begins. Products, custom fields, shopper groups, calculation rules, orders, payment methods, shipment methods, multilingual content, templates, modules, and SEO-sensitive routes all deserve review because they shape the final Joomla commerce experience.
+VirtueMart preparation should focus on operating meaning. Products, child products, custom fields, shopper groups, calculation rules, orders, payments, shipments, taxes, multilingual content, and Joomla storefront dependencies all need evidence before migration planning can be trusted.
 
-A strong preparation process does not make the migration heavier than necessary. It identifies where standard service capability is enough, where Add-ons may help, and where Custom Service should be reviewed before the migration process creates avoidable rework.
+A prepared VirtueMart project gives validation teams real examples of the store’s commercial complexity. If the preparation reveals unsupported extension data, custom product logic, unusual shopper-group behavior, complex calculation rules, or Joomla presentation work that standard migration cannot cover, the scope should be reviewed before Full Migration begins.
 
-Use Demo Migration to test representative VirtueMart structures before Full Migration. If product custom fields, shopper groups, calculation rules, payment or shipment behavior, multilingual data, Custom Platform records, or Joomla storefront dependencies carry important business meaning, review the migration path through Live Chat so the preparation work matches the selected service approach.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be prepared before migrating to VirtueMart?**
 
-Prepare the Joomla and VirtueMart target versions, catalog structure, product custom fields, shopper groups, customer records, order samples, calculation rules, payment methods, shipment methods, multilingual content, currencies, templates, modules, and SEO-sensitive routes. The preparation should show how the store is expected to operate after migration, not only which records should be transferred.
+Prepare Joomla and VirtueMart target details, product and category samples, custom fields, child products, shopper groups, customer and order examples, payment and shipment context, tax and calculation rules, multilingual content, storefront routes, modules, templates, and any custom or extension-owned data.
 
-**Why are VirtueMart custom fields important before migration?**
+**Why are VirtueMart custom fields important during preparation?**
 
-VirtueMart custom fields can carry product variation, pricing, specification, display, plugin, or shopper-selection meaning. If the source store uses similar fields differently, they should be reviewed before migration so the target product structure remains understandable and sellable.
+Custom fields may control shopper selections, price changes, technical specifications, related products, downloadable files, or plugin behavior. Their business purpose should be documented before migration so they are not treated as ordinary notes.
 
-**Should old VirtueMart versions be prepared differently?**
+**Should payment and shipping methods be prepared as migrated data or configuration?**
 
-Older operational VirtueMart installations should be reviewed against their exact Joomla version, VirtueMart version, extension stack, template layer, and customizations. Current stable behavior should not be assumed for every legacy installation.
+Both contexts should be separated. Historical payment and shipment labels may need to remain readable in old orders, while live payment gateways and shipment rules usually require VirtueMart configuration or plugin setup.
 
-**What makes a good VirtueMart Demo Migration sample?**
+**What should Demo Migration samples include for VirtueMart?**
 
-A good sample includes simple products, parent/child products, custom-field-heavy products, downloadable products, important categories, shopper-group customers, international customers, discounted or taxed orders, orders with different payment and shipment methods, and records that expose custom or plugin-owned behavior.
+Demo Migration should include complex products, child products, custom-field products, shopper-group customers, orders with tax and discounts, payment and shipment examples, multilingual records, and custom or plugin-owned data samples.
 
-**When should Custom Service be reviewed before migrating to VirtueMart?**
+**When should Custom Service be reviewed before VirtueMart migration?**
 
-Custom Service should be reviewed when the source includes Custom Platform data, unsupported extension data, custom fields beyond standard mapping, external identifiers, bespoke pricing logic, custom shipment or payment behavior, multilingual restructuring, or custom migration logic adjustment requirements.
+Custom Service should be reviewed when the project depends on Custom Platform data, unsupported extensions, custom database fields, bespoke product logic, complex shopper-group rules, plugin-owned records, or custom migration logic adjustment.

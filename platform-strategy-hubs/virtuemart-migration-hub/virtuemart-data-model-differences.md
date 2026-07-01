@@ -1,198 +1,156 @@
 # VirtueMart Data Model Differences
 
-VirtueMart migration is not only a record-transfer exercise. VirtueMart is a Joomla e-commerce extension with its own commerce structure, but it also depends on Joomla for menus, templates, modules, languages, users, permissions, plugins, and routing. A product, customer, order, price rule, or shipment method may therefore carry meaning from both the commerce component and the surrounding Joomla site.
+VirtueMart data model planning starts with a practical distinction: VirtueMart stores commerce data inside a Joomla environment. Product records, shopper groups, custom fields, calculation rules, payment methods, shipment methods, orders, invoices, currencies, and manufacturer relationships belong to the VirtueMart commerce layer, while menus, routes, modules, templates, language structure, access rules, plugins, and page output still depend on Joomla.
 
-VirtueMart 4.6.4 is the stable release baseline for migration planning. Older VirtueMart installations may remain operational, but older behavior should be reviewed against the intended target installation. Joomla 6 compatibility should be verified separately when the target environment depends on it.
+This separation makes VirtueMart flexible, but it also means source data rarely translates as a flat record-for-record transfer. A product option from one system may need to become a VirtueMart custom field, a child product relationship, or another catalog structure. A customer group may need to become a shopper group with pricing and visibility consequences. A tax rule may not be only a saved value; it may be part of VirtueMart calculation logic. A product URL may depend on Joomla menu structure as much as the product alias.
 
-A strong VirtueMart migration translates business meaning into VirtueMart’s product, category, custom field, shopper group, calculation rule, order, payment, shipment, multilingual, and Joomla presentation layers. The goal is not simply to show that products and orders exist after migration. The migrated data must still explain how the merchant sells, prices, groups, taxes, ships, invoices, displays, and manages the store.
+A strong VirtueMart migration plan therefore asks what each record means in commercial use. The goal is not only to place products, customers, and orders into VirtueMart. The goal is to preserve catalog behavior, shopper segmentation, pricing meaning, order evidence, checkout context, and storefront continuity in a way the target Joomla store can operate and validate.
 
-### Core VirtueMart Structural Layers <a href="#core-virtuemart-structural-layers" id="core-virtuemart-structural-layers"></a>
+### What Changes When Data Moves Into VirtueMart <a href="#what-changes-when-data-moves-into-virtuemart" id="what-changes-when-data-moves-into-virtuemart"></a>
 
-VirtueMart organizes commerce through several connected layers. Some layers store records directly, such as products, categories, manufacturers, customers, shopper groups, coupons, orders, payment methods, and shipment methods. Other layers define how those records behave, such as custom fields, calculation rules, shopper fields, templates, plugins, modules, languages, currencies, and Joomla routes.
+VirtueMart uses a Joomla-connected model rather than a fully isolated hosted-store model. The same migration scope may contain commerce records, Joomla records, plugin records, template behavior, and custom implementation details. That creates more planning responsibility, but it also gives merchants control over how the target store is organized.
 
-| VirtueMart layer              | What it controls                                                                                                                  | Migration meaning                                                                                          |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Product and catalog layer     | Products, categories, manufacturers, media, prices, stock, child products, reviews, and product display settings                  | Source catalog data must become sellable VirtueMart catalog structure, not only product rows.              |
-| Custom field layer            | Product attributes, selectable options, specifications, plugin-driven values, and additional display or buying behavior           | Source options, attributes, and custom data must be classified before mapping.                             |
-| Shopper layer                 | Shoppers, shopper groups, shopper fields, billing and shipping information, and registration/checkout data                        | Customer data must preserve account, group, address, and checkout meaning.                                 |
-| Pricing and calculation layer | Taxes, discounts, price modifiers, calculation rules, shopper-group conditions, country/state restrictions, and currency behavior | Pricing logic may need configuration, mapping, or Custom Service review rather than direct record copying. |
-| Order and invoice layer       | Order items, selected options, statuses, invoices, payment/shipment details, comments, and historical context                     | Order history must remain readable and operationally useful.                                               |
-| Joomla presentation layer     | Menus, modules, templates, overrides, URLs, metadata, language associations, and plugin behavior                                  | Storefront continuity depends on Joomla implementation, not only VirtueMart records.                       |
+| Source-store assumption                          | VirtueMart reality                                                                                                                | Migration planning impact                                                            |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Product data is the main catalog scope.          | Products may depend on categories, manufacturers, media, custom fields, child products, stock, prices, taxes, and shopper groups. | Catalog samples should include real selling relationships, not only simple products. |
+| Variants have one universal target structure.    | VirtueMart may use child products, custom fields, or configured product relationships depending on the store model.               | Variant mapping must be decided before validation is meaningful.                     |
+| Customer groups are labels.                      | Shopper groups can affect price, visibility, taxes, payment, shipment, and access behavior.                                       | Shopper group meaning should be documented before Demo Migration.                    |
+| Tax and discount records migrate as static data. | VirtueMart uses calculation rules and configuration that may depend on context.                                                   | Historical totals and live checkout behavior should be reviewed separately.          |
+| Storefront URLs come from products alone.        | Joomla menus, aliases, SEF routing, modules, templates, and language paths shape storefront output.                               | SEO review must include Joomla structure, not only product slugs.                    |
 
-These layers should be interpreted together. A migrated product may look complete in the VirtueMart administration area but still lose meaning if child products, custom fields, shopper group pricing, calculation rules, product images, language values, or product routes are incomplete.
+### Joomla Data vs VirtueMart Commerce Data <a href="#joomla-data-vs-virtuemart-commerce-data" id="joomla-data-vs-virtuemart-commerce-data"></a>
 
-### Product and Catalog Meaning <a href="#product-and-catalog-meaning" id="product-and-catalog-meaning"></a>
+Joomla and VirtueMart divide responsibility. Joomla provides the CMS framework: menus, modules, templates, language associations, users, access levels, plugins, routing, metadata, and page assembly. VirtueMart provides the commerce layer: products, categories, manufacturers, shopper data, shopper groups, orders, invoices, prices, taxes, payment methods, shipment methods, currencies, and store configuration.
 
-VirtueMart product data is broader than product names and prices. A product can carry descriptive content, SKU/model values, images, media, availability, dimensions, weight, manufacturer relationships, category placement, inventory settings, reviews, ratings, related products, and ordering/display behavior. Product migration should preserve enough structure for the merchant to manage the item and for shoppers to understand what they are buying.
+The distinction matters because a migrated commerce record can be technically present but commercially incomplete. A product can exist in VirtueMart while its route, module placement, template output, or language association is not ready. A shopper can exist while group-based prices or access behavior are wrong. An order can appear in history while payment or shipment context is too thin for customer service review.
 
-Source platforms often store catalog logic differently. A source store may use option sets, attributes, product families, variants, configurable products, grouped products, downloadable products, bundles, app-owned fields, or custom code. VirtueMart may represent parts of that structure through products, child products, custom fields, stock settings, downloadable media, categories, manufacturers, or plugin-supported behavior.
+| Data area                     | Primary owner in target              | What must be checked                                                                                     |
+| ----------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Menus and routes              | Joomla                               | Product and category access paths, aliases, SEF URLs, language paths, and redirects.                     |
+| Product records               | VirtueMart                           | SKU, title, description, category, manufacturer, media, price, stock, dimensions, tax, and availability. |
+| Variant logic                 | VirtueMart configuration             | Child products, custom fields, selectable options, stock behavior, and price differences.                |
+| Users and shoppers            | Joomla and VirtueMart                | Joomla user identity, shopper record, shopper group, billing/shipping details, and login continuity.     |
+| Storefront output             | Joomla and VirtueMart                | Templates, overrides, modules, filters, search, breadcrumbs, metadata, and product page layout.          |
+| Payment and shipment behavior | VirtueMart plugins and configuration | Available methods, restrictions, fees, order statuses, historical labels, and checkout testing.          |
 
-#### Categories and manufacturers define discovery context <a href="#categories-and-manufacturers-define-discovery-context" id="categories-and-manufacturers-define-discovery-context"></a>
+A migration plan should not hide this ownership split. It should use the split to decide what belongs to data migration, what belongs to target configuration, what belongs to Add-ons, and what may require Custom Service.
 
-VirtueMart categories are not merely folders. They affect storefront organization, product discovery, menu relationships, layout expectations, metadata, and sometimes how merchants think about pricing, tax, shipping, or product visibility. Nested category depth, duplicate categories, category descriptions, category images, and category-level display assumptions should be reviewed before migration.
+### Product and Catalog Structure Differences <a href="#product-and-catalog-structure-differences" id="product-and-catalog-structure-differences"></a>
 
-Manufacturers add another discovery and reporting layer. Source platforms may treat brands, vendors, suppliers, or makers differently. When brand identity is important to the storefront or catalog management process, manufacturer mapping should preserve the intended meaning rather than flattening all brand-related data into product descriptions.
+VirtueMart catalog data is relationship-heavy. Products may connect to categories, manufacturers, media, shopper groups, prices, taxes, custom fields, child products, related products, downloads, dimensions, inventory, reviews, and language-specific content. A source platform that stores those relationships differently needs mapping decisions before the data can be judged.
 
-#### Product media has operational and storefront value <a href="#product-media-has-operational-and-storefront-value" id="product-media-has-operational-and-storefront-value"></a>
+The most common mistake is treating product rows as the complete product model. In VirtueMart, product meaning often comes from surrounding records. A configurable product may depend on child products. A product option may depend on custom fields. A price may depend on shopper group or calculation rule. A visible product page may depend on Joomla route and module context.
 
-Product images, thumbnails, downloadable files, category images, manufacturer images, and other media records can affect customer trust, product comparison, and post-launch management. Source image galleries, option-specific images, external image paths, file naming conventions, and old CDN references should be reviewed. If a source store uses app-owned media relationships or variant-specific images, those relationships may need deeper mapping review.
+| Catalog element      | VirtueMart planning question                                                         | Why it affects migration quality                                         |
+| -------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Categories           | Will source categories map to VirtueMart categories and Joomla navigation paths?     | Category structure affects browsing, product URLs, breadcrumbs, and SEO. |
+| Manufacturers        | Are manufacturers required for product filtering, brand pages, or data completeness? | Manufacturer data may be more than a display label.                      |
+| Product media        | Which images, downloadable files, thumbnails, and alt text must remain associated?   | Media loss weakens storefront trust and validation accuracy.             |
+| Related products     | Are cross-sell, up-sell, accessory, or replacement relationships present?            | Product relationships affect merchandising and support.                  |
+| Stock and dimensions | Do stock, weight, size, and package details influence selling or shipment rules?     | Commercial behavior can change if these values are incomplete.           |
 
-#### Product reviews and ratings need context <a href="#product-reviews-and-ratings-need-context" id="product-reviews-and-ratings-need-context"></a>
+A representative Demo Migration should include simple products, category-heavy products, manufacturer-based products, products with multiple media assets, stock-sensitive products, and items that affect shipping or tax behavior.
 
-Reviews and ratings may support customer confidence, but source platforms can store them with different moderation states, customer associations, dates, rating scales, and product relationships. A migrated review should be connected to the correct product and retain enough context to remain credible. When review history is incomplete, duplicated, app-owned, or not clearly tied to active products, validation should decide whether the result is usable.
+### Custom Fields, Child Products, and Variant Meaning <a href="#custom-fields-child-products-and-variant-meaning" id="custom-fields-child-products-and-variant-meaning"></a>
 
-### Parent and Child Product Meaning <a href="#parent-and-child-product-meaning" id="parent-and-child-product-meaning"></a>
+VirtueMart custom fields are powerful, but they can create migration ambiguity. Source platforms may describe product choices as variants, options, modifiers, attributes, personalization fields, bundle selections, add-ons, downloadable choices, or price modifiers. VirtueMart may represent some of these through child products and others through custom fields or additional configuration.
 
-Parent/child products are one of the most important VirtueMart data-model differences. Many source platforms describe product variation through options, variants, attributes, configurable products, or SKU-level child items. VirtueMart can use parent and child products, derived product patterns, and custom fields to express similar commercial meaning, but the structures are not automatically equivalent.
+That means the migration plan should avoid assuming that every source variant becomes the same target object. The correct structure depends on what the choice does: whether it changes SKU, price, stock, image, weight, tax, availability, or order-line meaning.
 
-A parent product may provide shared catalog meaning: description, category placement, images, manufacturer, common display information, or grouping logic. Child products may carry selectable differences such as size, color, material, package size, stock, SKU, price, dimensions, weight, or media. If the source platform treats every variant as an independent product, VirtueMart planning may need to decide whether the target should preserve that independence or group those records under parent products.
+| Source behavior                           | Possible VirtueMart interpretation                     | Validation focus                                         |
+| ----------------------------------------- | ------------------------------------------------------ | -------------------------------------------------------- |
+| Color or size changes SKU and stock.      | Child products or structured selectable relationships. | Confirm SKU, stock, price, image, and order-line output. |
+| Option changes price but not stock.       | Custom field or configured product option.             | Confirm price adjustment and cart calculation.           |
+| Personalization text is entered by buyer. | Custom field or custom implementation.                 | Confirm checkout capture and order history visibility.   |
+| Bundle or kit behavior combines products. | Extension-specific or custom logic.                    | Confirm whether Standard Service is sufficient.          |
+| Download choice controls file access.     | Downloadable product or custom field relationship.     | Confirm access and post-order handling.                  |
 
-#### Variant structure affects shopper choice <a href="#variant-structure-affects-shopper-choice" id="variant-structure-affects-shopper-choice"></a>
+This area often determines whether the migration can stay standard, whether Add-ons are enough, or whether Custom Service is needed. The decision should be made before Full Migration, because variant structure affects product validation, order interpretation, and customer support after launch.
 
-Variant migration should be judged by how shoppers select products, not only by how many product records appear. A color/size product should allow the shopper to choose a valid combination. A product with stock by option should preserve stock meaning at the level the merchant actually manages. A product with option-level price differences should preserve the price difference in a way that is visible and maintainable in VirtueMart.
+### Shopper Groups, Prices, and Calculation Rules <a href="#shopper-groups-prices-and-calculation-rules" id="shopper-groups-prices-and-calculation-rules"></a>
 
-When source option logic includes conditional options, dependent options, image swaps, price modifiers, bundles, subscriptions, custom calculators, or third-party configurators, standard product migration may not preserve the full behavior. Those cases should be reviewed for Advanced Data Mapping, Advanced Data Configure, or Custom Service depending on the required transformation.
+VirtueMart uses shopper groups and calculation rules in ways that can be central to commercial behavior. Shopper groups may control prices, discounts, visibility, taxes, payment availability, shipment availability, or buyer segmentation. Calculation rules may affect tax, discounts, fees, category-based rules, product-based rules, country or state rules, and group-specific outcomes.
 
-#### Derived products require careful sample selection <a href="#derived-products-require-careful-sample-selection" id="derived-products-require-careful-sample-selection"></a>
+A source system may not have a direct equivalent. Customer groups, price lists, wholesale roles, tax-exempt customers, B2B accounts, discounts, and regional fees may need to be translated into VirtueMart structures or rebuilt through configuration.
 
-Derived product patterns can look simple until the source catalog contains mixed inheritance behavior. Some child products may inherit most parent values. Others may override price, image, stock, dimensions, or description. Demo Migration samples should include simple products, parent/child products, multi-option products, child products with overridden values, and products with important stock or pricing differences.
+| Business rule         | VirtueMart-sensitive data                             | What should be preserved or rebuilt                                   |
+| --------------------- | ----------------------------------------------------- | --------------------------------------------------------------------- |
+| Wholesale pricing     | Shopper groups and prices                             | Group assignment, price visibility, tax behavior, and order examples. |
+| Tax exemptions        | Shopper groups, tax rules, country/state data         | Eligibility logic and historical order evidence.                      |
+| Promotional discounts | Calculation rules, coupons, date ranges               | Active rules, historical discount labels, and checkout totals.        |
+| Regional fees         | Shipment methods, tax rules, country/state conditions | Method availability and fee calculation.                              |
+| Multicurrency selling | Currency setup and price display                      | Currency records, exchange behavior, formatting, and order history.   |
 
-### Custom Fields, Attributes, and Specifications <a href="#custom-fields-attributes-and-specifications" id="custom-fields-attributes-and-specifications"></a>
+Historical records and live behavior should be separated. Migrated orders can preserve what happened in the past, but future checkout behavior depends on target configuration. Validation should test both: old orders must remain understandable, and new carts must calculate correctly.
 
-VirtueMart custom fields are not a single-purpose data bucket. They can support product specifications, shopper-selectable attributes, additional display values, plugin-triggered behavior, downloadable or related information, and layout-specific content. That makes custom fields powerful, but it also makes them easy to misunderstand during migration.
+### Orders, Payments, Shipments, and Historical Evidence <a href="#orders-payments-shipments-and-historical-evidence" id="orders-payments-shipments-and-historical-evidence"></a>
 
-A source platform may use separate concepts for attributes, options, metafields, custom product fields, tags, technical specifications, product filters, add-on fields, or app-specific values. VirtueMart may not treat all of those as the same thing. Some values should become visible specifications. Some should become shopper-selectable custom fields. Some may belong in descriptions, categories, filters, manufacturer data, or custom logic. Some may require Custom Service if the source behavior is not a normal field-to-field mapping.
+VirtueMart orders are not just totals. They provide business evidence: purchased products, selected variants or custom fields, shopper group context, billing and shipping addresses, tax and discount values, payment method labels, shipment method labels, order statuses, invoices, currencies, notes, and timestamps.
 
-#### Display data and buying data should not be mixed carelessly <a href="#display-data-and-buying-data-should-not-be-mixed-carelessly" id="display-data-and-buying-data-should-not-be-mixed-carelessly"></a>
+The target store may not reproduce every past plugin calculation as live logic. That does not automatically mean migration failed. The key question is whether historical orders remain usable for customer support, accounting reference, fulfillment review, and compliance needs. Live payment and shipment behavior should be validated through target plugin configuration and checkout testing.
 
-A technical specification such as material may help shoppers compare products. A selectable option such as size may determine what the customer buys. A hidden integration identifier may connect the product to an external ERP. These are different types of meaning. Treating them as equivalent custom fields can create a target store that appears complete but is difficult to buy from, filter, or operate.
+| Order evidence                | Why it matters                                                  | Review method                                                           |
+| ----------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Product line items            | Shows what was purchased and how product choices were recorded. | Compare simple, child-product, custom-field, and discount-heavy orders. |
+| Tax and discount values       | Explain historical totals and business rules.                   | Check totals, labels, rates, and source notes where available.          |
+| Payment and shipment labels   | Help customer service understand the order context.             | Confirm labels and statuses are readable after migration.               |
+| Invoices and order documents  | Support accounting and post-order operations.                   | Decide whether documents, numbers, or references need special handling. |
+| Currency and language context | Preserves localized purchase evidence.                          | Test multilingual and multicurrency order samples.                      |
 
-#### Plugin-driven custom fields need deeper review <a href="#plugin-driven-custom-fields-need-deeper-review" id="plugin-driven-custom-fields-need-deeper-review"></a>
+A strong validation set should include old and recent orders, paid and unpaid orders, refunded or cancelled examples if available, orders with coupons or discounts, shipment-sensitive orders, tax-sensitive orders, and orders from different shopper groups.
 
-VirtueMart custom fields may be supported by plugins or custom extensions. When a source store uses a custom configurator, subscription plugin, bundled-product behavior, special calculator, or external data feed, the migrated value may need more than ordinary field mapping. The correct question is whether VirtueMart should store a value, recreate a behavior, preserve a display field, or connect to a custom extension after migration.
+### Storefront, SEO, Language, and Template Relationships <a href="#storefront-seo-language-and-template-relationships" id="storefront-seo-language-and-template-relationships"></a>
 
-### Shopper Groups, Shopper Fields, and Customer Meaning <a href="#shopper-groups-shopper-fields-and-customer-meaning" id="shopper-groups-shopper-fields-and-customer-meaning"></a>
+VirtueMart storefront output is shaped by both VirtueMart and Joomla. Product and category data may be migrated correctly while the customer-facing result still changes because menus, aliases, modules, filters, template overrides, metadata, SEF routing, or language structure are different in the target site.
 
-VirtueMart customer meaning is shaped by shoppers, shopper groups, shopper fields, billing and shipping information, Joomla user accounts, and checkout/registration behavior. A customer record is not only a name and email address. It may carry group membership, address history, tax context, B2B classification, price-display rules, payment/shipment eligibility, or checkout field values.
+SEO-sensitive planning should include category paths, product aliases, canonical pages, metadata, redirected URLs, menu items, language-specific pages, and important landing pages. Storefront validation should include search, filtering, breadcrumbs, product detail pages, category pages, cart entry points, and module-driven product blocks.
 
-Shopper groups are especially important. They can influence prices, discounts, calculation rules, product access, payment methods, shipment methods, and price display. If the source platform uses customer groups, wholesale roles, B2B tiers, tax-exempt customers, membership levels, or special buyer segments, those groups should be reviewed before migration. A group name alone is not enough; the business rules attached to that group determine the migration meaning.
+| Storefront element | Data-model issue                                                            | Validation requirement                                |
+| ------------------ | --------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Product URL        | Depends on Joomla menu and VirtueMart alias behavior.                       | Compare source and target URLs for priority products. |
+| Category route     | Depends on category hierarchy and menu structure.                           | Test navigation depth, breadcrumbs, and redirects.    |
+| Template override  | May change field display or product layout.                                 | Review visible page output, not only admin records.   |
+| Module output      | May display featured, latest, related, or category-specific products.       | Confirm modules use migrated data correctly.          |
+| Language records   | May require translated product, category, menu, and metadata relationships. | Validate representative language versions.            |
 
-#### Shopper fields can affect checkout and account quality <a href="#shopper-fields-can-affect-checkout-and-account-quality" id="shopper-fields-can-affect-checkout-and-account-quality"></a>
+This is why VirtueMart migration should be reviewed as a working Joomla store, not only as a database transfer.
 
-VirtueMart shopper fields collect customer, billing, shipping, registration, and checkout data. Source platforms may have custom checkout fields, company fields, tax ID fields, VAT fields, delivery instructions, membership numbers, or external account identifiers. Some values can be mapped as supported fields. Others may require custom fields, configuration, or Custom Service review.
+### Custom, Plugin-Owned, and Integration-Owned Data <a href="#custom-plugin-owned-and-integration-owned-data" id="custom-plugin-owned-and-integration-owned-data"></a>
 
-A migrated customer profile should be validated against real customer-service needs. The merchant should be able to identify the customer, understand the account or group context, review addresses, interpret past orders, and determine whether any special tax, shipping, or pricing treatment applies.
+VirtueMart stores often include third-party plugins, custom fields, external integrations, ERP references, marketplace connectors, accounting exports, product feed tools, subscription extensions, custom checkout fields, custom reports, or custom database tables. Some of this data may be visible in the store but not part of the standard supported scope.
 
-### Prices, Currencies, Taxes, Discounts, and Calculation Rules <a href="#prices-currencies-taxes-discounts-and-calculation-rules" id="prices-currencies-taxes-discounts-and-calculation-rules"></a>
+The migration plan should classify these requirements early. Standard Service can cover supported data within standard mapping. Add-ons can extend supported outcomes where predefined. Custom Service is appropriate when data requires transformation, unsupported source extraction, custom target insertion, plugin-specific interpretation, custom logic, or integration-aware handling.
 
-VirtueMart pricing is connected to calculation rules. Tax, discounts, shopper groups, countries, states, currencies, products, categories, and time-sensitive conditions may all affect the final price a shopper sees. Source platforms often store tax and discount logic differently, so pricing migration should distinguish between historical order totals, product base prices, current price rules, tax configuration, and promotional logic.
+| Data type                                                       | Usual planning classification | Reason                                                           |
+| --------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------- |
+| Standard VirtueMart products, categories, customers, and orders | Standard Service candidate    | Data follows recognizable supported structures.                  |
+| Additional supported relationships or options                   | Add-ons candidate             | Scope can be expanded through defined service options.           |
+| Plugin-specific checkout data                                   | Custom Service review         | Meaning depends on a third-party extension or custom schema.     |
+| ERP or accounting identifiers                                   | Custom Service review         | External system continuity may require exact preservation rules. |
+| Custom product builders or configurators                        | Custom Service review         | Product meaning may not map to native VirtueMart structures.     |
 
-#### Historical price data is not the same as active pricing behavior <a href="#historical-price-data-is-not-the-same-as-active-pricing-behavior" id="historical-price-data-is-not-the-same-as-active-pricing-behavior"></a>
-
-An old order total shows what happened in the past. It does not automatically recreate the rule that produced the total. A product discount may be a migrated promotional record, a manual sale price, a source app rule, or a historical value no longer active. A tax amount in an old order may be useful for order history but separate from the tax rules that need to operate after launch.
-
-Migration planning should identify which pricing values must be migrated as records, which current rules must be configured in VirtueMart, and which historical order values should remain as reference information only.
-
-#### Calculation rules require condition review <a href="#calculation-rules-require-condition-review" id="calculation-rules-require-condition-review"></a>
-
-VirtueMart calculation rules can be conditional. Conditions may involve shopper groups, products, categories, countries, states, currencies, dates, and other shop configuration. A source rule that looks like a simple discount may carry hidden conditions. A tax rule may depend on shipping destination, billing country, product type, or customer status. These relationships should be documented before migration and validated with representative products and orders.
-
-### Payment and Shipment Method Meaning <a href="#payment-and-shipment-method-meaning" id="payment-and-shipment-method-meaning"></a>
-
-Payment and shipment methods in VirtueMart are method-based and plugin-sensitive. A source platform may store shipping rates, payment gateways, carrier rules, restrictions, payment statuses, or processor identifiers in a different structure. VirtueMart may require payment and shipment methods to be configured in the target environment even when historical orders are migrated.
-
-Payment and shipment methods can also be restricted by country, shopper group, order value, currency, category, coupon use, or plugin parameters. That means a payment method record is not enough. The availability conditions and plugin behavior must make sense in the target store.
-
-#### Historical method labels require interpretation <a href="#historical-method-labels-require-interpretation" id="historical-method-labels-require-interpretation"></a>
-
-Old orders may show PayPal, bank transfer, UPS, or standard shipping. Those labels may be sufficient for customer-service reference, but they do not guarantee that the corresponding gateway or shipment plugin is installed, configured, and behaving in the target store. Historical method data and live checkout configuration should be validated separately.
-
-#### Plugin-provided details may not be standard records <a href="#plugin-provided-details-may-not-be-standard-records" id="plugin-provided-details-may-not-be-standard-records"></a>
-
-Some payment and shipment plugins store transaction IDs, tracking values, carrier responses, labels, fraud checks, status changes, or customer-facing instructions. If those details matter after migration, they should be reviewed early. Plugin-owned data may require Custom Service when it is outside standard service capability or depends on custom migration logic adjustment.
-
-### Order, Invoice, and Status Meaning <a href="#order-invoice-and-status-meaning" id="order-invoice-and-status-meaning"></a>
-
-VirtueMart order history should remain useful after migration. Important order meaning includes the customer, billing and shipping address, purchased products, selected options or child products, prices, discounts, taxes, shipping charges, payment method, shipment method, currency, order status, comments, invoice references, and historical timestamps.
-
-Order statuses are not always equivalent across platforms. A source status such as completed, paid, shipped, fulfilled, processing, or refunded may not map cleanly to VirtueMart status meaning. If the source store uses custom statuses, fulfillment integration statuses, marketplace statuses, or payment-gateway statuses, those should be reviewed before migration.
-
-#### Invoices and documents depend on target configuration <a href="#invoices-and-documents-depend-on-target-configuration" id="invoices-and-documents-depend-on-target-configuration"></a>
-
-Invoices, delivery notes, order emails, and documents may be generated by VirtueMart configuration, templates, extensions, or external systems. Migrating order history does not automatically recreate every old document or every source-system template. If the merchant needs specific invoice references, document numbers, tax display, payment instructions, or email history, those requirements should be identified before execution.
-
-### Multilingual and Multicurrency Meaning <a href="#multilingual-and-multicurrency-meaning" id="multilingual-and-multicurrency-meaning"></a>
-
-VirtueMart multilingual behavior depends on the Joomla language environment and VirtueMart language structure. Source platforms may store translated product names, descriptions, categories, custom fields, metadata, URLs, and checkout labels differently. The target store should be validated by language, not only by default-language records.
-
-Multicurrency behavior also deserves separate interpretation. A source store may store base currency, order currency, display currency, exchange rates, payment currency, and rounded totals. VirtueMart migration should preserve order currency context where supported and confirm how target display currencies and rates are configured.
-
-#### Translation completeness is part of data quality <a href="#translation-completeness-is-part-of-data-quality" id="translation-completeness-is-part-of-data-quality"></a>
-
-A translated product should not only have a translated title. Category placement, custom fields, specifications, descriptions, metadata, menu links, and route behavior may all need language-specific review. Missing translations may not break the store technically, but they can reduce customer trust and create inconsistent storefront experiences.
-
-#### Currency behavior affects both catalog and order history <a href="#currency-behavior-affects-both-catalog-and-order-history" id="currency-behavior-affects-both-catalog-and-order-history"></a>
-
-Product prices, order totals, payment references, tax values, shipping charges, and discounts may interact with currency logic. If the source platform used live conversion, manual rates, payment-specific currency rules, or multi-region pricing, those assumptions should be documented before migration.
-
-### Joomla Storefront, SEO, Template, and Route Meaning <a href="#joomla-storefront-seo-template-and-route-meaning" id="joomla-storefront-seo-template-and-route-meaning"></a>
-
-VirtueMart storefront meaning is shaped by Joomla menus, modules, templates, overrides, metadata, routing, and SEO configuration. Source categories and products must become usable pages in the target storefront. A migrated product that is technically present may still be hard to find if menu routes, category relationships, modules, or SEO settings are not planned.
-
-#### Templates and overrides can change what data means visually <a href="#templates-and-overrides-can-change-what-data-means-visually" id="templates-and-overrides-can-change-what-data-means-visually"></a>
-
-VirtueMart templates and overrides can control how product fields, prices, custom fields, stock messages, manufacturer values, reviews, related products, payment options, and shipment information appear. If a source store depends on a custom layout, equivalent presentation may require Joomla template work or implementation review outside the migrated data itself.
-
-#### Routes and metadata affect discovery continuity <a href="#routes-and-metadata-affect-discovery-continuity" id="routes-and-metadata-affect-discovery-continuity"></a>
-
-Old product URLs, category URLs, metadata, aliases, canonical behavior, and internal links may carry search and customer-navigation value. Migration should identify high-value routes before execution. Redirects and menu planning may be needed when source paths cannot be preserved exactly.
-
-### Extension-Owned and Custom Source Data <a href="#extension-owned-and-custom-source-data" id="extension-owned-and-custom-source-data"></a>
-
-VirtueMart stores often rely on extensions, plugins, template overrides, custom code, import/export routines, ERP connectors, payment/shipment plugins, analytics tools, or custom admin workflows. Some of these structures produce visible data. Others only produce behavior.
-
-Custom Platform sources, unsupported extension data, external identifiers, bespoke product relationships, third-party order metadata, custom checkout logic, custom calculation behavior, and plugin-owned records should not be assumed to fit standard migration behavior. Custom Service should be reviewed when the expected VirtueMart result depends on custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke interpretation.
-
-### What Migrated Data Must Prove After Translation <a href="#what-migrated-data-must-prove-after-translation" id="what-migrated-data-must-prove-after-translation"></a>
-
-A completed VirtueMart migration should prove that the target store preserves operating meaning, not only record count.
-
-| Proof area                        | What the migrated result should show                                                                                                    |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog structure                 | Products, categories, manufacturers, media, and product relationships are understandable and manageable.                                |
-| Variant and custom field behavior | Parent/child products, selectable values, specifications, and plugin-supported fields preserve buying and display meaning.              |
-| Shopper context                   | Customer records, shopper groups, shopper fields, addresses, and account/order relationships remain useful.                             |
-| Pricing and calculation behavior  | Prices, taxes, discounts, currencies, and calculation rules are either correctly migrated, correctly configured, or flagged for review. |
-| Order history                     | Orders, statuses, comments, selected options, payment/shipment context, invoice references, and totals remain readable.                 |
-| Storefront continuity             | Product pages, category pages, menus, modules, routes, metadata, and template expectations support customer navigation.                 |
-| Custom behavior                   | Extension-owned data, Custom Platform source logic, external identifiers, and bespoke relationships are identified rather than hidden.  |
+Classification protects the migration from late surprises. It also helps the merchant decide what must be moved, what should be rebuilt, and what should be retired instead of recreated.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VirtueMart migration quality depends on translating commercial meaning into a Joomla-native commerce structure. Products, child products, custom fields, shopper groups, calculation rules, payment and shipment methods, orders, invoices, languages, currencies, templates, modules, and routes all contribute to whether the target store is usable after migration.
+VirtueMart data model differences are not only technical. They affect how products sell, how shopper groups behave, how prices calculate, how orders remain useful, how checkout methods appear, and how the Joomla storefront presents migrated records.
 
-The most important data-model question is not whether source records can be moved into VirtueMart. The stronger question is whether those records still explain how the merchant sells, prices, taxes, ships, displays, and supports the store. When source data includes complex product structures, shopper-group rules, plugin-owned behavior, multilingual content, custom fields, or Custom Platform relationships, those areas should be reviewed before Full Migration.
+A reliable VirtueMart migration plan separates Joomla structure from VirtueMart commerce data, studies product and shopper relationships, reviews calculation rules, tests payment and shipment context, validates storefront paths, and identifies plugin-owned or custom data before Full Migration. The strongest outcomes come from treating data meaning as the core planning unit, not from relying on record counts alone.
 
-Use Demo Migration results to confirm that VirtueMart preserves the meaning behind product structures, shopper groups, calculation rules, order history, and storefront routes. If the result exposes unsupported custom fields, unclear plugin-owned data, non-standard calculation logic, or Custom Platform source behavior, use Live Chat to confirm whether Advanced Data Mapping, Advanced Data Configure, Managed Service, or Custom Service should be part of the final migration plan.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do VirtueMart variants require special review?**
 
-**Why do VirtueMart product structures need special review during migration?**
+Because source variants may translate into VirtueMart child products, custom fields, or another configuration pattern. The right structure depends on SKU, stock, price, image, order-line, and checkout behavior.
 
-VirtueMart can use parent products, child products, custom fields, categories, manufacturers, media, and calculation rules to express catalog meaning. Source product variants or options may not map cleanly unless their buying, pricing, stock, and display behavior are reviewed.
+**Are VirtueMart shopper groups the same as customer groups on every source platform?**
 
-**Are VirtueMart custom fields the same as product attributes from another platform?**
+No. Shopper groups can affect pricing, visibility, tax, payment, shipment, and access behavior, so their business meaning should be reviewed before mapping.
 
-Not always. VirtueMart custom fields can represent selectable product values, visible specifications, plugin-supported behavior, downloadable or related information, or custom display logic. Source attributes should be classified before mapping so buying behavior is not confused with descriptive information.
+**Do payment and shipment methods migrate as ordinary records?**
 
-**Can shopper groups be migrated like ordinary customer groups?**
+Historical payment and shipment labels may be preserved as order evidence, but live checkout behavior usually depends on target VirtueMart plugins and configuration.
 
-Shopper groups may affect prices, tax rules, payment methods, shipment methods, product access, and price display. They should be reviewed as business-rule context, not only as customer labels.
+**Why does Joomla structure matter in a VirtueMart data model review?**
 
-**Do payment and shipment methods migrate as complete live checkout behavior?**
-
-Historical payment and shipment labels may be migrated for order-reference purposes where supported, but live checkout behavior usually depends on VirtueMart method configuration, plugins, restrictions, and target-store setup. Those settings should be validated separately.
-
-**How should multilingual VirtueMart data be checked after migration?**
-
-Validation should include translated product names, descriptions, categories, custom fields, metadata, menu paths, and storefront routes. A default-language pass is not enough for a multilingual VirtueMart store.
+Joomla controls menus, routes, modules, templates, language structure, metadata, and access rules. These elements influence how VirtueMart data appears and functions in the storefront.

@@ -1,317 +1,259 @@
 # VirtueMart Migration Pitfalls and Prevention
 
-VirtueMart migrations fail most often when a store is treated as a simple transfer of products, customers, and orders. VirtueMart is a Joomla e-commerce extension with its own catalog structure, shopper group logic, calculation rules, payment and shipment method behavior, multilingual context, storefront templates, modules, routes, and extension ecosystem. A reliable migration must preserve the business meaning behind these structures, not only the visible records.
+VirtueMart migration pitfalls usually appear when the store is reviewed as a simple product-and-order transfer instead of a Joomla-connected commerce environment. The safest approach is to identify the conditions that create failure, review representative examples early, and convert each risk into a concrete prevention action before Full Migration.
 
-VirtueMart 4.6.4 is the stable release baseline for migration planning. Joomla 6 compatibility or beta VirtueMart behavior should be reviewed separately when the target environment depends on it. For most migration planning, the safer assumption is that the target installation should be verified against the stable VirtueMart version, the selected Joomla version, the active template, and the extensions that shape the store.
+| Pitfall area      | Main prevention focus                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| Product meaning   | Preserve custom fields, child products, categories, media, inventory, and manufacturers.   |
+| Commercial logic  | Review shopper groups, prices, discounts, calculation rules, tax behavior, and currencies. |
+| Checkout history  | Separate historical payment and shipment records from live checkout configuration.         |
+| Joomla storefront | Validate menus, aliases, routes, templates, modules, overrides, and SEO-sensitive paths.   |
+| Special scope     | Identify plugin-owned, integration-owned, and custom-developed data before approval.       |
 
-### Pitfall 1: Treating VirtueMart as a generic Joomla product list <a href="#pitfall-1-treating-virtuemart-as-a-generic-joomla-product-list" id="pitfall-1-treating-virtuemart-as-a-generic-joomla-product-list"></a>
+A useful pitfall review should not stop at naming what might fail. Each pitfall should lead to a practical prevention action: collect the right source evidence, choose representative Demo Migration samples, separate historical data from live configuration, and assign unsupported or custom requirements to the right handling path before Full Migration.
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+For VirtueMart, the most important prevention discipline is to validate scenarios rather than isolated records. A product with child options, a shopper group with different pricing, an order with payment and shipment context, a multilingual category path, and a plugin-owned field reveal more risk than a large count of simple products.
 
-The migration is planned around product names, prices, images, and descriptions, while the structures that make VirtueMart products sellable are under-reviewed. Parent products, child products, custom fields, variants, related products, media files, manufacturers, categories, downloadable files, and shopper-facing options may not translate as expected.
+### Pitfall 1: Treating VirtueMart Products as Flat Catalog Records <a href="#pitfall-1-treating-virtuemart-products-as-flat-catalog-records" id="pitfall-1-treating-virtuemart-products-as-flat-catalog-records"></a>
 
-The result can look complete in administration but fail in commercial use. Shoppers may see products without the right choices, missing media, unclear relationships, incomplete downloadable-product behavior, or inconsistent category placement.
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+VirtueMart products are approved because product names, descriptions, images, and base prices appear in the target store. Deeper relationships are missed: parent-child products, custom fields, categories, manufacturers, media, inventory behavior, downloadable files, and related product logic.
 
-* Product samples are chosen only from simple products.
-* Parent and child products are not included in Demo Migration review.
-* Custom fields are described vaguely as notes, attributes, or options without confirming their function.
-* Downloadable products, media files, or manufacturer relationships are treated as secondary details.
-* Category and product samples do not include the store’s most important buying paths.
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+
+Validation focuses on simple products only. Complex products are not included in the Demo Migration sample. Product detail pages look incomplete even though administration records exist. Staff cannot explain whether child products or custom fields were expected to behave as variants, specifications, or purchase options.
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Build the sample set around selling structure, not record count. Include simple products, parent-child product relationships, products with custom fields, image-heavy products, downloadable products, products assigned to multiple categories, and products with important manufacturer or related-product meaning.
+Use representative product samples from every selling pattern. Include simple products, child products, products with custom fields, products with manufacturer relationships, products assigned to multiple categories, products with inventory pressure, and products with multilingual content.
 
-Custom fields should be classified before migration. Some custom fields may act as product options, variant selectors, display content, downloadable-product support, layout behavior, or extension-owned logic. If their meaning cannot be represented through standard migration behavior, Advanced Data Mapping, Advanced Data Configure, or Custom Service review may be required.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+Before approving the target store, review one high-value product family with child products, custom fields, multiple images, a manufacturer, a category path, and a completed cart test.
 
-A merchant selling apparel should not validate only a simple T-shirt product. The Demo Migration should include a parent product with size and color child products, products with different images, stock-sensitive variants, sale pricing, and categories used in storefront navigation.
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+The product can be found, viewed, selected, added to cart, priced, and purchased in the expected form, with its catalog relationships still understandable.
 
-Representative products remain commercially understandable in VirtueMart: shoppers can choose the correct product, product relationships make sense, media displays correctly, downloads remain usable where applicable, and the merchant can manage the catalog after migration without reconstructing critical product meaning manually.
+### Pitfall 2: Confusing Custom Fields, Child Products, and Product Options <a href="#pitfall-2-confusing-custom-fields-child-products-and-product-options" id="pitfall-2-confusing-custom-fields-child-products-and-product-options"></a>
 
-### Pitfall 2: Underestimating custom fields <a href="#pitfall-2-underestimating-custom-fields" id="pitfall-2-underestimating-custom-fields"></a>
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+VirtueMart custom fields are treated as ordinary attributes or static specifications. Child products are treated as unrelated products. Product selection behavior changes, variant-like relationships disappear, and customers may not be able to choose the right size, model, license, package, or configuration.
 
-VirtueMart custom fields are treated as generic extra data. In practice, they may affect product presentation, shopper choices, pricing behavior, child product handling, plugin logic, layout output, or extension-specific behavior. If these fields are migrated without understanding their purpose, the target store can lose important purchase or display logic.
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
-
-* The source store has many product-level fields with unclear names.
-* Custom fields are used by plugins or template overrides.
-* Product options behave differently across categories or product families.
-* Field values appear in product pages, checkout, invoices, or order details.
-* The merchant cannot explain which fields are informational and which are functional.
+The source store uses custom fields heavily. Some products have child products or variant-like patterns. The target product page shows information but not the expected selection behavior. Product options appear as text instead of actionable choices.
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Separate custom fields into functional groups before execution: display-only information, shopper selection, product relationship support, pricing influence, downloadable-product behavior, plugin-owned data, and custom implementation logic. Standard migration planning is stronger when the field purpose is known.
+Classify each product field before approval. Separate descriptive specifications, selectable purchase options, child-product relationships, downloadable fields, technical parameters, and custom extension fields. Confirm which ones can be handled as standard records and which require configuration or custom handling.
 
-When a field controls behavior rather than information display, it should be reviewed for Add-on or Custom Service fit. Custom Service is the correct path when field behavior depends on custom code, unsupported extension data, external identifiers, or bespoke transformation.
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+Review a product with multiple custom fields and child products in administration, storefront, cart, and checkout before approving the approach for the full catalog.
 
-A field labeled “material” may be informational on one store and selection-driving on another. If shoppers use it to choose product variations or if pricing changes by value, it should not be treated as a harmless descriptive field.
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+The target store preserves both visible product information and the buying behavior attached to custom fields or child products.
 
-Important custom fields are visible, meaningful, and functional in the target store according to their intended role. Fields that cannot be handled through standard service capability have been identified before Full Migration rather than discovered during launch review.
+### Pitfall 3: Reviewing Shopper Records Without Shopper Groups and Joomla User Context <a href="#pitfall-3-reviewing-shopper-records-without-shopper-groups-and-joomla-user-context" id="pitfall-3-reviewing-shopper-records-without-shopper-groups-and-joomla-user-context"></a>
 
-### Pitfall 3: Losing shopper group and pricing meaning <a href="#pitfall-3-losing-shopper-group-and-pricing-meaning" id="pitfall-3-losing-shopper-group-and-pricing-meaning"></a>
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+Customer records are approved as contact data, while Joomla user identity, VirtueMart shopper profiles, shopper groups, addresses, permissions, and pricing implications are under-reviewed. Wholesale customers, registered buyers, special-price groups, or restricted buyer types may lose operational meaning.
 
-Shopper groups, customer-specific pricing, tax rules, discounts, and visibility rules are migrated as isolated records without preserving how they work together. VirtueMart stores may use shopper groups for B2B pricing, tax treatment, catalog visibility, payment availability, shipment availability, or customer segmentation.
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
 
-If this logic is not reviewed, customers may see incorrect prices, missing discounts, wrong tax behavior, or payment and shipment options that do not match their commercial profile.
-
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
-
-* Customer groups are present, but pricing rules are not mapped to them clearly.
-* B2B customers, wholesale customers, or tax-exempt customers are mixed with retail customers.
-* Discounts or calculation rules depend on group, country, product, category, or order amount.
-* Payment or shipment methods are restricted by customer profile.
-* Orders contain prices that cannot be explained from visible product prices alone.
+Only names and email addresses are checked. Shopper group membership is not validated. Staff cannot confirm whether group-specific pricing or access rules are preserved. Customer history looks present but does not support buyer segmentation.
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Document shopper group logic before migration. Identify which groups affect pricing, tax, discounts, payment methods, shipment methods, visibility, or account handling. Include representative customers and orders from each important shopper group in Demo Migration review.
+Validate Joomla users and VirtueMart shopper data together. Include customers from each important shopper group, customers with multiple addresses, customers with historical orders, and customers tied to special pricing or access requirements.
 
-Pricing validation should compare product detail pages, cart totals, checkout totals, historical order totals, tax lines, discount lines, and customer group visibility. A record-level match is not enough if the calculation outcome is wrong.
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+Test one retail customer, one wholesale customer, one customer with multiple addresses, and one customer with order history before approving customer migration quality.
 
-A B2B store should test a retail customer, wholesale customer, tax-exempt customer, and guest checkout sample. The test should verify not only account records but also product pricing, discounts, tax treatment, shipment options, and payment options.
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+Staff can identify the customer, confirm the correct shopper group, review addresses, and interpret order history without losing buyer context.
 
-Shopper groups remain meaningful after migration. Customer accounts are assigned correctly, pricing and discounts behave as expected, tax treatment is understandable, and payment or shipment restrictions match the merchant’s intended operating model.
+### Pitfall 4: Assuming Prices, Discounts, Taxes, and Calculation Rules Will Match Automatically <a href="#pitfall-4-assuming-prices-discounts-taxes-and-calculation-rules-will-match-automatically" id="pitfall-4-assuming-prices-discounts-taxes-and-calculation-rules-will-match-automatically"></a>
 
-### Pitfall 4: Assuming calculation rules are ordinary tax or discount fields <a href="#pitfall-4-assuming-calculation-rules-are-ordinary-tax-or-discount-fields" id="pitfall-4-assuming-calculation-rules-are-ordinary-tax-or-discount-fields"></a>
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+Prices and order totals are reviewed as isolated numbers. VirtueMart calculation rules, tax behavior, discounts, shopper-group prices, currencies, and rounding assumptions are not tested. The target store may preserve historical values but fail to reproduce the intended live pricing behavior.
 
-VirtueMart calculation rules can represent taxes, discounts, fees, margins, and other price adjustments. If they are treated as simple tax fields or discount labels, the migrated store may preserve visible names but lose calculation order, conditions, or applicability.
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
 
-This can affect product prices, cart totals, checkout totals, historical order interpretation, and invoice review.
-
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
-
-* The source store has many tax or discount rules with overlapping conditions.
-* Rules depend on country, state, shopper group, product category, manufacturer, or product type.
-* Cart totals differ from expected totals during Demo Migration review.
-* Historical orders include adjustments that do not match visible product prices.
-* The merchant relies on invoices or accounting references from past orders.
+The source store uses multiple tax rules, discounts, shopper-group pricing, or currencies. Historical orders appear correct, but test carts show different totals. Staff cannot explain whether rules should be migrated, rebuilt, or reconfigured.
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Review calculation rules as business logic. Confirm what each important rule does, when it applies, and whether it should be represented as migrated data, target configuration, or a custom transformation requirement.
+Separate historical financial records from active calculation behavior. Validate order history for readability, then test live cart and checkout scenarios for each important rule pattern. Confirm whether calculation rules belong in configuration, Add-ons, or Custom Service.
 
-Order samples should include tax-heavy, discount-heavy, international, wholesale, and exceptional orders. The review should compare totals, subtotals, tax lines, discounts, shipment costs, payment-related charges, and invoice output where relevant.
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+Run test carts for a retail shopper, a wholesale shopper, a taxable address, a non-taxable address, a discounted product, and a multi-currency display case if applicable.
 
-A store with EU tax rules and customer group discounts should test domestic retail orders, international orders, wholesale orders, discounted products, and mixed-cart orders. Each sample should be checked through product page, cart, checkout, and order history views.
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+Historical order values remain understandable, and live pricing behavior is either correctly configured or explicitly scoped for further handling.
 
-Important taxes, discounts, and calculation outcomes remain understandable. Product and cart totals make sense, historical orders can be interpreted, and any calculation behavior requiring configuration or Custom Service review is identified before launch.
+### Pitfall 5: Treating Shipment and Payment Records as Live Plugin Behavior <a href="#pitfall-5-treating-shipment-and-payment-records-as-live-plugin-behavior" id="pitfall-5-treating-shipment-and-payment-records-as-live-plugin-behavior"></a>
 
-### Pitfall 5: Treating payment and shipment methods as simple labels <a href="#pitfall-5-treating-payment-and-shipment-methods-as-simple-labels" id="pitfall-5-treating-payment-and-shipment-methods-as-simple-labels"></a>
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+Past payment and shipment method names are mistaken for active checkout functionality. The store may preserve historical payment and shipment context while the live target checkout still requires current payment plugins, shipment plugins, credentials, zones, rates, and configuration.
 
-Payment and shipment methods may depend on plugins, countries, shopper groups, order totals, products, weights, zones, or custom restrictions. Migration may preserve method names while losing the conditions that determine when those methods appear or how they calculate charges.
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
-
-* The merchant uses multiple payment or shipment plugins.
-* Some methods apply only to specific countries, customer groups, order totals, weights, or product types.
-* Historical orders include shipment or payment details not visible in normal exports.
-* The target store needs replacement plugins rather than the same plugin stack.
-* Payment references, transaction details, or shipment tracking are important for support.
+Orders show payment and shipment names, but live checkout has missing or incorrect methods. Shipping rates differ from the source store. Payment methods appear in history but are not available to customers. Credentials or plugin compatibility have not been checked.
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Inventory payment and shipment behavior before migration. Identify which methods are standard, plugin-owned, custom-coded, or externally integrated. Confirm whether the target installation will use the same method, a replacement method, or a configured equivalent.
+Validate historical order context separately from live checkout setup. Confirm active payment plugins, shipment methods, credentials, zones, tax interactions, and checkout display before launch.
 
-Demo Migration review should include orders with different payment methods, shipment methods, countries, cart totals, customer groups, and delivery conditions. Configuration-sensitive behavior should not be judged as data failure until target setup has been reviewed.
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+Test checkout using the most common shipment method, the most important payment method, a restricted location, and an order value that triggers a shipping or payment condition.
 
-A store using flat rate, weight-based shipping, local pickup, and payment restrictions by shopper group should test a sample order for each method and confirm whether the method appears correctly at checkout and remains understandable in order history.
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+Historical shipment and payment records are readable, and live checkout methods are configured, tested, and documented for launch.
 
-Payment and shipment methods remain operationally meaningful. Available methods match the merchant’s target configuration, historical orders preserve useful context, and plugin-owned or custom method behavior has been reviewed before Full Migration.
+### Pitfall 6: Ignoring Joomla Menus, Routes, Templates, Modules, and SEO Continuity <a href="#pitfall-6-ignoring-joomla-menus-routes-templates-modules-and-seo-continuity" id="pitfall-6-ignoring-joomla-menus-routes-templates-modules-and-seo-continuity"></a>
 
-### Pitfall 6: Ignoring Joomla template, module, and route dependencies <a href="#pitfall-6-ignoring-joomla-template-module-and-route-dependencies" id="pitfall-6-ignoring-joomla-template-module-and-route-dependencies"></a>
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+VirtueMart records migrate, but Joomla storefront access breaks. Category routes, product aliases, menu-driven paths, modules, template overrides, search paths, metadata, and redirects are not validated. Customers and search engines may lose access to important product pages.
 
-VirtueMart migration is treated as back-office data work while the storefront depends on Joomla templates, modules, menu items, SEF routes, overrides, metadata, and extension-specific layout decisions. Products and categories can migrate correctly while navigation, page layout, search visibility, and conversion paths degrade.
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
-
-* The store depends heavily on custom template overrides.
-* Product and category pages are reached through carefully built Joomla menus.
-* SEO traffic depends on stable product, category, or manufacturer URLs.
-* Modules display featured products, related products, categories, cart summaries, or shopper-specific content.
-* The implementation team has not separated migration work from Joomla storefront setup.
+Products are visible in administration but difficult to reach from the storefront. Category pages have unexpected layouts. Product URLs changed without redirect planning. Modules or template overrides display outdated information. Important landing pages are not included in validation.
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Map the storefront before migration. Identify high-value URLs, main category paths, key product pages, cart and checkout entry points, metadata, menu structures, module positions, template overrides, and SEO-sensitive routes.
+Validate storefront behavior through Joomla paths, not only VirtueMart administration. Review important menus, aliases, SEF URLs, category pages, product pages, cart modules, search results, template overrides, and redirect-sensitive pages.
 
-Storefront continuity should be validated after data migration and after Joomla implementation work. If a layout issue comes from a template override or module configuration, it should be classified separately from data migration accuracy.
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+Select high-traffic category and product URLs, then verify route behavior, metadata, menu context, product display, add-to-cart behavior, and redirect planning.
 
-A merchant with organic search traffic should choose top product URLs, top category URLs, manufacturer pages, and checkout paths as validation samples. Redirect planning and menu configuration should be reviewed alongside the migrated catalog.
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+Customers can find key products through the expected storefront paths, and SEO-sensitive route changes are handled deliberately.
 
-Customers can find and purchase important products through the intended Joomla navigation. Product and category pages render correctly, SEO-sensitive routes are planned, and data migration is not incorrectly blamed for template or menu configuration gaps.
+### Pitfall 7: Under-Sampling Multilingual and Multicurrency Behavior <a href="#pitfall-7-under-sampling-multilingual-and-multicurrency-behavior" id="pitfall-7-under-sampling-multilingual-and-multicurrency-behavior"></a>
 
-### Pitfall 7: Under-validating multilingual and multicurrency behavior <a href="#pitfall-7-under-validating-multilingual-and-multicurrency-behavior" id="pitfall-7-under-validating-multilingual-and-multicurrency-behavior"></a>
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+The migration is approved in the default language or currency only. Translated product names, descriptions, aliases, metadata, category paths, checkout labels, currencies, and localized buying behavior are not tested. Non-default language storefronts may appear incomplete or inconsistent.
 
-Multilingual product content, translated categories, currencies, countries, shopper fields, payment rules, shipment rules, tax behavior, and localized storefront content may be treated as secondary details. This can produce a target store that works in one language or currency but breaks commercial meaning for international customers.
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
-
-* Only the default language is included in validation samples.
-* Product names, descriptions, categories, or custom fields have translations.
-* Currency display, exchange rates, or country-specific rules matter.
-* International orders use different taxes, shipment methods, or payment methods.
-* Content pages, menu items, or metadata are localized.
+Only one language is reviewed. Translated product pages have missing fields. Category aliases do not align. Currency display differs from expectation. Staff cannot confirm whether language-specific records or currency behavior are historical, configured, or custom.
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Validate multilingual and multicurrency behavior with representative samples. Include products, categories, custom fields, customer accounts, orders, checkout paths, payment methods, shipment methods, tax cases, and routes across important languages or currencies.
+Include multilingual and multicurrency examples in Demo Migration review. Check product pages, categories, menus, aliases, metadata, checkout labels, price display, and important localized paths in every key language or market.
 
-Older multilingual implementations may differ from current stable VirtueMart behavior. If the source store uses custom translation handling or old extension behavior, version-specific review may be needed.
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+Review one product family, one category, one cart path, and one checkout path in each important language before approving migration quality.
 
-A store selling in English and German with euro and pound pricing should test translated product pages, translated categories, currency display, country-specific checkout, tax treatment, shipment availability, and order history readability.
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+Localized storefront paths, product information, metadata, and buying context remain usable in the target store.
 
-International shoppers can browse, select, and purchase products in the intended language and currency context. Translated content remains meaningful, and tax, payment, shipment, and order information remain usable across the merchant’s main markets.
+### Pitfall 8: Treating Extension-Owned, Integration-Owned, or Custom Data as Standard VirtueMart Scope <a href="#pitfall-8-treating-extension-owned-integration-owned-or-custom-data-as-standard-virtuemart-scope" id="pitfall-8-treating-extension-owned-integration-owned-or-custom-data-as-standard-virtuemart-scope"></a>
 
-### Pitfall 8: Planning around unverified Joomla or VirtueMart version behavior <a href="#pitfall-8-planning-around-unverified-joomla-or-virtuemart-version-behavior" id="pitfall-8-planning-around-unverified-joomla-or-virtuemart-version-behavior"></a>
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+Data created by third-party plugins, ERP connectors, reporting extensions, custom tables, template modifications, or scripts is assumed to be standard VirtueMart data. During validation, the records may be missing, partially present, or unusable because they require special handling.
 
-The migration assumes compatibility with a Joomla or VirtueMart version that has not been verified for the target installation. VirtueMart 4.6.4 is the stable release baseline for planning, while Joomla 6 or beta-version behavior should be tested separately when relevant. If a merchant plans around beta compatibility or unsupported version assumptions, migration results may become harder to interpret.
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
-
-* The target environment is expected to run beyond the stable support range without confirmation.
-* The implementation team plans around beta VirtueMart behavior.
-* Older source behavior is assumed to match the current stable release.
-* Joomla templates, plugins, or overrides have not been checked against the target version.
-* The merchant cannot identify the exact source and target VirtueMart versions.
+The source store depends on external systems, custom exports, marketplace connectors, price feeds, inventory sync, reporting tables, or custom product fields. Staff cannot identify where important records are stored. The Demo Migration omits business-critical fields.
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-Confirm the source VirtueMart version, target VirtueMart version, Joomla version, PHP environment, template compatibility, plugin stack, and extension dependencies before migration. Version assumptions should be documented before Demo Migration so unexpected behavior can be classified correctly.
+Inventory non-standard data before approval. Identify the owner of each important field or workflow: VirtueMart core, Joomla core, a plugin, an integration, a template customization, or custom development. Escalate special records before Full Migration.
 
-If the target depends on beta or forward-compatibility behavior, the project should be reviewed carefully before execution. Custom Service may be needed when the expected result depends on unsupported behavior, custom migration logic adjustment, extension-specific interpretation, or bespoke transformation.
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+Create a short custom-data map for product feeds, ERP identifiers, inventory sync fields, custom reports, and modified checkout fields before finalizing service scope.
 
-A merchant planning a Joomla 6 site should not assume stable VirtueMart 4 behavior will apply automatically. The target environment should be verified before migration planning, and any beta-version dependency should be treated as a separate risk rather than normal migration scope.
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+Every business-critical non-standard record is either included in scope, excluded intentionally, or assigned to Custom Service for review.
 
-The migration is planned against a verified source and target version. Version-dependent behavior is not discovered after Full Migration, and any beta, unsupported, or older-version requirement is reviewed before execution.
+### Pitfall 9: Using Demo Migration Samples That Do Not Expose Real Complexity <a href="#pitfall-9-using-demo-migration-samples-that-do-not-expose-real-complexity" id="pitfall-9-using-demo-migration-samples-that-do-not-expose-real-complexity"></a>
 
-### Pitfall 9: Choosing weak Demo Migration samples <a href="#pitfall-9-choosing-weak-demo-migration-samples" id="pitfall-9-choosing-weak-demo-migration-samples"></a>
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+Demo Migration is approved using clean, simple records. Complex product families, shopper groups, calculation rules, multilingual pages, plugin-owned fields, and unusual orders are left out. Full Migration then exposes issues that should have been visible earlier.
 
-Demo Migration uses simple records that do not represent the store’s real complexity. The result appears successful, but Full Migration later reveals problems with custom fields, parent/child products, shopper groups, calculation rules, multilingual content, payment methods, shipment methods, template dependencies, or extension-owned data.
+#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
-
-* Demo Migration samples are chosen randomly.
-* The sample set does not include high-revenue products or difficult product structures.
-* Orders with taxes, discounts, shipments, refunds, or multiple customer groups are excluded.
-* Multilingual, multicurrency, downloadable, and custom-field cases are not tested.
-* The merchant approves the Demo Migration based only on record counts.
+The sample set contains only simple products. Orders lack tax, shipment, payment, coupon, or discount examples. No shopper group examples are included. Multilingual records and custom-field products are missing from the review.
 
 #### Prevention <a href="#prevention-8" id="prevention-8"></a>
 
-Choose samples that expose risk. A strong VirtueMart sample set should include simple products, parent/child products, custom-field-heavy products, important categories, media-rich products, downloadable products if used, customer groups, recent orders, older orders, discounted orders, tax-sensitive orders, international orders, payment/shipment variation, and SEO-sensitive storefront paths.
+Build the Demo Migration sample around risk, not convenience. Include records that represent the hardest catalog, pricing, customer, order, storefront, multilingual, and custom-data patterns in the store.
 
-Demo Migration should prove meaning. It should answer whether shoppers can buy, merchants can manage, orders can be interpreted, and configuration-sensitive behavior is understood.
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
 
-#### Recommendation Example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+Include one complex product family, one shopper-group price case, one tax/shipment/payment order, one multilingual product, one SEO-sensitive route, and one custom or plugin-owned record in the review set.
 
-A store with 5,000 products should not test only five simple products. A better sample set includes the best-selling simple product, a parent product with children, a custom-field-heavy product, a downloadable product, a product with special tax or shipment behavior, and orders from different shopper groups.
+#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
 
-#### Pass Condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+The sample set proves the migration approach against the store’s real operating complexity, not only against simple records.
 
-Demo Migration samples represent the store’s real operating patterns. Approval is based on product usability, order meaning, shopper group behavior, calculation logic, storefront continuity, and configuration review—not only record presence.
+### Pitfall 10: Delaying the Service-Path Decision Until After Validation Problems Appear <a href="#pitfall-10-delaying-the-service-path-decision-until-after-validation-problems-appear" id="pitfall-10-delaying-the-service-path-decision-until-after-validation-problems-appear"></a>
 
-### Pitfall 10: Escalating service-path issues too late <a href="#pitfall-10-escalating-service-path-issues-too-late" id="pitfall-10-escalating-service-path-issues-too-late"></a>
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
+The store proceeds with a light approach even though the source structure shows complexity. Custom fields, child products, shopper groups, calculation rules, plugins, template overrides, multilingual content, and custom data are reviewed too late. Remediation becomes more expensive and launch confidence decreases.
 
-The migration begins under an approach that is too light for the source complexity. Custom fields, plugin-owned data, Custom Platform sources, external identifiers, shopper group logic, calculation rules, multilingual complexity, custom templates, and extension-specific behavior are discovered late, forcing rework or delaying launch.
+#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
-
-* The source platform contains custom fields or extension data that has not been classified.
-* The merchant expects non-standard transformations but has not reviewed Custom Service.
-* Plugin data affects products, orders, payment, shipment, customer accounts, or reports.
-* The target implementation depends on custom Joomla templates or overrides.
-* Demo Migration reveals repeated issues that cannot be solved through normal configuration.
+Known complexity is postponed until after Full Migration. Add-ons are selected without confirming fit. Custom Service is considered only after validation fails. Launch planning assumes that standard data movement will resolve structural differences automatically.
 
 #### Prevention <a href="#prevention-9" id="prevention-9"></a>
 
-Match the service approach to the migration burden early. Standard Service may fit clear supported data. Managed Service may fit Next-Cart-led execution where standard service capability and purchased Add-ons are enough. Custom Service should be reviewed when the project requires Custom Platform handling, unsupported extension data, custom fields, external identifiers, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, or broader bespoke interpretation.
+Use preparation and Demo Migration findings to choose the right service path early. Keep Add-ons and Custom Service separate. Use Add-ons for defined supported options and Custom Service for special structures, custom fields, integration-owned data, unusual logic, or requirements that need technical review.
 
-#### Recommendation Example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
 
-A merchant migrating from a heavily customized source store with custom product logic and plugin-owned order metadata should not wait until Full Migration to ask whether that behavior can be preserved. The requirements should be reviewed before Demo Migration samples are selected.
+If Demo Migration reveals custom-field ambiguity, missing shopper group behavior, plugin-owned records, and route issues, revise the migration approach before Full Migration instead of approving the store with unresolved exceptions.
 
-#### Pass Condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
 
-The selected service approach matches the confirmed complexity. Add-on needs and Custom Service requirements are identified before execution, and the merchant understands which outcomes belong to migration, target configuration, Joomla implementation, or custom review.
+The chosen approach reflects the actual VirtueMart store: standard records stay in standard scope, supported options use Add-ons, and special requirements are reviewed through Custom Service before launch pressure begins.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-VirtueMart migration pitfalls usually come from underestimating how much meaning sits behind products, custom fields, shopper groups, calculation rules, payment and shipment methods, multilingual behavior, Joomla templates, modules, routes, and extension-owned data. A strong migration plan prevents these issues by confirming the target version, selecting meaningful Demo Migration samples, separating migrated data from configuration work, and escalating custom behavior early.
+VirtueMart migration pitfalls are preventable when validation focuses on relationships, behavior, and Joomla storefront context. The highest-risk issues usually involve custom fields, child products, shopper groups, calculation rules, shipment and payment behavior, multilingual content, template overrides, plugin-owned records, and weak sample selection.
 
-Use Demo Migration results to test whether VirtueMart preserves real operating meaning, not only whether records appear in the target store. If product relationships, custom fields, shopper groups, calculation rules, multilingual behavior, payment or shipment methods, Joomla storefront dependencies, Custom Platform data, or version-specific behavior affect launch quality, review the migration path through Live Chat before Full Migration.
+A strong prevention approach tests representative examples, separates migrated history from live configuration, and turns findings into service-path decisions before Full Migration. That approach protects launch readiness and helps the target VirtueMart store remain commercially usable.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why do VirtueMart migrations need more than record-count validation?**
+**What is the most common VirtueMart migration pitfall?**
 
-VirtueMart stores often depend on product relationships, custom fields, shopper groups, calculation rules, payment methods, shipment methods, multilingual content, templates, modules, and routes. Record counts may confirm that data moved, but they do not prove the store remains usable.
+One of the most common pitfalls is treating VirtueMart products as flat records while overlooking custom fields, child products, shopper groups, calculation rules, and Joomla storefront dependencies.
 
-**What VirtueMart records should be included in Demo Migration samples?**
+**Why do custom fields need special review?**
 
-A strong sample set should include simple products, parent/child products, custom-field-heavy products, important categories, downloadable products if used, customer groups, recent and older orders, discounted orders, tax-sensitive orders, payment and shipment variation, multilingual examples, and SEO-sensitive storefront paths.
+VirtueMart custom fields may represent selectable options, specifications, variant-like behavior, downloadable information, or custom extension data. Their meaning must be confirmed before approval.
 
-**Can old VirtueMart custom fields create migration problems?**
+**Can shipment and payment history guarantee live checkout behavior?**
 
-Yes. Custom fields may control product display, shopper choices, pricing, downloadable files, plugin behavior, or layout output. They should be classified before migration so standard mapping, Add-on review, or Custom Service review can be planned correctly.
+No. Historical orders preserve past context, while live checkout depends on current VirtueMart configuration, payment plugins, shipment plugins, credentials, zones, and rates.
 
-**Should Joomla 6 or beta VirtueMart behavior be assumed during migration?**
+**When should Custom Service be considered for VirtueMart?**
 
-No. Stable VirtueMart behavior should be verified against the intended target installation. Joomla 6 or beta-version requirements should be reviewed separately because they may affect compatibility, templates, plugins, extensions, and validation expectations.
-
-**When should Custom Service be reviewed for a VirtueMart migration?**
-
-Custom Service should be reviewed when the source includes Custom Platform data, unsupported extension data, custom fields, external identifiers, bespoke calculation logic, plugin-owned order details, custom Joomla templates, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+Custom Service should be considered when the store depends on custom fields, child-product logic, plugin-owned records, integrations, unusual calculation rules, or custom-developed workflows that do not fit standard scope.

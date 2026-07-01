@@ -1,226 +1,185 @@
 # Phoca Cart Pre-Migration Preparation Checklist
 
-Preparation for a Phoca Cart migration should begin with the operating model the new Joomla store must support. Phoca Cart is not only a product-and-order destination. It can involve Joomla categories and menus, product attributes and options, specifications, parameters, stock behavior, downloadable products, customer groups, coupons, reward points, tax rules, shipping and payment plugins, invoice expectations, POS-related workflows, multilingual and multicurrency configuration, modules, template overrides, and other Phoca or Joomla extensions.
+Phoca Cart preparation should begin with evidence, not assumptions. A Phoca Cart store can combine Joomla site structure, Phoca Cart product records, attributes, options, specifications, manufacturers, categories, customer groups, tax rates, currencies, languages, order statuses, reward points, coupons, payment plugins, shipping plugins, invoices, template overrides, modules, and extension-owned behavior. Preparing only a product export is not enough when the target result must support real storefront use, order review, customer service, and launch validation.
 
-Phoca Cart 6.1.0 is the current official stable release, so preparation should normally evaluate target behavior against that release. Some merchants still operate older Phoca Cart installations, and Next-Cart can support migration projects from or to Phoca Cart across versions when the selected migration path and project requirements are reviewed correctly. Older operational versions should be prepared with version-specific evidence rather than assumed to behave exactly like the current release.
+A strong preparation process separates three things before migration begins: the records that should move, the Phoca Cart configuration that must exist in the target Joomla store, and the custom or extension-owned behavior that may need separate review. That separation prevents ordinary data movement from being judged against requirements that actually belong to configuration, Add-ons, Custom Service, or post-migration implementation work.
 
-### Preparation Priorities Before Migration <a href="#preparation-priorities-before-migration" id="preparation-priorities-before-migration"></a>
+| Preparation question                                    | Phoca Cart planning answer                                                                                                                                                           |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| What must be ready in the target store?                 | Joomla, Phoca Cart, templates, modules, menus, currencies, languages, tax, shipping, payment, and checkout settings should be reviewed before migration.                             |
+| Which records need the most careful preparation?        | Products, categories, manufacturers, attributes, options, specifications, customers, customer groups, orders, coupons, reward points, discounts, tax, shipping, and payment context. |
+| What should not be assumed to migrate as ordinary data? | Template overrides, module placement, plugin configuration, POS workflows, invoice layouts, custom code, import/export routines, and third-party integrations.                       |
+| What should Demo Migration prove?                       | That representative records preserve commercial meaning inside Phoca Cart, not merely that records appear in the administrator area.                                                 |
 
-A strong preparation process should answer four practical questions before the migration process begins:
+### Confirm the Target Store Structure <a href="#confirm-the-target-store-structure" id="confirm-the-target-store-structure"></a>
 
-1. Which Phoca Cart version and Joomla environment will the target store use?
-2. Which source data carries selling, pricing, tax, shipping, payment, loyalty, language, or storefront meaning?
-3. Which behavior belongs to migrated data, and which behavior must be configured inside Joomla, Phoca Cart, templates, modules, or plugins?
-4. Which samples should be used during Demo Migration to prove the migration result before Full Migration?
+The target store structure should be confirmed before catalog cleanup, sample selection, or service-path decisions. Phoca Cart works inside Joomla, so the target environment includes more than the Phoca Cart component alone. The Joomla version, Phoca Cart version, active template, menu structure, module positions, plugins, language setup, currency settings, and access-level expectations can all affect how migrated data is interpreted after import.
 
-| Preparation area                | What to confirm                                                                                                | Why it matters                                                                                                            |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Version and environment         | Phoca Cart version, Joomla version, PHP/database environment, template framework, installed Phoca extensions   | Older and current Phoca Cart installations may differ in behavior, extension compatibility, and administrative structure. |
-| Catalog structure               | Products, categories, attributes, options, specifications, parameters, stock, downloads, images, manufacturers | Catalog meaning affects shopper selection, filtering, product comparison, inventory, and administration after migration.  |
-| Buyer and pricing logic         | Customers, customer groups, group prices, coupons, reward points, discounts, access expectations               | Buyer-specific behavior can change the commercial meaning of migrated products and orders.                                |
-| Operational configuration       | Tax, shipping, payment, invoices, order statuses, POS expectations, email/document templates                   | These areas often require target configuration rather than record movement alone.                                         |
-| Joomla storefront layer         | Menus, modules, templates, overrides, aliases, language routing, category paths, product pages                 | A correct data result can still feel incomplete if Joomla presentation and discovery are not ready.                       |
-| Custom and extension-owned data | Custom fields, third-party plugins, integrations, import/export workflows, bespoke code                        | Non-standard behavior may require Add-on review, Custom Service, or separate implementation work.                         |
+Start by documenting the exact Joomla and Phoca Cart target versions. Phoca Cart can run across different Joomla generations, and the official project highlights compatibility with modern Joomla releases, payment and shipping plugins, modules, multilingual and multicurrency support, template overrides, import/export features, and Joomla CMS integration. Those features are useful only when the target environment is prepared with the same operating assumptions the store will use after launch.
 
-### 1. Confirm the Intended Phoca Cart and Joomla Version <a href="#id-1-confirm-the-intended-phoca-cart-and-joomla-version" id="id-1-confirm-the-intended-phoca-cart-and-joomla-version"></a>
+| Target-store area       | What to confirm                                                                                             | Why it matters for Phoca Cart                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Joomla environment      | Joomla version, PHP and database environment, user/access setup, language structure                         | Phoca Cart behavior depends on the Joomla site that hosts it.                                           |
+| Phoca Cart installation | Target Phoca Cart version, enabled features, core settings, modules, plugins                                | Product, checkout, invoice, tax, shipping, payment, and display behavior require target-side readiness. |
+| Storefront structure    | Menus, aliases, modules, template overrides, product/category routes                                        | Correct data can still be hard to validate when storefront paths are unfinished.                        |
+| Commerce configuration  | Currencies, countries, regions, tax rates, shipping methods, payment methods, order statuses                | These settings give commercial meaning to migrated records and future checkout behavior.                |
+| Extension stack         | Phoca modules, payment plugins, shipping plugins, search/filter modules, template framework, custom plugins | Extension-owned behavior may not be ordinary Phoca Cart record movement.                                |
 
-Version confirmation should happen before catalog mapping, Demo Migration sample selection, or service-path decisions. A merchant migrating into Phoca Cart 6.1.0 may need different preparation from a merchant targeting an older operational installation or moving from an older Phoca Cart version to a newer one.
+The target store should also be evaluated for catalog mode, standard cart behavior, downloadable products, B2B or wholesale pricing, customer group use, reward points, PDF invoices, POS-related workflows, wish lists, comparison lists, search/filter modules, and multilingual or multicurrency requirements. These areas do not all become migration scope automatically, but they influence preparation and validation.
 
-#### Confirm the target store environment <a href="#confirm-the-target-store-environment" id="confirm-the-target-store-environment"></a>
+If the source or target uses an older Phoca Cart installation, collect evidence from that exact installation instead of assuming current-release behavior. Version differences, template choices, extension availability, and Joomla compatibility can change how data appears, how modules display, and how administrators review the migrated result.
 
-Document the Joomla version, Phoca Cart version, PHP and database environment, active template, template framework, extension stack, and any installed Phoca Cart add-on extensions. Also confirm whether the future store will use Bootstrap, UIkit, custom template overrides, multilingual structure, multicurrency display, POS-related features, catalog mode, or standard cart behavior.
+### Prepare Catalog and Product Data <a href="#prepare-catalog-and-product-data" id="prepare-catalog-and-product-data"></a>
 
-#### Confirm whether older-version behavior matters <a href="#confirm-whether-older-version-behavior-matters" id="confirm-whether-older-version-behavior-matters"></a>
+Catalog preparation should focus on product meaning. Phoca Cart can represent products through categories, manufacturers, prices, images, stock behavior, attributes, options, specifications, parameters, related products, reviews, downloadable files, discounts, reward points, and other product-adjacent structures. A clean SKU count does not show whether the catalog is migration-ready.
 
-Older Phoca Cart versions may remain operational when the Joomla site and extension stack continue to work, but older behavior should not be treated as automatically equivalent to Phoca Cart 6.1.0. If the source or target uses an older version, collect screenshots, exports, configuration notes, sample records, and extension lists from that exact installation.
+Prepare a product inventory that identifies simple products, complex products, products with variations or selectable choices, products with specifications, products with multiple images, products with stock rules, downloadable products, discounted products, products assigned to multiple categories, products tied to manufacturers, and products that depend on special storefront routes. Include products with missing or unusual data as well; migration planning should expose weak records before validation.
 
-#### Confirm the selected migration path <a href="#confirm-the-selected-migration-path" id="confirm-the-selected-migration-path"></a>
+| Catalog element               | Preparation action                                                                          | Sample to include in Demo Migration                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Products                      | Confirm names, aliases, SKUs, descriptions, prices, statuses, stock, images, and categories | High-volume products, high-value products, disabled products, discounted products          |
+| Categories                    | Confirm hierarchy, category aliases, visibility, product placement, menu relationships      | Deep categories, empty categories, categories used in menus or filters                     |
+| Manufacturers                 | Confirm manufacturer records, product relationships, and display expectations               | Products where brand/manufacturer affects discovery or filtering                           |
+| Attributes and options        | Separate descriptive characteristics from shopper-selectable choices                        | Products with sizes, colors, packages, add-ons, option prices, or option stock             |
+| Specifications and parameters | Identify structured product information and display/behavior settings                       | Technical products, comparison products, products with detailed facts                      |
+| Media                         | Confirm main images, gallery images, thumbnails, file paths, and generated image behavior   | Products with multiple images, missing images, downloadable files, or external media paths |
 
-The selected migration path defines the one-way direction from the Source Platform to the Target Platform under the purchased service license. For Phoca Cart projects, that direction may involve moving from another supported platform into Phoca Cart, moving out of Phoca Cart, or moving from an older Phoca Cart installation into a newer Phoca Cart installation. The migration direction should be confirmed before preparing records and samples.
+Phoca Cart’s product layers should not be collapsed into one generic attribute list. Attributes, options, specifications, and parameters can carry different storefront meaning. Some source platforms use variants for shopper choice, custom fields for specifications, tags for filters, or app-created fields for inventory behavior. Preparation should identify the business meaning first, then decide whether the target Phoca Cart structure, mapping, configuration, Add-on, or Custom Service review is appropriate.
 
-### 2. Prepare the Product and Catalog Structure <a href="#id-2-prepare-the-product-and-catalog-structure" id="id-2-prepare-the-product-and-catalog-structure"></a>
+Downloads deserve separate attention. If the store sells digital products, prepare file paths, access rules, order-completion conditions, download limits, customer expectations, and examples of mixed physical/digital orders. If downloadable files are handled by a Joomla extension outside Phoca Cart, that dependency should be documented separately.
 
-Catalog preparation should focus on how products are sold and discovered, not only how many products exist. Phoca Cart can involve several product-detail layers, and those layers should be separated before migration so they can be interpreted correctly.
+### Prepare Customer, Account, and Order Data <a href="#prepare-customer-account-and-order-data" id="prepare-customer-account-and-order-data"></a>
 
-#### Products, categories, and manufacturers <a href="#products-categories-and-manufacturers" id="products-categories-and-manufacturers"></a>
+Customer and order preparation should preserve commercial usefulness. In Phoca Cart, buyer meaning may involve Joomla users, customer records, customer groups, access levels, custom group prices, discounts, coupons, reward points, order statuses, invoices, delivery notes, receipts, payment methods, shipping methods, tax rates, currencies, and historical line-item detail. Names and emails alone are not enough.
 
-Prepare a clean inventory of products, categories, manufacturers, category depth, product placement, product aliases, product status, pricing, images, product descriptions, product relationships, and any source-side structure used for discovery. Products that appear in more than one category or depend on special routes should be marked for validation.
+Prepare customer examples from each meaningful buyer segment. Include ordinary retail customers, wholesale customers, member groups, restricted-access buyers, customers with reward activity, customers with coupon use, inactive customers, guest-style order records when available, and customers tied to unusual order histories. If the source store uses customer groups differently from Phoca Cart, document the intended target behavior rather than treating the source labels as automatically equivalent.
 
-#### Attributes, options, specifications, and parameters <a href="#attributes-options-specifications-and-parameters" id="attributes-options-specifications-and-parameters"></a>
+| Buyer/order area        | What to prepare                                                                                  | Why it matters                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Customers               | Names, emails, addresses, account status, registration context, Joomla user relationship         | Customer records may need to align with Joomla identity and access behavior.              |
+| Customer groups         | Group names, group prices, access rules, discounts, rewards, tax or shipping effects             | Group meaning can affect catalog visibility and commercial interpretation.                |
+| Orders                  | Order numbers, dates, statuses, line items, options, discounts, tax, shipping, payment, currency | Historical orders should remain usable for service, accounting reference, and validation. |
+| Benefits and promotions | Coupons, cart discounts, reward points, customer-specific benefits                               | Benefits may be historical evidence, future configuration, or custom behavior.            |
+| Documents               | Invoices, delivery notes, receipts, email templates, POS-related documents                       | Document output often depends on target settings, templates, or extensions.               |
 
-Source platforms may combine product-choice, product-description, product-filter, and product-display information in ways that do not match Phoca Cart directly. Prepare representative examples for each product-detail layer:
+Order samples should include clean completed orders and operationally difficult cases. Use orders with multiple products, options, attributes, coupons, reward points, tax, shipping, different payment methods, multiple currencies, downloadable products, refunds or cancellations if available, unusual statuses, and customer group behavior. These samples should become the evidence set for Demo Migration review.
 
-| Product-detail layer | Preparation focus                                                    | Sample records to choose                                                                             |
-| -------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Attributes           | Product information that may help describe, filter, or compare items | Technical products, products with detailed characteristics, products used in comparison or filtering |
-| Options              | Shopper-selectable choices or configuration values                   | Products with size, color, package, add-on, option-price, or option-stock behavior                   |
-| Specifications       | Structured information that explains product qualities               | Products with technical tables, measurement data, material details, or product-grade information     |
-| Parameters           | Display or behavior-related product settings                         | Products whose visibility, layout, availability, or presentation depends on source-side settings     |
+Historical orders should not be treated as future checkout configuration. A migrated order can preserve what happened in the source store, while future tax, shipping, payment, invoice, and checkout behavior still require target-side setup. Preparation should keep those two expectations separate.
 
-The exact use of these layers should be confirmed against the target Phoca Cart installation. The goal is not to force every source field into a matching label, but to preserve the commercial meaning customers and administrators rely on.
+### Prepare Content, URLs, and SEO Inputs <a href="#prepare-content-urls-and-seo-inputs" id="prepare-content-urls-and-seo-inputs"></a>
 
-#### Stock, product availability, and downloadable products <a href="#stock-product-availability-and-downloadable-products" id="stock-product-availability-and-downloadable-products"></a>
+Phoca Cart preparation should include the Joomla storefront layer because customers do not experience migrated data inside the administrator area. They experience category pages, product pages, menu paths, search results, modules, filters, language routes, image output, page titles, metadata, redirects, and template-driven layouts. Storefront continuity requires preparation before migration, not only after import.
 
-Prepare products with ordinary stock, low stock, out-of-stock status, unlimited availability, disabled availability, downloadable files, mixed physical/digital behavior, and any POS-related inventory expectations. For downloadable products, gather file-delivery rules, access behavior, order-completion requirements, and customer download expectations.
+Collect current URLs for important product pages, category pages, manufacturer pages, landing pages, filtered pages, search pages, and campaign destinations. Document aliases, canonical-looking paths, page titles, meta descriptions, redirects, broken but valuable URLs, and pages receiving external traffic. If the source store has strong SEO value, the URL evidence should be prepared before Full Migration.
 
-#### Images and media <a href="#images-and-media" id="images-and-media"></a>
+| Storefront input   | Preparation action                                                                                              | Validation use                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Product URLs       | Export or crawl important product paths and aliases                                                             | Confirm that priority products remain reachable or redirected. |
+| Category paths     | Document category hierarchy, menus, aliases, and landing pages                                                  | Confirm discovery paths and SEO-sensitive category pages.      |
+| Menus and modules  | Identify Joomla menus, Phoca Cart modules, search/filter modules, carts, currency selectors, product slideshows | Confirm page assembly and shopper navigation.                  |
+| Metadata           | Gather titles, descriptions, aliases, structured data expectations, and priority pages                          | Confirm SEO continuity and page-level signals.                 |
+| Multilingual paths | Confirm language associations, translated products, category names, menu items, and currency/language behavior  | Confirm localized discovery and checkout expectations.         |
 
-Document main images, gallery images, product thumbnails, missing images, option-specific imagery, and any modern format expectations. If the source store uses manual image naming, external media paths, or extension-generated image handling, gather examples before migration.
+Template and module behavior should be prepared as display evidence, not assumed migration scope. Phoca Cart supports template overrides and modules, but the migration should not be expected to rebuild every Joomla layout decision automatically. If presentation continuity is business-critical, capture screenshots, template notes, module lists, layout examples, and priority page comparisons.
 
-### 3. Prepare Customers, Groups, Benefits, and Order Context <a href="#id-3-prepare-customers-groups-benefits-and-order-context" id="id-3-prepare-customers-groups-benefits-and-order-context"></a>
+### Review Apps, Extensions, Integrations, or Custom Data <a href="#review-apps-extensions-integrations-or-custom-data" id="review-apps-extensions-integrations-or-custom-data"></a>
 
-Customer and order preparation should preserve commercial usefulness. Names, emails, and order numbers are not enough if buyer groups, prices, discounts, reward points, tax, shipping, payment, and invoice context become unclear.
+Phoca Cart stores may depend on more than Phoca Cart’s core records. Payment plugins, shipping plugins, search/filter modules, product display modules, invoice tools, POS-related extensions, import/export routines, external feeds, analytics scripts, ERP connections, custom Joomla plugins, custom tables, and template overrides may own data or behavior that is not standard migration scope.
 
-#### Customer groups and buyer segmentation <a href="#customer-groups-and-buyer-segmentation" id="customer-groups-and-buyer-segmentation"></a>
+Review each dependency by asking whether it owns records, calculates behavior, changes display, affects checkout, writes identifiers, or only provides presentation. The answer determines whether it belongs in target setup, Add-on review, Custom Service review, or post-migration implementation.
 
-Prepare every customer group that affects product prices, access, discounts, rewards, tax behavior, or order handling. Include at least one customer from each important group in Demo Migration samples. For B2B, wholesale, loyalty, member, or restricted-access stores, customer-group examples are critical.
+| Dependency type         | Preparation evidence                                                       | Likely planning implication                                                 |
+| ----------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Payment plugins         | Plugin names, transaction references, payment labels, order examples       | Historical payment context may migrate differently from live gateway setup. |
+| Shipping plugins        | Method names, zones, rates, carrier rules, order examples                  | Future shipping behavior usually requires target configuration.             |
+| Search/filter modules   | Filter fields, attribute/specification use, category behavior, screenshots | Catalog mapping should support expected discovery behavior.                 |
+| Invoice/PDF tools       | Invoice samples, receipt examples, document templates, numbering rules     | Historical documents and future document output may need separate handling. |
+| POS or external systems | External IDs, order/customer/product references, sync rules                | Custom Service may be needed if identifiers or workflows must be preserved. |
+| Custom Joomla data      | Custom fields, custom tables, plugin-owned fields, bespoke code            | Non-standard data should be reviewed before migration scope is approved.    |
 
-#### Coupons, reward points, discounts, and benefits <a href="#coupons-reward-points-discounts-and-benefits" id="coupons-reward-points-discounts-and-benefits"></a>
+Do not classify all extension behavior as Add-ons. Add-ons help when the requirement matches an available optional service feature. Custom Service should be reviewed when the project requires unsupported data interpretation, custom migration logic adjustment, modified Add-ons, project-specific Add-ons, or migration involving Custom Platform behavior.
 
-List active and historical coupons, reward point behavior, customer benefits, discount rules, and promotion examples. Identify whether these rules need to be preserved as historical order context, configured for future selling, or reviewed as custom behavior.
+### Prepare Access, Backups, and Migration Inputs <a href="#prepare-access-backups-and-migration-inputs" id="prepare-access-backups-and-migration-inputs"></a>
 
-#### Order samples <a href="#order-samples" id="order-samples"></a>
+Access preparation is part of risk control. The migration cannot be reviewed properly if source data, target access, exports, database access, admin permissions, media files, or plugin lists are incomplete. The preparation package should be strong enough to support Demo Migration, review, and later Full Migration without repeated discovery work.
 
-Select orders that reveal operational meaning:
+Prepare administrator access, database or export access if required, media/file access, product image access, downloadable file access, customer/order data exports, source platform credentials, target Joomla administrator access, target Phoca Cart access, plugin/module lists, and recent backups. Backups should include files and database data where possible, especially when the source store is active or when older Joomla/Phoca Cart environments are involved.
 
-* recent orders and older orders
-* orders with multiple products
-* orders with attributes, options, or specifications visible in line items
-* orders with coupons, discounts, reward points, or special pricing
-* orders with tax and shipping charges
-* orders using different payment methods
-* orders with downloadable products
-* refunded, cancelled, pending, completed, or unusual order statuses when available
-* orders tied to important customer groups
+| Input type     | What to prepare                                                                                | Risk reduced                                                   |
+| -------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Source access  | Admin credentials, exports, database access where relevant, media files, custom-field evidence | Prevents incomplete data review.                               |
+| Target access  | Joomla admin, Phoca Cart admin, target configuration notes, plugin/module lists                | Prevents late setup discovery.                                 |
+| Backups        | Database backup, file backup, image/download backup, configuration snapshots                   | Protects the source and target during migration activity.      |
+| Evidence files | Screenshots, URL lists, sample order screenshots, export files, extension lists                | Supports issue diagnosis after Demo Migration.                 |
+| Business rules | Pricing rules, customer group rules, tax/shipping/payment expectations, invoice requirements   | Prevents records from being reviewed without business context. |
 
-#### Invoices, documents, and POS-related expectations <a href="#invoices-documents-and-pos-related-expectations" id="invoices-documents-and-pos-related-expectations"></a>
+Access should be tested before Demo Migration begins. A migration project loses time when missing image folders, blocked exports, incomplete permissions, or unavailable target settings are discovered during validation.
 
-If invoices, receipt behavior, POS workflows, or document templates matter, collect examples before migration. Historical orders may need to remain readable for customer service, accounting reference, warranty questions, or fulfillment review even when future invoice behavior is configured separately in Phoca Cart.
+### Prepare Demo Migration Review Samples <a href="#prepare-demo-migration-review-samples" id="prepare-demo-migration-review-samples"></a>
 
-### 4. Prepare Tax, Shipping, Payment, and Checkout Evidence <a href="#id-4-prepare-tax-shipping-payment-and-checkout-evidence" id="id-4-prepare-tax-shipping-payment-and-checkout-evidence"></a>
+Demo Migration samples should reveal the store’s real complexity. A sample set made only of clean products and ordinary orders can make the migration look simpler than it is. For Phoca Cart, the sample set should include records that test catalog structure, buyer segmentation, order history, configuration-sensitive behavior, multilingual content, Joomla storefront paths, and extension-owned data.
 
-Tax, shipping, payment, and checkout behavior often combines data, rules, plugins, zones, rates, templates, and business policies. These areas should be prepared as operating behavior, not only as fields.
+Choose samples intentionally:
 
-#### Tax and geographic rules <a href="#tax-and-geographic-rules" id="tax-and-geographic-rules"></a>
+* simple products and complex products
+* products with attributes, options, specifications, parameters, manufacturers, images, related products, discounts, reward points, and downloadable files
+* products in deep or multi-use categories
+* customers from each meaningful customer group
+* orders with coupons, tax, shipping, payment, currency, multiple statuses, and option-bearing line items
+* multilingual products, categories, menus, or content when relevant
+* pages with important aliases, metadata, redirects, modules, or filters
+* records controlled by third-party plugins, POS workflows, custom fields, or external identifiers
 
-Document tax rates, tax zones, country/region behavior, tax-inclusive or tax-exclusive display expectations, product-specific tax behavior, customer-group tax exceptions, and tax recapitulation expectations. Cross-border stores and multilingual/multicurrency stores should be especially careful because tax meaning may depend on location, currency, and language context.
+| Sample type                | Why to include it                                                         | What to verify after Demo Migration                        |
+| -------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Complex product            | Tests product meaning, options, specifications, stock, media, and pricing | Product remains sellable and understandable in Phoca Cart. |
+| Customer group example     | Tests buyer segmentation and group pricing context                        | Customer group meaning remains visible and usable.         |
+| Discounted or reward order | Tests commercial history and benefits                                     | Order totals and context remain explainable.               |
+| Tax/shipping/payment order | Tests configuration-sensitive history                                     | Historical order details remain interpretable.             |
+| Multilingual page/product  | Tests language and localized storefront assumptions                       | Localized content and paths can be validated.              |
+| Extension-owned record     | Tests whether the project requires additional review                      | Non-standard data is identified before Full Migration.     |
 
-#### Shipping methods and payment plugins <a href="#shipping-methods-and-payment-plugins" id="shipping-methods-and-payment-plugins"></a>
+The Demo Migration review should produce decisions, not just screenshots. If the sample set exposes missing fields, weak mappings, configuration gaps, unsupported extension data, or custom behavior, those findings should be resolved before proceeding.
 
-Prepare a list of shipping methods, payment methods, plugin names, carrier relationships, offline payment options, conditional shipping rules, free-shipping thresholds, and payment status behavior. If the source store depends on a third-party plugin, marketplace connector, external service, or custom integration, gather configuration screenshots and sample orders.
+### Final Preparation Check <a href="#final-preparation-check" id="final-preparation-check"></a>
 
-#### Checkout and account behavior <a href="#checkout-and-account-behavior" id="checkout-and-account-behavior"></a>
+Before Full Migration, the preparation work should support a clear go/no-go decision. The merchant should know what data is expected to migrate through the selected path, what target configuration remains required, what Add-ons are being used, what requires Custom Service review, and which samples will prove readiness.
 
-Document guest checkout, registered checkout, required customer information, address fields, terms conditions, checkout steps, email behavior, and any custom fields or custom logic used during checkout. If the migration requires preserving custom checkout data or external payment references, review whether Advanced Data Mapping, Advanced Data Configure, or Custom Service is needed.
+| Final check                        | Pass condition                                                                                                                                                        |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Target environment confirmed       | Joomla, Phoca Cart, template, modules, languages, currencies, tax, shipping, payment, and core settings are identified.                                               |
+| Catalog evidence prepared          | Products, categories, manufacturers, attributes, options, specifications, stock, images, downloads, discounts, and product relationships have representative samples. |
+| Buyer/order evidence prepared      | Customers, groups, orders, coupons, reward points, tax, shipping, payment, invoices, and statuses have representative samples.                                        |
+| Storefront/SEO evidence prepared   | Priority URLs, menus, aliases, metadata, redirects, modules, filters, and language paths are documented.                                                              |
+| Extension/custom scope reviewed    | Plugins, integrations, POS workflows, template overrides, custom fields, custom tables, and external identifiers are classified.                                      |
+| Demo Migration sample set approved | Samples expose real store complexity before Full Migration.                                                                                                           |
 
-### 5. Prepare Joomla Storefront, Multilingual, and Template Context <a href="#id-5-prepare-joomla-storefront-multilingual-and-template-context" id="id-5-prepare-joomla-storefront-multilingual-and-template-context"></a>
-
-A Phoca Cart store is also a Joomla site. Storefront preparation should include Joomla menus, modules, routes, templates, overrides, languages, content, and extension placement.
-
-#### Menus, modules, and routes <a href="#menus-modules-and-routes" id="menus-modules-and-routes"></a>
-
-Identify the most important product URLs, category URLs, menu items, landing pages, cart paths, checkout paths, account areas, content links, and search/discovery paths. Record which paths need redirect planning, which menu items must be recreated, and which modules support product discovery.
-
-#### Templates and overrides <a href="#templates-and-overrides" id="templates-and-overrides"></a>
-
-Document the active Joomla template, template framework, module positions, custom overrides, CSS/JavaScript customizations, and any layout changes made for Phoca Cart. If the target store uses a different template framework or a current Phoca Cart release with newer frontend behavior, layout expectations should be reviewed before Demo Migration is judged.
-
-#### Multilingual and multicurrency structure <a href="#multilingual-and-multicurrency-structure" id="multilingual-and-multicurrency-structure"></a>
-
-Prepare language lists, translated product names and descriptions, translated categories, language-specific aliases, menu associations, currency lists, exchange-rate expectations, and any language/currency switching behavior. A multilingual store should validate the relationship between translated Phoca Cart records and Joomla language routing.
-
-### 6. Prepare Custom, Extension-Owned, and Integration Data <a href="#id-6-prepare-custom-extension-owned-and-integration-data" id="id-6-prepare-custom-extension-owned-and-integration-data"></a>
-
-Custom behavior should be identified before migration, not discovered during final validation. Phoca Cart can be extended through plugins, modules, template overrides, import/export processes, feeds, custom code, and integrations. Some source behavior may not have a direct standard destination.
-
-#### What to inventory <a href="#what-to-inventory" id="what-to-inventory"></a>
-
-Prepare an inventory of:
-
-* Phoca Cart extensions and plugins
-* Joomla plugins connected to commerce behavior
-* custom fields or database columns
-* import/export workflows
-* XML or CSV feed processes
-* accounting, ERP, POS, marketplace, payment, shipping, tax, email, analytics, or fulfillment integrations
-* custom modules or custom layouts
-* third-party identifiers used outside the store
-* manual workflows that depend on exported records or order documents
-
-#### When to escalate before execution <a href="#when-to-escalate-before-execution" id="when-to-escalate-before-execution"></a>
-
-Custom Service should be reviewed when the project includes Custom Platform data, unsupported extension data, custom database structures, bespoke product logic, external identifiers, custom plugin-owned fields, older-version transformation, or any requirement that needs custom migration logic adjustment. Add-ons may help with filtering, mapping, or configuration when the requested outcome fits Standard Add-on capability; broader transformation belongs in Custom Service.
-
-### Practical Preparation Sequence <a href="#practical-preparation-sequence" id="practical-preparation-sequence"></a>
-
-The preparation sequence should move from environment clarity to data samples, then to service-path confirmation. Skipping directly to record counts can hide the structures that matter most.
-
-| Step | Preparation action                                                                             | Output before migration                                   |
-| ---- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| 1    | Confirm Phoca Cart version, Joomla version, template, and extension stack                      | Target environment profile                                |
-| 2    | Identify the selected migration path and service model expectation                             | Clear migration direction and responsibility boundary     |
-| 3    | Review products, categories, attributes, options, specifications, stock, downloads, and images | Catalog structure map and sample list                     |
-| 4    | Review customers, groups, coupons, rewards, orders, invoices, tax, shipping, and payment       | Operational data map and sample list                      |
-| 5    | Review menus, modules, templates, routes, languages, currencies, and storefront paths          | Joomla storefront dependency map                          |
-| 6    | Inventory custom fields, plugins, integrations, import/export workflows, and custom code       | Escalation list for Add-on or Custom Service review       |
-| 7    | Run Demo Migration with representative samples                                                 | Evidence for whether the migration approach is sufficient |
-
-### Demo Migration Sample Planning <a href="#demo-migration-sample-planning" id="demo-migration-sample-planning"></a>
-
-Demo Migration should test meaning, not only movement. The sample set should include ordinary records and edge records that expose how Phoca Cart will behave after migration.
-
-| Sample type                      | Include examples of                                                                                                                                    | What the sample should prove                                                     |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| Products                         | Simple products, products with options, products with attributes, specification-heavy products, downloadable products, products with stock differences | Product meaning remains sellable, searchable, and administratively useful.       |
-| Categories and discovery         | Main categories, deep categories, products in multiple locations, filtered or specification-driven discovery                                           | Storefront navigation and product organization remain understandable.            |
-| Customers                        | Guest customers, registered customers, important customer groups, loyalty or B2B customers                                                             | Buyer identity, group context, and account meaning remain clear.                 |
-| Orders                           | Discounted orders, reward-related orders, tax/shipping/payment variations, downloadable-product orders, unusual statuses                               | Order history remains readable for service, accounting, fulfillment, and review. |
-| Configuration-sensitive behavior | Tax examples, shipping examples, payment examples, invoice examples, POS-related examples                                                              | Behavior that requires setup is separated from migrated data.                    |
-| Joomla storefront context        | Important URLs, menu items, modules, template-specific pages, multilingual pages                                                                       | Storefront continuity is not judged by records alone.                            |
-| Custom or extension-owned data   | Custom fields, third-party identifiers, plugin-owned records, integration-dependent records                                                            | Custom Service or Add-on needs are identified early.                             |
-
-### What to Escalate Before Migration <a href="#what-to-escalate-before-migration" id="what-to-escalate-before-migration"></a>
-
-Some preparation findings should change the migration approach before execution begins. Escalation is not a failure; it is how the project avoids discovering structural gaps after Full Migration.
-
-#### Review Add-ons when filtering, mapping, or configuration is the main need <a href="#review-add-ons-when-filtering-mapping-or-configuration-is-the-main-need" id="review-add-ons-when-filtering-mapping-or-configuration-is-the-main-need"></a>
-
-The Data Filter Add-on, Advanced Data Mapping, and Advanced Data Configure may help when the migration needs selective record handling, clearer field relationships, or data configuration within available settings and supported behavior. Add-ons should not be used to describe broad bespoke transformation.
-
-#### Review Managed Service when execution responsibility is the main need <a href="#review-managed-service-when-execution-responsibility-is-the-main-need" id="review-managed-service-when-execution-responsibility-is-the-main-need"></a>
-
-Managed Service may be safer when the data structure is mostly standard but the merchant wants Next-Cart-led execution using standard service capability and purchased Add-ons. Managed Service does not automatically include customization.
-
-#### Review Custom Service when the structure is non-standard <a href="#review-custom-service-when-the-structure-is-non-standard" id="review-custom-service-when-the-structure-is-non-standard"></a>
-
-Custom Service should be reviewed when the migration involves Custom Platform handling, unsupported extension data, custom fields, older-version transformation, plugin-owned records, third-party identifiers, integration restructuring, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+A Phoca Cart migration is well prepared when the target store is ready to receive meaningful data, the sample set reflects actual store complexity, and the merchant can distinguish data movement from target configuration and custom implementation needs.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Phoca Cart preparation should confirm more than record availability. The strongest preparation identifies the Phoca Cart and Joomla versions, maps catalog structure, separates attributes from options and specifications, documents customer groups and benefit logic, gathers tax, shipping, payment, invoice, and order examples, and connects store data with Joomla menus, modules, templates, languages, currencies, and extensions.
+Phoca Cart preparation should be evidence-driven because Phoca Cart combines Joomla site structure with commerce records, product-detail layers, buyer segmentation, operational configuration, modules, plugins, templates, and extension-owned behavior. The strongest preparation work identifies what should migrate, what should be configured in the target store, and what needs Add-on or Custom Service review before migration activity begins.
 
-Phoca Cart 6.1.0 is the current official stable release, but older operational installations may require version-specific review. A migration plan should therefore prove what the selected target installation needs, what the source store actually contains, and which requirements belong to migrated data, Joomla configuration, Phoca Cart setup, Add-ons, Managed Service, or Custom Service.
+The most important preparation areas are target store readiness, catalog structure, product options and specifications, customer groups, order history, tax, shipping, payment, multilingual behavior, storefront paths, extension dependencies, access, backups, and Demo Migration samples. When those inputs are ready, validation becomes more objective and migration-scope decisions become easier to make before launch pressure begins.
 
-Before running Full Migration to Phoca Cart, use Demo Migration to test representative products, customers, orders, customer groups, discounts, reward points, tax, shipping, payment, downloadable files, multilingual records, and Joomla storefront paths. If the source store depends on older-version behavior, unsupported extension data, custom fields, third-party identifiers, or custom logic, contact Next-Cart through Live Chat so the migration path, Add-ons, and service model can be reviewed before execution.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What should be prepared first for a Phoca Cart migration?**
 
-**What should be prepared first before migrating to Phoca Cart?**
+Confirm the target Joomla and Phoca Cart environment first. The catalog, customer groups, order history, tax, shipping, payment, language behavior, modules, plugins, and storefront paths should be prepared against the actual target setup.
 
-Confirm the target Phoca Cart version, Joomla version, template, extension stack, and selected migration path first. Catalog mapping, service selection, and Demo Migration samples should be based on the actual target environment rather than a generic assumption about Phoca Cart behavior.
+**Why are Phoca Cart product options and specifications important before migration?**
 
-**Should older Phoca Cart versions be handled differently from Phoca Cart 6.1.0?**
+Options, attributes, specifications, and parameters can carry different product meanings. Preparing examples before Demo Migration helps confirm whether product choice, product description, filtering, comparison, and display behavior are being handled correctly.
 
-Yes. Older Phoca Cart installations may remain operational, but their behavior can differ from Phoca Cart 6.1.0. If the migration project targets or comes from an older version, prepare screenshots, configuration notes, extension lists, sample records, and version-specific validation expectations.
+**Should Joomla menus and modules be prepared before migration?**
 
-**Which product samples are most useful for Demo Migration?**
+Yes. Phoca Cart storefront continuity depends on Joomla menus, modules, aliases, templates, and sometimes search or filter modules. These areas help reviewers confirm whether migrated products and categories are usable from the storefront.
 
-Use products that reveal structure: simple products, products with attributes, products with options, specification-heavy products, products with stock differences, downloadable products, products in multiple categories, and products controlled by custom fields or extensions.
+**What kind of orders should be included in Demo Migration samples?**
 
-**Do tax, shipping, and payment settings migrate automatically?**
+Use orders with multiple products, product options, coupons, reward points, tax, shipping, payment methods, different statuses, customer groups, currencies, downloadable products, and unusual operational cases.
 
-Not always. Some historical order context may be migrated where supported, while future tax, shipping, payment, invoice, and checkout behavior may need to be configured in Phoca Cart. Configuration-sensitive behavior should be documented before Demo Migration.
+**When should custom Phoca Cart data be reviewed before migration?**
 
-**When should Custom Service be reviewed for a Phoca Cart migration?**
-
-Custom Service should be reviewed when the project involves Custom Platform data, unsupported extension data, custom fields, older-version transformation, third-party identifiers, plugin-owned records, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment beyond standard service capability.
+Custom data should be reviewed when the store uses custom fields, custom tables, third-party plugins, POS workflows, import/export routines, external identifiers, custom invoice behavior, or bespoke Joomla code that controls commerce meaning.

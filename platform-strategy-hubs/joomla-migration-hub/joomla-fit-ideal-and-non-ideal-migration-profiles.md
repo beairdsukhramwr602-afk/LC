@@ -4,7 +4,7 @@ Joomla is a strong Target Platform when the business needs a CMS-centered enviro
 
 A Joomla fit decision should therefore begin with ownership. If the migration is about content, users, menus, categories, access levels, multilingual structure, and site architecture, Joomla can be the correct target. If the migration is about products, orders, customers, checkout, shipping, payment, inventory, coupons, or reviews, the plan must identify the commerce extension or custom implementation that will own those records.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+### What Joomla Fit Means in Migration Planning <a href="#what-joomla-fit-means-in-migration-planning" id="what-joomla-fit-means-in-migration-planning"></a>
 
 The practical fit question is not “Can Joomla support a website?” Joomla can support many kinds of websites. The better question is whether the merchant wants the operational responsibilities that come with a Joomla-centered target: extension management, template behavior, menu and alias governance, access-control planning, multilingual structure, and developer or agency ownership.
 
@@ -18,7 +18,7 @@ The practical fit question is not “Can Joomla support a website?” Joomla can
 
 This fit logic keeps Joomla from being oversold. Joomla can be powerful when the business needs CMS flexibility, but the same flexibility increases planning responsibility.
 
-### Strong-Fit Joomla Profiles <a href="#strong-fit-joomla-profiles" id="strong-fit-joomla-profiles"></a>
+### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
 Joomla is often a strong fit for merchants and organizations that need structured content, controlled access, multilingual content, or a site environment shaped by extensions. These merchants usually understand that Joomla is not a native commerce platform and are prepared to define the extension or custom component that handles store behavior.
 
@@ -35,7 +35,7 @@ Strong-fit merchants often include content-rich businesses, associations, educat
 
 A strong fit does not mean the migration is automatic. It means the platform decision matches the operating model. The migration still needs evidence for menus, URLs, users, access levels, multilingual relationships, extension data, and content display.
 
-### Conditional-Fit Joomla Profiles <a href="#conditional-fit-joomla-profiles" id="conditional-fit-joomla-profiles"></a>
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
 
 Many merchants can succeed with Joomla, but only if scope and ownership are clarified early. Conditional fit often appears when the merchant likes Joomla flexibility but has not yet defined the commerce component, extension requirements, template dependencies, or support responsibilities.
 
@@ -52,7 +52,7 @@ A conditional-fit project may have good Joomla reasons but unresolved risks: unk
 
 Conditional fit becomes strong fit when the merchant can define the future Joomla environment clearly. It becomes weak fit when the merchant wants Joomla flexibility but cannot own the setup, extension choices, or validation burden.
 
-### Weaker-Fit Joomla Profiles <a href="#weaker-fit-joomla-profiles" id="weaker-fit-joomla-profiles"></a>
+### Weaker-Fit or Non-Ideal Profiles <a href="#weaker-fit-or-non-ideal-profiles" id="weaker-fit-or-non-ideal-profiles"></a>
 
 Joomla is often a weaker fit when the merchant expects a native e-commerce operating model without wanting Joomla-specific site ownership. A merchant who wants a fully hosted commerce platform, built-in store workflows, native product/order structures, simple app management, or low technical administration may be better served by a SaaS commerce platform or a specific supported store system.
 
@@ -69,7 +69,7 @@ Joomla may also be a weaker fit when the source store contains business-critical
 
 A weaker fit should not be handled by forcing Joomla into the plan. The better approach is to confirm whether the business is truly choosing Joomla as a CMS architecture or whether another target should own the commerce operation.
 
-### Joomla Core vs Commerce Extension Fit <a href="#joomla-core-vs-commerce-extension-fit" id="joomla-core-vs-commerce-extension-fit"></a>
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
 
 One of the most important fit decisions is whether Joomla core or a Joomla commerce extension should be the planning center. If the migration goal is content structure, users, access, menus, pages, and site architecture, Joomla should lead the plan. If the goal is products, customers, orders, coupons, reviews, shipping, payment, inventory, or checkout behavior, the selected commerce extension should lead the plan.
 
@@ -82,8 +82,6 @@ One of the most important fit decisions is whether Joomla core or a Joomla comme
 | Custom records or database tables                                                                | Custom Service review when business-critical data must be preserved.    |
 
 This separation prevents inaccurate support expectations. A merchant should not assume every store record is governed by Joomla core simply because the target site is built on Joomla.
-
-### Source Platform Expectations That Need Fit Review <a href="#source-platform-expectations-that-need-fit-review" id="source-platform-expectations-that-need-fit-review"></a>
 
 Joomla fit also depends on the Source Platform. A merchant leaving Shopify, BigCommerce, Magento, WooCommerce, OpenCart, PrestaShop, a Joomla commerce extension, or a custom store may bring assumptions that do not translate directly into Joomla. A Source Platform category may not equal a Joomla menu item. A customer account may not equal a Joomla user. A product page may need a commerce extension rather than an article. A URL path may be controlled by menus, aliases, SEF settings, redirects, or extension routing.
 
@@ -98,7 +96,22 @@ Joomla fit also depends on the Source Platform. A merchant leaving Shopify, BigC
 
 A strong Joomla fit review makes these assumptions visible before service selection. It is better to discover that the project is really a commerce-extension migration early than to treat Joomla core as the wrong target owner.
 
-### How Joomla Fit Affects Migration Scope <a href="#how-joomla-fit-affects-migration-scope" id="how-joomla-fit-affects-migration-scope"></a>
+### Signals of Fit to Confirm Before Choosing Joomla <a href="#signals-of-fit-to-confirm-before-choosing-joomla" id="signals-of-fit-to-confirm-before-choosing-joomla"></a>
+
+Joomla fit should be confirmed through practical signals, not only through preference for a familiar CMS. The project is healthier when the merchant can identify who will maintain Joomla, which commerce extension or custom component will own store behavior, which menus and URLs matter, which access rules must continue, and which extensions are business-critical rather than decorative.
+
+| Signal to confirm                                  | Why it matters for migration                                                                                                                           |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| A clear Joomla owner exists after launch.          | Someone must maintain extensions, templates, updates, access rules, and site configuration.                                                            |
+| Commerce ownership is named.                       | Products, customers, orders, checkout, payment, shipping, discounts, and inventory need a defined owner outside Joomla core when commerce is in scope. |
+| Menu and URL priorities are known.                 | Joomla routing, aliases, hidden menus, redirects, and metadata can affect SEO and visitor access.                                                      |
+| Access rules are documented.                       | User groups, permissions, memberships, and restricted pages need validation beyond record transfer.                                                    |
+| Extensions are inventoried.                        | Supported records, Add-on needs, Custom Service candidates, target setup, and accepted exclusions can be separated before launch.                      |
+| Demo Migration samples include real relationships. | Fit is stronger when samples prove content, menus, users, access, multilingual pages, and extension records in context.                                |
+
+If these signals are missing, Joomla may still be usable, but the migration decision remains incomplete. The safer next step is to clarify ownership and validation samples before treating Joomla as a confirmed target.
+
+### Turning Joomla Fit Into a Migration Scope Decision <a href="#turning-joomla-fit-into-a-migration-scope-decision" id="turning-joomla-fit-into-a-migration-scope-decision"></a>
 
 The fit decision directly affects scope. Strong Joomla fit usually means the merchant can define which records are Joomla-core records, which records are extension-owned, and which items are setup tasks. Conditional fit means those boundaries still need evidence. Weak fit means the chosen Target Platform may not match the desired operating model.
 
@@ -140,4 +153,4 @@ Joomla is weaker when the merchant wants a simple hosted storefront, expects nat
 
 **Can Add-ons handle every Joomla complexity?**
 
-No. Add-ons can help with supported filtering, mapping, or configuration. Unsupported extension records, custom components, custom tables, bespoke transformations, and custom migration logic adjustments should be reviewed as Custom Service needs.
+No. Add-ons can help with supported filtering, mapping, or configuration. Unsupported extension records, custom components, custom tables, bespoke transformations, and custom migration logic adjustment should be reviewed as Custom Service needs.
