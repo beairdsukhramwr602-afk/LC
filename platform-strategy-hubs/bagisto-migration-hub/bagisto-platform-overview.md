@@ -1,135 +1,150 @@
-# Page 1
+# Bagisto Platform Overview
 
-Bagisto is an open-source Laravel e-commerce platform built for merchants who want more control over commerce architecture than a fully closed, hosted platform usually allows. It can support standard ecommerce stores, marketplaces, B2B commerce, multi-tenant commerce, headless commerce, mobile apps, POS-connected selling, custom themes, extensions, and integration-led operations.
+Bagisto migration planning works best when Bagisto is treated as a commerce operating model, not as a blank destination for imported records. Its Laravel foundation, product-type structure, attribute-driven catalog model, channel settings, inventory sources, customer groups, CMS areas, marketing rules, APIs, and extension architecture can all change how source data should be interpreted before it becomes usable in the new store.
 
-A migration to Bagisto is not just a move into another storefront system. It is a move into a developer-governed commerce environment where product structure, customer meaning, order history, channel behavior, extension logic, and integration ownership need to be planned deliberately. Bagisto can be a strong Target Platform when the merchant wants flexibility and has the technical ownership to shape that flexibility into a stable operating model.
+For merchants moving from a simpler hosted store, Bagisto can feel more configurable than expected. For merchants moving from another open-source or custom-built platform, Bagisto may feel familiar at the code and customization level, but the migration still needs disciplined scope control. Product facts, category relationships, customer history, order records, content, promotions, and integrations need to be translated into Bagisto structures instead of copied as isolated database values.
 
-The main planning question is whether Bagisto should become a straightforward e-commerce destination, a customized Laravel commerce application, a marketplace foundation, a B2B commerce layer, a headless backend, or part of a larger operational stack. The clearer the target role is before migration, the easier it becomes to decide what data should move as standard commerce records, what needs mapping or configuration, and what requires Custom Service review.
+### What Bagisto Is in Migration Planning <a href="#what-bagisto-is-in-migration-planning" id="what-bagisto-is-in-migration-planning"></a>
 
-### What Changes in a Migration to Bagisto <a href="#what-changes-in-a-migration-to-bagisto" id="what-changes-in-a-migration-to-bagisto"></a>
+Bagisto is best understood as a Laravel-based open-source commerce platform with a modular architecture. That matters for migration because the target environment is not only a storefront. It is also an administrative system, a catalog modeling system, a channel and inventory configuration layer, and an extension platform.
 
-Migrating to Bagisto changes how the store should be understood because Bagisto’s value is closely tied to open-source extensibility. The Target Platform may receive ordinary products, customers, categories, orders, CMS Pages, and Blog Posts, but the final migration quality depends on whether those records support the intended Bagisto build.
+The practical migration question is not simply whether products, customers, and orders can be moved. The better question is whether the source store’s commercial model can be expressed clearly inside Bagisto’s product types, attributes, attribute families, categories, channels, inventory sources, customer groups, order states, CMS structures, and extension logic.
 
-| Change area                       | What changes in Bagisto                                                                                                                                              | Migration planning consequence                                                                                                                  |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Platform ownership**            | Bagisto gives merchants and developers more direct control over code, extensions, themes, and custom commerce behavior.                                              | Technical ownership must be clear before migration so custom requirements do not appear late in execution.                                      |
-| **Catalog structure**             | Products, categories, attributes, variants, and configurable buying choices may need to align with how the Bagisto storefront or custom build will present products. | Source catalog structure should be reviewed for reusable meaning, not only record counts.                                                       |
-| **Commerce extensions**           | Marketplace, B2B, multi-tenant, headless, mobile, POS, payment, shipping, and custom modules may shape how migrated data is used.                                    | Extension-owned behavior should be identified early because not every source behavior is a native default record in the Target Platform.        |
-| **Storefront and theme behavior** | Presentation can depend on themes, custom frontend work, API use, or headless implementation.                                                                        | Content, routes, media, SEO data, and product presentation should be planned against the intended storefront architecture.                      |
-| **Integration ownership**         | ERP, PIM, CRM, marketplace, fulfillment, payment, tax, and API layers may own business outcomes outside the storefront.                                              | The merchant should separate what Next-Cart migrates into Bagisto from what must be reconnected, rebuilt, or validated through outside systems. |
+| Migration planning area | Bagisto implication                                                                                                        | What should be decided before migration                                                                       |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Catalog model           | Products depend on type, attributes, families, categories, prices, images, and inventory behavior.                         | Which source catalog patterns should become native Bagisto product structures rather than custom workarounds. |
+| Storefront structure    | Channels, themes, CMS, URL rewrites, search terms, and design settings influence discovery.                                | Which storefront signals must be preserved for SEO, navigation, and conversion continuity.                    |
+| Operations              | Orders, invoices, shipments, refunds, transactions, customer groups, taxes, and inventory sources shape back-office use.   | Which historical records must remain operationally meaningful after migration.                                |
+| Extensibility           | Packages, APIs, headless storefronts, custom product types, payment methods, and shipping methods can extend the platform. | Which custom behavior belongs in Bagisto configuration, an Add-on, or Custom Service scope.                   |
 
-A simple Bagisto migration may focus on standard commerce records and clean storefront setup. A more ambitious Bagisto migration may involve marketplace vendors, B2B buyer structures, tenant boundaries, custom Laravel logic, API-first presentation, custom fields, or external systems. Those requirements change the migration path from ordinary data transfer into a structured implementation decision.
+This makes Bagisto a strong candidate for merchants who want more control than a closed SaaS environment usually allows. It also means a migration can become under-scoped if the planning phase treats Bagisto as only a product-customer-order destination. Bagisto’s value comes from structured flexibility, and structured flexibility requires clear decisions before Full Migration.
 
-### Where Bagisto Is Often a Strong Target <a href="#where-bagisto-is-often-a-strong-target" id="where-bagisto-is-often-a-strong-target"></a>
+A strong Bagisto migration therefore starts with operating-model alignment. The merchant should identify how the future store will manage catalog complexity, multi-channel selling, inventory availability, customer segmentation, promotions, content, checkout configuration, integrations, and future customization. Those decisions set the boundaries for what should be migrated directly, what should be reconfigured, what should be rebuilt, and what should be excluded.
 
-Bagisto is often a strong Target Platform when the merchant wants open-source control, Laravel-based extensibility, and room to shape the commerce model after migration. It is especially relevant when the future store needs more than a rigid out-of-the-box storefront.
+### How Bagisto Organizes Commerce Operations <a href="#how-bagisto-organizes-commerce-operations" id="how-bagisto-organizes-commerce-operations"></a>
 
-#### Open-source control is part of the platform decision <a href="#open-source-control-is-part-of-the-platform-decision" id="open-source-control-is-part-of-the-platform-decision"></a>
+Bagisto organizes commerce around connected structures rather than one flat catalog. Products sit inside product types and attribute families. Categories provide navigation and discovery structure. Channels help define store context, locale, currency, inventory, and storefront presentation. Inventory sources influence stock availability. Customer groups can affect pricing and segmentation. Orders connect commercial history with invoices, shipments, refunds, transactions, payment behavior, shipping behavior, taxes, and status meaning.
 
-Bagisto fits merchants who want ownership over code-level customization, extension behavior, theme decisions, and integration strategy. This can be valuable when the business has internal developers, a Laravel partner, or a technical team that can maintain the platform after launch.
+That operating model creates a useful planning lens:
 
-For migration planning, this means the destination should not be defined only as “Bagisto.” The merchant should know whether the future store will use standard Bagisto behavior, a set of existing extensions, a custom-developed Laravel commerce layer, or a phased implementation where the core migration comes first and advanced behavior is configured later.
+| Bagisto structure       | Migration meaning                                                                                                          | Planning cue                                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Product types           | A product is not only a SKU; it may be simple, configurable, virtual, bundle, grouped, downloadable, or booking-related.   | Map product behavior before mapping product fields.                                             |
+| Attributes and families | Catalog fields need to be assigned to meaningful Bagisto structures.                                                       | Separate clean attributes from legacy text, custom fields, and one-off merchandising notes.     |
+| Channels                | Storefront context can affect currency, locale, inventory, and presentation.                                               | Confirm whether the migration needs one channel or a multi-channel structure.                   |
+| Inventory sources       | Stock is not only a quantity if the business uses multiple locations or fulfillment assumptions.                           | Decide whether source inventory should be consolidated or split into Bagisto inventory sources. |
+| Customer groups         | Segmentation can affect pricing, access, and commercial treatment.                                                         | Preserve group meaning, not just group names.                                                   |
+| CMS and marketing       | Content, URL rewrites, catalog rules, cart rules, campaigns, search terms, and sitemaps affect acquisition and conversion. | Treat content and promotional logic as launch-continuity scope.                                 |
 
-#### The catalog needs flexible structure <a href="#the-catalog-needs-flexible-structure" id="the-catalog-needs-flexible-structure"></a>
+These structures should be planned together. A configurable product cannot be validated properly if the attribute family is wrong. A customer group has limited value if pricing logic is not reviewed. Order history may be present but commercially weak if invoices, shipments, refunds, taxes, and status names are not understandable to the business after migration.
 
-Bagisto can be a strong destination for merchants whose product data depends on attributes, variants, configurable choices, categories, media, technical details, or custom presentation. The platform’s open-source model can make it possible to build product experiences that are difficult to fit into a more restrictive system.
+The platform also creates a distinction between migrated facts and target-side settings. A product name, SKU, description, image, and price may be migrated facts. Product type assignment, attribute-family design, channel availability, tax configuration, theme behavior, checkout settings, and extension logic may require target-side configuration or custom implementation. Good migration planning keeps those two categories separate.
 
-The migration benefit is strongest when the catalog already has usable structure. If products, categories, attributes, SKUs, media, and descriptions have clear business meaning, Bagisto gives the merchant a flexible target for preserving and improving that structure. If the source catalog is messy, duplicate, or dependent on hidden custom logic, cleanup and Custom Service review may be needed before the migration outcome can be trusted.
+### Core Data Areas That Shape a Bagisto Migration <a href="#core-data-areas-that-shape-a-bagisto-migration" id="core-data-areas-that-shape-a-bagisto-migration"></a>
 
-#### B2B, marketplace, or multi-tenant ambitions are deliberate <a href="#b2b-marketplace-or-multi-tenant-ambitions-are-deliberate" id="b2b-marketplace-or-multi-tenant-ambitions-are-deliberate"></a>
+The main migration entities usually include Products, Categories, Customers, Orders, Reviews, Coupons, CMS, Blog Posts where applicable, and supporting commercial records. Bagisto makes those entities meaningful through configuration and relationships.
 
-Bagisto is often considered by merchants who want B2B commerce, multi-vendor marketplace behavior, B2B marketplace structure, or multi-tenant selling. These are not ordinary storefront preferences. They affect how customers, vendors, catalogs, prices, permissions, storefronts, and workflows should be interpreted.
+Products need special attention. A source platform may use variants, options, bundles, downloads, service bookings, grouped products, or custom option fields in ways that do not translate cleanly unless the product model is reviewed first. Bagisto’s product-type structure creates an opportunity to normalize messy catalogs, but it can also expose shortcuts that worked in the old store only because the old platform was permissive.
 
-A Bagisto migration is stronger when these ambitions are specific. A merchant should know whether vendors need separate product ownership, whether buyers need segmentation, whether tenants need isolated stores, whether catalogs differ by audience, and whether the initial migration should include those structures or prepare data for later implementation.
+Categories should be reviewed for hierarchy, naming, URL value, merchandising use, and channel relevance. A category tree that worked in a small catalog may not support Bagisto’s future search and navigation expectations. Conversely, a large legacy category tree may include duplicate, obsolete, or campaign-specific nodes that should not be carried forward without review.
 
-#### Headless, mobile, POS, or API-connected commerce is part of the future state <a href="#headless-mobile-pos-or-api-connected-commerce-is-part-of-the-future-state" id="headless-mobile-pos-or-api-connected-commerce-is-part-of-the-future-state"></a>
+Customers and Orders should be treated as commercial memory. Customer records may include groups, addresses, subscriptions to communications, reviews, account status, and pricing expectations. Order records may include statuses, invoices, shipments, refunds, transactions, taxes, discounts, payment methods, shipping methods, and internal comments. A Bagisto migration should preserve enough context for customer service and reporting, not merely enough fields to display an order number.
 
-Bagisto may also be a strong target when the future storefront is not limited to one traditional website. Merchants may want mobile app support, POS-connected selling, API-first storefronts, or headless frontend experiences.
+CMS and marketing structures are also important. CMS pages, URL rewrites, search terms, search synonyms, catalog rules, cart rules, campaigns, email templates, newsletters, sitemaps, and rich snippets can influence discoverability and conversion. Some of these can be migrated as content or rules. Others may need to be recreated, reconfigured, or redesigned because they depend on target-side behavior.
 
-This matters during migration because product, customer, order, inventory, and content data may be consumed by more than one interface. The migration should preserve data in a way that supports future channels, not just the first storefront page displayed after launch.
+The useful way to scope these areas is to classify them before migration:
 
-#### Custom Platform source data needs structured interpretation <a href="#custom-platform-source-data-needs-structured-interpretation" id="custom-platform-source-data-needs-structured-interpretation"></a>
+| Scope category             | Typical examples                                                                                                        | Treatment                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Direct data migration      | Clean product records, category names, customer accounts, order history, reviews, coupons, CMS pages.                   | Move through supported migration scope when field meaning is clear.     |
+| Configuration alignment    | Channels, locales, currencies, inventory sources, taxes, payment methods, shipping methods, checkout settings.          | Configure in Bagisto and validate against migrated data.                |
+| Mapping and transformation | Attribute families, product type assignment, customer groups, order statuses, URLs, legacy custom fields.               | Use Add-ons when bounded; escalate when logic is custom or unsupported. |
+| Custom implementation      | Custom product behavior, package-owned data, extension records, headless storefront dependencies, bespoke integrations. | Plan through Custom Service or target-side development.                 |
 
-Bagisto can be suitable for merchants moving from a Custom Platform or a heavily modified Source Platform because its Laravel foundation can support a tailored implementation. However, that flexibility does not remove the need to understand the source.
+This classification prevents a common mistake: assuming that every old store behavior should be migrated as data. In Bagisto, many behaviors should become configuration, extension logic, or a redesigned structure.
 
-If the Source Platform uses custom tables, custom fields, third-party identifiers, external data stores, proprietary pricing logic, or integration-owned records, those structures should be reviewed before migration. Custom Platform source cases require Custom Service because the project depends on interpreting non-standard source meaning before it can be translated into Bagisto.
+### Customization, Extensions, and Headless Architecture <a href="#customization-extensions-and-headless-architecture" id="customization-extensions-and-headless-architecture"></a>
 
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
+Bagisto’s Laravel base and developer ecosystem make customization a major part of its platform identity. For migration planning, that flexibility is both an advantage and a responsibility.
 
-Bagisto’s flexibility is useful only when it is governed. The same openness that makes the platform attractive can also increase planning burden if the merchant treats migration as a simple data move while expecting the result to behave like a custom-built commerce system.
+A merchant can use Bagisto because the business needs custom packages, API access, headless storefronts, custom product types, payment method development, shipping method development, theme development, performance tuning, or deeper integration control. Those are legitimate reasons to choose Bagisto. They also change the migration scope because the data migration may depend on custom code, extension data, or target-side development that does not exist in a default store.
 
-#### Extension-owned behavior should not be assumed <a href="#extension-owned-behavior-should-not-be-assumed" id="extension-owned-behavior-should-not-be-assumed"></a>
+This is where Bagisto differs from a migration into a tightly standardized SaaS store. If the target build includes custom packages, marketplace modules, B2B modules, headless storefronts, or specialized integrations, the migration plan must define which parts are ready before Demo Migration and which parts can be validated only after development reaches a usable state.
 
-Marketplace, B2B, multi-tenant, headless, POS, payment, shipping, and custom modules can affect what migrated records mean after launch. A customer record may become a buyer account in a B2B workflow. A product record may belong to a vendor-owned marketplace context. A category may be part of a tenant-specific storefront. An order may depend on external fulfillment or payment state.
+A practical decision framework is useful:
 
-The merchant should identify which extensions or custom modules are expected to shape the Target Platform before migration planning is finalized. If the required behavior is not standard, the migration may need Add-ons, Custom Service, custom migration logic adjustment, or post-migration configuration work.
+| Customization signal                                                               | Migration consequence                                                                       | Likely service implication                                  |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Source catalog uses custom fields that match clear Bagisto attributes.             | Mapping is needed, but the target model can remain native.                                  | Add-ons may be enough when the pattern is bounded.          |
+| Source store uses custom product behavior not represented by native product types. | Data may need transformation plus custom target behavior.                                   | Custom Service or target-side development is likely.        |
+| Target Bagisto build uses custom packages.                                         | Migration may need to wait for package schemas or APIs.                                     | Custom Service may be required for package-owned records.   |
+| Target storefront is headless.                                                     | Storefront validation depends on APIs, URLs, content, and frontend rendering.               | Managed Service plus technical validation is usually safer. |
+| Source platform has complex B2B or marketplace behavior.                           | Account hierarchy, vendor data, pricing, approval, or commission logic may not be standard. | Custom Service should be evaluated early.                   |
 
-#### Product and catalog meaning may need cleanup before migration <a href="#product-and-catalog-meaning-may-need-cleanup-before-migration" id="product-and-catalog-meaning-may-need-cleanup-before-migration"></a>
+The key distinction is that Add-ons help adjust bounded migration behavior. Custom Service is appropriate when the migration must handle unsupported records, custom fields, package data, bespoke transformations, or custom migration logic. Keeping that boundary clear protects both timeline and launch quality.
 
-Bagisto gives merchants room to structure catalogs, but it does not automatically make unclear catalog data meaningful. Duplicated SKUs, inconsistent attributes, overloaded product descriptions, missing media, unclear variant logic, and obsolete categories can all reduce migration quality.
+### What Bagisto Changes About Migration Scope <a href="#what-bagisto-changes-about-migration-scope" id="what-bagisto-changes-about-migration-scope"></a>
 
-Catalog preparation should focus on what the buyer, admin team, developer, and integration layer need to recognize after migration. A large catalog is not a problem by itself. A catalog whose structure cannot be explained is the risk.
+Bagisto changes migration scope because it makes platform design decisions visible. A simple target might allow a merchant to import records first and organize the store later. Bagisto rewards the opposite approach: define the target operating structure first, then migrate data into that structure.
 
-#### Customer, vendor, tenant, and buyer context may require separate planning <a href="#customer-vendor-tenant-and-buyer-context-may-require-separate-planning" id="customer-vendor-tenant-and-buyer-context-may-require-separate-planning"></a>
+The most important scope questions are:
 
-A simple Bagisto store may treat customers as ordinary accounts. More advanced Bagisto builds may involve B2B buyers, vendors, marketplace sellers, tenant-specific users, customer groups, or permission-like structures.
+| Scope question                                                           | Why it matters                                                                                     |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Which product types will be used at launch?                              | Product behavior affects attributes, pricing, options, inventory, cart behavior, and validation.   |
+| Which attribute families are required?                                   | Attribute-family design determines whether catalog data becomes usable or scattered.               |
+| Which channels, locales, currencies, and inventory sources are required? | Store context affects availability, display, pricing expectations, and operational use.            |
+| Which rules and promotions must continue?                                | Catalog rules and cart rules can affect revenue, customer expectations, and launch comparisons.    |
+| Which content and SEO signals must be preserved?                         | CMS pages, URL rewrites, sitemaps, search terms, and rich snippets protect acquisition continuity. |
+| Which extensions or custom packages are business-critical?               | Package-owned behavior may require Custom Service or development sequencing.                       |
 
-Those contexts should not be mixed casually during migration. If the merchant expects source customers to become B2B buyers, marketplace vendors, tenant users, or segmented account types, the intended relationship should be documented before execution. Otherwise, the data may appear present while the commercial workflow remains incomplete.
+Bagisto also changes the way migration quality should be evaluated. A record count is not enough. A Demo Migration should prove that the catalog behaves correctly, customers remain usable, orders make sense, content renders correctly, channels and inventory sources are aligned, and the store team can operate the target environment.
 
-#### Storefront routes, content, and SEO should match the future architecture <a href="#storefront-routes-content-and-seo-should-match-the-future-architecture" id="storefront-routes-content-and-seo-should-match-the-future-architecture"></a>
+For example, a product may be present in Bagisto but still fail launch readiness if it is assigned to the wrong product type, placed in the wrong attribute family, missing channel visibility, linked to incomplete inventory behavior, or displayed through a storefront theme that does not support its intended merchandising use. The migration succeeds only when migrated records support the business process they are supposed to carry.
 
-Bagisto storefront presentation may depend on theme structure, custom frontend development, headless implementation, or extension behavior. This affects how product URLs, category routes, CMS Pages, Blog Posts, media, metadata, and navigation should be reviewed.
+### Planning Bagisto Around Business Continuity <a href="#planning-bagisto-around-business-continuity" id="planning-bagisto-around-business-continuity"></a>
 
-A migration can preserve content records without guaranteeing the same storefront experience. Merchants should identify high-value pages, important product and category routes, search-visible content, and redirects or route decisions that matter for launch continuity.
+Business continuity in Bagisto migration means the store can keep selling, serving customers, managing orders, and measuring performance after launch. That requires more than moving data. It requires alignment between migrated records and the target store’s operational model.
 
-#### Integration responsibilities must be separated from migration responsibilities <a href="#integration-responsibilities-must-be-separated-from-migration-responsibilities" id="integration-responsibilities-must-be-separated-from-migration-responsibilities"></a>
+A practical continuity plan should cover four layers:
 
-Many Bagisto projects involve broader systems: PIM, ERP, CRM, marketplace systems, fulfillment providers, payment systems, tax services, inventory tools, or custom APIs. These systems may own data that appears inside the store but is not truly controlled by the e-commerce platform.
+| Continuity layer       | What to confirm                                                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Commercial continuity  | Products, prices, discounts, customer groups, order history, invoices, shipments, refunds, and taxes remain understandable. |
+| Storefront continuity  | Categories, CMS pages, URLs, search, sitemaps, rich snippets, media, and theme behavior support discovery and conversion.   |
+| Operational continuity | Inventory sources, payment methods, shipping methods, checkout settings, order states, and reporting support daily work.    |
+| Technical continuity   | APIs, extensions, packages, headless storefronts, custom scripts, and integration points are ready for launch validation.   |
 
-Before migration, the merchant should confirm which system owns product truth, pricing truth, inventory truth, customer truth, order status, fulfillment state, and reporting. Next-Cart can migrate supported data into Bagisto under the purchased service, but integration reconnection, custom API behavior, and external-system ownership may require additional planning or Custom Service review.
+Bagisto is a good fit when the business is willing to make these decisions deliberately. It is a weaker fit when the merchant expects the new store to reproduce every source-platform habit automatically while also changing architecture, improving flexibility, and reducing technical debt.
 
-### What Should Be Understood Early Before Moving into Bagisto <a href="#what-should-be-understood-early-before-moving-into-bagisto" id="what-should-be-understood-early-before-moving-into-bagisto"></a>
+The best migration posture is selective continuity. Preserve the commercial meaning that customers and staff rely on. Rebuild weak structures when Bagisto offers a cleaner model. Escalate unsupported or custom behavior early. Validate with meaningful samples before Full Migration. This approach lets Bagisto’s flexibility improve the store instead of turning flexibility into uncontrolled scope.
 
-A strong Bagisto migration starts with a clear definition of the destination role. Bagisto can serve several different commerce models, and each model changes what the migration should prioritize.
-
-| Early question                                                                                   | Why it matters before migration                                                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Will Bagisto run as a standard ecommerce store or a customized Laravel commerce application?** | This defines how much standard migration capability can cover and where custom implementation must be reviewed.                                      |
-| **Which extensions or modules are part of the expected launch state?**                           | Marketplace, B2B, multi-tenant, headless, POS, payment, shipping, and custom modules may change how records must be interpreted.                     |
-| **Which product structures are business-critical?**                                              | Attributes, variants, configurable options, category depth, media, and technical details should be included in representative Demo Migration review. |
-| **Which customer, vendor, buyer, or tenant relationships matter?**                               | Account data may need to support more than ordinary customer login and order history.                                                                |
-| **Which storefront routes and content carry SEO or operational value?**                          | Product URLs, category URLs, CMS Pages, Blog Posts, media, metadata, and navigation may need planned review after migration.                         |
-| **Which systems own operational truth outside Bagisto?**                                         | ERP, PIM, fulfillment, payment, tax, and API systems may require reconnection or separate validation beyond record migration.                        |
-| **Is the Source Platform standard or custom?**                                                   | Custom Platform or heavily modified sources require Custom Service review because source meaning may not be visible in ordinary exports.             |
-
-These questions are not meant to slow the project down. They prevent a common migration problem: moving records successfully while discovering too late that the target implementation needs a different structure, extra configuration, or custom handling.
+A final overview decision is whether Bagisto is being adopted mainly as a cleaner data destination, a more flexible operating base, or a development-ready commerce framework. Those are different migration postures. A cleaner data destination emphasizes supported records and careful mapping. A flexible operating base emphasizes channels, inventory sources, attributes, customer groups, CMS, and marketing rules. A development-ready commerce framework also requires decisions about packages, APIs, headless behavior, and custom product or checkout logic. Naming the posture early helps keep the migration realistic. It prevents the project from promising architectural modernization while scoping only a basic record transfer.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Bagisto is a strong Target Platform when the merchant wants open-source Laravel control, flexible catalog structure, extension-supported commerce models, and developer-governed customization. It can support straightforward e-commerce stores, but its real value often appears when the business needs a marketplace, B2B, multi-tenant, headless, mobile, POS, integration, or custom workflow planning.
+Bagisto migration should be planned as a structured commerce-architecture move. The platform can support rich product modeling, attribute-driven catalog management, channels, inventory sources, CMS, marketing rules, APIs, headless builds, extensions, marketplace patterns, B2B patterns, and custom development. That flexibility is valuable only when the migration scope is designed around how Bagisto actually organizes commerce operations.
 
-A good Bagisto migration should not treat flexibility as a substitute for preparation. Product structure, customer meaning, vendor or tenant context, storefront routes, integrations, custom fields, and Custom Platform source behavior should be clarified before the migration approach is finalized. The migration result should prove not only that records moved, but that the data can support the Bagisto store the merchant actually plans to operate.
+The strongest Bagisto projects separate migrated facts from target configuration, distinguish Add-ons from Custom Service, validate product behavior before launch, and treat content, SEO, operations, and integrations as part of migration readiness. When those decisions are made early, Bagisto can become a cleaner and more flexible operating base. When they are postponed, migration can carry old complexity into a more powerful platform without making it easier to run.
 
-If Bagisto is being considered as your Target Platform, use Demo Migration and Live Chat to review representative product, category, customer, order, storefront, extension, and integration examples before committing to the full migration approach.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Bagisto only suitable for highly technical merchants?**
 
-**Is Bagisto a good Target Platform for a standard e-commerce store?**
+No. Bagisto can support merchants who want structured control over catalog, channels, inventory, content, and integrations. However, merchants should be ready to make configuration and architecture decisions instead of expecting a purely plug-and-play migration.
 
-Yes, Bagisto can support standard e-commerce stores, especially when the merchant wants open-source control and Laravel-based extensibility. However, fit is strongest when the merchant understands why Bagisto is preferable to a simpler hosted platform and has a plan for managing its technical flexibility.
+**Does Bagisto require product data to be remodeled before migration?**
 
-**Does moving to Bagisto automatically preserve marketplace, B2B, or multi-tenant behavior?**
+Often, yes. Simple catalogs may map directly, but configurable, bundle, grouped, downloadable, booking, and custom product patterns should be reviewed before migration so they can be represented correctly.
 
-No. Marketplace, B2B, and multi-tenant behavior depend on the intended Bagisto setup, extensions, configuration, and source data meaning. Those requirements should be planned before migration and validated with representative samples.
+**Can Bagisto preserve customer and order history?**
 
-**When should Custom Service be considered for a Bagisto migration?**
+Customer and order history can be part of migration scope, but the value depends on preserving commercial meaning such as customer groups, addresses, order statuses, invoices, shipments, refunds, taxes, discounts, and payment or shipping references.
 
-Custom Service should be considered when the migration involves a Custom Platform source, custom fields, custom Laravel logic, third-party identifiers, extension-owned data, outside-system records, marketplace workflows, B2B-specific behavior, multi-tenant structures, headless requirements, or custom migration logic adjustment.
+**Are Bagisto extensions migrated automatically?**
 
-**Can Bagisto support headless or API-first commerce after migration?**
+Extension behavior should not be assumed to migrate automatically. Extension-owned data, package schemas, custom fields, and bespoke logic may require Custom Service or target-side development.
 
-Bagisto can be used in headless or API-connected commerce projects, but migration planning should identify which data will be consumed by the frontend, mobile app, integration layer, or external systems. A successful migration should support the target architecture, not only the admin record list.
+**What makes Bagisto migration different from a simple platform switch?**
 
-**What should be tested in Demo Migration for Bagisto?**
-
-Demo Migration should include representative products, variants, attributes, categories, customer accounts, orders, CMS Pages, Blog Posts, media, high-value routes, and any records connected to marketplace, B2B, multi-tenant, headless, integration, or Custom Platform source requirements.
+Bagisto migration is different because target-side structures such as product types, attributes, channels, inventory sources, CMS, marketing rules, APIs, and custom packages influence whether migrated data becomes usable after launch.

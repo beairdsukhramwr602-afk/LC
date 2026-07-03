@@ -1,160 +1,202 @@
 # Bagisto Pre-Migration Preparation Checklist
 
-Bagisto preparation should begin with a practical question: what should the future store be responsible for after migration, and what should remain the responsibility of custom code, extensions, connected systems, or operational teams?
+Bagisto preparation should begin before records are exported. A Bagisto project is not only a transfer of Products, Customers, Orders, CMS Pages, and store settings. It is a move into a Laravel-based commerce environment where product behavior, attributes, attribute families, channels, inventory sources, themes, extensions, APIs, and optional marketplace or B2B layers can determine whether migrated data remains usable after launch.
 
-Bagisto is an open-source Laravel e-commerce platform, so migration preparation is not only about exporting products, customers, and orders from the Source Platform. The target environment can be shaped by Laravel development, channels, product attributes, extension modules, marketplace or B2B requirements, headless storefronts, integrations, custom fields, and source-specific business logic. A clean migration plan should make those responsibilities visible before data starts moving.
+A well-prepared Bagisto migration separates clean commercial facts from behavior that must be recreated, configured, mapped, or rebuilt. Product names and order totals may be easy to identify. Product types, configurable choices, bundle logic, customer group pricing, tax settings, channel visibility, inventory distribution, URL rewrites, search behavior, and custom package data require deeper review. Without that review, a technically complete migration can still leave the new store difficult to operate.
 
-Preparation is strongest when the merchant can explain the intended Bagisto operating model in business language first, then connect that model to data, configuration, and service requirements. Without that preparation, the migration can produce records that appear present but still require heavy post-migration interpretation before the store is usable.
+The preparation checklist below keeps the work controlled. It follows the established sequence: confirm the Bagisto operating scope, prepare the data structures that must map cleanly, identify behavior that cannot be treated as ordinary records, choose the right service path, and use Demo Migration evidence before committing to Full Migration.
 
-### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
+### What Preparation Means for Bagisto <a href="#what-preparation-means-for-bagisto" id="what-preparation-means-for-bagisto"></a>
 
-Pre-migration preparation gives the Demo Migration and Full Migration a clear standard for evaluation. It should answer what must be preserved, what should be simplified, what should be rebuilt through Bagisto configuration, and what requires Custom Service review.
+Preparation for Bagisto means building a clear evidence base for how the current store operates and how that operation should be represented in Bagisto. It is not enough to ask whether products, customers, and orders can be moved. The more important question is whether each record can retain its commercial meaning when Bagisto applies its own product-type, attribute, channel, inventory, marketing, checkout, and extension logic.
 
-For Bagisto, preparation should focus on four kinds of clarity:
+Bagisto has strong native structures for catalog management, channel management, inventory sources, customer groups, CMS, marketing rules, taxes, data transfer, and configurable storefront behavior. That strength gives merchants flexibility, but it also makes preparation more important. A product that was simple in the current platform may need to become configurable, bundle, grouped, downloadable, virtual, booking, or a custom product type in Bagisto. A single stock field may need to be understood against Bagisto inventory sources. A generic customer segment may need to become a customer group with pricing or access implications.
 
-| Preparation area                        | Why it matters for Bagisto migration                                                                                                                                                                            |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Target operating model**              | Bagisto can support ordinary e-commerce, marketplace, B2B, multi-tenant, POS-connected, mobile, and headless commerce contexts. The migration should know which target model is actually expected after launch. |
-| **Catalog and attribute structure**     | Product meaning may depend on attributes, variants, categories, specifications, downloadable content, vendor context, channel visibility, or custom source fields. These should be classified before migration. |
-| **Extension and development ownership** | Some target behavior may come from Bagisto modules, third-party extensions, custom Laravel development, or external systems rather than native migrated records.                                                |
-| **Validation evidence**                 | Demo Migration samples should be chosen to reveal product, customer, order, channel, and integration issues early, not merely to show that common records can move.                                             |
+Preparation should produce four types of evidence:
 
-Preparation should not become a technical build document. It should give the migration team enough evidence to decide what can move through standard migration capability, what needs Add-on support, and what belongs in Custom Service.
+| Evidence type          | What it should clarify                                                                      | Why it matters in Bagisto                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Data evidence          | Which records exist and which fields matter                                                 | Determines Standard Service scope and Entity Points exposure          |
+| Behavior evidence      | How records affect buying, pricing, stock, and fulfillment                                  | Shows where configuration, Add-ons, or Custom Service may be required |
+| Structure evidence     | How product types, attributes, categories, channels, and inventory sources relate           | Prevents flat migration that loses Bagisto-specific operating meaning |
+| Customization evidence | Which extensions, APIs, themes, custom packages, or headless components influence the store | Identifies Custom Service triggers and post-migration rebuild needs   |
 
-### Preparation Priorities <a href="#numbered-preparation-priorities" id="numbered-preparation-priorities"></a>
+The preparation work should end with a decision-ready migration scope: what can be migrated directly, what needs configuration, what needs Add-ons, what must be reviewed under Custom Service, and what should be rebuilt outside the migration rather than copied from the old store.
 
-#### 1. Define the intended Bagisto store model <a href="#id-1-define-the-intended-bagisto-store-model" id="id-1-define-the-intended-bagisto-store-model"></a>
+### Confirm Bagisto Operating Scope Before Data Preparation <a href="#confirm-bagisto-operating-scope-before-data-preparation" id="confirm-bagisto-operating-scope-before-data-preparation"></a>
 
-Start by identifying the role Bagisto will play after migration. A simple online storefront, a multi-vendor marketplace, a B2B store, a B2B marketplace, a multi-tenant commerce environment, a POS-connected operation, and a headless commerce build create different preparation needs.
+Before cleaning data, confirm the intended Bagisto operating scope. Bagisto can support relatively straightforward stores, but it can also support multi-channel commerce, custom product types, marketplace behavior, B2B structures, headless storefronts, API-driven integrations, and extension-based functionality. Preparation becomes much clearer when the future operating shape is known before field mapping begins.
 
-The merchant should document the future store model before export planning. If the future store will include marketplace sellers, company buyers, channel-specific catalogs, mobile commerce, POS workflows, or headless frontend behavior, those requirements should be visible before the migration approach is selected.
+Start by documenting the target selling model. A single-channel retail store needs different preparation from a marketplace, a B2B buying environment, or a store that uses a separate frontend through APIs. The same product and customer data may require different mapping decisions depending on whether Bagisto will operate as a conventional storefront, a multi-channel catalog, a marketplace environment, or a customized Laravel commerce build.
 
-This preparation prevents a common issue: treating Bagisto as a generic e-commerce target while the actual project depends on developer-governed or extension-driven behavior.
+Useful preparation questions include:
 
-#### 2. Clean and classify product structure <a href="#id-2-clean-and-classify-product-structure" id="id-2-clean-and-classify-product-structure"></a>
+| Planning question                                                             | Preparation implication                                                                                       |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Will the Bagisto store use one channel or multiple channels?                  | Product visibility, pricing, locale, currency, theme, and SEO assumptions must be reviewed by channel.        |
+| Will inventory be managed through one location or multiple inventory sources? | Stock fields from the current platform may need distribution logic rather than direct one-field mapping.      |
+| Will customer groups affect pricing, permissions, or segmentation?            | Customer data must be checked for group logic, price rules, and historical commercial meaning.                |
+| Will the storefront be standard, themed, or headless?                         | CMS, navigation, URL behavior, theme assets, and API ownership must be scoped separately.                     |
+| Will marketplace or B2B layers be used?                                       | Seller, vendor, company, quote, commission, catalog access, and approval data may need Custom Service review. |
+| Will custom packages or extensions be preserved?                              | Extension-created records and custom database tables should be identified before Demo Migration.              |
 
-Bagisto migrations need clear product meaning. The merchant should review products, SKUs, categories, attributes, variants, specifications, downloadable items, product groups, related products, inventory signals, images, and source-specific product notes.
+This operating-scope review prevents a common preparation mistake: cleaning data for a simple store while the intended Bagisto build depends on advanced commerce behavior. If the target operating model is still uncertain, Demo Migration should be used to test representative structures rather than only ordinary products and recent orders.
 
-The goal is not to make every product perfect before migration. The goal is to separate commercially meaningful structure from source-side clutter. Product fields should be classified as sellable product information, search or filtering information, technical specification, internal reference, channel visibility context, extension-owned data, or custom-field material that may need special handling.
+### Prepare Products, Attributes, and Attribute Families <a href="#prepare-products-attributes-and-attribute-families" id="prepare-products-attributes-and-attribute-families"></a>
 
-A catalog that is large but well-classified is usually easier to migrate than a smaller catalog where options, attributes, and internal notes are mixed together without clear meaning.
+Bagisto catalog preparation should begin with product-type classification. Products should not be prepared only as names, SKUs, prices, and descriptions. Each product needs to be reviewed for the buying behavior it represents: simple purchase, configurable selection, digital delivery, bundle composition, grouped presentation, booking behavior, virtual delivery, or a custom product type.
 
-#### 3. Review category, channel, and storefront expectations <a href="#id-3-review-category-channel-and-storefront-expectations" id="id-3-review-category-channel-and-storefront-expectations"></a>
+A practical product preparation table should include:
 
-Bagisto preparation should clarify how customers will discover products in the Target Platform. Categories, menus, landing pages, URL paths, channel assignments, storefront language, and content structure should be reviewed before migration.
+| Field or behavior        | Preparation task                                                                           | Bagisto-specific concern                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| SKU and product identity | Remove duplicates, confirm parent-child relationships, and define canonical SKU rules      | Configurable, grouped, and bundle products depend on stable product identity.                  |
+| Product type             | Classify each product by selling behavior, not only by old platform label                  | Bagisto product types affect attributes, pricing, cart behavior, and validation.               |
+| Attributes               | Identify which fields are searchable, filterable, required, comparable, or variant-forming | Attribute settings influence catalog usability, layered navigation, and product editing.       |
+| Attribute families       | Group attributes by product family, category, or product class                             | Poor attribute-family planning creates admin confusion and inconsistent product maintenance.   |
+| Options and variants     | Separate actual variants from free-form customization fields                               | Variant logic should map differently from comments, personalization, or custom request fields. |
+| Media                    | Confirm image roles, gallery order, alt text, and missing assets                           | Product media can affect storefront quality even when core product data migrates correctly.    |
+| Inventory                | Confirm stock status, quantities, backorder assumptions, and source assignment needs       | Bagisto inventory-source behavior may require target-side planning.                            |
 
-If the business expects multiple channels, regional storefronts, B2B access areas, marketplace contexts, or headless storefronts, the preparation should define which products and content belong to each context. When channel or storefront expectations are unclear, migrated records may be technically present but difficult to use in the intended customer journey.
+Attribute preparation deserves particular care. Many legacy stores accumulate product fields that look similar but serve different purposes. One field may support search, another may support product comparison, another may drive variants, and another may only be old admin notes. Bagisto preparation should not treat all attributes as equal. Each attribute should be assigned a purpose before migration.
 
-#### 4. Document customer groups, company accounts, and buyer rules <a href="#id-4-document-customer-groups-company-accounts-and-buyer-rules" id="id-4-document-customer-groups-company-accounts-and-buyer-rules"></a>
+Attribute families should also be planned before Full Migration. If every product is forced into one broad family, Bagisto may become difficult to manage after launch. If too many narrow families are created, the merchant may inherit unnecessary admin complexity. A balanced attribute-family plan should reflect actual catalog maintenance: which products need the same fields, which fields are required, and which fields should be hidden, searchable, filterable, or used only internally.
 
-If the migration involves B2B, wholesale, company accounts, buyer roles, negotiated pricing, RFQ behavior, requisition lists, bulk ordering, or buyer-specific catalogs, customer preparation becomes more than account cleanup.
+### Prepare Categories, Channels, and Inventory Sources <a href="#prepare-categories-channels-and-inventory-sources" id="prepare-categories-channels-and-inventory-sources"></a>
 
-The merchant should identify which buyer groups matter, which accounts require special handling, which users belong to company accounts, which rules affect pricing or visibility, and which order examples prove that the expected buyer context works. For projects that do not use B2B features, preparation should still confirm whether customer groups, tax status, order history, and account data should be preserved in a simple customer-account model.
+Category preparation should connect structure with storefront behavior. Bagisto categories can affect navigation, product discovery, search patterns, SEO context, and channel presentation. A category tree copied from an older store may not be suitable if the new Bagisto build uses different channels, locales, themes, storefront menus, or content strategy.
 
-#### 5. Separate orders from operational workflow history <a href="#id-5-separate-orders-from-operational-workflow-history" id="id-5-separate-orders-from-operational-workflow-history"></a>
+Review each category for four questions:
 
-Order data should be reviewed for more than order number, customer, product, and total. Bagisto migration planning should identify which historical order details matter for customer service, reporting, fulfillment review, payment reconciliation, returns, vendor handling, or integration continuity.
+1. Does the category still represent how customers browse?
+2. Does it need channel-specific visibility?
+3. Does it carry SEO or URL value that should be preserved?
+4. Does it depend on product attributes or filters that must be prepared first?
 
-Older orders may contain source statuses, payment notes, shipping records, coupon usage, refunds, invoices, fulfillment instructions, or integration identifiers. Some of that context may be migrated as supported data, some may need mapping or configuration decisions, and some may remain external to Bagisto. The merchant should decide what the Target Platform must preserve and what can remain archived or handled outside the migration.
+Channel preparation is equally important. A current store may have one storefront, but Bagisto may be used with multiple channels for different brands, regions, currencies, locales, or catalogs. If that is planned, products and categories should be prepared with channel assignment in mind. Migration should not assume that all products belong everywhere by default.
 
-#### 6. Identify extensions, custom Laravel logic, and external systems <a href="#id-6-identify-extensions-custom-laravel-logic-and-external-systems" id="id-6-identify-extensions-custom-laravel-logic-and-external-systems"></a>
+Inventory-source preparation should clarify whether stock is a simple value or a distribution decision. Some stores only need one inventory source. Others need warehouse, location, marketplace, supplier, or fulfillment distinctions. If the current platform stores only a flat stock number, Bagisto may require a target-side rule for assigning stock into one or more inventory sources. If the current platform already has multi-location behavior, the preparation task is to determine whether that behavior can be mapped, configured, or recreated.
 
-Bagisto’s flexibility is one of its strengths, but preparation must identify where flexibility changes migration scope. The merchant should list required Bagisto extensions, custom Laravel modules, marketplace modules, B2B modules, payment extensions, shipping extensions, tax services, ERP/accounting systems, PIM systems, CRM systems, warehouse systems, APIs, or headless frontend layers.
+A useful preparation output is a catalog structure matrix:
 
-This list should explain what each system owns. For example, a PIM may own product enrichment, an ERP may own inventory and fulfillment, a marketplace module may own vendor assignment, and a custom Laravel module may own business-specific workflow logic. If ownership is unclear, the migration team cannot safely decide whether a field is a native target record, a mapped value, an integration dependency, or Custom Service work.
+| Structure area    | Ready for migration when                                                         | Watch condition                                      | Escalation condition                                             |
+| ----------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- |
+| Categories        | Names, hierarchy, status, SEO value, and product assignment are clear            | Old categories exist only for discontinued campaigns | Category behavior differs by channel, locale, or theme           |
+| Channels          | Target channels, currencies, locales, themes, and catalog visibility are defined | Current store has hidden regional assumptions        | Multi-channel logic affects price, visibility, inventory, or SEO |
+| Inventory sources | Stock ownership and source assignment rules are defined                          | Current stock data is incomplete or inconsistent     | Multi-location or supplier logic requires custom handling        |
 
-#### 7. Prepare source evidence before execution <a href="#id-7-prepare-source-evidence-before-execution" id="id-7-prepare-source-evidence-before-execution"></a>
+This preparation helps keep Bagisto implementation realistic. It prevents the catalog from being moved as a static tree when the target store needs channel-aware and inventory-aware structure.
 
-The merchant should gather representative exports, screenshots, admin examples, source field notes, integration diagrams, sample buyer accounts, sample products, sample orders, custom-field lists, app or extension data examples, and any source documentation that explains how the current store works.
+### Prepare Customers, Orders, CMS, and Commercial Rules <a href="#prepare-customers-orders-cms-and-commercial-rules" id="prepare-customers-orders-cms-and-commercial-rules"></a>
 
-This evidence is especially important when the Source Platform is heavily modified or custom-built. Custom Platform sources, proprietary database structures, outside-system identifiers, and non-standard field meanings should be reviewed before migration execution because standard export files may not explain the business logic behind the data.
+Customers and Orders require preparation beyond record counts. Bagisto can store customer accounts, customer groups, customer reviews, orders, invoices, shipments, refunds, transactions, marketing rules, CMS content, URL rewrites, search terms, newsletters, and other operational records. The preparation question is not only whether the records exist; it is whether the current platform’s commercial meaning can be preserved in Bagisto.
 
-### Practical Preparation Sequence <a href="#practical-preparation-sequence" id="practical-preparation-sequence"></a>
+Customer preparation should identify account status, group assignment, address quality, newsletter consent, review history, pricing relationships, and any B2B or marketplace dependencies. If customer groups are used for pricing or access, those groups should be documented before Demo Migration. If group names are inconsistent or duplicated, clean them before mapping.
 
-A strong preparation process moves from business intent to migration evidence. The following sequence keeps the work manageable and prevents teams from jumping into field-level cleanup before the target operating model is clear.
+Order preparation should preserve the facts a merchant needs after launch: order numbers, dates, customers, products, quantities, discounts, tax, shipping, payment references, invoices, shipments, refunds, order statuses, and order comments. Historical orders often include logic from old payment, tax, shipping, discount, or fulfillment systems. Not all of that logic should become live Bagisto configuration, but the historical record should remain understandable.
 
-| Step  | Preparation action                        | Output needed before migration                                                                                                                             |
-| ----- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1** | Define the future Bagisto operating model | Clear statement of whether Bagisto will support simple e-commerce, B2B, marketplace, multi-tenant, POS-connected, mobile, or headless commerce behavior.   |
-| **2** | Review catalog structure                  | Product examples, attribute groups, variant logic, category rules, image/content needs, channel visibility, and fields requiring mapping or custom review. |
-| **3** | Clarify buyer and customer context        | Customer groups, company accounts, buyer roles, pricing rules, tax treatment, account permissions, and representative buyer journeys.                      |
-| **4** | Review order and fulfillment history      | Sample orders with statuses, invoices, payment context, shipping data, refunds, vendor or warehouse context, and integration identifiers.                  |
-| **5** | Identify extensions and connected systems | List of required modules, APIs, integrations, external systems, and ownership responsibilities.                                                            |
-| **6** | Choose Demo Migration samples             | Representative products, customers, orders, categories, content, and custom-source examples that reveal real migration risk.                               |
-| **7** | Escalate non-standard requirements        | Items that require Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom fields, or custom migration logic adjustment.                        |
+CMS and marketing preparation should cover pages, content blocks, menus, email templates, URL rewrites, search terms, search synonyms, sitemaps, cart rules, catalog rules, campaigns, and newsletters where relevant. These records influence continuity after launch. Missing CMS Pages may break landing pages. Weak URL rewrite preparation may damage SEO continuity. Unreviewed cart and catalog rules may create discount mismatches.
 
-This sequence is not a software setup checklist. It is a preparation path for making the migration result testable.
+| Area      | Preparation focus                                                              | Practical output                                     |
+| --------- | ------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| Customers | Accounts, groups, addresses, consent, reviews, B2B or marketplace links        | Customer mapping table and group normalization notes |
+| Orders    | Statuses, totals, taxes, discounts, invoices, shipments, refunds, transactions | Historical order interpretation map                  |
+| CMS       | Pages, menus, content blocks, email templates, search and URL behavior         | Content and SEO continuity checklist                 |
+| Marketing | Cart rules, catalog rules, campaigns, newsletters                              | Promotion-retention and rebuild decision list        |
 
-### Demo Migration Sample Planning <a href="#demo-migration-sample-planning" id="demo-migration-sample-planning"></a>
+This section of preparation is where merchants should decide what must be preserved as history and what should become live Bagisto configuration. A coupon used three years ago may need to remain visible in order history but does not necessarily need to become an active cart rule. A customer group may need to keep past order meaning even if the new pricing structure changes after launch.
 
-Demo Migration should be designed to reveal whether Bagisto can represent the merchant’s real operating model. Easy samples are not enough. The sample set should include ordinary records, high-value records, and records that expose the difficult parts of the migration.
+### Prepare Extension, API, Headless, and Custom Package Evidence <a href="#prepare-extension-api-headless-and-custom-package-evidence" id="prepare-extension-api-headless-and-custom-package-evidence"></a>
 
-| Sample type                            | What to include                                                                                                                                                                                         | What the sample should reveal                                                                                          |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Product samples**                    | Simple products, variant-heavy products, attribute-rich items, downloadable items, grouped or related products, products with custom fields, and products assigned to important categories or channels. | Whether product meaning, options, attributes, images, pricing, and visibility can be interpreted correctly in Bagisto. |
-| **Category and navigation samples**    | Top categories, deep categories, high-traffic landing pages, redirected URLs, channel-specific content, and SEO-sensitive paths.                                                                        | Whether storefront discovery and route continuity can be planned deliberately.                                         |
-| **Customer samples**                   | Ordinary customers, wholesale or B2B buyers, company accounts, tax-exempt customers, high-value accounts, and accounts with meaningful order history.                                                   | Whether customer records retain the account context needed for service, pricing, and validation.                       |
-| **Order samples**                      | Recent orders, old orders, refunded or partially fulfilled orders, orders with discounts, orders with shipping/payment details, and integration-sensitive orders.                                       | Whether historical order context remains useful after migration.                                                       |
-| **Extension or custom-source samples** | Records shaped by source modules, custom fields, marketplace seller data, ERP identifiers, PIM fields, or custom database logic.                                                                        | Whether the requirement fits standard migration capability, Add-on support, or Custom Service review.                  |
+Bagisto’s Laravel foundation gives merchants and developers significant room for customization. That flexibility is valuable, but it also means preparation must identify which parts of the current store are ordinary data and which parts are behavior created by extensions, custom packages, APIs, themes, headless components, or external systems.
 
-A good Demo Migration sample should help the merchant answer: does the migrated data look usable in Bagisto, or does the result expose preparation gaps that should be resolved before Full Migration?
+Do not prepare extension-related data by guessing. Build an evidence list. For each extension or custom component, document what it does, which records it creates, which database tables or fields it owns, whether it affects checkout or catalog behavior, whether it connects to an external system, and whether the behavior must continue in Bagisto.
 
-### Custom Platform and Custom Data Preparation <a href="#custom-platform-and-custom-data-preparation" id="custom-platform-and-custom-data-preparation"></a>
+Important areas to check include:
 
-Custom Platform sources require more preparation than ordinary platform-to-platform migration paths. The merchant should not rely on exports alone when the source structure is custom, heavily modified, or dependent on external systems.
+| Dependency type                 | Preparation task                                                                                        | Likely handling                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Payment and shipping extensions | Identify configuration, transaction references, carrier rules, and checkout behavior                    | Usually target configuration, sometimes Custom Service for historical or custom records |
+| Product-type extensions         | Identify custom fields, pricing logic, product relationships, or cart behavior                          | Often Custom Service if behavior must be preserved                                      |
+| Theme and frontend code         | Identify layout dependencies, menus, scripts, content placement, and responsive behavior                | Usually target-side implementation, not raw data migration                              |
+| API integrations                | Identify external identifiers, sync ownership, and update direction                                     | Requires integration planning and validation outside simple record transfer             |
+| Headless storefront             | Identify API payloads, frontend routes, search behavior, CMS consumption, and deployment responsibility | Requires separate validation of migrated data and frontend usage                        |
+| Marketplace or B2B modules      | Identify seller, company, quote, role, approval, commission, or catalog-access data                     | Often Custom Service if records must be migrated                                        |
 
-Before execution, prepare:
+If extension-created data is important, determine whether it fits Bagisto’s supported structures, can be handled through Add-ons, or requires Custom Service. Add-ons can support bounded filtering, mapping, or configuration within supported migration behavior. Custom Service is appropriate when unsupported records, custom fields, extension-created tables, custom packages, or bespoke transformation logic must be handled.
 
-* source database or export structure explanations
-* custom-field definitions
-* relationship notes for products, customers, orders, vendors, and content
-* external identifiers used by ERP, PIM, CRM, warehouse, marketplace, tax, payment, or shipping systems
-* examples of custom logic that affects pricing, visibility, fulfillment, approval, or reporting
-* records that show how source data should be interpreted in Bagisto
+This distinction should be made before Full Migration. Waiting until after migration to discover that key checkout, seller, quote, or product-type behavior depended on custom code usually creates avoidable launch pressure.
 
-When this context is missing, the migration may preserve values without preserving meaning. Custom Service should be reviewed when custom source behavior, custom fields, outside-system identifiers, third-party data, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment is required.
+### Prepare Service Scope, Entity Points, and Demo Migration Samples <a href="#prepare-service-scope-entity-points-and-demo-migration-samples" id="prepare-service-scope-entity-points-and-demo-migration-samples"></a>
 
-### What Should Be Escalated Before Execution <a href="#what-should-be-escalated-before-execution" id="what-should-be-escalated-before-execution"></a>
+Service scope should be prepared from evidence, not optimism. A Bagisto migration can look simple when only core records are counted, but the scope can change once product types, attribute families, channels, inventory sources, CMS records, marketing rules, APIs, headless behavior, marketplace layers, or custom packages are reviewed.
 
-Not every preparation issue should delay migration, but some issues should be escalated before execution because they can change the migration approach.
+Entity Points should be used as a scope-sizing signal for eligible new Products, Customers, Orders, and Blog Posts. The important duplicate rule is simple: eligible new records consume Entity Points when they are first migrated, while records already counted through the service license do not consume again merely because another action occurs on the same migration path. This rule helps merchants understand size, but it should not be mistaken for a full complexity measure. A small catalog with complex configurable products and custom attributes may need more planning than a larger catalog with simple products.
 
-| Escalation signal                                    | Why it matters                                                                                                                                  |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **The future Bagisto model is still undecided**      | A simple storefront, marketplace, B2B store, multi-tenant model, and headless build do not create the same migration requirements.              |
-| **Product attributes and variants are inconsistent** | Poorly classified catalog data can migrate but still fail filtering, product selection, or channel presentation.                                |
-| **Buyer rules are undocumented**                     | B2B pricing, company accounts, permissions, tax treatment, and buyer-specific catalogs cannot be safely preserved if the rules are not defined. |
-| **External systems own key outcomes**                | ERP, PIM, fulfillment, payment, tax, warehouse, CRM, or API systems may need reconnection or custom planning outside basic record migration.    |
-| **Custom source logic controls business behavior**   | Custom fields, custom checkout logic, marketplace relationships, app-owned data, or proprietary database structure may require Custom Service.  |
-| **Demo Migration samples are too generic**           | If samples do not include difficult products, buyers, orders, channels, or integration-sensitive records, the test will not reveal launch risk. |
+Demo Migration sampling should reflect real Bagisto complexity. Do not choose only clean records. Include:
 
-Escalation is not a failure. It is the point where the migration plan becomes more accurate.
+* simple and configurable products;
+* products with multiple attributes and attribute-family differences;
+* bundle, grouped, downloadable, virtual, or booking products where relevant;
+* products assigned to important categories and channels;
+* records with inventory-source implications;
+* customers from different customer groups;
+* orders with discounts, taxes, shipping, invoices, shipments, refunds, and transaction references;
+* CMS Pages, URL rewrites, search terms, and marketing rules where they affect continuity;
+* records touched by extensions, APIs, marketplace layers, B2B logic, or custom packages.
+
+| Demo sample type          | Why it matters                                          | Pass signal                                                                           |
+| ------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Product complexity sample | Tests type, attribute, variant, and pricing translation | Product can be edited, displayed, filtered, and purchased correctly                   |
+| Channel/inventory sample  | Tests visibility and stock ownership                    | Product appears in the right channel with correct availability                        |
+| Customer/order sample     | Tests account and history continuity                    | Customer and order history remain commercially understandable                         |
+| CMS/SEO sample            | Tests content and discovery continuity                  | Pages, URLs, search behavior, and key content remain usable                           |
+| Custom dependency sample  | Tests escalation need                                   | Unsupported behavior is clearly assigned to configuration, Add-ons, or Custom Service |
+
+A Demo Migration that only proves ordinary records is not enough for a Bagisto project with advanced architecture. The sample should be representative enough to support a real Full Migration decision.
+
+### Prepare Follow-Up Migration Controls Before Launch <a href="#prepare-follow-up-migration-controls-before-launch" id="prepare-follow-up-migration-controls-before-launch"></a>
+
+Follow-up migration planning should be defined before launch, not after a problem appears. Bagisto projects often include a period of target-side configuration, theme work, integration development, or validation after the first migration test. During that period, the old store may continue to receive new orders, customers, products, CMS changes, or promotional updates.
+
+Additional Migration Options should be selected based on what changed after the last run:
+
+| Option                                                  | Use when                                                                                | Bagisto preparation concern                                                             |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Continue the Migration with the last used configuration | New records need to be migrated and the mapping remains valid                           | Confirm that product types, attributes, channels, and inventory rules have not changed. |
+| Continue the Migration with a new configuration         | The migration path needs adjusted mapping, filtering, or configuration                  | Recheck affected records before applying the new configuration.                         |
+| Perform a new migration                                 | The target build, source scope, or business rules changed enough to require a clean run | Avoid layering inconsistent assumptions onto the Bagisto target store.                  |
+
+The preparation team should also assign ownership for freeze windows, final record updates, SEO review, integration testing, theme readiness, inventory validation, and launch approval. If ownership is unclear, the project may pass technical migration checks but still fail operational readiness.
+
+A strong Bagisto preparation process ends with a launch-readiness packet: scope decision, data cleanup notes, mapping tables, Demo Migration sample plan, Add-ons and Custom Service decisions, Entity Points scope notes, target configuration responsibilities, Additional Migration Options plan, and sign-off criteria.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Preparing for a Bagisto migration means clarifying the target operating model before treating data movement as straightforward. Bagisto can support flexible Laravel-based e-commerce, marketplace, B2B, multi-tenant, POS, mobile, and headless commerce scenarios, but those scenarios require deliberate preparation around catalog meaning, customer context, channel behavior, extensions, integrations, custom fields, and source-specific logic.
+Bagisto migration preparation should turn a broad commerce move into a controlled operating-model decision. Products, Customers, Orders, CMS Pages, categories, attributes, channels, inventory sources, customer groups, marketing rules, extensions, APIs, and custom packages need to be reviewed before migration execution begins.
 
-The strongest preparation does not attempt to solve every technical detail before migration. It identifies what must be preserved, what should be simplified, what needs configuration, what needs Add-on support, and what must be reviewed through Custom Service before execution.
+The strongest preparation work separates records from behavior. Records may migrate through supported paths. Behavior may require Bagisto configuration, Add-ons, Custom Service, or a target-side rebuild. When that distinction is made before Demo Migration, the project can use test evidence to confirm scope instead of discovering gaps late in launch planning.
 
-Before starting the migration, use Demo Migration and Live Chat to test representative Bagisto scenarios: complex products, important categories, buyer groups, company accounts, rule-sensitive orders, channel-specific content, integration identifiers, and custom-source records that reveal whether the migration plan is ready for Full Migration.
+Bagisto rewards careful preparation because its architecture is flexible. That flexibility is most valuable when product types, attributes, attribute families, channels, inventory sources, CMS content, commercial rules, and custom dependencies are prepared as connected decisions rather than isolated fields.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Should every Bagisto migration require technical preparation?**
+**What should be prepared first before migrating to Bagisto?**
 
-Yes, but the level of preparation depends on the project. A simple storefront may need basic catalog, customer, order, and URL review. A marketplace, B2B, multi-tenant, headless, or custom Laravel-based project needs deeper preparation around extensions, integrations, buyer rules, custom data, and source interpretation.
+Start with the intended Bagisto operating scope. Confirm whether the target store will use simple catalog behavior, multiple product types, multiple channels, inventory sources, marketplace features, B2B functions, headless storefronts, APIs, or custom packages. That decision shapes every later preparation task.
 
-**What should be cleaned before migrating to Bagisto?**
+**Why are attributes and attribute families important in Bagisto preparation?**
 
-The most useful cleanup areas are duplicate or obsolete products, unclear attributes, inconsistent variants, outdated categories, unused customer groups, inactive rules, irrelevant content, and source fields that no longer have business meaning. Cleanup should support migration clarity rather than remove data without review.
+Bagisto uses attributes and attribute families to structure product information. If they are prepared poorly, products may migrate but become difficult to manage, filter, compare, edit, or display consistently after launch.
 
-**Should extensions be installed before migration?**
+**Should all extensions and custom behavior be migrated into Bagisto?**
 
-That depends on the target design. If an extension will own important data meaning, such as marketplace vendors, B2B buyer rules, payment context, shipping behavior, or custom catalog presentation, it should be identified before migration planning. Whether it must be installed before execution depends on the migration approach and target configuration plan.
+No. Some behavior should be replaced by Bagisto configuration or rebuilt using target-side extensions or custom development. Extension-created records, custom fields, custom tables, and bespoke transformation needs should be reviewed for Custom Service rather than treated as ordinary data.
 
 **How should Demo Migration samples be chosen for Bagisto?**
 
-Samples should include ordinary records and difficult records. Use products with attributes or variants, important categories, B2B or wholesale buyers, company accounts, meaningful order histories, SEO-sensitive content, custom fields, and integration-sensitive records. The goal is to reveal whether the result is usable in Bagisto, not merely whether data appears.
+Choose representative records, not only clean records. Include complex product types, important attributes, customer groups, discounted orders, inventory cases, CMS and SEO examples, and records affected by extensions, APIs, marketplace layers, B2B logic, or custom packages.
 
-**When should Custom Service be reviewed before a Bagisto migration?**
+**When should Additional Migration Options be planned?**
 
-Custom Service should be reviewed when the project involves Custom Platform sources, custom Laravel logic, non-standard source structures, custom fields, outside-system identifiers, third-party data, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment. These requirements can affect how data is interpreted and transformed before it reaches Bagisto.
+Plan them before launch. They matter when the old store continues to change after the first migration run or when the Bagisto configuration changes during preparation, testing, or target-side implementation.

@@ -1,160 +1,188 @@
 # Selecting the Right Migration Approach for Bagisto
 
-Bagisto migration approach should be chosen by looking at how much of the future store depends on standard commerce data and how much depends on Laravel-level customization, extensions, marketplace or B2B modules, channel configuration, API behavior, or connected systems.
+Selecting the right migration approach for Bagisto means matching the store’s operating complexity to the correct service path. Bagisto can support ordinary ecommerce records, but it can also support product-type complexity, attribute-family planning, channels, inventory sources, customer groups, marketing rules, CMS content, marketplace behavior, B2B logic, APIs, headless storefronts, packages, themes, and custom Laravel development. The correct approach depends on which of those structures must be preserved, configured, mapped, rebuilt, or validated.
 
-A simple source store moving into a mostly standard Bagisto installation can often be handled with a lighter approach. A business that expects Bagisto to become a customized Laravel commerce system, multi-vendor marketplace, B2B portal, multi-tenant storefront, headless commerce backend, POS-connected operation, or integration-heavy platform needs a more deliberate approach from the beginning.
+A Bagisto migration should not be selected only by record volume. Record volume matters, especially for Entity Points and migration sizing, but complexity often comes from relationships and behavior. A smaller catalog with configurable products, custom attributes, channel-specific visibility, and API dependencies may require more planning than a larger catalog of simple products.
 
-The practical question is not only whether products, customers, and orders can be migrated. The better question is whether the selected migration approach gives enough control to preserve the business meaning behind those records after they land in Bagisto.
+The practical goal is to decide which work belongs in Standard Service, which work needs Managed Service, which bounded changes can be handled by Add-ons, which requirements need Custom Service, how Demo Migration should confirm the choice, and which Additional Migration Options should be prepared before launch.
 
-### Why Approach Choice Depends on Bagisto-Specific Burden <a href="#why-approach-choice-depends-on-bagisto-specific-burden" id="why-approach-choice-depends-on-bagisto-specific-burden"></a>
+### What Migration Approach Means for Bagisto <a href="#what-migration-approach-means-for-bagisto" id="what-migration-approach-means-for-bagisto"></a>
 
-Bagisto is open-source and Laravel-based, so it can be adapted more deeply than many fixed hosted platforms. That flexibility is useful, but it also changes the migration decision. The more the target store depends on custom code, extensions, channels, custom fields, or external systems, the less safe it is to treat the migration as a simple record movement project.
+The migration approach defines how much of the Bagisto project can be handled through supported migration behavior and how much requires planning, configuration, or custom handling. In a Bagisto project, the key distinction is not only between small and large stores. It is between ordinary commerce records and architecture-sensitive behavior.
 
-| Bagisto-specific burden                        | Why it affects approach choice                                                                                             | Practical planning consequence                                                                                                    |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Laravel customization                          | Custom models, controllers, packages, or database structures may change how migrated data should be interpreted.           | Custom behavior should be reviewed before execution, not discovered after Demo Migration.                                         |
-| Extension-owned behavior                       | Marketplace, B2B, POS, payment, shipping, PIM, ERP, or other extensions may own important context.                         | The team should identify which behavior is native, extension-driven, integration-owned, or outside standard migration capability. |
-| Product attribute and variant complexity       | Bagisto can support structured catalog behavior, but unclear source attributes can produce confusing target records.       | Product samples should prove that options, variants, attributes, and categories remain useful to buyers and administrators.       |
-| Channel and storefront planning                | A Bagisto project may involve multiple channels, languages, currencies, storefronts, or headless frontends.                | Migration planning should define where migrated records should appear and which storefront or channel context matters.            |
-| B2B, marketplace, or multi-tenant requirements | Buyer groups, companies, vendors, tenant boundaries, commissions, or wholesale logic may require module-specific handling. | These requirements should be mapped before the service path is chosen.                                                            |
-| Integration and API dependencies               | External systems may control inventory, prices, customer truth, fulfillment, reporting, or storefront experiences.         | System ownership should be documented so the migration does not promise outcomes controlled outside Bagisto.                      |
+A record is usually easier to migrate when it has a clear equivalent in Bagisto and does not depend on hidden logic. A behavior needs deeper review when it affects product type, attribute structure, channel visibility, inventory source assignment, customer group pricing, cart or catalog rules, checkout behavior, CMS delivery, marketplace functions, B2B permissions, APIs, headless usage, or custom packages.
 
-A strong approach decision separates ordinary migration scope from target-side configuration, extension review, custom data interpretation, and post-migration validation. This prevents a project from appearing simple during purchase while becoming complex during launch preparation.
+A useful first-pass approach matrix looks like this:
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+| Store condition                                                                                                | Likely service direction     | Reason                                                                                  |
+| -------------------------------------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------- |
+| Clean catalog, customers, and orders with limited custom behavior                                              | Standard Service             | Core records can be moved through supported paths.                                      |
+| Migration is supported but the team needs planning, coordination, or guided execution                          | Managed Service              | Scope is manageable but requires stronger execution ownership.                          |
+| Data needs bounded filtering, mapping, or configuration within supported behavior                              | Add-ons                      | The requirement changes how supported data is selected or mapped.                       |
+| Custom fields, unsupported records, app or extension data, custom packages, or bespoke logic must be preserved | Custom Service               | The requirement sits outside ordinary supported migration behavior.                     |
+| Target build changes after the first run                                                                       | Additional Migration Options | Follow-up migration must match the last valid configuration or a revised configuration. |
 
-Standard Service is usually enough when the migration path is clear, the source data fits standard migration capability, and the target Bagisto store does not depend on custom interpretation beyond supported settings and purchased Standard Add-ons.
+This approach keeps service decisions grounded. It prevents overusing Custom Service for ordinary data cleanup, and it prevents forcing custom requirements into a Standard Service path that cannot preserve the needed behavior.
 
-#### The target Bagisto setup is relatively standard <a href="#the-target-bagisto-setup-is-relatively-standard" id="the-target-bagisto-setup-is-relatively-standard"></a>
+### When Standard Service Fits Bagisto <a href="#when-standard-service-fits-bagisto" id="when-standard-service-fits-bagisto"></a>
 
-Standard Service can fit when the future store is a straightforward Bagisto installation with ordinary products, categories, customers, orders, CMS Pages, Blog Posts, reviews, coupons, and other supported data moving into a clearly configured target environment.
+Standard Service fits when the migration scope is clear, the current platform data is clean enough to map into supported Bagisto structures, and the target store does not depend on unsupported custom behavior. For Bagisto, this usually means the merchant needs to move core records such as Products, Categories, Customers, Orders, Reviews, Coupons, CMS Pages, or related supported data without preserving complex extension-owned logic.
 
-This is more likely when product relationships are understandable, category structure is not heavily reworked, customer records do not carry complex B2B or company logic, and order history is needed mainly for reference rather than operational reconstruction.
+Standard Service is strongest when products can be represented through Bagisto’s supported product types and attributes without bespoke transformation. Simple products, well-defined configurable products, clear categories, stable customer groups, clean order history, and manageable CMS content are good signals. The migration can still require careful mapping, but the data does not demand custom engineering.
 
-#### The merchant can self-perform with clear source data <a href="#the-merchant-can-self-perform-with-clear-source-data" id="the-merchant-can-self-perform-with-clear-source-data"></a>
+Standard Service should not be selected blindly. Bagisto’s product, attribute, channel, inventory, and marketing structures can create complexity even when record counts are moderate. Before using Standard Service, confirm:
 
-Standard Service is customer-led. It can work well when the merchant or their technical team understands the source data, can configure the target Bagisto store, can review Demo Migration results, and can make decisions about categories, attributes, URLs, images, customers, and order history without needing Next-Cart to manage execution.
+* product types are known and can be represented in Bagisto;
+* attributes and attribute families are clean enough for target-side maintenance;
+* categories do not depend on old navigation behavior that must be rebuilt;
+* channel and inventory-source assumptions are simple or already defined;
+* customer groups do not carry complex pricing or access rules beyond supported handling;
+* order history can remain understandable without recreating every old checkout behavior;
+* CMS, URL, and marketing records are within the supported scope;
+* no essential custom package, API, marketplace, B2B, or headless behavior must be migrated as data.
 
-This does not mean the customer is unsupported. Standard Service still includes the purchased service license, 24/7 expert support, and any purchased Standard Add-ons. The deciding factor is whether the customer can lead review and decision-making without requiring Next-Cart-led execution or custom migration work.
+| Standard Service pass signal                          | Watch signal                                       | Escalation signal                                                           |
+| ----------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------- |
+| Records map cleanly into Bagisto-supported structures | Some field cleanup or mapping decisions are needed | Unsupported custom records or behavior must be preserved                    |
+| Product types and attributes are understood           | Attribute families need cleanup                    | Product behavior depends on custom product logic                            |
+| Orders can remain historical records                  | Order statuses need mapping                        | Payment, fulfillment, or external references require custom treatment       |
+| CMS and SEO scope is defined                          | URL rewrite decisions need review                  | Headless or custom frontend logic consumes migrated content in a custom way |
 
-#### Standard Add-ons can handle the adjustment needed <a href="#standard-add-ons-can-handle-the-adjustment-needed" id="standard-add-ons-can-handle-the-adjustment-needed"></a>
+Standard Service is appropriate when the migration can be completed without turning the project into custom architecture work.
 
-Standard Service can still be suitable when the merchant needs supported filtering, mapping, or data configuration through Standard Add-ons. For example, the Data Filter Add-on may help when only selected records should move, Advanced Data Mapping may help where source fields need to align with supported target structures, and Advanced Data Configure may help with supported value changes.
+### When Managed Service Fits Bagisto <a href="#when-managed-service-fits-bagisto" id="when-managed-service-fits-bagisto"></a>
 
-Using a Standard Add-on within its available settings and supported behavior does not automatically make the project Custom. The project becomes Custom when the desired result requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment.
+Managed Service fits when the migration path is supported but the project needs stronger planning, coordination, review, or execution control. Bagisto projects often reach this point when the data is not highly custom, yet the operating scope includes several moving parts: product types, attributes, attribute families, customer groups, channels, inventory sources, CMS, URL rewrites, marketing rules, tax settings, and launch sequencing.
 
-### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
+Managed Service is useful when the merchant needs help turning scattered platform information into a coherent migration scope. It can support decisions such as which product types to test in Demo Migration, how to interpret customer groups, which orders should be sampled, how to separate historical records from live target configuration, and when follow-up migration should be planned.
 
-Managed Service is safer when the migration still fits standard service capability but the review, execution, coordination, or validation burden is high enough that the merchant should not lead the process alone.
+Managed Service does not mean every custom requirement becomes supported. It gives the project a more controlled execution path. Requirements outside supported migration behavior still need Add-ons or Custom Service. The value of Managed Service is coordination: defining what needs to happen, when to test it, how to interpret results, and what should block Full Migration.
 
-#### The target structure is standard, but coordination is heavy <a href="#the-target-structure-is-standard-but-coordination-is-heavy" id="the-target-structure-is-standard-but-coordination-is-heavy"></a>
+Good Managed Service candidates include:
 
-A Bagisto migration may involve a standard migration path while still requiring careful coordination across products, attributes, categories, media, customers, order history, SEO routes, and target configuration. In that case, Managed Service can help because Next-Cart performs the migration for the customer using standard service capability and purchased Add-ons.
+| Scenario                                                                                | Why Managed Service helps                                                          |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Catalog uses several product types and many attributes                                  | Scope review prevents poor attribute-family and product-type mapping decisions.    |
+| Store uses multiple channels or inventory sources                                       | Channel and stock behavior need coordinated target preparation and validation.     |
+| Order history contains discounts, refunds, shipments, taxes, and customer group effects | Historical meaning needs review before launch.                                     |
+| CMS and SEO records are important to continuity                                         | Content, URL rewrites, search terms, and landing pages need controlled validation. |
+| Merchant team has limited migration ownership                                           | Managed coordination reduces missed decisions and late escalation.                 |
 
-Managed Service is often safer when the merchant has limited internal migration capacity, when the catalog is large, when the launch schedule is tight, or when the business needs a more guided execution process while still staying within standard supported behavior.
+Managed Service should be selected when the project is not mainly custom engineering, but it is too important or too interconnected to run as an unmanaged record transfer.
 
-#### The merchant needs help interpreting Demo Migration results <a href="#the-merchant-needs-help-interpreting-demo-migration-results" id="the-merchant-needs-help-interpreting-demo-migration-results"></a>
+### When Add-ons Should Be Used <a href="#when-add-ons-should-be-used" id="when-add-ons-should-be-used"></a>
 
-Demo Migration is especially useful for Bagisto because early samples can reveal whether the target store is ready, whether product attributes are usable, whether categories and URLs make sense, whether images and content render correctly, and whether order history remains useful.
+Add-ons fit bounded requirements that adjust supported migration behavior. In Bagisto projects, Add-ons are useful when the merchant needs filtering, mapping, or configuration assistance that remains inside the supported scope. They should not be used as a substitute for Custom Service when unsupported records, extension-owned data, custom fields, custom packages, or bespoke logic need special treatment.
 
-Managed Service can be safer when the merchant can identify problems but needs Next-Cart-led execution support to run, review, and adjust the migration process within standard capability.
+Common Bagisto Add-on situations include selecting a defined subset of records, mapping old customer groups into a cleaner target structure, applying controlled field mapping, preparing specific CMS or SEO handling, or supporting configuration-sensitive migration behavior that is still within supported boundaries.
 
-#### Multiple operational teams are involved <a href="#multiple-operational-teams-are-involved" id="multiple-operational-teams-are-involved"></a>
+The key test is whether the requirement is bounded and supported:
 
-Bagisto projects can involve developers, merchandising teams, SEO teams, operations teams, fulfillment teams, and integration owners. Managed Service can help when the migration itself is standard but the project needs coordination across those groups.
+| Requirement                                                 | Add-on candidate?              | Reason                                                            |
+| ----------------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------- |
+| Move only selected product categories or customer groups    | Yes                            | Data Filter Add-on may support controlled scoping.                |
+| Map old fields into known Bagisto attributes                | Yes, when fields are supported | Advanced Data Mapping can help align fields to target structure.  |
+| Adjust supported migration configuration for known entities | Yes                            | Advanced Data Configure can support controlled behavior changes.  |
+| Migrate custom package tables into Bagisto                  | No                             | This usually requires Custom Service.                             |
+| Preserve a custom product type with bespoke cart behavior   | No                             | Custom behavior needs custom handling or target-side development. |
+| Rebuild a headless frontend                                 | No                             | This is implementation work, not a migration Add-on.              |
 
-Managed Service does not automatically include custom migration logic. If the project requires modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom source interpretation, it should move into Custom Service review.
+Add-ons should make the supported migration path more accurate. They should not hide uncertainty. If the team cannot explain what record, field, or configuration is being filtered, mapped, or adjusted, the requirement should be clarified before an Add-on is selected.
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+### When Custom Service Becomes Necessary <a href="#when-custom-service-becomes-necessary" id="when-custom-service-becomes-necessary"></a>
 
-Custom Service is needed when the migration requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or broader bespoke handling.
+Custom Service becomes necessary when Bagisto must receive or preserve data and behavior outside ordinary supported migration paths. This is common when the current store includes custom fields, app or extension data, marketplace records, B2B structures, external-system identifiers, custom product types, custom database tables, bespoke checkout logic, API synchronization records, headless storefront dependencies, or Laravel package requirements.
 
-For Bagisto, Custom Service is especially important when the expected target result depends on custom Laravel behavior, extension-specific structures, marketplace or B2B logic, headless architecture, unusual source data, or external systems that change what migrated data should mean.
+Custom Service should be considered when the requirement cannot be described as ordinary Products, Customers, Orders, Reviews, Coupons, CMS Pages, Blog Posts, or supported configuration. The deciding question is: does the migration need to transform unsupported records or custom behavior into a usable Bagisto structure? If yes, the project needs custom scoping.
 
-| Custom Service trigger                   | Why it matters in a Bagisto migration                                                                                                               | Example review focus                                                                                        |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Custom Laravel data structures           | Source or target behavior may not match standard entity assumptions.                                                                                | Review custom tables, custom fields, relationships, and transformation requirements.                        |
-| Marketplace or vendor logic              | Vendors, seller stores, commissions, payouts, product ownership, and vendor order handling may not be ordinary product/order data.                  | Determine whether vendor context can be migrated, configured, rebuilt, or handled separately.               |
-| B2B or company-account behavior          | Buyer groups, company users, quotations, role-based access, custom pricing, requisition lists, or wholesale workflows may require special handling. | Define which buyer rules and account structures must exist in Bagisto after migration.                      |
-| Multi-tenant or multi-channel context    | Tenant boundaries, channel assignment, domain logic, language/currency behavior, or shared resources may shape record meaning.                      | Clarify where each product, customer, order, and content record belongs.                                    |
-| Headless or custom frontend architecture | A headless storefront may rely on API-ready data, custom routes, or frontend-specific identifiers.                                                  | Identify which data must support storefront rendering, API calls, search, filtering, and checkout behavior. |
-| Integration-owned data                   | ERP, PIM, POS, CRM, fulfillment, payment, tax, shipping, or reporting systems may own key business truth.                                           | Separate migrated data from data that should be reconnected, re-synced, or excluded from migration.         |
-| Custom Platform as Source Platform       | Non-standard source structures need source interpretation before migration mapping can be trusted.                                                  | Review custom fields, outside-system identifiers, third-party data, and transformation rules.               |
+Custom Service can involve custom data extraction, custom field handling, custom transformation, custom mapping into Bagisto-compatible structures, or coordination around records that need target-side implementation. It should not be treated as a last-minute rescue. The earlier custom needs are identified, the easier it is to decide whether they should be migrated, rebuilt, replaced, or retired.
 
-Custom Service does not automatically mean Next-Cart performs full migration management. Migration management can be included in the final Custom Service plan, but the quote depends on the required customization, data complexity, Add-ons, custom migration logic, Custom Platform handling, and any management work included.
+| Custom Service trigger                                                                  | Bagisto implication                                                                          |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Custom product type from the current platform must be preserved                         | Target product behavior may need custom Bagisto product-type handling or a rebuild decision. |
+| Extension-created records affect checkout, pricing, shipping, or fulfillment            | Migration must separate historical data from live target configuration.                      |
+| Marketplace records include seller, commission, payout, or vendor-specific catalog data | Supported marketplace behavior must be confirmed or custom mapping scoped.                   |
+| B2B records include companies, roles, quotes, credit, or requisition behavior           | B2B structure must be reviewed against Bagisto target capability and project scope.          |
+| Headless storefront consumes products, CMS, or search through APIs                      | Migration must support the data contract used by the frontend.                               |
+| External systems depend on preserved identifiers                                        | Identifier mapping and post-migration synchronization must be validated.                     |
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+Custom Service is appropriate when preserving business meaning requires more than record transfer and standard configuration.
 
-Add-ons can help when the migration requirement is specific, controlled, and tied to filtering, mapping, or data configuration. They should not be used as a shortcut for undefined customization.
+### How Entity Points Shape Scope Sizing <a href="#how-entity-points-shape-scope-sizing" id="how-entity-points-shape-scope-sizing"></a>
 
-| Add-on area             | Where it may help in a Bagisto migration                                                                                       | Boundary to watch                                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Moving only selected products, customers, orders, or Blog Posts when the merchant does not want every scanned record migrated. | Entered entity counts are for pricing and Entity Points Plan selection; they are not filters. Filtering must be configured deliberately. |
-| Advanced Data Mapping   | Aligning source fields with supported Bagisto structures when the target data model can accept the intended meaning.           | Mapping cannot create unsupported target behavior or solve unclear custom logic by itself.                                               |
-| Advanced Data Configure | Adjusting selected values so migrated data reaches Bagisto with updated or normalized information.                             | Value changes are not the same as rebuilding Laravel customization, B2B workflows, marketplace logic, or integration behavior.           |
-| Tailored Add-ons        | Modifying a Standard Add-on when the available settings and supported behavior are not enough.                                 | Tailored Add-ons require Custom Service because they involve modification work.                                                          |
-| Custom Add-ons          | Creating project-specific migration support when available Standard Add-ons do not fit the requirement.                        | Custom Add-ons are reviewed and quoted through Custom Service.                                                                           |
+Entity Points help size eligible new Products, Customers, Orders, and Blog Posts. They are useful in Bagisto planning because Bagisto projects can mix ordinary records with complex behavior. Entity Points show part of the scale, but they do not measure every form of complexity.
 
-Add-ons should be chosen only after the merchant understands what outcome is needed. If the requirement is really about custom source behavior, extension-owned meaning, marketplace logic, B2B workflows, external identifiers, or custom Laravel transformation, Custom Service is the correct review path.
+The duplicate-consumption rule should remain clear: eligible new records consume Entity Points when they are first migrated. Records already counted through the service license do not consume again merely because another action occurs on the same migration path. For example, a product should not consume again only because it also needs mapping or validation on the same migration path.
 
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
+Entity Points should be used with a second complexity review:
 
-Demo Migration should be treated as early evidence for approach fit. It should not be treated as final validation or launch approval.
+| Scope factor | What Entity Points show | What they do not fully show                                                                     |
+| ------------ | ----------------------- | ----------------------------------------------------------------------------------------------- |
+| Products     | New product volume      | Product-type complexity, attributes, variants, bundles, or custom behavior                      |
+| Customers    | New customer volume     | Customer group pricing, company roles, B2B access, or segmentation rules                        |
+| Orders       | New order volume        | Historical payment, tax, shipping, refunds, invoices, shipments, and transaction interpretation |
+| Blog Posts   | New blog-post volume    | CMS layout, headless content consumption, redirects, or theme behavior                          |
 
-For Bagisto, the Demo Migration sample should clarify whether the chosen approach is strong enough to handle the real migration burden.
+This distinction prevents under-scoping. A merchant can have a manageable Entity Points count but still require Managed Service, Add-ons, or Custom Service because Bagisto needs product-type planning, channel configuration, custom mapping, or development-aware validation.
 
-| Demo Migration signal                       | What it should reveal                                                                                                     | What the result may indicate                                                                               |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Product and attribute samples               | Whether products, variants, attributes, images, and descriptions remain understandable inside Bagisto.                    | If samples are confusing, the project may need mapping review, source cleanup, or Custom Service.          |
-| Category and channel samples                | Whether source category meaning, visibility, and storefront placement can be translated into the target setup.            | If records land but appear in the wrong context, channel or storefront planning may be incomplete.         |
-| Customer and B2B samples                    | Whether customer groups, company context, pricing expectations, or account meaning are preserved where needed.            | If buyer behavior cannot be interpreted, the project may need Custom Service review.                       |
-| Order history samples                       | Whether order status, products, customer context, totals, addresses, tax, shipping, and payment references remain useful. | If order records are present but operationally unclear, validation and integration planning should deepen. |
-| Extension and integration-sensitive samples | Whether records that depend on extensions, APIs, POS, ERP, PIM, fulfillment, or payment systems are still meaningful.     | If outside systems own the outcome, migration scope and reconnection responsibility must be clarified.     |
-| Custom Platform samples                     | Whether custom source structures can be interpreted safely before broader migration.                                      | If source meaning is hidden or inconsistent, Custom Service should be reviewed before Full Migration.      |
+### How Demo Migration Evidence Should Change the Approach <a href="#how-demo-migration-evidence-should-change-the-approach" id="how-demo-migration-evidence-should-change-the-approach"></a>
 
-A strong Demo Migration sample should include the records most likely to expose risk, not only the cleanest or easiest records.
+Demo Migration should confirm or challenge the initial service-path choice. It should not be treated as a formality. For Bagisto, Demo Migration is most useful when the sample includes records that test the actual complexity of the target store.
 
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
+A strong Demo Migration sample includes product-type variety, important attribute families, category and channel assignment, inventory-source cases, customer groups, discounted and refunded orders, CMS Pages, URL rewrites, search behavior, marketing rules, and records touched by extensions, APIs, marketplace layers, B2B structures, headless components, or custom packages.
 
-The selected approach may be too light if the migration repeatedly uncovers questions that cannot be answered through standard configuration or ordinary support.
+After Demo Migration, classify findings into three groups:
 
-| Warning signal                                               | What it suggests                                                                  | Likely next step                                                                         |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Product samples move but product relationships are unclear   | The target store may receive records without usable catalog meaning.              | Review mapping, product cleanup, or Custom Service if custom transformation is required. |
-| Customer records move but buyer rules are missing            | B2B, company, group, or pricing logic may not be covered by the current approach. | Review B2B requirements and determine whether Add-ons or Custom Service are needed.      |
-| Orders move but fulfillment or payment context is incomplete | Order history may depend on external systems or custom source logic.              | Document systems of record and review integration-sensitive requirements.                |
-| Extension-owned data is expected to migrate automatically    | The requirement may exceed standard migration capability.                         | Identify extension behavior and confirm whether Custom Service is needed.                |
-| Headless or custom frontend requirements appear late         | API, route, search, or frontend display needs were not planned early enough.      | Review target architecture before Full Migration continues.                              |
-| Custom Platform source data cannot be explained              | Source interpretation is not ready for standard migration execution.              | Move the requirement into Custom Service review.                                         |
+| Finding type | Meaning                                                                                  | Service-path response                                                |
+| ------------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Pass         | Records map correctly and remain usable in Bagisto                                       | Continue toward Full Migration with confirmed scope.                 |
+| Watch        | Records migrate but require cleanup, mapping, configuration, or stronger validation      | Add Managed Service control or relevant Add-ons.                     |
+| Blocking     | Data loses meaning, unsupported records appear, or custom behavior cannot be represented | Escalate to Custom Service or revise the target implementation plan. |
 
-A lighter approach should not be forced to carry undefined technical work. If the project needs customization, modification, or source interpretation, escalating early is safer than discovering the issue during final launch review.
+Demo Migration should also test ownership. If a product looks correct in the admin but cannot be purchased correctly, the issue may involve product type, inventory source, channel, pricing, or checkout configuration. If an order imports but loses tax or refund meaning, the issue may be historical interpretation rather than raw order transfer. If CMS content exists but the headless frontend does not consume it correctly, the issue may be frontend implementation or API contract.
+
+The service path should change when Demo Migration evidence changes the risk picture. A project that starts as Standard Service can become Managed Service if coordination gaps appear. An Add-on may become necessary if specific mapping needs are discovered. Custom Service may be required if unsupported records or custom behavior are essential to launch.
+
+### How Additional Migration Options Should Be Chosen <a href="#how-additional-migration-options-should-be-chosen" id="how-additional-migration-options-should-be-chosen"></a>
+
+Additional Migration Options are most useful after an initial migration run, Demo Migration review, or target-side configuration change. Bagisto projects often continue changing while the target store is prepared: new orders arrive, products are edited, customer accounts are created, CMS content changes, marketing rules are adjusted, channels are configured, or integrations are tested.
+
+Choose the follow-up option based on what changed:
+
+| Additional Migration Option                             | Use when                                                          | Bagisto-specific decision cue                                                                                           |
+| ------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Continue the Migration with the last used configuration | New records need to move and the original mapping remains correct | Product types, attributes, channels, inventory sources, and customer groups have not materially changed.                |
+| Continue the Migration with a new configuration         | Mapping, filtering, or supported configuration must be adjusted   | Attribute mapping, customer group handling, category selection, or data filters changed after review.                   |
+| Perform a new migration                                 | The target build or scope changed too much for continuation       | Bagisto channel structure, product-type plan, custom package handling, or target implementation was materially revised. |
+
+The wrong follow-up choice can create inconsistent target data. Continuing with the old configuration after major mapping changes can preserve old mistakes. Restarting unnecessarily can waste time and disrupt target preparation. The decision should come from evidence: what changed, which records are affected, and whether the prior configuration still represents the approved migration path.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Bagisto migration approach depends on how much of the project is standard commerce migration and how much depends on Laravel customization, extensions, marketplace or B2B modules, channel planning, headless architecture, integrations, or custom source interpretation.
+The right Bagisto migration approach depends on the relationship between data volume, data meaning, target configuration, and custom behavior. Standard Service fits clean supported records. Managed Service fits supported migrations that need stronger planning and coordination. Add-ons fit bounded filtering, mapping, or configuration needs. Custom Service fits unsupported records, custom fields, extension data, custom packages, headless dependencies, marketplace or B2B records, and bespoke transformation logic.
 
-Standard Service can work when the target Bagisto setup is straightforward and the customer can lead execution. Managed Service is safer when the project remains within standard capability but needs Next-Cart-led execution and coordination. Custom Service is needed when the expected outcome requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment.
+Entity Points help size eligible new Products, Customers, Orders, and Blog Posts, but they do not replace complexity review. Demo Migration should test representative records and change the service path when the evidence requires it. Additional Migration Options should be selected based on whether the last configuration remains valid, needs adjustment, or should be replaced by a new migration run.
 
-Use Demo Migration and Live Chat to test the approach before broader execution. Choose samples that expose Bagisto-specific risk: product attributes, channels, B2B accounts, marketplace or extension context, order history, integration dependencies, and any custom source structures that could affect the final migration outcome.
+A strong Bagisto migration approach is chosen through evidence. It connects record scope, Bagisto structure, target-side configuration, and launch risk before Full Migration begins.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Can a Bagisto migration use Standard Service?**
+**When is Standard Service enough for Bagisto?**
 
-Yes. Standard Service can fit when the source data is clear, the target Bagisto setup is relatively standard, and the customer can self-perform the migration process on the Next-Cart website with support and any purchased Standard Add-ons.
+Standard Service is usually enough when Products, Customers, Orders, CMS Pages, and related supported data can map cleanly into Bagisto without preserving unsupported custom fields, extension-created records, custom product behavior, marketplace records, B2B structures, or headless dependencies.
 
-**When is Managed Service safer for Bagisto?**
+**When should Managed Service be selected instead?**
 
-Managed Service is safer when the migration remains within standard service capability but the customer wants Next-Cart to perform the migration because the catalog, target setup, launch timing, or review workload is too demanding to manage alone.
+Managed Service is appropriate when the migration is supported but requires stronger planning, coordination, scope control, Demo Migration review, and launch sequencing. It is useful for Bagisto stores with product-type variety, attributes, channels, inventory sources, customer groups, CMS, SEO, or marketing rules that need guided decisions.
 
-**When does a Bagisto migration require Custom Service?**
+**What is the difference between Add-ons and Custom Service?**
 
-Custom Service is required when the migration involves customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom Laravel structures, extension-specific behavior, marketplace or B2B workflows, headless requirements, or integration-dependent data that cannot be handled through standard capability.
+Add-ons handle bounded filtering, mapping, or configuration within supported migration behavior. Custom Service handles unsupported records, custom fields, app or extension data, custom packages, bespoke transformation, external-system identifiers, and custom logic adjustment.
 
-**Can Add-ons solve complex Bagisto migration requirements?**
+**Do Entity Points measure Bagisto migration complexity?**
 
-Add-ons can help with filtering, mapping, or data configuration when the requirement fits their supported behavior. They should not be used as a substitute for Custom Service when the requirement involves custom source interpretation, extension-owned logic, bespoke transformation, or custom migration logic adjustment.
+Entity Points help size eligible new Products, Customers, Orders, and Blog Posts. They do not fully measure product-type complexity, attribute-family planning, channel behavior, inventory-source logic, marketplace or B2B data, APIs, headless dependencies, or custom packages.
 
-**What should Demo Migration prove before Full Migration?**
+**How should Demo Migration influence the final approach?**
 
-Demo Migration should show whether representative products, attributes, categories, customer groups, orders, content, URLs, integrations, and any custom source records behave as expected in Bagisto. It is early evidence, not final launch validation.
+Demo Migration should test representative complexity. If sample records remain usable in Bagisto, the current path may continue. If mapping gaps or validation issues appear, Managed Service or Add-ons may be needed. If unsupported records or custom behavior are essential, Custom Service should be scoped before Full Migration.
