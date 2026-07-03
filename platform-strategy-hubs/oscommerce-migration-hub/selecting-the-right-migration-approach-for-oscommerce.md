@@ -2,9 +2,9 @@
 
 Choosing the right migration approach for osCommerce depends on how predictable the source data is and how much interpretation the target store needs. A clean migration path into osCommerce can often be handled through standard service capability. A legacy, forked, customized, or module-heavy store may need deeper review because the source data may not map cleanly into a modern osCommerce v4 target structure.
 
-The right approach should be selected from evidence. Product count alone is not enough. A store with fewer products can still be complex if it depends on attributes, properties, product groups, B2B customer groups, old add-ons, custom database tables, payment or shipping modules, SEO rules, external-system identifiers, or modified order workflows.
+The right approach should be selected from evidence. Product count alone is not enough. A store with fewer products can still be complex if it depends on attributes, properties, product groups, B2B customer groups, old add-ons, custom database tables, payment or shipping modules, SEO rules, external-system identifiers, or modified order processs.
 
-### What Migration Approach Means for OsCommerce <a href="#what-migration-approach-means-for-oscommerce" id="what-migration-approach-means-for-oscommerce"></a>
+### What Migration Approach Means for osCommerce <a href="#what-migration-approach-means-for-oscommerce" id="what-migration-approach-means-for-oscommerce"></a>
 
 For osCommerce, approach choice is about service responsibility, standard capability, optional Add-ons, and whether custom work is needed. It should answer three practical questions:
 
@@ -70,7 +70,7 @@ Custom Service review should be considered when the source includes:
 
 Custom Service does not automatically mean Next-Cart performs the migration process for the customer. It means customization or modification work is required. Migration management is included only when it is part of the final plan.
 
-### How Add-ons Fit into an OsCommerce Migration <a href="#how-add-ons-fit-into-an-oscommerce-migration" id="how-add-ons-fit-into-an-oscommerce-migration"></a>
+### How Add-ons Fit into an osCommerce Migration <a href="#how-add-ons-fit-into-an-oscommerce-migration" id="how-add-ons-fit-into-an-oscommerce-migration"></a>
 
 Add-ons are optional service features that help customers adjust filtering, mapping, or data configuration to better match the expected migration outcome. For osCommerce, Add-ons can be useful when the requirement stays within supported platform capability and does not require custom migration logic adjustment.
 
@@ -124,13 +124,48 @@ The practical approach can be summarized as follows:
 
 The safest approach is the one that reflects the actual source store, not the simplest-looking service label.
 
+### Build an Escalation Map Before Committing <a href="#build-an-escalation-map-before-committing" id="build-an-escalation-map-before-committing"></a>
+
+The selected approach should include an escalation map before Full Migration. An escalation map does not make the project more complex; it makes the decision safer by defining what happens when Demo Migration reveals more complexity than expected. This is valuable for osCommerce because older stores often contain a mixture of standard records, old contributions, custom fields, add-on tables, manually edited data, and target-side behavior that cannot be inferred from record counts.
+
+A practical escalation map should identify which signals keep the project on the current path and which signals require a change. If products, customers, orders, CMS Pages, and SEO fields migrate with usable meaning, the current service selection may remain valid. If customer groups lose commercial meaning, order totals become difficult to interpret, product attributes flatten into text, custom fields disappear, or outside-system identifiers are missing, the project should pause before Full Migration and reconsider mapping, Add-ons, Managed Service, or Custom Service.
+
+| Demo Migration signal   | Keep current path when                                                                         | Escalate when                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Products and catalog    | Products, categories, images, attributes, and stock are usable in osCommerce.                  | Options, properties, product groups, stock rules, or sales channel assignments lose meaning. |
+| Customers and groups    | Accounts, addresses, and group labels remain clear.                                            | Groups control pricing, tax, visibility, approval, or access rules that are not represented. |
+| Orders                  | Statuses, totals, coupons, tax, payment labels, shipping labels, and comments remain readable. | Historical orders lose operational context or external references.                           |
+| CMS and SEO             | Priority pages, metadata, and URLs can be reviewed in the target.                              | High-value pages, menu paths, metadata, or redirects are incomplete.                         |
+| Modules and custom data | No required records depend on unsupported structures.                                          | Custom tables, app records, external IDs, or bespoke transformations are required.           |
+
+This map gives the merchant a clear decision standard. It prevents a common mistake: continuing toward Full Migration simply because a Demo Migration produced records. The question is not whether records appeared. The question is whether the selected approach preserves enough commercial meaning for the target osCommerce store to operate, be validated, and launch without avoidable rework.
+
+### Service-Path Decision Matrix <a href="#service-path-decision-matrix" id="service-path-decision-matrix"></a>
+
+The right path depends on how much of the source store is standard record migration, how much is target configuration, and how much is custom logic. osCommerce stores often sit across all three categories because they may combine standard Products, Customers, and Orders with long-lived modules, custom fields, sales-channel assumptions, CMS Pages, and old code-level changes.
+
+| Store condition                                                                                            | Likely path                                          | Reasoning                                                                                             |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Mostly standard catalog, customers, orders, categories, and basic content.                                 | Standard Service with careful Demo Migration review. | The main work is mapping standard records and validating representative samples.                      |
+| Large catalog, multiple customer groups, SEO-sensitive content, and many historical orders.                | Managed Service may be safer.                        | Coordination, sampling, validation, and issue classification become more important than raw transfer. |
+| Specific filtering, mapping, or configuration needs inside supported behavior.                             | Add-ons may be appropriate.                          | Bounded requirements can be handled without redefining the whole migration scope.                     |
+| Old modules, custom tables, external identifiers, or source behavior that standard migration cannot infer. | Custom Service review.                               | The issue needs tailored review, transformation logic, or non-standard handling.                      |
+
+### Escalation Logic After Demo Migration <a href="#escalation-logic-after-demo-migration" id="escalation-logic-after-demo-migration"></a>
+
+Demo Migration should not be treated as a preview that merely confirms whether files moved. For osCommerce, it should decide whether the selected path is still suitable. If product counts match but product discovery is weak, the response may involve mapping or target catalog configuration. If order history is readable but commercial context is unclear, the response may involve better samples, additional fields, or Custom Service review. If module-created records are missing, the issue should not be forced into Standard Service language.
+
+Escalation is justified when Demo Migration reveals a pattern rather than a single defect. Repeated issues with custom product properties, old add-on fields, external IDs, or customer-group behavior usually mean the original approach was too light. Repeated SEO or CMS Page issues may mean the migration plan did not sufficiently separate content migration from target Design and CMS configuration.
+
+Additional Migration Options should be used as controlled follow-up paths, not as a substitute for preparation. Continuing with the last used configuration is useful when the scope is stable and new records must be added. Continuing with a new configuration is useful when Demo Migration or post-launch review proves that mapping or filtering needs to change. Performing a new migration is appropriate when the store direction, Target Platform setup, or source preparation has changed enough that the previous path is no longer a reliable baseline.
+
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 Selecting the right migration approach for osCommerce requires a clear view of the source store’s real structure. Standard Service can be suitable for clean, predictable data. Managed Service can be safer when the merchant wants Next-Cart-led execution within standard capability. Add-ons can support filtering, mapping, and data configuration. Custom Service should be considered when old versions, forks, custom database tables, extension-owned data, B2B logic, outside-system identifiers, or tailored transformation change the scope.
 
 Use Demo Migration to test the records that carry the most business meaning before committing to the final approach. If the sample shows that standard capability does not preserve product, customer, order, SEO, module, or custom-data meaning well enough, resolve the approach through Add-ons or Custom Service review before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for every osCommerce migration?**
 

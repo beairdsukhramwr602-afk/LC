@@ -1,197 +1,118 @@
 # Gambio Platform Overview
 
-Gambio is an e-commerce shop system for merchants who want a professional online store with strong catalog management, storefront design control, SEO features, payment and shipping configuration, customer group support, multilingual and multicurrency possibilities, and operational tools for running a commercial shop. It can be used in hosted cloud and self-hosted contexts, so migration planning should clarify not only the data that will move, but also the target operating model the merchant expects after launch.
+Gambio is a Target Platform where the migration decision is closely tied to the future operating model of the store. A merchant is not only choosing a place to hold Products, Customers, Orders, Categories, Reviews, Coupons, CMS Pages, and related commerce records. The merchant is also choosing whether the new store should run as Gambio Cloud, with hosting, installation, updates, and support handled as part of the hosted package, or as a self-hosted Gambio store where the merchant owns the hosting, maintenance, and update responsibility.
 
-A migration to Gambio should be planned as a move into a structured shop environment where product data, variants, categories, customer groups, pricing rules, order history, SEO paths, design choices, legal and tax configuration, shipping methods, payment methods, languages, currencies, and integrations may all affect the final store. A successful migration is not measured only by whether records appear in the Gambio administration area. The migrated store should remain understandable to shoppers, manageable for the merchant, and reliable for launch operations.
+That distinction changes the way a Gambio migration should be planned. A store moving to Gambio Cloud may be looking for operational simplicity, faster setup, German hosting context, support access, legal-text assistance, and a system that lets the team focus on selling. A store moving to self-hosted Gambio may be looking for more flexibility, customizability, technical control, and room for specific integrations. Both paths can be valid, but they create different expectations for preparation, validation, and post-launch responsibility.
 
-For merchants moving from a simpler store, Gambio may introduce a more deliberate shop structure. For merchants moving from another mature platform, the main work is often interpretation: deciding how source catalog logic, customer segmentation, storefront presentation, historical orders, shipping rules, tax handling, and integration dependencies should be represented inside Gambio. The earlier these assumptions are clarified, the easier it is to choose the right migration approach and interpret Demo Migration results correctly.
+Gambio should therefore be evaluated as a shop system with a clear operating identity. The target store must preserve commercial meaning across product structure, product options, category hierarchy, images, stock, downloadable products, content pages, customer and order history, storefront navigation, SEO-sensitive paths, and any marketplace or multichannel assumptions. The migration is successful when the new Gambio store is not only populated with records, but also manageable, understandable, and ready for daily selling.
 
-### What Changes in a Migration to Gambio <a href="#what-changes-in-a-migration-to-gambio" id="what-changes-in-a-migration-to-gambio"></a>
+### Gambio as a Target Platform <a href="#gambio-as-a-target-platform" id="gambio-as-a-target-platform"></a>
 
-Moving to Gambio changes how the store is organized because Gambio expects commerce data to work inside its own shop system, configuration model, storefront layer, and operational settings. The Source Platform may store product options, categories, customer groups, checkout rules, storefront URLs, and integrations differently. During migration, those differences need to be translated into a Gambio result that preserves business meaning.
+Gambio is best understood as a complete shop environment rather than a blank technical framework. The platform is positioned for merchants that want a professional ecommerce store with included shop functionality, catalog management, customer-facing presentation, support access, and a practical administration experience. Gambio’s platform positioning emphasizes ease of use, SEO orientation, marketplace and payment-provider connection possibilities, professional support, a community, and broad adoption among merchants.
 
-The practical change is that migration planning should connect records with behavior. Products should remain sellable. Categories should still support discovery. Customer groups should still make sense. Orders should remain useful for support and reference. Storefront routes should be reviewed for SEO continuity. Shipping, payment, tax, and legal settings should be treated as configuration-sensitive areas rather than ordinary data fields.
+For migration planning, that means the target is not just a database. The migrated records must work inside Gambio’s own store administration, storefront structure, catalog rules, content management areas, and operating assumptions. Product data should become sellable articles. Categories should help shoppers browse. Images should support product presentation. Stock should remain usable. Content pages should be reviewed as customer-facing assets. Orders and customers should remain useful for service and reference after launch.
 
-| Migration area                 | What changes in Gambio                                                                                                                                                        | Why it matters during planning                                                                                         |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Shop foundation                | The target store operates inside Gambio’s shop system, with cloud or self-hosted operating implications.                                                                      | Hosting model, updates, configuration responsibility, and implementation support should be clarified before migration. |
-| Product catalog                | Products must be interpreted through Gambio’s catalog, categories, variants, product images, filters, inventory, base prices, downloadable product, and promotion structures. | A product should remain commercially understandable, not merely present as an imported item.                           |
-| Customer and pricing context   | Customer records may interact with customer groups, pricing, discounts, B2B needs, tax behavior, and account history.                                                         | Customer segmentation can affect storefront visibility, pricing, checkout expectations, and post-launch operations.    |
-| Orders and operational history | Orders, totals, taxes, shipping, payment references, statuses, line items, invoices, and fulfillment context must remain useful after migration.                              | Historical data should support customer service, financial reference, repeat purchases, and operational review.        |
-| Storefront and SEO             | Product pages, category paths, filters, metadata, redirects, theme behavior, and responsive presentation may differ from the source store.                                    | Search visibility and customer navigation depend on more than data transfer.                                           |
-| Configuration and integrations | Payment, shipping, tax, language, currency, legal, marketplace, and interface behavior may need setup or review in Gambio.                                                    | Some behavior is configured in the target store rather than migrated as direct records.                                |
+A store moving from another platform may carry logic that Gambio expresses differently. The Source Platform may separate products, options, variants, images, pages, SEO routes, customer groups, shipping rules, payment states, and integrations in a different way. The practical task is to decide what should be migrated as supported data, what should be configured in Gambio, what should be handled through Add-ons, and what may require Custom Service because the source behavior is too specific for a standard path.
 
-#### Product data becomes a managed catalog structure <a href="#product-data-becomes-a-managed-catalog-structure" id="product-data-becomes-a-managed-catalog-structure"></a>
+| Gambio planning area      | What it means for migration                                                                                       | What should be confirmed early                                                      |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Operating model           | Gambio can be approached as Cloud or self-hosted, and each path changes responsibility.                           | Whether the merchant expects hosted convenience or self-hosted control.             |
+| Catalog structure         | Products are managed as articles with categories, images, options, stock, downloads, and related selling details. | Which product types and option patterns represent the real catalog.                 |
+| Content and storefront    | Gambio includes customer-facing pages, design control, SEO-sensitive navigation, and storefront presentation.     | Which pages, URLs, metadata, and design expectations must remain meaningful.        |
+| Support and legal context | Gambio is strongly connected to German support and legal-text expectations.                                       | Whether language, legal, data-protection, and support assumptions fit the merchant. |
+| Customization             | Self-hosting can offer more flexibility, while Cloud prioritizes managed operation.                               | Whether custom integrations or custom behavior are required after launch.           |
 
-In Gambio, product data should be evaluated as a selling structure. Names, descriptions, prices, images, stock values, and SKUs matter, but so do variants, category placement, filters, product images, base prices, downloadable product rules, cross-selling, special pricing, reviews, and inventory behavior. If these details are not clarified before migration, the target catalog may look present while still being difficult to sell, search, filter, or manage.
+### Cloud and Self-Hosted Operating Models <a href="#cloud-and-self-hosted-operating-models" id="cloud-and-self-hosted-operating-models"></a>
 
-This is especially important when the source store uses complex variant logic, option-level pricing, multiple category paths, product labels, custom fields, special price rules, or source-specific display behavior. These details should be represented in Demo Migration samples so the merchant can see how Gambio will interpret the catalog before Full Migration.
+The Cloud versus self-hosted decision is one of the most important Gambio planning choices. Gambio Cloud is suited to merchants that want the platform provider to take care of hosting, installation, updates, and support. This can reduce the operational burden for teams that prefer to spend their time on merchandising, order handling, marketing, and customer service rather than server maintenance.
 
-#### Customer and pricing meaning needs early interpretation <a href="#customer-and-pricing-meaning-needs-early-interpretation" id="customer-and-pricing-meaning-needs-early-interpretation"></a>
+Self-hosted Gambio changes the responsibility model. The merchant receives the shop functionality and gains more flexibility and customizability, but also becomes responsible for hosting, maintenance, installation quality, updates, backups, troubleshooting, and technical coordination. This path can be appropriate for merchants with an agency, developer, technical administrator, or integration requirements that need more direct control.
 
-Gambio can support customer-facing and operational behaviors that depend on customer context. Customer groups, B2B workflows, customer-specific expectations, pricing differences, tax handling, discounts, and account history may all affect the target store’s usefulness. Migration planning should separate ordinary customer identity from customer segmentation and pricing meaning.
+A migration plan should not leave this decision until the end. A target store built for Cloud simplicity should not be judged against expectations that require server-level customization. A target store planned for self-hosting should not assume that hosting, security, updates, and operational maintenance will be handled automatically. The deployment model affects scope, risk, testing, and long-term ownership.
 
-A customer record is useful only when the merchant can understand who the customer is, what they purchased, what group or account context applies, and how that history should support service after launch. If the source platform uses customer groups, wholesale logic, special tax treatment, or externally managed accounts, those assumptions should be reviewed before migration.
+| Operating choice     | Strongest planning assumption                                           | Migration implication                                                                                                          |
+| -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Gambio Cloud         | The merchant wants managed hosting, installation, updates, and support. | Focus on catalog, content, customer, order, SEO, payment, shipping, and tax readiness inside a managed environment.            |
+| Self-hosted Gambio   | The merchant wants more technical control and customizability.          | Confirm hosting readiness, update ownership, integration needs, custom development expectations, and technical accountability. |
+| Undecided deployment | The merchant has not resolved convenience versus control.               | Pause detailed scope decisions until the operating model is clear enough to validate accurately.                               |
 
-#### Storefront continuity depends on design, routes, and SEO context <a href="#storefront-continuity-depends-on-design-routes-and-seo-context" id="storefront-continuity-depends-on-design-routes-and-seo-context"></a>
+### Catalog and Content Structure in Gambio <a href="#catalog-and-content-structure-in-gambio" id="catalog-and-content-structure-in-gambio"></a>
 
-Migration to Gambio should not assume that the old storefront presentation becomes the new storefront automatically. Gambio provides its own storefront, themes, layout/design tools, responsive presentation, SEO settings, category structure, product-page behavior, filters, and navigation model. The migration result should support the new storefront, but layout implementation and storefront configuration may require separate planning.
+Gambio uses commerce language that should be interpreted carefully during migration. Products may be described as articles, and a usable Gambio catalog can include many connected details: product names, descriptions, images, categories, options, stock, downloadable article behavior, product presentation, and content pages. Gambio can support large numbers of articles, images, categories, subcategories, options, and content pages. That does not remove the need for structure. It makes structure more important.
 
-High-value product URLs, category pages, metadata, internal links, campaign landing paths, and organic search entry points should be identified before migration. Redirect planning, route review, and SEO validation are especially important for established stores where search traffic and bookmarked product/category pages contribute to revenue.
+A large catalog is easier to migrate when the source data is consistent. Product options should be reviewed for size, color, finish, bundle, personalization, or other shopper choices. Category hierarchy should be checked for duplication, abandoned branches, overly deep paths, and SEO-sensitive landing pages. Images should be assessed for quantity, quality, naming, and product association. Stock rules should be confirmed when inventory must remain reliable after launch. Downloadable products should be identified early because they often involve file access, fulfillment expectation, and customer history.
 
-#### Configuration-sensitive behavior must be separated from migrated data <a href="#configuration-sensitive-behavior-must-be-separated-from-migrated-data" id="configuration-sensitive-behavior-must-be-separated-from-migrated-data"></a>
+Content pages also matter. Gambio supports editorial and content pages through its content management capabilities. A store that relies on informational pages, legal pages, landing pages, brand content, or buying guidance should not treat content as an afterthought. CMS Pages may not consume the same planning effort as product records in every migration, but they can carry trust, SEO value, and conversion context.
 
-Shipping, payment, tax, currencies, languages, checkout behavior, order statuses, inventory settings, legal texts, email templates, marketplace interfaces, and third-party integrations may not behave as direct data records. Some information can be migrated, some must be configured in Gambio, and some may require deeper review because it depends on external systems or custom source behavior.
+### German-Market Operating Context <a href="#german-market-operating-context" id="german-market-operating-context"></a>
 
-A strong migration plan identifies which parts of the expected result belong to supported migration data, which parts belong to the target-store configuration, and which parts require Add-on review or Custom Service. This prevents the Demo Migration from being judged against expectations that belong to configuration or implementation rather than migration alone.
+Gambio has a clear German-market orientation. Its platform positioning includes development in Bremen, Cloud servers located in Germany, hosting in accordance with European data-protection principles, German-language support, legal-text assistance in Cloud plans, and a commercial context where legal security and shop compliance are important concerns. For many merchants, that is a strength. For others, it is a planning condition that must be understood before choosing Gambio.
 
-### Where Gambio Is Often a Strong Target <a href="#where-gambio-is-often-a-strong-target" id="where-gambio-is-often-a-strong-target"></a>
+A merchant selling primarily in Germany or the wider European market may value Gambio’s support context, legal-text integrations, and regional hosting assumptions. A merchant with a global team, English-first operational processes, multiple international entities, or highly localized country operations should check whether support language, legal ownership, checkout configuration, and regional selling expectations match the target operating model.
 
-Gambio is often a strong Target Platform for merchants who want a structured e-commerce shop system with meaningful catalog management, storefront control, SEO support, payment and shipping configuration, and operational flexibility. It can fit merchants who want more than a minimal catalog but do not want every storefront or operational requirement to become a fully custom commerce project.
+Migration planning should separate platform capability from business readiness. Gambio can support a professional store, but legal texts, data-protection expectations, country-specific selling rules, shipping settings, payment methods, and customer-facing terms still need review. The migration can move and organize data, but it cannot replace merchant responsibility for legal and operational correctness.
 
-The strongest cases are not defined only by store size. They are defined by clarity. Gambio is easier to plan when the merchant can describe the target catalog, customer groups, storefront structure, payment and shipping requirements, language and currency needs, SEO priorities, and integration expectations before migration begins.
+### Marketplace, Payment, and Multichannel Expectations <a href="#marketplace-payment-and-multichannel-expectations" id="marketplace-payment-and-multichannel-expectations"></a>
 
-#### Merchants that need a full shop system, not just product listing <a href="#merchants-that-need-a-full-shop-system-not-just-product-listing" id="merchants-that-need-a-full-shop-system-not-just-product-listing"></a>
+Gambio is positioned with connections to major marketplaces and payment providers, and marketplace connection or multichannel selling should be treated as a separate operating assumption rather than as ordinary product data. This makes marketplace assumptions important during a migration review.
 
-Gambio is often a strong target when the merchant wants a complete shop environment with catalog management, product variants, categories, images, reviews, inventory, special pricing, shipping, payment, tax, SEO, and order handling. These merchants need the target store to support daily selling operations, not only display products.
+Marketplace activity can create records and dependencies that do not behave like ordinary storefront data. Products may have marketplace-specific titles, descriptions, identifiers, pricing, shipping behavior, stock reservations, order states, customer communication limits, or settlement information. If the Source Platform uses marketplace apps, ERP connectors, product feed managers, or external order routing, the merchant should document those dependencies before migration scope is finalized.
 
-The migration implication is that the merchant should validate how different store areas work together. Product data, category structure, customer accounts, order history, payment/shipping context, and SEO paths should be reviewed as parts of one operating system.
+For Gambio, the key question is not only whether a marketplace connection is possible. The key question is whether the source store’s marketplace-related data and operating assumptions can be represented, configured, or reconnected in the target environment without losing business meaning.
 
-#### Catalogs with structured product and category logic <a href="#catalogs-with-structured-product-and-category-logic" id="catalogs-with-structured-product-and-category-logic"></a>
+### Migration Planning Signals to Clarify Early <a href="#migration-planning-signals-to-clarify-early" id="migration-planning-signals-to-clarify-early"></a>
 
-Gambio can be a good fit when the source catalog has clear product records, meaningful categories, manageable variants, usable product images, consistent inventory values, and a known discovery structure. Catalogs with defined product relationships, filters, base prices, downloadable products, or B2B pricing expectations can also fit when these requirements are documented and tested.
+A good Gambio migration plan starts by clarifying the merchant’s operating choices and the shape of the source store. The following signals should be reviewed before Demo Migration because they define what a representative result should prove.
 
-A good migration plan should identify representative products early. The sample set should include simple products, variant-heavy products, products with multiple images, products with special prices, products in multiple categories, downloadable products if relevant, and products that expose important stock or shipping behavior.
+| Planning signal                     | Why it matters                                                                   | Evidence to collect                                                                          |
+| ----------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Cloud or self-hosted choice         | The operating model affects customization, updates, hosting, and responsibility. | Decision owner, hosting plan, technical resource, and post-launch maintenance plan.          |
+| Product option complexity           | Options affect shopper choice and product presentation.                          | Examples of simple products, option-heavy products, downloads, and stock-sensitive products. |
+| Category depth                      | Categories affect navigation, SEO, and product discovery.                        | Full category tree, important landing pages, and products assigned to multiple areas.        |
+| Content pages                       | Content can carry legal, trust, SEO, and conversion meaning.                     | Existing pages, legal pages, landing pages, help pages, and internal links.                  |
+| Marketplace or payment dependencies | External channels may require configuration or integration planning.             | Marketplace feeds, order sources, payment methods, external identifiers, and connector data. |
+| Support and language expectations   | Gambio support context may affect operational fit.                               | Support language requirements and merchant-side support ownership.                           |
 
-#### Merchants that care about SEO and storefront continuity <a href="#merchants-that-care-about-seo-and-storefront-continuity" id="merchants-that-care-about-seo-and-storefront-continuity"></a>
+### Assumptions That Should Not Be Carried Over Automatically <a href="#assumptions-that-should-not-be-carried-over-automatically" id="assumptions-that-should-not-be-carried-over-automatically"></a>
 
-Gambio can fit merchants that treat SEO and storefront structure as important parts of the migration. Product metadata, category hierarchy, search-friendly URLs, redirects, navigation, filters, and responsive presentation should be reviewed before migration, especially when the source store already receives organic traffic.
+A Gambio migration should not assume that every source-store behavior has a one-to-one equivalent in the target store. Some source platforms use app-based product options, page-builder content, custom checkout behavior, external payment states, marketplace-owned order fields, or connector-specific identifiers. These elements can appear as ordinary data in the old system while actually depending on software behavior outside the core commerce records.
 
-The migration does not need to preserve every old storefront pattern exactly. It does need to preserve the commercial value of important pages, routes, and product/category relationships. That means SEO planning should start before Full Migration rather than after launch problems appear.
+The practical response is to classify expectations before migration begins. Product names, descriptions, prices, images, Categories, Customers, Orders, Reviews, Coupons, CMS Pages, and common catalog records may be part of the expected migration scope. Shipping, payment, legal text delivery, marketplace feeds, design implementation, checkout behavior, and custom integrations may need target-store configuration, Add-ons, or Custom Service. This classification helps the merchant judge the Demo Migration fairly and prevents configuration work from being mistaken for missing data.
 
-#### Stores that need customer group, B2B, or pricing context <a href="#stores-that-need-customer-group-b2b-or-pricing-context" id="stores-that-need-customer-group-b2b-or-pricing-context"></a>
+For Gambio, this distinction is especially important because the platform can support both simple operation and more flexible self-hosted control. A merchant choosing Cloud should understand which expectations belong inside a managed setup. A merchant choosing self-hosting should understand which expectations require technical ownership after launch.
 
-Gambio can be relevant for merchants with customer group pricing, B2B needs, tax differences, group-based discounts, or separate customer contexts. These features can create a stronger fit when the merchant’s future selling model depends on segmentation rather than one public price for all customers.
+### What a Good Gambio Migration Result Should Prove <a href="#what-a-good-gambio-migration-result-should-prove" id="what-a-good-gambio-migration-result-should-prove"></a>
 
-This strength also increases planning responsibility. Customer groups, pricing rules, tax behavior, and order history should be sampled and validated carefully. If the source store contains unusual segmentation or external pricing logic, that may require Add-on review or Custom Service.
+A good Gambio migration result should prove more than record presence. The target store should show that the selected operating model is understood, catalog records can be managed by the merchant, storefront pages remain useful, and order history can still support customer service. A correct count of Products, Customers, Orders, Categories, Coupons, Reviews, CMS Pages, and related records is important, but it is not enough if the Gambio store cannot be operated confidently after launch.
 
-#### Merchants that can manage the chosen operating model <a href="#merchants-that-can-manage-the-chosen-operating-model" id="merchants-that-can-manage-the-chosen-operating-model"></a>
+Validation should therefore include administrative usability. The merchant should be able to open migrated articles, adjust product content, review images, understand options, check stock behavior, find categories, review customers, and interpret historical orders without relying on undocumented assumptions from the old platform. When a migrated store is technically populated but hard to maintain, the migration has preserved data without preserving operational value.
 
-Gambio’s cloud and self-hosted possibilities can serve different operational preferences. A merchant choosing a hosted cloud model may value easier setup and reduced hosting burden. A merchant choosing self-hosting may value direct control over hosting, files, integrations, and customization.
+Gambio also requires proof that target-side configuration has been separated from migrated data. Payment methods, shipping rules, tax expectations, legal-text handling, design settings, marketplace connections, and any custom behavior should have clear owners. The migration result is strongest when the merchant knows what Next-Cart migrated, what Gambio configuration still controls, and what belongs to a separate implementation or Custom Service discussion.
 
-This choice affects migration planning. The target environment, update responsibility, extension assumptions, developer involvement, and integration expectations should be clarified before migration starts.
+A strong Gambio migration result should prove more than record presence. It should show that the store can operate in a way that matches the chosen Gambio model. Products should be readable and purchasable. Options should be understandable. Categories should support navigation. Images should appear in the right product context. Stock should behave as expected. Downloadable products should be checked where relevant. Content pages should remain findable and coherent. Customers and orders should remain useful for service after launch.
 
-| Strong target signal                  | Why it supports Gambio                                                                        | Planning focus                                                                                     |
-| ------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Structured catalog needs              | Gambio supports richer catalog organization than a simple product-listing setup.              | Validate variants, categories, images, stock, filters, pricing, and downloadable product behavior. |
-| SEO matters                           | Gambio includes storefront and SEO planning surfaces that affect product/category visibility. | Identify priority URLs, metadata, category paths, redirects, and high-traffic entry points.        |
-| Customer groups or B2B context matter | Group-based pricing and customer segmentation can support differentiated selling.             | Clarify customer groups, tax handling, pricing rules, and representative order samples.            |
-| Merchant wants shop-system control    | Gambio can support storefront design, configuration, integrations, and operational control.   | Decide whether the cloud or self-hosted model fits the target operation.                           |
-| The source store is understandable    | Clear source data improves mapping, Demo Migration interpretation, and validation.            | Prepare product, customer, order, and configuration samples before execution.                      |
-
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
-
-Deeper planning is needed when the source store contains meaning that record counts do not reveal. A product count does not explain variant logic. An order count does not explain status meaning. A customer count does not explain customer group pricing. A category count does not explain SEO value. These areas need to be reviewed before migration because they affect whether Gambio becomes usable after launch.
-
-#### Catalog complexity and product behavior <a href="#catalog-complexity-and-product-behavior" id="catalog-complexity-and-product-behavior"></a>
-
-The catalog deserves deeper planning when products include variants, option-level pricing, configurable attributes, multiple images, downloadable products, base prices, cross-selling, special pricing, labels, product filters, reviews, or source-specific product fields. These structures shape the buying experience and the merchant’s post-launch management work.
-
-For Gambio, catalog planning should answer practical questions: Which product structures must remain shopper-facing? Which product relationships drive discovery? Which images are required for trust and conversion? Which products depend on pricing or inventory logic? Which source fields are standard and which are custom?
-
-#### Customer groups, discounts, and pricing rules <a href="#customer-groups-discounts-and-pricing-rules" id="customer-groups-discounts-and-pricing-rules"></a>
-
-Customer group pricing, wholesale or B2B behavior, discounts, tax differences, and customer-specific expectations should be clarified before migration. These rules can be easy to underestimate because they may not appear in ordinary product or customer exports.
-
-If the source store uses customer groups or rule-based pricing, the migration plan should define which groups matter, which products expose the rules, which customers should be sampled, and which orders prove that the historical data remains readable.
-
-#### Order history and operational context <a href="#order-history-and-operational-context" id="order-history-and-operational-context"></a>
-
-Order history should be reviewed for more than record preservation. A useful Gambio order history should help the merchant understand what was purchased, by whom, under which price, tax, shipping, payment, status, discount, and fulfillment context. If the source platform uses custom statuses, external payment references, ERP identifiers, marketplace orders, or fulfillment integrations, those details should be reviewed before assuming standard migration covers the full meaning.
-
-Representative order samples should include simple orders, orders with variants, orders with discounts, orders with tax and shipping differences, orders from key customer groups, refunded or cancelled orders if relevant, and orders tied to external systems.
-
-#### Shipping, payment, tax, and legal configuration <a href="#shipping-payment-tax-and-legal-configuration" id="shipping-payment-tax-and-legal-configuration"></a>
-
-Shipping, payment, tax, currency, language, legal text, checkout configuration, and email behavior may require target-side setup. These areas often combine data with business rules. They should not be treated as ordinary migration records.
-
-Planning should identify which rules need to be configured in Gambio, which migrated data references those rules, and which source behaviors are custom or external. If the merchant expects exact replication of a source checkout flow, shipping calculation, tax structure, or payment status process, deeper review is needed.
-
-#### Hosting, customization, and integration responsibility <a href="#hosting-customization-and-integration-responsibility" id="hosting-customization-and-integration-responsibility"></a>
-
-Gambio migration planning should account for whether the target store is cloud-based or self-hosted. Self-hosted projects may involve hosting setup, file access, update management, custom development, interfaces, and direct implementation responsibility. Cloud projects may reduce some operational burden but still require configuration and validation.
-
-Custom themes, modules, template changes, third-party interfaces, marketplace connections, ERP integrations, and source-specific development can all affect migration assumptions. If the source store’s business logic depends on custom code or external systems, Custom Service should be reviewed before execution.
-
-### What Should Be Understood Early Before Moving into Gambio <a href="#what-should-be-understood-early-before-moving-into-gambio" id="what-should-be-understood-early-before-moving-into-gambio"></a>
-
-The strongest Gambio migrations begin with clear expectations about the future shop. The merchant should know what the catalog should become, which customer and pricing contexts matter, which order history needs to remain useful, which storefront paths carry SEO value, and which configuration or customization requirements are outside ordinary data movement.
-
-#### 1. The target operating model matters <a href="#id-1-the-target-operating-model-matters" id="id-1-the-target-operating-model-matters"></a>
-
-Before migration, the merchant should clarify whether the future Gambio store will run in a cloud or self-hosted context and what that means for support, updates, customization, integration work, and implementation responsibility. This decision influences not only technical setup but also the way the migration should be validated.
-
-If the merchant expects custom storefront development, direct file-level changes, third-party interfaces, or deeper control over hosting and update timing, those expectations should be reviewed early. If the merchant expects a simpler managed shop setup, the migration plan should focus on clean data, configuration readiness, and launch validation.
-
-#### 2. Catalog structure should be reviewed before Demo Migration <a href="#id-2-catalog-structure-should-be-reviewed-before-demo-migration" id="id-2-catalog-structure-should-be-reviewed-before-demo-migration"></a>
-
-Product samples should be chosen deliberately. A weak sample includes only simple products that look correct anywhere. A strong sample includes products that reveal real catalog structure: variants, multiple images, special prices, category complexity, stock behavior, downloadable products, base prices, filters, cross-selling, and products with important SEO value.
-
-This sample design helps the merchant test whether Gambio represents the catalog as intended. It also reveals whether the project needs Advanced Data Mapping, Advanced Data Configure, or Custom Service before Full Migration.
-
-#### 3. Customer and order meaning should be documented <a href="#id-3-customer-and-order-meaning-should-be-documented" id="id-3-customer-and-order-meaning-should-be-documented"></a>
-
-Customers, customer groups, addresses, historical orders, order statuses, tax context, payment method, shipping method, discounts, and refunds should be documented before migration. The merchant should identify which historical records are most important for customer service, accounting reference, warranty questions, fulfillment review, or repeat purchasing.
-
-This preparation prevents a common mistake: judging migration by record totals while missing whether the records are actually useful in the new system.
-
-#### 4. Storefront and SEO continuity should be planned as a launch requirement <a href="#id-4-storefront-and-seo-continuity-should-be-planned-as-a-launch-requirement" id="id-4-storefront-and-seo-continuity-should-be-planned-as-a-launch-requirement"></a>
-
-Gambio storefront structure, category hierarchy, product pages, SEO settings, redirects, metadata, and navigation should be treated as launch-sensitive. The migration should support the future storefront, but the merchant must also plan how high-value pages, routes, and content entry points will be handled in the target store.
-
-For stores with existing search visibility, SEO planning should not wait until after launch. High-traffic product and category URLs should be identified before migration so they can be reviewed in Demo Migration and launch preparation.
-
-#### 5. Configuration-sensitive behavior should be separated from migration expectations <a href="#id-5-configuration-sensitive-behavior-should-be-separated-from-migration-expectations" id="id-5-configuration-sensitive-behavior-should-be-separated-from-migration-expectations"></a>
-
-Payment methods, shipping rules, taxes, currencies, languages, legal text, checkout behavior, and integrations may need configuration in Gambio. Some source data can support these areas, but the target behavior often depends on settings, plugins, templates, or external services.
-
-The migration plan should define what Next-Cart is expected to migrate under the selected migration path, what the merchant or implementation team must configure in Gambio, and what requires Custom Service because it involves custom logic, unsupported data, third-party identifiers, or bespoke transformation.
-
-| Early question                                         | What the answer should clarify                                                                                                      |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Is the target Gambio store cloud-based or self-hosted? | Hosting responsibility, update expectations, customization access, and implementation burden.                                       |
-| Which products reveal real catalog complexity?         | Demo Migration samples for variants, images, pricing, inventory, filters, categories, and downloadable products.                    |
-| Which customer groups and pricing rules matter?        | Whether customer segmentation, B2B behavior, discounts, tax treatment, or special pricing requires mapping or configuration review. |
-| Which orders must remain operationally useful?         | Samples for statuses, totals, tax, shipping, payment, discounts, refunds, and customer history.                                     |
-| Which storefront paths carry SEO or revenue value?     | Redirect, metadata, route, category, and product-page planning before launch.                                                       |
-| Which source behaviors are custom or external?         | Whether Add-on review or Custom Service is needed before execution.                                                                 |
+The result should also show whether remaining tasks belong to migration, configuration, implementation, or custom review. Shipping, payment, taxes, legal texts, marketplace channels, design, SEO settings, and integrations may require setup or specialist review. Clear separation prevents the merchant from expecting migrated records to recreate every business process automatically.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Gambio can be a strong Target Platform when the merchant wants a professional e-commerce shop system with structured catalog management, storefront control, SEO planning, customer group possibilities, payment and shipping configuration, and operational flexibility. The migration should be planned as a move into a complete shop environment, not merely as an import of products, customers, and orders.
+Gambio migration planning should begin with the platform’s operating model. Cloud and self-hosted Gambio can both support a professional online shop, but they create different responsibilities for hosting, updates, customization, support, and long-term operation. The catalog, content structure, legal and regional context, marketplace assumptions, and technical ownership all shape whether the migration is straightforward or requires deeper planning.
 
-The most important planning question is whether the source store’s commercial meaning can be represented clearly inside Gambio. Products, variants, categories, customer groups, pricing rules, orders, tax, shipping, payment context, storefront routes, SEO settings, hosting model, and integrations should be reviewed before migration so the target store is usable, not just populated.
+The strongest Gambio migration plans define the target operating model first, then test representative data through Demo Migration. When products, options, categories, images, stock, downloads, content pages, customers, orders, and configuration-sensitive areas are reviewed together, the merchant can judge the target store as a working business environment rather than a simple data destination.
 
-Use Demo Migration results to test how Gambio represents the store’s real operating structure. If the source store includes complex product variants, customer group pricing, unusual tax or shipping logic, custom fields, external integrations, marketplace data, unsupported source behavior, or Custom Platform data, review the selected migration path through Live Chat so the Standard Service, Managed Service, Custom Service, and Add-on boundaries are clear before execution.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is Gambio Cloud always easier to migrate to than self-hosted Gambio?**
 
-**What makes migration to Gambio different from moving to a simpler storefront platform?**
+Not always. Gambio Cloud can simplify hosting, installation, updates, and support responsibility, but catalog structure, content pages, product options, customer records, Orders, SEO, shipping, payment, and tax expectations still need careful validation. Self-hosted Gambio may require more technical ownership, but it can also fit stores that need more customization or integration flexibility.
 
-Gambio is a structured e-commerce shop system. Migration planning should account for products, variants, categories, customer groups, pricing rules, SEO paths, shipping, payment, tax, order history, storefront design, hosting model, and integrations. A useful result should preserve store meaning, not only record counts.
+**Should the Cloud or self-hosted decision be made before Demo Migration?**
 
-**Is Gambio a good Target Platform for merchants with complex catalogs?**
+Yes. The target operating model affects what should be tested and how the result should be judged. A Cloud path should be validated against managed-operation expectations. A self-hosted path should be validated with hosting, maintenance, updates, custom development, and integration ownership in mind.
 
-It can be a strong target when the catalog structure is clear and the merchant can define how products, variants, categories, filters, images, pricing, inventory, and downloadable products should work after migration. Complex catalogs need representative Demo Migration samples before Full Migration.
+**Does Gambio fit stores with many products or categories?**
 
-**Should customer groups be reviewed before migrating to Gambio?**
+Gambio can fit stores with large product and category structures when the source catalog is consistent enough to interpret. The key issue is not only volume. Product options, category hierarchy, images, stock, downloads, SEO paths, and content pages should be organized well enough to test with representative samples.
 
-Yes. Customer groups can affect pricing, discounts, tax behavior, B2B workflows, and order interpretation. If the source store uses customer groups or special pricing rules, those relationships should be documented and tested during Demo Migration.
+**Are marketplace and multichannel connections part of migration scope?**
 
-**Does storefront SEO need separate planning during Gambio migration?**
-
-Yes. Product URLs, category paths, metadata, redirects, internal navigation, and high-value landing paths should be reviewed before launch. Migrated records alone do not guarantee SEO continuity.
-
-**When should Custom Service be reviewed for a Gambio migration?**
-
-Custom Service should be reviewed when the source store includes Custom Platform data, unsupported custom fields, external identifiers, bespoke product logic, complex customer group rules, unusual tax or shipping behavior, custom checkout logic, third-party integration data, marketplace dependencies, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment beyond standard service capability.
+They may influence scope, but they should be reviewed separately from ordinary records. Marketplace identifiers, product feeds, order sources, payment states, and external connector data may require configuration, Add-ons, or Custom Service depending on how the source store is built.

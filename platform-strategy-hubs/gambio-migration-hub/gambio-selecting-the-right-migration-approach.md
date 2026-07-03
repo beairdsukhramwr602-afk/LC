@@ -1,163 +1,184 @@
 # Gambio Selecting the Right Migration Approach
 
-Gambio migration approach should be chosen by looking at the future operating model, not only by counting products, customers, and orders. A store moving to Gambio Cloud may need a different level of preparation than a store moving to a self-hosted Gambio installation. A simple catalog with clear categories and predictable order history can often be handled differently from a store with customer-group pricing, B2B rules, complex product options, downloadable products, SEO-sensitive URLs, custom integrations, or source-specific checkout behavior.
+Selecting the right migration approach for Gambio begins with the target operating model. A Gambio Cloud target and a self-hosted Gambio target can both support a professional online store, but they do not create the same migration responsibilities. Cloud reduces hosting and update responsibility for the merchant, while self-hosting gives more flexibility and customization control. That difference affects the evidence needed, the service path, and the validation burden.
 
-The practical question is not whether Gambio can receive store data. The better question is how much interpretation is needed before that data becomes reliable inside Gambio’s catalog, storefront, customer, order, configuration, and integration layers.
+A Gambio migration should not be scoped only by counting products, customers, and orders. The more important question is whether the source store’s catalog, options, stock behavior, content pages, historical orders, legal/trust content, integrations, and custom logic fit the planned target environment. Standard Service may be sufficient for a clean store with ordinary supported records. Managed Service, Add-ons, or Custom Service become more relevant when the project needs operational judgment, bounded transformation, or unsupported custom handling.
 
-### Why Approach Choice Depends on Gambio-Specific Burden <a href="#why-approach-choice-depends-on-gambio-specific-burden" id="why-approach-choice-depends-on-gambio-specific-burden"></a>
+The best service path is the one that keeps four boundaries visible: what can move as supported data, what must be configured in Gambio, what must be validated after Demo Migration, and what requires custom handling outside ordinary migration behavior.
 
-Gambio combines a shop system, storefront management, catalog administration, SEO configuration, payment and shipping setup, customer-group features, and hosting-model choices. This makes migration approach selection more sensitive than a simple record-transfer decision.
+### How Gambio Service Selection Should Be Read <a href="#how-gambio-service-selection-should-be-read" id="how-gambio-service-selection-should-be-read"></a>
 
-A clean migration path can become heavier when the source store contains hidden business logic. Product options may affect price, inventory, images, or shopper selection. Customer groups may determine visible prices, B2B rules, or commercial segmentation. Orders may include custom statuses, external identifiers, marketplace references, or special tax and shipping meaning. Storefront continuity may depend on SEO URLs, redirects, content pages, navigation, theme behavior, or integrations that are not ordinary product data.
+Gambio service selection should be read as a scope decision, not as a preference for more or less assistance. The right path depends on the store’s data structure, operating responsibility, customization depth, and validation capacity.
 
-The right approach should therefore match three areas of burden:
+A simple store can often proceed with a lighter migration path because the data meaning is visible. A store with many product options, downloads, custom fields, marketplace records, legal/content dependencies, or external identifiers may need a more controlled approach even if the record count is not large. Complexity is not always volume. Sometimes a small catalog with custom product logic is harder to migrate than a larger catalog with consistent records.
 
-#### Data burden <a href="#data-burden" id="data-burden"></a>
+| Decision factor    | Lower-scope signal                                                               | Higher-scope signal                                                                                          |
+| ------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Target environment | Cloud or self-hosted responsibility is already clear.                            | Environment choice is undecided or tied to custom access needs.                                              |
+| Catalog structure  | Products, categories, images, and stock behavior are standard and consistent.    | Options, downloads, stock rules, custom fields, or external inventory references are important.              |
+| Content structure  | CMS Pages are limited and easy to place.                                         | Legal, trust, SEO, or campaign pages require classification and placement decisions.                         |
+| Historical orders  | Orders use common statuses, payment labels, shipping methods, and product lines. | Orders include custom statuses, marketplace data, downloads, refunds, tax variation, or external references. |
+| Integrations       | Payment, shipping, and marketplace setup can be recreated separately.            | External systems own business meaning that must remain connected to migrated records.                        |
 
-Data burden comes from the source store’s product, customer, order, and content structure. A store with simple products, clear categories, stable customers, and ordinary order history creates less burden than a store with deep variants, customer-group rules, downloadable products, legacy option structures, fragmented categories, custom fields, or heavily modified source data.
+This table should guide service selection before Demo Migration. Demo Migration then tests whether the selected path is realistic.
 
-#### Configuration burden <a href="#configuration-burden" id="configuration-burden"></a>
+### When Standard Service Is a Good Fit <a href="#when-standard-service-is-a-good-fit" id="when-standard-service-is-a-good-fit"></a>
 
-Configuration burden comes from Gambio settings that must be planned separately from migrated records. Payment methods, shipping rules, tax behavior, currencies, languages, stock settings, customer groups, invoice and delivery-note expectations, SEO configuration, and legal-display settings may need setup or review after migration.
+Standard Service is most suitable when the Gambio migration involves supported records with predictable structure. The store should have clean products, categories, customers, orders, images, and related data that can be moved without extensive interpretation or custom transformation.
 
-#### Implementation burden <a href="#implementation-burden" id="implementation-burden"></a>
+For Gambio, Standard Service is a stronger fit when the merchant already knows whether the target is Cloud or self-hosted, the catalog uses ordinary products and categories, product options are simple, stock behavior is not highly customized, content pages are limited or well organized, and historical orders do not depend on unusual status or external-system logic.
 
-Implementation burden comes from the target environment. Gambio Cloud reduces some hosting and update responsibility, while self-hosted Gambio gives more control but increases responsibility for hosting, installation, maintenance, extensions, compatibility, and custom development. Storefront design, StyleEdit work, theme customization, integrations, and bespoke logic can also increase implementation burden.
+Standard Service can be appropriate when the merchant can review Demo Migration results internally. The merchant should be able to check product completeness, category placement, customer identity, order readability, CMS Pages, and basic storefront behavior without needing the migration team to interpret every decision.
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+Standard Service is weaker when the source store’s meaning is hidden in modules, custom tables, external integrations, theme logic, marketplace connectors, or special product rules. In those cases, the issue is not whether the store can be exported. The issue is whether the exported records explain enough to create a reliable Gambio target.
 
-Standard Service is usually the better fit when the source store is structurally clear and the merchant can self-perform the migration process on the Next-Cart website using standard service capability, 24/7 expert support, and any purchased Add-ons.
+### When Managed Service Adds Value <a href="#when-managed-service-adds-value" id="when-managed-service-adds-value"></a>
 
-For Gambio, Standard Service is usually more appropriate when the migration has these characteristics:
+Managed Service is appropriate when the merchant needs Next-Cart to handle more of the migration process and decision coordination. It does not turn every custom requirement into standard scope, but it can reduce execution burden when the merchant wants more guidance through Demo Migration, Full Migration, configuration checks, and issue review.
 
-| Standard Service signal                                                   | Why it matters for Gambio                                                            |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Products, categories, customers, and orders are organized and predictable | Core records can be migrated and checked without heavy interpretation.               |
-| Product options or variants are simple                                    | Shopper selection, pricing, and order line meaning are easier to validate.           |
-| Customer groups are not central to pricing or access logic                | The migration is less dependent on segmented commercial rules.                       |
-| Tax, shipping, payment, language, and currency requirements are standard  | Most post-migration work is configuration review rather than custom interpretation.  |
-| Storefront design is being rebuilt or adjusted separately                 | The migration can focus on the data foundation instead of design replication.        |
-| The merchant can review Demo Migration results carefully                  | Standard Service depends on the customer’s ability to validate records and settings. |
+For Gambio, Managed Service is useful when the project has several moving parts: Cloud/self-hosting decisions, many catalog samples to review, category and content cleanup, order-history verification, or internal teams that need a clearer sequence for validation. It is also useful when the merchant knows the store is not technically exotic but still wants controlled execution.
 
-Standard Service should not be treated as a low-effort shortcut. It works best when the merchant understands the source structure, can identify representative samples, and can distinguish migration issues from Gambio configuration or storefront implementation work.
+Managed Service is not a substitute for Custom Service. If the source store includes unsupported records, custom fields, bespoke transformation rules, external identifiers, or custom migration logic adjustment, those items still need separate review. Managed Service helps manage the process; Custom Service handles cases where the migration behavior itself must be adapted.
 
-#### Good Standard Service candidates <a href="#good-standard-service-candidates" id="good-standard-service-candidates"></a>
+| Managed Service is useful when…                                                         | It should not be used to assume…                                              |
+| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| The merchant needs guided execution and clearer review checkpoints.                     | Unsupported custom data will automatically become standard scope.             |
+| Demo Migration requires structured feedback across product, order, and content samples. | Target design, legal review, or integration rebuilds are included by default. |
+| Several teams must coordinate before Full Migration.                                    | All external-system behavior is recreated through data migration.             |
+| The project needs less merchant-side operational burden.                                | Custom source logic can be ignored.                                           |
 
-A small or mid-sized retail store with clean products, organized categories, ordinary customer records, and standard order history may be a good Standard Service candidate. The same is true for stores that do not rely heavily on customer-group pricing, custom checkout fields, source-specific option logic, unusual tax rules, or external operational systems.
+The best use of Managed Service is to keep the project organized while still separating supported migration, Add-ons, Custom Service, and target-side implementation tasks.
 
-Standard Service can also fit merchants who are moving into Gambio Cloud and expect a relatively standard Gambio setup, as long as the source data is clean and the merchant is prepared to configure the target shop settings after migration.
+### When Add-ons Are Needed <a href="#when-add-ons-are-needed" id="when-add-ons-are-needed"></a>
 
-### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
+Add-ons are appropriate when the required change is bounded and fits supported migration behavior. In Gambio projects, Add-ons may be relevant for filtering records, mapping fields, configuring how data is handled, or adjusting supported migration behavior within clear limits.
 
-Managed Service is safer when the migration still fits standard service capability, but the merchant wants Next-Cart-led execution. This can be useful when the source data is not unusually custom, but the merchant does not want to manage the migration process alone.
+The Data Filter Add-on may be useful when the merchant does not want all eligible records moved. For example, the project may need to exclude obsolete products, old customers, old orders, inactive content pages, or records outside a defined date range. Filtering is a scope-control decision; it should not be used to hide uncertainty about which records matter.
 
-For Gambio, Managed Service often makes sense when the store has enough moving parts to benefit from guided execution but not enough bespoke logic to require Custom Service.
+Advanced Data Mapping can help when source fields need to be aligned carefully with Gambio fields. This may apply to product attributes, categories, customer fields, order statuses, or other supported data areas where the meaning is clear but field alignment needs control.
 
-#### Managed Service is often useful when review coordination matters <a href="#managed-service-is-often-useful-when-review-coordination-matters" id="managed-service-is-often-useful-when-review-coordination-matters"></a>
+Advanced Data Configure can help when supported data needs specific configuration during migration. This may be relevant when the merchant has clear target handling rules for product visibility, category behavior, customer grouping, or order status interpretation.
 
-A merchant may have clean data but still need help coordinating product samples, customer records, order examples, category checks, tax review, shipping review, payment context, and Demo Migration interpretation. Managed Service can be safer in that case because Next-Cart performs the migration using standard service capability and any purchased Add-ons.
+Tailored Add-ons and Custom Add-ons may support bounded project needs that are not covered by default behavior but still remain within a defined migration adjustment. They should not be confused with Custom Service for unsupported or bespoke migration logic.
 
-#### Managed Service does not replace implementation planning <a href="#managed-service-does-not-replace-implementation-planning" id="managed-service-does-not-replace-implementation-planning"></a>
+### When Custom Service Is Required <a href="#when-custom-service-is-required" id="when-custom-service-is-required"></a>
 
-Managed Service should not be confused with custom development, theme implementation, or business-rule redesign. If the target Gambio store requires custom storefront work, bespoke data transformation, integration development, or non-standard migration logic, that requirement belongs in Custom Service review, not ordinary Managed Service expectations.
+Custom Service is required when the migration needs unsupported custom handling. For Gambio, this is most likely when the source store stores business meaning in custom fields, custom product structures, module-owned data, modified database tables, external-system identifiers, custom checkout rules, marketplace connector data, ERP links, or bespoke transformation rules.
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+Self-hosted Gambio expectations can increase Custom Service discussion because merchants may expect deep continuity from a heavily customized source store. Flexibility in the target environment does not mean custom source behavior migrates automatically. The project still needs to identify what is native data, what is configuration, what is extension-owned, what is external-system-owned, and what is custom logic.
 
-Custom Service should be reviewed when the migration requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, unsupported source structures, custom migration logic adjustment, or broader bespoke interpretation.
+Custom Service may be needed when:
 
-For Gambio, Custom Service becomes important when the source store’s operating meaning cannot be preserved through standard migration assumptions.
+* product logic depends on custom fields or modified source database structures;
+* option or stock behavior does not fit supported product handling;
+* downloadable products depend on custom access rules;
+* marketplace or ERP identifiers must be preserved in a specific way;
+* customer groups, tax behavior, or order status logic need bespoke interpretation;
+* CMS Pages include generated or theme-embedded content requiring special extraction;
+* the Source Platform or Target Platform requires custom migration logic adjustment.
 
-#### Custom Platform or heavily modified source data <a href="#custom-platform-or-heavily-modified-source-data" id="custom-platform-or-heavily-modified-source-data"></a>
+Custom Service should be scoped explicitly. It should not be buried inside a general migration promise. Clear separation protects the merchant from discovering after Full Migration that critical business meaning was never part of ordinary data movement.
 
-If the Source Platform is a Custom Platform, the valid service-path implication is Custom Service review. The same applies when the source system has custom database structures, app-owned fields, third-party identifiers, ERP-owned catalog data, marketplace-specific references, or bespoke order relationships that are not part of standard supported behavior.
+### Entity Points and Gambio Scope Control <a href="#entity-points-and-gambio-scope-control" id="entity-points-and-gambio-scope-control"></a>
 
-#### Complex customer-group and B2B logic <a href="#complex-customer-group-and-b2b-logic" id="complex-customer-group-and-b2b-logic"></a>
+Entity Points help control scope when eligible new Products, Customers, Orders, and Blog Posts are migrated. The key rule is that eligible new records consume Entity Points when first migrated. Records already counted through the service license do not consume again simply because another action happens on the same migration path.
 
-Gambio can support customer-group and B2B-oriented scenarios, but the migration must clarify what the source store actually means by groups, price lists, visibility rules, discounts, tax treatment, account approval, or buyer segmentation. If the source store uses custom B2B workflows or special pricing logic that does not map cleanly, Custom Service should be reviewed.
+In Gambio projects, Entity Points matter most when the merchant wants to add new records, expand scope, or handle follow-up migration after the initial path has been defined. They should not be used as a substitute for structural review. A store with fewer Products can still be complex if those Products depend on options, stock rules, downloads, custom fields, or external identifiers.
 
-#### Product options, variants, and custom product data <a href="#product-options-variants-and-custom-product-data" id="product-options-variants-and-custom-product-data"></a>
+| Scope situation                                           | Entity Points relevance                                                         | Separate planning question                                                     |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| New Products are added after initial scope                | Eligible new Products may consume Entity Points when first migrated.            | Do those Products follow the same Gambio structure already validated?          |
+| New Customers or Orders appear before launch              | Eligible new Customers or Orders may consume Entity Points when first migrated. | Are statuses, addresses, payments, shipping, and product lines still readable? |
+| Blog Posts are added where applicable                     | Eligible new Blog Posts may consume Entity Points when first migrated.          | Should content be migrated, recreated, redirected, or retired?                 |
+| Existing counted records are reprocessed on the same path | They do not consume again merely because another action occurs.                 | Has configuration changed enough to require a new migration path?              |
 
-Custom Service may be needed when source product options carry unusual pricing, inventory, image, SKU, bundle, or compatibility behavior. Product custom fields, external attributes, source-specific option logic, bundled products, configurable products, or non-standard downloadable product rules may require deeper mapping or custom migration logic adjustment.
+Entity Points answer a consumption question. They do not answer whether the target data is structurally ready for launch.
 
-#### Storefront, SEO, and integration dependencies <a href="#storefront-seo-and-integration-dependencies" id="storefront-seo-and-integration-dependencies"></a>
+### Demo Migration as the Service-Path Test <a href="#demo-migration-as-the-service-path-test" id="demo-migration-as-the-service-path-test"></a>
 
-A store with high-value SEO URLs, custom route rules, marketplace connections, ERP integration, payment workflow dependencies, shipping automation, custom modules, or self-hosted code modifications may require Custom Service if the expected result depends on more than supported record migration.
+Demo Migration is the practical test of the selected Gambio migration approach. It should include representative records, not only easy records. The point is to discover whether the chosen service path handles the store’s real structure.
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+A strong Gambio Demo Migration sample should include:
 
-Add-ons may help when the migration requires focused filtering, mapping, or configuration support that fits available Add-on capability. They should not be used as a substitute for broader Custom Service.
+* products with options;
+* products with stock behavior;
+* downloadable products;
+* products with multiple images;
+* products in important categories;
+* customers with addresses;
+* orders with discounts, tax, shipping, payment, and status variation;
+* CMS Pages with legal, trust, service, or SEO value;
+* records touched by integrations or custom fields where relevant.
 
-| Need                                                   | Possible Add-on relevance                                                                  | Boundary to watch                                                                              |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Excluding outdated or unnecessary records              | Data Filter Add-on may help when the filtering need is clear and supported.                | Complex conditional logic or business-rule redesign may need Custom Service.                   |
-| Mapping source fields into supported target structures | Advanced Data Mapping may help when source-to-target field relationships are clear.        | Unsupported custom fields, app-owned data, or external identifiers may require Custom Service. |
-| Adjusting supported configuration behavior             | Advanced Data Configure may help where target configuration needs fit standard capability. | Bespoke transformation or custom migration logic adjustment belongs in Custom Service.         |
-| Handling customer-group or catalog segmentation        | Add-ons may help if the mapping is defined and supported.                                  | Custom B2B pricing, visibility, or approval workflows may exceed Add-on boundaries.            |
+After Demo Migration, the team should classify findings into four groups: accepted behavior, configuration adjustment, Add-on need, and Custom Service need. This prevents every issue from being treated as the same kind of problem.
 
-The key boundary is scope. Add-ons are focused service features. Custom Service is the broader path for modified, bespoke, unsupported, or Custom Platform requirements.
+| Demo finding                                                             | Likely response                                                                               |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Supported data appears correct and readable.                             | Continue toward Full Migration with documented pass conditions.                               |
+| Supported data needs bounded field, filter, or configuration adjustment. | Review Add-ons or rerun with revised configuration.                                           |
+| Business meaning depends on unsupported custom records or logic.         | Scope Custom Service.                                                                         |
+| Target-side setup is missing.                                            | Assign configuration, design, legal/content, or integration tasks outside ordinary migration. |
 
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
+Demo Migration should produce a decision, not only a preview. The decision should state whether the current path is enough for Full Migration.
 
-Demo Migration should clarify whether the selected approach is strong enough before Full Migration. For Gambio, the Demo Migration should test examples that represent the real store, not only the simplest records.
+### Full Migration and Follow-Up Options <a href="#full-migration-and-follow-up-options" id="full-migration-and-follow-up-options"></a>
 
-#### Catalog proof <a href="#catalog-proof" id="catalog-proof"></a>
+Full Migration should proceed when the service path, scope, and validation responsibilities are clear. For Gambio, that means the target environment is confirmed, catalog samples passed, content pages are classified, order readability is acceptable, Add-ons are selected where needed, and Custom Service items are either scoped or separated from the launch plan.
 
-The Demo Migration should include simple products, option-heavy products, products with multiple images, products in multiple categories, downloadable products if used, products with special pricing, stock-sensitive products, and records with important attributes or filters. The goal is to prove that shoppers can understand the product and that the merchant can manage it after migration.
+Additional Migration Options become relevant when data changes after the first migration path has been tested or completed. The correct option depends on what changed:
 
-#### Customer and order proof <a href="#customer-and-order-proof" id="customer-and-order-proof"></a>
+| Follow-up need                                                    | Better option                                           | Reason                                                                         |
+| ----------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| New records must be added using the same approved setup           | Continue the Migration with the last used configuration | The target handling rules are already validated.                               |
+| Mapping, filtering, or configuration has changed                  | Continue the Migration with a new configuration         | The migration path has changed and must be treated as a new controlled action. |
+| The project needs a substantially different source-to-target plan | Perform a new migration                                 | The prior path no longer represents the intended target structure.             |
 
-The sample should include normal customers, customer-group examples, guest or registered account examples where relevant, recent orders, older orders, orders with discounts, tax, shipping, payment context, variant selections, and unusual statuses. Order history should remain useful for service, accounting reference, and operational review.
+These options are especially useful when a merchant continues selling while launch preparation continues. They should be planned with validation in mind, not treated as administrative buttons.
 
-#### Storefront and SEO proof <a href="#storefront-and-seo-proof" id="storefront-and-seo-proof"></a>
+### Choosing the Right Gambio Path <a href="#choosing-the-right-gambio-path" id="choosing-the-right-gambio-path"></a>
 
-The Demo Migration should help the merchant check whether categories, product pages, content pages, metadata, URLs, redirects, navigation, and storefront expectations are aligned with the Gambio implementation plan. If SEO continuity is important, high-value pages and paths should be reviewed early.
+The right Gambio path is selected by combining record scope with operating-model complexity. A merchant with a clean catalog, ordinary customer records, readable order history, stable categories, and limited external dependencies may fit a simpler path. A merchant with option-heavy products, downloadable items, legal or trust content, marketplace assumptions, custom fields, custom templates, or self-hosted integration needs usually requires more guided review.
 
-#### Configuration proof <a href="#configuration-proof" id="configuration-proof"></a>
+The decision should not be based only on the number of records. A store with fewer Products may still require Managed Service or Custom Service if the records carry custom behavior. A store with more Products may remain predictable if the data is consistent and target configuration is already understood. Entity Points help with eligible record volume, but service-path selection should also consider how much interpretation, mapping, configuration review, and validation support is needed.
 
-The Demo Migration should identify which issues are data issues, which are Gambio configuration issues, which require Add-on review, and which require Custom Service review. This distinction prevents the merchant from expecting migrated records to solve settings that must be configured inside Gambio.
+A strong service-path decision should identify escalation triggers before Demo Migration. If Demo Migration reveals option behavior that does not translate cleanly, historical orders that lose commercial context, CMS Pages that need restructuring, or integration assumptions that were not scoped, the project should decide whether Add-ons, Advanced Data Mapping, Advanced Data Configure, Custom Service, Additional Migration Options, or separate implementation are needed. Waiting until Full Migration to make those decisions increases launch risk.
 
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
+The practical choice is usually clear when the merchant separates record movement from operating behavior. Standard Service fits clean supported data. Managed Service fits merchants who need more execution support. Add-ons fit bounded filtering, mapping, and configuration needs. Custom Service fits unsupported, custom, external, or bespoke migration requirements.
 
-The chosen approach is probably too light if the Demo Migration reveals repeated ambiguity rather than isolated cleanup issues.
+| Migration path               | Best fit                                                                    | Watch condition                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Standard Service             | Clean supported records with manageable internal review.                    | Hidden custom logic or integration-owned meaning.                                       |
+| Managed Service              | Merchant needs guided execution and coordination.                           | Assuming guidance replaces custom migration work.                                       |
+| Add-ons                      | Bounded filtering, mapping, or configuration needs.                         | Using Add-ons to avoid Custom Service when unsupported data is involved.                |
+| Custom Service               | Unsupported records, custom fields, external identifiers, or bespoke logic. | Scope must be explicit before Full Migration.                                           |
+| Additional Migration Options | Follow-up records or changed configuration after an initial path.           | Must match whether the configuration is unchanged, revised, or substantially different. |
 
-Common warning signs include:
-
-* Product options appear but do not preserve shopper-facing meaning.
-* Category, filter, or product-discovery behavior is difficult to interpret.
-* Customer groups do not reflect expected pricing or segmentation meaning.
-* Orders appear but discounts, tax, shipping, payment context, or statuses are unclear.
-* Downloadable products, stock behavior, or special pricing cannot be validated confidently.
-* Important storefront URLs, metadata, content pages, or redirects are not planned.
-* Source custom fields or external identifiers are central to operations.
-* The source store depends on marketplace, ERP, payment, shipping, or self-hosted custom code behavior.
-* The merchant cannot separate migration issues from Gambio configuration or implementation work.
-
-When these signals appear, the safer action is to review the migration path, Add-on needs, Managed Service suitability, or Custom Service scope before moving into Full Migration.
+The right path should make the migration easier to validate. If the selected path does not clarify what will be moved, configured, customized, or validated, the path is not ready.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Gambio migration approach depends on how much interpretation the source store requires and how much responsibility the target operating model creates. Standard Service can fit clean, supported, well-understood data. Managed Service can be safer when the merchant wants Next-Cart-led execution within standard service capability. Custom Service should be reviewed when the source includes Custom Platform data, unsupported structures, custom fields, bespoke B2B rules, extension-owned data, integration dependencies, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+The right Gambio migration approach depends on operating model, catalog structure, content responsibility, historical order readability, integration dependencies, and customization depth. Standard Service is appropriate for clean supported data. Managed Service adds process control. Add-ons handle bounded filtering, mapping, and configuration needs. Custom Service handles unsupported and bespoke requirements.
 
-Use Demo Migration results to test whether the selected approach is strong enough for the real store. If product options, customer groups, order history, SEO paths, downloadable products, tax, shipping, payment, integrations, or self-hosted customization introduce uncertainty, review the migration path through Live Chat before Full Migration so service responsibilities and Add-on boundaries are clear.
+A strong decision separates record movement from target configuration, legal/content review, integration setup, and custom logic. Once those boundaries are clear, Demo Migration can test the selected path and Full Migration can proceed with fewer surprises.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for migrating to Gambio?**
+**When is Standard Service enough for a Gambio migration?**
 
-Standard Service may be enough when the source data is clean, the selected migration path supports the needed data types, and the merchant can self-perform the migration process on the Next-Cart website with 24/7 expert support. It is less suitable when the source store depends on custom fields, bespoke product logic, complex B2B rules, or unsupported extension data.
+Standard Service is usually enough when the store has clean supported records, simple products and categories, readable customers and orders, limited content complexity, and no unsupported custom logic.
 
-**When should Managed Service be considered for Gambio migration?**
+**When should Managed Service be selected?**
 
-Managed Service should be considered when the migration fits standard service capability but the merchant wants Next-Cart to perform the migration. It is useful when the store has enough catalog, customer, order, or configuration complexity to benefit from Next-Cart-led execution without requiring bespoke migration logic.
+Managed Service is useful when the merchant wants guided execution, coordinated review, and clearer handling of Demo Migration and Full Migration without assuming that custom requirements become standard.
 
-**When does Gambio migration require Custom Service?**
+**Can Add-ons handle custom Gambio migration needs?**
 
-Custom Service should be reviewed when the source includes Custom Platform data, unsupported custom fields, third-party identifiers, complex product option logic, customer-group pricing rules, self-hosted custom code, integration-owned data, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+Add-ons can handle bounded filtering, mapping, and configuration needs. Unsupported records, custom fields, external identifiers, bespoke transformation, or custom migration logic adjustment require Custom Service review.
 
-**Can Add-ons help with Gambio migration?**
+**How do Entity Points affect Gambio migration scope?**
 
-Yes. Add-ons may help with focused filtering, mapping, or configuration needs when those needs fit available Add-on capability. They should not be treated as a replacement for Custom Service when the migration requires broader customization, unsupported data handling, or bespoke transformation.
+Eligible new Products, Customers, Orders, and Blog Posts consume Entity Points when first migrated. Records already counted through the service license do not consume again simply because another action happens on the same migration path.
 
-**What should Demo Migration prove before Full Migration to Gambio?**
+**When should Additional Migration Options be considered?**
 
-Demo Migration should prove that products, options, categories, customer groups, orders, discounts, tax, shipping, payment context, downloadable products, stock behavior, SEO-sensitive pages, and storefront expectations can be interpreted correctly in the target Gambio environment.
+They are relevant when new records need to be added, configuration changes after a migration path has been tested, or a substantially different migration plan is needed.

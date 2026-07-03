@@ -1,206 +1,151 @@
 # OsCommerce Constraints and Risks
 
-osCommerce gives merchants strong control over the target store, but that control also creates migration risk when the source data, target configuration, modules, or custom code are not understood early. The highest-risk osCommerce migrations are usually not caused by ordinary product, customer, or order records. They are caused by the structures around those records: product attributes, properties, groups, old add-ons, custom database tables, customer groups, B2B rules, payment and shipping modules, storefront content, SEO behavior, and legacy osCommerce versions.
+osCommerce migration risk usually comes from assumptions that look safe at the record level but fail at the operating-model level. The name osCommerce can create a false sense of continuity: a merchant may assume that an older osCommerce store, a heavily modified fork, or a store with years of add-ons will move into modern osCommerce v4 without major interpretation. In practice, the risk is that legacy data, custom logic, and modern target structures may share familiar labels while behaving differently.
 
-A constraint should not be treated as a reason to avoid osCommerce automatically. Many constraints can be managed if they are identified before migration scope is finalized. The important question is whether the source store’s real operating meaning can be interpreted inside the intended osCommerce target without hidden assumptions.
+A useful risk review should connect assumption, consequence, operational impact, mitigation, and validation evidence. A product export may be accurate, but if category placement, attributes, stock, sales-channel assignment, and SEO behavior are wrong, the storefront is not ready. An order history may migrate, but if statuses, taxes, discounts, and comments lose meaning, staff cannot use that history confidently. A module field may appear in the source database, but if it was created by an unsupported add-on, it may need Custom Service rather than standard mapping.
 
-### Where Risk Concentrates in an OsCommerce Migration <a href="#where-risk-concentrates-in-an-oscommerce-migration" id="where-risk-concentrates-in-an-oscommerce-migration"></a>
+### Legacy Continuity Risk <a href="#legacy-continuity-risk" id="legacy-continuity-risk"></a>
 
-osCommerce risk is usually concentrated in the gap between the source store’s existing implementation and the target osCommerce structure. A clean source store with standard products, categories, customers, orders, and content can be easier to plan. A long-running store with old code, modified add-ons, custom tables, legacy attributes, complex customer groups, or external integrations needs deeper review.
+The first osCommerce risk is assuming that old osCommerce data automatically fits current osCommerce expectations. Many older osCommerce installations were extended through add-ons, manual code edits, custom database fields, template changes, and module-specific tables. Those stores may no longer represent a clean native osCommerce model. They represent a merchant-specific operating system that happens to be built on osCommerce foundations.
 
-| Constraint area                              | Who it affects                                                                                                    | Why it matters                                                                                                  | Earliest review priority                                                          |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Legacy osCommerce or forked source structure | Merchants moving from old osCommerce, osCMax-style, CRE Loaded-style, Zen Cart-style, or heavily modified systems | Old or forked schemas may not match modern osCommerce v4 assumptions.                                           | Confirm the exact source version, fork, database structure, and custom changes.   |
-| Product attributes, properties, and groups   | Catalog managers, merchandisers, shoppers, and support teams                                                      | Purchase choices, filters, specifications, and related products can lose meaning if mapped too loosely.         | Sample complex products before Full Migration.                                    |
-| Customer groups and B2B logic                | Wholesale, trade, member-price, tax-exempt, or restricted-access stores                                           | Customer group labels may control pricing, approval, visibility, payment, shipping, or tax behavior.            | Identify group rules and source logic before choosing the service path.           |
-| Orders and status history                    | Customer service, accounting, fulfillment, and management users                                                   | Orders may need status history, invoices, payment/shipping labels, comments, tracking, and transaction context. | Validate varied order samples across the order lifecycle.                         |
-| Payment, shipping, tax, and checkout modules | Store owners, operations teams, and shoppers                                                                      | Historical labels do not configure live checkout behavior.                                                      | Separate migrated order history from target checkout configuration.               |
-| App Shop modules and third-party add-ons     | Stores using marketplace, B2B, connector, SEO, payment, reporting, or custom modules                              | Module-owned records may not belong to standard platform structures.                                            | Inventory installed modules and identify data ownership.                          |
-| SEO URLs and content                         | Marketing teams, SEO teams, returning customers, and organic traffic                                              | Search continuity depends on page names, metadata, canonicals, redirects, and content structure.                | Prepare high-value URL and CMS Page samples.                                      |
-| Hosting and technical responsibility         | Store owners and technical teams                                                                                  | osCommerce is open-source and self-hosted by nature, so environment, updates, and maintenance matter.           | Confirm who manages hosting, upgrades, backups, security, and module maintenance. |
+The migration consequence is that familiar record names can hide incompatible meanings. A product field may have been repurposed. An order status may have been added by a payment module. A customer group may have been used for wholesale access, tax exemption, or private pricing. A custom table may store business-critical data that is invisible in a standard export.
 
-### Legacy Version and Fork Risk <a href="#legacy-version-and-fork-risk" id="legacy-version-and-fork-risk"></a>
+The operational impact appears after launch. Staff may find that historical Orders exist but no longer communicate fulfillment status. Products may exist but lose option behavior. Reports may change because old custom values are not represented. Customer-service teams may lose internal notes, fraud flags, or special-account indicators.
 
-A major osCommerce constraint is version and lineage uncertainty. A store may be called osCommerce, but its actual structure may reflect an old 2.x installation, a long-modified codebase, a fork, an add-on-heavy implementation, or a custom database layer. These differences can change product, customer, order, checkout, and module behavior.
+Mitigation starts with a legacy dependency inventory. The source store should be reviewed for custom tables, non-core add-ons, modified files, custom product fields, extra order fields, old payment/shipping module data, and hard-coded template behavior. Anything not clearly supported by standard migration scope should be classified before Demo Migration.
 
-This risk increases when:
+Validation should include records known to rely on old add-ons or customizations. If those records do not appear correctly in osCommerce or cannot be interpreted by staff, the risk should be escalated to Advanced Data Mapping, Advanced Data Configure, Custom Add-ons, or Custom Service review.
 
-* the source store has been operating for many years without a clean upgrade path;
-* developers modified core files or database tables;
-* old add-ons created custom records or fields;
-* the source store is related to osCommerce but not actually a standard osCommerce installation;
-* the merchant cannot identify the platform version, extension stack, or database changes.
+### Catalogue Relationship Risk <a href="#catalogue-relationship-risk" id="catalogue-relationship-risk"></a>
 
-Mitigation starts with identity confirmation. The source version, codebase, installed add-ons, database schema, custom tables, and integration points should be reviewed before assuming a standard migration path. If the source is heavily customized, forked, or unclear, Custom Service review should be considered early.
+osCommerce catalogue data is relational. Products connect to categories, brands, properties, attributes, stock, images, product listings, and sometimes multiple sales channels. The risk is treating catalogue migration as a flat product import. A product can exist in the Target Platform and still fail commercially if it appears in the wrong categories, lacks attributes, has misleading stock, loses images, or is not assigned to the right sales channel.
 
-### Catalog Structure Constraints <a href="#catalog-structure-constraints" id="catalog-structure-constraints"></a>
+The migration consequence is poor storefront behavior. Customers may not find products through category pages, brand pages, site search, or filters. Product listings may show incomplete information. Attribute selection may not support the intended purchase decision. Stock indicators may conflict with actual availability. These problems reduce conversion and create support tickets even when product counts match expectations.
 
-Catalog structure is one of the most important osCommerce risk areas because products can depend on many connected structures. A product may appear simple in a source export but rely on choices, specifications, images, brands, suppliers, stock behavior, product groups, bundles, downloadable-product behavior, and SEO fields.
+| Risk assumption                        | Consequence                                                  | Mitigation                                                                    | Validation signal                                         |
+| -------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Product count proves catalogue success | Relationships may still be broken                            | Validate products by category, attribute, property, image, and stock behavior | Customers can browse and purchase representative products |
+| Source options map directly            | Purchase choices and classification data may be mixed        | Separate attributes, properties, and custom metadata                          | Product pages show only intended selectable values        |
+| Categories are only labels             | Navigation, filters, and product listing behavior may change | Review hierarchy and product assignments before Full Migration                | Category pages display correct products and filters       |
+| Stock is a simple number               | Warehouse, supplier, or add-on logic may not carry over      | Document stock source and stock-indication requirements                       | Availability messages match business expectations         |
 
-#### Attributes, Properties, and Product Groups <a href="#attributes-properties-and-product-groups" id="attributes-properties-and-product-groups"></a>
+A strong risk-control sample includes simple products, configurable products, products in several categories, products with stock edge cases, products with old images, and products affected by special prices or marketing displays. The sample should be reviewed by the people who manage catalogue operations, not only by technical staff.
 
-Attributes, properties, and product groups can carry different meanings in osCommerce. If a source store uses a single option system for several purposes, those meanings may need to be separated during migration.
+### Sales-Channel and Storefront Context Risk <a href="#sales-channel-and-storefront-context-risk" id="sales-channel-and-storefront-context-risk"></a>
 
-Risk increases when:
+Modern osCommerce includes sales-channel concepts and front-end behavior that may not match a source store built around one storefront, one theme, or older multi-store workarounds. The risk is assuming that a source storefront structure will translate without deciding how the Target Platform should separate channels, themes, menus, languages, currencies, content, and product visibility.
 
-* options affect price, inventory, image, weight, or fulfillment;
-* filters and specifications are stored as custom fields;
-* product groups represent related products, variants, bundles, or grouped buying contexts;
-* source product data includes technical attributes that shoppers use for comparison;
-* an extension controls product choices or product relationships.
+The migration consequence is channel confusion. Products may be available in the wrong storefront context. A menu may not represent the intended catalogue. A theme assignment may not align with the desired channel. Language and currency switches may exist, but content or product data may not be ready for those contexts.
 
-Mitigation requires representative product samples. Do not validate only simple products. Include products with selectable choices, filterable specifications, special prices, stock-sensitive options, grouped relationships, downloads, multiple images, and SEO fields.
+The operational impact is strongest for merchants with regional stores, B2B/B2C separation, marketplace activity, affiliate channels, or multi-language catalogs. If channel rules are not defined early, launch teams may discover late that the migrated data is technically present but not organized for the intended customer experience.
 
-#### Categories, Brands, and Discovery <a href="#categories-brands-and-discovery" id="categories-brands-and-discovery"></a>
+Mitigation requires a target-channel map. Before Full Migration, the merchant should define active sales channels, required languages, currencies, product visibility rules, menu structures, theme expectations, and whether any old storefronts should be consolidated or retired. Migration should support that future operating model rather than copying every old workaround.
 
-osCommerce can use categories, brands, search, filters, featured/new/sale views, sales-channel assignment, and storefront navigation to shape discovery. Risk appears when product records migrate but browsing paths do not reflect how customers actually shop.
+Validation should test product visibility, category browsing, menus, language and currency behavior, and channel-specific content. If a product is meant to appear in one channel but not another, that rule should be tested during Demo Migration review.
 
-Risk increases when the source store has:
+### Order, Customer, and Commercial History Risk <a href="#order-customer-and-commercial-history-risk" id="order-customer-and-commercial-history-risk"></a>
 
-* deep category trees;
-* multiple category assignments per product;
-* brand-led browsing;
-* SEO landing categories;
-* manually curated category pages;
-* sales-channel-specific product visibility;
-* filter-heavy or specification-led discovery.
+Orders and customers carry operational memory. The risk is assuming that if customer profiles and order records appear in osCommerce, the migration has preserved commercial history. In practice, order value depends on status meaning, tax totals, discounts, shipping charges, payment references, comments, customer association, and reporting relevance.
 
-Mitigation should include category and product-discovery validation samples. Products should be checked from the storefront, not only from the admin catalog.
+The migration consequence is loss of interpretability. Staff may see historical Orders but not understand whether they were shipped, refunded, partially fulfilled, manually reviewed, paid through a specific provider, or affected by a promotion. Customer records may lose group meaning, address consistency, tax identifiers, or service notes.
 
-### Customer Group and Account Constraints <a href="#customer-group-and-account-constraints" id="customer-group-and-account-constraints"></a>
+The operational impact affects support, finance, returns, warranty handling, and repeat-customer service. If teams cannot trust historical Orders, they may need to consult the old store after launch. That weakens migration success because the Target Platform no longer acts as the reliable operating record.
 
-Customer data can be more than names, emails, and addresses. In osCommerce, customer groups, address books, guest status, language behavior, reviews, credit fields, and B2B/trade logic can affect how the target store interprets customers.
+Mitigation begins with order-status mapping and commercial-field review. Source statuses should be grouped by business meaning, not copied blindly. Coupons, gift cards, sales, taxes, shipping charges, and comments should be checked for historical clarity. Customer groups and address formats should be normalized where necessary.
 
-Risk increases when:
+Validation should include old Orders with different statuses, discounts, taxes, shipping methods, payment methods, comments, and customer-group cases. The pass condition is that staff can answer realistic support questions from the migrated data without opening the source store.
 
-* wholesale or trade accounts use customer groups;
-* customer groups affect price, tax, visibility, or approval;
-* registered and guest customers are handled differently;
-* customers have multiple addresses or historical order links;
-* source passwords cannot be preserved through ordinary target behavior;
-* customer-specific data is controlled by add-ons or custom code.
+### Module, App Shop, and Custom Data Risk <a href="#module-app-shop-and-custom-data-risk" id="module-app-shop-and-custom-data-risk"></a>
 
-Mitigation requires customer samples that represent real business cases. Include retail customers, wholesale customers, guest buyers, customers with multiple addresses, customers with reviews, and customers with varied order history.
+osCommerce v4 includes modules, extensions, and an App Shop, while older osCommerce stores may rely on legacy add-ons and custom modifications. The risk is assuming that a module name or field has a native target equivalent. A source add-on may have stored data in a custom table, changed checkout behavior, added order fields, controlled product restrictions, or created reporting values.
 
-### Order History and Operational Context Constraints <a href="#order-history-and-operational-context-constraints" id="order-history-and-operational-context-constraints"></a>
+The migration consequence is unsupported behavior. Standard migration may move supported entities, but it will not automatically implement custom module logic, recreate add-on behavior, or preserve every old field in a usable target structure. When module-created data matters, it must be identified and scoped.
 
-Historical orders are valuable because they support customer service, accounting reference, fulfillment review, and business continuity. A migration that preserves order totals but loses operational context can create problems after launch.
+The operational impact can be serious. Payment references may be incomplete. Shipping rules may not match. Product restrictions may disappear. Custom customer fields may become unsearchable. Old reports may no longer be available. Marketplace or ERP identifiers may be lost if they were stored by unsupported add-ons.
 
-Risk increases when orders include:
+Mitigation is to classify each dependency. Some module data can be mapped into native fields. Some can be preserved as metadata. Some may be handled through bounded Add-ons. Some requires Custom Service because it needs tailored review, custom field handling, custom logic adjustment, unsupported records, or Custom Platform review.
 
-* custom order statuses;
-* multiple payment and shipping methods;
-* partial fulfillment;
-* refunds or returns;
-* discount and coupon history;
-* customer or admin comments;
-* tracking numbers;
-* invoices and packing slips;
-* transaction records;
-* manual edits;
-* multi-currency or tax-sensitive orders.
+Validation should compare representative module-dependent records before and after Demo Migration. Any unsupported field should be escalated before Full Migration, not discovered during launch week.
 
-Mitigation should focus on order readability. The target does not need to reproduce every live workflow from the source store, but historical orders should remain understandable to the people who use them after migration.
+### SEO, Design and CMS, and Content Continuity Risk <a href="#seo-design-and-cms-and-content-continuity-risk" id="seo-design-and-cms-and-content-continuity-risk"></a>
 
-### Checkout, Payment, Shipping, and Tax Constraints <a href="#checkout-payment-shipping-and-tax-constraints" id="checkout-payment-shipping-and-tax-constraints"></a>
+osCommerce migration can break discoverability if SEO and content are treated as secondary. The Target Platform includes SEO, Design and CMS, pages, menus, themes, translations, email templates, catalog pages, meta tags, XML sitemap behavior, analytics settings, and search. Source content may not translate automatically into those structures.
 
-Checkout behavior is a separate risk area because migration can preserve historical information without configuring the target checkout experience. Payment labels from old orders do not install payment modules. Shipping labels from old orders do not define live shipping rules. Tax totals from old orders do not automatically configure tax behavior for new orders.
+The migration consequence is loss of landing pages, changed URLs, missing metadata, broken menus, incomplete CMS Pages, weaker site search, or unclear category content. A store can launch with complete product data but still lose organic traffic and customer trust if content and SEO continuity are not reviewed.
 
-Risk increases when:
+The operational impact includes traffic decline, duplicate content, broken links, missing policy pages, inconsistent emails, and poor navigation. If CMS Pages or catalog pages supported high-value search queries, losing them can reduce conversion even when products are available.
 
-* the store uses custom payment or shipping modules;
-* shipping depends on zones, weights, carriers, warehouses, or customer groups;
-* tax depends on regions, exemptions, customer groups, or product classes;
-* checkout fields were customized in the source store;
-* the source store uses B2B, quote, approval, or manual-payment flows.
+Mitigation starts with a content and URL inventory. Important CMS Pages, category pages, product URLs, meta fields, redirects, menus, translations, and email templates should be reviewed. Migration scope should distinguish records that can be migrated from target-side configuration that must be rebuilt or manually adjusted.
 
-Mitigation should separate historical order validation from live checkout testing. Migration planning should identify which fields are historical records and which target settings must be configured independently.
+Validation should test priority URLs, category pages, product pages, menus, search, metadata, redirects, and policy pages. The pass condition is not that every old URL is identical; it is that high-value discovery paths and trust pages remain accessible and coherent.
 
-### App Shop, Module, and Custom Data Constraints <a href="#app-shop-module-and-custom-data-constraints" id="app-shop-module-and-custom-data-constraints"></a>
+### Server, Installation, and Ownership Risk <a href="#server-installation-and-ownership-risk" id="server-installation-and-ownership-risk"></a>
 
-osCommerce modules and App Shop extensions can extend the store in many directions: payment, shipping, SEO, B2B, social login, marketplace connectors, reports, customer fields, content behavior, and storefront design. Some module behavior belongs to target configuration. Some module data may need migration. Some module-specific records may require custom mapping or Custom Service review.
+osCommerce is an open-source platform with installation and server requirements. That creates ownership advantages, but it also introduces responsibility. The risk is assuming that migration ends when data is moved. In a self-managed environment, hosting readiness, server configuration, security posture, backup procedures, module updates, and error monitoring affect whether migrated data remains stable.
 
-Risk increases when:
+The migration consequence is launch instability. A store may receive correct data but run on an environment that is not prepared for traffic, images, search, scheduled tasks, email sending, module behavior, or security expectations. Server-related issues can be misread as migration defects even when they are target-environment problems.
 
-* a module stores data in custom tables;
-* source add-ons created custom product, customer, or order fields;
-* outside systems use IDs that must remain traceable;
-* integrations depend on historical records;
-* a marketplace, accounting, ERP, CRM, POS, or shipping connector owns part of the workflow;
-* the merchant expects source add-on behavior to appear in the target automatically.
+The operational impact includes slow pages, broken images, failed emails, incomplete imports, checkout errors, indexing problems, and security exposure. These issues can delay launch or create emergency post-launch work.
 
-Mitigation starts with a module inventory. Each extension or custom feature should be classified as standard target configuration, data to migrate, data to map, data to re-create, or custom scope.
+Mitigation requires environment readiness before Demo Migration and Full Migration. The target installation should be stable, access credentials should be available, backups should be planned, image handling should be tested, email sending should be configured, and any required modules should be installed and reviewed before validation.
 
-### SEO, URL, and Content Constraints <a href="#seo-url-and-content-constraints" id="seo-url-and-content-constraints"></a>
+Validation should include administrative access, storefront browsing, checkout-relevant modules, email behavior, image loading, search, cache behavior, and error logs. If environment issues appear, they should be separated from migration-data issues so correction responsibility is clear.
 
-SEO continuity can become a major risk when the source store has long-standing URLs, category paths, brand pages, CMS Pages, landing pages, metadata, image alt text, canonical tags, or sitemap rules. osCommerce can support SEO fields and content structures, but migration planning must decide which source SEO signals matter most.
+### Risk Priority Matrix for osCommerce Migration <a href="#risk-priority-matrix-for-oscommerce-migration" id="risk-priority-matrix-for-oscommerce-migration"></a>
 
-Risk increases when:
+Not every risk has the same launch impact. A harmless formatting issue may be corrected after launch, but broken product attributes, missing order statuses, or unsupported custom data can change launch readiness. A priority matrix helps avoid spending validation time on low-impact details while critical risks remain unresolved.
 
-* organic search drives meaningful traffic;
-* source URLs have backlinks or ranking value;
-* product and category URLs use old patterns;
-* brand or CMS landing pages are important;
-* canonical behavior was customized;
-* redirects are not planned before launch;
-* image metadata or page metadata is incomplete.
+| Priority | Risk area                                                          | Why it matters                                      | Launch decision                                   |
+| -------- | ------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------- |
+| Critical | Products, categories, attributes, stock, and checkout-related data | Customers cannot shop correctly if these fail       | Block launch until corrected                      |
+| High     | Orders, statuses, taxes, discounts, and customer groups            | Staff cannot support customers or interpret history | Block or delay launch depending on severity       |
+| High     | Module-created fields and custom data                              | Unsupported behavior may not transfer automatically | Escalate to Custom Service before Full Migration  |
+| Medium   | CMS Pages, menus, SEO, search, and redirects                       | Discoverability and trust can decline               | Correct before launch for high-value pages        |
+| Medium   | Sales-channel visibility and localization                          | Wrong channel display creates customer confusion    | Validate before opening affected channels         |
+| Low      | Cosmetic presentation differences                                  | Usually correctable after launch                    | Track but do not block unless conversion-critical |
 
-Mitigation should prioritize important URLs and content pages. A migration plan should not promise preservation of every historical URL, but high-value product, category, brand, and CMS Page paths should be reviewed deliberately.
+The best final risk decision is evidence-based. If Demo Migration results prove that critical data behaves correctly, lower-priority items can be planned. If the Demo Migration exposes unclear mapping, unsupported custom data, or channel confusion, the scope should be adjusted before Full Migration.
 
-### Hosting, Maintenance, and Technical Responsibility Constraints <a href="#hosting-maintenance-and-technical-responsibility-constraints" id="hosting-maintenance-and-technical-responsibility-constraints"></a>
+### Risk Triage for Legacy osCommerce Stores <a href="#risk-triage-for-legacy-oscommerce-stores" id="risk-triage-for-legacy-oscommerce-stores"></a>
 
-osCommerce’s open-source model gives merchants control, but the target environment still needs hosting, updates, backups, security practices, module compatibility, theme maintenance, and technical support. A store that moves from a managed SaaS platform into osCommerce should understand this shift before migration.
+Risk control should begin by separating three kinds of issues. The first type is data risk, where source records are present but their target meaning is uncertain. Product attributes, properties, customer groups, coupon history, and order totals often fall into this group. The second type is configuration risk, where the target store must be configured before the migrated data can behave correctly. Sales channels, modules, currencies, tax settings, shipping rules, CMS Pages, menus, and search behavior are typical examples. The third type is custom-behavior risk, where the source store relies on an old module, a modified table, a custom field, or an external integration that cannot be interpreted safely without review.
 
-Risk increases when:
+This triage matters because the wrong response creates the wrong migration plan. A product property problem may be solved through mapping, but a custom product-builder table may require Custom Service review. A migrated order total may be readable as history, but live checkout still depends on target-side payment, shipping, tax, and order-status configuration. A CMS Page may migrate as content, but its menu placement, template behavior, and SEO value still require target validation.
 
-* the merchant does not have technical support for hosting and maintenance;
-* the target store requires many modules or custom changes;
-* PHP/database requirements are not confirmed;
-* extension compatibility is assumed rather than checked;
-* custom development is planned but not scoped;
-* launch responsibility is unclear.
+| Risk type            | Typical osCommerce signal                                           | Safer handling path                                                              |
+| -------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Data risk            | Standard records are present but their meaning may change.          | Confirm mapping rules and validate representative samples.                       |
+| Configuration risk   | Behavior depends on target settings, modules, or sales channels.    | Configure the target store and test the behavior outside record counts.          |
+| Custom-behavior risk | Old modules, custom tables, or external IDs control business logic. | Escalate for Custom Service review before Full Migration assumptions are locked. |
 
-Mitigation should define who will manage the target environment, who will maintain modules, who will approve changes, and who will test updates after migration.
+### Escalation Signals Before Full Migration <a href="#escalation-signals-before-full-migration" id="escalation-signals-before-full-migration"></a>
 
-### When Risk Increases Enough for Custom Service Review <a href="#when-risk-increases-enough-for-custom-service-review" id="when-risk-increases-enough-for-custom-service-review"></a>
+A risk should be escalated when Demo Migration feedback cannot be reduced to a simple correction. If reviewers say that a field is missing but cannot identify whether it is a product property, module-generated value, custom database field, ERP identifier, or display-only label, the issue is not ready for Full Migration. If a source add-on changed checkout, pricing, shipping, reporting, or catalog presentation, the team should not assume the same behavior is covered by standard record migration.
 
-Not every osCommerce constraint requires Custom Service. Some needs can be handled through preparation, Demo Migration review, Standard Add-ons, or target configuration. Custom Service review becomes more important when the source or target includes data or behavior outside standard service capability.
+Another escalation signal appears when several issues share the same root cause. Missing product filters, weak search results, broken category paths, and incorrect product-listing behavior may point to catalog-discovery design rather than isolated product errors. Order-history confusion across coupons, taxes, gift cards, payment labels, and statuses may point to commercial-history interpretation rather than count mismatch. These patterns should be handled as risk chains, not as separate small defects.
 
-Custom Service review should be considered when:
-
-* the source is a Custom Platform, fork, old osCommerce build, or heavily customized installation;
-* custom database tables or custom code carry business data;
-* extension-owned product, customer, order, SEO, or integration records must be included;
-* source product choices require non-standard transformation;
-* B2B, wholesale, approval, credit, or customer-group logic is custom;
-* outside-system identifiers must remain traceable;
-* payment, shipping, tax, or order workflows rely on custom logic;
-* the merchant needs tailored migration behavior beyond Standard Add-on capability.
+The final risk decision should identify ownership. Some issues belong to the migration configuration. Some belong to target osCommerce setup. Some belong to merchant data cleanup. Some require Add-ons. Some require Custom Service. The risk is not controlled until the team can name the owner and the expected validation proof for each major issue.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-osCommerce migration risk is manageable when the source store’s real structure is understood early. The biggest constraints usually come from legacy versions, custom code, add-ons, complex catalog meaning, customer groups, checkout modules, SEO continuity, and technical responsibility. These areas should be reviewed before the migration path is treated as straightforward.
+osCommerce migration risk is created by the distance between familiar labels and actual target behavior. Products, categories, attributes, customers, orders, modules, CMS content, SEO fields, sales channels, and server ownership must be reviewed through risk-chain reasoning. The store is not ready because data exists; it is ready when the migrated data can support the intended operating model.
 
-Before moving into Full Migration, prepare samples that expose the store’s real complexity and review them through Demo Migration. If the samples reveal custom database structures, extension-owned records, old-version differences, or business logic that does not fit standard service capability, discuss Add-ons or Custom Service review before finalizing scope.
+The safest path is to identify legacy dependencies early, test representative records during Demo Migration, separate migration-data issues from target-configuration issues, and escalate unsupported custom behavior before Full Migration. That approach reduces launch surprises and prevents old osCommerce assumptions from being carried into a modern osCommerce environment without review.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What is the biggest risk when migrating to osCommerce?**
+**What is the biggest risk when migrating into osCommerce?**
 
-The biggest risk is assuming the source store has a standard structure when it actually contains legacy code, custom add-ons, modified database tables, or fork-specific behavior. That can affect products, customers, orders, checkout, SEO, and extensions.
+The biggest risk is assuming that older osCommerce data, add-on fields, and custom logic will automatically match modern osCommerce behavior. Legacy continuity needs validation, especially when the source store has modified files, custom tables, or long-standing add-ons.
 
-**Do old osCommerce stores need special review before migration?**
+**Can product counts prove that an osCommerce migration is successful?**
 
-Yes. Older osCommerce installations may not match current osCommerce v4 structures. Long-running stores often include custom code, old add-ons, template changes, or database modifications, so the actual source installation should be reviewed before scope is finalized.
+No. Product counts only show that records exist. Success depends on category placement, attributes, properties, images, stock, pricing, SEO, and sales-channel behavior.
 
-**Can product attributes and properties create migration risk?**
+**Which osCommerce risks usually require Custom Service review?**
 
-Yes. Product attributes, properties, options, filters, and product groups can carry different commercial meanings. If they are mapped incorrectly, shoppers may lose selectable choices, product comparison details, filter behavior, or stock-sensitive options.
+Custom tables, old add-on data, bespoke product fields, extra order fields, unsupported records, custom customer fields, and source-specific transformation logic often require Custom Service review.
 
-**Are payment and shipping modules migrated automatically?**
+**How should Demo Migration reduce osCommerce risk?**
 
-Historical payment and shipping labels may be preserved inside order history where supported, but live payment and shipping behavior must be configured in the target osCommerce store. Module configuration and historical order migration should be treated as different concerns.
-
-**When should an osCommerce migration move into Custom Service review?**
-
-Custom Service review is appropriate when the migration involves Custom Platform data, heavily modified legacy stores, custom database tables, extension-owned records, outside-system identifiers, or tailored migration behavior beyond standard service capability.
+Demo Migration should include representative records that test catalogue relationships, order meaning, customer groups, CMS Pages, SEO fields, modules, and custom data. The goal is to expose risk before Full Migration planning is locked.

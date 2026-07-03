@@ -1,237 +1,127 @@
 # OsCommerce Validation Priorities
 
-Validation for an osCommerce migration should prove that the target store works as a connected commerce system. It is not enough to confirm that product, customer, order, and CMS Page counts appear in the admin area. The migrated result must show that products are sellable, categories and brands support discovery, customer groups remain meaningful, historical orders can be read, SEO fields support continuity, and module-owned or custom data has been handled intentionally.
+Validation for osCommerce must prove more than record arrival. A target store can contain the expected number of products, customers, orders, categories, and CMS Pages while still failing commercially if the catalog cannot be browsed, customer groups no longer carry meaning, order totals are unclear, or module-owned behavior is missing from launch planning.
 
-osCommerce validation should also reflect the store’s actual source history. A clean migration from a predictable source may need a focused sample review. A migration from an old osCommerce installation, a forked system, an add-on-heavy store, or a customized database needs broader validation because the source structure may not behave like a clean modern osCommerce v4 target.
+osCommerce deserves careful validation because many migrations into it carry two histories at once: the source platform’s data model and the merchant’s expectation of osCommerce ownership. Modern osCommerce v4 can include multiple sales channels, product catalogue management, customer groups, coupons, SEO, Design and CMS, modules, settings, App Shop apps, installation choices, and server responsibility. Older osCommerce or osCommerce-like sources may also contain legacy add-ons, custom tables, and long-lived workarounds. Validation must separate migrated data from target-side configuration, then prove that both are ready for use.
 
-### What Validation Is Really Trying to Prove <a href="#what-validation-is-really-trying-to-prove" id="what-validation-is-really-trying-to-prove"></a>
+### What Validation Must Prove in osCommerce <a href="#what-validation-must-prove-in-oscommerce" id="what-validation-must-prove-in-oscommerce"></a>
 
-Validation should answer one practical question: can the migrated osCommerce store be used confidently by the people who depend on it?
+Validation should answer whether the migrated osCommerce store can be trusted by the teams that will operate it after launch. Store administrators need products, categories, customers, orders, coupons, CMS Pages, SEO fields, and module-related assumptions to be readable. Customer service needs order history that explains what happened before migration. Merchandising teams need catalog discovery paths that match how shoppers search and browse. Technical teams need clear evidence about what was migrated, what was configured in osCommerce, what requires Add-ons, and what belongs under Custom Service review.
 
-That means validating both storefront behavior and back-office meaning. A migrated product must be more than present. It should be in the right categories, show the right choices, carry useful attributes or properties, display the right images, support stock expectations, and appear correctly in customer-facing discovery paths. A migrated order must be more than a total. It should preserve enough status, payment, shipping, tax, comment, tracking, invoice, and customer context to remain useful.
+The validation process should therefore test three layers at the same time. The first layer is migrated data: Products, Customers, Orders, Coupons, Reviews, CMS Pages, Blog Posts where applicable, and related records. The second layer is osCommerce configuration: sales channels, currencies, languages, customer groups, payment and shipping modules, tax zones, order statuses, menus, themes, and SEO settings. The third layer is non-standard scope: App Shop apps, third-party extensions, custom source tables, outside-system identifiers, and bespoke logic that cannot be confirmed by ordinary record counts.
 
-| Validation priority        | What to check                                                                                                                   | What a pass should prove                                                            |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Product meaning            | Product identity, price, images, attributes, properties, product groups, stock, brands, SEO fields, and category assignment.    | Products are usable, purchasable, and commercially recognizable.                    |
-| Catalog discovery          | Categories, brands, filters, search, menus, sale/new/featured behavior, and sales-channel visibility.                           | Shoppers can find products through expected storefront paths.                       |
-| Customer records           | Registered customers, guest buyers, addresses, customer groups, reviews, and order links.                                       | Customer data remains understandable and useful for store operations.               |
-| Order history              | Statuses, totals, products, payment/shipping labels, comments, transactions, invoices, tracking, refunds, and customer context. | Historical orders can be read and used for reference after migration.               |
-| Checkout context           | Historical payment/shipping labels versus live target checkout configuration.                                                   | Teams do not confuse migrated history with configured live checkout behavior.       |
-| CMS and storefront content | CMS Pages, navigation, banners, email content, metadata, and sales-channel content.                                             | Important content and customer-facing structure are present or planned for rebuild. |
-| SEO continuity             | High-value URLs, page names, metadata, canonicals, redirects, brand/category/product paths, and CMS Page URLs.                  | Priority search and customer-entry paths are not ignored.                           |
-| Extensions and custom data | App Shop modules, third-party add-ons, custom tables, outside-system IDs, and integration-owned records.                        | Custom or extension-owned scope is included, excluded, or escalated deliberately.   |
+| Validation layer             | What it proves                                                                  | Failure signal                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Migrated data                | Core business records are present and retain useful meaning.                    | Counts look correct, but products, customers, or orders cannot be interpreted.          |
+| Target configuration         | osCommerce can operate the migrated records in the intended storefront context. | Records exist, but sales-channel, checkout, tax, or content behavior is not configured. |
+| Custom or module-owned scope | Non-standard behavior has been included, excluded, or escalated deliberately.   | Legacy behavior disappears because it was never treated as migration scope.             |
 
-### Validate Products as Storefront Records, Not Just Admin Rows <a href="#validate-products-as-storefront-records-not-just-admin-rows" id="validate-products-as-storefront-records-not-just-admin-rows"></a>
+A validation pass is not a perfect recreation of the source store. It is a launch-readiness decision showing that the target osCommerce store contains the right data, behaves according to the chosen operating model, and has no hidden assumption that would surprise the team after Full Migration.
 
-Product validation should start in the storefront, not only in the admin panel. In osCommerce, product meaning may depend on categories, brands, attributes, properties, product groups, images, stock behavior, downloadable-product handling, supplier fields, SEO fields, and sales-channel assignment.
+### Validate Catalog and Sales-Channel Discovery <a href="#validate-catalog-and-sales-channel-discovery" id="validate-catalog-and-sales-channel-discovery"></a>
 
-A strong product validation set should include:
+The catalog should be validated from the storefront as well as the admin area. osCommerce product discovery may depend on categories, brands, properties, filters, sales-channel assignment, menus, search behavior, sale pages, featured products, new-product listings, and product listing modes. A product that appears correctly in the admin area can still fail validation if shoppers cannot reach it through expected browsing paths.
 
-* a simple product with ordinary price, image, category, and description;
-* a product with multiple images and image metadata;
-* a product with selectable attributes or options;
-* a product with technical properties or filterable specifications;
-* a product assigned to multiple categories;
-* a product connected to a brand or manufacturer-style browsing path;
-* a product with special visibility, sale, new, or featured behavior;
-* a stock-sensitive product or product with warehouse/supplier context;
-* a downloadable, bundled, grouped, or special product type if used;
-* a product with important SEO fields or historical URL value.
+Start with representative categories rather than only top-selling products. The validation set should include shallow and deep categories, categories with filters, categories with many products, categories connected to menus, and categories that previously carried SEO or landing-page value. Then check whether products assigned to those categories appear with the expected name, image, price, stock indication, attributes, and short description. Multi-category assignments require special attention because a migrated product may need to remain visible in several customer-facing contexts.
 
-A product sample passes validation when it is not only present, but understandable, discoverable, and usable in the target store.
+Sales-channel validation is equally important when the target osCommerce setup uses more than one storefront or channel. A product may be valid for one sales channel but inappropriate for another because language, currency, price, inventory, content, or theme assumptions differ. Validation should show whether products, categories, pages, and menus appear only where they should. If the source platform had one storefront and the target osCommerce store uses several sales channels, the team should treat visibility decisions as configuration decisions, not automatic migration outcomes.
 
-### Validate Categories, Brands, and Product Discovery <a href="#validate-categories-brands-and-product-discovery" id="validate-categories-brands-and-product-discovery"></a>
+| Discovery area           | Validation question                                                            | Pass condition                                                               |
+| ------------------------ | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Category structure       | Do representative products appear in the right parent and child categories?    | Shoppers can browse from category entry points to expected products.         |
+| Brand and property paths | Do brand or specification-led discovery paths remain useful?                   | Products can be found through the expected brand, property, or filter logic. |
+| Sales-channel assignment | Are products, categories, and content visible in the right storefront context? | Channel visibility matches the target operating model.                       |
+| Search behavior          | Can expected search terms find representative products and content?            | Important products are discoverable without relying only on menus.           |
+| Menus and landing pages  | Do navigation paths lead to the right catalogue or content areas?              | Storefront browsing supports launch expectations.                            |
 
-Category validation should prove that the target catalog reflects how shoppers are expected to browse. Category hierarchy is only one part of discovery. Brands, filters, search, menus, sale pages, new-product sections, featured-product areas, and sales-channel placement can all affect the customer journey.
+Catalog discovery should be validated before Full Migration acceptance because discovery defects often look small in admin review but become visible immediately to customers after launch.
 
-Validation should check:
+### Validate Product Details, Attributes, Stock, and Pricing <a href="#validate-product-details-attributes-stock-and-pricing" id="validate-product-details-attributes-stock-and-pricing"></a>
 
-| Discovery area              | Validation question                                                                 |
-| --------------------------- | ----------------------------------------------------------------------------------- |
-| Category hierarchy          | Are products assigned to the right parent and child categories?                     |
-| Multi-category assignment   | Do products that belonged in several source categories still appear where expected? |
-| Brand or manufacturer pages | Do brand-led browsing paths remain meaningful?                                      |
-| Filters and properties      | Do shoppers still have useful ways to narrow products?                              |
-| Search behavior             | Can representative products be found through likely search terms?                   |
-| Menus and landing pages     | Do important navigation paths lead to the expected product or content areas?        |
-| Sales-channel visibility    | Do products appear in the right storefront or sales-channel context where relevant? |
+Product validation should focus on commercial meaning. osCommerce can represent many product-related concepts, including product identity, categories, stock, attributes, properties, product groups, suppliers, warehouses, reviews, images, and SEO fields. The migration review should prove that each chosen sample still works as a sellable product, not only as a row with a title and price.
 
-A common validation gap is reviewing products one by one while ignoring how customers actually reach them. Product discovery should be validated from the storefront experience.
+A strong validation set includes ordinary products and edge cases. Validate a simple product, a product with selectable attributes, a product with properties used for filters, a product assigned to multiple categories, a product connected to a brand, a product with stock-sensitive behavior, a product with reviews, a product with special pricing or promotional treatment, and any product whose source behavior depended on an extension or custom field. If downloadable products, bundles, purchase limits, supplier fields, warehouse logic, or product documents are relevant, include samples for those as well.
 
-### Validate Customer Records, Groups, and Account Meaning <a href="#validate-customer-records-groups-and-account-meaning" id="validate-customer-records-groups-and-account-meaning"></a>
+Attribute validation should separate migrated product data from live target behavior. A source option may become an osCommerce attribute, property, custom field, or unsupported behavior depending on how it was used. If an attribute affects price, selection, display, filter behavior, or stock expectations, validation should confirm that the target meaning is intentional. If the meaning cannot be reproduced through standard target structures, the issue should be escalated rather than hidden inside a product-count pass.
 
-Customer validation should include more than a few ordinary accounts. osCommerce stores may use customer groups, guest checkout records, address books, reviews, language context, credit or trade fields, and B2B behavior. These structures can affect customer service, pricing, visibility, tax handling, approval, payment access, or shipping access.
+Stock and price validation should include operational scenarios. Review products with normal inventory, zero inventory, low stock, warehouse or supplier context, sale pricing, coupons or discounts, group-specific treatment, and tax-sensitive prices. A product passes only when administrators can understand what will be sold, what price will appear, and what stock signal will be shown to customers.
 
-Strong customer samples include:
+### Validate Customers, Groups, and Account Meaning <a href="#validate-customers-groups-and-account-meaning" id="validate-customers-groups-and-account-meaning"></a>
 
-* a standard registered customer;
-* a guest customer with completed order history;
-* a customer with multiple billing and shipping addresses;
-* a customer assigned to a special group;
-* a wholesale or trade customer where applicable;
-* a customer with reviews or product activity;
-* a customer with orders in different statuses;
-* a customer with language, currency, or regional context where relevant.
+Customer validation should prove that account history and segmentation remain usable. osCommerce can include customers, customer groups, access-related behavior, language and currency context, address records, reviews, subscriptions or module-owned fields, and special pricing or visibility assumptions. If the source store used customer groups for wholesale pricing, B2B access, tax treatment, approval, payment availability, or product visibility, those groups must be validated as commercial rules, not only as labels.
 
-Customer validation should prove that account context remains understandable. If password continuity is not supported for the specific source and target behavior, launch planning should include reset expectations and customer communication rather than treating the issue as a failed data count.
+Use a mixed customer sample. Include an ordinary registered customer, a guest customer with order history, a customer with multiple addresses, a customer assigned to a special group, a customer with reviews, a customer with orders in several statuses, and a customer whose account contains region, language, currency, or integration identifiers. If the source platform stored marketing consent, loyalty data, trade details, or other extension-owned fields, decide whether the information is standard migration scope, Add-on-related scope, or Custom Service scope.
 
-### Validate Historical Orders for Operational Readability <a href="#validate-historical-orders-for-operational-readability" id="validate-historical-orders-for-operational-readability"></a>
+Password behavior should be discussed separately from customer record migration. Depending on source and target constraints, password continuity may not be possible or may require customer communication. Validation should not mark the customer migration as failed simply because password behavior requires a target-side launch plan. The correct question is whether customer records, addresses, groups, and history are useful enough for post-launch operations.
 
-Historical orders should be validated through the people who will use them after launch: customer service, fulfillment, accounting, management, and store administrators. They should be able to understand what happened in the old store without relying on hidden source-system knowledge.
+A customer validation pass should allow customer service and store administrators to answer practical questions: who is the customer, what group do they belong to, what orders are connected to the account, which addresses are available, what commercial treatment applies, and what communication or reset plan is needed before launch.
 
-Validate order samples that include:
+### Validate Orders, Totals, Coupons, and Historical Context <a href="#validate-orders-totals-coupons-and-historical-context" id="validate-orders-totals-coupons-and-historical-context"></a>
 
-* paid, unpaid, canceled, refunded, and partially fulfilled orders;
-* different order statuses and status histories;
-* discounts, coupons, tax-sensitive totals, or manual adjustments;
-* different payment and shipping methods;
-* guest and registered-customer orders;
-* multi-currency or regional orders where relevant;
-* customer comments and admin comments;
-* tracking numbers, invoices, packing slips, or transaction references;
-* orders created before and after major source-store changes.
+Order validation should be performed through operational readability. Historical orders do not need to become new checkout rules, but they must remain useful for customer service, accounting reference, fulfillment review, management reporting, and dispute resolution. The validation sample should include paid, pending, canceled, refunded, partially fulfilled, manually adjusted, coupon-discounted, tax-sensitive, and multi-currency orders where relevant.
 
-A strong order validation sample should answer whether the order remains useful for service and reference. It does not need to prove that live checkout is configured. Historical order readability and live checkout behavior are separate validation tracks.
+osCommerce order meaning can involve order statuses, status groups, comments, payment labels, shipping labels, totals, taxes, discounts, coupon references, gift card behavior, tracking, invoice numbers, transaction IDs, customer context, and products purchased. Validation should confirm that the order tells a coherent story after migration. A historical order should show what the customer bought, what they paid, what tax or discount was applied, what status the order reached, and what operational notes or identifiers matter.
 
-### Validate Checkout, Payment, Shipping, and Tax Boundaries <a href="#validate-checkout-payment-shipping-and-tax-boundaries" id="validate-checkout-payment-shipping-and-tax-boundaries"></a>
+Coupons, gift cards, and promotional history require careful interpretation. A past coupon shown on an order is historical evidence. A live coupon configuration in osCommerce is target-side behavior. Validation should not assume that migrated discount history automatically creates new usable promotions. If live promotions need to continue after launch, they should be configured and tested separately.
 
-Migration can preserve historical checkout information, but live checkout readiness depends on the target osCommerce configuration. Payment modules, shipping modules, tax rules, zones, currencies, order statuses, and customer-group rules should be tested separately from migrated historical labels.
+| Order element          | Validation focus                                                                      | Operational reason                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Status and history     | Status labels, comments, and progression remain understandable.                       | Customer service can explain past orders.                          |
+| Totals and tax         | Subtotal, discount, shipping, tax, and grand total remain coherent.                   | Accounting and service teams can read historical amounts.          |
+| Payment and shipping   | Historical labels are preserved while live modules are tested separately.             | Teams do not confuse migrated history with new checkout readiness. |
+| Coupons and gift cards | Past usage is readable and live promotional needs are configured separately.          | Launch does not depend on false continuity assumptions.            |
+| Customer linkage       | Guest and registered orders stay connected to usable customer context where possible. | Order lookup remains useful after migration.                       |
 
-Validation should distinguish:
+Order validation should include stakeholders who will actually use the data. If accounting, customer service, and fulfillment cannot read the order sample confidently, record counts alone are not enough.
 
-| Validation track                       | What it proves                                                                                          |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Historical payment and shipping labels | Past orders remain readable and the team can understand how they were placed.                           |
-| Live payment modules                   | The target store can accept payment through configured methods.                                         |
-| Live shipping modules                  | The target store can calculate or apply shipping behavior correctly.                                    |
-| Tax rules and zones                    | New orders calculate tax according to the target store’s requirements.                                  |
-| Customer-group checkout behavior       | Specific groups receive the correct checkout, pricing, payment, or shipping treatment where applicable. |
+### Validate Design and CMS, SEO, and Search Continuity <a href="#validate-design-and-cms-seo-and-search-continuity" id="validate-design-and-cms-seo-and-search-continuity"></a>
 
-This distinction prevents a common error: assuming that because past order labels migrated, the target checkout is ready for new orders.
+osCommerce includes Design and CMS areas that can affect how the migrated store feels to customers. Pages, menus, themes, translations, email templates, catalog pages, banners, and storefront navigation should be reviewed where they are part of launch scope. CMS Pages and content records may migrate as content, but theme placement, menu logic, forms, layout, and storefront presentation are target-side decisions.
 
-### Validate CMS Pages, Themes, and Storefront Content <a href="#validate-cms-pages-themes-and-storefront-content" id="validate-cms-pages-themes-and-storefront-content"></a>
+SEO validation should focus on priority entry paths. Product pages, category pages, brand pages, CMS Pages, redirects, metadata, XML sitemap expectations, analytics settings, and search behavior should be tested against a list of high-value URLs and queries. The goal is not to inspect every URL manually. The goal is to prove that important search and referral paths have been mapped, redirected, rebuilt, or intentionally retired.
 
-osCommerce validation should include content and storefront presentation where those areas affect launch quality. CMS Pages, menus, banners, email templates, homepage sections, landing pages, forms, and theme-controlled content may not behave like simple product records.
+Search validation should use customer language, not only product SKUs. Test brand terms, category terms, partial product names, common misspellings, and terms that previously produced meaningful source-store results. If osCommerce search behavior differs from the source platform, the team should record whether the difference is acceptable, requires configuration, or needs a separate search extension.
 
-Validation should confirm:
+A content and SEO pass should show that customers can still reach important commercial content, that metadata and redirects have a clear plan, and that CMS Pages are not mistaken for full theme or navigation recreation.
 
-* important CMS Pages are present or planned for rebuild;
-* menus and navigation paths reflect the intended storefront structure;
-* homepage and landing-page content is accounted for;
-* images and banners appear in expected contexts;
-* important email content has been reviewed;
-* theme presentation does not hide migrated product or content data;
-* multilingual content appears in the correct language contexts where relevant.
+### Validate Modules, App Shop Dependencies, and Custom Data <a href="#validate-modules-app-shop-dependencies-and-custom-data" id="validate-modules-app-shop-dependencies-and-custom-data"></a>
 
-The target store can pass data-count review while still failing storefront review if content is incomplete or hidden by theme behavior.
+Module and custom-data validation is where osCommerce migrations often reveal hidden assumptions. The source store may contain custom add-ons, modified database tables, hard-coded checkout behavior, ERP references, external reporting IDs, shipping or payment extensions, search enhancements, marketplace connections, or old code that never existed as clean platform records. Modern osCommerce may support App Shop apps and modules, but that does not mean every source extension becomes a migrated target behavior automatically.
 
-### Validate SEO, URLs, and Metadata <a href="#validate-seo-urls-and-metadata" id="validate-seo-urls-and-metadata"></a>
+Create a dependency register before Full Migration. Each dependency should be marked as one of four outcomes: migrate as standard data, configure in osCommerce, handle with Add-ons when the requirement is bounded, or review under Custom Service when non-standard records or bespoke transformation are involved. This prevents launch teams from discovering late that a mission-critical process was never migration scope.
 
-SEO validation should focus on priority paths. Trying to validate every historical URL at the same depth can waste review time, while ignoring high-value URLs can create avoidable launch risk.
+Custom identifiers deserve special attention. ERP IDs, supplier codes, warehouse references, customer approval markers, legacy product flags, custom order fields, and outside-system references may look small but can affect reconciliation, fulfillment, customer service, and reporting. If those fields must survive, validate them deliberately. If they do not need to survive, document the decision so that the absence is not treated as a surprise after launch.
 
-Validate:
+A module and custom-data validation pass should prove that non-standard behavior has an owner. It should be clear which behavior was migrated, which behavior will be configured in osCommerce, which behavior needs an extension, and which behavior has been intentionally left out.
 
-* top product URLs;
-* top category URLs;
-* important brand pages;
-* CMS Pages and landing pages;
-* page names or slugs;
-* meta titles and descriptions;
-* canonical behavior where relevant;
-* image metadata where important;
-* redirect expectations for high-value paths;
-* XML sitemap expectations if part of the launch checklist.
+### Use Demo Migration Evidence to Decide Full Migration Readiness <a href="#use-demo-migration-evidence-to-decide-full-migration-readiness" id="use-demo-migration-evidence-to-decide-full-migration-readiness"></a>
 
-Validation should prove that important search and customer-entry paths are not lost silently. It should not promise preservation of every old URL unless that scope has been specifically planned and accepted.
+Demo Migration should create evidence, not just confidence. The sample should include enough variation to expose catalog, customer, order, content, SEO, module, and custom-field risks before Full Migration. A narrow sample made only of simple products and ordinary customers may pass while hiding the records most likely to fail.
 
-### Validate Modules, Extensions, and Custom Data Boundaries <a href="#validate-modules-extensions-and-custom-data-boundaries" id="validate-modules-extensions-and-custom-data-boundaries"></a>
+Use Demo Migration to answer launch-readiness questions. Are products sellable? Are categories and sales channels correct? Are attributes and properties meaningful? Are customer groups readable? Can customer service understand historical orders? Are CMS Pages and SEO priorities accounted for? Are live payment, shipping, tax, and checkout modules separate from migrated history? Are custom tables or extension-owned fields included, excluded, or escalated clearly?
 
-osCommerce App Shop modules, third-party add-ons, old source add-ons, and custom code may control data that is not part of ordinary product, customer, order, or CMS structures. Validation should confirm what happened to that data.
+If Demo Migration reveals a scope gap, the right response depends on the problem. A bounded mapping or filtering need may fit Add-ons. A complex source record, custom table, external-system identifier, or bespoke transformation may require Custom Service review. If the merchant changes the source data, target configuration, or inclusion rules after the first run, Additional Migration Options may be relevant for follow-up migration planning.
 
-For each important module or custom feature, classify the result:
-
-| Classification | Meaning                                                                                       |
-| -------------- | --------------------------------------------------------------------------------------------- |
-| Migrated       | Data is included in the migration and appears acceptably in osCommerce.                       |
-| Reconfigured   | Behavior belongs to target setup rather than migrated data.                                   |
-| Excluded       | Data is intentionally out of scope and accepted as such.                                      |
-| Rebuilt        | The feature or content must be recreated after migration.                                     |
-| Escalated      | Custom Service review is needed because the data or behavior requires bespoke interpretation. |
-
-This classification prevents a vague “missing data” discussion after migration. It creates a clear outcome for each extension-dependent area.
-
-### Strong Validation Samples for osCommerce <a href="#strong-validation-samples-for-oscommerce" id="strong-validation-samples-for-oscommerce"></a>
-
-A strong validation sample should represent the store’s real complexity. It should not be limited to simple products or recent orders.
-
-| Sample category    | Strong sample choice                                                                               | What it proves                                          |
-| ------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| Product            | Product with attributes, properties, brand, images, stock, SEO fields, and category assignments.   | Catalog meaning survives translation.                   |
-| Category           | Deep category with multi-assigned products and storefront navigation value.                        | Discovery and browsing remain usable.                   |
-| Customer           | Customer with group membership, multiple addresses, reviews, and varied order history.             | Account meaning and segmentation remain interpretable.  |
-| Order              | Order with status history, payment/shipping labels, comments, tracking, invoices, and adjustments. | Historical order context remains readable.              |
-| CMS content        | High-value CMS Page or landing page.                                                               | Non-product storefront content is accounted for.        |
-| SEO path           | Product, category, or brand URL with organic value.                                                | Priority URL continuity is testable.                    |
-| Module data        | Record controlled by add-on, integration, or custom logic.                                         | Extension-owned scope is understood.                    |
-| Legacy/custom data | Record from an old, forked, or modified source structure.                                          | Source-specific behavior is not assumed to be standard. |
-
-### What Often Gets Missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
-
-The most common osCommerce validation gaps are not always obvious from record totals. They appear when the team reviews the target store as a working system.
-
-Commonly missed areas include:
-
-* products that exist but are not discoverable in the right categories or filters;
-* attributes that appear as text but no longer support purchase choices;
-* properties that lose filter or comparison meaning;
-* customer groups that migrate as labels but lose pricing or access behavior;
-* historical orders that preserve totals but lose status, comment, tracking, invoice, or transaction context;
-* payment and shipping labels mistaken for live checkout configuration;
-* CMS Pages and menus omitted from launch review;
-* high-value URLs not sampled before launch;
-* module-owned data assumed to be standard platform data;
-* old osCommerce or forked-source structures treated as clean v4 data;
-* outside-system identifiers excluded from validation until integrations fail.
-
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
-
-Validation should lead to a decision, not only a list of observations.
-
-Use these result categories:
-
-| Result                                    | Meaning                                                                                                    | Next decision                                                                       |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Pass                                      | The sample behaves acceptably and no material migration issue is found.                                    | Continue reviewing the next sample group.                                           |
-| Pass with configuration note              | Migrated data is acceptable, but target settings or theme/content work is still needed.                    | Assign the item to target setup or launch preparation.                              |
-| Needs mapping or configuration adjustment | The data exists but does not carry the right target meaning.                                               | Review Advanced Data Mapping or Advanced Data Configure where supported.            |
-| Needs filtering clarification             | Records migrated that should not move, or expected records were not selected.                              | Review Data Filter Add-on logic where appropriate.                                  |
-| Needs Custom Service review               | Custom, extension-owned, old-version, forked, or outside-system data cannot be handled safely as standard. | Escalate before Full Migration or launch acceptance.                                |
-| Not accepted                              | The result does not support business use.                                                                  | Do not approve the migration result until the gap is resolved or formally accepted. |
+Full Migration should proceed only when the validation evidence is strong enough for the store’s operating model. The pass condition is not that every difference disappears. The pass condition is that differences are understood, accepted, configured, escalated, or scheduled before launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-osCommerce validation should prove business usability, not only data presence. Products, categories, customer groups, orders, CMS Pages, SEO paths, modules, and custom structures all need to be reviewed as connected parts of the target store. A clean-looking migration can still fail if shoppers cannot find products, customer groups lose meaning, orders cannot be interpreted, or module-owned data is silently excluded.
+osCommerce validation should prove operational readiness across catalog discovery, product meaning, customers, groups, orders, Design and CMS, SEO, modules, and custom data. A migrated store passes only when its records are usable inside the target operating model and the team can explain what remains configuration, extension work, Custom Service scope, or launch preparation.
 
-Use Demo Migration and post-migration review to test the records that expose real complexity. When the result shows mapping, filtering, configuration, extension, old-version, or custom-data gaps, resolve those findings before Full Migration or launch acceptance rather than treating them as minor cleanup.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is matching record count enough to validate an osCommerce migration?**
 
-**What should I validate first after migrating to osCommerce?**
+No. Record count is only the starting point. Products, customers, orders, categories, CMS Pages, and other records must also retain useful commercial meaning and operate correctly inside the target osCommerce structure.
 
-Start with the samples that carry the most business meaning: complex products, deep categories, customer groups, varied orders, CMS Pages, high-value URLs, and module-owned records. These samples reveal more than simple record totals.
+**Should payment and shipping modules be validated as migrated data?**
 
-**Is matching product count enough to approve the migration?**
+Historical payment and shipping labels on past orders are migration evidence. Live payment and shipping modules are target-side configuration and should be tested separately before launch.
 
-No. Product count only confirms presence. Validation should also confirm product choices, attributes, properties, images, stock behavior, category placement, brand context, SEO fields, and storefront discoverability.
+**What should Demo Migration prove for osCommerce?**
 
-**Why should order history be validated separately from checkout?**
+Demo Migration should prove that representative products, categories, customer groups, orders, CMS Pages, SEO fields, and custom-scope assumptions can be handled correctly before Full Migration.
 
-Historical orders show what happened in the source store. Live checkout depends on target payment, shipping, tax, zone, currency, and customer-group configuration. Migrated order labels do not prove that new checkout behavior is ready.
+**When should custom osCommerce-related data be escalated?**
 
-**How should extension-owned data be validated?**
-
-Each extension-owned area should be classified as migrated, reconfigured, excluded, rebuilt, or escalated. If the data is custom, integration-owned, or outside standard structure, Custom Service review may be needed.
-
-**What does it mean if a Demo Migration partly passes?**
-
-A partial pass means some data is acceptable, but specific gaps need classification. The result may require target configuration, Add-ons, mapping adjustment, filtering clarification, Custom Service review, or formal acceptance of excluded data.
+Custom tables, legacy add-ons, external-system identifiers, bespoke fields, and extension-owned logic should be escalated when they cannot be handled as standard records or bounded Add-ons.

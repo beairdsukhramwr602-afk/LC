@@ -1,181 +1,133 @@
 # Gambio Fit: Ideal and Non-Ideal Profiles
 
-Gambio is often considered by merchants who want a professional e-commerce shop system with enough built-in structure to manage products, categories, variants, orders, customers, payments, shipping, SEO, and storefront presentation without starting from a blank development project. Its appeal is strongest when the merchant wants a commerce platform that can support structured online selling while still leaving room for configuration, extensions, design work, and implementation decisions.
+Choosing Gambio as a Target Platform should be treated as a fit decision, not only as a software preference. The merchant needs to decide whether Gambio’s Cloud or self-hosted operating model, German-market orientation, catalog and content structure, support expectations, and customization boundaries align with the business that will run after migration.
 
-Fit should not be judged only by whether Gambio can receive products, customers, and orders. A good Gambio fit depends on whether the merchant’s future operating model can be represented cleanly inside Gambio’s catalog, storefront, customer, pricing, order, payment, shipping, tax, language, currency, and hosting environment. The same platform can be a strong choice for one merchant and a difficult choice for another if the source store depends on custom checkout behavior, unusual pricing rules, deep integration logic, or a hosting model the merchant is not prepared to manage.
+Gambio can be a strong fit for merchants that want a professional shop system with practical catalog functions, product options, categories, images, stock management, downloadable products, content pages, SEO orientation, marketplace/payment-provider connection possibilities, and a choice between hosted convenience and self-hosted control. It becomes harder to confirm when the merchant expects global SaaS simplicity, deep custom behavior without technical ownership, unsupported source structures, or a post-launch model that has not been clearly chosen.
 
-The practical fit question is simple: **will Gambio make the future store easier to operate, validate, and grow after migration, or will it introduce structural work that the merchant is not ready to handle?**
+A Gambio fit assessment should therefore connect merchant goals with migration evidence. The best question is not whether Gambio can receive data. The better question is whether the migrated store can preserve the commercial meaning of the source store while operating in a Gambio model the merchant is prepared to manage.
 
-### What Makes Gambio a Strong Fit <a href="#what-makes-gambio-a-strong-fit" id="what-makes-gambio-a-strong-fit"></a>
+### What Gambio Fit Means in Migration Planning <a href="#what-gambio-fit-means-in-migration-planning" id="what-gambio-fit-means-in-migration-planning"></a>
 
-Gambio is strongest when its shop-system structure matches the way the merchant wants to operate after migration. It is not only a catalog destination. It is a full commerce environment where products, categories, variants, customer groups, orders, SEO, storefront layout, legal/compliance-related settings, shipping, payment, language, currency, hosting, and integrations may all shape the final result.
+Gambio fit starts with the operating model. A merchant choosing Gambio Cloud is often prioritizing managed hosting, installation, updates, support, faster setup, and reduced technical burden. A merchant choosing self-hosted Gambio is often prioritizing flexibility, customizability, direct technical control, and room for specific development or integration needs. These are different forms of fit.
 
-#### A structured shop system for professional online selling <a href="#a-structured-shop-system-for-professional-online-selling" id="a-structured-shop-system-for-professional-online-selling"></a>
+Migration planning should treat this choice as a structural assumption. The same source store can produce a different migration plan depending on whether the target is Cloud or self-hosted. Cloud fit depends on whether the store can operate well within the managed environment. Self-hosted fit depends on whether the merchant has the technical capacity to handle hosting, maintenance, updates, troubleshooting, custom implementation, and integration ownership.
 
-Gambio can be a strong fit for merchants who want a dedicated e-commerce shop system rather than a lightweight add-on to a content site. The platform is built around core shop administration: products, categories, product images, variants, stock, customers, orders, shipping, payment, tax, SEO, and storefront configuration. This makes it useful when the merchant wants the target store to behave like a complete online shop rather than a minimal catalog.
+Fit also depends on data shape. Gambio can support products/articles, categories and subcategories, product images, product options, downloadable products, stock management, content pages, and customer-facing storefront presentation. A source store with clear catalog logic and manageable content expectations will usually be easier to assess than one with unclear custom fields, inconsistent product options, duplicated categories, external order dependencies, or app-owned behavior that must be rebuilt.
 
-The migration implication is that source data should be reviewed as operational shop data. Products should not only appear in the administration area; they should remain sellable. Categories should support discovery. Customer groups should preserve commercial meaning where relevant. Orders should remain useful for service, finance, and historical reference. A merchant with a clearly organized source store is more likely to experience Gambio as a strong fit.
-
-#### Cloud and self-hosting options support different operating preferences <a href="#cloud-and-self-hosting-options-support-different-operating-preferences" id="cloud-and-self-hosting-options-support-different-operating-preferences"></a>
-
-Gambio can appeal to two different types of merchants: those who want a managed cloud setup and those who want more control through self-hosting. This is an important fit factor because the hosting model changes responsibility.
-
-A merchant that wants installation, hosting, updates, and platform operation handled more simply may prefer the cloud model. A merchant that wants greater technical control, customization freedom, or a specific hosting environment may prefer self-hosting. Neither model is automatically better. The better fit depends on the merchant’s internal capacity, customization needs, compliance expectations, performance requirements, and tolerance for technical responsibility.
-
-For migration planning, the selected Gambio model should be confirmed early. A store moving into Gambio Cloud may need different operational planning from a store moving into a self-hosted Gambio installation, especially when custom development, server access, extensions, update timing, or integration control matters.
-
-#### Catalog features fit merchants with organized product structures <a href="#catalog-features-fit-merchants-with-organized-product-structures" id="catalog-features-fit-merchants-with-organized-product-structures"></a>
-
-Gambio is often a good fit for merchants with structured products, categories, variants, product images, downloadable products, product filters, base prices, specials, reviews, and inventory requirements. These features make the platform suitable for stores where catalog presentation and product management are central to the business.
-
-The strongest fit appears when source products already have clear structure. Simple products, variant products, products with multiple images, stock-managed products, download products, and products assigned to meaningful categories can be tested directly in Demo Migration. If the source catalog is messy, duplicated, or heavily customized, Gambio may still be usable, but the fit becomes harder to confirm without cleanup, mapping, or Custom Service review.
-
-#### Customer groups and pricing support more deliberate commercial segmentation <a href="#customer-groups-and-pricing-support-more-deliberate-commercial-segmentation" id="customer-groups-and-pricing-support-more-deliberate-commercial-segmentation"></a>
-
-Gambio can support merchants that need more than one general customer type. Customer groups, customer-specific pricing behavior, discounts, and B2B-oriented selling considerations can make Gambio relevant for merchants with wholesale, trade, loyalty, retail, or segmented pricing models.
-
-This is valuable only when the source store’s customer and pricing logic is understandable. If customer groups are clearly defined, migration planning can test whether customer assignments, pricing meaning, tax context, and order history remain useful. If the source store uses custom pricing scripts, external ERP rules, private customer identifiers, or app-owned discount logic, Gambio fit should be confirmed more carefully.
-
-#### SEO, content, and storefront controls matter to merchants protecting discovery <a href="#seo-content-and-storefront-controls-matter-to-merchants-protecting-discovery" id="seo-content-and-storefront-controls-matter-to-merchants-protecting-discovery"></a>
-
-Gambio may be a strong fit for merchants that care about search visibility, category structure, product page quality, storefront design, and content pages. SEO settings, product/category presentation, layout controls, and content-management areas can help the target store maintain a structured customer journey.
-
-For migration, this means fit is not limited to product movement. High-value product URLs, category pages, content pages, metadata, navigation, filters, and design expectations should be part of the planning conversation. A merchant with strong organic traffic should treat Gambio fit as a storefront continuity question as much as a data migration question.
-
-#### Extensions, interfaces, and customization support more technical merchants <a href="#extensions-interfaces-and-customization-support-more-technical-merchants" id="extensions-interfaces-and-customization-support-more-technical-merchants"></a>
-
-Gambio can fit merchants that expect integrations, payment providers, shipping providers, marketplace connections, or custom implementation work. The self-hosted model and developer ecosystem can be attractive when the merchant has technical support or a partner who can manage the shop beyond basic configuration.
-
-This strength also creates a boundary. Integration and customization needs can make Gambio a good strategic target, but they can also move the migration beyond standard assumptions. Source data owned by third-party systems, custom code, external identifiers, marketplace connectors, or bespoke workflows may require Custom Service review rather than ordinary migration planning.
-
-### Where Gambio Is Often a Strong Fit <a href="#where-gambio-is-often-a-strong-fit" id="where-gambio-is-often-a-strong-fit"></a>
-
-Gambio is often a strong Target Platform when the merchant wants a professional shop system with defined commerce administration, practical storefront control, and a choice between managed cloud operation and self-hosted flexibility.
-
-#### Merchants moving from a simpler store into a more structured shop system <a href="#merchants-moving-from-a-simpler-store-into-a-more-structured-shop-system" id="merchants-moving-from-a-simpler-store-into-a-more-structured-shop-system"></a>
-
-Gambio can fit merchants whose current store has outgrown basic product and order management. A merchant moving from a smaller platform may want stronger catalog organization, better product presentation, more deliberate customer groups, more payment and shipping flexibility, or a clearer shop administration workflow.
-
-For these merchants, migration planning should focus on preserving core selling meaning: product structure, category hierarchy, images, variants, stock, customer records, order history, coupons, tax, shipping, and payment context. Gambio is a stronger fit when those areas are understandable enough to test during Demo Migration.
-
-#### Merchants that want Gambio Cloud for simpler operation <a href="#merchants-that-want-gambio-cloud-for-simpler-operation" id="merchants-that-want-gambio-cloud-for-simpler-operation"></a>
-
-Gambio Cloud can be a strong fit for merchants who want a professional shop environment without owning the full hosting and update burden. This is especially relevant for merchants that want to focus on catalog, marketing, orders, and customer service rather than server maintenance.
-
-Migration planning should still confirm data structure and operational expectations. Cloud operation does not remove the need to validate products, variants, categories, customers, orders, SEO, shipping, payment, and tax behavior. It simply changes who carries more of the platform operation burden after launch.
-
-#### Merchants that want self-hosted control <a href="#merchants-that-want-self-hosted-control" id="merchants-that-want-self-hosted-control"></a>
-
-Self-hosted Gambio is often a strong fit when merchants want more direct control over hosting, technical implementation, custom development, extensions, update timing, and integration behavior. This can matter for merchants with specific performance requirements, agency-managed stores, custom workflows, or deeper integration needs.
-
-The fit is strongest when the merchant has technical resources. Self-hosting without the ability to manage hosting, updates, troubleshooting, backups, extensions, and implementation quality can create risk. The migration decision should therefore include an honest assessment of who will maintain the Gambio environment after launch.
-
-#### Merchants with structured catalogs and variant logic <a href="#merchants-with-structured-catalogs-and-variant-logic" id="merchants-with-structured-catalogs-and-variant-logic"></a>
-
-Gambio can fit merchants with products organized by categories, images, variants, filters, base prices, specials, stock, and downloadable products. The more structured the source catalog is, the easier it is to evaluate how well Gambio can represent the store.
-
-The strongest Demo Migration samples should include products that reveal real catalog behavior: a simple product, a variant-heavy product, a product with multiple images, a discounted product, a product with stock rules, a downloadable product if relevant, and products in important categories. These samples show whether Gambio is a fit for the store’s actual commercial structure.
-
-#### Merchants with customer group, B2B, or segmented pricing needs <a href="#merchants-with-customer-group-b2b-or-segmented-pricing-needs" id="merchants-with-customer-group-b2b-or-segmented-pricing-needs"></a>
-
-Gambio can be relevant for merchants that sell differently to different customer segments. Customer groups, group-based pricing, base prices, tax context, and B2B-oriented operations can make the platform a fit for merchants that need more structure than a basic retail store.
-
-This fit should be confirmed carefully. Customer groups and pricing rules often carry business meaning that may not be obvious from basic customer or product counts. The source store should be reviewed for customer group assignments, tax handling, discount logic, historical orders, and external pricing dependencies.
-
-### Where Gambio Is Often a Weaker Fit <a href="#where-gambio-is-often-a-weaker-fit" id="where-gambio-is-often-a-weaker-fit"></a>
-
-Gambio is not automatically the best target for every store. It becomes a weaker fit when the merchant expects a completely hands-off hosted system but chooses self-hosting, expects unrestricted custom development but chooses a constrained cloud path, or depends on source behavior that cannot be represented clearly inside standard Gambio structures.
-
-#### Merchants without clarity on cloud versus self-hosting <a href="#merchants-without-clarity-on-cloud-versus-self-hosting" id="merchants-without-clarity-on-cloud-versus-self-hosting"></a>
-
-Gambio fit becomes weaker when the merchant has not decided whether cloud convenience or self-hosted control matters more. This decision affects technical responsibility, customization flexibility, update expectations, support expectations, implementation planning, and long-term operations.
-
-A migration should not proceed as if hosting model is a minor detail. A merchant that chooses cloud but later expects deep server-level customization may face constraints. A merchant that chooses self-hosting but lacks technical support may face maintenance and update risk. The hosting model should be treated as part of the platform fit decision.
-
-#### Stores with heavily customized checkout, pricing, or integration behavior <a href="#stores-with-heavily-customized-checkout-pricing-or-integration-behavior" id="stores-with-heavily-customized-checkout-pricing-or-integration-behavior"></a>
-
-Gambio fit requires deeper confirmation when the source store depends on custom checkout rules, app-owned discounts, ERP-controlled pricing, marketplace-owned order fields, subscription behavior, unusual tax logic, custom shipping calculations, or external fulfillment identifiers.
-
-These requirements do not automatically disqualify Gambio. They do mean that standard record migration may not preserve the full business behavior. The merchant should identify which parts are data, which parts are configuration, which parts belong to integrations, and which parts require Custom Service review.
-
-#### Merchants expecting custom programming to be ordinary support work <a href="#merchants-expecting-custom-programming-to-be-ordinary-support-work" id="merchants-expecting-custom-programming-to-be-ordinary-support-work"></a>
-
-Gambio can support customization, especially in self-hosted and developer-supported contexts, but custom programming should not be confused with ordinary platform support or standard migration work. If the desired result depends on new behavior, custom code, unsupported data structures, or bespoke transformation, that work needs to be scoped separately.
-
-This matters during migration because a source store may contain logic that was created through custom development. If the merchant expects that behavior to reappear automatically in Gambio, the project may be under-scoped. Custom development and custom migration logic adjustment should be identified before execution.
-
-#### Merchants with ungoverned product and category history <a href="#merchants-with-ungoverned-product-and-category-history" id="merchants-with-ungoverned-product-and-category-history"></a>
-
-Gambio can represent a structured catalog well, but it is a weaker fit when the source catalog is difficult to interpret. Duplicate categories, inconsistent variants, missing images, mixed product types, unclear stock behavior, outdated products, abandoned filters, and inconsistent product naming can weaken the migration result.
-
-In this case, the issue is not only platform fit. It is readiness. Gambio may still be appropriate, but the merchant should clean, map, or at least document the catalog before treating the migration as straightforward.
-
-#### Merchants with complex international requirements but limited implementation resources <a href="#merchants-with-complex-international-requirements-but-limited-implementation-resources" id="merchants-with-complex-international-requirements-but-limited-implementation-resources"></a>
-
-Gambio includes language, currency, tax, and shipping-related capabilities, but international selling still requires careful implementation. Stores with multiple languages, currencies, country-specific taxes, region-based shipping, marketplace channels, and local compliance expectations need stronger planning.
-
-Gambio may fit these merchants if they have the right implementation support. It is a weaker fit if they expect multilingual, multicurrency, tax, and shipping behavior to become correct simply because records moved into the target store.
+| Fit dimension         | Strong indication                                                                        | Needs caution when                                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Operating model       | The merchant knows whether Cloud convenience or self-hosted control is the goal.         | The merchant wants both hands-off operation and unrestricted technical customization.                           |
+| Catalog structure     | Products, options, categories, images, downloads, and stock are documented clearly.      | The source catalog is inconsistent, heavily customized, or difficult to classify.                               |
+| Regional expectations | German-market support, legal-text handling, and European hosting assumptions are valued. | The business needs English-first global support or country-specific operating models beyond the available plan. |
+| Technical ownership   | A self-hosted merchant has a developer, agency, or internal technical resource.          | The merchant chooses self-hosting but has no maintenance or update owner.                                       |
+| Integrations          | Marketplace, payment, and external connections are known and can be scoped.              | Key behavior depends on opaque connector data or unsupported custom logic.                                      |
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-| Strong-fit profile                                   | Why this profile often fits Gambio                                                                                                    | Migration planning focus                                                                                                                          |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Merchant choosing Gambio Cloud for simpler operation | The merchant wants a professional shop system while reducing hosting, installation, update, and maintenance responsibility.           | Confirm catalog, order, customer, shipping, payment, tax, SEO, and storefront expectations within the cloud operating model.                      |
-| Merchant choosing self-hosted Gambio for control     | The merchant wants more control over hosting, extensions, customization, integrations, and technical implementation.                  | Confirm hosting readiness, update responsibility, extension dependencies, custom development needs, and service-path fit.                         |
-| Structured retail catalog                            | Products, categories, images, variants, stock, reviews, specials, and filters can be represented clearly.                             | Use representative Demo Migration samples to test simple products, variants, images, category placement, stock behavior, and discounted products. |
-| B2B or segmented customer model                      | Customer groups, pricing context, tax behavior, and order history can support differentiated selling.                                 | Review customer group assignments, pricing rules, discounts, tax handling, and historical orders tied to important customers.                     |
-| SEO-conscious merchant                               | Gambio’s SEO and storefront controls can support merchants that rely on search traffic and structured product/category pages.         | Identify high-value URLs, category pages, product pages, metadata, redirects, content pages, and navigation paths before migration.               |
-| Technically supported merchant                       | The merchant has an agency, developer, or internal technical resource to handle hosting, extensions, customization, and integrations. | Separate standard migrated data from implementation tasks, custom development, and Custom Service requirements.                                   |
+A strong Gambio fit usually appears when the merchant’s commercial model matches one of the platform’s clear operating strengths. These profiles are not labels for store size alone. They describe the relationship between the source store, the target operating model, and the merchant’s readiness to validate the migration result.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+The first strong-fit profile is a merchant that wants Gambio Cloud because the business prefers managed operation. This merchant may not want to manage hosting, installation, updates, or platform maintenance. The team may be more focused on products, customers, orders, marketing, and storefront work. For this profile, migration planning should test whether the catalog, content, customer, order, SEO, shipping, payment, and tax expectations can operate well inside the Cloud path.
 
-| Higher-risk profile                                         | Why the fit is harder to confirm                                                                                                     | What should be resolved before moving forward                                                                              |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| Merchant unsure between cloud and self-hosting              | The operating model affects customization, maintenance, updates, support expectations, and technical control.                        | Choose the Gambio deployment model before migration planning becomes detailed.                                             |
-| Store with custom checkout or pricing logic                 | Standard records may not carry the full logic behind discounts, payment states, shipping rules, taxes, or customer-specific pricing. | Document the source logic and decide what is migrated, configured, handled by Add-ons, or reviewed through Custom Service. |
-| Messy catalog with inconsistent variants                    | Gambio can support structured catalogs, but unclear source data makes mapping and validation harder.                                 | Clean or document product options, variants, categories, images, filters, stock, and product status before Demo Migration. |
-| Integration-heavy business                                  | ERP, marketplace, fulfillment, accounting, or custom middleware data may not behave as ordinary store records.                       | Identify external identifiers, integration-owned fields, and required post-migration workflows.                            |
-| International store without implementation resources        | Languages, currencies, shipping, tax, and compliance expectations require configuration and validation beyond basic data movement.   | Confirm country, language, currency, tax, and shipping rules, and assign implementation responsibility.                    |
-| Merchant expecting custom programming as standard migration | Custom development, unsupported behavior, or bespoke transformation may sit outside standard service capability.                     | Scope Custom Service, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment before execution.             |
+The second strong-fit profile is a merchant that wants self-hosted Gambio because the store needs more control. This can include agency-managed stores, technically mature merchants, stores with integration requirements, or businesses that need specific custom functionality. For this profile, migration planning should confirm that technical ownership exists and that the difference between migrated records, target configuration, Add-ons, and Custom Service is clearly understood.
 
-### What Should Be Confirmed Before Choosing Gambio <a href="#what-should-be-confirmed-before-choosing-gambio" id="what-should-be-confirmed-before-choosing-gambio"></a>
+A third strong-fit profile is a merchant with a structured catalog. Gambio’s product and content capabilities are easier to validate when products have consistent names, categories, images, options, stock values, and downloadable product rules where relevant. The merchant should be able to choose representative Demo Migration samples that show how the real catalog behaves.
 
-Before selecting Gambio as the Target Platform, the merchant should confirm whether the future operating model is cloud-led, self-hosted, or technically customized. That decision affects the rest of the migration plan. The same source store can require a different service approach depending on whether the target Gambio environment is expected to be a managed cloud shop, an agency-controlled self-hosted store, or a heavily customized implementation.
+A fourth strong-fit profile is a merchant selling in a German or European operating context where Gambio’s support, Cloud hosting in Germany, legal-text assistance, and data-protection positioning are valuable. This profile should still validate shipping, tax, payment, legal pages, and content expectations, but the platform orientation may fit the merchant’s daily operating reality.
 
-The merchant should also confirm whether the catalog is structurally ready. Products, categories, variants, images, filters, downloadable products, base prices, stock, specials, and customer group pricing should be reviewed as selling structures, not just as records. If these structures are unclear, the Demo Migration may show record movement without proving that Gambio is a strong operational fit.
+| Strong-fit profile                            | Why Gambio can fit                                                                                    | Scope evidence to confirm                                                                                     |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Cloud-focused merchant                        | Wants professional shop operation without owning hosting and update burden.                           | Target Cloud plan, catalog samples, payment/shipping expectations, legal pages, and SEO needs.                |
+| Self-hosted merchant with technical resources | Wants control, customization, and integration flexibility.                                            | Hosting plan, update owner, development resource, connector inventory, and custom logic list.                 |
+| Structured catalog merchant                   | Has clear Products, Categories, options, images, downloads, and stock behavior.                       | Representative products, option-heavy products, category tree, downloadable items, and inventory rules.       |
+| German-market merchant                        | Values German support context, legal-text handling, and European hosting/data-protection assumptions. | Support language needs, legal content responsibilities, payment methods, tax settings, and regional shipping. |
+| Content-aware merchant                        | Needs product pages plus content pages, legal pages, landing pages, and buying guidance.              | CMS Pages, internal links, SEO metadata, redirects, and high-value landing paths.                             |
 
-Customer and order history should be tested for usefulness. Important orders should preserve customer identity, product references, line items, totals, tax, shipping, payment context, discounts, status meaning, and customer group relevance where supported by the selected migration path. A store that relies heavily on old order details should not treat order migration as a background detail.
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
 
-SEO and storefront expectations should be confirmed early. If the merchant has important product URLs, category URLs, content pages, metadata, filters, or navigation paths, those areas should be mapped before launch. Gambio can be a good target for structured storefront management, but migration planning must identify which parts belong to data migration, which parts belong to Gambio configuration, and which parts require site implementation work.
+Conditional-fit merchants can still be good Gambio candidates, but the fit should not be assumed until specific conditions are resolved. These cases often need more discovery before Demo Migration and more careful interpretation after the sample result is reviewed.
 
-Finally, the merchant should confirm whether any source behavior is custom, integration-owned, or outside standard service capability. Custom Platform sources, custom fields, ERP identifiers, marketplace data, non-standard product logic, bespoke checkout behavior, unsupported extension data, Tailored Add-ons, Custom Add-ons, and custom migration logic adjustment should be reviewed through Custom Service rather than assumed to fit standard migration behavior.
+A merchant with complex product options is conditional rather than automatically strong. Gambio can support product options and shopper choices such as size, color, and other variations, but source platforms may represent variants, option pricing, stock, images, or SKU-level differences in different ways. The migration plan should identify which options are simple display choices, which affect price or stock expectations, and which are actually source-specific variant models that may need mapping or custom handling.
+
+A merchant with marketplace or multichannel activity is also conditional. Gambio is positioned for marketplace connections and multichannel selling through established marketplaces such as Amazon or eBay, but marketplace operations often depend on external data: product feeds, marketplace identifiers, settlement states, channel-specific order statuses, shipping mappings, and customer communication limits. These should be scoped before treating marketplace behavior as a normal catalog transfer.
+
+International merchants may fit Gambio if they understand the platform’s support context and are prepared to configure country-specific behavior. The caution is not that international selling is impossible. The caution is that support language, legal texts, payment methods, shipping rules, tax behavior, and storefront localization need deliberate ownership.
+
+A merchant with a self-hosted preference but limited technical resources is conditional. Self-hosting can provide more flexibility, but it transfers responsibility. If no one owns updates, backups, hosting quality, extension testing, and technical troubleshooting, the operating model may become a risk even if the migration itself succeeds.
+
+### Weaker-Fit or Non-Ideal Profiles <a href="#weaker-fit-or-non-ideal-profiles" id="weaker-fit-or-non-ideal-profiles"></a>
+
+Gambio becomes a weaker fit when the merchant’s expectations conflict with the operating model they intend to choose. A merchant that wants the provider to own nearly all technical responsibility while also expecting unrestricted server-level customization may be poorly aligned. Cloud can reduce technical burden, while self-hosting can increase control, but the two paths should not be treated as interchangeable.
+
+Another weaker-fit case is a merchant with no clear source-store structure. If the catalog contains duplicated categories, inconsistent options, missing images, unclear downloads, abandoned content pages, unknown stock rules, and custom fields with no ownership, Gambio may still be usable, but the migration will not be clean until the source data is interpreted. In this case, the fit problem is partly a readiness problem.
+
+A store with heavily custom checkout, pricing, tax, subscription, marketplace, fulfillment, or ERP behavior may also be non-ideal for a standard migration expectation. Gambio might still become the target, especially under a self-hosted model with technical support, but the project should be scoped as a controlled migration plus configuration, integration, and possible Custom Service review.
+
+Gambio is also less aligned for merchants that need English-first global vendor support as a core operating requirement. Gambio support expectations are strongly German-language oriented. A business can still use Gambio internationally, but internal support capability and operational ownership should be realistic.
+
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
+
+Many fit issues appear when the merchant assumes the Source Platform’s behavior will reappear exactly in Gambio. Migration planning should identify these assumptions before they become launch problems.
+
+Product options are a common area. A source store may treat variants as separate SKUs with independent stock, images, prices, and fulfillment rules. Another store may treat them as options on one product. Gambio can support options, but the meaning of each source structure must be read carefully before deciding whether standard migration, Advanced Data Mapping, Tailored Add-ons, or Custom Service is appropriate.
+
+Content and legal pages can also create translation issues. A source store may contain CMS Pages, embedded forms, app-generated blocks, legal content, landing pages, blog-like content, or page-builder layouts. Some content can move as records or pages. Some may require rebuilding, redesign, or manual handling because the presentation layer and content structure differ.
+
+Marketplace and payment behavior may not translate cleanly when the source store relies on external systems. Marketplace order states, payment references, tax evidence, fulfillment identifiers, customer communication limits, and connector-owned fields should be separated from core Orders. They may need configuration or custom review rather than direct migration.
+
+| Source expectation                            | Why it may not translate directly                                        | Planning response                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Variant behavior becomes identical options    | Source variants may carry stock, SKU, image, or price logic.             | Review representative products and decide what needs mapping or custom handling. |
+| Page layouts move as-is                       | Content structure and storefront presentation differ by platform.        | Separate CMS Pages, legal pages, SEO paths, and design implementation.           |
+| Marketplace data behaves like ordinary Orders | Channel data may be owned by external connectors.                        | Inventory marketplace fields, product feeds, and order-source identifiers.       |
+| Self-hosting is maintenance-free              | Self-hosting transfers hosting and update responsibility.                | Assign technical ownership before choosing the target model.                     |
+| Legal texts are solved by data transfer       | Legal content and compliance require review and merchant responsibility. | Confirm legal pages, terms, data-protection content, and update ownership.       |
+
+### Signals of Fit to Confirm Before Choosing Gambio <a href="#signals-of-fit-to-confirm-before-choosing-gambio" id="signals-of-fit-to-confirm-before-choosing-gambio"></a>
+
+Before choosing Gambio as the Target Platform, the merchant should confirm a small set of practical evidence. The most important signal is deployment clarity. The team should know whether Cloud or self-hosted Gambio is the intended path and why that path matches the business.
+
+The second signal is catalog clarity. The merchant should be able to show representative products: simple products, option-heavy products, products with multiple images, products with stock rules, downloadable products if relevant, and products that belong to important categories. These samples reveal whether Gambio fit is being judged against the real catalog rather than a simplified export.
+
+The third signal is content and SEO awareness. Important pages, legal pages, landing pages, product URLs, category URLs, metadata, internal links, and search-sensitive content should be listed before migration. Gambio fit is stronger when the merchant knows which customer-facing assets must be preserved or rebuilt.
+
+The fourth signal is operational ownership. Cloud merchants should confirm plan expectations, support needs, payment and shipping setup, legal-text ownership, and post-launch administration. Self-hosted merchants should confirm hosting, security, updates, backups, development support, and integration responsibility.
+
+### Turning Gambio Fit Into a Migration Scope Decision <a href="#turning-gambio-fit-into-a-migration-scope-decision" id="turning-gambio-fit-into-a-migration-scope-decision"></a>
+
+Fit should become scope, not just a yes-or-no decision. A strong Gambio fit with clean source data may support a more standard migration path. A conditional fit may still be appropriate, but it may require Managed Service, Standard Add-ons, Tailored Add-ons, Advanced Data Mapping, or Custom Service depending on the exact reason fit is conditional.
+
+If the source store has normal Products, Customers, Orders, Categories, Reviews, Coupons, CMS Pages, images, and ordinary catalog structure, the scope may be more predictable. If the store has complex options, marketplace connectors, custom content structures, ERP-owned identifiers, customer-specific pricing, external fulfillment rules, or self-hosted custom logic, the scope should be reviewed more carefully.
+
+Entity Points can support scope sizing when eligible new Products, Customers, Orders, and Blog Posts are included, but fit should not be reduced to count alone. The better fit signal is whether the records carry business meaning that can be represented, validated, and managed in Gambio after migration. A small store with deeply custom behavior can require more care than a larger store with clean structure.
+
+| Fit outcome                            | What it usually means                                                             | Migration scope implication                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Strong fit with clean structure        | Gambio model and source data are aligned.                                         | Standard Service may be enough, with Demo Migration used to confirm assumptions.              |
+| Strong fit with operational complexity | Gambio is appropriate but the store has important configuration or channel needs. | Managed Service or Add-ons may help control mapping, filtering, or configuration details.     |
+| Conditional fit                        | The platform may work, but key assumptions need proof.                            | Use representative samples, Advanced Data Mapping, and targeted review before Full Migration. |
+| Weak fit due to custom behavior        | The desired result depends on unsupported or bespoke logic.                       | Custom Service review is needed before promising the target behavior.                         |
+| Weak fit due to operating mismatch     | The merchant chose the wrong deployment model for its expectations.               | Resolve Cloud versus self-hosted assumptions before migration planning continues.             |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Gambio is often a strong Target Platform for merchants who want a professional shop system with structured catalog management, storefront controls, payment and shipping flexibility, SEO considerations, and a meaningful choice between cloud convenience and self-hosted control. It is especially suitable when the merchant can clearly define products, categories, variants, customers, orders, pricing, shipping, payment, tax, and SEO expectations before migration.
+Gambio is a strong Target Platform when the merchant’s operating model, regional expectations, catalog structure, content needs, and technical ownership match the platform’s strengths. Cloud can fit merchants that want managed operation. Self-hosted Gambio can fit merchants that need control and have the resources to maintain it. German-market support context, legal-text expectations, product options, stock management, content pages, and marketplace assumptions all influence the decision.
 
-Gambio becomes a higher-risk fit when the source store is structurally unclear, when the merchant has not chosen the right deployment model, when custom checkout or integration behavior carries important business logic, or when the target store requires implementation work that has not been scoped. A strong fit decision should therefore be based on operating model, catalog structure, service burden, and validation evidence, not only on feature lists.
+A good Gambio fit assessment turns quickly into migration scope. The merchant should confirm the deployment model, representative catalog samples, content and SEO assets, marketplace dependencies, legal and support expectations, and technical ownership before treating the migration as straightforward. That discipline prevents a technically successful data move from becoming an operational mismatch after launch.
 
-Use Demo Migration to confirm whether Gambio can preserve the business meaning behind the source store’s products, customers, orders, pricing, SEO, and operational rules. If the store includes customer group pricing, complex variants, custom checkout behavior, integration-owned data, Custom Platform source data, or uncertain cloud/self-hosting requirements, review the migration path through Live Chat before committing to Full Migration.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Who is usually a strong fit for Gambio Cloud?**
 
-**Is Gambio a good fit for merchants who want a cloud-hosted store?**
+Gambio Cloud is usually a strong fit for merchants that want a professional shop system without taking direct responsibility for hosting, installation, updates, and maintenance. The merchant still needs to validate catalog data, content, customers, Orders, payment, shipping, taxes, SEO, and legal pages.
 
-Gambio can be a good fit when the merchant wants a professional shop system with cloud operation and less hosting responsibility. The merchant should still confirm catalog structure, payment, shipping, tax, SEO, and storefront expectations before migration.
+**Who is usually a strong fit for self-hosted Gambio?**
 
-**Is Gambio a good fit for merchants who want self-hosted control?**
+Self-hosted Gambio is usually a strong fit for merchants that want more technical control and have a developer, agency, or internal resource to manage hosting, updates, customization, troubleshooting, and integrations. It is weaker when the merchant wants self-hosted flexibility but has no technical owner.
 
-Yes, Gambio can fit merchants who want more control over hosting, customization, extensions, integrations, and technical implementation. The fit is strongest when the merchant has the resources to manage hosting, updates, support coordination, and development needs.
+**Does Gambio fit stores with complex product options?**
 
-**Is Gambio suitable for stores with many variants?**
+It can, but the option structure should be tested carefully. The merchant should provide products that show real size, color, stock, image, price, download, and SKU behavior so the migration result can be judged against commercial meaning rather than record presence alone.
 
-Gambio can support structured product and variant scenarios, but the source catalog must be reviewed carefully. Variant-heavy products should be included in Demo Migration so pricing, images, stock, category placement, and order-line meaning can be validated.
+**Can a weak fit become a stronger fit after preparation?**
 
-**Does Gambio fit B2B or customer-group pricing models?**
-
-It can be a strong fit when customer groups, pricing behavior, discounts, tax context, and order history are clearly defined. If the source store relies on custom pricing scripts, ERP-controlled pricing, or app-owned rules, those details should be reviewed before migration.
-
-**When is Gambio a weaker fit?**
-
-Gambio is a weaker fit when the merchant cannot clarify cloud versus self-hosting, expects custom programming to be ordinary support work, has a highly disorganized source catalog, or depends on source behavior that requires unsupported custom transformation.
+Yes. Some weak-fit cases are really readiness problems. Cleaning categories, documenting options, identifying content pages, choosing Cloud or self-hosted Gambio, and clarifying marketplace or integration requirements can turn an uncertain migration into a clearer scoped project.

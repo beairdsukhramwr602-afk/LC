@@ -1,151 +1,181 @@
 # Selecting the Right Migration Approach for X-Cart
 
-Choosing the right migration approach for X-Cart depends on how closely the current store can be represented inside the target X-Cart Platform environment. A simple catalog with standard customers, orders, categories, and content can usually be planned very differently from a store that depends on custom fields, add-ons, modules, integrations, source-code changes, external identifiers, or specialized checkout behavior.
+The right migration approach for X-Cart depends on how much of the store is ordinary commerce data and how much depends on configuration, add-ons, custom fields, product variations, user memberships, external identifiers, or target-side setup. A simple record-count estimate is not enough. X-Cart migration planning should evaluate how the data will behave after it reaches the Target Platform.
 
-X-Cart planning should start with the target operating model. The target store may involve a specific X-Cart version, hosting environment, theme, add-on stack, payment setup, shipping setup, tax rules, SEO structure, search and filter behavior, and integrations with external systems. The migration approach should match that real operating model rather than only the number of products, customers, or orders being moved.
+Standard Service, Managed Service, Add-ons, and Custom Service are not interchangeable options. They answer different migration problems. Standard Service can work for supported records that fit a clean data path. Managed Service changes execution responsibility and coordination. Add-ons support bounded filtering, mapping, or data configuration within supported behavior. Custom Service is the correct review path when the migration requires non-standard handling, custom logic, unsupported add-on data, bespoke transformations, or external-system preservation.
 
-### How to Think About Service Choice for X-Cart <a href="#how-to-think-about-service-choice-for-x-cart" id="how-to-think-about-service-choice-for-x-cart"></a>
+### Start With the Migration Burden, Not the Store Size <a href="#start-with-the-migration-burden-not-the-store-size" id="start-with-the-migration-burden-not-the-store-size"></a>
 
-The best migration approach is the one that matches the work required to make X-Cart usable after migration. Service choice should account for data structure, target configuration, migration responsibility, customization needs, and review effort.
+A large X-Cart migration can be straightforward when the source data is clean and the target structure is ready. A smaller migration can be complex when products rely on custom logic, memberships control pricing or access, source add-ons create important fields, or historical order data must remain useful for accounting and customer support.
 
-| Planning question                                                                                       | Why it matters for X-Cart                                                                  | Likely service implication                                               |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| Does the source store use standard products, categories, customers, orders, and content?                | Standard records are easier to align with X-Cart target structures.                        | Standard Service may be enough when the target setup is straightforward. |
-| Does the merchant want Next-Cart to operate the migration within standard capability?                   | Execution responsibility matters even when the data model is not heavily customized.       | Managed Service may be the better fit.                                   |
-| Does the project require filtering, mapping, or data configuration within supported behavior?           | X-Cart migrations often need selective scope, field alignment, or value adjustment.        | Standard Add-ons may be useful when their default behavior fits.         |
-| Does the project depend on custom fields, add-ons, modules, custom code, or outside-system identifiers? | These elements may not behave as ordinary X-Cart records.                                  | Custom Service should be reviewed.                                       |
-| Is the source a Custom Platform or a heavily modified store?                                            | The source structure may require custom interpretation before it can be moved into X-Cart. | Custom Service applies.                                                  |
-| Does checkout, payment, shipping, tax, or integration behavior need special migration logic?            | Historical labels and records do not automatically recreate live target behavior.          | Custom Service or separate target setup may be needed.                   |
+The migration burden should be judged by structure, not only volume. Product variations, classes and attributes, image galleries, inventory fields, user roles, memberships, order statuses, SEO URLs, add-ons, and external identifiers all affect the approach. These factors determine whether the work is a standard transfer, a managed execution project, a supported Add-on use case, or a Custom Service requirement.
 
-### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
+| X-Cart migration signal                                                          | What it indicates                                               | Approach implication                                                                           |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Ordinary products, categories, customers, and orders                             | Core records fit common migration expectations.                 | Standard Service may be appropriate if Demo Migration confirms quality.                        |
+| Complex catalog with variations, attributes, images, and inventory differences   | Data may still be supported, but review burden is higher.       | Managed Service or Add-ons may be useful depending on scope and mapping needs.                 |
+| Memberships, profile fields, roles, or segmented commercial behavior             | Customer data may carry business rules beyond identity records. | Scope review is needed; Custom Service may be required for unsupported structures.             |
+| Add-on-created product, customer, order, or storefront data                      | Important behavior may not be native target data.               | Custom Service review is often necessary unless the need fits supported mapping/configuration. |
+| External IDs from ERP, PIM, WMS, marketplace, accounting, or fulfillment systems | Records must remain connected to outside operations.            | Mapping or Custom Service may be needed to preserve identifiers meaningfully.                  |
+| Data changes expected after Demo Migration                                       | Initial migration result may not be the final dataset.          | Additional Migration Options and revalidation planning may be needed.                          |
 
-Standard Service can be suitable when the source store uses a supported Source Platform, has a predictable data structure, and the target X-Cart store can accept the migrated data through standard service capability.
+The safest service decision is the one that matches the real burden. Choosing the lightest option can create a migration that appears complete by count but fails when product choices, customer segmentation, add-on fields, or order history are reviewed.
 
-This approach is usually strongest when products, categories, customers, orders, CMS Pages, Blog Posts, and images do not depend on unusual custom logic. It can also work when product options, variants, attributes, extra fields, manufacturers, coupons, or reviews follow structures that can be represented cleanly in the target X-Cart environment.
+### When Standard Service Can Be Enough <a href="#when-standard-service-can-be-enough" id="when-standard-service-can-be-enough"></a>
 
-Standard Service remains customer-led. The customer purchases a service license for the selected migration path and self-performs the migration process on the Next-Cart website. The customer also reviews the Demo Migration, checks the target result, adjusts target configuration where needed, and decides whether the result is ready for Full Migration.
+Standard Service can be appropriate when the migration uses supported Source Platform and Target Platform structures and the expected records fit standard service capability. For X-Cart, that usually means the store depends mainly on supported products, categories, customers, orders, coupons, reviews, CMS Pages, Blog Posts, and other ordinary record types without requiring bespoke interpretation.
 
-#### Good Standard Service signals <a href="#good-standard-service-signals" id="good-standard-service-signals"></a>
+Standard Service works best when the merchant can prepare the target environment, operate the required setup steps, review Demo Migration, confirm mapping expectations, and validate the migrated result. It is not a promise that every source-side behavior will become native X-Cart behavior. It is a service path for supported migration scope.
 
-Standard Service is more likely to fit when:
+A strong Standard Service candidate usually has:
 
-* the source store is supported and not heavily customized;
-* the target X-Cart version and environment are ready before migration;
-* product, customer, order, and content records are structurally predictable;
-* product options, variants, attributes, and extra fields do not require special transformation;
-* categories, search, filters, and storefront navigation can be configured normally in X-Cart;
-* customer groups, order statuses, coupons, manufacturers, and reviews do not carry unusual business logic;
-* SEO values, slugs, and redirects can be reviewed and adjusted through normal target planning;
-* external systems do not require migrated records to preserve complex custom identifiers or relationships.
+* clearly supported source and target platforms;
+* ordinary product records without custom configurator logic;
+* product choices that can be reviewed through supported structures;
+* categories that do not depend on unusual access or navigation rules;
+* customer and order records that do not require complex role, vendor, or membership transformation;
+* no unsupported add-on or custom module data required in the migration result;
+* target-side checkout, payment, shipping, tax, theme, and add-on setup handled separately from migration;
+* enough internal capacity to review Demo Migration and approve Full Migration.
 
-### When Managed Service Is the Safer Approach <a href="#when-managed-service-is-the-safer-approach" id="when-managed-service-is-the-safer-approach"></a>
+Standard Service should still be tested through Demo Migration. X-Cart’s catalog and user-management structures mean that simple-looking data can contain hidden variation, attribute, membership, or add-on dependencies. If Demo Migration reveals missing fields, unclear product choices, or customer segmentation gaps, the approach should be reconsidered before Full Migration.
 
-Managed Service is useful when the migration still fits standard service capability but the merchant wants Next-Cart-led execution. This can be valuable when the store team does not want to operate the migration process directly, when internal review time is limited, or when the project needs more structured coordination during Demo Migration and Full Migration.
+### When Managed Service Is the Safer Execution Choice <a href="#when-managed-service-is-the-safer-execution-choice" id="when-managed-service-is-the-safer-execution-choice"></a>
 
-Managed Service does not turn a standard migration into a customized migration. It changes execution responsibility. Next-Cart’s technician performs the migration using standard service capability and any purchased Standard Add-ons, while the customer still reviews the target result and confirms whether it is acceptable.
+Managed Service is useful when the migration still fits standard capability but the merchant wants Next-Cart-led execution and more structured coordination. It does not convert a standard migration into a custom migration. The value is execution responsibility, guidance, sequencing, and a more managed path through Demo Migration and Full Migration.
 
-For X-Cart, Managed Service may be a practical choice when the store has a meaningful catalog, multiple record types, product options, order history, SEO-sensitive URLs, and configuration work that the merchant wants handled with more guidance. It is also helpful when the customer wants support interpreting Demo Migration results before approving Full Migration.
+For X-Cart, Managed Service becomes attractive when the store has a meaningful catalog, many product samples to review, complex customer and order history, SEO-sensitive URLs, or internal teams that prefer not to operate the migration process directly. It can also help when a merchant needs a more organized review of product variations, attributes, images, categories, memberships, and order history before launch.
 
-#### Good Managed Service signals <a href="#good-managed-service-signals" id="good-managed-service-signals"></a>
+| Managed Service fit signal                     | Why it matters                                                                    | What Managed Service helps with                                        |
+| ---------------------------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| The project is standard but operationally busy | The merchant needs coordination more than customization.                          | Execution handling, timing control, and review guidance.               |
+| Demo Migration needs careful interpretation    | Sample results may require business review across catalog, customers, and orders. | Structured feedback and clearer decision points before Full Migration. |
+| The catalog has many variations or attributes  | Data may be supported but hard to check without a plan.                           | Better sequencing of sample review and validation priorities.          |
+| SEO and historical orders are important        | Launch readiness depends on more than product count.                              | Coordinated review of URLs, order readability, and high-value records. |
+| Internal resources are limited                 | Store teams may not have time to operate the migration process.                   | Next-Cart-led execution within the agreed service capability.          |
 
-Managed Service may be appropriate when:
+Managed Service should not be selected to avoid scope analysis. If the store requires custom fields, bespoke transformations, source-code interpretation, or unsupported add-on data migration, the issue is not execution responsibility alone. It belongs in Custom Service review.
 
-* the migration is standard enough to avoid customization;
-* the store team wants Next-Cart-led execution;
-* catalog review needs more coordination but not custom logic;
-* products, options, variants, categories, customers, orders, coupons, reviews, and content should be checked in a structured way;
-* SEO and URL review are important but can be handled through standard planning;
-* the merchant wants help managing Demo Migration and Full Migration timing.
+### Where Add-ons Can Improve a Supported Migration <a href="#where-add-ons-can-improve-a-supported-migration" id="where-add-ons-can-improve-a-supported-migration"></a>
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+Add-ons can help when the migration path is fundamentally supported but the merchant needs more control over filtering, mapping, or data configuration. They are useful for shaping the migration output within supported behavior. They are not a substitute for Custom Service and should not be used to imply that unsupported add-on data, custom code, or bespoke business logic will be migrated automatically.
 
-Add-ons are optional service features that help customers adjust filtering, mapping, or data configuration to better match the expected migration outcome. They should be considered when the base migration path is generally suitable, but the project needs clearer control over which records move, how supported fields align, or how certain values are configured before reaching X-Cart.
+For X-Cart, Add-ons may be useful when the merchant needs to limit scope, align supported fields, adjust supported values, or apply bounded configuration logic during migration. They can help make a standard migration more precise, especially when source data contains unnecessary history, inconsistent field labels, status differences, or scope boundaries that should be controlled.
 
-For X-Cart, Add-ons may be useful when a merchant wants to migrate selected records, align supported fields more carefully, or update certain values during migration. Add-ons should not be treated as a substitute for full customization. If an Add-on must be modified beyond its available settings and supported behavior, the requirement moves into Custom Service because customization is required.
+| Add-on category                  | X-Cart use case                                                                                           | Boundary to respect                                                                               |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Data Filter Add-on               | Migrate selected products, customers, orders, CMS Pages, Blog Posts, or other eligible records.           | Filtering controls which records move; it does not redesign product logic or membership behavior. |
+| Advanced Data Mapping            | Align supported source fields with supported X-Cart target fields where field meaning is clear.           | Mapping remains within supported field behavior; unsupported custom fields need review.           |
+| Advanced Data Configure          | Adjust supported values such as labels, statuses, or other migration values before they reach the target. | Configuration is not the same as rebuilding custom module rules or add-on behavior.               |
+| Tailored or Custom Add-on review | Address supported enhancement needs that require more specific handling.                                  | If default Add-on behavior must be modified, Custom Service review may be required.               |
 
-| Add-on area             | X-Cart use case                                                                                                  | Boundary                                                                                 |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Select only certain products, customers, orders, CMS Pages, Blog Posts, or other eligible records for migration. | Filtering controls scope; it does not redesign the target X-Cart data model.             |
-| Advanced Data Mapping   | Align supported source fields with supported X-Cart target fields where field meaning needs clearer control.     | Mapping must remain within platform data-model support and capability.                   |
-| Advanced Data Configure | Adjust selected values before they reach X-Cart, such as supported labels, statuses, or mapped information.      | Configuration is not the same as rebuilding custom logic or unsupported module behavior. |
+The key question is whether the need stays inside supported migration behavior. If yes, an Add-on may help. If the need requires new logic, unsupported records, custom transformation, or source-specific interpretation, the requirement should not be squeezed into an Add-on framing.
 
 ### When Custom Service Should Be Reviewed <a href="#when-custom-service-should-be-reviewed" id="when-custom-service-should-be-reviewed"></a>
 
-Custom Service should be reviewed when the X-Cart migration requires customization, modification, custom migration logic adjustment, unsupported data handling, or bespoke interpretation. This often happens when the current store has custom fields, custom tables, custom product logic, non-standard order relationships, proprietary module data, source-code changes, or integrations that must remain meaningful after migration.
+Custom Service should be reviewed when an X-Cart migration depends on non-standard handling. That includes custom source structures, unsupported add-on data, bespoke transformations, external-system identifiers, custom product logic, source-code changes, modified database fields, unusual memberships, custom user roles, or migration logic that must be adjusted beyond standard behavior.
 
-X-Cart can support flexible commerce implementations, but migration planning should not assume that every custom source behavior becomes a native X-Cart structure automatically. Some data may need custom transformation. Some behavior may need target configuration or development. Some external-system links may need to be recreated outside the migration itself.
+X-Cart’s flexibility makes this distinction important. A store can look like a normal catalog from the storefront while relying on custom fields, add-ons, or integrations behind the scenes. If that hidden structure matters after migration, it needs to be identified before Full Migration.
 
-#### Strong Custom Service signals <a href="#strong-custom-service-signals" id="strong-custom-service-signals"></a>
-
-Custom Service should be reviewed when the project includes:
+Strong Custom Service signals include:
 
 * a Custom Platform source;
 * a heavily modified source store;
-* custom product builders, configurators, calculators, or bundles;
-* custom fields that control product, customer, order, or checkout behavior;
-* add-on or module data that is not part of standard migration capability;
-* custom customer groups, pricing rules, permissions, or B2B workflows;
-* external ERP, PIM, WMS, accounting, marketplace, shipping, or fulfillment identifiers that must remain connected;
-* custom checkout, payment, shipping, or tax behavior;
-* legacy X-Cart data that needs version-specific interpretation;
-* headless, API-driven, or source-code customized storefront behavior;
-* required Add-on modification, Tailored Add-ons, or Custom Add-ons.
+* custom fields on products, customers, users, orders, categories, or checkout records;
+* custom product builders, configurators, fitment data, bundles, or calculators;
+* unsupported add-on or module data that must remain meaningful;
+* external identifiers from ERP, PIM, WMS, CRM, accounting, marketplace, shipping, or fulfillment systems;
+* source-code changes that affect catalog, checkout, customer, or order behavior;
+* unusual customer memberships, roles, permissions, or B2B-like rules;
+* custom order processes, return records, subscription records, reward logic, or loyalty data;
+* target-side requirements that need bespoke migration logic adjustment.
 
-### Demo Migration Should Drive the Final Decision <a href="#demo-migration-should-drive-the-final-decision" id="demo-migration-should-drive-the-final-decision"></a>
+Custom Service should be scoped carefully. Some requirements are data migration requirements. Some are target configuration requirements. Some are development or integration work outside the migration itself. A clear review prevents Custom Service from being treated as a broad promise to recreate the entire source-store operating model.
 
-Demo Migration is especially important for X-Cart because record counts alone do not show whether the target result is usable. A small sample can reveal whether product options, variants, attributes, categories, customers, orders, coupons, reviews, CMS Pages, Blog Posts, images, SEO values, and external references translate cleanly.
+### How Entity Points Affect X-Cart Scope Planning <a href="#how-entity-points-affect-x-cart-scope-planning" id="how-entity-points-affect-x-cart-scope-planning"></a>
 
-A strong X-Cart Demo Migration sample should include records that carry real operational meaning. Simple products and ordinary orders are useful, but they should not be the only proof. The sample should also include complex catalog cases, important customer groups, orders with payment and shipping context, SEO-sensitive pages, and records affected by add-ons, modules, or integrations.
+Entity Points should be considered when eligible Products, Customers, Orders, or Blog Posts are migrated for the first time. For X-Cart, this is most relevant when the store has large product catalogs, deep customer histories, substantial order history, or Blog Posts included in scope.
 
-| Demo Migration sample                                                  | What it should prove                                                    |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Products with options, variants, attributes, and images                | Buying choices and catalog display remain understandable inside X-Cart. |
-| Categories, manufacturers, filters, and storefront navigation examples | Product discovery can be reconstructed in the target environment.       |
-| Customers, users, groups, and order history                            | Customer and order records remain readable and operationally useful.    |
-| Coupons, reviews, statuses, and content records                        | Supporting commerce and content data keep their intended meaning.       |
-| SEO-sensitive URLs, slugs, and metadata                                | Priority pages can be reviewed for search and redirect planning.        |
-| Add-on, module, API, or integration-dependent records                  | Custom Service needs can be identified before Full Migration.           |
+Entity Points should not be treated as a quality score, fit score, or service recommendation by themselves. A store with fewer records may still require Custom Service if those records depend on custom fields or add-on behavior. A store with more records may still fit a supported path when the data is clean and the target structure is ready.
 
-### Avoiding a Too-Light Migration Approach <a href="#avoiding-a-too-light-migration-approach" id="avoiding-a-too-light-migration-approach"></a>
+The duplicate-consumption rule must also be preserved. Records already counted through the service license do not consume Entity Points again simply because later migration activity occurs on the same migration path. New eligible records may consume Entity Points when migrated for the first time. This distinction matters when a merchant uses follow-up migration activity after Demo Migration or before launch.
 
-A migration approach is too light when it treats X-Cart as a simple record destination while the store depends on configuration, custom code, add-ons, integrations, or target-version behavior. This can lead to a result that appears complete by count but still fails business review.
+| Entity Points planning question                                  | Why it matters for X-Cart                                                               |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Which Products, Customers, Orders, or Blog Posts are in scope?   | These eligible records may affect the service license when migrated for the first time. |
+| Are historical Orders required or only recent Orders?            | Order-history depth can change eligible record volume and validation effort.            |
+| Will new Products or Orders be added after Demo Migration?       | Later activity may require follow-up planning and revalidation.                         |
+| Are repeated records already counted on the same migration path? | They should not be counted again merely because later migration activity occurs.        |
+| Are custom fields or add-on records also required?               | Entity Points do not replace Custom Service review for unsupported or custom behavior.  |
 
-Warning signs include:
+The best use of Entity Points in an X-Cart approach article is scope clarity. They help frame eligible record volume, but they do not decide how custom data, add-ons, memberships, or integrations should be handled.
 
-* only record totals are reviewed;
-* product variants and attributes are not sampled;
-* custom fields are ignored;
-* source add-ons or modules are assumed to transfer as ordinary records;
-* external-system identifiers are not inventoried;
-* SEO and redirect planning are postponed until launch;
-* checkout, payment, shipping, and tax behavior are confused with historical order labels;
-* target X-Cart hosting, version, theme, and add-on stack are not confirmed;
-* the source store is custom or legacy but no Custom Service review is planned.
+### Planning Additional Migration Options <a href="#planning-additional-migration-options" id="planning-additional-migration-options"></a>
+
+Additional Migration Options are useful when X-Cart migration activity may continue after the first Full Migration or when the target configuration changes during launch preparation. They should be planned when products, customers, orders, content, URLs, or supported configuration choices may change between the first migration event and launch.
+
+For X-Cart, follow-up handling is especially important when the catalog is still active, the merchant continues receiving orders, product attributes or variations are being cleaned, SEO plans are still being finalized, or target-side settings are adjusted after Demo Migration. Later migration activity should be paired with validation because new data or new configuration can affect product display, customer records, order history, URLs, and add-on-dependent review.
+
+| Follow-up situation                                               | Useful option                                           | Validation requirement                                                                          |
+| ----------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| New source records are added after the first migration activity   | Continue the Migration with the last used configuration | Confirm newly added records appear correctly and do not disturb reviewed records.               |
+| Mapping, filtering, or configuration needs change before launch   | Continue the Migration with a new configuration         | Recheck affected products, customers, orders, URLs, and configured values.                      |
+| The target result must be replaced with a newly planned migration | Perform a new migration                                 | Revalidate the full affected scope and confirm Entity Points handling for new eligible records. |
+| Add-on or custom-data scope changes after review                  | Service-path review before follow-up activity           | Confirm whether Add-ons or Custom Service are now required.                                     |
+
+Additional Migration Options should not be inserted casually. They matter when the project has real timing, scope, or configuration movement. If the source data is frozen and the target plan is stable, a simpler path may be enough.
+
+### Demo Migration Should Decide the Final Approach <a href="#demo-migration-should-decide-the-final-approach" id="demo-migration-should-decide-the-final-approach"></a>
+
+Demo Migration should be the practical test of the chosen approach. For X-Cart, the sample should prove whether product variations, attributes, classes, categories, images, inventory, customers, users, memberships, orders, coupons, reviews, content records, SEO values, and add-on-sensitive data can be reviewed with confidence.
+
+A strong Demo Migration result should answer several questions:
+
+* Do products display with correct buying choices, images, pricing, and inventory cues?
+* Do attributes and classes keep their intended descriptive or filtering meaning?
+* Do customers, users, addresses, memberships, and profile fields remain understandable?
+* Do order histories preserve line items, statuses, tax, shipping, payment labels, coupons, and notes?
+* Do important URLs, metadata, and content records support SEO continuity planning?
+* Do add-on or custom-field requirements remain inside the selected approach, or do they require escalation?
+
+The final approach should be selected after these questions have evidence. If Demo Migration exposes unsupported custom data, broken product logic, incomplete membership behavior, unclear order records, or unresolved external identifiers, the service path should be adjusted before Full Migration.
+
+### Service-Path Decision Signals for X-Cart <a href="#service-path-decision-signals-for-x-cart" id="service-path-decision-signals-for-x-cart"></a>
+
+The service path should be selected from evidence, not from platform name alone. X-Cart stores can range from straightforward catalog migrations to highly customized environments with membership logic, add-ons, external identifiers, and historical order expectations. The practical decision is whether the required outcome is supported, configurable, bounded, or custom.
+
+| Decision signal                                                                                                | Likely handling direction                                                                                             |
+| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Native catalog, customer, order, and content records with limited variation complexity                         | Standard Service may be realistic when the merchant can configure and validate the Target Platform.                   |
+| Large catalog, important memberships, or complicated sample-review needs                                       | Managed Service may reduce sequencing and validation risk.                                                            |
+| Supported records need filtering, mapping, or configuration adjustment                                         | Add-ons may help when the requirement remains inside supported behavior.                                              |
+| Add-on-owned records, custom fields, bespoke transformations, or external-system identifiers must be preserved | Custom Service review is the safer path because ordinary configuration may not represent the required behavior.       |
+| Later migration activity changes already reviewed records                                                      | Additional Migration Options should be paired with focused revalidation of affected entities and storefront behavior. |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right migration approach for X-Cart depends on the relationship between data structure, target configuration, customization needs, and execution responsibility. Standard Service can fit clean supported migrations. Managed Service can help when the migration remains standard but the merchant wants Next-Cart-led execution. Add-ons can support filtering, mapping, or data configuration where their default behavior fits. Custom Service should be reviewed when the project depends on custom fields, custom logic, source-code changes, unsupported add-on data, external identifiers, or tailored migration behavior.
+The right X-Cart migration approach comes from matching the store’s data burden to the correct service path. Standard Service can work when supported records fit cleanly. Managed Service can help when the migration remains standard but needs structured execution. Add-ons can improve filtering, mapping, or configuration within supported behavior. Custom Service should be reviewed when the project depends on custom fields, unsupported add-on data, bespoke transformations, external identifiers, or custom migration logic adjustment.
 
-Before choosing the final approach, use Demo Migration to test the records that define real store behavior: complex products, customer groups, order history, content, SEO-sensitive URLs, add-on or module data, and external-system references. If the sample exposes behavior that standard migration cannot represent clearly, raise the requirement before Full Migration rather than treating it as a post-launch correction.
+Entity Points and Additional Migration Options should support that decision rather than distract from it. Entity Points clarify eligible record scope. Additional Migration Options help plan later migration activity and revalidation. Demo Migration should bring all of these decisions into focus before Full Migration begins.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for an X-Cart migration?**
 
-Standard Service may be enough when the source store is supported, the target X-Cart environment is ready, and the data can be represented through standard service capability. If the store depends on custom fields, add-ons, modules, custom code, or external-system relationships, the project should be reviewed more carefully.
+Standard Service may be enough when the source platform is supported, the target X-Cart environment is ready, and expected records fit supported migration behavior. If the store depends on custom fields, add-ons, custom modules, external identifiers, or unusual user and membership behavior, the project should be reviewed more carefully.
 
-**When should Managed Service be chosen for X-Cart?**
+**When should Managed Service be used for X-Cart?**
 
-Managed Service is useful when the migration fits standard service capability but the merchant wants Next-Cart-led execution. It does not automatically include custom development or custom migration logic adjustment.
+Managed Service is useful when the migration remains within standard capability but the merchant wants Next-Cart-led execution and more structured coordination. It does not automatically include custom development, unsupported data handling, or custom migration logic adjustment.
 
-**Can Add-ons help with an X-Cart migration?**
+**Can Add-ons solve custom X-Cart requirements?**
 
-Yes. Add-ons can help with filtering, supported field mapping, or data configuration when their default behavior fits the requirement. If an Add-on needs modification beyond its supported settings, the requirement is handled through Custom Service.
+Add-ons can help with filtering, supported field mapping, or supported data configuration. They should not be treated as a solution for unsupported add-on data, custom code, bespoke transformations, or source-specific business logic that requires Custom Service.
 
-**When does an X-Cart migration need Custom Service?**
+**How do Entity Points affect the X-Cart migration approach?**
 
-Custom Service should be reviewed when the migration involves a Custom Platform source, custom product logic, custom fields, unsupported add-on or module data, source-code modifications, external-system identifiers, or tailored behavior that standard service capability does not cover.
+Entity Points affect eligible record scope when Products, Customers, Orders, or Blog Posts are migrated for the first time. They do not decide whether a migration needs Standard Service, Managed Service, Add-ons, or Custom Service, because service path depends on data behavior and complexity.
 
-**Why is Demo Migration important before choosing the final approach?**
+**When are Additional Migration Options useful for X-Cart?**
 
-Demo Migration shows whether important records work inside X-Cart, not just whether records can be counted. Complex products, customer groups, orders, content, SEO values, and integration-sensitive records should be sampled before Full Migration approval.
+They are useful when source data continues changing, target configuration changes before launch, or follow-up migration activity is expected. Any later migration activity should be paired with revalidation of affected products, customers, orders, URLs, and configured behavior.

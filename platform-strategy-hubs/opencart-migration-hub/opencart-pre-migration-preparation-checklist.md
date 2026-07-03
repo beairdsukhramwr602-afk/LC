@@ -1,281 +1,143 @@
 # OpenCart Pre-Migration Preparation Checklist
 
-OpenCart preparation should define how the future storefront is expected to work before migration execution begins. The platform can support flexible catalog control, product options, attributes, filters, customer groups, multiple stores, SEO-friendly routes, extensions, themes, and modifications, but those strengths become safer only when the business governs them clearly.
+Preparing an OpenCart migration is not only a matter of exporting products, customers, and orders. OpenCart stores often look straightforward on the storefront, but important migration decisions sit inside product options, attributes, filters, categories, SEO keywords, customer groups, store settings, installed extensions, theme behavior, and payment or shipping configuration. A strong preparation process makes those layers visible before Demo Migration, so the migration scope can be tested against how the target store is expected to operate.
 
-This checklist helps merchants prepare for an OpenCart migration by clarifying the storefront structures, source-data decisions, and review samples that should be resolved before the migration result is judged ready. It is not a technical setup guide. It is a planning framework for deciding what OpenCart should preserve, what it should simplify, and where the migration path may need closer review.
+OpenCart preparation should therefore separate three kinds of work. First, merchants need to confirm which records should be migrated. Second, they need to identify which OpenCart settings or extension-driven behaviors must be recreated, configured, mapped, or reviewed separately. Third, they need to define what proof is required after Demo Migration and Full Migration. When those tasks are handled early, the migration is easier to scope, easier to validate, and less likely to be delayed by missing option values, duplicate SEO keywords, unsupported custom fields, or unclear extension dependencies.
 
-### What This Checklist Is For <a href="#what-this-checklist-is-for" id="what-this-checklist-is-for"></a>
+### Start With the OpenCart Store Structure <a href="#start-with-the-opencart-store-structure" id="start-with-the-opencart-store-structure"></a>
 
-A useful OpenCart preparation checklist reduces ambiguity before the migration reaches full execution pressure.
+Begin by documenting the active store structure rather than relying only on a product export. In OpenCart, the product record connects to catalog organization, customer-facing options, attribute data, manufacturer links, discount logic, images, SEO settings, and sometimes design overrides. A product list alone will not show whether those relationships are complete, whether they are used consistently, or whether some fields are only present because an extension added them.
 
-The goal is to clarify:
+The most useful first step is to create a short store map. The map should identify the active categories, manufacturers, key product groups, option sets, customer groups, main currencies, languages, tax settings, shipping methods, payment methods, active extensions, and important storefront pages. The goal is not to document every admin field. The goal is to define the parts of OpenCart that make the store usable after migration.
 
-* which product families depend on selectable option behavior
-* which product details should remain descriptive attributes
-* which values should support category and filter-led discovery
-* which customer groups still carry commercial meaning
-* which products, categories, information pages, settings, and routes belong in each store context
-* which legacy URLs and customer-account expectations deserve early review
-* which extension-, theme-, modification-, or custom-field behavior still affects storefront or operational outcomes
+| Preparation area             | What to collect                                                                                                 | Why it matters                                                                            |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Catalog hierarchy            | Active categories, parent-child relationships, manufacturer assignments, filters                                | Helps confirm how products should be discovered after migration.                          |
+| Product structure            | SKUs, model values, option sets, attributes, downloads, images, specials, discounts                             | Prevents product records from migrating as incomplete storefront items.                   |
+| SEO and URLs                 | SEO keywords, important category/product/manufacturer/information page URLs, duplicate or missing keyword cases | Protects organic traffic and prevents route conflicts after launch.                       |
+| Customer logic               | Customer groups, group-specific prices, discounts, approvals, tax-related expectations                          | Helps preserve customer segmentation and purchasing rules where supported.                |
+| Extensions and modifications | Installed extensions, modified templates, order total modules, payment/shipping modules, custom fields          | Identifies work that may require Add-ons, Custom Service, or target-side reconfiguration. |
 
-This is not a generic data-cleanup checklist. It is a decision checklist for making OpenCart governable as a Target Platform.
+This store map becomes the anchor for Demo Migration review. Without it, validation tends to focus on counts: how many products moved, how many orders moved, how many customers moved. Counts are useful, but they do not prove that OpenCart’s catalog logic, option behavior, SEO routes, and customer-facing rules survived in a usable form.
 
-### OpenCart Preparation Priorities <a href="#opencart-preparation-priorities" id="opencart-preparation-priorities"></a>
+### Prepare Product Options, Attributes, and Filters Separately <a href="#prepare-product-options-attributes-and-filters-separately" id="prepare-product-options-attributes-and-filters-separately"></a>
 
-#### 1. Define high-risk product structures first <a href="#id-1-define-high-risk-product-structures-first" id="id-1-define-high-risk-product-structures-first"></a>
+OpenCart preparation should not combine options, attributes, and filters into one generic “product details” task. These fields serve different storefront purposes. Options represent selectable purchase choices, such as size, color, file upload, date, or text input. Attributes describe product characteristics and can support product comparison. Filters help shoppers narrow catalog results when they are connected to categories and product groups.
 
-Start with the products most likely to expose weak product-choice decisions.
+Before migration, review whether options are reused consistently across products. A store may use a color option across hundreds of items, but the option values may not be standardized. One product might use “Navy,” another “Dark Blue,” and another “Blue - Navy.” If the target platform handles variants, modifiers, or option values differently, inconsistent source values can create messy product choice structures after migration.
 
-Before migration, identify:
+Attributes need a separate review because they are often descriptive rather than transactional. They may not determine purchasable variations, but they can still affect product comparison, filtering expectations, theme display, or technical specification pages. If attributes are treated as variants during planning, the target structure can become overcomplicated. If variant-like options are treated as simple attributes, customers may lose the ability to choose the correct product configuration.
 
-* high-revenue product families
-* products that depend on selectable choices
-* products that depend on text input, file upload, date input, or other customer-provided option behavior
-* products whose options affect price, stock, weight, availability, or buying confidence
-* products where the source store mixes variants, personalization, descriptive fields, or storefront behavior too loosely
-* products that would become weaker if represented with the wrong OpenCart structure
+Filters deserve their own preparation pass because they affect discovery rather than purchase configuration. Confirm which filters are actively used, which categories rely on them, and whether they are still meaningful. Old filter groups often remain in OpenCart after catalog changes. Migrating outdated filters can make the new store look full but confusing.
 
-The preparation goal is to make product behavior clear enough that migrated products can be judged by buyable meaning, not only by product count.
+| OpenCart field type | Preparation question                                                            | Migration risk if skipped                                       |
+| ------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Options             | Which options are required, price-changing, stock-related, or weight-affecting? | Customers may see missing or incorrect purchase choices.        |
+| Attributes          | Which attributes are meaningful specifications rather than selectable options?  | Product data may be mapped into the wrong target field type.    |
+| Filters             | Which filters are used by active categories and storefront navigation?          | Catalog discovery may become noisy or incomplete.               |
+| Option values       | Are naming conventions consistent across products?                              | Duplicated or fragmented values may appear in the target store. |
 
-#### 2. Clarify what belongs in options <a href="#id-2-clarify-what-belongs-in-options" id="id-2-clarify-what-belongs-in-options"></a>
+A strong preparation file should include representative samples, not just a list. Select several products with simple options, several with required options, several with price-changing options, several with many attributes, and several that depend on filters. Those products become the Demo Migration sample set.
 
-OpenCart options affect what customers can choose on a product page. They can support select, radio, checkbox, image, text, file, date, time, and related input behavior.
+### Review Categories, Manufacturers, and Product Links <a href="#review-categories-manufacturers-and-product-links" id="review-categories-manufacturers-and-product-links"></a>
 
-Before migration, decide:
+OpenCart products depend on more than their product page fields. Categories, manufacturers, related products, downloads, images, reward points, discounts, and specials can all affect how records appear and behave. These relationships should be reviewed before migration because they are easy to overlook in a flat export.
 
-* which product choices customers must select before purchase
-* which option values should appear for each product
-* which options should be required or optional
-* which options affect price, stock, weight, points, or checkout context
-* which source-side choices should not become OpenCart options because they are only descriptive information
+Category preparation should identify the active hierarchy and any categories that exist only for historical or administrative reasons. If a category no longer appears in navigation, decide whether it should still be migrated. If a category is used for SEO landing pages, confirm its URL, metadata, and product membership. If products belong to several categories, select sample products that prove multi-category assignment after Demo Migration.
 
-This helps prevent OpenCart from inheriting unclear source-side choice logic.
+Manufacturer preparation should confirm whether manufacturer pages matter to the business. Some OpenCart stores use manufacturers as visible brand landing pages. Others keep them as backend product fields. The migration plan should reflect that difference. A manufacturer field that is visible in storefront navigation or SEO should be validated more carefully than a manufacturer value used only for internal organization.
 
-#### 3. Clarify what belongs in attributes <a href="#id-3-clarify-what-belongs-in-attributes" id="id-3-clarify-what-belongs-in-attributes"></a>
+Related products, downloads, and product images should be treated as relationship data. Images may migrate as files and image references, but the storefront still needs correct ordering, thumbnail behavior, and product association. Downloads may require special handling if digital products are part of the business. Specials and discounts should be reviewed because customer-facing price logic may depend on dates, customer groups, or promotion rules that do not translate exactly into the Target Platform.
 
-OpenCart attributes are better suited to product description, specification, and comparison than direct customer selection.
+### Clean Up SEO Keywords and URL Evidence <a href="#clean-up-seo-keywords-and-url-evidence" id="clean-up-seo-keywords-and-url-evidence"></a>
 
-Before migration, identify:
+OpenCart SEO keyword preparation is essential because SEO keywords can apply to products, categories, manufacturers, and information pages. Keywords must be unique. That uniqueness requirement matters during migration because duplicate or missing SEO keywords can create route conflicts, unexpected URLs, or redirect planning gaps.
 
-* attributes customers use to compare products
-* attribute groups that should remain meaningful
-* specification values that should be cleaned, merged, or retired
-* descriptive fields that no longer help customers decide
-* values that are being confused with options or filters
+Before migration, export or record the important storefront URLs. Do not limit the list to product pages. Include category URLs, manufacturer URLs, information pages, and high-traffic landing pages. If the store uses manually edited SEO keywords, preserve those values in the preparation file. If some URLs are generated through extensions or custom rewrites, flag them separately because they may not be part of ordinary OpenCart data.
 
-A cleaner attribute plan helps the target catalog remain understandable after launch.
+A practical SEO preparation pass should separate four groups:
 
-#### 4. Define filter-led discovery <a href="#id-4-define-filter-led-discovery" id="id-4-define-filter-led-discovery"></a>
+| URL group         | What to review                                                            | Preparation output                                       |
+| ----------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Product URLs      | Active products, high-traffic products, products with edited SEO keywords | Sample URL list for redirect and validation review.      |
+| Category URLs     | Parent and child categories, important landing categories                 | Category hierarchy with current URLs.                    |
+| Manufacturer URLs | Brand pages that receive traffic or support navigation                    | Manufacturer URL list and visibility notes.              |
+| Information pages | Terms, policy, shipping, contact, static content pages                    | CMS/content URL list and target-side ownership decision. |
 
-Filters should be prepared around how customers narrow categories and find products.
+The goal is not to promise that every URL can remain identical. The goal is to know which URLs matter and what redirect or target routing decisions will be needed. SEO preparation should also flag duplicate keywords, blank keywords, and outdated pages. Fixing those issues before migration can make post-launch validation cleaner.
 
-Before migration, decide:
+### Identify Extensions, Modifications, and Theme-Dependent Behavior <a href="#identify-extensions-modifications-and-theme-dependent-behavior" id="identify-extensions-modifications-and-theme-dependent-behavior"></a>
 
-* which categories genuinely need filter behavior
-* which filter groups and filter values still help customers narrow results
-* which products should be assigned to those filters
-* whether inherited source filters still reflect real customer search behavior
-* whether categories and filters support each other clearly
+OpenCart stores often depend on extensions, modules, themes, and modifications that are not part of the standard product/customer/order record set. These dependencies should be inventoried before migration because they can determine whether Standard Service is enough or whether Add-ons or Custom Service need to be reviewed.
 
-This matters because OpenCart filters depend on category and product relationships. A migrated filter is useful only when it helps customers find the right products in the right context.
+The extension inventory should include installed payment gateways, shipping methods, order total modules, marketing extensions, feed integrations, analytics scripts, review modules, marketplace connectors, SEO extensions, product option enhancements, checkout extensions, and any custom admin fields. For each extension, identify whether it creates data, changes storefront behavior, changes checkout behavior, affects URLs, or only changes presentation.
 
-#### 5. Review category, manufacturer, and information-page structure <a href="#id-5-review-category-manufacturer-and-information-page-structure" id="id-5-review-category-manufacturer-and-information-page-structure"></a>
+Do not assume every extension needs to be migrated. Some extensions should be replaced by native target features. Some should be configured again on the Target Platform. Some may contain historical data that needs review. Some may be irrelevant after migration. The preparation task is to classify them, not to transfer them blindly.
 
-OpenCart preparation should also cover the storefront paths surrounding products.
+| Extension role                      | Preparation decision                                                          | Likely handling path                                                             |
+| ----------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Presentation/theme module           | Does it affect data or only layout?                                           | Target-side theme rebuild or configuration.                                      |
+| Product data extension              | Does it add custom fields, option logic, feeds, bundles, or specifications?   | Add-ons or Custom Service review depending on support.                           |
+| Checkout/payment/shipping extension | Does it store order-critical behavior or only connect to a provider?          | Reconfiguration on Target Platform; data migration only if records are involved. |
+| SEO/URL extension                   | Does it generate routes, redirects, metadata, or canonical logic?             | SEO mapping, redirect planning, or Custom Service review.                        |
+| Integration/feed extension          | Does it connect to ERP, marketplace, POS, accounting, or fulfillment systems? | Integration discovery and target-side replacement planning.                      |
 
-Before migration, identify:
+This distinction protects the migration from scope creep. A migration can move commerce records, but it does not automatically reproduce every extension, template customization, external integration, or checkout workflow. Those items need separate planning and ownership.
 
-* categories that drive revenue, search visibility, or customer navigation
-* category names and hierarchy levels that should be simplified
-* manufacturer or brand values that still help product discovery
-* information pages that support trust, service, policies, or buying confidence
-* inherited pages or structures that no longer deserve migration priority
+### Prepare Customer Groups, Orders, and Historical Records <a href="#prepare-customer-groups-orders-and-historical-records" id="prepare-customer-groups-orders-and-historical-records"></a>
 
-This keeps the future OpenCart store from carrying unnecessary legacy clutter while protecting the structures that still matter.
+Customer and order preparation should confirm what the merchant expects to use after migration. OpenCart customer groups can affect customer organization and pricing behavior. Orders may contain statuses, totals, taxes, shipping/payment labels, coupons, vouchers, product options, and historical customer details. Migrating the records is only useful if the target store can display and interpret them in a way the business can use.
 
-#### 6. Define customer-group meaning <a href="#id-6-define-customer-group-meaning" id="id-6-define-customer-group-meaning"></a>
+Before migration, prepare samples from ordinary customers, wholesale or special customer groups, guest customers, customers with reward points or store credit where used, and customers tied to important order history. For orders, choose samples with simple products, option-selected products, discounts, specials, taxes, shipping charges, refunds or returns where relevant, and different statuses.
 
-Customer groups should be prepared as commercial context, not only as customer labels.
+Historical orders should be reviewed for operational purpose. Some merchants need them for customer service lookup. Others need them for accounting references. Others want them visible in customer accounts. The target expectation changes how validation should be conducted. If order history only needs to be searchable by staff, the pass condition is different from a store where customers must see complete historical order details in their accounts.
 
-Before migration, clarify:
+### Prepare the Target Store Before Demo Migration <a href="#prepare-the-target-store-before-demo-migration" id="prepare-the-target-store-before-demo-migration"></a>
 
-* which customer groups are still useful
-* which groups affect pricing expectations, access, tax context, segmentation, or storefront treatment
-* which source-side groups should be simplified or retired
-* which customer-group scenarios should appear in Demo Migration review
-* whether returning customers will expect differentiated behavior after launch
+Preparation should include the Target Platform environment, not only the OpenCart source store. A Demo Migration can only prove meaningful results if the target store has enough structure to display migrated records correctly. That does not mean every design detail must be finished, but the store should be prepared enough to test products, categories, options, customer groups, URLs, and order history.
 
-Customer records can migrate while customer meaning remains unclear. Preparation should prevent that gap.
+At minimum, confirm the target store is accessible, the admin user has sufficient permission, the destination is not filled with unrelated test data, and core settings such as currency, language, tax, weight, length, stock, and customer account behavior are known. If the target platform requires specific product type decisions, collection setup, customer-group equivalents, URL behavior, or app configuration, those decisions should be documented before Demo Migration.
 
-#### 7. Decide what belongs in each store context <a href="#id-7-decide-what-belongs-in-each-store-context" id="id-7-decide-what-belongs-in-each-store-context"></a>
+Demo Migration should use representative records, not only easy ones. Include products with required options, price-changing options, attributes, filters, multiple categories, specials, discounts, manufacturer links, images, and SEO keywords. Include customers from different customer groups and orders with meaningful totals and option selections.
 
-If the OpenCart target will use more than one store, store scope should be prepared before migration review begins.
-
-Before migration, decide:
-
-* what should remain shared across stores
-* what should differ by store
-* which products, categories, information pages, routes, settings, and design expectations belong to each store
-* whether customer groups should behave differently by store context
-* whether multiple stores reflect a real operating need or unnecessary future ambition
-
-Multi-store preparation should be based on business reason, not on optional flexibility.
-
-#### 8. Prioritize legacy URLs by business value <a href="#id-8-prioritize-legacy-urls-by-business-value" id="id-8-prioritize-legacy-urls-by-business-value"></a>
-
-OpenCart can support SEO-friendly URL planning, but preparation should focus on destination relevance rather than readable paths alone.
-
-Before migration, identify:
-
-* product URLs that carry traffic, revenue, backlinks, or customer trust
-* category and manufacturer URLs that support discovery
-* information-page routes that support policies, trust, or support value
-* legacy paths that should not be redirected to generic destinations
-* source URL patterns that may not map cleanly into the future OpenCart structure
-
-A route is safe only when the destination still supports the purpose of the original page.
-
-#### 9. Define customer-account continuity expectations <a href="#id-9-define-customer-account-continuity-expectations" id="id-9-define-customer-account-continuity-expectations"></a>
-
-Customer-account continuity should be prepared honestly before launch planning begins.
-
-Before migration, clarify:
-
-* whether password continuity is realistic for the selected migration path
-* what returning customers should expect at first login
-* whether reset instructions, support messaging, or account guidance may be needed
-* which customer groups or repeat-customer segments are most sensitive
-* how support should handle account-access friction after launch
-
-Imported customer records are not the same as a credible returning-customer experience.
-
-#### 10. Document extension-, theme-, and modification-owned behavior <a href="#id-10-document-extension-theme-and-modification-owned-behavior" id="id-10-document-extension-theme-and-modification-owned-behavior"></a>
-
-OpenCart stores often depend on extensions, themes, modifications, and custom fields that shape business meaning outside ordinary catalog records.
-
-Before migration, identify:
-
-* extensions that affect products, pricing, filtering, search, checkout, shipping, payment, SEO, or reporting
-* theme behavior that affects navigation, trust, product display, or buying confidence
-* modifications that change storefront or administrative behavior
-* custom fields that affect product display, internal workflows, or external systems
-* outside-system identifiers used by ERP, CRM, fulfillment, marketplace, or reporting systems
-
-The business does not need to preserve every installed extension. It needs to know which extension-owned meanings still matter.
-
-#### 11. Build the Demo Migration sample around structural risk <a href="#id-11-build-the-demo-migration-sample-around-structural-risk" id="id-11-build-the-demo-migration-sample-around-structural-risk"></a>
-
-A Demo Migration is more useful when the sample is chosen to expose the areas most likely to fail.
-
-For OpenCart, include samples such as:
-
-* products with important options or customer input behavior
-* products with attributes used for comparison
-* categories where filters shape discovery
-* customer groups with pricing, access, segmentation, or account implications
-* multi-store placements that must be correct
-* high-value product, category, manufacturer, or information-page URLs
-* extension-, theme-, modification-, or custom-field behavior that affects real storefront outcomes
-
-A convenient sample may show that data can move. A risk-based sample helps show whether the OpenCart target is structurally credible.
-
-#### 12. Decide what OpenCart should formalize and what must remain unchanged <a href="#id-12-decide-what-opencart-should-formalize-and-what-must-remain-unchanged" id="id-12-decide-what-opencart-should-formalize-and-what-must-remain-unchanged"></a>
-
-OpenCart preparation should include a clear decision about what the future store is allowed to make cleaner.
-
-Before migration, decide:
-
-* which product choices must remain exact
-* which descriptive attributes should be cleaned or reorganized
-* which filters should be rebuilt around current customer behavior
-* which category or manufacturer structures should be simplified
-* which customer groups must remain intact
-* which store assignments are non-negotiable
-* which URLs must preserve intent
-* which extension-owned behavior requires specialized review
-
-OpenCart is safer when flexibility is governed. Preparation should not preserve source-side complexity simply because it exists.
-
-### Practical OpenCart Preparation Sequence <a href="#practical-opencart-preparation-sequence" id="practical-opencart-preparation-sequence"></a>
-
-#### Start with product-choice behavior <a href="#start-with-product-choice-behavior" id="start-with-product-choice-behavior"></a>
-
-Begin with the products most likely to expose option ambiguity, custom input requirements, or incorrect buyable behavior.
-
-#### Separate options, attributes, and filters <a href="#separate-options-attributes-and-filters" id="separate-options-attributes-and-filters"></a>
-
-Then classify which values are customer choices, which are specifications, and which support category-level discovery.
-
-#### Review category and route priorities <a href="#review-category-and-route-priorities" id="review-category-and-route-priorities"></a>
-
-Next, connect important categories, manufacturer paths, information pages, and legacy URLs to the customer journeys they support.
-
-#### Define customer groups and account expectations <a href="#define-customer-groups-and-account-expectations" id="define-customer-groups-and-account-expectations"></a>
-
-Prepare the customer context that affects pricing, access, segmentation, repeat-customer trust, and first-login expectations.
-
-#### Decide store assignments <a href="#decide-store-assignments" id="decide-store-assignments"></a>
-
-If multiple stores are involved, confirm what belongs in each store context before placement errors become difficult to diagnose.
-
-#### Classify extension-shaped behavior <a href="#classify-extension-shaped-behavior" id="classify-extension-shaped-behavior"></a>
-
-Separate native OpenCart structure from extension-, theme-, modification-, custom-field, or outside-system behavior that may need specialized handling.
-
-#### Choose representative validation samples <a href="#choose-representative-validation-samples" id="choose-representative-validation-samples"></a>
-
-Build the Demo Migration sample around the highest-risk structures, not the easiest records to review.
-
-### When Custom Platform Sources Need Extra Preparation <a href="#when-custom-platform-sources-need-extra-preparation" id="when-custom-platform-sources-need-extra-preparation"></a>
-
-When the Source Platform is a Custom Platform, OpenCart preparation usually needs earlier interpretation.
-
-That is because source-side product-choice logic, descriptive product meaning, discovery behavior, customer segmentation, store context, identifiers, or route behavior may sit in structures that do not align neatly with OpenCart products, options, attributes, filters, customer groups, multi-store behavior, or SEO URLs.
-
-#### What should be reviewed earlier <a href="#what-should-be-reviewed-earlier" id="what-should-be-reviewed-earlier"></a>
-
-A Custom Platform source usually requires earlier review of:
-
-* how source product-choice logic should become OpenCart option behavior or other target structure
-* which source fields should become attributes, filters, extension-owned behavior, or excluded legacy data
-* whether customer-group, pricing, access, or segmentation logic can be represented clearly
-* whether store context can be mapped safely into OpenCart multi-store behavior
-* whether source-side identifiers are needed for external systems
-* whether custom migration logic adjustment is required to preserve meaningful behavior
-* which samples must be included before full migration confidence is possible
-
-#### How this affects service-path thinking <a href="#how-this-affects-service-path-thinking" id="how-this-affects-service-path-thinking"></a>
-
-Custom Platform sources commonly point toward **Custom Service** when interpretation, transformation, custom fields, outside-system identifiers, app/plugin/module/extension data, or custom migration logic adjustment is required.
-
-This does not automatically mean Next-Cart performs the full migration execution. It means the standard migration path should not be assumed sufficient until the custom structures are reviewed and the required service responsibility is clear.
+### Decide What Belongs in Standard Service, Add-ons, or Custom Service Review <a href="#decide-what-belongs-in-standard-service-add-ons-or-custom-service-review" id="decide-what-belongs-in-standard-service-add-ons-or-custom-service-review"></a>
+
+A preparation checklist should end with a service-scope decision. Standard Service may be appropriate when the store relies mainly on ordinary supported OpenCart records and conventional catalog behavior. Add-ons may help when supported data needs filtering, mapping, or configuration adjustments. Custom Service becomes relevant when extension-owned fields, bespoke tables, modified logic, external identifiers, unusual option structures, or custom checkout records need tailored review.
+
+| Preparation finding                                                                                | What it means                                                              | Likely next step                                                 |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Ordinary products, categories, customers, orders, manufacturers, reviews, coupons, and CMS content | Scope is mostly standard commerce data.                                    | Demo Migration through a standard path may be reasonable.        |
+| Large catalog with selected date ranges, category subsets, or mapping adjustments                  | Supported records need bounded control.                                    | Review Add-ons such as filtering or advanced mapping.            |
+| Extension-owned product fields or custom tables                                                    | Source data may not exist in ordinary OpenCart exports.                    | Request Custom Service review.                                   |
+| Complex options, modified checkout, or external integration IDs                                    | The migration may need tailored logic or target-side replacement planning. | Separate migration scope from integration or configuration work. |
+| Later catalog changes are expected before launch                                                   | The migration path may need follow-up handling.                            | Plan Additional Migration Options and revalidation steps.        |
+
+Entity Points should also be considered during preparation. Eligible Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because another migration action happens on the same migration path. That distinction matters when planning a launch window, especially if the source store will continue receiving new products, customers, or orders before final cutover.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-An OpenCart migration is easiest to prepare when the business treats flexibility as something to govern, not something to assume.
+OpenCart migration preparation is strongest when it treats the store as a connected operating environment rather than a set of isolated export files. Products, options, attributes, filters, categories, SEO keywords, customer groups, orders, extensions, and store settings all shape the migration outcome. Preparing those layers before Demo Migration gives merchants a clearer scope, better samples, stronger validation evidence, and a more realistic service-path decision.
 
-The strongest preparation clarifies product choices, attributes, filters, categories, customer groups, store assignments, route priorities, customer-account expectations, and extension-shaped behavior before execution pressure increases. When those areas are defined clearly, OpenCart becomes easier to validate and safer to operate after launch.
+The best preparation work is practical and selective. It does not require documenting every field in the store. It requires identifying which data structures and behaviors make the OpenCart store usable, which ones are standard enough to migrate directly, which ones need Add-ons, and which ones require Custom Service or target-side configuration planning.
 
-Before moving deeper into execution, build the OpenCart preparation checklist around the products, browse paths, customer scenarios, store contexts, URLs, and extension-dependent behaviors that matter most. If those areas remain difficult to classify, Live Chat can help determine whether the issue is routine OpenCart translation, a higher-burden managed path, or a sign that Custom Service review is safer.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Should every OpenCart extension be migrated?**
 
-**What should be prepared first before migrating into OpenCart?**
+No. Many OpenCart extensions control storefront behavior, checkout connections, feeds, or presentation rather than portable data. Each extension should be classified by whether it creates records, changes mapping expectations, affects URLs, or needs to be replaced through target-side configuration.
 
-Start with the product families most likely to expose option ambiguity or incorrect buying behavior. After that, clarify attributes, filters, category paths, customer groups, store assignments, URL priorities, and extension-shaped behavior.
+**Why should options and attributes be prepared separately?**
 
-**Why are options, attributes, and filters such important preparation topics?**
+Options and attributes serve different purposes. Options are customer-facing purchase selections that may affect price, stock, points, or weight. Attributes describe product characteristics and may support comparison or display. Mixing them during preparation can lead to incorrect target structures.
 
-Because they represent different kinds of storefront meaning. Options affect customer selection, attributes support product description and comparison, and filters support category-level discovery. If those meanings are mixed, the migrated store can look complete while working poorly.
+**What OpenCart records should be included in Demo Migration samples?**
 
-**Should OpenCart preparation focus mainly on products?**
+Samples should include ordinary products, products with required and price-changing options, products with attributes and filters, multi-category products, customer groups, orders with discounts or taxes, high-value URLs, and records affected by important extensions.
 
-No. Products are central, but OpenCart preparation is also sensitive around browse logic, customer groups, multi-store assignments, SEO URLs, customer-account expectations, and extension- or modification-owned behavior.
+**Do SEO keywords automatically solve URL continuity?**
 
-**When does OpenCart preparation usually need Custom Service review?**
+No. SEO keywords are important evidence, but the target store may route products, categories, manufacturers, and content pages differently. Important URLs should be collected and used for redirect and validation planning.
 
-Custom Service review is usually safer when the Source Platform is a Custom Platform, when important meaning depends on custom fields or outside-system identifiers, or when app, plugin, module, extension, theme, or modification behavior must be interpreted or adjusted rather than simply transferred.
+**When should Custom Service be considered for OpenCart?**
 
-**Does Custom Service mean Next-Cart performs the whole migration for the customer?**
-
-Not automatically. Custom Service means customization or specialized handling is required. Migration management is included only when it is part of the final plan; otherwise, customers can still access and self-perform the migration process on the Next-Cart website if that is the agreed service responsibility.
+Custom Service should be considered when the store depends on unsupported extension data, custom tables, modified checkout logic, bespoke product fields, external identifiers, or migration behavior that cannot be handled through supported standard records or bounded Add-ons.

@@ -87,7 +87,7 @@ Prepare customer samples that include:
 
 Password expectations should be set early. Password continuity depends on source and target compatibility. If passwords cannot be preserved in a way that supports customer login, first-login reset planning and customer communication should be part of readiness planning.
 
-### 5. Prepare Order and Historical Workflow Samples <a href="#id-5-prepare-order-and-historical-workflow-samples" id="id-5-prepare-order-and-historical-workflow-samples"></a>
+### 5. Prepare Order and Historical Process Samples <a href="#id-5-prepare-order-and-historical-process-samples" id="id-5-prepare-order-and-historical-process-samples"></a>
 
 Order migration should preserve historical readability. Preparation should identify order examples that represent how the business actually uses order history.
 
@@ -108,7 +108,7 @@ Do not confuse historical order preservation with live checkout readiness. Migra
 
 ### 6. Inventory Modules, Extensions, and Custom Data <a href="#id-6-inventory-modules-extensions-and-custom-data" id="id-6-inventory-modules-extensions-and-custom-data"></a>
 
-Modules and add-ons can change the meaning of products, customers, orders, checkout, SEO, reports, B2B workflows, marketplaces, and integrations. Preparation should classify each extension according to its migration relevance.
+Modules and add-ons can change the meaning of products, customers, orders, checkout, SEO, reports, B2B processs, marketplaces, and integrations. Preparation should classify each extension according to its migration relevance.
 
 | Module or custom area                                          | What to confirm                                                                                               |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -194,13 +194,51 @@ Custom Service review should be considered when the requirement involves:
 * non-standard B2B, checkout, payment, shipping, tax, or order logic;
 * tailored migration behavior beyond Standard Add-on capability.
 
+### Define Scope Ownership Before Full Migration <a href="#define-scope-ownership-before-full-migration" id="define-scope-ownership-before-full-migration"></a>
+
+Preparation should end with a clear ownership view. Some items are migration scope, some are target configuration, and some are business decisions that the merchant must resolve before launch. This distinction is especially important for osCommerce because the platform can combine migrated records with App Shop apps, modules, sales channels, Design and CMS settings, SEO rules, and server-level responsibility.
+
+Use the preparation stage to assign every major area to one of four handling paths: migrate as supported data, configure in the target store, review through an Add-on, or review through Custom Service. Products, Customers, Orders, Reviews, Coupons, CMS Pages, and Blog Posts may be migration records where supported. Payment methods, shipping rates, tax settings, live checkout behavior, installed apps, sales channel setup, themes, email delivery, security settings, and domain launch behavior usually require target-side setup or implementation review.
+
+| Scope area                 | Preparation decision                                                                                   | Risk if ignored                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Catalog records            | Which Products, categories, attributes, properties, images, reviews, and stock details should migrate. | Products appear in the target but do not behave or display correctly. |
+| Customer and group records | Which customers, addresses, groups, and account relationships must remain meaningful.                  | Customer history is present but commercial rules are unclear.         |
+| Order history              | Which statuses, comments, totals, coupons, shipping labels, and payment labels must remain readable.   | Staff cannot interpret old orders after launch.                       |
+| CMS and SEO continuity     | Which CMS Pages, menus, metadata, and URLs must be preserved or redirected.                            | Search visibility and customer discovery weaken after migration.      |
+| Modules and custom records | Which extension-owned or custom data requires special handling.                                        | Critical business data is excluded from standard scope.               |
+
+This ownership view should be reviewed before Full Migration. If the team cannot say who owns each area, the project is not ready for launch timing. A cleaner migration scope is created when each item has a handling path before data begins moving at scale.
+
+### Preparation Evidence Matrix <a href="#preparation-evidence-matrix" id="preparation-evidence-matrix"></a>
+
+Preparation should produce evidence, not just confidence. osCommerce migration involves too many linked areas to rely on general statements such as “the catalog is ready” or “orders are clean.” A usable preparation file should show which samples prove each part of the target store: category discovery, product properties, customer groups, order totals, coupons, CMS Pages, SEO paths, modules, and custom data.
+
+| Preparation area              | Evidence to collect                                                                               | Why it matters before Demo Migration                                    |
+| ----------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Catalog and discovery         | Representative categories, products, brands, filters, properties, and search terms.               | Proves that migrated Products can be found and understood by customers. |
+| Customer and commercial rules | Customer groups, wholesale examples, tax-sensitive accounts, and discount cases.                  | Shows whether customer meaning is simple data or target behavior.       |
+| Orders and accounting history | Orders with different statuses, coupons, taxes, gift cards, payment labels, and shipping methods. | Prevents order history from passing by total alone.                     |
+| Content and SEO               | High-value CMS Pages, menus, metadata, redirects, sitemap priorities, and analytics paths.        | Protects traffic and storefront continuity.                             |
+| Modules and custom data       | Module list, old add-ons, custom fields, external identifiers, and integration touchpoints.       | Separates standard migration scope from Custom Service review.          |
+
+### Readiness Review Before Full Migration <a href="#readiness-review-before-full-migration" id="readiness-review-before-full-migration"></a>
+
+Before Full Migration, the team should convert the preparation checklist into a readiness decision. The question is not whether every source record has been listed. The question is whether the selected evidence is strong enough to represent the store that will launch. A small Demo Migration sample can be useful only when it includes the records that expose real complexity: multi-category products, attribute-heavy products, wholesale customers, old orders with discounts, CMS Pages with SEO value, and records created by modules or custom code.
+
+The readiness review should also identify which items are excluded deliberately. Some legacy modules may no longer support the target operating model. Some old CMS Pages may be retired. Some reports may be rebuilt outside osCommerce. Some custom records may require Custom Service rather than a standard path. These decisions should be made before launch pressure turns exclusions into surprises.
+
+A strong osCommerce preparation process ends with three lists: records ready for migration, target-side configuration still required, and items requiring Add-ons or Custom Service review. Without these lists, preparation remains a collection of tasks rather than a usable migration control system.
+
+Preparation is complete only when these lists can be reviewed without guessing which team owns the next action.
+
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
 osCommerce preparation should make the migration testable before the main data move. The source version, catalog structure, customer groups, orders, modules, content, SEO priorities, hosting environment, and custom data should be understood early enough to shape the Demo Migration and service scope. Without that preparation, a migration can appear successful at the record-count level while still missing the structures that make the target store usable.
 
 Before starting Full Migration, prepare a sample set that reflects real business complexity and review the Demo Migration results carefully. If the sample exposes unsupported custom data, module-owned records, old-version behavior, or transformation needs beyond standard service capability, resolve the scope through Add-ons or Custom Service review before continuing.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should I prepare first for an osCommerce migration?**
 

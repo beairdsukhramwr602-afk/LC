@@ -1,133 +1,148 @@
 # OsCommerce Fit: Ideal and Non-Ideal Migration Profiles
 
-Choosing osCommerce as a Target Platform is mainly a question of control, technical readiness, catalog complexity, and long-term operating responsibility. osCommerce can be a strong fit for merchants that want an open-source commerce environment with direct control over hosting, code, extensions, storefront structure, and data ownership. It is usually a weaker fit when the business wants a closed SaaS experience, minimal technical responsibility, or guaranteed parity with an old, heavily customized source store without deeper review.
+Choosing osCommerce as a Target Platform is not only a question of whether store records can be migrated. It is a question of whether the merchant wants the operating model that osCommerce represents: open-source control, configurable v4 commerce behavior, sales-channel planning, app/module flexibility, CMS and SEO responsibility, and enough technical ownership to validate the store after migration.
 
-The best-fit osCommerce migration projects are usually clear about what the target store should become. They do not treat osCommerce as a simple replacement for any legacy shopping cart. They define catalog structure, customer groups, order history expectations, extensions, storefront behavior, and maintenance responsibility before migration scope is finalized.
+osCommerce can be a strong fit for merchants who need control and are prepared to manage the target environment with discipline. It can be a conditional fit for merchants with older customized stores, unclear add-on history, or complex catalog behavior that needs discovery before scope is confirmed. It can be a weak fit for merchants who expect a turnkey hosted environment where platform maintenance, app behavior, theme work, and custom logic are handled automatically.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+### What osCommerce Fit Means in Migration Planning <a href="#what-oscommerce-fit-means-in-migration-planning" id="what-oscommerce-fit-means-in-migration-planning"></a>
 
-The practical question is not simply whether osCommerce can receive products, customers, orders, and CMS Pages. A better question is whether osCommerce is the right operating environment for the store after migration.
+Fit should be evaluated through operating assumptions, not platform name recognition. A merchant may choose osCommerce because it is open source, familiar, flexible, or historically connected to their current store. Those can be valid reasons, but they are not enough. The migration plan must determine whether the current data, business rules, and support expectations can be represented in osCommerce without creating hidden launch risk.
 
-A strong fit usually means the merchant wants control and can manage the responsibility that comes with it. A weaker fit usually means the merchant wants simplicity more than flexibility, or the existing store depends on old add-ons, custom tables, forked platform behavior, or source-specific workflows that need detailed interpretation before moving.
+The first fit question is ownership. osCommerce gives merchants more control than many hosted platforms, but that control comes with responsibility for environment readiness, configuration decisions, apps/modules, and target-side validation. A merchant who wants ownership and has the capacity to manage it may be a strong candidate. A merchant who wants the platform to absorb every operational detail automatically may find osCommerce harder than expected.
 
-### What Makes OsCommerce a Strong Fit <a href="#what-makes-oscommerce-a-strong-fit" id="what-makes-oscommerce-a-strong-fit"></a>
+The second fit question is data interpretation. osCommerce v4 includes administrative areas for products/catalogue, sales channels, App Shop, Design and CMS, SEO, modules, managers, settings, customers, orders, marketing tools, taxes, currencies, and languages. Fit improves when the merchant can identify which of those target structures matter to the migrated store. Fit weakens when source data is poorly understood, heavily customized, or dependent on behaviors that no one can explain.
 
-#### Open-source control and direct ownership <a href="#open-source-control-and-direct-ownership" id="open-source-control-and-direct-ownership"></a>
+The third fit question is migration scope. Some stores can use a comparatively standard path because the main requirement is moving supported Products, Customers, Orders, categories, and related records. Other stores need guided scoping because old add-ons, custom fields, sales-channel rules, app/module data, SEO structure, or custom code affect the meaning of the data. Fit does not require simplicity, but it does require clarity.
 
-osCommerce is a good fit for merchants that want to own more of the target environment. Hosting, code, themes, modules, integrations, and extension choices can be shaped more directly than on many SaaS platforms.
+| Fit dimension       | Strong signal                                                                             | Needs more review                                                                    |
+| ------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Ownership model     | Merchant wants open-source control and can manage hosting/configuration responsibility.   | Merchant expects hosted simplicity without technical ownership.                      |
+| Catalog structure   | Products, categories, attributes, properties, stock, and brands can be clearly explained. | Product behavior depends on old add-ons, custom tables, or manual workarounds.       |
+| Sales channels      | Channel needs are known before migration.                                                 | Source storefront/channel relationships are unclear or mixed with marketplace logic. |
+| Apps and modules    | Required apps/modules are identified and target-side setup is planned.                    | Existing behavior comes from source extensions with unknown data structures.         |
+| SEO/CMS             | Content, menus, pages, metadata, and redirects have clear continuity requirements.        | SEO and content assets are scattered, outdated, or unmanaged.                        |
+| Validation capacity | Merchant can review Demo Migration evidence against business rules.                       | Merchant only plans to check record counts.                                          |
 
-That control is useful when the business has technical support, a development partner, or internal resources that can maintain the store responsibly. It is less useful when the merchant wants the platform vendor to absorb most operational decisions.
-
-#### Flexible catalog and storefront structure <a href="#flexible-catalog-and-storefront-structure" id="flexible-catalog-and-storefront-structure"></a>
-
-osCommerce can support detailed product and storefront organization, including products, categories, brands, attributes, properties, product groups, images, stock behavior, CMS Pages, sales channels, menus, and SEO fields. This makes it suitable for merchants whose catalog needs more than a flat product list.
-
-The fit is strongest when the merchant can describe how products should be found, filtered, grouped, displayed, priced, and ordered after migration. If product meaning depends on many source-specific fields or legacy customizations, the platform may still fit, but planning should be deeper.
-
-#### Extension-supported business needs <a href="#extension-supported-business-needs" id="extension-supported-business-needs"></a>
-
-The osCommerce ecosystem can support payment, shipping, design, SEO, B2B, marketplace, reporting, connector, and operational behavior through modules, apps, and custom development. This is valuable for merchants that expect the target store to evolve after migration.
-
-The important distinction is that extension availability does not automatically mean source extension data will migrate as standard data. The store is a stronger fit when extension needs are understood before migration, not discovered after the first test result.
-
-#### Better fit for merchants comfortable with configuration <a href="#better-fit-for-merchants-comfortable-with-configuration" id="better-fit-for-merchants-comfortable-with-configuration"></a>
-
-osCommerce works well for merchants that expect to configure the target store actively. Payment modules, shipping methods, taxes, customer groups, CMS content, themes, stock behavior, sales channels, and SEO settings need planning and validation.
-
-Merchants who expect migration alone to deliver a fully configured live store may find osCommerce more demanding than expected. A good fit requires the business to separate migrated data from target-store setup.
-
-### Where OsCommerce Is Often a Strong Fit <a href="#where-oscommerce-is-often-a-strong-fit" id="where-oscommerce-is-often-a-strong-fit"></a>
-
-osCommerce is often a strong fit when the migration goal includes control, customization potential, and long-term ownership of the commerce environment.
-
-Common strong-fit situations include:
-
-* merchants moving from an older open-source platform and wanting a modernized open-source target;
-* stores with structured catalogs that need categories, brands, attributes, properties, stock, images, and SEO fields to remain meaningful;
-* businesses that want code-level or module-level flexibility after migration;
-* merchants with developer access or a trusted service partner for hosting, updates, extensions, and custom work;
-* stores that need sales-channel, multilingual, multicurrency, B2B, or CMS flexibility and are prepared to validate those areas;
-* merchants that prefer direct control over relying entirely on a hosted SaaS operating model.
-
-In these cases, osCommerce can be a practical target because the platform’s flexibility supports a more controlled migration outcome. The fit becomes stronger when the merchant also has realistic expectations about configuration, testing, and post-migration maintenance.
-
-### Where OsCommerce Is Often a Weaker Fit <a href="#where-oscommerce-is-often-a-weaker-fit" id="where-oscommerce-is-often-a-weaker-fit"></a>
-
-osCommerce is often a weaker fit when the merchant wants a low-maintenance hosted platform with limited technical involvement. It can also be a weaker fit when the source store is old, forked, heavily customized, or dependent on add-ons that have no clear target equivalent.
-
-Higher-risk situations include:
-
-* merchants expecting a fully managed SaaS experience with minimal hosting or maintenance responsibility;
-* stores where the source platform is an old osCommerce build, osCommerce-derived fork, or modified database with unclear schema changes;
-* businesses that depend on custom checkout, custom pricing, B2B rules, marketplace connectors, or non-standard customer data without documentation;
-* catalogs where options, attributes, properties, bundles, filters, or product groups are poorly understood;
-* stores that need exact storefront, theme, URL, or extension parity without accepting target-specific redesign or configuration work;
-* merchants that cannot validate migrated results beyond checking record counts.
-
-A weaker fit does not always mean osCommerce should be rejected. It means the project needs clearer evidence, stronger samples, and possibly a different service approach before the target choice is considered safe.
+A good fit decision creates a migration scope that can be tested. A weak fit decision relies on assumptions that only surface after launch.
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-| Merchant profile                                        | Why osCommerce can fit well                                                                                                    | What should still be confirmed                                                                                          |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| Open-source merchant modernizing from an older platform | The merchant already understands hosted responsibility, extension management, and direct platform control.                     | Confirm whether the source store is standard, modified, forked, or dependent on legacy add-ons.                         |
-| Catalog-heavy store with structured product data        | osCommerce can support categories, brands, attributes, properties, images, stock, SEO fields, and product grouping.            | Confirm how source options, variants, filters, specifications, and custom fields should map into the target structure.  |
-| Merchant with developer or agency support               | Technical resources can help manage hosting, modules, theme work, App Shop extensions, and custom adjustments.                 | Confirm which tasks are migration scope, which are target configuration, and which require development after migration. |
-| B2B or trade-oriented merchant                          | Customer groups, pricing context, account behavior, and module-supported workflows can support more controlled business rules. | Confirm whether B2B logic is standard, extension-owned, custom-coded, or tied to outside systems.                       |
-| Store needing storefront and CMS control                | Themes, CMS Pages, menus, content blocks, SEO fields, and sales-channel structure can support a more tailored storefront.      | Confirm content, URL, theme, language, currency, and sales-channel requirements before Demo Migration validation.       |
-| Merchant planning staged improvement after migration    | osCommerce can serve as a flexible base for later configuration, module additions, or custom development.                      | Confirm the first migration outcome separately from future enhancement work.                                            |
+osCommerce is a strong fit for merchants who want open-source control and understand that migration includes target-store readiness. These merchants are not simply looking for a place to store product and order records. They want a platform where catalog structure, channels, modules, CMS, and SEO can be managed with enough flexibility to support their future operating model.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+One strong-fit profile is the merchant moving from an older open-source or self-hosted environment and wanting to modernize without losing ownership. The source store may contain years of product, customer, and order history, but the merchant is willing to review what should be carried forward and what should be retired. This profile works well when the team can separate valuable historical data from old technical debt.
 
-| Merchant profile                                          | Why the fit is riskier                                                                                                                       | Safer evaluation path                                                                                                                   |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Merchant seeking a hands-off SaaS model                   | osCommerce requires more active hosting, configuration, maintenance, and technical responsibility than a fully managed SaaS platform.        | Consider whether a hosted platform would better match the operating model, or plan technical support before migration.                  |
-| Store using an old osCommerce or related fork as source   | Legacy schemas, custom add-ons, modified checkout behavior, and old database conventions can differ from a clean osCommerce v4 target.       | Review version, database structure, custom tables, add-ons, and representative records before service scope is chosen.                  |
-| Catalog with unclear option or attribute logic            | Product options, filters, properties, bundles, and grouped products can lose meaning if their source roles are not understood.               | Build Demo Migration samples around the most complex products, not only simple products.                                                |
-| Store dependent on custom modules or outside integrations | Payment, shipping, ERP, marketplace, B2B, reporting, connector, or custom customer data may not belong to standard platform migration scope. | Separate standard data, extension-owned data, outside-system data, and Custom Service requirements early.                               |
-| SEO-sensitive store with many historical URLs             | Source URL patterns, canonical rules, metadata, and category paths may not translate automatically into the target store.                    | Prepare high-value URL, product, category, brand, and CMS Page samples for redirect and metadata validation.                            |
-| Merchant unable to review migrated meaning                | Record counts alone cannot prove catalog, order, customer, URL, or extension meaning.                                                        | Assign review responsibility for products, orders, customers, content, checkout, SEO, and technical dependencies before Full Migration. |
+Another strong-fit profile is the merchant with catalog complexity that benefits from structured administration. Products may require categories, attributes, properties, brands, stock rules, reviews, product groups, or supplier/warehouse references. osCommerce can be a practical Target Platform when those relationships are documented and the merchant is ready to validate how they appear in the target store.
 
-### What Should Be Confirmed Before Choosing OsCommerce <a href="#what-should-be-confirmed-before-choosing-oscommerce" id="what-should-be-confirmed-before-choosing-oscommerce"></a>
+A third strong-fit profile is the merchant planning broader commerce control across sales channels, CMS content, SEO, modules, and settings. This type of merchant does not expect migration to configure every behavior automatically. Instead, they treat migration as one part of a larger launch plan that includes target configuration, module review, and validation.
 
-Before choosing osCommerce, the merchant should confirm whether the platform fits the business model, not only whether it is available as a Target Platform.
+Strong-fit merchants usually share several behaviors:
 
-The most important confirmation areas are:
+* they can identify the core data that must be migrated;
+* they know which catalog relationships drive shopping behavior;
+* they understand that apps/modules may require separate setup or review;
+* they are willing to test Demo Migration samples deeply;
+* they can make decisions about outdated records and technical debt;
+* they value open-source control more than turnkey simplicity.
 
-* **Operating responsibility:** who will manage hosting, security, upgrades, extensions, theme changes, and technical maintenance after migration.
-* **Source platform condition:** whether the source store is standard, old, forked, heavily customized, or dependent on undocumented add-ons.
-* **Catalog meaning:** how products, categories, brands, attributes, properties, product groups, filters, images, stock, and SEO fields should behave in osCommerce.
-* **Customer and B2B logic:** whether customer groups, special prices, trade rules, customer approval, guest orders, or custom account fields need migration or reconfiguration.
-* **Order history expectations:** which order statuses, totals, comments, invoices, transactions, tracking details, refunds, and payment or shipping context must remain readable.
-* **Extension and module scope:** which requirements belong to standard platform data, App Shop modules, third-party modules, custom development, or outside integrations.
-* **Storefront and content scope:** which CMS Pages, menus, themes, banners, landing pages, email templates, sales channels, languages, and currencies matter at launch.
-* **SEO continuity:** which product, category, brand, and content URLs require special attention during validation.
-* **Service-path signals:** whether the project is simple enough for Standard Service, safer with Managed Service, or needs Custom Service because of customization, Custom Platform handling, module-owned data, or custom migration logic adjustment.
+For these merchants, osCommerce can provide a strong migration destination because the platform’s flexibility matches their operating expectations.
+
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
+
+osCommerce becomes a conditional fit when the merchant’s goals are reasonable but the source store contains unclear, customized, or poorly documented behavior. Conditional fit does not mean osCommerce is the wrong choice. It means the migration plan must include discovery before the project is treated as standard.
+
+The most common conditional-fit case is the older osCommerce-family or legacy PHP store with accumulated modifications. These stores often contain custom fields, add-ons, abandoned modules, direct database changes, custom reports, special pricing logic, or checkout modifications. The merchant may want to preserve everything, but not every legacy behavior should move into the target store. Some elements may map to supported data. Some may require Custom Service. Some should be rebuilt or retired.
+
+Another conditional-fit case is the merchant moving from a hosted platform with app-created behavior. The source platform may hide logic behind apps, marketplace connectors, subscription rules, product bundling, custom discounts, or segmentation tools. Even when exports are available, the meaning of those records may not translate cleanly into osCommerce without mapping decisions.
+
+Multi-channel or multi-language merchants can also be conditional fits. osCommerce supports sales-channel and localization planning, but source assumptions must be clear. A store operating across regions, currencies, languages, or marketplaces needs to decide how much should become native osCommerce configuration, how much belongs in apps/modules, and how much is outside migration scope.
+
+| Conditional profile            | Why it can still fit                                                          | What must be resolved first                                                 |
+| ------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Legacy customized store        | osCommerce can support open-source continuity and structured modernization.   | Identify custom tables, old add-ons, custom fields, and obsolete code.      |
+| Hosted app-heavy store         | Core records may migrate cleanly while selected behaviors are rebuilt.        | Separate exportable data from app-only logic and target app/module setup.   |
+| Multi-channel merchant         | osCommerce planning can account for sales channels and storefront structure.  | Confirm product-channel assignment, content, pricing, and validation needs. |
+| Complex B2B or wholesale store | Customer groups, pricing, modules, and custom behavior may support the model. | Clarify which rules are supported, configured, or custom-scope.             |
+| SEO/content-sensitive store    | CMS Pages, menus, metadata, and redirects can be planned.                     | Inventory content assets and decide what should migrate or be rebuilt.      |
+
+Conditional-fit merchants should not skip Demo Migration. They need samples that represent difficult cases: complex products, historical orders, customer groups, old coupons, CMS Pages, SEO records, app/module-dependent records, and edge-case categories. If the Demo Migration only tests simple products, it will not answer the real fit question.
+
+### Weaker-Fit or Non-Ideal Profiles <a href="#weaker-fit-or-non-ideal-profiles" id="weaker-fit-or-non-ideal-profiles"></a>
+
+osCommerce is a weaker fit when the merchant wants the benefits of open-source control but not the responsibility that comes with it. A team that expects hosting, maintenance, configuration, module selection, theme readiness, and target validation to happen automatically may be better served by a more hosted operating model.
+
+A weak-fit profile is the merchant with no appetite for technical review. If the store has old customizations, unclear modules, broken product logic, or inconsistent order data, the merchant must be willing to investigate. Without that willingness, migration becomes guesswork. osCommerce can provide flexibility, but flexibility does not remove the need for decisions.
+
+Another weak-fit profile is the merchant whose core business depends on proprietary SaaS-only behavior. Some source platforms include built-in checkout rules, app ecosystems, subscription behavior, marketplace automations, analytics tools, or customer segmentation features that may not have a direct osCommerce equivalent. These behaviors may still be recreated through apps, modules, configuration, or Custom Service, but they should not be assumed to transfer as part of standard data migration.
+
+A third weak-fit profile is the merchant trying to preserve every historical workaround. Old add-ons, duplicate categories, abandoned modules, obsolete CMS Pages, one-off custom scripts, and inconsistent product fields can carry cost into the new store. osCommerce migration works best when the merchant is willing to modernize. If the goal is to reproduce every legacy defect, the project becomes harder to scope and harder to validate.
+
+Weaker fit does not always mean “do not choose osCommerce.” It means the decision should be delayed until the merchant can define what they are actually asking osCommerce to become.
+
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
+
+A major fit risk appears when merchants assume that source platform behavior will automatically reappear in osCommerce. Migration can move supported records, but the Target Platform still has its own operating logic. Source assumptions need to be reviewed before they become launch blockers.
+
+Product structure is a common example. A source platform may represent variants, options, properties, bundled products, restricted products, or marketplace fields in a way that differs from osCommerce. The merchant should not assume that every source product relationship maps one-to-one. The right question is which product behaviors must be preserved for customers and administrators.
+
+Order behavior can also be difficult. Historical orders may include custom statuses, fulfillment notes, tax logic, shipping labels, payment references, coupon usage, gift cards, refunds, or app-created fields. Some details may migrate as supported records. Some may need mapping. Some may need separate review. Customer support teams should define which order details they need after launch.
+
+Content and SEO expectations deserve the same care. Menus, landing pages, CMS Pages, metadata, redirects, sitemap behavior, analytics, and search results may be controlled differently in the Source Platform. If these assets matter for traffic and conversion, they need an explicit migration or rebuild plan.
+
+Apps/modules create the sharpest boundary. A source extension can store data, transform behavior, or control storefront logic. osCommerce App Shop and modules may provide alternative behavior, but migration should not imply automatic implementation of those alternatives. When data depends on a source app, the team should decide whether the target needs a native configuration, Add-ons, Custom Service, or a separate implementation plan.
+
+### Signals of Fit to Confirm Before Choosing osCommerce <a href="#signals-of-fit-to-confirm-before-choosing-oscommerce" id="signals-of-fit-to-confirm-before-choosing-oscommerce"></a>
+
+Before selecting osCommerce, merchants should confirm practical signals rather than relying on a general preference for open source.
+
+The first signal is catalog explainability. The merchant should be able to explain how products are categorized, how attributes and properties work, how stock is managed, which products are active or obsolete, and which relationships influence shopping behavior. If the team cannot explain the catalog, migration will expose hidden inconsistencies.
+
+The second signal is operational ownership. Someone must own the target environment, module review, configuration, and validation. This does not mean the merchant must do all work internally, but the responsibility must be assigned. osCommerce is a poor fit when nobody owns target readiness.
+
+The third signal is customization clarity. Old custom code, add-ons, custom fields, and external integrations should be identified before Full Migration. The goal is not to solve every customization immediately. The goal is to know which items are standard, which need bounded Add-ons, and which require Custom Service or separate implementation.
+
+The fourth signal is validation discipline. A merchant choosing osCommerce should be prepared to review Demo Migration results beyond simple record counts. The review should test products, categories, sales-channel assumptions, customers, orders, coupons, SEO, CMS Pages, and operational modules. If the merchant cannot review those areas, fit remains unproven.
+
+The fifth signal is willingness to modernize. osCommerce can support continuity, but it should not become a storage place for every outdated source-store workaround. A strong fit decision includes cleanup decisions, not only preservation decisions.
+
+### Turning osCommerce Fit Into a Migration Scope Decision <a href="#turning-oscommerce-fit-into-a-migration-scope-decision" id="turning-oscommerce-fit-into-a-migration-scope-decision"></a>
+
+Once fit is understood, the next step is translating that fit into migration scope. A strong-fit merchant with clean supported data may be able to start with Standard Service and use Demo Migration to confirm target behavior. A merchant with broader planning needs may be better served by Managed Service because sales channels, catalog structure, SEO, CMS, apps/modules, and legacy assumptions need coordinated review.
+
+Add-ons may be appropriate when the need is bounded. For example, filtering old records, mapping specific fields, or applying defined configuration adjustments can fit within Add-ons when the behavior is supported. Custom Service is different. It is needed when the project involves unsupported records, custom tables, app/module-specific data, bespoke transformations, custom fields, or a Custom Platform condition.
+
+Entity Points should be treated as a scope-sizing signal, not a fit score. Eligible new Products, Customers, Orders, and Blog Posts may consume Entity Points when first migrated. Records already counted through the service license should not consume Entity Points again simply because another action occurs on the same migration path. The fit question is not “how many Entity Points?” but “which records and relationships must be included for the osCommerce store to operate correctly?”
+
+Additional Migration Options become relevant when the merchant needs to continue migration after cleanup, target configuration, or validation. For osCommerce, this can matter when a Demo Migration reveals that catalog mapping, module assumptions, or content structures need adjustment before moving the final data set.
+
+| Fit outcome                                          | Scope response                                              | Practical next step                                                                   |
+| ---------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Strong fit with clean supported data                 | Keep scope focused and validate through Demo Migration.     | Prepare target settings, run sample migration, review core records and behavior.      |
+| Conditional fit with custom or legacy behavior       | Use guided scoping before confirming Full Migration.        | Identify unsupported records, app/module dependencies, and Custom Service candidates. |
+| Weak fit due to ownership mismatch                   | Reconsider platform choice or change operating assumptions. | Decide whether the merchant truly wants open-source responsibility.                   |
+| Fit unclear because source data is poorly understood | Do discovery before service selection.                      | Audit catalog, customers, orders, SEO/CMS, apps/modules, and custom fields.           |
+
+The best osCommerce fit decision is not simply a yes/no decision. It is a scope decision. It defines what can move through supported migration behavior, what must be configured in the target store, what requires Add-ons, what belongs in Custom Service, and what should be rebuilt or retired.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-osCommerce is a strong migration target when the merchant values control and is prepared for the responsibility that comes with an open-source e-commerce platform. It fits best when the catalog structure is understood, technical support is available, extension needs are identified, and the merchant can validate more than record presence. It is less suitable when the business wants a low-touch hosted platform, cannot document old or customized source behavior, or expects migration to replace target configuration and ongoing maintenance.
+osCommerce is a strong Target Platform for merchants who want open-source ownership, catalog control, app/module flexibility, and the ability to shape a modern commerce environment. It is a conditional fit when legacy customization, hosted-platform app logic, sales-channel complexity, or unclear catalog behavior needs discovery. It is a weaker fit when the merchant expects turnkey hosted simplicity or wants every old workaround reproduced without review.
 
-Before choosing osCommerce, review the source store’s version, catalog complexity, customer-group logic, order-history needs, extension dependencies, SEO priorities, and operating resources. A well-selected Demo Migration sample can reveal whether osCommerce is a straightforward target or whether deeper mapping, Add-ons, or Custom Service review should be planned before committing to Full Migration.
+The right way to evaluate osCommerce is to connect fit to migration scope. Strong-fit, conditional-fit, and weaker-fit profiles should lead to different decisions about Standard Service, Managed Service, Add-ons, Custom Service, Demo Migration, Entity Points, and follow-up migration planning. That discipline makes osCommerce selection clearer and reduces the chance of hidden launch risk.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is osCommerce a good fit if I want full control of my store?**
+**Who is osCommerce best suited for?**
 
-Yes, osCommerce can be a good fit when full control is a priority. That control should be matched with technical responsibility for hosting, updates, modules, themes, security, and long-term maintenance.
+osCommerce is best suited for merchants who want open-source ownership, can manage or coordinate target-store responsibility, and need flexible control over catalog, customers, orders, sales channels, CMS, SEO, apps, modules, and settings.
 
-**Is osCommerce a good fit if I want a simple hosted platform?**
+**Is osCommerce a good fit for a highly customized legacy store?**
 
-Usually not as the first choice. osCommerce is better suited to merchants comfortable with open-source ownership and configuration. A merchant that wants minimal technical responsibility may prefer a more managed SaaS platform.
+It can be, but only after discovery. Custom tables, old add-ons, custom fields, custom reports, and modified checkout or pricing behavior should be reviewed before the migration scope is confirmed. Some elements may be migrated, some may require Custom Service, and some may be better rebuilt.
 
-**Can an old osCommerce store move cleanly into current osCommerce?**
+**Can osCommerce replace SaaS app behavior automatically?**
 
-Sometimes, but old osCommerce stores should be reviewed carefully. Version differences, add-ons, custom tables, modified checkout behavior, old templates, or forked structures can change migration complexity.
+No. SaaS app behavior may need target configuration, osCommerce apps/modules, Add-ons, Custom Service, or separate implementation. Standard record migration should not be assumed to recreate app-only business logic.
 
-**Is osCommerce suitable for a complex catalog?**
+**How should merchants confirm osCommerce fit before Full Migration?**
 
-It can be, especially when the catalog structure is documented well. Products with attributes, properties, categories, brands, images, stock, product groups, filters, or SEO fields should be sampled before Full Migration.
-
-**Does choosing osCommerce mean my source extensions will work after migration?**
-
-No. Source extensions and target modules should be reviewed separately. Some behavior may be reconfigured in osCommerce, while extension-owned data, custom fields, or outside-system logic may need Add-ons or Custom Service review.
+They should run a Demo Migration with representative samples and review product relationships, categories, customers, orders, SEO/CMS assets, sales-channel assumptions, and app/module dependencies. Fit is confirmed when the target store can interpret the migrated data in a usable way.

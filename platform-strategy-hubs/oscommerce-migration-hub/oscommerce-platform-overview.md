@@ -1,126 +1,108 @@
 # OsCommerce Platform Overview
 
-osCommerce is an open-source e-commerce platform for merchants that want direct control over storefront structure, hosting, catalog behavior, extensions, and operational configuration. For migration planning, osCommerce should be understood as a self-hosted commerce environment with a modern v4 generation, App Shop extensions, sales-channel behavior, CMS and design tools, and module-driven payment, shipping, customer, inventory, and order workflows.
+osCommerce is often remembered through its long open-source history, but migration planning should not treat it only as a legacy cart destination. Current osCommerce planning requires a clearer distinction between older store assumptions and the broader operating model of osCommerce v4. A move into osCommerce is not only about transferring Products, Customers, and Orders. It is also about deciding how catalog rules, sales channels, apps, modules, CMS content, SEO settings, customer groups, order behavior, and server ownership will work after launch.
 
-Moving to osCommerce is not only a change of shopping-cart software. The target store needs to interpret product data, customer records, historical orders, storefront navigation, SEO fields, inventory behavior, customer groups, sales channels, modules, and content structures inside the osCommerce model. A clean migration outcome depends on how well the source store’s commercial meaning can be reconstructed in osCommerce, not only on whether records appear in the target database.
+For merchants, the central question is whether osCommerce should become the new operating base for a store that needs open-source control and configurable commerce behavior. That question affects scope from the first planning conversation. A store may have clean product and order records, but still need careful review if its source platform relies on hosted storefront rules, marketplace connectors, custom checkout logic, app-created records, or legacy fields that do not map directly into osCommerce.
 
-The current osCommerce v4 line is the relevant planning baseline for new target installations. The latest download baseline supplied for this planning cycle is osCommerce 4.14.63493. Older operational osCommerce installations, historical 2.x or 3.x stores, and osCommerce-derived systems can behave very differently and should be reviewed against their actual version, database structure, add-ons, and custom code before scope is finalized.
+### What osCommerce Represents as a Target Platform <a href="#what-oscommerce-represents-as-a-target-platform" id="what-oscommerce-represents-as-a-target-platform"></a>
 
-### What Changes in a Migration to OsCommerce <a href="#what-changes-in-a-migration-to-oscommerce" id="what-changes-in-a-migration-to-oscommerce"></a>
+osCommerce is best understood as an open-source commerce platform with a long legacy footprint and a modern v4 structure. Its value is not simply that merchants can own and operate the software. The more important migration point is that ownership changes responsibility. A merchant planning osCommerce must think about hosting, installation, server requirements, configuration, sales-channel structure, app/module behavior, and maintenance expectations alongside the data move.
 
-A migration to osCommerce places store data into an open-source environment where the merchant has more direct responsibility for hosting, configuration, extensions, themes, and long-term maintainability than on a closed SaaS platform. This can be a major advantage for stores that need control, but it also means the target structure must be planned carefully.
+This makes osCommerce different from a hosted SaaS destination. In a SaaS environment, many platform behaviors are locked behind native configuration, subscription limits, or app marketplace conventions. With osCommerce, more control can be available, but that control must be planned. Product data may be migrated successfully, yet the store can still feel incomplete if sales channels, menus, themes, modules, SEO settings, and CMS Pages are not ready to interpret that data.
 
-| Migration area                  | What changes in osCommerce                                                                                                                                                        | Planning implication                                                                                                                |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog structure               | Products may depend on categories, brands, identifiers, images, attributes, properties, product groups, stock behavior, marketing flags, and SEO fields.                          | Product records should be reviewed for business meaning, not only for names, prices, and descriptions.                              |
-| Product options and attributes  | Source options, variants, filters, specifications, and custom fields may need to be interpreted through osCommerce attributes, properties, product groups, or extension behavior. | Complex catalog data should be sampled before Full Migration so selectable choices and product discovery remain usable.             |
-| Categories and discovery        | Categories, menus, filters, search, brands, sale/new/featured views, and sales-channel assignment can jointly affect how shoppers find products.                                  | A product can migrate correctly as a record while still appearing in the wrong storefront context.                                  |
-| Customers and groups            | Customers may include registered or guest status, address records, customer groups, language, credit, reviews, and B2B or trade context.                                          | Customer migration should preserve account meaning and segmentation where those records affect pricing, approval, or order history. |
-| Orders and history              | Orders can carry statuses, products, totals, payment and shipping methods, comments, invoices, packing slips, transactions, refunds, tracking, and processing history.            | Historical orders should be validated for operational readability, not treated as flat archived records.                            |
-| Modules and App Shop extensions | Payment, shipping, B2B, marketplace, reporting, social-login, connector, design, and SEO behavior may be module or app dependent.                                                 | Extension-owned data and behavior should be separated from standard platform data during planning.                                  |
-| Storefront and CMS              | Themes, CMS Pages, catalog pages, menus, banners, email templates, translations, widgets, and sales channels influence the final customer experience.                             | Migration planning should include storefront structure and content continuity where those elements affect launch quality.           |
-| SEO and URLs                    | Product, category, brand, meta, canonical, XML sitemap, and page-name behavior may differ from the source store.                                                                  | Priority URL and metadata samples should be prepared before migration validation.                                                   |
+The platform also carries two historical realities. First, many merchants associate osCommerce with older 2.x stores, heavily modified codebases, and add-on ecosystems from earlier ecommerce eras. Second, osCommerce v4 introduces a broader administrative model with App Shop, sales channels, Design and CMS, product catalogue management, marketing tools, SEO, modules, managers, and settings. Migration planning must therefore avoid assuming that old osCommerce behavior and current osCommerce behavior are identical.
 
-### Where OsCommerce Is Often a Strong Target <a href="#where-oscommerce-is-often-a-strong-target" id="where-oscommerce-is-often-a-strong-target"></a>
+A strong osCommerce migration plan defines the Target Platform at three levels:
 
-osCommerce is often a strong target for merchants that want open-source ownership, direct hosting control, and the ability to shape storefront behavior through extensions, themes, and custom development. It can be especially useful when the business wants more flexibility than a tightly managed SaaS platform can provide.
+| Planning layer   | What it means in osCommerce                                                                                  | Migration implication                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Data layer       | Products, Customers, Orders, categories, attributes, properties, reviews, coupons, and related records       | Decide what can be migrated as records and what must become configuration or custom handling. |
+| Operating layer  | Sales channels, apps, modules, settings, taxes, currencies, languages, payment, shipping, and order behavior | Confirm target behavior before Full Migration, not after launch.                              |
+| Experience layer | Design and CMS, menus, pages, themes, SEO metadata, search, and storefront navigation                        | Preserve discoverability and shopping continuity, not just database completeness.             |
 
-#### Stores that need open-source control <a href="#stores-that-need-open-source-control" id="stores-that-need-open-source-control"></a>
+The planning mistake to avoid is treating osCommerce as a blank container. The Target Platform has its own structure. Records must land in that structure in a way that preserves commercial meaning.
 
-osCommerce gives merchants and development teams direct control over the target environment. That matters when the store needs custom hosting, code-level review, specialized integrations, or deeper control over how the storefront and back office behave.
+### The Operating Model Behind osCommerce Migration <a href="#the-operating-model-behind-oscommerce-migration" id="the-operating-model-behind-oscommerce-migration"></a>
 
-This strength is most valuable when the merchant has access to technical resources or a service partner who can manage hosting, configuration, upgrades, extensions, and custom work responsibly. Open-source control is powerful only when the store’s operating model can support it.
+osCommerce migration should begin with operating-model clarity. The merchant needs to know whether the future store will be managed as a mostly standard osCommerce v4 installation, a configurable open-source store with selected apps and modules, or a more customized environment that carries forward parts of a legacy architecture.
 
-#### Catalogs with structured product meaning <a href="#catalogs-with-structured-product-meaning" id="catalogs-with-structured-product-meaning"></a>
+That decision affects what migration can safely include. A store with standard products, customer accounts, order history, basic categories, and a limited promotional model may fit a cleaner migration path. A store with custom product tables, old add-ons, module-specific order fields, custom customer groups, personalized catalog access, bespoke pricing logic, or external inventory feeds needs deeper review before the scope can be called predictable.
 
-osCommerce can support detailed catalog structures, including categories, brands, identifiers, attributes, properties, product groups, stock behavior, images, SEO fields, and product visibility settings. This makes it suitable for stores where product organization matters to search, filtering, comparison, or customer decision-making.
+Sales channels are especially important. Current osCommerce documentation identifies sales channels as a managed area, and product assignment may need to be understood in relation to those channels. A merchant moving from a single storefront may not have explicit channel logic in the Source Platform. A merchant moving from a multi-store, marketplace-connected, or region-specific setup may have hidden assumptions about where products appear, how pricing works, and which customer groups can buy. Those assumptions need to be translated into osCommerce planning rather than assumed to migrate automatically.
 
-The key migration question is whether the source catalog can be translated cleanly into the target structure. Product options, technical specifications, filters, bundle behavior, downloadable products, supplier fields, and warehouse logic should be reviewed early when they carry business meaning.
+Apps and modules add another planning layer. Payment, shipping, order structure, social login, REST, B2B, reporting, product restrictions, customer fields, order flags, and other behaviors may depend on apps or extensions. Migration Service can move supported records, but it should not be used to imply automatic installation, configuration, or redesign of every target-side app/module behavior. When app-created data, custom fields, or bespoke module logic are business-critical, Custom Service review may be needed.
 
-#### Merchants planning extension-supported growth <a href="#merchants-planning-extension-supported-growth" id="merchants-planning-extension-supported-growth"></a>
+### What Changes When a Store Moves Into osCommerce <a href="#what-changes-when-a-store-moves-into-oscommerce" id="what-changes-when-a-store-moves-into-oscommerce"></a>
 
-The osCommerce App Shop and module ecosystem can support payment, shipping, design, B2B, marketplace, marketing, SEO, reports, and connector behavior. This makes osCommerce attractive for merchants that want to extend the target store over time.
+A move into osCommerce changes how the merchant should read their own store data. In a simple export, a product may look like a row with a name, SKU, price, image, stock value, and category. In osCommerce, that same product may need to participate in categories, brands, attributes, properties, sales channels, stock handling, reviews, upsell/cross-sell behavior, SEO metadata, and storefront display rules. The record is not enough; the surrounding interpretation matters.
 
-Migration planning should still separate migrated data from post-migration configuration. A module can provide target capability, but the migration scope must confirm whether the source data behind that capability is standard, extension-owned, custom, or outside the expected target structure.
+Customer and order data also need interpretation. Customer accounts may connect to groups, address formats, order history, order statuses, comments, coupon usage, gift cards, taxes, currencies, languages, and payment/shipping records. If those relationships are not understood, migrated records may be present but less useful for customer support, reporting, segmentation, or compliance review.
 
-#### Stores with multi-front-end or localized plans <a href="#stores-with-multi-front-end-or-localized-plans" id="stores-with-multi-front-end-or-localized-plans"></a>
+Content and SEO create another change. osCommerce includes Design and CMS areas such as pages, menus, themes, translations, email templates, and catalog pages. A merchant coming from a platform where content pages, menus, or SEO controls were managed differently must decide what should be migrated, what should be rebuilt in osCommerce, and what should be left behind because it is outdated or structurally incompatible.
 
-osCommerce v4 planning may involve sales channels, language behavior, currency configuration, CMS content, theme assignment, and localized storefront presentation. That can make osCommerce suitable for businesses that want more than a single simple storefront.
+The practical effect is simple: osCommerce migration is not a record-count exercise. It is a translation exercise. The migration plan should identify what data means in the Source Platform and what role that same data should play in osCommerce.
 
-When multiple front ends, languages, currencies, or regional storefronts matter, validation must include more than the default storefront. Products, categories, content, navigation, checkout, and SEO behavior should be checked in the target contexts where shoppers will actually use them.
+A practical osCommerce plan should also define what “ready” means before the final launch window. Ready does not mean that every page is visually perfect or every app is permanently selected. It means the target installation can accept the intended records, the necessary configuration areas are prepared enough to test, and the team knows which behaviors are inside the migration scope and which are separate implementation tasks. Without this distinction, merchants often overestimate what migrated data alone can prove.
 
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
+This distinction is especially important for merchants modernizing from older osCommerce-family stores. A legacy store may contain useful commercial history and also contain years of tactical fixes. Old product-option workarounds, manually edited database fields, obsolete contribution data, and retired checkout modules can all appear important because they still exist. In planning, each one should be judged by future value. If it supports selling, service, reporting, or compliance, it should be mapped, configured, or scoped. If it only preserves historical clutter, it should not drive the new store architecture.
 
-osCommerce gives merchants flexibility, but flexibility also increases planning responsibility. The highest-risk migrations are usually not simple product-and-order moves. They involve old versions, forks, custom code, modules, detailed catalog structures, B2B rules, multi-front-end behavior, or SEO-sensitive storefronts.
+The same thinking applies to merchants coming from newer SaaS platforms. A hosted platform may make catalog rules, customer segmentation, and promotions look simple because the platform hides the underlying structure. When moving into osCommerce, those rules have to become explicit decisions. The migration team needs to know whether a discount is a coupon, a sales rule, a customer-group behavior, an app-driven promotion, or a custom business rule that requires review outside standard record movement.
 
-#### Older osCommerce installations and related forks <a href="#older-oscommerce-installations-and-related-forks" id="older-oscommerce-installations-and-related-forks"></a>
+### Core Areas That Shape Migration Scope <a href="#core-areas-that-shape-migration-scope" id="core-areas-that-shape-migration-scope"></a>
 
-Older osCommerce stores, historical 2.x or 3.x builds, and osCommerce-derived systems should not be assumed to behave like a clean osCommerce v4 target installation. Many long-running stores have custom tables, modified checkout logic, old add-ons, altered product structures, custom templates, or legacy database conventions.
+Several osCommerce areas should be reviewed early because they often decide whether the migration stays straightforward or needs Managed Service, Add-ons, or Custom Service.
 
-If the source store is old, heavily modified, or forked, planning should confirm the actual source structure before service scope is chosen. The important question is not whether the store is related to osCommerce, but whether its data model is standard enough to migrate through standard service capability.
+| Area                              | Why it matters                                                                                                                        | What to confirm early                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Catalog structure                 | Products may involve categories, brands, attributes, properties, stock, reviews, suppliers, warehouses, and sales-channel assignment. | Which catalog relationships must remain usable after migration.                   |
+| Customers and groups              | Customer groups may affect pricing, access, discounts, or reporting.                                                                  | Whether source customer segments need target-side group logic.                    |
+| Orders and statuses               | Orders depend on totals, statuses, comments, payment/shipping references, taxes, coupons, and gift cards.                             | Which historical order details are required for support and reporting.            |
+| Sales channels                    | Products, themes, and storefront behavior may need channel-aware planning.                                                            | Whether one or more storefront/channel contexts must be represented.              |
+| Apps and modules                  | Extensions may create records or control behavior that standard migration does not automatically reproduce.                           | Which apps/modules are business-critical and which are optional.                  |
+| Design and CMS                    | Menus, pages, themes, translations, email templates, and catalog pages affect navigation and content continuity.                      | Which content must migrate and which should be rebuilt.                           |
+| SEO and search                    | Meta tags, sitemap, analytics, URLs, redirects, and search behavior affect discoverability.                                           | Which SEO assets must be preserved or reconstructed.                              |
+| Server and installation readiness | osCommerce ownership includes hosting and technical responsibility.                                                                   | Whether the target environment is ready before Demo Migration and Full Migration. |
 
-#### Extension-owned data and custom modules <a href="#extension-owned-data-and-custom-modules" id="extension-owned-data-and-custom-modules"></a>
+These areas should not be handled as afterthoughts. They determine whether migrated records become operational assets or disconnected data inside the new store.
 
-Modules and App Shop extensions can affect the meaning of payment, shipping, B2B, marketplace, social login, customer fields, SEO, reports, and connectors. Some extension behavior can be reconfigured after migration, while other data may need mapping, transformation, or custom handling.
+### Early Planning Questions for osCommerce <a href="#early-planning-questions-for-oscommerce" id="early-planning-questions-for-oscommerce"></a>
 
-A reliable scope should identify which data belongs to standard osCommerce structures and which data belongs to installed modules, third-party add-ons, outside systems, or custom development.
+Before starting the migration, merchants should answer a focused set of planning questions. These questions help identify whether the project is a clean migration, a guided migration, or a custom-scope migration.
 
-#### Attributes, properties, filters, and product groups <a href="#attributes-properties-filters-and-product-groups" id="attributes-properties-filters-and-product-groups"></a>
+First, what version and structure is the Source Platform using? A legacy osCommerce-family store, a hosted SaaS store, a marketplace-connected system, and a custom-built platform each create different translation problems. Older stores often carry add-ons, custom tables, manual fixes, and non-standard fields. Hosted systems often hide behavior behind platform-native settings. Custom platforms may contain business logic that has no direct target equivalent.
 
-Catalog complexity is one of the main areas where migration quality can decline if planning is too shallow. Source platforms often represent variants, options, filters, product specifications, grouped products, bundles, or technical attributes differently from osCommerce.
+Second, which data relationships are commercially important? Products without categories may still exist, but they may not sell properly. Orders without meaningful statuses may still be stored, but support teams may not trust them. Customer groups without pricing context may be migrated, but segmentation may lose practical value. The migration scope should prioritize relationships that support selling, support, reporting, and administration.
 
-If these structures are not mapped carefully, products may migrate but become difficult to filter, compare, configure, or purchase. Early samples should include the products that best expose catalog complexity, not only the products that migrate easily.
+Third, which target-side behaviors must be configured before validation? Payment, shipping, tax, sales channels, languages, currencies, SEO, menus, and apps/modules may need target preparation before a Demo Migration can produce useful evidence. A Demo Migration performed into an unprepared target store may show records but fail to prove launch readiness.
 
-#### Checkout, shipping, payment, tax, and order context <a href="#checkout-shipping-payment-tax-and-order-context" id="checkout-shipping-payment-tax-and-order-context"></a>
+Fourth, what should not be carried forward? osCommerce projects often surface old add-ons, abandoned module data, obsolete product fields, duplicate categories, unused coupons, outdated CMS Pages, and manual workarounds. Migration planning should not preserve technical debt simply because it exists in the source store. The better question is whether each element still supports the future operating model.
 
-A historical order can show the original payment and shipping context, but live checkout behavior depends on target configuration. Payment modules, shipping methods, tax rules, zones, currencies, customer groups, and order statuses should be reviewed as target behavior, not only as imported labels.
+Finally, how will success be validated? A successful osCommerce migration should prove that products display correctly, categories and sales channels behave as intended, customer/order history remains usable, SEO and CMS continuity are protected, and apps/modules that matter to operations are either configured, replaced, or scoped separately.
 
-This distinction matters because migration can preserve historical information while still requiring separate configuration before the target store is ready to accept orders.
+These questions should be answered before scope is treated as final because each answer changes the type of proof required. A simple catalog may only need product, category, image, customer, and order samples. A store with channel-specific catalog rules needs samples from each relevant channel. A store with legacy modules needs samples that show whether module-created data is still useful. A store with SEO dependency needs pages, metadata, redirects, and search behavior included in review.
 
-#### SEO, content, and storefront continuity <a href="#seo-content-and-storefront-continuity" id="seo-content-and-storefront-continuity"></a>
-
-osCommerce migrations often need early review of product URLs, category URLs, brand pages, CMS Pages, menus, metadata, canonical behavior, XML sitemap expectations, banners, email templates, and storefront content. These areas affect customer experience and search continuity even when core commerce records migrate correctly.
-
-Stores with significant organic traffic, custom landing pages, brand-category architecture, or localized storefronts should prepare SEO and content samples before migration validation.
-
-### What Should Be Understood Early Before Moving into OsCommerce <a href="#what-should-be-understood-early-before-moving-into-oscommerce" id="what-should-be-understood-early-before-moving-into-oscommerce"></a>
-
-A successful osCommerce migration starts with a clear distinction between data migration, target configuration, and post-migration implementation. The migration can place eligible records into osCommerce, but the target store still needs a planned environment, configured modules, usable themes, reviewed sales channels, and validated checkout behavior.
-
-The following points should be understood before moving into osCommerce:
-
-* **The target version matters.** osCommerce v4 is the planning baseline for new target installations, while older osCommerce versions and related forks need version-specific review.
-* **Open-source control increases responsibility.** Hosting, upgrades, modules, security, theme changes, and custom development should be planned as part of the operating model.
-* **Catalog structure needs meaning-based review.** Products, categories, attributes, properties, groups, brands, filters, stock, suppliers, and SEO fields should be checked as connected structures.
-* **Extensions can change migration scope.** App Shop modules, third-party modules, custom add-ons, and custom database tables can introduce data that does not belong to the standard platform model.
-* **Historical orders and live checkout are different concerns.** Migrated orders should remain readable, while payment, shipping, tax, and checkout behavior must be configured and tested separately.
-* **Sales channels and CMS content can affect the result.** A store can have accurate product records but still fail launch expectations if content, menus, storefront assignment, languages, currencies, or themes are incomplete.
-* **Demo Migration samples should be chosen deliberately.** The best sample set includes complex products, customer groups, varied orders, high-value URLs, CMS Pages, extension-dependent records, and any old-version or custom data.
+The planning discipline is not meant to slow the project down. It prevents false simplicity. osCommerce can support a broad operating model, but a broad operating model needs explicit ownership. When the team defines data scope, target configuration, and validation evidence early, later service decisions become more accurate and launch review becomes more meaningful.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-osCommerce can be a strong migration target for merchants that want open-source control, detailed catalog structure, extension flexibility, and a configurable storefront environment. Its strength depends on disciplined planning. The target result must preserve not only products, customers, and orders, but also the catalog relationships, customer context, order history, checkout configuration, storefront structure, SEO signals, and extension boundaries that make the store usable after migration.
+osCommerce migration requires more than moving ecommerce records into a new database. It requires a clear decision about open-source ownership, v4 operating structure, catalog interpretation, apps/modules, sales channels, CMS, SEO, and validation responsibility. The strongest projects define these assumptions before Full Migration, then use Demo Migration evidence to confirm whether the target store can support the merchant’s real operating model.
 
-Before committing to a full migration, review the source store’s catalog complexity, version history, extensions, checkout requirements, SEO priorities, and operating model. A focused Demo Migration can help confirm whether the selected migration path is straightforward or whether Add-ons, deeper mapping, or Custom Service review should be planned before moving forward.
+When osCommerce is treated as a modern open-source Target Platform rather than a generic legacy cart, migration planning becomes clearer. The team can separate records from behavior, standard migration from custom needs, and historical data from future store design. That discipline reduces launch risk and makes the migrated store more likely to be usable from day one.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is osCommerce still an active platform for migration planning?**
+**Is osCommerce only relevant for legacy stores?**
 
-Yes. osCommerce v4 is the relevant current-generation target for new osCommerce migration planning. Older osCommerce installations may still exist in production, but they should be reviewed against their actual version, extensions, database structure, and customizations before migration scope is confirmed.
+No. osCommerce has a long legacy footprint, but current planning should account for osCommerce v4 concepts such as sales channels, apps, Design and CMS, SEO, modules, managers, settings, and modern catalog administration. Legacy context matters because many source stores contain older assumptions, but the Target Platform should be planned as a current osCommerce environment.
 
-**Is osCommerce the same as osCMax, Loaded Commerce, or Zen Cart?**
+**Can a migration into osCommerce be treated as a simple data transfer?**
 
-No. Those platforms are related historically or conceptually in different ways, but they should not be treated as the same Target Platform. A migration to osCommerce should be planned around the actual osCommerce target installation. If the source store is a fork, derivative, or heavily customized system, the source structure may need Custom Service review.
+Only when the source store is simple and target behavior is already well understood. Most osCommerce projects need review of catalog relationships, customer groups, order statuses, sales channels, CMS Pages, SEO, apps/modules, and server readiness. Moving records without validating those relationships can leave the target store incomplete.
 
-**Does moving to osCommerce mean every extension or module from my source store will move automatically?**
+**What makes osCommerce migration scope expand?**
 
-No. Standard commerce data and extension-owned data should be reviewed separately. Products, customers, orders, and CMS Pages may follow one migration scope, while payment modules, shipping modules, B2B functions, marketplace connectors, reporting apps, social login, or custom tables may require separate configuration, mapping, or Custom Service review.
+Scope expands when the source store contains custom tables, old add-ons, app-created data, custom fields, unusual pricing rules, multi-channel logic, complex order status behavior, SEO dependencies, or content structures that do not map cleanly into supported target behavior. These areas may require Managed Service, Add-ons, or Custom Service.
 
-**Should I mention osCommerce 4.14.63493 in every migration decision?**
+**Why is Demo Migration important for osCommerce?**
 
-No. The version is useful as a current download baseline when planning a new target installation, but most migration decisions should focus on the actual source data, target osCommerce structure, installed modules, catalog complexity, and validation requirements. Older source stores and custom installations may need review regardless of the target version.
-
-**What should I validate first in a Demo Migration to osCommerce?**
-
-Start with samples that expose real complexity: products with attributes or properties, deep categories, customer groups, guest and registered customers, orders with different statuses and payment or shipping contexts, CMS Pages, high-value URLs, multilingual or multicurrency records, and any data controlled by modules or custom development.
+Demo Migration helps prove whether source records translate into usable osCommerce structures. It can reveal catalog relationship problems, missing status meaning, unsupported custom fields, SEO gaps, sales-channel assumptions, or module dependencies before Full Migration.

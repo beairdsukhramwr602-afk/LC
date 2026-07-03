@@ -1,163 +1,155 @@
 # X-Cart Data Model Differences
 
-X-Cart is a configurable e-commerce Target Platform, so migration quality depends on more than moving records into new tables. The migrated result must preserve how products are purchased, how categories and filters help shoppers find items, how customers and orders remain useful, and how add-ons, custom fields, SEO values, and integrations continue to support daily operations.
+X-Cart migration is not only a transfer of product, customer, and order records. It is a translation of store meaning into a Target Platform where catalog structure, product variations, classes and attributes, memberships, customer profile fields, CSV import behavior, add-ons, and storefront configuration can all affect whether the migrated store remains usable.
 
-A source store may describe products, customers, orders, content, and custom data in ways that do not map one-to-one into X-Cart. Some values become core X-Cart records, some become configuration, some depend on installed add-ons or custom modules, and some require custom migration logic adjustment before they can remain useful in the target environment.
+A source store may present data as simple fields, but X-Cart may treat the same information as catalog configuration, customer membership logic, import/export structure, add-on behavior, storefront display, or checkout-dependent setup. A successful migration should therefore confirm not only that records arrive, but that their operational meaning remains clear after they are placed inside X-Cart.
 
-### Why Data Model Differences Matter in X-Cart <a href="#why-data-model-differences-matter-in-x-cart" id="why-data-model-differences-matter-in-x-cart"></a>
+### Why X-Cart Data Meaning Needs Careful Translation <a href="#why-x-cart-data-meaning-needs-careful-translation" id="why-x-cart-data-meaning-needs-careful-translation"></a>
 
-X-Cart can support standard e-commerce structures as well as store-specific customization. That flexibility is valuable, but it also means migration planning should identify where business meaning lives. A product option, customer group, order status, custom field, storefront filter, or integration identifier may look like a simple field in the Source Platform while acting as an operational rule inside X-Cart.
+X-Cart can support ordinary catalog migration, but the platform also gives merchants configurable product data, user roles, customer memberships, profile fields, add-ons, and import/export structures. This flexibility is useful because it allows merchants to run stores with more than one simple selling pattern. It also creates migration responsibility: the source store must be interpreted before the target store can be accepted.
 
-The key question is not only whether the record exists after migration. The stronger question is whether the record behaves correctly in the target store.
+The central question is whether each migrated record will still do the same business job after it reaches X-Cart. A product value might control a storefront selection, a category might define navigation and discovery, a customer group might control access or commercial treatment, and an order field might need to remain readable for service or accounting. These meanings cannot be judged by record count alone.
 
-| Source-store meaning              | X-Cart meaning to confirm                                                                                                           | Why it matters                                                                            |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Product record                    | Product with name, SKU, price, inventory, images, description, options, attributes, SEO values, and category assignment             | Product records must remain purchasable, discoverable, and manageable.                    |
-| Product option or variation       | Option, variant, variation, attribute, extra field, or add-on-supported product logic                                               | Buying choices may affect SKU, price, image, inventory, shipping, or filtering.           |
-| Category or collection            | Category structure, navigation path, menu placement, filter behavior, and SEO route                                                 | Products can migrate correctly but become difficult to find if discovery meaning changes. |
-| Customer account                  | Customer profile, address, user status, group, membership, order association, and login context                                     | Account usability depends on more than name and email.                                    |
-| Order history                     | Order record with line items, totals, taxes, discounts, payment labels, shipping labels, status, invoice, and customer relationship | Historical orders must remain readable for service, accounting, and fulfillment review.   |
-| Checkout setup                    | Target payment, shipping, tax, notification, and checkout configuration                                                             | Migrated order labels do not automatically configure live checkout behavior.              |
-| Page or content block             | X-Cart content page, static page, storefront block, theme-managed content, or add-on-owned content                                  | Content migration may need design or theme review, not only text transfer.                |
-| SEO value                         | Product, category, page, metadata, slug, canonical, redirect, or landing-page value                                                 | SEO continuity depends on URL behavior and target routing, not only metadata fields.      |
-| App, module, or custom field data | Add-on/module data, custom field, custom table, API reference, or integration identifier                                            | Non-standard business meaning may need Custom Service review.                             |
+| Source-store data              | X-Cart meaning to confirm                                                                                    | Migration implication                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Product fields                 | Product identity, catalog detail, product class, attributes, stock, media, price, and searchable information | Product data should remain purchasable, searchable, and manageable, not only visible. |
+| Product variants or options    | Variant, option, attribute, modifier, or add-on-dependent buying choice                                      | Choice behavior may affect SKU, price, quantity, visibility, or purchase flow.        |
+| Categories                     | Category hierarchy, browsing path, landing-page meaning, and product assignment                              | Product discovery can change even when product records migrate correctly.             |
+| Customer groups or memberships | Membership level, role, pricing/access rule, discount condition, or profile segmentation                     | Account records may need commercial meaning, not only names and emails.               |
+| Orders                         | Historical order record with items, totals, taxes, discounts, statuses, payment and shipping labels          | Historical readability is separate from live checkout configuration.                  |
+| Custom fields                  | Product, customer, order, profile, add-on, or integration-specific data                                      | Unsupported structures may require Custom Service review.                             |
+| Add-on data                    | Add-on-owned record, storefront behavior, import field, or configuration dependency                          | Installed target capability and data ownership must be reviewed.                      |
+| SEO and content                | Product/category/page metadata, URL behavior, static content, and storefront routing                         | Organic continuity depends on target routing and review, not only metadata migration. |
 
-### Product and Catalog Meaning <a href="#product-and-catalog-meaning" id="product-and-catalog-meaning"></a>
+### Product and Catalog Records <a href="#product-and-catalog-records" id="product-and-catalog-records"></a>
 
-Products are central to an X-Cart migration, but product meaning can be distributed across several layers. A source product may include catalog identity, price, stock, SKU, images, descriptions, options, variants, attributes, extra fields, SEO values, related products, downloadable files, tax or shipping flags, and add-on-controlled behavior.
+Products are usually the first area merchants inspect after an X-Cart migration, but product records are often the most layered. A product can carry basic details such as name, SKU, price, description, stock, weight, tax information, and images. It can also carry catalog relationships, product classes, attributes, product variants, modifiers, downloadable files, manufacturer or brand meaning, related items, SEO fields, and add-on-dependent data.
 
-Inside X-Cart, these pieces should be reviewed as a working catalog model. A product that appears in the admin area is not necessarily migration-ready if shoppers cannot select the correct option, see the right image, purchase the right variant, or find the item through category and filter paths.
+The migration should separate core product identity from behavior. A product that appears in the admin area is not necessarily complete if the storefront cannot show the correct buying choices, if variant-level stock is unclear, if attributes no longer support comparison or filtering, or if media is attached only to the parent product when the source store expected option-specific images.
 
-#### Product Options, Variants, Attributes, and Extra Fields <a href="#product-options-variants-attributes-and-extra-fields" id="product-options-variants-attributes-and-extra-fields"></a>
+| Product layer                 | What should be reviewed in X-Cart                                                        | Why it affects acceptance                                                       |
+| ----------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Core product identity         | Name, SKU, price, status, description, tax/shipping flags, and visibility                | Staff must be able to recognize and manage the product.                         |
+| Catalog organization          | Category assignments, product classes, related items, and searchable fields              | Shoppers must be able to find the product through the intended paths.           |
+| Variant or option logic       | Variant-specific SKU, price, stock, image, weight, or availability                       | Purchase choices must produce the correct commercial result.                    |
+| Attributes and specifications | Technical facts, comparison data, filters, and merchandising fields                      | Detailed catalogs need attributes to remain useful, not merely present.         |
+| Media and downloadable files  | Images, gallery order, thumbnails, files, and product associations                       | Visual and digital product expectations can fail even when text fields migrate. |
+| Add-on-dependent data         | Add-on-owned values, custom modules, special catalog behavior, or import-specific fields | Some values may need target capability before they become usable.               |
 
-Product options and variants often carry business rules. They may change price, stock, SKU, weight, image, availability, product identity, or fulfillment handling. Attributes and extra fields may support product comparison, storefront filters, technical specifications, merchandising, or integration references.
+### Variants, Options, Classes, and Attributes <a href="#variants-options-classes-and-attributes" id="variants-options-classes-and-attributes"></a>
 
-For X-Cart, these values should be classified before migration acceptance:
+Source platforms often use overlapping words for product choices and product facts. One store may call a size/color buying choice a variant, another may call it an option, and another may store the same meaning in custom fields. X-Cart planning should classify those meanings before drafting acceptance criteria.
 
-| Product data type      | What to confirm in X-Cart                                                                                                       |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Options                | Whether selectable choices appear correctly and affect the intended product result.                                             |
-| Variants or variations | Whether variant-specific SKU, stock, price, image, and availability remain meaningful.                                          |
-| Attributes             | Whether shopper-facing and admin-facing attributes retain their purpose.                                                        |
-| Extra fields           | Whether additional product facts remain searchable, filterable, visible, hidden, or integration-ready as needed.                |
-| Inventory values       | Whether stock, availability, backorder behavior, and low-stock expectations align with target setup.                            |
-| Product media          | Whether images, galleries, thumbnails, downloadable files, or media associations stay attached to the right product or variant. |
+Buying choices need special care because they can affect the customer’s purchase path. If a size, color, bundle selection, personalization field, or configuration option changes price, quantity, SKU, shipping weight, product image, or availability, the migration should verify that the target behavior remains usable. A flat import of option names is not enough when the source option controlled inventory or pricing.
 
-When the Source Platform uses custom product logic, a direct record migration may not be enough. Custom logic, custom fields, custom tables, or add-on-owned product behavior should be reviewed through Custom Service when standard service capability or Standard Add-ons cannot preserve the intended meaning.
+Attributes and product classes require a different review. They often explain what the product is rather than what the customer buys. They may support comparison, product specification tables, filters, or admin-side organization. When attributes are mixed with options in the source store, the migration plan should decide which values should become buying choices and which should remain descriptive or searchable facts.
 
-### Categories, Navigation, Search, and Filters <a href="#categories-navigation-search-and-filters" id="categories-navigation-search-and-filters"></a>
+### Category, Navigation, and Discovery Meaning <a href="#category-navigation-and-discovery-meaning" id="category-navigation-and-discovery-meaning"></a>
 
-X-Cart catalog discovery depends on more than assigning products to categories. Category hierarchy, storefront menus, product sorting, search behavior, filters, faceted navigation, landing pages, and SEO URLs all affect how shoppers reach products.
+Category migration is more than preserving a hierarchy. X-Cart category structure affects the way shoppers browse, how staff group products, and how SEO-sensitive pages are reviewed. Source categories may also carry descriptions, images, menu placement, landing-page content, sorting expectations, or filter assumptions.
 
-A source category may become an X-Cart category, but the buyer journey can still change if menu placement, filter data, route structure, or search behavior is not planned. This is especially important for stores with deep catalogs, technical products, brand-driven browsing, size/color filtering, or SEO-sensitive category pages.
+A category can migrate as a record while still losing its role in the storefront. For example, a deep category may appear in the admin area but be difficult to reach from the storefront menu. A brand or technical specification may have been used as a category in the source store but should become an attribute or filter in X-Cart. A landing page may need content review rather than pure category mapping.
 
-Strong data-model review should include:
+| Discovery element              | Data-model question                                                            | Acceptance cue                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Category hierarchy             | Does the target hierarchy preserve the shopper’s browsing logic?               | Key categories are reachable and products appear in expected locations. |
+| Product-to-category assignment | Are products assigned to all meaningful categories?                            | Multi-category products do not disappear from important paths.          |
+| Attributes and filters         | Should source filters become attributes, classes, or add-on-supported filters? | Shoppers can narrow products by the criteria that matter.               |
+| Search-critical fields         | Are searchable names, SKUs, specifications, and identifiers preserved?         | Staff and shoppers can locate products through practical search terms.  |
+| SEO-sensitive category pages   | Do priority category URLs and metadata need target review?                     | High-value category pages have clear target equivalents or redirects.   |
 
-* top-level and deep categories;
-* products assigned to multiple categories;
-* category descriptions and images;
-* search-critical attributes and extra fields;
-* filter values that shoppers use to narrow results;
-* menu and navigation expectations;
-* high-value category and product URLs;
-* redirects for important legacy paths.
+### Customer, User, Role, and Membership Meaning <a href="#customer-user-role-and-membership-meaning" id="customer-user-role-and-membership-meaning"></a>
 
-### Customer, User, Group, and Account Meaning <a href="#customer-user-group-and-account-meaning" id="customer-user-group-and-account-meaning"></a>
+X-Cart customer data can involve more than customer name, email, and address. The platform’s user-management structure can include user types, roles, permissions, memberships, profile fields, address books, and customer-account behavior. Migration planning should identify which of those meanings matter for the merchant’s operations.
 
-Customer data in X-Cart should remain useful for account access, order review, segmentation, pricing logic, communication, and business workflows where applicable. A source customer record may include profile details, email, billing and shipping addresses, account status, user group, membership, tax exemption, marketing preference, reward balance, wholesale context, or external identifiers.
+Customer records should remain useful for staff, service, segmentation, order review, and any membership-based commercial behavior. A source value such as customer group, wholesale status, tax-exempt flag, business account, loyalty status, or access role may not belong in a simple customer field. It may need mapping into membership logic, profile fields, target configuration, or Custom Service review.
 
-Not every source value has the same target meaning. Some values can become standard customer or address data. Others may belong to user groups, memberships, custom fields, add-ons, or external systems.
+Customer passwords deserve separate treatment. Password compatibility depends on source and target authentication models. If password migration is not feasible or not supported for a specific source context, reset planning should be treated as a launch-readiness item rather than a migration failure.
 
-| Customer-related data          | X-Cart interpretation risk                                                                                       |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Email and profile details      | Account identity must stay clear and avoid duplication.                                                          |
-| Billing and shipping addresses | Address structure should remain usable for order review and future checkout.                                     |
-| Customer groups or memberships | Group meaning may affect pricing, permissions, tax, content access, or B2B behavior.                             |
-| Marketing or newsletter status | Consent and subscription meaning may depend on the target marketing setup.                                       |
-| External customer IDs          | CRM, ERP, accounting, or loyalty references may need custom mapping.                                             |
-| Passwords                      | Password continuity depends on platform compatibility and migration feasibility; reset planning may be required. |
+### Order and Historical Record Meaning <a href="#order-and-historical-record-meaning" id="order-and-historical-record-meaning"></a>
 
-### Order and Historical Transaction Meaning <a href="#order-and-historical-transaction-meaning" id="order-and-historical-transaction-meaning"></a>
+Order history should remain readable and operationally useful after migration. A complete X-Cart order review should confirm customer association, purchased products, product options or variants, quantities, totals, discounts, taxes, payment labels, shipping labels, order statuses, invoices, notes, and fulfillment-related context where available.
 
-Orders are often reviewed after migration as proof of operational continuity, but X-Cart order meaning includes more than order count. A usable order record should preserve customer context, purchased products, option or variant details, quantities, totals, taxes, discounts, shipping method, payment label, order status, invoice context, and fulfillment history where available.
+Historical order records should not be confused with live order behavior. A migrated order can show that a customer used a certain payment method or shipping method in the past, but that does not prove the target X-Cart store is configured to accept that payment method or calculate that shipping method for new orders. Migration acceptance and launch checkout testing are related but different checks.
 
-Historical payment and shipping labels should not be confused with live target configuration. A migrated order may show that a customer paid with a certain method or used a certain shipping carrier in the past. That does not mean the new X-Cart store is configured to accept the same payment method or calculate the same shipping method for future orders.
+Order status mapping also needs attention. Source statuses such as pending, paid, shipped, partially shipped, refunded, canceled, returned, or archived may not align exactly with target status behavior. If staff use order states for fulfillment, accounting, returns, or customer service, status samples should be reviewed before Full Migration acceptance.
 
-#### Order Statuses, Discounts, Taxes, and Returns <a href="#order-statuses-discounts-taxes-and-returns" id="order-statuses-discounts-taxes-and-returns"></a>
+### Content, Static Pages, and Storefront Presentation <a href="#content-static-pages-and-storefront-presentation" id="content-static-pages-and-storefront-presentation"></a>
 
-Source order states may not align exactly with X-Cart order statuses. Paid, authorized, refunded, partially refunded, canceled, shipped, partially shipped, returned, or abandoned-cart-related records should be sampled deliberately.
+X-Cart can hold storefront content, product descriptions, category descriptions, static pages, images, and other presentation-related materials, but content migration is not the same as theme reconstruction. A store may rely on banners, homepage blocks, custom page layouts, category landing pages, product tabs, promotional content, or add-on-driven content areas that need target-side review.
 
-Discounts and taxes also need careful review. A migrated order total may be readable, while the target discount or tax configuration for new orders remains separate. If the Source Platform uses custom discount logic, tax rules, return workflows, or fulfillment states, those meanings should be confirmed before Full Migration.
+The migration plan should classify content according to its business role. Product descriptions and category descriptions usually belong with catalog data. Static pages may need URL and navigation review. Design blocks, homepage layouts, banners, and visual storefront components may require manual setup or separate project handling. Custom layout logic should not be assumed to migrate as standard data.
 
-### Checkout, Payment, Shipping, and Tax Boundaries <a href="#checkout-payment-shipping-and-tax-boundaries" id="checkout-payment-shipping-and-tax-boundaries"></a>
+### SEO, URL, and Metadata Meaning <a href="#seo-url-and-metadata-meaning" id="seo-url-and-metadata-meaning"></a>
 
-Checkout-related data often crosses the boundary between migration and target setup. X-Cart can hold order history and support checkout configuration, payment methods, shipping methods, taxes, notifications, and security-related behavior, but these are not the same type of work.
+SEO values need practical review because X-Cart target routing may not match the source store’s URL model. Product metadata, category metadata, static page metadata, slugs, canonical behavior, redirects, image text, and priority landing pages should be treated as traffic-sensitive assets.
 
-Migration can preserve historical order information where supported. Target setup must separately confirm how new customers will check out, pay, receive tax calculations, select shipping, receive notifications, and generate new order records.
+A migration can preserve product names and descriptions while still creating SEO risk if high-value URLs are not mapped, if category paths change without redirect planning, or if static content is not linked from the new storefront. The data-model question is therefore not only where the metadata goes, but whether the target storefront resolves important pages correctly.
 
-This distinction should be clear when reviewing Demo Migration results. A historical order can pass migration review while checkout setup still requires separate target configuration and testing.
+| SEO asset                   | What to preserve or review                                     | Why it matters                                                  |
+| --------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------- |
+| Product URLs                | Priority product paths and redirect expectations               | High-value product pages should not break silently.             |
+| Category URLs               | Browsing paths, metadata, and landing-page equivalents         | Category traffic can be as valuable as product traffic.         |
+| Static pages                | Informational pages, policies, buying guides, and help content | Trust and conversion content should remain accessible.          |
+| Metadata                    | Titles, descriptions, and image-related values where supported | Search snippets and page meaning need continuity.               |
+| Canonical or filtered paths | Source assumptions around duplicate or filtered URLs           | Target behavior may require SEO review beyond record migration. |
 
-### Content, Storefront, and Theme-Managed Meaning <a href="#content-storefront-and-theme-managed-meaning" id="content-storefront-and-theme-managed-meaning"></a>
+### Add-ons, Custom Fields, and Integration Data <a href="#add-ons-custom-fields-and-integration-data" id="add-ons-custom-fields-and-integration-data"></a>
 
-X-Cart is an e-commerce platform, not a CMS-first platform, but stores may still include important content. Static pages, landing pages, category descriptions, product descriptions, banners, menus, footer links, marketing blocks, and theme-managed content can influence conversion and SEO.
+X-Cart stores may depend on add-ons, custom modules, API integrations, marketplace connectors, payment tools, shipping tools, tax services, loyalty programs, subscriptions, automotive fitment, dealer data, product fitments, or external systems. These records may not be part of ordinary product, customer, order, or content migration.
 
-Some content can migrate as page or product data. Other content may need theme work, storefront configuration, menu setup, or add-on support. Page-builder-like content, custom templates, embedded scripts, widgets, and design-specific blocks should not be treated as ordinary plain text without review.
+The safest approach is to identify ownership. If data belongs to X-Cart core and is supported by standard migration behavior, it can be reviewed in the normal path. If the value belongs to an add-on, a custom module, an external system, or a custom table, it may need mapping, target setup, accepted exclusion, Add-on review, or Custom Service review.
 
-### SEO, URL, Redirect, and Metadata Meaning <a href="#seo-url-redirect-and-metadata-meaning" id="seo-url-redirect-and-metadata-meaning"></a>
+| Data owner                            | Typical example                                                                             | Planning result                                                     |
+| ------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| X-Cart core                           | Products, categories, customers, users, orders, attributes, images                          | Standard review if source structure is supported.                   |
+| X-Cart configuration                  | Checkout, payment, tax, shipping, statuses, notifications, storefront settings              | Target setup and validation, not only migration.                    |
+| Add-on-owned data                     | Reviews, loyalty, dealer data, fitment, advanced product behavior, special catalog features | Confirm target add-on and migration support.                        |
+| Custom module or source customization | Custom fields, custom product rules, bespoke checkout logic, external identifiers           | Custom Service review when standard mapping is insufficient.        |
+| External system                       | ERP, PIM, WMS, CRM, accounting, marketplace, fulfillment, analytics                         | Preserve identifiers where needed and plan reconnection separately. |
 
-SEO values are part of the data model because they determine how the new store is found and how traffic continuity is protected. Product slugs, category paths, page URLs, metadata, canonical behavior, redirects, image alt text, and filtered-page behavior should be reviewed before launch.
+### Decision Cues for X-Cart Data Translation <a href="#decision-cues-for-x-cart-data-translation" id="decision-cues-for-x-cart-data-translation"></a>
 
-The most important URLs should be tested directly. A migrated product may appear correctly in X-Cart, but the migration can still create business risk if a high-value URL breaks, redirects incorrectly, loses metadata, or points to a product that shoppers cannot reach through the expected path.
+A practical X-Cart data review should not stop after confirming that products, categories, customers, and orders exist in the Target Platform. The review should decide which source values remain migrated records, which values become X-Cart configuration, and which values depend on add-ons, target-side setup, or Custom Service review. That distinction keeps Article 3 from becoming an object inventory and gives the migration team a clearer way to judge whether the new store preserves business meaning.
 
-### Add-Ons, Modules, Custom Fields, and Integration Data <a href="#add-ons-modules-custom-fields-and-integration-data" id="add-ons-modules-custom-fields-and-integration-data"></a>
+| Source-side pattern                             | X-Cart translation question                                                                                                   | Migration planning implication                                                                                         |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Product values used for storefront selection    | Should the value become a variant, product attribute, option-like behavior, or another catalog rule?                          | Validate storefront choice behavior, price impact, and stock behavior instead of checking only product field presence. |
+| Customer segmentation or account-level behavior | Does the source value correspond to X-Cart user type, membership, profile field, address data, or add-on behavior?            | Separate migrated customer records from target-side access, pricing, tax, payment, or membership configuration.        |
+| Historical order context                        | Does the source order carry status, payment, shipping, discount, customer, and tax meaning that X-Cart can preserve usefully? | Review historical order usability for customer service, reporting, refunds, and account lookup.                        |
+| Storefront content and SEO values               | Are titles, metadata, URLs, images, static pages, and content blocks represented as data or target-side presentation?         | Confirm that migrated records support search continuity and storefront usability after theme and navigation setup.     |
+| Add-on or integration-owned fields              | Are the fields native, add-on-owned, externally generated, or custom?                                                         | Decide whether Add-ons, Advanced Data Mapping, Advanced Data Configure, or Custom Service review is required.          |
 
-X-Cart stores often rely on add-ons, custom modules, API connections, import/export routines, analytics tools, marketing systems, ERP/PIM/WMS integrations, accounting systems, shipping services, or marketplace connectors. These layers may own business meaning that is not visible in standard product, customer, order, or page counts.
+This decision layer is especially important when the Source Platform has been modified over time. Two stores can both describe a value as an attribute, membership level, order note, SKU reference, or custom field while using it for very different purposes. In X-Cart migration planning, the useful question is not only whether the value can be moved. The useful question is whether the value will still support the same catalog decision, customer treatment, service action, or storefront behavior after migration.
 
-Add-on or module data should be classified early:
+### Migration-Scope Reading Rule for X-Cart <a href="#migration-scope-reading-rule-for-x-cart" id="migration-scope-reading-rule-for-x-cart"></a>
 
-| Data layer                        | Migration treatment to consider                                                                            |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Standard X-Cart-supported records | May fit standard migration scope when structure is predictable.                                            |
-| Custom fields and extra values    | May need mapping, configuration, Advanced Data Mapping, Advanced Data Configure, or Custom Service review. |
-| Add-on-owned data                 | Requires review because business meaning may live outside standard fields.                                 |
-| Custom module data                | Usually needs Custom Service review when custom logic or custom storage is involved.                       |
-| External identifiers              | May need preservation for ERP, PIM, WMS, CRM, accounting, marketplace, or fulfillment workflows.           |
-| API/headless references           | May need target-side development, mapping, or custom migration logic adjustment.                           |
-
-Add-ons are optional service features for filtering, mapping, or data configuration needs within supported capability. When an Add-on must be tailored, when custom migration logic adjustment is required, or when custom module data must be handled, the requirement moves into Custom Service because customization is required.
-
-### Custom Platform Sources and Heavily Customized Stores <a href="#custom-platform-sources-and-heavily-customized-stores" id="custom-platform-sources-and-heavily-customized-stores"></a>
-
-When the Source Platform is a Custom Platform, the migration cannot assume a known source data model. Product, customer, order, content, and custom records must be interpreted before they can be matched to X-Cart target structures.
-
-Heavily customized source stores create similar risks even when the platform itself is known. Custom checkout logic, custom catalog tables, custom product fields, custom customer groups, external IDs, custom order workflows, and proprietary integrations may all change how data should be translated into X-Cart.
-
-Custom Platform source cases and bespoke source logic belong in Custom Service review so the migration can be scoped around the actual business meaning of the data.
+A reliable X-Cart data model review should read every major record through two questions: what is the record, and what does the store use it to control? A category may control discovery, navigation, or access. A customer field may only store profile information, or it may support segmentation, account service, or external-system matching. An order status may be historical information, or it may drive service decisions after launch. This reading rule helps prevent overconfident one-to-one mapping and keeps the migration plan connected to the merchant’s actual store operation.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-X-Cart migration quality depends on preserving the meaning of store data inside a configurable e-commerce environment. Products must remain purchasable, categories and filters must support discovery, customers and orders must remain useful, content and SEO values must protect storefront continuity, and add-on or custom data must be handled in line with its business purpose.
+X-Cart data-model review should focus on business meaning, not only field transfer. Products, categories, customers, users, orders, content, SEO values, add-ons, and integration identifiers may all migrate into different target structures or require separate target configuration before they become usable.
 
-Before judging a Demo Migration, compare representative records from the Source Platform against their intended X-Cart behavior. If complex options, custom fields, add-on-owned data, external identifiers, or custom workflows are essential to the business, raise those cases before Full Migration so the service path, Add-ons, or Custom Service review can be selected correctly.
+A strong X-Cart migration plan identifies what can move as standard data, what must be configured in the target store, what depends on add-ons or modules, and what should move into Custom Service review. Demo Migration should then test representative records from each meaningful area instead of relying on record totals as proof of readiness.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why do product options and variants need extra review in an X-Cart migration?**
+**Why are X-Cart product options and attributes reviewed separately?**
 
-Options and variants can affect price, SKU, image, inventory, shipping, filtering, and the shopper’s buying path. A product may exist after migration but still fail if its selectable choices do not behave correctly in X-Cart.
+Options and variants often affect the buying path, while attributes usually describe or classify the product. Mixing them can create problems with SKU behavior, stock, price, filtering, comparison, or storefront display.
 
-**Are migrated order records enough to prove checkout is ready?**
+**Can all X-Cart add-on data be treated as ordinary product data?**
 
-No. Historical orders show past transaction context, while live checkout depends on target payment, shipping, tax, notification, and configuration settings. Both should be reviewed separately.
+No. Add-on-owned data should be reviewed separately because it may depend on target add-on availability, custom fields, specific import behavior, or Custom Service review.
 
-**What happens to custom fields during migration to X-Cart?**
+**Does migrated order history prove that checkout is ready?**
 
-Custom fields should be reviewed for purpose and target fit. Some values may be handled through supported mapping or configuration, while custom logic, custom module data, or bespoke storage requires Custom Service review.
+No. Migrated order history proves historical readability. Active payment, shipping, tax, notification, and checkout behavior require target-side setup and testing.
 
-**Should add-on data be treated as standard product or order data?**
+**What customer data needs extra attention in X-Cart?**
 
-Not automatically. Add-ons can store or control business meaning outside standard records. Add-on-owned data should be identified before migration scope is finalized so it can be migrated, mapped, reconfigured, excluded, or reviewed through Custom Service.
+Memberships, roles, customer profile fields, address books, commercial segmentation, external identifiers, and password expectations need careful review because they may affect account usability after migration.
 
-**Why does SEO belong in a data model discussion?**
+**What is the best way to validate X-Cart data-model differences?**
 
-SEO values affect how migrated products, categories, and pages are found after launch. Slugs, metadata, redirects, canonical behavior, and high-value URLs should be treated as part of migration meaning, not as a last-minute visual check.
+Use Demo Migration samples that include complex products, category paths, customers with account differences, orders with several statuses, SEO-sensitive URLs, add-on-owned fields, and integration identifiers.

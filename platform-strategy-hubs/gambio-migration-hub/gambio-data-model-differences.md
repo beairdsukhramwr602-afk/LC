@@ -1,149 +1,136 @@
 # Gambio Data Model Differences
 
-Gambio migration is not only a transfer of products, customers, and orders into a new administration area. It is a translation of commercial meaning into a Gambio shop structure, where catalog records, variants, stock behavior, customer groups, storefront design, content pages, SEO settings, integrations, and hosting responsibility may all affect how the migrated store works after launch.
+Gambio migration planning should treat data as operating structure, not as a flat export of products, customers, and orders. A store can appear complete at record level while still losing selling meaning if product options, categories, stock behavior, content pages, legal pages, customer context, or storefront paths are interpreted too casually in the Target Platform.
 
-This matters because source stores rarely use data in a neutral way. A category may carry navigation meaning. A product option may control price, stock, or shopper choice. A customer group may affect B2B pricing or access. A downloadable product may depend on file handling, order status, or customer account behavior. A content page may support legal, trust, or conversion requirements. After migration, these records need to make sense inside Gambio’s operating model, not merely appear as imported data.
+Gambio adds a specific planning question that not every platform raises in the same way: the merchant must understand whether the target environment is Gambio Cloud or self-hosted Gambio. That decision changes responsibility for hosting, installation, updates, support expectations, customization surface, and sometimes the way technical evidence is gathered before migration. The data model must therefore be read together with the chosen operating model.
 
-### Core Structural Layers in Gambio <a href="#core-structural-layers-in-gambio" id="core-structural-layers-in-gambio"></a>
+### How Gambio Changes Data Interpretation <a href="#how-gambio-changes-data-interpretation" id="how-gambio-changes-data-interpretation"></a>
 
-Gambio combines a shop administration layer, storefront presentation layer, catalog layer, customer/order layer, configuration layer, integration layer, and hosting/deployment layer. The practical data-model question is how each source concept should be understood after it enters the Gambio environment.
+A Gambio Target Platform receives migrated data into a shop structure that combines catalog records, storefront presentation, content management, checkout configuration, customer accounts, order history, and environment responsibility. The same source data can have different meaning depending on how it was used in the original store.
 
-| Gambio layer                     | Migration meaning                                                                                                                                                         | What the migrated result must preserve                                                                                       |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Catalog structure                | Products, categories, product options, variants, images, stock, downloads, base prices, filters, and related product logic become the foundation of the sellable catalog. | Products should remain understandable, purchasable, searchable, and manageable.                                              |
-| Customer and pricing structure   | Customers, customer groups, B2B conditions, segmented prices, addresses, and account context can affect commercial behavior.                                              | Customers should remain connected to meaningful pricing, account, and order context.                                         |
-| Order history                    | Orders carry product, customer, total, tax, shipping, payment, status, and fulfillment meaning.                                                                           | Historical orders should remain useful for service, accounting reference, fulfillment review, and customer support.          |
-| Storefront and content structure | Layout, content pages, SEO paths, navigation, category presentation, product pages, and design elements shape how shoppers experience the store.                          | The store should remain navigable and credible after launch, even where design work is configured separately from migration. |
-| Operational configuration        | Taxes, currencies, languages, shipping, payments, inventory, legal/compliance settings, and integrations may depend on Gambio configuration.                              | The merchant should know which behavior comes from migrated data and which must be configured in Gambio.                     |
-| Hosting and customization layer  | Cloud and self-hosted Gambio environments do not carry the same operational responsibility or customization surface.                                                      | Migration expectations should reflect the selected Gambio environment.                                                       |
+A product option may be a simple shopper choice, or it may represent stock, price, fulfillment, image, or SKU logic. A category may be a browsing container, or it may define SEO architecture. A content page may be a marketing page, or it may carry legal and trust meaning. A customer record may be a simple account, or it may be linked to B2B pricing, tax treatment, or repeated service history.
 
-### Product and Catalog Meaning <a href="#product-and-catalog-meaning" id="product-and-catalog-meaning"></a>
+| Source data area          | Gambio interpretation question                                                              | What must be preserved                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Products and articles     | Does the product remain sellable, readable, and manageable in Gambio?                       | Name, SKU, price, images, stock, options, downloads, category placement, and merchandising meaning.          |
+| Categories and navigation | Does the source discovery structure translate into Gambio category and menu logic?          | Browsing paths, parent-child relationships, high-value category pages, and SEO-sensitive structure.          |
+| Options and variants      | Are shopper choices simple selections, commercial rules, or inventory-sensitive structures? | Option labels, price impact, stock assumptions, order-line clarity, and product selection accuracy.          |
+| Customers and orders      | Do accounts and historical orders remain useful for service and reporting reference?        | Customer identity, addresses, order totals, product lines, tax/shipping/payment context, and status meaning. |
+| Content and legal pages   | Are informational pages still accessible and placed correctly?                              | CMS Pages, policy pages, trust content, landing pages, and internal links.                                   |
+| Operating model           | Is Gambio Cloud or self-hosted Gambio the intended target?                                  | Correct assumptions about updates, hosting, maintenance, technical access, and customization.                |
 
-#### Products are commercial structures, not isolated records <a href="#products-are-commercial-structures-not-isolated-records" id="products-are-commercial-structures-not-isolated-records"></a>
+These distinctions help define what the migration must prove before the merchant treats the transferred data as operationally ready.
 
-In Gambio, product data should be interpreted as the foundation of the sellable catalog. A product is not only a title, SKU, description, price, and image. It may also involve product options, variants, inventory, downloadable files, base prices, product images, reviews, specials, cross-selling relationships, shipping implications, category placement, filters, and SEO metadata.
+### Product and Article Data <a href="#product-and-article-data" id="product-and-article-data"></a>
 
-A source platform may use a different product model. Some platforms treat variants as separate products, some attach option values to a parent product, and some use app-owned option logic or custom product fields. During migration, the important question is whether the product remains commercially readable inside Gambio. Shoppers should be able to choose the right item, and the merchant should be able to manage stock, pricing, images, categories, and product relationships without guessing what the migrated records mean.
+Gambio commonly uses the language of articles for sellable products. That matters because source platforms may separate products, variants, options, digital goods, bundles, and custom product types in ways that do not match Gambio one-to-one. The migration question is not whether every source product can be counted. The question is whether the resulting Gambio catalog can be managed and purchased without losing commercial meaning.
 
-#### Product options and variants need careful interpretation <a href="#product-options-and-variants-need-careful-interpretation" id="product-options-and-variants-need-careful-interpretation"></a>
+Basic product fields such as title, SKU, description, price, images, and inventory are only the visible layer. Real migration difficulty usually appears in the relationships around the product: category placement, option values, download handling, image galleries, stock behavior, base-price expectations, search and filter visibility, and how product data appears in historical order lines.
 
-Options and variants are often one of the most sensitive catalog translation areas. A source store may use options for color, size, material, package, warranty, engraving, digital format, or bundle selection. Those options may affect price, availability, SKU, stock, product images, shipping behavior, or order line meaning.
+Gambio’s catalog model supports common merchant needs: many articles, multiple images per article, product options for choices such as size or color, stock management per article, downloadable articles, and categories with subcategories. That breadth is useful for migration planning because typical catalog structures can be represented, but it does not remove the need to translate source-side logic accurately.
 
-In Gambio, these relationships should be reviewed as part of catalog meaning. If source options are simple shopper selections, they may be easier to interpret. If they control inventory, price changes, image changes, or downstream fulfillment, they deserve closer review. A migration can look successful at record level while still failing if shoppers cannot choose the right variant or if order lines no longer show what was purchased.
+A source platform with simple physical products usually maps more cleanly. A source platform with option-level stock, app-managed variants, bundle logic, subscription products, custom product fields, or external inventory references needs closer interpretation. In those cases, product data is not just content; it is a commercial rule system.
 
-#### Categories, filters, and navigation carry discovery meaning <a href="#categories-filters-and-navigation-carry-discovery-meaning" id="categories-filters-and-navigation-carry-discovery-meaning"></a>
+### Options, Variants, Stock, and Downloadable Products <a href="#options-variants-stock-and-downloadable-products" id="options-variants-stock-and-downloadable-products"></a>
 
-Categories are not just containers for products. They shape how shoppers browse, compare, and trust the store. Gambio catalog planning should consider category hierarchy, product placement, filters, manufacturer relationships, specials, cross-selling, and any source structure used to guide discovery.
+Options and variants deserve separate attention because they are often where migration quality becomes visible to shoppers. A color or size selector seems simple until it affects price, image display, SKU selection, stock reduction, shipping weight, or fulfillment instructions. If the source platform stores those relationships differently from Gambio, the migrated product may look present but behave incorrectly.
 
-The data-model difference becomes important when the source platform combines category, tag, collection, menu, and filter behavior differently from Gambio. A product that belongs to several source collections may need a clear category or filtering strategy in Gambio. A source store with deep category trees may require careful validation so products do not become buried. A source store with SEO-sensitive category URLs should also treat route and metadata behavior as part of the storefront interpretation, not only the catalog import.
+Gambio can let shoppers choose variations through product options and can reduce inventory when an article is sold, while stock control can also be disabled when the merchant does not want to use that functionality. These capabilities create two distinct planning questions: does the source store expect option-level or article-level inventory behavior, and should the target Gambio store use stock control in the same way after launch?
 
-#### Downloadable products and special product types need source evidence <a href="#downloadable-products-and-special-product-types-need-source-evidence" id="downloadable-products-and-special-product-types-need-source-evidence"></a>
+Downloadable products add another layer. A downloadable article is not simply a product with no shipping. It can involve file access, customer account permissions, order status, historical purchase access, and post-payment availability. If a source store manages files through an app, external storage, membership area, or custom logic, that structure may need Custom Service review rather than ordinary field mapping.
 
-Gambio supports downloadable products, but downloadable product migration should not be assumed to behave like ordinary physical product migration. File references, access expectations, order status dependencies, customer account access, and historical purchase context may all affect whether the migrated result is operationally useful.
+| Product structure       | Lower-risk interpretation                                  | Higher-risk interpretation                                                           |
+| ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Simple physical product | One article with direct price, SKU, image, and stock.      | Product depends on external fulfillment or custom stock calculation.                 |
+| Shopper option          | Size or color selection with clear labels.                 | Option changes stock, price, SKU, weight, images, or fulfillment logic.              |
+| Downloadable product    | Download access is standard and tied to the product/order. | Files are stored externally or controlled by custom membership logic.                |
+| Image-heavy product     | Multiple images support product presentation.              | Images are variant-specific, externally hosted, or controlled by source theme logic. |
+| Product grouping        | Categories and options explain buying choices.             | Bundles, kits, or configurable sets depend on unsupported source structures.         |
 
-Stores with digital products, mixed physical and digital products, or products requiring special fulfillment logic should identify representative samples before migration. If the source platform stores downloads through custom apps, external file systems, membership tools, or third-party services, the migration may require Custom Service review.
+The strongest validation samples should include products from both columns. Simple examples prove baseline migration. Complex examples prove whether the migration preserves selling meaning.
 
-### Customer and Account Meaning <a href="#customer-and-account-meaning" id="customer-and-account-meaning"></a>
+### Categories, Navigation, and Discovery Structure <a href="#categories-navigation-and-discovery-structure" id="categories-navigation-and-discovery-structure"></a>
 
-#### Customers are connected to pricing, orders, and account behavior <a href="#customers-are-connected-to-pricing-orders-and-account-behavior" id="customers-are-connected-to-pricing-orders-and-account-behavior"></a>
+Categories in Gambio should be treated as discovery architecture. They help shoppers find products, understand assortment structure, and move through the storefront. A source platform may use categories, collections, tags, menus, filters, brands, landing pages, or custom navigation blocks to create the same customer journey. Migration planning must identify which of those structures should become Gambio categories, which should become content/navigation work, and which should be rebuilt separately.
 
-Customer data in Gambio should remain connected to the merchant’s operating logic. Names, emails, addresses, and account records are only the visible part of the model. The useful meaning often depends on customer groups, historical orders, pricing expectations, tax treatment, B2B account needs, and communication context.
+Gambio can represent categories and subcategories, which supports deeper catalog structures. That capability does not automatically solve source stores where categories carry multiple meanings. A product may live in a merchandising collection, a seasonal collection, a technical category, and a sale category. A direct migration without interpretation may create clutter, duplicate paths, or poor discoverability.
 
-This is especially important for merchants using segmented pricing, customer-group logic, B2B conditions, wholesale pricing, or recurring high-value customer accounts. If customer group meaning is unclear in the source store, the migrated Gambio customer structure may appear complete but fail to support the merchant’s actual pricing or service workflow.
+SEO-sensitive categories also require attention. If the source store receives organic traffic through category pages, the migration scope must consider page titles, metadata, URLs, redirects, internal links, and whether the new Gambio category structure supports the same browsing intent. Category data is therefore not only a database layer; it affects discoverability and post-launch revenue.
 
-#### Customer groups can change commercial interpretation <a href="#customer-groups-can-change-commercial-interpretation" id="customer-groups-can-change-commercial-interpretation"></a>
+### Content Pages, Legal Pages, and Storefront Meaning <a href="#content-pages-legal-pages-and-storefront-meaning" id="content-pages-legal-pages-and-storefront-meaning"></a>
 
-Customer groups are a key planning area because they can affect pricing, access, discounts, B2B treatment, or customer segmentation. A source platform may use groups, tags, roles, price lists, company accounts, membership levels, or app-managed segmentation. These structures should not be flattened into ordinary customer records without review.
+Gambio supports editorial and content pages through its content management capabilities. For migration planning, that means CMS Pages should be treated as part of the customer experience, not as optional extras. A source store may use content pages for shipping information, returns, privacy, legal notices, size charts, brand storytelling, buying guides, landing pages, or campaign pages.
 
-For a Gambio migration, the merchant should identify which customer groups matter after launch, which customers belong to them, which prices or conditions depend on them, and whether group behavior is standard enough for the selected migration path. When segmentation is used only for marketing, the migration implication may be lighter. When segmentation controls actual commercial rules, it becomes a data-model and validation priority.
+In a Gambio context, content pages can be especially important because the platform is commonly positioned with legal, support, and German-market expectations. Cloud packages may include legal-text handling through selected partners, while self-hosted merchants may carry more responsibility for ensuring that their storefront content and legal content are current and correctly placed. Migration does not replace that legal review, but it should preserve the pages and relationships that the merchant expects to keep.
 
-### Order and Historical Data Meaning <a href="#order-and-historical-data-meaning" id="order-and-historical-data-meaning"></a>
+Content page migration should therefore answer three questions. Which pages must be migrated? Which pages must be refreshed or reconfigured in Gambio? Which pages require redirects, menu placement, or legal review before launch? Treating all content as equal can bury important trust pages and over-preserve obsolete marketing pages.
 
-#### Orders must remain useful beyond order numbers <a href="#orders-must-remain-useful-beyond-order-numbers" id="orders-must-remain-useful-beyond-order-numbers"></a>
+### Customer and Order Meaning <a href="#customer-and-order-meaning" id="customer-and-order-meaning"></a>
 
-Order migration should preserve business meaning, not just order IDs. Historical orders are often used for customer service, fulfillment questions, warranty checks, accounting reference, repeat purchase support, and dispute review. A useful migrated order should retain readable customer identity, product line items, option or variant selections, quantities, totals, discounts, tax, shipping, payment context, status meaning, and address information as far as supported by the selected migration path.
+Customer data has value only when it remains connected to commercial context. Names, emails, addresses, and account records are useful, but many stores depend on more: customer groups, tax status, repeat purchase history, invoice expectations, newsletter consent, B2B relationships, and order history. If the source platform uses tags, roles, memberships, or customer groups to express those relationships, the migration must identify which meanings belong in Gambio and which are external to the migrated data.
 
-Different source platforms store order meaning differently. Some preserve complete option labels on order lines. Some store source-specific statuses. Some rely on payment gateways, fulfillment apps, ERP references, or shipping integrations to explain what happened. Those details should be reviewed before migration if the merchant expects historical Gambio orders to support operations after launch.
+Order history must remain readable. A migrated order should help the merchant answer practical questions: what was purchased, by whom, at what price, with which tax/shipping/payment context, and in what status. Historical orders are often used for customer service, accounting reference, warranty handling, and repeat purchase support. If option labels, product names, discounts, tax totals, payment names, or status meanings are unclear after migration, the data may technically exist but fail operationally.
 
-#### Order statuses need interpretation, not direct naming assumptions <a href="#order-statuses-need-interpretation-not-direct-naming-assumptions" id="order-statuses-need-interpretation-not-direct-naming-assumptions"></a>
+The most useful Demo Migration samples should include ordinary orders, discounted orders, orders with product options, orders with downloads, orders from different customer types, and orders with different payment or shipping methods. Gambio validation should focus on whether staff can understand the order without returning to the source store.
 
-Order statuses can look simple, but they often carry operational meaning. A source status such as processing, paid, shipped, partially refunded, cancelled, failed, pending review, or awaiting fulfillment may not map one-to-one into the target status structure. The migration should preserve useful meaning where supported, but the merchant may still need to configure or interpret statuses inside Gambio.
+### Cloud and Self-Hosted Data Responsibilities <a href="#cloud-and-self-hosted-data-responsibilities" id="cloud-and-self-hosted-data-responsibilities"></a>
 
-The risk is not only that a status label changes. The risk is that the team misunderstands what the status means after launch. If old orders are used for customer service or finance review, status samples should be checked carefully during Demo Migration and final validation.
+Gambio Cloud and self-hosted Gambio create different responsibilities around the same data. In Gambio Cloud, hosting, installation, updates, and support are part of the managed environment. In self-hosted Gambio, the merchant is responsible for hosting, installation, maintenance, and updates while receiving greater flexibility for customization and integrations.
 
-### Storefront, Content, and SEO Meaning <a href="#storefront-content-and-seo-meaning" id="storefront-content-and-seo-meaning"></a>
+This distinction affects data-model interpretation because technical access, custom code review, extension behavior, and integration recreation may differ by environment. A source store with extensive custom database fields, modified templates, custom checkout behavior, or integration-owned data may be better suited to a self-hosting conversation, but that does not mean migration becomes automatic. It means the merchant needs clearer evidence about what data is standard, what is custom, and what must be rebuilt.
 
-#### Storefront data is connected to design and navigation <a href="#storefront-data-is-connected-to-design-and-navigation" id="storefront-data-is-connected-to-design-and-navigation"></a>
+Cloud-oriented merchants should avoid assuming that every source customization can be carried forward. Self-hosting-oriented merchants should avoid assuming that greater technical freedom removes the need for scope control. In both cases, the migration must distinguish supported data, Gambio configuration, implementation work, and Custom Service needs.
 
-Gambio storefront meaning includes more than product and category records. Layout, responsive theme behavior, StyleEdit changes, content pages, navigation, category pages, product pages, internal links, metadata, and SEO paths all affect how shoppers experience migrated data.
+### Data Translation Priorities for Gambio <a href="#data-translation-priorities-for-gambio" id="data-translation-priorities-for-gambio"></a>
 
-A migrated catalog may be technically present but commercially weak if storefront organization is not planned. Product pages need images, descriptions, options, related information, and price context. Category pages need clean product grouping. Content pages may support legal requirements, brand trust, shipping information, returns, payment explanations, or conversion paths. SEO-sensitive stores should identify priority URLs and metadata before launch.
+A Gambio data-model review should begin by separating record identity from selling behavior. Record identity answers whether a product, customer, order, category, or CMS Page exists in the target. Selling behavior answers whether that record still works as expected in the new store. The second question is often more important, because customers do not experience a migrated database; they experience catalog choices, navigation, content, prices, stock, checkout context, and post-order service.
 
-#### Content pages should not be confused with product records <a href="#content-pages-should-not-be-confused-with-product-records" id="content-pages-should-not-be-confused-with-product-records"></a>
+When a Source Platform uses a different product architecture, data can look correct while meaning changes. A source variant may become a product option, a landing page may become a CMS Page, a navigation node may become a category, or an integration-generated field may have no direct target equivalent. The review should identify these meaning changes before Full Migration so they can be handled through mapping, configuration, Add-ons, Custom Service, or separate target setup.
 
-Many stores use content pages for legal pages, service information, buying guides, FAQ pages, landing pages, brand pages, and policy pages. These pages may not belong to the same data model as products, categories, customers, or orders. In Gambio, content management and storefront presentation can support this material, but the migration plan should distinguish store records from content implementation.
+The practical translation priority for Gambio is to protect commercial meaning first and record form second. A source product should become a usable Gambio article, not merely a row with a name and price. A source category should become a navigable structure, not only a parent-child relationship. A source content page should remain customer-facing and findable, not only text moved into a new field.
 
-This distinction matters during validation. A Demo Migration should not be judged only by whether products and orders appear. For stores with important content pages, navigation paths, or SEO traffic, validation should also confirm whether the target storefront supports the content structure needed for launch, even if some design or page work is completed separately by the merchant or implementation team.
+The most important review questions are therefore cause-and-effect questions. If a source option changes price, stock, image, or fulfillment expectation, what should that mean in Gambio? If a source category carried SEO value, how should navigation and URL continuity be reviewed? If a source order included discounts, tax behavior, shipping context, or downloadable items, what does staff need to see in Gambio to support the customer later? These questions turn data mapping into migration planning.
 
-### Extension, Integration, and Customization Meaning <a href="#extension-integration-and-customization-meaning" id="extension-integration-and-customization-meaning"></a>
+Entity Points can help estimate scope when eligible new Products, Customers, Orders, or Blog Posts are migrated for the first time, but they should not be used as a substitute for data-model review. A small number of complex records can create more translation work than a larger number of ordinary records. Gambio planning should therefore combine count-based scope with behavior-based review.
 
-#### Integrations can own data that is not visible in standard exports <a href="#integrations-can-own-data-that-is-not-visible-in-standard-exports" id="integrations-can-own-data-that-is-not-visible-in-standard-exports"></a>
+The practical translation priority for Gambio is to protect commercial meaning first and record form second. A source product should become a usable Gambio article, not merely a row with a name and price. A source category should become a navigable structure, not only a parent-child relationship. A source content page should remain customer-facing and findable, not only text moved into a new field.
 
-Gambio stores may connect to marketplaces, payment providers, shipping services, ERP systems, analytics, marketing services, product feeds, or other interfaces. Source stores may also use apps, plugins, modules, scripts, custom tables, or external systems to create behavior that standard records do not fully describe.
+The most important review questions are therefore cause-and-effect questions. If a source option changes price, stock, image, or fulfillment expectation, what should that mean in Gambio? If a source category carried SEO value, how should navigation and URL continuity be reviewed? If a source order included discounts, tax behavior, shipping context, or downloadable items, what does staff need to see in Gambio to support the customer later? These questions turn data mapping into migration planning.
 
-This creates a data-model boundary. Standard migration can address supported data within the selected migration path, but external identifiers, integration-owned states, marketplace-specific fields, ERP references, custom fulfillment data, or third-party rule behavior may require review. If the target Gambio shop must preserve this meaning, the project may need Advanced Data Mapping, Advanced Data Configure, or Custom Service.
+Entity Points can help estimate scope when eligible new Products, Customers, Orders, or Blog Posts are migrated for the first time, but they should not be used as a substitute for data-model review. A small number of complex records can create more translation work than a larger number of ordinary records. Gambio planning should therefore combine count-based scope with behavior-based review.
 
-#### Cloud and self-hosted Gambio change implementation expectations <a href="#cloud-and-self-hosted-gambio-change-implementation-expectations" id="cloud-and-self-hosted-gambio-change-implementation-expectations"></a>
+The strongest Gambio data-model review starts with representative records, not only totals. Record counts tell the merchant how large the project is. Representative records reveal whether the target structure preserves meaning.
 
-The selected Gambio environment can affect how migrated data is implemented and maintained. Gambio Cloud reduces hosting and update responsibility, while self-hosting gives the merchant more control over hosting, technical access, customization, and maintenance. This difference should not change the basic need for clean product, customer, and order data, but it can change how customization, interfaces, and operational responsibility are planned.
+| Priority                            | Why it matters                                                           | Best sample evidence                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Product options and stock           | They affect purchase accuracy and fulfillment confidence.                | Products with size/color choices, stock reduction, price differences, and order-line examples.                   |
+| Category hierarchy                  | It shapes browsing, SEO, and product discovery.                          | Deep categories, products in multiple categories, and high-traffic category URLs.                                |
+| CMS Pages and legal content         | They affect trust, compliance context, and navigation.                   | Terms, shipping, returns, privacy, legal notices, guides, and landing pages.                                     |
+| Customer/order relationship         | It determines whether history remains useful after launch.               | Customers with multiple orders, different addresses, group logic, discounts, and tax/shipping/payment variation. |
+| Environment-dependent customization | It affects whether data can be migrated, configured, or must be rebuilt. | Custom fields, modified source tables, third-party modules, ERP references, and integration-owned identifiers.   |
 
-A merchant moving into Gambio Cloud should be especially clear about which requirements fit the managed environment and which require configuration rather than code-level intervention. A merchant moving into self-hosted Gambio should be ready to manage hosting, updates, technical dependencies, custom work, and integration maintenance as part of the future operating model.
-
-### Custom Platform Source Interpretation <a href="#custom-platform-source-interpretation" id="custom-platform-source-interpretation"></a>
-
-When the Source Platform is a Custom Platform, the data model should not be assumed to match Gambio’s structure. Custom Platform sources may contain bespoke product tables, unusual option logic, non-standard customer segmentation, external order references, custom tax or shipping logic, content relationships, proprietary URLs, or third-party identifiers.
-
-For these cases, the migration should begin with source interpretation. The team must understand what each data field means, how records relate to one another, which relationships are required after launch, and which target structures can represent them. Custom Platform handling points to Custom Service because the work may require custom migration logic adjustment, bespoke transformation, or review beyond standard service capability.
-
-### What Migrated Data Must Prove After Translation <a href="#what-migrated-data-must-prove-after-translation" id="what-migrated-data-must-prove-after-translation"></a>
-
-A successful Gambio migration should prove that the source store’s commercial meaning has survived inside the target environment. The following proof areas are especially important:
-
-| Proof area            | What to confirm in Gambio                                                                                                                                   |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog meaning       | Products, categories, variants, options, images, prices, stock, downloads, filters, and manufacturer relationships remain understandable and usable.        |
-| Customer meaning      | Customer records, addresses, customer groups, B2B or pricing context, and order relationships remain clear.                                                 |
-| Order meaning         | Historical orders preserve line items, totals, tax, shipping, payment context, statuses, discounts, and option selections where supported.                  |
-| Storefront meaning    | Product pages, category pages, content pages, navigation, metadata, and SEO-sensitive paths make sense in the target shop.                                  |
-| Configuration meaning | Tax, shipping, payment, currencies, languages, stock behavior, and legal/compliance-related settings are either migrated, configured, or marked for review. |
-| Custom meaning        | Custom fields, integration data, external identifiers, and bespoke source behavior are reviewed through the right Add-on or Custom Service path.            |
+These priorities help keep Gambio migration grounded in usable outcomes. The target result should not merely contain records. It should give the merchant a catalog, storefront, account base, and historical order set that can be operated after launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Gambio data-model differences are mainly about meaning translation. Products must become manageable Gambio catalog records. Options and variants must remain understandable to shoppers and administrators. Customer groups must preserve commercial context. Orders must remain useful for history and support. Storefront, content, SEO, and design structures must support the migrated data instead of merely displaying it. Configuration-sensitive behavior such as tax, shipping, payment, currency, language, inventory, and integration logic must be separated from ordinary record transfer.
+Gambio data migration is best understood as a translation of selling structure into a Cloud or self-hosted Gambio operating model. Products, options, categories, stock, downloads, content pages, customers, and orders all carry meaning beyond their field names. The more a source store depends on custom logic, app-owned fields, complex product choices, or SEO-sensitive navigation, the more important it becomes to review representative records before Full Migration.
 
-The strongest migration plans identify these meaning layers before Full Migration. They treat Demo Migration as a chance to test whether Gambio can represent the source store’s real operating logic, not just whether record counts match.
+A strong Gambio migration plan separates four things clearly: data that can be moved, behavior that must be configured, storefront elements that must be rebuilt or reviewed, and custom structures that may require Custom Service. That separation helps the new store become usable, not just populated.
 
-Use Demo Migration samples to test product variants, customer groups, orders, content pages, SEO-sensitive categories, tax/shipping/payment context, and any custom or integration-owned data. If the source store contains non-standard product logic, customer segmentation, external identifiers, custom development, or Custom Platform data, review the migration path through Live Chat so the correct Add-on or Custom Service boundary is clear before execution.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why do product options require special attention in Gambio migration?**
 
-**Why do Gambio data model differences matter during migration?**
+Product options may affect shopper choice, price, SKU meaning, stock assumptions, images, shipping, and order-line clarity. If the source platform stores option behavior differently, the migrated product can look correct while still selling incorrectly.
 
-They matter because source records may not carry the same meaning inside Gambio. Products, variants, categories, customer groups, orders, content pages, and configuration settings need to be interpreted so the migrated store remains usable, not merely populated.
+**Are Gambio categories just ordinary product containers?**
 
-**Are product options and variants the same in every migration to Gambio?**
+No. Categories also shape navigation, SEO, product discovery, and customer trust. A source store that uses collections, tags, menus, or landing pages should review how those structures should translate into Gambio.
 
-No. Source platforms may represent options, variants, and product choices differently. The migration should verify how option labels, prices, stock, images, and order line meaning appear in Gambio before Full Migration.
+**Do CMS Pages matter in a Gambio migration?**
 
-**Should customer groups be reviewed before migrating to Gambio?**
+Yes. CMS Pages can include legal content, shipping information, returns pages, trust content, guides, and landing pages. They should be reviewed for placement, relevance, links, and redirects, not only migrated as text records.
 
-Yes. Customer groups can affect pricing, B2B behavior, discounts, tax context, or access. If the source store uses groups, tags, roles, price lists, or membership structures, those meanings should be reviewed before migration.
+**Does choosing Gambio Cloud or self-hosted Gambio change data planning?**
 
-**Can Gambio content pages be treated like product data?**
-
-No. Content pages, legal pages, buying guides, landing pages, and policy pages usually have different responsibilities from product records. They should be planned as part of storefront and content continuity, not flattened into catalog migration assumptions.
-
-**When do custom source fields require Custom Service for Gambio migration?**
-
-Custom Service should be reviewed when source fields, external identifiers, integration-owned data, Custom Platform structures, bespoke product logic, or custom order relationships need interpretation beyond standard service capability or Standard Add-on behavior.
+Yes. Cloud and self-hosted environments create different expectations for hosting, updates, customization, technical access, and post-migration responsibility. The selected environment should shape how custom data and integrations are reviewed.

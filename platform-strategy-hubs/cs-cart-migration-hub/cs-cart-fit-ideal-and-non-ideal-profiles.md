@@ -1,201 +1,157 @@
 # CS-Cart Fit: Ideal and Non-Ideal Profiles
 
-CS-Cart is usually considered when a merchant wants more control over the future e-commerce environment than a simple hosted storefront can provide. It can support ordinary online stores, multi-vendor marketplaces, B2B and B2C selling, mobile marketplace experiences, headless implementations, cloud or on-premises deployment, add-ons, themes, custom development, and managed hosting options. That breadth can be valuable, but it also means fit should be judged by the operating model the merchant intends to run after migration.
+CS-Cart is a strong fit when the merchant needs a flexible commerce environment with deliberate control over catalog structure, vendor participation, storefront behavior, add-ons, and implementation ownership. It is a weaker fit when the merchant wants a simple storefront without marketplace logic, technical ownership, or clear requirements for how the target store should operate after launch.
 
-A good CS-Cart fit is not based on platform breadth alone. It depends on whether the merchant needs a flexible e-commerce or marketplace structure and whether the business can define the commercial rules, vendor relationships, storefront behavior, product organization, integrations, hosting expectations, and customization needs that should shape the Target Platform.
+Fit should not be judged by feature breadth alone. A merchant may choose CS-Cart because it can support conventional selling, marketplace operations, or more customized commerce processes. The migration question is whether the business can define those processes clearly enough for data, configuration, service scope, and validation to align.
 
-The practical fit question is direct: _**does CS-Cart match the way the merchant wants to sell, manage vendors or products, control storefront behavior, customize platform logic, and operate the future store after launch?**_
+The most useful way to evaluate CS-Cart fit is to connect business intent with migration evidence. Strong-fit merchants know what kind of store they want to run, which catalog relationships matter, whether vendor logic is part of the operating model, and which source behaviors must be preserved. Conditional-fit merchants may benefit from CS-Cart but need cleanup, configuration planning, or service-path review first. Weaker-fit merchants may be asking CS-Cart to solve problems that are better handled through a simpler platform, stronger source cleanup, or a different operating model.
 
-If the answer is clear, CS-Cart can be a strong Target Platform. If the answer depends on undocumented vendor rules, unclear customization, poorly structured catalog data, or an assumption that every source workflow can be reproduced automatically, fit needs deeper review before the migration path is treated as straightforward.
+### What CS-Cart Fit Means in Migration Planning <a href="#what-cs-cart-fit-means-in-migration-planning" id="what-cs-cart-fit-means-in-migration-planning"></a>
 
-### What Makes CS-Cart a Strong Fit <a href="#what-makes-cs-cart-a-strong-fit" id="what-makes-cs-cart-a-strong-fit"></a>
+CS-Cart fit is a migration-planning question because the platform can support more than one business shape. A single-seller store, a vendor marketplace, and a customized commerce project may all use the same Target Platform differently. The merchant should therefore evaluate fit by asking what CS-Cart needs to preserve, configure, or enable after the migration.
 
-CS-Cart is strongest when its flexibility solves real business needs rather than simply adding more configuration choices. It is often attractive when the future store needs ownership over e-commerce structure, marketplace operations, storefront behavior, deployment decisions, and custom development possibilities.
+A strong fit usually begins with a clear target operating model. If the merchant knows whether the future store will operate as a conventional e-commerce site, a Multi-Vendor marketplace, a B2B-like buying environment, or a customized commerce project, migration planning can assign data to the right purpose. Product records can be reviewed for features, options, variations, stock, images, categories, and vendor ownership. Customer records can be reviewed for groups, access, order history, and vendor administrator relationships. Orders can be reviewed for customer support, payment/shipping history, vendor responsibility, and operational reference.
 
-#### Marketplace and vendor structure can be part of the platform decision <a href="#marketplace-and-vendor-structure-can-be-part-of-the-platform-decision" id="marketplace-and-vendor-structure-can-be-part-of-the-platform-decision"></a>
+Fit becomes less certain when the merchant only knows that the current platform is limiting. CS-Cart can provide flexibility, but flexibility does not automatically produce a clean migration outcome. The merchant still needs to define which source relationships matter, which target settings must be configured, which add-ons or customizations are required, and which records are important enough to validate through Demo Migration.
 
-CS-Cart is often a strong candidate when the merchant is not only selling its own products but also managing a marketplace, vendor catalog, seller onboarding flow, vendor order responsibility, vendor commission logic, or product ownership across multiple sellers. Its official positioning includes marketplace builder, multi-vendor marketplace, B2B marketplace, and mobile marketplace use cases, which makes vendor-aware planning central to many CS-Cart migration decisions.
+| Fit signal               | What it means for migration planning                                                       | Recommended handling                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Clear marketplace model  | Vendor records, vendor-owned products, and vendor order context can be reviewed early.     | Strong fit when source evidence is available and vendor rules are defined.       |
+| Structured catalog       | Products, categories, features, options, and variations can be mapped with less ambiguity. | Strong fit when catalog relationships are clean and commercially meaningful.     |
+| Custom source behavior   | The target may need add-ons, configuration, Custom Service, or target-side implementation. | Conditional fit until custom behavior is documented.                             |
+| Weak technical ownership | CS-Cart flexibility may become difficult to manage after launch.                           | Conditional or weaker fit depending on implementation support.                   |
+| Simple storefront goal   | CS-Cart may be more platform than the merchant needs.                                      | Weaker fit if marketplace, customization, or catalog governance is not required. |
 
-This matters because marketplace data should not be reviewed as ordinary product and order data only. A strong fit requires the merchant to know which vendors exist, which products belong to each vendor, how orders are assigned, how vendor-facing information should appear, and which marketplace rules need to remain meaningful after migration.
-
-#### Store builder and marketplace paths can support different growth models <a href="#store-builder-and-marketplace-paths-can-support-different-growth-models" id="store-builder-and-marketplace-paths-can-support-different-growth-models"></a>
-
-CS-Cart can suit both a conventional online store and a marketplace-oriented business, but those are different operating models. A single-merchant store may value control over product structure, themes, add-ons, custom code, and hosting. A marketplace may also need vendor panels, vendor-owned products, multi-seller order flows, marketplace policies, seller communication, and marketplace-specific reporting.
-
-The fit advantage is strongest when the merchant understands which model it is moving toward. Migration planning becomes clearer when CS-Cart is chosen because the future operating structure is deliberate, not because the merchant wants a broad platform without deciding how it will be used.
-
-#### Customization and deployment control can support long-term ownership <a href="#customization-and-deployment-control-can-support-long-term-ownership" id="customization-and-deployment-control-can-support-long-term-ownership"></a>
-
-CS-Cart can be a stronger fit when the merchant wants more control over source code, add-ons, themes, hosting, custom development, or on-premises deployment than a more closed platform might allow. Its ecosystem includes add-ons, themes, partner developers, custom development, cloud marketplace options, on-premises options, and managed hosting support.
-
-That flexibility is useful only when someone owns the technical decisions. A merchant with a clear development partner, an internal technical team, or a managed implementation plan can leverage CS-Cart's flexibility to preserve business-specific workflows. A merchant without technical ownership may still use CS-Cart, but the fit depends more heavily on preparation, service choice, and post-migration governance.
-
-#### Product and category complexity can be governed deliberately <a href="#product-and-category-complexity-can-be-governed-deliberately" id="product-and-category-complexity-can-be-governed-deliberately"></a>
-
-CS-Cart can fit merchants with catalogs that require structured categories, product options, product variations, rich product details, downloadable products, marketplace-specific product ownership, or B2B/B2C buying differences. The platform is most useful when catalog complexity supports selling rather than merely reflecting years of unmanaged source data.
-
-For migration, this means product data should be reviewed for business meaning. A complex catalog can be a strong fit when the merchant can explain how products should be grouped, displayed, priced, assigned, searched, and purchased after launch. If the source catalog is complex but inconsistent, CS-Cart may still be suitable, but fit depends on cleanup and configuration decisions before migration.
-
-#### Add-ons, themes, and custom development can extend the operating model <a href="#add-ons-themes-and-custom-development-can-extend-the-operating-model" id="add-ons-themes-and-custom-development-can-extend-the-operating-model"></a>
-
-CS-Cart’s add-on and theme ecosystem can be an advantage when the future store needs features beyond the base migration outcome. Add-ons and themes can support storefront behavior, design changes, feature expansion, marketplace enhancements, and operational workflows. Custom development can also help when the merchant needs behavior that is specific to the business.
-
-The migration implication is that the merchant should separate core data migration from platform configuration and post-migration extension. Fit is stronger when the merchant understands which outcomes should be native, which may depend on CS-Cart add-ons or themes, and which require Custom Service because the migration itself needs customization, modification, custom migration logic adjustment, or Custom Platform source interpretation.
-
-#### Hosting, performance, and support expectations can be planned up front <a href="#hosting-performance-and-support-expectations-can-be-planned-up-front" id="hosting-performance-and-support-expectations-can-be-planned-up-front"></a>
-
-CS-Cart can be a strong fit when the merchant wants to make hosting and operational control part of the platform plan. Official CS-Cart materials reference cloud and on-premises options, managed hosting, support services, documentation, community, partners, add-ons, and themes. That ecosystem can help merchants who want control, extensibility, and implementation support.
-
-This is most valuable when the merchant is ready to make ownership decisions. Before migration, the team should know whether the future store will be cloud-based, self-hosted, partner-supported, developer-managed, or supported through managed hosting. Without that clarity, platform flexibility can become operational ambiguity.
-
-### Where CS-Cart Is Often a Strong Fit <a href="#where-cs-cart-is-often-a-strong-fit" id="where-cs-cart-is-often-a-strong-fit"></a>
-
-CS-Cart is often a strong Target Platform when the merchant needs flexible e-commerce ownership, marketplace or vendor logic, customizable storefront behavior, and a platform ecosystem that can support future growth. The strongest scenarios are not generic feature matches. They describe business situations where CS-Cart’s structure can support the merchant’s future operating model.
-
-#### The merchant is building or migrating a marketplace <a href="#the-merchant-is-building-or-migrating-a-marketplace" id="the-merchant-is-building-or-migrating-a-marketplace"></a>
-
-CS-Cart is often a strong fit when the future business depends on multiple vendors, marketplace seller participation, vendor-owned products, vendor-facing workflows, or marketplace-specific order responsibility. A marketplace should not be treated as a larger version of a single-seller store because product ownership, order handling, communication, commissions, vendor access, and reporting may all affect the migration outcome.
-
-In this scenario, the merchant should prepare vendor records, vendor-owned product examples, vendor-specific order examples, marketplace policies, seller access expectations, and any source data that shows how marketplace participation currently works. CS-Cart fit is strongest when those marketplace relationships are known before migration.
-
-#### The business needs a flexible store with long-term customization control <a href="#the-business-needs-a-flexible-store-with-long-term-customization-control" id="the-business-needs-a-flexible-store-with-long-term-customization-control"></a>
-
-CS-Cart can be a strong fit when the merchant wants to own more of the future e-commerce environment. This may include custom storefront behavior, custom workflows, add-ons, themes, custom development, hosting decisions, or integration architecture. The platform can be attractive for businesses that expect the store to evolve rather than remain a fixed template.
-
-This scenario works best when the merchant has technical ownership. The team should know who will configure CS-Cart, who will manage add-ons and themes, who will maintain custom code, and who will validate the store after migration. Without that ownership, flexibility can increase risk instead of reducing it.
-
-#### B2B or hybrid B2B/B2C selling is part of the future model <a href="#b2b-or-hybrid-b2b-b2c-selling-is-part-of-the-future-model" id="b2b-or-hybrid-b2b-b2c-selling-is-part-of-the-future-model"></a>
-
-CS-Cart can fit merchants that need B2B or B2B/B2C selling behavior, especially when buyer groups, company accounts, different pricing expectations, quote-style behavior, marketplace seller relationships, or account-specific workflows affect how customers buy. The platform becomes more relevant when buyer context is a real operating requirement, not just a future possibility.
-
-For migration, the merchant should define which buyer groups matter, whether B2B and B2C customers should share the same store structure, how pricing and access should differ, and which examples should be tested during Demo Migration. CS-Cart is a stronger fit when those buyer patterns are planned rather than improvised after launch.
-
-#### The catalog is complex but commercially organized <a href="#the-catalog-is-complex-but-commercially-organized" id="the-catalog-is-complex-but-commercially-organized"></a>
-
-CS-Cart can be a strong fit for merchants with large or structured catalogs, multiple categories, product options, variations, downloadable products, vendor-owned products, or product lines that require careful browsing and filtering. The platform’s value is higher when the product structure helps customers choose correctly and helps administrators manage growth.
-
-The key condition is organization. The merchant should understand which category structure should remain, which product options or variations matter, which products are vendor-owned, and which product details affect buying decisions. If catalog complexity is useful and documented, CS-Cart can provide a flexible Target Platform for rebuilding it.
-
-#### The store depends on add-ons, integrations, or connected operations <a href="#the-store-depends-on-add-ons-integrations-or-connected-operations" id="the-store-depends-on-add-ons-integrations-or-connected-operations"></a>
-
-CS-Cart can be a strong fit when the merchant expects the future store to work with payment, shipping, ERP, CRM, marketplace, accounting, tax, analytics, mobile, or headless systems. It can also fit businesses that rely on add-ons or custom development to support daily operations.
-
-This scenario requires ownership clarity. Before migration, the merchant should know which system owns product truth, inventory status, customer records, vendor information, order processing, fulfillment status, payment context, and reporting. CS-Cart is stronger when those relationships are clear enough to reconnect and validate after migration.
-
-### Where CS-Cart Is Often a Weaker Fit <a href="#where-cs-cart-is-often-a-weaker-fit" id="where-cs-cart-is-often-a-weaker-fit"></a>
-
-CS-Cart is often a weaker fit when the merchant does not need its flexibility, cannot govern the technical environment, or expects complex marketplace, B2B, or custom workflows to migrate without planning. A weaker fit does not always mean CS-Cart should be rejected, but it does mean the platform decision needs more scrutiny.
-
-#### The merchant only needs a simple hosted retail storefront <a href="#the-merchant-only-needs-a-simple-hosted-retail-storefront" id="the-merchant-only-needs-a-simple-hosted-retail-storefront"></a>
-
-CS-Cart may be more platform than the business needs when the future store is a straightforward retail catalog with standard products, simple customer accounts, ordinary pricing, basic promotions, and limited customization. In this case, the merchant may not benefit from marketplace capability, custom development flexibility, hosting choices, add-on planning, or deeper technical ownership.
-
-The migration concern is not whether records can move. The concern is whether the platform decision adds unnecessary planning, configuration, and maintenance burden for a business model that does not require it.
-
-#### Marketplace requirements are vague or aspirational <a href="#marketplace-requirements-are-vague-or-aspirational" id="marketplace-requirements-are-vague-or-aspirational"></a>
-
-CS-Cart fit weakens when a merchant chooses the platform because it might build a marketplace later, but vendor rules, seller onboarding, vendor-owned products, commissions, vendor communication, and marketplace governance are not yet defined. Marketplace capability is valuable only when the business model is specific enough to plan.
-
-Before treating CS-Cart as a strong marketplace destination, the merchant should define the first launch model. If the future marketplace is still conceptual, migration should avoid overbuilding around uncertain vendor logic.
-
-#### Technical ownership is unclear <a href="#technical-ownership-is-unclear" id="technical-ownership-is-unclear"></a>
-
-CS-Cart can involve choices around hosting, add-ons, themes, custom development, upgrades, integrations, and performance. Fit is weaker when no one owns those decisions after migration. A merchant may have a strong commercial idea but still face risk if the future store has no internal technical owner, partner, or managed service plan.
-
-This scenario does not disqualify CS-Cart, but it changes the planning requirement. The merchant should confirm who will manage configuration, support, add-ons, themes, custom code, hosting, and future changes before selecting the migration approach.
-
-#### The source store depends on custom behavior that is not documented <a href="#the-source-store-depends-on-custom-behavior-that-is-not-documented" id="the-source-store-depends-on-custom-behavior-that-is-not-documented"></a>
-
-CS-Cart is flexible, but flexibility does not mean every source behavior can be recreated automatically. Custom checkout logic, proprietary pricing, hidden database fields, app-owned data, vendor workflows, marketplace extensions, or source-side scripts may require deeper review.
-
-If these behaviors are undocumented, fit cannot be confirmed by platform capability alone. The merchant should identify which behaviors are native target configuration, which may rely on CS-Cart add-ons or custom development, and which require Custom Service or custom migration logic adjustment.
-
-#### The catalog or vendor model is complex because it is inconsistent <a href="#the-catalog-or-vendor-model-is-complex-because-it-is-inconsistent" id="the-catalog-or-vendor-model-is-complex-because-it-is-inconsistent"></a>
-
-A large catalog, many vendors, or many categories does not automatically make CS-Cart a strong fit. Fit weakens when product ownership, SKU meaning, category assignments, option logic, downloadable product handling, vendor records, or marketplace responsibility are inconsistent.
-
-The migration risk is that complexity may move without becoming usable. Before choosing CS-Cart, the merchant should separate meaningful structure from obsolete source clutter and decide what should be preserved, reorganized, excluded, or reviewed through Custom Service.
+This fit logic helps keep the decision practical. CS-Cart is not automatically ideal because it is flexible, and it is not automatically unsuitable because it requires planning. It is suitable when that planning matches the merchant’s business structure.
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-The following profiles are often good CS-Cart candidates because their business model benefits from flexible platform ownership and gives the migration team specific outcomes to preserve.
+CS-Cart is often a strong Target Platform for merchants who need control over structured catalog behavior, marketplace operation, and future customization. The strongest fit profiles share one trait: the merchant can explain the target operating model before migration begins.
 
-| Strong-fit profile                                          | Why this profile often fits CS-Cart                                                                                                                                                                                                 | Migration planning focus                                                                                                                                                                                |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Marketplace operator with defined vendor relationships**  | The business depends on seller participation, vendor-owned products, vendor-facing workflows, and marketplace governance. CS-Cart fit is stronger when vendor rules are real operating structure, not vague future ambition.        | Prepare vendor records, vendor-owned product examples, order assignment examples, seller access expectations, commission or marketplace policy context, and vendor-specific validation samples.         |
-| **Merchant moving from a custom or self-hosted platform**   | The business may value control over code, hosting, add-ons, themes, custom logic, and integrations. CS-Cart can support a more governed replacement when the merchant wants flexibility without rebuilding everything from scratch. | Identify custom fields, source extensions, custom workflows, outside-system identifiers, integrations, and which behavior should be preserved, simplified, rebuilt, or reviewed through Custom Service. |
-| **B2B or hybrid B2B/B2C seller**                            | The store may need different buyer groups, pricing expectations, account behavior, quote-like workflows, or customer-specific access. CS-Cart can be a better fit when those rules support real sales operations.                   | Document customer groups, account types, pricing examples, access rules, payment expectations, and B2B/B2C differences before migration and Demo Migration review.                                      |
-| **Catalog-heavy merchant with organized product structure** | Product options, variations, downloadable products, vendor-owned products, and structured categories can benefit from a flexible platform when the catalog’s complexity is commercially meaningful.                                 | Prepare representative products, category examples, option and variation logic, downloadable products, vendor-owned products, and product relationships that reveal catalog behavior.                   |
-| **Business with clear technical ownership**                 | CS-Cart flexibility creates value when someone can govern hosting, add-ons, themes, updates, custom development, and integrations after migration.                                                                                  | Confirm whether the future store will be managed internally, by a development partner, through managed hosting, or through a broader implementation plan.                                               |
-| **Merchant with integration-aware operations**              | The future store may need to connect with ERP, CRM, accounting, shipping, tax, analytics, marketplace, mobile, or headless systems. Fit is stronger when system ownership is clear.                                                 | Separate data that belongs in CS-Cart from data controlled by connected systems, and define which integrations must be reconnected, configured, validated, or scoped separately.                        |
+A marketplace-oriented merchant is one of the clearest strong-fit profiles. If the business depends on multiple vendors, seller-owned products, vendor administrators, vendor-specific shipping responsibility, product approval, seller onboarding, or marketplace accounting, CS-Cart can be a strong destination. The migration plan should then collect examples of vendor records, vendor-owned products, vendor-related orders, and seller process requirements before execution. A marketplace is not just a larger catalog. It is a responsibility structure, and CS-Cart fit is strongest when that responsibility structure is known.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+A merchant with a commercially organized catalog can also be a strong fit. CS-Cart categories form a tree, products must belong to at least one category, and features, options, variations, prices, stock, images, and product status can affect the buying experience. If the source catalog is complex but organized, CS-Cart gives the merchant a target environment where that complexity can become useful product discovery and purchasing logic. Fit is strongest when the merchant can distinguish product properties from choices, categories from navigation clutter, and migrated records from target configuration.
 
-The following profiles do not automatically rule out CS-Cart, but they require more careful planning before the platform can be called a good fit.
+A merchant with implementation ownership may also be a strong fit. CS-Cart can involve add-ons, themes, storefront configuration, hosting decisions, partner development, and custom logic. That flexibility is valuable when the business has an internal team, agency, developer, or managed plan to maintain the environment after launch. The migration can then focus on data continuity while the implementation team owns the target behavior that is not part of migration itself.
 
-| Higher-risk profile                                             | Why the fit is harder to confirm                                                                                                                                                                             | What should be resolved before moving forward                                                                                                                                                  |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Simple retail store choosing CS-Cart for broad flexibility**  | The business may not need marketplace functions, custom development control, self-hosting choices, or deep add-on planning. The platform can become heavier than the operating model requires.               | Confirm which CS-Cart capabilities will actually be used after launch. If the answer is mostly basic catalog and order management, compare whether a simpler target would be more efficient.   |
-| **Marketplace idea without defined vendor operations**          | Vendor capability is attractive, but migration cannot preserve a marketplace model that has not been defined. Seller onboarding, product ownership, order responsibility, and policy context may be missing. | Define launch-stage vendor rules, marketplace governance, vendor product ownership, vendor order examples, seller permissions, and marketplace validation samples.                             |
-| **Merchant without technical ownership**                        | CS-Cart may require ongoing decisions around hosting, add-ons, themes, custom code, support, and integrations. Without ownership, flexibility can become operational risk.                                   | Identify the internal team, partner, managed hosting plan, or service arrangement responsible for configuration, maintenance, upgrades, and post-launch changes.                               |
-| **Custom source store with undocumented workflows**             | Hidden database fields, source-side scripts, custom checkout behavior, app-owned data, or integration-dependent behavior may not map cleanly into standard migration capability.                             | Document custom behavior, custom fields, external identifiers, app/plugin/module data, and source logic before confirming whether Standard Service, Add-ons, or Custom Service is appropriate. |
-| **Catalog or vendor data with inconsistent meaning**            | Large volume does not equal readiness. Product ownership, categories, SKUs, options, vendor assignments, and downloadable products may be too inconsistent to translate cleanly.                             | Clean up or classify catalog and vendor structures before migration. Decide what should move, what should be reorganized, and what should be excluded or custom-reviewed.                      |
-| **Integration-heavy business without system-of-record clarity** | Connected systems may control inventory, pricing, fulfillment, tax, payments, reporting, or vendor data. If ownership is unclear, the migration can preserve records while breaking operations.              | Document systems of record, downstream consumers, API dependencies, reporting needs, and launch-critical reconnection requirements.                                                            |
+| Strong-fit profile             | Why CS-Cart can fit                                                                                | Evidence to prepare                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Marketplace operator           | Vendor ownership and vendor administration can become part of the target operating model.          | Vendor list, vendor-owned products, vendor administrator examples, vendor order samples. |
+| Structured catalog merchant    | Product features, options, categories, variations, and stock behavior can support richer selling.  | Product samples, category tree, feature/option examples, product variation examples.     |
+| Custom-commerce business       | Add-ons and implementation control can support business-specific processes.                        | Custom field list, add-on inventory, integration map, target behavior requirements.      |
+| B2B or mixed buyer model       | Customer groups, pricing expectations, account roles, and order history may need planned handling. | Customer groups, buyer examples, price-rule examples, historical orders.                 |
+| Technically supported merchant | CS-Cart flexibility can be governed after migration.                                               | Internal owner, implementation partner, hosting plan, validation responsibility.         |
 
-### What Should Be Confirmed Before Choosing CS-Cart <a href="#what-should-be-confirmed-before-choosing-cs-cart" id="what-should-be-confirmed-before-choosing-cs-cart"></a>
+The strong-fit merchant does not need every requirement solved before migration begins. But the merchant should be able to name the requirements, provide representative examples, and decide which outcomes belong to migration, configuration, Add-ons, or Custom Service review.
 
-Before CS-Cart is treated as the right Target Platform, the merchant should confirm the business scenarios that made the platform attractive in the first place.
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
 
-#### 1. Is the future model a store, marketplace, B2B environment, or hybrid structure? <a href="#id-1-is-the-future-model-a-store-marketplace-b2b-environment-or-hybrid-structure" id="id-1-is-the-future-model-a-store-marketplace-b2b-environment-or-hybrid-structure"></a>
+CS-Cart can be a good target for many merchants who are not immediately ready for migration. These merchants are not poor fits; they simply need preparation before the migration scope can be treated as stable.
 
-Define whether the Target Platform will operate as a conventional online store, a multi-vendor marketplace, a B2B/B2C environment, a headless implementation, or a custom e-commerce project. Fit is stronger when the operating model is explicit.
+A merchant with marketplace ambitions but incomplete vendor evidence is a conditional fit. If the business wants a marketplace but has not identified vendor records, vendor-owned product examples, seller order context, or vendor administrator requirements, migration planning becomes uncertain. The merchant may still choose CS-Cart, but the first work should be marketplace discovery. Without it, the migration may move products and orders while leaving vendor responsibility unresolved.
 
-#### 2. Which vendor, buyer, or account relationships must be preserved? <a href="#id-2-which-vendor-buyer-or-account-relationships-must-be-preserved" id="id-2-which-vendor-buyer-or-account-relationships-must-be-preserved"></a>
+A merchant with a large catalog but inconsistent product structure is also a conditional fit. CS-Cart can support structured catalog management, but the source data must be understandable. If product options are inconsistent, features are used as free-form descriptions, categories are duplicated, or product variations are not clearly represented, the migration should include cleanup, sample testing, and validation planning before launch.
 
-Identify vendor records, vendor-owned products, seller permissions, customer groups, account types, pricing expectations, and order responsibilities that should remain meaningful after migration.
+A merchant with heavy add-on or custom-code dependency is another conditional fit. CS-Cart may be a good target if the business wants extensibility, but not every source customization becomes supported target data. The migration plan should separate native records from add-on-owned records, custom fields, external identifiers, and integration behavior. Some needs may fit Add-ons. Others may require Custom Service or target-side development.
 
-#### 3. Which product and category structures affect buying decisions? <a href="#id-3-which-product-and-category-structures-affect-buying-decisions" id="id-3-which-product-and-category-structures-affect-buying-decisions"></a>
+A merchant without clear post-launch ownership may still choose CS-Cart, but the project should not be treated as simple. If nobody owns hosting, add-ons, templates, security, checkout setup, marketplace configuration, or post-launch troubleshooting, flexibility can become operational risk. Managed Service or stronger implementation support may be needed.
 
-Document product options, variations, downloadable products, structured categories, vendor ownership, product details, and product relationships that help customers choose correctly.
+| Conditional-fit situation                         | Risk if not resolved                                                    | Planning step before migration                                                 |
+| ------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Marketplace target but weak vendor evidence       | Vendor ownership may be missing or misassigned.                         | Prepare vendor, product, user, and order samples.                              |
+| Complex catalog but inconsistent source fields    | Product choices, features, categories, and variations may lose meaning. | Clean representative product samples and define mapping intent.                |
+| Add-on-heavy source store                         | Source behavior may not have a direct target equivalent.                | Separate core data, add-on data, custom fields, and target-side configuration. |
+| B2B-like expectations without clear account rules | Customer records may migrate without the needed commercial context.     | Define customer groups, pricing, access, and buyer examples.                   |
+| Limited implementation ownership                  | Target setup and validation may become unclear after data transfer.     | Assign a technical owner or consider Managed Service support.                  |
 
-#### 4. Which parts of the store depend on add-ons, themes, custom development, or integrations? <a href="#id-4-which-parts-of-the-store-depend-on-add-ons-themes-custom-development-or-integrations" id="id-4-which-parts-of-the-store-depend-on-add-ons-themes-custom-development-or-integrations"></a>
+Conditional fit should be handled through evidence, not guesswork. The merchant should not delay the project indefinitely, but the migration plan should be honest about what must be clarified before Full Migration.
 
-Clarify whether important behavior is native to the Target Platform, depends on CS-Cart add-ons or themes, requires configuration, belongs to connected systems, or needs Custom Service review.
+### Weaker-Fit or Non-Ideal Profiles <a href="#weaker-fit-or-non-ideal-profiles" id="weaker-fit-or-non-ideal-profiles"></a>
 
-#### 5. Who will own technical decisions after migration? <a href="#id-5-who-will-own-technical-decisions-after-migration" id="id-5-who-will-own-technical-decisions-after-migration"></a>
+CS-Cart may be a weaker fit when the merchant wants a very simple store, has no marketplace or customization needs, and does not want to manage platform configuration or technical ownership. In that case, a more guided hosted storefront may be easier to operate. Choosing CS-Cart only because it has broad capabilities can create unnecessary migration and maintenance burden.
 
-Confirm whether the future store will be managed by the merchant’s internal team, a development partner, managed hosting, or another support arrangement. This is especially important when CS-Cart is chosen for flexibility or customization control.
+It may also be a weaker fit when the merchant expects source behavior to be reproduced automatically without documenting it. CS-Cart can support rich store and marketplace logic, but a migration cannot infer hidden business rules from incomplete source data. If pricing, vendor responsibility, product choices, customer groups, or order processes are undocumented, the store may require discovery before CS-Cart can be evaluated fairly.
 
-#### 6. Can Demo Migration test realistic CS-Cart scenarios? <a href="#id-6-can-demo-migration-test-realistic-cs-cart-scenarios" id="id-6-can-demo-migration-test-realistic-cs-cart-scenarios"></a>
+Another weaker-fit profile is a merchant with highly specialized requirements but no willingness to use Custom Service, target-side development, or implementation support. If the source platform includes custom database tables, modified checkout logic, marketplace commissions, external ERP ownership, or unsupported records, a standard migration expectation may be unrealistic. The platform may still be suitable, but the service path is not simple.
 
-Fit is stronger when the merchant can test meaningful examples after Demo Migration, such as vendor-owned products, marketplace orders, B2B customer groups, product variations, category navigation, custom fields, integration-sensitive records, and high-value storefront routes.
+A merchant focused only on design migration may also be misaligned. CS-Cart migration should not be confused with rebuilding a theme, recreating every page layout, implementing every add-on, or redesigning the storefront. If the primary goal is visual duplication rather than data and operating-model continuity, the project scope should be reframed before the platform decision is finalized.
+
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
+
+CS-Cart fit depends heavily on which source assumptions are being brought into the target environment. Some assumptions translate well when they are documented; others become migration risk.
+
+A common issue is assuming that product options, product features, and product variations are interchangeable. In CS-Cart, features are product properties, options are separable product choices, and product variations may carry their own representation. If the source platform uses one field to serve all these purposes, the merchant must decide what the field should mean after migration.
+
+Another issue is assuming that seller, supplier, manufacturer, and vendor data all mean the same thing. For a marketplace project, vendor information is operational. For a single-seller store, similar data may be informational or catalog-related. If the source store contains supplier records, dropship partners, external seller labels, or manufacturer fields, these should be reviewed before deciding whether they belong to CS-Cart vendor structure.
+
+Customer expectations can also be difficult to translate. A source platform may use customer groups for pricing, wholesale access, tax treatment, approval rules, or segmentation. The migration plan should clarify which of these meanings must remain operational and which can be handled after launch through target configuration.
+
+SEO and storefront assumptions need similar care. Migrated URLs, categories, product visibility, images, and content may require redirect planning or target setup. A migration can preserve data, but storefront behavior often depends on how CS-Cart is configured.
+
+| Source expectation                           | Why it may not translate cleanly                                               | Fit implication                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| One source field handles all product choices | CS-Cart may need separate treatment for features, options, and variations.     | Conditional fit until product meaning is clarified.                 |
+| Supplier equals vendor                       | CS-Cart vendor structure is operational in Multi-Vendor, not just descriptive. | Strong fit only if seller ownership should become target operation. |
+| Customer group controls many rules           | Groups, pricing, access, and tax behavior may require separate configuration.  | Fit depends on documented buyer logic.                              |
+| Theme behavior should move with data         | Presentation and layout are not the same as data migration.                    | Requires storefront configuration or implementation planning.       |
+| Add-on behavior is expected automatically    | Add-on-owned source data may be unsupported or require custom handling.        | Custom Service review may be needed.                                |
+
+The goal is not to reject CS-Cart when translation is complex. The goal is to decide whether the business is ready to define that translation before migration begins.
+
+### Signals of Fit to Confirm Before Choosing CS-Cart <a href="#signals-of-fit-to-confirm-before-choosing-cs-cart" id="signals-of-fit-to-confirm-before-choosing-cs-cart"></a>
+
+A merchant should confirm fit through evidence before committing to CS-Cart as the migration target. The most useful evidence is practical, not theoretical.
+
+The first signal is catalog clarity. The merchant should be able to provide representative products that show ordinary products, products with features, products with options, products with variations, downloadable products if relevant, and products assigned to meaningful categories. If these examples are clear, the migration team can test whether the target structure preserves selling meaning.
+
+The second signal is marketplace clarity. If CS-Cart Multi-Vendor is part of the future model, the merchant should identify vendor records, vendor administrators, vendor-owned products, vendor-related orders, and vendor responsibility rules. If the target will not use Multi-Vendor, vendor-like source fields should be treated carefully so they do not create unnecessary scope.
+
+The third signal is service-scope clarity. The merchant should know which outcomes are expected from data migration, which outcomes are target configuration, which outcomes may require Add-ons, and which outcomes need Custom Service review. This prevents a common mismatch: assuming that platform flexibility means every source behavior will appear automatically after migration.
+
+The fourth signal is validation readiness. The merchant should have a sample set for Demo Migration that includes high-value products, complex options, important categories, representative customer groups, key orders, and marketplace examples if relevant. Without these samples, the fit decision remains abstract.
+
+### Turning CS-Cart Fit Into a Migration Scope Decision <a href="#turning-cs-cart-fit-into-a-migration-scope-decision" id="turning-cs-cart-fit-into-a-migration-scope-decision"></a>
+
+After fit is evaluated, the result should become a migration scope decision. A strong-fit merchant with ordinary supported records may be ready for Standard Service. A strong-fit merchant with marketplace complexity may still need Managed Service or Custom Service if vendor logic, custom fields, or unsupported source behavior must be handled. A conditional-fit merchant may need data cleanup, sample review, target configuration planning, or a Demo Migration before committing to Full Migration.
+
+Entity Points should be considered as scope sizing when eligible records such as Products, Customers, Orders, or Blog Posts are migrated. They should not be treated as a fit score. A store can be a strong CS-Cart fit but still require careful Entity Points planning if the source contains large or complex eligible records. Records already counted through the service license should not be counted again simply because later migration activity occurs on the same migration path.
+
+Additional Migration Options are most useful when launch timing changes after the main migration. If the merchant expects new products, new customers, new orders, configuration changes, or revised mapping decisions between Demo Migration and Full Migration, the project should plan how later migration activity will be validated. This is especially important when product options, vendor ownership, or customer group behavior may change before launch.
+
+| Fit conclusion                              | Migration-scope implication                                                                                |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Strong fit with clear standard records      | Standard Service may be realistic if target setup and validation ownership are clear.                      |
+| Strong fit with marketplace operation       | Managed Service or Custom Service may be needed depending on vendor data and custom logic.                 |
+| Conditional fit from catalog inconsistency  | Preparation, cleanup, and Demo Migration sampling should happen before Full Migration.                     |
+| Conditional fit from custom source behavior | Add-ons or Custom Service review may be needed before scope is confirmed.                                  |
+| Weaker fit from simple storefront needs     | Platform choice should be reconsidered if CS-Cart complexity does not support a real business requirement. |
+
+The fit decision is complete only when the merchant can connect platform choice to migration scope, service path, and validation criteria. CS-Cart is a strong target when the business needs its structure and is ready to define how that structure should work.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-CS-Cart is a strong Target Platform candidate when the merchant needs flexible e-commerce ownership, marketplace or vendor structure, B2B/B2C selling context, organized catalog complexity, add-ons, themes, custom development, hosting control, and integration-aware operations. It is often weaker when the business mainly needs a simple storefront, when marketplace requirements are aspirational, when technical ownership is unclear, or when custom source behavior is expected to transfer without review.
+CS-Cart is most suitable for merchants who need structured catalog control, marketplace or vendor-aware operation, configurable storefront behavior, and room for add-ons or custom implementation. It is less suitable when the merchant wants a simple storefront, has no clear operating-model requirements, or expects undocumented source behavior to move automatically.
 
-A good CS-Cart fit decision should come from operating-model clarity. The merchant should be able to explain how the future store will sell, who owns products, how vendors or buyers interact, which catalog structures matter, what integrations affect operations, and who will maintain the platform after launch.
+The strongest fit decision is evidence-based. Merchants should confirm catalog examples, vendor requirements, customer group meaning, add-on dependencies, service-scope expectations, and validation samples before choosing CS-Cart as the Target Platform. When those signals are clear, CS-Cart can become a strong foundation for a controlled migration and a more capable target commerce environment.
 
-If CS-Cart appears to match your future operating model, use Demo Migration and Live Chat to test representative vendor, product, customer, order, storefront, and integration scenarios before committing to the full migration approach.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is CS-Cart a strong fit for a simple online store?**
 
-**Is CS-Cart a good fit for every marketplace migration?**
+It can be, but only when the merchant wants CS-Cart’s control, extensibility, or catalog governance. If the business only needs a very simple storefront with minimal configuration, a lighter platform may be easier to operate.
 
-No. CS-Cart is strongest when vendor relationships, product ownership, seller workflows, order responsibility, and marketplace rules are defined clearly enough to migrate and validate. If marketplace requirements are still conceptual, fit needs more planning.
+**Is CS-Cart mainly for marketplace businesses?**
 
-**Can CS-Cart work for a simple e-commerce store?**
+No. CS-Cart can support ordinary store use, but Multi-Vendor capability becomes important when the business needs vendor-owned products, vendor administrators, seller processs, or marketplace responsibility after launch.
 
-It can, but it may not always be the most efficient choice if the merchant only needs a simple retail storefront with standard products, ordinary pricing, and limited customization. Fit should be based on the future operating model, not platform breadth alone.
+**What makes CS-Cart a conditional fit?**
 
-**What makes CS-Cart a stronger fit than a simpler platform?**
+CS-Cart becomes a conditional fit when the business model is promising but the source evidence is unclear. Examples include undocumented vendor rules, inconsistent product options, unclear customer groups, custom source behavior, or weak post-launch ownership.
 
-CS-Cart becomes more compelling when the store needs marketplace or vendor structure, B2B/B2C selling logic, custom development flexibility, add-ons, themes, deployment control, integration ownership, or more technical control over the future e-commerce environment.
+**Should product features, options, and variations be reviewed before migration?**
 
-**When should Custom Service be considered for a CS-Cart migration?**
+Yes. These structures can represent different product meanings in CS-Cart. Reviewing representative products before migration helps prevent confusing product selection, filtering, comparison, or purchasing behavior after launch.
 
-Custom Service should be considered when the migration requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom fields, outside-system identifiers, app-owned data, source extensions, or integration-dependent behavior beyond standard migration capability.
+**How should fit affect the Migration Service choice?**
 
-**What should be included in Demo Migration review before confirming fit?**
-
-Demo Migration review should include realistic scenarios such as vendor-owned products, marketplace orders, B2B customer groups, product options or variations, downloadable products, category navigation, custom fields, integration-sensitive records, and high-value storefront routes.
+Fit should guide scope and responsibility. Clear supported records may fit Standard Service, while marketplace logic, custom fields, unsupported records, or source customizations may require Managed Service, Add-ons, or Custom Service review.

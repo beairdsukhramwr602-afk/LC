@@ -1,144 +1,172 @@
 # Selecting the Right Migration Approach for CS-Cart
 
-A CS-Cart migration approach should be chosen according to how much commercial structure must be interpreted, configured, reviewed, or customized before the Target Platform can support the merchant’s operating model. CS-Cart can support ordinary online stores, marketplace-style businesses, B2B/B2C selling, mobile marketplace experiences, headless implementations, custom e-commerce projects, add-ons, themes, managed hosting, and custom development. That flexibility makes the approach decision important.
+Choosing the right CS-Cart migration approach depends on how much business meaning sits behind the source data. A clean store with ordinary Products, Customers, Orders, Categories, CMS Pages, Blog Posts, Reviews, Coupons, and URLs may fit a straightforward Migration Service path. A marketplace, B2B-like model, heavily customized catalog, add-on-dependent store, or source with vendor responsibility may need more planning before the service path is selected.
 
-A simple store that mainly needs products, customers, orders, categories, and content moved into a clear CS-Cart setup can often use a lighter approach. A marketplace, vendor-based business, B2B operation, headless architecture, heavily customized source store, or integration-dependent workflow needs deeper planning before the migration path is treated as straightforward.
+The approach should not be chosen by record count alone. CS-Cart migration planning should consider catalog structure, vendor ownership, customer groups, storefront routes, add-on dependencies, custom fields, external identifiers, and the merchant’s ability to review Demo Migration results. The right approach is the one that preserves business meaning without pretending that configuration, custom behavior, or marketplace logic is ordinary data.
 
-The practical question is not only whether CS-Cart can receive the data. It is whether the selected service model gives enough room to preserve the business meaning behind that data.
+For CS-Cart, the main decision is whether the migration can stay within Standard Service, whether Managed Service is safer because execution should be handled by Next-Cart, whether Add-ons can handle focused filtering or mapping needs, or whether Custom Service is required because the source or target result needs customization, modification, or custom migration logic adjustment.
 
-### Why Approach Choice Depends on CS-Cart-Specific Burden <a href="#why-approach-choice-depends-on-cs-cart-specific-burden" id="why-approach-choice-depends-on-cs-cart-specific-burden"></a>
+### What the Migration Approach Must Decide <a href="#what-the-migration-approach-must-decide" id="what-the-migration-approach-must-decide"></a>
 
-CS-Cart can be used as an online store builder, a marketplace platform, a B2B/B2C marketplace builder, a mobile marketplace foundation, and a customizable e-commerce environment. That range creates different migration burdens. The same product, customer, or order record may have a different level of importance depending on whether the merchant is running a single-seller store, a multi-vendor marketplace, a B2B catalog, or a custom source project that relies on external systems.
+A CS-Cart migration approach should decide who owns execution, how much interpretation the source data needs, and which parts of the target result can be handled by standard migration capability. The approach should also define how Demo Migration will be used before Full Migration and whether follow-up changes may require Additional Migration Options.
 
-The migration approach should be based on the number of interpretation decisions required before the result can be trusted. If the target structure is clear and the source data is ordinary, the migration may be mainly a matter of execution and review. If source data contains marketplace ownership, vendor commission context, storefront-specific visibility, add-on behavior, custom fields, or integration-owned status, the approach must allow for planning, adjustment, or Custom Service review.
+The first decision is whether the source structure is standard enough for direct handling. Products, categories, customers, orders, reviews, coupons, and content may be suitable for Standard Service when field meaning is clear and target expectations are ordinary. But CS-Cart projects often involve areas that need more interpretation: product features versus options, category hierarchy, vendor-owned products, vendor administrator accounts, customer groups, add-on-created fields, marketplace commissions, and external system IDs.
 
-| CS-Cart migration burden                       | Why it affects approach choice                                                                                      | Service implication                                                                                              |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Single-seller online store structure           | Products, customers, categories, and orders may translate with limited interpretation if the source store is clean. | Standard Service may be enough when requirements stay within standard migration capability.                      |
-| Marketplace or vendor ownership                | Products, orders, shipping, payout, and responsibility may depend on seller or vendor context.                      | Managed Service or Custom Service may be safer depending on how much vendor logic must be interpreted.           |
-| B2B/B2C account behavior                       | Customer roles, pricing, catalog access, approvals, or account rules may affect the expected result.                | Custom Service is needed when non-standard customer or account logic requires custom migration logic adjustment. |
-| Add-on or theme-shaped behavior                | Important commercial meaning may live in add-ons, templates, design rules, or modified platform behavior.           | Add-on review or Custom Service may be required if the behavior is not standard data migration.                  |
-| Headless, mobile, or external-system workflows | Storefront experience or order handling may depend on systems outside CS-Cart.                                      | Custom Service may be required when external identifiers, APIs, or outside-system logic must be interpreted.     |
-| Custom Platform source data                    | Source structures may not map predictably without discovery.                                                        | Custom Platform source cases should be reviewed through Custom Service.                                          |
+The second decision is whether the merchant can manage execution. Some merchants can configure the service, run Demo Migration, review samples, adjust settings, and proceed to Full Migration. Others need Next-Cart-led operation because the store is large, business-critical, marketplace-sensitive, or difficult to validate.
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+| Approach question                                         | Why it matters for CS-Cart                                                             | Direction it suggests           |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------- |
+| Is the source data structurally clear?                    | Standard records can be interpreted with less custom review.                           | Standard Service may fit.       |
+| Does the merchant want Next-Cart to perform execution?    | The migration may be standard, but customer-led operation may be inefficient or risky. | Managed Service may fit.        |
+| Are focused filtering or mapping changes needed?          | Some requirements stay within bounded migration support.                               | Add-ons may help.               |
+| Does the source contain custom or unsupported structures? | Custom fields, marketplace logic, or external IDs may need bespoke handling.           | Custom Service may be required. |
+| Does Demo Migration expose missing business meaning?      | The selected service path may be too light.                                            | Escalate before Full Migration. |
 
-Standard Service is usually enough when the migration is customer-led and the expected result fits standard migration capability. For CS-Cart, that usually means the merchant has a clear source store, ordinary product and category structure, customer records without unusual account logic, order history that does not depend on custom operational interpretation, and a target CS-Cart setup that does not require migration-side customization.
+The approach should be selected before Full Migration, then tested with representative samples. If Demo Migration shows that the selected approach cannot preserve catalog, vendor, customer, order, or route meaning, the merchant should adjust the service path before broader execution.
 
-A Standard Service path can be appropriate when the merchant can review the Demo Migration confidently and knows how the target CS-Cart configuration should work. The customer self-performs the E-commerce Platform Migration on the Next-Cart website under the purchased 1-year service license for the selected migration path, with 24/7 expert support and any purchased Add-ons.
+### When Standard Service Can Fit <a href="#when-standard-service-can-fit" id="when-standard-service-can-fit"></a>
 
-Standard Service is usually strongest when the migration questions are practical rather than architectural: whether categories appear correctly, products are usable, images and descriptions are readable, customer records are present, orders are interpretable, and storefront routes can be reviewed after migration.
+Standard Service can fit a CS-Cart migration when the merchant’s source data is structurally clear and the expected target result fits supported migration behavior. It is most suitable when Products, Categories, Customers, Orders, Reviews, Coupons, CMS Pages, Blog Posts, and URLs can be interpreted without custom logic, unsupported source fields, or marketplace-specific transformation.
 
-#### Standard Service is more likely to fit when the store is structurally clear <a href="#standard-service-is-more-likely-to-fit-when-the-store-is-structurally-clear" id="standard-service-is-more-likely-to-fit-when-the-store-is-structurally-clear"></a>
+For CS-Cart, Standard Service is strongest when the target store is a conventional online store or a clearly structured catalog where product relationships are understandable. Product names, SKU/code values, descriptions, prices, stock, images, category assignments, status, customer accounts, order history, reviews, coupons, and content should have direct business meaning. The merchant should also be comfortable configuring the service, checking Demo Migration, and confirming the result.
 
-A CS-Cart migration can remain within Standard Service when the source store does not require special interpretation. Product types, SKUs, variants, categories, customer records, and orders should already be understandable in the source data. If the merchant needs only expected data transfer and standard review, a customer-led approach may be efficient.
+Standard Service may also fit some marketplace-adjacent projects if vendor-related requirements are outside migration scope or if marketplace setup is handled separately in the Target Platform. But the merchant should not assume vendor ownership, commissions, payout references, seller dashboards, or marketplace governance will be preserved as ordinary data unless the service scope confirms it.
 
-#### Standard Service is less suitable when the business model needs interpretation <a href="#standard-service-is-less-suitable-when-the-business-model-needs-interpretation" id="standard-service-is-less-suitable-when-the-business-model-needs-interpretation"></a>
+| Standard Service fit signal                                       | Why it supports a standard path                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Products and categories are clean and commercially understandable | Catalog data can be moved and validated without extensive interpretation. |
+| Product features, options, and variations are documented          | The merchant can review whether target product structure is correct.      |
+| Customer and order history are ordinary records                   | Account and order continuity can be validated through samples.            |
+| Marketplace logic is not part of required migration scope         | Vendor complexity does not need to be solved by standard data movement.   |
+| Add-on or custom-field data is not launch-critical                | The migration can focus on supported entities and target configuration.   |
+| The merchant can operate and review the process                   | Customer-led execution is realistic.                                      |
 
-If the source store depends on vendor-specific ownership, marketplace responsibility, customer-specific access, custom pricing logic, external workflow identifiers, modified checkout behavior, or custom platform records, Standard Service may be too light. In those cases, the migration is not only about transferring data; it is about deciding how business logic should be represented in CS-Cart.
+Standard Service should not be chosen just because it is simpler. It should be chosen because the source structure and target expectations are clear enough for a standard path. When there is uncertainty, Demo Migration should include difficult records rather than only clean examples.
 
-### When Managed Service Is Safer <a href="#when-managed-service-is-safer" id="when-managed-service-is-safer"></a>
+### When Managed Service Is the Safer Path <a href="#when-managed-service-is-the-safer-path" id="when-managed-service-is-the-safer-path"></a>
 
-Managed Service is safer when the migration can still use standard service capability but the merchant wants Next-Cart to perform the migration for them. This can be useful for CS-Cart projects where the source data is broadly standard, but the merchant needs more operational confidence, support coordination, or review discipline during execution.
+Managed Service is appropriate when the migration can still use standard service capability but the merchant wants Next-Cart to perform the migration. This can be valuable for CS-Cart projects where the source structure is not custom enough to require Custom Service, but the business risk, data volume, marketplace sensitivity, or validation burden makes customer-led execution less practical.
 
-Managed Service does not automatically include customization or modification work. If the project needs custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or bespoke interpretation of source behavior, the requirement moves into Custom Service.
+A merchant may choose Managed Service when the store is active and commercially important, when downtime planning matters, when the team lacks migration experience, when vendor or catalog samples need careful review, or when multiple validation rounds are expected. Managed Service does not turn unsupported custom requirements into supported standard migration. It changes execution ownership, coordination, and operational support within the agreed service scope.
 
-| Managed Service signal                                               | Why it matters for CS-Cart                                                                              | What Managed Service can help with                                                         |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| The merchant wants Next-Cart-led execution                           | CS-Cart setup may involve many review areas even when data is standard.                                 | Next-Cart performs the migration using standard service capability and purchased Add-ons.  |
-| The source store has many products, categories, customers, or orders | Volume can make customer-led execution harder to monitor.                                               | Execution support and review coordination reduce operational burden.                       |
-| The merchant needs careful Demo Migration interpretation             | CS-Cart target review may require checking catalog, customers, orders, and storefront meaning together. | Next-Cart-led execution can help the merchant interpret standard results more confidently. |
-| The store is standard but commercially important                     | Launch risk can be high even when customization is not required.                                        | Managed Service can support disciplined execution without changing service capability.     |
+Managed Service can be especially useful for CS-Cart when the merchant must coordinate source access, Demo Migration review, Full Migration timing, and post-migration checks around business operations. A marketplace or large catalog project may still need Custom Service for certain requirements, but Managed Service can reduce execution risk when the core migration itself remains standard.
 
-Managed Service is often the safer practical choice when the merchant can define the desired CS-Cart result, but does not want to manage the migration process independently. It is not a substitute for Custom Service when the required result depends on non-standard transformation.
+| Managed Service signal                                              | Why it matters                                                                 |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| The source store is active and order flow must be managed carefully | Execution timing and review coordination become more important.                |
+| The catalog is large but structurally clear                         | Standard migration may fit, but customer-led operation may be too burdensome.  |
+| The merchant wants Next-Cart to operate the migration               | Execution ownership shifts from customer-led to Next-Cart-led handling.        |
+| Demo Migration review requires coordination across teams            | Product, order, vendor, content, and SEO checks may need structured follow-up. |
+| The business has limited internal migration capacity                | Managed execution reduces avoidable process burden.                            |
 
-### When Custom Service Is Needed <a href="#when-custom-service-is-needed" id="when-custom-service-is-needed"></a>
+Managed Service should be selected for the right reason. It is not a shortcut around source ambiguity. If the source store contains custom marketplace data, unsupported records, modified database structures, external identifiers, or custom migration logic needs, Custom Service may still be required.
 
-Custom Service is needed when a CS-Cart migration requires customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or broader bespoke handling. CS-Cart’s flexibility can make Custom Service especially important when the source store contains business logic that cannot be treated as ordinary product, customer, order, or content data.
+### When Add-ons Can Improve the Migration Scope <a href="#when-add-ons-can-improve-the-migration-scope" id="when-add-ons-can-improve-the-migration-scope"></a>
 
-The clearest Custom Service cases are marketplace, vendor, B2B, integration, custom field, and Custom Platform scenarios where the data requires interpretation before it can be migrated safely.
+Add-ons can help when the merchant needs focused support that remains within supported migration behavior. For CS-Cart, Add-ons are often useful when the merchant needs to filter records, map supported values, configure selected fields, or adjust bounded migration output. They should not be used as a substitute for Custom Service when the requirement is actually custom transformation or unsupported source interpretation.
 
-| Custom Service trigger                                                     | Why Standard or Managed Service is not enough                                                                                       | Example review need                                                                                 |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Vendor or marketplace ownership must be reconstructed                      | Marketplace behavior can involve seller assignment, vendor responsibility, commissions, fulfillment handling, or product ownership. | Determine which vendor-related records can be migrated, configured, mapped, or rebuilt.             |
-| B2B account logic requires custom handling                                 | Customer roles, approval flows, buyer access, negotiated pricing, or company structures may not be simple customer records.         | Review whether customer/account behavior needs custom migration logic adjustment.                   |
-| Add-on-owned behavior carries business meaning                             | Add-ons may control fields, workflows, display logic, pricing rules, or vendor operations.                                          | Identify whether the data can move as standard fields, needs an Add-on, or requires Custom Service. |
-| Headless, mobile, or external storefront architecture affects data meaning | Storefront behavior may depend on APIs, mobile app logic, or external presentation layers.                                          | Separate migratable records from frontend or API behavior that must be rebuilt or reconnected.      |
-| Custom source fields or outside-system identifiers are launch-critical     | External IDs, ERP references, fulfillment codes, or reporting keys may not fit standard migration capability.                       | Decide whether they should be mapped, preserved, transformed, or reviewed as custom data.           |
-| Source Platform is custom or heavily modified                              | Non-standard data structures may contain hidden business meaning.                                                                   | Use Custom Service discovery before confirming the final migration approach.                        |
+A Data Filter Add-on can help when only selected records should be migrated, such as products from specific categories, recent orders, selected customers, or specific content types. Advanced Data Mapping can help when source values need to align with supported target structures, such as customer groups, categories, tax-related values, or product attributes. Advanced Data Configure can help when selected values need controlled adjustment before reaching the Target Platform.
 
-Custom Service does not automatically mean Next-Cart performs the full migration management. Migration management can be included in the final Custom Service plan, but the defining factor is the need for customization, modification, or bespoke handling.
+| Add-on type                | CS-Cart use case                                                                                     | Boundary to respect                                                                |
+| -------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Data Filter Add-on         | Migrate selected Products, Customers, Orders, Blog Posts, or other eligible records.                 | Entity counts entered for pricing do not act as filters by themselves.             |
+| Advanced Data Mapping      | Align supported source values with target categories, groups, attributes, or other supported fields. | Mapping cannot recreate unsupported marketplace behavior or custom database logic. |
+| Advanced Data Configure    | Adjust selected values so the migrated data better fits the target setup.                            | Configuration is bounded; bespoke transformation belongs to Custom Service.        |
+| Standard Add-ons           | Use available service extensions for defined migration needs.                                        | They should match a specific requirement, not compensate for unclear planning.     |
+| Tailored or Custom Add-ons | Modify or create project-specific add-on support.                                                    | These are reviewed through Custom Service because they require customization.      |
 
-### Where Add-ons May Help <a href="#where-add-ons-may-help" id="where-add-ons-may-help"></a>
+Add-ons should be selected after the merchant identifies the exact problem. If the issue is “migrate only certain products,” Data Filter may help. If the issue is “source customer groups need to become target-supported groups,” mapping may help. If the issue is “vendor commission logic must be interpreted from a custom table,” Custom Service is more likely than a Standard Add-on.
 
-Add-ons are optional service features. They can help when the merchant needs filtering, mapping, or data configuration support, but they are not the same as Custom Service. For CS-Cart, Add-ons are most useful when the desired result is specific and fits available settings and supported behavior.
+### When Custom Service Is Required <a href="#when-custom-service-is-required" id="when-custom-service-is-required"></a>
 
-| Add-on area             | Where it may help in CS-Cart migration                                                                                                  | Boundary to watch                                                                                                                          |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Data Filter Add-on      | The merchant wants to migrate only selected records, such as certain products, customers, orders, or blog records.                      | Entered entity counts are used for pricing and Entity Points Plan selection; they are not migration filters. Filtering must be configured. |
-| Advanced Data Mapping   | Source values need to map into target-supported structures, such as categories, customer groups, attributes, or other supported fields. | Mapping cannot remove CS-Cart platform limits or recreate unsupported custom logic by itself.                                              |
-| Advanced Data Configure | Selected values need to be edited or adjusted so migrated data reaches CS-Cart with updated information.                                | Configuration changes stay within supported capability; broader transformation requires Custom Service.                                    |
-| Tailored Add-ons        | A Standard Add-on needs modification to meet the expected result.                                                                       | Tailored Add-ons are Custom Service work because they require customization or modification.                                               |
-| Custom Add-ons          | The merchant needs a new or project-specific Add-on not covered by available Standard Add-ons.                                          | Custom Add-ons are reviewed and quoted through Custom Service.                                                                             |
+Custom Service is required when the migration needs customization, modification, Custom Platform handling, unsupported data interpretation, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or bespoke handling beyond standard service capability. CS-Cart projects may require Custom Service when source data carries marketplace, B2B, add-on, external-system, or custom-field meaning that cannot be handled as ordinary records.
 
-Add-ons are helpful when the migration requirement is focused. They should not be used to disguise a broader custom migration. If vendor logic, B2B rules, integration ownership, or custom source behavior must be interpreted, the project should be reviewed through Custom Service rather than treated as a simple Add-on decision.
+Common Custom Service triggers include vendor ownership that is not stored in a standard way, custom marketplace commissions, seller payout references, modified product structures, special product configurators, source add-on data, customer-company relationships, custom profile fields, ERP identifiers, fulfillment codes, historical reporting keys, and external system references. A heavily modified Source Platform may also require Custom Service because the data model itself may not match standard assumptions.
 
-### What Demo Migration Should Clarify <a href="#what-demo-migration-should-clarify" id="what-demo-migration-should-clarify"></a>
+| Custom Service trigger                        | Why standard handling may not be enough                                            |
+| --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Vendor ownership is custom or incomplete      | Marketplace meaning may need interpretation rather than direct field transfer.     |
+| Custom fields are launch-critical             | Unsupported fields may need custom mapping, transformation, or preservation.       |
+| Add-on-owned data controls business behavior  | The data may sit outside ordinary product/customer/order records.                  |
+| B2B or account rules are source-specific      | Customer groups and pricing logic may not translate cleanly.                       |
+| External identifiers must remain stable       | ERP, PIM, POS, fulfillment, or accounting references may require bespoke handling. |
+| Source Platform is custom or heavily modified | Standard assumptions may not describe the actual data structure.                   |
 
-Demo Migration should clarify whether the selected approach is strong enough before broader execution. For CS-Cart, a useful Demo Migration should not be limited to easy products or ordinary orders. It should include records that reveal whether marketplace structure, customer context, product configuration, storefront meaning, and order interpretation are working as expected.
+Custom Service should be considered early, not after Full Migration fails to show expected behavior. If the merchant suspects custom requirements, the safest path is to prepare examples and discuss the requirement before committing to a standard path. The service decision can then distinguish what is migratable as supported data, what belongs to target configuration, what Add-ons can address, and what requires custom handling.
 
-| Demo Migration review area                      | What it should reveal                                                                                       | Why it affects the approach                                                              |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Product and category samples                    | Whether products, variants, images, descriptions, categories, and attributes are understandable in CS-Cart. | Weak product results may signal data cleanup, Add-on review, or Custom Service need.     |
-| Marketplace or vendor samples                   | Whether vendor ownership, product responsibility, and order context can be interpreted.                     | Marketplace ambiguity may require Custom Service.                                        |
-| Customer and account samples                    | Whether customer records, groups, addresses, and account context remain useful.                             | Complex account behavior may need mapping or custom handling.                            |
-| Order-history samples                           | Whether historical orders remain readable and operationally meaningful.                                     | Missing order context can affect support, fulfillment review, or reporting.              |
-| Storefront and route samples                    | Whether category, product, and content routes support launch planning.                                      | SEO or route issues may need configuration, redirect planning, or Custom Service review. |
-| Add-on, theme, or integration-sensitive samples | Whether important behavior depends on components outside migrated records.                                  | External dependency may change the service path.                                         |
+### How Entity Points Affect CS-Cart Scope Planning <a href="#how-entity-points-affect-cs-cart-scope-planning" id="how-entity-points-affect-cs-cart-scope-planning"></a>
 
-A good Demo Migration does not prove final launch readiness by itself. It gives evidence about whether the selected approach is appropriate and what must be corrected before Full Migration.
+Entity Points help size eligible migrated records. For CS-Cart, they are relevant when Products, Customers, Orders, or Blog Posts are migrated under an Entity Points Plan. The key planning rule is that eligible new Products, Customers, Orders, and Blog Posts consume Entity Points when they are first migrated. Records already counted through the service license do not consume again simply because another action happens on the same migration path.
 
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
+This matters when a CS-Cart migration includes large catalogs, historical order archives, customer databases, or Blog Posts. The merchant should estimate record scope carefully, then decide whether any filtering is needed before migration begins. A Data Filter Add-on may reduce scope when the merchant wants only selected records, but entering a smaller record count for pricing does not filter the migration by itself.
 
-The selected approach is too light when review findings show that the migration needs more interpretation, customization, or coordination than the current service path supports.
+Entity Points should be treated as scope sizing, not a platform-fit score. A store with fewer records may still require Custom Service if vendor ownership or custom fields are complex. A store with many records may still use Standard Service if the structure is clean and expectations are standard.
 
-| Warning sign                                                    | What it usually means                                                                     | Recommended response                                                                                  |
-| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Vendor or marketplace ownership is unclear after Demo Migration | Source data may not contain enough standard structure to preserve marketplace meaning.    | Review vendor-related requirements through Managed Service or Custom Service depending on complexity. |
-| Product data moves but buying context is weak                   | Attributes, variants, categories, or content may need cleanup, mapping, or configuration. | Consider Advanced Data Mapping, Advanced Data Configure, or Custom Service if source logic is custom. |
-| Customer records exist but account behavior is not meaningful   | Customer groups, B2B context, or account rules may not have been fully interpreted.       | Review account logic and decide whether mapping or Custom Service is required.                        |
-| Orders are present but operational context is missing           | Fulfillment, vendor, payment, tax, or integration context may be external or custom.      | Document ownership and escalate if custom migration logic adjustment is needed.                       |
-| Add-on or theme behavior is assumed to transfer automatically   | Add-ons and themes may not be ordinary data records.                                      | Identify what must be configured, reinstalled, rebuilt, or reviewed through Custom Service.           |
-| The merchant cannot explain what the target result should prove | The issue is planning readiness, not only migration execution.                            | Pause and clarify target behavior before continuing with Full Migration.                              |
+| Entity Points planning question                                             | CS-Cart implication                                                                 |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Which Products, Customers, Orders, and Blog Posts are eligible new records? | Estimate service license and Entity Points Plan needs accurately.                   |
+| Are all historical orders required?                                         | Filtering may be useful if only recent or operationally relevant orders are needed. |
+| Are all products launch-relevant?                                           | Obsolete, test, disabled, or vendor-discontinued products may not need migration.   |
+| Will Blog Posts be migrated?                                                | Blog scope should be included if content continuity matters.                        |
+| Are records being migrated again only because another action occurs?        | Avoid treating already-counted records as newly consumed points without reason.     |
 
-Ignoring these signals can make a migration appear complete while the CS-Cart store remains operationally weak. The earlier the approach is corrected, the easier it is to prevent rework.
+Entity Points planning should happen before Demo Migration so the sample and Full Migration expectations reflect the intended scope. It should also be revisited when Additional Migration Options are considered, especially if the merchant changes the configuration or performs a new migration.
+
+### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
+
+Demo Migration should test whether the selected service path is strong enough. For CS-Cart, a useful Demo Migration should include records that reveal catalog structure, vendor ownership, customer/account context, order readability, content route behavior, and custom-field expectations. The merchant should not limit the sample to easy products if the final store depends on more complex data.
+
+A strong Demo Migration review should answer whether Products appear with the right content, categories, images, stock, status, features, options, and variation behavior; whether vendor-owned records preserve the expected marketplace meaning; whether Customers and Orders remain linked and readable; whether CMS Pages and Blog Posts support content continuity; and whether source-specific fields require mapping, Add-ons, or Custom Service.
+
+| Demo Migration decision                 | What to inspect                                                                                 |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Is the catalog usable?                  | Products, categories, images, stock, status, features, options, variations, and route behavior. |
+| Is marketplace context preserved?       | Vendor ownership, vendor administrator records, vendor products, seller order context.          |
+| Are accounts meaningful?                | Customer groups, addresses, vendor administrators, B2B-like account fields.                     |
+| Is order history readable?              | Customer links, products, payment/shipping context, tax references, vendor responsibility.      |
+| Does content support launch continuity? | CMS Pages, Blog Posts, metadata, product/category routes, redirects.                            |
+| Is the selected approach still valid?   | Whether issues can be solved by standard settings, Add-ons, Managed Service, or Custom Service. |
+
+Demo Migration is not only a preview. It is a service-path checkpoint. If the result shows missing vendor meaning, unsupported custom fields, weak account logic, or unclear product structure, the merchant should correct the approach before Full Migration.
+
+### Using Full Migration and Additional Migration Options <a href="#using-full-migration-and-additional-migration-options" id="using-full-migration-and-additional-migration-options"></a>
+
+Full Migration should proceed when the service path has been confirmed and the merchant understands what must be validated after completion. For CS-Cart, the Full Migration plan should define source-store freeze timing, final data capture expectations, vendor or product changes during the migration window, and responsibility for post-migration review.
+
+Additional Migration Options become important when the source store changes after an earlier migration result or when the merchant needs a different handling path. The merchant can continue the migration with the last used configuration, continue the migration with a new configuration, or perform a new migration. The right choice depends on whether the underlying assumptions stayed the same.
+
+| Follow-up choice                          | Use when                                                                | CS-Cart example                                                                       |
+| ----------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Continue with the last used configuration | New records exist but the mapping and target assumptions are unchanged. | New orders and customers were added after Full Migration preparation.                 |
+| Continue with a new configuration         | The merchant corrected source structure or changed mapping assumptions. | Categories, customer groups, vendor assignments, or content rules were updated.       |
+| Perform a new migration                   | The target plan, source scope, or service path changed substantially.   | Marketplace model, Custom Service requirements, or target setup changed after review. |
+
+Additional Migration Options should be selected based on evidence. If only new orders appeared, the last used configuration may be enough. If vendor assignments were rebuilt, a new configuration may be safer. If the merchant changed from a simple store plan to a Multi-Vendor marketplace plan, a new migration may be more appropriate.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Choosing the right CS-Cart migration approach depends on how much business meaning sits behind the source data. Standard Service can fit when the source store is clean, the target structure is straightforward, and the customer can lead execution confidently. Managed Service is safer when the migration can use standard service capability but the merchant wants Next-Cart-led execution. Custom Service is needed when marketplace logic, B2B account behavior, custom fields, add-on-owned workflows, headless architecture, integrations, Custom Platform sources, or custom migration logic adjustment must be handled.
+The right CS-Cart migration approach depends on data meaning, execution ownership, customization needs, and validation evidence. Standard Service can fit when the source structure is clean and the merchant can run and review the process. Managed Service is safer when the migration can remain standard but the merchant wants Next-Cart-led execution. Add-ons can help with bounded filtering, mapping, and configuration needs. Custom Service is required when the project needs customization, modification, unsupported source handling, Custom Platform support, or custom migration logic adjustment.
 
-The strongest approach decision is made before Full Migration, using preparation and Demo Migration results to decide whether the selected service model is still appropriate.
+The approach should be tested through Demo Migration before Full Migration. When follow-up changes are needed, Additional Migration Options should be selected according to whether the original configuration still applies, a new configuration is needed, or a new migration is the safer path.
 
-If you are planning a CS-Cart migration, use Demo Migration and Live Chat to review representative products, categories, customers, marketplace or vendor examples, order history, storefront routes, and integration-sensitive records before confirming the full migration approach.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Can Standard Service handle a CS-Cart migration?**
 
-**Can I use Standard Service for a CS-Cart migration?**
+Yes, when the source data is structurally clear, target expectations are standard, and the merchant can run and review Demo Migration and Full Migration. It is less suitable when marketplace logic, custom fields, add-on-owned data, or external identifiers require interpretation.
 
-Yes, Standard Service can be appropriate when the source store is structurally clear, the target CS-Cart setup does not require customization, and the expected result fits standard migration capability. It is less suitable when marketplace ownership, B2B rules, custom fields, external identifiers, or add-on-owned behavior require interpretation.
+**When should I choose Managed Service for CS-Cart?**
 
-**When is Managed Service better for CS-Cart?**
+Choose Managed Service when the migration can use standard service capability but customer-led execution would create unnecessary burden or risk. It is useful for larger stores, active businesses, and migrations that require Next-Cart-led operation and coordinated validation.
 
-Managed Service is better when the migration can use standard service capability but the merchant wants Next-Cart to perform the migration. It is useful for larger or commercially important CS-Cart migrations where customer-led execution would create unnecessary operational burden.
+**Can Add-ons replace Custom Service?**
 
-**When does a CS-Cart migration require Custom Service?**
+No. Add-ons can help with bounded filtering, mapping, or data configuration needs. Custom Service is required when the migration needs customization, unsupported source interpretation, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or Custom Platform handling.
 
-Custom Service is required when the migration needs customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, vendor or marketplace interpretation, custom source fields, external identifiers, or integration-dependent behavior beyond standard migration capability.
+**How do Entity Points apply to CS-Cart migration?**
 
-**Can Add-ons handle CS-Cart marketplace or B2B requirements?**
-
-Add-ons may help with focused filtering, mapping, or data configuration requirements. They should not be treated as a replacement for Custom Service when marketplace or B2B behavior requires broader interpretation, customization, or custom migration logic adjustment.
+Eligible new Products, Customers, Orders, and Blog Posts consume Entity Points when first migrated. Records already counted through the service license do not consume again simply because another action happens on the same migration path.
 
 **What should Demo Migration prove before Full Migration?**
 
-Demo Migration should show whether representative CS-Cart records preserve the expected business meaning. Review products, categories, customers, marketplace or vendor examples, order history, storefront routes, add-on-sensitive data, and integration-sensitive records before confirming that the selected approach is strong enough.
+Demo Migration should prove that the selected approach preserves CS-Cart catalog meaning, vendor context, account relationships, order readability, content continuity, and any custom-sensitive records that affect launch quality.

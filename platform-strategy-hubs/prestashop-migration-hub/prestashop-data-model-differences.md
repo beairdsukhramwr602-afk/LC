@@ -1,210 +1,176 @@
 # PrestaShop Data Model Differences
 
-Migrating into PrestaShop is not only a move into another storefront system. It is a move into a target model where product structure, customer segmentation, shop scope, route behavior, and surrounding modules can change the meaning of the migrated data after launch.
+PrestaShop migration should be planned as a structured-commerce translation, not a simple field transfer. The Target Platform can hold familiar commerce records such as Products, Categories, Customers, Orders, Coupons, CMS Pages, images, and SEO fields, but the meaning of those records changes when they enter PrestaShop’s catalog, customer-group, multistore, URL, module, and storefront-governance environment.
 
-That matters because PrestaShop can make the commercial structure more explicit than it was in the Source Platform. Products may need clearer separation between combinations, features, and customization fields. Customers may need group logic that supports real storefront behavior. Multistore data may need a deliberate shop context. Friendly URLs may need stable route governance. Modules, themes, overrides, and custom fields may continue to shape what customers see and how the store operates.
+The most important data-model difference is that PrestaShop does not treat product meaning as one broad option layer. A source store may use product options, attributes, specifications, app fields, custom checkout notes, or module behavior to represent many different things. In PrestaShop, those meanings may need to become combinations, attributes, features, customization fields, product associations, category assignments, customer group behavior, shop-specific scope, or Custom Service requirements.
 
-A PrestaShop migration should therefore be judged by meaning, not only by record presence. The safer question is not simply whether products, customers, and orders moved. The stronger question is whether PrestaShop can still express how the business sells, describes products, segments customers, separates shop contexts, routes customers, and supports important storefront behavior.
+That distinction is not cosmetic. If selectable product choices become descriptive features, customers may no longer be able to buy the right version. If descriptive specifications become combinations, the product can become harder to manage and validate. If customer group meaning is treated as a label rather than storefront behavior, pricing, visibility, discounts, tax treatment, or account expectations may become unclear. If multistore context is flattened, shop ownership, URL paths, and product visibility can become difficult to trust.
 
-### Why PrestaShop Data-Model Differences Matter <a href="#why-prestashop-data-model-differences-matter" id="why-prestashop-data-model-differences-matter"></a>
+### PrestaShop Data Meaning Starts With Catalog Structure <a href="#prestashop-data-meaning-starts-with-catalog-structure" id="prestashop-data-meaning-starts-with-catalog-structure"></a>
 
-PrestaShop is flexible, but that flexibility is most useful when the target model is intentional. A source store may use one broad option system, custom fields, extensions, manual notes, or theme behavior to represent product choices and storefront rules. PrestaShop may expect those meanings to be separated into more specific structures.
+PrestaShop gives merchants strong control over catalog organization, but that control depends on correctly separating product meaning. The migration plan should identify what each source product field actually does before deciding where it belongs in PrestaShop.
 
-This is where migration quality can become hard to judge. A product can appear in the Target Platform while its commercial meaning changes. A customer can exist while group-based behavior becomes unclear. A URL can be generated while the old route intent is no longer protected. A module-dependent behavior can be missed because it was treated as background configuration rather than part of the store’s selling model.
+Some source platforms use a single option model for variation, filtering, product specification, personalization, bundle choices, or marketing labels. Other stores rely on modules, templates, custom fields, or scripts to show product choices that are not clearly represented in export data. PrestaShop can support a structured catalog, but the source data must be interpreted through the correct target behavior.
 
-PrestaShop data-model review should therefore focus on the structures that shape customer experience and operational confidence after migration.
+| Source-side meaning              | PrestaShop planning question                                               | Migration implication                                                                              |
+| -------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Selectable product version       | Should it become a combination based on attributes?                        | Wrong classification can affect purchasable choices, price, SKU, stock, and product-page behavior. |
+| Product specification            | Should it become a feature?                                                | Features support description, comparison, and discovery rather than purchasable variation.         |
+| Customer-entered personalization | Should it become a customization field or custom requirement?              | Personalization should not be mistaken for ordinary variation or descriptive content.              |
+| Module-managed option            | Is the behavior supported, module-owned, or custom?                        | Module data may need Add-ons, Custom Service review, or target-side rebuilding.                    |
+| Product grouping                 | Is it a category, association, pack, accessory, or merchandising decision? | Catalog relationships need target meaning, not just copied labels.                                 |
 
-### Product Meaning Depends on Clearer Structure <a href="#product-meaning-depends-on-clearer-structure" id="product-meaning-depends-on-clearer-structure"></a>
+The safest PrestaShop data model review begins by asking what customers and staff need the product data to do after launch. Only then should the migration team decide whether the source value belongs in core migrated records, target-side configuration, Add-ons, Custom Service, or an excluded expectation.
 
-PrestaShop product data often needs stronger classification than many source stores use.
+### Products, Combinations, Attributes, and Features Are Not Interchangeable <a href="#products-combinations-attributes-and-features-are-not-interchangeable" id="products-combinations-attributes-and-features-are-not-interchangeable"></a>
 
-#### Combinations represent selectable product variation <a href="#combinations-represent-selectable-product-variation" id="combinations-represent-selectable-product-variation"></a>
+Product migration into PrestaShop requires special attention to combinations, attributes, and features. These terms may sound similar to source-platform options or specifications, but they are not interchangeable. The distinction affects product display, customer choice, filtering, catalog administration, and validation.
 
-Combinations should be reviewed as the layer for sellable product variation. They can affect what customers choose, how a product is purchased, and how stock or product-page behavior is interpreted.
+Attributes are the basis for PrestaShop product variations, commonly called combinations in the PrestaShop interface. They represent properties that change between purchasable versions of the same product, such as size, color, capacity, material, or another selectable difference. A product can only have combinations if the changing choice is represented by at least one attribute. Features, by contrast, are intrinsic product characteristics that remain the same across combinations and provide descriptive product information.
 
-A migration can become commercially wrong if selectable variation is flattened into descriptive information or if descriptive information is incorrectly rebuilt as purchasable variation. The target product may look complete, but customers may no longer see or choose the product in the intended way.
+This creates a clear migration test: if the source value affects which version the customer buys, it probably needs variation-level review. If it explains the product but does not create a different purchasable version, it is more likely to be a feature or descriptive field. If it asks the customer to enter text, upload information, or personalize an item, it may belong to a customization field or custom handling path.
 
-#### Features support product understanding and comparison <a href="#features-support-product-understanding-and-comparison" id="features-support-product-understanding-and-comparison"></a>
+| PrestaShop structure          | What it usually represents                                          | Migration risk if misused                                                                          |
+| ----------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Attribute                     | A changing property used to create combinations.                    | Product choices may fail if attributes are missing, merged, duplicated, or confused with features. |
+| Combination                   | A purchasable product variation built from attributes.              | SKU, price, stock, image, or option selection may become unreliable.                               |
+| Feature                       | A stable characteristic used for product information or comparison. | Specifications may become harder to browse or may be overbuilt as purchasable choices.             |
+| Customization field           | Customer-entered or customer-provided product personalization.      | Personalized buying flows may be lost if treated as simple notes or options.                       |
+| Module-owned product behavior | Extended behavior created outside core structures.                  | Standard migration may not preserve the behavior without review.                                   |
 
-Product features should be treated as descriptive or comparative product meaning, not as the same thing as combinations. They can help customers understand product characteristics, compare items, and browse with clearer product information.
+A high-quality PrestaShop migration should not try to force every source option into combinations. It should preserve the commercial meaning of each source field. The target catalog should remain understandable for customers, manageable for staff, and realistic for later validation.
 
-This distinction matters when the Source Platform mixed product specifications, marketing details, variation labels, and filter values together. PrestaShop can support clearer product meaning, but only when those layers are classified deliberately.
+### Category Data Carries Discovery, Visibility, and SEO Meaning <a href="#category-data-carries-discovery-visibility-and-seo-meaning" id="category-data-carries-discovery-visibility-and-seo-meaning"></a>
 
-#### Customization fields represent customer-entered personalization <a href="#customization-fields-represent-customer-entered-personalization" id="customization-fields-represent-customer-entered-personalization"></a>
+PrestaShop categories should be treated as discovery structures, not only containers. A category tree can affect how customers browse, how products are grouped, how landing pages are understood, and how SEO metadata and friendly URLs are reviewed.
 
-Customization fields are another separate product layer. They are relevant when customers need to enter text, upload information, or personalize a product as part of the buying journey.
+Source platforms often mix several roles into category-like structures. A category might function as an admin folder, customer navigation path, campaign page, brand page, collection, SEO landing page, or product filter shortcut. Migrating every source category directly into PrestaShop may preserve old clutter instead of supporting clean target browsing.
 
-Source stores may have carried this behavior through product add-ons, free-text fields, order notes, custom plugins, or special checkout instructions. In PrestaShop, that meaning should be reviewed as a product-level personalization decision, not automatically treated as variation or descriptive data.
+PrestaShop category review should determine which categories still deserve target visibility and which categories should be merged, retired, redirected, or handled as content rather than catalog structure. This is especially important when the source store has deep trees, duplicate categories, seasonal groups, language-specific paths, brand collections, or category pages with meaningful search value.
 
-### Category and Discovery Structure Need Target Meaning <a href="#category-and-discovery-structure-need-target-meaning" id="category-and-discovery-structure-need-target-meaning"></a>
+| Category role in the source store | PrestaShop data-model decision                                                         |
+| --------------------------------- | -------------------------------------------------------------------------------------- |
+| Permanent product family          | Usually belongs in category migration and validation.                                  |
+| Campaign or seasonal grouping     | May need retirement, redirect, or target-side merchandising review.                    |
+| SEO landing page                  | Requires URL, metadata, content, and redirect review, not just category-name transfer. |
+| Customer-group-specific access    | Must be checked against group and visibility behavior.                                 |
+| Multistore-specific catalog area  | Requires shop-scope review before migration acceptance.                                |
+| Navigation-only menu item         | May belong to storefront setup instead of migrated catalog records.                    |
 
-PrestaShop catalog discovery depends on more than preserving category names.
+A category can be technically present and still fail its migration purpose. The stronger validation question is whether the category still helps customers find products, preserves important landing paths, and supports the target storefront structure.
 
-#### Categories should support real browsing behavior <a href="#categories-should-support-real-browsing-behavior" id="categories-should-support-real-browsing-behavior"></a>
+### Customer Records and Customer Groups Need Separate Interpretation <a href="#customer-records-and-customer-groups-need-separate-interpretation" id="customer-records-and-customer-groups-need-separate-interpretation"></a>
 
-Categories should be reviewed as the primary structure for how customers browse the catalog. A migrated category tree should still help customers understand where products belong, how product families relate to each other, and which landing pages matter commercially.
+PrestaShop customer migration should separate buyer identity from customer treatment. A Customer record may preserve name, email, address, order relationship, and account context. A customer group may affect how the storefront treats the buyer through pricing, discounts, tax behavior, access, or segmentation, depending on the store configuration.
 
-If the source category structure was messy, duplicated, campaign-driven, or built around old merchandising habits, copying it directly into PrestaShop may preserve clutter rather than improve customer navigation.
+The risk is treating groups as harmless labels. If groups influenced commercial behavior in the source store, the migration plan should define what that behavior should mean in PrestaShop. Wholesale buyers, retail buyers, loyalty members, trade accounts, tax-exempt customers, regional groups, and special access groups may all need different handling.
 
-#### Features and filters should not be confused <a href="#features-and-filters-should-not-be-confused" id="features-and-filters-should-not-be-confused"></a>
+| Source customer pattern            | PrestaShop interpretation question                                  | Planning result                                                    |
+| ---------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Ordinary retail customer           | Is standard customer migration enough?                              | Usually straightforward when identity and order history are clean. |
+| Wholesale or trade customer        | Does the group affect price, discount, tax, or access?              | Group behavior needs preparation and validation.                   |
+| Loyalty or membership buyer        | Is the value core data, module data, or external CRM data?          | May require Add-ons, Custom Service, or external-system handling.  |
+| Guest buyer                        | Should order history remain readable without full account behavior? | Validate customer-order relationships and support expectations.    |
+| Duplicate or inconsistent customer | Which record should staff trust after migration?                    | Cleaning, filtering, or post-migration review may be needed.       |
 
-Product features may support structured product information, while filters and faceted search behavior can affect how customers narrow product lists. A value can survive migration but still fail if it no longer supports the right browsing purpose.
+Customer-group migration should be judged by business meaning. A group that exists but no longer controls the right customer experience can create confusion for staff and buyers, even if the record count looks correct.
 
-PrestaShop review should identify which product characteristics should remain descriptive, which should support comparison, and which should be available for storefront filtering or discovery.
+### Multistore Changes the Scope of Products, Categories, Customers, and URLs <a href="#multistore-changes-the-scope-of-products-categories-customers-and-urls" id="multistore-changes-the-scope-of-products-categories-customers-and-urls"></a>
 
-### Customer Groups Change Customer Context <a href="#customer-groups-change-customer-context" id="customer-groups-change-customer-context"></a>
+PrestaShop multistore can make migration planning more powerful and more fragile. When multiple shops, domains, brands, languages, or B2B/B2C storefronts are managed through one back office, migrated records may need shop-specific interpretation.
 
-Customer groups can become part of the storefront-control model in PrestaShop. They may affect customer treatment, price expectations, visibility, segmentation, account handling, or buyer-type logic depending on how the store is configured.
+A product may exist in one shop but not another. A category may belong to one storefront hierarchy. A customer group may apply differently by shop context. A CMS Page may support one storefront but not all of them. Friendly URLs, domains, and shop URLs may define where customers land after launch.
 
-That means customer migration is not only about preserving customer records. It is also about preserving the customer context that the business still needs.
+This means multistore migration is not merely a larger version of a single-store migration. It requires shop-scope governance.
 
-#### Customer records and customer treatment are different <a href="#customer-records-and-customer-treatment-are-different" id="customer-records-and-customer-treatment-are-different"></a>
+| Multistore data area        | What must be clarified                                                          |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| Products                    | Which shops should carry each product, price, visibility, or stock expectation? |
+| Categories                  | Which catalog tree belongs to which shop or root category?                      |
+| Customers and groups        | Whether segmentation applies globally or shop-specifically.                     |
+| CMS Pages and Blog Posts    | Which storefront or language context owns the content.                          |
+| Friendly URLs and shop URLs | Whether important old paths map cleanly to the correct target storefront.       |
+| Modules and themes          | Whether behavior differs across shops, domains, or themes.                      |
 
-A customer record may migrate successfully while the target store still loses important segmentation meaning. This can happen when groups are assigned too broadly, inherited from the Source Platform without review, or preserved as labels without clear storefront purpose.
+If source data does not carry reliable shop context, the migration plan should avoid promising exact multistore preservation. Shop assignment may need source cleanup, supported mapping, Add-ons, Custom Service, or target-side governance.
 
-Where customer groups affect commercial behavior, they should be reviewed as part of the customer model, not as secondary admin metadata.
+### Orders Preserve History but Do Not Recreate Storefront Behavior <a href="#orders-preserve-history-but-do-not-recreate-storefront-behavior" id="orders-preserve-history-but-do-not-recreate-storefront-behavior"></a>
 
-#### Group logic should be explainable before launch <a href="#group-logic-should-be-explainable-before-launch" id="group-logic-should-be-explainable-before-launch"></a>
+Order migration into PrestaShop should preserve useful historical meaning. Orders can help staff answer customer questions, review previous purchases, understand totals, check discounts, and maintain service continuity. But historical order data should not be mistaken for live target behavior.
 
-PrestaShop group review should answer practical questions:
+A source order may contain statuses, payment method labels, shipment data, tax lines, discounts, vouchers, notes, module references, customer group context, and product snapshots. Some of this data may migrate as supported order history. Some may need custom review. Some may only remain as historical reference.
 
-* Which groups still matter after migration?
-* What should each group affect?
-* Are group assignments still accurate?
-* Do any groups exist only because of old source-side workarounds?
-* Should some group behavior be simplified, rebuilt, or handled through Custom Service?
+The migration plan should separate past commercial evidence from future PrestaShop setup. Live payment modules, shipping carriers, tax rules, voucher behavior, email templates, checkout flow, and module configuration are target-side operational areas. Their configuration should be prepared and validated separately from order-record migration.
 
-If the business cannot explain the group model, the migrated customer data may be present but not commercially reliable.
+| Order data area      | Migration meaning in PrestaShop                                                     |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| Order status         | Historical status context may need interpretation, not exact workflow reproduction. |
+| Payment method label | Useful for history, but not proof that the live payment module is configured.       |
+| Shipping method      | Historical context, not automatic carrier setup.                                    |
+| Voucher or discount  | May preserve order history but may not recreate active promotion logic.             |
+| Tax lines            | Historical reference that still requires target-side tax configuration.             |
+| Module references    | May require Custom Service review if the source behavior is business-critical.      |
 
-### Multistore Changes Shop-Scope Meaning <a href="#multistore-changes-shop-scope-meaning" id="multistore-changes-shop-scope-meaning"></a>
+Historical order validation should use representative examples: ordinary orders, refunded orders, discounted orders, orders with tax differences, orders tied to customer groups, and orders created through important modules.
 
-PrestaShop multistore changes how data scope should be interpreted. A value may not only belong to a product, customer, category, or page. It may also belong to a specific shop context.
+### Modules, Themes, Overrides, and Custom Data Can Own Business Meaning <a href="#modules-themes-overrides-and-custom-data-can-own-business-meaning" id="modules-themes-overrides-and-custom-data-can-own-business-meaning"></a>
 
-This changes how migration should be reviewed because a value can be technically correct and still operationally wrong if it appears in the wrong shop, is shared too broadly, or is separated when it should be shared.
+PrestaShop’s modular ecosystem is one of its strengths, but it also creates migration boundaries. Modules, themes, overrides, and custom fields may shape product pages, checkout behavior, discounts, loyalty, reviews, marketplace feeds, tax rules, shipping logic, payment behavior, SEO, analytics, and admin workflows.
 
-#### Shared and shop-specific data should be decided deliberately <a href="#shared-and-shop-specific-data-should-be-decided-deliberately" id="shared-and-shop-specific-data-should-be-decided-deliberately"></a>
+The key migration question is whether the data belongs to supported PrestaShop records or to a custom/module-owned layer outside ordinary migration scope. A source store may show information in a way that appears native, while the actual value comes from a module or custom table. Without source review, that value can be missed, flattened, or migrated into the wrong place.
 
-A multistore migration should clarify which structures should be shared and which should differ by shop. This can include catalogs, categories, products, customer groups, content, language, currency, route behavior, module configuration, and operational rules.
+| Dependency type       | Why it matters for data migration                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Module data           | May hold reviews, loyalty, subscriptions, bundles, advanced filters, or payment/shipping settings. |
+| Theme behavior        | May display product or category fields that are not native target records.                         |
+| Overrides/custom code | May alter product, customer, order, or checkout behavior beyond standard PrestaShop logic.         |
+| External systems      | ERP, CRM, PIM, inventory, or accounting IDs may require custom mapping or integration review.      |
+| Custom fields         | May need Add-ons if supported or Custom Service if non-standard handling is required.              |
 
-The risk is not only losing data. The risk is losing the intended scope of that data.
+Add-ons and Custom Service should be separated at this stage. Add-ons can support specific bounded filtering, mapping, or configuration needs within supported behavior. Custom Service should be considered when the requirement involves unsupported module data, bespoke transformation, external identifiers, Custom Platform sources, or custom migration logic adjustment.
 
-#### Single-store targets still need scope review <a href="#single-store-targets-still-need-scope-review" id="single-store-targets-still-need-scope-review"></a>
+### PrestaShop Data Model Review Should End With Acceptance Signals <a href="#prestashop-data-model-review-should-end-with-acceptance-signals" id="prestashop-data-model-review-should-end-with-acceptance-signals"></a>
 
-Even when the Target Platform is not using PrestaShop multistore, source stores with multiple storefronts, languages, regions, catalogs, or customer segments still need scope review. Some source structures may need to be consolidated, simplified, or rebuilt to fit the intended PrestaShop target model.
+The final data-model question is not whether PrestaShop has a place for every source value. It is whether the migrated result supports the target selling environment.
 
-### Friendly URLs Are Part of Store Meaning <a href="#friendly-urls-are-part-of-store-meaning" id="friendly-urls-are-part-of-store-meaning"></a>
+A product should be understandable as a PrestaShop product. Combinations should preserve selectable variation. Features should support product understanding and comparison. Customization fields should support customer personalization where relevant. Categories should help discovery. Customer groups should preserve meaningful buyer treatment. Multistore context should be intentional. Orders should remain useful for support. URLs and CMS Pages should support continuity. Module-owned or custom data should be either supported, handled through Add-ons, scoped for Custom Service, rebuilt in the target, or excluded intentionally.
 
-PrestaShop friendly URLs are not only technical paths. They help shape customer recognition, search visibility, internal linking, marketing continuity, and route meaning after migration.
+| Data-model area           | Acceptance signal                                                                                                |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Products and combinations | Customers can choose the right purchasable version, and staff can validate SKU, price, stock, and image meaning. |
+| Features                  | Product specifications remain useful without being confused with variation.                                      |
+| Categories                | Browsing and landing-page structure still support discovery and revenue priorities.                              |
+| Customer groups           | Commercial treatment is explainable and validated.                                                               |
+| Multistore                | Shop assignment and URL context are intentional.                                                                 |
+| Orders                    | Historical records remain readable and useful.                                                                   |
+| Modules/custom data       | Handling path is known before launch.                                                                            |
 
-#### Stable route behavior should be planned <a href="#stable-route-behavior-should-be-planned" id="stable-route-behavior-should-be-planned"></a>
-
-PrestaShop product settings include friendly URL behavior, and route decisions can affect whether product and category paths remain stable or change after migration. A migrated product can be valid while its route no longer supports the same customer intent.
-
-High-value product, category, brand, content, and landing-page routes should be reviewed early, especially when the Source Platform used custom slugs, old SEO paths, campaign URLs, or manually managed redirects.
-
-#### Route continuity is not the same as copying every old URL <a href="#route-continuity-is-not-the-same-as-copying-every-old-url" id="route-continuity-is-not-the-same-as-copying-every-old-url"></a>
-
-The goal is not always to preserve every source URL exactly. The goal is to protect the routes that matter and ensure that changed paths lead customers to relevant target destinations.
-
-PrestaShop route review should therefore focus on customer intent, priority pages, redirect planning, internal links, and whether the new route structure is stable enough for launch.
-
-### Modules, Themes, Overrides, and Custom Fields Can Carry Meaning <a href="#modules-themes-overrides-and-custom-fields-can-carry-meaning" id="modules-themes-overrides-and-custom-fields-can-carry-meaning"></a>
-
-PrestaShop can support important behavior through modules, themes, overrides, custom fields, and surrounding integrations. These layers can affect the storefront even when the core product, customer, or order records look complete.
-
-#### Module-owned behavior should be reviewed by outcome <a href="#module-owned-behavior-should-be-reviewed-by-outcome" id="module-owned-behavior-should-be-reviewed-by-outcome"></a>
-
-A module may influence product display, checkout behavior, search, filtering, reviews, pricing, loyalty, payment rules, shipping logic, content blocks, or integrations. Some behavior may need to be rebuilt in PrestaShop. Some may be replaced by native structure. Some may require custom migration logic adjustment.
-
-The correct review question is not whether the module itself moves. The better question is what customer or operational outcome the module supported and how that outcome should exist in the Target Platform.
-
-#### Theme and override behavior may affect more than appearance <a href="#theme-and-override-behavior-may-affect-more-than-appearance" id="theme-and-override-behavior-may-affect-more-than-appearance"></a>
-
-Themes and overrides can shape layout, product-page behavior, field display, customer journeys, and storefront logic. If those behaviors carried business meaning in the source store, they should not be treated as cosmetic details.
-
-When source-side theme logic, custom fields, or extension-owned behavior needs bespoke interpretation, the work belongs under Custom Service rather than being treated as a simple data transfer.
-
-### Orders Need Historical and Operational Interpretation <a href="#orders-need-historical-and-operational-interpretation" id="orders-need-historical-and-operational-interpretation"></a>
-
-Order migration into PrestaShop should preserve useful business history, but order meaning can differ across platforms.
-
-#### Historical orders should remain understandable <a href="#historical-orders-should-remain-understandable" id="historical-orders-should-remain-understandable"></a>
-
-A migrated order may preserve customer association, line items, totals, taxes, discounts, shipping labels, payment labels, status, timestamps, and notes. That does not automatically mean the order remains useful to support staff, accountants, or returning customers.
-
-Order validation should consider whether historical orders remain understandable in the PrestaShop admin, whether customer-account order history is useful, and whether statuses and labels still communicate the intended meaning.
-
-#### Module or integration history may not translate directly <a href="#module-or-integration-history-may-not-translate-directly" id="module-or-integration-history-may-not-translate-directly"></a>
-
-Some source-side order meaning may come from subscriptions, loyalty, fulfillment tools, payment extensions, ERP/CRM connections, marketplace logic, or other external systems. That meaning may not sit inside ordinary order fields.
-
-When order context depends on external systems or extension-owned behavior, the migration should clarify whether the target should preserve the record, rebuild the behavior, reconnect the workflow, or intentionally simplify the historical context.
-
-### What Migrated Data Must Prove in PrestaShop <a href="#what-migrated-data-must-prove-in-prestashop" id="what-migrated-data-must-prove-in-prestashop"></a>
-
-PrestaShop migration success should be measured by whether the target store preserves commercial and operational meaning.
-
-#### Strong PrestaShop data-model validation should prove <a href="#strong-prestashop-data-model-validation-should-prove" id="strong-prestashop-data-model-validation-should-prove"></a>
-
-* combinations still represent real selectable product variation;
-* features still support useful product understanding and comparison;
-* customization fields still support intended customer-entered personalization;
-* categories still support clear browsing and commercial structure;
-* filtering or faceted discovery uses the right product characteristics;
-* customer groups still reflect meaningful customer treatment;
-* multistore or shop-scope decisions are correct;
-* friendly URLs and changed routes still support customer intent;
-* modules, themes, overrides, custom fields, and integrations have a target meaning;
-* historical orders remain understandable and useful.
-
-### What Usually Needs the Earliest Review <a href="#what-usually-needs-the-earliest-review" id="what-usually-needs-the-earliest-review"></a>
-
-The highest-risk PrestaShop data-model differences usually deserve early review before the migration is treated as straightforward.
-
-#### Review these areas first <a href="#review-these-areas-first" id="review-these-areas-first"></a>
-
-* product-structure translation between combinations, features, and customization fields;
-* category hierarchy and product-discovery logic;
-* customer-group behavior and segmentation meaning;
-* multistore assignment and shop-scope logic;
-* friendly URL and priority-route behavior;
-* module-, theme-, override-, or custom-field-owned storefront behavior;
-* order history that depends on external systems or special workflow meaning.
-
-### How a Custom Platform Source Changes PrestaShop Data-Model Review <a href="#how-a-custom-platform-source-changes-prestashop-data-model-review" id="how-a-custom-platform-source-changes-prestashop-data-model-review"></a>
-
-When the Source Platform is a Custom Platform, PrestaShop data-model review usually needs a more bespoke translation lens.
-
-A Custom Platform may carry product-choice logic, descriptive product meaning, personalization behavior, customer segmentation, shop context, route behavior, or order meaning in structures that do not align neatly with PrestaShop combinations, features, customization fields, customer groups, multistore context, or friendly URLs.
-
-In that situation, the key review question is not only what data exists. It is how source-side meaning should be interpreted and rebuilt so the PrestaShop target remains commercially coherent. Custom Platform handling always belongs under Custom Service, and migration management is included only when it is part of the final plan.
+This makes PrestaShop migration more than data preservation. It becomes a controlled translation of catalog, customer, storefront, and operational meaning into the target environment.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-PrestaShop data-model differences matter because they change the commercial meaning of migrated data, not only its storage location. The target model often asks the business to clarify combinations, features, customization fields, customer groups, shop scope, route behavior, module-owned meaning, and historical order context more deliberately than the Source Platform may have required.
+PrestaShop data model differences matter because the platform gives structure to product variation, descriptive product information, customer personalization, customer groups, shop scope, category discovery, friendly URLs, modules, and historical order context. A migration can look complete while still weakening the way products are chosen, categories are browsed, customers are treated, orders are interpreted, or shop-specific records are governed.
 
-That can be a strength when the business wants better catalog structure and clearer customer segmentation. It becomes a risk when those layers are copied mechanically, blurred together, or validated only by record count.
+The strongest PrestaShop data-model plan classifies source meaning before migration. It distinguishes combinations from features, personalization from variation, category structure from navigation clutter, customer records from customer treatment, multistore assignment from simple record volume, and supported data from module-owned or custom requirements.
 
-Before treating the PrestaShop model as settled, review the product, customer, shop, route, order, and module-owned structures that carry real business meaning. If those structures are still unclear, use Demo Migration results and Live Chat to decide whether the issue is target-fit uncertainty, data-model translation risk, or a sign that Custom Service review is needed before full execution.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Why are PrestaShop combinations so important during migration?**
 
-**What is one of the biggest PrestaShop data-model differences?**
+Combinations represent selectable product variations built from attributes. If source product choices are not interpreted correctly, customers may lose the ability to select the right version, and staff may struggle to validate SKU, price, image, or stock behavior.
 
-One of the biggest differences is that product meaning often depends on a clearer separation between combinations, product features, and customization fields. These layers should not be treated as interchangeable because they represent different customer and storefront outcomes.
+**Are PrestaShop features the same as product options?**
 
-**Are combinations, features, and customization fields interchangeable in PrestaShop?**
+No. Features are intrinsic characteristics used to describe or compare products. They do not create product variations. Source values that customers select to buy a different version should be reviewed as variation or combination logic instead.
 
-No. Combinations usually represent selectable product variation, features support product understanding or comparison, and customization fields support customer-entered personalization. A migration should preserve the right meaning in the right target structure.
+**Why do customer groups need special review in PrestaShop?**
 
-**Why do customer groups matter in a PrestaShop migration?**
+Customer groups can affect buyer treatment depending on how the target store is configured. If groups influenced pricing, access, tax behavior, discounts, or segmentation in the source store, they should be validated as business logic rather than preserved as simple labels.
 
-Customer groups can become part of customer treatment, segmentation, visibility, price expectations, or account behavior. If groups are migrated only as labels, the customer record may survive while the intended storefront behavior becomes unclear.
+**Does multistore change how data should be migrated to PrestaShop?**
 
-**Does multistore change how PrestaShop data should be reviewed?**
+Yes. Multistore can change product visibility, category ownership, shop URLs, customer context, CMS Pages, and module behavior. The migration plan should define which records belong to which shop context before accepting the result.
 
-Yes. Multistore can make data scope part of the meaning. Products, categories, customer groups, content, routes, languages, currencies, or module behavior may need to be shared or separated by shop context.
+**When does PrestaShop data require Custom Service review?**
 
-**When does PrestaShop data-model review require Custom Service?**
-
-Custom Service is usually required when the Source Platform is a Custom Platform, when source-side behavior depends on custom fields, modules, overrides, integrations, or outside-system identifiers, or when the target needs custom migration logic adjustment rather than standard field movement.
+Custom Service should be considered when the requirement involves unsupported module data, custom fields, external identifiers, bespoke transformation, Custom Platform sources, or custom migration logic adjustment beyond supported migration behavior.

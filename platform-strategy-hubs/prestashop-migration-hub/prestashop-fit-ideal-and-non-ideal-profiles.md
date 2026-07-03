@@ -1,189 +1,141 @@
 # PrestaShop Fit: Ideal and Non-Ideal Profiles
 
-PrestaShop is a strong target when a business needs open-source control with enough internal discipline to govern that control. It is not the right fit for every store that wants flexibility. The fit becomes strongest when the future store genuinely needs structured product combinations, product features, customization fields, customer-group behavior, multistore scope, friendly URL governance, and module- or theme-shaped storefront logic.
+PrestaShop is a strong Target Platform when a merchant needs structured open-source commerce and has enough governance discipline to use that flexibility well. It is not automatically the right choice for every business that wants more control, more customization, or a non-SaaS environment. PrestaShop fit depends on whether the business can define how catalog structure, customer groups, categories, multistore scope, friendly URLs, modules, themes, and custom data should behave after migration.
 
-That distinction matters because PrestaShop can give merchants a more explicit way to manage catalog meaning, customer segmentation, shop scope, and extensibility. But those advantages only help when the business can define what the Target Platform should represent. If the current store is already ambiguous, PrestaShop may carry that ambiguity forward instead of solving it.
+The strongest PrestaShop candidates are not simply the largest stores or the most complex catalogs. They are merchants whose complexity has a clear target meaning. A catalog with many options can be a strong fit if the team can classify combinations, features, and customization fields. A multistore plan can be a strong fit if the business knows what must be shared and separated. Module dependence can be acceptable if the important behavior is identified and scoped. PrestaShop becomes weaker when the platform is chosen as a vague promise of flexibility without enough clarity to validate the migrated result.
 
-A smaller store can be a strong PrestaShop fit when its selling model depends on structured product behavior or customer-group control. A larger store can be a weaker fit if it wants broad customization without a clear plan for catalog governance, shop scope, route continuity, and module-dependent behavior.
+### What PrestaShop Fit Really Means <a href="#what-prestashop-fit-really-means" id="what-prestashop-fit-really-means"></a>
 
-### Where PrestaShop Is Often a Strong Fit <a href="#where-prestashop-is-often-a-strong-fit" id="where-prestashop-is-often-a-strong-fit"></a>
+PrestaShop fit should be judged by target operating fit, not by the source store’s desire to escape its current platform. A merchant may dislike the limits of a hosted SaaS platform, a legacy cart, or a plugin-heavy store, but that dissatisfaction does not automatically make PrestaShop the right destination. The business must know what PrestaShop should own after launch.
 
-PrestaShop is often a strong migration target when the business needs a configurable commerce environment and is prepared to govern the structures that make that flexibility useful.
+A fit assessment should ask whether PrestaShop will improve the merchant’s ability to govern product structure, customer treatment, store contexts, URLs, modules, and storefront behavior. The answer may be strong, conditional, or weak depending on how clearly those needs are defined.
 
-#### The catalog needs structured product meaning <a href="#the-catalog-needs-structured-product-meaning" id="the-catalog-needs-structured-product-meaning"></a>
+| Fit dimension             | Strong PrestaShop signal                                                                                   | Conditional signal                                                 | Weaker signal                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Catalog model             | Products need combinations, features, customization fields, and clear category structure.                  | Product behavior is rich but not yet fully classified.             | Products are simple and flexibility adds little business value.      |
+| Customer groups           | Groups affect real commercial treatment, access, pricing, or segmentation.                                 | Groups exist but their business purpose needs review.              | Groups are inherited labels with no clear target behavior.           |
+| Multistore                | Multiple shops, domains, brands, B2B/B2C versions, or pricing contexts need shared back-office governance. | Future multistore use is likely but not yet specified.             | Multistore is desired mainly as a vague expansion option.            |
+| Modules and customization | The team can identify module, theme, override, and custom-field dependencies.                              | Dependencies exist but need scope classification.                  | Key behavior is custom but undocumented or unowned.                  |
+| SEO and routes            | Friendly URLs, category paths, and landing-page continuity matter and can be reviewed.                     | Some priority URLs are known, but redirect planning is incomplete. | URL continuity is important but no one can identify priority routes. |
+| Operating ownership       | The merchant or partner can govern an open-source store after launch.                                      | Governance capacity exists but roles are unclear.                  | The team wants control but does not want ongoing responsibility.     |
 
-PrestaShop is often a good fit when product meaning depends on more than a simple product record.
+A good fit does not mean the migration will be effortless. It means the platform’s strengths match the merchant’s real operating needs and the team can validate the result with enough precision.
 
-This usually applies when the business needs to preserve or rebuild distinctions between:
+### Strong-Fit PrestaShop Profiles <a href="#strong-fit-prestashop-profiles" id="strong-fit-prestashop-profiles"></a>
 
-* sellable variation through combinations
-* descriptive product information through features
-* customer-entered personalization through customization fields
-* product-page behavior affected by modules, themes, or custom fields
-* stock and availability expectations that depend on how products and combinations are represented
+PrestaShop is often a strong fit for merchants that need structured catalog control, modular extensibility, and open-source governance without moving into a full enterprise commerce environment. These merchants usually know why they want PrestaShop and can connect that choice to specific data and operating needs.
 
-In this situation, PrestaShop is strongest when the business already understands which product behaviors are essential and which can be simplified during the move.
+| Strong-fit profile                             | Why PrestaShop fits                                                                                                   | What migration should preserve or clarify                                                                                         |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Catalog-led merchant with option-rich products | PrestaShop can support structured product meaning through combinations, features, and customization-related behavior. | Product samples should prove how source options become sellable variations, descriptive values, or customer-entered fields.       |
+| Merchant with meaningful customer segmentation | Customer groups can support differentiated treatment when groups have business purpose.                               | Group records should be validated against pricing, access, tax, category visibility, or segmentation expectations where relevant. |
+| Business with real multistore governance       | Multiple front offices may be managed under one back office when the shop model is clear.                             | Products, categories, prices, languages, currencies, domains, and modules need shop-scope decisions.                              |
+| Merchant needing URL and category control      | Categories, metadata, friendly URLs, and visibility can matter to discovery and SEO continuity.                       | Priority category/product URLs, metadata, redirects, and navigation assumptions should be reviewed.                               |
+| Team with development or partner capacity      | Open-source control is valuable when the team can maintain modules, themes, overrides, and configuration.             | Module-owned data, custom fields, external identifiers, and theme behavior need scope classification.                             |
 
-#### Customer groups are part of the commercial model <a href="#customer-groups-are-part-of-the-commercial-model" id="customer-groups-are-part-of-the-commercial-model"></a>
+These profiles share one trait: the merchant can explain what PrestaShop should do better than the current Source Platform. That explanation becomes the foundation for preparation, service-path choice, and validation.
 
-PrestaShop can be a strong fit when customer groups do more than organize customer records. They may affect pricing expectations, visibility, access, segmentation, account treatment, or the way different buyer types should experience the storefront.
+### Conditional-Fit PrestaShop Profiles <a href="#conditional-fit-prestashop-profiles" id="conditional-fit-prestashop-profiles"></a>
 
-The fit is stronger when group-based behavior is intentional. If the business can explain which customer groups matter and what each group should experience after migration, PrestaShop can support a more deliberate customer model.
+Many merchants fall into a conditional-fit category. PrestaShop may be a suitable Target Platform, but the business needs more evidence before treating the choice as settled. Conditional fit is not a warning to avoid PrestaShop. It is a signal that the migration plan should slow down around classification, setup, and validation.
 
-#### Multiple shop contexts need shared governance <a href="#multiple-shop-contexts-need-shared-governance" id="multiple-shop-contexts-need-shared-governance"></a>
+| Conditional scenario                                    | What must be clarified                                                                                                     | Why it matters                                                                          |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Product options are complex but inconsistent            | Which source options should become combinations, features, customization fields, simplified descriptions, or custom scope. | Misclassification can make products harder to sell, filter, compare, or validate.       |
+| Customer groups exist but their role is unclear         | Whether groups affect prices, access, taxes, discounts, visibility, or only labels.                                        | Migrating unused groups may add complexity without business value.                      |
+| Multistore is planned later                             | Which records should be shared or separated now to avoid rework later.                                                     | Future shop scope can affect product, category, content, price, and language decisions. |
+| Modules drive important behavior                        | Which module data is supported, replaceable, target-side setup, Add-ons scope, Custom Service scope, or excluded.          | Module behavior may sit outside ordinary data migration.                                |
+| SEO continuity matters but priorities are incomplete    | Which product, category, CMS Pages, Blog Posts, and routes have the highest value.                                         | Friendly URL fields alone do not guarantee launch continuity.                           |
+| The merchant is moving from a heavily customized source | Which custom fields, external identifiers, and custom logic must remain meaningful.                                        | Bespoke behavior may require Custom Service rather than Standard Service.               |
 
-PrestaShop can be useful when the business needs more than one shop context under a governed platform model. This can matter when different stores, languages, currencies, catalogs, customer groups, or content contexts need to coexist while still being managed within a broader PrestaShop environment.
+Conditional-fit merchants should prepare representative samples before committing to Full Migration expectations. A Demo Migration sample should include complex product families, customer-group cases, category and URL examples, multistore-sensitive records, module-dependent behavior, and historical orders that matter for support.
 
-The fit is strongest when the business can explain why each shop context exists and what should be shared or separated across those contexts.
+### Weaker-Fit or Non-Ideal PrestaShop Profiles <a href="#weaker-fit-or-non-ideal-prestashop-profiles" id="weaker-fit-or-non-ideal-prestashop-profiles"></a>
 
-#### Route control and storefront continuity matter <a href="#route-control-and-storefront-continuity-matter" id="route-control-and-storefront-continuity-matter"></a>
+PrestaShop is usually a weaker fit when the merchant wants the benefits of open-source flexibility but does not want the responsibility that comes with it. The platform can provide control, but it also requires decisions. If the business cannot define what should be controlled, the migration may produce a target store that is technically flexible but operationally unclear.
 
-PrestaShop can be a strong target when friendly URL behavior, route readability, and continuity from high-value legacy pages matter commercially.
+Weaker fit also appears when the source store contains complex behavior that the team expects PrestaShop to simplify automatically. A Target Platform cannot reliably resolve inherited catalog ambiguity, poorly governed customer groups, unclear multistore scope, undocumented module logic, or custom source behavior without early classification.
 
-This does not mean URL continuity is automatic. It means PrestaShop can be a suitable target when the business is prepared to identify priority product, category, content, and landing-page routes and validate whether the new destinations still support the same customer intent.
+| Weaker-fit signal                                                  | Why it creates risk                                                                                                          |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| “We want PrestaShop because it is open-source” is the main reason. | Flexibility without a defined target need can create governance burden rather than clarity.                                  |
+| Product meaning is vague.                                          | The team may not know whether source choices should become combinations, features, customization fields, or custom behavior. |
+| Customer groups are inherited from the old store but unused.       | Group migration may complicate customer data without supporting real commercial behavior.                                    |
+| Multistore is enabled as a future ambition only.                   | Shop scope may add complexity before the business has a real store-governance model.                                         |
+| Modules, themes, and overrides are undocumented.                   | Important behavior may be missed, overpromised, or misclassified during migration.                                           |
+| The team cannot validate representative records.                   | PrestaShop fit depends on the merchant’s ability to review target structure, not only on record transfer.                    |
 
-#### The team can govern modules, themes, and custom behavior <a href="#the-team-can-govern-modules-themes-and-custom-behavior" id="the-team-can-govern-modules-themes-and-custom-behavior"></a>
+A weaker fit does not always mean the merchant should reject PrestaShop. It may mean the target plan should be simplified before migration. For example, the merchant may decide to migrate core catalog and order history first, rebuild selected module behavior later, or exclude outdated customer-group logic that no longer supports the business.
 
-PrestaShop is often a stronger fit for teams that understand modules, themes, overrides, custom fields, and integrations as part of the target operating model.
+### Source Platform Expectations That May Not Translate Cleanly <a href="#source-platform-expectations-that-may-not-translate-cleanly" id="source-platform-expectations-that-may-not-translate-cleanly"></a>
 
-The question is not whether the source store uses many extensions or custom behaviors. The better fit question is whether the team can classify which surrounding behaviors are essential, which can be replaced by native PrestaShop structure, which can be simplified, and which may need Custom Service review.
+PrestaShop fit depends partly on where the merchant is migrating from. A Shopify merchant may expect app-managed behavior and platform-defined variants. A WooCommerce merchant may expect plugin fields, WordPress content, custom post types, and permalink logic. A Magento or Adobe Commerce merchant may expect attribute sets, configurable products, customer groups, and multistore structure. A legacy cart merchant may expect custom tables, historical modules, old URL patterns, and modified checkout behavior.
 
-### Where PrestaShop Is Often a Weaker Fit <a href="#where-prestashop-is-often-a-weaker-fit" id="where-prestashop-is-often-a-weaker-fit"></a>
+Those expectations should be translated before PrestaShop is confirmed as the target.
 
-PrestaShop is often a weaker fit when the business wants broad control without the responsibility of defining how that control should work.
+| Source expectation                        | PrestaShop fit question                                                                           |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Product variants or options               | Can they become combinations, features, customization fields, or another clear target structure?  |
+| Category and URL structure                | Which category paths, friendly URLs, metadata, and redirects should be preserved?                 |
+| Customer accounts and groups              | Do customer groups affect real treatment, or are they only inherited labels?                      |
+| Multistore or multi-language source setup | Does the PrestaShop target need multiple shop contexts or only translated content?                |
+| App/plugin/module data                    | Is the behavior supported, configurable, Custom Service scope, or outside migration expectations? |
+| Custom checkout or order logic            | Should historical order context migrate while live behavior is configured separately?             |
+| External IDs and integrations             | Do ERP, CRM, inventory, or accounting references need preservation through Custom Service?        |
 
-#### The business only wants open-source flexibility in general <a href="#the-business-only-wants-open-source-flexibility-in-general" id="the-business-only-wants-open-source-flexibility-in-general"></a>
+This translation step is often the difference between a strong PrestaShop choice and a risky one. If most source behavior can be given a clear PrestaShop meaning, fit improves. If the source behavior remains unclear, fit should be treated as conditional until the merchant can define target outcomes.
 
-Open-source flexibility is not a complete reason to choose PrestaShop. The platform is a weaker fit when the business cannot connect that flexibility to specific needs such as combinations, features, customization fields, customer groups, multistore scope, route control, modules, themes, or custom behavior.
+### Fit Signals to Confirm Before Choosing PrestaShop <a href="#fit-signals-to-confirm-before-choosing-prestashop" id="fit-signals-to-confirm-before-choosing-prestashop"></a>
 
-If the target choice is based mainly on wanting “more control,” the business should first define what needs to be controlled and why that control matters after launch.
+Before treating PrestaShop as the final Target Platform, the merchant should be able to answer a small set of practical fit questions. These questions are not administrative. They reveal whether the business understands the target model well enough to migrate into it.
 
-#### Product behavior is still poorly classified <a href="#product-behavior-is-still-poorly-classified" id="product-behavior-is-still-poorly-classified"></a>
+| Fit question                               | Strong answer                                                                                               | Risk answer                                                |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| What product structures matter most?       | The team can identify combinations, features, customization fields, and custom behavior with examples.      | The team only says the catalog is complex.                 |
+| What should customer groups control?       | Groups have clear commercial, access, pricing, tax, or segmentation purpose.                                | Groups are inherited and no longer understood.             |
+| Why is multistore needed?                  | The business can explain domains, B2B/B2C separation, brands, languages, prices, or shop-level differences. | Multistore is chosen because it seems powerful.            |
+| Which modules or custom behavior matter?   | Important dependencies are listed with business purpose and handling direction.                             | Modules are assumed to be background details.              |
+| Which URLs or content areas are important? | Priority product, category, CMS Pages, Blog Posts, and redirect needs are known.                            | SEO continuity is important but no route inventory exists. |
+| Who will validate the result?              | The team can review product, group, shop, URL, module, and order samples.                                   | Validation responsibility is unclear.                      |
 
-PrestaShop becomes harder to judge safely when source products mix variants, options, custom fields, personalization, bundles, add-on choices, or module-driven product behavior without a clear target meaning.
+If these answers are strong, PrestaShop is likely a practical target. If several answers are weak, the merchant should invest in preparation before service selection or Full Migration.
 
-The platform can represent richer catalog structure, but it should not be expected to decide automatically which source behaviors should become combinations, features, customization fields, module logic, or simplified product structure.
+### How Fit Shapes Migration Scope <a href="#how-fit-shapes-migration-scope" id="how-fit-shapes-migration-scope"></a>
 
-#### Customer-group logic is inherited but not understood <a href="#customer-group-logic-is-inherited-but-not-understood" id="customer-group-logic-is-inherited-but-not-understood"></a>
+PrestaShop fit should lead directly into scope discipline. A strong-fit merchant can usually define which records should migrate, which fields need mapping, which modules require attention, which target settings must be configured, and which samples must pass. A conditional-fit merchant should first clarify product structure, customer groups, shop scope, URLs, modules, and custom fields. A weaker-fit merchant may need to simplify the target expectation before moving forward.
 
-Customer groups can be valuable in PrestaShop, but the fit weakens when groups exist only because they were inherited from the source store and nobody can explain whether they still affect real buying or account behavior.
+This is where PrestaShop differs from a generic “open-source platform” decision. The target store can be highly flexible, but the migration scope must still be specific. Supported data may fit Standard Service or Managed Service. Supported filtering, mapping, or configuration adjustments may point to Add-ons. Unsupported module data, custom fields, external identifiers, or bespoke transformation may point to Custom Service. Target-side setup remains separate from migrated data.
 
-If customer groups do not clearly support differentiated treatment, they may add complexity without improving the target store.
-
-#### Multistore is being chosen before the shop model is clear <a href="#multistore-is-being-chosen-before-the-shop-model-is-clear" id="multistore-is-being-chosen-before-the-shop-model-is-clear"></a>
-
-PrestaShop multistore can be powerful, but it is a weaker fit when the business wants multiple shop contexts without knowing what should differ between them.
-
-Risk increases when products, categories, customers, prices, languages, currencies, content, modules, or operational rules are expected to differ by shop but the business has not defined those differences clearly.
-
-#### Module or theme dependence is high but poorly governed <a href="#module-or-theme-dependence-is-high-but-poorly-governed" id="module-or-theme-dependence-is-high-but-poorly-governed"></a>
-
-PrestaShop can be a strong target for module-rich stores, but only when the team can explain what each important module or theme behavior contributes.
-
-The fit weakens when storefront behavior depends heavily on modules, themes, overrides, custom fields, or integrations that are treated as background details rather than migration scope and validation concerns.
-
-### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
-
-PrestaShop is often a strong fit for businesses that match several of the following profiles.
-
-#### Catalog-led merchants with rich product structure <a href="#catalog-led-merchants-with-rich-product-structure" id="catalog-led-merchants-with-rich-product-structure"></a>
-
-These businesses need product representation that distinguishes sellable variation, descriptive product information, personalization, and product-page behavior. They are prepared to review representative product families before launch rather than assuming the target structure will be obvious.
-
-#### Merchants with meaningful customer segmentation <a href="#merchants-with-meaningful-customer-segmentation" id="merchants-with-meaningful-customer-segmentation"></a>
-
-These stores need customer groups to influence real storefront behavior, not merely label customer records. They may need differentiated price context, visibility, account treatment, or buyer-type logic.
-
-#### Businesses with real multistore requirements <a href="#businesses-with-real-multistore-requirements" id="businesses-with-real-multistore-requirements"></a>
-
-These businesses need multiple shop contexts under one broader platform environment and can define what should be shared, separated, localized, or governed across shops.
-
-#### Teams that want open-source control and can maintain it <a href="#teams-that-want-open-source-control-and-can-maintain-it" id="teams-that-want-open-source-control-and-can-maintain-it"></a>
-
-These merchants understand that PrestaShop flexibility requires planning. They are prepared to govern modules, themes, custom fields, integrations, and route behavior as part of the post-migration operating model.
-
-#### Stores with planned SEO and customer-continuity expectations <a href="#stores-with-planned-seo-and-customer-continuity-expectations" id="stores-with-planned-seo-and-customer-continuity-expectations"></a>
-
-These businesses understand which legacy URLs, high-value landing pages, account expectations, and customer journeys matter most. They are willing to treat continuity as part of target-platform fit instead of leaving it until launch pressure.
-
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
-
-PrestaShop usually becomes a higher-risk target for businesses that match the following patterns.
-
-#### Businesses choosing PrestaShop mainly because it is flexible <a href="#businesses-choosing-prestashop-mainly-because-it-is-flexible" id="businesses-choosing-prestashop-mainly-because-it-is-flexible"></a>
-
-These merchants want the idea of control but have not yet defined which catalog, customer, shop, route, or extension behaviors require that control.
-
-#### Stores with undefined product meaning <a href="#stores-with-undefined-product-meaning" id="stores-with-undefined-product-meaning"></a>
-
-These businesses know their current catalog is complex but have not decided how the Target Platform should represent combinations, features, customization fields, product-page behavior, or module-dependent outcomes.
-
-#### Teams expecting PrestaShop to simplify ambiguity automatically <a href="#teams-expecting-prestashop-to-simplify-ambiguity-automatically" id="teams-expecting-prestashop-to-simplify-ambiguity-automatically"></a>
-
-These teams hope the target platform will make inherited source complexity easier without first classifying what should be preserved, simplified, rebuilt, or excluded.
-
-#### Businesses unwilling to validate a richer target model <a href="#businesses-unwilling-to-validate-a-richer-target-model" id="businesses-unwilling-to-validate-a-richer-target-model"></a>
-
-PrestaShop fit depends partly on whether the business can review the result carefully. If the team cannot validate product structure, customer groups, multistore behavior, route continuity, modules, themes, and customer-facing outcomes, the platform can become harder to launch safely.
-
-### What Should Be Confirmed Before Calling PrestaShop a Good Fit <a href="#what-should-be-confirmed-before-calling-prestashop-a-good-fit" id="what-should-be-confirmed-before-calling-prestashop-a-good-fit"></a>
-
-Before treating PrestaShop as the right Target Platform, the business should be able to answer several fit questions clearly.
-
-#### Does the catalog genuinely need combinations, features, and customization fields? <a href="#does-the-catalog-genuinely-need-combinations-features-and-customization-fields" id="does-the-catalog-genuinely-need-combinations-features-and-customization-fields"></a>
-
-If the catalog depends on those distinctions, PrestaShop is often a stronger fit. If the catalog is structurally simple, the added platform flexibility may not create enough value to justify the planning burden.
-
-#### Do customer groups affect real storefront behavior? <a href="#do-customer-groups-affect-real-storefront-behavior" id="do-customer-groups-affect-real-storefront-behavior"></a>
-
-The business should confirm whether customer groups influence pricing expectations, visibility, account handling, segmentation, or differentiated purchasing behavior. If groups are only labels, they may not be a strong reason to choose PrestaShop.
-
-#### Is multistore a real operating requirement? <a href="#is-multistore-a-real-operating-requirement" id="is-multistore-a-real-operating-requirement"></a>
-
-The team should be able to explain why multiple shop contexts are needed and what should differ across them. Multistore is strongest when the business has a real governance model, not only a future ambition.
-
-#### Which module, theme, custom field, or integration behavior must remain true? <a href="#which-module-theme-custom-field-or-integration-behavior-must-remain-true" id="which-module-theme-custom-field-or-integration-behavior-must-remain-true"></a>
-
-Important surrounding behavior should be identified before the platform choice is treated as settled. If these layers carry business meaning, they may affect migration scope, Custom Service review, and validation planning.
-
-#### Which routes and customer-continuity expectations matter most? <a href="#which-routes-and-customer-continuity-expectations-matter-most" id="which-routes-and-customer-continuity-expectations-matter-most"></a>
-
-High-value URLs, product/category paths, customer-account expectations, and customer communication requirements should be understood early. They can affect whether PrestaShop is a practical fit for the target launch model.
-
-#### Can the team validate the target result with enough depth? <a href="#can-the-team-validate-the-target-result-with-enough-depth" id="can-the-team-validate-the-target-result-with-enough-depth"></a>
-
-The business should be ready to test representative products, customer groups, shop contexts, module-sensitive behavior, priority URLs, and customer journeys. A platform fit is not secure until the business can verify the outcomes that matter.
+The best fit decision is therefore not whether PrestaShop can handle complexity in general. It is whether the merchant knows which complexity matters and how that complexity should appear in the target store.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-PrestaShop is often a strong migration target when the business needs structured catalog meaning, customer-group control, multistore governance, friendly URL planning, and open-source flexibility that can be governed deliberately. It is less suitable when the target decision is based on abstract flexibility without clear product, customer, shop, route, and module requirements.
+PrestaShop is often a strong migration target for merchants that need structured catalog control, meaningful customer groups, clear category and URL governance, multistore capability, and open-source flexibility they are prepared to maintain. It is a weaker choice when flexibility is desired without a defined operating purpose or when source complexity is expected to resolve itself during migration.
 
-The strongest PrestaShop fit is not the store with the most complexity. It is the store that can explain which complexity matters, how it should be represented in the Target Platform, and how the result will be validated before launch.
+The right PrestaShop fit decision should produce a clear scope direction. The merchant should know which product structures matter, how customer groups should behave, whether multistore is needed, which modules or custom fields require review, which URLs are important, and who will validate the result. Without those answers, PrestaShop may still be viable, but the migration should be treated as conditional until the target model is clearer.
 
-Use a Demo Migration sample that includes complex product families, customer-group cases, shop-scope examples, module- or theme-sensitive behavior, high-value URLs, and customer-continuity expectations. If the result shows unclear target structure, Custom Platform behavior, third-party data, or non-standard transformation needs, review the scope through Live Chat before assuming a standard migration path is enough.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is PrestaShop a good fit for option-heavy catalogs?**
 
-Often yes, when the business can clearly separate sellable variation, descriptive product information, and customer-entered customization. The deciding factor is not catalog size alone. It is whether product meaning can be expressed clearly enough through PrestaShop’s target structure.
+Yes, when the merchant can clearly separate sellable variation, descriptive product information, customer-entered customization, and custom behavior. If every option is treated the same way, PrestaShop fit becomes more conditional.
 
 **Is PrestaShop automatically a good fit because it is open-source?**
 
-No. Open-source flexibility is useful only when the business knows what it needs to control. PrestaShop is strongest when flexibility supports defined catalog, customer, shop, route, module, or integration requirements.
+No. Open-source flexibility is valuable only when the business knows what it needs to control. Without clear catalog, customer, shop, URL, module, or integration requirements, that flexibility can become unnecessary governance burden.
 
-**What usually makes PrestaShop a weaker fit?**
+**When is PrestaShop a weaker fit?**
 
-PrestaShop is usually a weaker fit when product meaning is vague, customer-group logic is inherited but not useful, multistore scope is unclear, or module and theme behavior has not been classified by business value.
+PrestaShop is weaker when product meaning is unclear, customer groups have no real purpose, multistore scope is vague, important module behavior is undocumented, or the team cannot validate representative target records.
 
 **Does PrestaShop multistore make migration easier?**
 
-Not by itself. Multistore can be useful when shop differences are real and well governed, but it can increase planning and validation burden if product, category, customer, content, pricing, language, currency, or module differences are not clearly defined.
+Not by itself. Multistore is useful when multiple shop contexts need shared governance, but it adds planning and validation work when the business has not defined what should differ across shops.
 
-**Should module-related behavior always be preserved during a PrestaShop migration?**
+**How should module-related behavior affect fit?**
 
-No. Module-related behavior should be reviewed by business value. Some behavior may be replaced by native PrestaShop structure, some may be simplified, and some may require Custom Service if it goes beyond standard service capability.
+Module-related behavior should be classified by business value and feasibility. Some behavior can be replaced by native PrestaShop structure or target setup, while unsupported module data, custom fields, or bespoke transformation may require Custom Service review.
 
-**What is the fastest way to confirm whether PrestaShop is the right target?**
+**What is the safest way to confirm PrestaShop fit?**
 
-A representative Demo Migration is usually the safest early fit test. It should include complex products, customer-group scenarios, shop-scope examples, module-dependent behavior, priority URLs, and customer-continuity expectations so the business can judge whether PrestaShop supports the outcomes that matter most.
+Use representative Demo Migration samples that include complex products, customer-group cases, shop-scope examples, important URLs, module-dependent behavior, and historical orders. The result should show whether PrestaShop supports the outcomes that matter most.

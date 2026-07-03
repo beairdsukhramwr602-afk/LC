@@ -1,289 +1,294 @@
 # Gambio Migration Pitfalls and Prevention
 
-Gambio migration problems rarely come from one missing record. They usually come from treating Gambio as a simple destination for exported data instead of a full e-commerce shop system with catalog rules, customer groups, storefront presentation, SEO behavior, payments, shipping, taxes, integrations, and hosting-model decisions.
+Gambio migration pitfalls usually appear when the project treats the Target Platform as a simple record destination. Products, Customers, Orders, Categories, Coupons, Reviews, CMS Pages, and related records may move correctly, but the migration can still fail if the selected Gambio operating model, catalog behavior, content continuity, integration expectations, and validation evidence are not controlled.
 
-A reliable migration to Gambio should preserve operating meaning. Products should remain sellable. Variants should remain understandable. Categories and filters should support discovery. Customer groups should keep their commercial purpose. Orders should remain useful for support and reporting. Storefront pages, URLs, content areas, and configuration-sensitive behavior should be reviewed before the shop is considered launch-ready.
+The most important prevention principle is to separate migrated data from target-store behavior. Next-Cart can migrate supported data into Gambio, but the merchant still needs to understand what Gambio Cloud owns, what self-hosted Gambio requires, what target configuration must be completed, and what external systems or custom behavior need separate attention. When that separation is clear, migration planning becomes easier and post-launch surprises become less likely.
 
-This article explains the recurring failure patterns that can affect Gambio migration projects and how to prevent them before they become launch blockers.
+For Gambio, pitfall prevention should follow a simple path: confirm the operating model, translate catalog behavior carefully, protect storefront and commercial continuity, separate integrations from migrated records, and use Demo Migration evidence as a launch decision. The recurring mistakes below are grouped by that path so the prevention logic remains easy to follow while still preserving the detailed pitfall review needed for launch readiness.
 
-### Pitfall 1: Treating Gambio as a Simple Record Destination <a href="#pitfall-1-treating-gambio-as-a-simple-record-destination" id="pitfall-1-treating-gambio-as-a-simple-record-destination"></a>
+### Operating-Model Pitfalls <a href="#operating-model-pitfalls" id="operating-model-pitfalls"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+Operating-model pitfalls occur when the merchant chooses Gambio without confirming how the future store will be hosted, updated, maintained, supported, and customized. These mistakes are especially important because Gambio Cloud and self-hosted Gambio can both be valid choices, but they create different ownership models. A technically accurate migration can still feel incomplete if the merchant expected one operating model while the project was scoped for another.
 
-The migration is judged by whether products, customers, and orders appear in the Gambio administration area. This creates a false sense of completion because the records may exist while their commercial behavior is still incomplete. Products may lack usable option structure, categories may not support storefront discovery, customer groups may not preserve pricing meaning, and order history may be difficult to interpret.
+#### Pitfall 1: Treating Gambio Cloud and Self-Hosted Gambio as the Same Target <a href="#pitfall-1-treating-gambio-cloud-and-self-hosted-gambio-as-the-same-target" id="pitfall-1-treating-gambio-cloud-and-self-hosted-gambio-as-the-same-target"></a>
 
-Gambio is not only a database destination. It is a shop system where records interact with configuration, storefront display, customer-group behavior, tax rules, shipping methods, payment handling, SEO, and design decisions.
+#### What goes wrong
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+The migration plan assumes that Gambio Cloud and self-hosted Gambio create the same responsibilities and customization possibilities. The project focuses on whether records can be migrated while leaving hosting, updates, maintenance, and customization ownership unresolved.
 
-* The migration plan focuses mainly on product, customer, and order counts.
-* Demo Migration samples include only simple products and clean orders.
-* Customer groups, filters, variants, downloads, content pages, and SEO URLs are not reviewed.
-* The target shop is evaluated only from the administration view, not the storefront.
+#### Early warning signs
 
-#### Prevention <a href="#prevention" id="prevention"></a>
+The merchant expects Cloud convenience and self-hosted flexibility at the same time. Hosting, updates, support, custom code, server-side access, backups, and maintenance are discussed together without a clear owner.
 
-Define what the migrated Gambio shop must prove before migration begins. Product samples should include simple products, option-heavy products, products with images, products in important categories, discounted products, downloadable products if relevant, and products affected by inventory or customer-group rules.
+#### Prevention
 
-Customer and order samples should include different customer groups, guest or registered customers where relevant, discounted orders, tax/shipping examples, payment examples, refunded or cancelled orders if present, and orders containing product options.
+Confirm the operating model before migration scope is finalized. If the merchant chooses Gambio Cloud, validate whether required behavior fits the managed environment. If the merchant chooses self-hosted Gambio, confirm technical ownership for hosting, updates, maintenance, security, and custom functionality.
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+#### Recommendation example
 
-Instead of validating ten ordinary products, select a sample set that includes the merchant’s best-selling configurable product, a discounted product, a product with several images, a product in multiple categories, a downloadable product, and a product affected by stock or customer-group pricing. This reveals whether Gambio can support the way the merchant actually sells.
+For a merchant leaving a heavily customized self-hosted store, do not approve Gambio Cloud solely because product data can migrate. First confirm whether the custom behavior is still required and whether it belongs to target configuration, Custom Service review, or separate implementation.
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+#### Pass condition
 
-The migrated records are not only visible; they behave correctly in the Gambio storefront and administration area. Products can be understood, customers and orders remain useful, and configuration-dependent behavior has been reviewed separately from record presence.
+The project can state which responsibilities belong to Gambio Cloud or self-hosted Gambio, which responsibilities belong to the merchant, and which responsibilities belong to the migration scope.
 
-### Pitfall 2: Underestimating Product Options, Variants, Attributes, and Filters <a href="#pitfall-2-underestimating-product-options-variants-attributes-and-filters" id="pitfall-2-underestimating-product-options-variants-attributes-and-filters"></a>
+#### Pitfall 2: Assuming Support Covers Every Post-Migration Need <a href="#pitfall-2-assuming-support-covers-every-post-migration-need" id="pitfall-2-assuming-support-covers-every-post-migration-need"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+#### What goes wrong
 
-Source product structures are flattened into basic product records. Option names, option values, variant pricing, stock behavior, product attributes, filters, images, and category placement may be partially preserved or misunderstood. The storefront may show products, but shoppers cannot choose the correct size, color, package, material, or version confidently.
+The merchant assumes that support, migration, configuration, custom development, and integration setup are one continuous responsibility. This can create frustration after launch because different tasks require different owners.
 
-This pitfall is common when the source platform uses a different model for options, variants, configurable products, product attributes, bundled products, or filterable product specifications.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+Questions about new feature development, payment setup, marketplace configuration, custom templates, legal-text handling, and migration issues are all routed into the same unresolved support expectation. The project has no clear line between data migration, Gambio configuration, and separate implementation.
 
-* Product options and attributes are described interchangeably.
-* Variant-heavy products are missing from Demo Migration samples.
-* Product filters are treated as ordinary text fields.
-* Inventory is checked only at product level, not option or variant level where relevant.
-* Product images are validated only for the main image, not gallery or option-related presentation.
+#### Prevention
 
-#### Prevention <a href="#prevention-1" id="prevention-1"></a>
+Separate support questions from migration deliverables and target-store setup. Support can help with software-related questions, while custom functionality, integrations, custom data handling, and implementation work may need different owners.
 
-Separate product selling choices from product descriptive data. Selling choices affect what the shopper selects and what appears in the order line. Descriptive attributes help shoppers compare or filter products. Each source platform may structure these differently, so the migration plan should identify which fields become product options, which become product attributes, which support filters, and which need mapping or configuration review.
+#### Recommendation example
 
-Representative product samples should include all important product structures, not only the cleanest products.
+If a merchant needs a specific integration rebuilt after migration, classify that expectation before launch. Do not hide it inside a general support assumption or treat it as an automatic part of moving data.
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+#### Pass condition
 
-For a fashion merchant, validate a product with size and color options, a product with different stock behavior, a product using multiple images, and a product that appears in filter-led category browsing. For a technical catalog, validate attributes such as dimensions, specifications, compatibility, and manufacturer information.
+Migration issues, target configuration tasks, support questions, and custom implementation needs are classified separately before Full Migration.
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+### Catalog and Product-Behavior Pitfalls <a href="#catalog-and-product-behavior-pitfalls" id="catalog-and-product-behavior-pitfalls"></a>
 
-Products are sellable and discoverable in Gambio. Shopper-facing selections, pricing, stock, images, attributes, filters, category placement, and order line output remain meaningful after migration.
+Catalog pitfalls are common because Gambio can support many articles, images, categories, category levels, options, downloadable products, and stock management. The mistake is assuming these capabilities remove the need for careful catalog translation. A Gambio catalog should be validated by buying meaning and maintenance meaning: shoppers must be able to choose and buy correctly, and staff must be able to manage the result after launch.
 
-### Pitfall 3: Losing Customer Group and B2B Pricing Meaning <a href="#pitfall-3-losing-customer-group-and-b2b-pricing-meaning" id="pitfall-3-losing-customer-group-and-b2b-pricing-meaning"></a>
+#### Pitfall 3: Validating Only Simple Products <a href="#pitfall-3-validating-only-simple-products" id="pitfall-3-validating-only-simple-products"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+#### What goes wrong
 
-Customer records migrate, but the commercial rules attached to customer groups are not fully reviewed. B2B customers, wholesale buyers, retail customers, special-price groups, tax-sensitive groups, and segmented discount structures may lose meaning if the source platform’s customer rules are not interpreted carefully.
+Demo Migration review focuses on products with ordinary names, prices, descriptions, and images, while products with options, stock-sensitive behavior, downloadable content, or complex category placement are left out. The sample passes but fails to represent the real store.
 
-In Gambio, customer groups can affect how customers are classified and how pricing or shop behavior is presented. A migration that preserves names and email addresses but weakens customer-group context can disrupt post-launch service, pricing, and repeat buying.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+The sample does not include products with size or color choices, option-based price changes, multiple images, downloadable articles, out-of-stock behavior, high-value categories, or products that commonly generate support questions.
 
-* Customer groups are not listed during preparation.
-* B2B and retail customers are mixed in validation samples.
-* Special pricing is checked only from the public storefront view.
-* Test customers do not include group-specific examples.
-* Old customer records are imported without confirming whether group assignment still matters.
+#### Prevention
 
-#### Prevention <a href="#prevention-2" id="prevention-2"></a>
+Build the validation sample around real catalog complexity. Include simple products for baseline checks, but also include products that represent the hardest source-platform structures. The sample should test article display, option selection, stock meaning, category placement, image association, and order-line readability.
 
-Document the source customer groups and explain what each group does. Confirm whether each group affects pricing, visibility, tax display, discount behavior, account approval, order handling, or reporting. Include representative customers from each important group in the Demo Migration and validate storefront behavior using customer logins where appropriate.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+If the source store uses product variants or option-like selections, include those records in Demo Migration and check both admin maintainability and shopper-facing selection behavior.
 
-If a merchant has retail, wholesale, and dealer customers, validate one customer from each group. Check product prices, discount behavior, tax display, order history, and account access for each group instead of validating all customers as if they shared one storefront experience.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+Complex products can be found, selected, purchased, maintained, and interpreted correctly in Gambio.
 
-Customer groups remain understandable and commercially useful in Gambio. Group assignments, pricing context, account meaning, and historical order relationships can be interpreted after migration.
+#### Pitfall 4: Confusing Options with Full Product-Variant Logic <a href="#pitfall-4-confusing-options-with-full-product-variant-logic" id="pitfall-4-confusing-options-with-full-product-variant-logic"></a>
 
-### Pitfall 4: Treating Tax, Shipping, Payment, and Legal Display as Migrated Data Only <a href="#pitfall-4-treating-tax-shipping-payment-and-legal-display-as-migrated-data-only" id="pitfall-4-treating-tax-shipping-payment-and-legal-display-as-migrated-data-only"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+Product options are treated as a direct replacement for every variant or configurable-product structure from the Source Platform. The labels may appear correctly, but SKU, stock, price, image, or fulfillment meaning may not translate automatically.
 
-The source store’s tax, shipping, payment, invoice, delivery-note, legal-display, and checkout behavior is assumed to move automatically with data records. In practice, these areas often depend on Gambio configuration, payment provider setup, shipping rules, country/zone logic, currencies, tax classes, templates, and legal-compliance presentation.
+#### Early warning signs
 
-A migration can preserve orders and products but still require configuration work before checkout is launch-ready.
+The old store has variant-specific SKUs, variant-specific stock, option-level images, option-level pricing, bundles, personalization, or custom option logic, but the migration scope only says that product options should be migrated.
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+#### Prevention
 
-* Shipping and payment are not tested in the target storefront.
-* Tax examples are validated only by comparing order totals.
-* Country, zone, currency, and tax assumptions are undocumented.
-* Payment providers are assumed to work because payment references appear in old orders.
-* Legal-display requirements are postponed until launch week.
+Compare source product structure with the way Gambio should represent shopper selections. Identify which option behavior can map cleanly, which behavior requires configuration, and which behavior needs Advanced Data Mapping, Advanced Data Configure, Add-ons, Custom Service, or separate implementation.
 
-#### Prevention <a href="#prevention-3" id="prevention-3"></a>
+#### Recommendation example
 
-Separate historical order context from active checkout configuration. Historical orders should remain understandable, but future checkout behavior must be configured and tested in Gambio. Validate representative regions, shipping methods, payment methods, tax examples, currencies, and legal-display areas before launch.
+For products with color and size choices, do not validate only whether the option labels appear. Check price adjustments, purchasability, stock behavior, order-line readability, and admin maintenance.
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+#### Pass condition
 
-For a merchant selling across multiple regions, test a domestic order, an international order, a discounted order, a tax-sensitive product, and at least one order using each important shipping and payment method. Compare not only totals but also how the storefront presents the checkout flow.
+Product options in Gambio preserve the buying meaning that matters to shoppers and the operational meaning that matters to staff.
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+#### Pitfall 5: Assuming Unlimited Categories Remove Navigation Risk <a href="#pitfall-5-assuming-unlimited-categories-remove-navigation-risk" id="pitfall-5-assuming-unlimited-categories-remove-navigation-risk"></a>
 
-Historical order data remains readable, and active checkout behavior is configured and tested in Gambio. Tax, shipping, payment, currency, invoice, delivery-note, and legal-display expectations are not treated as record migration alone.
+#### What goes wrong
 
-### Pitfall 5: Ignoring Storefront, SEO, Content, and URL Continuity <a href="#pitfall-5-ignoring-storefront-seo-content-and-url-continuity" id="pitfall-5-ignoring-storefront-seo-content-and-url-continuity"></a>
+Because Gambio can support many categories and subcategories, the project assumes the source category tree can be moved without navigation review. The structure may technically exist, but it may not help shoppers find products.
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+#### Early warning signs
 
-The migration focuses on catalog and order data while storefront discovery is left for later. Products may migrate, but customers cannot find them through familiar navigation, search-engine paths, content pages, filters, internal links, or landing pages. Category pages, product pages, content manager pages, metadata, redirects, and design areas may not align with the new Gambio shop.
+Category depth, duplicate categories, obsolete categories, orphaned products, landing-page categories, and SEO-sensitive category URLs are not reviewed before migration. Category checks focus on counts instead of browsing paths.
 
-This pitfall is especially costly for merchants with organic traffic, paid campaigns, affiliate links, content-led product discovery, or established category URLs.
+#### Prevention
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+Validate category structure as a shopper journey, not only as a hierarchy. Confirm that important products remain assigned correctly, high-value categories are easy to browse, and category content supports search and conversion.
 
-* No list of high-value URLs is prepared before migration.
-* Category and product aliases are not reviewed.
-* Content pages are treated as secondary even though they support conversion.
-* The target storefront is checked visually but not navigationally.
-* SEO metadata, redirects, and internal links are reviewed only after Full Migration.
+#### Recommendation example
 
-#### Prevention <a href="#prevention-4" id="prevention-4"></a>
+For a merchant with many subcategories, choose representative top-level, mid-level, and deep categories for Demo Migration review instead of only checking whether the total category count matches.
 
-Prepare a storefront continuity map before migration. Identify important product URLs, category URLs, content pages, landing pages, internal links, menu items, metadata, and search-engine entry points. Determine which items are migrated as supported data, which must be configured in Gambio, and which need redirect or implementation planning.
+#### Pass condition
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+Customers can browse from category to product detail pages without confusing category depth, missing assignments, or broken content paths.
 
-Create a sample set of the merchant’s top product pages, top category pages, top content pages, and top traffic-driving URLs. After Demo Migration, check whether those pages have a clear target equivalent, whether navigation supports discovery, and whether redirect planning is needed.
+### Storefront Content and Commercial-Continuity Pitfalls <a href="#storefront-content-and-commercial-continuity-pitfalls" id="storefront-content-and-commercial-continuity-pitfalls"></a>
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+Storefront and commercial pitfalls occur when the project gives too much attention to products and too little attention to pages, legal or trust content, customer meaning, and historical order readability. In Gambio, CMS Pages, navigation, legal pages, trust information, and order history can directly affect whether the migrated store feels credible and usable.
 
-The Gambio storefront is not only populated with data; it provides a coherent customer path. Important products, categories, content pages, and URLs have a clear continuity plan.
+#### Pitfall 6: Treating CMS Pages as Secondary Content <a href="#pitfall-6-treating-cms-pages-as-secondary-content" id="pitfall-6-treating-cms-pages-as-secondary-content"></a>
 
-### Pitfall 6: Confusing Cloud and Self-Hosted Responsibility <a href="#pitfall-6-confusing-cloud-and-self-hosted-responsibility" id="pitfall-6-confusing-cloud-and-self-hosted-responsibility"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+CMS Pages, editorial pages, trust pages, legal pages, help content, and internal links are treated as lower-priority than product records. The store launches with products available but important customer-facing context incomplete.
 
-The merchant chooses or evaluates Gambio without fully understanding how the operating model affects migration, configuration, maintenance, customization, and launch responsibility. Gambio Cloud and self-hosted Gambio can lead to different expectations around hosting, updates, access, customization, development work, and technical control.
+#### Early warning signs
 
-A migration plan that ignores this distinction may assign work to the wrong party or underestimate implementation effort.
+The project validates products and orders but does not check whether important content pages are present, readable, linked, and aligned with the new storefront structure. Legal or trust pages are assumed to be current because they exist somewhere in the target store.
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+#### Prevention
 
-* The target operating model is not decided before migration planning.
-* Custom development expectations are discussed without confirming whether the target environment supports them as expected.
-* Hosting, updates, and maintenance responsibility are unclear.
-* The merchant expects managed simplicity and full technical flexibility at the same time.
+Include CMS Pages and key storefront content in Demo Migration review. Check important pages for formatting, internal links, metadata, visibility, and customer-facing usefulness. Legal wording, design updates, and compliance review should be separated from data migration.
 
-#### Prevention <a href="#prevention-5" id="prevention-5"></a>
+#### Recommendation example
 
-Confirm the target Gambio operating model before choosing the migration approach. If the merchant wants a simpler managed environment, clarify what still needs configuration after migration. If the merchant wants self-hosted flexibility, confirm hosting readiness, technical maintenance, update responsibility, and developer involvement.
+If the old store has buying guides, legal pages, delivery pages, return information, or product-support content, validate those pages alongside catalog and order records.
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+#### Pass condition
 
-A merchant moving to Gambio Cloud should prioritize supported catalog, customer, order, storefront, and configuration outcomes. A merchant moving to self-hosted Gambio with custom development should inventory custom fields, integrations, layout changes, and source-specific logic before execution.
+Important content remains findable, readable, and aligned with launch expectations, with any legal, layout, or wording updates classified separately from data migration.
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+#### Pitfall 7: Overlooking SEO and Internal-Link Continuity <a href="#pitfall-7-overlooking-seo-and-internal-link-continuity" id="pitfall-7-overlooking-seo-and-internal-link-continuity"></a>
 
-The migration approach matches the target Gambio operating model. Hosting, customization, maintenance, configuration, and service responsibility are clear before Full Migration.
+#### What goes wrong
 
-### Pitfall 7: Assuming Integrations and Custom Development Are Standard Migration Outcomes <a href="#pitfall-7-assuming-integrations-and-custom-development-are-standard-migration-outcomes" id="pitfall-7-assuming-integrations-and-custom-development-are-standard-migration-outcomes"></a>
+The migration preserves content but does not protect the search and navigation signals connected to that content. Products, categories, and pages may display, while URLs, metadata, redirects, and internal links remain unresolved.
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+#### Early warning signs
 
-Source behavior created by ERP connectors, marketplace integrations, payment extensions, shipping connectors, custom modules, theme changes, database adjustments, or bespoke code is treated as if it were ordinary store data. This can create missing identifiers, broken workflows, incomplete mappings, or unrealistic expectations about what the migration service will reproduce automatically.
+Product URLs, category URLs, CMS Page URLs, metadata, redirects, canonical assumptions, and internal links are reviewed only after the new store is nearly ready to launch. Organic traffic pages are not included in the validation sample.
 
-Integrations and custom development often define how a store operates, but they are not always equivalent to products, customers, orders, or CMS Pages.
+#### Prevention
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+Identify high-value URLs and content paths before Full Migration. Validate product, category, and page samples to confirm which URLs remain stable, which need redirects, and which content relationships require manual review.
 
-* External identifiers are not documented.
-* Integration-owned fields appear in exports but are not explained.
-* Custom development is described only as “extra data.”
-* ERP, marketplace, payment, shipping, or reporting dependencies are discovered during validation instead of preparation.
-* The merchant expects support or migration to recreate custom programming without Custom Service review.
+#### Recommendation example
 
-#### Prevention <a href="#prevention-6" id="prevention-6"></a>
+For a merchant with strong organic traffic, do not accept the migration because pages display correctly. Confirm whether key product, category, and content URLs have a continuity plan.
 
-Inventory every integration and custom behavior that affects the expected Gambio result. Identify which information is standard store data, which can be handled through Add-on review, and which requires Custom Service because it involves unsupported data, third-party identifiers, custom migration logic adjustment, Tailored Add-ons, Custom Add-ons, or broader bespoke transformation.
+#### Pass condition
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+High-value URLs, metadata, and internal links have been checked, and redirect or content-adjustment tasks are known before launch.
 
-If the source store uses ERP product codes, marketplace listing IDs, custom customer fields, and custom order-status automation, document those fields before migration. Then decide whether they should be mapped, configured, reviewed as a Tailored Add-on, or handled through Custom Service.
+#### Pitfall 8: Preserving Orders Without Preserving Commercial Meaning <a href="#pitfall-8-preserving-orders-without-preserving-commercial-meaning" id="pitfall-8-preserving-orders-without-preserving-commercial-meaning"></a>
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+#### What goes wrong
 
-Integration-owned and custom-developed behavior is not hidden inside ordinary migration expectations. The migration scope clearly separates standard data, Add-ons, configuration work, and Custom Service needs.
+Historical orders migrate, but staff cannot interpret discounts, taxes, shipping, payment context, product options, downloadable items, or order status clearly after launch. The record exists, but its service value is weakened.
 
-### Pitfall 8: Choosing Demo Migration Samples That Are Too Clean <a href="#pitfall-8-choosing-demo-migration-samples-that-are-too-clean" id="pitfall-8-choosing-demo-migration-samples-that-are-too-clean"></a>
+#### Early warning signs
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+Validation checks order totals and order counts but does not inspect orders with coupons, multiple shipping contexts, tax variation, product options, cancellations, refunds, or downloadable products. Staff cannot explain what happened in a sample order without returning to the Source Platform.
 
-The Demo Migration uses only simple products, ordinary customers, and clean orders. The result looks successful, but it does not test the structures most likely to fail in the full project. Complex product options, customer groups, special pricing, downloads, discounts, taxes, shipping examples, SEO-sensitive pages, and custom data may remain untested.
+#### Prevention
 
-A Demo Migration that avoids complexity cannot prove that the Gambio migration is launch-ready.
+Validate representative commercial history. Review order lines, product selections, tax and shipping context, payment references, customer connection, and order status meaning. Include older orders and exception orders, not only recent clean orders.
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+#### Recommendation example
 
-* Samples are selected randomly or only from recent records.
-* No difficult products are included.
-* No customer-group or B2B samples are included.
-* No discounted, taxed, shipped, cancelled, refunded, or option-heavy orders are selected.
-* Storefront and SEO pages are not included in the review.
+For a merchant with complex promotions or shipping rules, include discounted and shipping-sensitive orders in Demo Migration rather than validating only clean recent orders.
 
-#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+#### Pass condition
 
-Choose Demo Migration samples deliberately. The sample set should include clean records and difficult records. It should test the store’s main operating patterns, not just the easiest records to migrate.
+Staff can use Gambio order history for customer service, reconciliation, and operational reference without returning to the old platform for basic interpretation.
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+### Integration and Customization Pitfalls <a href="#integration-and-customization-pitfalls" id="integration-and-customization-pitfalls"></a>
 
-A strong Gambio Demo Migration sample set may include a best-selling simple product, a configurable product, a downloadable product, a discounted product, a product with several images, products in important categories, retail and wholesale customers, orders with multiple payment/shipping/tax examples, and high-value category or content pages.
+Integration and customization pitfalls happen when external behavior is treated as migrated data. This is especially relevant for merchants that depend on marketplaces, payment providers, shipping services, remarketing tools, analytics, legal-text services, or custom self-hosted functionality. These items may influence the migration decision, but they should not be hidden inside ordinary record migration.
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+#### Pitfall 9: Assuming Marketplace and Payment Connections Move with the Records <a href="#pitfall-9-assuming-marketplace-and-payment-connections-move-with-the-records" id="pitfall-9-assuming-marketplace-and-payment-connections-move-with-the-records"></a>
 
-The Demo Migration proves the difficult parts of the store, not only the easy parts. Validation findings are specific enough to decide whether the project can continue under the chosen service approach or needs Add-on, configuration, Managed Service, or Custom Service review.
+#### What goes wrong
 
-### Pitfall 9: Waiting Too Long to Escalate the Service Approach <a href="#pitfall-9-waiting-too-long-to-escalate-the-service-approach" id="pitfall-9-waiting-too-long-to-escalate-the-service-approach"></a>
+Product and order data is migrated, but the merchant expects marketplace, payment, shipping, or marketing connections to be active automatically in Gambio. The business then discovers after launch that live commerce operations still need configuration.
 
-#### What Goes Wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+#### Early warning signs
 
-A migration begins under a service approach that is too light for the actual source complexity. Custom fields, unsupported platform behavior, third-party identifiers, special pricing logic, complex options, custom development, or Custom Platform source data are discovered late. This can delay launch, create rework, or force urgent scope correction.
+The plan mentions Amazon, eBay, payment providers, shipping tools, remarketing, analytics, or product feeds without separating migrated records from live connection setup. No owner is assigned for target-side configuration.
 
-#### Early Warning Signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+#### Prevention
 
-* The source store has custom data, but no Custom Service discussion has happened.
-* Add-ons are expected to solve broad custom transformation needs.
-* Managed Service is selected even though the project needs custom migration logic adjustment.
-* Validation findings repeatedly show “Needs Custom Service review.”
-* The same unexplained data gaps appear across several sample groups.
+Treat external connections as target configuration or separate implementation unless a specific supported data area is being migrated. Validate historical data separately from live integration readiness.
 
-#### Prevention <a href="#prevention-8" id="prevention-8"></a>
+#### Recommendation example
 
-Use preparation and Demo Migration to test whether the selected approach is strong enough. Standard Service is appropriate when supported data is clear and the merchant can self-perform the migration process on the Next-Cart website with 24/7 expert support. Managed Service is safer when Next-Cart-led execution is needed within standard service capability and purchased Add-ons. Custom Service should be reviewed when the project requires Tailored Add-ons, Custom Add-ons, Custom Platform handling, unsupported data, third-party identifiers, custom fields, bespoke transformation, or custom migration logic adjustment.
+If marketplace sales are part of the business model, confirm whether the migration only carries product and order records or whether the merchant also needs marketplace setup, feed configuration, or connector implementation.
 
-#### Recommendation Example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+#### Pass condition
 
-If the Demo Migration shows that product option behavior, customer-group pricing, custom fields, and integration identifiers cannot be interpreted through standard settings, the project should not continue as if the issue is minor. It should move into Custom Service review before Full Migration.
+External systems required for launch are listed with owners, and none are assumed to be delivered merely because related records migrated.
 
-#### Pass Condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+#### Pitfall 10: Carrying Old Customization Assumptions into Gambio <a href="#pitfall-10-carrying-old-customization-assumptions-into-gambio" id="pitfall-10-carrying-old-customization-assumptions-into-gambio"></a>
 
-The selected service approach matches the real migration burden. Escalation happens before Full Migration, not after repeated validation failure.
+#### What goes wrong
+
+Custom source-platform behavior is expected to appear in Gambio without explicit mapping, configuration, Custom Service review, or development planning. This is especially risky for self-hosted merchants that previously relied on modified templates, custom fields, or bespoke checkout and fulfillment behavior.
+
+#### Early warning signs
+
+The source store has custom fields, custom checkout logic, bespoke product behavior, custom templates, external identifiers, or modified data structures, but the migration scope treats them as ordinary supported records.
+
+#### Prevention
+
+Identify customized records and behavior early. Decide whether the need can be handled by mapping, Advanced Data Mapping, Advanced Data Configure, Add-ons, Custom Service, or separate implementation. Do not approve Full Migration until unsupported behavior has an owner and handling path.
+
+#### Recommendation example
+
+For a self-hosted merchant with custom product fields connected to fulfillment, do not validate only product display. Confirm whether those fields need to be migrated, transformed, configured, or rebuilt outside ordinary record migration.
+
+#### Pass condition
+
+Custom behavior is classified before Full Migration, and no unsupported or bespoke requirement is hidden inside a standard data expectation.
+
+### Turning Pitfall Review Into a Launch Decision <a href="#turning-pitfall-review-into-a-launch-decision" id="turning-pitfall-review-into-a-launch-decision"></a>
+
+Pitfall review should produce a launch decision, not only a list of warnings. For Gambio, the decision should answer whether the Target Platform operating model is confirmed, whether representative catalog and commercial records behave correctly, whether storefront continuity is protected, whether integrations and custom behavior have owners, and whether Demo Migration findings have been classified.
+
+Validation and scope control belong here because they connect all pitfall categories. A Demo Migration sample that avoids difficult records is not enough. The sample should include complex products, deep categories, CMS Pages, older and exception orders, downloadable products, integration-sensitive records, and any custom data that could affect launch. When issues appear, the team should classify them immediately as migration configuration, target configuration, Add-ons, Custom Service, Additional Migration Options, or separate implementation.
+
+The strongest Gambio launch decision separates four layers. The first layer is migrated data: records that can be moved into the Target Platform. The second layer is Gambio configuration: settings, payment methods, shipping behavior, legal or trust content updates, and storefront choices that must be prepared in the target store. The third layer is tailored migration handling: mapping, configuration adjustments, Add-ons, or Custom Service when source data does not fit ordinary behavior. The fourth layer is separate implementation: live integrations, custom development, design changes, or external system work that should not be implied by data migration.
+
+This layered review prevents two common mistakes. The first is overpromising the migration by expecting moved records to recreate an entire operating environment. The second is underusing migration evidence by treating Demo Migration as a preview instead of a decision gate. When the sample shows an issue with options, categories, CMS Pages, orders, integrations, or custom data, the project should decide what the issue means before Full Migration.
+
+A merchant should be able to read the final pitfall review and understand what will be safe to launch, what still requires target setup, what needs a scoped migration adjustment, and what must be handled outside the migration. Without that separation, the project can look complete while still leaving critical launch responsibilities unresolved.
+
+Pitfall review should produce a launch decision, not only a list of warnings. For Gambio, the decision should answer whether the Target Platform operating model is confirmed, whether representative catalog and commercial records behave correctly, whether storefront continuity is protected, whether integrations and custom behavior have owners, and whether Demo Migration findings have been classified.
+
+Validation and scope control belong here because they connect all pitfall categories. A Demo Migration sample that avoids difficult records is not enough. The sample should include complex products, deep categories, CMS Pages, older and exception orders, downloadable products, integration-sensitive records, and any custom data that could affect launch. When issues appear, the team should classify them immediately as migration configuration, target configuration, Add-ons, Custom Service, Additional Migration Options, or separate implementation.
+
+| Decision area         | Launch should proceed when                                                       | Launch should pause when                                                  |
+| --------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Operating model       | Cloud or self-hosted responsibility is clear.                                    | Hosting, updates, support, or customization expectations are unresolved.  |
+| Catalog behavior      | Products, options, stock, downloadable items, and categories behave as expected. | Complex products were not tested or cannot be maintained.                 |
+| Content and SEO       | Important pages, URLs, internal links, and metadata have a continuity plan.      | Content exists but navigation, search, or trust pages are unverified.     |
+| Commercial history    | Customers and orders remain readable and useful.                                 | Discounts, taxes, shipping, payment context, or order status are unclear. |
+| External dependencies | Marketplace, payment, shipping, and custom requirements have owners.             | External behavior is assumed to migrate automatically.                    |
+| Scope handling        | Issues are classified before Full Migration.                                     | Open issues are left as vague post-launch tasks.                          |
+
+A Gambio migration is ready when the team can explain what will be migrated, what must be configured, what requires Custom Service or Add-ons, what belongs to separate implementation, and what the merchant must own after launch. Without that clarity, the project may still produce a technically complete migration but fail as a store-launch decision.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Gambio migration pitfalls usually appear when the project treats records as the whole migration. In practice, Gambio success depends on preserving catalog meaning, product options, customer groups, order usefulness, storefront discovery, SEO continuity, checkout configuration, hosting-model expectations, integrations, and custom behavior.
+Gambio migration pitfalls are preventable when the project keeps the operating model, catalog behavior, storefront continuity, external dependencies, and validation evidence visible from the beginning. The strongest prevention strategy is not a longer checklist. It is a clearer separation between migrated records, Gambio configuration, custom or integration work, and post-launch responsibility.
 
-The safest migration plans identify these patterns early. They select representative samples, separate migrated data from configuration work, confirm Cloud or self-hosted operating assumptions, and escalate Add-on or Custom Service needs before Full Migration.
+Merchants should treat Demo Migration results as scope evidence. If the sample proves that representative products, categories, CMS Pages, customers, orders, and integration-sensitive records behave correctly, the project can move forward with confidence. If the sample reveals unsupported behavior, custom requirements, or unclear ownership, those issues should be classified before Full Migration rather than carried into launch.
 
-Use Demo Migration results to test the parts of the source store most likely to affect launch quality. If the store depends on complex product options, customer-group pricing, custom fields, integration-owned data, custom development, SEO-sensitive routes, or Custom Platform source behavior, review those areas through Live Chat before continuing so the selected migration path and service approach match the actual project.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What is the most common Gambio migration pitfall?**
 
-**What is the most common mistake in migration to Gambio?**
+The most common pitfall is treating Gambio as a simple record destination instead of a full operating environment. Cloud or self-hosted responsibility, catalog behavior, content continuity, and integration setup all need separate review.
 
-The most common mistake is treating migration as record movement only. Gambio migration should also preserve product behavior, customer-group meaning, order context, storefront discovery, SEO continuity, checkout configuration, and implementation expectations.
+**Why should complex products be included in Demo Migration?**
 
-**Why are product options and variants a common Gambio migration pitfall?**
+Complex products reveal whether product options, pricing, stock behavior, images, downloadable items, and category placement work correctly. Simple products rarely expose the problems that affect launch readiness.
 
-Product options and variants affect how shoppers select products and how orders record those selections. If the source platform structures options, variants, attributes, or filters differently, those records should be tested carefully during Demo Migration.
+**Do marketplace and payment integrations migrate with the store data?**
 
-**Should Gambio Cloud and self-hosted Gambio be planned differently?**
+No. Related records may migrate when supported, but live marketplace, payment, shipping, and marketing connections usually require target-side configuration or separate implementation.
 
-Yes. The target operating model affects hosting responsibility, maintenance, access, customization expectations, and implementation work. The migration plan should confirm whether the merchant is moving into Gambio Cloud or a self-hosted Gambio environment.
+**When should a Gambio issue become a Custom Service discussion?**
 
-**Can Add-ons solve custom Gambio migration requirements?**
-
-Add-ons can help when the need arises for available add-on capabilities, such as filtering, mapping, or configuration support. Broader customization, unsupported data, Custom Platform handling, Tailored Add-ons, Custom Add-ons, third-party identifiers, and custom migration logic adjustment require Custom Service review.
-
-**What should a good Gambio Demo Migration sample include?**
-
-A strong sample should include simple and complex products, product options, important categories, customer groups, discounted records, representative orders, tax and shipping examples, payment context, content or SEO-sensitive pages, and any records affected by custom fields or integrations.
+An issue should move into Custom Service review when it involves unsupported data, custom fields, bespoke transformation, source-specific logic, custom behavior, or requirements that cannot be handled through standard migration configuration or bounded Add-ons.

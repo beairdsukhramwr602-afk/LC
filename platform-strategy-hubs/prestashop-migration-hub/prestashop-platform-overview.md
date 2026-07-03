@@ -1,170 +1,141 @@
 # PrestaShop Platform Overview
 
-PrestaShop is an open-source commerce platform for businesses that need more structural control over catalog behavior, customer segmentation, storefront scope, and extensibility than lighter hosted platforms usually provide.
+PrestaShop is a modular open-source commerce Target Platform. A migration into PrestaShop should therefore be planned around structured catalog meaning, storefront governance, and extension-aware validation, not only around moving products, customers, and orders into a new database.
 
-That flexibility can be a strength, but it also changes where migration risk concentrates. In a PrestaShop migration, risk often lies in how the business defines product combinations, features, customization fields, category structure, customer groups, multistore scope, friendly URL continuity, and module- or theme-shaped behavior after launch. The result should not be judged only by whether products, customers, and orders arrive. The stronger question is whether the Target Platform still supports the buying, browsing, account, and operational outcomes the business depends on.
+The most important PrestaShop planning question is whether the source store’s business meaning can be represented cleanly in the target environment. Product choices may need to become combinations, features, customization fields, simplified product information, module behavior, or Custom Service scope. Categories may affect not only grouping, but also customer discovery, visibility, SEO metadata, friendly URLs, group access, and multistore root-category behavior. Customer groups may influence differentiated treatment. Multistore may create shop-scope governance. Modules, themes, overrides, and external systems may hold behavior that does not belong to ordinary migrated records.
 
-PrestaShop works best when catalog structure, customer segmentation, and shop-scope decisions are formalized before migration. It becomes riskier when the source store carries flexible or inherited behavior that has never been classified clearly. The platform can represent a rich storefront model, but it will not automatically decide which source behaviors should become combinations, features, customization fields, customer-group logic, multistore assignments, module behavior, or simplified target structure.
+That makes PrestaShop a strong target when the business wants open-source control and can govern that control deliberately. It becomes higher risk when the merchant expects the platform to absorb unclear source logic without first deciding what should be preserved, simplified, rebuilt, configured, or excluded.
 
-### What Changes in a Migration to PrestaShop <a href="#what-changes-in-a-migration-to-prestashop" id="what-changes-in-a-migration-to-prestashop"></a>
+### What PrestaShop Means as a Target Platform <a href="#what-prestashop-means-as-a-target-platform" id="what-prestashop-means-as-a-target-platform"></a>
 
-A move into PrestaShop often changes the store most clearly in product structure, catalog discovery, customer segmentation, shop scope, URL behavior, and module-shaped storefront meaning.
+PrestaShop is not best understood as a lightweight cart that simply receives catalog rows. It is a structured commerce environment where catalog records, storefront display, category organization, customer segmentation, shop scope, modules, themes, and configuration can all affect the final migration result.
 
-#### Product structure becomes a combinations-versus-features-versus-customization decision <a href="#product-structure-becomes-a-combinations-versus-features-versus-customization-decision" id="product-structure-becomes-a-combinations-versus-features-versus-customization-decision"></a>
+For migration planning, PrestaShop’s value is not only that it is open-source. The value is that the merchant can shape how commerce data behaves in the target store. That flexibility is useful only when the business can explain what needs to be controlled. A merchant that needs clear combinations, product features, customization fields, customer groups, multistore governance, friendly URL planning, and module-aware storefront behavior may benefit from PrestaShop. A merchant that wants “flexibility” in the abstract may inherit unnecessary complexity without gaining a clearer operating model.
 
-PrestaShop carries several product layers, and that distinction is one of the most important migration truths to understand early.
+| PrestaShop area                | Migration significance                                                                                                 |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Product combinations           | Sellable variations need a clear target structure when source options affect SKU, price, stock, or customer selection. |
+| Product features               | Descriptive product characteristics should not be confused with sellable variation.                                    |
+| Customization fields           | Customer-entered product personalization needs separate review from both combinations and features.                    |
+| Categories                     | Categories influence discovery, visibility, metadata, friendly URLs, access, and shop organization.                    |
+| Customer groups                | Group logic can affect commercial treatment and should be validated as behavior, not only as labels.                   |
+| Multistore                     | Multiple front offices under one back office require shop-scope decisions before migration.                            |
+| Modules, themes, and overrides | Storefront behavior may come from extensions or custom code outside standard migrated records.                         |
+| Friendly URLs and routes       | URL continuity requires route review, redirect planning, and SEO-aware validation.                                     |
 
-Product migration into PrestaShop is less about moving product records as a flat list and more about deciding whether product meaning should be represented as:
+A strong PrestaShop migration should connect these areas instead of treating each entity as a separate import task. If the product model is unclear, category review becomes weaker. If customer groups are not understood, order and pricing history can be misread. If multistore scope is vague, products, categories, prices, languages, and content may appear in the wrong shop context.
 
-* selectable sellable variation through combinations
-* descriptive or comparative information through features
-* customer-entered personalization through customization fields
-* module-shaped or theme-shaped behavior that may need separate review
+### Product Meaning Is the First Planning Layer <a href="#product-meaning-is-the-first-planning-layer" id="product-meaning-is-the-first-planning-layer"></a>
 
-The question is not only whether products arrive. It is whether the correct product structure still expresses the real sellable outcome clearly enough after launch.
+PrestaShop makes product interpretation especially important because product meaning can be split across several concepts. A source platform may describe options, variants, attributes, custom fields, add-ons, personalization fields, bundles, features, filters, and module-managed values in one broad product model. PrestaShop requires the merchant to decide which of those meanings should become target catalog structure and which should be handled differently.
 
-#### Categories become part of storefront meaning <a href="#categories-become-part-of-storefront-meaning" id="categories-become-part-of-storefront-meaning"></a>
+The key distinction is not merely technical. It affects how the product is sold, displayed, searched, filtered, priced, and validated after launch.
 
-In PrestaShop, categories are not only an administrative filing system. They often shape how products are discovered, grouped, merchandised, and interpreted by shoppers.
+| Source behavior                                                                 | PrestaShop planning question                                 | Why it matters                                                                                              |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Size, color, capacity, material, or other sellable option                       | Should it become a combination?                              | Combinations affect customer selection and may affect SKU, stock, price, images, and product availability.  |
+| Weight, material description, dimensions, specifications, or descriptive values | Should it become a feature?                                  | Features describe products and can support comparison or search, but they do not create product variations. |
+| Engraving, message text, upload, personalization, or custom input               | Is a customization field or custom handling needed?          | Customer-entered values should not be flattened into descriptive text if they affect order handling.        |
+| Bundle, kit, pack, or module-created product behavior                           | Is it supported, simplified, rebuilt, or custom-scoped?      | Complex product logic may depend on module behavior or custom transformation.                               |
+| Hidden source field or external identifier                                      | Does it need mapping, Add-ons, Custom Service, or exclusion? | Operational identifiers may be important without belonging to visible catalog content.                      |
 
-That changes migration planning because a storefront can preserve products successfully while still weakening customer discovery if category meaning, category hierarchy, and product placement are not planned clearly enough.
+This is why Demo Migration samples for PrestaShop should include more than ordinary products. They should include products with combinations, products with features, products with customization needs, category-sensitive products, module-sensitive products, and products with priority SEO value.
 
-#### Customer groups become a stronger commercial layer <a href="#customer-groups-become-a-stronger-commercial-layer" id="customer-groups-become-a-stronger-commercial-layer"></a>
+### Categories Carry Discovery, Visibility, and SEO Meaning <a href="#categories-carry-discovery-visibility-and-seo-meaning" id="categories-carry-discovery-visibility-and-seo-meaning"></a>
 
-PrestaShop customer groups can carry more storefront meaning than teams first expect. They may influence visibility, pricing context, purchasing rules, or other differentiated customer experiences.
+PrestaShop categories deserve more attention than a basic hierarchy check. They help customers navigate the catalog, narrow product discovery, understand product groups, and reach important landing pages. Category records may also include descriptions, images, metadata, friendly URLs, display status, group access, and relationships to shop context.
 
-That means customer continuity in PrestaShop is not only about importing customer accounts. It is also about deciding what the Target Platform should still do differently for different customer contexts after launch.
+This creates a common migration trap. The source store may have a category tree, but that does not prove that the tree should be copied exactly. Some categories may be useful for navigation. Some may exist for internal management. Some may carry SEO value. Some may be outdated. Some may be tied to customer-group access or shop-specific organization. Some may need redirects rather than direct recreation.
 
-#### Shop scope becomes part of the target model <a href="#shop-scope-becomes-part-of-the-target-model" id="shop-scope-becomes-part-of-the-target-model"></a>
+PrestaShop planning should therefore separate category roles:
 
-PrestaShop includes native multistore capability, so shop scope can become part of the platform model rather than a later administrative convenience.
+| Category role                        | Migration implication                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Catalog grouping                     | Preserve structure if it supports product organization and customer browsing.              |
+| Navigation                           | Confirm whether menus, modules, and theme behavior need separate setup or validation.      |
+| SEO landing page                     | Preserve metadata, friendly URL logic, and redirect priorities where relevant.             |
+| Access control                       | Review customer group restrictions and visibility assumptions.                             |
+| Multistore root or shop organization | Confirm whether categories belong to one shop, multiple shops, or different root contexts. |
+| Legacy or internal category          | Decide whether it should migrate, be filtered, redirected, or retired.                     |
 
-That makes scope decisions important before migration. A PrestaShop target can look structurally complete while still being difficult to govern if the business has not defined what belongs to one shop, what should be shared, and what should remain separate.
+The strongest PrestaShop category plan does not ask only whether categories exist. It asks whether categories still help customers find products, whether high-value URLs are protected, whether category visibility is correct, and whether shop-specific organization is clear.
 
-#### Friendly URL continuity is native, but route planning still matters <a href="#friendly-url-continuity-is-native-but-route-planning-still-matters" id="friendly-url-continuity-is-native-but-route-planning-still-matters"></a>
+### Customer Groups and Shop Scope Need Early Governance <a href="#customer-groups-and-shop-scope-need-early-governance" id="customer-groups-and-shop-scope-need-early-governance"></a>
 
-PrestaShop supports friendly URL behavior, but route continuity still needs planning. URL rewriting, route structure, legacy page value, and destination relevance all affect whether customers and search engines can continue reaching important content after migration.
+PrestaShop can support customer-group and shop-scope logic, but those capabilities should not be treated as automatic improvements. They are valuable only when the merchant has a real governance reason for them.
 
-The key planning question is not simply whether friendly URLs exist. It is which legacy paths matter most, what each path should lead to, and whether the resulting destination still supports the customer intent that the old URL served.
+Customer groups may affect how different buyer types are treated. For migration planning, that means group records should be reviewed alongside customers, prices, discounts, tax assumptions, category access, and historical order context. A group imported as a label may be harmless, but a group that controls commercial behavior can affect the target store’s business logic.
 
-#### Modules, themes, and overrides can carry storefront meaning <a href="#modules-themes-and-overrides-can-carry-storefront-meaning" id="modules-themes-and-overrides-can-carry-storefront-meaning"></a>
+Multistore deserves similar discipline. Managing multiple front offices from one back office can support separate domains, B2B/B2C versions, different branding, or different prices by store. But those benefits require a clear shop model. The merchant should know what is shared, what is separated, and what each shop context is supposed to control.
 
-PrestaShop’s open ecosystem can support meaningful extensions, modules, themes, and custom behavior. During migration, those surrounding layers can become important when they affect product display, checkout expectations, customer experience, pricing logic, search behavior, content presentation, or integrations.
+| Governance area   | Question to answer before migration                                                                              |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Customer groups   | Do groups affect pricing, visibility, access, tax assumptions, segmentation, or customer treatment?              |
+| Shop scope        | Which products, categories, customers, languages, currencies, content, modules, and prices belong to which shop? |
+| Shared data       | Which records should remain common across shops?                                                                 |
+| Separated data    | Which records must differ by domain, brand, market, language, or buyer type?                                     |
+| Historical orders | Should order history be interpreted by shop, customer group, price context, or storefront source?                |
 
-A migration can move core records while still losing practical storefront meaning if module-owned or theme-owned behavior is not identified early.
+If the business cannot answer these questions, PrestaShop may still be the right target, but the migration should slow down around scope and validation. Unclear group or shop logic can create confusion that looks like a migration issue even when the data transfer itself is technically complete.
 
-### Where PrestaShop Is Often a Strong Target <a href="#where-prestashop-is-often-a-strong-target" id="where-prestashop-is-often-a-strong-target"></a>
+### Modules, Themes, and Overrides Can Shape Migration Scope <a href="#modules-themes-and-overrides-can-shape-migration-scope" id="modules-themes-and-overrides-can-shape-migration-scope"></a>
 
-PrestaShop is often a strong target when the business genuinely needs an open-source platform that can support clearer catalog structure, stronger customer-group control, and more deliberate shop-scope governance than lighter targets normally carry natively.
+PrestaShop’s modular architecture is one of its strengths, but it also changes migration planning. Important storefront behavior may be produced by modules, theme customization, overrides, external systems, or custom fields. Some of that behavior may be reproduced through PrestaShop configuration after migration. Some may be irrelevant to the new store. Some may require Add-ons if supported filtering, mapping, or configuration is needed. Some may require Custom Service when unsupported module data, custom fields, external identifiers, or bespoke transformation must be handled.
 
-#### Catalogs that need structured product meaning <a href="#catalogs-that-need-structured-product-meaning" id="catalogs-that-need-structured-product-meaning"></a>
+The key is to avoid treating surrounding behavior as background detail. If a module controls product personalization, reviews, loyalty, marketplace feeds, carrier rules, payment behavior, SEO fields, product tabs, or category display, the migration plan should decide whether the data is part of supported scope, target-side setup, Custom Service, or excluded expectation.
 
-PrestaShop is often suitable when the catalog depends on a meaningful distinction between selectable variation, descriptive product information, and customer-entered customization.
+| Dependency type                                                   | Planning treatment                                                                        |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Supported product, customer, order, category, and content records | May fit Standard Service or Managed Service depending on structure and validation burden. |
+| Supported records needing filtering or mapping adjustment         | May fit Add-ons when the requirement remains inside supported behavior.                   |
+| Unsupported module data or custom fields                          | Requires Custom Service review when business meaning must be preserved.                   |
+| Theme-only visual behavior                                        | Usually target-side design/setup rather than migrated commerce data.                      |
+| Overrides or custom logic                                         | Requires review because it may indicate bespoke behavior outside standard migration.      |
+| External system identifiers                                       | May require Custom Service if continuity depends on preserving operational references.    |
 
-This is especially true when the team is willing to validate high-risk products early instead of assuming familiar source behavior will survive automatically.
+This boundary protects the project from overpromising. A PrestaShop migration can move supported data, but it should not imply automatic module installation, custom development, integration deployment, theme rebuilding, or site redesign.
 
-#### Merchants that need customer-group control <a href="#merchants-that-need-customer-group-control" id="merchants-that-need-customer-group-control"></a>
+### When PrestaShop Usually Needs Deeper Planning <a href="#when-prestashop-usually-needs-deeper-planning" id="when-prestashop-usually-needs-deeper-planning"></a>
 
-PrestaShop can be a strong fit when customer groups matter commercially. This may include different customer contexts, price visibility, segmentation, account behavior, or differentiated storefront treatment.
+PrestaShop needs deeper planning when source complexity affects target behavior. The most common signs are ambiguous product options, customer groups with real commercial meaning, multistore scope, high-value URLs, module-managed data, custom fields, theme-dependent content, or historical records that must remain interpretable for service and reporting.
 
-The fit is strongest when those customer differences are intentional and documented, not inherited loosely from the source platform.
+Deeper planning does not mean PrestaShop is the wrong platform. It means the business should clarify the target model before Full Migration.
 
-#### Businesses with real multistore needs <a href="#businesses-with-real-multistore-needs" id="businesses-with-real-multistore-needs"></a>
-
-PrestaShop can be valuable when the business needs multiple shop contexts under one platform model. The advantage is strongest when the business can define which catalog, customer, content, language, currency, or operational differences should belong to each shop context.
-
-#### Stores that need open customization with governance <a href="#stores-that-need-open-customization-with-governance" id="stores-that-need-open-customization-with-governance"></a>
-
-PrestaShop can be a strong target for teams that need open-source flexibility, but only when customization is governed. Modules, themes, overrides, integrations, and custom fields should be reviewed by business meaning, not treated as a technical afterthought.
-
-#### Businesses with planned route and customer-continuity expectations <a href="#businesses-with-planned-route-and-customer-continuity-expectations" id="businesses-with-planned-route-and-customer-continuity-expectations"></a>
-
-PrestaShop can support friendly URL planning and customer continuity when the underlying conditions are understood. Where password continuity matters, the relevant source-platform condition, hash transfer possibility, and target continuity path should be confirmed before launch. Where those conditions are not met, a reset-first launch model with clear communication is safer.
-
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
-
-PrestaShop is not automatically the right fit just because it is open-source and flexible. Its flexibility is most useful when the business knows what it wants the Target Platform to represent.
-
-#### Product behavior is poorly classified <a href="#product-behavior-is-poorly-classified" id="product-behavior-is-poorly-classified"></a>
-
-Deeper planning is needed when source products mix variants, options, custom fields, personalization, bundles, add-on choices, or module-driven product behavior without a clear target meaning.
-
-The migration should clarify which behavior belongs in combinations, which belongs in features, which belongs in customization fields, and which may need Custom Service review.
-
-#### Customer-group logic is commercially sensitive <a href="#customer-group-logic-is-commercially-sensitive" id="customer-group-logic-is-commercially-sensitive"></a>
-
-If customer groups affect pricing, visibility, purchasing rules, or account treatment, they should not be treated as simple labels. The business needs to decide which customer-group outcomes must remain true after migration.
-
-#### Multistore scope is unclear <a href="#multistore-scope-is-unclear" id="multistore-scope-is-unclear"></a>
-
-Multistore is powerful, but unclear shop assignment can make the target harder to operate and validate. Deeper planning is needed when products, categories, customers, languages, currencies, content, or modules should behave differently by shop.
-
-#### Important behavior depends on modules, themes, overrides, or custom data <a href="#important-behavior-depends-on-modules-themes-overrides-or-custom-data" id="important-behavior-depends-on-modules-themes-overrides-or-custom-data"></a>
-
-Modules, themes, overrides, custom fields, third-party app data, outside-system identifiers, or Custom Platform behavior can affect migration scope. If these layers carry important business meaning, the project may need Custom Service rather than a standard service scope.
-
-#### SEO and route continuity carry business value <a href="#seo-and-route-continuity-carry-business-value" id="seo-and-route-continuity-carry-business-value"></a>
-
-PrestaShop route continuity should be planned by business value. High-value products, categories, content pages, and landing pages should be identified early so the migration does not preserve low-value structure while weakening important customer or search journeys.
-
-### What Should Be Understood Early Before Moving into PrestaShop <a href="#what-should-be-understood-early-before-moving-into-prestashop" id="what-should-be-understood-early-before-moving-into-prestashop"></a>
-
-Before treating PrestaShop as a settled target choice, the business should be able to answer a few practical questions.
-
-#### Can the source product model be expressed cleanly through combinations, features, and customization fields? <a href="#can-the-source-product-model-be-expressed-cleanly-through-combinations-features-and-customization-fi" id="can-the-source-product-model-be-expressed-cleanly-through-combinations-features-and-customization-fi"></a>
-
-This is one of the most important early questions because product representation often shapes the whole target more than teams first expect.
-
-#### Which category behavior is commercially important? <a href="#which-category-behavior-is-commercially-important" id="which-category-behavior-is-commercially-important"></a>
-
-The answer usually determines whether catalog continuity will still feel structured, discoverable, and useful after launch.
-
-#### How should customer groups work? <a href="#how-should-customer-groups-work" id="how-should-customer-groups-work"></a>
-
-Because customer-group behavior can become part of the target’s real commercial model, it should be defined early rather than guessed during validation.
-
-#### What should differ by shop? <a href="#what-should-differ-by-shop" id="what-should-differ-by-shop"></a>
-
-If the business intends to use PrestaShop multistore, it should clarify which catalog, customer, content, language, currency, pricing, or module behavior should differ by shop.
-
-#### Which modules, theme behaviors, custom fields, or integrations carry real business meaning? <a href="#which-modules-theme-behaviors-custom-fields-or-integrations-carry-real-business-meaning" id="which-modules-theme-behaviors-custom-fields-or-integrations-carry-real-business-meaning"></a>
-
-The business should identify which surrounding systems or custom behaviors are essential to the post-migration operating model and which can be simplified, retired, or rebuilt differently.
-
-#### Which legacy URLs and customer-continuity expectations matter most? <a href="#which-legacy-urls-and-customer-continuity-expectations-matter-most" id="which-legacy-urls-and-customer-continuity-expectations-matter-most"></a>
-
-PrestaShop can support friendly URL planning, but route and customer-continuity decisions still need business priority, technical review, and validation.
+| Planning signal                                                              | What it usually means                                                        |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Source options mix variants, specifications, and personalization             | Product meaning must be classified before migration.                         |
+| Category tree contains high-value landing pages                              | SEO metadata, friendly URLs, and redirects need review.                      |
+| Customer groups affect prices, access, or tax assumptions                    | Group logic must be validated, not only migrated.                            |
+| Multistore is expected                                                       | Shop-scope governance must be defined before data assignment.                |
+| Modules own product, content, review, loyalty, or checkout-adjacent behavior | Supported scope, Add-ons, Custom Service, or target setup must be separated. |
+| Source store is heavily customized                                           | Custom fields, overrides, and external identifiers need early review.        |
+
+The right PrestaShop orientation is not “move everything first and fix later.” It is “identify the target meaning, migrate supported records, configure the target deliberately, and validate the result with representative samples.”
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-PrestaShop is often a strong migration target for businesses that need open-source flexibility, structured product meaning, customer-group control, multistore governance, and deliberate route handling. It performs best when the business defines how the Target Platform should represent catalog structure, segmentation, shop scope, and extension-shaped behavior before migration decisions become launch pressure.
+PrestaShop is a strong Target Platform when the merchant wants a modular open-source commerce environment with structured product meaning, category and URL control, customer-group logic, multistore governance, and extension-aware flexibility. It is not best planned as a simple cart-to-cart transfer.
 
-A PrestaShop migration should not be judged only by whether the store can be rebuilt inside a flexible platform. It should be judged by whether combinations, features, customization fields, categories, customer groups, multistore decisions, module-dependent behavior, and important continuity paths still support the intended customer and operational outcomes.
+A successful PrestaShop migration begins by clarifying what each source behavior should become in the target store. Product options, features, customization fields, categories, customer groups, shop scope, modules, themes, friendly URLs, orders, customers, and custom data all need interpretation. The result should not only exist in PrestaShop; it should make operational sense for the way the merchant intends to manage, sell, and validate the store after launch.
 
-Use a Demo Migration sample that includes complex product families, customer-group scenarios, shop-scope cases, module-dependent behavior, high-value URLs, and customer-continuity expectations. If the result shows uncertainty around target structure, custom fields, Custom Platform behavior, third-party data, or non-standard transformation requirements, review the scope through Live Chat before assuming a standard migration approach is enough.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is PrestaShop mainly for simple or complex catalogs?**
 
-**Is PrestaShop a good fit for option-heavy catalogs?**
+PrestaShop can support both, but it is especially useful when catalog meaning needs structure. Merchants with combinations, features, customization fields, category logic, customer groups, or multistore needs should plan those relationships carefully before migration.
 
-Often yes, when the business can clearly separate sellable variation, descriptive product information, and customer-entered customization. The deciding factor is not catalog size alone. It is whether the product model can be expressed clearly enough through PrestaShop’s target structure and validated before launch.
+**Why are combinations and features so important in PrestaShop migration?**
 
-**What usually makes PrestaShop a strong migration target?**
-
-PrestaShop is usually strong when the business needs open-source flexibility, structured product behavior, customer-group control, multistore capability, friendly URL planning, and governed module or theme behavior.
-
-**What usually makes PrestaShop a weaker fit?**
-
-PrestaShop is often a weaker fit when important source behavior is still vague, when module- or theme-owned meaning is poorly classified, or when the team expects the platform’s flexibility to resolve commercial ambiguity automatically.
+Combinations help represent sellable product variations, while features describe product characteristics. If source options are not classified correctly, the migrated catalog may be harder to sell, filter, compare, or validate.
 
 **Does PrestaShop multistore make migration easier?**
 
-Not by itself. Multistore can be useful when shop differences are real and well defined, but it can increase planning and validation burden if products, categories, customers, content, pricing, or modules are assigned without clear governance.
+Not automatically. Multistore can be useful when different shops, domains, B2B/B2C versions, branding, or price contexts need shared governance. It adds risk when the merchant has not defined what should be shared or separated across shops.
 
-**Should module data always be migrated into PrestaShop?**
+**Should every PrestaShop module behavior be migrated?**
 
-No. Module-related meaning should be reviewed by business value. Some module behavior may be replaced by native PrestaShop structure, some may need a new module or configuration, and some may require Custom Service if the requirement goes beyond standard service capability.
+No. Module behavior should be reviewed by business value and technical feasibility. Some behavior belongs to supported data, some belongs to target-side setup, some may be excluded, and some may require Custom Service when unsupported or custom data must be preserved.
 
-**What is the fastest way to confirm whether PrestaShop is the right target?**
+**What should be checked early before migrating to PrestaShop?**
 
-A representative Demo Migration is usually the fastest early fit test. It should include complex products, customer-group cases, shop-scope examples, module-dependent behavior, priority URLs, and customer-continuity expectations so the business can judge whether PrestaShop can preserve the outcomes that matter most.
+Start with representative products, category and URL priorities, customer-group behavior, shop-scope expectations, module/theme dependencies, historical order needs, and any custom fields or external identifiers that must remain meaningful after migration.

@@ -1,175 +1,185 @@
 # Selecting the Right Migration Approach for PrestaShop
 
-Choosing the right migration approach for PrestaShop is not mainly about entity volume. It is about how much catalog structure, customer segmentation, shop scope, and surrounding storefront behavior must be interpreted before the migrated store can be trusted.
+Choosing the right migration approach for PrestaShop is not mainly a question of store size. It is a question of interpretation burden. PrestaShop can support structured product combinations, product features, customization fields, category governance, customer groups, multistore capability, friendly URLs, and module-supported flexibility. Those strengths are useful when the merchant knows how the source store should be translated into PrestaShop. They become risky when product logic, customer segmentation, shop scope, module behavior, or custom data remains unclear.
 
-PrestaShop can be a strong Target Platform when the business wants a more structured open-source commerce environment with clear product combinations, product features, customization fields, customer groups, multistore capability, friendly URL control, and module-supported flexibility. That strength becomes safer when the future structure is intentional. It becomes risky when inherited catalog logic, customer treatment, shop assignments, routes, modules, themes, overrides, or custom fields are still vague.
+The safest approach is the lightest service path that still protects the intended PrestaShop outcome. Standard Service may be enough when records are supported, the target structure is clear, and the merchant can validate confidently. Managed Service may be safer when the scope is supported but coordination and execution burden are high. Add-ons can help with bounded filtering, mapping, or configuration needs. Custom Service should be considered when requirements involve unsupported records, modules, custom fields, external identifiers, bespoke transformations, Custom Platform handling, or custom migration logic adjustment.
 
-The safest approach is the one that matches the real PrestaShop interpretation burden. A lighter approach can work when the business has already defined the target model and can validate the outcome confidently. A more guided or custom approach becomes safer when PrestaShop must do more than receive records; it must preserve commercial meaning inside a more explicit product, customer, shop, and open-platform structure.
+### What Migration Approach Means for PrestaShop <a href="#what-migration-approach-means-for-prestashop" id="what-migration-approach-means-for-prestashop"></a>
 
-### What Approach Means in a PrestaShop Migration <a href="#what-approach-means-in-a-prestashop-migration" id="what-approach-means-in-a-prestashop-migration"></a>
+A PrestaShop migration approach defines how much execution support, mapping control, customization review, and validation discipline the project needs. It should not be chosen only from Product, Customer, Order, or Blog Posts volume. Volume matters for planning, but PrestaShop complexity often comes from how records behave after migration.
 
-In a PrestaShop migration, approach selection decides how much guidance, execution support, and customization is needed to preserve the intended target outcome.
+Products may need to become combinations, features, or customization fields. Categories may affect navigation, SEO metadata, friendly URLs, group access, and multistore root-category planning. Customer groups may carry pricing, access, or segmentation meaning. Modules and overrides may own business logic that ordinary records do not explain. A source store may also contain custom fields, external IDs, ERP references, CRM records, review data, loyalty data, subscription data, or other dependencies outside standard migration behavior.
 
-A PrestaShop migration approach should be chosen by answering three practical questions:
+| Approach decision                       | PrestaShop-specific question                                                                                                            |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Is Standard Service enough?             | Are the required records supported, structured clearly, and easy for the merchant to validate?                                          |
+| Is Managed Service safer?               | Is the scope supported but coordination, timing, or customer-side execution capacity a concern?                                         |
+| Are Add-ons enough?                     | Is the need bounded to supported filtering, mapping, or configuration?                                                                  |
+| Is Custom Service needed?               | Does the requirement involve custom fields, unsupported module data, Custom Platform handling, external IDs, or bespoke transformation? |
+| Does launch timing affect the approach? | Will new records, changed configuration, or a refreshed target result require Additional Migration Options?                             |
 
-* Is the future PrestaShop catalog model already clear enough for standard handling?
-* Can the customer team operate and validate the migration process with confidence?
-* Does the required outcome depend on bespoke handling beyond standard service capability?
+The selected approach should be grounded in representative source examples, not broad confidence. If no one can explain how the difficult products, categories, groups, shop scope, URLs, and module data should behave in PrestaShop, the approach is not ready.
 
-These questions matter because PrestaShop migration risk often sits in interpretation. Products may need to be separated into combinations, features, and customization fields. Customer groups may affect pricing, access, visibility, or communication. Shop scope may need to be assigned deliberately when multistore matters. Friendly URLs may need continuity planning. Modules, themes, overrides, custom fields, and integrations may carry behavior that ordinary records do not explain by themselves.
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-### Why PrestaShop Approach Choice Depends on Structure Burden <a href="#why-prestashop-approach-choice-depends-on-structure-burden" id="why-prestashop-approach-choice-depends-on-structure-burden"></a>
+Standard Service can be suitable when the PrestaShop target structure is already clear and the merchant can manage required review tasks responsibly. It is strongest when the source store uses ordinary commerce records, product choices map predictably, categories are clean, customer groups are limited or well documented, multistore is not required or already planned, and module/custom behavior is not central to the migration outcome.
 
-PrestaShop can make a target store feel more governed, but only when the business knows what should be governed.
+Standard Service is not a low-quality option. It can be the right choice when the merchant’s internal team understands the source store and can validate the PrestaShop result through Demo Migration and Full Migration. The key is not whether the catalog is small; the key is whether the target meaning is clear.
 
-A PrestaShop migration is usually easier to control when:
+| Standard Service readiness signal                    | Why it matters in PrestaShop                                      |
+| ---------------------------------------------------- | ----------------------------------------------------------------- |
+| Product combinations are already defined.            | Selectable choices can be reviewed without deep reinterpretation. |
+| Features are clean and commercially useful.          | Product comparison data can be preserved without clutter.         |
+| Customization fields are simple or not required.     | Personalization does not create heavy fulfillment risk.           |
+| Category tree and URLs are manageable.               | Discovery and SEO review remains controlled.                      |
+| Customer groups are limited and documented.          | Group meaning can be validated without bespoke logic.             |
+| Multistore is absent or simple.                      | Shop assignment does not dominate the project.                    |
+| Modules and custom fields are not business-critical. | Standard records can carry most of the migration value.           |
 
-* product combinations, features, and customization fields are already classified clearly
-* category structure supports browsing, merchandising, comparison, and search intent
-* customer groups are documented as commercial behavior, not only as labels
-* shop scope and multistore assignments are intentional
-* priority URLs and route destinations are ranked by business value
-* modules, themes, overrides, custom fields, and integrations are identified
-* the customer team can validate the migrated result through realistic storefront and operational scenarios
+Standard Service becomes risky when the merchant expects it to resolve unclear source logic automatically. If combinations, features, groups, shop assignments, or custom data need interpretation rather than transfer, a stronger approach should be considered.
 
-A PrestaShop migration usually needs stronger guidance when:
+### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
 
-* product-choice logic is still being interpreted
-* sellable combinations, descriptive features, and customer-entered customization are mixed together in the Source Platform
-* customer-group behavior is still described broadly
-* multistore scope is unclear or inherited from old structure rather than future need
-* customer-account expectations affect repeat buying, B2B access, loyalty, or service history
-* important behavior depends on modules, themes, overrides, custom fields, ERP, CRM, fulfillment, payment, shipping, tax, analytics, reviews, loyalty, or other outside systems
-* the Demo Migration exposes differences the team cannot classify confidently
+Managed Service may be the better fit when the PrestaShop migration is within supported capability but the project needs more coordinated execution. This often happens when the merchant wants Next-Cart-led migration handling, the internal team lacks time to manage steps directly, or the scope has enough structure that execution discipline reduces avoidable mistakes.
 
-The approach should reflect the level of interpretation required, not only the number of products, customers, orders, or Blog Posts being migrated.
+Managed Service is useful for supported PrestaShop migrations with many moving parts: combination-heavy catalogs, feature-rich product data, important categories and friendly URLs, customer groups, recent orders, image-heavy catalogs, or launch timing that requires careful sequencing. It helps when the merchant can provide business decisions and final validation, but should not carry every operational step alone.
 
-### Standard Service for PrestaShop <a href="#standard-service-for-prestashop" id="standard-service-for-prestashop"></a>
+Managed Service should not be confused with Custom Service. A project can be managed without being custom. If the requirement is supported but needs stronger coordination, Managed Service may fit. If the requirement itself needs custom transformation, unsupported data handling, or custom migration logic adjustment, Custom Service should be reviewed.
 
-Standard Service can be a good fit when the PrestaShop target structure is already well understood and the customer team is prepared to manage the migration process with guidance from Next-Cart.
+| Managed Service fit signal            | What Managed Service helps with                         | What it does not automatically solve                                                  |
+| ------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Large supported catalog               | Migration execution coordination and review sequencing. | Unsupported product logic or custom module behavior.                                  |
+| Important SEO paths                   | Better timing and sample review discipline.             | Full SEO strategy, redesign, or external redirect implementation beyond agreed scope. |
+| Customer groups need careful checking | Coordinated migration and validation support.           | Rebuilding unsupported pricing or access logic.                                       |
+| Internal team has limited bandwidth   | Reduces hands-on migration-operation burden.            | Merchant-side business decisions and final approval.                                  |
 
-This approach is often suitable when:
+Managed Service is safest when the merchant can still define what success looks like. Execution support cannot replace business interpretation.
 
-* the Source Platform uses a supported migration path
-* products can be represented predictably through PrestaShop combinations, features, and customization fields
-* category behavior and product assignments are already clear
-* customer groups are defined enough for deliberate setup and review
-* multistore scope is either not needed or already documented clearly
-* friendly URL priorities are known and manageable
-* module-, theme-, override-, or integration-dependent behavior is limited or not business-critical
-* the customer can review Demo Migration and Full Migration results carefully
-* the project does not require custom migration logic adjustment
+### When Add-ons Are the Right Layer <a href="#when-add-ons-are-the-right-layer" id="when-add-ons-are-the-right-layer"></a>
 
-Standard Service should not be chosen only because the store appears small. A smaller PrestaShop migration can still need stronger handling if product personalization, customer groups, multistore assignments, friendly URLs, module-owned data, custom fields, or Custom Platform source behavior carries important business meaning.
+Add-ons fit PrestaShop migrations when the requirement is bounded, supported, and specific. They can help with filtering, mapping, or configuration needs, but they are not a substitute for Custom Service when the source behavior itself is unsupported or bespoke.
 
-### Managed Service for PrestaShop <a href="#managed-service-for-prestashop" id="managed-service-for-prestashop"></a>
+A Data Filter Add-on can be useful when the merchant wants to migrate only selected products, customers, orders, categories, CMS Pages, Blog Posts, or historical records. Advanced Data Mapping can help when supported source fields need more deliberate target alignment. Advanced Data Configure can help when supported output behavior needs configuration within agreed boundaries.
 
-Managed Service is often the stronger fit when PrestaShop is still the right Target Platform, but the customer does not want the project to depend heavily on internal migration-operation capacity.
+| Add-on type             | PrestaShop use case                                                                                                         | Boundary to protect                                                           |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Data Filter Add-on      | Exclude obsolete products, old orders, retired categories, inactive customers, or content that should not move.             | Filtering does not solve unclear catalog meaning.                             |
+| Advanced Data Mapping   | Align supported fields with combinations, features, categories, customer groups, or other supported targets where feasible. | Mapping cannot create unsupported target behavior.                            |
+| Advanced Data Configure | Adjust supported configuration choices that affect migration output.                                                        | Configuration is not custom development or module implementation.             |
+| Custom Add-ons          | Handle a bounded special requirement within agreed scope.                                                                   | Broad custom data or bespoke transformation belongs to Custom Service review. |
 
-This approach is often suitable when:
+The best way to choose an Add-on is to write the requirement as an acceptance rule. For example: “Exclude orders before a specific date” is bounded. “Rebuild all custom loyalty behavior from the old store” is not.
 
-* the customer wants Next-Cart to carry more of the migration execution burden
-* product, category, customer-group, shop-scope, or URL review needs closer coordination
-* the store has enough structure that expert-led execution reduces avoidable mistakes
-* the internal team can provide business decisions and validation but should not manage every migration step alone
-* the migration still stays within standard service capability
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
 
-Managed Service is not the same as Custom Service. It can reduce the customer’s operational workload, but it does not automatically include bespoke transformation, module-specific rebuilding, custom field interpretation, outside-system logic handling, or custom migration logic adjustment. Those requirements belong under Custom Service when they affect the migration outcome.
+Custom Service should be considered when the migration requirement exceeds supported standard behavior. PrestaShop’s open-source nature makes this boundary especially important. Many stores rely on modules, overrides, custom fields, custom database tables, ERP/CRM connectors, tax rules, shipping logic, payment behavior, loyalty systems, reviews, subscriptions, marketplace extensions, or internal reporting IDs. Some of that information may not belong to ordinary product, customer, order, category, or content records.
 
-### Custom Service for PrestaShop <a href="#custom-service-for-prestashop" id="custom-service-for-prestashop"></a>
+Custom Service is the right review path when the project requires tailored handling, not just extra care. The merchant should provide sample records, source evidence, target expectations, and business reasons for the custom requirement.
 
-Custom Service is the safer path when the PrestaShop migration requires customization, modification, or bespoke handling beyond standard service capability.
+| Custom Service trigger            | Why it matters for PrestaShop                                                                  |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Custom fields or database columns | The value may need interpretation, merging, splitting, transformation, or target placement.    |
+| Module-owned records              | Standard migration may not include data created or stored by modules.                          |
+| Overrides or custom code          | Behavior may not be represented as ordinary records.                                           |
+| External identifiers              | ERP, CRM, accounting, warehouse, loyalty, or reporting continuity may depend on preserved IDs. |
+| Complex product logic             | Source options may not map cleanly into combinations, features, or customization fields.       |
+| Multistore transformation         | Records may need deliberate assignment across shops, domains, languages, or pricing contexts.  |
+| Custom Platform source            | The source structure itself may require analysis before PrestaShop mapping can be trusted.     |
 
-This approach is often needed when:
+Custom Service does not automatically mean full target-store setup, app implementation, theme redesign, or integration deployment. It means the migration requirement needs tailored review or non-standard handling within an agreed scope.
 
-* the Source Platform is a Custom Platform
-* source-side product-choice logic does not map cleanly into PrestaShop combinations, features, or customization fields
-* category, customer-group, shop, pricing, or visibility rules require transformation rather than direct transfer
-* custom fields must be interpreted, remapped, merged, split, rebuilt, or connected to business behavior
-* module, theme, override, ERP, CRM, fulfillment, payment, shipping, tax, subscription, loyalty, review, marketplace, analytics, or outside-system data affects continuity
-* selective migration or filtering rules require defined inclusion and exclusion logic
-* legacy routes, outside-system identifiers, or custom URLs require special handling
-* the project needs custom migration logic adjustment
+### How Entity Points Affect Planning <a href="#how-entity-points-affect-planning" id="how-entity-points-affect-planning"></a>
 
-Custom Service does not automatically mean Next-Cart performs full migration management. Migration management depends on the final service plan. The key point is that customization and modification work itself belongs under Custom Service.
+Entity Points help plan selected migration volume, but they do not measure PrestaShop complexity by themselves. Product, Customer, Order, and Blog Posts records may be relevant for Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path.
 
-### How Add-ons Fit Into a PrestaShop Migration Approach <a href="#how-add-ons-fit-into-a-prestashop-migration-approach" id="how-add-ons-fit-into-a-prestashop-migration-approach"></a>
+For PrestaShop, Entity Points should be considered alongside structure burden. A small store can require Custom Service if its product choices depend on custom fields or module behavior. A large store can fit Standard Service or Managed Service if the data is supported, the structure is clean, and validation is realistic.
 
-Add-ons may be relevant when a PrestaShop migration needs optional service features that support filtering, mapping, or configuration. They should not be treated as a replacement for Custom Service.
+| Planning signal   | What it tells the team                                    | What it does not prove                                                                               |
+| ----------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Product volume    | Expected catalog scale and possible Entity Points impact. | Whether combinations, features, customizations, and categories are correct.                          |
+| Customer volume   | Buyer-data scale.                                         | Whether customer groups, duplicates, tax status, or B2B-style treatment is usable.                   |
+| Order volume      | Historical record volume.                                 | Whether refunds, discounts, order statuses, payment references, and custom fields remain meaningful. |
+| Blog Posts volume | Content volume where included in scope.                   | Whether URLs, redirects, CMS Pages, and navigation are launch-ready.                                 |
 
-For example, a Data Filter Add-on can be relevant when the customer wants to migrate only selected products, customers, orders, categories, content, or historical records. Advanced Data Mapping or Advanced Data Configure can be relevant when mapped fields, target settings, or selected configuration choices need more deliberate handling.
-
-However, when the issue is broader customization, Custom Platform handling, module-aware interpretation, theme- or override-shaped behavior, custom field transformation, outside-system identifier handling, or custom migration logic adjustment, the safer boundary is Custom Service.
+Entity Points should support service planning, not replace migration approach selection.
 
 ### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
 
-A Demo Migration should not only confirm that sample records can appear in PrestaShop. It should help decide whether the planned approach is strong enough.
+Demo Migration should be treated as the evidence gate for the chosen PrestaShop approach. It should prove more than record presence. It should show whether the selected service path can preserve enough target meaning to proceed with confidence.
 
-For PrestaShop, the Demo Migration should include samples that test:
+A strong Demo Migration review should include:
 
-* products with combinations
-* products with feature-heavy comparison logic
-* products with customization fields or personalization requirements
-* category paths that matter for browsing, merchandising, SEO, or customer decision-making
-* customer groups that affect pricing, visibility, access, segmentation, or communication
-* shop-specific product, category, customer-group, language, region, or storefront cases when multistore matters
-* high-value product, category, CMS Pages, Blog Posts, and campaign URLs
-* records affected by modules, themes, overrides, custom fields, or integrations
-* orders with important customer, tax, discount, payment, shipping, fulfillment, or service-history context
-* records from a Custom Platform source if the source is not a supported standard platform
+| Sample area                  | Decision it should support                                                                         |
+| ---------------------------- | -------------------------------------------------------------------------------------------------- |
+| Combination-heavy product    | Whether attributes and combinations are interpreted correctly.                                     |
+| Feature-heavy product        | Whether comparison/specification data remains useful.                                              |
+| Personalized product         | Whether customization fields and order detail behave as expected.                                  |
+| Category with SEO value      | Whether metadata, friendly URL, visibility, and product assignment are acceptable.                 |
+| Customer group example       | Whether pricing, access, communication, or segmentation meaning is preserved or scoped separately. |
+| Multistore example           | Whether shop assignment, root category, domain, language, or price context is clear.               |
+| Module/custom-field record   | Whether Add-ons, Custom Service, target setup, or exclusion is needed.                             |
+| Refunded or discounted order | Whether historical order context remains readable.                                                 |
 
-If these samples migrate cleanly and the customer can validate them confidently, Standard Service or Managed Service may be enough depending on execution responsibility. If the samples expose product-structure ambiguity, customer-group uncertainty, shop-assignment risk, module dependency, route-continuity pressure, custom-data complexity, or transformation requirements, Custom Service should be considered early.
+If Demo Migration exposes issues the team cannot classify, the approach is probably too light. The right response is to refine scope, service path, Add-ons, Custom Service requirements, or target-side setup before Full Migration.
 
-### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
+### Additional Migration Options and Launch Timing <a href="#additional-migration-options-and-launch-timing" id="additional-migration-options-and-launch-timing"></a>
 
-The chosen PrestaShop approach may be too light when the migration plan depends on assumptions that have not been proven.
+PrestaShop launch timing can require follow-up migration planning when the source store continues to change after an earlier run. New products, customers, orders, Blog Posts, categories, images, or content may appear before launch. Configuration may also need to change after Demo Migration shows mapping, filtering, or setup gaps.
 
-Common warning signs include:
+Additional Migration Options should be discussed only when they solve a real launch-timing problem. The merchant may need to continue the migration with the last used configuration, continue the migration with a new configuration, or perform a new migration. These choices affect what should be revalidated.
 
-* teams cannot explain which choices should become combinations, features, or customization fields
-* categories are being migrated without confirming how customers should browse the future store
-* customer groups are listed but their commercial effect is unclear
-* multistore is expected, but shop assignments and shared-versus-separated behavior are not operationally defined
-* friendly URL expectations are vague
-* modules, themes, overrides, or custom fields are treated as ordinary records even though they affect storefront behavior
-* customer-account continuity has not been tested
-* Demo Migration results show differences that reviewers cannot classify confidently
-* the Source Platform is a Custom Platform but the project is still being planned like a standard supported migration path
+| Later migration need                                  | Practical review focus                                                                      |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| New source records appear before launch               | Validate newly migrated records and regression samples.                                     |
+| Configuration changes after Demo Migration            | Recheck affected fields, filters, mappings, or assignments.                                 |
+| Target result should be refreshed                     | Validate the new migration result and confirm previous target data is replaced as intended. |
+| New eligible entities are migrated for the first time | Review Entity Points usage for those new records.                                           |
 
-These signals do not always mean PrestaShop is the wrong Target Platform. They usually mean the migration approach needs more guidance, stronger validation, or Custom Service handling.
+This language should remain operational. There is no need to explain old feature names or backend mechanics in publication content.
 
-### How Custom Platform Sources Affect PrestaShop Approach Selection <a href="#how-custom-platform-sources-affect-prestashop-approach-selection" id="how-custom-platform-sources-affect-prestashop-approach-selection"></a>
+### Signals That the Approach Is Too Light <a href="#signals-that-the-approach-is-too-light" id="signals-that-the-approach-is-too-light"></a>
 
-When the Source Platform is a Custom Platform, the valid service-path implication is Custom Service.
+A PrestaShop approach is too light when it assumes standard record transfer can solve unclear target meaning. Warning signs should be addressed before Full Migration.
 
-Custom Platform data may not follow the standard product, customer, order, category, URL, or shop model expected from supported platforms. Product-choice logic, personalization behavior, customer segmentation, shop context, custom fields, outside-system identifiers, integrations, and historical order meaning may need interpretation before they can become useful in PrestaShop.
+| Warning signal                                                                                        | Likely response                                               |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Products mix selectable choices, feature values, and personalization fields without a decision model. | Rework catalog scope before proceeding.                       |
+| Customer groups affect price, visibility, or access but are described only as labels.                 | Strengthen preparation and service-path review.               |
+| Multistore scope is unclear.                                                                          | Define shop structure or consider stronger handling.          |
+| Modules, overrides, or custom fields own important data.                                              | Review Custom Service requirements.                           |
+| URL priorities and category landing pages are not ranked.                                             | Add preparation and validation around SEO continuity.         |
+| Demo Migration findings cannot be classified.                                                         | Pause before Full Migration and refine scope or service path. |
 
-In that situation, the main question is not whether the migration is large or small. The better question is which parts of the source require custom handling so PrestaShop can preserve the intended catalog, customer, shop, route, and operational meaning.
+Choosing a stronger approach is not about making the project heavier than necessary. It is about matching the support path to the parts of PrestaShop that actually create business risk.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right PrestaShop migration approach is the one that matches the real structure and behavior burden of the Target Platform. Standard Service can work well when the supported migration path is clear, the future PrestaShop model is already defined, and the customer can validate the outcome confidently. Managed Service is stronger when the migration still fits standard service capability but the customer wants Next-Cart to carry more execution responsibility. Custom Service becomes the safer path when PrestaShop success depends on customization, modification, Custom Platform handling, module-aware interpretation, custom fields, filtered logic, outside-system identifiers, or custom migration logic adjustment.
+The right PrestaShop migration approach is the one that matches the real interpretation burden. Standard Service may be enough when supported records are clear and the merchant can validate confidently. Managed Service may be safer when execution coordination matters. Add-ons can support bounded filtering, mapping, or configuration. Custom Service should be considered when custom data, modules, overrides, external identifiers, Custom Platform handling, or bespoke transformation affect the expected target result.
 
-Review a Demo Migration that includes the PrestaShop products, combinations, features, customization fields, categories, customer groups, shop assignments, URLs, orders, modules, themes, overrides, and Custom Platform cases most likely to expose risk. If the result still leaves unresolved interpretation questions, use Live Chat to clarify whether Standard Service, Managed Service, or Custom Service is the safer path before committing to the full migration.
+PrestaShop approach selection should be based on representative evidence: combination-heavy products, feature-rich product data, customer groups, multistore scope, URL priorities, module dependencies, custom fields, and historical order examples. The service path is ready when the merchant can explain what should migrate, what should be configured, what requires special handling, and what must be proven before launch.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for PrestaShop?**
+**When is Standard Service enough for a PrestaShop migration?**
 
-Standard Service may be enough when the Source Platform uses a supported migration path, the future PrestaShop structure is clear, and the customer can validate products, combinations, features, customization fields, categories, customer groups, URLs, orders, and important storefront behavior confidently.
+Standard Service may be enough when the required records are supported, product combinations and features are clear, customer groups are documented, multistore scope is simple or absent, module/custom data is not business-critical, and the merchant can validate Demo Migration and Full Migration results confidently.
 
-**When should I consider Managed Service for PrestaShop?**
+**When should Managed Service be considered for PrestaShop?**
 
-Managed Service is useful when the migration still fits standard service capability, but the customer wants Next-Cart to carry more of the execution burden while the internal team focuses on business decisions, result review, and launch judgment.
+Managed Service is useful when the migration remains within supported capability but the merchant wants stronger execution support, coordination, and review sequencing. It does not replace Custom Service when the requirement itself needs custom handling.
 
-**When does PrestaShop require Custom Service?**
+**How are Add-ons different from Custom Service in a PrestaShop migration?**
 
-Custom Service should be considered when the project requires customization, modification, Custom Platform handling, custom field transformation, module-aware interpretation, theme- or override-shaped handling, filtered logic, outside-system identifier handling, or custom migration logic adjustment.
+Add-ons support bounded filtering, mapping, or configuration within supported behavior. Custom Service is for tailored review or non-standard handling, such as custom fields, module-owned data, overrides, external identifiers, Custom Platform sources, or custom migration logic adjustment.
 
-**Do Add-ons replace Custom Service for PrestaShop?**
+**Do Entity Points decide the right PrestaShop migration approach?**
 
-No. Add-ons can support specific optional needs such as filtering, mapping, or configuration. Broader customization, Custom Platform handling, module- or theme-specific interpretation, override-shaped behavior, custom field transformation, or custom migration logic adjustment belongs under Custom Service.
+No. Entity Points help plan migration volume for eligible records, but they do not measure catalog structure, customer group complexity, multistore scope, module dependency, custom data, or validation burden.
 
-**What should the Demo Migration prove before choosing the approach?**
+**What should Demo Migration prove before Full Migration?**
 
-It should prove whether high-risk PrestaShop cases can be migrated and validated safely, including combinations, features, customization fields, customer groups, multistore assignments, friendly URLs, module- or theme-shaped behavior, historical orders, custom fields, and any Custom Platform source data.
+Demo Migration should prove that representative PrestaShop records behave as expected: combinations, features, customization fields, categories, URLs, customer groups, multistore examples, module/custom-field records, and important order samples.
+
+**When are Additional Migration Options relevant?**
+
+They are relevant when launch timing requires follow-up handling, such as adding newly created source records, changing configuration after Demo Migration, or performing a new migration to refresh the target result. The team should define what changes and what must be revalidated.

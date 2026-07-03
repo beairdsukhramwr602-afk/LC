@@ -1,215 +1,143 @@
 # Gambio Constraints and Risks
 
-Gambio migration risk is rarely caused by one isolated record type. It usually appears where catalog structure, customer group behavior, order history, storefront presentation, legal and regional settings, integrations, and hosting responsibility meet. A product may migrate as a record, but its commercial meaning depends on variants, categories, filters, stock, images, prices, tax behavior, shipping rules, and how the product appears in the storefront.
+Gambio migration risk usually appears when the project treats the platform as a simple destination for records instead of a specific operating model. Gambio can support practical store operations, catalog management, product options, stock control, downloadable products, content pages, marketplace connections, and either Cloud or self-hosted deployment. The constraint is that those capabilities still need the right data interpretation, configuration, and implementation plan.
 
-The most important constraint in a Gambio migration is therefore not whether data can be moved at all. It is whether the source store’s operating logic can be represented cleanly in the future Gambio environment. Merchants planning a migration should review the areas below before assuming that a standard record transfer will preserve the way the business actually sells, manages, and supports customers.
+The most important risk is not that data cannot be moved. It is that the migrated store may not behave the way the merchant expects after launch. Product choices may lose commercial meaning, categories may no longer support discovery, legal and content pages may be misplaced, historical orders may be difficult to read, or the chosen Cloud/self-hosted environment may not match the merchant’s customization assumptions.
 
-### Where Risk Concentrates in Gambio Migration <a href="#where-risk-concentrates-in-gambio-migration" id="where-risk-concentrates-in-gambio-migration"></a>
+### Constraint 1: Cloud and Self-Hosted Gambio Create Different Operating Responsibilities <a href="#constraint-1-cloud-and-self-hosted-gambio-create-different-operating-responsibilities" id="constraint-1-cloud-and-self-hosted-gambio-create-different-operating-responsibilities"></a>
 
-Risk concentrates in Gambio migration when the source store relies on structures that are easy to underestimate: product options, variants, customer group pricing, legal or regional settings, storefront design, SEO routes, self-hosted customization, app or module behavior, and third-party integrations.
+Gambio Cloud and self-hosted Gambio are not just pricing or infrastructure choices. They shape who owns hosting, installation, updates, maintenance, support expectations, customization access, and technical follow-up after migration. Gambio Cloud is positioned for merchants who want hosting, installation, updates, and support included. Self-hosting gives the merchant more flexibility and customizability, but also makes the merchant responsible for hosting, maintenance, and updates.
 
-For simpler stores, these areas may only require ordinary preparation and Demo Migration review. For stores with long operating history, custom development, segmented pricing, multilingual content, B2B workflows, marketplace connections, or highly tailored storefront behavior, these areas should be reviewed earlier and more deliberately.
+This creates migration risk when the merchant chooses a target environment without matching it to the source store’s technical reality. A store with heavy custom code, modified database structures, special integrations, or extension-owned records may require more review than a Cloud-oriented launch can accommodate. A merchant choosing self-hosting may have more technical freedom, but still needs scope control and clear ownership for custom work.
 
-| Risk area                                  | Why it matters in Gambio migration                                                                             | Earliest review focus                                                                         |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Cloud versus self-hosted operating model   | Hosting responsibility, update control, customization flexibility, and implementation burden differ by model.  | Confirm whether the Target Platform will be Gambio Cloud or a self-hosted Gambio environment. |
-| Product options and variants               | Buying choices, prices, stock, images, and order line meaning may depend on how source options are structured. | Select variant-heavy products for Demo Migration and compare shopper-facing behavior.         |
-| Customer groups and pricing                | Group-specific pricing, B2B context, discounts, and tax treatment can affect commercial meaning.               | Identify customer groups, price rules, and representative customers before migration.         |
-| Tax, shipping, payment, and legal settings | These areas often require target configuration, not simple data transfer.                                      | Separate migrated records from Gambio settings and post-migration configuration tasks.        |
-| Storefront and SEO continuity              | Product/category paths, content pages, metadata, navigation, and layout affect traffic and usability.          | Identify high-value URLs, content pages, menu paths, and SEO-sensitive records.               |
-| Customization and integrations             | Self-hosted modifications, modules, connectors, and custom code may not map through standard capability.       | Inventory custom behavior and decide whether Custom Service review is needed.                 |
+| Environment assumption                        | Risk if ignored                                                                    | Planning response                                                                       |
+| --------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Gambio Cloud handles operational maintenance. | Merchant expects unsupported source customizations to carry over automatically.    | Confirm what belongs to migration, target configuration, or separate implementation.    |
+| Self-hosting allows more flexibility.         | Merchant underestimates hosting, update, security, and maintenance responsibility. | Assign technical ownership before Full Migration.                                       |
+| Both options support professional stores.     | Team treats environment choice as irrelevant to migration scope.                   | Review customization, access needs, integrations, and post-launch support expectations. |
 
-### Constraint 1: Cloud and Self-Hosted Gambio Are Not the Same Migration Environment <a href="#constraint-1-cloud-and-self-hosted-gambio-are-not-the-same-migration-environment" id="constraint-1-cloud-and-self-hosted-gambio-are-not-the-same-migration-environment"></a>
+The mitigation is to choose the Gambio operating model before finalizing scope. Demo Migration should validate records, but the environment decision should validate responsibility.
 
-#### Description <a href="#description" id="description"></a>
+### Constraint 2: Product Options and Stock Behavior Can Lose Selling Meaning <a href="#constraint-2-product-options-and-stock-behavior-can-lose-selling-meaning" id="constraint-2-product-options-and-stock-behavior-can-lose-selling-meaning"></a>
 
-Gambio can be evaluated through cloud and self-hosted operating models. This choice affects the migration because the target environment defines who manages hosting, updates, technical access, customization flexibility, and implementation responsibility.
+Gambio supports product options and stock management, but source platforms often model these areas differently. A source option may be a simple label, a variant selector, an inventory-bearing choice, a price modifier, a shipping modifier, or a custom field controlled by an app or module. If those meanings are not reviewed, the target catalog may appear complete while shoppers cannot select the right product or staff cannot fulfill orders confidently.
 
-A cloud setup may reduce infrastructure burden and make the target environment easier to operate for merchants who want a managed shop foundation. A self-hosted setup may offer more control and customization flexibility, but it also increases responsibility for hosting, server readiness, updates, technical maintenance, custom code, and extension compatibility.
+Risk increases when the source store has many size/color combinations, option-level pricing, SKU-dependent options, downloadable products, product bundles, custom product builders, or inconsistent product structures created over several years. Stock behavior is especially sensitive because the source store may reduce inventory at product level, variant level, warehouse level, or through an external system.
 
-#### Who It Affects <a href="#who-it-affects" id="who-it-affects"></a>
+Mitigation requires representative catalog sampling. The merchant should not validate only top-selling simple products. Demo Migration should include products with options, products with stock reduction, products with no stock control, downloadable products, products with multiple images, products in multiple categories, and products with historical orders. The goal is to prove that product structure remains sellable, not just imported.
 
-This constraint affects merchants who are moving from a hosted SaaS platform, merchants with custom code in their source store, merchants planning self-hosted control, and merchants expecting the migration result to include implementation decisions that actually belong to hosting, environment setup, or development work.
+### Constraint 3: Category, Navigation, and SEO Structures May Not Transfer as One Layer <a href="#constraint-3-category-navigation-and-seo-structures-may-not-transfer-as-one-layer" id="constraint-3-category-navigation-and-seo-structures-may-not-transfer-as-one-layer"></a>
 
-It also affects merchants who compare Gambio Cloud and self-hosted Gambio as if they create the same operational burden. The migrated data may be similar in purpose, but the implementation assumptions around access, configuration, customization, updates, and maintenance are not the same.
+Gambio can support categories and subcategories, but source stores often use several structures to create discovery: categories, collections, tags, menu links, filters, landing pages, manufacturer pages, promotional sections, and theme-specific blocks. A direct data transfer can preserve records while weakening the storefront path that shoppers and search engines actually use.
 
-#### Mitigation Strategy <a href="#mitigation-strategy" id="mitigation-strategy"></a>
+This is a major risk for stores with organic search traffic, deep category trees, many indexed product/category URLs, content-heavy landing pages, or paid campaigns pointing to specific pages. If categories are migrated without reviewing navigation and URL expectations, products may become harder to find, internal links may break, and high-value pages may lose continuity.
 
-The target operating model should be confirmed before migration planning becomes detailed. The merchant should decide whether Gambio Cloud or self-hosted Gambio is the intended Target Platform environment, then review what that choice means for supported data, configuration work, design implementation, custom development, and ongoing operations.
+Mitigation starts with a discovery map. The merchant should identify high-value categories, products, content pages, menus, and URLs before migration. Demo Migration should include SEO-sensitive categories and products, not only random samples. Redirect planning, metadata review, menu placement, and storefront layout should be handled as separate launch tasks where needed.
 
-If the source store depends on custom code, unusual data relationships, non-standard integrations, or server-level behavior, the migration should be reviewed before assuming that a standard service path can preserve the full operating model.
+### Constraint 4: Content Pages and Legal Context Require More Than Text Transfer <a href="#constraint-4-content-pages-and-legal-context-require-more-than-text-transfer" id="constraint-4-content-pages-and-legal-context-require-more-than-text-transfer"></a>
 
-### Constraint 2: Product Variants, Options, and Stock Behavior Can Carry Hidden Meaning <a href="#constraint-2-product-variants-options-and-stock-behavior-can-carry-hidden-meaning" id="constraint-2-product-variants-options-and-stock-behavior-can-carry-hidden-meaning"></a>
+Gambio’s content page capabilities are valuable, but content migration becomes risky when pages are treated as ordinary text records. Many stores use CMS Pages for legal notices, privacy policy, terms, shipping information, returns, size guides, trust badges, contact information, brand pages, and campaign landing pages. These pages matter because they support compliance context, customer confidence, and conversion.
 
-#### Description <a href="#description-1" id="description-1"></a>
+Gambio Cloud positioning may include legal-text support through selected partners, while self-hosted merchants may need to manage a larger share of legal and content responsibility themselves. Migration should not be treated as legal advice or compliance validation. Still, it should preserve the content records and reveal which pages need placement, review, or replacement in the target store.
 
-Gambio stores often depend on product structure that is richer than a product title, price, and image. A product may include options, variants, stock behavior, downloadable products, product images, categories, filters, reviews, specials, related items, and base price information. In a source platform, these details may be stored through different structures, extensions, apps, or custom fields.
+Risk increases when the source store has outdated policy pages, duplicated landing pages, theme-embedded content blocks, hard-coded footer content, custom forms, or legal text generated by third-party services. Some content may be better recreated in Gambio rather than moved exactly as-is.
 
-The risk is that the source product appears to migrate correctly while the shopper-facing buying logic changes. A color, size, bundle, download, stock rule, or price adjustment may not behave the same way unless the source structure is reviewed against Gambio’s target structure.
+Mitigation requires content classification. Pages should be grouped into legal/trust pages, service pages, conversion pages, SEO pages, and obsolete pages. This prevents the new store from carrying forward clutter while losing the pages that matter.
 
-#### Who It Affects <a href="#who-it-affects-1" id="who-it-affects-1"></a>
+### Constraint 5: Historical Orders Can Become Hard to Interpret <a href="#constraint-5-historical-orders-can-become-hard-to-interpret" id="constraint-5-historical-orders-can-become-hard-to-interpret"></a>
 
-This constraint affects merchants with configurable products, apparel catalogs, product bundles, digital downloads, multiple images per product, stock-sensitive sales, product filters, special pricing, base price display requirements, or product records that have been shaped by custom fields or external systems.
+Historical order migration should preserve operational readability. Merchants often rely on order history for customer support, accounting reference, warranty handling, repeat purchase support, refunds, and dispute review. The risk is that migrated orders may retain totals and dates but lose the context staff need to understand what happened.
 
-It also affects merchants who have inconsistent product data, duplicated options, unclear SKU logic, missing images, mixed variant structures, or years of manual catalog changes.
+Order interpretation risk increases when the source store uses option-heavy products, custom order statuses, partial fulfillment, external payment references, marketplace orders, tax-sensitive orders, discounts, or shipping rules that do not map neatly into Gambio. A migrated order may show a product and total, but if product options, payment labels, tax details, shipping method, or status meaning are unclear, the record is much less useful.
 
-#### Mitigation Strategy <a href="#mitigation-strategy-1" id="mitigation-strategy-1"></a>
+Mitigation requires order sampling by scenario. Demo Migration should include ordinary orders, orders with discounts, orders with product options, orders with downloads, cancelled or refunded orders, different shipping methods, different payment methods, and orders from important customer types. Staff should verify whether the record can be understood inside Gambio without opening the old platform.
 
-Representative catalog samples should be selected before Demo Migration. These samples should include simple products, variant-heavy products, products with multiple images, products with stock rules, downloadable products, discounted products, products in multiple categories, and products with special display or pricing behavior.
+### Constraint 6: Marketplace, Payment, and External Integrations Need Scope Separation <a href="#constraint-6-marketplace-payment-and-external-integrations-need-scope-separation" id="constraint-6-marketplace-payment-and-external-integrations-need-scope-separation"></a>
 
-If source product meaning depends on custom fields, unsupported extensions, external identifiers, or bespoke transformation rules, Advanced Data Mapping, Advanced Data Configure, or Custom Service review may be needed.
+Gambio’s platform positioning includes marketplace and payment-provider connectivity, with marketplace and multichannel selling commonly framed around channels such as Amazon or eBay. That does not mean source marketplace history, connector configuration, external IDs, payment gateway data, fulfillment references, or ERP records automatically become standard migration data.
 
-### Constraint 3: Customer Groups and B2B Pricing Require Early Review <a href="#constraint-3-customer-groups-and-b2b-pricing-require-early-review" id="constraint-3-customer-groups-and-b2b-pricing-require-early-review"></a>
+Integration risk is common because source stores may use connectors to manage inventory, import marketplace orders, synchronize prices, update tracking numbers, or exchange customer and order data with an ERP. These relationships can be business-critical but invisible in ordinary export fields.
 
-#### Description <a href="#description-2" id="description-2"></a>
+Mitigation is to separate migrated data from integration recreation. Products, customers, and orders may move through the migration scope where supported. Connector configuration, marketplace feeds, ERP mappings, payment gateway setup, and external automation often need separate implementation or Custom Service review. This distinction prevents the merchant from assuming that a successful data migration also recreates the entire operating system around the store.
 
-Gambio can support customer group and pricing behavior that is important for merchants with segmented customers, wholesale buyers, B2B accounts, or group-specific commercial rules. During migration, customer records alone do not prove that the customer model has been preserved. The target result must also preserve the customer’s intended relationship to pricing, discounts, tax context, visibility, and historical orders where those areas are relevant.
+### Constraint 7: Customization and Open-Source Expectations Can Inflate Scope <a href="#constraint-7-customization-and-open-source-expectations-can-inflate-scope" id="constraint-7-customization-and-open-source-expectations-can-inflate-scope"></a>
 
-A source platform may handle groups, roles, price lists, wholesale permissions, customer tags, or B2B logic in ways that do not directly match the target structure. This creates a risk that customers migrate but lose the commercial meaning that made the grouping useful.
+Gambio’s open-source/GPL positioning and self-hosting flexibility can encourage merchants to expect high customization continuity. That expectation is reasonable to discuss, but risky when it is not separated from data migration. Open-source availability does not mean every source customization can be automatically translated into the Target Platform.
 
-#### Who It Affects <a href="#who-it-affects-2" id="who-it-affects-2"></a>
+Risk increases when the source store contains custom fields, modified database tables, custom checkout logic, source-side modules, custom reports, external identifiers, or theme-level behavior that stores business meaning outside standard entities. These structures may require Advanced Data Mapping, Advanced Data Configure, Tailored Add-ons, Custom Add-ons, or Custom Service review depending on the case.
 
-This constraint affects merchants with wholesale customers, retail/wholesale segmentation, B2B pricing, logged-in customer pricing, customer-group discounts, tax-sensitive customer types, restricted price visibility, or different purchase conditions by customer group.
+Mitigation starts with a customization inventory. The merchant should identify what is native data, what is configuration, what is extension-owned, what is theme-only, and what is external-system-owned. The migration plan should not hide those differences inside a single record count.
 
-It also affects merchants moving from platforms where B2B behavior is controlled by apps, modules, custom code, ERP systems, or external customer records.
+### Highest-Risk Patterns to Review First <a href="#highest-risk-patterns-to-review-first" id="highest-risk-patterns-to-review-first"></a>
 
-#### Mitigation Strategy <a href="#mitigation-strategy-2" id="mitigation-strategy-2"></a>
+The highest-risk Gambio patterns are the ones where an old-store assumption is carried forward without deciding whether it belongs to migrated data, Gambio configuration, Custom Service, Add-ons, or separate implementation. These patterns should be reviewed before Full Migration because they can produce errors that are not visible in simple record counts.
 
-Before migration, customer groups and representative customer accounts should be documented. The merchant should identify which customers belong to which group, what pricing or rules are attached to each group, and whether any source behavior is native, app-owned, custom, or external.
+| Risk pattern                         | Assumption to challenge                                                      | Operational consequence                                                                   | Review signal                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Cloud versus self-hosted uncertainty | The same migration scope works for either operating model.                   | Launch responsibility becomes unclear when hosting, updates, or customization are needed. | The merchant cannot state who owns updates, server maintenance, and custom behavior. |
+| Complex product options              | Source variants and Gambio options are treated as equivalent.                | Shoppers may see choices, but staff may lose stock, price, SKU, or fulfillment meaning.   | Option-heavy products fail admin and order-line review.                              |
+| Deep category migration              | Category count is treated as proof of navigation quality.                    | Products become harder to browse, and SEO-sensitive category paths may weaken.            | Important categories exist but do not guide shoppers effectively.                    |
+| Legal or trust content drift         | CMS Pages are treated as ordinary text.                                      | Compliance, trust, or buying guidance may become outdated or disconnected.                | Key content pages are present but not linked, reviewed, or aligned with launch.      |
+| External dependency assumptions      | Marketplace, payment, or shipping behavior is expected to move with records. | Launch tasks are discovered late because live connections were never scoped.              | Integrations are named but have no owner or configuration plan.                      |
 
-Demo Migration should include customers and orders from multiple customer groups. If the source uses custom B2B logic, external identifiers, or unsupported pricing relationships, the migration path should be reviewed for Custom Service.
+A strong Gambio review should not wait until all records are migrated before asking these questions. The earlier the project identifies which assumptions are not part of data migration, the easier it is to protect the schedule and avoid post-launch rework.
 
-### Constraint 4: Tax, Shipping, Payment, and Legal Settings Are Configuration-Sensitive <a href="#constraint-4-tax-shipping-payment-and-legal-settings-are-configuration-sensitive" id="constraint-4-tax-shipping-payment-and-legal-settings-are-configuration-sensitive"></a>
+The highest-risk Gambio areas are the ones where data and behavior are tightly connected. They should be reviewed before Full Migration because they can change scope, validation effort, and post-launch work.
 
-#### Description <a href="#description-3" id="description-3"></a>
+| Risk pattern                | Why it matters                                                        | Earliest review evidence                                                               |
+| --------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Cloud/self-hosting mismatch | Operating responsibility and customization expectations may conflict. | Target environment decision, hosting needs, update ownership, and custom access needs. |
+| Option-heavy catalog        | Product selection, price, stock, and order-line meaning can break.    | Representative products with options, stock behavior, images, and historical orders.   |
+| SEO-sensitive structure     | Categories, content pages, and URLs affect discoverability.           | High-value URLs, category paths, metadata, menus, and redirect plan.                   |
+| Legal/content dependency    | Important pages may need review, placement, or replacement.           | Legal pages, shipping/returns pages, trust content, footer links, and CMS Pages.       |
+| Integration-owned data      | External systems may hold business meaning outside migrated records.  | Marketplace, ERP, payment, shipping, and accounting connector inventory.               |
 
-Tax, shipping, payment, regional settings, currencies, order statuses, and legal-compliance-related settings often involve target configuration. They should not be treated as ordinary records that automatically behave the same way after migration.
+A strong risk review does not try to eliminate all complexity. It makes complexity visible early enough that the migration path can be scoped correctly.
 
-A source store may have tax rules based on region, product type, customer type, or business model. Shipping may depend on weight, order value, destination, carrier, product group, or custom logic. Payment behavior may rely on gateway identifiers, transaction references, statuses, or third-party systems. Legal and regional display requirements may depend on configuration and storefront presentation.
+### When Risk Requires Escalation <a href="#when-risk-requires-escalation" id="when-risk-requires-escalation"></a>
 
-#### Who It Affects <a href="#who-it-affects-3" id="who-it-affects-3"></a>
+Risk requires escalation when a discovered issue changes the expected migration path. A product option that only needs label cleanup may remain a configuration issue. A product option that controls SKU, stock, price, image, fulfillment, or external identifiers may require Advanced Data Mapping, Advanced Data Configure, Add-ons, Custom Service, or separate implementation. The difference is not the label of the feature; it is the business behavior attached to it.
 
-This constraint affects merchants selling across regions, using multiple tax zones, offering multiple shipping methods, relying on specific payment providers, managing B2B and B2C buyers in the same store, using multiple currencies or languages, or operating under strict regional compliance expectations.
+Escalation is also necessary when the project cannot name an owner. If legal-text review, marketplace setup, payment configuration, hosting, updates, custom templates, or integration deployment is described only as something that will happen later, the risk is not controlled. A Gambio migration should move toward Full Migration only when those tasks are classified and separated from the data migration scope.
 
-It also affects merchants who expect migrated orders to fully preserve the operational context behind payment, shipping, tax, invoice, or fulfillment decisions.
+A useful escalation review should identify the assumption, consequence, operational impact, mitigation, and validation signal for each open issue. For example, an assumption that all old product options will behave naturally in Gambio can lead to incorrect order lines, staff confusion, and customer complaints. The mitigation is not simply to migrate the option labels; it is to test representative products and decide whether the option behavior belongs to normal mapping, target configuration, or a more tailored handling path.
 
-#### Mitigation Strategy <a href="#mitigation-strategy-3" id="mitigation-strategy-3"></a>
+The same logic applies to hosting and customization. If the merchant chooses Gambio Cloud but expects server-level changes, the operational impact is not just technical inconvenience. It may affect feature availability, integration planning, support expectations, and post-launch maintenance. If the merchant chooses self-hosted Gambio without a technical owner, the migration may be complete while the store is not operationally protected.
 
-The migration plan should separate data migration from target configuration. Historical orders should be checked for tax, shipping, payment method, totals, discounts, and status readability. Future selling behavior should be configured and tested in Gambio after migration.
+The final risk-control question is simple: if this issue appears after launch, will it stop customers from finding products, buying products, trusting the store, receiving the right fulfillment, or receiving support? If the answer is yes, the issue belongs in the migration decision path rather than in a vague post-launch task list.
 
-If the source uses custom shipping rules, unsupported payment metadata, third-party tax systems, ERP-controlled fulfillment, or custom compliance workflows, Custom Service review may be required.
+Risk requires escalation when a discovered issue changes the expected migration path. A product option that only needs label cleanup may remain a configuration issue. A product option that controls SKU, stock, price, image, fulfillment, or external identifiers may require Advanced Data Mapping, Advanced Data Configure, Add-ons, Custom Service, or separate implementation. The difference is not the label of the feature; it is the business behavior attached to it.
 
-### Constraint 5: Storefront Layout and SEO Continuity Are Not Just Data Issues <a href="#constraint-5-storefront-layout-and-seo-continuity-are-not-just-data-issues" id="constraint-5-storefront-layout-and-seo-continuity-are-not-just-data-issues"></a>
+Escalation is also necessary when the project cannot name an owner. If legal-text review, marketplace setup, payment configuration, hosting, updates, custom templates, or integration deployment is described only as something that will happen later, the risk is not controlled. A Gambio migration should move toward Full Migration only when those tasks are classified and separated from the data migration scope.
 
-#### Description <a href="#description-4" id="description-4"></a>
+The final risk-control question is simple: if this issue appears after launch, will it stop customers from finding products, buying products, trusting the store, receiving the right fulfillment, or receiving support? If the answer is yes, the issue belongs in the migration decision path rather than in a vague post-launch task list.
 
-Gambio migration does not automatically recreate the source storefront design. Product records, category records, and content pages may move, but the final customer experience depends on layout, navigation, theme behavior, content placement, metadata, redirects, product paths, category paths, and how the Gambio storefront is configured.
+Some risks can be handled through careful configuration, representative Demo Migration validation, and targeted Add-ons. Others indicate that the project may require Custom Service.
 
-This matters because storefront continuity affects customer trust, search visibility, paid campaign performance, and post-launch usability. A store can have complete data in the administration area but still feel broken if important pages are difficult to find, key product paths change without planning, or content pages lose their role in the buying journey.
+Escalation is appropriate when the source store depends on unsupported custom records, app/module data, custom fields, external-system identifiers, bespoke transformation rules, or custom migration logic adjustment. It is also appropriate when the merchant expects target behavior that is not part of ordinary data movement, such as recreating a custom checkout, rebuilding marketplace automation, or translating a heavily modified product model.
 
-#### Who It Affects <a href="#who-it-affects-4" id="who-it-affects-4"></a>
-
-This constraint affects merchants with strong organic traffic, many indexed product/category URLs, content-rich stores, custom landing pages, extensive navigation, marketing campaign pages, legally important content pages, or storefront layouts that influence conversion.
-
-It also affects merchants moving from platforms where theme, content, category display, product display, and SEO behavior were tightly integrated.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-4" id="mitigation-strategy-4"></a>
-
-Before migration, high-value URLs, key categories, important products, content pages, metadata, internal links, and navigation structures should be documented. The target Gambio storefront should be reviewed for how the migrated data will appear, not only whether it exists.
-
-Demo Migration should include SEO-sensitive products and categories, content pages, and records with important metadata. If redirects, custom layout recreation, or theme-level transformation is required, those needs should be planned separately from ordinary data migration.
-
-### Constraint 6: Custom Development and Integrations Can Exceed Standard Migration Assumptions <a href="#constraint-6-custom-development-and-integrations-can-exceed-standard-migration-assumptions" id="constraint-6-custom-development-and-integrations-can-exceed-standard-migration-assumptions"></a>
-
-#### Description <a href="#description-5" id="description-5"></a>
-
-Gambio can support professional store operations and customization, especially in self-hosted contexts, but migration planning must distinguish supported data migration from custom development, integration recreation, module behavior, and bespoke business logic.
-
-A source store may rely on marketplace connectors, ERP systems, accounting integrations, payment gateway metadata, warehouse systems, CRM sync, custom fields, custom checkout logic, modified database tables, or modules that do not have a direct equivalent in Gambio. These elements may carry business meaning that is not visible in ordinary product, customer, or order exports.
-
-#### Who It Affects <a href="#who-it-affects-5" id="who-it-affects-5"></a>
-
-This constraint affects merchants with custom-developed stores, heavily modified open-source platforms, external systems, marketplace workflows, ERP dependencies, app-owned data, custom order logic, non-standard product structures, or custom reporting requirements.
-
-It also affects merchants who expect the migration itself to recreate source-side functionality rather than move supported data into the Target Platform.
-
-#### Mitigation Strategy <a href="#mitigation-strategy-5" id="mitigation-strategy-5"></a>
-
-Custom behavior should be inventoried before migration. The merchant should identify what belongs to supported data migration, what belongs to target configuration, what belongs to Gambio implementation, and what requires Custom Service.
-
-Custom Service should be reviewed when the migration requires Custom Platform handling, unsupported extension data, third-party data, external identifiers, Tailored Add-ons, Custom Add-ons, custom migration logic adjustment, or broader bespoke transformation.
-
-### What Deserves Earliest Review <a href="#what-deserves-earliest-review" id="what-deserves-earliest-review"></a>
-
-The earliest review should focus on the areas most likely to change migration scope or service path. These areas are not always the largest by record count. They are the areas where business meaning is most likely to be hidden inside configuration, custom logic, integrations, or storefront behavior.
-
-#### Target operating model <a href="#target-operating-model" id="target-operating-model"></a>
-
-Confirm whether the merchant is moving into Gambio Cloud or self-hosted Gambio. This decision affects the implementation path, customization expectations, technical access, update responsibility, and the way post-migration work should be assigned.
-
-#### Representative product structures <a href="#representative-product-structures" id="representative-product-structures"></a>
-
-Review simple products, variant-heavy products, products with stock behavior, digital downloads, products with multiple images, products in multiple categories, filtered products, and products with special pricing. Product structure is one of the most common places where a migration can look successful but still lose selling meaning.
-
-#### Customer group and pricing logic <a href="#customer-group-and-pricing-logic" id="customer-group-and-pricing-logic"></a>
-
-Document customer groups, wholesale or B2B segmentation, group pricing, tax-sensitive customer types, and representative customers. This helps clarify whether the target result can preserve account meaning, not only customer records.
-
-#### Tax, shipping, payment, and order status behavior <a href="#tax-shipping-payment-and-order-status-behavior" id="tax-shipping-payment-and-order-status-behavior"></a>
-
-Review historical orders and future selling configuration separately. Historical order readability and future checkout behavior are related, but they are not the same validation task.
-
-#### Storefront routes, content, and SEO-sensitive pages <a href="#storefront-routes-content-and-seo-sensitive-pages" id="storefront-routes-content-and-seo-sensitive-pages"></a>
-
-Identify important product URLs, category URLs, content pages, navigation paths, metadata, and landing pages. These records should be included in planning because Gambio migration quality depends on both administration-side data and storefront-side usability.
-
-#### Custom and integration-owned data <a href="#custom-and-integration-owned-data" id="custom-and-integration-owned-data"></a>
-
-Inventory custom fields, modified source tables, app-owned data, ERP identifiers, marketplace references, third-party fulfillment fields, and custom checkout or pricing behavior. These are the strongest indicators that Custom Service may be needed.
-
-### When Risk Increases <a href="#when-risk-increases" id="when-risk-increases"></a>
-
-Risk increases when the source store is structurally unclear, heavily customized, or expected to behave identically after migration without separate target configuration and implementation work.
-
-A Gambio migration deserves deeper review when any of the following conditions apply:
-
-* The source catalog uses complex variants, bundles, downloads, option-level pricing, or inconsistent SKU logic.
-* Customer groups, wholesale pricing, or B2B rules affect how buyers see prices or purchase products.
-* Tax, shipping, payment, currencies, or legal display behavior depends on region-specific or custom logic.
-* The merchant is moving from a heavily customized open-source platform or a Custom Platform source.
-* Important store behavior is controlled by apps, modules, custom code, ERP systems, or third-party connectors.
-* The target environment is self-hosted and requires technical readiness, custom development, or extension compatibility review.
-* SEO-sensitive URLs, content pages, or navigation paths are central to traffic and conversion.
-* Demo Migration samples include only simple records and do not represent the store’s real complexity.
-
-These signals do not mean the migration cannot proceed. They mean the migration should be planned with clearer samples, stronger evidence, and the correct service path before Full Migration.
+The main decision is whether the issue is a standard configuration difference, a bounded mapping/filtering/configuration need, or a custom migration requirement. Keeping that distinction clear prevents risk from being discovered only after Full Migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Gambio migration risk is highest where ordinary records carry operational meaning: product variants, customer groups, B2B pricing, tax and shipping behavior, payment context, SEO-sensitive storefront paths, content pages, and custom integrations. A safe migration plan does not treat these areas as afterthoughts. It identifies them early, selects representative Demo Migration samples, and separates data migration from target configuration, design implementation, and custom development.
+Gambio migration risk is concentrated around operating-model choice, product options, stock behavior, categories, content pages, historical order readability, integrations, and customization expectations. The platform can support many merchant needs, but migration quality depends on matching source data meaning to the chosen Gambio environment.
 
-For straightforward stores with clean products, clear categories, simple customer records, and predictable orders, standard migration planning may be enough. For stores with segmented pricing, complex variants, custom checkout behavior, region-specific rules, self-hosted customization, or integration-owned data, the migration should be reviewed more carefully before execution.
+The safest approach is to separate data migration from target configuration, storefront implementation, integration recreation, legal/content review, and custom development. When those boundaries are visible before Full Migration, the Gambio project is easier to validate and less likely to produce a store that is technically populated but operationally unclear.
 
-Use Demo Migration results to test the risk areas that matter most to the Gambio target environment. If product structure, customer groups, tax rules, shipping behavior, storefront routes, custom fields, integrations, or Custom Platform source data create uncertainty, review the migration path through Live Chat so Standard Service, Managed Service, Custom Service, and Add-on boundaries are clear before Full Migration.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the biggest risk in a Gambio migration?**
 
-The biggest risk is assuming that migrated records automatically preserve business meaning. Products, variants, customer groups, tax rules, shipping methods, payment context, storefront paths, content pages, and integrations may all need planning beyond basic record movement.
+The biggest risk is assuming that imported records will automatically recreate the source store’s behavior. Product options, stock logic, content pages, integrations, and environment responsibilities must be reviewed separately.
 
 **Does choosing Gambio Cloud reduce migration risk?**
 
-Gambio Cloud can reduce hosting and maintenance responsibility, but it does not remove catalog, order, customer, tax, shipping, payment, SEO, or storefront validation work. The operating model becomes easier in some areas, but the migrated result still needs to be tested.
+Gambio Cloud can reduce hosting, update, and maintenance responsibility, but it does not automatically solve source-side customization, integration, or data-model issues. Those still need scope review.
 
-**When does self-hosted Gambio increase migration complexity?**
+**Why are product options risky during Gambio migration?**
 
-Self-hosted Gambio increases complexity when the merchant needs custom development, technical access, hosting control, module compatibility, integration work, or server-level responsibility. These needs should be reviewed before choosing the migration approach.
+Options may affect price, stock, SKU meaning, images, shipping, and order-line clarity. If the source platform stores option behavior differently, the migrated catalog may look complete but fail in daily selling.
 
-**Are product variants always straightforward to migrate to Gambio?**
+**When should Custom Service be considered for Gambio?**
 
-Not always. Variant-heavy products should be reviewed carefully, especially when the source platform uses option-level pricing, option-level stock, bundles, custom fields, or app-controlled product behavior. Demo Migration should include representative variant products.
-
-**When should Custom Service be reviewed for Gambio migration?**
-
-Custom Service should be reviewed when the source store includes Custom Platform data, unsupported extension data, third-party identifiers, custom fields, bespoke product or checkout logic, external integrations, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment beyond standard service capability.
+Custom Service should be considered when the source store depends on unsupported custom records, extension-owned data, external-system identifiers, custom fields, bespoke transformation rules, or custom migration logic adjustment.

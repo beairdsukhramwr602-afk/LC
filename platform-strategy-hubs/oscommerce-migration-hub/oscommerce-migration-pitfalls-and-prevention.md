@@ -1,295 +1,329 @@
 # OsCommerce Migration Pitfalls and Prevention
 
-osCommerce migration problems usually appear when source-store behavior is assumed instead of verified. A store may look like a straightforward product, customer, and order migration, but the real operating meaning can depend on old osCommerce versions, forked structures, custom add-ons, product attributes, properties, customer groups, order status history, SEO fields, App Shop modules, custom tables, and external-system identifiers.
+osCommerce migration becomes risky when a long-lived store is treated as a simple database transfer. The source store may contain years of catalog decisions, old modules, custom fields, customer-group rules, order total logic, content pages, SEO paths, and operational workarounds. The Target Platform may support a modern osCommerce v4 operating model with sales channels, App Shop modules, Design and CMS, SEO settings, product properties, customer groups, and broader configuration layers. Those two realities do not automatically meet each other without planning.
 
-Pitfall prevention should focus on symptoms that can be detected early. The safest osCommerce migrations identify what can move through standard structures, what belongs to target configuration, what needs Add-ons, and what requires Custom Service review before Full Migration.
+The safest way to prevent failure is to identify the assumption behind each issue. Some pitfalls are data-shape problems. Some are configuration problems. Some are validation problems. Some are scope problems that require Add-ons or Custom Service review. A pitfall is controlled only when the team knows what can migrate as data, what must be configured in osCommerce, what should be rebuilt outside migration scope, and what must be escalated before Full Migration.
 
-### Pitfall 1: Treating Every osCommerce Store as a Clean v4 Target <a href="#pitfall-1-treating-every-oscommerce-store-as-a-clean-v4-target" id="pitfall-1-treating-every-oscommerce-store-as-a-clean-v4-target"></a>
+### Pitfall 1: Treating osCommerce as Only a Legacy Cart <a href="#pitfall-1-treating-oscommerce-as-only-a-legacy-cart" id="pitfall-1-treating-oscommerce-as-only-a-legacy-cart"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+#### What goes wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
 
-The source store is treated as if it matches a modern osCommerce v4 target structure, even though it may be an old osCommerce installation, a forked system, or a long-modified codebase. Product, customer, order, checkout, and module data may then be interpreted through the wrong assumptions.
+Teams assume osCommerce migration is mostly a transfer from an old cart into a similar cart. That assumption hides the difference between an older customized source and a modern osCommerce v4 target with sales channels, App Shop modules, Design and CMS, SEO, product properties, and broader configuration responsibilities.
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+The result is a migration plan that looks simple on paper but cannot explain how the target store will actually operate. Legacy continuity becomes an unspoken dependency instead of a controlled migration topic.
 
-* The source store has been operating for many years without a clean upgrade history.
-* The merchant cannot confirm the exact osCommerce version.
-* The database includes unknown custom tables or old add-on tables.
-* Core files or templates were modified by previous developers.
-* The source store is related to osCommerce but may actually be a fork or derivative platform.
+#### Early warning signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+
+Planning language focuses only on Products, Customers, and Orders. No one inventories source versions, modified code, old add-ons, module-generated fields, custom database tables, or target hosting and module assumptions.
+
+Another warning sign is when the team says the target is “still osCommerce,” so old behavior should naturally transfer. Platform relationship does not eliminate the need to validate structure, configuration, and business rules.
 
 #### Prevention <a href="#prevention" id="prevention"></a>
 
-Confirm the exact source platform, source version, database structure, installed add-ons, and custom modifications before treating the migration as standard. If the source is old, forked, or heavily customized, review the source as its own implementation rather than assuming it behaves like the intended osCommerce target.
+Start by documenting the source version, codebase condition, custom changes, target osCommerce version, hosting plan, sales-channel plan, and module assumptions. Separate standard records from source behavior created by extensions or custom work.
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+Legacy continuity should be reviewed before Demo Migration samples are chosen. Otherwise the Demo Migration may prove only the simple records while missing the behavior that actually made the old store usable.
 
-Before Full Migration, provide a source database backup, platform/version notes, installed add-on list, and examples of customized product, customer, order, and checkout data. If the source structure is unclear, request Custom Service review before continuing.
+#### Recommendation example <a href="#recommendation-example" id="recommendation-example"></a>
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+A merchant with an old osCommerce-derived source should list which old add-ons created product fields, checkout rules, order notes, or reporting identifiers before deciding whether those records are standard migration scope.
 
-The migration scope reflects the actual source installation, including legacy, forked, add-on, or custom database behavior where relevant.
+#### Pass condition <a href="#pass-condition" id="pass-condition"></a>
 
-### Pitfall 2: Migrating Products Without Preserving Attribute and Property Meaning <a href="#pitfall-2-migrating-products-without-preserving-attribute-and-property-meaning" id="pitfall-2-migrating-products-without-preserving-attribute-and-property-meaning"></a>
+The team can explain what is being preserved as data, what will be rebuilt as target configuration, what will be retired, and what requires Custom Service review.
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+### Pitfall 2: Validating Products Without Catalog Discovery <a href="#pitfall-2-validating-products-without-catalog-discovery" id="pitfall-2-validating-products-without-catalog-discovery"></a>
 
-Products migrate as visible records, but source options, attributes, properties, filters, specifications, product groups, bundles, or stock-sensitive choices lose their commercial meaning. Shoppers may no longer select the right choices, compare products, filter the catalog, or understand product details.
+#### What goes wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+Products arrive in the admin area, but customers cannot browse or search the catalog effectively. Category hierarchy, brands, product properties, filters, product listing pages, sales pages, featured products, or sales-channel visibility may be incomplete.
 
-* The source store has many product options, specifications, or filter fields.
-* Options affect price, inventory, weight, images, or fulfillment.
-* Product groups, bundles, or downloadable products are used.
-* Source attributes were created by add-ons or custom fields.
-* Demo Migration validates only simple products.
+This failure often passes early count checks because the product records exist. The problem is that the target catalog does not reproduce the discovery logic that customers and staff rely on.
+
+#### Early warning signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+
+Product counts pass, but storefront testing shows missing category placements, weak filters, empty brand paths, poor search results, or products visible in the wrong sales channel.
+
+Reviewers may also notice that products look correct individually but lose commercial meaning when viewed from category pages, brand pages, search results, or promotional listings.
 
 #### Prevention <a href="#prevention-1" id="prevention-1"></a>
 
-Choose product samples that expose real catalog complexity. Validate products with selectable choices, technical properties, filterable values, multiple images, brand assignment, stock-sensitive behavior, product groups, downloads, and SEO fields. Do not accept the product migration based only on record count.
+Validate products through customer-facing paths, not only through the product-edit screen. Include representative categories, brands, properties, filters, search terms, product listing pages, and sales-channel assignments in Demo Migration review.
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+Catalog validation should include simple products and complex products. A sample that excludes multi-category products, products with detailed properties, and products assigned to important discovery paths cannot prove launch readiness.
 
-Include a product with multiple attributes, a product with technical specifications, a product assigned to several categories, a product with brand-led browsing value, and a product with special stock or downloadable behavior in Demo Migration review.
+#### Recommendation example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+A product assigned to multiple source categories should be tested from each important category path, from search, and from any high-value promotional or sales-channel context where customers previously found it.
 
-Products remain sellable, discoverable, configurable, and understandable in osCommerce, with product choices and specifications represented in appropriate target structures.
+#### Pass condition <a href="#pass-condition-1" id="pass-condition-1"></a>
 
-### Pitfall 3: Preserving Categories but Losing Storefront Discovery <a href="#pitfall-3-preserving-categories-but-losing-storefront-discovery" id="pitfall-3-preserving-categories-but-losing-storefront-discovery"></a>
+Representative products can be found, understood, and purchased through the browsing and search paths that matter for launch.
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+### Pitfall 3: Flattening Attributes, Properties, and Product Groups <a href="#pitfall-3-flattening-attributes-properties-and-product-groups" id="pitfall-3-flattening-attributes-properties-and-product-groups"></a>
 
-The category tree appears in osCommerce, but customers cannot browse the catalog the way they did in the source store. Product discovery may break because menus, brands, filters, search behavior, landing pages, sale/new/featured areas, or sales-channel visibility were not reviewed.
+#### What goes wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+Source options, attributes, specifications, product groups, or product properties are migrated as plain text or simplified labels. The data exists, but it no longer supports selection, filtering, comparison, pricing, product relationships, or merchandising logic.
 
-* The source store uses deep categories or products assigned to multiple categories.
-* Brand pages drive browsing or SEO traffic.
-* Filters and product specifications are important to shopper decision-making.
-* Landing categories or curated navigation pages are used.
-* Products appear correctly in the admin area but are hard to find from the storefront.
+This creates a quiet quality problem. Customers may still see product information, but the information no longer supports the same buying decision or operational handling.
+
+#### Early warning signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+
+Selectable options appear as descriptions. Filters no longer work. Grouped products lose commercial context. Product properties are present but not useful for search, comparison, or merchandising.
+
+A second warning sign is when reviewers cannot explain whether a source field was meant for customer selection, admin reference, pricing, stock control, filtering, or SEO support.
 
 #### Prevention <a href="#prevention-2" id="prevention-2"></a>
 
-Validate product discovery from the storefront, not only from the admin catalog. Review categories, menus, brands, filters, search, landing pages, sales-channel visibility, and high-value browsing paths.
+Classify each source product detail by business function before mapping. The key question is not whether a field has a similar label in osCommerce. The key question is what the field does for the shopper, the catalog manager, or the operations team.
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+When a detail controls price, availability, filtering, grouping, or external-system identification, it needs more review than ordinary descriptive content.
 
-Test a top category, a deep subcategory, a brand-led browsing path, a filter-heavy product group, and a high-value landing page after Demo Migration.
+#### Recommendation example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+A size option used for customer selection should not be treated the same as a technical property used for filtering unless the target behavior is intentionally different and the change has been approved.
 
-Customers can find representative products through expected category, brand, filter, search, and navigation paths.
+#### Pass condition <a href="#pass-condition-2" id="pass-condition-2"></a>
 
-### Pitfall 4: Treating Customer Groups as Simple Labels <a href="#pitfall-4-treating-customer-groups-as-simple-labels" id="pitfall-4-treating-customer-groups-as-simple-labels"></a>
+Product details remain useful for buying, filtering, comparing, merchandising, reporting, or operational handling according to their original purpose.
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+### Pitfall 4: Confusing Historical Checkout Data With Live Checkout Readiness <a href="#pitfall-4-confusing-historical-checkout-data-with-live-checkout-readiness" id="pitfall-4-confusing-historical-checkout-data-with-live-checkout-readiness"></a>
 
-Customer groups migrate as names or labels, but their operational meaning is lost. In many stores, groups can affect wholesale pricing, tax treatment, payment access, shipping access, approval rules, visibility, credit behavior, or B2B workflows.
+#### What goes wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+Past payment and shipping labels migrate into order history, so the team assumes live checkout is ready. Historical readability and new-order functionality are different responsibilities.
 
-* The store has wholesale, trade, member, tax-exempt, approved, or restricted customers.
-* Customer groups affect product visibility or price.
-* Guest buyers and registered customers are handled differently.
-* Payment, shipping, or tax behavior differs by customer group.
-* B2B or account-approval logic is controlled by add-ons or custom code.
+A migrated order can show the old payment label, shipping method, tax value, or status without proving that the target payment modules, shipping modules, tax zones, currencies, or checkout rules are configured.
+
+#### Early warning signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+
+Orders show familiar payment and shipping names, but test checkout fails. Tax zones are incomplete. Shipping rates do not apply. Customer groups see the wrong payment methods. Order statuses do not match operational expectations.
+
+Another warning sign is when finance, fulfillment, and customer service review only old orders and do not test new order creation.
 
 #### Prevention <a href="#prevention-3" id="prevention-3"></a>
 
-Prepare customer samples for each meaningful group. Confirm which group behavior is data to migrate, which behavior belongs to target configuration, and which behavior depends on custom logic or modules.
+Validate order history and live checkout separately. Historical labels prove past readability. Live payment, shipping, tax, currency, order-status, and customer-group behavior require target-side configuration and testing.
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+The migration plan should clearly state which checkout elements are migrated as historical references and which target behaviors must be configured by the merchant, implementation team, or platform owner.
 
-Validate a retail customer, wholesale customer, guest buyer, customer with multiple addresses, and customer with varied order history. If group-based pricing or approval logic is custom, request Custom Service review.
+#### Recommendation example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+A migrated order showing an old PayPal label does not prove that the new target PayPal module is installed, configured, and tested for current transactions.
 
-Customer groups remain interpretable and any pricing, access, tax, approval, or B2B behavior is either configured, migrated, excluded, or escalated intentionally.
+#### Pass condition <a href="#pass-condition-3" id="pass-condition-3"></a>
 
-### Pitfall 5: Moving Orders as Flat Historical Records <a href="#pitfall-5-moving-orders-as-flat-historical-records" id="pitfall-5-moving-orders-as-flat-historical-records"></a>
+Historical orders are readable, and live checkout tests independently confirm payment, shipping, tax, currency, and order-status behavior.
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+### Pitfall 5: Underestimating Customer Groups and Segmentation <a href="#pitfall-5-underestimating-customer-groups-and-segmentation" id="pitfall-5-underestimating-customer-groups-and-segmentation"></a>
 
-Orders appear in osCommerce, but the history is not useful for customer service, accounting, fulfillment, or management review. Status history, payment and shipping labels, comments, transaction records, invoices, tracking numbers, refunds, or manual adjustments may be incomplete or misinterpreted.
+#### What goes wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+Customer groups are treated as simple labels even though they may control pricing, product visibility, discounts, payment access, tax behavior, approval rules, or B2B workflows.
 
-* The source store has custom order statuses.
-* Orders include refunds, partial fulfillment, manual edits, tracking, or admin comments.
-* Payment and shipping methods varied over time.
-* Accounting, fulfillment, or customer service teams rely on historical orders.
-* Demo Migration validates only a few recent completed orders.
+When this happens, the customer record may be present but the customer’s commercial relationship with the store is incomplete.
+
+#### Early warning signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+
+Wholesale accounts migrate, but their price or checkout behavior is missing. Customer service can see the customer but not the rule attached to that customer. Tax-sensitive or region-specific accounts no longer behave as expected.
+
+A common warning sign is that Demo Migration samples include many ordinary retail customers but no customers from groups that drive special pricing or access rules.
 
 #### Prevention <a href="#prevention-4" id="prevention-4"></a>
 
-Validate order samples across the full order lifecycle. Include paid, unpaid, refunded, canceled, partially fulfilled, discounted, tracked, manually edited, guest, registered-customer, and multi-currency orders where relevant.
+Inventory all customer groups and define what each one does. Validate customer samples that represent retail, wholesale, trade, tax-exempt, region-specific, approval-based, or special-pricing behavior where relevant.
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+The review should distinguish group membership from target behavior. Migration may preserve the membership, while the target store still needs configuration to make the group meaningful.
 
-Ask customer service and operations users to review migrated order samples and confirm whether they can understand what happened without returning to the source store.
+#### Recommendation example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+If a customer group controlled wholesale pricing in the source store, Demo Migration should include a customer from that group and products where the price difference is visible.
 
-Historical orders remain readable and useful for business reference, with enough context to support service, fulfillment, accounting, and internal review.
+#### Pass condition <a href="#pass-condition-4" id="pass-condition-4"></a>
 
-### Pitfall 6: Confusing Historical Checkout Data with Live Checkout Readiness <a href="#pitfall-6-confusing-historical-checkout-data-with-live-checkout-readiness" id="pitfall-6-confusing-historical-checkout-data-with-live-checkout-readiness"></a>
+Customer group membership is readable, and group-dependent target behavior is configured, tested, excluded, or escalated deliberately.
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+### Pitfall 6: Reading Order History as Totals Only <a href="#pitfall-6-reading-order-history-as-totals-only" id="pitfall-6-reading-order-history-as-totals-only"></a>
 
-The migrated store shows historical payment or shipping labels, so the team assumes live checkout is ready. In reality, live checkout depends on osCommerce payment modules, shipping modules, tax settings, zones, currencies, customer groups, and target configuration.
+#### What goes wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+Orders are accepted because totals appear correct, while statuses, comments, coupons, gift cards, taxes, refunds, invoices, tracking references, customer context, and order-total components are not reviewed.
 
-* Payment and shipping labels appear in historical orders, but target modules have not been configured.
-* Tax zones, rates, or customer-group rules have not been tested.
-* Shipping depends on weights, zones, warehouses, carriers, or customer groups.
-* Checkout fields were customized in the source store.
-* The team validates order history but does not test a new purchase flow.
+This creates operational risk after launch. The store may technically contain order history, but staff cannot use that history for support, accounting, fulfillment, or reporting.
+
+#### Early warning signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+
+Customer service cannot explain an order after launch. Accounting cannot trace discounts or tax. Fulfillment cannot understand status history or shipment references. Refunds, coupons, or gift cards appear as unexplained adjustments.
+
+Another warning sign is when order validation uses only recent successful orders and ignores canceled, refunded, manually adjusted, tax-sensitive, or promotion-heavy orders.
 
 #### Prevention <a href="#prevention-5" id="prevention-5"></a>
 
-Separate order-history validation from live checkout testing. Historical labels prove past order readability. They do not prove that new orders can be placed correctly in osCommerce.
+Validate varied order samples with different statuses, discounts, taxes, payment methods, shipping methods, customer groups, guest accounts, refunds, comments, and operational identifiers. Ask the teams that use order history to review the sample.
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+The review should decide which historical details must remain actionable and which are preserved only for reference.
 
-After validating historical orders, run separate target checkout tests for payment, shipping, tax, customer groups, currencies, coupons, and order-status behavior.
+#### Recommendation example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+A canceled order with a coupon, manual adjustment, and status comments should be included if such orders matter for service, accounting, or dispute review.
 
-Historical order data is readable, and live checkout behavior is separately configured and tested in the target store.
+#### Pass condition <a href="#pass-condition-5" id="pass-condition-5"></a>
 
-### Pitfall 7: Assuming Modules and Add-ons Migrate Automatically <a href="#pitfall-7-assuming-modules-and-add-ons-migrate-automatically" id="pitfall-7-assuming-modules-and-add-ons-migrate-automatically"></a>
+Historical orders remain understandable enough for customer service, accounting, fulfillment, and management reference after migration.
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+### Pitfall 7: Treating Design and CMS as Simple Content Migration <a href="#pitfall-7-treating-design-and-cms-as-simple-content-migration" id="pitfall-7-treating-design-and-cms-as-simple-content-migration"></a>
 
-The migration moves standard data, but the merchant expects payment modules, shipping modules, SEO add-ons, B2B extensions, marketplace connectors, social-login records, reporting add-ons, or custom module data to migrate automatically. Important extension-owned data may then be missing from the accepted scope.
+#### What goes wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+CMS Pages, menus, banners, email templates, catalog pages, themes, translations, and layout-dependent content are assumed to migrate as isolated text records. In osCommerce, storefront presentation depends on Design and CMS configuration as well as migrated content.
 
-* The source store has many installed add-ons or modules.
-* A module created custom product, customer, order, SEO, or checkout fields.
-* Outside systems depend on source IDs or connector records.
-* The merchant describes functionality but cannot identify where the data is stored.
-* The expected result depends on a third-party extension or custom code.
+The result is content that exists somewhere in the target but does not support the storefront experience, legal page access, navigation, email communication, or search-entry paths.
+
+#### Early warning signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+
+Content appears in the admin area but is not linked from menus, does not match the theme, has broken layout assumptions, lacks translations, or misses email-template context.
+
+A second warning sign is when the content review is assigned only to data reviewers and not to the people responsible for merchandising, content, SEO, and customer communication.
 
 #### Prevention <a href="#prevention-6" id="prevention-6"></a>
 
-Create a module inventory before migration. Classify each module as target configuration, data to migrate, data to exclude, data to rebuild, or Custom Service scope. Do not treat extension-owned records as standard platform data unless the scope confirms it.
+Separate migrated content from target presentation. Prepare priority CMS Pages, menu paths, email templates, landing pages, category content, and theme-dependent content that must be validated before launch.
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+Content validation should include reachability, readability, placement, language, metadata, and theme behavior. A page that exists but cannot be reached from the right menu is not launch-ready.
 
-For each payment, shipping, SEO, B2B, marketplace, accounting, ERP, CRM, POS, or reporting extension, confirm whether it owns data that must be migrated or whether the function should be reconfigured after migration.
+#### Recommendation example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+A policy page can migrate as content, but its menu placement, footer link, target URL, metadata, and theme presentation still need target-side review.
 
-Every important extension-dependent area is classified and accepted as migrated, reconfigured, excluded, rebuilt, or escalated.
+#### Pass condition <a href="#pass-condition-6" id="pass-condition-6"></a>
 
-### Pitfall 8: Ignoring SEO, URLs, and CMS Content Until Launch <a href="#pitfall-8-ignoring-seo-urls-and-cms-content-until-launch" id="pitfall-8-ignoring-seo-urls-and-cms-content-until-launch"></a>
+Important content is present, reachable, readable, and assigned to the right storefront, menu, language, and sales-channel context.
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+### Pitfall 8: Leaving SEO and Search Until the End <a href="#pitfall-8-leaving-seo-and-search-until-the-end" id="pitfall-8-leaving-seo-and-search-until-the-end"></a>
 
-Products, customers, and orders migrate successfully, but important customer-entry paths break. Product URLs, category URLs, brand pages, CMS Pages, metadata, canonicals, menus, landing pages, and redirects are reviewed too late, causing avoidable SEO and user-experience risk.
+#### What goes wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+SEO fields, metadata, sitemap expectations, redirects, category paths, brand pages, product URLs, CMS Page URLs, analytics, and search behavior are reviewed too late or only after launch.
 
-* Organic search drives meaningful traffic.
-* Source URLs have backlinks or ranking value.
-* The store has important brand, category, or CMS landing pages.
-* Metadata and page names are important to launch quality.
-* Redirect planning is not part of validation.
-* Content pages are considered separate from migration quality.
+Late SEO review creates avoidable traffic loss because many issues require decisions before the final cutover: which URLs are preserved, redirected, rebuilt, merged, or retired.
+
+#### Early warning signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+
+High-value source URLs have no redirect plan. Search terms that used to find key products return weak results. Metadata is inconsistent across product and category samples. Category or brand landing pages lose their previous discovery role.
+
+Another warning sign is when SEO review is limited to product URLs and ignores CMS Pages, categories, brands, search behavior, sitemap expectations, and analytics paths.
 
 #### Prevention <a href="#prevention-7" id="prevention-7"></a>
 
-Prepare high-value URL and content samples before Demo Migration review. Validate product, category, brand, and CMS Page paths along with metadata, page names, menus, and redirect expectations.
+Prepare a priority SEO and search list before Demo Migration. Include high-traffic products, categories, brands, CMS Pages, common search terms, metadata samples, and redirect-sensitive URLs.
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+Validate redirects, metadata, sitemap expectations, search results, and category discovery early enough to change mapping, target configuration, or launch sequencing.
 
-Build a priority list of top product URLs, category URLs, brand URLs, CMS Pages, landing pages, and metadata samples before accepting migration results.
+#### Recommendation example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+A top category that drove organic traffic should be tested as a URL, a menu path, a search result, a metadata sample, and a redirect case.
 
-Important SEO and content paths are accounted for, and priority pages either resolve, redirect, or have an accepted rebuild plan.
+#### Pass condition <a href="#pass-condition-7" id="pass-condition-7"></a>
 
-### Pitfall 9: Underestimating Hosting and Technical Responsibility <a href="#pitfall-9-underestimating-hosting-and-technical-responsibility" id="pitfall-9-underestimating-hosting-and-technical-responsibility"></a>
+Priority search-entry paths are mapped, redirected, rebuilt, or intentionally retired before launch.
 
-#### What Goes Wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+### Pitfall 9: Assuming App Shop or Module Behavior Migrates Automatically <a href="#pitfall-9-assuming-app-shop-or-module-behavior-migrates-automatically" id="pitfall-9-assuming-app-shop-or-module-behavior-migrates-automatically"></a>
 
-The migration is planned as a data move only, while the merchant has not prepared for the technical responsibilities of an open-source osCommerce target. Hosting, PHP/database compatibility, backups, security, modules, theme maintenance, code changes, and update responsibility may remain unclear.
+#### What goes wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+The source store uses extensions, custom modules, outside integrations, or legacy add-ons, but the migration plan treats their data and behavior as standard platform records. Target osCommerce modules may need installation, configuration, testing, or Custom Service review.
 
-* The merchant is moving from a hosted SaaS platform and expects equivalent managed infrastructure.
-* No one owns target hosting and maintenance.
-* Module compatibility is assumed but not checked.
-* Theme or code changes are planned but not scoped.
-* Technical launch responsibility is unclear.
+This is one of the most serious osCommerce pitfalls because module-created data can look like ordinary fields while actually controlling business logic.
+
+#### Early warning signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+
+Fields generated by old add-ons are missing. External identifiers disappear. Reports no longer reconcile. Payment, shipping, marketplace, or ERP behavior is expected without target configuration.
+
+A second warning sign is when no one can identify which module created a field or whether it still has a target-side equivalent.
 
 #### Prevention <a href="#prevention-8" id="prevention-8"></a>
 
-Define the target operating model before launch. Confirm who manages hosting, backups, updates, modules, security, theme maintenance, and technical troubleshooting. Treat these as launch-readiness issues, not migration data issues.
+Create a dependency register. Mark each dependency as standard data, target configuration, Add-on-related need, Custom Service review, external integration work, or intentionally excluded behavior.
 
-#### Recommendation Example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+Every dependency should have an owner. Without ownership, module behavior becomes an assumption that no one validates until after launch.
 
-Assign a responsible technical owner for hosting, module installation, theme changes, updates, backup/restore plans, and checkout testing before Full Migration acceptance.
+#### Recommendation example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
 
-#### Pass Condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+A custom order field used by an ERP should be validated as an external-system identifier, not buried inside general order comments unless that is an approved business decision.
 
-The target osCommerce environment has a clear owner for hosting, maintenance, modules, theme behavior, and technical launch readiness.
+#### Pass condition <a href="#pass-condition-8" id="pass-condition-8"></a>
 
-### Pitfall 10: Choosing a Service Approach That Is Too Light <a href="#pitfall-10-choosing-a-service-approach-that-is-too-light" id="pitfall-10-choosing-a-service-approach-that-is-too-light"></a>
+Every important module, app, custom field, and integration dependency has an owner, a migration handling decision, and a validation test.
 
-#### What Goes Wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
+### Pitfall 10: Accepting Demo Migration Without Scope Decisions <a href="#pitfall-10-accepting-demo-migration-without-scope-decisions" id="pitfall-10-accepting-demo-migration-without-scope-decisions"></a>
 
-The migration starts under an approach that assumes standard data, but source review or Demo Migration reveals custom tables, forked structures, extension-owned records, B2B logic, outside-system identifiers, or tailored transformation needs. The project then faces late scope changes.
+#### What goes wrong <a href="#what-goes-wrong-9" id="what-goes-wrong-9"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
+Demo Migration is reviewed as a quick preview instead of a decision checkpoint. The team notices issues but does not decide whether they require mapping, filtering, Add-ons, Custom Service, target configuration, source cleanup, or launch-process changes.
 
-* Product, customer, order, or SEO samples fail for structural reasons.
-* Source add-ons own business-critical data.
-* Custom database tables are discovered after planning.
-* Old source structures do not match expected target fields.
-* The merchant needs tailored behavior beyond available Standard Add-on settings.
-* Outside systems require preserved identifiers or special mapping.
+The same issues then reappear in Full Migration because no one converted findings into scope decisions.
+
+#### Early warning signs <a href="#early-warning-signs-9" id="early-warning-signs-9"></a>
+
+Feedback says items are wrong but does not identify the responsible path. Reviewers disagree about whether an issue is migration-related or target-configuration-related. Full Migration planning continues even though Demo Migration findings remain unresolved.
+
+Another warning sign is a Demo Migration review that contains screenshots and comments but no decision log.
 
 #### Prevention <a href="#prevention-9" id="prevention-9"></a>
 
-Use source review and Demo Migration to test difficult records early. Escalate custom, extension-owned, forked, or outside-system data before Full Migration. Use Add-ons only for supported filtering, mapping, or data configuration needs, and use Custom Service when customization or bespoke handling is required.
+Turn Demo Migration review into a decision log. For each issue, record whether it is accepted, corrected in source data, configured in osCommerce, handled through Add-ons, escalated to Custom Service, reserved for Additional Migration Options, or excluded.
 
-#### Recommendation Example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
+The decision log should also define who must revalidate the item and what proof is required before Full Migration can proceed.
 
-If Demo Migration shows missing custom fields, unclear add-on records, or old schema behavior, pause scope acceptance and classify the issue as Add-on-supported, target configuration, accepted exclusion, or Custom Service review.
+#### Recommendation example <a href="#recommendation-example-9" id="recommendation-example-9"></a>
 
-#### Pass Condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+If product properties map correctly for simple products but fail for custom product groups, the decision log should state whether the failure is a mapping adjustment, unsupported behavior, or Custom Service scope.
 
-The chosen service approach matches the actual migration complexity, and unresolved custom or extension-owned requirements are not pushed into launch review.
+#### Pass condition <a href="#pass-condition-9" id="pass-condition-9"></a>
+
+Full Migration proceeds only after Demo Migration findings have clear decisions, owners, and validation criteria.
+
+### Turning Pitfall Review Into a Launch Decision <a href="#turning-pitfall-review-into-a-launch-decision" id="turning-pitfall-review-into-a-launch-decision"></a>
+
+Pitfall review should produce a launch decision, not just a list of warnings. For osCommerce, the key decision is whether the target store has enough proof across catalog discovery, product meaning, customer groups, order history, content, SEO, modules, and custom data. A record count alone cannot provide that proof.
+
+A strong launch decision separates three outcomes. Some findings are acceptable because they do not affect launch. Some require correction before Full Migration. Some require a changed service path, Add-ons, Custom Service review, or Additional Migration Options. The review is complete only when every major finding has an owner and a handling path.
+
+### Final Prevention Checklist for osCommerce <a href="#final-prevention-checklist-for-oscommerce" id="final-prevention-checklist-for-oscommerce"></a>
+
+The final prevention check should connect pitfall review to launch control. A merchant should not move forward simply because each pitfall has been discussed. The safer test is whether the team can prove that the major business paths have been reviewed from both sides: source meaning and target behavior. Source meaning explains what the old store stored, why the record mattered, and which business process used it. Target behavior explains whether osCommerce will preserve that meaning through migrated data, configuration, Add-ons, Custom Service review, or a deliberate exclusion.
+
+A practical prevention checklist should cover five launch decisions. First, the catalog must be discoverable through the storefront paths customers actually use. Second, product details must still support buying, filtering, grouping, stock handling, and pricing where those functions matter. Third, customers and orders must remain useful for service, accounting, fulfillment, and segmentation. Fourth, Design and CMS, SEO, search, menus, and priority URLs must support continuity rather than merely exist as records. Fifth, modules, App Shop dependencies, custom fields, and external identifiers must have explicit owners.
+
+| Launch-control question                             | Evidence that should exist before launch                                                        |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Can customers find key products?                    | Tested category, brand, search, property, and sales-channel paths.                              |
+| Can staff interpret historical orders?              | Samples with statuses, coupons, tax, payment, shipping, comments, and adjustments.              |
+| Can customer groups still support commercial rules? | Group samples tested against pricing, access, checkout, or tax behavior.                        |
+| Can priority content and SEO paths survive launch?  | Redirect plan, metadata review, CMS Page checks, and search validation.                         |
+| Can custom dependencies be owned?                   | Dependency register with migration handling, target configuration, or Custom Service decisions. |
+
+This checklist prevents the pitfall review from becoming theoretical. It turns warnings into launch evidence. If a question cannot be answered with a tested sample or a documented decision, the safer response is to delay Full Migration, adjust scope, or define the follow-up path before the issue reaches customers.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Most osCommerce migration pitfalls can be prevented when the source store is reviewed as a real implementation, not as a platform name. Legacy versions, forks, custom code, attributes, properties, customer groups, order history, modules, SEO, content, hosting, and service approach all affect whether the target store will be usable after migration.
+osCommerce migration pitfalls are preventable when the team treats the target store as a configured operating model rather than a destination database. The safest review pattern is to test catalog discovery, product meaning, customer groups, orders, checkout boundaries, CMS Pages, SEO, modules, custom data, and Demo Migration decisions before launch pressure compresses the work.
 
-Before approving Full Migration or launch readiness, review the failure patterns that are most relevant to the source store. If any pitfall appears in Demo Migration or source review, resolve the scope through target configuration, Add-ons, Custom Service review, or an accepted exclusion before treating the migration as complete.
-
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the most common osCommerce migration pitfall?**
 
-The most common pitfall is assuming the source store is standard when it is actually old, forked, customized, or add-on-heavy. That can affect products, customers, orders, checkout, modules, SEO, and custom data.
+The most common pitfall is assuming that migrated records automatically recreate source-store behavior. osCommerce configuration, modules, sales channels, Design and CMS, and custom data must be validated separately from record transfer.
 
-**Can a migration pass record-count review but still fail quality review?**
+**Why does osCommerce pitfall review focus heavily on modules and custom data?**
 
-Yes. Record counts can look correct while product choices, customer groups, order context, SEO paths, CMS content, module-owned data, or checkout expectations remain incomplete.
+Many osCommerce stores have long operating histories and may include extensions, App Shop dependencies, custom tables, modified code, and external identifiers. These can affect catalog, checkout, order history, reporting, and operations even when standard Products, Customers, and Orders migrate successfully.
 
-**How do I prevent product attribute problems in osCommerce?**
+**Should all source add-on behavior be recreated in osCommerce?**
 
-Use Demo Migration samples that include complex products with attributes, properties, product groups, images, stock-sensitive behavior, filters, and SEO fields. Validate the storefront result, not only the admin record.
+No. Each behavior should be evaluated. Some behavior can be configured in osCommerce, some may fit bounded Add-ons, some requires Custom Service review, and some can be intentionally retired if it no longer supports the target operating model.
 
-**Should payment and shipping modules be reviewed before launch?**
+**How should Demo Migration findings be handled?**
 
-Yes. Historical payment and shipping labels may migrate for reference, but live payment and shipping behavior depends on target osCommerce module configuration and testing.
-
-**When should a pitfall trigger Custom Service review?**
-
-A pitfall should trigger Custom Service review when it involves Custom Platform data, custom database tables, old or forked schemas, extension-owned records, outside-system identifiers, or tailored migration behavior beyond standard service capability.
+Each finding should become a decision: accept, correct source data, configure the target store, use Add-ons, escalate to Custom Service, plan an Additional Migration Option, or exclude the item deliberately.

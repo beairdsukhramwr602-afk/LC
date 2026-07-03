@@ -1,275 +1,167 @@
 # PrestaShop Validation Priorities
 
-PrestaShop validation should focus on whether the migrated store still supports the commercial structure the business needs, not only whether records appear in the Target Platform. A PrestaShop store can look complete while product combinations, product features, customization fields, customer groups, shop assignments, friendly URLs, or module-shaped behavior no longer carry the right meaning.
+PrestaShop validation should prove that the migrated store is usable as a PrestaShop operating environment, not merely that records arrived. Product pages can exist while combinations are confusing. Categories can load while discovery is weaker. Customer groups can appear while pricing, visibility, or access meaning is unclear. Multistore contexts can be present while product, category, content, customer, or URL ownership is hard to govern.
 
-That is why validation should begin with the areas where PrestaShop is most likely to formalize or reinterpret source-store behavior. The strongest review sample should include the products, customer contexts, shop scopes, routes, and storefront behaviors that would create the most business risk if they were translated incorrectly.
+The safest validation approach starts with the PrestaShop areas where source-store meaning is most likely to be reinterpreted: attributes and combinations, features, customization fields, category paths, customer groups, multistore scope, friendly URLs, modules, themes, overrides, and custom data. Record counts remain useful, but they are only evidence of presence. The real validation question is whether customers and internal teams can still understand, buy, support, and maintain the migrated store after launch.
 
-### What PrestaShop Validation Is Trying to Prove <a href="#what-prestashop-validation-is-trying-to-prove" id="what-prestashop-validation-is-trying-to-prove"></a>
+### What PrestaShop Validation Must Prove <a href="#what-prestashop-validation-must-prove" id="what-prestashop-validation-must-prove"></a>
 
-A PrestaShop migration should prove that the migrated result remains usable, explainable, and commercially trustworthy.
+A PrestaShop migration should be validated through meaning, behavior, and governance. Meaning asks whether migrated records express the right commercial information. Behavior asks whether the storefront and back office still support real buying and operating scenarios. Governance asks whether the business can maintain the result after migration.
 
-#### Product structure must still support buying decisions <a href="#product-structure-must-still-support-buying-decisions" id="product-structure-must-still-support-buying-decisions"></a>
+| Validation layer | PrestaShop proof required                                                                                                     | Failure signal                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Record presence  | Products, categories, customers, orders, CMS Pages, Blog Posts, images, and supported related records appear where expected.  | Counts look acceptable, but important relationships or storefront behavior are not tested. |
+| Catalog meaning  | Combinations, features, customization fields, prices, stock, images, and product descriptions express the right buying logic. | Product pages exist, but customers cannot confidently choose the right item.               |
+| Discovery        | Categories, friendly URLs, SEO fields, navigation paths, and important destinations still support customer movement.          | Pages load, but browsing paths or destination meaning are weaker than expected.            |
+| Customer context | Customer groups, customer records, order history, and group-sensitive expectations remain understandable.                     | Group names import, but their storefront or operational purpose is unclear.                |
+| Shop governance  | Multistore assignments, shop URLs, languages, content, category scope, and shared versus separate data are explainable.       | Multiple shops exist, but ownership and boundaries are confusing.                          |
+| Custom behavior  | Modules, themes, overrides, custom fields, and integrations are classified correctly.                                         | The team assumes module-driven behavior migrated as ordinary data.                         |
 
-Product records are only the starting point. Reviewers should confirm whether combinations, product features, customization fields, prices, stock behavior, and product-page behavior still help customers choose and buy the right item.
+A result should not be approved because the easiest examples passed. PrestaShop validation needs samples that expose the store’s real operating burden.
 
-The key question is not simply whether the product exists. It is whether the product still expresses the correct sellable outcome in PrestaShop.
+### Validate Product Combinations, Features, and Customization Fields First <a href="#validate-product-combinations-features-and-customization-fields-first" id="validate-product-combinations-features-and-customization-fields-first"></a>
 
-#### Customer groups must still carry the right storefront meaning <a href="#customer-groups-must-still-carry-the-right-storefront-meaning" id="customer-groups-must-still-carry-the-right-storefront-meaning"></a>
+Product validation is usually the highest-priority PrestaShop review area because the platform distinguishes between selectable variation logic, descriptive product characteristics, and customer-entered customization. A product may be present in PrestaShop while those layers no longer communicate the right meaning.
 
-Customer groups should be reviewed as storefront behavior, not just imported labels. If customer groups affect visibility, pricing, access, segmentation, communication, or operational handling, the migrated result should prove that the right customer context still receives the right experience.
+The validation sample should include products where attributes create combinations, products with feature-heavy comparison data, products with customer-entered personalization fields, products where selected combinations affect price or stock, and products where images or SKUs vary by option. The goal is to confirm the buying path, not only the product record.
 
-#### Shop scope must remain understandable <a href="#shop-scope-must-remain-understandable" id="shop-scope-must-remain-understandable"></a>
+| Product layer        | What to validate                                                                                                      | Practical pass condition                                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Combinations         | Selectable choices such as size, color, capacity, or other variation-driving options.                                 | Customers can select the intended sellable variant and see the right price, image, SKU, stock, and availability where supported. |
+| Features             | Invariable characteristics used for comparison or product detail.                                                     | Customers can compare and understand products without mistaking features for selectable choices.                                 |
+| Customization fields | Inputs customers provide for personalization or order-specific detail.                                                | The field appears intentionally, collects the right information, and supports fulfillment or support use.                        |
+| Product associations | Related products, packs, accessories, manufacturer/brand context, or structured product relationships where relevant. | Relationships help buying or merchandising instead of creating confusing catalog clutter.                                        |
+| Product media        | Images assigned to products or combinations where supported.                                                          | Visuals support the intended product decision and are not mismatched or incomplete.                                              |
 
-When PrestaShop multistore matters, validation should confirm that products, categories, content, customers, URLs, and settings belong to the correct shop context. A shop can exist in the Target Platform while assignments remain unclear or commercially weak.
+Product validation should be performed with real commercial examples. Simple products prove baseline transfer. Complex products prove whether the PrestaShop interpretation is strong enough for launch.
 
-#### Friendly URLs must lead to useful destinations <a href="#friendly-urls-must-lead-to-useful-destinations" id="friendly-urls-must-lead-to-useful-destinations"></a>
+### Validate Category Discovery and Friendly URL Continuity <a href="#validate-category-discovery-and-friendly-url-continuity" id="validate-category-discovery-and-friendly-url-continuity"></a>
 
-A readable PrestaShop-friendly URL is not enough by itself. Validation should confirm that important routes still support the intended customer journey, preserve destination meaning, and avoid sending customers to weaker or confusing pages.
+PrestaShop categories should be validated as customer discovery structures, not only imported taxonomy records. Category validation should confirm that customers can browse naturally, find high-value products, and reach destinations that still make commercial sense.
 
-#### Module-, theme-, and override-shaped behavior must be checked directly <a href="#module-theme-and-override-shaped-behavior-must-be-checked-directly" id="module-theme-and-override-shaped-behavior-must-be-checked-directly"></a>
+Friendly URL validation should be tied to destination quality. A URL that resolves is not automatically successful if it leads to a less relevant page, weaker category path, missing product, duplicate destination, or page that no longer supports the original search or campaign intent.
 
-Many PrestaShop stores depend on modules, themes, overrides, custom fields, or integrations for merchandising, display logic, order handling, customer experience, or internal workflows. Validation should confirm the outcomes those layers support, not only the native records they surround.
+Priority examples should include:
 
-### Priority 1: Validate High-Risk Product Structure First <a href="#priority-1-validate-high-risk-product-structure-first" id="priority-1-validate-high-risk-product-structure-first"></a>
+* top revenue categories;
+* categories with deep subcategory structures;
+* product pages with strong search demand or backlinks;
+* manufacturer, brand, or supplier-led browsing paths where relevant;
+* products assigned to multiple categories;
+* CMS Pages or Blog Posts that support trust, policy, buying education, or SEO continuity;
+* old URLs that should redirect, resolve, or be intentionally retired.
 
-The first validation priority is usually the product set most likely to expose ambiguity in PrestaShop’s product model.
+| Validation area    | Proof required                                                                                      | Why it matters                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Category hierarchy | Parent and child categories remain useful and maintainable.                                         | PrestaShop category records can exist while browsing becomes less intuitive. |
+| Product placement  | Important products appear in the expected commercial paths.                                         | Misplaced products weaken discovery and merchandising.                       |
+| SEO metadata       | Titles, descriptions, friendly URL slugs, and visible content are reviewed where included in scope. | Search continuity depends on more than record presence.                      |
+| Priority routes    | High-value URLs lead to the right target destinations.                                              | Customers and search engines need destination continuity.                    |
+| Group access       | Category or product visibility behaves correctly for relevant customer groups.                      | Access mistakes can hide or expose products incorrectly.                     |
 
-#### What to include in the sample <a href="#what-to-include-in-the-sample" id="what-to-include-in-the-sample"></a>
+Category and URL validation should not attempt to treat every page equally. Start with the destinations most likely to affect revenue, customer trust, or organic traffic.
 
-Use products that involve:
+### Validate Customer Groups and Order Context <a href="#validate-customer-groups-and-order-context" id="validate-customer-groups-and-order-context"></a>
 
-* multiple selectable combinations
-* feature-heavy comparison or specification logic
-* customer-entered customization fields
-* product packs, grouped meanings, or structured product relationships
-* products where price, stock, image, SKU, or availability depends on the selected variation
-* products where the source platform mixed variation, description, personalization, or display logic in a way that PrestaShop must formalize differently
+PrestaShop customer groups can carry practical meaning for pricing, access, visibility, segmentation, communication, and internal support. Validation should confirm what the group still does after migration, not only whether the group label exists.
 
-#### What to prove <a href="#what-to-prove" id="what-to-prove"></a>
+Representative customer samples should include ordinary customers, customers assigned to meaningful groups, customers with multiple addresses, guest or historical buyers where applicable, repeat customers, customers tied to important order histories, and customer records affected by modules or external systems.
 
-Reviewers should confirm that customers can still reach the correct purchasable outcome, compare the right information, select the right option, and understand stock or availability without confusion.
+| Customer or order area         | What to validate                                                                                             | Failure signal                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Customer identity              | Names, emails, addresses, customer records, and order associations remain readable.                          | Staff can see records but cannot support the customer confidently.                       |
+| Customer groups                | Group assignment and group-sensitive expectations remain explainable.                                        | Group labels import, but pricing, access, or segmentation meaning is uncertain.          |
+| Historical orders              | Products, quantities, totals, discounts, taxes, payments, statuses, and references remain useful for lookup. | Orders are present but hard to interpret for support or reporting.                       |
+| Module-dependent customer data | Loyalty, review, subscription, B2B, CRM, or external ID behavior is classified correctly.                    | The business expects custom or module-owned data to behave like native customer records. |
 
-A product passes validation only when the migrated structure supports real buying behavior. It does not pass merely because a product page exists.
+Order validation should separate historical readability from live checkout readiness. Migrated historical records help support and operational lookup. Live payment, shipping, tax, carrier, checkout, email, and module behavior still need PrestaShop-side setup and testing.
 
-### Priority 2: Validate Category and Discovery Behavior <a href="#priority-2-validate-category-and-discovery-behavior" id="priority-2-validate-category-and-discovery-behavior"></a>
+### Validate Multistore and Shop-Scope Assignments <a href="#validate-multistore-and-shop-scope-assignments" id="validate-multistore-and-shop-scope-assignments"></a>
 
-PrestaShop validation should check the catalog paths customers use to browse, compare, and reach important products.
+When PrestaShop multistore is part of the target plan, validation must prove that each shop context remains understandable. Multistore is not only a record container. It can affect storefront identity, domains, languages, product and category assignments, prices, content, customer expectations, and operating responsibility.
 
-#### What to validate <a href="#what-to-validate" id="what-to-validate"></a>
+A strong multistore validation sample should include at least one product shared across shops, one product limited to a specific shop, one category with shop-specific relevance, one high-value URL per important shop, one customer or group scenario where shop context matters, and one content page or CMS area where local trust or policy information differs.
 
-Review:
+| Multistore question                                        | Validation proof                                                                                           |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Which shops should exist?                                  | Each shop has a clear business purpose, audience, domain, language, or operating role.                     |
+| What should be shared?                                     | Shared products, categories, customers, content, or configuration are intentional and explainable.         |
+| What should differ?                                        | Shop-specific products, prices, categories, URLs, content, or modules are reviewed separately.             |
+| Who governs each shop?                                     | Internal teams understand ownership and post-launch maintenance responsibility.                            |
+| What requires revalidation after later migration activity? | New records, changed configuration, or refreshed target results are checked in the affected shop contexts. |
 
-* top commercial categories
-* categories with complex subcategory structures
-* categories used for merchandising or campaign navigation
-* products assigned to multiple categories
-* manufacturer or brand-led browsing where relevant
-* category pages that carry SEO or conversion value
-* category positions, visibility, and storefront clarity where they affect discovery
+Multistore validation fails when the target technically contains shops but the business cannot explain which records belong where or why.
 
-#### What to prove <a href="#what-to-prove-1" id="what-to-prove-1"></a>
+### Validate Modules, Themes, Overrides, and Custom Data <a href="#validate-modules-themes-overrides-and-custom-data" id="validate-modules-themes-overrides-and-custom-data"></a>
 
-The migrated store should still help customers find the right product through the intended browsing path. Category records may be present, but validation should confirm that discovery still feels natural, organized, and commercially useful.
+PrestaShop stores often depend on modules, themes, overrides, integrations, or custom fields to shape the real storefront and operating behavior. Validation should classify those dependencies instead of assuming they are automatically included in normal migration output.
 
-### Priority 3: Validate Customer-Group Behavior <a href="#priority-3-validate-customer-group-behavior" id="priority-3-validate-customer-group-behavior"></a>
+The review should identify whether the dependency affects catalog display, combinations, personalization, discounts, tax, shipping, payment, checkout, reviews, loyalty, subscriptions, marketplaces, ERP/CRM IDs, reporting, analytics, or SEO behavior. Then it should decide whether the outcome is supported migration scope, Add-ons scope, Custom Service review, PrestaShop-side setup, third-party implementation, manual rebuild, or accepted exclusion.
 
-Customer groups should be tested with realistic account examples, especially when they influence access, pricing, visibility, segmentation, communication, or post-login experience.
+| Dependency type                          | Validation question                                                                              | Likely handling path                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Supported field needing better placement | Does the field map to a supported PrestaShop destination?                                        | Advanced Data Mapping or supported configuration may help.                       |
+| Supported records needing exclusion      | Should obsolete products, old orders, retired categories, or inactive customers be filtered out? | Data Filter Add-on may help.                                                     |
+| Module-owned records                     | Does a module store business-critical records outside standard fields?                           | Custom Service review is often needed.                                           |
+| Theme or override behavior               | Does display or storefront logic depend on code, templates, or overrides?                        | PrestaShop-side setup or Custom Service review may be needed depending on scope. |
+| External identifiers                     | Do ERP, CRM, accounting, marketplace, or reporting IDs need preservation?                        | Custom Service review is often needed.                                           |
 
-#### What to validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
+Validation should not overpromise. Add-ons can support bounded filtering, mapping, or configuration needs. Custom Service is the safer review path when the requirement involves unsupported data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-Review whether:
+### Validate Additional Migration Activity Before Launch <a href="#validate-additional-migration-activity-before-launch" id="validate-additional-migration-activity-before-launch"></a>
 
-* representative customers belong to the correct groups
-* group-based storefront behavior remains understandable
-* visibility or access rules do not leak into the wrong customer context
-* pricing, discounts, or communication assumptions still make sense where applicable
-* support and operations teams can explain why a customer sees a specific experience
+Many merchants continue selling while migration review is in progress. PrestaShop validation should therefore define what must be checked after later migration activity, especially when products, combinations, categories, customers, orders, CMS Pages, Blog Posts, or shop-specific records continue changing.
 
-#### What to prove <a href="#what-to-prove-2" id="what-to-prove-2"></a>
+The validation burden changes depending on the action:
 
-The Target Platform should preserve useful customer context, not just customer-group names. If the migrated result cannot explain what each group means or why it matters, validation is incomplete.
+| Later migration activity                                | What to revalidate in PrestaShop                                                                                             |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Continue the Migration with the last used configuration | New eligible records and regression samples from combinations, categories, groups, URLs, and shop contexts already reviewed. |
+| Continue the Migration with a new configuration         | Newly migrated records plus fields, filters, mappings, or settings affected by the changed configuration.                    |
+| Perform a new migration                                 | Refreshed target result, replaced earlier migrated target data, and the full set of launch-critical PrestaShop samples.      |
 
-### Priority 4: Validate Multistore and Shop-Scope Behavior <a href="#priority-4-validate-multistore-and-shop-scope-behavior" id="priority-4-validate-multistore-and-shop-scope-behavior"></a>
+Entity Points should be interpreted correctly when planning later activity. Newly migrated eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when first migrated. Records already counted through the service license do not consume Entity Points again simply because another migration action occurs on the same migration path.
 
-If the PrestaShop target uses more than one shop context, validation should prove that each shop still works as a coherent storefront and operating environment.
+### Build a PrestaShop Validation Report <a href="#build-a-prestashop-validation-report" id="build-a-prestashop-validation-report"></a>
 
-#### What to validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
+A useful validation report should classify findings by business impact and handling path. It should not be a screenshot collection or a list of counts. Each finding should explain what was expected, what appeared in PrestaShop, how serious the gap is, and what action is needed.
 
-Check whether:
+| Report field     | Purpose                                                                                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Sample record    | Identifies the product, combination, feature, category, customer, order, URL, shop, CMS Page, Blog Post, module behavior, or custom field being reviewed.                      |
+| Expected outcome | States what the PrestaShop result should support.                                                                                                                              |
+| Observed result  | Describes what the target actually shows.                                                                                                                                      |
+| Severity         | Separates launch blockers from minor cleanup.                                                                                                                                  |
+| Handling path    | Classifies the issue as migration correction, Add-on adjustment, Custom Service review, PrestaShop setup, third-party work, manual cleanup, accepted limitation, or exclusion. |
+| Owner            | Assigns responsibility to the merchant, Next-Cart, PrestaShop-side setup team, developer, agency, or external partner.                                                         |
+| Status           | Confirms whether the issue is open, corrected, accepted, or deferred.                                                                                                          |
 
-* products and categories appear in the correct shop context
-* customers, languages, regions, brands, or audience segments are assigned appropriately
-* shop-specific routes, content, and storefront settings remain understandable
-* duplicated or shared content does not create confusing overlap
-* shop boundaries can be governed after launch
-
-#### What to prove <a href="#what-to-prove-3" id="what-to-prove-3"></a>
-
-The migrated result should make shop ownership clear. Multistore validation fails when the target technically contains shops but the business cannot explain which products, customers, content, or routes belong where.
-
-### Priority 5: Validate Friendly URLs and High-Value Destinations <a href="#priority-5-validate-friendly-urls-and-high-value-destinations" id="priority-5-validate-friendly-urls-and-high-value-destinations"></a>
-
-PrestaShop route validation should focus first on high-value pages, not on every low-impact path equally.
-
-#### What to validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
-
-Include:
-
-* best-selling product URLs
-* priority category URLs
-* landing pages tied to campaigns, search demand, or backlinks
-* CMS Pages with trust, policy, or conversion value
-* customer-support or account-related paths that affect launch confidence
-* old paths that require redirect or destination review
-
-#### What to prove <a href="#what-to-prove-4" id="what-to-prove-4"></a>
-
-Important routes should lead to destinations that preserve the purpose of the original page. A path that resolves technically can still fail validation if the destination no longer supports the same customer intent.
-
-### Priority 6: Validate Customer Continuity and First-Login Expectations <a href="#priority-6-validate-customer-continuity-and-first-login-expectations" id="priority-6-validate-customer-continuity-and-first-login-expectations"></a>
-
-Customer migration should be judged by the customer experience after launch, not only by whether customer records exist.
-
-#### What to validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
-
-Review:
-
-* customer-account access expectations
-* first-login or password-reset flow assumptions
-* customer group behavior after login
-* address and order-history usefulness
-* communication needed if the account experience changes
-* support readiness for customer questions after launch
-
-#### What to prove <a href="#what-to-prove-5" id="what-to-prove-5"></a>
-
-The migrated result should support customer trust. If customers can be imported but cannot reasonably understand how to access or use their accounts after launch, validation should not be treated as complete.
-
-### Priority 7: Validate Module-, Theme-, Override-, and Integration-Dependent Outcomes <a href="#priority-7-validate-module-theme-override-and-integration-dependent-outcomes" id="priority-7-validate-module-theme-override-and-integration-dependent-outcomes"></a>
-
-PrestaShop stores often rely on surrounding technical layers to create the intended storefront and operating experience. These layers should be validated by outcome.
-
-#### What to validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
-
-Review the results affected by:
-
-* merchandising modules
-* shipping, payment, tax, loyalty, review, subscription, marketplace, or analytics integrations
-* theme-level display behavior
-* overrides or custom code
-* custom fields and outside-system identifiers
-* ERP, CRM, fulfillment, warehouse, or accounting dependencies
-
-#### What to prove <a href="#what-to-prove-6" id="what-to-prove-6"></a>
-
-The migrated Target Platform should still support the business outcome those layers were meant to create. If a module, override, custom field, or integration changed how customers buy or how teams operate, validation should judge that behavior directly.
-
-### Priority 8: Validate Governability and Future Maintainability <a href="#priority-8-validate-governability-and-future-maintainability" id="priority-8-validate-governability-and-future-maintainability"></a>
-
-PrestaShop validation should also ask whether the Target Platform is understandable enough to manage after launch.
-
-#### What to validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Check whether:
-
-* product structure can be explained clearly by the business
-* category and customer-group rules are not unnecessarily opaque
-* shop scope can be maintained without guesswork
-* module, theme, override, and integration dependencies are visible enough for future ownership
-* future edits do not appear risky because important logic has no clear owner
-
-#### What to prove <a href="#what-to-prove-7" id="what-to-prove-7"></a>
-
-A migrated PrestaShop store should not only function at launch. It should remain governable enough for safer updates, merchandising, support, and future change.
-
-### What Makes a Strong PrestaShop Validation Sample <a href="#what-makes-a-strong-prestashop-validation-sample" id="what-makes-a-strong-prestashop-validation-sample"></a>
-
-A strong sample is deliberately chosen around risk, not selected randomly.
-
-#### Include cases that expose PrestaShop-specific meaning <a href="#include-cases-that-expose-prestashop-specific-meaning" id="include-cases-that-expose-prestashop-specific-meaning"></a>
-
-A useful sample should include:
-
-* products with combinations, features, customization fields, stock behavior, and image/SKU variation
-* categories that matter for navigation, merchandising, SEO, or conversion
-* customer groups with commercial or access meaning
-* shop-specific product, customer, category, content, language, region, or brand cases
-* high-value product, category, CMS Pages, Blog Posts, and campaign routes
-* customer-account cases where login, reset, address, group, or order-history behavior matters
-* records affected by modules, themes, overrides, custom fields, integrations, or outside-system identifiers
-* records from a Custom Platform source when source-side structure is non-standard
-
-#### Avoid broad but shallow validation <a href="#avoid-broad-but-shallow-validation" id="avoid-broad-but-shallow-validation"></a>
-
-A sample is weak when it only confirms that common records exist. PrestaShop validation should reveal whether the migrated structure still supports how the business sells, segments customers, governs shops, preserves routes, and maintains storefront behavior.
-
-### What Often Gets Missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
-
-Several validation mistakes create false confidence in a PrestaShop migration.
-
-#### Common weak spots <a href="#common-weak-spots" id="common-weak-spots"></a>
-
-Teams often miss:
-
-* products where combinations, features, and customization fields were interpreted too loosely
-* customer groups that exist but no longer support the intended storefront behavior
-* multistore assignments that look present but remain operationally unclear
-* friendly URLs that work technically but land on weaker destinations
-* customer records that import without a clear account-access or first-login plan
-* modules, themes, overrides, or integrations that quietly shaped the original storefront
-* custom fields or outside-system identifiers that matter to internal workflows
-
-#### Why these gaps matter <a href="#why-these-gaps-matter" id="why-these-gaps-matter"></a>
-
-These gaps are dangerous because they often do not appear as obvious migration failure. They appear later as weaker buyability, unclear customer behavior, support confusion, broken operational interpretation, or a store that is harder to maintain than expected.
-
-### How Custom Platform Sources Change Validation <a href="#how-custom-platform-sources-change-validation" id="how-custom-platform-sources-change-validation"></a>
-
-When the Source Platform is a Custom Platform, PrestaShop validation usually needs a tighter evidence standard.
-
-#### Why the evidence standard increases <a href="#why-the-evidence-standard-increases" id="why-the-evidence-standard-increases"></a>
-
-Custom Platform data may not follow a standard product, customer, order, category, URL, or shop model. Product-choice logic, personalization, customer segmentation, shop scope, custom fields, outside-system identifiers, integrations, and historical order meaning may need interpretation before they can become useful in PrestaShop.
-
-#### What to validate more carefully <a href="#what-to-validate-more-carefully" id="what-to-validate-more-carefully"></a>
-
-The review should give extra attention to:
-
-* how source-side product-choice logic became combinations, features, customization fields, or another PrestaShop structure
-* whether customer and customer-group meaning was reconstructed accurately
-* whether shop, language, region, or brand context remained coherent
-* whether custom fields and outside-system identifiers still support the intended workflow
-* whether legacy routes and destination meaning remain acceptable
-* whether differences are acceptable PrestaShop formalization or real continuity problems
-
-This does not change the main validation priorities. It raises the precision required before the result should be trusted.
+A validation report passes only when it gives the business enough evidence to decide whether the PrestaShop target is ready for Full Migration approval, launch planning, or correction.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-PrestaShop validation is strongest when it tests the places where platform structure can change commercial meaning: product combinations, features, customization fields, category-led discovery, customer groups, multistore scope, friendly URLs, customer-account expectations, and module-, theme-, override-, or integration-dependent behavior.
+PrestaShop validation should prove more than data arrival. It should prove that the migrated store still supports product choice, catalog discovery, customer context, shop governance, route continuity, historical order lookup, and module-sensitive operating behavior. The strongest validation process uses representative samples, checks the difference between migrated records and target-side setup, classifies custom or unsupported expectations early, and revalidates affected areas when later migration activity changes the result.
 
-A PrestaShop storefront can look polished while still being weaker in exactly those areas. The safest validation method is to use representative samples that prove the migrated result remains buyable, understandable, governable, and commercially useful.
+A PrestaShop migration is ready for approval only when the business can explain how the target works and trust that customers and internal teams can use it after launch. Record counts help confirm scope, but they do not replace meaning-based validation.
 
-Review the products, customer groups, shop assignments, URLs, customer-account scenarios, and module-shaped behaviors most likely to expose risk before treating the PrestaShop target as launch-ready. If the result leaves unresolved questions about whether a difference is acceptable PrestaShop formalization or a real continuity problem, use Live Chat to clarify the evidence before launch decisions are locked.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What should be validated first after a PrestaShop Demo Migration?**
 
-**What should be validated first in a PrestaShop migration?**
+Start with high-risk product examples: combinations, features, customization fields, image behavior, price or stock differences, category placement, and product URLs. These areas reveal whether the migration preserved buying logic rather than only product presence.
 
-Start with the product families most likely to expose combinations-versus-features-versus-customization ambiguity. Then review customer-group behavior, shop assignments, high-value routes, customer-account scenarios, and module-, theme-, override-, or integration-dependent outcomes.
+**Is matching product and order counts enough for PrestaShop validation?**
 
-**Why are product combinations important in PrestaShop validation?**
+No. Counts are useful completeness checks, but PrestaShop validation must also prove meaning. Product combinations, category paths, customer groups, multistore scope, URLs, orders, and module-sensitive behavior need representative review.
 
-Combinations often carry sellable product choices such as size, color, pack, SKU, image, price, or stock behavior. If those choices are translated incorrectly, the product may exist but no longer support the correct buying decision.
+**How should customer groups be validated in PrestaShop?**
 
-**Why are customer groups an important validation priority?**
+Customer groups should be tested with realistic customer examples. Confirm that group assignment, pricing or access expectations, customer context, and support interpretation remain understandable after migration.
 
-Customer groups can shape differentiated storefront behavior, pricing, access, segmentation, or communication expectations. Validation should prove that the right customer context still receives the intended experience, not only that group records exist.
+**Does PrestaShop multistore need separate validation?**
 
-**Why does multistore require separate validation?**
+Yes. If multistore is part of the target plan, validate each relevant shop context separately. Products, categories, URLs, customers, content, prices, and modules may need different review depending on how each shop is intended to operate.
 
-Multistore can place products, categories, customers, content, URLs, and settings into different shop contexts. Validation should prove that each shop still works as a coherent storefront rather than assuming that shop creation alone proves correctness.
+**When should custom PrestaShop data be escalated during validation?**
 
-**What makes a PrestaShop validation sample weak?**
-
-A weak sample is too broad, generic, or record-focused. It avoids the product structures, customer groups, shop assignments, routes, customer-account scenarios, custom fields, modules, themes, overrides, and integrations most likely to prove whether the migrated result is commercially trustworthy.
+Escalate when the issue involves unsupported records, module-owned data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment. Add-ons are appropriate only for bounded supported filtering, mapping, or configuration needs.
