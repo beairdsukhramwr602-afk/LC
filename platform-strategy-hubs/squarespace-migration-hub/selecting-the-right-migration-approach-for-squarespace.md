@@ -1,205 +1,209 @@
 # Selecting the Right Migration Approach for Squarespace
 
-Choosing the right migration approach for Squarespace requires more than counting products and orders. Squarespace is a hosted content-first commerce Target Platform, so the correct approach depends on how much of the project is structured data movement, how much is content and presentation work, and how much depends on target-side configuration, third-party systems, or custom handling.
+Choosing the right migration approach for Squarespace depends on how much of the project is structured data movement and how much depends on content, presentation, configuration, integrations, and unsupported business logic. Squarespace can support a polished commerce site with products, inventory, orders, contacts, transactions, and site-level context, but the migration approach must respect the difference between data that can be transferred and site behavior that must be configured, rebuilt, or reviewed separately.
 
-A straightforward store with standard products, clean customers, readable order history, and a simple content structure may fit a lighter approach. A store with complex product types, subscriptions or payment-plan expectations, unusual content relationships, SEO-sensitive URLs, external fulfillment tools, custom checkout behavior, or legacy site dependencies should be planned more carefully before Full Migration.
+A lighter approach may be enough for a clean store with ordinary products, simple customer and order records, limited content, and a straightforward launch plan. A more guided or custom approach becomes safer when the source store includes complex product options, SEO-sensitive content, customer/contact ambiguity, custom fields, subscription-like workflows, extensive historical orders, external-system identifiers, or design expectations that cannot be solved by data movement alone.
 
 ### What Migration Approach Means for Squarespace <a href="#what-migration-approach-means-for-squarespace" id="what-migration-approach-means-for-squarespace"></a>
 
-A Squarespace migration approach defines the level of assistance and scope control needed to move store records into a hosted content-first environment. It should answer four practical questions before launch work begins.
+A Squarespace migration approach should decide how the project will handle data, content, configuration, service responsibility, validation evidence, and launch timing. The question is not only how many products, customers, and orders exist. The stronger question is whether the expected launch result can be achieved through supported migration behavior, target-side setup, Add-ons, Managed Service, Custom Service, or a combination of those paths.
 
-| Approach question                             | Why it matters for Squarespace                                                                                                                                                             | Decision signal                                                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| Is the project mainly standard data movement? | Squarespace can receive common commerce and content records, but it will not automatically reproduce every design, template, integration, or business workflow from the previous platform. | Standard Service may be enough when records are ordinary and target setup is simple.               |
-| Does the merchant need guided execution?      | Squarespace projects often involve content, Store Pages, SEO, redirects, domains, and checkout settings alongside product and order data.                                                  | Managed Service becomes more useful when timing, validation, or launch coordination matters.       |
-| Are there specific extra migration needs?     | Some requirements are narrow enough to be handled through Add-ons rather than a broad custom review.                                                                                       | Add-ons may fit when the extra need is clear, bounded, and supported.                              |
-| Are there non-standard records or workflows?  | Custom selling models, app-owned records, unsupported structures, unusual content relationships, and external-system dependencies may not fit ordinary mapping.                            | Custom Service review is appropriate when the migration needs tailored analysis or implementation. |
+Squarespace projects can look deceptively simple because the platform presents commerce through a polished site-building experience. That simplicity should not hide important migration decisions. A product record may have a direct path, while the Store Page, product-page presentation, image order, SEO slug, navigation, checkout settings, payment setup, shipping rules, and external integrations still require separate planning.
 
-The correct approach should be chosen before the merchant treats Squarespace as ready for launch. A successful data move can still require separate work for design, checkout, taxes, shipping, payment, domains, email notifications, SEO redirects, and integrations.
+| Decision area                    | Why it matters for Squarespace                                                                                                             | Service-path signal                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Standard data scope              | Products, customers or contacts, orders, Blog Posts, CMS Pages, and other supported records may be enough for a clean store.               | Standard Service may be suitable when records are ordinary and the merchant can manage setup and validation. |
+| Content and Store Page structure | Store Pages, product presentation, page layouts, media, internal links, and navigation can affect launch quality.                          | Managed Service may be safer when sequencing and validation need guidance.                                   |
+| Supported adjustments            | Filtering, mapping, or bounded configuration may need more than default setup but not full custom work.                                    | Add-ons may fit when the requirement stays inside supported behavior.                                        |
+| Unsupported or bespoke needs     | Custom fields, external IDs, membership logic, subscription-like behavior, or custom content relationships may not fit ordinary migration. | Custom Service review is appropriate when tailored analysis or implementation is required.                   |
+| Follow-up migration timing       | The source store may keep receiving new products, customers, orders, or posts before launch.                                               | Additional Migration Options may be relevant when a later update or new migration action is needed.          |
+
+The right approach should be chosen before the merchant treats Squarespace as ready for launch. A successful record transfer can still leave payment methods, tax settings, shipping rules, checkout, design, redirects, domains, and integrations unfinished.
 
 ### Why Squarespace Approach Choice Depends on Content and Commerce Together <a href="#why-squarespace-approach-choice-depends-on-content-and-commerce-together" id="why-squarespace-approach-choice-depends-on-content-and-commerce-together"></a>
 
-Squarespace projects commonly combine storefront data with site presentation. Product records may migrate correctly while Store Pages, navigation, templates, sections, media placement, and promotional content still require target-side decisions.
+Squarespace approach selection should account for the relationship between commerce records and site structure. Products are not isolated database rows in the customer experience. They appear through Store Pages, product pages, images, navigation, SEO fields, URL slugs, design sections, and content paths. Customers and contacts may also have broader meanings than commerce buyers because a Squarespace site may include subscribers, donors, members, form contacts, and marketing contacts.
 
-| Planning area                        | Service-path implication                                                                                                                                                                                |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Store Pages and product presentation | If the source store depends on custom category layouts, landing pages, filters, or merchandising blocks, the approach should include content and display validation rather than only data-field checks. |
-| Product types and variants           | Physical products, service products, digital downloads, gift cards, subscription-style offers, and variant-heavy catalogs should be sampled separately during Demo Migration.                           |
-| Content and SEO                      | CMS Pages, Blog Posts, media, slugs, redirects, metadata, internal links, and domain timing can affect launch quality as much as commerce data.                                                         |
-| Checkout and operations              | Payment, tax, shipping, fulfillment, subscriptions/payment plans, notifications, and transaction handling may need target-side setup separate from migrated history.                                    |
-| External systems                     | CRM, fulfillment, accounting, inventory, booking, donation, subscription, and marketing tools may hold records or workflows outside normal Squarespace migration scope.                                 |
+This creates a practical decision rule: choose the lightest service path only when the commerce records are straightforward and the merchant can separately handle site setup. Choose a more supported or custom path when the migration result depends on interpretation, sequencing, unusual source records, or business rules that are not obvious from standard exports.
 
-This does not mean every Squarespace migration needs the heaviest service path. It means the decision should be based on evidence from actual store behavior, not only on the number of entities.
+| Squarespace condition                                                                                           | Approach impact                                       |
+| --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Products are simple, content is limited, URLs are manageable, and the merchant can configure the site directly. | Standard Service is more realistic.                   |
+| Products, pages, posts, images, contacts, orders, redirects, and launch settings all need coordinated review.   | Managed Service is safer.                             |
+| Supported records need filtering, field mapping, or bounded configuration.                                      | Add-ons may improve the result.                       |
+| The source store includes unsupported fields, custom logic, external IDs, or third-party records.               | Custom Service should be reviewed.                    |
+| The source store will stay active before launch.                                                                | Additional Migration Options should be planned early. |
+
+This framing prevents the service choice from being based only on platform reputation. Squarespace may be easier to operate than a highly customized commerce stack, but a migration into Squarespace still needs careful service planning when content, SEO, Store Pages, customers, orders, and external systems must remain meaningful.
 
 ### Standard Service for Squarespace <a href="#standard-service-for-squarespace" id="standard-service-for-squarespace"></a>
 
-Standard Service is usually appropriate when the store has a clear migration path, ordinary records, limited custom workflow dependency, and a merchant who can handle target-side configuration and validation with minimal guidance.
+Standard Service may be a reasonable Squarespace path when the source store is clean, the record structure is supported, and the merchant can handle target-side configuration. This usually means ordinary products, understandable variants, clear customer or contact data, usable historical orders, manageable content, and straightforward URL planning.
 
-| Standard Service may fit when           | Why it fits                                                                                                                                                |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Products are mostly standard            | Physical, service, gift card, or download products have clean titles, SKUs, prices, images, inventory values, and variant structures.                      |
-| Orders are historical reference records | Order history is needed for customer service or reporting, but live checkout, payment, tax, shipping, and fulfillment setup will be configured separately. |
-| Customer records are simple             | Customer, contact, subscriber, or profile records have clean emails, names, addresses, and order links without complex membership or CRM logic.            |
-| Content scope is manageable             | CMS Pages, Blog Posts, images, redirects, and SEO fields are limited, clean, and easy to validate.                                                         |
-| The merchant can validate results       | The merchant can review Demo Migration records, identify issues, and complete target-side settings before launch.                                          |
+A Standard Service fit becomes stronger when the merchant already knows which records should migrate and which areas should be rebuilt manually in Squarespace. For example, if the store has physical products with simple variants, a modest number of pages, clean product images, standard customer records, and historical orders used mainly for reference, the project may not need heavy customization. The merchant still needs to configure Squarespace settings, but the migration itself can stay focused on supported records.
 
-Standard Service should not be treated as an automatic website rebuild. Squarespace templates, sections, page styling, custom layouts, app configuration, payment providers, tax settings, shipping methods, notification settings, and domain launch steps remain separate target-side responsibilities unless another service arrangement covers them.
+Standard Service is weaker when the source platform contains hidden logic or app-managed business rules. Product personalization, subscription workflows, wholesale pricing, booking rules, loyalty data, marketplace records, third-party review data, custom checkout fields, or external-system identifiers may not belong in a default migration path. These should be identified before the service approach is chosen.
 
 #### Standard Service decision checklist <a href="#standard-service-decision-checklist" id="standard-service-decision-checklist"></a>
 
-| Check               | Standard-ready signal                                                         | Escalation signal                                                                                                               |
-| ------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog complexity  | Simple and variant products follow predictable rules.                         | Products depend on bundles, custom forms, external catalog logic, or unsupported option behavior.                               |
-| Content structure   | Pages and posts can be moved or rebuilt with clear redirect decisions.        | Site depends on complex content relationships, custom templates, gated content, or heavy media restructuring.                   |
-| Orders and payments | Historical orders only need readable continuity.                              | Subscription billing, transaction references, refunds, or external fulfillment data must preserve specific operational meaning. |
-| Customer identity   | Customer records are ordinary commerce contacts.                              | Members, donors, subscribers, account permissions, or CRM profiles have different business meanings.                            |
-| Target readiness    | Merchant can configure checkout, payment, tax, shipping, and launch settings. | Merchant expects the migration to configure business operations or rebuild design automatically.                                |
+| Standard Service is more realistic when                                                      | Standard Service is risky when                                                                                            |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Products use ordinary fields and manageable variants.                                        | Product options depend on app, script, form, or custom-field logic.                                                       |
+| Content pages and Blog Posts have clear migration or rebuild decisions.                      | Content relies on page-builder structures, embedded tools, or custom layouts that are expected to transfer automatically. |
+| Customer/contact records are clean and do not depend on complex segmentation.                | Customer data includes loyalty status, wholesale roles, memberships, donor-specific meanings, or app-owned attributes.    |
+| Orders are needed mainly for historical reference.                                           | Orders must preserve complex operational, fulfillment, subscription, or external-channel context.                         |
+| The merchant can configure payment, tax, shipping, checkout, domains, redirects, and design. | The merchant expects migration to complete configuration or design work automatically.                                    |
+
+Standard Service should not be selected because Squarespace appears simple. It should be selected because the actual source data, launch expectation, and validation burden are simple enough for a standard path.
 
 ### Managed Service for Squarespace <a href="#managed-service-for-squarespace" id="managed-service-for-squarespace"></a>
 
-Managed Service is appropriate when the store owner needs more guidance, coordination, and validation support while still working within a migration path that can be defined clearly. It is especially useful when the migration touches both commerce records and content-driven launch work.
+Managed Service becomes useful when the merchant needs more guidance around sequencing, evidence, scope control, and launch readiness. Squarespace projects can involve multiple workstreams at once: product migration, content review, URL planning, Store Page setup, checkout configuration, domain timing, redirect mapping, and post-Demo Migration validation.
 
-| Managed Service is useful when                       | How it helps                                                                                                     |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| The migration has launch timing pressure             | Coordination helps align Demo Migration, Full Migration, content checks, redirect review, and final validation.  |
-| Several record groups matter                         | Products, customers, orders, contacts, subscribers, pages, posts, media, and redirects all need business review. |
-| Demo Migration needs careful interpretation          | Support can help distinguish data issues from target-side configuration, design work, or accepted exclusions.    |
-| Multiple stakeholders review the target store        | Operations, marketing, content, SEO, fulfillment, and finance teams may need a shared validation sequence.       |
-| The merchant is unfamiliar with Squarespace behavior | Guidance can clarify what migration can move and what Squarespace configuration must be completed separately.    |
+A merchant may choose Managed Service even when the underlying data is mostly supported. The reason is coordination risk. If a store has strong SEO dependence, many content pages, mixed product types, important historical orders, or a tight launch window, the cost of mis-sequencing work may be higher than the complexity of the data itself.
 
-Managed Service does not remove the need for merchant decisions. It helps the merchant make and validate those decisions in a more structured way.
+Managed Service is especially useful when the merchant needs help turning Demo Migration results into decisions. A sample migration can show whether products, variants, images, contacts, orders, pages, and URLs behave as expected, but someone still needs to interpret the result. For Squarespace, interpretation often requires separating migration output from target-side setup. A product may transfer correctly while its page layout, navigation placement, checkout setup, or redirect rule still needs work.
 
 #### Managed Service decision checklist <a href="#managed-service-decision-checklist" id="managed-service-decision-checklist"></a>
 
-| Check                                   | Managed-ready signal                                                                       | Possible Custom Service signal                                                                 |
-| --------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Scope can be described clearly          | The merchant can identify required records, exclusions, timing, and validation priorities. | Important records are undocumented, app-owned, custom-coded, or dependent on external systems. |
-| Data mapping is mostly standard         | Differences can be resolved through normal field review and supported Add-ons.             | Required behavior does not map to Squarespace structures without tailored work.                |
-| Content work has clear boundaries       | Pages, posts, media, redirects, and SEO can be prepared and checked.                       | Content must be transformed, redesigned, merged, or rebuilt in a highly custom way.            |
-| Operations can be configured separately | Payment, tax, shipping, fulfillment, and notifications are target-side setup tasks.        | External operational systems must be preserved or synchronized through custom handling.        |
+| Managed Service is useful when                       | How it helps                                                                                                        |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| The migration has launch timing pressure.            | Coordination helps align Demo Migration, Full Migration, content checks, redirect review, and final validation.     |
+| Several record groups matter.                        | Products, customers, orders, contacts, subscribers, pages, posts, media, and redirects all receive business review. |
+| Demo Migration needs careful interpretation.         | Support helps separate data issues from target-side configuration, design work, and accepted exclusions.            |
+| Multiple stakeholders affect readiness.              | Designers, content owners, SEO reviewers, operations staff, and external vendors can work from the same scope.      |
+| The merchant needs confidence before Full Migration. | Validation priorities and launch blockers can be identified before the final move.                                  |
 
-Managed Service is often the right middle path for Squarespace when the merchant has a normal store but wants lower launch risk and stronger review discipline.
+Managed Service should not be chosen simply to make a small project feel safer. It should be chosen when guidance, sequencing, and interpretation materially reduce migration risk.
 
 ### Add-ons for Squarespace <a href="#add-ons-for-squarespace" id="add-ons-for-squarespace"></a>
 
-Add-ons should be chosen for specific needs. They are not a substitute for Custom Service, custom development, target-store design, checkout configuration, or broad business-process rebuilding.
+Add-ons should be considered when the project needs supported filtering, mapping, or bounded configuration beyond a default migration path. They are useful when the requirement is specific enough to define clearly and does not require unsupported custom-data handling.
 
-| Add-on use case             | Squarespace example                                                                                                       | Boundary to keep clear                                                                                       |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Additional data filtering   | Excluding obsolete products, inactive customers, old content, test orders, or unused blog posts.                          | Filtering does not redesign site structure or decide business strategy.                                      |
-| Advanced data mapping       | Mapping source product fields, customer fields, order labels, SEO fields, or content values into supported target fields. | Mapping does not create unsupported Squarespace behaviors.                                                   |
-| Advanced data configuration | Handling specific target formatting or migration setup rules for a known field group.                                     | Configuration does not replace platform settings such as payment, tax, shipping, or domains.                 |
-| CMS or content handling     | Moving or organizing CMS Pages, Blog Posts, media, and SEO fields where supported.                                        | Content movement does not automatically rebuild every layout, section, template, or internal design pattern. |
-| URL or SEO support          | Preserving slugs, metadata, redirects, and launch-critical path continuity where possible.                                | SEO support still requires merchant review of live target pages and redirect behavior.                       |
+For Squarespace, Add-ons may be relevant when the merchant wants to filter inactive products, exclude obsolete records, map supported fields more carefully, preserve selected content types, control which orders or customers are migrated, or adjust supported output behavior. Add-ons can improve the migration result when the merchant already knows the desired scope and the requested adjustment stays within supported behavior.
 
-Add-ons fit best when the requirement is narrow, documented, and connected to migration output. If the requirement is open-ended, unsupported, or dependent on external workflow behavior, Custom Service review is safer.
+Add-ons should not be used as a substitute for Custom Service. If the requirement involves unsupported records, bespoke source fields, third-party app data, external-system identifiers, membership logic, subscription behavior, custom checkout data, or unusual content relationships, the project should be reviewed as Custom Service instead.
+
+| Need                                                                                       | Better fit                                                           |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Filter out inactive products, obsolete customers, or old orders within supported behavior. | Add-on or supported configuration.                                   |
+| Map supported fields more carefully.                                                       | Add-on, especially when the requirement is bounded and well-defined. |
+| Preserve selected content or order ranges.                                                 | Add-on or supported setup, depending on scope.                       |
+| Migrate custom fields with no supported equivalent.                                        | Custom Service.                                                      |
+| Preserve external-system identifiers with business meaning.                                | Custom Service.                                                      |
+| Transform custom source behavior into a new Squarespace-compatible structure.              | Custom Service.                                                      |
+
+The practical rule is simple: Add-ons adjust supported behavior; Custom Service addresses unsupported or bespoke requirements.
 
 ### Custom Service for Squarespace <a href="#custom-service-for-squarespace" id="custom-service-for-squarespace"></a>
 
-Custom Service review is appropriate when the merchant needs tailored analysis or custom handling for requirements that do not fit a standard migration path or a clearly scoped Add-on.
+Custom Service should be reviewed when the expected result cannot be handled through standard supported behavior, Managed Service coordination, or Add-ons. Squarespace migrations may require Custom Service review when the source store includes custom fields, app-managed data, bespoke product logic, external IDs, membership relationships, subscription workflows, custom checkout fields, specialized order attributes, or content relationships that do not translate cleanly.
 
-| Custom Service may be needed when          | Why standard handling may not be enough                                                                                                                             |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Products use non-standard selling behavior | Bundles, custom product builders, appointment-style services, advanced subscriptions, donations, gated products, or external catalog rules may not map cleanly.     |
-| Content must be transformed                | Source templates, page-builder content, custom landing pages, embedded commerce blocks, galleries, or structured content may need decisions beyond field migration. |
-| Customer identity is complex               | Members, subscribers, donors, account permissions, CRM profiles, booking participants, or gated-content users may not equal ordinary commerce customers.            |
-| Orders carry operational dependencies      | Refunds, fulfillment references, transaction IDs, subscription records, external warehouse IDs, or accounting data may need special interpretation.                 |
-| External systems own key records           | CRM, fulfillment, marketing, booking, donation, inventory, accounting, or subscription systems may require custom analysis.                                         |
-| API-supported scope is incomplete          | Available APIs may expose some records while leaving app behavior, design, or business logic outside ordinary migration reach.                                      |
-
-Custom Service should be defined around the actual requirement. It may cover custom mapping, custom extraction, custom import preparation, special validation, or another tailored handling scope. It should not be described as a blanket promise to rebuild the entire Squarespace store.
+Custom Service is also relevant when Squarespace is expected to become part of a larger operational system. For example, if the merchant needs specific CRM IDs, fulfillment references, accounting identifiers, tax-exemption evidence, donor history, loyalty data, or product personalization data to remain usable after migration, those needs should be reviewed before the service path is confirmed.
 
 #### Custom Service decision checklist <a href="#custom-service-decision-checklist" id="custom-service-decision-checklist"></a>
 
-| Question                                                         | Custom Service signal                                                                                           |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Is the requirement documented enough to estimate?                | If not, discovery is needed before committing to migration scope.                                               |
-| Does the record have a supported target destination?             | If not, the outcome may be exclusion, manual rebuild, external-system retention, or custom handling.            |
-| Does the target behavior depend on Squarespace settings or apps? | If yes, the merchant should separate migration output from target configuration.                                |
-| Does the requirement affect launch-critical operations?          | Payment, subscription, fulfillment, tax, shipping, account access, and SEO continuity deserve early escalation. |
+| Custom Service trigger                                                        | Why it matters                                                                            |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Unsupported product or variant fields                                         | Squarespace may not have a direct target field for every source attribute.                |
+| External IDs must remain usable                                               | Staff may need CRM, accounting, fulfillment, or customer-service references after launch. |
+| Membership, subscription, booking, donation, or gated-access behavior matters | These records may be business logic, not ordinary customer or order data.                 |
+| App-managed reviews, loyalty, bundles, or custom forms must be preserved      | The source data may not be part of a standard export or supported target structure.       |
+| Bespoke content relationships affect the storefront                           | Page relationships, embedded tools, or custom layouts may need separate handling.         |
+| Source data requires transformation                                           | A direct transfer may not produce a usable Squarespace result.                            |
+
+Custom Service does not mean every complex Squarespace project must be rebuilt from scratch. It means the custom requirement must be reviewed, scoped, and handled separately from ordinary supported records.
 
 ### Entity Points and Squarespace Scope Planning <a href="#entity-points-and-squarespace-scope-planning" id="entity-points-and-squarespace-scope-planning"></a>
 
-Entity Points should be planned around the records that will actually be migrated. Squarespace projects can involve commerce records, content records, and supporting records, so scope planning should identify what counts, what is excluded, and what may need separate handling.
+Entity Points should be used as a scope-planning control, not as a substitute for service-path judgment. For Squarespace, the most relevant counted records are typically Product, Customer, Order, and Blog Posts records when they are included in the selected migration scope. The merchant should estimate these records before Full Migration so cost and scope are understood.
 
-| Scope area                    | Entity Points planning note                                                                                                               |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Products                      | Count products that should move, including product types and variant-heavy records where applicable.                                      |
-| Customers and contacts        | Separate commerce customers from subscribers, donors, members, profiles, and marketing-only contacts.                                     |
-| Orders                        | Count order history that should be migrated, including records needed for customer service, finance, or fulfillment history.              |
-| Blog Posts                    | New Blog Posts consume Entity Points when migrated for the first time.                                                                    |
-| CMS Pages and content records | Confirm whether content is in migration scope, manually rebuilt, excluded, or handled through a specific Add-on or custom review.         |
-| Exclusions                    | Outdated products, obsolete pages, test orders, inactive contacts, and unsupported records should be removed from scope when appropriate. |
+The key rule is that Entity Points are consumed when new data entities are migrated. If an entity has already been recorded through the migration service license, migrating that same recorded entity again does not consume additional Entity Points simply because the merchant performs another migration action on the same migration path. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time.
 
-Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when they are migrated for the first time. This remains true even when the customer performs a new migration for the same migration path.
+Squarespace planning should separate Entity Points from unsupported-data handling. A custom field, external ID, membership relationship, or app-managed record may create Custom Service scope even if the counted entity volume looks small. Likewise, a large but clean catalog may create Entity Points planning needs without requiring Custom Service.
 
-Entity Points should not be used as the only approach decision. A smaller Squarespace project can still need Managed Service or Custom Service if the data is complex, business-critical, or tightly connected to content and launch behavior.
+| Scope condition                                                                             | Planning implication                                                |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Many ordinary products, customers, orders, or Blog Posts                                    | Entity Points should be estimated carefully.                        |
+| Small number of records with unsupported custom fields                                      | Custom Service may matter more than count.                          |
+| Source store remains active before launch                                                   | Additional Migration Options may be needed for newly added records. |
+| The same already-recorded entity is migrated again through the same service-license context | Duplicate Entity Points consumption should not be assumed.          |
+
+Entity Points planning is strongest when it is connected to Demo Migration evidence. The sample should show whether record types, record counts, and record meanings match the intended Squarespace scope.
 
 ### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
 
-Demo Migration should be treated as evidence for choosing and confirming the service path. The sample should include records that represent the real Squarespace launch risk, not only easy products.
+Demo Migration should confirm whether the selected approach is strong enough before Full Migration. For Squarespace, the sample should test not only ordinary records but also the records most likely to expose migration meaning: product types, variants, Store Page relationships, images, SEO slugs, contacts, orders, transactions, content pages, Blog Posts, redirects, and any custom or external-system fields.
 
-| Sample area              | Include in Demo Migration                                                                                                     | What the result should prove                                               |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Products                 | Physical products, service products, digital downloads, gift cards, variant products, product images, and inventory values.   | Whether catalog data lands in a usable Squarespace structure.              |
-| Orders                   | Standard orders, refunded orders, subscription/payment-plan examples, transactions, shipping lines, tax lines, and discounts. | Whether historical order meaning remains readable.                         |
-| Customers and contacts   | Registered customers, guest buyers, subscribers, donors, members, profiles, and duplicate-email cases if relevant.            | Whether account and contact meaning is preserved clearly enough.           |
-| Content                  | CMS Pages, Blog Posts, images, SEO metadata, slugs, and redirects.                                                            | Whether content and path continuity support launch expectations.           |
-| Operational dependencies | Fulfillment IDs, external references, payment labels, tax values, and integration-owned data.                                 | Whether operational history remains useful or needs Custom Service review. |
+The merchant should review Demo Migration results with three questions in mind. First, did supported records move with the expected meaning? Second, which issues are target-side configuration or site-building tasks rather than migration defects? Third, which requirements are unsupported enough to require Add-ons, Custom Service, accepted exclusion, or manual rebuilding?
 
-After Demo Migration, the merchant should classify findings into four groups: accepted target behavior, target-side configuration tasks, migration corrections, and scope changes requiring Add-ons or Custom Service review. That classification prevents service-path decisions from being based on vague dissatisfaction with the target store.
+| Demo Migration finding                                                                            | Approach decision                                                  |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Products, customers, orders, and content are accurate, and remaining work is normal target setup. | Continue with the selected standard or managed path.               |
+| Supported fields need better filtering or mapping.                                                | Review Add-ons or supported configuration.                         |
+| Custom fields, external IDs, or app data are missing but business-critical.                       | Review Custom Service.                                             |
+| URL, Store Page, navigation, or design issues are mostly site setup.                              | Plan manual target-side work rather than changing migration scope. |
+| New records will continue to be added before launch.                                              | Plan Additional Migration Options early.                           |
+
+Demo Migration should not be treated as a pass/fail technical formality. It is the best practical moment to confirm whether the service path still fits the real Squarespace launch plan.
 
 ### How Additional Migration Options Affect Approach Planning <a href="#how-additional-migration-options-affect-approach-planning" id="how-additional-migration-options-affect-approach-planning"></a>
 
-Additional Migration Options should be considered when the merchant expects later activity on the same migration path. They matter for Squarespace when new records are created, store content changes, or launch timing requires updated data close to go-live.
+Additional Migration Options matter when the source store continues changing after Demo Migration or Full Migration. A merchant may continue receiving new orders, adding products, updating customers, publishing content, or making catalog changes before launch. If that happens, the initial migration approach should include a plan for how later records will be handled.
 
-| Follow-up situation                                                                    | Approach implication                                                                                                           |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| New products, customers, orders, or Blog Posts appear after the first migration action | Plan whether those records should be included later and whether Entity Points apply when they are migrated for the first time. |
-| Content pages or SEO fields change before launch                                       | Prepare revalidation for URLs, redirects, metadata, internal links, and published-page behavior.                               |
-| Orders continue on the old store while Squarespace is prepared                         | Decide how late-stage order and customer changes will be handled.                                                              |
-| Product images, variants, or inventory values change                                   | Include catalog revalidation in the launch plan.                                                                               |
-| Payment, tax, shipping, or fulfillment settings are configured late                    | Recheck that migrated history and live target operations are not being confused.                                               |
+For Squarespace, timing is especially important because launch may involve domain cutover, redirect setup, content review, design work, checkout configuration, and final validation. A merchant should decide whether later activity will be handled by continuing the migration with the last used configuration, continuing with a new configuration, or performing a new migration. The wording should be kept practical and tied to the launch plan, not treated as a separate feature lesson.
 
-Additional Migration Options should not be treated as an excuse to skip preparation. They are most useful when the first migration action, Demo Migration, Full Migration, and launch timing are planned with clear responsibility for what changes later.
+| Timing situation                                                    | Planning response                                                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Source store remains open after Demo Migration                      | Plan how new products, customers, orders, and posts will be handled before launch. |
+| Scope remains the same                                              | Continuing with the last used configuration may be sufficient.                     |
+| Scope or mapping needs to change                                    | Continuing with a new configuration may be more appropriate.                       |
+| The target result needs replacement or a materially different setup | Performing a new migration may be required.                                        |
+| The launch depends on SEO or content timing                         | Coordinate later migration activity with redirects, domains, and validation.       |
+
+Additional Migration Options should be planned before the launch window becomes urgent. They are most useful when the merchant has already decided which records matter, how Squarespace will be configured, and what must be revalidated after later activity.
 
 ### Squarespace Approach Decision Matrix <a href="#squarespace-approach-decision-matrix" id="squarespace-approach-decision-matrix"></a>
 
-| Store condition                                                                                    | Recommended approach tendency                           | Reason                                                                                                               |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Small content-led store with clean products and simple order history                               | Standard Service                                        | Records are likely to fit a normal migration path, assuming target settings are configured separately.               |
-| Store with important content, SEO, redirects, products, orders, and launch timing                  | Managed Service                                         | Coordination and validation support reduce risk without requiring broad custom work.                                 |
-| Store with narrow extra needs such as filtering, field mapping, or content/SEO handling            | Standard or Managed Service with Add-ons                | Add-ons can address specific migration requirements when the need is documented and supported.                       |
-| Store with complex products, unusual customer meanings, external systems, or unsupported workflows | Custom Service review                                   | Tailored analysis is needed before promising output quality or launch readiness.                                     |
-| Store expecting Squarespace to replicate an old site exactly                                       | Managed Service plus possible Custom Service review     | Migration can move data, but design, templates, app behavior, and platform-specific setup may require separate work. |
-| Store with late-stage data changes before launch                                                   | Service path plus Additional Migration Options planning | Follow-up migration handling and revalidation should be planned before final launch.                                 |
+Use the decision matrix to confirm the service path before Full Migration.
 
-The safest approach is the one that matches evidence. Store size matters, but record complexity, content importance, operational dependencies, SEO sensitivity, and launch timing often matter more.
+| Migration condition                                                                                                                                  | Stronger approach                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Clean products, simple variants, readable customers, reference-only orders, limited content, and merchant-led setup                                  | Standard Service                                             |
+| Supported records plus launch coordination, SEO-sensitive URLs, content review, multiple stakeholders, or timing pressure                            | Managed Service                                              |
+| Supported records need filtering, mapping, or bounded configuration                                                                                  | Add-ons                                                      |
+| Unsupported custom fields, app-managed records, external IDs, membership/subscription logic, bespoke transformation, or custom content relationships | Custom Service                                               |
+| Large eligible record counts with ordinary data                                                                                                      | Entity Points planning                                       |
+| Source store continues changing before launch                                                                                                        | Additional Migration Options                                 |
+| Demo Migration reveals target-side setup gaps but correct migrated data                                                                              | Continue selected service path and plan manual configuration |
+| Demo Migration reveals unsupported business-critical records                                                                                         | Escalate to Custom Service review                            |
+
+The final approach should match both the data and the launch burden. Squarespace can be straightforward when the store is compact and records are ordinary, but it needs more careful planning when commerce data, content, SEO, site setup, and external workflows must remain aligned.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Squarespace migration approach selection should begin with the target store’s real operating model. A simple content-led shop may fit Standard Service, while a content-heavy or launch-sensitive migration may benefit from Managed Service. Add-ons are useful for specific supported requirements. Custom Service review is appropriate when the store depends on non-standard products, unusual customer meaning, external systems, unsupported structures, or tailored content handling.
+The right Squarespace migration approach depends on the relationship between supported data, content-led site structure, target-side configuration, service responsibility, and launch timing. Standard Service may be enough for a clean store with ordinary records and merchant-led setup. Managed Service is safer when coordination, interpretation, and launch sequencing matter. Add-ons can improve supported filtering or mapping. Custom Service should be reviewed when unsupported fields, external data, bespoke relationships, or business-critical custom behavior must be preserved.
 
-Demo Migration should confirm the decision. If the sample proves that products, customers, orders, content, URLs, SEO fields, and operational references behave as expected, the selected approach is likely sound. If the sample exposes unsupported behavior, unclear mapping, missing dependencies, or launch-critical gaps, the approach should be adjusted before Full Migration.
+A strong approach decision should be made before Full Migration, then tested through Demo Migration. The merchant should know which records are moving, which settings must be configured separately, which needs require Add-ons or Custom Service, how Entity Points affect scope, and whether Additional Migration Options are needed for later changes before launch.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for Squarespace migration?**
 
-Standard Service can be enough when the store has standard products, clean customer records, readable order history, manageable content, and a merchant who can configure Squarespace settings separately. It is less suitable when the project depends on complex design reproduction, external systems, unusual products, or custom workflows.
+Standard Service may be enough when the source store has ordinary products, manageable variants, clean customer or contact records, usable historical orders, limited content, and a merchant who can configure payment, tax, shipping, checkout, domains, redirects, and design directly in Squarespace.
 
 **When should a Squarespace migration use Managed Service?**
 
-Managed Service is useful when the merchant needs guided execution, timing support, Demo Migration interpretation, launch coordination, or validation across both commerce records and content records.
+Managed Service should be considered when the project needs coordination, sequencing, and interpretation. It is useful when products, content, URLs, orders, contacts, SEO, checkout setup, domain timing, and stakeholder review all affect launch readiness.
 
 **When does Squarespace require Custom Service review?**
 
-Custom Service review is appropriate when important data or behavior does not fit a standard migration path. Examples include custom product behavior, complex subscriptions, unusual customer or member relationships, external-system dependencies, unsupported content structures, or special operational references.
+Custom Service should be reviewed when the source store includes unsupported fields, external IDs, custom product logic, app-managed records, membership or subscription behavior, custom checkout fields, bespoke content relationships, or data that requires transformation before it can be useful in Squarespace.
 
 **Do Add-ons replace Custom Service for Squarespace?**
 
-No. Add-ons support specific bounded needs such as filtering, mapping, configuration, content handling, or SEO-related migration requirements. Custom Service is used when the requirement needs tailored review or non-standard handling.
+No. Add-ons help with supported filtering, mapping, or bounded configuration. Custom Service is for unsupported, bespoke, or custom requirements that cannot be handled through ordinary supported behavior.
 
 **How should Additional Migration Options be planned for Squarespace?**
 
-Additional Migration Options should be planned when new products, customers, orders, Blog Posts, content changes, or SEO updates may need to be handled after an earlier migration action. They should be paired with validation so later changes do not create launch risk.
+Additional Migration Options should be planned when the source store will keep changing before launch. The merchant should decide whether later activity can continue with the last used configuration, needs a new configuration, or requires a new migration, then validate the affected records again.

@@ -1,238 +1,170 @@
 # Cafe24 Validation Priorities
 
-Migration validation for Cafe24 should prove that the migrated store can support the real selling environment the merchant expects to operate after launch. A Cafe24 migration may look complete at record level while still needing review in storefront structure, design behavior, app-dependent logic, payment and shipping context, API-connected workflows, analytics data, or integration ownership.
+Cafe24 validation should prove more than record transfer. A store can contain products, customers, orders, images, variants, redirects, and settings while still failing the operating model that the merchant expects after launch. Cafe24 is broad enough to hold product structure, member data, order lifecycle resources, payment and shipping settings, SEO controls, redirects, app behavior, webhooks, and design-layer dependencies. Validation therefore has to confirm whether the migrated store is usable as a commercial system, not whether a checklist of entities appears in the admin area.
 
-Cafe24 validation should therefore go beyond checking whether products, customers, orders, and content exist. The migrated result should be tested as a working e-commerce environment: products should be findable, storefront content should support buyer journeys, customer and order history should remain interpretable, apps should not hide unverified business rules, and connected systems should have a clear role in the future operating model.
+For Cafe24, validation should focus on three questions:
 
-A strong validation process asks one practical question: _can the Cafe24 target store support the merchant’s expected storefront, selling, operational, and integration behavior after migration?_ If the answer is uncertain, the validation result should trigger configuration review, data cleanup, Add-on review, or Custom Service review before launch.
+* First, can buyers discover, understand, and purchase products through the new storefront?
+* Second, can internal teams interpret customer, order, payment, shipment, refund, and return history without losing business context?
+* Third, are settings, apps, webhooks, design dependencies, and external systems clearly separated from migrated data so the team knows what has been transferred, configured, reconnected, or rebuilt?
+
+A strong validation process uses representative samples, not only totals. It should include simple and complex products, products with variants and inventory behavior, customers with account history, orders with payment and shipment complexity, redirects for high-value URLs, and any records that depend on Cafe24 settings or external integrations.
 
 ### What Cafe24 Validation Is Trying to Prove <a href="#what-cafe24-validation-is-trying-to-prove" id="what-cafe24-validation-is-trying-to-prove"></a>
 
-Cafe24 validation is not only a final data check. It is the proof stage where the merchant confirms that migrated records work inside Cafe24’s storefront, design, app, API, and data ecosystem.
+Cafe24 validation is the proof stage where the migration result is tested against real selling, support, fulfillment, reporting, and storefront requirements. It should connect migrated data with the configuration and operational layers that make the store usable.
 
-The validation goal is to confirm that:
+| Validation area                | What it must prove                                                                                                            | Why it matters                                                                                                          |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Product and variant data       | Products, options, variants, images, SEO data, tags, categories, and inventory-sensitive fields are usable in Cafe24.         | A product can exist but still be difficult to sell if the variant, image, inventory, or category context is incomplete. |
+| Customer and member data       | Customers, member status, contact details, tiers, memos, addresses, and account-related meaning remain interpretable.         | Customer records need to support support work, segmentation, repeat purchasing, and account review.                     |
+| Order history                  | Orders, line items, payment details, shipments, refunds, returns, cancellations, coupons, and status context remain readable. | Support, finance, and fulfillment teams rely on order history for post-launch continuity.                               |
+| Store settings                 | Payment, shipping, tax, SEO, order-form, privacy, and product-display settings are not confused with migrated data.           | Settings often require configuration, not only migration.                                                               |
+| Storefront and design behavior | Important pages, product listings, redirects, mobile display, and buyer flows support the expected customer experience.       | Data quality is incomplete if buyers cannot navigate or complete the purchase journey.                                  |
+| Apps, APIs, and webhooks       | External systems, app-owned logic, events, and reporting flows have clear ownership.                                          | Integrations may determine operational outcomes that are not represented by native records alone.                       |
 
-| Validation goal                                           | What it proves in Cafe24                                                                                   |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Products and categories are commercially usable           | Buyers can find, compare, and purchase products in the expected storefront structure.                      |
-| Storefront and design context is coherent                 | Key pages, modules, content blocks, and buyer paths support the intended customer experience.              |
-| Customer and order records are interpretable              | Support, fulfillment, repeat purchasing, and account review can rely on migrated history.                  |
-| Discount, shipping, and payment context is not assumed    | App-dependent behavior is identified and tested instead of being treated as ordinary migrated data.        |
-| API, webhook, and Data Bridge dependencies are understood | Connected systems have clear ownership and do not create hidden launch gaps.                               |
-| Analytics and reporting context is realistic              | The merchant understands what historical data can support after migration and what must be re-established. |
-| Custom or source-specific data has a destination plan     | Custom fields, outside-system identifiers, and non-standard source logic are not silently lost or misread. |
+Validation should produce a clear launch decision. If a record exists but its business use is unclear, the result is not ready. If a rule depends on app or external behavior, the validation owner must document whether that behavior is configured in Cafe24, handled through Add-ons, reviewed through Custom Service, or managed outside the migration scope.
 
-This proof matters because Cafe24 often sits between storefront presentation and operational services. A record can appear in the Target Platform but still fail the business purpose if the storefront, app, API, or integration context has not been validated.
+### Product, Option, Variant, and Inventory Validation <a href="#product-option-variant-and-inventory-validation" id="product-option-variant-and-inventory-validation"></a>
 
-### Product and Category Validation <a href="#product-and-category-validation" id="product-and-category-validation"></a>
+Product validation should start with the structure that buyers and internal teams actually use. Cafe24 product resources can involve product details, images, options, SEO, tags, variants, and variant inventories. Validation must confirm that this structure makes sense after the source store has been translated into Cafe24.
 
-Product and category validation should prove that the migrated catalog is usable inside Cafe24, not merely that product records have arrived.
+A simple total count is not enough. Products should be checked at the level of commercial behavior: whether product options produce the expected choices, whether variants retain meaningful SKUs and inventory states, whether images support buyer decisions, and whether SEO or product-display information remains coherent.
 
-#### What to validate <a href="#what-to-validate" id="what-to-validate"></a>
+| Sample type                   | What to validate                                                                                           | Pass condition                                                                                     |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Simple product                | Name, description, price, category, visibility, image, SEO fields, and stock status.                       | Product is findable, readable, and purchasable without missing required context.                   |
+| Variant-heavy product         | Options, variant labels, SKU, price differences, inventory, images, and unavailable combinations.          | Buyers see the correct choices, and staff can interpret inventory at the right level.              |
+| SEO-sensitive product         | Product title, page metadata, URL/redirect plan, image context, and category path.                         | Search-sensitive content remains understandable and does not create broken route behavior.         |
+| Product with custom details   | Specifications, compatibility notes, badges, tags, custom fields, or app-owned information.                | Custom details are either preserved, converted, configured, or assigned for Custom Service review. |
+| High-volume inventory product | Stock quantity, inventory ownership, variant inventory, backorder assumptions, and fulfillment dependency. | Stock behavior matches the intended operational model after launch.                                |
 
-Review product names, SKUs, descriptions, images, prices, inventory-sensitive fields, options, variants, product status, category assignment, product visibility, and any product details used by storefront modules or connected apps. If the source catalog contained technical specifications, buying notes, bundle-like relationships, or market-specific product treatment, confirm how those details appear in Cafe24.
+Validation should also confirm that product data is not being stretched beyond its role. If the source store used custom templates, external catalog enrichments, ERP attributes, marketplace fields, or app-created merchandising rules, Cafe24 product validation should identify which details belong in native product data and which require configuration, integration, or Custom Service handling.
 
-Category validation should also include navigation logic. A product may be migrated correctly but still be difficult to find if category hierarchy, menu placement, storefront module behavior, or product listing rules are not aligned.
+### Category, Display, and Product Discovery Validation <a href="#category-display-and-product-discovery-validation" id="category-display-and-product-discovery-validation"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
+Category and display validation proves whether buyers can move through the new store naturally. Product records may be correct while category placement, listing behavior, storefront menus, and product-display settings still create a weak buyer journey.
 
-A strong sample includes best-selling products, products with options, products with multiple images, products assigned to several categories, products that should be hidden or inactive, products with SEO-sensitive content, and products used in promotional or app-dependent flows.
+Cafe24 validation should distinguish between administrative organization and customer-facing discovery. Some source categories may be internal, outdated, seasonal, campaign-specific, or duplicated. Others may be essential for SEO, product discovery, and conversion. Treating every source category as equal can create a technically complete but commercially confusing store.
 
-If the merchant sells across different storefront or market contexts, include products that represent those differences. A sample made only of simple products will not prove that the target catalog can support the real Cafe24 storefront.
+| Discovery element        | Validation question                                                                   | Review signal                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Primary categories       | Do the main product groups match how customers shop?                                  | Buyers can reach high-value products through a short, logical path.                     |
+| Product listing pages    | Do listings show the right products, prices, availability, and merchandising context? | Product groups do not feel random, duplicated, or incomplete.                           |
+| Menus and navigation     | Do menu paths support important buyer journeys?                                       | Navigation matches the commercial structure, not only the old admin structure.          |
+| SEO-sensitive paths      | Are high-value old URLs, product pages, and category routes accounted for?            | Redirect needs are identified before launch rather than discovered after traffic drops. |
+| Mobile storefront review | Does the discovery path work on mobile?                                               | Products remain findable and purchasable without layout or navigation friction.         |
 
-#### What often gets missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
+The validation sample should include best sellers, long-tail products, products with several category assignments, and products linked to campaigns or search traffic. A sample made only of clean catalog records will not reveal whether the Cafe24 storefront supports real discovery behavior.
 
-Merchants often check product presence but miss whether the product is findable, purchasable, correctly grouped, correctly displayed, or usable in the future storefront. Product validation should include buyer-path review, not only admin-side record review.
+### Customer, Member, and Segmentation Validation <a href="#customer-member-and-segmentation-validation" id="customer-member-and-segmentation-validation"></a>
 
-### Storefront, Design, and Route Validation <a href="#storefront-design-and-route-validation" id="storefront-design-and-route-validation"></a>
+Cafe24 customer validation should prove that customer data remains useful for account review, support, segmentation, and business operations. Member records, tiers, memos, payment-related information, social account context, signup-field properties, and customer properties may all matter depending on the store’s operating model.
 
-Cafe24 validation should confirm that migrated data supports the storefront experience the merchant expects buyers to use after launch.
+Validation should not reduce customers to names and email addresses. A usable customer record should help staff understand who the customer is, what history is connected to the account, how the customer should be treated, and whether any source-side membership or segmentation meaning still matters.
 
-#### What to validate <a href="#what-to-validate-1" id="what-to-validate-1"></a>
+| Customer sample                         | Why it matters                                       | What to check                                                                  |
+| --------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Recent repeat buyer                     | Tests customer identity and order association.       | Account details, order links, addresses, contact data, and support usefulness. |
+| Long-term customer                      | Reveals whether older history remains interpretable. | Historical orders, old addresses, customer notes, and status meaning.          |
+| Tiered or segmented customer            | Tests membership or group-related treatment.         | Tier logic, segment mapping, discount assumptions, and app dependencies.       |
+| Social-login or special signup customer | Reveals account-context dependencies.                | Signup fields, social account meaning, and login expectations.                 |
+| Customer with unusual records           | Exposes custom-field or operational edge cases.      | Memos, external IDs, tax status, wholesale logic, or CRM references.           |
 
-Review storefront navigation, product listing pages, product detail pages, CMS-like content, landing pages, banners, menus, high-value routes, language or market-specific presentation, design modules, Smart Design or Smart Theme behavior where relevant, and any web components or scripts that affect the buyer experience.
+If a customer attribute controls pricing, tax treatment, account approval, loyalty, marketing segmentation, or B2B behavior, it should not be treated as ordinary profile text. The validation owner should decide whether it belongs in native Cafe24 customer data, a configured business rule, an app, a connected system, or Custom Service review.
 
-The target storefront does not need to reproduce the source design exactly. It does need to preserve the commercial paths that matter: where buyers enter, how they discover products, how they understand product value, how they move toward checkout, and how important pages remain identifiable.
+### Order, Payment, Fulfillment, Refund, and Return Validation <a href="#order-payment-fulfillment-refund-and-return-validation" id="order-payment-fulfillment-refund-and-return-validation"></a>
 
-#### Strong validation samples <a href="#strong-validation-samples-1" id="strong-validation-samples-1"></a>
+Order validation should prove that historical orders remain interpretable. Cafe24 order resources can include order items, buyer details, recipients, payments, shipments, refunds, returns, cancellations, exchanges, coupons, and order status behavior. Validation should check whether each order sample tells a clear business story.
 
-Choose pages that generate traffic, support search visibility, answer buyer questions, or represent critical campaigns. Include products and categories that depend on page content, navigation modules, visual merchandising, or storefront scripts. If the source store had important old URLs, validate whether the target route plan supports continuity or requires separate redirect planning.
+The goal is not to make old orders behave like new live orders. The goal is to ensure support, finance, operations, and fulfillment teams can understand the historical context after migration. A complete order count does not prove that the migrated history is useful.
 
-#### What often gets missed <a href="#what-often-gets-missed-1" id="what-often-gets-missed-1"></a>
+| Order sample                                  | Why it should be included               | Validation focus                                                                  |
+| --------------------------------------------- | --------------------------------------- | --------------------------------------------------------------------------------- |
+| Recent paid order                             | Confirms normal order history behavior. | Order date, buyer, line items, totals, payment status, and fulfillment state.     |
+| Refunded or returned order                    | Tests exception history.                | Refund/return context, status meaning, notes, and amount interpretation.          |
+| Cancelled or exchanged order                  | Tests lifecycle visibility.             | Cancellation or exchange state, affected items, and support readability.          |
+| Discounted or coupon order                    | Tests promotional context.              | Coupon value, discount meaning, subtotal/tax/shipping impact.                     |
+| Multi-shipment or fulfillment-sensitive order | Tests operational interpretation.       | Recipient details, shipment status, tracking context, and fulfillment ownership.  |
+| Imported historical order                     | Tests migrated-order assumptions.       | Whether old order history is readable without implying current checkout behavior. |
 
-Storefront validation often fails when reviewers only compare page text or visual layout. The more important question is whether the buyer journey still works. A page can look acceptable while product discovery, category paths, promotional context, or SEO-sensitive routes are incomplete.
+Validation should also separate migrated order history from live Cafe24 checkout configuration. Payment methods, shipping manager behavior, tax manager behavior, order-form settings, and fulfillment integrations may require setup or reconnection. They should not be considered validated just because historical orders are present.
 
-### Customer and Account Validation <a href="#customer-and-account-validation" id="customer-and-account-validation"></a>
+### Store Settings, Checkout, Shipping, Tax, and Privacy Validation <a href="#store-settings-checkout-shipping-tax-and-privacy-validation" id="store-settings-checkout-shipping-tax-and-privacy-validation"></a>
 
-Customer validation should prove that customer records remain useful for support, repeat purchase, segmentation, and account review after migration.
+Cafe24 has many store-level and operation-level settings that influence how the store behaves. Validation should confirm which items are migrated data and which are configuration responsibilities. Payment settings, order-form settings, shipping settings, tax settings, privacy settings, customer settings, product-display settings, SEO settings, redirects, and order statuses may shape launch readiness.
 
-#### What to validate <a href="#what-to-validate-2" id="what-to-validate-2"></a>
+| Setting area              | Validation question                                                                    | Failure signal                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Payment settings          | Are the intended payment methods configured and tested for the launch market?          | Historical payment data is mistaken for active payment readiness.    |
+| Shipping settings         | Do shipping methods, fees, and fulfillment expectations match the launch model?        | Orders look correct, but checkout shipping behavior is untested.     |
+| Tax settings              | Are tax expectations configured for the target market and product mix?                 | Tax totals from old orders are used as proof of future tax behavior. |
+| Order-form settings       | Are required fields, custom checkout fields, and privacy notices aligned?              | Checkout captures the wrong information or misses required consent.  |
+| Product-display settings  | Are listings, product details, images, and storefront visibility configured correctly? | Products exist in admin but display poorly or inconsistently.        |
+| Redirect and SEO settings | Are high-value routes protected?                                                       | Broken links or lost routes appear after launch.                     |
 
-Review customer names, email addresses, phone numbers, addresses, account status, segmentation context, membership or group-related meaning where applicable, order association, and any customer fields that influence operations. If customer records from the Source Platform were connected to CRM, marketing, loyalty, tax, wholesale, or outside-system identifiers, validate how that context is preserved or reconnected.
+This validation layer often prevents false confidence. A migration can be data-complete while settings remain unfinished. Cafe24 launch readiness requires both migrated records and confirmed configuration ownership.
 
-#### Strong validation samples <a href="#strong-validation-samples-2" id="strong-validation-samples-2"></a>
+### Storefront, Design, Redirect, and Mobile Validation <a href="#storefront-design-redirect-and-mobile-validation" id="storefront-design-redirect-and-mobile-validation"></a>
 
-Use recent customers, long-term customers, customers with multiple addresses, customers with large order histories, customers tied to special business rules, and customers affected by integrations. If the future Cafe24 store depends on segmentation or app-based customer behavior, include samples that reveal whether those relationships can be reviewed after migration.
+Cafe24 storefront validation should prove that the buyer-facing experience is ready to support real traffic. Smart Design, Smart Themes, modules, scripts, page layout, responsive behavior, banners, landing pages, product pages, and checkout-related pages may affect how the migrated data appears.
 
-#### What often gets missed <a href="#what-often-gets-missed-2" id="what-often-gets-missed-2"></a>
+| Storefront area            | What to validate                                                                  | Pass signal                                                    |
+| -------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Product detail pages       | Product content, option display, images, price, stock, and purchase path.         | Buyers can understand and buy representative products.         |
+| Category and listing pages | Product grouping, listing order, labels, filters, visibility, and mobile display. | Product discovery feels intentional and complete.              |
+| Content and landing pages  | Key campaign pages, brand pages, policy pages, and support pages.                 | Important pages are not reduced to broken or unstyled content. |
+| Redirects                  | High-value old URLs, product/category URLs, and campaign routes.                  | Critical paths are mapped or intentionally retired.            |
+| Mobile behavior            | Navigation, product selection, image display, cart, and checkout movement.        | The store works on the device patterns buyers actually use.    |
 
-The most common gap is treating customer validation as a contact-list check. A customer record may look complete but still lack the order, support, segmentation, or connected-system context that makes it useful after launch.
+Storefront validation should not demand visual duplication of the source store. It should demand commercial continuity: buyers can find products, understand product value, trust the storefront, and move toward checkout without avoidable friction.
 
-### Order, Fulfillment, Payment, and Shipping Validation <a href="#order-fulfillment-payment-and-shipping-validation" id="order-fulfillment-payment-and-shipping-validation"></a>
+### Apps, APIs, Webhooks, Analytics, and External Systems Validation <a href="#apps-apis-webhooks-analytics-and-external-systems-validation" id="apps-apis-webhooks-analytics-and-external-systems-validation"></a>
 
-Order validation should prove that migrated order history remains interpretable for business use. It should not be limited to order count matching.
+Cafe24 validation should include integration ownership. Cafe24 supports app development, API resources, webhooks, analytics-related workflows, Data Bridge, Smart Design, Smart Themes, and custom storefront components. These layers can determine how products, inventory, customers, orders, fulfillment, reporting, and marketing data behave after launch.
 
-#### What to validate <a href="#what-to-validate-3" id="what-to-validate-3"></a>
+| Dependency type                         | Validation question                                                                        | Required decision                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| API-connected systems                   | Which system owns product, inventory, customer, or order truth?                            | Reconnect, replace, rebuild, or retire the connection.               |
+| Webhooks and event flows                | Which events must trigger after launch?                                                    | Confirm event ownership and testing responsibility.                  |
+| Analytics and reporting                 | Which historical and live data must be comparable?                                         | Identify what is migrated, reset, mapped, or re-established.         |
+| App-owned business rules                | Which rules affect discounts, shipping, checkout, loyalty, marketing, or account behavior? | Assign to native setup, Add-ons, Custom Service, or external work.   |
+| External IDs and operational references | Which identifiers are needed by ERP, CRM, warehouse, marketplace, or finance systems?      | Preserve, transform, reconnect, or document as historical reference. |
 
-Review order numbers, dates, customer associations, product line items, quantities, prices, discounts, taxes, shipping charges, billing and shipping addresses, payment status, fulfillment status, refund or cancellation context where applicable, and order notes or operational references. If payment gateway, shipping fee, fulfillment, accounting, marketplace, or tax workflows depend on apps or external systems, clarify which parts are historical reference and which parts must function after launch.
+Integration validation should produce specific ownership decisions. If the team cannot say who owns a workflow after launch, the workflow is not validated.
 
-#### Strong validation samples <a href="#strong-validation-samples-3" id="strong-validation-samples-3"></a>
+### Demo Migration and Follow-Up Migration Validation <a href="#demo-migration-and-follow-up-migration-validation" id="demo-migration-and-follow-up-migration-validation"></a>
 
-Choose recent orders, old orders, high-value orders, discounted orders, orders with shipping complexity, orders with multiple products, cancelled or refunded orders, orders with unusual payment status, and orders tied to external fulfillment or accounting review.
+Demo Migration should be used to expose risk early. It should include complex products, customer edge cases, historical orders, redirect-sensitive pages, custom fields, app-dependent rules, and integration-sensitive examples. Clean samples may create false confidence.
 
-#### What often gets missed <a href="#what-often-gets-missed-3" id="what-often-gets-missed-3"></a>
+After Demo Migration, validation should identify what needs adjustment before Full Migration. After Full Migration, validation should confirm the complete record set and verify that launch-critical settings and integrations are ready. If additional data must be moved later, the team should select the correct follow-up action based on whether the last configuration can be reused, whether a new configuration is required, or whether a separate migration is needed.
 
-A migrated order can be present but operationally weak if fulfillment teams cannot understand what happened, support teams cannot answer customer questions, or finance teams cannot interpret payment and tax context. Validation should confirm order usefulness, not just record presence.
-
-### App-Dependent Rule Validation <a href="#app-dependent-rule-validation" id="app-dependent-rule-validation"></a>
-
-Cafe24 supports app development and app categories such as discount apps, shipping fee apps, and payment gateway apps. That makes app-dependent business behavior a validation priority, especially when the source store relied on extensions, apps, scripts, or custom service logic.
-
-#### What to validate <a href="#what-to-validate-4" id="what-to-validate-4"></a>
-
-Identify which discounts, promotions, shipping calculations, payment behavior, storefront scripts, customer treatment, reporting actions, or operational events are controlled by Cafe24 configuration, Cafe24 apps, connected systems, or custom handling. Validate whether the target store contains the required data, whether the required behavior has been configured separately, and whether any unsupported behavior requires Add-on or Custom Service review.
-
-#### Strong validation samples <a href="#strong-validation-samples-4" id="strong-validation-samples-4"></a>
-
-Include products affected by discounts, orders with shipping-fee differences, payment-sensitive orders, customer groups affected by rules, promotional products, and storefront flows that rely on scripts or app logic.
-
-#### What often gets missed <a href="#what-often-gets-missed-4" id="what-often-gets-missed-4"></a>
-
-Merchants may assume that app-owned behavior migrates because the visible data migrated. That is unsafe. App behavior should be validated as behavior, not as ordinary product, customer, or order records.
-
-### API, Webhook, Data Bridge, and Integration Validation <a href="#api-webhook-data-bridge-and-integration-validation" id="api-webhook-data-bridge-and-integration-validation"></a>
-
-Cafe24’s developer ecosystem includes API documentation, OAuth, app development, webhooks, Data Bridge, and analytics-related APIs. When a merchant uses connected systems, validation should confirm integration ownership before launch.
-
-#### What to validate <a href="#what-to-validate-5" id="what-to-validate-5"></a>
-
-Review which systems create, modify, enrich, or consume product, customer, order, inventory, payment, shipping, analytics, and reporting data. Confirm whether each connected workflow is expected to run inside Cafe24, through a Cafe24 app, through API activity, through webhooks, through Data Bridge, or outside the Target Platform.
-
-Validation should also clarify whether historical data is needed for reference only or whether connected workflows must act on it after launch.
-
-#### Strong validation samples <a href="#strong-validation-samples-5" id="strong-validation-samples-5"></a>
-
-Use records involved in ERP, accounting, CRM, shipping, tax, marketplace, analytics, reporting, or fulfillment workflows. Include examples where the source store displayed data that was actually owned elsewhere.
-
-#### What often gets missed <a href="#what-often-gets-missed-5" id="what-often-gets-missed-5"></a>
-
-Integration validation often fails because the storefront is reviewed before system ownership is understood. If nobody knows whether Cafe24, an app, an API workflow, Data Bridge, or an external system owns a business outcome, the migration result cannot be judged safely.
-
-### Analytics and Reporting Context Validation <a href="#analytics-and-reporting-context-validation" id="analytics-and-reporting-context-validation"></a>
-
-Cafe24 validation should also check whether migrated and newly created data can support the reporting expectations that matter after launch.
-
-#### What to validate <a href="#what-to-validate-6" id="what-to-validate-6"></a>
-
-Review whether product, customer, order, and storefront data can support the merchant’s expected reporting context. If the merchant plans to use Cafe24 Analytics API, Data Bridge, external BI tools, accounting reports, marketing reports, or operational dashboards, validate whether required identifiers, dates, statuses, categories, and source references are preserved or need mapping.
-
-#### Strong validation samples <a href="#strong-validation-samples-6" id="strong-validation-samples-6"></a>
-
-Use products with category changes, customers with multiple orders, orders across different statuses, promotional orders, market-specific records, and data that appears in external reports.
-
-#### What often gets missed <a href="#what-often-gets-missed-6" id="what-often-gets-missed-6"></a>
-
-Reporting validation often happens too late. Merchants may approve visible storefront records and only later discover that reporting groups, date ranges, identifiers, or integration feeds do not support the decisions they expected to make after launch.
-
-### Custom Platform and Custom Data Validation <a href="#custom-platform-and-custom-data-validation" id="custom-platform-and-custom-data-validation"></a>
-
-When Cafe24 is the Target Platform and the Source Platform is a Custom Platform or heavily modified system, validation should prove that custom meaning was interpreted correctly.
-
-#### What to validate <a href="#what-to-validate-7" id="what-to-validate-7"></a>
-
-Review custom fields, source-only identifiers, third-party references, non-standard product relationships, account logic, order metadata, app-owned values, outside-system IDs, and custom database behavior. Confirm which values belong in Cafe24, which should be mapped or configured through Add-ons, and which require Custom Service because they depend on custom migration logic adjustment or broader bespoke handling.
-
-#### Strong validation samples <a href="#strong-validation-samples-7" id="strong-validation-samples-7"></a>
-
-Choose records with the highest business meaning, not the simplest records. Include custom product structures, customers with special account logic, orders with unusual metadata, records tied to outside systems, and data that staff use daily but that may not appear in standard exports.
-
-#### What often gets missed <a href="#what-often-gets-missed-7" id="what-often-gets-missed-7"></a>
-
-Custom data is often treated as extra information rather than business logic. Validation should prove that custom meaning remains usable, or that it has a clear exclusion, transformation, or Custom Service plan.
-
-### What Makes a Strong Cafe24 Validation Sample <a href="#what-makes-a-strong-cafe24-validation-sample" id="what-makes-a-strong-cafe24-validation-sample"></a>
-
-A strong validation sample should be small enough to review carefully and varied enough to expose risk. It should include records that represent how the future Cafe24 store will actually operate.
-
-| Sample type                                               | Why it should be included                                                                  |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Best-selling and high-traffic products                    | They expose catalog, storefront, SEO, and buyer-path issues that affect revenue.           |
-| Products with options, variants, or special display needs | They show whether source catalog meaning translated into usable Cafe24 structure.          |
-| Important categories and navigation paths                 | They prove that buyers can reach products in the intended storefront structure.            |
-| Customers with order history or segmentation context      | They prove whether customer records remain operationally useful.                           |
-| Discounted, shipped, refunded, or complex orders          | They reveal whether order history remains interpretable for support and operations.        |
-| App- or integration-sensitive records                     | They expose behavior that cannot be judged by ordinary record presence.                    |
-| Custom-field or Custom Platform samples                   | They prove whether custom source meaning needs mapping, cleanup, or Custom Service review. |
-
-A weak sample usually contains only clean products, ordinary customers, and simple orders. That type of sample can create false confidence because it avoids the records most likely to expose Cafe24 migration issues.
-
-### What Often Gets Missed <a href="#what-often-gets-missed-8" id="what-often-gets-missed-8"></a>
-
-Cafe24 validation commonly misses the gap between record presence and operating readiness.
-
-| Missed area                                       | Why it matters                                                                                                                |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Storefront route and navigation behavior          | Buyers may not reach migrated products or key pages through the expected path.                                                |
-| Design/module dependency                          | Migrated content may need storefront configuration before it becomes meaningful.                                              |
-| App-owned discount, shipping, or payment behavior | Data may appear correct while rules still need separate configuration or review.                                              |
-| API, webhook, or Data Bridge ownership            | Connected workflows may fail if system responsibility is unclear.                                                             |
-| Analytics and reporting expectations              | Historical data may not support future reporting without mapping or reconnection.                                             |
-| Custom fields and source-only identifiers         | Important operational context may be hidden outside standard records.                                                         |
-| Recent activity before launch                     | New products, customers, orders, or content created after earlier migration activity may need Recent Data Migration planning. |
-
-These gaps do not always mean the migration has failed. They mean the merchant should not treat validation as finished until the issue has been classified and resolved.
-
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
-
-Validation results should guide the next action. A finding should not be treated as a vague concern; it should be classified by what it means for launch readiness.
-
-| Validation result               | Meaning                                                                                                                                                                                   | Next action                                                                                          |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Pass**                        | The sampled records behave correctly in Cafe24 and support the intended business use.                                                                                                     | Keep the finding as launch evidence and continue validation across other samples.                    |
-| **Needs configuration review**  | The data is present, but Cafe24 settings, design, app behavior, storefront modules, or connected services need adjustment.                                                                | Resolve configuration before treating the sample as approved.                                        |
-| **Needs data cleanup**          | Source data quality, classification, duplicated records, incomplete fields, or inconsistent values are affecting the result.                                                              | Clean or clarify the source or target data before broader execution or launch.                       |
-| **Needs Add-on review**         | Filtering, mapping, or data configuration requirements may fit Standard Add-ons or need tailored handling.                                                                                | Review whether Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure is appropriate. |
-| **Needs Custom Service review** | The expected result depends on customization, modification, Custom Platform handling, custom migration logic adjustment, app-owned data, external identifiers, or bespoke transformation. | Escalate before Full Migration or launch approval.                                                   |
-| **Not launch-ready**            | The result affects buyer experience, order interpretation, payment/shipping context, integrations, reporting, or operational continuity.                                                  | Pause launch planning until the issue is resolved and revalidated.                                   |
-
-The strongest validation reviews produce clear decisions. They show what is approved, what needs configuration, what needs cleanup, what needs Add-on review, and what must move into Custom Service review.
+| Validation stage      | What to prove                                                                                    | Output                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Demo Migration        | Representative samples reveal structural and operational risks.                                  | A correction list for mapping, configuration, Add-ons, or Custom Service review. |
+| Full Migration review | The complete migrated result supports launch readiness.                                          | Launch decision, issue log, and assigned owners.                                 |
+| Later data movement   | New or changed data is handled without duplicating or overwriting important records incorrectly. | Correct follow-up action and Entity Points awareness where relevant.             |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Cafe24 validation should prove that migrated data works inside the storefront, design, app, API, integration, analytics, and operational context the merchant plans to use after launch. The presence of products, customers, orders, and pages is only the starting point. The stronger proof is whether those records support product discovery, buyer confidence, customer support, order review, connected workflows, reporting, and launch readiness.
+Cafe24 validation should prove that the migrated store can operate, not only that records were transferred. Products must support buying decisions, customers must remain useful, orders must remain interpretable, settings must be configured, storefront paths must work, and integrations must have clear ownership.
 
-A reliable validation process should use representative samples, classify findings clearly, and avoid approving the migration based only on simple records. If Cafe24 validation reveals app-dependent rules, unclear system ownership, custom fields, or source-specific behavior, those findings should be resolved before the final migration approach or launch plan is treated as stable.
+The strongest validation process uses representative samples and role-specific checks. It separates migrated data from configuration, design work, app behavior, and external-system ownership. That discipline helps teams catch the gaps that ordinary record-count validation misses.
 
-Use Demo Migration and Live Chat to review representative Cafe24 validation samples before Full Migration. Include products, categories, customers, orders, storefront routes, app-sensitive behavior, API or webhook dependencies, analytics requirements, and custom-source records that show whether the migrated result can support your expected e-commerce operation.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**Is record-count matching enough to validate a Cafe24 migration?**
 
-**What should I validate first after a Cafe24 Demo Migration?**
+No. Record counts are useful, but they do not prove that products are sellable, orders are interpretable, customers are operationally useful, settings are configured, or integrations are ready.
 
-Start with records that affect business use: best-selling products, important categories, high-value customers, representative orders, storefront routes, discount or shipping cases, and integration-sensitive records. Simple records are useful, but they should not be the only validation sample.
+**Which Cafe24 records should be sampled first?**
 
-**Is matching record counts enough to approve a Cafe24 migration?**
+Start with high-value products, variant-heavy products, customers with order history, refunded or cancelled orders, SEO-sensitive pages, and records affected by apps, custom fields, or integrations.
 
-No. Record counts can confirm that expected records were processed, but Cafe24 validation should also prove storefront usability, product discovery, customer and order interpretation, app-dependent behavior, and integration readiness.
+**Should checkout settings be validated separately from order history?**
 
-**Should Cafe24 apps be included in validation?**
+Yes. Historical order data and live checkout behavior are different validation areas. Payment, shipping, tax, privacy, and order-form settings should be reviewed as launch configuration.
 
-Yes, when apps affect discounts, shipping fees, payment behavior, storefront scripts, reporting, or operational workflows. App-owned behavior should be validated as behavior, not assumed from migrated records alone.
+**When should Custom Service be considered during validation?**
 
-**How should API, webhook, or Data Bridge dependencies be reviewed?**
-
-Identify which system owns each important outcome, then test representative records connected to those workflows. If Cafe24 only displays data owned elsewhere, validation should confirm the external responsibility and reconnection plan.
-
-**When does a Cafe24 validation issue require Custom Service review?**
-
-Custom Service review is appropriate when the expected result depends on customization, modification, Custom Platform handling, custom migration logic adjustment, app-owned data, external identifiers, non-standard source structures, or bespoke transformation beyond standard migration capability.
+Custom Service should be considered when unsupported app data, custom fields, external IDs, bespoke transformations, or integration-dependent behavior cannot be handled through standard supported migration paths or Add-ons.

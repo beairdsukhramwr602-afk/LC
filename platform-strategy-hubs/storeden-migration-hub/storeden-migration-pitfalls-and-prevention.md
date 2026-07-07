@@ -1,280 +1,342 @@
 # Storeden Migration Pitfalls and Prevention
 
-A Storeden migration can look successful at record level while still failing in daily operation. The most common problems appear when migrated data is accepted too quickly, without checking how products sell, how inventory is interpreted, how orders remain usable, how channels depend on product identifiers, how apps and integrations connect, and how storefront URLs and SEO values behave after launch.
+Storeden migration pitfalls usually appear when the project treats the target store as a simple data container. Storeden is better understood as a commerce operating environment that connects catalog management, inventory, orders, payments, logistics, themes, apps, plug-ins, marketplaces, API resources, and TeamSystem ecosystem workflows. A migration can look complete in record counts while still failing in discovery, stock accuracy, order support, checkout readiness, marketplace continuity, or integration behavior.
 
-Pitfall prevention should focus on business meaning. Products should not only exist in Storeden; they should be understandable, purchasable, discoverable, and manageable. Orders should not only appear in the admin area; they should preserve enough context for customer service, fulfillment, finance, and reporting. Marketplace, logistics, app, API, and TeamSystem-related references should be reviewed before they become launch surprises.
+Pitfall prevention should be practical. Each risk should be tied to what goes wrong, early warning signs, prevention work, a recommendation example, and a pass condition. Tables are used to keep the risk logic visible without replacing the explanations that make the recommendation useful.
 
-### Pitfall 1: Treating Hosted Storeden Boundaries as Source-Code Control <a href="#pitfall-1-treating-hosted-storeden-boundaries-as-source-code-control" id="pitfall-1-treating-hosted-storeden-boundaries-as-source-code-control"></a>
+### Storeden Pitfall Prevention Map <a href="#storeden-pitfall-prevention-map" id="storeden-pitfall-prevention-map"></a>
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+| Pitfall area                   | Main risk                                                                  | Best prevention signal                                                        |
+| ------------------------------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Storeden as a record container | Data is present but not operationally usable.                              | Migrated records are reviewed against target workflows.                       |
+| Catalog structure              | Products exist but buying choices, categories, or attributes lose meaning. | Complex product samples pass storefront and admin review.                     |
+| Inventory ownership            | Stock values migrate without a clear system of record.                     | Storeden, marketplace, logistics, or external-system ownership is documented. |
+| Orders and checkout            | Historical order data is mistaken for live checkout readiness.             | Order history and target checkout configuration are tested separately.        |
+| Marketplace and logistics      | Channel and fulfillment assumptions are not rebuilt.                       | Channel, shipping, tracking, and logistics workflows have assigned owners.    |
+| Apps and TeamSystem ecosystem  | App-owned or external IDs are treated as normal fields.                    | Unsupported or external data has a defined handling path.                     |
 
-A source store may depend on custom database fields, custom checkout behavior, custom scripts, server-side modifications, unsupported extensions, or implementation-specific workflows. When these behaviors are treated as ordinary data, the migrated Storeden result may miss the logic that made the original store work.
+### Pitfall 1: Treating Storeden as a Basic Data Destination <a href="#pitfall-1-treating-storeden-as-a-basic-data-destination" id="pitfall-1-treating-storeden-as-a-basic-data-destination"></a>
 
-Storeden is a hosted cloud Target Platform. It provides managed commerce structures, storefront features, apps, marketplace connections, and integration options, but it should not be treated as a direct copy of a self-hosted codebase or a custom database implementation.
+**What goes wrong**
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+The migration is judged by record presence alone. Products, customers, and orders appear in the target store, so the project is considered successful before anyone confirms whether the migrated records support catalog management, order management, payments, logistics, marketplace workflows, and connected systems.
 
-| Warning sign                                                                            | Why it matters                                                                 |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| The source store has custom database tables or custom product/order fields              | The data may not map cleanly to Storeden’s standard structures.                |
-| Checkout, pricing, shipping, or tax behavior depends on custom code                     | The behavior may require target configuration, apps, or Custom Service review. |
-| Business users rely on fields that are not visible in ordinary product or order exports | Important operational meaning may be hidden outside standard records.          |
+| Missing validation layer | Practical consequence                                                 |
+| ------------------------ | --------------------------------------------------------------------- |
+| Catalog usability        | Products exist but are hard to manage, filter, or sell.               |
+| Order interpretation     | Staff can see orders but cannot answer support questions confidently. |
+| Configuration separation | Historical data is mistaken for live Storeden setup.                  |
+| Integration context      | External identifiers disappear or lose operational meaning.           |
 
-#### Prevention <a href="#prevention" id="prevention"></a>
+**Early warning signs**
 
-Identify custom logic before Demo Migration. Separate data that can migrate into supported Storeden structures from behavior that must be recreated through configuration, apps, integration setup, or Custom Service. If the source is a Custom Platform or depends on unsupported custom structures, treat that as a Custom Service signal early.
+The review plan focuses on counts, not sample quality. There is no target-store workflow review. Marketplace, logistics, app, payment, and TeamSystem ecosystem requirements are discussed late or treated as post-launch details.
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+**Prevention**
 
-Before approving scope, list the source store’s custom product fields, checkout rules, shipping conditions, pricing behavior, marketplace identifiers, and external-system references. Mark each item as standard migration data, target configuration, app/integration setup, accepted exclusion, or Custom Service review.
+Define validation around operating outcomes. Decide what products, customers, orders, content, and external references must prove before Full Migration is approved. Separate migrated data from Storeden configuration and assign ownership for every non-data dependency.
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+**Recommendation example**
 
-The migration plan clearly distinguishes migrated data from custom behavior, target setup, app behavior, and integration requirements.
+Instead of approving Demo Migration because 100 products, 20 customers, and 30 orders appear, review one simple product, one complex product, one inventory-sensitive product, one marketplace-linked product, one returning customer, one complex order, one priority category, and one external-system record.
 
-### Pitfall 2: Sampling Only Simple Products <a href="#pitfall-2-sampling-only-simple-products" id="pitfall-2-sampling-only-simple-products"></a>
+**Pass condition**
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+The migration passes only when representative records are usable in Storeden and every unresolved operational dependency has a clear handling path.
 
-A Demo Migration may look clean when it includes only simple products with basic names, prices, images, and categories. Problems appear later when variant products, attribute-heavy products, stock-sensitive items, channel-ready products, or products with custom fields are reviewed.
+### Pitfall 2: Flattening Product Options and Catalog Meaning <a href="#pitfall-2-flattening-product-options-and-catalog-meaning" id="pitfall-2-flattening-product-options-and-catalog-meaning"></a>
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+**What goes wrong**
 
-| Warning sign                                            | Why it matters                                                     |
-| ------------------------------------------------------- | ------------------------------------------------------------------ |
-| Demo Migration samples contain mostly simple products   | Complex catalog behavior remains untested.                         |
-| Variant products are reviewed only by product title     | Option structure, SKU, stock, and price differences may be missed. |
-| Marketplace-ready products are excluded from the sample | Channel-related data may fail later.                               |
+Product choices move into Storeden without preserving their commercial meaning. Variant-like values, attributes, labels, product codes, images, or category relationships may technically transfer, but shoppers and staff no longer understand how a product should be selected, priced, stocked, or displayed.
 
-#### Prevention <a href="#prevention-1" id="prevention-1"></a>
+| Catalog element        | What can fail                                                | Prevention focus                                            |
+| ---------------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Options or variants    | Buying choices become unclear or inconsistent.               | Test complex products before Full Migration.                |
+| Product identifiers    | SKU, supplier, marketplace, or ERP references lose context.  | Decide which identifiers must remain visible or integrable. |
+| Product images         | Main images, galleries, or channel images become incomplete. | Validate media-heavy products.                              |
+| Attributes and filters | Values become cluttered, duplicated, or hidden.              | Map descriptive values to useful target structures.         |
+| Categories             | Products move but discovery weakens.                         | Validate product placement and navigation together.         |
 
-Include products that represent real catalog complexity. Samples should cover variants, attributes, SKUs, stock, pricing differences, images, category placement, filters, marketplace-relevant fields, and products that are important for revenue or daily management.
+**Early warning signs**
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+The project uses only simple product samples. Product options are discussed as text fields rather than buying logic. Product identifiers are not separated into storefront values, admin values, marketplace values, and integration values.
 
-Select one simple product, one product with variants, one product with complex attributes, one stock-sensitive product, one marketplace-relevant product, one product with important images, and one high-value product category before reviewing Demo Migration results.
+**Prevention**
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+Build a catalog sample set that includes complex products, attribute-heavy products, products with multiple images, products with external IDs, products with stock differences, and products assigned to important categories.
 
-The Storeden product sample proves that products are complete, purchasable, categorized, searchable, visually usable, inventory-aware, and understandable to both shoppers and store managers.
+**Recommendation example**
 
-### Pitfall 3: Assuming Variant, Attribute, and SKU Meaning Will Stay Identical <a href="#pitfall-3-assuming-variant-attribute-and-sku-meaning-will-stay-identical" id="pitfall-3-assuming-variant-attribute-and-sku-meaning-will-stay-identical"></a>
+Choose a product with multiple sizes, different prices, separate stock values, a marketplace reference, and several images. Validate whether the target product remains commercially understandable, not merely whether the name and price appear.
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+**Pass condition**
 
-Source platforms can represent product options in different ways. A product choice may be a variant, attribute, modifier, custom field, configurable product, grouped structure, or marketplace-specific field. If these meanings are flattened during migration, the target catalog may lose important selling or management behavior.
+Products pass when their buying choices, management fields, images, prices, stock values, categories, and identifiers remain meaningful in Storeden.
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+### Pitfall 3: Assuming Inventory Values Are Self-Explanatory <a href="#pitfall-3-assuming-inventory-values-are-self-explanatory" id="pitfall-3-assuming-inventory-values-are-self-explanatory"></a>
 
-| Warning sign                                                     | Why it matters                                                           |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Product options appear as text rather than usable buying choices | Shoppers may not be able to select the correct product configuration.    |
-| SKU and stock are not reviewed at variant level                  | Inventory control may become inaccurate.                                 |
-| Attribute labels differ from the source store without review     | Product filtering, product comparison, or management meaning may change. |
+**What goes wrong**
 
-#### Prevention <a href="#prevention-2" id="prevention-2"></a>
+Stock values are migrated without clarifying whether Storeden will control inventory after launch. If stock is actually managed by an ERP, warehouse, marketplace, logistics provider, TeamSystem connection, or external feed, migrated values may be temporary, stale, or incomplete.
 
-Map product option meaning before Full Migration. Review how variants, attributes, SKUs, stock, prices, images, and filters behave inside Storeden. Use Advanced Data Mapping or Advanced Data Configure only when the requirement fits supported Add-on behavior. If the required transformation changes migration logic or needs tailored handling, it is handled through Custom Service.
+**Early warning signs**
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+No one can identify the system of record for inventory. Marketplace stock, warehouse stock, and website stock are treated as the same value. Out-of-stock products, preorder products, and discontinued products are not reviewed separately.
 
-For each important product family, compare the source product page against the Storeden product page and admin record. Confirm option labels, option values, SKU behavior, stock behavior, price changes, image relationships, and category/filter placement.
+| Stock scenario              | Validation question                                            | Likely action                                  |
+| --------------------------- | -------------------------------------------------------------- | ---------------------------------------------- |
+| Storeden-managed stock      | Are launch stock values correct in the target store?           | Validate product and variant stock directly.   |
+| External stock owner        | Which identifier connects the product to the external system?  | Preserve or map IDs; review integration setup. |
+| Marketplace-sensitive stock | Does each channel use the same availability value?             | Validate channel assumptions separately.       |
+| Nonstandard availability    | Is the product preorder, made-to-order, digital, or unlimited? | Configure target availability behavior.        |
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+**Prevention**
 
-Variant and attribute records support real buying choices, inventory management, and product discovery without losing the meaning that existed in the source store.
+Document inventory ownership before Full Migration. Identify where stock values come from, which values should migrate, which values should be configured, and which external identifiers need Custom Service or integration review.
 
-### Pitfall 4: Ignoring Category, Filter, and Storefront Discovery Behavior <a href="#pitfall-4-ignoring-category-filter-and-storefront-discovery-behavior" id="pitfall-4-ignoring-category-filter-and-storefront-discovery-behavior"></a>
+**Recommendation example**
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+For a warehouse-controlled catalog, migrate product records and visible stock where appropriate, but separately validate ERP or warehouse identifiers that will control ongoing synchronization.
 
-Products can migrate into Storeden but become harder to find. Category placement, filter values, navigation paths, product visibility, search behavior, and marketplace-ready grouping may not match how shoppers previously discovered products.
+**Pass condition**
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+Inventory passes when stock values and stock ownership are both understood, and the target store is not relying on a stale migrated number as if it were live operational truth.
 
-| Warning sign                                                   | Why it matters                                                            |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Product counts look correct but category pages feel incomplete | Record totals do not prove storefront discovery.                          |
-| Filters are not reviewed with real shopper scenarios           | Important product narrowing behavior may be missing.                      |
-| Category names migrate but product assignment is not sampled   | The catalog may look organized while key products sit in the wrong place. |
+### Pitfall 4: Confusing Historical Orders With Live Checkout Readiness <a href="#pitfall-4-confusing-historical-orders-with-live-checkout-readiness" id="pitfall-4-confusing-historical-orders-with-live-checkout-readiness"></a>
 
-#### Prevention <a href="#prevention-3" id="prevention-3"></a>
+**What goes wrong**
 
-Validate discovery, not only record existence. Review category pages, filter behavior, product visibility, storefront navigation, and priority product paths. Include high-value categories and products that shoppers commonly use to browse.
+Historical orders migrate, but the team assumes Storeden checkout, payment, shipping, tax, notification, and logistics behavior are therefore ready. Order history can preserve past context. It does not configure future selling.
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+| Historical order data  | Live configuration still needed                                           |
+| ---------------------- | ------------------------------------------------------------------------- |
+| Payment method labels  | Active payment providers and checkout testing.                            |
+| Shipping method labels | Shipping rules, carrier setup, logistics workflow, and tracking behavior. |
+| Tax totals             | Future tax setup and accounting logic.                                    |
+| Discount history       | Future coupon and promotion rules.                                        |
+| Fulfillment status     | Live fulfillment process and operational ownership.                       |
 
-Build a validation sample around top categories, best-selling products, products with important filters, and products sold through marketplace channels. Confirm that each item can be reached through expected Storeden storefront paths.
+**Early warning signs**
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+Payment and shipping labels are reviewed only inside old orders. No live test order is planned. Refunds, cancelled orders, partially fulfilled orders, and tax edge cases are not included in validation.
 
-Priority products are visible, categorized, filterable where needed, and reachable through the expected storefront journey.
+**Prevention**
 
-### Pitfall 5: Treating Historical Orders as Live Checkout Proof <a href="#pitfall-5-treating-historical-orders-as-live-checkout-proof" id="pitfall-5-treating-historical-orders-as-live-checkout-proof"></a>
+Validate historical orders for service and reporting, then test live checkout separately. Review payment providers, logistics settings, shipping rates, taxes, emails, and fulfillment workflow in the Storeden target environment.
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+**Recommendation example**
 
-Historical orders can migrate with customer names, products, totals, statuses, payment labels, shipping labels, tax values, tracking references, and marketplace context. That does not prove that Storeden is ready to accept new orders after launch.
+Use a historical order to check customer support continuity, then place a target-store test order to confirm active payment, shipping, tax, notification, and fulfillment behavior.
 
-Live checkout, payment availability, TS Pay usage, shipping rules, logistics services, tax configuration, tracking behavior, and fulfillment workflow require target setup and separate testing.
+**Pass condition**
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+Orders pass when historical records are interpretable and live checkout behavior has been configured and tested separately.
 
-| Warning sign                                                          | Why it matters                                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Migrated orders are used as proof that checkout is ready              | Historical order readability and live checkout behavior are different concerns. |
-| Payment labels appear in orders but payment methods are not tested    | Storeden may not be configured for new transactions.                            |
-| Shipping methods migrate as text but logistics rules are not reviewed | Fulfillment behavior may fail after launch.                                     |
+### Pitfall 5: Underestimating Marketplace Channel Requirements <a href="#pitfall-5-underestimating-marketplace-channel-requirements" id="pitfall-5-underestimating-marketplace-channel-requirements"></a>
 
-#### Prevention <a href="#prevention-4" id="prevention-4"></a>
+**What goes wrong**
 
-Separate historical order validation from live checkout testing. Review migrated orders for readability and operational context, then test Storeden payment, shipping, logistics, tax, and fulfillment behavior using the target configuration.
+Storeden supports multichannel commerce, but marketplace data is treated as if it were ordinary website catalog data. Marketplace titles, categories, identifiers, pricing assumptions, availability rules, and publication status may not transfer or operate automatically through standard catalog migration.
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+**Early warning signs**
 
-Use historical order samples for customer service and reporting review. Use separate test checkout scenarios for payment, shipping, tax, logistics, tracking, and fulfillment readiness.
+Marketplace-connected products are not part of Demo Migration samples. Channel IDs and listing references are not documented. Website category structure is assumed to match Amazon, eBay, Facebook, AliExpress, or other marketplace classification needs.
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+| Marketplace area       | What to check                                       | Why it matters                                      |
+| ---------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Listing identifiers    | Product-to-channel references and marketplace IDs.  | Helps preserve or rebuild channel relationships.    |
+| Channel categories     | Marketplace classification and required attributes. | Website categories may not be enough.               |
+| Price and availability | Channel-specific pricing or stock assumptions.      | Prevents mismatched listings after launch.          |
+| Publication status     | Active, inactive, excluded, or pending listings.    | Avoids accidental channel exposure.                 |
+| Feed or app ownership  | Marketplace connector or external integration.      | May require configuration or Custom Service review. |
 
-Historical orders remain understandable, and the Storeden target setup is separately confirmed for live checkout, payment, shipping, logistics, tax, and fulfillment behavior.
+**Prevention**
 
-### Pitfall 6: Losing Marketplace and Channel Context <a href="#pitfall-6-losing-marketplace-and-channel-context" id="pitfall-6-losing-marketplace-and-channel-context"></a>
+Separate website catalog migration from marketplace readiness. Decide which marketplace fields can be migrated, which must be configured in Storeden or connected apps, and which require Custom Service or external-channel review.
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+**Recommendation example**
 
-Marketplace selling can depend on product identifiers, channel-specific fields, availability rules, synchronization settings, price differences, stock behavior, listing status, category mapping, and fulfillment expectations. If these values are not reviewed, products may migrate into Storeden but fail to support multichannel selling.
+If a product sells through both the Storeden storefront and a marketplace, validate the storefront record, channel identifier, marketplace category, and channel publication assumptions as separate review items.
 
-Amazon, eBay, Facebook, AliExpress, or other sales-channel dependencies should not be treated as ordinary product text without review.
+**Pass condition**
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+Marketplace-related products pass only when website catalog data and channel-specific requirements are both accounted for.
 
-| Warning sign                                                                     | Why it matters                                        |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| Marketplace identifiers are not included in migration samples                    | Channel continuity may be impossible to verify.       |
-| Products sell through multiple channels but only storefront records are reviewed | Multichannel behavior may be missed.                  |
-| Inventory synchronization expectations are unclear                               | Stock accuracy can become unreliable across channels. |
+### Pitfall 6: Treating Logistics as a Shipping Label Problem <a href="#pitfall-6-treating-logistics-as-a-shipping-label-problem" id="pitfall-6-treating-logistics-as-a-shipping-label-problem"></a>
 
-#### Prevention <a href="#prevention-5" id="prevention-5"></a>
+**What goes wrong**
 
-Inventory marketplace dependencies before migration. Identify which fields should migrate, which must be recreated in Storeden, which belong to connected channels, and which require accepted exclusions or Custom Service review.
+Old shipping labels are preserved, but the actual Storeden logistics workflow is not planned. A historical carrier name does not configure shipping rates, carrier accounts, tracking behavior, fulfillment steps, delivery rules, or warehouse operations.
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+**Early warning signs**
 
-Create a channel sample that includes products sold on the storefront and at least one important marketplace. Review identifiers, category/channel placement, price, stock, publication status, and fulfillment expectations.
+The migration plan mentions shipping only inside orders. No one has assigned ownership for live logistics setup. Tracking formats, carrier integrations, fulfillment statuses, and warehouse references are not sampled.
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+**Prevention**
 
-The migration plan shows how marketplace-relevant data will be migrated, reconfigured, excluded, or reviewed through Custom Service, and priority channel products can be validated without guesswork.
+Validate shipping history and logistics configuration separately. Historical shipping labels should support past-order interpretation. Live logistics setup should be tested through target Storeden settings, carrier configuration, tracking behavior, and fulfillment process review.
 
-### Pitfall 7: Overlooking Apps, APIs, Webhooks, and TeamSystem Integration References <a href="#pitfall-7-overlooking-apps-apis-webhooks-and-teamsystem-integration-references" id="pitfall-7-overlooking-apps-apis-webhooks-and-teamsystem-integration-references"></a>
+**Recommendation example**
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+Review a shipped historical order to confirm the shipping method and tracking context, then test a new target-store order through the expected fulfillment process.
 
-Apps, plugins, APIs, webhooks, ERP systems, accounting tools, inventory systems, fulfillment platforms, and TeamSystem ecosystem connections can carry business meaning outside the main commerce records. If those dependencies are not identified, the migrated Storeden store may lose reporting links, automation triggers, external IDs, fulfillment references, or financial context.
+| Logistics area  | Migration review                           | Configuration review                                     |
+| --------------- | ------------------------------------------ | -------------------------------------------------------- |
+| Shipping method | Historical method label in order history.  | Active shipping rules and rate behavior.                 |
+| Tracking        | Past tracking value where available.       | Tracking notification and carrier workflow.              |
+| Fulfillment     | Past fulfillment status.                   | Staff process for packing, shipping, and status updates. |
+| Warehouse       | Historical location or external reference. | Live warehouse or ERP integration.                       |
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+**Pass condition**
 
-| Warning sign                                                                | Why it matters                                                                  |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| External IDs are stored in custom fields or app records                     | Standard product, customer, or order migration may not preserve them correctly. |
-| ERP, accounting, or warehouse systems depend on product or order references | Connected workflows may break after launch.                                     |
-| API or webhook behavior is not documented                                   | Automation may need rebuilding or reconfiguration.                              |
-| TeamSystem-related workflows are assumed to reconnect automatically         | Ecosystem connections may need target-side setup and validation.                |
+Logistics pass when historical shipping context remains useful and the future fulfillment workflow is configured and tested.
 
-#### Prevention <a href="#prevention-6" id="prevention-6"></a>
+### Pitfall 7: Ignoring Apps, Plug-ins, and Unsupported Data <a href="#pitfall-7-ignoring-apps-plug-ins-and-unsupported-data" id="pitfall-7-ignoring-apps-plug-ins-and-unsupported-data"></a>
 
-Create an integration inventory before migration. Identify connected apps, external systems, API dependencies, webhook workflows, business-system identifiers, and TeamSystem ecosystem references. Decide whether each item is migration data, reconfiguration work, accepted exclusion, or Custom Service scope.
+**What goes wrong**
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+Storeden app, plug-in, and extension data is assumed to migrate like ordinary products or orders. App-owned data may live outside standard records, use custom fields, rely on external IDs, or require target-side installation and configuration.
 
-For each connected system, list the record types it uses, the identifiers it depends on, the direction of data flow, and the post-migration validation owner. Include at least one representative product, customer, and order affected by the integration in the Demo Migration sample.
+**Early warning signs**
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+No app inventory exists. The team cannot explain which apps create fields, automate workflows, connect marketplaces, send marketing data, or control B2B or logistics behavior. Custom values appear in exports but have no target destination.
 
-Integration-sensitive data is clearly classified, and no critical app, API, webhook, ERP, accounting, fulfillment, inventory, or TeamSystem dependency is left unreviewed.
+| App-related signal                         | Likely handling path                               |
+| ------------------------------------------ | -------------------------------------------------- |
+| Supported fields need filtering or mapping | Add-ons.                                           |
+| App-created values must be preserved       | Custom Service review.                             |
+| External-system IDs must remain usable     | Custom Service or integration review.              |
+| App settings control workflow              | Manual setup, app setup, or implementation review. |
+| Custom logic affects migration output      | Custom Service.                                    |
 
-### Pitfall 8: Leaving Theme, Content, Domain, URL, and SEO Review Too Late <a href="#pitfall-8-leaving-theme-content-domain-url-and-seo-review-too-late" id="pitfall-8-leaving-theme-content-domain-url-and-seo-review-too-late"></a>
+**Prevention**
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+Build an app and plug-in inventory before migration. Identify which values belong to standard records, which are supported by Add-ons, which require Custom Service, and which are target-side configuration tasks.
 
-A Storeden migration can preserve catalog and order data while storefront experience changes unexpectedly. Theme structure, menus, page content, product URLs, category URLs, metadata, redirects, images, banners, domain behavior, and SEO settings may need planning beyond record migration.
+**Recommendation example**
 
-If this work is delayed until launch, the store may face broken journeys, missing landing pages, weak metadata, unexpected URL changes, or avoidable SEO disruption.
+If a marketplace connector stores channel IDs on products, validate whether those IDs appear in an export, whether they have a supported target location, and whether preserving them is necessary for relaunch.
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+**Pass condition**
 
-| Warning sign                                           | Why it matters                                         |
-| ------------------------------------------------------ | ------------------------------------------------------ |
-| SEO review starts after product migration is accepted  | URL and metadata gaps may be found too late.           |
-| Only product records are sampled, not storefront paths | Shopper experience may be incomplete.                  |
-| Domain and redirect planning is postponed              | Launch continuity may be affected.                     |
-| Theme differences are treated as minor visual changes  | Storefront usability and content structure may change. |
+Apps and plug-ins pass when every required app-owned value has a destination, handling path, or deliberate exclusion decision.
 
-#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+### Pitfall 8: Losing TeamSystem Ecosystem and External-System Identifiers <a href="#pitfall-8-losing-teamsystem-ecosystem-and-external-system-identifiers" id="pitfall-8-losing-teamsystem-ecosystem-and-external-system-identifiers"></a>
 
-Prepare storefront and SEO evidence before Full Migration. Include priority product URLs, category URLs, content pages, metadata, redirects, images, domain expectations, and high-value landing paths. Treat theme and content work as part of launch readiness, not as a side note.
+**What goes wrong**
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+Storeden’s relationship with TeamSystem ecosystem tools and external business systems is not considered during migration planning. Products, customers, and orders may migrate, but ERP IDs, accounting references, invoicing values, warehouse identifiers, payment references, or CRM keys may be missing or unusable.
 
-Create a pre-launch URL and content checklist covering top product pages, top category pages, important content pages, brand pages, landing pages, metadata, redirects, navigation, and domain behavior.
+**Early warning signs**
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+External IDs are treated as optional notes. Accounting, ERP, logistics, or invoicing teams are not included in scope review. Staff plan to reconnect systems after launch without confirming whether required identifiers survived migration.
 
-Priority Storeden storefront paths, SEO values, domain expectations, redirects, and content pages are reviewed before launch acceptance.
+**Prevention**
 
-### Pitfall 9: Using Record Counts as the Main Acceptance Standard <a href="#pitfall-9-using-record-counts-as-the-main-acceptance-standard" id="pitfall-9-using-record-counts-as-the-main-acceptance-standard"></a>
+Identify integration-critical identifiers before Demo Migration. Decide which IDs are needed for reporting, reconciliation, synchronization, invoicing, logistics, or customer service. Assign unsupported identifiers to Custom Service or integration review.
 
-#### What Goes Wrong <a href="#what-goes-wrong-8" id="what-goes-wrong-8"></a>
+| Identifier type      | Why it may matter                                    | Review decision                      |
+| -------------------- | ---------------------------------------------------- | ------------------------------------ |
+| Product external ID  | ERP, warehouse, marketplace, or supplier continuity. | Preserve, map, recreate, or exclude. |
+| Customer external ID | CRM, invoicing, account management, or B2B review.   | Preserve if operationally required.  |
+| Order external ID    | Accounting, reconciliation, or support traceability. | Validate against sample orders.      |
+| Payment reference    | Settlement or refund review.                         | Preserve history where scoped.       |
+| Logistics reference  | Tracking, warehouse, or carrier workflow.            | Validate with fulfillment samples.   |
 
-Record counts can confirm that data moved, but they cannot prove that migrated data is usable. A product count may be correct while variants are broken. An order count may be correct while payment or shipping context is unclear. A customer count may be correct while B2B or external-system meaning is missing.
+**Recommendation example**
 
-This pitfall creates false confidence and can delay discovery of serious business issues until after launch.
+Before Full Migration, select one product, one customer, and one order that are used by an external system. Confirm whether the values needed for synchronization or reconciliation are migrated, recreated, or handled separately.
 
-#### Early Warning Signs <a href="#early-warning-signs-8" id="early-warning-signs-8"></a>
+**Pass condition**
 
-| Warning sign                                                   | Why it matters                          |
-| -------------------------------------------------------------- | --------------------------------------- |
-| Acceptance focuses on total products, customers, and orders    | Business meaning may not be validated.  |
-| Samples are not chosen from complex or high-value records      | The most important risks remain hidden. |
-| Storefront, admin, and connected-system views are not compared | Usability gaps may be missed.           |
-| Demo Migration results are accepted without scenario testing   | Launch readiness remains unproven.      |
+External-system continuity passes when required identifiers are not merely present somewhere, but remain usable for the workflow that depends on them.
 
-#### Prevention <a href="#prevention-8" id="prevention-8"></a>
+### Pitfall 9: Treating SEO and Content as Secondary Cleanup <a href="#pitfall-9-treating-seo-and-content-as-secondary-cleanup" id="pitfall-9-treating-seo-and-content-as-secondary-cleanup"></a>
 
-Use record counts as a starting point, not the full validation method. Validate samples that prove product buying behavior, inventory meaning, customer usability, order readability, marketplace context, integration relevance, storefront discovery, and SEO continuity.
+**What goes wrong**
 
-#### Recommendation Example <a href="#recommendation-example-8" id="recommendation-example-8"></a>
+Product and order data receive attention, while content, metadata, priority URLs, category copy, CMS pages, Blog Posts, redirects, and internal links are reviewed late. The store may launch with working products but damaged discoverability and weak customer trust pages.
 
-For each record type, define what a pass looks like. Products should be purchasable and manageable. Orders should be understandable and useful. Customers should remain identifiable. URLs should support priority journeys. Connected references should remain usable or be classified for reconfiguration.
+**Early warning signs**
 
-#### Pass Condition <a href="#pass-condition-8" id="pass-condition-8"></a>
+No priority URL list exists. Product URLs are checked only through admin records. CMS pages and Blog Posts are treated as optional. Redirect timing is not coordinated with domain launch. Internal links are not sampled.
 
-Migration acceptance depends on meaningful Storeden samples and business scenarios, not only record totals.
+| SEO/content item | What can go wrong                                       | Prevention                                                           |
+| ---------------- | ------------------------------------------------------- | -------------------------------------------------------------------- |
+| Product URLs     | Product pages produce avoidable 404s or weak redirects. | Create a priority product URL list.                                  |
+| Category URLs    | High-value browsing pages lose traffic.                 | Validate category destination paths.                                 |
+| CMS pages        | Policy, trust, and landing pages are missing.           | Include Trang Hệ thống quản lý nội dung (CMS pages) in scope review. |
+| Blog Posts       | Content-led traffic and internal links break.           | Sample high-value posts and internal links.                          |
+| Metadata         | Search snippets and page meaning weaken.                | Validate metadata for representative pages.                          |
+
+**Prevention**
+
+Prepare SEO and content evidence before migration approval. Prioritize high-traffic URLs, high-value categories, important product pages, legal/trust pages, and content that supports conversion or search visibility.
+
+**Recommendation example**
+
+Create a redirect test list with ten priority product URLs, five category URLs, key CMS pages, and representative Blog Posts. Validate them before and after launch.
+
+**Pass condition**
+
+SEO and content pass when priority pages have clear destinations, metadata is reviewed, and broken internal links or missing pages are not left as post-launch surprises.
+
+### Pitfall 10: Skipping Post-Migration Change Control <a href="#pitfall-10-skipping-post-migration-change-control" id="pitfall-10-skipping-post-migration-change-control"></a>
+
+**What goes wrong**
+
+After Demo Migration or Full Migration, the source store continues changing but the team does not track what changed. New products, customers, orders, stock updates, price changes, refunds, and content edits can be missed or overwritten if later migration actions are not planned carefully.
+
+**Early warning signs**
+
+No freeze window exists. Staff keep editing the source store without change notes. There is no list of records changed after Demo Migration. Later migration actions are requested without defining what should be included.
+
+**Prevention**
+
+Create a change-control plan. Decide whether the team will freeze certain source-store activity, track changes manually, or use later migration actions to bring over new or updated records. Validate later changes separately from already-approved records.
+
+| Change type                | Review need                                                                       |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| New products               | Confirm product fields, categories, images, prices, and stock.                    |
+| New customers              | Confirm identity, addresses, and order links.                                     |
+| New orders                 | Confirm totals, status, payment label, shipping label, and customer relationship. |
+| Stock changes              | Confirm system of record and update timing.                                       |
+| Content changes            | Confirm URL, metadata, and redirect impact.                                       |
+| App or integration changes | Confirm whether custom handling is affected.                                      |
+
+**Recommendation example**
+
+After Full Migration, review a delta sample that includes one new product, one updated product, one new customer, one new order, one changed stock value, and one edited URL or content item.
+
+**Pass condition**
+
+Change control passes when the team knows which records changed after the last approved migration state and can validate those changes without damaging already-reviewed data.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Storeden migration pitfalls usually come from treating a hosted multichannel commerce move as a simple record transfer. The safest approach is to check the records and workflows that carry business meaning: product structure, variants, inventory, categories, orders, payments, shipping, marketplace data, apps, APIs, TeamSystem integrations, storefront content, URLs, and SEO values.
+Storeden migration pitfalls are preventable when the project validates the target store as an operating environment. Catalog structure, inventory ownership, order history, payment and logistics configuration, marketplace channels, apps, TeamSystem ecosystem identifiers, SEO content, and post-migration changes all need clear review paths.
 
-Before approving Full Migration, use Demo Migration results to test real operating scenarios, not only database totals. If the review exposes custom fields, unsupported app data, marketplace-specific requirements, external-system identifiers, or tailored transformation needs, confirm whether Standard Service, Managed Service, Add-ons, or Custom Service is the right next step before launch planning moves forward.
+A Storeden migration is ready when each major risk has a pass condition, not just a hopeful assumption. The best result is a target store where migrated records are usable, configuration work is visible, external dependencies are assigned, and launch decisions are based on evidence.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What is the most common Storeden migration pitfall?**
 
-The most common pitfall is accepting record counts as proof of migration quality. Storeden validation should also check product usability, variants, inventory, categories, customer readability, order context, payment and shipping labels, marketplace data, app dependencies, integration references, URLs, and storefront behavior.
+The most common pitfall is judging migration quality by record counts instead of operational readiness. Products, customers, and orders may exist, but the store still needs validation for catalog meaning, stock ownership, checkout configuration, logistics, marketplace behavior, apps, and external identifiers.
 
-**Why do variants and attributes need special review in Storeden?**
+**Should marketplace data be treated as normal product data?**
 
-Variants and attributes affect how products are selected, priced, stocked, displayed, filtered, and managed. If source product options are interpreted incorrectly, the Storeden product may exist but fail to support the intended buying or inventory behavior.
+No. Marketplace-related values often involve channel identifiers, channel categories, listing rules, availability assumptions, and connector behavior. They should be reviewed separately from ordinary website catalog data.
 
-**Do migrated orders prove that Storeden checkout is ready?**
+**Why is inventory ownership a major Storeden migration risk?**
 
-No. Migrated historical orders prove only that order history can be reviewed in the target environment. Live checkout, payment methods, TS Pay, shipping rules, logistics, tax behavior, tracking, and fulfillment workflow require separate target setup and testing.
+Inventory values are only useful when the team knows which system controls stock after launch. Storeden, marketplaces, logistics tools, ERP systems, or TeamSystem ecosystem connections may all affect how stock should be validated.
 
-**Why should marketplace data be reviewed before Full Migration?**
+**When do Storeden migration risks require Custom Service?**
 
-Marketplace selling can depend on product identifiers, channel categories, availability rules, stock synchronization, listing status, pricing, and fulfillment behavior. These details may not behave like ordinary product fields and should be sampled before launch decisions are made.
+Custom Service should be considered when required results depend on unsupported app data, external-system identifiers, marketplace-specific structures, TeamSystem ecosystem references, Custom Platform interpretation, or custom migration logic adjustment.
 
-**When does a Storeden pitfall move into Custom Service review?**
+**How can Storeden migration pitfalls be prevented before Full Migration?**
 
-Custom Service review is appropriate when the migration depends on Custom Platform source data, unsupported app or integration data, custom fields, external-system identifiers, marketplace-specific transformation, custom migration logic adjustment, or tailored behavior beyond standard service capability and Standard Add-on capability.
+Use Demo Migration to test representative records, document app and external-system dependencies, separate migrated history from live configuration, validate priority URLs, and confirm whether Add-ons or Custom Service are needed before approving Full Migration.

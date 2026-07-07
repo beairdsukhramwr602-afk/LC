@@ -1,215 +1,205 @@
 # Storeden Pre-Migration Preparation Checklist
 
-Storeden migration preparation should make the future store easier to test, configure, and launch. Because Storeden operates as a hosted cloud e-commerce platform within the TeamSystem Commerce environment, preparation should cover more than products, customers, and orders. Catalog structure, inventory behavior, marketplace selling, payment and logistics setup, storefront content, apps, APIs, ERP references, and SEO continuity all need early review.
+Storeden migration preparation should make the target store easier to configure, test, and launch with confidence. Because Storeden is positioned around cloud commerce, catalog and inventory management, professional order management, integrated payments, logistics, themes, apps, plug-ins, marketplace channels, API/developer resources, and TeamSystem ecosystem connections, preparation has to cover more than products, customers, and orders.
 
-The goal is not to document every record manually. The goal is to identify the data and workflows that carry business meaning so Demo Migration and Full Migration can be judged against real Storeden operating needs.
+The goal is not to document every record manually. The goal is to identify which records, settings, workflows, and external references carry business meaning so Demo Migration and Full Migration can be judged against real Storeden operating needs. A product count, customer count, or order count can confirm transfer volume, but it does not prove that the new store is ready to sell, fulfill, report, or connect to surrounding systems.
 
-### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
+A strong preparation file separates three categories before migration begins: data that should migrate, Storeden configuration that must be rebuilt in the target store, and custom or external behavior that requires Add-ons, Custom Service, app review, integration review, or manual setup.
 
-Preparation helps confirm whether the current store can move into Storeden through standard target structures, whether Add-ons should be considered for filtering, mapping, or data configuration, and whether Custom Service review is needed for custom logic or unsupported data.
+### Storeden Preparation Principle <a href="#storeden-preparation-principle" id="storeden-preparation-principle"></a>
 
-A strong preparation file should answer four practical questions:
+Storeden preparation should be built around operational evidence. The most useful preparation materials are the samples and decisions that show how the current store actually works: which catalog structures drive sales, which stock values control availability, which orders support customer service, which channels create extra identifiers, which apps hold business data, and which TeamSystem or external systems need continuity.
 
-* Which products, customers, orders, content, and channels must remain usable after migration?
-* Which target settings belong to Storeden configuration rather than migrated historical data?
-* Which apps, APIs, TeamSystem integrations, marketplace connections, or external systems affect daily operations?
-* Which records should be included in Demo Migration so the result can be evaluated properly?
+| Preparation question                                | What it reveals                                                                                                     | Storeden planning value                                                                   |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Which records are needed for daily operation?       | Products, stock, customers, orders, categories, content, and URLs that staff or shoppers rely on.                   | Helps prioritize migration review around business-critical records, not only full counts. |
+| Which workflows are target-side configuration?      | Payment setup, logistics behavior, marketplace connections, apps, theme layout, and security settings.              | Prevents migrated history from being mistaken for live Storeden configuration.            |
+| Which fields come from apps or external systems?    | ERP IDs, accounting references, marketplace IDs, warehouse values, marketing tags, and automation fields.           | Identifies where Custom Service or integration review may be required.                    |
+| Which samples should be included in Demo Migration? | Complex products, channel-sensitive records, representative customers, and orders with payment or shipping context. | Makes Demo Migration useful as an approach checkpoint before Full Migration.              |
 
-### 1. Confirm the Target Storeden Environment <a href="#id-1-confirm-the-target-storeden-environment" id="id-1-confirm-the-target-storeden-environment"></a>
+Preparation is successful when the team can explain why a record matters, how it should appear in Storeden, and whether it belongs to standard migration scope, Add-ons, Custom Service, target configuration, or manual setup.
 
-Before migration planning moves into data review, confirm the target Storeden environment and the business role it needs to support. Storeden is a hosted Target Platform, so migration quality depends on the target setup as well as the migrated records.
+### Confirm the Target Storeden Store and Operating Scope <a href="#confirm-the-target-storeden-store-and-operating-scope" id="confirm-the-target-storeden-store-and-operating-scope"></a>
 
-| Preparation item                 | What to confirm                                                                                                                              | Why it matters                                                                           |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Target account and store context | The target Storeden environment, access roles, store language, currency expectations, and operational ownership.                             | Prevents migration work from being reviewed against an incomplete or wrong target setup. |
-| Commerce scope                   | Whether the store will use online storefront selling, marketplace selling, B2B workflows, logistics services, or connected business systems. | Defines which data and workflows require deeper migration planning.                      |
-| Storefront structure             | Theme expectations, navigation, page structure, domain requirements, and priority content.                                                   | Helps separate data migration from theme and launch configuration.                       |
-| Payment setup                    | Payment provider expectations, TS Pay relevance, and payment-status interpretation.                                                          | Historical payment labels do not configure live payment behavior by themselves.          |
-| Shipping and logistics           | Shipping methods, tracking needs, fulfillment workflow, and logistics service expectations.                                                  | Historical shipping names may not recreate operational logistics behavior.               |
-| App ecosystem                    | Apps, plugins, marketplace connectors, marketing tools, reporting tools, logistics tools, and other connected services.                      | App-owned data may need separate review rather than standard migration handling.         |
-| TeamSystem or ERP connection     | ERP, accounting, invoicing, inventory, warehouse, or business-management dependencies.                                                       | External identifiers and workflow references can affect post-migration operations.       |
+Before reviewing data, confirm the target Storeden store and the business role it needs to support. Storeden is a managed commerce environment, so migration quality depends on both the transferred records and the target-side setup. If the target store is incomplete, reviewers may judge migrated data against unfinished settings, missing themes, disabled channels, or unconfigured payment and shipping behavior.
 
-### 2. Prepare Product and Catalog Samples <a href="#id-2-prepare-product-and-catalog-samples" id="id-2-prepare-product-and-catalog-samples"></a>
+| Readiness area                 | What to confirm                                                                                                                 | Why it matters before migration                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Store access and roles         | Administrative access, ownership, language/currency expectations, and review responsibilities.                                  | Ensures the right people can inspect records, adjust settings, and approve migration results.      |
+| Commerce scope                 | Whether the store will use storefront selling, marketplace channels, B2B workflows, logistics tools, or TeamSystem connections. | Defines which records and workflows require deeper preparation.                                    |
+| Theme and storefront baseline  | Theme status, navigation expectations, important pages, product-page layout, and mobile review needs.                           | Separates data migration quality from design and theme configuration work.                         |
+| Payment expectations           | Payment providers, integrated payment behavior, transaction labels, and settlement review needs.                                | Historical payment data does not automatically configure live checkout behavior.                   |
+| Shipping and logistics         | Shipping methods, carriers, tracking needs, logistics workflows, and fulfillment ownership.                                     | Shipping labels in old orders do not automatically rebuild Storeden logistics rules.               |
+| Apps and plug-ins              | Apps, marketplace connectors, marketing tools, analytics tools, and operational extensions.                                     | App-owned data may need separate handling or Custom Service review.                                |
+| API or TeamSystem dependencies | ERP, accounting, warehouse, POS, invoicing, CRM, or external identifiers.                                                       | Integration identifiers may be operationally important even when they are not visible to shoppers. |
 
-Product preparation should focus on records that reveal how selling works, not only on the largest or newest products. Storeden catalog review should include simple products, complex products, variant products, attribute-heavy products, inventory-sensitive products, and marketplace-relevant products.
+The target setup does not need to be final before migration planning starts, but it must be clear enough to determine what the migrated data will be tested against.
 
-Include samples for:
+### Prepare Product and Catalog Evidence <a href="#prepare-product-and-catalog-evidence" id="prepare-product-and-catalog-evidence"></a>
 
-* simple products with standard name, price, description, image, category, and stock values;
-* products with variants, options, attributes, modifiers, SKU differences, or stock differences;
-* products with special pricing, sale pricing, tax behavior, or shipping rules;
-* products assigned to multiple categories, collections, tags, filters, or storefront paths;
-* products with multiple images, image ordering requirements, or media that affects selling;
-* products sold through marketplace channels;
-* products connected to ERP, warehouse, inventory, accounting, or external IDs;
-* products that should be excluded, filtered, renamed, remapped, or adjusted before migration.
+Product preparation should focus on business meaning, not only on catalog size. Storeden publicly emphasizes catalog and inventory management, product images and descriptions, price management, marketplace distribution, and order operations. That makes product preparation central to migration quality.
 
-| Product evidence                | Preparation value                                                                            |
-| ------------------------------- | -------------------------------------------------------------------------------------------- |
-| Product export or sample list   | Gives the migration review a clear view of product count, structure, and catalog complexity. |
-| Variant and attribute examples  | Shows whether buying choices can be represented clearly in Storeden.                         |
-| SKU and stock examples          | Helps confirm inventory continuity and external-system references.                           |
-| Category and filter samples     | Shows how shoppers should find products after migration.                                     |
-| Marketplace product examples    | Reveals channel-specific identifiers, titles, availability rules, or listing differences.    |
-| Product image and media samples | Helps detect whether visual selling assets need separate handling.                           |
+Use product samples that expose different kinds of catalog complexity. A simple product can confirm ordinary field transfer, but it cannot prove that variants, marketplace listings, stock-sensitive products, media-heavy products, or external identifiers will behave correctly.
 
-### 3. Prepare Category, Filter, and Storefront Discovery Evidence <a href="#id-3-prepare-category-filter-and-storefront-discovery-evidence" id="id-3-prepare-category-filter-and-storefront-discovery-evidence"></a>
+| Product sample type          | What to include                                                                                                              | What it should prove in Storeden                                                        |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Simple product               | Title, description, image, price, SKU or product code, category, status, and stock.                                          | Standard product records remain clear and commercially usable.                          |
+| Variant product              | Size, color, material, package quantity, price differences, stock differences, and image differences.                        | Buying choices remain understandable and operationally valid.                           |
+| Attribute-heavy product      | Technical specifications, custom fields, manufacturer values, labels, filters, or merchandising fields.                      | Descriptive values appear where they are useful and do not distort purchasable choices. |
+| Inventory-sensitive product  | Low-stock items, out-of-stock items, preorder items, warehouse-controlled items, or products with external stock references. | Stock values and availability expectations can be reviewed before launch.               |
+| Marketplace-relevant product | Channel title, channel category, marketplace identifier, availability rule, or channel-specific description.                 | Website catalog data is not confused with marketplace-channel requirements.             |
+| Excluded or inactive product | Archived, hidden, discontinued, duplicate, or seasonal products.                                                             | Scope decisions are deliberate rather than accidental.                                  |
 
-Storeden catalog usability depends on how shoppers find products. Categories, filters, menus, search behavior, landing pages, product groups, and marketplace-facing structures can carry business meaning that is not visible from product count alone.
+Product review should also identify catalog cleanup opportunities. Storeden migration planning is often the right time to decide whether old inactive products, duplicate records, obsolete descriptions, inconsistent images, or unused category assignments should move exactly as they are, be filtered, be mapped differently, or be excluded.
 
-Prepare evidence for:
+### Prepare Category, Navigation, and Discovery Evidence <a href="#prepare-category-navigation-and-discovery-evidence" id="prepare-category-navigation-and-discovery-evidence"></a>
 
-* main product categories and subcategories;
-* product filters, attributes, tags, or grouping logic;
-* menu and navigation expectations;
-* landing pages or product-listing pages used for campaigns;
-* high-value category URLs;
-* marketplace category or channel assignment expectations;
-* products that appear in more than one selling path;
-* category structures that should be simplified or reorganized during migration.
+Categories and product discovery should be prepared separately from product records. A product can migrate correctly and still be difficult to find if category hierarchy, menus, filters, storefront links, or marketplace category assumptions are not reviewed.
 
-If category or filter behavior affects conversion, it should be represented in Demo Migration. A target store with correct product records but weak discovery can still feel unfinished to shoppers and store managers.
+Storeden preparation should identify the structures shoppers and staff actually use. That includes main categories, subcategories, landing pages, filters, menu items, product groups, marketplace categories, campaign pages, and priority SEO URLs.
 
-### 4. Prepare Customer, Account, and B2B Context <a href="#id-4-prepare-customer-account-and-b2b-context" id="id-4-prepare-customer-account-and-b2b-context"></a>
+| Discovery evidence     | Preparation focus                                                              | Review signal                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Main category tree     | Parent/child category relationships and product assignment.                    | Products appear in the expected browsing structure.                                   |
+| Menu structure         | Storefront paths, header navigation, footer navigation, and promotional links. | Categories exist and are also reachable through the intended navigation paths.        |
+| Filters and attributes | Attributes, tags, labels, custom fields, or other filter-driving values.       | Shoppers can narrow products using meaningful data, not empty or inconsistent labels. |
+| Category content       | Category descriptions, SEO copy, banners, and internal links.                  | High-value landing pages retain their commercial and SEO context.                     |
+| Marketplace grouping   | Channel categories or marketplace-specific product classification.             | Marketplace preparation is reviewed separately from website navigation.               |
+| Priority URLs          | High-traffic category and product URLs.                                        | Redirect or URL continuity planning focuses on pages that matter most.                |
 
-Customer preparation should distinguish ordinary customer records from business accounts, B2B buyers, marketplace customers, newsletter subscribers, guest checkout records, and external CRM or ERP references. These records may not all carry the same meaning inside Storeden.
+If category or filter behavior affects conversion, it should be represented in Demo Migration. Reviewing only product rows can miss storefront discovery problems that become obvious to customers after launch.
 
-| Customer-related area | What to prepare                                                                                     | Review focus                                                                      |
-| --------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Customer accounts     | Representative customer records, names, emails, addresses, order links, and account status.         | Confirms whether customer history remains understandable after migration.         |
-| Guest buyers          | Orders tied to non-account customers or incomplete profiles.                                        | Prevents historical order review from depending on missing customer accounts.     |
-| B2B context           | Company names, VAT/tax identifiers, price list relationships, customer groups, or negotiated terms. | Identifies where B2B logic exceeds ordinary customer migration.                   |
-| Marketplace customers | Buyers originating from Amazon, eBay, Facebook, AliExpress, or other channels.                      | Clarifies whether marketplace origin should remain visible in historical records. |
-| Marketing context     | Newsletter status, consent values, tags, segments, or external CRM references.                      | Separates customer migration from marketing-platform setup or consent handling.   |
-| External IDs          | ERP, accounting, CRM, warehouse, loyalty, or support-system identifiers.                            | Helps determine whether mapping or Custom Service review is needed.               |
+### Prepare Inventory and Availability Evidence <a href="#prepare-inventory-and-availability-evidence" id="prepare-inventory-and-availability-evidence"></a>
 
-Password continuity should be handled cautiously. If the Source Platform stores passwords in a format that cannot be carried into Storeden safely or compatibly, customers may need to reset passwords after migration.
+Inventory preparation should clarify whether Storeden will hold the authoritative stock value or whether another system will continue to control stock. A merchant using simple stock quantities has a different preparation requirement from a merchant using warehouse feeds, supplier feeds, ERP updates, marketplace stock sync, bundle logic, or manual stock adjustments.
 
-### 5. Prepare Order, Payment, Shipping, and Logistics Samples <a href="#id-5-prepare-order-payment-shipping-and-logistics-samples" id="id-5-prepare-order-payment-shipping-and-logistics-samples"></a>
+| Inventory situation            | Evidence to prepare                                                                            | Why it matters                                                                             |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Single stock value per product | Product list with stock quantities and representative out-of-stock examples.                   | Confirms ordinary availability after migration.                                            |
+| Variant-level stock            | Variant samples with different SKU and stock values.                                           | Prevents option-level overselling or hidden sellable variants.                             |
+| External stock owner           | ERP, warehouse, supplier, POS, or marketplace stock references.                                | Migrated stock may become stale if the connection is not rebuilt.                          |
+| Non-stock items                | Services, digital items, preorder products, made-to-order products, or informational products. | Avoids forcing unsuitable stock behavior onto products that do not use ordinary inventory. |
+| Channel-specific availability  | Marketplace availability, B2B availability, or region-specific availability.                   | Website stock and channel stock may not share the same rule.                               |
 
-Order preparation should include more than complete paid orders. Historical order quality depends on whether staff can understand what was purchased, who placed the order, how it was paid, how it was shipped, what status it reached, and whether any external systems depended on it.
+Inventory evidence should be reviewed before Full Migration because stock errors can create immediate launch risk. A store with correct product titles but unreliable stock values can fail operationally on the first day.
 
-Include examples of:
+### Prepare Customer, Account, and B2B Context <a href="#prepare-customer-account-and-b2b-context" id="prepare-customer-account-and-b2b-context"></a>
 
-* paid, unpaid, canceled, refunded, partially refunded, fulfilled, and partially fulfilled orders;
-* orders with discounts, coupons, taxes, shipping fees, or marketplace commissions;
-* orders with multiple products, variant products, or bundled items;
-* orders tied to guest customers, registered customers, B2B buyers, or marketplace buyers;
-* orders with tracking numbers, carrier labels, logistics-service references, or fulfillment notes;
-* orders with payment method labels, transaction references, TS Pay relevance, or gateway-specific data;
-* orders connected to ERP, invoicing, accounting, warehouse, or customer-service systems.
+Customer preparation should distinguish ordinary customer records from guest buyers, registered account holders, B2B contacts, marketplace buyers, newsletter contacts, CRM identities, and external-system references. These records do not all carry the same meaning after migration.
 
-Live payment and logistics behavior should be planned separately. Historical order labels can explain what happened in the previous store, but they do not automatically configure payment methods, TS Pay, shipping rates, fulfillment rules, or logistics services in Storeden.
+| Customer area        | What to prepare                                                                                             | What to verify                                                                    |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Registered customers | Names, emails, addresses, account status, order links, and representative customer histories.               | Customer records remain understandable and useful for service review.             |
+| Guest buyers         | Orders with incomplete or no customer account records.                                                      | Historical orders can still be interpreted even when an account does not exist.   |
+| B2B context          | Company names, VAT/tax IDs, customer groups, price-list relationships, negotiated terms, or approval rules. | B2B meaning is not flattened into ordinary customer data.                         |
+| Marketplace buyers   | Buyer origin, order source, contact details, and marketplace references.                                    | Channel-origin context remains visible where it matters for service or reporting. |
+| Marketing context    | Newsletter status, consent values, tags, segments, or external marketing references.                        | Customer migration is not confused with marketing-platform setup.                 |
+| External IDs         | ERP, CRM, accounting, support, loyalty, or warehouse identifiers.                                           | Integration continuity can be reviewed before acceptance.                         |
 
-### 6. Separate Migrated Data from Storeden Configuration <a href="#id-6-separate-migrated-data-from-storeden-configuration" id="id-6-separate-migrated-data-from-storeden-configuration"></a>
+Password continuity should be handled cautiously. If the previous store stores passwords in a format that cannot be migrated safely or compatibly, customers may need to reset passwords after launch. That expectation should be part of communication planning rather than discovered after the store opens.
 
-A common preparation mistake is treating historical records as if they configure the new store. Migrated products, customers, orders, and content provide store history and operating context. Storeden settings still need target-side setup and review.
+### Prepare Order, Payment, Shipping, and Logistics Samples <a href="#prepare-order-payment-shipping-and-logistics-samples" id="prepare-order-payment-shipping-and-logistics-samples"></a>
 
-| Area              | Migrated-data role                                                                                 | Storeden configuration role                                                                  |
-| ----------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Products          | Preserves product information, variants, stock, images, and catalog relationships where supported. | Controls storefront publication, visibility, channel behavior, and merchandising choices.    |
-| Orders            | Preserves order history and commercial context.                                                    | Does not configure future payment, shipping, fulfillment, or logistics behavior.             |
-| Payments          | Preserves historical payment labels and references where supported.                                | Payment providers and TS Pay behavior must be set up and tested in the target environment.   |
-| Shipping          | Preserves historical shipping names, fees, and tracking context where supported.                   | Live shipping methods, logistics services, rates, and carrier behavior require target setup. |
-| Tax               | Preserves historical tax amounts or labels where available.                                        | Live tax rules and invoice behavior require target configuration and review.                 |
-| Marketplaces      | May preserve product or order context connected to a channel.                                      | Active channel publication and synchronization need app or marketplace configuration.        |
-| Apps and APIs     | May preserve selected identifiers or data fields when supported.                                   | App behavior, API connections, webhooks, and automation workflows need separate setup.       |
-| Storefront design | May preserve pages, content, images, and SEO values where supported.                               | Theme layout, menus, domain behavior, and visual presentation require target-side work.      |
+Order preparation should include the records staff will use after launch. Historical orders help customer service, finance, fulfillment, refund review, and management reporting. They should be reviewed for meaning, not only for count.
 
-### 7. Prepare Content, Theme, Domain, URL, and SEO Evidence <a href="#id-7-prepare-content-theme-domain-url-and-seo-evidence" id="id-7-prepare-content-theme-domain-url-and-seo-evidence"></a>
+| Order sample                             | What to include                                                                             | Why it matters                                                                      |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Paid and unpaid orders                   | Payment status, payment method label, totals, and transaction references.                   | Staff can interpret commercial history after migration.                             |
+| Fulfilled and partially fulfilled orders | Shipping method, tracking number, carrier, fulfillment status, and notes.                   | Fulfillment history remains useful for service review.                              |
+| Refunded or canceled orders              | Refund values, cancellation status, return notes, or adjustment history.                    | Finance and service teams can understand exceptions.                                |
+| Discounted orders                        | Coupons, discounts, taxes, shipping fees, and promotional adjustments.                      | Totals remain explainable after migration.                                          |
+| Marketplace orders                       | Channel origin, marketplace references, commissions, shipping labels, and customer context. | Marketplace-origin history is not treated like ordinary website-only order history. |
+| External-system orders                   | ERP, accounting, invoicing, warehouse, POS, or customer-service references.                 | External references can be preserved or flagged for Custom Service review.          |
 
-Storeden migration planning should include storefront content and search visibility when they affect launch quality. Products and orders can migrate correctly while content, navigation, domains, redirects, or metadata remain incomplete.
+Live checkout must be planned separately from migrated order history. Past payment method labels do not configure integrated payments. Past shipping names do not configure logistics rules. Historical order data can explain what happened before migration; Storeden settings control what happens after launch.
 
-Prepare:
+### Separate Migrated Data from Storeden Configuration <a href="#separate-migrated-data-from-storeden-configuration" id="separate-migrated-data-from-storeden-configuration"></a>
 
-* key CMS Pages, landing pages, and storefront content;
-* Blog Posts if they exist and are within migration scope;
-* page titles, SEO descriptions, slugs, and priority metadata;
-* high-value product URLs and category URLs;
-* redirect requirements from the old store to the new Storeden structure;
-* menu, footer, banner, and navigation expectations;
-* theme or visual layout requirements that should not be confused with migrated data;
-* image alt text and media that affect SEO or product conversion.
+One of the most important preparation steps is separating migrated data from configuration work. This prevents unrealistic expectations and makes project scope easier to approve.
 
-SEO preparation should prioritize important URLs instead of attempting to review every page manually. Products, categories, landing pages, and revenue-driving content should receive the most attention.
+| Area                   | Migrated data can preserve                                                                                   | Storeden configuration still controls                                                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Products               | Product information, images, prices, stock values, category relationships, and supported custom values.      | Publication rules, merchandising, channel behavior, and storefront presentation.                                   |
+| Customers              | Customer details, addresses, order relationships, and selected supported customer values.                    | Account access behavior, password reset expectations, segmentation setup, and marketing-tool configuration.        |
+| Orders                 | Historical order details, totals, products purchased, customer context, payment labels, and shipping labels. | Live checkout, payment providers, fulfillment workflow, logistics rules, and future order processing.              |
+| Categories and content | Category names, descriptions, CMS content, SEO values, and redirect planning inputs where supported.         | Theme layout, menu placement, landing-page design, and content hierarchy decisions.                                |
+| Apps and integrations  | Some identifiers or exported values if supported and scoped.                                                 | App installation, API connections, TeamSystem integration setup, automation behavior, and ongoing synchronization. |
+| Marketplace data       | Channel-related identifiers or product references when scoped.                                               | Marketplace account setup, channel publication, feed rules, and live channel operations.                           |
 
-### 8. Inventory Apps, APIs, Marketplace Channels, and TeamSystem Integrations <a href="#id-8-inventory-apps-apis-marketplace-channels-and-teamsystem-integrations" id="id-8-inventory-apps-apis-marketplace-channels-and-teamsystem-integrations"></a>
+This distinction should be visible in the preparation file. It helps the merchant understand which concerns belong to migration and which should be handled through Storeden setup, Storeden support, connected apps, or external-system implementation.
 
-Storeden’s app ecosystem, developer surfaces, marketplace channels, and TeamSystem connections can strongly affect migration scope. These dependencies should be listed before Demo Migration samples are selected.
+### Identify Add-ons and Custom Service Signals Early <a href="#identify-add-ons-and-custom-service-signals-early" id="identify-add-ons-and-custom-service-signals-early"></a>
 
-| Dependency type           | Examples to inventory                                                                                               | Migration planning question                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Apps and plugins          | Marketing apps, logistics apps, marketplace connectors, reporting tools, promotions, feeds, or storefront features. | Does the app store data that needs to migrate, or does it need reconfiguration after migration?               |
-| Marketplace channels      | Amazon, eBay, Facebook, AliExpress, or other selling channels.                                                      | Are channel identifiers, listing data, availability rules, or order origins required after migration?         |
-| API integrations          | Product sync, inventory sync, order export, fulfillment automation, or external dashboards.                         | Which identifiers and fields must remain stable for connected workflows?                                      |
-| ERP and accounting        | TeamSystem ecosystem tools, invoicing, finance, warehouse, stock, or business-management systems.                   | Do records need external IDs, mapping, or workflow-specific treatment?                                        |
-| Logistics and fulfillment | Shipping providers, tracking services, warehouse systems, fulfillment rules, or carrier integrations.               | Which historical values should be migrated, and which live workflows must be configured?                      |
-| Marketing and CRM         | Email platforms, customer segments, consent systems, loyalty, support, or CRM records.                              | Which customer or contact fields belong in migration scope, and which remain outside Storeden data migration? |
+Add-ons and Custom Service should not be discovered late. Preparation should identify whether the project needs supported filtering, mapping, or configuration, or whether it requires custom handling beyond standard migration behavior.
 
-Unsupported app-owned data, external-system identifiers, custom API behavior, bespoke sync logic, or tailored marketplace requirements should be reviewed through Custom Service when they cannot be handled through standard service capability or a Standard Add-on.
+| Signal                                              | Likely handling path    | Example                                                                                              |
+| --------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------- |
+| Only selected eligible records should migrate       | Data Filter Add-on      | Exclude obsolete products, old test customers, or historical orders before a specific business date. |
+| Supported fields need better alignment              | Advanced Data Mapping   | Align catalog fields, customer values, order statuses, or category values where supported.           |
+| Supported values need controlled adjustment         | Advanced Data Configure | Adjust selected labels, statuses, names, or other supported values before migration.                 |
+| App-owned or unsupported data is required           | Custom Service          | Preserve app fields, marketplace IDs, ERP identifiers, or nonstandard product logic.                 |
+| Custom source logic affects business meaning        | Custom Service          | Transform bundle logic, B2B account relationships, external IDs, or bespoke order metadata.          |
+| Standard migration output needs custom modification | Custom Service          | Adjust migration logic to match project-specific target expectations.                                |
 
-### 9. Choose Demo Migration Samples Deliberately <a href="#id-9-choose-demo-migration-samples-deliberately" id="id-9-choose-demo-migration-samples-deliberately"></a>
+Add-ons should remain bounded to supported filtering, mapping, or configuration behavior. Custom Service is required when the expected result depends on unsupported structures, app data, external-system references, Custom Platform interpretation, or custom migration logic adjustment.
 
-Demo Migration should be designed to test the records that carry risk. A small sample made only of simple records may look successful while hiding catalog, channel, order, integration, or SEO issues.
+### Prepare SEO, Content, and Redirect Evidence <a href="#prepare-seo-content-and-redirect-evidence" id="prepare-seo-content-and-redirect-evidence"></a>
 
-| Demo Migration sample                          | Why it should be included                                              |
-| ---------------------------------------------- | ---------------------------------------------------------------------- |
-| Simple product                                 | Confirms ordinary catalog fields and baseline product display.         |
-| Variant or attribute-heavy product             | Tests product choices, SKUs, images, stock, and price behavior.        |
-| Inventory-sensitive product                    | Checks stock meaning and external inventory references.                |
-| Marketplace-relevant product                   | Reveals channel-specific identifiers, titles, or listing expectations. |
-| Complex category or filter example             | Tests storefront discovery and product grouping.                       |
-| Registered customer and guest buyer            | Checks customer/account readability and order relationship handling.   |
-| B2B or company customer sample                 | Tests whether business-account meaning needs deeper review.            |
-| Paid, refunded, canceled, and fulfilled orders | Shows whether historical order states remain understandable.           |
-| Order with tracking or logistics data          | Confirms shipping and fulfillment context.                             |
-| Priority CMS Page or Blog Post                 | Tests content continuity where content migration matters.              |
-| Priority product or category URL               | Supports SEO and redirect planning.                                    |
-| App, API, ERP, or TeamSystem-linked record     | Reveals whether external identifiers or custom handling are needed.    |
+Storeden preparation should include URLs and content, especially for stores with meaningful organic traffic or content-led selling. SEO continuity depends on more than importing products. It also depends on product URLs, category URLs, CMS pages, Blog Posts, metadata, internal links, images, redirects, canonical expectations, and domain timing.
 
-### 10. Identify Add-on and Custom Service Signals Early <a href="#id-10-identify-add-on-and-custom-service-signals-early" id="id-10-identify-add-on-and-custom-service-signals-early"></a>
+| SEO or content area | What to collect                                                                                      | Why it matters                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Priority URLs       | High-traffic product, category, CMS, and Blog Post URLs.                                             | Redirect work should prioritize pages with real value.                                   |
+| Metadata            | Titles, descriptions, URL slugs, image alt text, and indexation notes.                               | Search presentation may change if metadata is missing or misaligned.                     |
+| CMS pages           | Trang Hệ thống quản lý nội dung (CMS pages), policy pages, landing pages, and informational content. | Storefront trust and legal/commercial pages should not be treated as optional leftovers. |
+| Blog Posts          | Articles, category relationships, author/date expectations, and internal links.                      | Content continuity may need separate review from product migration.                      |
+| Domain timing       | DNS, launch date, redirect activation, and post-launch crawl monitoring.                             | URL continuity depends on launch coordination, not only migrated records.                |
+| Internal links      | Navigation links, footer links, collection links, and content-to-product links.                      | Broken links can damage customer experience even if records migrate correctly.           |
 
-Preparation should identify where standard migration is likely enough and where additional handling should be discussed before Full Migration. This prevents late-stage surprises after Demo Migration review.
+Preparation should identify which SEO and content items are migration requirements, which are Storeden configuration tasks, and which need manual rebuild or Custom Service review.
 
-Add-ons may be relevant when the requirement fits supported filtering, mapping, or data configuration needs. For example, the Data Filter Add-on can help when only selected eligible records should migrate. Advanced Data Mapping can help when supported field relationships need mapping review. Advanced Data Configure can help when supported data values should be adjusted before reaching Storeden.
+### Build a Demo Migration Evidence Plan <a href="#build-a-demo-migration-evidence-plan" id="build-a-demo-migration-evidence-plan"></a>
 
-Custom Service is appropriate when customization, modification, bespoke handling, unsupported app data, Custom Platform source interpretation, custom migration logic adjustment, or external-system requirements exceed standard service capability or Standard Add-on behavior. Tailored Add-ons and Custom Add-ons are also handled through Custom Service because customization is required.
+Demo Migration should be used as a practical evidence checkpoint. A weak sample set can make a migration look cleaner than it really is. A strong Storeden sample set includes ordinary records and the records most likely to expose data-model, configuration, app, marketplace, or integration issues.
 
-| Signal found during preparation                                         | Likely implication                                                                          |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Clean supported products, customers, orders, categories, and content    | Standard Service may be enough if the customer can self-perform and validate the migration. |
-| Customer wants Next-Cart-led execution within standard capability       | Managed Service may be safer when the migration does not require customization.             |
-| Selected records should migrate instead of all eligible records         | Data Filter Add-on should be reviewed where supported.                                      |
-| Supported fields need mapping review                                    | Advanced Data Mapping should be considered.                                                 |
-| Supported values should be adjusted before migration                    | Advanced Data Configure should be considered.                                               |
-| Custom Platform source or unusual source data                           | Custom Service is required for source interpretation and custom handling.                   |
-| Unsupported app, marketplace, ERP, API, or external-system data         | Custom Service review is needed.                                                            |
-| Custom checkout, B2B, marketplace, logistics, pricing, or sync behavior | Custom Service review is needed because custom migration logic adjustment may be required.  |
+| Demo Migration sample           | What it should test                                                                                                    |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Simple product                  | Baseline product fields, image display, category assignment, and price.                                                |
+| Variant or option product       | SKU, stock, price, image, and option meaning.                                                                          |
+| Marketplace-sensitive product   | Channel identifiers, listing assumptions, and publication context.                                                     |
+| Inventory-sensitive product     | Availability, out-of-stock handling, and stock-owner assumptions.                                                      |
+| Representative customer         | Addresses, order links, customer context, and account meaning.                                                         |
+| B2B or company-related customer | Business identifiers, groups, tax context, or special account expectations.                                            |
+| Complex order                   | Products purchased, discounts, taxes, payment labels, shipping labels, fulfillment context, and customer relationship. |
+| External-system record          | ERP ID, accounting reference, warehouse ID, marketplace ID, or API-linked value.                                       |
+| Priority URL or CMS page        | SEO and content continuity.                                                                                            |
+
+If Demo Migration samples behave as expected, the project can move forward with stronger confidence. If samples reveal missing app data, broken option meaning, incomplete external identifiers, unclear order history, or weak SEO continuity, the service path should be reviewed before Full Migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Storeden preparation should make the migration result easier to interpret before launch. The strongest preparation focuses on the records and workflows that define how the business sells: catalog structure, inventory, variants, customers, orders, marketplace channels, payments, shipping, logistics, storefront content, SEO, apps, APIs, and TeamSystem or ERP connections.
+Storeden preparation should create a clear evidence base for migration scope, target configuration, and service-path choice. Products, categories, inventory, customers, orders, marketplace values, logistics references, payment labels, content, SEO data, apps, API references, and TeamSystem-related identifiers all need review according to their business role.
 
-Before starting Full Migration, prepare a focused Demo Migration sample that includes both ordinary and complex records. If the sample exposes filtering, mapping, configuration, app-owned data, marketplace identifiers, external-system references, or custom workflow requirements, review Add-ons or Custom Service before treating the migration path as straightforward.
+A Storeden migration is easiest to approve when the merchant knows what will migrate, what must be configured in the target store, what requires Add-ons, what requires Custom Service, and which Demo Migration samples will prove readiness before Full Migration. Preparation is not paperwork. It is the control layer that prevents a technically complete migration from becoming an operationally incomplete launch.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **What should be prepared first for a Storeden migration?**
 
-Start with the target Storeden environment, product catalog structure, inventory behavior, customer and order samples, marketplace channels, payment and shipping expectations, and any apps or TeamSystem integrations that affect daily operations.
+Start with the target Storeden store scope, then prepare representative products, categories, customers, orders, payment and shipping context, marketplace records, SEO URLs, apps, integrations, and external identifiers. The first goal is to understand business-critical records and configuration dependencies before migration begins.
 
-**Which product samples should be included before Demo Migration?**
+**Should payment and shipping settings be prepared as migration data?**
 
-Include simple products, variant products, attribute-heavy products, inventory-sensitive products, products with images and categories, marketplace-relevant products, and products connected to ERP, accounting, warehouse, or external-system identifiers.
+Historical payment and shipping labels can be migrated as part of order history where supported, but live payment and shipping behavior must be configured in the target Storeden store. Preparation should separate order-history meaning from future checkout and logistics behavior.
 
-**Should payment and shipping settings be prepared before migration?**
+**When do Add-ons become relevant during preparation?**
 
-Yes. Historical payment and shipping labels can be migrated where supported, but live payment, TS Pay, shipping, logistics, tax, tracking, and fulfillment behavior need Storeden-side configuration and testing.
+Add-ons become relevant when supported migration data needs filtering, mapping, or controlled value configuration. For example, a merchant may want to migrate only selected records, align supported fields more carefully, or adjust supported labels before migration.
 
-**Should SEO and URLs be prepared before migration?**
+**When should Custom Service be discussed before Full Migration?**
 
-Yes. Priority product URLs, category URLs, metadata, redirects, domains, CMS Pages, Blog Posts, and landing pages should be prepared before launch planning. SEO-sensitive stores should not wait until after Full Migration to review URL continuity.
+Custom Service should be discussed when the expected result depends on unsupported app data, external-system identifiers, marketplace-specific records, B2B logic, Custom Platform interpretation, or custom migration logic adjustment. These requirements should be identified before the Demo Migration review is accepted.
 
-**When should Add-ons or Custom Service be identified?**
+**How should Demo Migration samples be chosen for Storeden?**
 
-Add-ons should be identified when filtering, mapping, or supported data configuration is needed. Custom Service should be identified when the migration involves Custom Platform data, unsupported app or marketplace data, custom fields, external-system identifiers, or custom migration logic adjustment.
+Demo Migration samples should include ordinary records and the records most likely to expose Storeden-specific issues: variant products, marketplace-linked products, inventory-sensitive items, B2B customers, complex orders, external identifiers, and priority URLs or content pages.

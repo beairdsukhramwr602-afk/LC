@@ -1,165 +1,175 @@
 # Storeden Validation Priorities
 
-A Storeden migration should be validated by checking whether the migrated result works as a Storeden store, not only whether records appear in the new account. Products, customers, orders, content, marketplace context, apps, and integration references must remain understandable inside a hosted cloud commerce environment.
+Storeden validation should prove that the migrated store can operate inside the target commerce environment, not only that record counts look complete. Storeden is positioned around cloud commerce, multichannel selling, catalog and inventory management, professional order management, integrated payments, logistics, themes, apps, plug-ins, API resources, marketplace channels, and TeamSystem ecosystem connections. That means validation has to connect migrated data with the way the target store will sell, fulfill, report, and connect after launch.
 
-Validation should focus on the records and workflows that carry the most business meaning. A product with variants, attributes, stock, marketplace relevance, images, and SEO values is more useful than a simple product when judging migration quality. An order with payment, shipping, tracking, tax, customer, channel, and external-system context is more useful than an order that only proves a record count.
+A clean migration result can still be incomplete if products are present but hard to discover, orders are present but not useful for support, customer records exist but do not match operational expectations, marketplace references are unclear, or logistics and payment context is treated as if it were live configuration. Validation should therefore move from record presence to business proof.
 
-### What Validation Should Prove in Storeden <a href="#what-validation-should-prove-in-storeden" id="what-validation-should-prove-in-storeden"></a>
+The strongest Storeden validation workflow uses representative samples. It checks ordinary records, complex records, and records tied to external workflows. The purpose is to confirm that migrated data is usable, that target-side configuration is understood, and that any remaining gaps are clearly assigned to configuration, Add-ons, Custom Service, connected apps, TeamSystem setup, or manual operational work.
 
-Storeden validation should prove that migrated data can support daily store management, customer service, product discovery, sales-channel coordination, and launch decisions. It should also identify what belongs to target configuration rather than migration output.
+### Storeden Validation Principle <a href="#storeden-validation-principle" id="storeden-validation-principle"></a>
 
-| Validation area                          | What should be checked                                                                                                          | Why it matters                                                                                                  |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Product records                          | Names, descriptions, prices, images, categories, SKUs, visibility, and selling status.                                          | Products must be usable for merchandising, management, and storefront review.                                   |
-| Variants and attributes                  | Option names, attribute values, SKU relationships, price differences, images, and stock behavior.                               | Product choices must remain clear to shoppers and manageable for the store team.                                |
-| Inventory                                | Stock quantities, inventory status, product availability, and external stock references where relevant.                         | Inventory mistakes can affect selling, marketplace synchronization, and fulfillment planning.                   |
-| Categories, filters, and discovery       | Category placement, subcategories, filters, tags, navigation, search behavior, and marketplace-facing organization.             | A product can exist in Storeden but still be hard to find or incorrectly grouped.                               |
-| Customer and account data                | Customer identity, contact details, account context, B2B indicators, and external references where applicable.                  | Customer-service teams need readable customer records and meaningful account history.                           |
-| Order history                            | Products, customer links, totals, discounts, taxes, payment labels, shipping methods, tracking, statuses, and channel origin.   | Order history should remain useful for support, finance, fulfillment, and management.                           |
-| Payment, shipping, and logistics context | Historical payment and shipping labels, tracking values, logistics references, and fulfillment context.                         | Historical values must be readable, while live checkout and logistics setup must be tested separately.          |
-| Marketplace data                         | Amazon, eBay, Facebook, AliExpress, or other channel-related identifiers, publication context, and order/channel references.    | Multichannel stores need to know what remains connected, what is reference-only, and what must be reconfigured. |
-| Apps, APIs, and TeamSystem integrations  | App-owned fields, ERP or accounting identifiers, inventory-system references, API-dependent records, and workflow expectations. | Connected workflows often carry meaning outside standard product, customer, or order fields.                    |
-| Storefront, content, URLs, and SEO       | Themes, menus, CMS Pages, landing content, product/category URLs, redirects, metadata, and domain expectations.                 | A technically successful data migration may still need storefront and search-continuity review.                 |
+Storeden validation should answer one practical question: can staff use the migrated store to sell, manage, and support the business without losing the meaning of the original data? The answer depends on product structure, inventory ownership, order history, customer context, content continuity, marketplace assumptions, logistics dependencies, payment references, and integration identifiers.
 
-### Validate Products Beyond Record Counts <a href="#validate-products-beyond-record-counts" id="validate-products-beyond-record-counts"></a>
+| Validation layer         | What to prove                                                                                                                            | Why it matters                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Record completeness      | Expected products, categories, customers, orders, content, and images exist.                                                             | Confirms that migration scope was applied correctly.                             |
+| Commercial meaning       | Products, prices, stock, categories, and product descriptions make sense to shoppers and staff.                                          | Prevents technically present records from becoming weak storefront assets.       |
+| Operational context      | Orders, shipping labels, payment labels, customer relationships, and fulfillment notes remain interpretable.                             | Supports customer service, reporting, and post-launch operations.                |
+| Configuration separation | Live payments, logistics, theme behavior, apps, marketplace channels, and TeamSystem connections are not confused with migrated history. | Prevents incorrect assumptions about what migration can configure automatically. |
+| Exception handling       | Unsupported fields, app-owned data, external IDs, and custom structures are assigned to the right handling path.                         | Makes remaining work visible before launch.                                      |
 
-Product validation should begin with a focused group of records that represents the store’s real catalog. Simple products are useful, but they rarely expose the areas where Storeden migration quality can fail.
+Validation should be performed after Demo Migration, before Full Migration approval, after Full Migration, and again after any additional migration action that brings new or changed data into the target store.
 
-#### Product details and merchandising values <a href="#product-details-and-merchandising-values" id="product-details-and-merchandising-values"></a>
+### Validate Product and Catalog Usability <a href="#validate-product-and-catalog-usability" id="validate-product-and-catalog-usability"></a>
 
-Check product names, descriptions, pricing, images, categories, visibility, and SEO fields. Product pages should make sense to shoppers and store managers, not only exist in the back office.
+Product validation should begin with the catalog records that drive revenue and support workload. A small set of ordinary products can confirm baseline transfer, but Storeden validation needs more than a quick sample. It should include variant products, inventory-sensitive products, media-heavy products, products tied to marketplace channels, products with app-created values, and products that rely on custom fields or external identifiers.
 
-For high-value products, compare how the product is presented, how it is grouped, and how it can be found. Storeden validation should confirm that the migrated product supports selling and management in the target environment.
+| Product validation area      | What to inspect                                                                                        | Pass signal                                                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Core product fields          | Name, description, price, SKU or product code, status, product images, and product visibility.         | Products are readable, commercially accurate, and ready for target-store review. |
+| Category relationships       | Primary and secondary category placement, storefront grouping, and navigation fit.                     | Products appear in the expected discovery paths.                                 |
+| Inventory values             | Stock quantity, availability meaning, out-of-stock behavior, and stock-owner assumptions.              | Stock data supports the intended operating model and does not mislead shoppers.  |
+| Product media                | Main images, gallery images, image order, missing assets, and image quality.                           | Product pages remain usable without manual image investigation.                  |
+| Product attributes           | Specifications, filters, labels, custom values, manufacturer references, and merchandising fields.     | Descriptive data supports buying decisions instead of becoming hidden clutter.   |
+| Marketplace-sensitive values | Channel IDs, listing titles, channel categories, feed references, or product availability assumptions. | Marketplace-related data is reviewed separately from storefront catalog data.    |
 
-#### Variants, attributes, SKUs, and options <a href="#variants-attributes-skus-and-options" id="variants-attributes-skus-and-options"></a>
+A product should not pass validation only because it exists. It should pass because the migrated record can be understood and managed in Storeden.
 
-Products with variants and attributes should be reviewed carefully. Variant names, option combinations, SKU relationships, price differences, image behavior, stock values, and attribute meaning should remain clear.
+### Validate Categories, Navigation, and Discovery <a href="#validate-categories-navigation-and-discovery" id="validate-categories-navigation-and-discovery"></a>
 
-If the source store used custom options, configurable products, unusual modifiers, bundles, or marketplace-specific product fields, validation should confirm whether the result is acceptable inside Storeden or whether mapping, configuration, or Custom Service review is needed.
+Category validation checks whether customers and staff can find products after migration. Storeden emphasizes catalog and inventory management, multichannel distribution, and storefront presentation, so product discovery must be reviewed as its own validation layer.
 
-#### Inventory and availability <a href="#inventory-and-availability" id="inventory-and-availability"></a>
+| Discovery element      | Validation focus                                                                             | Failure signal                                                                             |
+| ---------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Category tree          | Parent/child relationships, category names, product counts, and priority category placement. | Products exist but appear in unexpected or empty categories.                               |
+| Navigation paths       | Header menus, footer links, campaign links, and category landing paths.                      | Categories exist but are not reachable from expected storefront routes.                    |
+| Filters and attributes | Filter-driving values, labels, tags, specifications, and custom fields.                      | Filters are missing, inconsistent, overloaded, or not useful for shoppers.                 |
+| Category content       | Descriptions, images, SEO copy, landing-page text, and internal links.                       | Important category pages become thin or disconnected from commercial context.              |
+| Marketplace grouping   | Marketplace categories or channel classification.                                            | Marketplace classification is assumed to follow website category structure without review. |
 
-Inventory validation should check stock values, availability status, product visibility, and any external inventory references that matter to the business. This is especially important when Storeden is expected to support marketplace selling or TeamSystem ecosystem workflows after launch.
+Discovery validation should include a shopper-style test. Reviewers should search for a product, browse through the category structure, inspect filter behavior where relevant, and confirm that key product groups are reachable without relying on direct admin access.
 
-A product should not be accepted simply because it migrated. It should be checked for whether it can be managed, sold, hidden, restocked, synchronized, or excluded correctly in the new environment.
+### Validate Inventory and Availability Meaning <a href="#validate-inventory-and-availability-meaning" id="validate-inventory-and-availability-meaning"></a>
 
-### Validate Storefront Discovery <a href="#validate-storefront-discovery" id="validate-storefront-discovery"></a>
+Inventory validation should confirm who owns the stock value after launch. Storeden provides catalog and inventory management, but many merchants rely on external systems, marketplace synchronization, logistics providers, ERP connections, or TeamSystem-related workflows. If stock ownership is unclear, migrated inventory can create false confidence.
 
-Storefront discovery is where catalog structure becomes visible to shoppers. Categories, subcategories, filters, tags, navigation, search behavior, and marketplace organization should be tested with realistic browsing paths.
+| Inventory question                     | Validation requirement                                                                           | Handling implication                                                                          |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Is Storeden the stock owner?           | Confirm that migrated stock values will be managed directly in Storeden.                         | Full inventory validation can focus on target-store values and storefront availability.       |
+| Is an external system the stock owner? | Confirm which identifiers connect Storeden to ERP, warehouse, logistics, or marketplace systems. | External IDs and integration setup may need Custom Service or separate implementation review. |
+| Are all products stock-controlled?     | Separate physical products from digital, service, preorder, made-to-order, or unlimited items.   | Availability behavior may require configuration rather than migration-only validation.        |
+| Are stock values channel-sensitive?    | Compare website stock assumptions with marketplace or logistics assumptions.                     | Marketplace and logistics validation should not be skipped.                                   |
 
-A strong validation sample should include products that belong to multiple categories, products that depend on filters, products with variant choices, and products that are important for marketplace or campaign traffic.
+A stock value is validated only when the team understands whether it is the launch value, historical reference, placeholder value, or externally controlled value.
 
-| Discovery item               | Validation question                                                                             |
-| ---------------------------- | ----------------------------------------------------------------------------------------------- |
-| Categories and subcategories | Are products placed in the right browsing structure?                                            |
-| Filters and tags             | Can shoppers narrow products in a way that matches the intended catalog logic?                  |
-| Navigation and menus         | Can priority categories and products be reached from expected paths?                            |
-| Search behavior              | Are important product names, SKUs, attributes, or descriptors discoverable?                     |
-| Marketplace visibility       | Are channel-relevant products ready for review before marketplace synchronization is accepted?  |
-| SEO-sensitive paths          | Do priority product and category URLs support the intended redirect and search-continuity plan? |
+### Validate Customer and Account Context <a href="#validate-customer-and-account-context" id="validate-customer-and-account-context"></a>
 
-### Validate Customers, Accounts, and B2B Context <a href="#validate-customers-accounts-and-b2b-context" id="validate-customers-accounts-and-b2b-context"></a>
+Customer validation should focus on usability for service, segmentation, and account continuity. Storeden migration may preserve customer details, addresses, order relationships, and selected supported values, but live account behavior, password access, marketing segmentation, and B2B workflows still need target-side review.
 
-Customer validation should confirm more than names and email addresses. Check contact details, account identity, customer-to-order relationships, billing or shipping information, and any external references that the business uses for service, accounting, marketing, or integrations.
+| Customer validation area         | What to inspect                                                                        | Pass signal                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Identity                         | Email, name, company, phone, and duplicate handling.                                   | Staff can identify the right customer without confusion.                        |
+| Addresses                        | Billing and shipping addresses, country, postal code, region, and formatting.          | Address records remain useful for support and future ordering.                  |
+| Order links                      | Customer-to-order relationships and historical purchase visibility.                    | Staff can trace customer history where the target store supports it.            |
+| Groups or segments               | B2B groups, pricing labels, marketing groups, or trade context.                        | Group meaning is preserved, mapped, or assigned to a target configuration task. |
+| Consent and communication values | Newsletter flags, marketing preferences, or contact labels where available and scoped. | Communication-related values are not assumed to be active automation settings.  |
 
-If the source store used customer groups, B2B pricing, wholesale logic, approval workflows, account-specific terms, or app-managed customer behavior, those areas should be treated as meaning-sensitive. They may not behave like ordinary customer records in Storeden.
+Validation should avoid promising password continuity unless the target process supports it. Customer records can migrate, but customer login behavior is usually controlled by the target platform and launch process.
 
-B2B-related validation should focus on what the merchant needs after launch: whether the data is readable, whether the target account or app configuration supports the expected behavior, and whether any unsupported source logic needs Custom Service review.
+### Validate Order History and Operational Evidence <a href="#validate-order-history-and-operational-evidence" id="validate-order-history-and-operational-evidence"></a>
 
-### Validate Orders as Business Records <a href="#validate-orders-as-business-records" id="validate-orders-as-business-records"></a>
+Order validation is not the same as checkout validation. Historical orders show what happened before migration; target settings control what happens next. Storeden validation should make order history useful for customer service, accounting review, fulfillment context, and operational continuity.
 
-Historical order validation should check whether old orders remain useful for customer service, fulfillment review, accounting reference, and management reporting. An order should be evaluated as a business record, not only as a migrated item.
+| Order area       | Validation focus                                                                                                      | Pass signal                                                                          |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Order identity   | Order number, date, customer, email, billing address, shipping address, and status.                                   | Orders can be searched and interpreted by staff.                                     |
+| Purchased items  | Product names, SKUs, quantities, prices, discounts, taxes, and totals.                                                | Historical purchases remain commercially understandable.                             |
+| Payment context  | Payment method label, transaction reference where scoped, paid/unpaid status, and refund information where supported. | Payment history is clear as history and not mistaken for live payment configuration. |
+| Shipping context | Shipping method label, tracking value, carrier reference, and fulfillment status where supported.                     | Fulfillment history remains useful for service review.                               |
+| Exceptions       | Cancelled orders, refunded orders, partially fulfilled orders, test orders, and manually edited orders.               | Edge cases do not distort reporting or service workflows.                            |
 
-#### Strong order samples <a href="#strong-order-samples" id="strong-order-samples"></a>
+A migrated order should pass when staff can answer a customer question from the record. If a customer service representative cannot interpret what was purchased, paid, shipped, refunded, or cancelled, order validation is not complete.
 
-Use varied order examples, including paid, unpaid, fulfilled, unfulfilled, canceled, refunded, partially fulfilled, discounted, taxed, marketplace-originated, and tracked orders where available. Orders with multiple products, variant products, different shipping methods, and customer-account relationships are especially useful.
+### Validate Payments, Logistics, and Checkout Separation <a href="#validate-payments-logistics-and-checkout-separation" id="validate-payments-logistics-and-checkout-separation"></a>
 
-#### Payment, shipping, tax, and logistics context <a href="#payment-shipping-tax-and-logistics-context" id="payment-shipping-tax-and-logistics-context"></a>
+Storeden includes payment, logistics, and order-management capabilities, but validation should distinguish migrated history from live configuration. Historical labels can support service and reporting. They do not automatically configure future checkout, payment capture, logistics rules, or shipping automation.
 
-Review historical payment labels, shipping methods, tracking numbers, logistics references, tax lines, discount values, order statuses, and fulfillment context. These values help teams understand past transactions after migration.
+| Area             | Validate as migrated history                                                            | Validate as target configuration                                                            |
+| ---------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Payment methods  | Historical payment labels and transaction references where scoped.                      | Active payment providers, settlement behavior, wallets, fraud checks, and checkout testing. |
+| Shipping methods | Historical shipping labels, tracking values, fulfillment notes, and carrier references. | Live shipping rates, logistics providers, zones, tracking rules, and fulfillment process.   |
+| Taxes            | Historical tax lines and totals where migrated.                                         | Future tax setup, invoicing logic, regional rules, and accounting integration.              |
+| Discounts        | Order-level or item-level discount history.                                             | Future promotion rules, coupon behavior, and marketing automation.                          |
+| Checkout flow    | Historical order records.                                                               | Live checkout configuration, payment testing, shipping testing, and confirmation emails.    |
 
-Live payment, TS Pay, shipping, logistics, tax, and checkout behavior should be validated as target setup. Historical order labels do not prove that new checkout, payment, shipping, or logistics workflows are ready for launch.
+Validation should include at least one live checkout test in the target store environment where possible. That test is not proof of migration quality by itself, but it confirms that migrated data is being reviewed alongside real Storeden configuration.
 
-### Validate Marketplace and Channel Context <a href="#validate-marketplace-and-channel-context" id="validate-marketplace-and-channel-context"></a>
+### Validate Content, SEO, and Redirect Readiness <a href="#validate-content-seo-and-redirect-readiness" id="validate-content-seo-and-redirect-readiness"></a>
 
-Storeden’s multichannel model makes marketplace validation important when the source store used Amazon, eBay, Facebook, AliExpress, or other sales channels. Marketplace-related data may include product identifiers, channel availability, feed-related values, publication state, order origin, inventory expectations, or external references.
+Content and SEO validation should focus on the pages that carry business value. Storeden migration may include product content, category content, CMS pages, Blog Posts, metadata, images, and redirect planning inputs depending on scope, but the target store still needs review for theme placement, menu links, internal links, and launch timing.
 
-Validation should identify which values migrated as Storeden data, which remain reference-only, and which must be reconnected or reconfigured after migration. This prevents a false pass where products and orders are present but marketplace workflows are not ready.
+| Content or SEO area | What to check                                                                                    | Pass signal                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Product URLs        | URL continuity, product slugs, priority product paths, and redirect needs.                       | Important product pages can be reached or redirected.                   |
+| Category URLs       | Category landing pages, SEO copy, indexable paths, and redirected legacy paths.                  | High-value category traffic has a clear target path.                    |
+| CMS pages           | Trang Hệ thống quản lý nội dung (CMS pages), policy pages, brand pages, and informational pages. | Non-product pages remain accessible and trustworthy.                    |
+| Blog Posts          | Article titles, dates, categories, internal links, and media references.                         | Content-led traffic is not lost because posts were treated as optional. |
+| Metadata            | Titles, descriptions, image alt text, canonical expectations, and noindex decisions.             | Search-facing information remains intentional.                          |
+| Redirects           | Legacy URLs, destination URLs, domain timing, and post-launch crawl review.                      | Priority URLs do not produce avoidable 404 errors after launch.         |
 
-For marketplace-sensitive stores, validation should include at least one product or order from each important channel, plus products where marketplace rules affect price, availability, description, title, inventory, or images.
+A strong SEO validation process selects high-traffic URLs and representative page types. It does not try to manually inspect every URL before launch, but it does require enough samples to prove that redirect and metadata logic is working.
 
-### Validate Apps, APIs, and TeamSystem Integration References <a href="#validate-apps-apis-and-teamsystem-integration-references" id="validate-apps-apis-and-teamsystem-integration-references"></a>
+### Validate Apps, API Data, and TeamSystem Ecosystem Dependencies <a href="#validate-apps-api-data-and-teamsystem-ecosystem-dependencies" id="validate-apps-api-data-and-teamsystem-ecosystem-dependencies"></a>
 
-Apps, plugins, API workflows, ERP connections, accounting tools, inventory systems, POS systems, fulfillment tools, and TeamSystem ecosystem integrations can carry meaning outside standard Storeden fields. Validation should check whether those references remain usable, need remapping, or should be excluded from standard acceptance.
+Storeden validation should identify where migrated data intersects with apps, plug-ins, APIs, marketplace channels, logistics, and TeamSystem ecosystem connections. These areas are often the difference between a visible storefront migration and an operationally complete launch.
 
-| Integration-sensitive area        | What to validate                                                                               | Possible result                                                                            |
-| --------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| App-owned product data            | Custom product values, app-specific flags, additional catalog logic, or marketing fields.      | Accepted as migrated data, reconfigured through app setup, or reviewed for Custom Service. |
-| ERP or accounting references      | External product IDs, customer IDs, order IDs, invoice references, or management-system codes. | Preserved, remapped, or documented as outside standard migration scope.                    |
-| Inventory or warehouse references | External stock IDs, warehouse indicators, synchronization expectations, or availability rules. | Confirmed usable, reconfigured after migration, or escalated for review.                   |
-| Marketplace identifiers           | Channel product IDs, listing references, feed values, and channel-order context.               | Preserved where supported, reconnected through channel setup, or handled separately.       |
-| API or webhook logic              | External workflows that depend on stable identifiers or custom data structures.                | Rebuilt, remapped, or reviewed under Custom Service.                                       |
+| Dependency type        | Validation focus                                                                                      | Possible handling path                                                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Apps and plug-ins      | App-owned fields, app settings, automation values, and extension-created records.                     | App reinstall, manual configuration, Add-ons, or Custom Service depending on data type. |
+| Marketplace channels   | Channel identifiers, listing references, marketplace categories, pricing assumptions, and feed rules. | Target channel setup, integration review, or Custom Service for unsupported values.     |
+| API references         | External IDs, sync keys, ERP references, warehouse IDs, accounting IDs, or CRM values.                | Custom Service or integration implementation review.                                    |
+| TeamSystem connections | Management software, invoicing, payment, or ecosystem identifiers.                                    | Separate configuration and testing outside migration-only validation.                   |
+| Logistics providers    | Carrier IDs, tracking formats, fulfillment rules, and shipping automation.                            | Target setup and logistics testing.                                                     |
 
-### Validate Storefront Presentation, Content, URLs, and SEO <a href="#validate-storefront-presentation-content-urls-and-seo" id="validate-storefront-presentation-content-urls-and-seo"></a>
+A dependency should not be considered validated because the visible product or order migrated. The integration reference itself must either be present, mapped, recreated, or deliberately excluded.
 
-Storeden validation should include storefront review because migration quality is not limited to back-office records. Themes, menus, static content, CMS Pages, landing pages, policy pages, product pages, category pages, metadata, URLs, redirects, and domain expectations can all affect launch quality.
+### Validate Demo Migration and Full Migration Results Differently <a href="#validate-demo-migration-and-full-migration-results-differently" id="validate-demo-migration-and-full-migration-results-differently"></a>
 
-Theme and content validation should focus on whether the new store communicates the right information and supports the intended customer journey. Source themes or custom frontend behavior should not be assumed to transfer as-is.
+Demo Migration validation is a decision checkpoint. Full Migration validation is launch readiness work. The same records can be reviewed in both stages, but the approval criteria should be different.
 
-SEO validation should prioritize the pages that already carry search, paid campaign, marketplace, or customer-service value. Check product URLs, category URLs, metadata, image text where relevant, redirects, canonical expectations, and domain behavior before launch readiness is approved.
+| Stage                  | Validation purpose                                                                | Approval question                                                      |
+| ---------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Demo Migration         | Test data interpretation, service scope, field alignment, and exception handling. | Is the selected approach suitable before Full Migration?               |
+| Full Migration         | Confirm the full approved scope has migrated and target-side review can proceed.  | Is the migrated store ready for final configuration and launch checks? |
+| Later migration action | Bring over new or changed data after the last migration step.                     | Did the new data arrive without breaking already-reviewed records?     |
+| Post-launch review     | Detect customer-facing, operational, or SEO issues after traffic moves.           | Are shoppers and staff experiencing the target store as intended?      |
 
-### Separate Migration Validation from Target Setup Testing <a href="#separate-migration-validation-from-target-setup-testing" id="separate-migration-validation-from-target-setup-testing"></a>
-
-Storeden validation should separate migrated-data acceptance from target-configuration readiness. Both matter, but they prove different things.
-
-| Review area            | Migration validation proves                                  | Target setup testing proves                                                            |
-| ---------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| Products               | Product data is present, structured, and meaningful.         | Products can be sold, displayed, managed, and synchronized as intended.                |
-| Orders                 | Historical order context remains readable and useful.        | New orders can be placed, paid, fulfilled, and tracked.                                |
-| Payments               | Historical payment labels and references are understandable. | TS Pay, gateways, wallets, or other payment methods are configured correctly.          |
-| Shipping and logistics | Historical shipping and tracking values are readable.        | Live shipping, logistics, tracking, and fulfillment workflows operate correctly.       |
-| Tax                    | Historical tax values remain understandable where migrated.  | New tax behavior is configured for the target selling model.                           |
-| Marketplaces           | Channel references are present where supported.              | Marketplace synchronization, publication, and channel rules are configured correctly.  |
-| Apps and integrations  | App or external references are preserved where included.     | Apps, APIs, ERP, accounting, or TeamSystem workflows operate in the target account.    |
-| Storefront and SEO     | Migrated content and metadata can be reviewed.               | Theme, navigation, redirects, domain, and search-continuity behavior are launch-ready. |
-
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
-
-Validation results should be classified by decision impact. Not every issue means the migration failed, but every issue should be assigned to the right next action.
-
-| Validation result            | Meaning                                                                                                                          | Recommended action                                                                              |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Expected and acceptable      | Data appears correctly and supports Storeden operation.                                                                          | Mark the area as accepted.                                                                      |
-| Minor correction needed      | Data is mostly usable, but a small wording, display, or mapping issue remains.                                                   | Correct through supported settings, mapping, or a targeted adjustment where available.          |
-| Target configuration needed  | Migrated data is acceptable, but live behavior depends on Storeden setup.                                                        | Complete and test target configuration before launch.                                           |
-| Add-on review needed         | Filtering, supported mapping, or supported data configuration would improve the outcome.                                         | Review Data Filter Add-on, Advanced Data Mapping, or Advanced Data Configure where appropriate. |
-| Custom Service review needed | Custom Platform source behavior, app data, external identifiers, custom logic, or unsupported transformation affects acceptance. | Move the requirement into Custom Service review.                                                |
-| Accepted exclusion           | The data or behavior is outside the agreed migration scope.                                                                      | Document the exclusion and confirm the business can proceed without it.                         |
+Validation should become narrower and more evidence-based as the project moves forward. Demo Migration may reveal scope questions. Full Migration should confirm approved scope. Later migration actions should focus on changes since the last approved migration state.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Storeden validation should prove that the migrated store can operate meaningfully inside a hosted multichannel commerce environment. Strong validation checks products, variants, inventory, discovery, customers, orders, payments, shipping, logistics, marketplaces, apps, APIs, TeamSystem references, storefront content, URLs, and SEO continuity.
+Storeden validation should prove usable commerce continuity. Products must be sellable, categories must support discovery, stock must make sense, customer and order history must support service, content and SEO must protect priority paths, and apps, APIs, marketplace channels, logistics, payments, and TeamSystem ecosystem references must be assigned to the right handling path.
 
-Before approving Full Migration results, compare the Demo Migration or final output against the records that matter most to the business. Use Live Chat when validation shows unclear mapping, missing business meaning, integration-sensitive data, or a difference between migrated history and live Storeden setup.
+A Storeden migration should pass validation when the merchant can distinguish migrated data from target configuration, confirm that representative records work in the target store, and explain any remaining gaps without guessing. That is the difference between a data transfer that looks complete and a launch that is operationally ready.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should be validated first after migrating to Storeden?**
+**What should be validated first after a Storeden Demo Migration?**
 
-Start with products, variants, inventory, categories, customers, and orders that represent real business complexity. Then review marketplace data, apps, integrations, storefront content, URLs, and SEO values that affect launch quality.
+Start with representative products, categories, inventory, customers, and orders. Then review content, priority URLs, marketplace-sensitive records, logistics references, payment labels, and integration identifiers. The goal is to confirm whether the selected migration approach is suitable before Full Migration.
 
-**Is record count enough to approve a Storeden migration?**
+**Does migrated order history prove that checkout is ready?**
 
-No. Record count only confirms that records exist. Storeden validation should also check whether those records remain meaningful for selling, order review, customer service, inventory management, marketplace activity, storefront discovery, and connected workflows.
+No. Migrated order history helps staff understand past purchases, payments, shipping labels, and customer relationships. Live checkout depends on Storeden payment, shipping, tax, notification, and logistics configuration.
 
-**Should payment and shipping setup be validated as part of migration?**
+**How should marketplace-related records be validated?**
 
-Historical payment and shipping values should be reviewed as migrated order context. Live payment, TS Pay, shipping, logistics, tracking, tax, and checkout behavior should be tested separately as Storeden target setup.
+Marketplace-related records should be checked separately from website catalog data. Product titles, categories, identifiers, availability assumptions, and channel rules may need target-side marketplace setup or Custom Service review if unsupported values must be preserved.
 
-**How should marketplace data be validated in Storeden?**
+**When should Custom Service be considered during validation?**
 
-Use products and orders that represent each important channel. Check whether channel identifiers, availability, order origin, inventory expectations, and marketplace-facing values are preserved, reconfigured, or outside the agreed scope.
+Custom Service should be considered when validation reveals required unsupported app data, external-system identifiers, TeamSystem ecosystem references, marketplace-specific data, bespoke product logic, or custom migration logic adjustment.
 
-**When does Storeden validation point to Custom Service?**
+**How should additional migration actions be validated?**
 
-Custom Service review is appropriate when validation depends on Custom Platform source logic, app-owned records, TeamSystem or ERP identifiers, marketplace-specific data, API or webhook workflows, custom product transformations, or custom migration logic adjustment.
+After any later migration action, compare new and changed records against previously approved records. Focus on recently added products, customers, orders, status changes, stock changes, and records that depend on apps or external systems.

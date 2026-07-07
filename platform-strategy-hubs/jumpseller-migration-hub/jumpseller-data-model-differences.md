@@ -1,145 +1,229 @@
 # Jumpseller Data Model Differences
 
-A migration to Jumpseller changes how store data is interpreted, displayed, managed, and validated. Source records do not simply move into matching fields with the same operational meaning. They become Jumpseller products, variants, categories, customers, orders, pages, checkout details, inventory records, redirects, theme-managed storefront elements, and app or integration dependencies inside a hosted SaaS platform.
+Migrating to Jumpseller is not only a matter of placing records into a new admin panel. The important question is how each record will behave once Jumpseller becomes the operating environment for catalog management, inventory control, checkout, order handling, discovery, and storefront presentation.
 
-The central data-model question is whether each source structure has a clear Jumpseller destination and whether the migrated result still supports how the business sells, fulfills, reviews history, and manages the store after launch. Product rows, customer records, and order history are only part of that answer. Catalog behavior, shopper selection, category discovery, checkout context, payment and fulfillment meaning, multilingual content, SEO paths, app-owned data, and theme presentation also need to make sense inside Jumpseller.
+Jumpseller is especially sensitive to the difference between catalog structure and storefront behavior. Product names, categories, options, variants, stock values, custom fields, product descriptions, order records, customer records, payment status, fulfillment status, and navigation settings all have operational meaning after migration. A source store may store similar information, but it may not use the same boundaries between product data, page content, checkout configuration, theme code, and app behavior.
+
+The goal of data-model review is to define what each source data element should become inside Jumpseller before the migration is treated as successful. A clean record count is not enough. Products must be usable, variants must represent real buyable combinations, categories must support discovery, customers and orders must preserve business context, and unsupported data must be routed through Add-ons or Custom Service instead of being forced into the wrong field.
 
 ### Product Data Becomes Jumpseller Catalog Structure <a href="#product-data-becomes-jumpseller-catalog-structure" id="product-data-becomes-jumpseller-catalog-structure"></a>
 
-Source platforms can describe products through simple products, configurable products, grouped items, bundles, product builders, downloadable goods, subscriptions, appointment-based products, modifiers, attributes, custom fields, and app-generated product logic. Jumpseller needs that source meaning to become a practical product catalog that can be managed through its product structure.
+Jumpseller product records carry both selling information and merchandising information. A product is not only a title and price. It can include images, categories, pricing, stock behavior, status, options, variants, custom fields, SEO fields, and descriptive content that influences both search and conversion.
 
-Core product information usually includes product name, description, SKU, price, images, stock, visibility, categories, SEO fields, and related settings. Those fields are only reliable when their meaning survives the move. A source product that used attributes mainly for search may not need the same target structure as a source product that used attributes for shopper selection, stock tracking, or price changes.
+A source product may arrive with fields such as SKU, name, short description, long description, regular price, sale price, brand, tags, category IDs, images, meta title, URL key, stock quantity, dimensions, product type, visibility, downloadable file, supplier information, and app-created attributes. During Jumpseller migration, each field needs a destination decision: standard product field, option/variant field, custom field, content block, SEO field, unsupported field, or Custom Service review.
 
-The safest data translation separates product meaning into clear groups:
+| Source product element       | Jumpseller interpretation                                    | Migration implication                                                   |
+| ---------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Product name                 | Primary product identity and discovery signal                | Needs cleanup if the source uses SKU-like or overly promotional names   |
+| Product images               | Product presentation assets, with possible variant image use | Image order and variant association need sampling after migration       |
+| Description                  | Product-page persuasion and information layer                | HTML-heavy descriptions may need display review in the active theme     |
+| Price and sale price         | Commerce pricing fields                                      | Source discount logic should not be confused with migrated price values |
+| Product status or visibility | Availability and storefront exposure                         | Source hidden, archived, draft, or disabled states need mapped meaning  |
+| SEO fields and URL data      | Search and continuity inputs                                 | Slugs, meta fields, and redirects need separate review where preserved  |
+| App-created attributes       | Extra operational or merchandising logic                     | May require Custom Service if no standard Jumpseller destination exists |
 
-| Source product meaning              | Jumpseller interpretation question                                                                                      | What the migrated result must prove                                                                                          |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Main product identity               | Does the item become a clear Jumpseller product with the correct name, description, SKU, price, images, and visibility? | Staff can recognize, edit, and publish the product without losing commercial meaning.                                        |
-| Shopper-selectable options          | Should the source structure become Jumpseller options, variants, or another target-side representation?                 | Shoppers can select the intended product choices and see the correct price, image, and availability behavior.                |
-| Source attributes or specifications | Are these selling options, product details, filter values, SEO information, or custom fields?                           | Attribute meaning is not flattened into generic text when it affects search, filtering, comparison, or purchasing decisions. |
-| Custom product fields               | Can Jumpseller store the value as a usable product field, content element, custom field, or target-side configuration?  | Important custom data remains visible or usable where staff and shoppers need it.                                            |
-| App-owned product logic             | Does the target platform natively support it, or does it depend on an app, integration, or Custom Service review?       | The migrated catalog does not imply support for behavior that is actually controlled outside the native product record.      |
+The practical risk is assuming that every source product field is equally important. In Jumpseller, some fields directly affect buying behavior, some affect discovery, and some are only internal reference data. Data-model review should separate these meanings before migration starts.
 
-### Options, Variants, Inputs, and Custom Product Meaning <a href="#options-variants-inputs-and-custom-product-meaning" id="options-variants-inputs-and-custom-product-meaning"></a>
+### Options, Variants, Custom Inputs, and Custom Fields Have Different Roles <a href="#options-variants-custom-inputs-and-custom-fields-have-different-roles" id="options-variants-custom-inputs-and-custom-fields-have-different-roles"></a>
 
-Variant translation is one of the most important Jumpseller data-model topics. Jumpseller product options can represent shopper selections such as size or color, and option combinations can generate variants with their own price, stock, SKU, and images. This makes Jumpseller suitable for many ordinary variant catalogs, but not every source product structure maps cleanly.
+Variant-heavy catalogs require special attention because Jumpseller separates several ideas that source platforms sometimes blur together. Product options can generate variants, and those variants can have their own SKU, price, stock, weight, and images. Other option types collect customer input or support customization without creating a stocked variant.
 
-Some source platforms separate options, variants, attributes, modifiers, personalization fields, file uploads, and custom line-item data. In Jumpseller, these meanings need careful classification. A color or size option that changes stock is different from a text field used for personalization. A file upload field is different from a variant image. A source modifier that adds an optional paid service is not the same as a stock-tracked variant.
+This distinction matters because a source store may use the same attribute system for size, color, engraving text, gift wrapping, file upload, bundle choice, or internal classification. In Jumpseller, each of these meanings needs a different handling path.
 
-Jumpseller also has a variant-count boundary. Product structures with very large combinations should be reviewed before migration because overly dense source configurations may not fit neatly into a single Jumpseller product. When a source product generates many combinations, the migration plan may need to split products, simplify choices, map some values as descriptive fields, or review whether custom handling is needed.
+| Source meaning                                  | Better Jumpseller interpretation         | Why it matters                                                           |
+| ----------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------ |
+| Size or color with separate stock               | Variant-generating option                | Each combination may need SKU, stock, price, and image validation        |
+| Personalization message                         | Text Input or Text Area style input      | It should not create artificial stock combinations                       |
+| Customer upload                                 | File input behavior                      | Needs checkout/product-page handling review, not only product import     |
+| Gift wrap or optional extra                     | Optional add-on or non-variant selection | It may affect price without becoming a core product variant              |
+| Brand, material, region, or technical attribute | Custom field where supported             | Useful for filtering or product information without multiplying variants |
+| Source app configurator data                    | Custom Service review                    | Complex configurators rarely map cleanly to standard product options     |
+
+The most important data-model question is whether a source attribute represents a real sellable unit, a customer choice, a product descriptor, a filterable attribute, or a custom workflow. If that distinction is skipped, Jumpseller may receive technically valid product data that creates confusing buying paths.
+
+### Variant Limits and Combination Logic Need Source-Side Translation <a href="#variant-limits-and-combination-logic-need-source-side-translation" id="variant-limits-and-combination-logic-need-source-side-translation"></a>
+
+Jumpseller supports structured product options and variants, but variant logic still needs careful translation. A source platform may allow a large number of combinations, app-based option rules, conditional option visibility, dependent selections, pricing formulas, or custom bundles. Jumpseller expects product options and variant combinations to follow its own operational model.
+
+A clean migration plan should identify products that have high variant counts, unusual option dependencies, or mixed option meanings before migration. These products are more likely to need mapping rules, manual cleanup, Add-ons, or Custom Service review.
+
+| Product pattern                  | Data-model concern                                 | Review priority                                                     |
+| -------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------- |
+| Size x color x material grid     | Combination count and stock accuracy               | Confirm all real variants are created and purchasable               |
+| Made-to-order product            | Customer input vs stock control                    | Avoid creating fake inventory variants                              |
+| Configurable product from an app | Conditional logic may not be native                | Review whether Custom Service is needed                             |
+| Bundle or kit                    | Relationship between parent product and components | Decide whether to migrate as product data, content, or custom logic |
+| Digital product                  | No physical inventory or shipping expectation      | Confirm delivery and checkout behavior after migration              |
+
+Variant review should be sample-based and risk-based. The goal is not only to count variants, but to confirm that the migrated product behaves like a real customer-facing product inside Jumpseller.
 
 ### Categories Are Product Organization, Not the Whole Storefront Path <a href="#categories-are-product-organization-not-the-whole-storefront-path" id="categories-are-product-organization-not-the-whole-storefront-path"></a>
 
-Categories in Jumpseller organize products, but they should not be treated as the entire storefront navigation model. A source platform may use categories as menus, collections, filters, landing pages, shop departments, brand pages, or SEO landing structures. Jumpseller category migration must preserve product grouping, but storefront discovery also depends on menus, theme layout, page links, product filters, and SEO paths.
+Jumpseller categories organize products and support browsing, filtering, navigation, and merchandising. However, source platforms may treat categories as multiple things at once: taxonomy, URL structure, menu placement, landing-page content, search facet, campaign grouping, and SEO asset.
 
-A migrated category can be technically present while still failing the business test if shoppers cannot find the products through the expected navigation route. Category meaning should therefore be interpreted in relation to product placement, storefront menus, filter expectations, and the target theme experience.
+When categories migrate, the key question is not only whether the category names exist. The question is whether category structure still supports product discovery in the new store.
 
-Source category hierarchies may also need simplification. Deep category trees from older platforms can become difficult to use in a hosted storefront if they were originally built around legacy URL structures, plugin behavior, or source-specific menu logic. The target outcome should be a clear Jumpseller catalog structure that supports browsing, search, and merchandising.
+| Source category role | Jumpseller planning question                                   | Validation signal                                        |
+| -------------------- | -------------------------------------------------------------- | -------------------------------------------------------- |
+| Product grouping     | Are products assigned to the correct categories?               | Category pages contain the expected products             |
+| Hierarchy            | Does parent-child structure still make sense?                  | Subcategories support natural browsing                   |
+| Menu placement       | Should the category appear in navigation?                      | Main menu and category menu are intentionally configured |
+| SEO landing page     | Are title, description, URL, and content preserved or rebuilt? | Search-facing category pages remain meaningful           |
+| Filter source        | Are filterable attributes category-relevant?                   | Customers can narrow products without confusion          |
+
+A source store may have categories that are useful for internal management but weak for customer browsing. Migration is a good moment to distinguish operational categorization from storefront navigation. Jumpseller can hold product-category relationships, but the merchant still needs to validate menu structure, category order, product sorting, and filter usefulness.
+
+### Product Filters Depend on Options and Custom Product Fields <a href="#product-filters-depend-on-options-and-custom-product-fields" id="product-filters-depend-on-options-and-custom-product-fields"></a>
+
+Jumpseller product filters can be shaped by product options and custom product fields. This makes attribute planning important. A field that looks minor in the source store may become part of the customer’s discovery experience after migration.
+
+For example, a clothing store may rely on color, size, material, gender, brand, and price filters. A parts store may rely on model compatibility, technical specification, year range, and manufacturer. A food store may rely on allergens, package size, diet type, and storage condition. These are not just data fields; they affect whether customers can narrow the catalog efficiently.
+
+| Attribute type        | Migration decision                           | Poor outcome if ignored                             |
+| --------------------- | -------------------------------------------- | --------------------------------------------------- |
+| True option           | Use as product option or variant structure   | Customers cannot choose the correct buyable version |
+| Filterable descriptor | Use as suitable custom field where supported | Customers cannot narrow the catalog effectively     |
+| Internal-only note    | Keep out of storefront-facing fields         | Sensitive or confusing content appears publicly     |
+| App-generated filter  | Review for target-side replacement           | Important discovery behavior disappears             |
+
+The data model should preserve the difference between what customers select, what customers filter by, what staff use internally, and what custom logic uses behind the scenes.
 
 ### Customer Data Becomes Account and Contact Context <a href="#customer-data-becomes-account-and-contact-context" id="customer-data-becomes-account-and-contact-context"></a>
 
-Customer migration into Jumpseller is not only a matter of names and email addresses. Customer records can include account status, addresses, phone numbers, purchase history links, customer categories or groups, marketing preferences, tax or billing identifiers, and password expectations.
+Customer data migration into Jumpseller should preserve identity, communication context, and commercial history where supported. The source store may contain customer accounts, billing addresses, shipping addresses, tags, groups, tax IDs, marketing consent, loyalty data, notes, wholesale status, account approval state, password hashes, and app-created segmentation.
 
-The meaning of customer data depends on how the target store will use it. Some migrated customer records support historical order review. Others support future customer login, repeat purchasing, segmentation, customer service, marketing, or B2B-style account management. These uses should not be assumed to be identical across platforms.
+Not all of those elements have the same destination. Some belong in standard customer fields, some belong in custom fields or notes if supported, some belong in external CRM systems, and some require Custom Service if they control business logic.
 
-Password continuity is especially sensitive. Source platforms store customer passwords using different hashing systems, and hosted SaaS platforms often do not accept legacy password hashes as direct reusable credentials. The migration result should set realistic expectations for customer login after launch and confirm whether customers will need reset or reactivation communication.
+| Customer source data   | Jumpseller meaning                             | Migration consideration                                                           |
+| ---------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------- |
+| Name and email         | Customer identity                              | Duplicate or shared emails need cleanup before migration                          |
+| Address records        | Billing and shipping context                   | Validate formatting and country/region consistency                                |
+| Customer group or type | Pricing, segmentation, or operational handling | Confirm whether target configuration supports the same business use               |
+| Marketing consent      | Communication permission                       | Do not treat as a generic tag without compliance review                           |
+| Password hash          | Authentication behavior                        | Passwords usually cannot be migrated as active login credentials across platforms |
+| Loyalty or app data    | External business logic                        | Custom Service or third-party integration review may be needed                    |
 
-Customer groups or categories also need interpretation. A source customer group may control pricing, tax handling, payment access, shipping eligibility, discounts, or wholesale behavior. If Jumpseller does not use the same group logic in the same way, the migrated field may preserve a label without preserving the original business rule.
+The key issue is continuity of customer recognition. A migrated customer record has value only if staff can identify the customer, understand their history, and serve them correctly in the new store.
 
 ### Orders Become Historical and Operational Records <a href="#orders-become-historical-and-operational-records" id="orders-become-historical-and-operational-records"></a>
 
-Order data in Jumpseller carries both historical and operational meaning. A migrated order should show what was purchased, who purchased it, where it was billed or shipped, how payment was recorded, how fulfillment was handled, what discounts or taxes were applied, and what happened during the order lifecycle.
+Orders carry commercial history, but they also reflect source-specific checkout, payment, fulfillment, tax, promotion, and shipping behavior. In Jumpseller, order records include payment and fulfillment statuses, purchased products, customer information, billing and shipping details, totals, discounts, taxes, and additional information where present.
 
-Source platforms vary widely in order structure. Some store payment state separately from order state. Some have custom fulfillment stages, invoice workflows, refund records, shipment packages, partial fulfillment, abandoned cart logic, manual order creation, or app-managed fulfillment history. Jumpseller interprets orders through its own payment, fulfillment, product, address, history, and administrative structures.
+Historical orders should be treated as reference records, not as proof that the new checkout has been configured. A migrated order can preserve past business context, but live payment gateways, shipping methods, fulfillment processes, and checkout rules still need target-side setup and testing.
 
-The migration plan should distinguish between preserving order history and reproducing source workflow behavior. Historical orders should remain readable and useful for staff. Live order processing, payment capture, fulfillment, shipping labels, customer notifications, invoices, and external fulfillment workflows may require target-side configuration or integration work beyond data migration.
+| Order component        | Data-model meaning                   | Validation focus                                                 |
+| ---------------------- | ------------------------------------ | ---------------------------------------------------------------- |
+| Order ID and date      | Historical reference                 | Confirm ordering, timestamps, and lookup logic                   |
+| Purchased items        | Commercial record of what was bought | Confirm product names, quantities, prices, discounts, and totals |
+| Customer details       | Order-level contact context          | Confirm email, phone, billing, and shipping fields               |
+| Payment status         | Historical payment state             | Do not confuse migrated status with gateway configuration        |
+| Fulfillment status     | Operational completion state         | Confirm fulfillment history is interpretable                     |
+| Additional information | Checkout-specific extra context      | Review whether source custom checkout fields have a destination  |
 
-### Payment, Shipping, Tax, and Fulfillment Meaning Changes <a href="#payment-shipping-tax-and-fulfillment-meaning-changes" id="payment-shipping-tax-and-fulfillment-meaning-changes"></a>
+The strongest validation sample includes orders across several statuses: paid, pending, canceled, fulfilled, partially fulfilled, discounted, taxed, shipped, and customized. If only simple paid orders are sampled, hidden data-model issues remain easy to miss.
 
-Payment and shipping methods are operating configurations, not just data labels. A source order may contain a historical payment method name, but the live Jumpseller store still needs payment providers to be configured inside the target environment. The same applies to shipping rates, shipping zones, fulfillment providers, pickup methods, manual payment instructions, and tax-related settings.
+### Inventory Becomes Stock Behavior, Not Just a Number <a href="#inventory-becomes-stock-behavior-not-just-a-number" id="inventory-becomes-stock-behavior-not-just-a-number"></a>
 
-A migration can preserve historical payment and shipping references while still requiring new target-side setup for future orders. This distinction matters because merchants sometimes expect payment, tax, shipping, and fulfillment behavior to transfer as if they were ordinary product fields. In practice, these areas must be re-confirmed inside Jumpseller’s hosted platform structure.
+Inventory data in Jumpseller has product and variant meaning. Stock can be tracked at product or variant level, and inventory can be adjusted through the inventory area, CSV, or integrations. Source inventory data should be reviewed for stock ownership, unlimited stock behavior, location logic, backorder rules, preorder handling, and ERP synchronization.
 
-For data-model planning, the key question is whether historical values remain understandable and whether future checkout behavior can be configured to support the business. A source-specific payment plugin or shipping module may not have a direct one-to-one target equivalent.
+| Source inventory pattern         | Jumpseller interpretation issue                              | Recommended review                                            |
+| -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
+| Variant-level stock              | Stock belongs to each buyable combination                    | Validate high-risk products by SKU and option combination     |
+| Unlimited or non-stocked product | Stock should not block purchasing                            | Confirm unlimited or digital-product behavior                 |
+| Multi-location stock             | Location-level meaning may need configuration or integration | Review whether target store supports the required stock model |
+| ERP-controlled stock             | Inventory may be integration-owned                           | Confirm post-migration sync path before launch                |
+| Negative or backorder logic      | Source behavior may not directly match                       | Define target checkout expectation separately                 |
 
-### Checkout Fields and Additional Order Information Need Separate Review <a href="#checkout-fields-and-additional-order-information-need-separate-review" id="checkout-fields-and-additional-order-information-need-separate-review"></a>
+Inventory should be validated through storefront behavior, not only admin values. A product with correct stock in the admin can still fail if the wrong variant is purchasable, unavailable, or displayed with incorrect option imagery.
 
-Checkout data can include standard customer fields, shipping and billing details, tax identifiers, delivery notes, business names, marketing consent, gift messages, delivery dates, pickup preferences, or custom checkout fields. Source platforms often store these details in different locations, including order attributes, customer attributes, checkout-field tables, plugin records, or custom database fields.
+### Content, Pages, Blog Posts, and SEO Fields Need Storefront Interpretation <a href="#content-pages-blog-posts-and-seo-fields-need-storefront-interpretation" id="content-pages-blog-posts-and-seo-fields-need-storefront-interpretation"></a>
 
-Jumpseller checkout has its own structure and field behavior. Migrated checkout-related data should be reviewed for whether it belongs to the customer record, the order record, additional order information, custom fields, or external-system handling. This prevents important operational data from being hidden, flattened, or placed where staff cannot use it after launch.
+Source content does not automatically become effective Jumpseller storefront content. Product descriptions, category descriptions, CMS pages, blog posts, meta titles, meta descriptions, URL slugs, image alt text, redirects, and internal links all require interpretation.
 
-Checkout design should not be confused with checkout data. A source checkout layout or script is not the same as a checkout field value. If the source store depended on custom checkout behavior, the data model should first identify what information must be preserved and then determine whether the target platform can capture and display it appropriately.
+For Next-Cart planning, CMS pages should be treated as **Trang Hệ thống quản lý nội dung (CMS pages)**&#x77;hen the source store contains pages such as About Us, Shipping Policy, Returns, Privacy Policy, Size Guide, brand pages, or campaign landing pages. These pages may be migrated as content records where supported, rebuilt manually, or handled through Custom Service depending on structure and platform compatibility.
 
-### Inventory Becomes Jumpseller Stock and Location Context <a href="#inventory-becomes-jumpseller-stock-and-location-context" id="inventory-becomes-jumpseller-stock-and-location-context"></a>
+| Content element      | Migration question                               | Quality signal                                           |
+| -------------------- | ------------------------------------------------ | -------------------------------------------------------- |
+| Product description  | Is formatting usable in Jumpseller theme?        | Description is readable, styled, and complete            |
+| Category description | Does it still support SEO and browsing?          | Category page has meaningful content and product context |
+| Blog post            | Does the content model map cleanly?              | Article content, images, and URLs remain usable          |
+| CMS page             | Should it migrate, be rebuilt, or be redesigned? | Policy and evergreen pages are easy to find and read     |
+| Redirect             | Is traffic continuity protected?                 | Priority legacy URLs resolve to the right destination    |
+| Internal link        | Does it point to a valid Jumpseller page?        | No source-domain or broken internal paths remain         |
 
-Inventory meaning depends on how the source store tracked stock. Some stores track stock at the product level. Others track stock by variant, warehouse, location, supplier, bundle component, fulfillment channel, or external inventory system. Jumpseller stock should be interpreted through the target product and variant structure, and stock-location needs should be confirmed against the target plan and operating model.
+Content migration should be planned as a customer-facing quality issue. A complete content record that renders poorly or links to old URLs is not truly successful.
 
-Variant-level stock is especially important. If the source store tracked inventory per size, color, or SKU combination, that meaning should remain attached to the correct Jumpseller variant after migration. If the source store tracked inventory through an ERP, marketplace, POS, or fulfillment app, the migration plan should separate migrated stock values from future synchronization behavior.
+### Payment, Shipping, Tax, and Fulfillment Data Must Be Separated From Configuration <a href="#payment-shipping-tax-and-fulfillment-data-must-be-separated-from-configuration" id="payment-shipping-tax-and-fulfillment-data-must-be-separated-from-configuration"></a>
 
-The migrated result should prove that staff can understand available stock, update stock safely, and connect future inventory workflows without confusing historical quantities with live operational control.
+Source data often includes payment method names, shipping method names, tax lines, discount rules, fulfillment states, and gateway transaction references. These fields help explain historical orders, but they are not the same as live Jumpseller configuration.
 
-### Content, Pages, Blog Posts, and SEO Fields Have Storefront Meaning <a href="#content-pages-blog-posts-and-seo-fields-have-storefront-meaning" id="content-pages-blog-posts-and-seo-fields-have-storefront-meaning"></a>
+This separation prevents one of the most common migration misunderstandings: assuming that historical order data proves the new checkout is ready. Migration can preserve order context, but payment gateways, shipping rates, fulfillment providers, taxes, and checkout settings must be configured and tested in Jumpseller.
 
-Jumpseller store content may include pages, legal pages, blog or article-style content, page categories, images, SEO titles, meta descriptions, permalinks, redirects, and custom templates. Source content should not be treated as generic text only. It may support trust pages, policies, SEO landing pages, product education, brand storytelling, and customer support.
+| Source record               | Historical data role            | Target-side setup role                             |
+| --------------------------- | ------------------------------- | -------------------------------------------------- |
+| Payment method on old order | Explains how the order was paid | Does not activate the gateway                      |
+| Shipping line on old order  | Explains what was charged       | Does not create shipping rules                     |
+| Tax amount                  | Preserves historical total      | Does not configure future tax behavior             |
+| Fulfillment status          | Preserves operational state     | Does not connect a carrier or fulfillment provider |
+| Discount on order           | Explains historical promotion   | Does not recreate all promotion rules              |
 
-CMS Pages and Blog Posts should be reviewed separately from products and categories. A product migration may be successful while content migration remains incomplete if legal pages, SEO metadata, internal links, media, or redirects are not handled correctly.
+Article 3 should keep this distinction clear: data meaning and configuration readiness are related, but they are not the same layer.
 
-SEO meaning also changes during migration. Source URLs, slugs, metadata, headings, redirects, and internal links may not have identical target structures. Jumpseller can support target-side SEO fields and redirects, but URL continuity still needs prioritization and validation. The goal is not to promise that every historical URL will behave exactly the same. The goal is to preserve priority paths, reduce avoidable loss, and make target pages understandable to shoppers and search engines.
+### Apps, API, Webhooks, and Theme Code Are Surrounding Meaning Layers <a href="#apps-api-webhooks-and-theme-code-are-surrounding-meaning-layers" id="apps-api-webhooks-and-theme-code-are-surrounding-meaning-layers"></a>
 
-### Multilingual and Multicurrency Data Need Target-Side Interpretation <a href="#multilingual-and-multicurrency-data-need-target-side-interpretation" id="multilingual-and-multicurrency-data-need-target-side-interpretation"></a>
+Jumpseller supports apps, APIs, webhooks, and theme-level customization. Source stores may rely on extensions, modules, scripts, checkout customizations, loyalty tools, ERP connectors, CRM syncing, marketplace feeds, custom fields, or custom templates. These elements may create or interpret data, but they do not automatically become standard migration fields.
 
-Jumpseller can support multiple languages and currencies, but multilingual and multicurrency migration is not automatic field duplication. Source platforms may store translations through language tables, duplicated products, translation plugins, localized URLs, language-specific categories, translated menus, or separate storefronts. Each of these models has different migration meaning.
+| Source dependency          | Data-model question                                 | Likely handling path                                                   |
+| -------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
+| App-created product fields | Are these descriptive fields or business rules?     | Add-ons for supported mapping; Custom Service for unsupported behavior |
+| ERP IDs                    | Are they required for future sync?                  | Preserve through suitable fields or Custom Service review              |
+| Theme code                 | Does it only display data, or does it create logic? | Rebuild or Custom Service depending on dependency                      |
+| Webhook workflow           | Does another system need migrated identifiers?      | Integration planning outside simple content transfer                   |
+| Marketplace feed data      | Does it map to Jumpseller or a sales-channel app?   | Review target-side channel configuration                               |
 
-Translated product names, descriptions, categories, pages, SEO fields, navigation labels, checkout labels, and policy pages should be interpreted as target-language content, not only as extra text fields. The validation question is whether shoppers in each intended language can understand the catalog, navigate the store, and complete the purchase path.
-
-Currency behavior also deserves separation from historical order currency. A migrated order may preserve the currency used at purchase, while live multicurrency selling depends on Jumpseller settings, payment availability, country behavior, and target storefront expectations.
-
-### Theme, Liquid, Apps, API, and Webhooks Are Surrounding Meaning Layers <a href="#theme-liquid-apps-api-and-webhooks-are-surrounding-meaning-layers" id="theme-liquid-apps-api-and-webhooks-are-surrounding-meaning-layers"></a>
-
-A Jumpseller migration does not recreate a source theme by moving product, customer, and order records. Storefront appearance and front-end behavior are controlled by the Jumpseller theme system, available theme editing, Liquid-based templates, theme components, content placement, apps, and integrations.
-
-This matters because some source data is only meaningful because of surrounding source code or app behavior. A product badge, comparison block, bundle widget, trust badge, installment-payment message, recommendation carousel, marketplace feed, invoice integration, or ERP status may appear to be part of the product or order record, but it may actually be owned by a source app, template, script, or external system.
-
-App-owned and integration-owned data should be classified before migration. Some values can become native Jumpseller product, customer, order, page, or SEO fields. Some can be recreated through target-side apps or theme work. Some require Custom Service because they need custom migration logic adjustment, outside-system identifiers, unsupported app records, or bespoke transformation.
+A useful migration plan identifies which data must be migrated, which data must be recreated, which behavior must be reconfigured, and which logic requires Custom Service.
 
 ### What Migrated Data Must Prove Inside Jumpseller <a href="#what-migrated-data-must-prove-inside-jumpseller" id="what-migrated-data-must-prove-inside-jumpseller"></a>
 
-Data-model validation should prove meaning, not only record presence. A migrated Jumpseller store should show that the main business structures are readable, usable, and positioned correctly inside the target platform.
+The end state of Article 3 is a proof model. Data-model success means the migrated records behave correctly in Jumpseller, not only that they exist.
 
-| Proof area                      | What should be checked                                                                                                           | Why it matters                                                                              |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Product meaning                 | Product identity, SKUs, prices, descriptions, images, SEO fields, visibility, and custom fields                                  | Confirms that the catalog is usable by staff and understandable to shoppers.                |
-| Variant meaning                 | Options, variant combinations, stock, price changes, variant images, and SKU behavior                                            | Confirms that shopper selection and inventory logic survived translation.                   |
-| Category and navigation meaning | Product placement, category hierarchy, menus, filters, and important landing paths                                               | Confirms that shoppers can find products, not only that categories exist.                   |
-| Customer meaning                | Accounts, addresses, categories, marketing fields, password expectations, and order links                                        | Confirms that customer records support future use and historical review.                    |
-| Order meaning                   | Products purchased, totals, discounts, taxes, payment status, fulfillment status, addresses, history, and additional information | Confirms that historical orders remain operationally readable.                              |
-| Content and SEO meaning         | CMS Pages, Blog Posts, legal pages, media, metadata, permalinks, redirects, and internal links                                   | Confirms that storefront trust, search visibility, and content continuity were not ignored. |
-| Integration meaning             | App-owned fields, external IDs, API/webhook data, sales-channel fields, and fulfillment links                                    | Confirms that external-system dependencies are not mistaken for ordinary native records.    |
+| Data area       | Required proof                                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Products        | Key products are visible, complete, correctly priced, and assigned to the right categories                         |
+| Variants        | Option combinations, SKU, stock, price, image, and availability are accurate                                       |
+| Categories      | Product groupings, hierarchy, menu exposure, and discovery behavior are intentional                                |
+| Customers       | Identity, addresses, account context, and segmentation are usable                                                  |
+| Orders          | Historical status, totals, line items, payment, fulfillment, address, and additional information are interpretable |
+| Inventory       | Stock behavior matches real buyable units and operational expectations                                             |
+| Content and SEO | Product/category/page content renders cleanly, with priority URLs and metadata reviewed                            |
+| Integrations    | External IDs, app fields, and custom logic are preserved only where intentionally supported                        |
+
+If a source data element cannot pass this proof model through standard fields, it should be classified before migration. That classification is what prevents avoidable cleanup after launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Jumpseller data-model differences matter because the platform organizes commerce through hosted SaaS structures rather than through the source store’s original database, extension stack, checkout code, or theme logic. A successful migration should make products, variants, categories, customers, orders, content, checkout context, inventory, URLs, languages, and integrations meaningful inside Jumpseller. The safest planning starts by identifying what each source record actually did for the business and then confirming where that meaning belongs in the Target Platform.
+Jumpseller migration requires a careful interpretation of data meaning. Products become structured selling records, options and variants control buyable combinations, categories shape discovery, inventory controls availability, customers preserve identity, orders preserve commercial history, and content determines whether the new storefront remains understandable.
 
-Before approving a migration to Jumpseller, review representative source samples for product variants, custom fields, categories, customer accounts, order statuses, checkout fields, inventory, content, redirects, languages, and app-owned data. If those samples reveal unsupported structures, external identifiers, source-specific app behavior, or transformation needs beyond standard service capability, discuss the scope with Next-Cart through Live Chat before relying on the migration result for launch planning.
+The strongest migration plans do not force every source field into the nearest available destination. They decide what each field means, how Jumpseller should use it, and whether standard migration, Add-ons, or Custom Service is the right handling path. That is how migrated data becomes usable, not merely transferred.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Are product options and product attributes always migrated the same way into Jumpseller?**
+**Are Jumpseller product options and custom fields the same thing?**
 
-No. Source platforms use options, attributes, specifications, modifiers, and custom fields for different purposes. Some values should become shopper-selectable options or variants in Jumpseller. Others may belong in descriptions, custom fields, filters, SEO fields, or target-side configuration. The correct mapping depends on what the source value does for shopping, stock, price, search, and staff management.
+No. Product options can represent customer selections and may generate variants, while custom fields are better suited for descriptive product information that does not create a distinct stocked product combination.
 
-**Why do variant-heavy catalogs need extra review before moving to Jumpseller?**
+**Why do variants need separate review during Jumpseller migration?**
 
-Variant-heavy catalogs need review because each option combination may affect stock, price, SKU, images, and availability. If the source platform uses complex configurators, bundles, modifiers, or large option combinations, the product may need restructuring before it can work cleanly inside Jumpseller’s product and variant model.
+Variants can carry SKU, stock, price, images, and availability. A migration can appear complete at product level while still failing at the variant level if option combinations or variant attributes are wrong.
 
-**Does migrating categories automatically recreate my old storefront navigation?**
+**Do migrated categories automatically recreate the old storefront navigation?**
 
-No. Categories organize products, but storefront navigation also depends on menus, theme layout, filters, content links, landing pages, and SEO paths. A migrated category may exist correctly while the storefront still needs navigation review before shoppers can browse products in the expected way.
+No. Categories can preserve product organization, but navigation menus, category ordering, filters, and storefront discovery should be reviewed separately inside Jumpseller.
 
-**Can historical orders move even if payment and shipping methods must be reconfigured?**
+**Can historical orders prove that payment and shipping are ready?**
 
-Yes. Historical order information and future checkout configuration are different concerns. A migration can preserve readable payment and shipping references in past orders, while the live Jumpseller store still needs payment gateways, shipping rules, fulfillment methods, and related settings configured for future sales.
+No. Historical orders preserve past payment, shipping, tax, and fulfillment context. Live checkout behavior still requires Jumpseller-side configuration and testing.
 
-**What happens to source app data or custom fields that do not have a clear Jumpseller destination?**
+**What happens to source app data that does not fit standard Jumpseller fields?**
 
-Data from source apps, custom tables, external systems, or unusual custom fields should be reviewed before migration. If the data cannot be handled through standard service capability or Standard Add-ons, it belongs under Custom Service review because custom interpretation, transformation, or migration logic adjustment is required.
+It should be reviewed before migration. Some app-created data can be mapped through supported fields or Add-ons, while unsupported app logic, external IDs, or custom behavior may require Custom Service.

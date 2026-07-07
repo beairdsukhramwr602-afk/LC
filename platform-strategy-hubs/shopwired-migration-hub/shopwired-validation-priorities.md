@@ -1,238 +1,216 @@
 # ShopWired Validation Priorities
 
-Validation for a ShopWired migration should prove that the target store works as a hosted commerce environment, not only that records appear in the admin area. Product count, customer count, and order count are useful checks, but they do not prove that variations, choices, extras, B2B rules, checkout behavior, apps, integrations, SEO fields, and storefront content have retained their business meaning.
+ShopWired migration validation should prove more than record presence. A product can appear in the admin area while still failing the selling model if its variations, choices, extras, bundles, stock behavior, product images, category placement, VAT handling, delivery assumptions, or storefront discovery path no longer work as customers expect.
 
-ShopWired validation should be built around the source store’s real complexity. A simple retail catalog may need a focused sample review. A store with product personalization, bundles, trade pricing, quotes, customer groups, external inventory, app-owned records, or marketplace identifiers needs a broader proof framework before the migration can be accepted confidently.
+The strongest validation approach treats ShopWired as a hosted commerce environment with configurable product structures, customer and trade account behavior, checkout settings, apps, API-connected workflows, and content/SEO dependencies. Count checks are useful, but they are only the starting point. The real question is whether the migrated store can be used by customers, support teams, fulfillment teams, finance users, and marketing teams without losing the commercial meaning of the original store.
 
-### What Validation Is Really Trying to Prove <a href="#what-validation-is-really-trying-to-prove" id="what-validation-is-really-trying-to-prove"></a>
+### What ShopWired Validation Should Prove <a href="#what-shopwired-validation-should-prove" id="what-shopwired-validation-should-prove"></a>
 
-Validation should answer whether the migrated ShopWired store can support the merchant’s real selling model. The target result should be reviewed from both the admin and storefront perspectives. A product can exist in the admin but still fail validation if customers cannot select the right choices, find the product in the right category, see correct pricing, or complete checkout through the expected flow.
+Validation should start with a proof model. A proof model prevents the review from becoming a loose checklist where every record is counted but the important behavior is missed. ShopWired stores often depend on product options, variation attributes, delivery rules, VAT treatment, customer identity, trade pricing, custom fields, apps, and external systems. These areas should be validated through representative samples, not only by reviewing totals.
 
-| Validation priority                      | What to check                                                                                                                 | What a pass should prove                                                                       |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Product meaning                          | Product names, SKUs, images, descriptions, categories, brands, stock, delivery settings, tax behavior, and SEO fields.        | Products remain recognizable, sellable, and correctly organized.                               |
-| Variations, choices, extras, and bundles | Product options, personalization, optional add-ons, grouped or bundled buying, digital products, and stock-sensitive choices. | Shopper-facing purchase choices still work as intended.                                        |
-| Product discovery                        | Categories, brands, menus, filters, search, featured areas, and channel visibility.                                           | Customers can find products through expected storefront paths.                                 |
-| Customers and B2B records                | Accounts, addresses, groups, trade customers, quotes, account terms, and order links.                                         | Customer segmentation and account meaning remain usable.                                       |
-| Historical orders                        | Products, totals, discounts, payment and delivery labels, tax values, fulfillment state, notes, and customer links.           | Orders remain readable for operations, finance, and customer service.                          |
-| Checkout boundaries                      | Historical checkout data versus live target payment, delivery, tax, customer-group, and app settings.                         | The team does not confuse migrated history with configured live checkout.                      |
-| Content and SEO                          | CMS Pages, menus, metadata, page names, redirects, high-value URLs, and theme-dependent content.                              | Important customer-entry paths are included, rebuilt, redirected, or accepted as out of scope. |
-| Apps and integrations                    | App-owned records, API data, webhooks, marketplace fields, external IDs, and automation dependencies.                         | Connected-system data is migrated, mapped, rebuilt, excluded, or escalated intentionally.      |
+| Validation question                                              | Why it matters in ShopWired                                                                                                                                | Evidence to collect                                                                                                     |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Can customers select and buy the intended product configuration? | Variations, choices, extras, and bundles may carry price, stock, image, delivery, tax, personalization, or fulfillment meaning.                            | Storefront screenshots, admin product settings, selected-option checkout tests, and sample product notes.               |
+| Are products discoverable through the expected paths?            | Categories, brands, filters, search, menus, featured areas, and SEO paths shape how customers reach products.                                              | Category/brand samples, search terms, menu checks, redirect checks, and landing-page review.                            |
+| Do customers and trade records retain useful identity?           | ShopWired customer records are email-centered, while trade customers and customer fields can affect pricing, account use, and B2B workflows.               | Customer samples, address checks, order links, group/trade evidence, and external reference notes.                      |
+| Is order history readable for operations?                        | Historical orders need enough context for customer service, fulfillment, finance, refunds, and management review.                                          | Varied order samples covering statuses, payment labels, delivery labels, tax, discounts, notes, refunds, and B2B cases. |
+| Is live checkout actually ready?                                 | Migrated order history does not configure payment gateways, delivery rates, tax settings, trade behavior, or checkout apps.                                | Target checkout test orders, payment tests, delivery-rate tests, VAT/tax checks, and customer-type tests.               |
+| Are apps and integrations accounted for?                         | App-owned data, webhooks, external IDs, inventory tools, accounting, marketplace feeds, CRM, and fulfillment systems may not be standard migration fields. | Integration inventory, owner decisions, mapping notes, and post-migration connection tests.                             |
+| Are content and SEO paths protected?                             | Products may migrate while CMS Pages, Blog Posts, menus, redirects, metadata, and theme-controlled areas remain incomplete.                                | Priority URL list, redirect samples, metadata review, content-page samples, and theme display checks.                   |
 
-### Validate Products as Customer-Facing Records <a href="#validate-products-as-customer-facing-records" id="validate-products-as-customer-facing-records"></a>
+A validation pass should mean the target store is usable in the areas that matter to the merchant. It should not mean every possible limitation has disappeared. Some items may be accepted limitations, manual cleanup tasks, app setup tasks, or Custom Service items. The important point is that each exception is identified, owned, and resolved or accepted intentionally.
 
-Product validation should include storefront review, not only admin review. In ShopWired, a product’s business meaning may depend on variations, choices, extras, bundles, categories, brands, stock, images, delivery settings, tax behavior, and SEO fields.
+### Validate Products as Sellable Records <a href="#validate-products-as-sellable-records" id="validate-products-as-sellable-records"></a>
 
-A strong product validation set should include:
+Product validation should prove that products remain sellable, not merely visible. A migrated ShopWired product should preserve enough business meaning for a shopper to understand the item, choose the right option, see the right price or availability, and proceed through the intended buying path.
 
-* a simple product with ordinary price, image, category, and description;
-* a product with variations such as size, color, or material;
-* a product with choices or extras that affect the buying experience;
-* a personalized or configurable product where customer input matters;
-* a bundled, grouped, kit, or package product if used;
-* a digital product or product with special fulfillment assumptions;
-* a product assigned to multiple categories;
-* a product connected to a brand-led browsing path;
-* a stock-sensitive product or product controlled by external inventory;
-* a product with important SEO fields or historical URL value.
+A strong product validation set should include simple products and complex products. The sample should not only include clean records. It should include products most likely to reveal migration risk: items with multiple images, stock-sensitive variants, assigned brands, multiple category placements, product descriptions with formatting, delivery assumptions, VAT-sensitive pricing, SEO fields, and products that depend on special selling behavior.
 
-A product sample passes validation when shoppers can understand, select, and purchase the product in the intended target context.
+| Product sample                           | What to validate                                                                                  | Pass condition                                                                              |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Simple retail product                    | Name, SKU, price, description, category, brand, image, stock, status, and SEO fields.             | The product is recognizable, correctly organized, and ready for ordinary storefront review. |
+| Product with several images              | Main image, gallery order, image quality, and image relationship to product selection.            | Images support the product presentation and do not create customer confusion.               |
+| Product assigned to multiple categories  | Category placement, breadcrumbs, menu reachability, and product visibility in each relevant area. | Customers can find the product through expected browsing paths.                             |
+| Product with delivery or tax sensitivity | Delivery setting, weight, VAT/tax treatment, and checkout impact where relevant.                  | The product does not pass validation until the live target setup is separately tested.      |
+| Product with external reference          | SKU, GTIN, MPN, supplier code, ERP reference, marketplace field, or custom identifier.            | External references are migrated, mapped, excluded, or escalated intentionally.             |
 
-### Validate Variations, Choices, Extras, and Special Product Behavior <a href="#validate-variations-choices-extras-and-special-product-behavior" id="validate-variations-choices-extras-and-special-product-behavior"></a>
+Product validation should be done in both the admin and storefront. Admin review proves the record exists and the main fields are understandable. Storefront review proves the result is customer-facing, selectable, and commercially usable.
 
-Product choice structures are one of the most important ShopWired validation areas. A migrated product can look correct at a summary level while losing important purchase behavior.
+### Validate Variations, Choices, Extras, and Product-Specific Buying Logic <a href="#validate-variations-choices-extras-and-product-specific-buying-logic" id="validate-variations-choices-extras-and-product-specific-buying-logic"></a>
 
-Validation should answer:
+ShopWired product structure deserves a separate validation track because product choices can change the buying experience. Product variations, choices, extras, bundles, personalization fields, and digital-product behavior are not interchangeable. A source product may use options that change price, stock, image, weight, VAT, delivery, fulfillment, or customer input. If those meanings are flattened into descriptions, the product may look complete while failing as a sellable item.
 
-| Product-choice area     | Validation question                                                                     |
-| ----------------------- | --------------------------------------------------------------------------------------- |
-| Variations              | Do selectable dimensions such as size, color, material, or style appear correctly?      |
-| Choices                 | Can shoppers select the intended options without losing pricing or fulfillment meaning? |
-| Extras                  | Are optional upgrades, add-ons, or personalization charges represented acceptably?      |
-| Bundles or kits         | Does the target store reflect the intended grouped buying behavior?                     |
-| Digital products        | Are delivery, access, or fulfillment expectations represented correctly?                |
-| Stock-sensitive options | Does the selected option reflect stock or availability expectations where relevant?     |
-| Product images          | Do images support the selected product choices where expected?                          |
+| Product-choice area                     | Validation focus                                                                                                                        | What a failure looks like                                                                            |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Variations                              | Option names, option values, generated combinations, published status, SKU, stock, price, image, weight, GTIN, MPN, and VAT attributes. | Customers can select options, but the selected result has wrong price, stock, image, or SKU meaning. |
+| Choices                                 | Shopper-facing choice behavior where the selection does not behave like a full variation.                                               | The choice appears as text but no longer supports the intended selection workflow.                   |
+| Extras                                  | Optional add-ons, upgrades, charges, or accessory-style selections.                                                                     | The add-on is missing, free when it should not be, or disconnected from the order context.           |
+| Personalization                         | Text input, file upload, engraving, made-to-order notes, or custom customer instructions.                                               | The customer cannot provide the required information at purchase time.                               |
+| Bundles and kits                        | Grouped buying logic, included items, pricing assumptions, and stock implications.                                                      | The product displays, but the bundle logic is incomplete or operationally misleading.                |
+| Digital or special fulfillment products | Delivery, access, download, or fulfillment expectations.                                                                                | Historical product data exists, but fulfillment behavior is not confirmed.                           |
 
-The main validation risk is flattening product choices into text. Text may preserve information, but it may not preserve buying behavior.
+A product-choice validation pass requires sample products that represent real complexity. If only simple products are reviewed, the validation set is not strong enough for a store that sells configurable products.
 
-### Validate Categories, Brands, and Storefront Discovery <a href="#validate-categories-brands-and-storefront-discovery" id="validate-categories-brands-and-storefront-discovery"></a>
+### Validate Categories, Brands, Search, Filters, and Storefront Discovery <a href="#validate-categories-brands-search-filters-and-storefront-discovery" id="validate-categories-brands-search-filters-and-storefront-discovery"></a>
 
-ShopWired validation should prove that products are findable in the ways customers will actually browse. Products should be reviewed through category pages, brand pages, menus, filters, search, featured sections, and channel-specific views where relevant.
+A ShopWired migration can preserve products but still weaken how customers find them. Discovery validation should check the storefront paths that drive buying behavior: categories, subcategories, brands, filters, menus, search, featured products, landing pages, and priority product groups.
 
-Validation should include:
+Discovery validation should not assume that category records alone recreate the customer journey. A store may rely on brand-led navigation, curated menus, filter-heavy product groups, SEO landing pages, or homepage modules. Those areas need validation because they determine whether migrated products are visible in the right customer context.
 
-* top-level categories;
-* deep subcategories;
-* products assigned to multiple categories;
-* brand-led browsing paths;
-* filter-heavy product groups;
-* search terms customers are likely to use;
-* homepage or featured-product areas;
-* channel-specific product visibility where relevant;
-* high-value category or brand landing pages.
+| Discovery area           | Review action                                                                | Pass condition                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Top-level categories     | Open the category page and review representative product placement.          | The category supports the expected browsing path.                               |
+| Deep subcategories       | Test products that sit several levels down.                                  | Products are reachable without broken hierarchy or missing navigation.          |
+| Brands                   | Review brand pages and brand assignments for priority products.              | Brand-led discovery remains useful.                                             |
+| Search                   | Test common customer search terms, SKU searches, and product-name fragments. | Search returns relevant products for realistic customer behavior.               |
+| Filters                  | Review filter-heavy product groups and specification-led browsing.           | Filters narrow products in a way that supports purchase decisions.              |
+| Menus and featured areas | Check curated navigation, homepage areas, and promotional product sections.  | Important products are not technically present but commercially hidden.         |
+| SEO landing paths        | Check high-value category, brand, product, and content URLs.                 | Priority traffic paths land on useful target destinations or planned redirects. |
 
-A common validation gap is checking whether products exist but not checking whether customers can reach them.
+Discovery should be validated after product data is reviewed. Product data can be correct in isolation while still failing commercial use if category, brand, search, filter, menu, or SEO context is incomplete.
 
-### Validate Customers, Groups, B2B, and Trade Behavior <a href="#validate-customers-groups-b2b-and-trade-behavior" id="validate-customers-groups-b2b-and-trade-behavior"></a>
+### Validate Customers, Customer Groups, Trade Records, and Account Meaning <a href="#validate-customers-customer-groups-trade-records-and-account-meaning" id="validate-customers-customer-groups-trade-records-and-account-meaning"></a>
 
-Customer validation should include the account structures that matter to the merchant’s sales model. Ordinary retail customers and trade customers may need different validation samples.
+Customer validation should prove that migrated customers remain useful for support, marketing, account review, and B2B operations. In ShopWired, customer identity and order relationships require careful review because customer records, email addresses, addresses, order links, customer types, trade accounts, and custom fields can affect how teams interpret the result.
 
-Strong customer samples include:
+The validation sample should include ordinary customers and edge cases. Stores with B2B or trade behavior should not validate customers only as retail accounts. Trade customers, approved customers, quote-related accounts, customer groups, special pricing references, external IDs, account terms, tax behavior, and payment/delivery restrictions may require target configuration, app review, or Custom Service scope.
 
-| Customer sample                  | What it proves                                                                               |
-| -------------------------------- | -------------------------------------------------------------------------------------------- |
-| Standard registered customer     | Account details, addresses, and order links remain understandable.                           |
-| Guest customer                   | Guest order history remains usable without being misread as full account behavior.           |
-| Customer with multiple addresses | Billing and delivery relationships remain interpretable.                                     |
-| Customer group member            | Segmentation is preserved where supported.                                                   |
-| Trade or B2B customer            | Account context, pricing expectations, and order behavior can be reviewed.                   |
-| Quote-related customer           | Quote and order relationships remain understandable where relevant.                          |
-| Customer with external ID        | CRM, ERP, accounting, POS, marketplace, or fulfillment references are traceable if required. |
+| Customer sample                   | What to check                                                                               | What a pass should prove                                                                     |
+| --------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Standard registered customer      | Name, email, account data, addresses, and linked order history.                             | The customer remains identifiable and useful for support.                                    |
+| Guest buyer                       | Order relationship and buyer identity without assuming full account behavior.               | Guest history is understandable and not misclassified.                                       |
+| Customer with multiple addresses  | Billing and delivery address handling.                                                      | Address relationships remain interpretable.                                                  |
+| Customer group member             | Group label, segmentation logic, pricing expectation, and target handling decision.         | Segmentation is preserved, configured, or intentionally separated from migration scope.      |
+| Trade customer                    | Account status, trade pricing expectation, payment terms, order behavior, and restrictions. | Trade behavior is not mistaken for ordinary customer migration.                              |
+| Customer with custom fields       | Field labels, business meaning, display/use location, and handling path.                    | Custom data remains usable or is escalated properly.                                         |
+| Customer with external references | ERP, CRM, POS, marketplace, accounting, or fulfillment identifiers.                         | External references are mapped, excluded, or handled through Custom Service where necessary. |
 
-B2B validation should separate customer data from target configuration. A group label may migrate, but pricing, quotes, approval, account terms, payment access, delivery rules, and tax behavior may need target setup, app support, or Custom Service review.
+Customer validation should also include permissions and practical admin use. Staff should be able to find customers, understand order history, and identify important account context without relying on the old platform for ordinary lookup.
 
-### Validate Historical Orders, Quotes, and Subscription Context <a href="#validate-historical-orders-quotes-and-subscription-context" id="validate-historical-orders-quotes-and-subscription-context"></a>
+### Validate Historical Orders, Refunds, Quotes, and Operational Context <a href="#validate-historical-orders-refunds-quotes-and-operational-context" id="validate-historical-orders-refunds-quotes-and-operational-context"></a>
 
-Historical orders should be validated for operational readability. The people who rely on order records after migration should be able to understand what happened without returning to the source store for ordinary reference.
+Order validation should focus on operational readability. The goal is not to prove that old checkout behavior has been recreated. The goal is to prove that historical order records can support customer service, fulfillment, finance, management review, returns, refunds, and post-migration questions.
 
-Validate samples with:
+A useful order sample includes normal and exception records. Clean paid-and-fulfilled orders are not enough. The sample should include unpaid, canceled, refunded, partially fulfilled, discounted, tax-sensitive, B2B, quote-related, manually adjusted, externally referenced, and note-heavy orders where those records exist.
 
-* paid and unpaid states;
-* fulfilled and unfulfilled orders;
-* refunded, canceled, or partially fulfilled orders;
-* discounts, vouchers, credits, or manual adjustments;
-* different payment and delivery method labels;
-* tax-sensitive totals;
-* customer and admin notes;
-* B2B or trade orders;
-* quote-related orders where relevant;
-* subscription-like or recurring-order context if used;
-* external-system or channel references where relevant.
+| Order type                           | Why it matters                      | Pass condition                                                                            |
+| ------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------- |
+| Paid and fulfilled order             | Baseline order-history readability. | Products, totals, customer, payment label, delivery label, and status are understandable. |
+| Unpaid, pending, or canceled order   | Exception state handling.           | Staff can tell what happened without misreading the record.                               |
+| Refunded or partially refunded order | Finance and support continuity.     | Refund context remains visible enough for post-migration review.                          |
+| Discounted or voucher order          | Promotion and total interpretation. | Discounts and totals remain explainable.                                                  |
+| B2B or trade order                   | Account-based selling context.      | Trade customer and pricing context is readable or intentionally separated.                |
+| Quote-related order                  | Quote-to-order relationship.        | The relationship is preserved, documented, rebuilt, or accepted as out of scope.          |
+| Order with external IDs              | Integration continuity.             | External references remain traceable or have a documented handling path.                  |
 
-A strong order sample passes when customer service, finance, fulfillment, and management users can understand the record well enough for post-migration reference.
+Historical order validation should involve the people who will use the records after launch. Customer service, finance, fulfillment, and operations may notice different problems. A record can look acceptable to a migration reviewer while still being unclear to the team that relies on it every day.
 
-### Validate Checkout, Delivery, Payment, and Tax Boundaries <a href="#validate-checkout-delivery-payment-and-tax-boundaries" id="validate-checkout-delivery-payment-and-tax-boundaries"></a>
+### Validate Checkout, Delivery, Payment, Tax, and Trade Boundaries <a href="#validate-checkout-delivery-payment-tax-and-trade-boundaries" id="validate-checkout-delivery-payment-tax-and-trade-boundaries"></a>
 
-Validation should clearly separate migrated historical data from live target setup. Past payment and delivery labels may migrate for order readability, but live checkout depends on ShopWired payment gateways, delivery rules, tax settings, customer groups, apps, and configuration.
+A ShopWired validation pass must separate migrated history from live target configuration. Historical order records may show payment labels, delivery labels, tax values, voucher codes, and customer context. That does not prove that new orders can be accepted through the target checkout.
 
-| Validation track                 | What it proves                                                                                                |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Historical payment labels        | Past orders remain understandable.                                                                            |
-| Live payment setup               | The target store can accept payment through configured methods.                                               |
-| Historical delivery labels       | Past delivery context remains readable.                                                                       |
-| Live delivery setup              | The target store can apply delivery rates, zones, rules, or carrier behavior as configured.                   |
-| Historical tax values            | Past tax context remains visible where supported.                                                             |
-| Live tax rules                   | New orders calculate tax according to target settings.                                                        |
-| Customer-group checkout behavior | B2B, trade, or restricted customers receive the intended target behavior.                                     |
-| Custom checkout fields           | Fields are classified as order notes, customer data, app-owned records, accepted exclusions, or custom scope. |
+Live checkout readiness should be tested separately. Payment gateways, delivery zones, delivery rates, collection options, VAT/tax settings, trade customer behavior, customer-group pricing, restricted products, quote workflows, apps, and custom checkout fields all need target-side confirmation where relevant.
 
-This distinction prevents a misleading pass. A migration can preserve historical checkout context while the target store still requires configuration before launch.
+| Boundary               | Historical validation                                        | Live target validation                                                                                 |
+| ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Payment                | Past payment labels and transaction context remain readable. | Configured payment methods accept realistic test orders.                                               |
+| Delivery               | Past delivery method labels remain understandable.           | Delivery zones, rates, inclusions, exclusions, and collection rules work for new orders.               |
+| Tax/VAT                | Historical tax values remain readable.                       | VAT or sales tax behavior calculates according to target settings.                                     |
+| Discounts and vouchers | Past discounts remain explainable.                           | New voucher or offer behavior works in the target checkout.                                            |
+| Trade customers        | Old B2B order context remains interpretable.                 | Trade pricing, visibility, account terms, payment rules, and delivery rules are configured and tested. |
+| Custom checkout fields | Old field data is classified and reviewed.                   | Required checkout fields are rebuilt, app-supported, excluded, or handled as custom scope.             |
 
-### Validate Content, SEO, and Theme-Dependent Storefront Areas <a href="#validate-content-seo-and-theme-dependent-storefront-areas" id="validate-content-seo-and-theme-dependent-storefront-areas"></a>
+This distinction prevents a misleading acceptance decision. A migration can preserve historical checkout context while the live target store still requires setup before launch.
 
-ShopWired storefront quality depends on content and presentation as well as commerce records. CMS Pages, menus, banners, theme-controlled sections, metadata, URLs, redirects, image text, and landing pages should be reviewed where they affect customer experience or search continuity.
+### Validate Apps, Custom Fields, API Connections, and External Systems <a href="#validate-apps-custom-fields-api-connections-and-external-systems" id="validate-apps-custom-fields-api-connections-and-external-systems"></a>
 
-Validation should cover:
+ShopWired validation should identify data and workflows owned by apps, custom fields, API connections, webhooks, feeds, external inventory systems, accounting platforms, CRM systems, POS systems, fulfillment tools, email services, marketplace channels, or reporting systems. These items may influence the target store even when they are not ordinary migration entities.
 
-* high-value product URLs;
-* high-value category and brand URLs;
-* CMS Pages and landing pages;
-* blog or content pages where relevant;
-* metadata for priority pages;
-* menus and navigation paths;
-* homepage or campaign sections;
-* policy, delivery, returns, B2B, or support pages;
-* image alt text where important;
-* redirects for important legacy URLs;
-* theme presentation that affects product or category display.
+The validation question is not simply whether an integration is connected. It is whether the data or workflow that integration needs has been preserved, rebuilt, mapped, excluded, or escalated. External IDs are especially important because they may link migrated records to downstream systems.
 
-Not every old page needs equal review. Priority should go to pages that affect search, conversion, customer trust, B2B onboarding, support, or launch quality.
+| Connected area        | Validation focus                                                                                      | Handling path                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Custom fields         | Field labels, values, business meaning, display location, and operational use.                        | Standard migration, Add-on handling, Custom Service review, manual rebuild, or accepted exclusion. |
+| Apps                  | App-owned records, storefront behavior, checkout behavior, B2B logic, forms, feeds, or customer data. | Reinstall/configure, migrate where supported, rebuild, exclude, or escalate.                       |
+| API connections       | Product, customer, order, stock, price, or status records used by external systems.                   | Reconnect credentials, map IDs, test endpoints, or document changed workflow.                      |
+| Webhooks              | Triggered workflows for fulfillment, accounting, CRM, email, inventory, or reporting.                 | Recreate and test triggers after target setup.                                                     |
+| Marketplace/feed data | Channel identifiers, product attributes, taxonomies, and feed-specific fields.                        | Map, rebuild, validate feed output, or exclude intentionally.                                      |
+| ERP/POS/accounting    | IDs, stock, customer, order, tax, or fulfillment references.                                          | Preserve references where possible or plan post-migration reconciliation.                          |
 
-### Validate Apps, API, Webhooks, and Integration Data <a href="#validate-apps-api-webhooks-and-integration-data" id="validate-apps-api-webhooks-and-integration-data"></a>
+Custom Service should be considered when the required result depends on unsupported app data, bespoke field transformation, external identifier preservation, custom migration logic, or behavior that standard platform mapping cannot represent safely.
 
-Apps and integrations should be validated as scope outcomes. If a source store relied on apps, API connections, webhooks, marketplaces, accounting systems, fulfillment tools, or external inventory, the migration should clarify what happened to that data or workflow.
+### Validate Content, SEO, Redirects, and Theme-Dependent Areas <a href="#validate-content-seo-redirects-and-theme-dependent-areas" id="validate-content-seo-redirects-and-theme-dependent-areas"></a>
 
-For each important app or integration, classify the outcome:
+Content and SEO validation should be part of acceptance, not a late launch task. ShopWired stores may depend on product pages, category pages, brand pages, CMS Pages, Blog Posts, menus, banners, landing pages, metadata, canonical behavior, redirects, images, files, and theme-controlled sections. If those areas are not validated, a store can pass data review while still losing traffic, trust, or conversion context.
 
-| Classification | Meaning                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------- |
-| Migrated       | The required data is included and appears acceptably in ShopWired.                      |
-| Mapped         | Data is preserved through supported mapping or agreed field treatment.                  |
-| Reconfigured   | The behavior belongs to target setup rather than migrated data.                         |
-| Rebuilt        | The feature or workflow must be recreated after migration.                              |
-| Excluded       | The data is intentionally out of scope and accepted as such.                            |
-| Escalated      | Custom Service review is needed because the data or workflow requires bespoke handling. |
+| Content or SEO area       | What to validate                                                                      | Pass condition                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Product URLs              | Priority product paths, SEO titles, descriptions, and redirects.                      | Important product traffic lands on useful target destinations.                      |
+| Category and brand URLs   | High-value category and brand paths.                                                  | Discovery and SEO continuity are protected or intentionally redirected.             |
+| CMS Pages                 | Policy pages, delivery pages, support pages, B2B pages, and trust content.            | Critical non-product content is migrated, rebuilt, or accepted as out of scope.     |
+| Blog Posts                | Articles that drive organic traffic or customer education.                            | Priority posts are preserved, redirected, rebuilt, or intentionally excluded.       |
+| Menus and landing pages   | Curated navigation and campaign pages.                                                | Customer journeys are not broken by missing presentation areas.                     |
+| Metadata and redirects    | SEO fields, page titles, meta descriptions, canonical assumptions, and 301 redirects. | Search and referral paths have documented target handling.                          |
+| Theme-controlled sections | Homepage modules, banners, product blocks, and custom display areas.                  | Design-dependent content is rebuilt or accepted as theme work, not silently missed. |
 
-This classification avoids vague acceptance. It creates a concrete decision for app-owned and integration-sensitive areas.
+SEO validation should prioritize business value. Not every historical URL deserves the same attention. High-traffic, high-revenue, externally linked, campaign-driven, or support-critical paths should be sampled first.
 
-### Strong Validation Samples for ShopWired <a href="#strong-validation-samples-for-shopwired" id="strong-validation-samples-for-shopwired"></a>
+### Validate Demo Migration and Full Migration Evidence <a href="#validate-demo-migration-and-full-migration-evidence" id="validate-demo-migration-and-full-migration-evidence"></a>
 
-A strong validation sample should expose real complexity. It should not be limited to records that are easiest to migrate.
+Demo Migration should be used as an evidence-building stage. It should not be treated as a preview of only simple records. The sample should include products, customers, orders, content, custom fields, trade behavior, and integration-sensitive records that represent the real migration risk.
 
-| Sample category              | Strong sample choice                                                                                | What it proves                                  |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Product                      | Product with variations, choices, extras, images, categories, stock, delivery, tax, and SEO fields. | Product meaning survives target translation.    |
-| Category or brand            | Deep category or brand page with customer-facing browsing value.                                    | Discovery remains usable.                       |
-| B2B customer                 | Trade customer with group, quote, pricing, or account-term expectations.                            | Customer segmentation remains interpretable.    |
-| Order                        | Order with payment, delivery, tax, discount, fulfillment, notes, and customer context.              | Historical order meaning remains readable.      |
-| Content page                 | Important CMS Page, policy page, or landing page.                                                   | Storefront content continuity is accounted for. |
-| SEO path                     | Product, category, brand, or content URL with traffic or backlink value.                            | Priority URL continuity is testable.            |
-| App-owned record             | Record controlled by an app or platform extension.                                                  | Extension scope is understood.                  |
-| Integration-sensitive record | Record with ERP, CRM, POS, accounting, fulfillment, marketplace, or channel ID.                     | External references are handled intentionally.  |
+Full Migration should then be validated against a launch-readiness checklist. If the configuration changes after Demo Migration, the validation plan should change with it. If additional data is migrated later using a continued or new migration configuration, the changed scope should be revalidated rather than assumed to inherit the earlier pass.
 
-### What Often Gets Missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
+| Evidence stage                 | What to prove                                                             | Decision value                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Demo Migration                 | Representative records migrate with enough meaning to expose risks early. | Confirms whether scope, mapping, Add-ons, or Custom Service decisions need adjustment.   |
+| Pre-Full Migration review      | Source cleanup, target setup, mapping, and custom requirements are ready. | Reduces avoidable migration defects and late-stage scope confusion.                      |
+| Full Migration validation      | Canonical target data supports launch and operations.                     | Confirms readiness for publication, customer access, and business use.                   |
+| Continued migration validation | New or changed data lands correctly after the main migration.             | Prevents post-launch records from being accepted without proof.                          |
+| New-configuration validation   | A different configuration produces the intended result.                   | Confirms that changed mapping, filtering, or target handling did not create new defects. |
 
-Common validation gaps include:
+Entity Points should be reviewed when repeated or later migration activity is part of the plan. If the same entity is migrated again under a new paid execution, Entity Points may be consumed again. That should be accounted for before approving repeated runs.
 
-* products that exist but have broken or flattened buying choices;
-* variations that appear but no longer affect price, stock, image, or fulfillment as expected;
-* extras or personalization fields lost as plain text;
-* B2B customers migrated without pricing, quote, or account-rule review;
-* historical orders accepted without delivery, payment, tax, note, or fulfillment context;
-* past payment and delivery labels mistaken for live checkout setup;
-* CMS Pages and menus excluded from launch review;
-* SEO URLs and metadata sampled too late;
-* app-owned records assumed to be ordinary platform data;
-* API, webhook, marketplace, accounting, fulfillment, or inventory references ignored until connected workflows fail.
+### Build a ShopWired Validation Report <a href="#build-a-shopwired-validation-report" id="build-a-shopwired-validation-report"></a>
 
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
+A validation report should convert review findings into decisions. Without a report, teams often lose the distinction between migration defects, target setup tasks, app work, manual cleanup, accepted limitations, and custom requirements.
 
-Validation should lead to a decision. Each issue should be classified so the team knows whether to continue, configure, map, filter, escalate, or reject the result.
+| Report field     | Purpose                                                                                                                                                                           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sample or record | Identifies the product, variation, customer, order, category, brand, CMS Page, app record, redirect, or integration item under review.                                            |
+| Expected result  | Describes the intended ShopWired outcome in business terms.                                                                                                                       |
+| Observed result  | Records what the reviewer actually sees in the target store.                                                                                                                      |
+| Severity         | Separates launch blockers from cleanup items, accepted limitations, and post-launch improvements.                                                                                 |
+| Handling path    | Classifies the item as migration correction, Add-on adjustment, Custom Service review, ShopWired setup, app/integration work, theme work, manual cleanup, or accepted limitation. |
+| Owner            | Assigns responsibility to the merchant, Next-Cart, ShopWired setup owner, app partner, integration owner, or external technical team.                                             |
+| Status           | Confirms whether the item is open, corrected, deferred, accepted, or launch-ready.                                                                                                |
 
-| Result                                    | Meaning                                                                                         | Next decision                                                                       |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Pass                                      | The sample behaves acceptably and no material migration issue is found.                         | Continue reviewing the next sample group.                                           |
-| Pass with configuration note              | Migrated data is acceptable, but target settings, apps, theme, or content work is still needed. | Assign the item to target setup or launch preparation.                              |
-| Needs mapping or configuration adjustment | Data exists but does not carry the right target meaning.                                        | Review Advanced Data Mapping or Advanced Data Configure where supported.            |
-| Needs filtering clarification             | Records migrated that should not move, or expected records were not selected.                   | Review Data Filter Add-on logic where appropriate.                                  |
-| Needs Custom Service review               | Custom, app-owned, integration-owned, or unsupported data cannot be handled safely as standard. | Escalate before Full Migration or launch acceptance.                                |
-| Not accepted                              | The result does not support business use.                                                       | Do not approve the migration result until the gap is resolved or formally accepted. |
+The validation report should be reviewed before final acceptance. A clean report is less important than a clear one. Some accepted limitations are reasonable, but unresolved ambiguity is not.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-ShopWired validation should prove that the migrated target store can support real selling behavior. Products, variations, choices, extras, categories, brands, B2B customers, orders, checkout boundaries, content, SEO, apps, API connections, webhooks, and integrations should be reviewed as connected parts of the target store.
+ShopWired validation should prove that migrated data still supports the store’s commercial model. Products need to remain sellable, product-choice structures need to work from the storefront, customers and trade records need to retain useful meaning, orders need to remain operationally readable, checkout needs separate live testing, integrations need ownership decisions, and content or SEO paths need deliberate handling.
 
-Use Demo Migration and post-migration review to test records that expose real business complexity. If validation shows gaps in product choices, customer groups, B2B behavior, order context, SEO, app-owned data, or integration identifiers, resolve them through configuration, Add-ons, Custom Service review, or accepted exclusions before approving Full Migration or launch readiness.
+A strong validation process does not rely on counts alone. It uses representative samples, storefront checks, admin review, target setup tests, integration review, and a clear validation report. That approach gives the merchant a reliable basis for deciding whether the migration result is ready for launch or still needs correction, configuration, custom handling, or accepted-scope decisions.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should I validate first after migrating to ShopWired?**
+**What should be validated first in a ShopWired migration?**
 
-Start with complex products, customer groups, B2B or trade customers, varied orders, high-value URLs, CMS Pages, app-owned records, and integration-sensitive identifiers. These samples reveal more than simple record totals.
+Start with the records that carry the most business meaning: complex products, variations, choices, extras, bundles, trade customers, high-value orders, checkout-sensitive products, important categories, and priority SEO paths. These samples reveal more risk than simple record counts.
 
-**Is matching the product count enough to approve a ShopWired migration?**
+**Why are product variations and choices important in ShopWired validation?**
 
-No. Product count only confirms presence. Validation should also prove that variations, choices, extras, categories, brands, stock, SEO fields, and storefront discovery remain usable.
+They affect the customer buying experience. A product may appear correct at a summary level while its options, stock, price, image, VAT, personalization, or bundle behavior no longer works as intended.
 
-**Why should B2B records be validated separately?**
+**Are historical orders enough to prove checkout readiness?**
 
-B2B records can depend on customer groups, pricing, quotes, approval, payment access, delivery rules, account terms, and tax behavior. Those behaviors may be target configuration, app-supported behavior, or Custom Service scope.
+No. Historical orders prove past context only. Live checkout depends on ShopWired payment methods, delivery rules, tax settings, customer-group behavior, apps, and target configuration, so it needs separate testing.
 
-**Do migrated orders prove that ShopWired checkout is ready?**
+**How should trade customers be validated?**
 
-No. Migrated order history can preserve past payment and delivery context, but live checkout readiness depends on target payment, delivery, tax, app, and customer-group settings.
+Trade customers should be reviewed as business accounts, not only as customer records. Pricing expectations, account status, payment terms, delivery rules, quote behavior, visibility, tax handling, and custom fields should be configured, migrated, rebuilt, excluded, or escalated intentionally.
 
-**How should app-owned or integration-owned data be validated?**
+**Do Add-ons and Custom Service remove the need for validation?**
 
-Each app or integration should be classified as migrated, mapped, reconfigured, rebuilt, excluded, or escalated. If the data needs bespoke handling, Custom Service review should be considered before Full Migration is accepted.
+No. Add-ons and Custom Service can expand or adapt the migration scope, but the target result still needs validation. The merchant should verify that the supported configuration, custom handling, and final records meet the intended ShopWired outcome.<br>

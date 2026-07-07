@@ -1,253 +1,173 @@
 # Cafe24 Pre-Migration Preparation Checklist
 
-Cafe24 migration preparation should make the future store easier to interpret before data starts moving. A Cafe24 project can involve more than product, customer, and order transfer because storefront design, modules, apps, APIs, webhooks, payment and shipping behavior, analytics, and integration services may all affect how the migrated store operates after launch.
+Cafe24 migration preparation should begin with evidence, not assumptions. A store may look ready because products, customers, and orders can be exported from the current system, but Cafe24 migration quality depends on whether those records can be interpreted inside Cafe24’s commerce, storefront, member, order, app, API, and market-configuration environment.
 
-The goal of preparation is not to configure every part of the Target Platform in advance. The goal is to identify what must be preserved, what should be rebuilt differently, what depends on Cafe24 configuration, and what requires deeper review before the migration process is treated as straightforward.
+The preparation goal is to separate what can move as structured data from what must be configured, rebuilt, mapped, redesigned, reconnected, or reviewed as a custom requirement. That separation protects the migration from a common planning mistake: treating every visible feature of the source store as ordinary data. Cafe24 can support rich commerce structures, member behavior, product options, variants, order operations, Smart Design work, apps, webhooks, and API-managed workflows, but those areas need different preparation evidence.
 
-A strong preparation checklist should answer a practical question: when the Demo Migration is reviewed, will the merchant know what a good Cafe24 result is supposed to look like?
+A good Cafe24 preparation process should leave the team with a clean source dataset, a realistic target-store structure, a clear list of configuration responsibilities, and representative records for Demo Migration review. The checklist below is designed to help merchants prepare that evidence before migration execution.
 
-### What Preparation Is For <a href="#what-preparation-is-for" id="what-preparation-is-for"></a>
+### Preparation Starts With Scope Separation <a href="#preparation-starts-with-scope-separation" id="preparation-starts-with-scope-separation"></a>
 
-Cafe24 preparation is most useful when it separates ordinary records from the operating context around those records. Products, categories, customers, and orders may be present after migration, but the result still needs to make sense inside Cafe24’s storefront, design, app, API, payment, shipping, and data ecosystem.
+Before reviewing individual data entities, define the boundaries of the Cafe24 migration. The most important preparation question is not only “what data do we have?” It is “what does each part of the store need to become in Cafe24?”
 
-Preparation should help the merchant define:
+| Preparation layer              | What to clarify before migration                                                                                           | Why it matters in Cafe24                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Structured commerce data       | Products, categories, product options, variants, customers, orders, coupons, and related records that should move as data. | These records need clean mapping so they remain usable inside Cafe24 administration and storefront workflows.       |
+| Store configuration            | Payment, shipping, tax, order, security, member, coupon, SEO, redirect, and storefront settings.                           | Configuration controls how the new store behaves after launch and should not be assumed to follow migrated records. |
+| Storefront and design behavior | Smart Design work, theme behavior, product-page layout, menus, modules, scripts, and content presentation.                 | Design and storefront behavior often need rebuild or implementation work separate from data migration.              |
+| App and integration behavior   | Apps, APIs, webhooks, Data Bridge, analytics, ERP, fulfillment, marketplace, or external reporting workflows.              | Connected systems may depend on identifiers, event flows, or custom fields that need special review.                |
+| Custom business logic          | Custom pricing, membership benefits, market rules, checkout changes, order processing, or source-specific behavior.        | Custom behavior may require Custom Service rather than ordinary migration settings.                                 |
 
-| Preparation area                    | Why it matters before migration                                                                                                                                                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Storefront and market structure     | Cafe24 may be used for market-specific storefronts, design experiences, or selling contexts that need clear ownership before data is interpreted.                                   |
-| Product and category meaning        | Product records, options, categories, display logic, and merchandising structure need to support how buyers will browse and purchase after launch.                                  |
-| Design and module dependency        | Smart Design, Smart Themes, modules, web components, and scripts may shape what customers see beyond the migrated records themselves.                                               |
-| App-owned behavior                  | Discount apps, shipping fee apps, payment gateway apps, and other app behavior can affect outcomes that standard record migration should not be expected to recreate automatically. |
-| API, webhook, and data dependencies | API-connected systems, Data Bridge workflows, analytics feeds, and webhooks may control business outcomes outside ordinary article-level data.                                      |
-| Order and customer context          | Order history must remain useful for service, accounting, fulfillment, and customer review, not merely appear as copied historical records.                                         |
-| Custom source interpretation        | Custom Platform sources, modified source platforms, custom fields, or third-party data need to be explained before they can be translated safely.                                   |
+This scope separation should be completed before Full Migration. It also helps decide what Demo Migration must test. If difficult records are not identified early, the sample migration may look successful while avoiding the data that actually controls launch quality.
 
-The preparation work should give Next-Cart and the merchant a shared understanding of the expected result. Without that shared understanding, Demo Migration may show records that appear complete while still missing the context needed for launch decisions.
+### Prepare the Product Catalog <a href="#prepare-the-product-catalog" id="prepare-the-product-catalog"></a>
 
-### Numbered Preparation Priorities <a href="#numbered-preparation-priorities" id="numbered-preparation-priorities"></a>
+Cafe24 catalog preparation should focus on product usability, not just product availability. The source products should be cleaned and classified so migrated records can support browsing, selection, checkout, fulfillment, reporting, and future administration.
 
-#### 1. Define the role of Cafe24 in the future operating model <a href="#id-1-define-the-role-of-cafe24-in-the-future-operating-model" id="id-1-define-the-role-of-cafe24-in-the-future-operating-model"></a>
+Start by reviewing product identity fields. Product names, SKUs, source product identifiers, slugs or SEO references, images, descriptions, brand or manufacturer details, display status, prices, sale prices, tax-related fields, tags, labels, and internal notes should be checked for accuracy and consistency. Duplicates, discontinued products, hidden products, archived products, and test records should be marked before migration so the team does not waste Entity Points or validation time on records that should not become part of the new Cafe24 store.
 
-Before migration, the merchant should clarify what Cafe24 is expected to become after launch. Some stores move to Cafe24 mainly for hosted e-commerce operations and storefront management. Others depend on Cafe24 because of its app ecosystem, design structure, APIs, Data Bridge, webhooks, or market-specific selling plans.
+Product option and variant preparation deserves special attention. Cafe24 product resources include product options, product variants, and variant inventory, which means source option logic should be reviewed as a purchasable structure rather than just display text. A source store that used size and color combinations is different from one that used bundles, conditional product builders, add-on selections, subscription choices, or custom scripts to create choices.
 
-The preparation question is not only “what data should move?” It is “what role should Cafe24 play in the business after migration?”
+| Catalog evidence to prepare        | What to check                                                                                                            | Cafe24 preparation outcome                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Product inventory list             | Active, inactive, hidden, archived, duplicate, test, and discontinued records.                                           | Confirms which Products should migrate and which should be excluded or filtered.                     |
+| Product identifiers                | SKUs, product IDs, variant IDs, supplier IDs, barcodes, external IDs, or ERP references.                                 | Helps preserve operational matching for fulfillment, reporting, and connected systems.               |
+| Product descriptions and images    | HTML content, embedded media, image quality, broken image URLs, missing alt context, and unsupported layout assumptions. | Prevents product detail pages from appearing incomplete or visually broken after migration.          |
+| Options and variants               | Option names, values, combinations, SKU assignment, inventory handling, prices, and display status.                      | Confirms how customer choices should become Cafe24 product options, variants, and variant inventory. |
+| Custom fields and extra attributes | Source-specific product attributes, app-created fields, metafields, technical specifications, and merchandising labels.  | Identifies which fields can be mapped, which need Add-ons, and which require Custom Service review.  |
+| Category assignment                | Primary categories, secondary categories, product-list placement, menus, and curated collections.                        | Preserves product discoverability instead of only moving product records.                            |
 
-A merchant should identify whether Cafe24 will be used as:
+The goal is to make catalog decisions before migration execution. If the source catalog contains messy option naming, inconsistent SKU conventions, or app-owned product fields, the cleanup should happen before relying on Demo Migration as evidence.
 
-* the primary storefront and order-management environment
-* a market-specific storefront for a certain region or buyer audience
-* a storefront that depends on design customization and modules
-* an app-connected commerce environment
-* a store connected to external fulfillment, analytics, marketing, or operational systems
-* a Target Platform that must receive data from a custom or heavily modified Source Platform
+### Prepare Categories, Navigation, and SEO Paths <a href="#prepare-categories-navigation-and-seo-paths" id="prepare-categories-navigation-and-seo-paths"></a>
 
-This role definition helps prevent later confusion. A simple storefront migration requires different preparation than a Cafe24 migration where apps, APIs, shipping behavior, payment gateways, and design modules are central to the expected result.
+Cafe24 preparation should treat categories and storefront paths as migration-critical. Categories are not only administrative labels. They influence how products are discovered, how menus are built, how product lists are understood, and how customers reach purchase pages.
 
-#### 2. Document storefront, language, market, and selling-context requirements <a href="#id-2-document-storefront-language-market-and-selling-context-requirements" id="id-2-document-storefront-language-market-and-selling-context-requirements"></a>
+The source category tree should be exported or documented with enough detail to show hierarchy, product membership, priority categories, manually curated groups, hidden categories, SEO landing pages, and menu placement. If the source store uses separate category logic for desktop, mobile, market, language, or campaign pages, those differences should be documented before migration.
 
-Cafe24 preparation should identify how the future storefront should be organized for customers. If the merchant serves multiple audiences, countries, brands, campaigns, or selling contexts, those expectations should be written down before migration begins.
+SEO preparation should include URLs, redirects, metadata, product SEO fields, category-page SEO, high-value landing pages, and internal links. Cafe24 supports redirect and SEO-related resources, but a redirect plan still needs to be prepared. A migration can preserve product and category data while still losing organic visibility if old URLs, menu paths, canonical assumptions, or campaign landing pages are ignored.
 
-The merchant should prepare notes on:
+| SEO and path area        | Preparation question                                                                 | Evidence to collect                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Product URLs             | Which product URLs generate traffic, backlinks, ads, or customer support references? | High-value product URL list, redirects, SEO titles, descriptions, and old-to-new path expectations. |
+| Category URLs            | Which categories are important for navigation or organic search?                     | Category hierarchy, landing-page copy, product membership, and redirect needs.                      |
+| CMS and content pages    | Which content pages support trust, conversion, policies, or SEO?                     | Page URLs, page content, embedded media, internal links, and priority for migration or rebuild.     |
+| Internal links           | Which product, category, blog, or policy links appear inside descriptions and pages? | Link inventory and correction plan for changed target-store URLs.                                   |
+| Market or language paths | Are URLs segmented by market, language, domain, or subfolder?                        | Domain plan, localization plan, and mapping rules for market-specific paths.                        |
 
-* which storefront or market contexts matter after launch
-* whether product visibility differs by audience, market, or campaign
-* which categories, landing pages, or content pages are business-critical
-* which URLs, navigation paths, or search-engine results should be protected
-* whether design or module behavior changes how products and content appear
-* whether any language, currency, payment, or shipping expectation affects the migration outcome
+SEO preparation should be practical. Not every old page needs the same treatment, but priority URLs should be identified before migration so redirects and validation can be checked before launch.
 
-This preparation does not require final design completion. It requires a clear enough target structure to judge whether migrated data fits Cafe24’s future storefront experience.
+### Prepare Customers, Members, and Account Data <a href="#prepare-customers-members-and-account-data" id="prepare-customers-members-and-account-data"></a>
 
-#### 3. Clean and classify product data before migration <a href="#id-3-clean-and-classify-product-data-before-migration" id="id-3-clean-and-classify-product-data-before-migration"></a>
+Cafe24 customer preparation should distinguish customer records from member behavior. Customer names, email addresses, phone numbers, addresses, customer groups, account status, memos, purchase history, social-login references, signup fields, and membership benefits may all matter. The migration team should clarify which of these are ordinary customer fields, which are settings, and which belong to custom source logic or third-party systems.
 
-Products should be reviewed before migration so Cafe24 does not inherit avoidable catalog confusion. Product data often contains a mix of sellable structure, display information, internal notes, discontinued records, SEO fields, app-owned references, and source-specific workarounds.
+Customer email quality is especially important. Duplicate emails, guest records, inconsistent casing, missing addresses, test accounts, and unsupported account states can create confusion after migration. If customer tiers, membership levels, points, benefits, or B2B-style permissions exist in the source store, they should be reviewed before assuming they will map directly into Cafe24 member behavior.
 
-The merchant should identify:
+| Member preparation area         | What to verify                                                                           | Why it matters                                                                                |
+| ------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Customer identity               | Email, phone, name, address, customer number, account status, and duplicate records.     | Determines whether repeat customers can be recognized and associated with historical context. |
+| Customer groups and tiers       | Membership levels, wholesale groups, benefits, discounts, points, and VIP logic.         | Helps decide whether mapping, configuration, Add-ons, or Custom Service is required.          |
+| Guest checkout records          | Orders placed without full account creation or with inconsistent contact information.    | Prevents order history from becoming detached from customer recognition.                      |
+| Social-login references         | Naver, Kakao, Apple, or other social account relationships where relevant.               | Helps identify identity behavior that may not be ordinary customer data.                      |
+| Customer memos and extra fields | Internal notes, preferences, support flags, custom signup fields, and segmentation data. | Determines whether the fields need mapping, value transformation, or custom handling.         |
 
-* active products that should move
-* products that should be excluded, archived, or reviewed separately
-* categories and product groupings that should remain meaningful
-* product options, variants, attributes, specifications, and labels that affect buying decisions
-* product images and media that are required for launch readiness
-* SEO titles, descriptions, slugs, or URL references that should be preserved or redirected
-* app-owned or custom product data that may need Custom Service review
+Member preparation should also include privacy and consent review. Marketing subscriptions, signup fields, policy acceptance, and consent-sensitive data should be handled according to the merchant’s operational and legal responsibilities.
 
-This is especially important if the Source Platform has accumulated duplicate products, inconsistent categories, inconsistent SKUs, or promotional products that are no longer part of the live business.
+### Prepare Orders, Payments, Refunds, and Fulfillment Context <a href="#prepare-orders-payments-refunds-and-fulfillment-context" id="prepare-orders-payments-refunds-and-fulfillment-context"></a>
 
-#### 4. Clarify category, navigation, and discovery expectations <a href="#id-4-clarify-category-navigation-and-discovery-expectations" id="id-4-clarify-category-navigation-and-discovery-expectations"></a>
+Order migration into Cafe24 should be prepared as historical continuity. Orders help staff answer customer questions, review past purchases, inspect revenue history, and maintain operational context. They do not automatically recreate live checkout, payment gateway setup, shipping rules, tax configuration, return workflows, or order automation.
 
-Cafe24 category and navigation preparation should focus on how customers find products after migration. Source categories do not always translate into the ideal Cafe24 navigation structure. Some source stores use categories as merchandising groups, SEO landing pages, internal reporting buckets, or temporary campaign pages.
+Before migration, export representative order records and check whether they include order numbers, customer association, order items, product and variant references, quantities, discounts, coupons, totals, taxes, payment status, fulfillment status, shipping addresses, billing addresses, refunds, returns, cancellations, exchanges, tracking data, memos, and labels. Cafe24’s API includes order, payment, shipment, refund, return, and cancellation-related areas, but preparation should still clarify what historical details must remain visible and meaningful.
 
-Before migration, the merchant should decide:
+| Order evidence                       | Preparation focus                                                                            | Validation expectation                                                                             |
+| ------------------------------------ | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Recent completed orders              | Items, totals, payment status, shipping status, customer association, and addresses.         | Staff can understand the order after migration and compare it with source records.                 |
+| Refunded or returned orders          | Refund amounts, return status, cancellation notes, exchange context, and payment references. | Exceptional order history remains understandable, not flattened into generic order records.        |
+| Orders with discounts or coupons     | Coupon codes, promotional discounts, store credits, points, and benefits.                    | Promotional history is interpretable even if future promotion setup must be configured separately. |
+| International or multi-market orders | Currency, language, tax, address format, shipping method, and market channel.                | Regional context is preserved enough for support and reporting review.                             |
+| App-affected orders                  | Subscription, marketplace, ERP, fulfillment, or custom checkout fields.                      | App-owned or external-system data is flagged for Add-ons or Custom Service review.                 |
 
-* which source categories should remain as categories
-* which category structures should be simplified
-* which campaign or seasonal categories should be retired
-* which navigation paths are important for buyers
-* which category URLs or landing pages matter for SEO continuity
-* which products should appear in multiple discovery paths
-* which menu, module, or theme behavior may need separate configuration
+The preparation step should also define how far back order history should move. Migrating all historical orders may be valuable for support and reporting, but it also consumes scope. If only a subset is needed, use appropriate filtering decisions before execution rather than treating historical range as an afterthought.
 
-A clean category plan improves Demo Migration review because the reviewer can judge whether the product catalog is discoverable, not merely whether product records arrived.
+### Prepare Store Configuration and Operational Settings <a href="#prepare-store-configuration-and-operational-settings" id="prepare-store-configuration-and-operational-settings"></a>
 
-#### 5. Identify customer, account, and communication context <a href="#id-5-identify-customer-account-and-communication-context" id="id-5-identify-customer-account-and-communication-context"></a>
+Cafe24 migration preparation should list the settings that must be recreated or confirmed in Cafe24. These are not ordinary data-transfer tasks. They affect how the new store behaves after launch.
 
-Customer migration preparation should define what customer records need to support after launch. Basic customer identity may not be enough if customer records affect account access, marketing segmentation, order review, membership handling, loyalty context, or app-connected customer behavior.
+Payment gateways, shipping methods, tax settings, order-form fields, member signup fields, security settings, store policies, automated messages, currency settings, SEO settings, redirect rules, product display settings, inventory behavior, admin users, and notification settings should be assigned to an owner before launch. Some settings may be configured by the merchant, some by an implementation partner, and some may require coordinated review with Next-Cart when they affect migration results.
 
-The merchant should prepare:
+| Configuration area         | Preparation requirement                                                                       | Migration boundary                                                                      |
+| -------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Payment and checkout       | Payment gateway, payment methods, order form fields, checkout policies, and customer notices. | Live checkout behavior must be configured and tested separately from historical orders. |
+| Shipping and fulfillment   | Shipping manager, delivery methods, regions, tracking behavior, and fulfillment ownership.    | Migrated orders do not automatically prove future shipping operations.                  |
+| Taxes and currency         | Tax settings, currency behavior, market rules, and regional pricing assumptions.              | Tax and pricing behavior require target-store configuration and validation.             |
+| Member settings            | Signup fields, privacy settings, benefits, points, groups, and account-page behavior.         | Customer records do not automatically recreate member program logic.                    |
+| SEO and redirects          | Store SEO settings, redirect rules, product/category metadata, and priority URLs.             | URL continuity requires explicit mapping and post-migration checks.                     |
+| Notifications and policies | Automated messages, order emails, privacy text, policies, and support messages.               | Communication behavior should be reviewed before launch.                                |
 
-* customer groups or segments that matter after launch
-* records that should not move because they are obsolete, test accounts, or duplicates
-* customer addresses and contact information that should be reviewed for quality
-* marketing opt-in or communication context that should be handled carefully
-* account history needed for customer service
-* customer references used by external systems
-* custom customer fields or app-owned customer data that require review
+This preparation step prevents a common migration gap: data arrives, but the store is not operationally ready. Cafe24 launch readiness depends on both migrated data and configured behavior.
 
-The preparation goal is to know whether customer data is simple identity information or part of a broader customer-management process.
+### Prepare Apps, APIs, Webhooks, and External Systems <a href="#prepare-apps-apis-webhooks-and-external-systems" id="prepare-apps-apis-webhooks-and-external-systems"></a>
 
-#### 6. Review order history for operational usefulness <a href="#id-6-review-order-history-for-operational-usefulness" id="id-6-review-order-history-for-operational-usefulness"></a>
+Cafe24 can support app development, API workflows, webhooks, Data Bridge, analytics, and developer-led integrations. That ecosystem is a strength, but it also means preparation must identify which workflows depend on something outside ordinary data migration.
 
-Order records should be prepared with the future support and reporting needs in mind. A Cafe24 migration should not treat order history as valuable merely because it exists. The useful question is which historical order information the business needs after launch and how that history should be interpreted.
+Create a dependency inventory before migration. List apps, custom scripts, payment services, shipping services, analytics tools, ERP, POS, marketplace channels, accounting tools, fulfillment platforms, review systems, subscription systems, loyalty tools, and any external reports that depend on source-store identifiers. For each dependency, identify the data it reads, the event it expects, the identifier it uses, and the owner responsible for reconnecting it.
 
-The merchant should review:
+| Dependency type        | What to document                                                                           | Likely handling path                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| API integrations       | Endpoints, identifiers, sync direction, data owner, and error handling.                    | Reconnect, remap identifiers, test after migration, or review through Custom Service.   |
+| Webhooks and events    | Trigger events, payload expectations, connected systems, and retry behavior.               | Rebuild event flow and validate with representative orders, customers, or products.     |
+| Analytics and tracking | Scripts, conversion events, product data layer, order data layer, and campaign parameters. | Reinstall and test after storefront and checkout configuration.                         |
+| Apps and extensions    | Data owned by apps, custom fields, app-created records, and embedded storefront behavior.  | Use standard migration only if supported; otherwise consider Add-ons or Custom Service. |
+| External reporting     | Data identifiers, order statuses, customer groups, product categories, and date ranges.    | Preserve or map identifiers where required for reporting continuity.                    |
 
-* order date range needed in the Target Platform
-* order statuses that should remain understandable
-* payment and shipping context needed for service review
-* tax, discount, coupon, and refund references that matter historically
-* product-line details needed for reorder or customer-service use
-* source statuses or fulfillment notes that may not translate directly
-* external order references owned by ERP, accounting, marketplace, shipping, or fulfillment systems
+External-system preparation should not wait until after Full Migration. If a workflow depends on source identifiers or custom fields, that dependency should influence migration approach before execution.
 
-If external systems own part of the order truth, preparation should identify those systems before migration. Otherwise, Cafe24 may receive records that look complete but do not explain the business workflow behind them.
+### Prepare Demo Migration Samples <a href="#prepare-demo-migration-samples" id="prepare-demo-migration-samples"></a>
 
-#### 7. Inventory apps, design dependencies, and custom storefront behavior <a href="#id-7-inventory-apps-design-dependencies-and-custom-storefront-behavior" id="id-7-inventory-apps-design-dependencies-and-custom-storefront-behavior"></a>
+Demo Migration should test representative difficulty, not easy records. For Cafe24, sample selection should include products with complex options, variant inventory, important categories, product images, customer records, member-group examples, normal orders, exceptional orders, coupon-related orders, refunded or returned orders, content-rich pages, priority URLs, and app-sensitive records.
 
-Cafe24 supports an ecosystem around apps, design, modules, web components, scripts, APIs, Data Bridge, and webhooks. Preparation should identify which parts of the source store depend on similar outside layers and which Cafe24-side behavior must be configured separately.
+| Sample type                   | Why it should be included                                                                         | What to review after Demo Migration                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Complex products              | They reveal option, variant, image, inventory, and custom-field behavior.                         | Product display, variant selection, SKU/inventory accuracy, and operational identifiers.        |
+| Priority categories           | They reveal navigation, product membership, and SEO path issues.                                  | Category hierarchy, product placement, menu expectations, and redirect planning.                |
+| Member records                | They reveal customer identity, account status, groups, addresses, and consent-related context.    | Customer matching, account interpretation, group mapping, and order association.                |
+| Exceptional orders            | They reveal refunds, returns, cancellations, discounts, payment context, and fulfillment history. | Order readability, status interpretation, totals, customer association, and support usefulness. |
+| Integration-sensitive records | They reveal external-system assumptions.                                                          | Identifier continuity, custom fields, API dependencies, and Custom Service needs.               |
 
-The merchant should list:
+If the Demo Migration sample avoids these records, it should not be used as evidence that the migration approach is ready for Full Migration.
 
-* discount, promotion, loyalty, or pricing behavior controlled by apps or scripts
-* shipping fee logic or carrier behavior controlled outside ordinary product/order data
-* payment gateway or checkout behavior that affects launch readiness
-* design elements that shape product pages, category pages, and content presentation
-* JavaScript, embedded widgets, tracking scripts, or third-party storefront behavior
-* API-connected systems that read from or write to the store
-* webhooks, data feeds, analytics, or Data Bridge-type workflows that must be rebuilt or reconnected
+### Prepare Launch-Window Change Handling <a href="#prepare-launch-window-change-handling" id="prepare-launch-window-change-handling"></a>
 
-This inventory helps prevent unrealistic expectations. Migration can move and translate supported data, but app behavior, design logic, API workflows, and external system responsibilities must be planned separately.
+Preparation should include a plan for data changes made after Demo Migration or Full Migration. During a launch window, source-store activity may continue. New products, customers, orders, reviews, coupons, content changes, and inventory updates can appear after the main migration run.
 
-#### 8. Separate standard migration needs from Add-on and Custom Service needs <a href="#id-8-separate-standard-migration-needs-from-add-on-and-custom-service-needs" id="id-8-separate-standard-migration-needs-from-add-on-and-custom-service-needs"></a>
+Cafe24 planning should clarify whether the merchant needs to continue the migration with the last used configuration, continue the migration with a new configuration, or perform a new migration. The right action depends on the timing of source changes, the type of records involved, and whether the previous configuration still matches the expected result.
 
-Preparation should identify which requirements fit standard migration capability and which require additional service planning. This is especially important when source data includes filters, mapping needs, custom fields, source modifications, or external identifiers.
-
-The merchant should flag:
-
-* data filtering needs that should use the Data Filter Add-on
-* field or value mapping needs that may use Advanced Data Mapping
-* data value changes that may use Advanced Data Configure
-* requirements that exceed Standard Add-on settings or supported behavior
-* Tailored Add-on or Custom Add-on needs
-* Custom Platform source interpretation
-* custom migration logic adjustment
-* app-owned data, third-party data, or outside-system identifiers
-
-Using a Standard Add-on within its available settings and supported behavior does not automatically make the project Custom. Requirements that need customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, or custom migration logic adjustment should be reviewed through Custom Service.
-
-### Practical Preparation Sequence <a href="#practical-preparation-sequence" id="practical-preparation-sequence"></a>
-
-Cafe24 preparation is easier when the merchant works from business context to data details, then from data details to validation samples.
-
-| Step | Preparation action                                   | Practical outcome                                                                                                                           |
-| ---- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Define the future Cafe24 operating role              | Clarifies whether the migration is a simple storefront move, an app-connected move, a market-specific launch, or a more customized project. |
-| 2    | Map storefront and market expectations               | Identifies the storefront, category, content, language, market, or buyer-context decisions that affect migration review.                    |
-| 3    | Clean product and category data                      | Reduces duplicate, obsolete, or confusing catalog structure before it reaches the Target Platform.                                          |
-| 4    | Review customer and order records                    | Confirms which customer and order information is useful for post-launch service, reporting, and support.                                    |
-| 5    | Inventory apps, design logic, APIs, and integrations | Separates data migration from configuration, reconnection, and Custom Service needs.                                                        |
-| 6    | Identify Add-on or Custom Service requirements       | Prevents filtering, mapping, custom fields, external identifiers, or custom logic from being discovered too late.                           |
-| 7    | Choose Demo Migration samples                        | Ensures the sample migration can reveal whether Cafe24 is being prepared correctly.                                                         |
-| 8    | Resolve escalation items before Full Migration       | Avoids entering Full Migration with unresolved business logic, custom source interpretation, or external system dependencies.               |
-
-This sequence helps the merchant avoid a common preparation mistake: reviewing data only after it has already been migrated. The better approach is to decide what the migrated result should prove before the sample is created.
-
-### Demo Migration Sample Planning <a href="#demo-migration-sample-planning" id="demo-migration-sample-planning"></a>
-
-Demo Migration should not use only easy records. For Cafe24, a useful Demo Migration sample should include records that expose storefront, catalog, customer, order, app, API, and integration questions early.
-
-| Sample type                      | What to include                                                                                                                      | Why it matters                                                                              |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Representative products          | Simple products, products with options, products with images, SEO fields, categories, and important product-detail content           | Shows whether product meaning remains clear inside Cafe24.                                  |
-| Category and navigation examples | Top categories, nested categories, campaign categories, SEO-sensitive pages, and high-traffic paths                                  | Shows whether buyers can find products and whether important routes need redirect planning. |
-| Customer records                 | Ordinary customers, segmented customers, accounts with order history, duplicate-prone accounts, and records tied to external systems | Shows whether customer data supports service and communication needs after migration.       |
-| Order history                    | Recent orders, older orders, orders with discounts, refunds, shipping differences, payment references, and special statuses          | Shows whether historical orders remain useful for service and operational review.           |
-| Design-sensitive records         | Products or pages that depend on rich content, special layout, media, scripts, or theme behavior                                     | Shows where design or module configuration affects the perceived migration result.          |
-| App-sensitive records            | Products, customers, or orders affected by discount, shipping, payment, loyalty, analytics, or marketing apps                        | Shows which outcomes require app configuration or separate review.                          |
-| Integration-sensitive records    | Records connected to ERP, accounting, fulfillment, marketplace, tax, CRM, analytics, API, webhook, or Data Bridge workflows          | Shows whether the migration depends on external ownership beyond Cafe24 records.            |
-| Custom source examples           | Custom fields, modified source records, outside-system identifiers, third-party data, or non-standard database structures            | Shows whether Custom Service review is needed before broader execution.                     |
-
-A strong Demo Migration sample should make review harder in a useful way. If the sample includes only clean products and ordinary customers, it may hide the very issues that will matter during launch.
-
-### Custom Platform and Custom Data Preparation <a href="#custom-platform-and-custom-data-preparation" id="custom-platform-and-custom-data-preparation"></a>
-
-If Cafe24 is the Target Platform and the Source Platform is a Custom Platform or heavily modified system, preparation should start with source interpretation. The migration cannot safely translate data when the source meaning is undocumented.
-
-The merchant should prepare:
-
-* source database or export structure notes
-* definitions for custom fields and custom tables
-* explanation of outside-system identifiers
-* examples of app-owned or third-party data
-* mapping notes for non-standard product, customer, order, or content structures
-* custom checkout, pricing, shipping, payment, or fulfillment behavior
-* records that prove how the source system actually works
-
-Custom Platform source cases should be reviewed through Custom Service. The issue is not only technical extraction. The issue is understanding what the source data means, which parts belong in Cafe24, which parts need configuration, and which parts require custom migration logic adjustment.
-
-### What Should Be Escalated Before Execution <a href="#what-should-be-escalated-before-execution" id="what-should-be-escalated-before-execution"></a>
-
-Some issues should be raised before Full Migration because they can change the migration approach, Add-on plan, or Custom Service requirement.
-
-| Escalation signal                                                                         | Why it should be reviewed early                                                                                                           |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Product options, categories, or attributes have no consistent structure                   | The migrated catalog may appear complete but remain difficult to browse, configure, or validate.                                          |
-| Storefront design or modules control important product or content behavior                | Data migration alone may not recreate the intended customer experience.                                                                   |
-| Discount, shipping, or payment behavior is app-owned                                      | These outcomes may require configuration, app review, or Custom Service rather than standard data movement.                               |
-| API, webhook, Data Bridge, analytics, or integration workflows affect business operations | External ownership must be identified before launch readiness can be judged.                                                              |
-| Customer or order records depend on outside-system identifiers                            | The migration may need mapping or custom logic to preserve useful references.                                                             |
-| The merchant wants only selected records to move                                          | Filtering should be planned before execution through the Data Filter Add-on or Custom Service if requirements exceed standard capability. |
-| Source data includes custom fields, modified structures, or third-party data              | These cases may require Custom Service review before migration scope is reliable.                                                         |
-| Demo Migration samples do not include high-risk records                                   | The sample may produce false confidence and leave launch-critical issues hidden.                                                          |
-
-Escalation is not a failure. It is how the merchant avoids discovering avoidable problems after Full Migration has already started.
+Entity Points planning should also be handled carefully. When newly created counted records are migrated successfully for the first time, they consume Entity Points. Entered entity counts are used for pricing and Entity Points Plan selection; they are not filters. If the merchant needs filtering, mapping, or configuration changes, those should be selected and configured as service requirements rather than assumed from entity-count entries.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Cafe24 preparation should make the expected migration result visible before execution. The merchant should understand how storefront structure, product and category meaning, customer and order context, design dependencies, apps, APIs, integrations, custom fields, and external systems affect the future Cafe24 store.
+Cafe24 migration preparation should produce usable evidence: clean catalog decisions, product option and variant classification, customer and member context, order-history expectations, configuration ownership, app and API dependency mapping, Demo Migration samples, and launch-window change planning. Without that evidence, even a technically successful migration can leave the target store unable to support storefront presentation, checkout readiness, repeat-customer recognition, historical order review, or connected-system continuity.
 
-The strongest preparation work produces clear Demo Migration samples and clear decision points. It shows what can be handled through standard migration capability, what may need Add-ons, what requires configuration outside migration, and what should be reviewed through Custom Service before broader execution.
+A prepared Cafe24 migration does not try to solve every issue during execution. It identifies which data can move through standard capability, which settings must be configured in Cafe24, which Add-ons may help with filtering or mapping, and which requirements need Custom Service review before launch pressure begins.
 
-Before starting Full Migration to Cafe24, use Demo Migration and Live Chat to review representative products, categories, customers, orders, storefront routes, app-sensitive records, integration-sensitive data, and custom source examples. The goal is to confirm that the migration plan reflects how the future Cafe24 store is expected to operate, not only that records can be moved.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What should be prepared first for a Cafe24 migration?**
 
-**Should Cafe24 preparation start with product data or storefront structure?**
+Start with scope separation. Identify which parts of the source store are structured commerce data, which are Cafe24 configuration requirements, which are storefront or design work, and which depend on apps, APIs, webhooks, or external systems.
 
-It should start with the future operating role of the Cafe24 store, then move into product and storefront detail. Product cleanup is important, but the merchant first needs to know how Cafe24 will support the future storefront, market, design, app, and integration model.
+**Should product options and variants be reviewed before migration?**
 
-**What should be included in a Cafe24 Demo Migration sample?**
+Yes. Cafe24 product options, variants, and variant inventory can affect purchase behavior, stock control, fulfillment, and reporting. Review option names, values, combinations, SKUs, inventory, prices, display status, and any custom source logic before migration.
 
-The sample should include ordinary records and high-risk records: products with options, important categories, SEO-sensitive pages, customer records with history, orders with payment or shipping context, app-sensitive records, integration-sensitive data, and any custom source examples that may need deeper review.
+**Are payment, shipping, and tax settings included in data migration?**
 
-**Do Cafe24 apps migrate automatically with store data?**
+They should be treated as target-store configuration, not as ordinary migrated data. Historical order records may preserve payment or shipping context, but live checkout, shipping, tax, and gateway behavior must be configured and tested in Cafe24.
 
-No. App-owned behavior, scripts, API workflows, Data Bridge connections, webhooks, analytics feeds, payment gateway behavior, and shipping fee logic should be reviewed separately. Some records may migrate, but the behavior around those records may need configuration, reconnection, or Custom Service review.
+**How should Demo Migration samples be selected for Cafe24?**
 
-**When should Add-ons be planned for Cafe24 migration?**
+Use representative records that expose real complexity: products with variants, important categories, member groups, exceptional orders, coupon-related orders, refunds, returns, priority URLs, and integration-sensitive records.
 
-Add-ons should be planned when the merchant needs filtering, mapping, or data configuration beyond straightforward record transfer. The Data Filter Add-on, Advanced Data Mapping, and Advanced Data Configure can help when requirements fit their available settings and supported behavior. Requirements beyond that should be reviewed through Custom Service.
+**When should Custom Service be considered during preparation?**
 
-**When does Cafe24 preparation require Custom Service review?**
-
-Custom Service review is needed when the migration involves customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom fields, third-party data, outside-system identifiers, app-owned data, or source behavior that standard migration capability cannot interpret safely.
+Custom Service should be considered when the migration depends on custom fields, app-owned data, Custom Platform behavior, external identifiers, bespoke transformations, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment that standard capability cannot cover.

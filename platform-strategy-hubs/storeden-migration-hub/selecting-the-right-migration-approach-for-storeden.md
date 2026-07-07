@@ -1,170 +1,173 @@
 # Selecting the Right Migration Approach for Storeden
 
-Choosing the right migration approach for Storeden depends on how much of the current store can move into standard Storeden structures and how much depends on custom logic, apps, marketplace workflows, external business systems, or unsupported data relationships.
+Selecting the right Storeden migration approach means matching the service path to the real operating complexity of the store. Storeden’s role as a TeamSystem Commerce environment can make it a practical target for merchants that want cloud commerce, catalog and inventory control, professional order management, integrated payments, logistics, marketplace selling, apps, API resources, and business-system connections. Those same strengths also create planning questions that should be answered before Full Migration.
 
-Storeden is a hosted cloud commerce environment. That makes service-path selection different from a migration into a fully self-hosted custom stack. Product, customer, order, and content records may fit standard migration capability, while checkout behavior, payment setup, logistics, marketplace synchronization, TeamSystem ecosystem workflows, app-owned data, API references, and storefront theme behavior often need separate review.
+The right approach is not determined by platform name alone. It depends on the shape of the source data, the target Storeden setup, the amount of execution support the merchant wants, and whether the expected result requires supported data migration, optional Add-ons, Custom Service, or post-migration target configuration.
 
-The goal is not to choose the largest service model by default. The goal is to match the migration approach to the actual burden: how clean the source data is, how much target configuration is needed, how many connected systems affect the result, and whether any requirement goes beyond standard service capability.
+A Storeden project should be selected through evidence: catalog samples, customer and order examples, marketplace dependencies, app-owned values, TeamSystem or external identifiers, SEO continuity requirements, and Demo Migration results. The decision should be clear enough that everyone understands what Next-Cart is migrating, what Storeden must be configured to handle, and what the merchant or connected providers must prepare outside the migration itself.
 
-### The Practical Approach Question for Storeden <a href="#the-practical-approach-question-for-storeden" id="the-practical-approach-question-for-storeden"></a>
+### Storeden Approach Selection Principle <a href="#storeden-approach-selection-principle" id="storeden-approach-selection-principle"></a>
 
-A Storeden migration approach should answer one practical question:
+A Storeden migration approach should answer two questions at the same time: how much migration support is needed, and how much customization is required. These are related, but they are not the same.
 
-**Can the current store’s data and operating meaning be represented inside Storeden with standard service capability, or does the project need Next-Cart-led execution, optional Add-ons, or Custom Service review?**
+A merchant may have clean supported data but want Next-Cart to manage execution. That points toward Managed Service. Another merchant may be comfortable with self-managed execution but require custom handling for app data, marketplace identifiers, or external-system references. That points toward Custom Service. A third merchant may only need supported filtering or mapping, which may fit an Add-on rather than a custom project.
 
-The answer usually depends on five areas:
+| Decision factor                 | What it means for Storeden                                                                                                | Likely service implication                                               |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Supported data structure        | Products, Customers, Orders, Categories, Reviews, Coupons, CMS, and SEO values fit supported migration behavior.          | Standard Service or Managed Service may be sufficient.                   |
+| Execution burden                | The merchant wants Next-Cart to handle migration execution rather than self-performing key steps.                         | Managed Service may be more appropriate than Standard Service.           |
+| Filtering or mapping need       | Eligible records need controlled selection or supported field alignment.                                                  | Add-ons may improve the result while staying within supported scope.     |
+| Custom or unsupported data      | App data, external IDs, marketplace values, custom product logic, or TeamSystem-related references need special handling. | Custom Service review is required.                                       |
+| Target configuration dependency | Payments, logistics, themes, apps, channels, or integrations must be configured in Storeden.                              | This is target setup work and should not be confused with migrated data. |
+| Evidence uncertainty            | Demo Migration samples do not yet prove that the selected path fits the real store.                                       | Review the approach before approving Full Migration.                     |
 
-| Planning area                   | Why it affects the migration approach                                                                                                                    |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog structure               | Products, variants, attributes, SKUs, categories, filters, images, inventory, and marketplace-ready fields decide how much mapping and review is needed. |
-| Order history                   | Orders may include payment labels, shipping methods, tracking numbers, fulfillment status, customer links, marketplace origin, and external references.  |
-| Storefront and SEO              | Theme expectations, CMS Pages, Blog Posts, navigation, domains, URLs, redirects, metadata, and content presentation affect launch quality.               |
-| Apps and marketplace channels   | Apps, plugins, Amazon, eBay, Facebook, AliExpress, and other channel workflows can create data or behavior outside ordinary Storeden records.            |
-| TeamSystem and API integrations | ERP, accounting, POS, inventory, fulfillment, API, webhook, or developer workflows can depend on identifiers and logic that need separate handling.      |
+The safest approach is the lightest path that still protects the expected result. Choosing a heavier path without evidence can waste effort. Choosing a lighter path despite unsupported requirements can create launch risk.
 
-A store with clean catalog records and predictable historical data may not need a complex approach. A store where daily operations depend on apps, marketplaces, TeamSystem integrations, custom attributes, or external IDs should be reviewed more carefully before Full Migration.
+### When Standard Service Can Fit Storeden <a href="#when-standard-service-can-fit-storeden" id="when-standard-service-can-fit-storeden"></a>
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+Standard Service can fit when the source store has clean supported data, the merchant can prepare the target Storeden store, and the expected result does not depend on custom migration logic. This is most likely when catalog structure is understandable, product options are not unusually complex, orders are needed mainly for historical review, customers and addresses are ordinary, and the merchant can configure Storeden payments, logistics, themes, apps, and marketplace channels separately.
 
-Standard Service can be suitable when the Storeden migration fits supported data structures and the customer is comfortable self-performing the migration process on the Next-Cart website.
+Standard Service is strongest when the merchant has enough internal clarity to review Demo Migration results, identify errors, and continue with Full Migration once the sample result is acceptable.
 
-Standard Service is usually a reasonable starting point when the source store has:
+| Standard-fit signal                | Storeden interpretation                                                                                           | Evidence to confirm                                                                       |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Catalog data is clean              | Products, images, prices, categories, and stock values fit supported target structures.                           | Product samples display correctly in Storeden.                                            |
+| Product options are predictable    | Variants or options do not require bespoke transformation.                                                        | Variant products retain SKU, price, stock, and image meaning.                             |
+| Customer data is ordinary          | Customers, addresses, and order links do not depend on unusual account logic.                                     | Representative customer histories remain understandable.                                  |
+| Orders are historical records      | Past orders are needed for service and finance review, not to rebuild live checkout rules.                        | Order samples show products, totals, payment labels, shipping labels, and status meaning. |
+| Storeden setup is owned separately | Theme, payment, shipping, logistics, apps, marketplaces, and integrations will be configured in the target store. | Migration acceptance is not tied to unfinished configuration work.                        |
 
-* products that can be represented through supported Storeden product structures;
-* manageable variants, SKUs, images, prices, descriptions, categories, and stock values;
-* customer records that do not depend on unusual account or B2B logic;
-* historical orders that mainly need readable order, customer, product, payment, shipping, and status context;
-* CMS Pages or Blog Posts that fit supported migration scope;
-* no required migration of unsupported app, marketplace, ERP, API, or webhook-owned data;
-* no custom migration logic adjustment requirement.
+Standard Service should not be selected simply because the store is small. A smaller store with app-owned data, custom product behavior, or external identifiers may still need Custom Service. A larger store with clean supported structures may remain standard if the merchant can manage preparation and review.
 
-Standard Service does not mean the project is risk-free. It means the customer-led migration can proceed within standard service capability, with support available when questions arise. Target-side setup still matters. Storeden payment methods, TS Pay, shipping rules, logistics services, tax behavior, marketplace publication, app configuration, storefront theme work, and domain settings are not proven merely because records have migrated.
+### When Managed Service Is a Better Fit <a href="#when-managed-service-is-a-better-fit" id="when-managed-service-is-a-better-fit"></a>
 
-### When Managed Service Is the Better Fit <a href="#when-managed-service-is-the-better-fit" id="when-managed-service-is-the-better-fit"></a>
+Managed Service is appropriate when the data can remain within supported migration capability, but the merchant wants Next-Cart to manage the migration execution process. The need is operational assistance, not necessarily customization.
 
-Managed Service can be suitable when the Storeden migration still fits standard service capability, but the customer wants Next-Cart’s technician to perform the migration instead of self-performing it.
+This can be valuable for Storeden projects where the merchant has a meaningful catalog, customer/order history, SEO concerns, or launch timeline, but does not want to manage each migration step independently. Managed Service can help reduce execution burden while keeping the migration within supported structures.
 
-Managed Service is often the better fit when:
+| Managed-fit signal                            | Why it matters                                                                         | What still remains outside migration                                                               |
+| --------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| The merchant wants guided execution           | The project needs a clearer process and less customer-side handling.                   | Target Storeden settings still need merchant or platform-side configuration.                       |
+| Data is supported but review workload is high | Product, customer, order, and SEO samples require organized review.                    | Business decisions about scope, exclusions, and target setup remain the merchant’s responsibility. |
+| Launch timing needs coordination              | Migration timing, Demo Migration review, and Full Migration acceptance need structure. | Live payment, logistics, app, channel, and integration readiness still need separate confirmation. |
+| Internal team capacity is limited             | The merchant may not have time to manage each migration step alone.                    | Custom requirements still require Custom Service if they go beyond supported behavior.             |
 
-| Situation                                                  | Why Managed Service helps                                                                                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| The merchant has limited migration time                    | Next-Cart-led execution reduces the customer’s direct operational burden during migration setup and run.                                 |
-| The catalog has many records but standard structures       | The data may not require customization, but execution and result review still benefit from experienced handling.                         |
-| The team needs support interpreting Demo Migration results | Next-Cart can run the migration under standard capability while the customer focuses on reviewing business-critical samples.             |
-| The store has several ordinary data types                  | Products, customers, orders, CMS Pages, and Blog Posts may fit standard capability but still require careful execution order and review. |
-| The customer prefers guided migration responsibility       | Managed Service gives clearer execution responsibility while keeping the project within standard service scope.                          |
-
-Managed Service does not automatically cover customized data handling. If the migration needs tailored app data handling, marketplace identifier preservation, API-owned records, TeamSystem workflow logic, or custom product transformation, the requirement moves into Custom Service because customization is required.
+Managed Service should not be used as a substitute for Custom Service. If the expected result depends on custom field handling, app data, marketplace-specific identifiers, external-system data, or custom transformation, the requirement still needs Custom Service review even if the merchant also wants managed execution.
 
 ### Where Add-ons Can Help <a href="#where-add-ons-can-help" id="where-add-ons-can-help"></a>
 
-Add-ons are optional service features that help customers adjust filtering, mapping, or data configuration to better match the expected migration outcome. For Storeden, Add-ons are most relevant when the data still fits supported platform behavior but needs more control over which records move, how fields align, or how values are adjusted.
+Add-ons help when the data remains within supported migration behavior but needs more control. For Storeden, Add-ons are most relevant when the merchant wants to filter eligible records, map supported values more carefully, or configure supported migrated values before they reach the target store.
 
-| Add-on                  | Storeden migration use case                                                                                                                                          | Important boundary                                                                                   |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Use when only selected eligible products, customers, orders, CMS Pages, Blog Posts, or other supported records should migrate.                                       | Estimated entity numbers are not migration filters. Filtering should be configured deliberately.     |
-| Advanced Data Mapping   | Use when supported fields need clearer alignment between the Source Platform and Storeden structures, such as catalog, customer, order, category, or content values. | Mapping must remain within supported platform data-model capability.                                 |
-| Advanced Data Configure | Use when supported migrated values should be modified before they reach Storeden, such as selected labels, names, statuses, or other supported values.               | Configuration does not replace custom logic, app migration, or unsupported external-system behavior. |
+| Add-on                  | Storeden use case                                                                                              | Boundary to keep clear                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Data Filter Add-on      | Migrate only selected eligible products, customers, orders, CMS pages, Blog Posts, or other supported records. | Estimated entity numbers are not filters. Filtering should be configured deliberately. |
+| Advanced Data Mapping   | Align supported product, customer, order, category, content, or SEO values with Storeden-facing structures.    | Mapping must stay within supported platform capability.                                |
+| Advanced Data Configure | Adjust supported values such as selected labels, names, statuses, or other supported fields before migration.  | Configuration does not create custom app migration or unsupported logic.               |
 
-Add-ons are not a substitute for Custom Service. If an Add-on needs modification beyond its available settings and supported behavior, the tailored requirement is handled through Custom Service because customization is required.
+Add-ons are useful when the merchant can clearly describe what should be filtered, mapped, or adjusted and the requested behavior stays within supported migration capability. If the Add-on itself needs modification beyond available settings, the requirement moves into Custom Service because customized handling is required.
 
 ### When Custom Service Is Required <a href="#when-custom-service-is-required" id="when-custom-service-is-required"></a>
 
-Custom Service is required when the Storeden migration includes customization, modification, bespoke handling, Custom Platform source interpretation, unsupported app data, external-system identifiers, or custom migration logic adjustment.
+Custom Service is required when the expected Storeden result depends on customization, unsupported app or plug-in data, custom fields, Custom Platform interpretation, external-system identifiers, marketplace-specific handling, or custom migration logic adjustment.
 
-Storeden projects often move into Custom Service when the migration includes:
+Storeden projects can require Custom Service when the business depends on data that is not ordinary catalog, customer, order, category, content, or SEO migration output. This is especially important when the previous store used apps, ERP connections, marketplace feeds, B2B logic, bespoke checkout behavior, custom order metadata, or integration IDs that staff still need after launch.
 
-* a Custom Platform as the Source Platform;
-* app or plugin data that is not part of standard migration capability;
-* B2B app behavior, customer-group logic, or account rules that need custom handling;
-* marketplace identifiers or channel-specific records that must be preserved in a particular way;
-* TeamSystem ERP, accounting, POS, inventory, or management-system identifiers that affect operations;
-* API, webhook, developer, or external application data that carries business meaning;
-* custom product attributes, configurable logic, bundles, nonstandard variants, or bespoke inventory behavior;
-* custom order relationships, fulfillment references, payment references, tax logic, or logistics data;
-* storefront, SEO, URL, domain, or redirect transformations beyond standard capability;
-* custom migration logic adjustment to make the migrated result match project-specific expectations.
+| Custom Service signal                      | Storeden example                                                                                                         | Why Standard Service or Add-ons may not be enough                                              |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| App-owned data carries business meaning    | App fields control promotions, customer groups, marketplace listings, or fulfillment context.                            | Standard migration may not include unsupported app data.                                       |
+| External identifiers must remain usable    | ERP, accounting, warehouse, POS, CRM, or TeamSystem-related IDs are required after launch.                               | These identifiers may need custom mapping or transformation.                                   |
+| Product behavior is bespoke                | Bundles, configurable products, nonstandard variants, custom fields, or channel-specific attributes affect selling.      | The data may not fit ordinary product/variant structures.                                      |
+| Marketplace values need special handling   | Marketplace IDs, channel categories, listing statuses, or origin references must be preserved.                           | Channel data may differ from standard storefront catalog data.                                 |
+| Orders contain custom operational metadata | Payment references, logistics IDs, fulfillment notes, tax labels, or external references require special interpretation. | Historical order import may not preserve the expected operational context without custom work. |
+| Custom Platform source is involved         | The source system is bespoke or lacks predictable export structure.                                                      | Custom interpretation is needed before migration rules can be applied.                         |
 
-Custom Service does not automatically mean Next-Cart-led execution. Custom Service defines the customization or modification path. Migration management is included only when it is part of the final plan.
+Custom Service defines the customization path. It does not automatically mean full execution management unless migration management is included in the final plan.
 
-### Choosing Between Standard, Managed, Add-ons, and Custom Service <a href="#choosing-between-standard-managed-add-ons-and-custom-service" id="choosing-between-standard-managed-add-ons-and-custom-service"></a>
+### Entity Points and Migration Scope Impact <a href="#entity-points-and-migration-scope-impact" id="entity-points-and-migration-scope-impact"></a>
 
-A Storeden project can be evaluated through a simple decision pattern:
+Entity Points matter because a migration may consume allowance based on the selected entities and the way records are migrated. Storeden planning should review Entity Points before Full Migration when the source store has high record volume, duplicate records, multiple language/content versions, marketplace-origin records, or historical order volume that may affect scope.
 
-| Migration condition                                                                                                 | Better approach                                                     | Reasoning                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Clean supported data, predictable Storeden structures, customer-led execution is acceptable                         | Standard Service                                                    | The migration can remain within standard service capability.                                    |
-| Clean supported data, but the customer wants Next-Cart-led execution                                                | Managed Service                                                     | The service burden is execution, not customization.                                             |
-| Only selected eligible records should migrate                                                                       | Standard or Managed Service with Data Filter Add-on                 | Filtering is an optional service feature when supported and properly configured.                |
-| Supported fields need clearer alignment                                                                             | Standard or Managed Service with Advanced Data Mapping              | Mapping can improve target interpretation without creating custom migration logic.              |
-| Supported values should be adjusted before migration                                                                | Standard or Managed Service with Advanced Data Configure            | Value configuration can improve the target result when the change is within supported behavior. |
-| Custom Platform source, app data, external identifiers, API records, marketplace IDs, or bespoke logic are required | Custom Service                                                      | The requirement goes beyond standard service capability or Standard Add-on behavior.            |
-| The merchant needs customization and wants Next-Cart to manage execution                                            | Custom Service with migration management included in the final plan | Custom work and execution responsibility must both be planned explicitly.                       |
+| Scope signal                  | Why it matters                                                                                           | Planning response                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Large catalog volume          | Products, variants, images, categories, and attributes can increase review workload and migration scope. | Confirm record counts and representative product complexity before Full Migration.   |
+| Large order history           | Historical orders can create significant scope even when the current catalog is small.                   | Decide whether full history is needed or whether filtering is appropriate.           |
+| Duplicate or obsolete records | Old test data, archived products, or inactive customers may consume scope without business value.        | Consider cleanup or Data Filter Add-on before migration.                             |
+| Multi-channel records         | Marketplace products, channel orders, and duplicated references may create ambiguity.                    | Identify whether records should migrate as standard history or need custom handling. |
+| CMS and content volume        | CMS pages, Blog Posts, landing pages, and SEO records may add meaningful scope.                          | Prioritize content that affects trust, SEO, or conversion.                           |
 
-The safest approach is the one that matches actual complexity. A store does not need Custom Service only because it uses Storeden, marketplaces, or TeamSystem-related products. It needs Custom Service when the required migration outcome depends on customization, unsupported structures, app-owned data, external-system data, or custom migration logic adjustment.
+Entity Points should be discussed as a scope-control issue, not only a pricing detail. If the merchant migrates unnecessary historical or duplicate data, they may spend project capacity on records that do not improve launch quality.
+
+### Additional Migration Options and Later Migration Actions <a href="#additional-migration-options-and-later-migration-actions" id="additional-migration-options-and-later-migration-actions"></a>
+
+Additional Migration Options should be considered when they solve a Storeden-specific migration need, not because they are available. The same rule applies to later migration actions after the initial migration.
+
+| Need                                                      | Suitable handling                                                       | Storeden planning note                                                                  |
+| --------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Preserve relationships or supported values more carefully | Relevant Additional Migration Options or Add-ons, depending on the need | Confirm the option changes the Storeden result in a useful way.                         |
+| Move newly created records after the first run            | Continue the Migration with the last used configuration                 | Useful when new source records were created after the earlier migration run.            |
+| Change settings or scope before continuing                | Continue the Migration with a new configuration                         | Useful when the merchant needs a different mapping, filtering, or entity selection.     |
+| Start a separate migration plan                           | Perform a new migration                                                 | Useful when the project changes substantially or the target plan is no longer the same. |
+
+Later migration actions should be chosen based on what changed: the data, the configuration, or the whole project plan. They should not be used as generic cleanup labels.
 
 ### Demo Migration as the Approach Checkpoint <a href="#demo-migration-as-the-approach-checkpoint" id="demo-migration-as-the-approach-checkpoint"></a>
 
-Demo Migration is a practical way to check whether the selected approach is realistic. For Storeden, the Demo Migration should not be limited to simple products or a small set of ordinary orders. It should include records that reveal whether the chosen service path can support the real operating model.
+Demo Migration should confirm whether the selected approach matches Storeden reality. The sample set should include records that expose product, catalog, customer, order, content, marketplace, app, and integration complexity.
 
-Strong Storeden Demo Migration samples include:
+| Demo sample                     | What it should prove                                                                                  | What failure suggests                                        |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Variant product                 | Options, SKU, stock, price, and images remain meaningful.                                             | Mapping or Custom Service review may be needed.              |
+| Marketplace-sensitive product   | Channel identifiers or listing context are visible where required.                                    | Marketplace data may need separate handling.                 |
+| Customer with order history     | Account details, addresses, and order links are understandable.                                       | Customer/order relationship review is needed.                |
+| B2B or company-related customer | Company, tax, group, or account context is preserved where scoped.                                    | B2B logic may require Custom Service or target setup.        |
+| Complex order                   | Products, discounts, taxes, payment labels, shipping labels, and fulfillment context remain readable. | Order-history meaning may require mapping or custom review.  |
+| External-system record          | ERP, accounting, warehouse, API, or TeamSystem-related IDs appear as expected.                        | Integration-dependent data may require Custom Service.       |
+| Priority URL or content page    | SEO and content continuity can be evaluated.                                                          | Redirect, CMS, or manual content planning may be incomplete. |
 
-| Sample type                                 | What it should prove                                                                                                    |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Product with variants and attributes        | Product choices, SKU behavior, pricing, images, stock, and storefront presentation remain understandable.               |
-| Category, subcategory, and filter sample    | Product discovery works in the target storefront and does not rely only on product record presence.                     |
-| Marketplace-relevant product                | Channel-sensitive values, identifiers, availability expectations, and publication requirements are visible for review.  |
-| Customer or B2B-related sample              | Account meaning, customer details, contact context, or B2B-related expectations are not flattened.                      |
-| Order with payment and shipping context     | Historical order detail remains readable for service, fulfillment, finance, and management review.                      |
-| Order with tracking or logistics references | Fulfillment history and shipping context remain useful after migration.                                                 |
-| App or integration-sensitive record         | App-owned data, external identifiers, TeamSystem references, or API-linked values are identified before Full Migration. |
-| Priority URL or content sample              | SEO, domain, URL, metadata, and storefront continuity risks are visible early.                                          |
+If Demo Migration results prove the selected approach, the project can move forward with stronger confidence. If the sample exposes unsupported data, app dependencies, missing external IDs, unclear order context, or weak product meaning, the service path should be reviewed before Full Migration.
 
-If Demo Migration results show that the main records fit Storeden without custom treatment, Standard Service or Managed Service may remain appropriate. If the Demo Migration exposes unsupported app data, broken product meaning, missing external references, marketplace identifier problems, or custom transformation needs, the project should move into Custom Service review before Full Migration.
+### Warning Signs the Approach Is Too Light <a href="#warning-signs-the-approach-is-too-light" id="warning-signs-the-approach-is-too-light"></a>
 
-### Signs the Chosen Approach Is Too Light <a href="#signs-the-chosen-approach-is-too-light" id="signs-the-chosen-approach-is-too-light"></a>
-
-A Storeden migration approach may be too light when it focuses only on record counts or assumes that hosted-platform migration automatically covers every operational dependency.
+A Storeden approach may be too light when it focuses on record movement while ignoring operational dependencies. This is most common when merchants assume the target platform will recreate old workflows automatically.
 
 Common warning signs include:
 
-* marketplace records are important, but only ordinary product fields are sampled;
-* TeamSystem ERP, accounting, POS, or inventory identifiers are used operationally but not reviewed;
-* app or plugin data affects sales, fulfillment, marketing, or reporting but is not scoped;
-* product attributes, variants, filters, or inventory rules are treated as simple text fields;
-* B2B behavior is expected without confirming target account or app support;
-* historical orders are accepted without checking payment, shipping, tracking, logistics, and customer context;
-* live checkout, TS Pay, tax, payment gateway, and shipping readiness are confused with migrated order history;
-* SEO review is delayed until after launch planning;
-* the customer expects source theme or code behavior to transfer into Storeden without target theme work;
-* Demo Migration samples contain only easy records.
+* marketplace products or orders matter, but channel identifiers are not included in scope review;
+* TeamSystem, ERP, accounting, warehouse, CRM, POS, or API references are operationally important but not sampled;
+* apps or plug-ins control pricing, customer groups, fulfillment, marketing, or reporting;
+* product options, attributes, filters, or stock rules are treated as plain text;
+* B2B behavior is expected without confirming account, price, tax, or approval logic;
+* orders are accepted without checking payment, shipping, fulfillment, refund, tax, or logistics context;
+* live checkout, payment providers, logistics, marketplaces, and apps are confused with migrated history;
+* SEO review is delayed until after launch;
+* Demo Migration samples include only easy records.
 
-When these signs appear, the project should not proceed to Full Migration without approach review. The right next step may be better Demo Migration sampling, Add-on review, Custom Service review, or a clearer separation between migrated data and Storeden configuration work.
+When these signs appear, the project should not proceed to Full Migration without approach review. The next step may be better Demo Migration sampling, Add-on configuration, Custom Service review, or a clearer separation between migration scope and Storeden setup.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Storeden migration approach depends on whether the project is mainly a standard data migration into hosted Storeden structures or whether it also needs filtering, mapping, value configuration, customization, app handling, marketplace-specific treatment, TeamSystem integration review, or custom migration logic adjustment. Standard Service can work for clean supported structures, Managed Service can help when execution support is the main need, Add-ons can refine supported filtering, mapping, and configuration, and Custom Service is required when customization or unsupported data handling is part of the expected result.
+The right Storeden migration approach depends on whether the project needs standard supported migration, Next-Cart-led execution, optional filtering or mapping, Custom Service, or a combination of these. Standard Service can work for clean supported structures. Managed Service can help when execution support is the main need. Add-ons can refine supported filtering, mapping, and value configuration. Custom Service is required when the expected result depends on unsupported data, app-owned values, external identifiers, marketplace-specific handling, Custom Platform interpretation, or custom migration logic adjustment.
 
-Before choosing the final approach, review the most complex Storeden records in Demo Migration: variants, attributes, stock-sensitive products, categories and filters, marketplace-linked records, app-dependent data, TeamSystem references, historical orders, payment and logistics context, and priority URLs. If those samples behave as expected, the selected approach is easier to confirm. If they expose unsupported data or custom logic, discuss the findings through Live Chat before moving into Full Migration.
+Demo Migration should be the checkpoint that confirms the decision. If representative products, customers, orders, marketplace records, external identifiers, and priority URLs behave as expected, the selected path is easier to approve. If they expose unsupported data or custom logic, the approach should be adjusted before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for a Storeden migration?**
 
-Standard Service can be enough when the source store uses clean supported product, customer, order, content, and catalog structures, and the customer is comfortable self-performing the migration process. Storeden payment setup, shipping, logistics, apps, marketplace channels, themes, and integrations still need separate target review.
+Standard Service can be enough when the source data fits supported migration behavior, the merchant can manage the target Storeden setup, and the expected result does not require app data, external identifiers, custom transformation, or unsupported logic.
 
-**When should I choose Managed Service for Storeden?**
+**When should Managed Service be selected instead?**
 
-Managed Service is useful when the migration fits standard service capability but the customer wants Next-Cart-led execution. It is not the same as customization. If the project requires app data handling, marketplace identifier preservation, TeamSystem integration data, or custom migration logic adjustment, Custom Service is the correct review path.
+Managed Service is useful when the data fits supported migration capability but the merchant wants Next-Cart to manage execution. It helps with process burden, but it does not replace Custom Service when customization is required.
 
-**Can Add-ons help with Storeden migration requirements?**
+**How do Add-ons differ from Custom Service for Storeden?**
 
-Yes. The Data Filter Add-on can help select eligible records for migration, Advanced Data Mapping can help align supported fields, and Advanced Data Configure can help adjust supported migrated values. Add-ons remain optional service features and do not replace Custom Service for customized or unsupported requirements.
+Add-ons support bounded filtering, mapping, or configuration for supported migration data. Custom Service is required when the project needs unsupported data handling, app or plug-in data, external identifiers, Custom Platform interpretation, or custom migration logic adjustment.
 
-**When does a Storeden migration need Custom Service?**
+**Why are Entity Points important when choosing the approach?**
 
-Custom Service is required when the migration needs customization, modification, bespoke handling, Custom Platform source interpretation, unsupported app or plugin data, marketplace-specific identifier handling, TeamSystem system references, API or webhook data, or custom migration logic adjustment.
+Entity Points help clarify scope impact. Large catalogs, large order histories, duplicate records, marketplace-origin data, and content volume can affect the migration plan. Reviewing scope early helps avoid moving unnecessary data or underestimating complexity.
 
-**Does Custom Service automatically mean Next-Cart performs the migration?**
+**What should Demo Migration prove before Full Migration?**
 
-No. Custom Service defines the customization or modification path. Migration management is included only when it is part of the final plan. A Storeden project can involve Custom Service for tailored work without automatically making every execution step Next-Cart-led.
+Demo Migration should prove that representative Storeden records behave correctly: products, variants, stock values, categories, customers, orders, marketplace-sensitive values, external identifiers, and priority URLs or content pages. If those samples reveal unsupported data or custom requirements, the approach should be reviewed before Full Migration.

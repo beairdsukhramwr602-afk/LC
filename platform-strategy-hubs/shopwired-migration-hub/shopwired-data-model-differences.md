@@ -1,174 +1,201 @@
 # ShopWired Data Model Differences
 
-Migrating to ShopWired means translating source-store data into a hosted commerce model with its own assumptions about products, variations, choices, extras, categories, brands, customers, customer groups, orders, checkout settings, themes, apps, APIs, and multi-channel behavior. The goal is not only to move records, but to preserve what those records mean in day-to-day selling.
+Migrating to ShopWired is not only a matter of moving Products, Customers, Orders, Categories, Reviews, Coupons, and CMS records into a new administration area. ShopWired has a specific commerce structure around products, categories, brands, variations, choices, extras, stock, customer identity, trade features, checkout configuration, VAT and sales tax settings, delivery rules, apps, API behavior, and theme-driven storefront presentation. A good migration plan must translate source data into that structure without losing the business meaning behind the records.
 
-A source product option may become a ShopWired variation, choice, extra, bundle relationship, personalization field, digital-product setup, or app-supported behavior depending on how it works in the source store. A customer group may represent a simple segment, a B2B pricing rule, a trade account, a quote workflow, or a checkout restriction. An order may need delivery, payment, tax, discount, fulfillment, and customer context to remain useful after migration.
+The central question is simple: when a source record lands in ShopWired, will the merchant still understand what it means and will the store still use it correctly? A product option that was previously a simple label may need to become a ShopWired variation, choice, extra, bundle, personalization field, or app-supported behavior. A customer segment may become a customer record, newsletter subscriber, trade customer, pricing group, or custom field. A historical order may be readable for service purposes, but it will not automatically configure checkout, delivery, payment, VAT, sales tax, or B2B behavior for future transactions.
 
-Data-model planning should therefore focus on business meaning. The migrated store should prove that ShopWired can represent how the source store sells, organizes products, serves customers, reads historical orders, and connects to surrounding systems.
+ShopWired works best when migration planning separates record transfer from operational reconstruction. Data should be reviewed by what it is expected to do after launch: drive catalog browsing, control purchasable combinations, preserve customer history, support trade accounts, explain historical orders, maintain search visibility, connect external systems, or support ongoing merchandising.
 
-### How ShopWired Interprets Migrated Data <a href="#how-shopwired-interprets-migrated-data" id="how-shopwired-interprets-migrated-data"></a>
+### ShopWired Data Translation Priorities <a href="#shopwired-data-translation-priorities" id="shopwired-data-translation-priorities"></a>
 
-ShopWired is a hosted platform, so migrated data must fit the structures and configuration surfaces available in the target store. Some source data maps into standard ShopWired records. Some behavior belongs to target setup. Some app-owned, API-connected, channel-specific, or custom data may need separate review.
+ShopWired data-model planning should begin with the areas that can change business meaning most directly: product configuration, customer identity, B2B behavior, order interpretation, storefront discovery, and external-system dependencies. These areas determine whether the migrated store is merely populated or genuinely usable.
 
-| Source-store meaning   | How it may be interpreted in ShopWired                                                                                 | What the migrated result must prove                                                                          |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Product identity       | Product name, SKU, price, description, images, categories, brands, stock, tax, delivery settings, and SEO fields.      | Products remain recognizable, sellable, and correctly organized in the target storefront.                    |
-| Product choices        | Variations, choices, extras, personalization options, bundles, digital products, or app-supported behavior.            | Shoppers can select the right options without losing price, stock, fulfillment, or product meaning.          |
-| Product discovery      | Categories, brands, menus, filters, search, featured products, and channel visibility.                                 | Products can be found through expected customer-facing paths.                                                |
-| Customer records       | Customer accounts, addresses, groups, B2B/trade context, quotes, account limits, and order links.                      | Customer segmentation and account meaning remain useful after migration.                                     |
-| Historical orders      | Products, totals, discounts, delivery and payment context, fulfillment state, notes, customer links, and order status. | Orders remain readable for service, operations, and reference.                                               |
-| Checkout behavior      | Payment, delivery, tax, customer-group rules, checkout fields, account settings, and enabled apps.                     | Historical labels are not confused with live checkout configuration.                                         |
-| Content and storefront | Pages, blog/content areas, menus, banners, themes, theme code, navigation, and SEO values.                             | Content and presentation requirements are either migrated, configured, rebuilt, or accepted as out of scope. |
-| Apps and integrations  | App-owned records, API data, webhooks, marketplace/channel data, outside-system identifiers, and automation logic.     | Integration-dependent data is included, excluded, reconfigured, or escalated intentionally.                  |
+| Source-store area                  | ShopWired interpretation                                                                                                  | Migration planning question                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Product variants and options       | Variations, choices, extras, bundles, text/file inputs, or app behavior                                                   | Does the source option affect SKU, price, stock, delivery, tax, or only presentation?  |
+| Category and brand structure       | Product discovery, navigation, filtering, SEO, and merchandising logic                                                    | Can customers still find priority products through the expected routes?                |
+| Customer records                   | Email-based customer identity, account state, order history, notes, custom fields, and trade separation                   | Do duplicate, guest, B2B, and registered customer records retain the right meaning?    |
+| Customer groups and trade accounts | B2B visibility, pricing, account behavior, and operational rules                                                          | Which rules are data, which are ShopWired configuration, and which need custom review? |
+| Historical orders                  | Customer history, payment and delivery labels, tax values, order notes, fulfillment context, and external references      | Are historical orders useful for service and reporting after migration?                |
+| Content and SEO assets             | Pages, landing pages, blog posts, menus, redirects, metadata, and theme-controlled display                                | Which content affects search, trust, conversion, or B2B onboarding?                    |
+| Apps and integrations              | External data ownership, API/webhook behavior, stock feeds, accounting, fulfillment, email, marketplace, or CRM workflows | Which connected systems must be reconfigured, mapped, rebuilt, or excluded?            |
 
-### Product and Catalog Meaning <a href="#product-and-catalog-meaning" id="product-and-catalog-meaning"></a>
+This translation view prevents a common migration mistake: assuming that matching field names are enough. Field similarity does not guarantee operational similarity. For ShopWired, meaning depends on how the record participates in product selection, customer recognition, B2B selling, checkout, fulfillment, tax calculation, and storefront presentation.
 
-ShopWired product data may include ordinary product records, but the important migration work is often in the surrounding structures. Products can depend on categories, brands, variations, choices, extras, images, SKUs, stock behavior, delivery settings, tax handling, digital-product behavior, bundle relationships, and SEO values.
+### Products, Categories, Brands, and Discovery Data <a href="#products-categories-brands-and-discovery-data" id="products-categories-brands-and-discovery-data"></a>
 
-A source catalog should not be judged only by product count. Two stores with the same number of products can have very different migration complexity if one uses simple products and the other depends on configurable choices, trade pricing, personalization, product bundles, or integration-managed stock.
+Products in ShopWired should be planned as merchandising records, not isolated database rows. A migrated product needs a name, description, images, pricing, SKU-related information, stock handling, category placement, brand relationship, visibility, product search relevance, SEO treatment, and customer-facing presentation. When the source store contains a flat catalog, the mapping may be straightforward. When the source store contains complex options, configurators, customer-specific visibility, or app-controlled merchandising, the product model needs closer review.
 
-#### Variations, Choices, and Extras <a href="#variations-choices-and-extras" id="variations-choices-and-extras"></a>
+Categories and brands also carry more than administrative classification. They can define navigation, landing-page value, filter behavior, product grouping, and customer expectations. A source store may use categories as SEO landing pages, brand pages as trust signals, product tags as filters, or manually curated collections as merchandising zones. These structures should not be treated as interchangeable without checking how they will appear and behave in ShopWired.
 
-Variations, choices, and extras should be reviewed as separate meaning layers. They may look similar in a source export, but they can affect different parts of the buying experience.
+| Data area                  | What may change in ShopWired                                                                                                      | Quality check                                                                        |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Product identity           | A product may keep its commercial identity while changing option structure, URL behavior, category placement, or display template | Confirm that priority products are recognizable in admin and storefront views        |
+| Categories                 | Deep source trees may need simpler navigation, revised parent-child relationships, or selective landing-page treatment            | Test high-traffic category journeys and important product discovery paths            |
+| Brands                     | Brand data may become a discovery, SEO, or trust element rather than a simple product attribute                                   | Confirm that brand-led browsing still works for priority manufacturers or labels     |
+| Filters and specifications | Source attributes may need to become filters, product fields, custom fields, descriptions, or app behavior                        | Validate products that customers compare by technical specification or compatibility |
+| Images and media           | Source image roles may not map cleanly to product, variation, theme, or page presentation                                         | Check main image, gallery order, alt context, and variant-image expectations         |
 
-* **Variations** can represent core product options such as size, color, material, or another selectable product dimension.
-* **Choices** can support selectable product configuration where the customer chooses from defined values.
-* **Extras** can represent add-on selections, optional upgrades, personalization, or supplementary charges depending on how the target store is configured.
-* **Bundles and special products** may need separate review if the source store connects multiple products into one buying experience.
-* **Digital products** may carry file, fulfillment, or access assumptions that should not be reduced to ordinary product descriptions.
+The most important question is not whether products migrated, but whether product data remains commercially intelligible. Merchants should be able to answer: what is being sold, how customers choose it, how stock and price are controlled, where the product appears, and whether search or navigation still leads to the right buying path.
 
-The safest migration samples should include products where options affect price, stock, images, fulfillment, delivery, personalization, or customer choice. If these cases are not sampled, the migration can appear cleaner than it really is.
+### Variations, Choices, Extras, and Product Configuration Meaning <a href="#variations-choices-extras-and-product-configuration-meaning" id="variations-choices-extras-and-product-configuration-meaning"></a>
 
-#### Categories, Brands, and Product Discovery <a href="#categories-brands-and-product-discovery" id="categories-brands-and-product-discovery"></a>
+Product configuration is one of the most important ShopWired data-model differences. Many source platforms use a single concept such as variant, option, modifier, add-on, attribute, personalization field, or bundle to cover several different behaviors. ShopWired distinguishes these behaviors more deliberately. A source selection may need to become a variation when it creates a required product combination with attributes such as SKU, price, stock, weight, image, GTIN, MPN, or VAT treatment. A different source selection may work better as a choice, extra, custom text field, customer-submitted file, bundle relationship, or app-supported behavior.
 
-ShopWired product discovery can depend on categories, brands, menu placement, filters, search behavior, merchandising sections, and channel-specific visibility. A product may migrate successfully as a product record but still fail commercially if it is not visible in the right category, brand, or browsing path.
+That distinction matters because option behavior affects migration scope. A color selection that changes the SKU and stock quantity is not the same as a gift-wrap checkbox. A custom engraving field is not the same as a size variation. A bundle that reduces inventory across multiple items is not the same as a single product with a descriptive option. If these meanings are flattened, the store may look populated but behave incorrectly.
 
-Category and brand migration should preserve storefront meaning. If the source store uses brand-led browsing, curated categories, SEO landing pages, or filter-heavy product structures, validation should test how customers reach those products after migration.
+| Source behavior                                                                     | Likely ShopWired planning route                                          | Why it matters                                                                             |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Required selection that changes SKU, price, image, stock, weight, GTIN, MPN, or VAT | Variation review                                                         | These fields can affect fulfillment, reporting, tax, and customer choice accuracy          |
+| Optional paid add-on or upgrade                                                     | Choice, extra, app feature, or configured behavior review                | The add-on must appear correctly in basket, order history, and operational handling        |
+| Personalization text or customer-submitted file                                     | Text/file input or app-supported handling                                | Customer-provided information must remain visible where teams process orders               |
+| Product bundle or kit                                                               | Bundle feature, app behavior, or Custom Service review                   | Inventory and fulfillment may depend on relationships between products                     |
+| Subscription, pre-order, or quote-related product                                   | App/configuration and migration scope review                             | Purchase timing, account view, and order interpretation may involve more than catalog data |
+| Source configurator with conditional logic                                          | Custom Service review where standard structures cannot express the logic | The source behavior may be application logic, not ordinary product data                    |
 
-### Customer and B2B Meaning <a href="#customer-and-b2b-meaning" id="customer-and-b2b-meaning"></a>
+Demo Migration samples should include the most complex product types, not only the cleanest products. The best sample set includes products with multiple variations, optional extras, custom fields, bundles, B2B pricing relevance, special VAT treatment, stock differences, and important images. That sample set reveals whether product meaning survives the translation into ShopWired.
 
-ShopWired customer data can be more than basic account records. Customer groups, B2B or trade accounts, quotes, account limits, company context, approval workflows, payment terms, and customer-specific pricing may affect how the target store treats buyers.
+### Customer, Account, and Marketing Data <a href="#customer-account-and-marketing-data" id="customer-account-and-marketing-data"></a>
 
-A customer group should not be treated as a label unless it is only used as a label. In many stores, customer grouping controls real business behavior. That behavior may be ordinary target configuration, app-supported behavior, custom scope, or data that should not migrate directly.
+Customer data in ShopWired is strongly tied to email identity, account state, order history, and customer-facing account pages. This changes how duplicate customers, guest orders, registered accounts, newsletter subscribers, trade customers, and custom customer fields should be reviewed. If two source customer records share operational identity but use different emails, they may not behave as one customer after migration. If a guest checkout record later becomes an account, order visibility depends on how that history is assigned.
 
-| Customer area                  | Meaning risk                                                                                | Review priority                                                          |
-| ------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Registered customers           | Account details may move, but login continuity and customer expectations need review.       | Validate representative accounts with addresses and order links.         |
-| Customer groups                | Groups may control price, tax, visibility, approval, credit, or payment access.             | Confirm whether groups are data, configuration, or custom behavior.      |
-| B2B and trade customers        | Trade pricing, quotes, account terms, and approval may depend on target settings or apps.   | Sample real B2B buyers and quote/order workflows.                        |
-| Addresses                      | Billing and delivery addresses may have different relationships in the target store.        | Validate customers with multiple addresses and varied order history.     |
-| Customer-specific external IDs | ERP, CRM, accounting, or sales-channel identifiers may be outside standard customer fields. | Decide whether IDs need mapping, preservation, or Custom Service review. |
+A customer record should be assessed by what the business needs it to support: service lookup, login, order history access, trade pricing, marketing consent, internal notes, custom-field visibility, or segmentation. Some of these needs can be migrated as data. Others require target configuration, app setup, customer communication, or Custom Service review.
 
-### Order and Historical Transaction Meaning <a href="#order-and-historical-transaction-meaning" id="order-and-historical-transaction-meaning"></a>
+| Customer-data question                                       | Why it matters in ShopWired                                                     | Review action                                                                          |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Are duplicate customers separated by email address?          | Email identity can split order history and account recognition                  | Identify duplicate patterns before migration and decide whether cleanup is needed      |
+| Are guest and registered accounts mixed in the source store? | Customer type can affect account expectations and order visibility              | Sample registered, guest, and post-order account scenarios                             |
+| Are newsletter preferences important?                        | Marketing consent and subscriber handling can affect post-launch communications | Separate customer records from newsletter or marketing status where needed             |
+| Are trade customers managed separately?                      | B2B account behavior may not be ordinary customer segmentation                  | Map trade records, pricing implications, approval status, and account rules separately |
+| Are customer custom fields used operationally?               | Custom values may support service, trade review, compliance, or segmentation    | Decide whether fields are standard data, Add-on scope, or Custom Service scope         |
 
-Historical orders in ShopWired should remain readable. They may need product names, SKUs, quantities, prices, totals, discounts, delivery method labels, payment method labels, customer details, fulfillment state, order notes, tax values, and status information to remain useful after migration.
+Customer migration quality is not proven by customer counts alone. It is proven when real customer examples can be found, identified, associated with the correct order history, and interpreted by the teams that will use them after launch.
 
-The key distinction is between historical order context and live target configuration. A migrated order may show that a source customer paid by a certain method or selected a certain delivery service. That does not mean the live ShopWired checkout has been configured to accept the same payment method or calculate the same delivery rules.
+### B2B, Trade, Quote, and Pricing Data <a href="#b2b-trade-quote-and-pricing-data" id="b2b-trade-quote-and-pricing-data"></a>
 
-A strong order sample set should include:
+ShopWired can support trade and B2B selling, but B2B migration should not be treated as ordinary customer migration. Trade accounts, trade-only products or categories, pricing bands, individual trade pricing, global discounts, quotes, account terms, purchase-order expectations, VAT treatment, delivery rules, and customer-specific visibility may all carry commercial logic.
 
-* paid and unpaid orders;
-* fulfilled and unfulfilled orders;
-* discounted or coupon-based orders;
-* orders with multiple delivery methods or payment methods;
-* B2B or quote-related orders where relevant;
-* orders with notes, special instructions, or customer communication;
-* refunded, canceled, or partially fulfilled orders where applicable;
-* orders connected to external systems or sales channels.
+The key data-model difference is that B2B meaning often sits between data and configuration. A source platform may store a customer group as a label, but the business may use that label to control price, access, payment method, delivery rule, tax treatment, or quoting workflow. In ShopWired, those outcomes may require trade settings, app setup, theme behavior, product visibility decisions, or Custom Service review.
 
-Order validation should answer whether the merchant can understand and use the migrated order history after launch.
+| B2B source element                      | Migration meaning                                                             | Scope implication                                                    |
+| --------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Trade customer account                  | Customer identity plus account-specific commercial treatment                  | Review separately from ordinary customers                            |
+| Customer group or pricing tier          | May affect product price, visibility, discount, payment, or delivery behavior | Determine whether it is data, configuration, or custom logic         |
+| Quote history                           | Commercial negotiation record, not just an order-like record                  | Validate fields, statuses, notes, and follow-up process expectations |
+| Trade-only category or product          | Access-control and merchandising rule                                         | Confirm visibility behavior and storefront testing route             |
+| Customer-specific price                 | Pricing exception with operational impact                                     | Escalate if standard structures cannot represent the rule safely     |
+| Purchase-order or account-term behavior | Checkout/payment workflow, not just historical label                          | Separate past-order context from live checkout setup                 |
 
-### Checkout, Delivery, Payment, and Tax Meaning <a href="#checkout-delivery-payment-and-tax-meaning" id="checkout-delivery-payment-and-tax-meaning"></a>
+A retail-only migration sample is not enough for a trade seller. B2B samples should include ordinary retail customers, approved trade customers, customers with special pricing, quote-related records, trade-only products, and historical orders that show how the account relationship actually worked.
 
-Checkout behavior is not only data migration. In ShopWired, live checkout behavior depends on target settings, payment providers, delivery configuration, tax rules, customer groups, B2B settings, enabled apps, and any custom requirements.
+### Orders, Order Statuses, Quotes, and Transaction Context <a href="#orders-order-statuses-quotes-and-transaction-context" id="orders-order-statuses-quotes-and-transaction-context"></a>
 
-Source checkout fields may need different treatment depending on their purpose:
+Historical orders must remain understandable after migration. In ShopWired, order meaning may involve customer assignment, product lines, option selections, discounts, vouchers, delivery labels, payment labels, tax values, VAT status, refunds, returns, notes, fulfillment state, quote history, subscription context, and external-system references.
 
-| Source checkout element | Likely target interpretation                                                  | Planning concern                                               |
-| ----------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| Payment method label    | Historical order label or target payment setup.                               | Do not confuse old order context with live payment readiness.  |
-| Delivery method label   | Historical order label or target delivery configuration.                      | Live delivery settings need separate testing.                  |
-| Tax total               | Historical value or target tax-rule behavior.                                 | New orders depend on target tax settings.                      |
-| Custom checkout field   | Note, customer field, order field, app-owned data, or custom scope.           | Confirm whether the field has business or fulfillment meaning. |
-| B2B checkout rule       | Customer-group setting, quote workflow, payment restriction, or custom logic. | Review customer group and B2B behavior before scope is locked. |
+A migrated order does not automatically reproduce live checkout behavior. It preserves past commercial context where supported. New orders depend on ShopWired configuration for checkout, payment gateways, delivery zones and rates, VAT or sales tax, customer account behavior, trade settings, and apps. This distinction should be clear in planning, because merchants often judge migration success by whether old orders are useful for customer service, reporting, reconciliation, and compliance.
 
-Migrating checkout-related data should preserve historical meaning where possible, while target checkout configuration should be planned and tested separately.
+| Order-related data           | What to preserve                                                          | What not to assume                                                            |
+| ---------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Customer assignment          | Billing email, customer record link, order history visibility             | That all duplicate customer histories will merge automatically                |
+| Product lines and options    | Purchased item names, SKUs, selected options, quantities, prices          | That source configurator logic will remain active for future purchases        |
+| Payment and delivery labels  | Historical context for service and reconciliation                         | That payment gateways or delivery rates are configured for launch             |
+| Discounts, vouchers, credits | Commercial explanation of order totals                                    | That promotional logic will recreate itself in ShopWired                      |
+| Tax/VAT values               | Historical compliance and invoice context                                 | That future tax settings match source behavior without setup                  |
+| Notes and custom fields      | Operational instructions, B2B notes, fulfillment details                  | That every custom field is standard migration scope                           |
+| External IDs                 | Traceability to ERP, accounting, fulfillment, marketplace, or CRM systems | That connected systems will resume using the same identifiers without mapping |
 
-### Content, Theme, and SEO Meaning <a href="#content-theme-and-seo-meaning" id="content-theme-and-seo-meaning"></a>
+Order validation should include varied examples: retail orders, trade orders, discounted orders, refunded orders, orders with special delivery, orders with custom fields, quote-related orders, and orders with external references. The output should be judged by operational users, not just by a record-count report.
 
-ShopWired storefront data may include pages, blog or content areas, menus, banners, theme-controlled content, metadata, page names, redirects, and other SEO-related values. Some source content can migrate as content records. Some design behavior may need theme work. Some SEO behavior may require redirect planning or manual review.
+### Checkout, Delivery, Payment, VAT, and Sales Tax Data <a href="#checkout-delivery-payment-vat-and-sales-tax-data" id="checkout-delivery-payment-vat-and-sales-tax-data"></a>
 
-Content migration should focus on the customer journey. A page that carries search traffic, brand trust, support information, size guides, delivery policies, or B2B instructions may matter more than a low-value historical page.
+Checkout-related source data has to be separated into history, configuration, and custom behavior. Historical orders may contain payment method names, delivery method names, tax values, customer notes, and selected checkout options. Those values help explain past transactions, but they do not configure the ShopWired checkout for new transactions.
 
-SEO planning should prioritize:
+ShopWired setup may involve platform checkout behavior, delivery zones, delivery rates, delivery restrictions, collection options, payment gateway configuration, offline payment, VAT features, VAT zones, custom VAT rates, disability VAT relief, EU business VAT treatment, VAT on delivery costs, US sales tax configuration, checkout apps, and customer-group or trade rules. Migration planning should identify which parts are migrated for history and which parts must be rebuilt as target configuration.
 
-* important product URLs;
-* important category URLs;
-* brand or collection-style pages;
-* CMS Pages and landing pages;
-* meta titles and descriptions;
-* page names or slugs;
-* image alt text where important;
-* redirect expectations;
-* content that supports checkout, returns, delivery, or B2B terms.
+| Source checkout element           | Migration treatment                                              | Launch-readiness dependency                                                          |
+| --------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Historical payment method names   | Preserve as order context where supported                        | Configure and test live payment gateways separately                                  |
+| Delivery method names and charges | Preserve order history and reporting context                     | Configure delivery zones, rates, restrictions, collection, and fulfillment workflows |
+| Tax or VAT values on old orders   | Preserve historical totals and invoice meaning                   | Configure VAT/sales tax settings for future orders                                   |
+| Custom checkout fields            | Review as order custom fields, app data, or Custom Service scope | Confirm where the information appears in admin, email, and fulfillment workflows     |
+| B2B payment terms                 | Historical label plus live trade-account behavior                | Review trade settings, offline payment, approval, and account-term expectations      |
+| Checkout apps                     | App-owned or configured behavior                                 | Reconfigure, map, rebuild, exclude, or escalate depending on business role           |
 
-### Apps, API, Webhooks, and Integration Data <a href="#apps-api-webhooks-and-integration-data" id="apps-api-webhooks-and-integration-data"></a>
+A good ShopWired migration plan therefore has two different pass criteria: historical checkout context remains readable, and future checkout behavior is configured and tested separately. Treating those as the same task creates avoidable launch risk.
 
-ShopWired can support apps, API access, webhooks, multi-channel selling, and external integrations. These areas can affect migration because important business data may live outside ordinary product, customer, and order records.
+### Content, SEO, Menus, and Theme-Dependent Data <a href="#content-seo-menus-and-theme-dependent-data" id="content-seo-menus-and-theme-dependent-data"></a>
 
-Integration-sensitive data can include:
+ShopWired storefront presentation depends on more than imported product records. Website pages, landing pages, blog content, product and category metadata, 301 redirects, canonical behavior, breadcrumbs, menus, images, theme settings, customer account pages, and homepage or featured-product areas all influence how migrated data appears.
 
-* marketplace identifiers;
-* ERP, CRM, POS, accounting, or fulfillment IDs;
-* subscription or quote-related data;
-* product feed data;
-* custom app records;
-* automation rules;
-* webhook-triggered workflows;
-* external inventory references;
-* customer-specific pricing or account terms stored outside standard records.
+Content data should be classified by business value. Some pages are informational and can be rebuilt or retired. Others support SEO, B2B onboarding, policy compliance, conversion, product education, or paid traffic landing pages. High-value content deserves sample validation because a missing page, changed URL, broken redirect, weak metadata mapping, or incorrect menu placement can create real post-launch loss even when product data is technically present.
 
-These should be classified before scope is finalized. Some integration behavior can be reconfigured after migration. Some data can be mapped. Some app-owned or external-system records may need Custom Service review.
+| Content or SEO asset            | Migration meaning                                         | Validation focus                                                                                         |
+| ------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Product and category URLs       | Search continuity and customer bookmarks                  | Priority URL mapping, redirects, canonical signals, and landing-page behavior                            |
+| Website pages and landing pages | Trust, policy, B2B onboarding, SEO, or campaign relevance | Content completeness, links, images, forms, and calls to action                                          |
+| Blog posts                      | Organic traffic, product education, or brand content      | URLs, metadata, images, author/date relevance, and internal links                                        |
+| Menus and link lists            | Customer discovery and storefront wayfinding              | Main navigation, footer navigation, category access, and priority pages                                  |
+| Theme-controlled sections       | Visual merchandising and conversion support               | Confirm whether data migration, theme setup, or manual rebuild is required                               |
+| Customer account pages          | Account experience after login                            | Theme behavior, order visibility, address pages, subscriptions, favourites, and reward points where used |
 
-### What Migrated Data Must Prove in ShopWired <a href="#what-migrated-data-must-prove-in-shopwired" id="what-migrated-data-must-prove-in-shopwired"></a>
+The migration plan should not promise visual parity as a data outcome. It should preserve and verify content assets that have measurable business value, while separating theme design, layout reconstruction, and storefront setup from data migration scope.
 
-A successful ShopWired migration should prove that the target data supports the intended business process, not only that expected records exist.
+### Apps, API, Webhooks, and External-System Data <a href="#apps-api-webhooks-and-external-system-data" id="apps-api-webhooks-and-external-system-data"></a>
 
-The migrated result should prove that:
+ShopWired provides app, API, and webhook capabilities, but that does not mean source app data or external workflows automatically transfer. Source stores often depend on accounting tools, fulfillment platforms, stock systems, customer communication tools, marketplace connectors, postcode shipping, tax services, search tools, B2B apps, reward systems, subscription tools, product feeds, or custom integrations. Some records are inside the store database; others live in the app or external system.
 
-* products are sellable and assigned to the correct categories, brands, and visibility contexts;
-* variations, choices, extras, bundles, and digital products carry the intended buying meaning;
-* customer accounts, groups, B2B/trade context, addresses, and order links remain interpretable;
-* historical orders preserve enough payment, delivery, tax, discount, fulfillment, and customer context to be useful;
-* checkout-related history is not mistaken for live target configuration;
-* content, SEO fields, menus, and high-value URLs are included, rebuilt, or accepted as out of scope;
-* apps, APIs, webhooks, multi-channel data, and outside-system identifiers have been reviewed intentionally;
-* custom or unsupported structures have been mapped, excluded, or escalated before Full Migration.
+The ShopWired data model should be planned around data ownership. If a field is visible in the old storefront but owned by an app, it may not be part of standard product, customer, or order records. If an ERP uses old product IDs, those identifiers may need to be preserved as custom fields or mapping records. If a webhook triggers fulfillment, the target process must be recreated and tested rather than assumed.
+
+| Dependency type               | Typical migration question                                                                                             | Possible handling path                                                              |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| App-owned product data        | Does the app store options, bundles, feeds, reviews, subscriptions, or custom fields outside ordinary product records? | Add-on review, app setup, external export, manual rebuild, or Custom Service review |
+| Accounting or ERP references  | Do old product, customer, or order IDs need to remain traceable?                                                       | Mapping file, custom field, Custom Service, or integration rebuild                  |
+| Stock and fulfillment systems | Which system is the stock authority after launch?                                                                      | Reconfigure feed, API mapping, webhook setup, or phased validation                  |
+| Customer marketing systems    | Are subscribers, consent, tags, or customer groups stored inside or outside the source store?                          | Separate marketing export, API sync, app setup, or accepted exclusion               |
+| Marketplace and feed data     | Are listings richer than store product records?                                                                        | Channel-specific mapping, app configuration, or external-system review              |
+| Custom fields                 | Are fields operational, reporting-only, or obsolete?                                                                   | Standard mapping where supported, Add-on, Custom Service, or exclusion              |
+
+API planning also affects migration execution. Large data sets may need pagination-aware handling, and connected systems must respect authentication, HTTPS, JSON behavior, rate limits, and error handling. These are not copywriting details; they affect timing, testing, and integration readiness.
+
+### Where Add-ons and Custom Service May Apply <a href="#where-add-ons-and-custom-service-may-apply" id="where-add-ons-and-custom-service-may-apply"></a>
+
+Add-ons and Custom Service should not be merged into one generic “extra work” category. Add-ons are best understood as bounded migration enhancements when the required output fits a supported pattern. Custom Service applies when the required result depends on unsupported data sources, app-owned structures, external identifiers, bespoke transformation, custom migration logic, or custom platform behavior.
+
+| Need                                                     | Typical handling                                                | Why the distinction matters                                                |
+| -------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Filter or field mapping within supported structures      | Add-on review                                                   | The desired output fits a bounded migration enhancement                    |
+| Product attributes that need structured treatment        | Add-on or Custom Service depending on source and target support | The same visible field may be simple mapping or custom transformation      |
+| App-owned product, customer, or order records            | Custom Service review                                           | The data may not exist in ordinary exportable store records                |
+| External IDs that must remain traceable                  | Custom Service review or mapping deliverable                    | Operational continuity may depend on preserving reference relationships    |
+| B2B, quote, or pricing logic beyond supported structures | Custom Service review                                           | The requirement is business logic, not just record transfer                |
+| Unsupported custom fields from a Custom Platform         | Custom Service review                                           | The source structure itself may need tailored extraction or transformation |
+
+This distinction protects the migration plan from two opposite mistakes: treating everything as standard data, or escalating every non-basic request into custom work. The right decision depends on whether the requirement fits a supported transformation pattern.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-ShopWired migration quality depends on translating source data into the right hosted-platform structures. Products, variations, choices, extras, customers, B2B rules, orders, checkout context, content, SEO values, apps, and integrations all carry business meaning that can be lost if they are treated as flat fields.
+ShopWired data-model planning should focus on meaning, not field matching. The most important differences usually appear around product configuration, B2B and trade behavior, customer identity, order history, checkout context, content and SEO assets, apps, API workflows, external IDs, and custom fields. Each area should be reviewed by how it will be used after launch, not only by whether a record can be imported.
 
-Use Demo Migration samples to test the data that carries the most meaning: complex products, B2B customers, quote or trade cases, varied orders, high-value URLs, content pages, app-dependent records, and integration-sensitive identifiers. If those samples do not translate clearly into ShopWired, mapping, configuration, Add-ons, or Custom Service review should be considered before Full Migration.
+A strong ShopWired migration plan classifies each source behavior as standard data, target configuration, storefront setup, Add-on scope, Custom Service review, external-system work, or accepted exclusion. That classification gives the merchant a more accurate view of what migration can preserve, what ShopWired must be configured to handle, and what must be rebuilt or reviewed separately before launch.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why can product options change meaning when moving to ShopWired?**
+**Why do ShopWired product options need special review during migration?**
 
-Source platforms represent options, variants, modifiers, add-ons, and personalization differently. In ShopWired, those structures may need to become variations, choices, extras, bundles, digital-product behavior, app-supported data, or custom scope depending on how they affect buying.
+Because source product options may represent different behaviors in ShopWired. Some become variations with SKU, price, stock, image, weight, or VAT meaning. Others are better handled as choices, extras, personalization fields, bundles, app features, or Custom Service review.
 
-**Are B2B customer groups just customer labels?**
+**Are customer records matched only by name in ShopWired?**
 
-Not always. B2B or trade groups can affect pricing, quote behavior, approval, account terms, payment access, delivery rules, or visibility. Their meaning should be reviewed before migration scope is finalized.
+No. Customer identity is strongly tied to email address. Duplicate emails, guest orders, registered accounts, trade accounts, and customer custom fields should be reviewed carefully so order history and account meaning remain usable.
 
-**Does migrating orders into ShopWired configure payment and delivery settings?**
+**Do migrated orders configure checkout in ShopWired?**
 
-No. Migrated order history can preserve past payment and delivery labels where supported, but live payment, delivery, tax, and checkout behavior must be configured and tested in the target ShopWired store.
+No. Migrated orders can preserve historical payment, delivery, discount, tax, and fulfillment context where supported. Live checkout still depends on ShopWired payment, delivery, VAT or sales tax, customer-group, trade, and app configuration.
 
-**What happens to app-owned or integration-owned data?**
+**Can B2B pricing and trade rules be migrated as normal customer data?**
 
-App-owned or integration-owned data should be reviewed separately from ordinary products, customers, and orders. It may be reconfigured, mapped, excluded, rebuilt, or reviewed through Custom Service depending on the requirement.
+Not always. Trade accounts, pricing bands, customer-specific pricing, quote workflows, product visibility, account terms, and tax treatment may involve configuration or Custom Service review, not only customer-record transfer.
 
-**What should a ShopWired Demo Migration prove?**
+**When should ShopWired data be reviewed for Custom Service?**
 
-A Demo Migration should prove that complex products, customer groups, B2B cases, varied orders, SEO samples, content pages, app-dependent records, and integration-sensitive data can be interpreted acceptably inside ShopWired.
+Custom Service review is appropriate when source behavior depends on unsupported custom fields, app-owned records, custom platform data, external identifiers, complex product transformation, B2B logic, or integration behavior that standard migration scope cannot safely preserve.

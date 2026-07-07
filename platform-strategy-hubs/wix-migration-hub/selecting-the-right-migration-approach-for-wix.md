@@ -1,144 +1,191 @@
 # Selecting the Right Migration Approach for Wix
 
-Choosing the right Wix migration approach means deciding how much guidance, configuration review, data handling, and custom evaluation the migration requires. Wix is a hosted site-builder commerce Target Platform, so the right approach depends on more than record count. It depends on catalog complexity, product options and variants, content and SEO continuity, checkout expectations, app dependencies, Velo/API logic, service plugins, integrations, launch timing, and how much the merchant wants Next-Cart involvement during the process.
+The right Wix migration approach depends on what the merchant expects the future Wix site to operate, not only on how many records need to move. A small product catalog can require deeper planning if it depends on product options, variant-specific inventory, CMS data, memberships, custom forms, external systems, Velo/API logic, or app-owned records. A larger catalog can still follow a straightforward path when the data is supported, the structure is clear, and the merchant can validate the target result with confidence.
 
-The approach should separate five things: what the Migration Service can move, what the merchant must configure in Wix, what Add-ons can extend, what requires Custom Service review, and what should be validated through Demo Migration before Full Migration.
+For Wix, service-path selection should separate migrated records from Wix setup and site implementation. Products, customers, orders, CMS Pages, Blog Posts, media, and supported metadata may be migration scope. Checkout settings, payment providers, shipping, taxes, domain connection, site design, app configuration, member access, CMS permissions, custom code, and external integrations may require target-side work, Add-ons, Custom Service, or manual implementation. The best approach is the lightest path that protects the intended Wix operating outcome.
 
 ### What Migration Approach Means for Wix <a href="#what-migration-approach-means-for-wix" id="what-migration-approach-means-for-wix"></a>
 
-A Wix migration approach should define the operating model for the project. It should not be chosen only by store size. A smaller Wix migration with custom checkout logic can require more review than a larger standard catalog migration.
+A Wix migration approach defines scope, execution responsibility, support level, special handling, and validation depth. It should answer which records are expected to migrate, which Wix settings must be configured separately, which special requirements need Add-ons, and which unsupported or custom requirements require Custom Service review.
 
-| Planning question                     | Why it matters for Wix                                                                                                    | Approach impact                                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Is the catalog standard or custom?    | Products, options, variants, modifiers, custom catalogs, and app-owned items may need different handling.                 | Determines whether Standard Service, Add-ons, or Custom Service is appropriate. |
-| How important is content and SEO?     | CMS Pages, Blog Posts, media, product URLs, page URLs, redirects, and metadata affect launch quality.                     | May require Add-ons, Managed Service support, or additional validation.         |
-| Is checkout standard?                 | Live checkout behavior depends on Wix settings, payment, shipping, tax, discount, fulfillment, apps, and service plugins. | May require target setup outside migration scope or Custom Service review.      |
-| Are apps or integrations central?     | Wix apps, Velo/API logic, custom catalogs, and external systems may own records or workflows.                             | Often moves the project beyond basic migration.                                 |
-| How much help does the merchant need? | Some merchants can run and validate migration themselves; others need operational guidance.                               | Helps choose Standard Service or Managed Service.                               |
+The approach should be chosen from evidence, not from platform assumptions. Wix is hosted and user-friendly, but that does not make every migration simple. A content-heavy site, variant-rich store, member-based business, custom-coded workflow, or app-driven catalog may require more careful service planning than a conventional product/customer/order transfer.
 
-### Standard Service for Wix <a href="#standard-service-for-wix" id="standard-service-for-wix"></a>
+| Workstream                 | Wix example                                                                                                            | Service-path implication                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Supported migrated data    | Products, collections, customers, orders, CMS Pages, Blog Posts, images, and supported metadata.                       | May fit Standard Service or Managed Service depending on complexity and execution support needs. |
+| Supported data adjustments | Filtering old records, mapping supported fields, or configuring supported output.                                      | May fit Add-ons when requirements stay within supported behavior.                                |
+| Custom or unsupported data | App-owned records, custom fields, external IDs, Velo/API logic, CMS collection complexity, or bespoke transformations. | Requires Custom Service review.                                                                  |
+| Wix target setup           | Payments, checkout, shipping, tax, pickup, delivery, discounts, app setup, domain, site design, and member settings.   | Must be configured and tested in Wix, not assumed from migration output.                         |
 
-Standard Service is suitable when the merchant can manage the migration process and validation with limited guidance, and the store has a manageable Wix target scope.
+This distinction prevents two common errors. The first is under-scoping Wix because it is a hosted platform. The second is over-escalating every Wix site-builder or app requirement into Custom Service when the real need is target setup, supported mapping, or a bounded Add-on.
 
-| Standard Service fits when                    | Why it works                                                                                                                             | What still needs validation                                                                         |
-| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Catalog is relatively standard                | Products, images, prices, SKUs, options, variants, collections, and inventory can be sampled clearly.                                    | Variant behavior, media, collection assignment, and SEO fields.                                     |
-| Customer and order history is straightforward | Historical records can be reviewed without unusual account or integration meaning.                                                       | Customer/contact/member meaning, guest orders, totals, payment labels, tax, shipping, and statuses. |
-| Site content scope is modest                  | Priority CMS Pages, Blog Posts, and media can be identified without heavy rebuild expectations.                                          | URLs, redirects, internal links, and target design handling.                                        |
-| Merchant can configure Wix settings           | Payment, shipping, tax, discounts, checkout, fulfillment, domains, apps, and site design are not expected as automatic migration output. | Target readiness before launch.                                                                     |
+### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
 
-Standard Service should not be selected simply because the store is small. It is best when the target scope is clear and the merchant can make informed validation decisions.
+Standard Service may be suitable when the merchant needs supported Wix data migration with ordinary structure and can manage the preparation, execution, and validation responsibilities. It works best when products are straightforward, collections are not heavily dependent on custom navigation logic, customers and orders are standard, content is limited or supported, and Wix site setup can be handled by the merchant or the site team.
 
-### Managed Service for Wix <a href="#managed-service-for-wix" id="managed-service-for-wix"></a>
+Standard Service can still produce a strong Wix result when expectations are realistic. The merchant should understand that migration can transfer supported records, while site design, live checkout behavior, domains, payment setup, shipping rules, tax configuration, member access, and app setup must be handled in Wix.
 
-Managed Service is appropriate when the merchant wants Next-Cart guidance and closer handling during the migration process. It is especially useful when the store has several moving parts but does not necessarily require fully custom migration work.
+| Standard Service signal                                                | Wix-specific reason                                                                   |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Products have simple options or clear variant structures.              | Supported catalog records can be reviewed without bespoke transformation.             |
+| Collections are straightforward product groupings.                     | Product discovery does not depend on complex category-to-page reconstruction.         |
+| Inventory is product-level or clear variant-level stock.               | The merchant can validate stock meaning without external-system complexity.           |
+| Customers and orders are mainly needed for lookup and service history. | Historical records do not require advanced account, member, loyalty, or app behavior. |
+| CMS Pages and Blog Posts are limited or easy to review.                | Content migration does not dominate launch risk.                                      |
+| Site design and checkout setup are handled directly in Wix.            | The migration scope stays separate from target implementation.                        |
 
-| Managed Service signal              | Why it matters                                                                                 | Example Wix use case                                                                          |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Merchant wants operational guidance | Wix migrations can involve commerce data, site content, SEO, apps, and launch timing.          | Coordinating Demo Migration review across catalog, orders, customers, content, and redirects. |
-| Large or sensitive catalog          | Product options, variants, collections, media, and SEO need structured review.                 | Sampling best sellers, complex products, product pages, and collection paths.                 |
-| Content and SEO are important       | Pages, Blog Posts, media, slugs, redirects, and domain timing affect post-launch continuity.   | Creating a validation checklist for search-sensitive URLs and priority landing pages.         |
-| Multiple teams are involved         | Store owner, marketer, developer, agency, and operations team may own different Wix decisions. | Coordinating what is migration scope versus Wix setup.                                        |
+Standard Service becomes weaker when the merchant cannot provide clear samples, does not know which Wix features will own post-launch behavior, or expects custom source functionality to transfer automatically.
 
-Managed Service does not remove the need for target Wix configuration. It helps the merchant plan and validate the migration more carefully.
+### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
 
-### Add-ons for Wix <a href="#add-ons-for-wix" id="add-ons-for-wix"></a>
+Managed Service may be safer when the data is largely supported but the execution path needs stronger coordination. Wix migrations can involve many review points: catalog samples, variant behavior, inventory, customers, orders, content, URLs, redirects, app dependencies, target setup, and launch timing. Even when no custom transformation is required, a merchant may need help coordinating the migration steps and reviewing results.
 
-Add-ons extend specific migration needs. They are useful when the merchant requires additional handling within a defined area, such as data mapping, filtering, configuration support, or supported data extensions.
+Managed Service is especially useful when the merchant wants Next-Cart-led execution support while retaining responsibility for final verification and Wix setup decisions. It can reduce operational pressure, but it does not turn unsupported records into supported records and does not replace the need to configure Wix itself.
 
-| Add-on need              | Wix example                                                                                          | Boundary                                                                            |
-| ------------------------ | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Data filtering           | Migrating only selected products, customers, orders, Blog Posts, or date ranges.                     | Filtering does not rebuild app behavior or site design.                             |
-| Advanced mapping         | Handling category-to-collection planning, fields, product data, or customer/order attributes.        | Mapping does not guarantee unsupported source behavior becomes native Wix behavior. |
-| Content or media support | Supporting CMS Pages, Blog Posts, images, files, metadata, or priority URL context where applicable. | Page design and layout rebuild may still be implementation scope.                   |
-| Data configuration       | Improving how selected fields are interpreted during migration.                                      | It does not replace Custom Service when data is non-standard.                       |
+| Managed Service fit                    | Wix scenario                                                                                                  |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Supported scope with many review areas | Products, collections, customers, orders, CMS Pages, Blog Posts, URLs, and images all need structured review. |
+| Launch timing is sensitive             | The source store remains active while the Wix site is being prepared.                                         |
+| Content and SEO matter                 | URLs, redirects, landing pages, Blog Posts, CMS Pages, and internal links need careful sequencing.            |
+| Internal bandwidth is limited          | The merchant cannot confidently manage every migration step and review task alone.                            |
+| Demo Migration must drive decisions    | Samples need coordinated interpretation before Full Migration.                                                |
 
-Add-ons should be chosen for specific needs. They are not a substitute for Custom Service, custom development, target site design, app implementation, or integration rebuild work.
+Managed Service should be selected for coordination and execution confidence. When the underlying requirement is app-owned records, custom fields, Velo/API logic, external identifiers, or unsupported source behavior, Custom Service may still be needed.
 
-### Custom Service for Wix <a href="#custom-service-for-wix" id="custom-service-for-wix"></a>
+### When Add-ons Are the Right Fit <a href="#when-add-ons-are-the-right-fit" id="when-add-ons-are-the-right-fit"></a>
 
-Custom Service should be considered when the migration requires tailored analysis or handling beyond standard scope and specific Add-ons.
+Add-ons are useful when the merchant needs bounded changes within supported migration behavior. They help refine what is migrated, how supported fields are aligned, or how supported output is configured. They should not be used as a substitute for unsupported data migration or custom business-logic recreation.
 
-| Custom Service trigger              | Why it matters for Wix                                                                                   | Discovery focus                                                                                |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Custom catalog behavior             | Products may be controlled by external systems, custom catalog logic, or service plugins.                | Catalog ownership, identifiers, sync direction, product structure, and checkout impact.        |
-| Complex options or modifiers        | Source choices may control SKU, stock, price, media, personalization, fulfillment, or app logic.         | Which choices can map to Wix and which require custom evaluation.                              |
-| App-owned records                   | Bookings, events, memberships, pricing plans, forms, loyalty, or other apps may own business data.       | Exportability, target app setup, accepted exclusions, or custom handling.                      |
-| Velo/API or service-plugin behavior | Cart, checkout validation, shipping, fees, payment, or integrations may depend on custom logic.          | Required behavior, technical feasibility, and responsibility boundaries.                       |
-| External systems                    | ERP, CRM, PIM, WMS, accounting, shipping, payment, tax, and marketing systems may require ID continuity. | Field mapping, external references, order/customer/product identifiers, and reconnection plan. |
+For Wix, Add-ons are most useful when the merchant has clear, supported requirements such as excluding obsolete records, narrowing historical orders, mapping supported product fields, organizing supported content output, or configuring supported target data for easier Wix review.
 
-Custom Service does not automatically mean Next-Cart performs the entire target build or custom development. It means the requirement needs tailored review and agreed scope.
+| Add-on need             | Wix example                                                                                              | Boundary check                                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Data Filter Add-on      | Exclude archived products, old orders, inactive customers, unused Blog Posts, or low-value content.      | Filtering should not remove records needed for support, SEO, or launch verification.           |
+| Advanced Data Mapping   | Map supported source fields to suitable Wix product, customer, order, content, or metadata destinations. | Mapping cannot create unsupported Wix behavior or custom app logic.                            |
+| Advanced Data Configure | Adjust supported data handling so Wix records are easier to review and use.                              | Configuration must remain bounded and supported.                                               |
+| Custom Add-ons          | Handle a narrow supported requirement that has a clear output expectation.                               | Unsupported fields, app data, or bespoke transformations should move to Custom Service review. |
+
+The best Add-on request is specific. A vague request such as “make Wix match the old store” is not enough. A useful request states which supported records, fields, filters, or output behavior should change and how the result will be validated in Wix.
+
+### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
+
+Custom Service should be considered when the Wix migration requirement goes beyond supported migration behavior. The trigger is not only store size. The trigger is a need for custom evaluation, unsupported records, app-owned data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, Velo/API logic, or custom migration logic adjustment.
+
+Wix custom requirements often appear when the source store has behavior that is not stored as ordinary commerce data. Examples include product configurators, subscription or membership logic, booking or event history, custom customer fields, CRM or loyalty IDs, external inventory references, marketplace records, CMS collections, dynamic pages, custom database structures, Velo-like code, or private integrations.
+
+| Custom Service trigger                                                        | Wix-specific implication                                                             |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| App-owned product, customer, order, or content records                        | Standard migration may not include the app’s data or behavior.                       |
+| Custom fields or external identifiers                                         | The fields may need bespoke mapping or transformation to remain useful.              |
+| Velo/API or source-code-dependent behavior                                    | The requirement may need custom logic review or target-side implementation planning. |
+| Complex CMS collections or external databases                                 | Content and data relationships may not fit ordinary CMS Page or Blog Post migration. |
+| Product configurators, forms, memberships, bookings, or pricing-plan behavior | The selling model may belong to Wix apps, target setup, or custom handling.          |
+| Non-standard checkout, shipping, tax, fulfillment, or payment logic           | Live behavior may need Wix setup, service-plugin planning, or accepted redesign.     |
+
+Custom Service should be scoped through representative examples. The merchant should provide sample records, source screenshots or exports where appropriate, target expectations, and validation rules. Without examples, custom review becomes too abstract to protect the Wix outcome.
+
+### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
+
+Demo Migration should test whether the selected approach can preserve Wix-specific meaning. It should not be treated only as a preview of record counts. For Wix, Demo Migration should answer whether products, collections, variants, inventory, customers, orders, content, URLs, and special handling requirements are moving through the right path.
+
+A strong Wix Demo Migration sample set should include ordinary and difficult examples. The goal is to prove the approach, not to approve the easiest records.
+
+| Sample area                                 | Decision it should support                                                                |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Simple product                              | Whether baseline Wix catalog transfer is clean.                                           |
+| Option/variant product                      | Whether choices, variant SKUs, prices, weights, images, and inventory behave as expected. |
+| Collection/category sample                  | Whether source discovery meaning can become Wix collections, pages, menus, or redirects.  |
+| Customer with orders                        | Whether buyer identity and historical order context remain useful.                        |
+| Guest buyer or duplicate profile            | Whether identity assumptions need cleanup or acceptance rules.                            |
+| Refunded or discounted order                | Whether historical order exceptions remain readable.                                      |
+| CMS Page, Blog Post, or media-heavy content | Whether content migration, rebuild, or redirect decisions are clear.                      |
+| App/custom/external record                  | Whether the requirement belongs to Add-ons, Custom Service, target setup, or exclusion.   |
+
+If Demo Migration shows that important Wix records lose meaning, the approach should be adjusted before Full Migration. The response should not be to continue with a weak path and expect the full data set to solve structural problems.
 
 ### Entity Points and Wix Scope Planning <a href="#entity-points-and-wix-scope-planning" id="entity-points-and-wix-scope-planning"></a>
 
-Entity Points matter when eligible records are migrated. For Wix planning, Entity Points should be discussed when the source includes products, customers, orders, Blog Posts, or other supported record types that affect service scope.
+Entity Points help estimate eligible migration volume, but they do not measure Wix complexity by themselves. Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path.
 
-New Product, Customer, Order, and Blog Posts records consume Entity Points when migrated for the first time. Records already counted through the service license do not consume Entity Points again simply because the merchant performs another migration action. New eligible records may consume Entity Points when migrated for the first time, even when the merchant performs a new migration for the same migration path.
+For Wix, Entity Points should be considered alongside data meaning. A small Wix migration may require Custom Service if it includes app-owned data, CMS collections, custom fields, external identifiers, or Velo/API-dependent behavior. A larger migration may remain suitable for Standard Service or Managed Service if supported records are clear and the merchant can validate the result.
 
-| Scope question                                       | Why it matters                                                                    |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Which records are included in the initial migration? | Defines the expected baseline for service license and Entity Points planning.     |
-| Which new records may be added before launch?        | Helps plan follow-up migration needs and possible additional Entity Points usage. |
-| Are Blog Posts or content records in scope?          | Content scope can affect both migration planning and SEO validation.              |
-| Are app-owned records excluded or custom scoped?     | Prevents unsupported records from being counted as ordinary migration records.    |
+| Scope signal     | What it helps estimate                           | What it does not prove                                                                        |
+| ---------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| Product count    | Catalog volume and possible Entity Points usage. | Whether options, choices, variants, images, collections, and inventory are usable in Wix.     |
+| Customer count   | Buyer-record volume.                             | Whether contacts, members, subscribers, app participants, and external IDs remain meaningful. |
+| Order count      | Historical order volume.                         | Whether payment, refund, fulfillment, discount, and external-reference context is readable.   |
+| Blog Posts count | Content volume when relevant.                    | Whether CMS Pages, URLs, redirects, media, and site structure are launch-ready.               |
 
-### Demo Migration as the Approach Decision Point <a href="#demo-migration-as-the-approach-decision-point" id="demo-migration-as-the-approach-decision-point"></a>
+Entity Points should support planning, not replace service-path evaluation. The chosen approach still depends on supported behavior, target setup, custom requirements, execution responsibility, and validation evidence.
 
-Demo Migration should confirm whether the chosen approach is realistic. It should include easy and difficult samples.
+### Additional Migration Options and Wix Launch Timing <a href="#additional-migration-options-and-wix-launch-timing" id="additional-migration-options-and-wix-launch-timing"></a>
 
-| Demo sample                      | What to confirm                                                                                    | Approach signal                                                                                       |
-| -------------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Simple and complex products      | Options, variants, prices, SKUs, inventory, images, collections, and SEO.                          | Standard if clean; Add-ons or Custom Service if meaning is lost.                                      |
-| Orders                           | Line items, totals, discounts, tax, shipping, payment labels, statuses, notes, and customer links. | Managed Service if review needs coordination; Custom Service if order meaning depends on custom data. |
-| Customers, contacts, and members | Account, contact, CRM, subscriber, and membership meaning.                                         | Additional review if customer identity is more than commerce history.                                 |
-| Pages, Blog Posts, media, URLs   | Content display, media references, slugs, metadata, internal links, and redirects.                 | Add-ons or Managed Service if SEO continuity is important.                                            |
-| Apps and integrations            | App-owned fields, external IDs, service-plugin behavior, and API dependencies.                     | Custom Service if business behavior depends on non-standard logic.                                    |
+Additional Migration Options become relevant when source data continues changing while the Wix site is being prepared. New products, customers, orders, Blog Posts, or content updates may appear after an initial migration run. Mapping or filtering decisions may also change after Demo Migration.
 
-### How Additional Migration Options Affect Approach Planning <a href="#how-additional-migration-options-affect-approach-planning" id="how-additional-migration-options-affect-approach-planning"></a>
+The merchant may need to continue the migration with the last used configuration, continue with a new configuration, or perform a new migration when the target result should be replaced. The choice should be tied to the intended Wix outcome.
 
-Additional Migration Options are relevant when migration activity continues after the initial migration. For Wix, follow-up handling should be planned carefully because new products, customers, orders, Blog Posts, media, URLs, app data, or integration fields can affect launch readiness.
+| Situation                                                           | Likely action logic                        | Validation emphasis                                                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| New source records were added and configuration remains acceptable. | Continue with the last used configuration. | Check newly migrated records and regression samples.                                                 |
+| Field mapping, filters, or supported configuration changed.         | Continue with a new configuration.         | Check affected fields, record groups, and samples.                                                   |
+| The previous Wix target result should be replaced.                  | Perform a new migration.                   | Validate the refreshed target result and confirm outdated migrated data is no longer relied on.      |
+| The Wix site launch is delayed while source sales continue.         | Plan continuation timing before launch.    | Confirm new orders, customers, products, and content updates are included or intentionally excluded. |
 
-| Follow-up situation                               | Wix planning implication                                                                       |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Source store keeps receiving orders before launch | New orders and customers may need validation before final cutover.                             |
-| New products or content are added                 | Product, collection, media, page, Blog Post, SEO, and URL checks may need to be repeated.      |
-| Apps or integrations change                       | Follow-up data may include fields or dependencies that were not present during Demo Migration. |
-| URL or content structure changes                  | Redirect and internal-link planning may need updates.                                          |
+Additional Migration Options should not be presented as a broad workaround for poor preparation. They are useful when the migration timing and target-result expectation are clear.
 
-Additional Migration Options should not be treated as a shortcut around validation. They should be planned as controlled follow-up activity.
+### Signals That the Chosen Wix Approach Is Too Light <a href="#signals-that-the-chosen-wix-approach-is-too-light" id="signals-that-the-chosen-wix-approach-is-too-light"></a>
 
-### Wix Approach Decision Matrix <a href="#wix-approach-decision-matrix" id="wix-approach-decision-matrix"></a>
+The chosen approach is too light when it treats Wix as a simple import destination while ignoring site-commerce complexity. The warning signs usually appear in sample review, not in record counts.
 
-| Store condition                                                                                     | Recommended approach emphasis                        |
-| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| Standard catalog, simple history, merchant can self-validate                                        | Standard Service with strong Demo Migration review   |
-| Larger store, SEO-sensitive content, or many stakeholders                                           | Managed Service with structured validation           |
-| Specific data mapping, filtering, or supported extension need                                       | Add-ons with clear boundaries                        |
-| Custom catalog, app-owned records, checkout logic, Velo/API dependency, or external-system workflow | Custom Service review                                |
-| Ongoing source activity before launch                                                               | Additional Migration Options with renewed validation |
+| Warning signal                                                                                    | Likely response                                                                            |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Product options, choices, variants, and inventory cannot be validated confidently.                | Rework catalog scope or consider stronger execution/custom review.                         |
+| Source categories are expected to recreate menus, pages, filters, and SEO paths automatically.    | Separate collection migration from site structure and redirect planning.                   |
+| Customer records include members, contacts, subscribers, loyalty, bookings, or app participation. | Classify identity types and review supported versus custom paths.                          |
+| Historical orders are expected to configure live Wix checkout.                                    | Separate migrated history from payment, shipping, tax, and order-setting setup.            |
+| CMS Pages, Blog Posts, dynamic pages, or custom data collections are central to launch.           | Plan content migration, rebuild, redirects, CMS setup, or Custom Service review.           |
+| App-owned fields, Velo/API logic, or external IDs are business-critical.                          | Do not rely on generic migration scope; evaluate Add-ons or Custom Service as appropriate. |
+| The merchant cannot define who will validate Wix setup and migration output.                      | Managed Service may help coordination, but acceptance criteria must still be defined.      |
+
+These signals should be addressed before Full Migration because they usually become harder to resolve when launch deadlines are close.
+
+### Choosing the Practical Wix Path <a href="#choosing-the-practical-wix-path" id="choosing-the-practical-wix-path"></a>
+
+The practical Wix path is the lightest service path that can still protect the future site-commerce result. Standard Service may be enough for supported, straightforward data when the merchant can manage target setup and validation. Managed Service is safer when the data is supported but execution and review coordination matter. Add-ons help with supported filtering, mapping, or configuration. Custom Service is required when custom, unsupported, app-owned, external-system, or bespoke transformation needs affect the migration result.
+
+A ready approach can be summarized with four statements:
+
+* which Wix records should migrate;
+* which Wix settings and site elements must be configured or rebuilt separately;
+* which Add-ons or Custom Service requirements are in scope;
+* which Demo Migration samples must pass before Full Migration.
+
+If those statements are not clear, the service path should not be treated as finalized. Wix migration quality depends on matching the chosen approach to the actual site-commerce environment the merchant wants to operate after launch.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-The right Wix migration approach depends on how closely the source store can be represented through Wix-supported commerce, content, app, and integration structures. Standard Service fits clear and manageable migrations. Managed Service fits merchants that need guidance and coordination. Add-ons address specific migration needs. Custom Service should be used when Wix success depends on non-standard data or behavior. Additional Migration Options should be planned when follow-up migration activity affects launch readiness.
+Selecting the right Wix migration approach requires more than estimating record volume. The approach must account for Wix Stores catalog structure, options, choices, variants, inventory, customers, contacts, members, orders, CMS Pages, Blog Posts, URLs, apps, Velo/API logic, external systems, target-side setup, Entity Points, Additional Migration Options, and validation responsibility.
+
+The right path is not always the most complex one. It is the path that separates supported migration scope from Wix setup, identifies where Add-ons are enough, escalates true custom requirements to Custom Service review, and uses Demo Migration to prove that the Wix target result will support real selling, site experience, and operational review.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for Wix migration?**
+**When is Standard Service enough for a Wix migration?**
 
-Standard Service can be enough when the catalog, customers, orders, content, and target setup are manageable and the merchant can validate results independently.
+Standard Service may be enough when the merchant needs supported Wix records with ordinary structure, can manage Wix setup directly, and can validate products, collections, customers, orders, content, and URLs without extensive coordination or custom handling.
 
-**When should a Wix migration use Managed Service?**
+**When should Managed Service be considered for Wix?**
 
-Managed Service is useful when the merchant wants guidance, has large or SEO-sensitive data, needs coordinated validation, or has several teams involved in launch decisions.
+Managed Service is useful when the migration remains within supported capability but the merchant needs stronger execution support, coordination, sample review, launch-window planning, or help managing migration steps before Full Migration.
 
-**When does Wix require Custom Service review?**
+**How are Add-ons different from Custom Service for Wix?**
 
-Custom Service should be reviewed when source behavior depends on custom catalogs, complex product choices, app-owned records, Velo/API logic, service plugins, or external systems.
+Add-ons support bounded filtering, mapping, or configuration within supported migration behavior. Custom Service is for unsupported app data, custom fields, external identifiers, Velo/API logic, bespoke transformation, Custom Platform handling, or custom migration logic adjustment.
 
-**Do Add-ons replace Custom Service for Wix?**
+**Do Entity Points decide whether a Wix migration is complex?**
 
-No. Add-ons address specific migration needs. They are not a substitute for Custom Service, target site design, app implementation, custom development, or integration rebuild work.
+No. Entity Points help estimate eligible migration volume, but Wix complexity depends on data meaning, site setup, custom behavior, app ownership, content structure, external references, and validation burden.
 
-**How should Additional Migration Options be planned for Wix?**
+**What should Demo Migration prove before Full Migration?**
 
-They should be planned as controlled follow-up migration activity with renewed validation for any new records, content, URLs, app data, or integration fields introduced after the initial migration.
+Demo Migration should prove that representative Wix records behave as expected: products, variants, collections, inventory, customers, orders, CMS Pages, Blog Posts, URLs, and any app/custom samples that affect the selected service path.

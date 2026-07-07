@@ -1,134 +1,168 @@
 # Storeden Fit: Ideal and Non-Ideal Migration Profiles
 
-Storeden is usually strongest when the target store should operate as a hosted cloud e-commerce environment with practical catalog management, inventory control, storefront themes, order handling, payments, logistics, apps, marketplace channels, and business-system connections.
+Storeden fit should be judged by operating alignment, not by store size alone. A small store can be a poor Storeden fit if it depends on custom checkout logic, undocumented marketplace automation, or source-code behavior that cannot be represented in the target environment. A larger store can be a strong fit when its catalog, order history, channels, integrations, and storefront expectations can be translated into Storeden’s managed commerce model.
 
-Fit depends on more than whether products, customers, and orders can be moved. A good Storeden migration target should also support how the business sells, manages stock, handles channels, interprets historical orders, presents the storefront, and connects to external systems after launch.
+The decision should answer a practical question: can the business use Storeden after migration without losing the commercial behavior that matters? That means reviewing Products, Categories, Customers, Orders, Reviews, Coupons, CMS content, SEO values, stock, marketplace context, payment history, logistics context, external IDs, apps, and integration dependencies through Storeden-specific assumptions.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+A good fit decision does not require every old behavior to be copied. It requires knowing what must be preserved, what can be configured, what should be rebuilt, what can be simplified, and what needs Custom Service review.
 
-The main question is whether the current store can move into Storeden without losing the business meaning behind its catalog, customer records, orders, sales channels, storefront content, and connected workflows.
+### Storeden Fit Decision Framework <a href="#storeden-fit-decision-framework" id="storeden-fit-decision-framework"></a>
 
-A store may be a strong fit when its commercial model can be represented through Storeden’s hosted structures, configuration, apps, themes, and integrations. It becomes a higher-risk fit when essential behavior depends on custom source code, unusual database relationships, app-owned records, marketplace-specific identifiers, unsupported B2B behavior, or workflows that must remain identical after migration.
+The best Storeden fit reviews compare business behavior against target operating reality. Storeden is positioned around cloud commerce, multichannel selling, catalog and inventory management, professional order handling, integrated payments, logistics, themes, security, apps, plug-ins, API/developer resources, marketplace channels, and TeamSystem ecosystem connections. That makes it attractive for merchants that want a managed commerce environment, but it also means fit depends on how much source behavior can be translated into those structures.
 
-### What Makes Storeden a Strong Fit <a href="#what-makes-storeden-a-strong-fit" id="what-makes-storeden-a-strong-fit"></a>
-
-#### Hosted cloud operation <a href="#hosted-cloud-operation" id="hosted-cloud-operation"></a>
-
-Storeden is suitable for merchants that want a managed commerce environment instead of maintaining a self-hosted application stack. The fit is strongest when the business wants to concentrate on catalog, channels, orders, storefront, payments, logistics, and integrations rather than server maintenance or low-level platform ownership.
-
-This does not mean every custom requirement disappears. It means custom behavior should be reviewed as target configuration, app behavior, integration work, accepted change, or Custom Service scope instead of being treated as a simple database transfer.
-
-#### Catalog and inventory management <a href="#catalog-and-inventory-management" id="catalog-and-inventory-management"></a>
-
-Storeden can be a practical target when the current catalog depends on structured products, product images, categories, stock levels, prices, SKUs, variants, attributes, and store-management workflows. These are central areas to review during fit evaluation because they shape how the new store will be managed after launch.
-
-A strong fit usually has products that can be represented clearly in Storeden’s target catalog model. A weaker fit appears when the source catalog relies on deeply custom option logic, nonstandard bundles, unusual inventory relationships, or custom fields that drive purchasing decisions but do not have an obvious Storeden equivalent.
-
-#### Multichannel and marketplace selling <a href="#multichannel-and-marketplace-selling" id="multichannel-and-marketplace-selling"></a>
-
-Storeden can fit merchants that sell through more than one channel or expect the new store to work with marketplace-related operations. When marketplace selling matters, fit should be judged by how products, stock, identifiers, categories, prices, and order context will be handled in Storeden and connected services.
-
-A strong fit does not require every marketplace detail to migrate automatically. It requires a clear plan for what should be migrated, what should be mapped, what should be reconfigured, and what should be handled separately.
-
-#### Apps, integrations, and TeamSystem ecosystem connections <a href="#apps-integrations-and-teamsystem-ecosystem-connections" id="apps-integrations-and-teamsystem-ecosystem-connections"></a>
-
-Storeden can be a good choice when the business wants commerce operations connected to apps, business software, logistics, accounting, inventory, ERP, or TeamSystem ecosystem workflows. These connections can strengthen the target operating model, especially when the merchant wants a hosted commerce platform that is not isolated from business management systems.
-
-The fit becomes more complex when external systems hold identifiers, rules, statuses, pricing logic, marketplace mappings, warehouse behavior, or accounting references that must remain meaningful after migration. Those dependencies should be reviewed before Storeden is treated as a straightforward target.
-
-#### Storefront themes and practical presentation control <a href="#storefront-themes-and-practical-presentation-control" id="storefront-themes-and-practical-presentation-control"></a>
-
-Storeden can fit merchants that are comfortable rebuilding or configuring the storefront presentation through the target theme and content environment. This is often suitable when the business needs a professional storefront but does not need the exact source theme, source code, or custom frontend behavior to move unchanged.
-
-It is a weaker fit when the existing design depends on custom frontend application logic, checkout-level code, source-specific theme behavior, or page structures that cannot be reproduced through Storeden’s target theme and configuration model without extra work.
-
-### Where Storeden Is Often a Strong Fit <a href="#where-storeden-is-often-a-strong-fit" id="where-storeden-is-often-a-strong-fit"></a>
-
-| Strong-fit scenario                                                              | Why Storeden can fit                                                                                                                 | What should still be checked                                                                                                  |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Merchant wants hosted cloud commerce                                             | The business prefers a managed platform environment rather than self-hosted software ownership.                                      | Confirm that essential custom logic can be represented through target configuration, apps, integrations, or accepted changes. |
-| Catalog depends on products, variants, attributes, images, categories, and stock | Storeden planning naturally centers on catalog and inventory operations.                                                             | Test products with complex variants, attributes, SKUs, stock behavior, category placement, and image requirements.            |
-| Business sells through multiple channels                                         | Storeden is suitable for merchants that need marketplace and channel-oriented commerce planning.                                     | Review marketplace identifiers, publication rules, stock expectations, order origin, and channel-specific fields.             |
-| Store needs app and integration support                                          | Apps, APIs, business-system connections, logistics, accounting, inventory, or TeamSystem workflows can support the target operation. | Identify which records migrate, which workflows are reconfigured, and which integration identifiers must remain meaningful.   |
-| Merchant accepts target theme configuration                                      | A hosted storefront can be rebuilt or configured around Storeden’s theme and content model.                                          | Check priority pages, menus, product pages, category paths, URLs, metadata, banners, and design expectations.                 |
-| Historical orders mainly need readable business context                          | Orders can be reviewed for customer service, finance, fulfillment, and management continuity.                                        | Confirm payment labels, shipping methods, tracking, taxes, discounts, statuses, marketplace origin, and external references.  |
-
-### Where Storeden Is Often a Weaker Fit <a href="#where-storeden-is-often-a-weaker-fit" id="where-storeden-is-often-a-weaker-fit"></a>
-
-Storeden is less suitable when the business expects a hosted platform migration to preserve source-specific custom behavior without review. A weaker fit does not always mean Storeden should be rejected, but it does mean the migration needs clearer scoping, target-behavior confirmation, and possibly Custom Service.
-
-| Higher-risk scenario                                                           | Why fit is weaker                                                                                                           | Practical implication                                                                                                                          |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Full source-code or database control is required                               | Storeden is a hosted commerce platform, not a self-hosted codebase.                                                         | Custom source behavior should be translated into supported Storeden structures, apps, integrations, accepted changes, or Custom Service scope. |
-| Product logic is highly customized                                             | Complex options, custom fields, bundles, pricing rules, or inventory relationships may not map cleanly.                     | Demo Migration should include the most complex product structures before fit is accepted.                                                      |
-| B2B behavior depends on custom logic                                           | B2B pricing, customer groups, approvals, restricted catalogs, or account rules may be app- or configuration-dependent.      | Confirm whether the target account and available apps can support the required B2B behavior.                                                   |
-| Marketplace operations depend on exact identifiers and automation              | Marketplace listings, product feeds, synchronization rules, and channel-specific fields can hold business-critical meaning. | Marketplace dependencies may require mapping, reconfiguration, or Custom Service review.                                                       |
-| ERP, accounting, POS, logistics, or inventory systems control daily operations | External systems may define workflow meaning beyond ordinary product and order records.                                     | Integration IDs, status logic, stock synchronization, invoicing references, and workflow rules should be reviewed before scope is finalized.   |
-| The source theme must transfer unchanged                                       | Source themes and Storeden themes do not behave as simple one-to-one data records.                                          | Storefront presentation may need target theme setup, content reconstruction, or design adjustment.                                             |
-| App-owned or API-owned data must be preserved                                  | Apps and custom API workflows may store data outside standard commerce records.                                             | Unsupported app, plugin, API, or developer-owned data moves into Custom Service review when it must be migrated or transformed.                |
+| Fit dimension          | Strong-fit signal                                                                                    | Conditional or high-risk signal                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Catalog structure      | Products, variants, attributes, categories, stock, images, and prices can be represented clearly.    | Products depend on custom builders, unusual option logic, source-only fields, or undocumented inventory rules.          |
+| Marketplace role       | Marketplace channels can be reconnected or reconfigured after catalog migration.                     | Existing marketplace IDs, feeds, channel categories, and synchronization states are business-critical but undocumented. |
+| Storefront expectation | The business accepts target theme setup and content reconstruction.                                  | Launch depends on copying the exact source theme, scripts, page-builder behavior, or frontend workflow.                 |
+| Order history          | Historical orders mainly need readable service, finance, fulfillment, and management context.        | Orders must preserve integration-sensitive workflow states, external finance IDs, or marketplace automation state.      |
+| Integrations           | ERP, accounting, POS, logistics, inventory, and TeamSystem dependencies are known and can be scoped. | External systems define product, stock, invoice, fulfillment, customer, or order meaning without a clear data map.      |
+| Service scope          | Most needs fit supported records, target setup, Add-ons, or clear Custom Service review.             | The project assumes unsupported app data or custom behavior will be migrated automatically.                             |
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-| Merchant profile                              | Why the fit is strong                                                                                                           | Recommended planning focus                                                                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Hosted-commerce merchant                      | The business wants a cloud commerce platform and does not need to maintain the source application stack.                        | Confirm the target account, enabled features, apps, theme expectations, payment setup, logistics setup, and channel requirements. |
-| Catalog-led retailer                          | Products, variants, attributes, categories, stock, prices, and images are central to store operations.                          | Use product samples that expose variant, inventory, category, and image behavior during Demo Migration review.                    |
-| Multichannel seller                           | The merchant needs storefront and marketplace planning together rather than a store-only migration view.                        | Review marketplace product fields, order origin, channel identifiers, stock rules, and category/channel publication requirements. |
-| TeamSystem-connected business                 | The merchant expects e-commerce operations to connect with management, accounting, ERP, POS, inventory, or logistics workflows. | List external-system identifiers and workflow dependencies before migration scope is approved.                                    |
-| Practical storefront rebuilder                | The merchant accepts target theme configuration instead of expecting the source theme to move unchanged.                        | Prepare priority page, menu, product-page, category-page, metadata, redirect, and visual-layout samples.                          |
-| Merchant with standard historical order needs | Historical orders mainly need to remain readable for customer service, finance, fulfillment, and management reference.          | Validate varied order samples, including payment, tax, shipping, tracking, status, customer, discount, and marketplace context.   |
+#### Merchant moving into managed cloud commerce <a href="#merchant-moving-into-managed-cloud-commerce" id="merchant-moving-into-managed-cloud-commerce"></a>
+
+Storeden is a strong candidate when the merchant wants to move away from infrastructure burden, platform maintenance, or a fragmented stack and into a managed commerce environment. This fit is strongest when the business is ready to configure Storeden as the new operating system rather than expecting the old implementation to appear unchanged.
+
+The migration focus should be on preserving business meaning: catalog structure, customers, historical orders, content, SEO priorities, marketplace context, and integration-sensitive identifiers. Source-specific technical implementation should be reviewed and translated into Storeden setup, apps, integrations, accepted changes, or Custom Service scope.
+
+#### Catalog and inventory-led retailer <a href="#catalog-and-inventory-led-retailer" id="catalog-and-inventory-led-retailer"></a>
+
+Storeden can fit retailers whose selling model depends on a structured catalog, clear categories, stock visibility, images, prices, SKUs, attributes, and product availability. These stores benefit from a migration plan that treats the catalog as an operating system, not just a list of product records.
+
+This fit is strongest when representative products can be tested early. Demo Migration should include simple products, variant products, attribute-rich products, marketplace-relevant products, products with stock sensitivity, products with important images, and products tied to external IDs or SKU conventions.
+
+| Product sample          | Why it should be included                           | What a good result proves                                                                         |
+| ----------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Simple product          | Establishes baseline field mapping.                 | Name, SKU, price, image, description, category, and visibility are understandable.                |
+| Variant product         | Tests buying-choice structure.                      | Options, combinations, price, stock, SKU, and image behavior make sense in Storeden.              |
+| Attribute-rich product  | Tests filtering, comparison, or marketplace fields. | Important attributes remain visible, useful, or mapped to the right target place.                 |
+| Stock-sensitive product | Tests operational confidence.                       | Inventory values and availability behavior are not misleading.                                    |
+| Marketplace product     | Tests channel readiness.                            | Channel-related values are identified and scoped instead of hidden inside generic product fields. |
+
+#### Multichannel seller <a href="#multichannel-seller" id="multichannel-seller"></a>
+
+Storeden is often a strong candidate for merchants that need storefront and marketplace planning together. Marketplace channels such as Amazon, eBay, Facebook, AliExpress, or other sales channels may influence product fields, category choices, availability rules, order origin, inventory expectations, and post-launch synchronization.
+
+This profile is strong when marketplace behavior is understood and documented. It becomes conditional when the business depends on channel IDs, automated feeds, or marketplace-specific fulfillment behavior that nobody has mapped.
+
+#### TeamSystem-connected business <a href="#teamsystem-connected-business" id="teamsystem-connected-business"></a>
+
+Storeden can be a strong target when the merchant’s commerce operations are intended to connect with TeamSystem ecosystem workflows, accounting, ERP, inventory, payments, logistics, or other management systems. The fit improves when those connections are planned as part of the target operating model, not discovered after data migration.
+
+External IDs and workflow ownership are the key issue. If Storeden will connect to accounting or ERP tools after launch, the migration should preserve the fields that allow reconciliation, reporting, and ongoing synchronization where supported.
+
+#### Merchant ready to rebuild storefront presentation <a href="#merchant-ready-to-rebuild-storefront-presentation" id="merchant-ready-to-rebuild-storefront-presentation"></a>
+
+Storeden can fit teams that want a practical storefront backed by themes, responsive presentation, content tools, and target configuration. The best fit occurs when the business accepts that visual continuity requires Storeden theme setup, content review, menu planning, image review, SEO planning, and redirect management.
+
+This is not a weakness. It is a healthy migration expectation. Trying to migrate a source theme as if it were a standard data entity usually creates disappointment. Rebuilding presentation around Storeden’s target model produces a clearer launch plan.
+
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
+
+Some merchants are not poor Storeden fits, but they need stronger scoping before commitment. These cases usually involve business behavior that may be supported, partially supported, app-dependent, integration-dependent, or better handled through Custom Service.
+
+| Conditional profile          | Why it can still work                                                                               | What must be clarified first                                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| B2B or wholesale merchant    | Storeden may support account-oriented commerce through configuration, apps, or ecosystem workflows. | Customer groups, restricted catalogs, negotiated pricing, tax handling, payment terms, approvals, and sales-rep relationships. |
+| Marketplace-dependent seller | Multichannel selling aligns with Storeden’s positioning.                                            | Listing IDs, feed ownership, marketplace categories, synchronization rules, stock ownership, and marketplace order handling.   |
+| Integration-heavy merchant   | Storeden can sit near business-system workflows.                                                    | Which system owns products, stock, invoices, customer IDs, fulfillment status, and reporting values.                           |
+| App-dependent store          | Apps and plug-ins may extend target behavior.                                                       | Which old app data must be preserved, which target apps replace old behavior, and what needs Custom Service.                   |
+| SEO-sensitive store          | URLs, metadata, categories, and content can be planned.                                             | Priority URL list, redirect map, metadata samples, page hierarchy, and internal-link behavior.                                 |
+
+Conditional fit should end with a clear handling plan. If the plan is “we will see after migration,” the project is not ready. If the plan identifies supported records, target setup tasks, Add-ons, accepted changes, and Custom Service items, Storeden can remain a viable target.
 
 ### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-| Merchant profile                   | Why the profile is higher risk                                                                                                                    | Recommended next step                                                                                                       |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Custom-platform source merchant    | The source store does not follow a standard supported platform structure or uses bespoke data relationships.                                      | Treat the source as Custom Platform and review the project through Custom Service.                                          |
-| Deeply customized product merchant | The catalog depends on custom product builders, advanced option logic, nonstandard bundles, custom price rules, or unusual inventory behavior.    | Prepare representative products for Demo Migration and Custom Service review if supported structures are not enough.        |
-| Complex B2B merchant               | Customer-specific pricing, restricted catalogs, approvals, account hierarchies, or negotiated terms control buying behavior.                      | Confirm whether Storeden account features, apps, or Custom Service can support the required B2B outcome.                    |
-| Integration-heavy merchant         | ERP, accounting, POS, warehouse, marketplace, logistics, or API workflows define product, stock, order, or finance meaning.                       | Map external identifiers, ownership of each workflow, and whether the migration must preserve or recreate those references. |
-| Marketplace-dependent merchant     | Sales depend on exact marketplace listing IDs, product feeds, channel-specific categories, synchronization rules, or marketplace order workflows. | Separate store catalog migration from marketplace synchronization and channel reconfiguration planning.                     |
-| Theme-code-dependent merchant      | Launch quality depends on the exact source theme, custom frontend behavior, or source-specific page logic.                                        | Plan theme rebuild, content restructuring, URL review, and accepted design changes separately from data migration.          |
-| App-data-dependent merchant        | Critical records are stored or generated by apps, plugins, scripts, or custom API workflows outside standard commerce data.                       | Identify app-owned records early and move unsupported app or API data into Custom Service review.                           |
+#### Store requiring unrestricted source-code control <a href="#store-requiring-unrestricted-source-code-control" id="store-requiring-unrestricted-source-code-control"></a>
 
-### What Should Be Confirmed Before Choosing Storeden <a href="#what-should-be-confirmed-before-choosing-storeden" id="what-should-be-confirmed-before-choosing-storeden"></a>
+Storeden is a managed commerce platform. It is not a direct replacement for source environments where the merchant controls the full application stack, database schema, server behavior, and custom backend logic. A merchant can still move to Storeden, but the migration must translate old behavior into target-supported structures.
 
-Before choosing Storeden as the Target Platform, the migration team should confirm whether the current store’s most important commercial behavior can be represented in the new hosted environment.
+This profile is high risk when the business expects exact technical continuity rather than operational continuity. The better question is not “can the code move?” but “what business behavior did the code produce, and how should Storeden support or replace it?”
 
-Key confirmation areas include:
+#### Store with deeply customized product logic <a href="#store-with-deeply-customized-product-logic" id="store-with-deeply-customized-product-logic"></a>
 
-* whether product types, variants, attributes, SKUs, inventory rules, images, categories, filters, and marketplace-facing fields can be represented correctly;
-* whether customer, account, contact, B2B, or group-related records carry behavior that affects pricing, access, orders, or marketing;
-* whether historical orders need only readable context or must preserve integration-sensitive references;
-* whether payments, TS Pay, tax, logistics, shipping, tracking, discounts, refunds, and statuses require target setup beyond migrated order history;
-* whether Amazon, eBay, Facebook, AliExpress, or other marketplace workflows depend on identifiers or publication rules;
-* whether apps, plugins, API workflows, ERP, accounting, POS, logistics, inventory, or TeamSystem ecosystem connections hold migration-critical data;
-* whether the storefront can be rebuilt through Storeden themes, content structures, navigation, metadata, redirects, and domain planning;
-* whether the migration path fits Standard Service, needs Managed Service execution, benefits from Add-ons, or requires Custom Service.
+Custom product builders, advanced configurators, bundled products, nonstandard option dependencies, customer-specific price calculations, or source-only attribute logic can make Storeden fit more complex. These features may not be ordinary product data.
+
+The fit decision should use product samples that expose the real complexity. If the most complex products cannot be represented cleanly through Storeden structures, target apps, accepted simplification, or Custom Service, Storeden may still be possible but should not be treated as a straightforward migration.
+
+#### Store with undocumented marketplace automation <a href="#store-with-undocumented-marketplace-automation" id="store-with-undocumented-marketplace-automation"></a>
+
+Storeden’s multichannel orientation can be valuable, but marketplace automation is risky when undocumented. If old marketplace behavior depends on hidden rules, app-generated fields, feed scripts, external listings, or channel-specific fulfillment logic, the migration needs channel-by-channel scoping.
+
+The risk is not just data loss. The risk is operational confusion after launch: products visible in the storefront but not marketplace-ready, stock values that do not synchronize as expected, or orders whose channel context is not usable.
+
+#### Store whose apps or external systems own core business data <a href="#store-whose-apps-or-external-systems-own-core-business-data" id="store-whose-apps-or-external-systems-own-core-business-data"></a>
+
+Some stores appear standard until app-owned or external-system-owned data is reviewed. A loyalty app may own customer segmentation. A feed app may own marketplace fields. An ERP may own product IDs and stock. A fulfillment system may own shipping states. A reporting system may rely on custom tags.
+
+This profile needs careful service-path planning. Add-ons may support bounded mapping or filtering. Custom Service is needed when unsupported app, plug-in, API, external-ID, custom-field, Custom Platform, or bespoke transformation requirements carry business value.
+
+### Non-Ideal Fit Signals <a href="#non-ideal-fit-signals" id="non-ideal-fit-signals"></a>
+
+A non-ideal fit signal does not automatically reject Storeden, but it indicates that the project needs a more controlled decision before migration begins.
+
+| Signal                                    | Why it matters                                                                                            | Better decision response                                                                     |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| The source theme must be copied exactly   | Theme files and source layout logic are not ordinary migration records.                                   | Plan target theme setup, content reconstruction, design acceptance, and SEO checks.          |
+| Marketplace data is undocumented          | Multichannel records may carry identifiers and channel rules outside standard products.                   | Map marketplace fields, order origin, feed ownership, and stock rules before scope approval. |
+| External IDs are unknown                  | ERP, accounting, logistics, POS, and inventory tools may depend on stable IDs.                            | Identify IDs that must be preserved, mapped, or recreated.                                   |
+| Customers have hidden behavior            | B2B rules, groups, discounts, tax handling, or marketing consent may not appear in basic customer fields. | Sample customers by behavior, not only by record count.                                      |
+| Orders must drive live workflow           | Historical orders are not the same as live checkout, payment, and fulfillment setup.                      | Separate order-history migration from target workflow configuration.                         |
+| Unsupported app data is business-critical | App records may not fit supported entities.                                                               | Move app-owned data into Custom Service review.                                              |
+
+### Fit Testing Before Committing <a href="#fit-testing-before-committing" id="fit-testing-before-committing"></a>
+
+The best way to test Storeden fit is to use representative migration evidence, not optimistic assumptions. Demo Migration review should include the records that will expose Storeden’s suitability for the business model.
+
+Useful samples include complex products, variant products, stock-sensitive products, marketplace products, customer groups, B2B accounts, varied orders, payment and shipping examples, SEO-sensitive URLs, CMS pages, app-dependent records, and external-system IDs.
+
+| Test area             | Representative sample                                                                                           | Fit question                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Catalog               | Complex products, variants, attributes, categories, images, stock, marketplace products.                        | Can products be sold, found, managed, and synchronized in Storeden?          |
+| Customer/account data | Customers with addresses, groups, B2B behavior, marketing context, or order history.                            | Does customer meaning survive beyond name and email?                         |
+| Orders                | Orders with discounts, taxes, payment labels, shipping labels, tracking, marketplace origin, refunds, or notes. | Is order history readable for service, finance, fulfillment, and management? |
+| Content and SEO       | Priority pages, product URLs, category URLs, redirects, metadata, and internal links.                           | Can launch preserve discovery and trust?                                     |
+| Integrations          | ERP IDs, accounting references, warehouse values, marketplace IDs, and app-owned fields.                        | Are external workflows scoped rather than assumed?                           |
+
+### Choosing the Right Level of Migration Support <a href="#choosing-the-right-level-of-migration-support" id="choosing-the-right-level-of-migration-support"></a>
+
+Storeden fit also depends on the service path. A store can be a good platform fit but a poor Standard Service fit if the project contains unsupported custom data, heavy app dependencies, or unclear integrations.
+
+Standard Service may be enough when supported entities are well structured and the merchant can validate target results. Managed Service can be useful when the business wants Next-Cart to operate the migration with more execution support. Add-ons can support bounded filtering, mapping, or configuration choices. Custom Service is the right review path for unsupported data, custom fields, external IDs, Custom Platform behavior, app-owned records, or bespoke transformation needs.
+
+| Migration condition                          | Better handling path | Reason                                                                                  |
+| -------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------- |
+| Supported records with predictable structure | Standard Service     | The project mainly needs accurate entity migration and normal validation.               |
+| Merchant wants Next-Cart-led execution       | Managed Service      | Execution support and sequence control matter more than self-managed operation.         |
+| Supported output needs bounded refinement    | Add-ons              | Filtering, mapping, or configuration adjustments can improve target results.            |
+| Unsupported or bespoke data carries value    | Custom Service       | App, API, custom-field, external-ID, or Custom Platform behavior needs explicit review. |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Storeden is often a strong Target Platform when the merchant wants hosted cloud commerce, centralized catalog and inventory management, marketplace-aware selling, practical storefront control, order management, payment and logistics configuration, apps, and business-system connections. It is a weaker fit when the business depends on source-level control, custom checkout logic, deeply customized product behavior, unsupported app data, or exact preservation of external-system workflows without review.
+Storeden is a strong migration target when the merchant wants managed cloud commerce, structured catalog and inventory control, multichannel selling, practical order management, payment and logistics configuration, storefront themes, apps, and TeamSystem ecosystem alignment. It is a conditional or high-risk target when the business depends on exact source-code behavior, custom product logic, undocumented marketplace automation, app-owned records, or external-system workflows that have not been mapped.
 
-A focused Demo Migration should test the records that carry real business meaning: complex products, variants, attributes, stock, categories, marketplace-related products, customers or B2B examples, varied orders, payment and shipping context, app-dependent records, external identifiers, priority URLs, and storefront content. If those samples fit cleanly, Storeden may be a practical target. If they expose unsupported behavior, the migration should be planned with Add-ons, configuration work, accepted changes, or Custom Service before Full Migration.
+The best fit decision is evidence-based. A strong Storeden candidate can show representative products, customer records, orders, content, marketplace cases, integration IDs, and SEO examples that can be validated in the target environment. If those samples expose unsupported assumptions, the project should adjust scope, use Add-ons where appropriate, or enter Custom Service review before Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Who is Storeden usually a good fit for?**
+**What kind of merchant is usually a strong Storeden fit?**
 
-Storeden is usually a good fit for merchants that want hosted cloud e-commerce with catalog management, inventory control, storefront themes, payment and logistics setup, marketplace channels, apps, and business-system connections.
+Storeden is usually strongest for merchants that want managed cloud commerce, structured catalog and inventory control, multichannel selling, payment and logistics configuration, storefront themes, apps, and possible TeamSystem ecosystem alignment.
 
-**When is Storeden a weaker migration target?**
+**Is Storeden a good fit for stores with marketplace selling?**
 
-Storeden is a weaker target when the source store depends on full code or database control, highly custom product logic, complex B2B rules, unsupported app data, exact marketplace identifier preservation, or custom integration behavior that cannot be represented through Storeden structures without additional work.
+It can be, but marketplace selling should be scoped carefully. Listing identifiers, channel categories, feed rules, stock synchronization, marketplace order origin, and external-channel ownership should be reviewed before migration assumptions are accepted.
 
-**Can Storeden fit a multichannel seller?**
+**When is Storeden only a conditional fit?**
 
-Yes, Storeden can fit multichannel sellers, but marketplace-related behavior should be reviewed carefully. Product identifiers, marketplace categories, listing rules, stock synchronization, channel-specific fields, and order origin may need mapping, reconfiguration, or Custom Service review.
+Storeden is conditional when the store depends on B2B rules, app-owned data, external systems, custom product logic, SEO-sensitive URLs, or marketplace automation that may need configuration, Add-ons, accepted changes, or Custom Service review.
 
-**Does choosing Storeden mean the source theme will migrate automatically?**
+**Can a highly customized source store move to Storeden?**
 
-No. Storefront design usually needs target theme setup, navigation planning, content review, image review, URL planning, and SEO checks. Product and order data can migrate while the storefront presentation still requires separate target preparation.
+It may be possible, but the project should translate business behavior rather than expect code-level continuity. Unsupported custom logic, app data, external IDs, and bespoke transformations should be reviewed before scope is approved.
 
-**What should be tested before deciding Storeden is a strong fit?**
+**What should be tested before choosing Storeden?**
 
-Test complex product structures, variants, attributes, categories, inventory, marketplace-relevant products, customer or B2B records, varied orders, payment and shipping context, app-dependent records, external identifiers, priority URLs, and representative storefront content during Demo Migration review.
+Test representative products, variants, attributes, stock-sensitive items, marketplace products, customers, B2B examples, varied orders, content, URLs, app-owned records, and external IDs through Demo Migration review and target setup planning.

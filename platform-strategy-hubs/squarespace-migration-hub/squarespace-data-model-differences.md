@@ -1,184 +1,180 @@
 # Squarespace Data Model Differences
 
-Squarespace is a hosted content-first commerce Target Platform. Its data model combines website presentation, Store Pages, products, inventory, contacts, orders, transactions, media, SEO, and site settings inside a managed platform. A successful migration into Squarespace depends on understanding which source records become Squarespace-supported data, which details become target-site setup, which details require Add-ons, and which structures need Custom Service review.
+Squarespace combines commerce records with the structure of a hosted website. Product data, Store Pages, product URLs, images, SEO fields, inventory, orders, contacts, transactions, and site settings all matter, but they do not behave like a free-form database that can reproduce every source-store object exactly. A migration into Squarespace should therefore translate data meaning, not only field names.
 
-The main difference is orientation. Many source platforms organize the store around a commerce catalog first, then attach content, design, and marketing tools around it. Squarespace begins with a hosted site experience and layers commerce into that site through pages, product presentation, checkout, orders, contacts, and integrations. This distinction affects how products, categories, content, URLs, customers, subscriptions, order history, and custom records should be reviewed before migration.
+The most important difference is that Squarespace treats commerce as part of the site experience. A product may have a name, description, images, price, product type, variant data, SEO fields, URL slug, and Store Page association. That product can be migrated as a recognizable commerce record, but merchandising layout, page design, navigation placement, checkout behavior, fulfillment rules, and some third-party workflows still depend on target-side setup or external systems.
+
+A strong Squarespace data review separates supported commerce records from presentation choices, configuration settings, historical context, and unsupported custom behavior. That distinction helps merchants avoid the common mistake of expecting a data migration to recreate an entire site experience without reviewing how Squarespace stores, displays, and operates each part of the store.
+
+### Data Meaning Translation Framework <a href="#data-meaning-translation-framework" id="data-meaning-translation-framework"></a>
+
+Squarespace data-model planning should translate each source record into one of four meanings: migrated record, Squarespace configuration, site-content rebuild, or unsupported/custom requirement. That framework is more useful than a simple entity checklist because Squarespace blends commerce with website structure.
+
+| Source expectation               | Squarespace meaning                                                                                                            | Migration planning action                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Product record                   | Product data connected to product type, Store Page context, visibility, images, SEO fields, URL slug, variants, and inventory. | Validate both record accuracy and customer-facing placement.                       |
+| Category or collection structure | Store Page, navigation, tag, content, or product-discovery structure rather than a universal category model.                   | Decide how source categories become product discovery and site navigation.         |
+| Customer account                 | Contact, customer, subscriber, donor, member, or address-book context depending on how the source platform stored identity.    | Separate purchasable history from marketing, membership, and account expectations. |
+| Order history                    | Historical commerce record, transaction context, fulfillment reference, or customer-service history.                           | Validate history without assuming live checkout readiness.                         |
+| CMS or design content            | Page, Blog Post, media, template layout, navigation item, or manual rebuild requirement.                                       | Decide what is migrated, rebuilt, redirected, or excluded.                         |
+| Custom app data                  | Integration-owned or source-specific behavior.                                                                                 | Review for Add-ons, Custom Service, external ownership, or accepted exclusion.     |
 
 ### Why Squarespace Data Model Differences Matter <a href="#why-squarespace-data-model-differences-matter" id="why-squarespace-data-model-differences-matter"></a>
 
-Data-model differences are not just field-mapping details. They determine how the migrated store will behave in the Squarespace admin, storefront, customer experience, SEO structure, and operational workflow.
+Squarespace data-model differences matter because the same source-store information may become different kinds of target work. Some values can become Squarespace product data. Some become site structure or Store Page placement. Some become SEO or URL planning. Some belong to contacts, orders, or inventory. Some belong to integrations, custom code, booking tools, donation tools, fulfillment systems, or marketing systems that are not the same as core commerce data.
 
-| Source-store assumption                                                                                | Squarespace interpretation                                                                                                                         | Migration planning impact                                                                                                           |
-| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Commerce data is the main structure and content is secondary.                                          | Site structure, content presentation, Store Pages, and commerce data work together.                                                                | Products, CMS Pages, Blog Posts, media, menus, redirects, and domains should be planned together.                                   |
-| Categories, menus, collections, and filters may be separate systems.                                   | Product organization and site navigation must be represented through Squarespace-supported collections, pages, menus, and storefront presentation. | Category hierarchy, filter behavior, and merchandising rules may need simplification or rebuild planning.                           |
-| Product types may come from apps, custom code, or source-specific modules.                             | Squarespace supports defined product formats and commerce records, with unsupported behavior handled through scope decisions.                      | Physical, service, gift card, download, subscription, and non-standard product behavior should be classified before Full Migration. |
-| Checkout logic may be customized deeply.                                                               | Checkout, payment, tax, shipping, discounts, and fulfillment depend on Squarespace-supported configuration and connected services.                 | Historical order data should be separated from live checkout setup and operational configuration.                                   |
-| Customer data may represent buyers, members, subscribers, donors, wholesale accounts, or CRM profiles. | Squarespace distinguishes commerce customers, contacts, profiles, marketing/subscriber meaning, and site-member behavior.                          | Customer/contact meaning must be validated, not assumed from a source database field.                                               |
+For migration planning, the practical question is not only whether a record exists. The question is what the record is expected to do after it enters Squarespace. A product description must display correctly. A variant must connect to the right option structure and inventory behavior. A product URL must support traffic continuity. A customer record must be understood as a contact or buyer profile, not necessarily as the same account model from the source platform. An order must preserve historical meaning without being confused with live checkout configuration.
 
-A data model review should identify the difference between transferable records and behavior that must be configured, rebuilt, simplified, or excluded.
+| Source-store assumption                                                       | Squarespace interpretation                                                                                                                        | Migration planning impact                                                                                                 |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Product data alone defines the storefront.                                    | Product records work inside Store Pages, site design, navigation, and content presentation.                                                       | Store Page placement, product visibility, page layout, and navigation should be reviewed separately from migrated fields. |
+| Categories, menus, collections, and filters have the same meaning everywhere. | Product organization must fit Squarespace-supported Store Page, tag, page, and navigation behavior.                                               | Deep category trees, custom filters, and source-specific merchandising rules may need simplification or target setup.     |
+| Variants are just copied combinations.                                        | Variants must align with Squarespace-supported product attributes, SKUs, pricing, inventory, and display behavior.                                | Option names, SKU logic, pricing differences, images, and inventory should be sampled before Full Migration.              |
+| Customer data equals customer accounts.                                       | Squarespace commerce data can involve contacts, customers, address books, marketing preferences, donors, and subscribers depending on the source. | Buyer identity, marketing consent, account access expectations, and address data require separate review.                 |
+| Historical orders recreate operations.                                        | Orders preserve transaction and fulfillment history, while live payment, shipping, tax, fulfillment, and checkout settings must be configured.    | Order import expectations should be separated from launch configuration.                                                  |
 
-### Products, Product Types, and Store Pages <a href="#products-product-types-and-store-pages" id="products-product-types-and-store-pages"></a>
+The result should be a target store that is understandable inside Squarespace, not merely a collection of copied records.
 
-Squarespace product data is not only a list of items. Product records appear inside a hosted site context, usually through Store Pages and product presentation settings. This makes product migration dependent on both commerce fields and site-display decisions.
+The main data-model risk is assuming that source structure and target meaning are the same. In Squarespace, a record can be technically present but commercially incomplete if the surrounding site context is not planned. Product data needs Store Page and visibility review. SEO fields need URL and redirect planning. Contact records need identity interpretation. Order history needs separation from checkout configuration.
 
-| Product area         | What usually maps cleanly                                                                            | What needs review                                                                                                                 |
-| -------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Basic product data   | Name, SKU where applicable, description, price, images, stock, status, and standard product details. | Source-specific product fields, custom product tabs, supplier data, internal notes, and app-owned metadata.                       |
-| Product types        | Physical products and many standard commerce items can be reviewed as product records.               | Service products, gift cards, downloads, subscription/payment-plan behavior, donations, bookings, and non-standard selling flows. |
-| Store presentation   | Product pages, product images, product descriptions, and visible storefront information.             | Exact layout, source theme sections, custom product templates, merchandising widgets, and design parity.                          |
-| Product availability | Published/visible products and inventory state.                                                      | Hidden products, draft products, channel-specific products, schedule-based availability, or app-controlled visibility.            |
+For that reason, the most valuable data-model review is not only whether an entity is supported. It is whether the migrated result gives the merchant a usable Squarespace operating state after the site has been configured and validated.
 
-The migration plan should clarify whether the product is only being transferred as data or whether its storefront presentation, sales behavior, and surrounding page content must also be rebuilt.
+### Products, Product Types, and Store Page Meaning <a href="#products-product-types-and-store-page-meaning" id="products-product-types-and-store-page-meaning"></a>
 
-### Variants, Options, Images, and Inventory <a href="#variants-options-images-and-inventory" id="variants-options-images-and-inventory"></a>
+Squarespace product records carry commerce fields, but they also sit within a site structure. Product migration should account for product type, visibility, Store Page placement, URL slug, SEO data, images, tags, variants, and pricing. A source product may look straightforward until its selling behavior depends on product bundles, bookings, wholesale rules, subscriptions, custom option logic, customer-specific pricing, or an app-owned product model.
 
-Variant structures often differ between source platforms and Squarespace. A source product may use option groups, attributes, configurable products, product options, modifiers, or app-based add-ons. Squarespace-supported variants and inventory records should be validated separately from source-specific selling logic.
+Squarespace supports defined product types such as physical, service, gift card, and digital products through its commerce product structure. That matters because source platforms may represent products more broadly. A source catalog can include configurable products, grouped products, event registrations, appointment-based services, membership products, course access, donation items, or product records managed by an external system. During migration, those records should be classified by what Squarespace can store natively and what must be rebuilt, configured, integrated, or excluded.
 
-| Data area                     | Squarespace migration concern                                                                         | Validation focus                                                                                          |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Variants                      | Source combinations may not have the same option structure or display behavior.                       | Check option names, choices, SKU/price/stock differences, visibility, and product-page display.           |
-| Product options and modifiers | Source options may represent true variants, personalization fields, add-ons, or custom pricing rules. | Separate variant data from checkout customization, personalization, and custom pricing behavior.          |
-| Product images                | Product images and variant images may not attach or display exactly like the source store.            | Validate primary images, gallery order, image quality, alt text where included, and product-page display. |
-| Inventory                     | Stock may exist at product or variant level.                                                          | Confirm variant-level inventory, stock status, out-of-stock handling, and any external inventory system.  |
+| Product area         | Squarespace data meaning                                                                                                                  | Review priority                                                                                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Product identity     | Name, description, product type, visibility, tags, Store Page, URL slug, and SEO fields identify how a product appears and is discovered. | Confirm that products are visible, assigned correctly, and reachable through the intended site structure.                        |
+| Product media        | Images can migrate as product assets, but order, alt text, quality, cropping, and display behavior may differ.                            | Review priority products visually, not only by record count.                                                                     |
+| Product type         | Squarespace-supported product formats may not match every source selling model.                                                           | Classify physical, service, gift card, digital, subscription-like, booking-like, donation, and custom products before migration. |
+| Product URLs         | Product URL and slug behavior affects SEO and internal links.                                                                             | Preserve or redirect priority product paths where possible.                                                                      |
+| Product presentation | Store Page layout and design are not the same as migrated data fields.                                                                    | Plan design and content setup separately from data transfer.                                                                     |
 
-Complex variant, personalization, bundle, subscription, or configurable-product behavior may need Add-ons for specific migrated fields, or Custom Service review when Squarespace does not represent the structure directly.
+This distinction prevents a common planning error: treating product migration as complete when the product exists in the admin, even if shoppers cannot discover it, understand it, or buy it through the intended flow.
 
-### Collections, Categories, Navigation, and Merchandising <a href="#collections-categories-navigation-and-merchandising" id="collections-categories-navigation-and-merchandising"></a>
+### Variants, Product Attributes, and Inventory <a href="#variants-product-attributes-and-inventory" id="variants-product-attributes-and-inventory"></a>
 
-Squarespace does not always treat source categories, collections, menus, and filters as identical objects. A source platform may have category trees, layered navigation, product tags, smart collections, brand pages, merchandising rules, and automated filters. In Squarespace, these may become product organization, Store Page structure, site navigation, content pages, or manual merchandising decisions.
+Variant handling is one of the most important Squarespace data-model review areas. Product variants can contain SKU and pricing information, and inventory is managed at the variant level. That means source options should be reviewed as operational selling structures, not only as display labels.
 
-| Source structure               | Target interpretation                                                          | Risk if ignored                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| Deep category hierarchy        | May need flatter product organization, navigation menus, and landing pages.    | Customers cannot find products in expected paths.                 |
-| Automated collections          | May not behave like the source if rules are app-specific or dynamic.           | Merchandising pages lose intended product grouping.               |
-| Brand/manufacturer pages       | May become content pages, product grouping, redirects, or accepted exclusions. | SEO and customer navigation signals weaken.                       |
-| Filters and faceted navigation | May depend on Squarespace-supported storefront behavior and product data.      | Browsing and product discovery may not match source expectations. |
+A migration plan should confirm whether each source option becomes a clean Squarespace variant choice, whether SKUs remain unique, whether prices differ by variant, whether weights or shipping implications change, and whether inventory should be finite or unlimited. Complex source catalogs may contain option sets, modifier pricing, option-level images, bundles, personalization fields, or app-managed stock rules that cannot be assumed to become ordinary Squarespace variant data.
 
-For Squarespace, the migration should treat product organization as both a data issue and a site-experience issue.
+| Source pattern             | Potential Squarespace issue                                                                   | Planning response                                                                                |
+| -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Many option dimensions     | Option combinations may become difficult to manage or display cleanly.                        | Sample products with the largest variant sets before approving scope.                            |
+| Modifier pricing           | Pricing may not translate if the source uses add-on pricing outside a standard variant model. | Decide whether pricing becomes variant pricing, simplified options, or custom/external behavior. |
+| Variant-specific inventory | Stock must connect to the correct variant record.                                             | Validate high-volume SKUs and low-stock items after Demo Migration.                              |
+| Option-level images        | Source display behavior may not match Squarespace product image handling.                     | Review image assignment and product presentation for priority products.                          |
+| Personalization fields     | Text inputs, gift messages, engraving, or custom files may belong to form or app behavior.    | Separate migrated product records from checkout or custom-order workflow requirements.           |
 
-### Customers, Contacts, Members, and Profiles <a href="#customers-contacts-members-and-profiles" id="customers-contacts-members-and-profiles"></a>
+Inventory review should be practical. A merchant should not only ask whether stock migrated; they should ask whether the migrated stock is attached to the right variant, whether unlimited stock behavior is intentional, whether out-of-stock items display correctly, and whether fulfillment staff can trust the target store after launch.
 
-Squarespace customer-related data can involve contacts, customers, subscribers, donors, profiles, and site-member concepts. A source store may hold all of these meanings in one customer table or split them across store, CRM, email marketing, membership, and app systems.
+### Store Pages, Collections, Navigation, and Product Discovery <a href="#store-pages-collections-navigation-and-product-discovery" id="store-pages-collections-navigation-and-product-discovery"></a>
 
-| Source data meaning    | Squarespace-related review                                      | Migration implication                                                                                   |
-| ---------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Buyer/customer account | Commerce customer identity and order association.               | Validate names, emails, billing/shipping details, and historical order links.                           |
-| Contact or subscriber  | Marketing, email subscription, donor, or contact-list meaning.  | Confirm whether the record belongs in migrated commerce scope, marketing tools, or accepted exclusions. |
-| Member/account access  | Login, membership, restricted content, courses, or gated areas. | Treat access behavior separately from ordinary customer data.                                           |
-| External CRM profile   | Data owned by CRM, email, analytics, or donation tools.         | Preserve external IDs only when relevant and supported by scope.                                        |
+Source platforms often separate categories, collections, menus, filters, landing pages, and merchandising rules. Squarespace can represent product discovery through Store Pages, product organization, tags, page structure, navigation, and content areas, but those concepts may not have a one-to-one relationship with the source platform.
 
-Customer migration should avoid assuming that every source customer field becomes an identical Squarespace account or contact field.
+A deep category tree from the source store may not translate well as an identical Squarespace structure. A content-led catalog may work better when high-value product groups are represented through curated pages and navigation rather than copied category depth. A store that depends on advanced filtering, faceted navigation, brand pages, compatibility charts, or marketplace-like discovery may need a target-site plan beyond data migration.
 
-### Orders, Transactions, Subscriptions, and Fulfillment <a href="#orders-transactions-subscriptions-and-fulfillment" id="orders-transactions-subscriptions-and-fulfillment"></a>
+| Discovery element         | Migration meaning                                                                           | What to check                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Categories or collections | May become product grouping, Store Page structure, tags, page links, or navigation choices. | Confirm which source groupings need to remain customer-facing.                     |
+| Menus and navigation      | Not all navigation is product data.                                                         | Rebuild the main navigation and footer paths intentionally.                        |
+| Search and filters        | Source filtering logic may not match Squarespace behavior.                                  | Identify important filters before migration and define acceptable target behavior. |
+| Landing pages             | Often include copy, media, featured products, and internal links.                           | Treat them as content and merchandising assets, not only category names.           |
+| Internal links            | Product and page links may change when URLs or slugs change.                                | Review high-value links and traffic-sensitive paths.                               |
 
-Squarespace order history is different from live checkout configuration. A migrated order may preserve important historical evidence, but it does not automatically recreate every source checkout workflow, tax rule, payment gateway action, subscription engine, fulfillment integration, or post-purchase automation.
+Squarespace data planning should therefore connect product organization to the way customers will browse the new site. A correct product record is not enough if the path to that product disappears.
 
-| Order area                  | What to validate                                                                                       | Why it matters                                                                                         |
-| --------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Order identity              | Order number, date, status, customer/contact link, email, billing, and shipping details.               | Historical records must be searchable and understandable.                                              |
-| Line items                  | Product names, variants, quantities, prices, discounts, taxes, shipping, and totals.                   | Financial and support teams rely on accurate historical order interpretation.                          |
-| Transactions                | Payment labels, payment references, refund records, and financial transaction meaning where supported. | Payment history may be historical record data, not live gateway control.                               |
-| Subscriptions/payment plans | Recurring or subscription-related records may have different target behavior.                          | Active subscription operations may need external setup, accepted exclusions, or Custom Service review. |
-| Fulfillment                 | Shipment status, carrier data, tracking, fulfillment references, and external logistics IDs.           | Operational continuity may depend on connected systems beyond migrated order data.                     |
+### Customers, Contacts, Subscribers, and Address Books <a href="#customers-contacts-subscribers-and-address-books" id="customers-contacts-subscribers-and-address-books"></a>
 
-Live checkout setup belongs to Squarespace configuration and connected services. Historical orders belong to migrated data validation. Confusing these two areas is a common source of post-migration misunderstanding.
+Customer migration into Squarespace requires careful meaning translation. In many source systems, a customer record may combine login identity, buyer profile, address book, order history, marketing subscription, loyalty status, wholesale group, membership permissions, and CRM attributes. Squarespace commerce data can involve contacts, customer identity, address books, marketing preferences, subscribers, donors, and related profile meaning. These are related concepts, but they are not always the same as the source platform’s customer account model.
 
-### Discounts, Taxes, Shipping, Payments, and Checkout Configuration <a href="#discounts-taxes-shipping-payments-and-checkout-configuration" id="discounts-taxes-shipping-payments-and-checkout-configuration"></a>
+The migration plan should identify what the merchant actually needs from customer data. For some stores, the priority is preserving buyer names, emails, addresses, and order history. For others, the priority is preserving marketing consent, membership access, wholesale eligibility, or segmentation. Those expectations should be separated because each may require different handling.
 
-Some source records look like data but function as configuration. Discounts, tax rules, shipping methods, payment gateways, checkout fields, and fulfillment services often need target-side setup even when historical order data migrates cleanly.
+| Customer data area | Squarespace migration meaning                                                                     | Risk if misunderstood                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Buyer identity     | Name, email, customer/contact relationship, and historical orders.                                | Customers appear duplicated, incomplete, or disconnected from history.  |
+| Address data       | Shipping and billing details may be stored as contact/address information or order history.       | Fulfillment review becomes unreliable if addresses are incomplete.      |
+| Marketing consent  | Subscriber status and marketing preferences may not equal customer status.                        | Merchants may overstate what can be used for campaigns after migration. |
+| Account access     | Passwords, login state, membership access, and permissions may not transfer like ordinary fields. | Customers expect old access behavior that must be rebuilt or reset.     |
+| Segmentation       | Loyalty groups, wholesale roles, tags, or CRM fields may not map directly.                        | Follow-up marketing and support workflows lose context.                 |
 
-| Area            | Data-model difference                                                                                      | Planning response                                                                                |
-| --------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Discounts       | Historical coupon use may appear in orders, while active discount rules need target setup.                 | Validate order discounts separately from live discount configuration.                            |
-| Taxes           | Historical tax amounts may migrate as order data, while tax calculation must be configured in Squarespace. | Confirm whether tax history, tax settings, or both are in scope.                                 |
-| Shipping        | Shipping labels and totals differ from active shipping rules and rates.                                    | Separate migrated order shipping details from live checkout shipping setup.                      |
-| Payments        | Payment labels and transaction references are not the same as gateway reconnection.                        | Reconnect gateways and validate historical payment meaning separately.                           |
-| Checkout fields | Source custom fields may not have a direct Squarespace equivalent.                                         | Classify fields as migrated notes, Add-ons, Custom Service, external-system data, or exclusions. |
+For Squarespace, the safest expectation is to preserve useful customer and order context while separately planning any account-access, membership, subscription, marketing, or CRM behavior that goes beyond standard commerce records.
 
-This distinction keeps migration expectations realistic: historical data can be preserved without implying that all source checkout behavior has been replicated.
+### Orders, Transactions, Fulfillment, and Historical Context <a href="#orders-transactions-fulfillment-and-historical-context" id="orders-transactions-fulfillment-and-historical-context"></a>
 
-### CMS Pages, Blog Posts, Media, and Site Content <a href="#cms-pages-blog-posts-media-and-site-content" id="cms-pages-blog-posts-media-and-site-content"></a>
+Squarespace order data can include order totals, line items, customer information, billing and shipping addresses, fulfillment status, payment state, refunds, discounts, shipping lines, taxes, tracking data, and related transaction context. That makes historical orders useful after migration, but order data should not be confused with live operational configuration.
 
-Squarespace is content-first, so non-product content is central to the migration experience. CMS Pages, Blog Posts, media, page structure, menus, sections, embedded content, forms, and landing pages may carry as much business value as catalog records.
+A migrated order record can help customer service answer questions, review past purchases, reconcile history, and preserve business context. It does not automatically configure payment gateways, tax rules, shipping methods, fulfillment routing, refund logic, invoices, email automation, or third-party operational systems. Those belong to target setup and integration review.
 
-| Content area | What can be migrated or rebuilt                                                                        | What needs careful review                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| CMS Pages    | Page titles, page body content, visible copy, media, metadata, and key landing pages where supported.  | Section layout, blocks, forms, custom scripts, embedded widgets, and exact design behavior.              |
-| Blog Posts   | Titles, post content, publication dates, authors where supported, featured images, metadata, and URLs. | Comment systems, custom post types, taxonomy logic, and source-specific editorial structures.            |
-| Media        | Images, documents, product media, gallery assets, and content-media references.                        | Image placement, compression, alt text, broken links, file paths, and layout-specific display.           |
-| Site design  | Templates, sections, page layout, navigation, and visual hierarchy.                                    | Design must usually be rebuilt or configured in Squarespace, not treated as a direct database migration. |
+| Order-related record       | What it preserves                                                                                      | What it does not automatically recreate                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Historical order           | Past purchase context, totals, items, customer details, status, and addresses.                         | Live checkout, tax, payment, shipping, and fulfillment configuration. |
+| Line item                  | Purchased product, SKU, quantity, price, selected variant details, and customizations where supported. | Current product availability or exact source checkout behavior.       |
+| Payment state              | Historical payment context.                                                                            | Active payment gateway setup or future payment authorization flow.    |
+| Fulfillment data           | Shipment status, carrier/tracking data, and delivery context where available.                          | Warehouse logic, fulfillment integrations, or live shipping rules.    |
+| Refund/transaction context | Financial history and reconciliation signals.                                                          | Accounting-system continuity unless integrations are planned.         |
 
-Content migration should be scoped with SEO and user navigation in mind, not just as a bulk transfer of page text.
+This separation is important for launch readiness. A merchant should verify historical order usefulness while also configuring the live store to sell correctly after the migration.
 
-### URLs, Redirects, SEO, and Domain Behavior <a href="#urls-redirects-seo-and-domain-behavior" id="urls-redirects-seo-and-domain-behavior"></a>
+### Content, Blog Posts, Pages, Media, and SEO Data <a href="#content-blog-posts-pages-media-and-seo-data" id="content-blog-posts-pages-media-and-seo-data"></a>
 
-Squarespace URL behavior may differ from the source store. Product URLs, collection URLs, blog paths, content page paths, media URLs, domain routing, redirects, canonical behavior, and metadata need validation because they influence both user continuity and search visibility.
+Squarespace migration often involves both commerce and content. CMS Pages, Blog Posts, landing pages, images, product media, internal links, URL slugs, SEO titles, SEO descriptions, redirects, and domain behavior can influence whether the new store retains traffic and customer trust.
 
-| SEO element        | Data-model concern                                                                | Validation focus                                               |
-| ------------------ | --------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| Product URLs       | Source product paths may not match Squarespace product path behavior.             | Validate priority product URLs, redirects, and internal links. |
-| Page and blog URLs | Content paths may change during site rebuild or import.                           | Check high-traffic CMS Pages, Blog Posts, and landing pages.   |
-| Metadata           | SEO titles, descriptions, slugs, image alt text, and structured content may vary. | Confirm important metadata and accepted exclusions.            |
-| Redirects          | Redirects may be target setup rather than migrated record data.                   | Build and test a redirect map before launch.                   |
-| Domains            | Domain switching is a launch operation, not a migrated data entity.               | Coordinate DNS, SSL, redirects, and go-live timing separately. |
+Not all source content belongs inside core commerce data. A product description may migrate with a product. A category description may need to become page copy or Store Page context. A blog archive may need separate content migration. A custom landing page may need manual rebuild work. Media may transfer, but formatting, cropping, image order, alt text, and internal references can still need review.
 
-The safest approach is to treat SEO as a cross-data-model validation layer over products, content, media, navigation, and launch setup.
+| Content or SEO element | Squarespace data meaning                                                                | Planning implication                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Product SEO fields     | Search title, description, URL slug, and product URL influence product discoverability. | Validate priority product SEO fields and paths.                                    |
+| CMS Pages              | May need to become Squarespace pages or rebuilt content sections.                       | Decide which pages are in scope and which are redesigned.                          |
+| Blog Posts             | Preserve content continuity where blog traffic or education matters.                    | Review URLs, dates, authorship expectations, categories, tags, and internal links. |
+| Media assets           | Product images and content images may behave differently after transfer.                | Validate image order, display, and broken references.                              |
+| Redirects              | URL changes require redirect planning.                                                  | Map priority URLs before launch, especially for traffic-heavy pages.               |
 
-### API, Integration, and Unsupported Data Boundaries <a href="#api-integration-and-unsupported-data-boundaries" id="api-integration-and-unsupported-data-boundaries"></a>
+A data model review should not reduce SEO to a metadata checklist. The real issue is whether customers and search engines can still reach the right content and products after the site changes.
 
-Squarespace provides APIs for commerce records, but not every source database table, app record, theme behavior, or external-system workflow has a direct target equivalent. Data owned by a source app, CRM, ERP, PIM, marketplace, email tool, subscription service, booking system, donation tool, accounting platform, or custom module may require separate review.
+### Integrations, Custom Fields, and Unsupported Data <a href="#integrations-custom-fields-and-unsupported-data" id="integrations-custom-fields-and-unsupported-data"></a>
 
-| Boundary type                  | Typical examples                                                                                                     | Migration handling                                                                                |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| API-supported commerce records | Products, inventory, orders, contacts, transactions, profiles, and webhooks.                                         | Validate supported fields and relationships through Demo Migration and Full Migration checks.     |
-| External-system records        | ERP IDs, PIM attributes, CRM tags, fulfillment references, accounting IDs, and marketing segments.                   | Preserve only where supported, scoped, and useful in the target operation.                        |
-| App-owned behavior             | Scheduling, donations, subscriptions, digital delivery, memberships, forms, loyalty, and third-party sales channels. | Separate migrated records from app setup, reconnection, or accepted exclusions.                   |
-| Unsupported custom structures  | Custom database tables, custom checkout logic, source-specific modules, bespoke themes, and dynamic templates.       | Consider Custom Service review and define what can be migrated, rebuilt, simplified, or excluded. |
+Squarespace supports commerce APIs and connected services, but many source stores carry data that belongs outside standard commerce records. Examples include app-managed reviews, loyalty points, wholesale price lists, product configurators, advanced bundles, subscription rules, booking records, donation records, CRM attributes, custom checkout fields, analytics IDs, accounting references, and fulfillment-system identifiers.
 
-Custom Service is appropriate when the source data model requires evaluation beyond standard records or specific Add-ons. It should not be described as a substitute for full target-store setup, design implementation, external system configuration, or ongoing operational management.
+These records should be classified before migration. Some can be handled through supported mapping or Add-ons. Some may require Custom Service review. Some may need to remain in an external system. Some may be excluded because the target store does not need the same operational behavior.
 
-### Entity Points and Squarespace Data Scope <a href="#entity-points-and-squarespace-data-scope" id="entity-points-and-squarespace-data-scope"></a>
+| Data type                | Likely handling path                                                        | Review question                                                          |
+| ------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Standard commerce fields | Standard Service or supported configuration.                                | Does the field match a supported Squarespace commerce concept?           |
+| Field adjustments        | Add-ons when filtering or mapping changes remain within supported behavior. | Is the adjustment supported, bounded, and clearly defined?               |
+| App-owned records        | Custom Service review or external-system planning.                          | Is the source of truth inside an app, integration, or external database? |
+| Custom product behavior  | Custom Service review, target rebuild, or accepted simplification.          | Does Squarespace have an equivalent native behavior?                     |
+| External identifiers     | Custom mapping or integration planning.                                     | Will staff or systems need these IDs after launch?                       |
 
-Entity Points planning should follow the data being migrated for the first time. Squarespace migrations may include products, customers/contacts, orders, CMS Pages, Blog Posts, coupons/discount-related records where supported, and other eligible records depending on scope.
-
-Records already counted through the service license do not consume Entity Points again simply because the merchant performs another migration action for the same migration path. New eligible records may consume Entity Points when they are migrated for the first time. This distinction matters when the merchant adds products, customers, orders, Blog Posts, CMS Pages, or other eligible data after the initial migration scope has already been defined.
-
-Entity Points do not solve platform data-model differences. They help measure migration volume. Data-model review still decides whether each record can be represented in Squarespace, needs an Add-on, requires Custom Service review, should be rebuilt manually, or should be excluded.
-
-### Squarespace Data Model Review Matrix <a href="#squarespace-data-model-review-matrix" id="squarespace-data-model-review-matrix"></a>
-
-| Data area          | Standard review question                                                | Advanced review question                                                                                             | Likely handling                                                       |
-| ------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Products           | Do products, prices, images, stock, and descriptions appear correctly?  | Do product types, variants, downloads, gift cards, subscriptions, or special selling formats need special treatment? | Standard scope, Add-ons, Custom Service, or accepted simplification.  |
-| Customers/contacts | Are buyer identities and order links clear?                             | Are members, subscribers, donors, marketing contacts, or CRM profiles mixed into the same source data?               | Scope classification, external-system review, or accepted exclusions. |
-| Orders             | Are historical order records understandable?                            | Are subscriptions, transactions, refunds, imported channel orders, fulfillment references, or external IDs required? | Historical migration, Add-ons, Custom Service, or external setup.     |
-| Content            | Are CMS Pages, Blog Posts, media, and priority landing pages preserved? | Are layouts, custom blocks, forms, embedded scripts, and editorial structures expected to match exactly?             | Migration, rebuild, redesign, or exclusion.                           |
-| SEO                | Are priority URLs and metadata preserved or redirected?                 | Are canonical structures, redirect chains, internal links, and domain changes coordinated?                           | Redirect mapping, validation, target setup, and launch planning.      |
-| Integrations       | Are required identifiers visible and useful?                            | Does the source depend on custom tables, app behavior, or external workflows?                                        | Custom Service review, reconnection, or accepted exclusions.          |
+This classification prevents unsupported details from being silently treated as ordinary fields. It also helps merchants decide which data matters enough to preserve, rebuild, or connect after migration.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Squarespace data-model differences come from its content-first hosted architecture. Products, inventory, orders, contacts, transactions, CMS Pages, Blog Posts, media, SEO, redirects, and integrations must be reviewed as parts of a site-and-commerce system rather than as isolated database tables. The right migration plan distinguishes standard transferable records from target setup, design rebuild, external-system reconnection, Add-ons, Custom Service review, Entity Points scope, and accepted exclusions.
+Squarespace data migration is a meaning-translation process. Products, variants, inventory, customers, contacts, orders, content, media, SEO fields, Store Pages, and integrations should be reviewed according to what they need to do in Squarespace after launch. Some records can become supported Squarespace data. Some become target setup. Some require Add-ons or Custom Service review. Some need external-system planning or accepted simplification.
+
+The strongest Squarespace migration plans separate record transfer from site presentation, live configuration, and unsupported behavior. That separation helps the target store become usable, understandable, and operationally safe instead of merely populated with imported data.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Why do Squarespace data-model differences matter during migration?**
+**Why do Squarespace data model differences matter during migration?**
 
-They determine how source-store records become usable Squarespace products, contacts, orders, content, media, SEO paths, and operational data. A field may transfer cleanly, but the source behavior behind that field may still require target setup, redesign, integration work, Add-ons, or Custom Service review.
+They matter because Squarespace combines commerce data with hosted site structure, Store Pages, content, SEO, and configuration. A source record may need to become a product field, a page structure, a URL decision, a contact record, a target setting, or an external-system requirement.
 
-**Do product variants migrate into Squarespace exactly as they worked on the source store?**
+**Can all source product options become Squarespace variants?**
 
-Not always. Variant names, choices, prices, SKUs, stock, images, and display behavior should be validated. Source-specific options, personalization fields, bundles, configurators, or custom pricing logic may need separate handling.
+Not always. Standard options may translate cleanly, but modifier pricing, deep option combinations, personalization fields, bundles, and app-managed product logic may require simplification, Add-ons, Custom Service review, or target-side rebuild work.
 
-**Are historical orders the same as live checkout setup in Squarespace?**
+**Are customer records and contacts the same thing in Squarespace?**
 
-No. Historical orders preserve past order information. Live checkout behavior depends on Squarespace configuration and connected services for payments, shipping, tax, discounts, fulfillment, and checkout settings.
+They can overlap, but they should not be treated as identical without review. Buyer identity, address books, marketing consent, subscribers, donors, membership access, and historical order relationships may carry different meanings.
 
-**How should content and SEO be reviewed for Squarespace migration?**
+**Does migrated order data recreate live checkout operations?**
 
-Products, CMS Pages, Blog Posts, media, URLs, redirects, metadata, internal links, and domains should be reviewed together. Squarespace migration should preserve important business and SEO signals while recognizing that page layout and site design often need target-side rebuild.
+No. Historical orders can preserve purchase context, but live payment, tax, shipping, fulfillment, refund, and notification behavior must be configured in the target store or connected services.
 
-**When does Squarespace data require Custom Service review?**
+**What should be reviewed before migrating custom or app-owned data into Squarespace?**
 
-Custom Service review is appropriate when the source store includes unsupported product structures, custom database records, app-owned workflows, external-system identifiers, unusual order data, source-specific checkout behavior, or content structures that cannot be handled through standard scope or specific Add-ons.
+The source of truth, business purpose, target equivalent, required staff workflow, and service path should be reviewed. Unsupported app records, custom fields, product configurators, loyalty data, or external identifiers may need Custom Service review or external-system planning.

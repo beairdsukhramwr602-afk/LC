@@ -1,142 +1,167 @@
-# ShopWired Fit - Ideal and Non-Ideal Migration Profiles
+# ShopWired Fit: Ideal and Non-Ideal Migration Profiles
 
-ShopWired is often a strong fit for merchants that want a hosted e-commerce platform with practical catalog tools, configurable storefront themes, B2B and trade-selling options, apps, payment and delivery settings, and integration surfaces without taking on self-hosted platform responsibility. It is not the right fit merely because it is hosted. The business should confirm that ShopWired can express the source store’s product choices, customer groups, checkout requirements, content structure, and operational workflows in a way that supports the intended target store.
+Choosing ShopWired as a migration target should be based on how well the platform fits the merchant’s operating model, not only on whether products, customers, and orders can be transferred. A good fit exists when the business wants a hosted commerce platform and its catalog, customer, order, checkout, B2B, content, and integration requirements can be represented through ShopWired’s supported structures.
 
-Fit should be judged by how the merchant sells, how the catalog is structured, how customers are managed, and how much source behavior depends on custom code or external systems. A store with standard catalog and order history may fit cleanly. A store with complex personalization, unusual B2B rules, custom checkout workflows, app-owned records, or highly customized source logic may still be possible, but it needs deeper review before ShopWired is chosen as the target.
+A weaker fit does not always mean ShopWired is the wrong platform. It may mean the project needs better preparation, target configuration, Add-ons, Managed Service support, or Custom Service review. The fit decision should identify where the source store is ordinary, where the migration is configuration-heavy, and where business rules depend on custom code, apps, external systems, or product logic that cannot be assumed to transfer directly.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+The most useful ShopWired fit assessment focuses on operating evidence. What product choices do customers make? How are categories, brands, filters, and search used? What makes a customer retail, trade, registered, guest, or newsletter-only? Which order details matter for support or accounting? Which checkout rules are historical labels, and which must work live after launch? Which apps or integrations own records that ordinary migration may not include?
 
-The practical question is not “Can data move into ShopWired?” A better question is:
+### ShopWired Fit Decision Framework <a href="#shopwired-fit-decision-framework" id="shopwired-fit-decision-framework"></a>
 
-**Can ShopWired represent the business model, catalog structure, customer rules, checkout requirements, storefront experience, and integration needs well enough after migration?**
+ShopWired is often the right direction when the merchant wants managed platform operations with practical commerce depth. It is usually less suitable when the business requires self-hosted database control, unrestricted backend customization, or highly bespoke checkout and product logic that must remain exactly as built in the source system.
 
-A good-fit migration should preserve the source store’s commercial meaning inside ShopWired’s hosted model. A weak-fit migration usually appears when the merchant expects a hosted target store to reproduce source-side custom code, non-standard checkout logic, or external-system behavior without configuration, app support, or Custom Service review.
-
-### What Makes ShopWired a Strong Fit <a href="#what-makes-shopwired-a-strong-fit" id="what-makes-shopwired-a-strong-fit"></a>
-
-#### Hosted platform responsibility <a href="#hosted-platform-responsibility" id="hosted-platform-responsibility"></a>
-
-ShopWired is a strong fit for merchants that want to avoid self-hosted infrastructure management while still using a dedicated e-commerce platform. Hosting, platform updates, storefront administration, checkout settings, themes, apps, and support resources sit within the ShopWired environment rather than requiring the merchant to maintain a self-hosted codebase.
-
-This is valuable when the business wants operational control through platform settings, but does not want the maintenance burden of open-source hosting, server updates, security patching, or custom infrastructure.
-
-#### Practical catalog flexibility <a href="#practical-catalog-flexibility" id="practical-catalog-flexibility"></a>
-
-ShopWired can suit merchants with product catalogs that need more than basic product records. Variations, choices, extras, bundles, digital products, stock behavior, categories, brands, product imagery, SEO fields, and storefront presentation can all matter when translating source data into ShopWired.
-
-The platform is a stronger fit when the merchant can define how source variants, modifiers, product options, personalization fields, and add-on-style purchase choices should appear in the target catalog. It is a weaker fit when the source catalog depends on deeply custom product logic that does not fit hosted platform behavior without bespoke review.
-
-#### B2B and trade-selling potential <a href="#b2b-and-trade-selling-potential" id="b2b-and-trade-selling-potential"></a>
-
-ShopWired is often worth considering for merchants with business-to-business or trade-selling needs. Customer groups, trade customers, quotes, customer-specific expectations, account-based rules, and differentiated pricing or checkout behavior can make ShopWired more relevant than a very simple online-store builder.
-
-Fit depends on the exact B2B model. Standard trade customer handling may be a good fit, while highly customized approval workflows, external pricing engines, contract-specific catalogs, or bespoke checkout rules need early review.
-
-#### Theme and storefront control without full self-hosting <a href="#theme-and-storefront-control-without-full-self-hosting" id="theme-and-storefront-control-without-full-self-hosting"></a>
-
-ShopWired gives merchants storefront presentation control through themes and theme code while keeping the store inside a hosted platform. This can fit brands that want stronger storefront control than a minimal template system but do not want to manage a fully self-hosted storefront stack.
-
-This strength matters when product pages, category pages, navigation, landing content, brand presentation, and promotional areas are important to launch quality. It is less suitable when the business expects to reproduce every source theme section, custom script, or app-rendered experience automatically through migration.
-
-#### Apps, API, webhooks, and connected operations <a href="#apps-api-webhooks-and-connected-operations" id="apps-api-webhooks-and-connected-operations"></a>
-
-ShopWired can support merchants that use apps, API connections, webhooks, marketplaces, payment providers, delivery integrations, and operational services. This makes it relevant for stores that want a hosted platform but still need integration-aware operations.
-
-Fit is strongest when integration requirements are clearly documented and can be separated into migrated records, target configuration, app setup, or custom review. Fit becomes riskier when outside systems own essential product, customer, order, inventory, or fulfillment meaning but no one has mapped that dependency.
-
-### Where ShopWired Is Often a Strong Fit <a href="#where-shopwired-is-often-a-strong-fit" id="where-shopwired-is-often-a-strong-fit"></a>
-
-ShopWired is often a strong fit when the merchant wants a hosted commerce target with practical platform features and manageable migration complexity.
-
-| Merchant scenario                                  | Why ShopWired can fit well                                                                                                         | What to confirm before migration                                                               |
-| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Retail store moving from a simpler hosted cart     | ShopWired can provide a more structured hosted commerce environment with product, order, customer, content, and checkout controls. | Confirm catalog structure, product choices, SEO needs, and order-history expectations.         |
-| Store with product variations, choices, and extras | ShopWired can represent richer product purchase options than a flat product model.                                                 | Confirm how source variants, options, modifiers, personalization, and extras should translate. |
-| B2B or trade-oriented merchant                     | ShopWired can support account-based selling needs such as trade customers, pricing, and quote-related workflows where suitable.    | Confirm which B2B rules are data, configuration, app behavior, or custom scope.                |
-| Brand needing hosted theme control                 | Themes and theme code can support storefront presentation without self-hosting responsibility.                                     | Confirm which design/content expectations are migration scope and which require theme work.    |
-| Store with moderate integration needs              | Apps, API, webhooks, and channels can support connected operations.                                                                | Confirm external-system identifiers, app-owned records, and post-migration integration setup.  |
-| Merchant wanting managed platform operations       | Hosted platform responsibility reduces self-hosted maintenance burden.                                                             | Confirm that the business accepts ShopWired’s hosted-platform boundaries.                      |
-
-### Where ShopWired Is Often a Weaker Fit <a href="#where-shopwired-is-often-a-weaker-fit" id="where-shopwired-is-often-a-weaker-fit"></a>
-
-ShopWired can be a weaker fit when the source store depends on behavior that does not translate naturally into a hosted SaaS platform. That does not automatically rule out migration, but it changes the planning burden.
-
-ShopWired is often higher-risk when:
-
-* the source store depends on custom code that controls checkout, pricing, products, shipping, tax, or customer access;
-* product configuration depends on advanced personalization, dynamic pricing, configurators, or external rules engines;
-* B2B logic involves complex approval, contract pricing, customer-specific catalogs, ERP-controlled availability, or custom account terms;
-* source apps or integrations own business-critical records that are not ordinary products, customers, orders, or content;
-* the merchant expects source theme behavior, app-rendered pages, or custom scripts to be reproduced automatically;
-* multi-channel, fulfillment, inventory, marketplace, or accounting logic depends on outside-system identifiers that must remain traceable;
-* the store requires self-hosted code control or database-level customization after launch.
-
-In these cases, ShopWired may still be viable, but the project should confirm target capability, migration scope, app setup, integration dependencies, and Custom Service requirements before treating the move as straightforward.
+| Fit dimension     | Strong ShopWired signal                                                                                                  | Caution signal                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Operating model   | Merchant wants hosted platform management with configurable commerce features.                                           | Merchant expects direct control of server, database, and backend application code.                                              |
+| Catalog structure | Product options can be expressed through variations, choices, extras, bundles, brands, categories, and supported fields. | Products rely on advanced configurators, conditional logic, external rules engines, or unusual option inheritance.              |
+| B2B/trade model   | Trade customers, pricing bands, quotes, and account-based behavior can be clearly described and configured or reviewed.  | Pricing, catalog access, approvals, terms, and availability are controlled by ERP logic or bespoke code.                        |
+| Checkout model    | Payment, delivery, VAT/tax, offers, and checkout settings can be rebuilt in ShopWired.                                   | Checkout flow depends on custom scripts, source-only gateways, or highly conditional fulfilment rules.                          |
+| Content and SEO   | Important pages, URLs, metadata, redirects, images, menus, and landing paths can be planned before launch.               | SEO value depends on app-rendered pages, custom templates, or uncatalogued legacy landing pages.                                |
+| Integration model | Apps, API connections, webhooks, and external identifiers are known and can be reconnected or scoped.                    | Operational records are scattered across apps, marketplaces, fulfilment tools, and custom middleware without ownership clarity. |
 
 ### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
 
-| Profile                                             | Why the fit is strong                                                                                                                          | Migration focus                                                                                                 |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Hosted-growth retailer                              | The merchant wants a hosted platform with stronger commerce tools than a basic storefront builder.                                             | Products, categories, customers, orders, CMS Pages, SEO, delivery, payment, and checkout settings.              |
-| Product-choice-driven catalog                       | The catalog depends on variations, choices, extras, images, brands, and structured product presentation.                                       | Source options and modifiers should be mapped into ShopWired-supported product structures.                      |
-| Trade or B2B seller with manageable rules           | The business needs trade customer handling, quote-related flows, or differentiated customer treatment, but the logic can be described clearly. | Customer groups, trade records, order samples, pricing expectations, and B2B configuration should be reviewed.  |
-| Merchant wanting theme control without self-hosting | The brand needs storefront presentation control but does not want to maintain a self-hosted stack.                                             | Product-page, category-page, menu, content, image, and SEO samples should be reviewed with theme expectations.  |
-| Integration-aware but structured operation          | The store uses apps, channels, API connections, or webhooks, but dependencies are known.                                                       | Classify each integration as migrated data, target configuration, reconnected service, or Custom Service scope. |
-| Store seeking operational simplification            | The merchant wants hosted platform responsibility and clearer administration.                                                                  | Confirm that source custom behavior can be simplified or re-expressed in ShopWired rather than cloned exactly.  |
+ShopWired tends to be strongest for merchants that need a hosted commerce system with enough structure to support real selling operations. The following profiles usually indicate a good fit when the source data is clean enough and the merchant accepts target-side configuration work.
 
-### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
+#### Hosted-growth retailers <a href="#hosted-growth-retailers" id="hosted-growth-retailers"></a>
 
-| Profile                                       | Why risk increases                                                                                                      | What should be confirmed                                                                             |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Deeply customized source store                | Custom code may control business rules that do not map directly into ShopWired.                                         | Identify which logic is data, target configuration, app behavior, or Custom Service scope.           |
-| Complex product configurator store            | Personalization, conditional options, or dynamic pricing may exceed standard product choice handling.                   | Sample the most complex product flows before migration scope is accepted.                            |
-| Advanced B2B or contract-pricing operation    | Customer-specific pricing, catalogs, approval, payment terms, or ERP-driven rules may not be ordinary customer data.    | Confirm target B2B capability, app requirements, and whether Custom Service review is needed.        |
-| App-owned operational model                   | Source apps may own product, customer, order, subscription, fulfillment, quote, or integration data.                    | Inventory app-owned data and classify what should migrate, reconnect, rebuild, or be excluded.       |
-| Heavy multi-channel or marketplace operation  | Marketplace, inventory, fulfillment, and order workflows may depend on external identifiers and channel-specific logic. | Confirm channel ownership, outside-system IDs, and post-migration setup requirements.                |
-| Source store requiring database-level control | The merchant may expect self-hosted customization after moving.                                                         | Confirm that a hosted SaaS target is acceptable and that unsupported custom behavior is not assumed. |
-| SEO-sensitive or content-heavy brand          | URLs, landing pages, menus, content blocks, and metadata may carry business value.                                      | Prepare high-value page and URL samples before Demo Migration review.                                |
+A hosted-growth retailer wants to move away from a simpler platform, an ageing cart, or a self-hosted environment while keeping practical control over catalog, orders, customers, content, checkout, and integrations. ShopWired can fit this profile because it offers a managed environment with operational commerce features rather than requiring the merchant to maintain the full technical stack.
 
-### What Should Be Confirmed Before Choosing ShopWired <a href="#what-should-be-confirmed-before-choosing-shopwired" id="what-should-be-confirmed-before-choosing-shopwired"></a>
+The migration focus should be on preserving business meaning rather than preserving old implementation detail. Product data, customer records, order history, CMS Pages, categories, brands, and SEO assets should be moved into structures that make the target store usable. Delivery, payment, tax, theme, and app setup should be planned as target configuration.
 
-Before choosing ShopWired as the Target Platform, the merchant should confirm the areas that determine whether the target store can support the business model.
+#### Product-choice-driven stores <a href="#product-choice-driven-stores" id="product-choice-driven-stores"></a>
 
-Important confirmation questions include:
+Stores with meaningful product options can be a strong ShopWired fit when the choices are clear and can be mapped properly. Source variants, modifiers, add-ons, personalization fields, bundles, or digital product behavior should be reviewed against ShopWired’s product structures before migration.
 
-* Can source product variants, options, modifiers, extras, bundles, and digital products be represented in ShopWired without losing buying meaning?
-* Are categories, brands, filters, menus, search paths, and landing pages clear enough to rebuild product discovery?
-* Do customer groups, trade customers, quotes, B2B pricing, or account terms need migration, configuration, app setup, or custom review?
-* Which historical order details must remain readable after migration?
-* Which payment, delivery, tax, checkout, and fulfillment behaviors are historical records and which are target configuration?
-* Which source apps or integrations own important data?
-* Do APIs, webhooks, marketplaces, or outside systems require preserved identifiers?
-* Are theme expectations realistic for ShopWired’s hosted theme model?
-* Which SEO URLs, CMS Pages, images, and content areas need priority review?
-* Does the business accept hosted-platform boundaries, or does it require self-hosted code/database control?
+A strong fit exists when product complexity is manageable and can be represented in the target store without reducing the buying experience. A weaker fit appears when option logic changes price, stock, availability, fulfilment, image selection, tax, or customer eligibility in ways that cannot be expressed through supported structures.
+
+| Product scenario                    | Fit outlook    | Review focus                                                                                   |
+| ----------------------------------- | -------------- | ---------------------------------------------------------------------------------------------- |
+| Standard size/colour options        | Usually strong | Variation structure, SKU, price, image, stock, and visibility.                                 |
+| Optional add-ons or personalization | Conditional    | Whether choices, extras, text input, file upload, or app behavior fits the source meaning.     |
+| Bundled or kit products             | Conditional    | Whether bundle behavior is presentational, stock-affecting, pricing-related, or app-supported. |
+| Dynamic configurators               | Higher risk    | Whether custom logic or external configuration needs Custom Service review.                    |
+| Trade-only product access           | Conditional    | Whether visibility, pricing, and customer eligibility can be handled in target setup.          |
+
+#### Trade and B2B sellers with manageable rules <a href="#trade-and-b2b-sellers-with-manageable-rules" id="trade-and-b2b-sellers-with-manageable-rules"></a>
+
+ShopWired can be suitable for trade and B2B sellers when the business can clearly define customer types, pricing expectations, quote behavior, account handling, and checkout access. A merchant with trade customers, pricing bands, individual trade pricing, or quote-related workflows may find ShopWired more appropriate than a platform aimed only at simple retail selling.
+
+The fit depends on rule clarity. If source B2B behavior is mostly structured customer data plus configurable pricing and account rules, ShopWired may be a strong fit. If the source store depends on ERP-controlled catalogs, customer-specific availability, approval hierarchies, negotiated terms, or custom checkout flows, the platform may still be viable but the migration needs deeper discovery.
+
+#### Stores with manageable integration needs <a href="#stores-with-manageable-integration-needs" id="stores-with-manageable-integration-needs"></a>
+
+ShopWired can also fit merchants that depend on connected services but can identify those services clearly. Apps, APIs, webhooks, payment providers, delivery tools, tax services, accounting systems, stock sync, and marketing tools can support operations after launch when their ownership and configuration are known.
+
+The migration should classify each connected system by role. Some connections only need to be reconfigured after launch. Some require migrated identifiers to remain traceable. Some hold records that ordinary migration does not include. Some create a Custom Service requirement.
+
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
+
+Many ShopWired candidates are not purely strong or weak. They are conditional fits because the platform may work well after specific planning issues are resolved. These cases should not be rejected too quickly, but they should also not be treated as standard migrations without review.
+
+| Conditional profile                     | Why it may still work                                                                                      | What must be resolved first                                                                                         |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Store with messy legacy product options | ShopWired may support the intended buying choices through cleaner product structures.                      | Identify which source option workarounds should be preserved, simplified, or replaced.                              |
+| B2B store with mixed customer records   | Trade and customer records can be planned, but identity and pricing rules need separation.                 | Distinguish retail customers, guest buyers, registered accounts, trade customers, pricing bands, and custom fields. |
+| SEO-sensitive retailer                  | ShopWired can support product, category, content, and redirect planning.                                   | Prepare priority URLs, metadata, redirects, menus, and landing pages before launch.                                 |
+| Store with many apps                    | Apps may be reconnected or replaced, but their data ownership must be known.                               | Inventory app-created product, customer, order, subscription, fulfilment, and reporting data.                       |
+| Multi-channel seller                    | ShopWired may support connected operations, but source channel identifiers may not be ordinary store data. | Confirm marketplace IDs, fulfilment references, accounting links, and stock-sync ownership.                         |
+| Merchant simplifying operations         | ShopWired can support simplification if the merchant accepts changed workflows.                            | Decide which legacy custom behavior should not be recreated.                                                        |
+
+A conditional fit should move forward only when the uncertain areas have owners and evidence. For example, a product option problem should have representative product samples. A B2B pricing problem should have customer and pricing examples. An integration problem should have system names, identifiers, and data ownership notes. A content problem should have URL and page samples. Without evidence, the migration may appear straightforward during setup and fail during validation.
+
+### Weaker-Fit Profiles <a href="#weaker-fit-profiles" id="weaker-fit-profiles"></a>
+
+ShopWired can be a weaker fit when the source store depends on behavior that conflicts with the expectations of a hosted commerce platform. These cases may still be possible with redesign, simplification, external systems, or custom work, but the merchant should understand the trade-offs before choosing the platform.
+
+#### Stores that require self-hosted technical control <a href="#stores-that-require-self-hosted-technical-control" id="stores-that-require-self-hosted-technical-control"></a>
+
+A store that requires database-level control, unrestricted backend code access, custom checkout application logic, or full ownership of server-side architecture may not be a natural ShopWired fit. ShopWired can support theme work, apps, APIs, webhooks, and integrations, but it remains a hosted platform.
+
+If the merchant expects to reproduce a self-hosted system exactly, migration planning should challenge that expectation. The decision becomes whether the business is willing to translate the old model into ShopWired’s supported operating model.
+
+#### Stores with advanced configurator logic <a href="#stores-with-advanced-configurator-logic" id="stores-with-advanced-configurator-logic"></a>
+
+Product configurators can create fit problems when choices depend on conditional rules, formulas, dimensions, customer eligibility, real-time pricing, external stock, or custom manufacturing logic. Some source behavior may be expressible through product options, extras, bundles, or apps. Other behavior may require custom review or may belong outside the standard migration scope.
+
+A fit decision should use real products. If the merchant cannot show the products that create the complexity, the project cannot confirm whether ShopWired will preserve the buying experience.
+
+#### Stores with deeply customized B2B rules <a href="#stores-with-deeply-customized-b2b-rules" id="stores-with-deeply-customized-b2b-rules"></a>
+
+B2B risk increases when the source store uses customer-specific catalogs, contract pricing, approval workflows, ERP-controlled availability, custom payment terms, multi-user account hierarchies, or custom tax and delivery rules. These requirements are not ordinary customer records.
+
+ShopWired may still be considered, but the migration must identify what belongs to platform configuration, what belongs to apps or integrations, what must be rebuilt operationally, and what requires Custom Service review.
+
+#### Stores whose apps own the business model <a href="#stores-whose-apps-own-the-business-model" id="stores-whose-apps-own-the-business-model"></a>
+
+A store may appear simple in the admin while its real operations depend on apps or external systems. Examples include subscriptions, product personalization, reward logic, fulfilment routing, tax services, inventory sync, marketplace listings, accounting exports, review data, or custom reports.
+
+If those systems own important records, ordinary migration of products, customers, orders, and content may not be enough. The merchant should not choose ShopWired until app ownership and external identifiers are documented.
+
+### Non-Ideal Fit Signals <a href="#non-ideal-fit-signals" id="non-ideal-fit-signals"></a>
+
+Some signs indicate that ShopWired should be reconsidered or scoped very carefully before migration. These are not automatic rejection rules, but they should trigger a senior planning conversation.
+
+| Signal                                                  | Why it matters                                                   | Recommended response                                                                     |
+| ------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Source checkout is heavily customized                   | Hosted checkout behavior may not reproduce bespoke source logic. | Confirm whether target checkout can be configured or whether process redesign is needed. |
+| Product options depend on formulas or conditional rules | Standard product structures may not preserve buying logic.       | Sample complex products and classify custom behavior before scope is approved.           |
+| Customer-specific pricing is ERP-controlled             | Pricing may live outside ordinary customer and product records.  | Identify external ownership and integration requirements.                                |
+| Marketplace or fulfilment IDs must remain authoritative | External systems may need exact identifiers after launch.        | Preserve ID strategy or plan Custom Service review.                                      |
+| Store relies on source-side database customizations     | Hosted SaaS boundaries may conflict with expectations.           | Confirm whether the business accepts platform-managed operations.                        |
+| SEO inventory is incomplete                             | Important landing pages and redirects may be missed.             | Build priority URL and content map before migration.                                     |
+
+### Choosing the Right Level of Migration Support <a href="#choosing-the-right-level-of-migration-support" id="choosing-the-right-level-of-migration-support"></a>
+
+Fit assessment should lead directly into service-path planning. A strong fit with clean data can usually proceed through a more standard path. A conditional fit may need Managed Service support, Add-ons, or targeted preparation before Demo Migration. A weaker fit may require Custom Service review before the merchant can make a reliable platform decision.
+
+| Fit result                                       | Likely handling                                                  | Why                                                                              |
+| ------------------------------------------------ | ---------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Strong fit with ordinary records                 | Standard Service may be suitable.                                | Data maps cleanly and platform configuration is manageable.                      |
+| Strong fit with many records or validation needs | Managed Service may be useful.                                   | The merchant needs guidance, review, or staged validation support.               |
+| Conditional fit with specific mapping needs      | Add-ons may help where the requirement is bounded and supported. | Filtering, field mapping, or selected migration behavior may need configuration. |
+| Conditional fit with app/custom data             | Custom Service review may be needed.                             | Unsupported records, custom fields, or external IDs may require custom handling. |
+| Weak fit because of platform mismatch            | Reconsider platform or redesign expectations.                    | Migration cannot solve an operating-model mismatch by itself.                    |
+
+The fit decision should remain practical. The goal is not to make every requirement appear possible. The goal is to decide whether ShopWired can support the merchant’s business model at an acceptable migration and operating cost.
+
+### What to Confirm Before Choosing ShopWired <a href="#what-to-confirm-before-choosing-shopwired" id="what-to-confirm-before-choosing-shopwired"></a>
+
+Before committing to ShopWired, the merchant should prepare evidence in the areas most likely to affect migration scope.
+
+| Evidence area    | What to prepare                                                                                                 | Why it matters                                                          |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Complex products | Products with the deepest options, variations, extras, bundles, personalization, stock, and pricing behavior.   | Confirms whether customer buying logic can be preserved.                |
+| Customer samples | Registered customers, guest customers, newsletter subscribers, trade customers, and records with custom fields. | Confirms identity handling, segmentation, and order linkage.            |
+| Order samples    | Orders with discounts, refunds, delivery differences, payment notes, status changes, and trade/customer links.  | Confirms historical readability and support value.                      |
+| Checkout rules   | Delivery zones, rates, payment gateways, VAT/tax behavior, offers, and restrictions.                            | Separates migrated history from target configuration.                   |
+| SEO assets       | Priority products, categories, brands, CMS Pages, URLs, metadata, redirects, and landing pages.                 | Protects discovery and search continuity.                               |
+| Integration list | Apps, APIs, webhooks, accounting, fulfilment, stock sync, marketplaces, and external IDs.                       | Identifies what migrates, reconnects, rebuilds, or needs custom review. |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-ShopWired is a strong migration target for merchants that want hosted e-commerce management with practical catalog features, B2B potential, theme control, apps, APIs, and integration options. It is best suited to stores whose product, customer, order, content, and operational meaning can be expressed inside ShopWired’s supported platform model.
+ShopWired is a strong fit for merchants that want a hosted commerce platform with practical catalog depth, B2B/trade potential, managed operations, theme and content tools, apps, API access, and configurable checkout settings. It is strongest when the source store’s business meaning can be translated into ShopWired’s product, customer, order, content, checkout, and integration structures without needing to clone a bespoke source implementation.
 
-Before choosing ShopWired, review the source store’s product choices, B2B rules, app dependencies, checkout requirements, SEO priorities, storefront content, and integration ownership. If those areas fit ShopWired’s hosted structure, the platform can provide a strong target. If they depend on custom code, external-system logic, or unsupported data structures, plan Add-ons, target configuration, or Custom Service review before Full Migration.
+ShopWired is a weaker or more conditional fit when the source store depends on advanced product configurators, deeply customized B2B rules, custom checkout logic, self-hosted backend control, app-owned records, or external-system identifiers that ordinary migration cannot represent. Those cases may still be viable, but they need evidence, target capability review, and the right service path before the project moves forward.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is ShopWired a good fit for stores with product variations and options?**
+**What makes ShopWired a strong migration fit?**
 
-Yes, when the source product choices can be represented through ShopWired-supported product structures such as variations, choices, extras, bundles, or related platform behavior. Complex configurators or conditional pricing should be reviewed before migration scope is accepted.
+ShopWired is a strong fit when the merchant wants hosted commerce management and the source store’s catalog, customers, orders, content, checkout rules, and integrations can be represented through ShopWired-supported structures and target configuration.
 
-**Is ShopWired a good fit for B2B or trade sellers?**
+**When is ShopWired a conditional fit rather than an obvious fit?**
 
-It can be. ShopWired is often relevant for trade and B2B merchants, but the exact fit depends on customer groups, pricing rules, quote behavior, approval needs, checkout access, and whether source logic depends on apps or custom systems.
+It becomes conditional when the source store has complex product options, B2B/trade rules, app-owned data, marketplace identifiers, SEO-sensitive content, or integration dependencies that need review before migration scope can be confirmed.
 
-**Is ShopWired suitable for merchants who need self-hosted code control?**
+**Is ShopWired suitable for highly customized stores?**
 
-Usually not. ShopWired is a hosted platform. It can support theme customization, apps, API access, and integration work, but it is not the same as owning a self-hosted codebase and database layer.
+It depends on what is customized. Theme, app, API, and configuration work may be practical, but database-level control, bespoke checkout logic, advanced configurators, and external rules engines may require redesign or Custom Service review.
 
-**What makes a ShopWired migration higher-risk?**
+**Should B2B merchants consider ShopWired?**
 
-Risk increases when the source store depends on custom checkout logic, advanced product configurators, external pricing engines, B2B approval rules, app-owned data, marketplace identifiers, subscription behavior, or source-side custom code.
+Yes, when trade customer records, pricing expectations, quote behavior, account access, and checkout requirements can be defined clearly. Complex customer-specific catalogs, ERP-controlled pricing, or approval workflows need deeper review.
 
-**Should apps and integrations be reviewed before choosing ShopWired?**
+**What evidence should be prepared before choosing ShopWired?**
 
-Yes. Apps, API connections, webhooks, marketplaces, accounting systems, fulfillment tools, and other integrations should be classified before migration. Some are target configuration, some are reconnected after migration, and some may involve data or identifiers that need Custom Service review.
+Prepare complex product samples, customer and trade customer examples, representative historical orders, checkout rules, SEO-priority pages and URLs, and a list of apps, API connections, webhooks, and external systems that affect store operations.

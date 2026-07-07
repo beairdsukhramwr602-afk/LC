@@ -1,264 +1,322 @@
 # Cafe24 Migration Pitfalls and Prevention
 
-Cafe24 migration problems usually appear when a store is treated as a simple collection of products, customers, orders, and pages. Cafe24 can involve storefront design, market context, apps, APIs, webhooks, analytics, Data Bridge, payment gateway apps, shipping fee apps, discount apps, Smart Design, Smart Themes, modules, and external systems. When those layers are not planned, migrated records may appear present while the future store still fails to support the intended customer experience or operating workflow.
+Cafe24 migration pitfalls usually appear when teams treat a broad operating platform as a simple data destination. Cafe24 can involve product resources, variant inventories, customer tiers, orders, payments, shipments, refunds, returns, redirects, store settings, Smart Design, Smart Themes, apps, APIs, webhooks, analytics-related workflows, and external systems. A migration can look orderly at record level while still missing the business logic that makes the store work.
 
-The most useful prevention work starts before Full Migration. The merchant should know which storefronts matter, which product and category structures should remain, which design or module behavior belongs to the Cafe24 store, which app-owned behavior must be recreated or reconnected, and which source-side customizations require Custom Service review. Demo Migration should then be used to expose risk early, not only to confirm that records can be moved.
+The safest prevention approach is to separate data movement from configuration, design implementation, and integration ownership. Products, customers, and orders need to be moved with their business meaning intact. Store settings, checkout behavior, app workflows, redirects, and external-system events need their own review because they may not be represented by ordinary records.
 
-### Pitfall Summary <a href="#pitfall-summary" id="pitfall-summary"></a>
+| Prevention layer                 | What it protects                                                              | Why it matters in Cafe24                                                              |
+| -------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Product and variant planning     | Product options, variants, images, SEO, tags, and inventory meaning.          | Complex catalog structures can lose meaning if only basic product fields are checked. |
+| Customer and member planning     | Customer identity, tiers, memos, signup fields, and account history.          | Member treatment can affect support, segmentation, and repeat purchasing.             |
+| Order lifecycle planning         | Orders, payments, shipments, refunds, returns, cancellations, and coupons.    | Order history must remain interpretable for support, finance, and operations.         |
+| Settings and storefront planning | Payment, shipping, tax, SEO, redirects, product display, and design behavior. | Configuration gaps can break launch readiness even when data is present.              |
+| Integration planning             | Apps, APIs, webhooks, Data Bridge, analytics, and external IDs.               | Connected workflows may be the real owner of operational outcomes.                    |
 
-| Pitfall                                                      | What usually causes it                                                                            | Prevention focus                                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Treating Cafe24 as a simple record destination               | Storefront, design, app, and integration context are ignored                                      | Define the future Cafe24 operating model before execution                   |
-| Migrating product data without buying-context review         | Products move, but options, categories, visibility, or content do not support customer decisions  | Select product samples that reveal real buying behavior                     |
-| Rebuilding categories without storefront-navigation planning | Category names transfer but navigation and discovery become weak                                  | Map category, menu, collection, and landing-page intent                     |
-| Assuming design behavior will follow the data automatically  | Smart Design, Smart Themes, modules, components, or scripts are not reviewed                      | Separate migrated content from theme and module implementation              |
-| Overlooking app-owned rules                                  | Discount, shipping, payment, analytics, or marketing behavior is handled outside ordinary records | Identify app-owned behavior before choosing the migration approach          |
-| Ignoring API, webhook, and Data Bridge dependencies          | External systems depend on event, reporting, or synchronization behavior                          | Confirm ownership and reconnection requirements before launch               |
-| Using a weak Demo Migration sample                           | Easy records are tested instead of risk-revealing scenarios                                       | Include complex products, routes, customers, orders, apps, and integrations |
-| Treating custom source behavior as standard data             | Custom fields, scripts, and outside identifiers are not interpreted                               | Route custom behavior through Custom Service review                         |
+### Pitfall 1: Treating Cafe24 as a Basic Record Destination <a href="#pitfall-1-treating-cafe24-as-a-basic-record-destination" id="pitfall-1-treating-cafe24-as-a-basic-record-destination"></a>
 
-### Pitfall 1: Treating Cafe24 as a Simple Record Destination <a href="#pitfall-1-treating-cafe24-as-a-simple-record-destination" id="pitfall-1-treating-cafe24-as-a-simple-record-destination"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong" id="what-goes-wrong"></a>
+Teams sometimes validate a Cafe24 migration by asking whether products, customers, and orders arrived. That approach ignores the fact that Cafe24 store behavior can depend on product-display settings, order-form settings, payment configuration, shipping configuration, redirects, design implementation, apps, APIs, webhooks, and external-system connections.
 
-A Cafe24 migration can look successful when products, customers, orders, categories, and content records appear in the Target Platform. The problem is that Cafe24 planning often depends on storefront structure, design behavior, app services, API connections, analytics context, webhooks, payment and shipping behavior, and market-facing presentation. If the migration is reviewed only by record count, the merchant may miss whether the future store can actually operate as intended.
+When Cafe24 is treated as a basic record destination, the migration may pass a count check but fail operational review. Products may exist without the right display behavior, orders may be present without useful lifecycle context, and customers may be imported without the member or segmentation meaning needed after launch.
 
-This pitfall is common when the source store is being moved quickly, when the merchant assumes hosted e-commerce platforms behave the same way, or when project review focuses on entity transfer instead of storefront and operational outcomes.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs" id="early-warning-signs"></a>
+| Warning sign                                               | What it usually means                                          |
+| ---------------------------------------------------------- | -------------------------------------------------------------- |
+| Review focuses only on entity totals.                      | The team is not checking whether the data works inside Cafe24. |
+| Settings are discussed after migration rather than before. | Configuration ownership is unclear.                            |
+| Apps and integrations are described vaguely.               | Business behavior may be hiding outside ordinary records.      |
+| Demo Migration samples are clean and simple.               | The review may not reveal real operating risk.                 |
 
-* Stakeholders discuss migration success mainly as whether records moved.
-* Nobody has defined how Cafe24 storefront structure, design, apps, or integrations will support the migrated data.
-* Demo Migration review focuses only on product names, customer emails, and order totals.
-* App, API, webhook, analytics, payment, or shipping requirements are left for launch week.
+#### Prevention
 
-#### Prevention <a href="#prevention" id="prevention"></a>
+Define Cafe24 readiness as operating readiness. Before migration, separate native data, settings, design work, Add-ons, Custom Service needs, and external-system responsibilities. Every launch-critical workflow should have an owner and a validation method.
 
-Before migration execution, define what Cafe24 must do after launch. Clarify storefront structure, product discovery, customer experience, order review, app-owned behavior, integration ownership, and reporting needs. Treat the migration as a move into a Cafe24 operating environment, not only a record transfer into a hosted platform.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example" id="recommendation-example"></a>
+For a merchant with product variants, customer tiers, promotional rules, and fulfillment integrations, do not validate only product, customer, and order counts. Build a review sample that includes variant inventory, tier-sensitive customers, discounted orders, shipment status, and integration identifiers.
 
-Instead of reviewing only whether 500 products moved, choose representative products that prove category placement, product options, image behavior, content layout, SEO route planning, app-dependent discounts, shipping expectations, and storefront presentation.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition" id="pass-condition"></a>
+The team can explain what was migrated, what was configured, what was reconnected, what requires Add-ons or Custom Service, and what remains outside the migration scope.
 
-The migrated store can be reviewed through real buyer and staff workflows, not only through entity lists. Products, storefront pages, customer records, orders, apps, and connected systems can be checked in context.
+### Pitfall 2: Flattening Product Options, Variants, and Inventory Meaning <a href="#pitfall-2-flattening-product-options-variants-and-inventory-meaning" id="pitfall-2-flattening-product-options-variants-and-inventory-meaning"></a>
 
-### Pitfall 2: Moving Products Without Preserving Buying Meaning <a href="#pitfall-2-moving-products-without-preserving-buying-meaning" id="pitfall-2-moving-products-without-preserving-buying-meaning"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-1" id="what-goes-wrong-1"></a>
+Cafe24 product data can involve product records, product options, product variants, product images, SEO data, tags, custom properties, and variant inventories. If the source catalog is flattened into a simple product list, options may lose buyer-facing meaning and inventory may be tracked at the wrong level.
 
-Product records may migrate, but customers may no longer understand what to buy. Options, variants, technical details, images, descriptions, category placement, related products, buyer-facing content, or market-specific product presentation may not carry the same meaning inside Cafe24.
+This is especially risky for apparel, cosmetics, electronics, B2B catalogs, products with bundled presentation, and stores where product choices affect price, availability, image display, or fulfillment.
 
-This is especially risky when the source store uses unusual option structures, custom fields, third-party apps, hardcoded page content, or source-specific product logic. A product that exists in Cafe24 is not automatically a product that sells correctly.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-1" id="early-warning-signs-1"></a>
+| Warning sign                                         | Possible impact                                |
+| ---------------------------------------------------- | ---------------------------------------------- |
+| Products are sampled without variant-heavy examples. | Variant mapping risk remains hidden.           |
+| SKU and stock are reviewed only at product level.    | Variant inventory may be incorrect.            |
+| Images are checked without option behavior.          | Buyers may see the wrong product presentation. |
+| Product options are treated as labels only.          | Price, stock, or selection logic may be lost.  |
 
-* Product review focuses only on SKU, name, price, and stock.
-* Complex products are excluded from Demo Migration samples.
-* Option, variant, specification, image, and description behavior is not tested.
-* Product relationships or compatibility information exist in custom fields, apps, or source templates.
+#### Prevention
 
-#### Prevention <a href="#prevention-1" id="prevention-1"></a>
+Create a catalog sample that includes simple products, variant-heavy products, products with multiple images, products with SEO-sensitive fields, products with tags, and products with inventory behavior. Confirm whether each source-side detail belongs in Cafe24 product data, variant data, inventory data, a product-display setting, or Custom Service review.
 
-Prepare product samples that reveal the real catalog structure. Include simple products, configurable products, products with multiple options, products with rich content, products that depend on images or specifications, and products that require app or integration context. Decide which source-side details should become native Cafe24 product data, which should become content or configuration, and which require Custom Service review.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-1" id="recommendation-example-1"></a>
+If a source product uses color and size to control SKU, price, image, and availability, validate the Cafe24 product not only by name and price but by option selection, variant SKU, inventory level, image display, and purchase behavior.
 
-A merchant selling apparel should test size, color, image, category, route, discount, and market-presentation behavior. A merchant selling technical equipment should test specifications, compatibility content, replacement relationships, and any custom fields that help buyers select the correct product.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-1" id="pass-condition-1"></a>
+Representative products are findable, correctly displayed, purchasable, and operationally readable at the product, option, variant, and inventory level.
 
-Representative products are not only visible in Cafe24; they support correct buyer decisions, display meaningful information, appear in the right storefront context, and preserve the commercial purpose of the source catalog.
+### Pitfall 3: Moving Categories Without Product Discovery Planning <a href="#pitfall-3-moving-categories-without-product-discovery-planning" id="pitfall-3-moving-categories-without-product-discovery-planning"></a>
 
-### Pitfall 3: Rebuilding Categories Without Storefront Navigation Planning <a href="#pitfall-3-rebuilding-categories-without-storefront-navigation-planning" id="pitfall-3-rebuilding-categories-without-storefront-navigation-planning"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-2" id="what-goes-wrong-2"></a>
+Categories may transfer, but the new Cafe24 storefront may not support the intended buyer journey. Source categories often include old campaign groups, internal organization, duplicate labels, supplier groupings, or SEO-sensitive routes. Moving all categories without discovery planning can produce a cluttered navigation structure.
 
-Category records may migrate, but the future storefront may feel disorganized. Cafe24 storefront experience can depend on navigation, menus, design modules, landing pages, product grouping, search behavior, and market-specific presentation. When categories are migrated without navigation planning, the result can be technically complete but commercially weak.
+Cafe24 validation should focus on how categories, product listings, menus, redirects, product-display settings, and mobile navigation work together.
 
-This pitfall often affects merchants whose source store has years of accumulated category changes, seasonal landing pages, campaign pages, duplicated navigation labels, or categories used for internal organization rather than buyer discovery.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-2" id="early-warning-signs-2"></a>
+| Warning sign                                                   | Why it matters                                    |
+| -------------------------------------------------------------- | ------------------------------------------------- |
+| Category count is treated as the main success measure.         | Commercial discovery may be ignored.              |
+| Internal categories are mixed with customer-facing categories. | Navigation becomes confusing.                     |
+| High-value URLs are not identified.                            | SEO and referral traffic may be disrupted.        |
+| Mobile browsing is not sampled.                                | Storefront friction may appear only after launch. |
 
-* Category names are treated as enough evidence of migration quality.
-* Menu, homepage, landing-page, and product-list behavior is not reviewed.
-* High-value SEO routes are not identified before migration.
-* Internal categories and customer-facing categories are mixed together.
+#### Prevention
 
-#### Prevention <a href="#prevention-2" id="prevention-2"></a>
+Classify categories by purpose before migration: customer navigation, SEO route, merchandising group, internal organization, campaign landing group, or obsolete structure. Decide which categories should move as-is, which should be merged, which need redirects, and which should not become visible storefront navigation.
 
-Separate source category data from storefront navigation intent. Decide which categories should remain, which should be simplified, which are internal, and which should support landing pages or campaigns. Identify high-value URLs and navigation paths before migration so route continuity and redirect planning can be handled deliberately.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-2" id="recommendation-example-2"></a>
+If the source store has separate categories for supplier tracking and buyer browsing, do not expose all categories equally in Cafe24. Keep customer-facing discovery clean and preserve internal meaning only where it supports operations.
 
-If the source store has separate categories for internal merchandising, supplier grouping, and buyer navigation, do not assume all categories should become equal storefront categories in Cafe24. Decide which categories help buyers and which should be retired, merged, or handled as internal context.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-2" id="pass-condition-2"></a>
+Customers can browse important product groups naturally, high-value category paths are accounted for, and internal organization does not pollute buyer-facing navigation.
 
-Customers can browse the migrated Cafe24 storefront naturally. Important product groups are findable, navigation reflects the intended buyer journey, and high-value routes are accounted for before launch.
+### Pitfall 4: Confusing Historical Orders With Live Checkout Readiness <a href="#pitfall-4-confusing-historical-orders-with-live-checkout-readiness" id="pitfall-4-confusing-historical-orders-with-live-checkout-readiness"></a>
 
-### Pitfall 4: Expecting Smart Design, Smart Themes, Modules, or Scripts to Follow the Data <a href="#pitfall-4-expecting-smart-design-smart-themes-modules-or-scripts-to-follow-the-data" id="pitfall-4-expecting-smart-design-smart-themes-modules-or-scripts-to-follow-the-data"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-3" id="what-goes-wrong-3"></a>
+Order history and live checkout behavior are different responsibilities. Cafe24 order resources may include order items, buyer details, recipients, payments, shipments, refunds, returns, cancellations, exchanges, coupons, and order status. Those records help preserve history, but they do not automatically configure future payment, shipping, tax, privacy, order-form, or fulfillment behavior.
 
-Migration can move content and data, but storefront behavior may still depend on Cafe24 design implementation. Smart Design, Smart Themes, modules, web components, scripts, and theme-specific layouts can shape how migrated data appears. If these layers are ignored, the store may contain correct data but present it poorly.
+If historical order validation is used as proof of checkout readiness, teams may launch with incomplete settings.
 
-This is a common failure pattern when the source store used custom templates, embedded scripts, app widgets, or theme-specific content blocks that do not map directly to Cafe24 page structure.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-3" id="early-warning-signs-3"></a>
+| Warning sign                                                     | Likely gap                                      |
+| ---------------------------------------------------------------- | ----------------------------------------------- |
+| Historical payment data is used to approve payment setup.        | Active payment configuration may be untested.   |
+| Old shipping amounts are treated as proof of shipping readiness. | Shipping settings may still need configuration. |
+| Refund or return history is present but not interpretable.       | Support and finance review may fail.            |
+| Order status labels differ from the source store.                | Teams may misunderstand historical order state. |
 
-* Design review is postponed until after data migration.
-* Content pages are expected to display correctly without theme review.
-* Product, category, and checkout-related presentation depends on scripts or app widgets.
-* The team cannot distinguish migrated data from theme-controlled display behavior.
+#### Prevention
 
-#### Prevention <a href="#prevention-3" id="prevention-3"></a>
+Validate historical orders for interpretability and validate live checkout settings separately. Review payment methods, shipping rules, tax behavior, privacy notices, order-form fields, fulfillment requirements, refunds, returns, and status handling as separate launch checks.
 
-Separate migration content from design implementation. Decide which content must move as structured data, which layout behavior belongs to Cafe24 theme work, which modules or components need setup, and which scripts or third-party widgets must be recreated, replaced, or removed.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-3" id="recommendation-example-3"></a>
+A migrated refunded order should help support staff understand what happened historically. A live test order should separately prove that Cafe24 payment, shipping, tax, order confirmation, and fulfillment behavior work for new purchases.
 
-If a product page relies on a custom source template to display technical tabs, compatibility charts, or marketing blocks, do not treat the text alone as a complete migration result. Review how that content should be displayed in Cafe24 and whether custom implementation is needed.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-3" id="pass-condition-3"></a>
+Historical orders remain readable, and live checkout settings are independently configured, tested, and assigned to the correct launch owner.
 
-Key storefront pages display migrated data in a usable layout. Product pages, categories, content pages, and checkout-related pages support the intended customer experience after theme and module configuration are considered.
+### Pitfall 5: Losing Customer, Member, Tier, or Account Context <a href="#pitfall-5-losing-customer-member-tier-or-account-context" id="pitfall-5-losing-customer-member-tier-or-account-context"></a>
 
-### Pitfall 5: Overlooking App-Owned Discount, Shipping, Payment, or Marketing Behavior <a href="#pitfall-5-overlooking-app-owned-discount-shipping-payment-or-marketing-behavior" id="pitfall-5-overlooking-app-owned-discount-shipping-payment-or-marketing-behavior"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-4" id="what-goes-wrong-4"></a>
+Cafe24 customer data may include customers, customer tiers, memos, payment information, social account resources, signup-field properties, and account-related settings. If the migration treats customer data as a simple contact import, important member logic can be lost.
 
-Cafe24 supports an app ecosystem, and some business behavior may be handled through apps or services rather than ordinary migrated records. Discount apps, shipping fee apps, payment gateway apps, marketing services, analytics tools, and other integrations can affect checkout, pricing, fulfillment, reporting, or customer experience.
+This can affect repeat purchasing, support, segmentation, marketing, wholesale-like treatment, approval processes, loyalty interpretation, and account-level review.
 
-If app-owned behavior is not identified, the migration may preserve records while leaving operational behavior incomplete.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-4" id="early-warning-signs-4"></a>
+| Warning sign                                                   | Business risk                              |
+| -------------------------------------------------------------- | ------------------------------------------ |
+| Customer validation checks only name and email.                | Account usefulness is not proven.          |
+| Customer tiers are not mapped or explained.                    | Segment-based treatment may change.        |
+| Customer memos or external IDs are ignored.                    | Support or CRM continuity may be weakened. |
+| Social login or signup fields are assumed to transfer cleanly. | Account access expectations may be wrong.  |
 
-* Discounts, shipping rates, payment handling, or promotions are described vaguely.
-* Source rules are assumed to move as ordinary product or order data.
-* App responsibilities are not documented before migration.
-* Demo Migration does not include cases affected by shipping, payment, discount, or analytics behavior.
+#### Prevention
 
-#### Prevention <a href="#prevention-4" id="prevention-4"></a>
+Review customer identity, account status, tiers, memos, addresses, order association, signup fields, external references, and any source-side customer rules. Identify which fields can be migrated directly, which need mapping, which need Add-ons, and which require Custom Service review.
 
-Identify which outcomes are native data, which are Cafe24 configuration, and which depend on apps or external systems. Standard Add-ons may help with filtering, mapping, or configuration within supported behavior, but app-dependent or custom logic may require Custom Service review or post-migration setup outside standard migration capability.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-4" id="recommendation-example-4"></a>
+If VIP customers receive different benefits in the source store, prepare sample customers with their orders, tier meaning, discount assumptions, and expected Cafe24 treatment. Do not rely on contact fields alone.
 
-If certain customers receive discount behavior through a source-side app, prepare examples showing the customer, product, rule, order result, and expected Cafe24 outcome. This prevents the rule from being mistaken for ordinary customer or product data.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-4" id="pass-condition-4"></a>
+Customer records support account review, support decisions, segmentation context, and order association without losing the business meaning of membership or tier-related data.
 
-Launch-critical discount, shipping, payment, marketing, and analytics behavior has an assigned owner. The team knows whether each item is migrated, configured, reconnected, replaced, or reviewed through Custom Service.
+### Pitfall 6: Assuming Storefront Design, Smart Themes, or Scripts Follow the Data <a href="#pitfall-6-assuming-storefront-design-smart-themes-or-scripts-follow-the-data" id="pitfall-6-assuming-storefront-design-smart-themes-or-scripts-follow-the-data"></a>
 
-### Pitfall 6: Ignoring API, Webhook, Data Bridge, and Analytics Dependencies <a href="#pitfall-6-ignoring-api-webhook-data-bridge-and-analytics-dependencies" id="pitfall-6-ignoring-api-webhook-data-bridge-and-analytics-dependencies"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-5" id="what-goes-wrong-5"></a>
+Migration can move data, but it does not automatically recreate design behavior. Cafe24 storefront implementation may involve Smart Design, Smart Themes, modules, components, scripts, web components, banners, product-page layouts, and content blocks. A product or page can contain correct data while displaying poorly or missing the interaction that buyers expect.
 
-Cafe24 migration can involve more than storefront data. APIs, webhooks, Data Bridge, analytics, and external systems may control or consume important data. If these dependencies are not documented, the migrated store may appear correct while reporting, automation, synchronization, or downstream operations fail.
+This pitfall is common when the source store uses custom templates, app widgets, embedded scripts, tabbed product content, technical specification blocks, or landing pages tied to specific promotions.
 
-This risk increases when the source store is connected to ERP, fulfillment, CRM, marketplace, tax, shipping, advertising, analytics, or custom reporting systems.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-5" id="early-warning-signs-5"></a>
+| Warning sign                                                   | Display risk                                 |
+| -------------------------------------------------------------- | -------------------------------------------- |
+| Design work is postponed until after data validation.          | Storefront quality may not be launch-ready.  |
+| Product content depends on tabs, scripts, or custom templates. | Data alone may not reproduce the experience. |
+| Landing pages are treated as ordinary text pages.              | Campaign context may be lost.                |
+| Mobile layout is not reviewed.                                 | Buyer friction may appear after launch.      |
 
-* External systems are mentioned, but ownership is unclear.
-* Nobody can explain which system owns product, inventory, customer, order, fulfillment, or reporting truth.
-* Webhook, analytics, or data-feed needs are left for the final launch stage.
-* API-driven behavior is described as “integration stuff” without specific examples.
+#### Prevention
 
-#### Prevention <a href="#prevention-5" id="prevention-5"></a>
+Separate migrated content from design implementation. Decide which content should move as structured data, which belongs in theme or module work, which scripts need replacement, and which content should be retired. Validate top product pages, category pages, landing pages, policy pages, and mobile flows.
 
-Map each external dependency before migration. Identify systems of record, downstream consumers, trigger events, reporting requirements, synchronization direction, and launch-critical reconnections. Data that depends on outside systems should not be treated as ordinary native store data unless its ownership is clear.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-5" id="recommendation-example-5"></a>
+If a product page uses a custom source template to show compatibility charts and installation tabs, migrate the content meaning but also plan how Cafe24 will display it. The content is not complete until buyers can use it.
 
-If order data feeds a fulfillment system and analytics dashboard, review not only the order record in Cafe24 but also the fields, statuses, identifiers, and timing needed by those external systems after launch.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-5" id="pass-condition-5"></a>
+Key storefront pages display migrated content in a usable layout, and design-dependent behavior has an implementation owner before launch.
 
-The team can explain which systems own each important outcome, which data needs to be reconnected, which event or reporting flows are launch-critical, and which dependencies require Custom Service or separate integration work.
+### Pitfall 7: Ignoring Apps, APIs, Webhooks, Data Bridge, and Analytics Dependencies <a href="#pitfall-7-ignoring-apps-apis-webhooks-data-bridge-and-analytics-dependencies" id="pitfall-7-ignoring-apps-apis-webhooks-data-bridge-and-analytics-dependencies"></a>
 
-### Pitfall 7: Choosing Demo Migration Samples That Are Too Easy <a href="#pitfall-7-choosing-demo-migration-samples-that-are-too-easy" id="pitfall-7-choosing-demo-migration-samples-that-are-too-easy"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-6" id="what-goes-wrong-6"></a>
+Cafe24 can support apps, APIs, webhooks, analytics workflows, Data Bridge, and external connections. These dependencies may control product synchronization, inventory updates, order export, fulfillment triggers, CRM records, marketplace feeds, advertising data, and finance reporting.
 
-A Demo Migration can appear successful if it uses only simple products, ordinary customers, basic orders, and low-risk pages. That does not prove the Cafe24 migration is ready. Easy samples hide the problems that usually affect launch: product options, category navigation, app-owned rules, design presentation, route continuity, integration fields, and custom source behavior.
+If these dependencies are ignored, the migrated store may look correct while operational automation fails.
 
-Demo Migration is early evidence, not final validation. It should be designed to reveal risk.
+#### Early warning signs
 
-#### Early Warning Signs <a href="#early-warning-signs-6" id="early-warning-signs-6"></a>
+| Warning sign                                            | Operational risk                                         |
+| ------------------------------------------------------- | -------------------------------------------------------- |
+| External systems are listed but not assigned to owners. | Reconnection work may be missed.                         |
+| Webhook events are not documented.                      | Automations may stop after launch.                       |
+| Analytics and reporting are left to the final stage.    | Performance comparison may become unreliable.            |
+| External IDs are not validated.                         | ERP, CRM, fulfillment, or marketplace matching may fail. |
 
-* Sample records are selected because they are clean, not because they are representative.
-* Complex products, important URLs, app-dependent cases, and integration-sensitive orders are omitted.
-* Demo Migration is reviewed quickly without role-specific checks.
-* The team treats a successful sample as proof that Full Migration will need no further review.
+#### Prevention
 
-#### Prevention <a href="#prevention-6" id="prevention-6"></a>
+Map systems of record, synchronization direction, external IDs, webhook events, API consumers, reporting needs, and launch-critical integration owners. Decide which data is migrated, which must be reconnected, which needs Custom Service, and which belongs to a separate integration project.
 
-Choose samples that represent real business scenarios. Include high-value products, complex options, important categories, content pages, customer records, orders with fulfillment or payment context, app-affected rules, and external-system identifiers where relevant.
+#### Recommendation example
 
-#### Recommendation Example <a href="#recommendation-example-6" id="recommendation-example-6"></a>
+If Cafe24 orders need to feed a warehouse and finance platform, validate order identifiers, line items, statuses, shipment fields, tax context, and event timing before launch. Do not wait until the first live orders expose the gap.
 
-A strong Demo Migration sample might include a best-selling product with options, a category landing page tied to SEO traffic, a customer with order history, an order affected by shipping or payment rules, and a page that depends on theme or module presentation.
+#### Pass condition
 
-#### Pass Condition <a href="#pass-condition-6" id="pass-condition-6"></a>
+The team can identify each critical integration, its owner, its required data, its event or reporting behavior, and its launch validation method.
 
-Demo Migration exposes enough evidence to decide whether the migration approach is appropriate, whether Add-ons are needed, whether data cleanup is required, and whether Custom Service review is necessary before Full Migration.
+### Pitfall 8: Treating Redirects and SEO Settings as Afterthoughts <a href="#pitfall-8-treating-redirects-and-seo-settings-as-afterthoughts" id="pitfall-8-treating-redirects-and-seo-settings-as-afterthoughts"></a>
 
-### Pitfall 8: Treating Custom Source Behavior as Ordinary Cafe24 Data <a href="#pitfall-8-treating-custom-source-behavior-as-ordinary-cafe24-data" id="pitfall-8-treating-custom-source-behavior-as-ordinary-cafe24-data"></a>
+#### What goes wrong
 
-#### What Goes Wrong <a href="#what-goes-wrong-7" id="what-goes-wrong-7"></a>
+SEO continuity depends on more than product descriptions. Cafe24 includes SEO settings and redirect resources, while old stores may have product URLs, category URLs, campaign URLs, blog or content pages, image paths, and external links that drive traffic. If these are reviewed late, the launch may create broken paths and lost discoverability.
 
-Custom source stores may contain business meaning in custom fields, scripts, database structures, extensions, third-party apps, outside identifiers, or manual processes. If that behavior is treated as ordinary data, the migration may preserve visible records while losing the logic that made those records useful.
+#### Early warning signs
 
-This pitfall is especially serious when the Source Platform is a Custom Platform, heavily modified platform, custom-built storefront, or source environment with app-owned behavior that is not visible in basic exports.
+| Warning sign                           | SEO risk                                             |
+| -------------------------------------- | ---------------------------------------------------- |
+| Only product metadata is reviewed.     | Category and content routes may be missed.           |
+| Redirects are planned after launch.    | Broken URLs may already be live.                     |
+| High-traffic pages are not identified. | Priority routes may be treated like low-value pages. |
+| Old campaign pages are ignored.        | Paid, social, or referral traffic may break.         |
 
-#### Early Warning Signs <a href="#early-warning-signs-7" id="early-warning-signs-7"></a>
+#### Prevention
 
-* Stakeholders expect custom checkout, pricing, shipping, account, or reporting behavior to transfer automatically.
-* Custom fields are not classified by business meaning.
-* Outside identifiers are present but their owners are unknown.
-* No one has documented which source behavior is native, customized, integration-owned, or manual.
+Prepare a route inventory before launch. Identify products, categories, content pages, campaign URLs, policy pages, and external links that matter. Decide which routes will be recreated, redirected, merged, retired, or handled through new Cafe24 content and SEO settings.
 
-#### Prevention <a href="#prevention-7" id="prevention-7"></a>
+#### Recommendation example
 
-Classify custom behavior before migration. Identify which custom fields should become target data, which should become reference context, which require Advanced Data Mapping or Advanced Data Configure within supported behavior, and which require Custom Service because they need customization, modification, custom migration logic adjustment, Custom Platform handling, Tailored Add-ons, or Custom Add-ons.
+If the source store has high-ranking category pages and campaign landing pages, include them in the validation sample. Confirm whether each path has a Cafe24 destination, redirect, or intentional retirement decision.
 
-#### Recommendation Example <a href="#recommendation-example-7" id="recommendation-example-7"></a>
+#### Pass condition
 
-If a source store uses a custom customer identifier to connect orders to a separate ERP account, do not migrate it as an ordinary note without review. Confirm where that identifier should live in Cafe24, whether external systems still need it, and whether custom mapping or Custom Service is required.
+High-value old routes are accounted for, redirect needs are documented, and Cafe24 SEO settings are reviewed before launch.
 
-#### Pass Condition <a href="#pass-condition-7" id="pass-condition-7"></a>
+### Pitfall 9: Choosing Validation Samples That Are Too Easy <a href="#pitfall-9-choosing-validation-samples-that-are-too-easy" id="pitfall-9-choosing-validation-samples-that-are-too-easy"></a>
 
-Custom source behavior is documented and assigned to the right handling path. The team knows what can move through standard migration capability, what needs Add-on support, and what must be reviewed through Custom Service.
+#### What goes wrong
+
+A Demo Migration can look successful if the sample contains only clean products, ordinary customers, simple orders, and uncomplicated pages. Easy samples hide the records that usually create launch risk: variants, product custom fields, customer tiers, refunded orders, redirects, app-owned rules, webhooks, and external IDs.
+
+#### Early warning signs
+
+| Easy sample choice               | Hidden risk                                                   |
+| -------------------------------- | ------------------------------------------------------------- |
+| Simple products only             | Option, variant, and inventory issues remain invisible.       |
+| Recent paid orders only          | Refund, cancellation, return, and status context is untested. |
+| Ordinary customers only          | Tier, memo, signup, and segmentation context is untested.     |
+| Clean pages only                 | Redirect, design, and content-display issues are missed.      |
+| No integration-sensitive records | API and webhook readiness is not proven.                      |
+
+#### Prevention
+
+Design Demo Migration samples to expose complexity. Include high-risk records and review them with product, support, operations, marketing, finance, and technical stakeholders where relevant. Use the findings to refine mapping, Add-ons, Custom Service review, configuration, or integration planning before Full Migration.
+
+#### Recommendation example
+
+A strong Cafe24 sample includes a variant-heavy product, a product with SEO-sensitive content, a VIP or tiered customer, a refunded order, a redirect-sensitive page, and at least one record tied to an external system.
+
+#### Pass condition
+
+Demo Migration reveals whether the migration can handle realistic store complexity, not only whether simple records can move successfully.
+
+### Pitfall 10: Misusing Follow-Up Migration Actions After Launch <a href="#pitfall-10-misusing-follow-up-migration-actions-after-launch" id="pitfall-10-misusing-follow-up-migration-actions-after-launch"></a>
+
+#### What goes wrong
+
+After launch, merchants may need to move new or changed data. If follow-up migration actions are selected without understanding configuration reuse, mapping changes, or Entity Points implications, teams can duplicate records, overwrite important updates, or consume additional Entity Points unexpectedly.
+
+#### Early warning signs
+
+| Warning sign                                               | Potential consequence                                |
+| ---------------------------------------------------------- | ---------------------------------------------------- |
+| The team cannot explain what changed after Full Migration. | Follow-up action may target the wrong data.          |
+| Configuration changes are made without documenting them.   | Reusing the last setup may be unsafe.                |
+| Entity Points consumption is not reviewed.                 | Duplicate movement may consume additional allowance. |
+| Store updates happen in both stores at the same time.      | Conflict and overwrite risk increases.               |
+
+#### Prevention
+
+Choose the follow-up action based on what has changed. Use the last configuration only when the same mapping and behavior still apply. Use a new configuration when mapping, filters, or handling rules have changed. Use a separate migration when the work is materially different. Track Entity Points implications and avoid duplicate data movement.
+
+#### Recommendation example
+
+If new orders were placed on the source store after Full Migration and the Cafe24 configuration has not changed, continuing with the last used configuration may be appropriate. If new custom-field mapping or filtering is required, a new configuration should be reviewed instead.
+
+#### Pass condition
+
+The team understands which data changed, which configuration applies, whether Entity Points may be consumed again, and how to avoid duplicate, overwritten, or misclassified records.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Cafe24 migration pitfalls usually come from treating storefront, design, app, API, and integration behavior as secondary details. The safer approach is to define the future Cafe24 operating model early, select Demo Migration samples that reveal real risk, and review migrated data in the context of storefront presentation, checkout behavior, order handling, reporting, and connected systems.
+Cafe24 migration pitfalls are rarely caused by missing records alone. They usually come from missed relationships between product structure, customer/member meaning, order lifecycle context, store settings, storefront design, redirects, apps, APIs, webhooks, analytics, and external systems.
 
-A strong Cafe24 migration plan does not try to preserve every source-side artifact blindly. It separates useful structure from obsolete clutter, assigns ownership to app and integration behavior, and escalates custom source logic before it creates launch risk.
+A safer Cafe24 migration treats each pitfall as an ownership question. The team should know what is migrated, what is configured, what is reconnected, what needs Add-ons, what requires Custom Service, and what must be validated outside the migration itself.
 
-If your Cafe24 migration includes complex product presentation, app-owned discounts or shipping rules, custom source fields, API/webhook dependencies, or important storefront routes, use Demo Migration and Live Chat to confirm whether the issue can be handled through standard migration capability, Add-ons, or Custom Service before Full Migration begins.
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-### FAQs <a href="#faqs" id="faqs"></a>
+**What is the most common Cafe24 migration pitfall?**
 
-**Why can a Cafe24 migration look complete but still have launch issues?**
+The most common pitfall is treating Cafe24 as a basic record destination. Products, customers, and orders may move, but settings, design behavior, app logic, redirects, and integrations still need separate ownership.
 
-Because migrated records can be present while storefront presentation, design modules, app-owned rules, payment or shipping behavior, analytics, APIs, webhooks, or external integrations still need configuration or reconnection. Migration success should be judged through business workflows, not record presence alone.
+**Why are product variants a high-risk area in Cafe24 migration?**
 
-**Should Demo Migration include only clean sample records?**
+Variants can affect SKU, price, stock, images, and purchase behavior. If variants are flattened or sampled poorly, the catalog may look complete while buyers see incorrect choices or staff see unreliable inventory.
 
-No. Demo Migration should include representative and risk-revealing samples. Clean records are useful, but they do not prove complex product, category, route, app, integration, or custom-source behavior.
+**Should order history prove that checkout is ready?**
 
-**Are Cafe24 design and theme issues part of data migration?**
+No. Historical orders prove past transaction readability. Live checkout readiness requires separate testing of payment, shipping, tax, privacy, order-form, and fulfillment settings.
 
-Not always. Some content can be migrated, but design behavior may depend on Smart Design, Smart Themes, modules, web components, scripts, or separate storefront implementation. The preparation plan should distinguish migrated data from theme-controlled presentation.
+**When should Custom Service be reviewed?**
 
-**Can Add-ons prevent all Cafe24 migration pitfalls?**
-
-No. Standard Add-ons can help with supported filtering, mapping, or data configuration needs. Requirements that involve customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, or app/integration-dependent behavior should be reviewed through Custom Service.
-
-**What is the most important prevention step before Full Migration?**
-
-The most important step is choosing review samples that reflect the real Cafe24 operating model: important products, storefront routes, customer records, order cases, app-owned rules, integration-sensitive data, and any custom source behavior that could affect launch.
+Custom Service should be reviewed when unsupported app data, custom fields, external IDs, bespoke transformations, or integration-dependent behavior must be preserved beyond standard supported migration paths or Add-ons.

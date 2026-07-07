@@ -1,153 +1,179 @@
 # Jumpseller Fit: Ideal and Non-Ideal Migration Profiles
 
-Choosing Jumpseller as the Target Platform is a good fit before it becomes a migration execution decision. Jumpseller can be a strong destination for merchants seeking a hosted SaaS e-commerce platform with practical catalog management, theme customization, payment and shipping configuration, multilingual storefront options, sales channels, and an app ecosystem. It is less suitable when the source business depends on unrestricted backend control, heavily customized checkout behavior, unusual product configurators, source-specific app logic, or operational workflows that cannot be represented inside a managed platform model.
+Choosing Jumpseller as a migration target should start with fit, not feature attraction. Jumpseller can be a strong destination for merchants who want a hosted commerce platform with practical catalog management, storefront customization, configurable checkout, payment and shipping setup, sales-channel support, apps, and less infrastructure responsibility. But fit depends on whether the source store’s real operating model can be translated into Jumpseller without losing important business logic.
 
-A good fit does not mean every source feature transfers exactly. It means the important business meaning of the source store can be expressed clearly through Jumpseller products, categories, variants, customers, orders, content, URLs, checkout settings, payment methods, shipping methods, themes, apps, and integrations. The stronger the match between the source store and Jumpseller’s hosted operating model, the more predictable the migration plan becomes.
+A strong fit does not require the source store to be simple. It requires the important parts of the business to be expressible through Jumpseller’s product, category, option, variant, inventory, customer, order, content, checkout, theme, and integration structures. A weak fit usually appears when the store depends on deep backend control, unusual configurators, custom checkout behavior, source-specific app data, or external operational rules that cannot be cleanly represented in the hosted target environment.
 
-### The Practical Fit Question <a href="#the-practical-fit-question" id="the-practical-fit-question"></a>
+The right decision is not whether Jumpseller has a feature that sounds similar. The right decision is whether Jumpseller can support the merchant’s operating model after migration with acceptable configuration, service planning, validation effort, and long-term maintainability.
 
-The practical question is not simply whether Jumpseller can host an online store. The better question is whether the merchant’s catalog, checkout expectations, storefront design, team workflow, language and currency requirements, integrations, and launch requirements can operate effectively within Jumpseller after migration.
+### Fit Decision Snapshot <a href="#fit-decision-snapshot" id="fit-decision-snapshot"></a>
 
-Jumpseller is usually a better fit when the merchant wants to reduce infrastructure responsibilities and move to a platform-managed environment. It becomes a higher-risk fit when the merchant expects Jumpseller to behave like a fully self-hosted platform, a custom application, or a source platform with unrestricted checkout and backend modification.
+Use this snapshot to separate obvious strong candidates from stores that need deeper review before Jumpseller is selected.
 
-### What Makes Jumpseller a Strong Fit <a href="#what-makes-jumpseller-a-strong-fit" id="what-makes-jumpseller-a-strong-fit"></a>
+| Fit signal             | Strong Jumpseller fit                                                               | Needs deeper review                                                                      | Likely weaker fit                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Catalog structure      | Products, categories, stock, images, standard variants, and SEO fields are clear    | Product options affect stock, price, images, personalization, or filtering in mixed ways | Product builders, kits, bundles, or configurators drive the sales model                 |
+| Storefront expectation | Merchant accepts theme-based rebuilding or improvement                              | Merchant needs selective recreation of important layouts or scripts                      | Merchant expects exact transfer of a source theme, app layout, or checkout UI           |
+| Checkout behavior      | Standard checkout, payment, shipping, and order creation are acceptable             | Some custom fields, invoice needs, delivery rules, or payment instructions matter        | Checkout depends on custom validation, custom scripts, or industry-specific logic       |
+| Operations             | Inventory and order workflows can be managed in the target admin or connected tools | ERP, warehouse, accounting, or fulfillment tools need reconnection                       | External systems own the core commerce workflow and require deep custom synchronization |
+| Platform ownership     | Merchant wants hosted SaaS simplicity                                               | Merchant needs some theme or integration customization                                   | Merchant needs unrestricted backend access or direct database control                   |
+| Migration goal         | Clean operational move into a managed platform                                      | Move requires targeted transformation or custom review                                   | Move requires reproducing a highly customized source platform environment               |
 
-#### Hosted operation with lower infrastructure burden <a href="#hosted-operation-with-lower-infrastructure-burden" id="hosted-operation-with-lower-infrastructure-burden"></a>
+This fit view should be used before scope is locked. It helps prevent the common mistake of treating Jumpseller as either too simple or infinitely flexible. It is neither. It is a hosted commerce platform with useful built-in structures and clear boundaries.
 
-Jumpseller is often attractive to merchants that no longer want to manage hosting, platform patches, server maintenance, database-level fixes, or fragile plugin stacks. A hosted SaaS target can simplify technical responsibility and make ongoing operation more predictable for teams that want to focus on catalog work, storefront presentation, payment and shipping setup, orders, and marketing channels.
+### Strong-Fit Migration Profiles <a href="#strong-fit-migration-profiles" id="strong-fit-migration-profiles"></a>
 
-This fit is especially strong when the source store has become difficult to maintain because of outdated software, unsupported extensions, developer dependency, or unstable customizations. Moving to Jumpseller can reduce the need to preserve the source platform’s technical environment, provided the store’s commerce meaning can be represented inside Jumpseller’s structures.
+Jumpseller is usually a strong fit when the merchant’s requirements align with hosted commerce operation and the source store does not rely on hidden custom logic to sell correctly.
 
-#### Practical catalog management for standard commerce models <a href="#practical-catalog-management-for-standard-commerce-models" id="practical-catalog-management-for-standard-commerce-models"></a>
+#### Merchant moving away from outdated self-hosted maintenance <a href="#merchant-moving-away-from-outdated-self-hosted-maintenance" id="merchant-moving-away-from-outdated-self-hosted-maintenance"></a>
 
-Jumpseller is a good fit for merchants whose products can be managed through a product catalog, categories, images, pricing, stock, product options, variants, SEO fields, and related storefront content. Catalogs with clear product structures usually migrate more predictably than catalogs built around unusual configurators, custom product builders, complex bundle engines, or source-specific product logic.
+Jumpseller can be a strong target when the source store has become difficult to maintain because of hosting issues, outdated platform versions, fragile plugins, developer dependency, unsupported extensions, or admin complexity. In this profile, the migration goal is often operational cleanup.
 
-Variant-heavy stores can still be suitable, but they need early review. The important fit question is whether shoppers can select the intended product combinations and whether stock, price, image, SKU, and availability behavior remain understandable after migration.
+The source store may still have meaningful history, SEO value, product content, categories, customers, orders, and storefront assets worth preserving. The improvement comes from moving those assets into a managed environment where daily operations are easier to control.
 
-#### Storefront customization without full backend ownership <a href="#storefront-customization-without-full-backend-ownership" id="storefront-customization-without-full-backend-ownership"></a>
+| What usually fits well                                                          | What still needs planning                                                                |
+| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Standard products, categories, images, customers, orders, pages, and SEO fields | URL redirects, theme reconstruction, payment setup, shipping setup, and app replacement  |
+| Desire to reduce hosting and platform maintenance                               | Review of source plugins, custom fields, checkout behavior, and integration dependencies |
+| Team wants simpler admin workflows                                              | Training, permissions, inventory process, and post-launch validation                     |
 
-Jumpseller can suit merchants that want a professional storefront, theme selection, visual design control, and code-level theme customization where available, but do not need to own the whole backend platform. This is a useful middle ground for merchants that want more control than a very rigid storefront builder but do not want the maintenance burden of a self-hosted e-commerce system.
+This profile is strongest when the merchant accepts that some legacy behaviors should be retired rather than replicated.
 
-The fit weakens when the source store depends on custom backend controllers, direct database manipulation, deeply modified checkout flows, server-side modules, or proprietary business logic that must remain embedded in the commerce platform.
+#### Retail store with a structured catalog <a href="#retail-store-with-a-structured-catalog" id="retail-store-with-a-structured-catalog"></a>
 
-#### Integrated payment, shipping, and sales-channel planning <a href="#integrated-payment-shipping-and-sales-channel-planning" id="integrated-payment-shipping-and-sales-channel-planning"></a>
+Jumpseller is a good candidate for retail stores where the catalog can be represented through products, categories, product options, variants, SKUs, stock, images, filters, and SEO metadata. Apparel, accessories, home goods, specialty retail, food products, health products, and small wholesale catalogs may fit well when option logic is clear.
 
-Jumpseller can be a strong fit when the merchant is willing to configure live payment methods, shipping rules, fulfillment behavior, and sales channels inside the target platform. This is often suitable for stores that use common payment providers, understandable shipping rules, and integrations that can be reconnected or replaced through Jumpseller-supported options.
+Variant-heavy products should still be reviewed. A store selling shoes by size and color may fit cleanly. A store selling configurable machinery with conditional components, quote logic, file-based custom specs, and ERP-owned pricing may not.
 
-The fit is weaker when payment, shipping, fulfillment, invoicing, tax, or sales-channel behavior is highly customized in the source store or controlled by external systems that do not have a clear Jumpseller equivalent.
+The fit is strongest when each shopper choice has an obvious meaning: it either creates a variant, captures personalization, affects pricing, or supports filtering. Ambiguous choices create migration risk.
 
-#### A manageable operating model for growing teams <a href="#a-manageable-operating-model-for-growing-teams" id="a-manageable-operating-model-for-growing-teams"></a>
+#### Brand-led store that wants storefront control without backend ownership <a href="#brand-led-store-that-wants-storefront-control-without-backend-ownership" id="brand-led-store-that-wants-storefront-control-without-backend-ownership"></a>
 
-Jumpseller can work well for merchants that need a manageable admin environment for products, orders, content, store settings, apps, and team access. Teams that want to standardize store operation after leaving a fragmented source platform often benefit from a hosted target with clearer platform boundaries.
+Jumpseller can fit merchants that care about brand presentation but do not need full platform ownership. The merchant can plan a target storefront through a Jumpseller theme, content pages, category presentation, product-page layout, menu structure, images, and SEO fields.
 
-Plan-sensitive needs should still be reviewed. Staff access, stock locations, product filtering, language coverage, code editing, and other capabilities can affect whether a specific Jumpseller plan supports the merchant’s intended operating model.
+This profile works when the brand accepts target-side design reconstruction. It is risky when the merchant expects the source storefront theme, custom page builder, script behavior, widgets, and app-driven page sections to transfer directly.
 
-### Where Jumpseller Is Often a Strong Fit <a href="#where-jumpseller-is-often-a-strong-fit" id="where-jumpseller-is-often-a-strong-fit"></a>
+A strong brand-led fit has clear answers to these questions:
 
-Jumpseller is usually a strong candidate when the source store’s business model can be expressed through standard hosted-commerce structures and the merchant wants fewer technical maintenance responsibilities.
+| Question                              | Strong answer                                                                                              |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Which layouts are business-critical?  | Product pages, category pages, homepage sections, and content pages are prioritized by revenue or traffic. |
+| Which design elements can change?     | Legacy layout details are separated from must-preserve customer experience.                                |
+| Which content supports SEO or trust?  | High-value pages, metadata, image alt context, and redirects are identified before launch.                 |
+| Which old elements should be retired? | Outdated scripts, duplicated landing pages, and low-value widgets are not carried forward by default.      |
 
-| Strong-fit situation                                                                 | Why Jumpseller can work well                                                                           | What should still be confirmed                                                                                     |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| Merchant is leaving a maintenance-heavy self-hosted store                            | Jumpseller reduces hosting, patching, and backend maintenance responsibility.                          | Confirm that critical source customizations are not required in the target platform.                               |
-| Catalog uses recognizable products, categories, options, variants, images, and stock | The product structure is more likely to translate into Jumpseller’s catalog model.                     | Test variant-rich products, image handling, category placement, stock behavior, and SEO fields.                    |
-| Storefront needs customization but not full platform ownership                       | Themes and storefront editing can support a branded store without self-hosted backend control.         | Confirm which design elements are data migration scope and which require target-side theme work.                   |
-| Payment and shipping workflows are standard enough to reconfigure                    | Common payment and shipping expectations can usually be planned through target-side setup.             | Validate provider availability, countries, shipping rules, manual payment instructions, and fulfillment needs.     |
-| Merchant wants a practical multilingual storefront                                   | Jumpseller can support multilingual store planning where the selected setup and plan fit the business. | Confirm language requirements, translation coverage, URL behavior, emails, checkout labels, and app compatibility. |
-| The team wants a cleaner operating environment                                       | Jumpseller can reduce dependence on legacy extensions or custom backend workflows.                     | Confirm admin access, role needs, app dependencies, stock locations, and order-management expectations.            |
+#### Merchant with standard payment, shipping, and fulfillment needs <a href="#merchant-with-standard-payment-shipping-and-fulfillment-needs" id="merchant-with-standard-payment-shipping-and-fulfillment-needs"></a>
 
-### Where Jumpseller Is Often a Weaker Fit <a href="#where-jumpseller-is-often-a-weaker-fit" id="where-jumpseller-is-often-a-weaker-fit"></a>
+Jumpseller is easier to evaluate when checkout can be configured through supported payment and shipping methods rather than custom checkout engineering. Standard payment gateways, manual payment instructions, shipping zones, shipping rates, delivery rules, pickup behavior, and ordinary fulfillment workflows can be planned inside the target environment.
 
-Jumpseller becomes a weaker fit when the source business expects a hosted SaaS platform to preserve custom infrastructure behavior, direct code ownership, or source-specific data models without adjustment.
+This does not mean checkout can be ignored. Payment and shipping setup still need credentials, market availability, rate logic, order testing, email testing, and fulfillment confirmation. The strong-fit signal is that these requirements are configuration problems, not custom-platform behavior problems.
 
-| Weaker-fit situation                                                              | Why risk increases                                                                                                                     | Safer interpretation                                                                               |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Source store depends on custom checkout logic                                     | Hosted checkout behavior may not support every source field, validation rule, or workflow exactly.                                     | Confirm which checkout requirements are essential and whether they can be supported or simplified. |
-| Catalog relies on custom configurators, bundles, kits, or personalization engines | These structures may not map cleanly to ordinary product options and variants.                                                         | Review representative products before assuming Jumpseller is a strong fit.                         |
-| Merchant requires unrestricted backend code or database control                   | Jumpseller is a managed SaaS platform, not a self-hosted application stack.                                                            | Consider whether target-side simplification is acceptable before choosing Jumpseller.              |
-| Store operation depends on source-specific apps or extensions                     | App-owned data and workflows may not have direct Jumpseller destinations.                                                              | Identify app-owned data and integration dependencies before migration planning.                    |
-| Fulfillment, stock, or ERP behavior is highly customized                          | Hosted stock and order structures may not mirror external operational logic.                                                           | Confirm stock locations, fulfillment process, order statuses, and integration expectations early.  |
-| SEO depends on complex legacy routing or page-builder URLs                        | Product, category, and page URLs may change during a move into Jumpseller.                                                             | Plan high-value redirects and validate destination quality before launch.                          |
-| The merchant expects the old storefront to transfer exactly                       | Source themes, custom scripts, templates, page-builder blocks, and layout logic do not automatically become Jumpseller theme behavior. | Separate data migration from target-side design reconstruction.                                    |
+#### Merchant using integrations that can be reconnected or replaced <a href="#merchant-using-integrations-that-can-be-reconnected-or-replaced" id="merchant-using-integrations-that-can-be-reconnected-or-replaced"></a>
 
-### Strong-Fit Profiles <a href="#strong-fit-profiles" id="strong-fit-profiles"></a>
+A store may depend on marketing, analytics, feeds, invoicing, fulfillment, dropshipping, product recommendations, reviews, accounting, or social channels. Jumpseller can be a good target when those workflows can be reconnected through Jumpseller apps, external services, API work, webhooks, or operational process changes.
 
-The following profiles are usually worth considering for Jumpseller when the merchant accepts the hosted SaaS operating model and the source data can be represented in Jumpseller without excessive custom transformation.
+The fit becomes stronger when the merchant understands which systems own the data. If the source platform owns product and order records, migration may handle them. If an app owns reviews, subscriptions, loyalty records, or custom workflow data, that data may need separate handling.
 
-| Merchant profile                                                      | Fit logic                                                                                                                      | Migration planning focus                                                                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Small to mid-sized merchant moving from an outdated self-hosted store | Jumpseller can reduce maintenance burden while supporting ordinary catalog, checkout, payment, shipping, and storefront needs. | Prioritize product structure, category navigation, customer and order history, URLs, and target checkout readiness.       |
-| Brand-led store with manageable product complexity                    | A theme-based hosted storefront can support presentation needs without requiring full backend ownership.                       | Separate migrated data from design reconstruction, then validate product pages, content pages, images, and navigation.    |
-| Merchant with standard payment and shipping workflows                 | Jumpseller can support target-side configuration for payment and shipping when provider and country needs align.               | Confirm payment gateway availability, shipping-rate logic, fulfillment expectations, and order status interpretation.     |
-| Multilingual merchant with clear translation requirements             | Jumpseller can support multilingual planning when language coverage and content structure are reviewed early.                  | Validate translated products, categories, pages, menus, URLs, emails, checkout labels, and app behavior.                  |
-| Team seeking a cleaner day-to-day admin model                         | A hosted platform can simplify store management compared with a heavily modified legacy store.                                 | Review administrator access, roles, app needs, stock locations, product filtering, and plan-sensitive features.           |
-| Merchant using integrations that can be reconnected or replaced       | Apps, feeds, automation, and sales channels can be planned around Jumpseller’s ecosystem when expectations are clear.          | Identify which integration data migrates, which must be reconfigured, and which belongs outside standard migration scope. |
+### Conditional-Fit Profiles <a href="#conditional-fit-profiles" id="conditional-fit-profiles"></a>
+
+Some stores can migrate to Jumpseller successfully, but only after specific assumptions are tested. These are not poor fits by default. They are situations where the fit decision needs evidence.
+
+| Conditional profile                | Why it needs review                                                                                                     | Evidence needed before proceeding                                                                         |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Variant-heavy catalog              | Products may exceed simple option assumptions or require variant-specific price, stock, images, weight, or SKU behavior | Sample products with the highest option complexity should be tested in Demo Migration.                    |
+| Customizable products              | Personalization fields may not behave like stock-bearing variants                                                       | Decide which choices create variants and which only collect customer input.                               |
+| Multilingual or multi-market store | Language coverage, content consistency, payment support, shipping zones, and emails may vary by market                  | Confirm language structure, localized content, checkout labels, and market-specific settings.             |
+| SEO-sensitive store                | URLs, metadata, categories, and page relationships may change                                                           | Identify high-value URLs and validate redirects, product pages, category pages, and content destinations. |
+| Integration-dependent store        | Operational behavior may sit outside core store data                                                                    | Map each integration to migration, reconfiguration, API work, or Custom Service review.                   |
+| B2B or customer-segmented store    | Prices, customer groups, terms, and account expectations may be more complex than ordinary retail                       | Confirm customer categories, price lists, volume pricing, tax handling, and account workflows.            |
+
+Conditional fit requires representative testing. The goal is to avoid a vague approval such as “Jumpseller supports variants” or “Jumpseller has apps.” The merchant needs to know whether their specific variants, specific apps, and specific workflows can be supported.
 
 ### Higher-Risk Fit Profiles <a href="#higher-risk-fit-profiles" id="higher-risk-fit-profiles"></a>
 
-The following profiles do not automatically exclude Jumpseller, but they need stricter review before the merchant treats Jumpseller as the right Target Platform.
+Jumpseller may still be possible for higher-risk stores, but these profiles should not move forward on assumption alone.
 
-| Higher-risk profile                                      | Why fit is uncertain                                                                                                       | What should be confirmed before choosing Jumpseller                                                                 |
-| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Store with custom checkout fields or order rules         | Checkout behavior may be difficult to reproduce exactly in a hosted SaaS target.                                           | Confirm required checkout fields, invoice fields, delivery logic, validation rules, and payment-specific workflows. |
-| Store with unusual product-building logic                | Product builders, configurators, bundles, kits, and personalization flows may exceed ordinary option and variant behavior. | Test representative products and define whether simplification, mapping, or Custom Service review is needed.        |
-| Store with heavy source-specific app data                | App-owned data may not have a direct Jumpseller destination.                                                               | List source apps, identify data ownership, and confirm which records or workflows must be preserved.                |
-| Store needing direct backend modification                | Jumpseller does not provide the same backend control as a self-hosted platform.                                            | Decide whether SaaS platform boundaries are acceptable for the future operating model.                              |
-| Store with complex stock, warehouse, or ERP dependencies | Stock and fulfillment may be partly controlled outside the storefront platform.                                            | Confirm stock locations, SKU behavior, order export needs, fulfillment process, and integration responsibility.     |
-| Store with strict SEO continuity requirements            | URLs, redirects, metadata, product/category routes, and page destinations need careful launch planning.                    | Identify high-value URLs, map destinations, and validate redirect behavior during migration review.                 |
-| Store with unclear source data ownership                 | Records may be split among core platform tables, custom fields, external systems, or app-owned structures.                 | Clarify which data belongs to the Source Platform, which belongs to apps, and which requires custom handling.       |
+#### Store with deeply custom checkout behavior <a href="#store-with-deeply-custom-checkout-behavior" id="store-with-deeply-custom-checkout-behavior"></a>
 
-### What Should Be Confirmed Before Choosing Jumpseller <a href="#what-should-be-confirmed-before-choosing-jumpseller" id="what-should-be-confirmed-before-choosing-jumpseller"></a>
+Jumpseller’s hosted checkout model is a boundary. If the source store depends on custom checkout fields, conditional validation, custom scripts, manual approval flows, delivery-date logic, invoice-number rules, payment-specific forms, or source-specific checkout apps, the merchant needs to confirm whether Jumpseller can support the required behavior.
 
-A Jumpseller fit decision should be made with enough evidence to avoid assuming that every source behavior will become native target behavior. The following confirmations help separate a strong migration fit from a higher-risk platform choice.
+A store can preserve historical orders while still fail launch readiness if live checkout no longer captures required information.
 
-#### Confirm the catalog can fit Jumpseller’s product model <a href="#confirm-the-catalog-can-fit-jumpseller-s-product-model" id="confirm-the-catalog-can-fit-jumpseller-s-product-model"></a>
+#### Store with custom product builders or complex configuration <a href="#store-with-custom-product-builders-or-complex-configuration" id="store-with-custom-product-builders-or-complex-configuration"></a>
 
-Review products, categories, options, variants, images, SKUs, stock, product filters, custom fields, SEO fields, and product visibility. Variant-heavy or configurable products should be tested before migration scope is finalized.
+Product options and variants are not the same as a custom product builder. A product builder may use conditional choices, dependent options, component inventory, pricing formulas, bundles, kit logic, uploaded files, previews, or quote behavior. Some of this may be simplified. Some may need app support. Some may require Custom Service review or another platform choice.
 
-#### Confirm checkout expectations <a href="#confirm-checkout-expectations" id="confirm-checkout-expectations"></a>
+The fit should be tested against the most complex representative products, not against average products.
 
-Identify required checkout fields, payment instructions, shipping selection rules, delivery requirements, invoicing needs, customer account expectations, and order notification behavior. If checkout behavior is business-critical, it should be validated early rather than discovered after migration.
+#### Store that requires unrestricted backend control <a href="#store-that-requires-unrestricted-backend-control" id="store-that-requires-unrestricted-backend-control"></a>
 
-#### Confirm payment, shipping, and fulfillment requirements <a href="#confirm-payment-shipping-and-fulfillment-requirements" id="confirm-payment-shipping-and-fulfillment-requirements"></a>
+Jumpseller is a hosted SaaS platform. Merchants that need direct database control, custom backend modules, unrestricted checkout modifications, server-level behavior, or platform-level extension ownership may find the operating model restrictive.
 
-Payment and shipping readiness depends on provider availability, country support, account configuration, shipping-rate logic, pickup or delivery rules, fulfillment expectations, and integration requirements. Historical order context and live checkout configuration should be evaluated separately.
+This profile should decide whether the migration is meant to simplify operations or preserve full technical control. Those goals often point in different directions.
 
-#### Confirm storefront design expectations <a href="#confirm-storefront-design-expectations" id="confirm-storefront-design-expectations"></a>
+#### Store with app-owned or external-system-owned data <a href="#store-with-app-owned-or-external-system-owned-data" id="store-with-app-owned-or-external-system-owned-data"></a>
 
-A migration into Jumpseller should not be evaluated as a direct copy of the source storefront. Identify which pages, menus, homepage sections, theme elements, scripts, forms, and design behaviors need to be rebuilt, replaced, simplified, or handled outside data migration scope.
+If reviews, loyalty points, subscriptions, quotes, custom fields, accounting references, supplier feeds, ERP status, customer segmentation, or fulfillment rules are owned by external systems, migration scope must be carefully defined. Not every important business record is a core store record.
 
-#### Confirm app and integration ownership <a href="#confirm-app-and-integration-ownership" id="confirm-app-and-integration-ownership"></a>
+The fit risk is not only whether data can be exported. It is whether the data has a useful target destination and whether the workflow can continue after launch.
 
-List marketing tools, feeds, sales channels, dropshipping systems, invoicing systems, ERP connections, analytics, webhooks, and custom integrations. Determine whether each item is ordinary target-side configuration, app reconnection, external-system work, Add-on-supported data configuration, or Custom Service review.
+### Fit Testing Before Committing <a href="#fit-testing-before-committing" id="fit-testing-before-committing"></a>
 
-#### Confirm plan-sensitive capabilities <a href="#confirm-plan-sensitive-capabilities" id="confirm-plan-sensitive-capabilities"></a>
+Before a merchant treats Jumpseller as the right destination, the fit decision should be tested with representative records.
 
-Capabilities such as staff access, product filtering, stock locations, language coverage, code editing, advanced features, apps, or enterprise-level requirements can affect the fit decision. The merchant should confirm that the intended Jumpseller plan supports the operating model before committing to the platform choice.
+| Test area    | What to test                                                                                      | Good fit signal                                  | Warning sign                                                   |
+| ------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| Catalog      | Complex products, common products, discontinued products, digital products, personalized products | Each product type has a clear target structure   | Product logic requires unsupported conditional behavior.       |
+| Variants     | Options that affect price, stock, SKU, image, or weight                                           | Variant combinations preserve sellable meaning   | Source options are mixed with personalization or bundle logic. |
+| Categories   | Main categories, subcategories, filters, navigation, product ordering                             | Shoppers can browse naturally after migration    | Categories exist but discovery feels broken.                   |
+| Orders       | Paid, pending, abandoned, canceled, refunded, and fulfilled examples                              | Historical order meaning remains understandable  | Status, payment, shipping, or fulfillment context is unclear.  |
+| Customers    | Active customers, guest customers, wholesale customers, marketing contacts                        | Customer identity and account context are usable | Customer grouping, pricing, or account access is ambiguous.    |
+| Checkout     | Payment, shipping, tax, delivery, invoice, and notification flow                                  | New orders can be placed and fulfilled correctly | Required checkout information is missing.                      |
+| Integrations | ERP, accounting, feeds, marketing, analytics, fulfillment, apps                                   | Each workflow has an owner and continuation path | App-owned data has no target-side plan.                        |
+
+Demo Migration is useful because it turns fit assumptions into visible evidence. It should include difficult records, not only clean records.
+
+### When Jumpseller Is Not the Best First Choice <a href="#when-jumpseller-is-not-the-best-first-choice" id="when-jumpseller-is-not-the-best-first-choice"></a>
+
+Jumpseller may not be the best first choice when the merchant’s core advantage depends on platform behavior that is difficult to represent in a hosted SaaS environment.
+
+Examples include:
+
+* enterprise-grade custom backend workflows;
+* highly conditional product builders;
+* quote-first commerce where checkout is secondary;
+* complex marketplace seller logic;
+* heavy subscription lifecycle rules not supported by ordinary product behavior;
+* deep ERP-owned catalog and stock logic;
+* strict one-to-one checkout reproduction;
+* source-specific app data that must remain editable in the target storefront but has no clear destination.
+
+In these situations, Jumpseller may still be considered if the merchant is intentionally simplifying the operating model. If the goal is exact preservation of complex legacy behavior, the platform fit should be challenged before migration begins.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Jumpseller is often a good fit for merchants that want a hosted SaaS e-commerce platform with practical catalog management, storefront customization, payments, shipping, sales channels, apps, and reduced infrastructure responsibility. It is a weaker fit when the source store depends on unrestricted backend control, custom checkout behavior, unusual product configuration, source-specific app data, or tightly customized operational workflows that cannot be represented clearly in Jumpseller.
+Jumpseller is a strong migration target when the merchant wants a hosted commerce environment and the source store’s important business meaning can be represented through Jumpseller’s product, category, option, variant, inventory, customer, order, content, checkout, theme, and integration structures. It is a weaker fit when the migration depends on recreating unrestricted backend control, deeply custom checkout behavior, unusual product builders, or app-owned workflows without a clear target-side plan.
 
-Before choosing Jumpseller, compare the source store’s real operating requirements against Jumpseller’s hosted platform model. Use representative records in Demo Migration, review plan-sensitive features, and use Live Chat when catalog complexity, checkout requirements, app-owned data, or custom source behavior makes the fit uncertain.
+A good fit decision uses evidence. Review representative products, customer records, orders, URLs, checkout requirements, integrations, and design expectations before committing. When the store’s complexity is compatible with Jumpseller’s hosted model, the platform can provide a cleaner and more maintainable operating environment after migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Jumpseller a good fit for a store moving away from a self-hosted platform?**
+**Is Jumpseller a good fit for stores leaving WooCommerce, Magento, or another self-hosted platform?**
 
-Yes, when the store wants to reduce hosting, maintenance, patching, and backend management responsibility. The fit should still be checked against catalog complexity, checkout expectations, payment and shipping needs, design requirements, and source-specific customizations.
+It can be a strong fit when the merchant wants to reduce hosting and maintenance responsibility. The decision should still check catalog complexity, checkout behavior, payment and shipping requirements, SEO continuity, app dependencies, and integration ownership.
 
-**Is Jumpseller suitable for stores with many product variants?**
+**Can Jumpseller support B2B or wholesale requirements?**
 
-It can be, but variant-heavy catalogs should be reviewed carefully. The merchant should test products with important option combinations, SKU differences, image behavior, price differences, stock behavior, and product-page presentation before treating Jumpseller as a strong fit.
+It may support some B2B-style needs through customer categories, price lists, volume pricing, account workflows, and configuration choices. The merchant should confirm pricing logic, tax handling, customer account expectations, and approval needs before choosing Jumpseller.
 
-**Is Jumpseller a good choice if the store has custom checkout fields?**
+**Is Jumpseller suitable for highly customized products?**
 
-It depends on whether the required checkout behavior can be supported in the target store. Custom checkout fields, invoice fields, delivery-date logic, validation rules, or payment-specific instructions should be reviewed before choosing Jumpseller as the Target Platform.
+It depends on the type of customization. Standard options, variants, text inputs, file uploads, and add-on-style selections may be manageable. Conditional product builders, formulas, bundles, component inventory, or quote-based configuration need deeper review.
 
-**Should source apps and integrations influence the fit decision?**
+**Should old apps influence the Jumpseller fit decision?**
 
-Yes. Apps and integrations can carry business workflows that are separate from core store records. Marketing tools, feeds, ERP systems, fulfillment tools, analytics, sales channels, or app-owned data should be reviewed to determine whether they can be reconnected, replaced, configured in Jumpseller, or handled through Custom Service.
+Yes. Apps can contain business logic that is not part of ordinary store data. Reviews, loyalty, subscriptions, feeds, ERP references, accounting connections, and fulfillment automations should be reviewed before migration scope is finalized.
 
-**Does choosing Jumpseller mean the old storefront design will transfer exactly?**
+**What is the best way to test whether Jumpseller is the right target?**
 
-No. Jumpseller can support storefront customization, but source themes, templates, page-builder layouts, scripts, widgets, and custom design behavior usually need target-side adaptation. Store data migration and storefront design reconstruction should be planned as separate work areas.
+Use representative records in Demo Migration: complex products, key categories, important customers, different order states, high-value URLs, and integration-sensitive examples. Fit should be proven with difficult cases, not only average catalog items.

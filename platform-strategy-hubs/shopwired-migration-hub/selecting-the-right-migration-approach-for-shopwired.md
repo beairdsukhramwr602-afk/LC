@@ -1,150 +1,170 @@
 # Selecting the Right Migration Approach for ShopWired
 
-Selecting the right migration approach for ShopWired depends on how clearly the source store’s data can be interpreted inside ShopWired’s hosted platform model. A simple catalog, ordinary customers, standard orders, and straightforward content may fit standard service capability. A store with complex product choices, B2B rules, quote workflows, app-owned data, API connections, outside-system identifiers, or custom checkout behavior may need deeper review before the migration path is treated as predictable.
+Choosing a ShopWired migration approach should be based on how the store must operate after launch. Record volume matters, but it should not be the only decision factor. A small source store can require careful handling if it depends on complex product options, B2B pricing, custom fields, integrations, or app-owned behavior. A larger store can still fit a simpler path when its data structures are supported and validation responsibility is clear.
 
-The right approach should be chosen from evidence, not from store size alone. A small store can require Custom Service when product configuration or B2B logic is highly customized. A larger store can still fit standard service capability when the source records are structured predictably and the target expectations match supported ShopWired behavior.
+The right approach should explain five things: what can migrate as supported records, what must be configured in ShopWired, what requires Add-ons, what should be reviewed as Custom Service, and what Demo Migration must prove before Full Migration. When these decisions are made early, ShopWired migration planning becomes a controlled scope decision rather than a late-stage troubleshooting exercise.
 
-### What Migration Approach Means for ShopWired <a href="#what-migration-approach-means-for-shopwired" id="what-migration-approach-means-for-shopwired"></a>
+### What the Approach Decision Should Control <a href="#what-the-approach-decision-should-control" id="what-the-approach-decision-should-control"></a>
 
-For ShopWired, migration approach means deciding how much responsibility and customization the project requires. It should clarify whether the merchant can use Standard Service, whether Next-Cart-led execution is needed through Managed Service, whether Standard Add-ons can handle filtering or mapping needs, or whether Custom Service review is required because the migration includes custom, app-owned, integration-owned, or unsupported data.
+A ShopWired migration approach should control execution responsibility, support level, scope assumptions, configuration needs, and validation depth. It should not be selected only from convenience or record count.
 
-| Planning signal                                                           | What it means for ShopWired                                                                   | Likely approach direction                   |
-| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| Standard products, categories, brands, customers, orders, and pages       | Source records fit ordinary ShopWired structures.                                             | Standard Service may be enough.             |
-| Standard data, but the merchant wants Next-Cart-led execution             | The migration may not be custom, but service responsibility should shift.                     | Managed Service may be safer.               |
-| Only selected eligible records should migrate                             | The requirement is filtering, not a change in platform identity.                              | Data Filter Add-on may be relevant.         |
-| Supported fields need controlled mapping                                  | The source and target support the data, but field interpretation needs adjustment.            | Advanced Data Mapping may be relevant.      |
-| Migrated values need supported modification                               | Values can be configured before reaching the target store within supported behavior.          | Advanced Data Configure may be relevant.    |
-| Complex product choices require non-standard transformation               | Variations, choices, extras, bundles, personalization, or stock behavior may not map cleanly. | Custom Service review may be needed.        |
-| B2B, quotes, account terms, or customer-group logic is custom             | The requirement may involve more than ordinary customer records.                              | Custom Service review should be considered. |
-| App, API, webhook, marketplace, or external-system data must be preserved | The business meaning may sit outside standard platform data.                                  | Custom Service review is likely needed.     |
-| Custom Platform is involved as Source Platform or Target Platform         | Custom platform handling is required.                                                         | Custom Service is required.                 |
+| Decision area                  | What to evaluate                                                                                                        | Why it matters                                                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Supported data fit             | Products, categories, brands, customers, orders, reviews, coupons, CMS Pages, and other eligible records.               | Confirms whether ordinary migration scope is realistic.                                         |
+| Catalog complexity             | Variations, choices, extras, bundles, digital products, pre-orders, subscriptions, stock, pricing, tax, and SEO fields. | Determines whether the catalog needs simple transfer, mapping, configuration, or custom review. |
+| B2B and trade behavior         | Customer groups, trade accounts, pricing, restricted products, quotes, account terms, and checkout behavior.            | Decides whether target setup and special validation are needed.                                 |
+| App and integration dependency | Apps, custom fields, API connections, webhooks, feeds, ERP, POS, accounting, CRM, fulfillment, and marketplaces.        | Identifies data that may not be standard store data.                                            |
+| Launch ownership               | Who prepares, configures, reviews, performs available actions, and validates final results.                             | Prevents service-path confusion during Demo Migration and Full Migration.                       |
 
-### When Standard Service May Be Enough <a href="#when-standard-service-may-be-enough" id="when-standard-service-may-be-enough"></a>
+The practical approach is the lightest path that still protects the outcome. Choosing too little support can expose the merchant to preventable launch risk. Choosing too much support can slow the project without adding value.
 
-Standard Service may be enough when the source data is predictable and the target result can fit ShopWired’s ordinary product, customer, order, category, brand, and content structures without custom interpretation.
+### When Standard Service Can Be Enough <a href="#when-standard-service-can-be-enough" id="when-standard-service-can-be-enough"></a>
 
-This is more likely when the source store has:
+Standard Service can be appropriate when the migration is within supported scope and the merchant can confidently prepare, review, configure, and validate the target store. For ShopWired, this usually means the catalog structure is clear, product options do not require unusual transformation, customer identity is clean, historical orders are readable, and target checkout settings can be configured by the merchant.
 
-* standard products with ordinary prices, images, descriptions, SKUs, stock, categories, and brands;
-* product variations or choices that map cleanly into supported ShopWired structures;
-* customers and addresses without complex B2B rules;
-* historical orders that need ordinary reference value;
-* content pages and SEO fields that do not require custom transformation;
-* no app-owned data that must be migrated as part of the agreed scope;
-* no outside-system identifiers that must be preserved through custom mapping;
-* a merchant team that is comfortable self-performing the migration and validating results.
+| Standard Service fit signal                                                    | What it usually means                                                                                                                  |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Products use straightforward structures.                                       | Product names, descriptions, images, prices, stock, categories, brands, and SEO fields can be reviewed without special interpretation. |
+| Variations are ordinary and within expected limits.                            | Option names, values, combinations, SKUs, stock, images, and prices can be validated from representative samples.                      |
+| Customers are clean enough to review by email identity.                        | Duplicate, shared, or changed email scenarios are not central to operations.                                                           |
+| Historical orders are needed for reference, not complex workflow continuation. | Payment, delivery, discount, refund, tax, and note fields can remain readable without advanced transformation.                         |
+| Target setup is merchant-owned.                                                | Payments, delivery, tax, emails, theme, apps, and account settings can be configured separately by the merchant.                       |
 
-Standard Service does not mean the ShopWired store is automatically ready to launch. Payment, delivery, tax, checkout, theme, content, apps, channels, and integrations still need to be configured and tested in the target store. Standard Service only means the migration itself appears to fit standard capability and customer-led execution.
+Standard Service is not a low-quality path. It is the correct path when the scope is supported and the merchant can handle preparation and validation. It becomes risky only when unsupported behavior is treated as ordinary data or when the merchant expects Next-Cart to manage decisions outside the selected scope.
 
-### When Managed Service May Be Safer <a href="#when-managed-service-may-be-safer" id="when-managed-service-may-be-safer"></a>
+### When Managed Service Is the Safer Path <a href="#when-managed-service-is-the-safer-path" id="when-managed-service-is-the-safer-path"></a>
 
-Managed Service may be a better fit when the data appears to fit standard service capability, but the merchant wants Next-Cart to perform the migration. This can be useful when the store has enough data volume, stakeholder coordination, or review burden that customer-led execution is not the preferred operating model.
+Managed Service is useful when the migration remains within supported capability but the merchant needs stronger operational coordination. It can help when the scope is not custom, but the business needs guidance around sample selection, timing, configuration dependencies, and result review.
 
-Managed Service may be safer when:
+| Managed Service signal                                                   | Why extra coordination helps                                                                             |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Catalog records are supported but numerous or varied.                    | More structured review is needed to keep products, categories, brands, images, stock, and SEO aligned.   |
+| B2B or trade behavior is important but mostly target-side configuration. | The merchant needs clearer separation between migrated customer data and configured trade behavior.      |
+| Demo Migration must test several risk categories.                        | Sample selection and review need coordination across products, customers, orders, SEO, and integrations. |
+| Launch timing is tight.                                                  | Migration action timing, source-store changes, and validation responsibilities must be controlled.       |
+| The merchant has limited migration review capacity.                      | A guided process reduces the chance that issues are discovered late.                                     |
 
-* the migration requirement is not custom, but the merchant wants Next-Cart-led execution;
-* the merchant wants Next-Cart to run the migration using standard capability and purchased Standard Add-ons;
-* the source data is mostly standard, but timing and execution coordination matter;
-* the merchant wants to reduce hands-on migration operation while still reviewing results;
-* the business has internal teams for catalog, B2B, marketing, and operations validation but prefers not to run the migration process itself.
+Managed Service should not be used to disguise unsupported requirements. If the store depends on app-owned data, custom transformations, non-standard product behavior, external identifiers, or Custom Platform analysis, the requirement should be scoped through Custom Service instead.
 
-Managed Service should not be used to hide custom requirements. If the project needs custom product transformation, app-owned data handling, custom B2B logic, external ID preservation, or tailored migration behavior, those requirements should be reviewed through Custom Service even if the merchant also wants Next-Cart-led execution.
+### When Add-ons Should Be Considered <a href="#when-add-ons-should-be-considered" id="when-add-ons-should-be-considered"></a>
 
-### When Custom Service Should Be Considered <a href="#when-custom-service-should-be-considered" id="when-custom-service-should-be-considered"></a>
+Add-ons are useful when the migration remains within supported capability but needs filtering, mapping, or configuration. They should not be treated as a catch-all for unsupported app data or bespoke transformation.
 
-Custom Service should be considered when the migration includes customization, modification, bespoke handling, Custom Platform logic, unsupported structures, or custom migration logic adjustment. For ShopWired, this often appears around product choices, B2B behavior, apps, integrations, custom checkout fields, and outside-system dependencies.
+| Add-on need             | ShopWired example                                                                                                                              | Correct interpretation                                              |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Data Filter             | Migrate selected products, customers, orders, coupons, reviews, or CMS Pages based on date, status, category, or other supported criteria.     | The merchant wants eligible records narrowed before migration.      |
+| Advanced Data Mapping   | Map supported source values to supported target values, such as customer groups, order statuses, product attributes, or other eligible fields. | The record is supported, but value interpretation needs control.    |
+| Advanced Data Configure | Modify supported values before they reach ShopWired.                                                                                           | The transformation stays within supported configuration capability. |
 
-Custom Service review should be considered when the source includes:
+For ShopWired, Add-ons are especially useful when the source store has mixed catalog quality, legacy categories, customer segments, order statuses, or field values that should not be moved exactly as-is. They are less appropriate when the issue is app-owned logic, external-system dependency, or unsupported product behavior.
 
-* product options, modifiers, extras, personalization fields, bundles, or kit logic that cannot map cleanly into standard ShopWired structures;
-* custom fields that affect buying, fulfillment, delivery, tax, B2B pricing, or customer service;
-* customer groups that control trade pricing, quotes, approval, visibility, account terms, payment access, delivery access, or tax behavior;
-* app-owned product, customer, order, checkout, SEO, subscription, quote, or integration records;
-* API, webhook, marketplace, ERP, CRM, accounting, POS, fulfillment, or inventory identifiers that must remain traceable;
-* source checkout fields or workflows that do not fit ordinary ShopWired settings;
-* historical order data with custom operational meaning;
-* tailored data transformation beyond Standard Add-on behavior.
+### When Custom Service Should Be Reviewed <a href="#when-custom-service-should-be-reviewed" id="when-custom-service-should-be-reviewed"></a>
 
-Custom Service does not automatically mean Next-Cart performs the migration process for the customer. It means customization or modification work is required. Migration management is included only when it is part of the final plan.
+Custom Service should be reviewed when the migration depends on unsupported structures, app-owned data, custom fields, external identifiers, bespoke transformation, Custom Platform handling, or custom migration logic adjustment. It is not simply a more expensive version of ordinary migration. It is a review path for requirements that need direct analysis.
 
-### How Add-ons Fit into a ShopWired Migration <a href="#how-add-ons-fit-into-a-shopwired-migration" id="how-add-ons-fit-into-a-shopwired-migration"></a>
+| Custom Service signal                                                                                     | Why standard handling may not be enough                                         |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Product options do not fit ordinary variations, choices, extras, or supported configuration.              | The buying logic may need transformation or rebuild guidance.                   |
+| Bundles, kits, subscriptions, pre-orders, or personalized products carry business-critical rules.         | Standard product records may not preserve the operational behavior.             |
+| Customer, trade, or pricing rules depend on custom fields or external systems.                            | The data may need mapping, enrichment, or bespoke handling.                     |
+| Orders contain external IDs, accounting references, fulfillment references, or marketplace workflow data. | Historical readability may depend on fields not handled as ordinary order data. |
+| Apps create records or logic that the merchant expects to preserve.                                       | App-owned data is not automatically the same as platform-native data.           |
+| A Custom Platform is involved.                                                                            | Data structures must be inspected before scope and mapping can be trusted.      |
 
-Add-ons can help refine a ShopWired migration when the requirement stays within supported service capability. They should not be used as a substitute for Custom Service when the project requires bespoke transformation or unsupported custom data handling.
+Custom Service decisions should be example-led. The merchant should provide representative products, customer records, orders, app exports, custom fields, external identifiers, and expected output. Without examples, the discussion remains too abstract to decide scope reliably.
 
-| Add-on                  | When it may help in a ShopWired migration                                                                                                                           | Boundary                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | The merchant wants to migrate only selected eligible records, such as active products, specific customers, recent orders, selected pages, or narrowed catalog data. | Estimated entity quantities are not filters. Filtering must be configured as an explicit migration requirement. |
-| Advanced Data Mapping   | Supported source fields need to map into supported ShopWired target fields in a controlled way.                                                                     | If the mapping requires custom logic beyond available behavior, it moves into Custom Service.                   |
-| Advanced Data Configure | Migrated values need supported modification before reaching the target store.                                                                                       | If the value change requires tailored behavior beyond available settings, it belongs in Custom Service review.  |
+### How Demo Migration Should Decide the Path <a href="#how-demo-migration-should-decide-the-path" id="how-demo-migration-should-decide-the-path"></a>
 
-Add-ons are useful when the data is supported but needs selective handling. Custom Service is the correct review path when the business meaning itself is custom, app-owned, integration-owned, or outside standard platform interpretation.
+Demo Migration should test whether the chosen approach is strong enough. It should not be evaluated only by whether a few records appear in ShopWired. It should answer whether the target store can represent the real business model.
 
-### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
+| Demo Migration sample                            | Decision it should support                                                                                                        |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Simple product                                   | Confirms baseline product, image, category, brand, price, stock, and SEO handling.                                                |
+| Variation-heavy product                          | Confirms option names, option values, combinations, SKUs, stock, images, weight, GTIN, MPN, and tax behavior.                     |
+| Product with choices, extras, or personalization | Shows whether the product can be configured, mapped, or needs Custom Service review.                                              |
+| B2B or trade customer                            | Confirms customer identity, account expectations, pricing assumptions, and order history visibility.                              |
+| Complex historical order                         | Confirms discounts, refunds, payment labels, delivery labels, taxes, notes, fulfillment, and external references remain readable. |
+| Content or SEO page                              | Confirms CMS Pages, blog posts, metadata, menus, and redirect assumptions are realistic.                                          |
+| App or integration-dependent record              | Shows whether external IDs, custom fields, API relationships, or app-owned data are in scope.                                     |
 
-Demo Migration should test whether source data can be interpreted inside ShopWired with the chosen approach. It should not only preview a few easy records.
+If Demo Migration exposes a mismatch, the correct response is to adjust scope before Full Migration. The selected path should change when evidence changes.
 
-A strong Demo Migration should help decide whether:
+### Entity Points and Scope Planning <a href="#entity-points-and-scope-planning" id="entity-points-and-scope-planning"></a>
 
-* product variations, choices, extras, bundles, images, stock, delivery settings, tax behavior, and SEO values remain usable;
-* categories, brands, filters, and storefront discovery paths work as expected;
-* customer accounts, groups, addresses, B2B/trade context, quotes, and order links remain interpretable;
-* historical orders preserve enough payment, delivery, tax, discount, fulfillment, note, and customer context;
-* content pages, menus, metadata, and high-value URLs are included, rebuilt, or accepted as out of scope;
-* app-owned, API-connected, webhook-triggered, channel-specific, or outside-system data has been addressed;
-* the selected approach is enough or whether Add-ons or Custom Service review should be added before Full Migration.
+Entity Points help estimate eligible migration volume. They do not decide whether a ShopWired migration is simple or complex. Product, Customer, Order, and Blog Posts records may consume Entity Points when migrated for the first time. Already recorded entities do not consume Entity Points again simply because another migration action occurs on the same migration path. New eligible records may consume Entity Points when migrated for the first time.
 
-Demo Migration samples should include the records most likely to reveal difficulty: complex products, B2B customers, quote or trade examples, unusual orders, high-value URLs, app-dependent records, and integration-sensitive identifiers.
+For ShopWired, Entity Points should be reviewed alongside structure and complexity.
+
+| Scope signal     | What Entity Points help estimate                 | What they do not prove                                                                              |
+| ---------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Product count    | Potential eligible product volume.               | Whether variations, choices, extras, bundles, images, stock, tax, and SEO meaning fit.              |
+| Customer count   | Potential eligible customer volume.              | Whether email identity, trade accounts, custom fields, and order relationships are clean.           |
+| Order count      | Potential eligible order volume.                 | Whether payment, delivery, tax, refund, discount, note, and external-system context remains useful. |
+| Blog Posts count | Potential eligible content volume when relevant. | Whether URLs, redirects, metadata, theme placement, and content presentation are launch-ready.      |
+
+A store with few records can need Custom Service if its data is structurally unusual. A store with many records can use a supported path if the data is clean and validation is well prepared.
+
+### Later Migration Actions and Launch Timing <a href="#later-migration-actions-and-launch-timing" id="later-migration-actions-and-launch-timing"></a>
+
+A ShopWired migration plan should also define what happens when the source store continues changing after Demo Migration or after an initial Full Migration. The merchant may need to continue the migration with the last used configuration, continue the migration with a new configuration, or perform a new migration.
+
+| Later action                                            | When it fits                                                                           | Validation requirement                                                                 |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Continue the Migration with the last used configuration | New eligible records have appeared and the previous configuration remains correct.     | Validate new products, customers, orders, content, and any changed totals or statuses. |
+| Continue the Migration with a new configuration         | Filters, mapping, or configuration decisions need to change.                           | Validate the changed field behavior and affected record types, not only new records.   |
+| Perform a new migration                                 | The target result should be replaced or the previous run is no longer the right basis. | Revalidate core catalog, customers, orders, SEO, settings, and launch timing.          |
+
+The service path should clarify who performs the action and who validates the result. Under Standard Service and Custom Service without Expert Handle, the customer performs available migration actions and verifies the result. Under Managed Service and Custom Service with Expert Handle, Next-Cart can perform migration actions based on the customer’s request and agreed scope, while the customer remains responsible for final result verification and migration outcome.
+
+### Choosing Between the Main Paths <a href="#choosing-between-the-main-paths" id="choosing-between-the-main-paths"></a>
+
+The approach decision should be practical. It should protect the merchant from avoidable risk while avoiding unnecessary service weight. Use the following decision map as a final check.
+
+| If the ShopWired migration looks like this                                                                      | Stronger path to consider                                              |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Supported records, clean catalog, ordinary customers, readable order history, and merchant-led setup.           | Standard Service.                                                      |
+| Supported records but higher coordination pressure, launch timing pressure, or limited validation capacity.     | Managed Service.                                                       |
+| Supported records need filtering, mapping, or supported value configuration.                                    | Add-ons.                                                               |
+| Unsupported, custom, app-owned, external-system, Custom Platform, or bespoke transformation requirements exist. | Custom Service.                                                        |
+| Scope is unclear because samples are weak.                                                                      | Strengthen Demo Migration samples before committing to Full Migration. |
+
+A reliable choice can be summarized in four statements: which records will migrate, which ShopWired settings must be configured separately, which Add-ons or Custom Service requirements are in scope, and which sample results must pass before Full Migration.
 
 ### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
 
-A migration approach may be too light when source review or Demo Migration exposes business meaning that standard migration cannot preserve safely.
+A ShopWired migration approach is too light when it treats business logic as ordinary record movement. The warning signs usually appear in product options, B2B behavior, customer identity, app dependencies, external identifiers, or target setup.
 
-| Signal                                                 | Why it matters                                                                                               | Safer response                                                                        |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| Product choices lose buying behavior                   | Variations, choices, extras, personalization, bundles, or stock behavior may need deeper mapping.            | Review Advanced Data Mapping, Advanced Data Configure, or Custom Service.             |
-| B2B customers lose group behavior                      | Customer groups may control pricing, quotes, approval, tax, visibility, or checkout rules.                   | Separate customer data from B2B configuration and custom logic.                       |
-| Historical orders are readable only at a shallow level | Payment, delivery, tax, discount, fulfillment, notes, or external context may be incomplete.                 | Expand order samples and define required order-history meaning.                       |
-| App-owned records are missing                          | App data may not belong to ordinary product, customer, order, or content structures.                         | Classify the app as reconfigured, rebuilt, excluded, mapped, or Custom Service scope. |
-| Outside-system identifiers are not preserved           | ERP, CRM, accounting, marketplace, POS, fulfillment, or inventory references may be operationally important. | Review mapping or Custom Service requirements before Full Migration.                  |
-| SEO and content paths are incomplete                   | Important URLs, metadata, menus, pages, or landing paths may not be included in standard data scope.         | Prepare priority SEO/content samples and confirm accepted scope.                      |
-| Source checkout fields do not fit target settings      | Custom checkout behavior may affect order processing, B2B rules, delivery, or payment.                       | Treat the field as configuration, migrated note, app data, or Custom Service scope.   |
+| Warning signal                                                                | Likely response                                                                                          |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Complex products were not included in Demo Migration.                         | Add variation, choices, extras, bundle, stock, tax, image, and SEO samples.                              |
+| B2B rules are described generally but not sampled.                            | Provide trade customers, pricing examples, account terms, restricted products, and related orders.       |
+| Custom fields are important but not classified.                               | Decide whether they are supported mapping, app-owned data, external references, or Custom Service scope. |
+| Payment, delivery, and tax setup is assumed to come from order history.       | Separate historical readability from target configuration.                                               |
+| API, webhook, feed, ERP, POS, or marketplace dependencies are not documented. | Build an integration map and review external ID needs.                                                   |
+| Entity Points are used as the only scope measure.                             | Review data meaning and structural complexity alongside volume.                                          |
 
-### Choosing the Practical Path <a href="#choosing-the-practical-path" id="choosing-the-practical-path"></a>
-
-The practical approach can be summarized this way:
-
-* choose **Standard Service** when source data is standard, the target ShopWired structures can support it, and the merchant is ready to self-perform and validate the migration;
-* choose **Managed Service** when the requirement fits standard capability but the merchant wants Next-Cart-led execution;
-* use **Standard Add-ons** when filtering, field mapping, or supported value configuration is needed;
-* move to **Custom Service** when the project requires custom product interpretation, app-owned data handling, custom B2B logic, outside-system ID preservation, Custom Platform handling, or tailored migration behavior.
-
-The safest approach is the one that reflects the actual source-store structure and target ShopWired requirements, not the lightest available service label.
+These signs should be handled before Full Migration. Launch is the wrong moment to discover that the chosen approach did not match the store’s operating model.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Selecting the right migration approach for ShopWired requires a clear view of product complexity, B2B rules, checkout behavior, apps, integrations, content, SEO, and service responsibility. Standard Service can be enough for clean and predictable data. Managed Service can be safer when the merchant wants Next-Cart-led execution. Add-ons can support filtering, mapping, and supported data configuration. Custom Service should be considered when custom, app-owned, integration-owned, or unsupported data changes the migration scope.
+The right ShopWired migration approach is the path that matches the store’s actual business structure. Standard Service may be enough for supported, merchant-led migrations. Managed Service is useful when coordination pressure is higher but the scope remains supported. Add-ons help when eligible records need filtering, mapping, or configuration. Custom Service is needed when unsupported, custom, app-owned, external-system, or bespoke transformation requirements affect the result.
 
-Use Demo Migration to test the records that carry the most business meaning. If the sample shows that standard capability does not preserve product choices, B2B behavior, order context, SEO, apps, or integration data well enough, adjust the approach before Full Migration.
+A strong decision depends on evidence. The merchant should use preparation work and Demo Migration samples to prove product options, B2B behavior, customer identity, historical order readability, SEO continuity, app dependencies, Entity Points planning, and launch timing before committing to Full Migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Standard Service enough for every ShopWired migration?**
+**When is Standard Service enough for a ShopWired migration?**
 
-No. Standard Service may be enough for predictable source data, but complex product choices, custom B2B rules, app-owned data, outside-system identifiers, or custom checkout behavior may require Add-ons or Custom Service review.
+Standard Service may be enough when the migration stays within supported scope, product structures are clear, customer and order data are manageable, target settings can be configured by the merchant, and the merchant can validate results confidently.
 
-**When should I choose Managed Service for ShopWired?**
+**When should Managed Service be considered?**
 
-Choose Managed Service when the migration appears to fit standard service capability but you want Next-Cart to perform the migration. Managed Service is about service execution responsibility, not custom transformation.
+Managed Service is useful when the scope remains supported but the merchant needs stronger coordination, sample review, execution support, timing control, or help managing validation across catalog, customers, orders, SEO, and integrations.
 
-**Does Custom Service mean Next-Cart automatically performs the migration for me?**
+**How are Add-ons different from Custom Service?**
 
-No. Custom Service means customization or modification work is required. Migration management is included only when it is part of the final plan.
+Add-ons adjust supported filtering, mapping, or configuration. Custom Service handles unsupported structures, app-owned data, custom fields, external identifiers, Custom Platform handling, bespoke transformation, or custom migration logic adjustment.
 
-**Which Add-ons are most relevant to ShopWired migration planning?**
+**Do Entity Points decide which ShopWired migration approach is right?**
 
-The Data Filter Add-on can help when only selected eligible records should migrate. Advanced Data Mapping can help with supported field mapping. Advanced Data Configure can help when migrated values need supported modification before reaching ShopWired.
-
-**What should Demo Migration prove before choosing the final approach?**
-
-Demo Migration should prove that complex products, B2B customers, varied orders, important content and URLs, app-dependent data, and integration-sensitive identifiers can be interpreted acceptably inside ShopWired. If those samples expose gaps, the approach should be adjusted before Full Migration.
+No. Entity Points help plan eligible migration volume. The right approach also depends on product structure, B2B rules, customer identity, order readability, app dependencies, external systems, target setup, and Demo Migration evidence.

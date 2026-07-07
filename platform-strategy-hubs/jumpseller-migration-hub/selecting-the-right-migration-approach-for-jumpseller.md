@@ -1,203 +1,162 @@
 # Selecting the Right Migration Approach for Jumpseller
 
-Choosing a migration approach for Jumpseller depends on how much of the source store can be translated into Jumpseller’s hosted e-commerce structure without custom interpretation. Jumpseller is designed around managed store infrastructure, native products, options, variants, categories, customers, orders, payments, shipping methods, themes, apps, sales channels, languages, redirects, and integrations. A migration approach should be selected by comparing the source store’s real operating model with what Jumpseller can represent cleanly.
+Choosing the right migration approach for Jumpseller depends on how clearly the source store can be translated into Jumpseller’s hosted commerce structure. A small store can still require careful handling if product options drive inventory or pricing. A larger store can still be straightforward if products, categories, customers, orders, pages, and redirects follow predictable structures. The right approach is determined by evidence, not by platform name or data volume alone.
 
-A straightforward source store may need only standard product, customer, order, CMS Pages, and Blog Posts migration into a prepared Jumpseller store. A more complex store may depend on custom product fields, dense variants, B2B rules, warehouse logic, external identifiers, unsupported app data, checkout customizations, custom source exports, or integration-owned records. Those differences change the safest service path.
+Jumpseller migration planning should separate supported data movement from operational interpretation. Products, categories, customers, orders, CMS Pages, Blog Posts, and other supported data may move through a standard path when the source data is clean and target-side expectations are clear. Add-ons can help when the requirement is filtering, mapping, or supported configuration. Custom Service becomes relevant when the project involves unsupported app data, custom fields with business logic, external identifiers, Custom Platform behavior, or custom migration logic adjustment.
 
-The right approach is not the one that moves the most records with the least review. It is the one that gives the migration enough interpretation, configuration, and validation for Jumpseller to become a usable Target Platform after the data is moved.
+The safest approach is selected after preparation and Demo Migration reveal how the source store actually works. The goal is not to choose the heaviest service path. It is to avoid choosing a light path for requirements that need interpretation, configuration, or custom handling.
 
-### What Migration Approach Means for Jumpseller <a href="#what-migration-approach-means-for-jumpseller" id="what-migration-approach-means-for-jumpseller"></a>
+### Start With the Migration Responsibility Model <a href="#start-with-the-migration-responsibility-model" id="start-with-the-migration-responsibility-model"></a>
 
-A Jumpseller migration approach should answer four questions before execution:
+The first decision is who should manage execution and how much operational involvement is needed. A customer-led migration can work when the source data is predictable, the team understands the migration steps, and the target store setup is already prepared. A Next-Cart-led migration can be safer when the team wants execution support, review discipline, or a managed process even if the data itself remains standard.
 
-1. Can the source data fit Jumpseller’s native structures within standard service capability?
-2. Does the customer want to self-perform the migration process or have Next-Cart handle execution?
-3. Are filtering, mapping, or data-configuration adjustments needed through Add-ons?
-4. Does the project include customization, unsupported data, Custom Platform handling, external-system logic, or custom migration logic adjustment that belongs under Custom Service?
+| Approach         | Best fit                                                                                                                                                        | Caution                                                                                                       |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Standard Service | Supported source data, prepared Jumpseller setup, clean product/category/customer/order structure, and a team ready to self-perform the migration process       | Not ideal if the team expects Next-Cart to interpret complex business logic or manage all execution decisions |
+| Managed Service  | Standard migration capability, but the customer wants Next-Cart-led execution and less hands-on migration operation                                             | Still depends on standard migration capability unless additional custom work is agreed                        |
+| Add-ons          | Filtering, mapping, or configuration requirements that fit supported Add-on behavior                                                                            | Add-ons do not replace Custom Service for unsupported app data or bespoke transformation                      |
+| Custom Service   | Custom Platform handling, unsupported data, app-owned records, custom fields with business behavior, external identifiers, or custom migration logic adjustment | Scope should be defined from evidence, not assumed from a vague request for customization                     |
 
-These questions should be answered from platform behavior, not only from store size. A small store can need Custom Service if its catalog is built around custom product builders, unsupported subscription logic, external inventory identifiers, or unusual source exports. A large store can sometimes remain within Standard Service or Managed Service when its product, customer, order, CMS Pages, and Blog Posts structure is clean and target expectations are clear.
+A Jumpseller migration can also combine approaches. A project may use Managed Service for execution, Add-ons for selective mapping, and Custom Service for a specific unsupported data area. The key is to name the reason for each component instead of treating the migration as one undifferentiated service choice.
 
-| Decision area                            | Why it matters for Jumpseller                                                                                                                    | Approach implication                                                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| Catalog structure                        | Jumpseller depends on products, options, variants, categories, custom fields, images, stock, and SEO fields behaving coherently                  | Clean structures may fit Standard Service; dense or custom variant logic may need Add-ons or Custom Service |
-| Checkout and order meaning               | Payment status, fulfillment status, order fields, shipping method, invoicing, tax, and abandoned-order behavior may not match the source exactly | Standard migration may preserve readable history; custom checkout or order logic needs review               |
-| Target configuration                     | Payment methods, shipping rates, tax setup, languages, currencies, apps, customer login, and stock locations are target-side conditions          | Managed Service can help execution, but unavailable target capabilities still need planning                 |
-| Custom or unsupported source behavior    | Custom Platform sources, unsupported app data, external identifiers, source-specific logic, or unusual exports need interpretation               | Custom Service is the correct review path                                                                   |
-| Filtering, mapping, or data modification | Some projects need only selected records, adjusted mappings, or edited target values                                                             | Standard Add-ons may be enough when the requirement fits their available behavior                           |
+### Match the Approach to Product and Catalog Complexity <a href="#match-the-approach-to-product-and-catalog-complexity" id="match-the-approach-to-product-and-catalog-complexity"></a>
 
-A good approach choice starts with scope clarity. The migration should not be treated as standard only because the platform is hosted, and it should not be treated as custom only because the store is large. The real question is whether Jumpseller can represent the migrated business meaning without custom logic.
+Product structure is often the strongest signal for the right Jumpseller migration approach. A clean product catalog with ordinary SKUs, categories, images, prices, stock, and SEO fields can often fit a standard path. A catalog with dense variants, custom fields, app-based product builders, bundles, digital fulfillment, or source-specific option behavior needs closer review.
 
-### When Standard Service Is Usually Enough <a href="#when-standard-service-is-usually-enough" id="when-standard-service-is-usually-enough"></a>
+Jumpseller product options and variants should be tested with representative samples. If the source uses options only as display attributes, the handling may be simpler. If options create sellable combinations with separate SKU, price, stock, image, or weight behavior, the migration approach should prove that those meanings remain usable.
 
-Standard Service can be suitable when the source data is clean, the migration path is supported, the customer is comfortable self-performing the migration process on the Next-Cart website, and the target Jumpseller store has already been prepared for the expected result.
+| Product profile                                                                             | Likely service path                                            | Why                                                                                                            |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Simple products with ordinary categories, images, prices, stock, and SEO fields             | Standard Service or Managed Service                            | The data meaning is likely predictable if the source platform is supported and the target store is prepared    |
+| Products with sellable variants that affect SKU, price, image, or stock                     | Standard Service or Managed Service after Demo Migration proof | The approach is suitable only if variant behavior remains operational in sample results                        |
+| Products with large or unusual option matrices                                              | Add-on or Custom Service review depending on source behavior   | Dense structures can expose mapping, limit, or transformation needs                                            |
+| Products with custom fields used as specifications                                          | Add-ons may help if the requirement is supported mapping       | Custom Service may be needed if those fields drive purchase behavior or external workflows                     |
+| Bundles, kits, subscriptions, product builders, personalization, or app-owned product logic | Custom Service review                                          | These behaviors often depend on app data, custom logic, or external rules rather than standard product records |
 
-For Jumpseller, this usually means the store has a conventional catalog, predictable product variants, ordinary category assignments, readable customer records, standard historical order records, ordinary CMS Pages or Blog Posts, and no hidden dependency on custom apps, unsupported extensions, external systems, or custom source tables.
+The approach should be adjusted when Demo Migration shows that product behavior was underestimated. A clean-looking catalog can become a Custom Service case when the critical product meaning lives outside ordinary product and variant fields.
 
-#### Strong Standard Service Signals <a href="#strong-standard-service-signals" id="strong-standard-service-signals"></a>
+### Match the Approach to Customers, Orders, and Historical Meaning <a href="#match-the-approach-to-customers-orders-and-historical-meaning" id="match-the-approach-to-customers-orders-and-historical-meaning"></a>
 
-Standard Service is often reasonable when:
+Customer and order data should be assessed for meaning, not only volume. A standard migration may be enough when customer records contain ordinary profile and address information and orders contain understandable line items, totals, payment status, fulfillment status, taxes, discounts, and shipping data. More careful handling is needed when the source store uses custom statuses, group-based logic, payment references, tax identifiers, subscriptions, customer segmentation, staff notes, or external order IDs.
 
-* products have clear names, descriptions, prices, SKUs, images, categories, and statuses;
-* product options and variants follow a predictable structure;
-* inventory belongs to products or variants without complex warehouse rules;
-* category structure can be mapped without rebuilding the full storefront strategy;
-* customers mainly need readable account and contact data;
-* historical orders mainly need to remain understandable for staff reference;
-* CMS Pages and Blog Posts can move without heavy layout reconstruction;
-* the target Jumpseller store already has suitable payment, shipping, tax, language, and theme settings;
-* no unsupported app, custom checkout, or external-system data is part of the expected migration scope.
+Historical order migration is different from future checkout configuration. A migrated order can preserve the history of what happened, but future payments, shipping, taxes, and checkout behavior must be configured inside Jumpseller. The service path should not assume that order history and operating checkout are the same problem.
 
-Standard Service is not a low-review option. It still requires the customer to understand the source data, configure the target store where needed, run and interpret Demo Migration results, and validate the migrated output before launch.
+| Data area           | Standard-path signal                                                                                         | Upgrade signal                                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Customer records    | Name, email, phone, address, account status, and ordinary profile fields                                     | Customer groups control pricing, access, tax, payment, shipping, or external CRM behavior                           |
+| Customer accounts   | Customer identity can remain readable and customer communication is planned                                  | Password expectations, account activation, or customer access rules are unclear                                     |
+| Orders              | Order history contains ordinary line items, totals, payment status, fulfillment status, discounts, and taxes | Custom statuses, app-owned data, external IDs, partial fulfillment rules, or complex refunds require interpretation |
+| Historical payments | Payment method and status need to remain readable                                                            | Transaction references must feed accounting, ERP, or external reconciliation workflows                              |
+| Fulfillment         | Shipping method and fulfillment status are enough for history                                                | Warehouse, supplier, marketplace, dropshipping, pickup, or multi-location behavior affects operations               |
 
-#### Where Standard Service Can Become Too Light <a href="#where-standard-service-can-become-too-light" id="where-standard-service-can-become-too-light"></a>
+A service path that works for catalog data may not be enough for customer and order continuity. If staff need historical order data for service, tax, warranty, returns, or reconciliation, order samples should be reviewed before the approach is confirmed.
 
-Standard Service becomes too light when the migration depends on interpretation beyond standard service capability. Jumpseller’s hosted structure can make certain source behaviors easier to operate after migration, but it can also expose data that does not map cleanly.
+### Match the Approach to Content, SEO, Languages, and Redirects <a href="#match-the-approach-to-content-seo-languages-and-redirects" id="match-the-approach-to-content-seo-languages-and-redirects"></a>
 
-Examples include source stores where product options are used as filters, pricing rules, personalization fields, bundles, subscriptions, or custom forms rather than ordinary sellable variants. Another example is a source store where customer groups control B2B prices, payment access, tax behavior, or shipping eligibility. Moving labels alone will not preserve those rules unless the target structure can support them and the migration scope accounts for them.
+Jumpseller migration can involve CMS Pages, Blog Posts, product pages, category pages, metadata, image content, internal links, language versions, and URL redirects. The right approach depends on whether the content can be represented cleanly in Jumpseller or whether the source store uses custom page builders, embedded app content, unusual URL patterns, or multilingual structures that need interpretation.
 
-Standard Service should also be reconsidered when source order data includes custom fulfillment states, external invoices, marketplace identifiers, custom payment references, or app-owned order fields that staff need after migration.
+Do not treat content as secondary if the old store relies on content for search visibility, product education, buying guides, policy trust, or campaign landing pages. A migration that preserves products but breaks key content pathways can create customer friction and SEO loss.
 
-### When Managed Service Is the Safer Choice <a href="#when-managed-service-is-the-safer-choice" id="when-managed-service-is-the-safer-choice"></a>
+| Content profile                                                         | Likely approach                                                                     | Review focus                                                                        |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Ordinary pages, posts, metadata, and image content                      | Standard Service or Managed Service                                                 | Confirm readability, formatting, internal links, and destination quality            |
+| High-value product/category URLs                                        | Standard path with redirect planning, or Add-ons if supported URL mapping is needed | Confirm source URL inventory and target destination quality                         |
+| Multilingual content across products, categories, pages, and SEO fields | Demo Migration proof before full execution                                          | Confirm language setup and translation placement before launch                      |
+| Page-builder or app-owned content                                       | Custom Service review may be needed                                                 | Determine whether content can move as usable content or requires rebuilding         |
+| Complex internal linking or campaign landing pages                      | Add-on or Custom Service review depending on mapping needs                          | Broken internal links and weak redirects can damage usability and search continuity |
 
-Managed Service is suitable when the migration can remain within standard service capability but the customer wants Next-Cart-led execution. This can be useful for merchants moving into Jumpseller who prefer support with migration execution, setup review, Demo Migration interpretation, and coordination around the selected migration path.
+The service path should preserve valuable content where it matters and avoid migrating obsolete content only because it exists. Content scope should be an editorial and operational decision, not only a database decision.
 
-Managed Service does not remove the need for target-store preparation. Jumpseller still needs the right target settings for product visibility, payment methods, shipping rules, tax behavior, languages, currencies, customer login expectations, apps, theme behavior, and redirects. Managed Service helps with execution responsibility; it does not turn unsupported or custom source logic into standard capability.
+### Use Add-ons for Supported Configuration Needs <a href="#use-add-ons-for-supported-configuration-needs" id="use-add-ons-for-supported-configuration-needs"></a>
 
-| Managed Service is useful when                                             | Why it helps                                                            | Boundary to remember                                                      |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| The source data is standard but the customer wants Next-Cart-led execution | Reduces execution burden and gives the customer a clearer review role   | It remains within standard service capability unless custom work is added |
-| The catalog has many records but predictable structure                     | Execution support can help coordinate a larger run                      | Record volume alone does not decide whether Custom Service is needed      |
-| The customer needs help interpreting Demo Migration output                 | Next-Cart-led execution can make review and adjustment more structured  | The customer still needs to confirm business meaning and launch readiness |
-| Standard Add-ons are purchased                                             | Managed Service can include purchased Standard Add-ons during execution | Modified Add-ons or custom behavior move into Custom Service              |
+Add-ons should be used when the migration requirement fits a supported, bounded need such as filtering, mapping, or configuration. They are useful when the project needs selective data movement, value adjustments, field mapping, or scope control that remains within supported migration capability.
 
-Managed Service is often a practical fit for merchants who want Jumpseller’s hosted environment but do not want to manage the migration run themselves. It is especially useful when the main concern is execution responsibility, not custom interpretation.
+Add-ons should not be used as a vague solution for every difficult requirement. If the source requirement depends on unsupported app data, custom fields with business behavior, external identifiers, or custom migration logic adjustment, Custom Service is the correct review path.
 
-### When Custom Service Should Be Used <a href="#when-custom-service-should-be-used" id="when-custom-service-should-be-used"></a>
+| Add-on use case              | Appropriate when                                                                              | Not appropriate when                                                                              |
+| ---------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Data filtering               | The project needs to migrate only selected products, customers, orders, pages, or date ranges | The filter depends on unsupported app logic or unclear source meaning                             |
+| Field mapping                | Source values need to map into supported target fields or supported custom handling           | Values must drive new business rules or bespoke storefront behavior                               |
+| Category or value adjustment | The project needs controlled remapping or cleanup within supported behavior                   | The category structure is tied to custom navigation logic, marketplace rules, or external systems |
+| Additional Migration Options | The project needs bounded options relevant to scope, timing, or data handling                 | The request implies unsupported transformation or app-owned data extraction                       |
 
-Custom Service is the correct path when the migration requires customization, modification, bespoke handling, Custom Platform work, unsupported data, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment. For Jumpseller, Custom Service is especially relevant when the source store depends on behavior that Jumpseller does not natively represent in the same way.
+A useful test is whether the requirement can be described as a supported migration setting or whether it requires custom interpretation. Supported settings belong in Add-ons. Custom interpretation belongs in Custom Service review.
 
-This does not automatically mean Next-Cart performs the migration process. Custom Service defines the customization or modification path. Migration management is included only when it is part of the final plan.
+### Use Custom Service for Unsupported or Bespoke Requirements <a href="#use-custom-service-for-unsupported-or-bespoke-requirements" id="use-custom-service-for-unsupported-or-bespoke-requirements"></a>
 
-#### Jumpseller-Specific Custom Service Signals <a href="#jumpseller-specific-custom-service-signals" id="jumpseller-specific-custom-service-signals"></a>
+Custom Service is appropriate when the migration requires customization, modification, Custom Platform handling, unsupported app data, Tailored Add-ons, Custom Add-ons, external identifiers, custom fields with operational meaning, or custom migration logic adjustment. It is not a premium label for ordinary complexity; it is the correct path when standard migration capability is not enough.
 
-Custom Service should be reviewed when the project includes:
+For Jumpseller, Custom Service should be reviewed when product behavior, customer behavior, order meaning, stock workflows, content structures, or integration requirements cannot be represented through standard migration behavior or supported Add-ons.
 
-* Custom Platform as the Source Platform or Target Platform;
-* source data from unsupported apps, plugins, modules, custom components, or external systems;
-* custom product builders, bundles, kits, personalization fields, subscription logic, appointment logic, or complex service products;
-* variant structures that cannot be represented cleanly as ordinary Jumpseller options and variants;
-* product custom fields that affect purchase behavior, filtering, shipping, tax, or staff workflow;
-* external identifiers that must remain connected to ERP, accounting, invoicing, marketplace, fulfillment, or CRM systems;
-* customer groups that control pricing, payment access, tax treatment, or shipping eligibility;
-* custom checkout fields or order metadata that staff must continue using;
-* source order statuses that need special transformation into Jumpseller’s order, payment, fulfillment, or invoicing context;
-* multi-location stock, warehouse logic, reservations, supplier feeds, or external inventory systems;
-* multilingual content that needs custom mapping across products, categories, pages, navigation, and SEO fields;
-* source URLs or landing pages requiring complex redirect and destination planning;
-* API, webhook, feed, or sales-channel data that must remain usable after migration.
+| Custom Service trigger            | Example                                                                                             | Why it matters                                                                |
+| --------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Custom Platform source            | The source store uses a custom-built catalog or checkout structure                                  | Data needs interpretation before it can become usable Jumpseller records      |
+| Unsupported app data              | Reviews, subscriptions, bundles, loyalty, product feeds, or custom checkout data live in app tables | App-owned data may not be available through standard migration paths          |
+| External identifiers              | ERP, warehouse, accounting, marketplace, or fulfillment IDs must remain usable                      | IDs may require specific preservation, transformation, or mapping             |
+| Custom fields with behavior       | A field controls pricing, eligibility, stock, product display, or fulfillment                       | The field is business logic, not only informational content                   |
+| Custom migration logic adjustment | The project needs bespoke transformation rules                                                      | Standard settings and Add-ons are not enough to express the required handling |
 
-Custom Service is not a penalty for complexity. It is the review path for requirements that need controlled interpretation instead of default assumptions.
+Custom Service should be scoped with examples. The strongest request is not “customize the migration.” It is a clear statement such as: preserve ERP product IDs as usable references, transform source product builder options into Jumpseller-readable product fields, or retain custom order metadata for staff review.
 
-#### Custom Platform and Unsupported Source Data <a href="#custom-platform-and-unsupported-source-data" id="custom-platform-and-unsupported-source-data"></a>
+### Use Demo Migration as the Decision Gate <a href="#use-demo-migration-as-the-decision-gate" id="use-demo-migration-as-the-decision-gate"></a>
 
-Any migration involving Custom Platform requires Custom Service. In a Jumpseller migration, this matters when the source system is not one of the supported Source Platforms or when the source store contains custom-built structures that behave like a separate data model. Custom Platform handling can include custom source exports, custom fields, outside-system identifiers, app-owned records, or custom transformation rules.
+Demo Migration should decide whether the selected approach matches the real store. It should not be treated as a small preview of easy records. The sample set should include records that prove ordinary behavior and records that expose difficult behavior.
 
-Unsupported app or integration data should be handled with the same caution. If a source store relies on external systems for product feeds, stock updates, invoicing, shipping labels, marketplace orders, customer segmentation, or subscriptions, those records should not be assumed to become native Jumpseller data automatically. They need a defined target meaning, a migration scope decision, and validation evidence.
+| Demo Migration sample  | What it should test                                                                              | Decision outcome                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| Simple product         | Product identity, price, image, stock, category, and SEO fields                                  | Confirms baseline catalog handling                                          |
+| Variant product        | Option names, option values, SKU, price, image, weight, stock, and availability                  | Confirms sellable choices remain operational                                |
+| Complex product        | Custom fields, digital behavior, made-to-order data, bundles, or app-owned logic                 | Reveals Add-on or Custom Service needs                                      |
+| Customer sample        | Addresses, language, marketing consent, group labels, and account expectations                   | Confirms customer records are usable without overstating account continuity |
+| Order sample           | Payment status, fulfillment status, refunds, taxes, discounts, custom statuses, and external IDs | Confirms historical order meaning remains readable                          |
+| Content and URL sample | CMS Pages, Blog Posts, metadata, internal links, and redirects                                   | Confirms content and SEO continuity are realistic                           |
+| Integration sample     | Records connected to ERP, fulfillment, warehouse, marketplace, or reporting workflows            | Identifies external-system dependency before full migration                 |
 
-### How Add-ons Fit into a Jumpseller Migration <a href="#how-add-ons-fit-into-a-jumpseller-migration" id="how-add-ons-fit-into-a-jumpseller-migration"></a>
+A strong Demo Migration result should lead to one of three decisions: proceed with the selected approach, add supported Add-ons or configuration changes, or move specific requirements into Custom Service review.
 
-Add-ons are optional service features that help customers adjust filtering, mapping, or data configuration to better match the expected migration outcome. They should be considered when the migration requirement fits Add-on capability and does not require broader custom handling.
+### Decide the Safest Jumpseller Migration Approach <a href="#decide-the-safest-jumpseller-migration-approach" id="decide-the-safest-jumpseller-migration-approach"></a>
 
-For Jumpseller, Add-ons are often useful when the source data is structurally compatible but the customer wants more control over what moves, how source values map into target fields, or how selected values are configured during migration.
+After preparation and Demo Migration, choose the lightest approach that can reliably preserve business meaning. Do not choose a heavier path just because the source store is large. Do not choose a lighter path just because the store looks simple on the surface.
 
-| Add-on type             | Jumpseller use case                                                                                                                      | Boundary                                                                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Data Filter Add-on      | Move only selected records, such as active products, recent orders, specific categories, selected customer groups, or relevant CMS Pages | Filtering does not solve unsupported source behavior or custom target logic               |
-| Advanced Data Mapping   | Map source fields, statuses, categories, customer labels, or product values more deliberately into Jumpseller-supported structures       | Mapping must remain within platform data-model support and capability                     |
-| Advanced Data Configure | Adjust selected migrated values so the target data reaches Jumpseller with updated information                                           | Data configuration is not the same as bespoke transformation or unsupported app migration |
+| Project evidence                                                                                                                     | Recommended direction                                                                     | Reason                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Supported source data, clean catalog, ordinary customers and orders, prepared Jumpseller setup, and customer-led execution readiness | Standard Service                                                                          | The project fits a predictable supported migration path                                   |
+| Supported source data, standard complexity, but customer prefers Next-Cart-led execution                                             | Managed Service                                                                           | Execution support is needed even if custom migration logic is not                         |
+| Supported data with bounded filtering, mapping, or configuration needs                                                               | Standard Service or Managed Service with Add-ons                                          | Add-ons can handle supported scope or mapping adjustments                                 |
+| Supported data plus specific unsupported app records, external IDs, or custom field behavior                                         | Custom Service for those requirements, with the broader execution path defined separately | The custom requirement should be scoped instead of buried inside a general service choice |
+| Custom Platform source or bespoke transformation requirement                                                                         | Custom Service                                                                            | The source structure requires custom interpretation or custom migration logic adjustment  |
+| Standard start, but Demo Migration exposes difficult product, customer, order, content, or integration behavior                      | Adjust the service path before full migration                                             | Evidence should change the plan before execution creates rework                           |
 
-A Standard Add-on is enough only when the requirement fits its available settings and supported behavior. If a Standard Add-on must be modified, the tailored work is handled through Custom Service. If the customer needs a new project-specific Add-on, that Custom Add-on request is also reviewed and quoted through Custom Service.
-
-Add-ons are useful, but they are not the whole Custom Service path. Broader requirements such as Custom Platform handling, third-party app data, custom fields that carry business logic, outside-system identifiers, or bespoke transformation should be reviewed as Custom Service requirements.
-
-### What Demo Migration Should Decide <a href="#what-demo-migration-should-decide" id="what-demo-migration-should-decide"></a>
-
-Demo Migration should test whether the selected approach is realistic before the full migration is treated as ready. For Jumpseller, the Demo Migration should not use only clean products and ordinary orders. It should include samples that expose the source store’s real complexity.
-
-| Sample area                    | What to include                                                                                              | What the result should prove                                                         |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| Simple product                 | A normal product with images, category, price, stock, SEO fields, and status                                 | Ordinary catalog records are readable and usable in Jumpseller                       |
-| Variant product                | A product where options affect SKU, price, image, weight, stock, or availability                             | Sellable product choices remain operational, not flattened into text                 |
-| Complex product                | A product with custom fields, personalization needs, downloads, bundles, or source-specific logic            | The approach can handle the difficult product group or identify Custom Service needs |
-| Category and navigation sample | Important categories, nested categories, and high-value landing pages                                        | Product organization and storefront discovery expectations are realistic             |
-| Customer sample                | Customers with addresses, language, marketing consent, tax identifiers, customer categories, or group labels | Customer records are usable and do not imply unsupported account logic               |
-| Order sample                   | Paid, unpaid, fulfilled, partially fulfilled, refunded, abandoned, or custom-status orders                   | Historical order meaning remains understandable inside Jumpseller                    |
-| Content and SEO sample         | CMS Pages, Blog Posts, metadata, permalinks, and redirect-sensitive URLs                                     | Content and URL continuity can be validated instead of assumed                       |
-| Integration sample             | Records linked to ERP, fulfillment, invoicing, marketplace, or API workflows                                 | App-owned or external-system dependencies are visible before full migration          |
-
-A Demo Migration result should lead to one of three outcomes: confirm that the selected approach is suitable, identify Add-ons needed for filtering/mapping/configuration, or show that Custom Service review is required.
-
-### Signals That the Chosen Approach Is Too Light <a href="#signals-that-the-chosen-approach-is-too-light" id="signals-that-the-chosen-approach-is-too-light"></a>
-
-A migration approach is too light when it depends on assumptions that the Demo Migration or preparation evidence does not support. The warning signs often appear before a full migration if the review samples are chosen well.
-
-| Warning sign                                                            | What it usually means                                                                            | Safer next action                                                              |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Product variants lose SKU, stock, image, price, or availability meaning | Source product logic does not fit cleanly into standard option/variant handling                  | Review mapping, Add-ons, or Custom Service depending on the cause              |
-| Categories move but navigation feels wrong                              | Source categories were also used as menus, SEO landing pages, campaigns, or filters              | Separate category migration from navigation and theme planning                 |
-| Customer groups move only as labels                                     | Source groups carried pricing, tax, payment, shipping, or access rules                           | Review target capability and Custom Service needs if logic must be transformed |
-| Historical orders are present but hard to interpret                     | Source statuses, payment data, fulfillment states, or custom fields need meaning translation     | Expand order samples and review whether mapping or custom handling is needed   |
-| Required checkout fields are missing                                    | Source checkout captured data that Jumpseller does not represent the same way                    | Review target configuration, app options, or Custom Service                    |
-| Stock does not match operating needs                                    | Source inventory depends on warehouses, reservations, external feeds, or supplier logic          | Review stock-location limits and integration strategy before full migration    |
-| Multilingual content is incomplete                                      | Source translations are not mapped across products, categories, pages, navigation, or SEO fields | Expand multilingual validation and confirm target language setup               |
-| URL redirects are unclear                                               | Important source URLs were not identified or target destinations are weak                        | Prioritize high-value URLs and validate destination quality                    |
-| App data is expected but not native                                     | Source behavior is owned by apps, integrations, APIs, or external systems                        | Review Custom Service or post-migration integration planning                   |
-
-If several warning signs appear together, the issue is rarely only a settings problem. It usually means the selected approach does not match the source store’s real structure or the target store’s operational expectations.
-
-### Choosing the Safest Approach <a href="#choosing-the-safest-approach" id="choosing-the-safest-approach"></a>
-
-The safest Jumpseller migration approach should be selected from the evidence gathered before and during Demo Migration. The following decision path can help keep the choice practical without turning it into a generic service comparison.
-
-| Project profile                                                                                                                                     | Likely approach                                                        | Why                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Clean supported source data, conventional products, ordinary categories, standard customer/order history, and prepared target settings              | Standard Service                                                       | Customer-led execution can be enough when the target result is predictable and no custom logic is required   |
-| Clean supported source data, larger record volume, or customer preference for Next-Cart-led execution                                               | Managed Service                                                        | Execution responsibility shifts to Next-Cart while the migration stays within standard service capability    |
-| Standard data with selective scope, special mapping, or value adjustment needs                                                                      | Standard Service or Managed Service with Add-ons                       | Add-ons can support filtering, mapping, or configuration when the requirement fits available behavior        |
-| Standard Add-on needs modification beyond available settings                                                                                        | Custom Service                                                         | Tailored Add-ons are handled through Custom Service because customization is required                        |
-| Custom Platform source, unsupported app data, custom product logic, external identifiers, unusual stock/order structures, or bespoke transformation | Custom Service                                                         | The migration requires custom interpretation, custom migration logic adjustment, or broader bespoke handling |
-| Custom requirements plus customer preference for Next-Cart-led execution                                                                            | Custom Service with migration management if included in the final plan | Custom Service defines the custom work; migration management must be part of the agreed scope                |
-
-The approach should remain flexible until difficult samples have been reviewed. A project may begin as a standard-looking migration and move into Add-on or Custom Service review after Demo Migration reveals hidden complexity. That adjustment is healthier than forcing a light approach to carry requirements it was not designed to handle.
+The safest approach is evidence-led. A migration can start with a standard assumption, but that assumption should remain provisional until the difficult samples are reviewed.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Selecting the right migration approach for Jumpseller depends on how clearly the source store’s business meaning can be represented inside a hosted SaaS Target Platform. Standard Service can fit clean, predictable migrations where the customer is ready to self-perform the migration process. Managed Service can fit standard migrations where Next-Cart-led execution is preferred. Add-ons can support filtering, mapping, and configuration needs when they remain within available capability. Custom Service is the right path when the project includes Custom Platform handling, unsupported data, custom fields, external identifiers, tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+Selecting the right migration approach for Jumpseller means matching the service path to the source store’s real structure and the target store’s operating requirements. Standard Service can fit clean, supported migrations where the customer is ready to self-perform the migration process. Managed Service can fit standard migrations where Next-Cart-led execution is preferred. Add-ons can support filtering, mapping, and configuration needs when the requirement remains within supported behavior. Custom Service is the right path for unsupported data, Custom Platform handling, external identifiers, custom fields with business meaning, tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
 
-Before choosing the final approach, prepare representative samples and use Demo Migration to test the difficult parts of the source store, not only the easy records. If product variants, categories, checkout data, customer groups, order history, multilingual content, redirects, or app-connected records do not behave as expected, use the findings to adjust the service path before committing to the full migration scope.
+The decision should be made from preparation evidence and Demo Migration results. If the difficult samples preserve product, customer, order, content, SEO, and integration meaning, the selected approach can proceed. If those samples expose unsupported behavior, the service path should be adjusted before full migration.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
 **Is Standard Service enough for a Jumpseller migration?**
 
-Standard Service can be enough when the source data is clean, the migration path is supported, the customer is ready to self-perform the migration process, and Jumpseller can represent the expected product, customer, order, CMS Pages, and Blog Posts structure without custom handling. Demo Migration should confirm this before the full migration is treated as ready.
+Standard Service can be enough when the source path is supported, the data is clean, Jumpseller can represent the required product, customer, order, content, and SEO structure, and the customer is ready to self-perform the migration process. Demo Migration should confirm the assumption before full migration.
 
-**When should Managed Service be chosen instead of Standard Service?**
+**When should Managed Service be selected?**
 
-Managed Service is useful when the migration can remain within standard service capability but the customer wants Next-Cart-led execution. It is often a practical choice for merchants who want help managing the migration run and reviewing results, while still using standard Jumpseller-supported data structures.
+Managed Service is useful when the migration remains within standard capability but the customer wants Next-Cart-led execution. It is often suitable when the data is not custom, but the team prefers a managed process and support during execution and review.
 
-**What makes a Jumpseller migration a Custom Service case?**
+**When are Add-ons relevant for Jumpseller?**
 
-Custom Service is appropriate when the project requires customization or modification work. Examples include Custom Platform handling, unsupported app data, custom product logic, external identifiers, unusual stock or order structures, tailored transformation, Tailored Add-ons, Custom Add-ons, or custom migration logic adjustment.
+Add-ons are relevant when the requirement is bounded filtering, mapping, or configuration within supported migration behavior. Examples include selective data movement, value mapping, or supported options that help the migrated data fit the target store more cleanly.
 
-**Are Add-ons the same as Custom Service?**
+**When does a Jumpseller migration require Custom Service?**
 
-No. Add-ons are optional service features for filtering, mapping, or data configuration. Custom Service is broader and covers customization, modification, Custom Platform handling, unsupported data, Tailored Add-ons, Custom Add-ons, and bespoke migration requirements.
+Custom Service is appropriate when the project includes Custom Platform handling, unsupported app data, external identifiers, custom fields with operational meaning, Tailored Add-ons, Custom Add-ons, bespoke transformation, or custom migration logic adjustment.
 
-**Can a Jumpseller migration start as Standard Service and later move into Custom Service?**
+**Can a project combine Managed Service, Add-ons, and Custom Service?**
 
-Yes. If preparation or Demo Migration shows that the source data requires customized handling, the service path should be adjusted. This is common when difficult products, custom fields, external identifiers, app-owned records, or unusual order and stock logic appear during review.
+Yes. A project may use Managed Service for execution, Add-ons for supported mapping or filtering, and Custom Service for specific unsupported requirements. Each component should have a clear reason and scope.
 
-**Does Custom Service automatically mean Next-Cart performs the migration for me?**
+**What should Demo Migration prove before the final approach is confirmed?**
 
-No. Custom Service defines the customization or modification path. Migration management is included only when it is part of the final plan. A customer may still self-perform the migration process unless migration management is added.
+Demo Migration should prove that ordinary and difficult samples remain usable in Jumpseller. It should test products, variants, categories, customers, orders, content, URLs, and dependency-linked records so the chosen service path is based on evidence rather than assumptions.

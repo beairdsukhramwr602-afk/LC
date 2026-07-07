@@ -1,155 +1,193 @@
 # Jumpseller Validation Priorities
 
-Migration validation for Jumpseller should prove that migrated data works inside a hosted e-commerce structure, not only that records appear in the admin. Products need to sell correctly, categories need to support storefront discovery, checkout fields need to match the business model, orders need to remain understandable, and customer-facing pages need to behave as expected.
+Migration validation for Jumpseller should prove that the migrated store is ready to operate inside Jumpseller’s hosted commerce structure, not only that records exist in the admin. Product data, category organization, inventory behavior, order history, customer records, checkout settings, and storefront presentation all need to work together before launch decisions are made.
 
-Jumpseller reduces hosting and infrastructure responsibility, but it also introduces platform-defined structures for products, checkout, payments, shipping, themes, languages, apps, and integrations. Validation should therefore focus on how migrated records behave inside Jumpseller’s operating model.
+Jumpseller can support a practical catalog, localized selling, product options, categories, inventory control, digital products, customer accounts, order management, redirects, apps, and API-connected workflows. Validation should therefore focus on whether migrated information still carries the same selling and operational meaning after it has been translated into Jumpseller’s structure.
 
-### What Validation Must Prove After Moving to Jumpseller <a href="#what-validation-must-prove-after-moving-to-jumpseller" id="what-validation-must-prove-after-moving-to-jumpseller"></a>
+### What Validation Must Prove <a href="#what-validation-must-prove" id="what-validation-must-prove"></a>
 
-A successful Jumpseller migration should prove four things.
+A successful Jumpseller migration should prove five things.
 
-First, the migrated catalog must be usable. Products, variants, images, prices, stock, categories, product descriptions, SEO fields, and visible storefront pages should support real browsing and purchasing behavior.
+First, the catalog must be sellable. Product names, descriptions, images, categories, prices, stock, status, SEO fields, and variants need to create product pages that customers can understand and buy from.
 
-Second, checkout and order records must remain operationally clear. Staff should be able to understand order history, customer details, payment status, fulfillment status, shipping information, discounts, taxes, and special checkout fields without relying on source-platform assumptions that no longer exist.
+Second, product options and variants must preserve commercial meaning. Size, color, material, bundle-like selections, digital access, and custom product inputs may look similar on the surface but behave differently once they are represented through Jumpseller options, variants, custom fields, or storefront configuration.
 
-Third, storefront continuity must be tested from the customer’s point of view. Navigation, category pages, product URLs, redirects, search behavior, filters, theme layout, multilingual content, and mobile display should be reviewed as part of migration acceptance, not left until launch.
+Third, categories and filters must support discovery. A clean product record does not guarantee that customers can browse the catalog properly. Category hierarchy, menu placement, product sorting, filters, and high-value landing paths all need to be checked from the storefront.
 
-Fourth, platform boundaries must be clear. Some source-platform behavior may need to be rebuilt through Jumpseller settings, themes, apps, API integrations, or custom review. Validation should identify those gaps early rather than treating them as missing records only after launch.
+Fourth, order and customer records must remain useful for support and operations. Staff should be able to interpret customer details, addresses, order totals, payment status, fulfillment status, taxes, discounts, notes, and purchased items without needing to reconstruct meaning from the old store.
 
-### Core Validation Priorities <a href="#core-validation-priorities" id="core-validation-priorities"></a>
+Fifth, storefront continuity must be proven outside the admin. Redirects, theme display, mobile layout, checkout behavior, language/currency expectations, and connected services can expose migration gaps that record-count validation will miss.
 
-| Validation area                    | What to check in Jumpseller                                                                                                                | Why it matters                                                                                                                                  |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product records                    | Product names, descriptions, prices, SKUs, images, stock, status, SEO fields, and visibility                                               | Record presence alone does not prove that products are ready to browse, sell, and manage.                                                       |
-| Options and variants               | Variant combinations, option labels, SKU assignment, price differences, stock differences, and image behavior                              | Source platforms often model options differently. A product can migrate but still sell the wrong variation if variant meaning is not validated. |
-| Categories and discovery           | Category placement, visible category pages, navigation links, product grouping, filters, and collection-style browsing                     | Jumpseller storefront discovery depends on how catalog structure is presented, not only on imported category records.                           |
-| Customers                          | Customer names, emails, addresses, account expectations, purchase history context, and any customer grouping or segmentation assumptions   | Customer data must remain useful for service, communication, and order lookup.                                                                  |
-| Orders                             | Order totals, taxes, discounts, products, customer links, payment status, fulfillment status, shipping details, and historical readability | Historical orders must remain understandable even when checkout and fulfillment workflows differ from the source platform.                      |
-| Checkout behavior                  | Required fields, invoicing needs, shipping data, payment selection, order notes, and country-specific requirements                         | Checkout validation proves whether migrated data and current Jumpseller configuration support the intended selling workflow.                    |
-| Shipping, tax, and payment context | Shipping method interpretation, delivery rates, tax expectations, payment records, and payment-status meaning                              | These areas often combine migrated history with Jumpseller configuration, so they need business review rather than record-count checking.       |
-| URLs and redirects                 | High-value product, category, content, and landing-page redirects                                                                          | SEO continuity depends on whether important customer and search-engine paths resolve to the correct destination.                                |
-| Themes and storefront layout       | Product cards, category pages, cart display, checkout-adjacent pages, content pages, mobile layout, and custom code behavior               | A clean data migration can still feel wrong if theme structure does not present the migrated data properly.                                     |
-| Apps and integrations              | Connected sales channels, product feeds, analytics, API links, webhooks, fulfillment apps, and marketing integrations                      | External systems may depend on identifiers, product structure, order status, or events that do not behave the same after migration.             |
-| Languages and currencies           | Translated fields, language availability, currency display, localized content, and checkout expectations                                   | Multilingual or multicurrency stores need validation across customer-facing versions, not only in the default language or currency.             |
+| Validation proof        | What it confirms                                                                               | Why it matters before launch                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Record accuracy         | Key fields migrated into the expected Jumpseller locations                                     | Prevents hidden data-loss issues from being discovered by staff or customers after launch. |
+| Storefront usability    | Products, categories, menus, filters, cart, and checkout behave coherently                     | Confirms that migrated data is usable in the customer journey.                             |
+| Operational readability | Orders, customers, payments, fulfillment, and notes can be understood by staff                 | Protects customer service and order lookup continuity.                                     |
+| Configuration alignment | Payment, shipping, taxes, languages, redirects, and apps support the intended workflow         | Separates migration issues from target-store setup gaps.                                   |
+| Exception handling      | Complex products, unusual orders, important customers, and external workflows still make sense | Reduces the risk of approving a migration based only on easy samples.                      |
 
-### Strong Validation Samples <a href="#strong-validation-samples" id="strong-validation-samples"></a>
+### Core Validation Areas <a href="#core-validation-areas" id="core-validation-areas"></a>
 
-Good validation samples should represent the real complexity of the source store. A small set of easy products is not enough if the store depends on variants, filtered categories, multilingual content, or custom checkout behavior.
+| Area                   | What to validate in Jumpseller                                                                                 | Strong pass signal                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Products               | Name, description, images, price, status, category assignment, SEO fields, and storefront page output          | A customer can find, understand, and add the product to cart without confusion.         |
+| Options and variants   | Option labels, option values, variant combinations, SKU, price, stock, images, and unavailable combinations    | Each sellable choice represents the same commercial meaning as the source store.        |
+| Inventory              | Stock value, unlimited-stock behavior, low-stock assumptions, product-level and variant-level inventory        | Staff can manage stock without relying on the old platform’s inventory rules.           |
+| Categories and filters | Category hierarchy, menu placement, category pages, sorting, product filters, and important browsing paths     | Customers can browse the catalog using meaningful Jumpseller navigation.                |
+| Customers              | Names, emails, addresses, account expectations, purchase-history context, segmentation assumptions             | Customer records remain useful for service, communication, and lookup.                  |
+| Orders                 | Products, totals, discounts, taxes, shipping, payment status, fulfillment status, customer link, and notes     | Historical orders can be interpreted accurately by support and operations.              |
+| Checkout               | Required fields, payment choices, shipping choices, notes, invoicing needs, tax identifiers, and country rules | Current selling workflow can complete without missing required business data.           |
+| URLs and redirects     | Product, category, content, brand, campaign, and high-traffic legacy URLs                                      | Important customer and search-engine paths resolve to relevant Jumpseller destinations. |
+| Theme presentation     | Product pages, category pages, menus, cart display, image ratios, mobile layout, and custom content blocks     | Migrated data is displayed clearly in the chosen Jumpseller theme.                      |
+| Integrations           | Apps, analytics, feeds, payment services, shipping services, fulfillment tools, API, and webhooks              | External systems can still interpret Jumpseller product, customer, and order data.      |
 
-#### Catalog samples <a href="#catalog-samples" id="catalog-samples"></a>
+### Product and Variant Validation <a href="#product-and-variant-validation" id="product-and-variant-validation"></a>
 
-Select products that include simple products, variant-heavy products, products with multiple images, products with special prices, products with stock differences, products that belong to multiple discovery paths, and products that drive meaningful revenue.
+Product validation should begin with the catalog because product structure is where source-platform assumptions most often surface. A product can appear in Jumpseller and still fail validation if the product page is difficult to understand, the option values are incomplete, the wrong variant carries the stock value, or category placement makes the product hard to find.
 
-A strong sample should answer whether shoppers can find the product, understand its options, select the right variation, add it to cart, and reach checkout without confusion.
+Jumpseller product validation should cover both admin data and storefront behavior. Admin review confirms that required fields are present. Storefront review confirms that customers can use those fields in a buying journey.
 
-#### Customer and order samples <a href="#customer-and-order-samples" id="customer-and-order-samples"></a>
+| Product sample type        | Include in validation                                                                 | What the sample proves                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Simple product             | Name, images, price, stock, category, description, SEO fields                         | Baseline product records migrate cleanly and display correctly.                                                |
+| Variant-heavy product      | Multiple option values, SKU differences, price differences, stock differences, images | Jumpseller variant combinations preserve sellable choices.                                                     |
+| Category-sensitive product | Product assigned to important categories, filters, or menu paths                      | Discovery structure works after the move.                                                                      |
+| Digital product            | No shipping requirement, delivery/access expectation, product description clarity     | Non-physical selling behavior is represented correctly.                                                        |
+| Product with custom input  | Personalization, notes, custom fields, date/choice inputs, special instructions       | Source behavior is either preserved through supported configuration or clearly scoped for additional handling. |
+| SEO-sensitive product      | URL, title/meta content, description quality, redirect destination                    | Search and direct traffic continuity can be protected.                                                         |
 
-Select customers with different address patterns, repeat purchase history, unusual names or characters, tax or invoicing requirements, and orders containing discounts, shipping, refunds, fulfillment changes, or complex product combinations.
+Validation should not approve a variant product just because the first visible option works. Review the full combination set, including unavailable or edge-case combinations. If the old store had option logic that prevented impossible combinations, those rules should be tested in the Jumpseller storefront or flagged for configuration or Custom Service review.
 
-The goal is not to recreate every source-platform workflow. The goal is to confirm that migrated records remain interpretable and useful inside Jumpseller.
+### Category, Filter, and Navigation Validation <a href="#category-filter-and-navigation-validation" id="category-filter-and-navigation-validation"></a>
 
-#### Storefront and URL samples <a href="#storefront-and-url-samples" id="storefront-and-url-samples"></a>
+Jumpseller catalog discovery depends on more than imported categories. Product grouping, category hierarchy, navigation placement, filters, and product ordering need to be tested together because customers experience them as one browsing system.
 
-Select top product URLs, high-traffic category URLs, landing pages, content pages, and pages used in campaigns, ads, email flows, or social channels. Redirect testing should focus on destination quality, not just whether a redirect exists.
+A common validation mistake is checking whether category names exist while ignoring where those categories appear. Categories that are present but buried, duplicated, poorly nested, or disconnected from the main menu can still damage conversion and customer trust.
 
-A good redirect sends the visitor to a relevant Jumpseller destination. A technically active redirect that leads to the wrong category or a weak substitute can still harm customer experience.
+| Discovery element  | Validation question                                                               | Failure signal                                                                                |
+| ------------------ | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Category hierarchy | Does the parent-child structure match how customers browse the store?             | Important subcategories are missing, flattened, duplicated, or placed under the wrong parent. |
+| Menu placement     | Are priority categories visible in the expected menu locations?                   | Products exist but high-value paths are hidden from the storefront.                           |
+| Product filters    | Do filters reflect useful product options or custom product fields?               | Filters are missing, irrelevant, or based on inconsistent attributes.                         |
+| Product ordering   | Are featured or high-priority products shown where expected?                      | Key products appear too low or category pages feel random.                                    |
+| Search behavior    | Can customers find products using common names, option values, and product terms? | Search depends on source-store wording that was not preserved or normalized.                  |
 
-#### Integration samples <a href="#integration-samples" id="integration-samples"></a>
+Category validation should include high-traffic categories, revenue-driving categories, SEO-sensitive categories, and categories with complex product assignments. If a product belonged to several merchandising paths in the source store, test whether Jumpseller represents that path clearly or whether a new navigation strategy is needed.
 
-Select records that feed external systems such as marketplaces, product feeds, analytics, email marketing, shipping services, fulfillment tools, or custom API/webhook flows. These samples should test whether downstream systems still receive usable product, customer, and order information.
+### Customer and Order Validation <a href="#customer-and-order-validation" id="customer-and-order-validation"></a>
 
-### What Often Gets Missed <a href="#what-often-gets-missed" id="what-often-gets-missed"></a>
+Customer and order validation should prove that historical information remains useful, not that the new store exactly recreates every old workflow. Jumpseller staff need to understand who ordered, what they ordered, what they paid, where it shipped, which status applies, and what context matters for support.
 
-Many Jumpseller validation issues are missed because the first review focuses on visible products and ignores how the store operates.
+Customer validation should include ordinary customers, repeat customers, customers with multiple addresses, customers with special characters in names, and customers linked to meaningful order history. Order validation should include paid orders, unpaid orders, fulfilled orders, partially fulfilled records, discounted orders, tax-sensitive orders, shipping-sensitive orders, and orders containing multiple product types.
 
-#### Variant meaning <a href="#variant-meaning" id="variant-meaning"></a>
+| Validation record     | What to review                                                   | Operational pass condition                                                     |
+| --------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Customer identity     | Name, email, phone, addresses, account expectation               | Staff can identify the customer and contact or support them confidently.       |
+| Customer relationship | Order history, repeat purchase context, segmentation assumptions | Customer context is not reduced to an isolated contact record.                 |
+| Order line items      | Product names, variants, quantities, price, discounts            | Purchased items remain understandable without source-platform lookup.          |
+| Order totals          | Subtotal, shipping, tax, discount, total paid/refunded           | Financial meaning is readable and consistent with expected historical context. |
+| Status fields         | Payment status, fulfillment status, shipment details, notes      | Staff can interpret what happened and what action, if any, remains open.       |
 
-Variant migration needs more than a visual check. Review whether option names, variant combinations, prices, stock, SKUs, and images represent the same selling choices the merchant expects. A product page can look complete while a specific variant combination carries the wrong price or inventory.
+If order records are migrated as historical context, validation should focus on readability and support value. If the store expects active post-migration operations against those records, the team should confirm exactly which actions are supported and which belong to new Jumpseller orders after launch.
 
-#### Category and navigation behavior <a href="#category-and-navigation-behavior" id="category-and-navigation-behavior"></a>
+### Checkout, Payment, Shipping, and Tax Validation <a href="#checkout-payment-shipping-and-tax-validation" id="checkout-payment-shipping-and-tax-validation"></a>
 
-Source categories do not automatically prove Jumpseller storefront discovery. Category visibility, navigation placement, filters, product sorting, and customer-facing browsing paths should be reviewed together.
+Checkout validation is partly a migration concern and partly a target-store configuration concern. Migrated products and customers can be accurate while checkout still fails because shipping rates, payment methods, tax behavior, required fields, or business-specific inputs have not been configured correctly.
 
-#### Checkout and invoicing fields <a href="#checkout-and-invoicing-fields" id="checkout-and-invoicing-fields"></a>
+Validation should test real checkout paths using representative products and customer scenarios. Include domestic and international shipping when relevant, taxable and non-taxable products, products with stock limits, products with variant price differences, and orders that require special instructions or invoicing details.
 
-Stores with business checkout requirements should validate required fields, optional fields, invoicing data, tax identifiers, delivery instructions, and order notes. These fields can affect fulfillment and accounting even when core order records migrated correctly.
+| Checkout scenario          | What to test                                                     | Why it matters                                                               |
+| -------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Standard purchase          | Product selection, cart, shipping, payment, confirmation         | Confirms that ordinary products can move through the full buying path.       |
+| Variant purchase           | Option selection, price change, stock change, cart line display  | Confirms that product choices remain commercially correct.                   |
+| Shipping-sensitive order   | Address, country/region, shipping method, cost calculation       | Prevents launch issues where orders cannot be delivered or priced correctly. |
+| Tax-sensitive order        | Tax display, invoice expectation, exemption or country logic     | Protects accounting and compliance expectations.                             |
+| Business-specific checkout | Notes, custom fields, delivery instructions, invoice identifiers | Ensures operational information needed after purchase is captured.           |
 
-#### Historical order readability <a href="#historical-order-readability" id="historical-order-readability"></a>
+Checkout validation should be completed before final approval because customers will experience checkout issues as store failure, even if the migration data itself is accurate.
 
-Historical orders should be readable by staff after migration. Review totals, line items, customer links, status meaning, discounts, shipping, taxes, and fulfillment context. If staff cannot interpret past orders, the migrated history may not support customer service or operational lookup.
+### URL, SEO, and Storefront Validation <a href="#url-seo-and-storefront-validation" id="url-seo-and-storefront-validation"></a>
 
-#### Theme-dependent presentation <a href="#theme-dependent-presentation" id="theme-dependent-presentation"></a>
+URL validation should prioritize business impact. A complete redirect list is useful, but the highest-value test is whether important customer and search-engine paths land on relevant Jumpseller destinations. Product URLs, category URLs, content pages, campaign landing pages, and email/social links should be tested before launch.
 
-Jumpseller themes can shape how migrated data appears. Product descriptions, image ratios, badges, category menus, filters, related products, and mobile layout should be checked in the storefront, not only inside the admin.
+Storefront validation should review how migrated content looks in the chosen theme. Product descriptions, image ratios, category pages, menu structure, labels, badges, product cards, cart display, and mobile layouts can change the perceived quality of the migration.
 
-#### App and API dependencies <a href="#app-and-api-dependencies" id="app-and-api-dependencies"></a>
+| URL or storefront item  | Strong validation method                                                | Pass condition                                                             |
+| ----------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Product URL             | Test high-traffic legacy URLs against migrated product pages            | Visitor reaches the correct or most relevant product.                      |
+| Category URL            | Test important category and subcategory paths                           | Visitor lands on a useful Jumpseller category or equivalent browsing page. |
+| Content URL             | Test pages used in search, email, ads, or support materials             | Visitor reaches relevant content or an intentional replacement.            |
+| Mobile product page     | Review product images, options, price, add-to-cart, and description     | Customer can complete product selection without layout friction.           |
+| Theme-dependent content | Review custom HTML, embedded media, tabs, tables, and rich descriptions | Content remains readable and does not break the storefront layout.         |
 
-External services can expose migration gaps that ordinary storefront testing misses. Product feeds, sales channels, fulfillment apps, analytics, webhooks, and API-based workflows should be tested with migrated records that represent real business complexity.
+SEO validation should not be reduced to preserving every old URL exactly. The priority is continuity: relevant destinations, clear metadata, useful category structure, and no unnecessary dead ends for important traffic.
+
+### Integration and External Workflow Validation <a href="#integration-and-external-workflow-validation" id="integration-and-external-workflow-validation"></a>
+
+Integration validation should use real records, not dummy data only. Product feeds, analytics, email marketing, fulfillment services, shipping services, marketplace connections, and API/webhook workflows may depend on product identifiers, variant structure, order status, customer email, or event timing.
+
+| Integration type        | Validation sample                                                           | What to confirm                                                   |
+| ----------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Product feed            | Products with variants, images, categories, stock, and prices               | External channels receive usable product data.                    |
+| Fulfillment or shipping | Orders with different shipping methods, addresses, and statuses             | Operational systems can process Jumpseller order data.            |
+| Analytics               | Product views, add-to-cart, checkout, conversion, and order events          | Measurement remains meaningful after launch.                      |
+| Email marketing         | Customers, order history, product recommendations, abandoned checkout flows | Customer communication logic has valid data.                      |
+| API or webhook workflow | Products, customers, orders, status updates, and inventory changes          | Custom or external systems can interpret the new store structure. |
+
+If integration testing exposes gaps, classify them carefully. Some are configuration issues. Some require Add-ons. Some involve custom identifiers, app-specific data, source-platform behavior, or bespoke transformation and should be reviewed under Custom Service.
 
 ### Demo Migration Validation Priorities <a href="#demo-migration-validation-priorities" id="demo-migration-validation-priorities"></a>
 
-Demo Migration review should not be limited to asking whether records appeared. It should test whether Jumpseller can represent the source store’s essential operating meaning.
+Demo Migration review should use samples that represent the real store, not only the easiest records. The goal is to determine whether Jumpseller can carry the store’s essential operating meaning and which areas need adjustment before a full migration.
 
-| Demo sample type                   | What a useful sample should include                                                            | What the result should prove                                               |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Variant-heavy product              | Multiple options, SKU differences, image differences, stock differences, and price differences | Jumpseller can represent the product as a sellable customer-facing item.   |
-| Category-sensitive product         | Product assigned to important browsing paths, menus, filters, or collections                   | Catalog discovery can be rebuilt in a way customers understand.            |
-| High-value customer                | Full contact details, addresses, and meaningful order history                                  | Customer records remain useful for service and lookup.                     |
-| Complex order                      | Discounts, shipping, tax, payment status, fulfillment status, and multiple products            | Historical orders remain readable and operationally meaningful.            |
-| SEO-sensitive URL                  | High-traffic product, category, or content URL                                                 | Redirect planning points users to relevant Jumpseller destinations.        |
-| Multilingual or multicurrency item | Translated product/content fields or localized price/currency expectations                     | Storefront localization requirements can be represented or clearly scoped. |
-| App-dependent workflow             | Product feed, fulfillment, analytics, API, webhook, or sales-channel dependency                | External systems can still interpret migrated store data.                  |
+| Demo sample                    | What to include                                                                    | What the result should prove                             |
+| ------------------------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Variant-heavy product          | Multiple options, different SKUs, stock, prices, images, and category assignments  | Jumpseller can represent the product as a sellable item. |
+| Category-sensitive product     | Important browsing paths, filters, and menu placement                              | Customers can find the product after migration.          |
+| High-value customer            | Full contact details, addresses, and order context                                 | Customer information remains usable for service.         |
+| Complex order                  | Multiple products, discounts, shipping, tax, payment, fulfillment, and notes       | Historical order meaning is preserved.                   |
+| SEO-sensitive URL              | High-traffic product, category, or content path                                    | Redirect planning supports continuity.                   |
+| Integration-dependent workflow | Product feed, analytics, fulfillment, API, webhook, or email automation dependency | External systems can work with migrated data.            |
 
-If the Demo Migration exposes structural gaps, the next decision should be whether configuration, Add-ons, or Custom Service review is needed. The answer depends on whether the issue is ordinary mapping/filtering/configuration work or deeper custom interpretation of source behavior.
+A Demo Migration should be evaluated by business impact. A missing optional field on a low-value product may be a minor adjustment. A wrong variant price on a best-selling product, broken category path, unreadable order, or failed redirect for a high-traffic page can materially affect launch readiness.
 
-### How to Interpret Validation Results <a href="#how-to-interpret-validation-results" id="how-to-interpret-validation-results"></a>
+### How to Classify Validation Results <a href="#how-to-classify-validation-results" id="how-to-classify-validation-results"></a>
 
-Validation results should be classified by impact. Not every difference is a migration defect, and not every visible record proves readiness.
+Validation findings should be sorted into clear action categories. Without classification, teams often overreact to cosmetic differences or underreact to issues that affect selling, fulfillment, or SEO.
 
-#### Acceptable differences <a href="#acceptable-differences" id="acceptable-differences"></a>
-
-Some differences are expected when moving from a source platform into a hosted SaaS structure. Admin screens, workflow labels, theme presentation, order-status terminology, and checkout configuration may not match the source platform exactly. These differences are acceptable when the migrated result remains accurate, usable, and aligned with Jumpseller’s structure.
-
-#### Configuration gaps <a href="#configuration-gaps" id="configuration-gaps"></a>
-
-Some issues indicate that Jumpseller settings, themes, checkout options, shipping rates, taxes, redirects, apps, or language configuration still need adjustment. These are not always migration-data issues, but they must be resolved before launch if they affect customer experience or operations.
-
-#### Mapping or filtering gaps <a href="#mapping-or-filtering-gaps" id="mapping-or-filtering-gaps"></a>
-
-Some issues point to migrated data needing more precise filtering, mapping, or data configuration. Examples include records that should have been excluded, category structures that need different mapping, product data that needs value adjustment, or source fields that should be interpreted differently in Jumpseller.
-
-When the need fits available filtering, mapping, or data-configuration capability, an Add-on review may be appropriate. If the requirement needs modification beyond available Add-on behavior, it moves into Custom Service because customization is required.
-
-#### Custom interpretation gaps <a href="#custom-interpretation-gaps" id="custom-interpretation-gaps"></a>
-
-Some gaps reflect deeper source-platform or business-specific behavior. Examples include custom product logic, external identifiers, unsupported app data, unusual customer segmentation, non-standard order history, custom checkout rules, or API/webhook dependencies.
-
-These gaps should be reviewed under Custom Service because the migration requires custom interpretation or custom migration logic adjustment, not only ordinary validation.
+| Finding type             | Meaning                                                                                                          | Recommended response                                                                 |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Acceptable difference    | Jumpseller represents the data differently but the result is accurate and usable                                 | Document the difference and approve if business users understand it.                 |
+| Mapping issue            | A migrated field appears in the wrong place or loses important meaning                                           | Correct mapping or transformation before approval.                                   |
+| Configuration gap        | Jumpseller settings, theme, checkout, shipping, tax, redirects, or apps need adjustment                          | Resolve in the target store before launch validation closes.                         |
+| Add-on candidate         | Supported filtering, mapping, or bounded configuration is needed                                                 | Scope as an Add-on if it fits supported migration behavior.                          |
+| Custom Service candidate | Unsupported app data, custom fields, external IDs, bespoke logic, or unusual source behavior must be interpreted | Scope through Custom Service review before treating it as a standard migration task. |
+| Launch blocker           | The issue prevents buying, order handling, customer support, SEO continuity, or business-critical integration    | Do not approve launch until corrected and retested.                                  |
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Jumpseller validation should prove that the migrated store can be browsed, purchased from, managed, and interpreted inside Jumpseller’s hosted e-commerce structure. The strongest review does not stop at product counts or imported order totals. It checks whether products sell correctly, checkout supports the business model, historical records remain useful, storefront paths lead to the right destinations, and external dependencies still make sense.
+Jumpseller validation should prove that migrated data works as a functioning store. Products must be sellable, variants must preserve buying choices, categories and filters must support discovery, orders and customers must remain operationally useful, and storefront behavior must hold up across checkout, URLs, themes, and integrations.
 
-Use Demo Migration results to separate acceptable platform differences from configuration gaps, Add-on candidates, and Custom Service requirements. If validation exposes unclear product logic, checkout assumptions, app dependencies, or external-system behavior, discuss the findings with Next-Cart through Live Chat before treating the migration path as launch-ready.
+The strongest validation process uses meaningful samples, tests admin records and storefront behavior together, and classifies findings by business impact. When validation distinguishes acceptable differences from mapping issues, configuration gaps, Add-ons, Custom Service needs, and launch blockers, the migration can move forward with clearer evidence and fewer post-launch surprises.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should I validate first after a Jumpseller Demo Migration?**
+**What should be validated first after a Jumpseller migration?**
 
-Start with products, variants, categories, customers, and orders that represent real business complexity. Easy records can create false confidence. The most useful review samples are products with variants, important categories, high-value orders, SEO-sensitive URLs, and any records linked to checkout, fulfillment, language, currency, or app behavior.
+Start with sellable products, variant behavior, categories, customer records, and representative orders. These areas show whether the migrated store can support browsing, buying, support, and order lookup.
 
-**Is it enough to compare record counts after migrating to Jumpseller?**
+**Is record count enough to approve a Jumpseller migration?**
 
-No. Record counts help confirm coverage, but they do not prove that migrated data works correctly. Validation should also check product display, variant selection, checkout behavior, order readability, redirects, customer records, storefront navigation, and integration-sensitive data.
+No. Record count only confirms that records exist. Validation should prove that records are accurate, usable, visible, and operationally meaningful inside Jumpseller.
 
-**Should historical orders look exactly the same in Jumpseller as they did on the source platform?**
+**How should variant-heavy products be tested?**
 
-Not necessarily. Jumpseller may present order, payment, fulfillment, tax, and shipping details differently from the source platform. The important test is whether staff can understand the order history and use it for service, lookup, reporting context, and operational review.
+Review option labels, option values, SKU differences, price differences, stock differences, images, and unavailable combinations. Test the storefront selection flow, not only the admin record.
 
-**What if Jumpseller does not support a source-platform field in the same way?**
+**Should checkout settings be part of migration validation?**
 
-The field should be reviewed by meaning, not only by name. Some fields can be mapped, configured, transformed, or excluded. If the field represents custom logic, unsupported app data, external identifiers, or a business-specific relationship, it should be reviewed as a Custom Service requirement.
+Yes. Checkout behavior may depend on Jumpseller configuration rather than migrated records, but it still affects launch readiness. Shipping, tax, payment, required fields, and business-specific checkout inputs should be tested.
 
-**When should validation results lead to Custom Service review?**
+**How should validation findings be handled?**
 
-Custom Service review is appropriate when validation exposes custom source behavior, unsupported app or integration data, unusual product logic, external identifiers, API/webhook dependencies, or requirements that need custom migration logic adjustment. If a Standard Add-on must be modified beyond available settings and supported behavior, that customization is also handled through Custom Service.
+Classify each finding as an acceptable difference, mapping issue, configuration gap, Add-on candidate, Custom Service candidate, or launch blocker. That prevents minor differences from distracting from issues that affect selling or operations.

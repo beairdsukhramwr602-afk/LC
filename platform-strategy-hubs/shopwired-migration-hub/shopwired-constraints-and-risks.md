@@ -1,186 +1,197 @@
 # ShopWired Constraints and Risks
 
-ShopWired migration risk usually appears where source-store behavior depends on structures that are not simple product, customer, order, or page records. The target store may need to interpret variations, choices, extras, bundles, digital products, customer groups, trade pricing, quote behavior, checkout rules, delivery settings, payment methods, tax behavior, apps, API connections, webhooks, external channels, themes, and SEO fields through ShopWired’s hosted platform model.
+ShopWired migration risk usually appears when a source store contains behavior that looks like simple data but actually depends on platform configuration, app logic, theme behavior, or external-system relationships. Products may migrate but lose option meaning. Customers may migrate but split order history across emails. Orders may migrate but not explain trade terms, custom fields, or fulfillment context. Content may migrate but lose search or navigation value. Apps and integrations may be visible in the source store but not transferable as ordinary records.
 
-These constraints do not automatically make ShopWired a weak target. They simply need early review. A hosted platform can provide a cleaner operating model than a custom or self-hosted stack, but it also means custom source behavior must fit supported ShopWired structures, target configuration, app-supported behavior, or Custom Service scope.
+The purpose of risk review is not to make ShopWired look difficult. It is to separate what can be migrated, what must be configured in ShopWired, what should be rebuilt in the storefront, what requires Add-ons, and what needs Custom Service review. That separation helps merchants avoid assuming that a populated target store is the same as a launch-ready store.
 
-### Where Risk Concentrates in a ShopWired Migration <a href="#where-risk-concentrates-in-a-shopwired-migration" id="where-risk-concentrates-in-a-shopwired-migration"></a>
+### ShopWired Risk Review Framework <a href="#shopwired-risk-review-framework" id="shopwired-risk-review-framework"></a>
 
-ShopWired risk is concentrated in the difference between source-store flexibility and target-platform interpretation. The risk is low when the source data is standard and the merchant’s target expectations fit ShopWired’s built-in features. Risk rises when the source store depends on unusual product configuration, customer-specific rules, custom checkout data, third-party apps, external integrations, or highly customized storefront behavior.
+A strong ShopWired risk review follows the chain from assumption to consequence. The merchant should understand not only that a risk exists, but why it exists, how it affects operations, and what evidence proves it has been controlled.
 
-| Constraint area                          | Who it affects                                                   | Why it matters                                                                                                     | Earliest review priority                                                                                           |
-| ---------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| Hosted-platform boundaries               | Store owners, developers, and operations teams                   | ShopWired is not a self-hosted platform where every source-side customization can be copied directly.              | Confirm which source behavior must become target configuration, app behavior, theme work, or Custom Service scope. |
-| Variations, choices, extras, and bundles | Merchandisers, shoppers, and fulfillment teams                   | Product buying choices can lose price, stock, personalization, or fulfillment meaning if mapped too loosely.       | Sample complex products before Full Migration.                                                                     |
-| B2B, trade, and customer groups          | Wholesale teams, B2B buyers, account managers, and finance teams | Groups may affect pricing, quote workflows, account terms, approval, tax, visibility, delivery, or payment access. | Confirm which customer rules are data, configuration, app behavior, or custom scope.                               |
-| Orders, quotes, and subscriptions        | Customer service, operations, finance, and fulfillment teams     | Historical order or quote context may be incomplete if only totals and product names are reviewed.                 | Validate varied order and quote samples where relevant.                                                            |
-| Checkout, payment, delivery, and tax     | Store owners, shoppers, operations teams, and finance teams      | Migrated history does not configure live checkout behavior.                                                        | Separate historical order review from target checkout setup and testing.                                           |
-| Apps, API, webhooks, and integrations    | Technical teams and operations teams                             | App-owned records and external identifiers may sit outside standard migration structures.                          | Inventory installed apps and connected systems before scope is finalized.                                          |
-| Themes, content, and SEO                 | Marketing teams, designers, SEO teams, and returning customers   | Storefront quality depends on menus, pages, metadata, redirects, theme presentation, and landing paths.            | Prepare priority content, URL, and theme-dependent samples.                                                        |
-| Multi-channel selling                    | Marketplace, feed, fulfillment, and inventory teams              | Channel-specific product data, identifiers, and stock behavior may not be standard platform data.                  | Identify channel-owned fields, IDs, and sync expectations early.                                                   |
+| Risk area                  | Common assumption                                         | Practical consequence                                                                        | Mitigation direction                                                                                             |
+| -------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Hosted platform boundaries | Old storefront behavior can be copied directly            | Custom code, unsupported app data, or source-specific logic may not transfer                 | Classify each behavior as data, configuration, theme work, app setup, integration work, or Custom Service review |
+| Product configuration      | All source options are equivalent to ShopWired variations | Price, stock, SKU, image, VAT, bundle, or personalization behavior may be misrepresented     | Sample complex products and choose the correct ShopWired structure                                               |
+| B2B and trade logic        | Customer groups are ordinary customer records             | Pricing, approval, visibility, quote, payment, and tax behavior may be incomplete            | Build B2B samples and separate data from trade configuration                                                     |
+| Historical orders          | Order transfer proves operational continuity              | Past orders may be readable while checkout, payment, delivery, and tax remain unconfigured   | Validate history separately from new-order testing                                                               |
+| Content and SEO            | Pages and products are enough to preserve traffic         | URLs, redirects, metadata, menus, landing pages, and theme sections may be incomplete        | Prioritize high-value content and search paths                                                                   |
+| Apps and integrations      | Connected workflows restart automatically                 | External IDs, webhooks, stock feeds, accounting, marketplace, or fulfillment links may break | Inventory dependencies and assign a handling path                                                                |
 
-### Hosted-Platform Boundaries <a href="#hosted-platform-boundaries" id="hosted-platform-boundaries"></a>
+The safest planning stance is to treat each source behavior as unclassified until it is assigned to a clear handling path. If a behavior drives pricing, stock, visibility, tax, checkout, fulfillment, reporting, search, or B2B access, it deserves more than a field-level mapping decision.
 
-ShopWired is a hosted platform. That is one of its strengths, but it also creates a boundary around migration expectations. A source store with custom server-side code, custom checkout scripts, direct database modifications, or unusual business logic cannot simply transfer that behavior into ShopWired as-is.
+### Hosted Platform and Custom Code Constraints <a href="#hosted-platform-and-custom-code-constraints" id="hosted-platform-and-custom-code-constraints"></a>
 
-Risk increases when:
+ShopWired is a hosted commerce platform. That gives merchants a managed environment with commerce, checkout, themes, apps, API access, and operational features, but it also creates boundaries. A source store may contain custom templates, server-side code, database tables, checkout scripts, plugins, modules, or direct database relationships that cannot be copied into ShopWired as they are.
 
-* the source store relies on custom code that changes product, cart, checkout, customer, or order behavior;
-* custom fields are stored outside ordinary product, customer, or order structures;
-* the merchant expects source-side admin workflows to be reproduced exactly;
-* a source integration controls inventory, pricing, fulfillment, or customer access;
-* the target launch depends on behavior that is not clearly supported by ShopWired settings, apps, API, theme work, or accepted custom scope.
+This matters most when the source store’s business behavior depends on technical customization rather than ordinary commerce records. A custom pricing table, a bespoke product configurator, an external-stock script, a checkout-field rule, or a plugin-owned subscription process may appear to customers as normal storefront behavior. In migration planning, it must be reviewed as implementation logic.
 
-Mitigation starts with classification. Each source behavior should be classified as migrated data, target configuration, theme work, app behavior, external-system work, accepted exclusion, or Custom Service review.
+| Source behavior                                 | ShopWired risk                                                          | Required review                                                                         |
+| ----------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Custom code controlling product display         | Product may migrate without the rules that shaped the buying experience | Decide whether ShopWired configuration, theme work, an app, or Custom Service is needed |
+| Direct database fields from a self-hosted store | Fields may not exist in supported ShopWired structures                  | Classify as mapped field, custom field, excluded data, or tailored transformation       |
+| Checkout scripts or custom form fields          | Historical orders may not prove live checkout readiness                 | Separate order-history preservation from checkout configuration and testing             |
+| Plugin or module records                        | Data may be stored outside ordinary product, customer, or order exports | Obtain app/plugin exports or escalate to Custom Service review                          |
+| Custom workflows tied to external IDs           | Operational traceability may be lost                                    | Preserve reference IDs through mapping, custom fields, or integration planning          |
+
+Mitigation begins with a customization inventory. The inventory should list what the old store did, where that behavior lived, who used it, and whether the expected ShopWired outcome is data migration, configuration, theme setup, integration work, Add-on scope, Custom Service review, or accepted exclusion.
 
 ### Product Variation, Choice, Extra, and Bundle Constraints <a href="#product-variation-choice-extra-and-bundle-constraints" id="product-variation-choice-extra-and-bundle-constraints"></a>
 
-Product configuration is one of the most important ShopWired risk areas. Source platforms may use variants, product options, modifiers, personalization fields, add-ons, bundles, custom attributes, or app-controlled choices in different ways. Those structures may not map one-to-one into ShopWired.
+Product configuration is one of the highest-impact ShopWired risk areas. Source platforms often use different structures for variants, modifiers, add-ons, personalization, bundles, kits, downloadable products, subscription products, quote-only products, and product-specific delivery or tax behavior. These structures may not map one-to-one into ShopWired.
 
-Risk increases when product choices:
+Risk increases when product choices affect price, SKU, stock, image, weight, GTIN, MPN, VAT, delivery, fulfillment, or customer instructions. It also increases when a source product uses more option complexity than the target structure can express safely, when options come from an app, or when a bundle or configurator calculates output dynamically.
 
-* affect price, stock, image, weight, delivery, tax, or fulfillment;
-* include personalization or custom text fields;
-* create add-on charges or optional upgrades;
-* depend on product bundles or grouped buying;
-* control downloadable-product access;
-* come from an app or custom database table;
-* appear differently across sales channels.
+| Warning sign                                      | Why it matters                                                       | Prevention action                                                   |
+| ------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Product options affect stock or SKU               | Incorrect mapping can create wrong inventory or fulfillment behavior | Include variation-heavy products in Demo Migration samples          |
+| Options add charges or upgrades                   | Basket and order totals may not explain the purchase correctly       | Decide whether choices, extras, apps, or custom handling are needed |
+| Personalization fields collect text or files      | Customer instructions may disappear from operational views           | Validate order-admin, email, and fulfillment visibility             |
+| Bundles reduce inventory across multiple products | A single product migration may not preserve relationship logic       | Review bundle/app behavior before treating the product as standard  |
+| Options control VAT, weight, or delivery          | Tax and fulfillment outcomes may be wrong                            | Test products with special VAT, weight, and delivery implications   |
 
-Mitigation requires product samples that expose real choice complexity. If Demo Migration only includes simple products, it may hide the most important product-translation risks.
+Mitigation should use realistic product sampling. A Demo Migration that includes only simple products can pass while hiding the most important ShopWired translation risks. The sample set should include the products that are hardest to sell correctly, not only the products that are easiest to migrate.
 
-### Category, Brand, and Discovery Constraints <a href="#category-brand-and-discovery-constraints" id="category-brand-and-discovery-constraints"></a>
+### Category, Brand, Filter, and Discovery Constraints <a href="#category-brand-filter-and-discovery-constraints" id="category-brand-filter-and-discovery-constraints"></a>
 
-Migrating products into ShopWired does not automatically prove that customers can find them. Product discovery may depend on categories, brands, filters, menus, search, product visibility, featured areas, and channel-specific display.
+Migrating product records does not prove that customers can find products in ShopWired. Discovery may depend on categories, brands, filters, menus, internal search, product visibility, featured areas, product sorting, SEO landing pages, and manually curated navigation.
 
-Risk increases when:
+Risk increases when the source store uses deep category trees, products in multiple categories, brand-led browsing, filter-heavy selection, product specifications, category pages with organic traffic, or customer-group visibility. The danger is not only missing data; it is a store that contains the right products but makes them harder to discover.
 
-* the source store has deep category trees;
-* products belong to multiple categories;
-* brand-led browsing matters;
-* filters or specifications drive customer decisions;
-* categories double as SEO landing pages;
-* product visibility differs across customer groups or channels;
-* source navigation was manually curated.
+| Discovery element      | Failure mode                                                | Validation signal                                                          |
+| ---------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Categories             | Products land in unexpected hierarchy or weak landing pages | Priority products can be found through expected category paths             |
+| Brands                 | Manufacturer or label browsing loses value                  | Brand pages or filters support the expected product discovery journey      |
+| Filters/specifications | Customers cannot narrow technical products properly         | High-value filters work on representative catalog samples                  |
+| Menus                  | Navigation does not reflect selling priorities              | Main and footer menus lead to important product/category/page destinations |
+| Search                 | Internal search returns weaker or incomplete results        | Test common product, SKU, brand, and compatibility queries                 |
+| Visibility rules       | Retail or trade users see the wrong products                | Review public, logged-in, and trade-customer scenarios                     |
 
-Mitigation should include storefront discovery checks, not only product-admin checks. The migration should prove that representative products can be found through the same customer-facing logic the merchant expects after launch.
+Mitigation should include storefront discovery checks, not only product-admin checks. The merchant should test the product paths customers actually use: category browsing, brand browsing, search queries, menu links, landing pages, and priority product filters.
 
 ### B2B, Trade, Quote, and Customer-Group Constraints <a href="#b2b-trade-quote-and-customer-group-constraints" id="b2b-trade-quote-and-customer-group-constraints"></a>
 
-ShopWired can be relevant for B2B and trade selling, but B2B data is often not just ordinary customer data. Trade pricing, account terms, quotes, approval flows, credit limits, customer-specific payment methods, tax treatment, and delivery rules may involve target configuration, apps, or custom handling.
+ShopWired may be a strong option for merchants with trade or B2B needs, but B2B migration is rarely just customer migration. Trade customers, pricing bands, individual trade prices, global discounts, quote records, account approval, product/category visibility, delivery access, offline payment, account terms, and tax treatment can all carry business logic.
 
-Risk increases when:
+Risk increases when the source store uses customer groups to control commercial outcomes. A group label may look simple in the database, but the business may use it to determine whether a customer can buy certain products, receive special pricing, request quotes, use purchase orders, access delivery methods, or receive tax treatment.
 
-* customer groups affect price or visibility;
-* quote workflows are used;
-* trade accounts require approval;
-* different customers see different products or prices;
-* payment, delivery, or tax behavior differs by group;
-* account limits, customer-specific discounts, or negotiated terms must be preserved;
-* B2B behavior depends on custom code or third-party apps.
+| B2B constraint                                          | Consequence if missed                                                               | Mitigation                                                                  |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Trade accounts handled separately from retail customers | Trade users may lose expected access or pricing                                     | Build separate trade-customer samples and review approval/account status    |
+| Pricing bands or customer-specific pricing              | Customers may see incorrect prices                                                  | Compare source and ShopWired pricing examples across customer types         |
+| Quote workflows                                         | Sales teams may lose negotiation context                                            | Validate quote history, notes, statuses, and follow-up process expectations |
+| Trade-only products or categories                       | Public users may see restricted products, or trade users may miss required products | Test public, logged-in retail, and trade-customer visibility                |
+| Offline payment or account terms                        | Checkout may not support expected B2B payment behavior                              | Configure and test payment options separately from order migration          |
+| B2B tax treatment                                       | Tax/VAT output may be inaccurate                                                    | Review tax settings, customer type, product type, and regional rules        |
 
-Mitigation should start with customer and order samples that represent the actual B2B model. A retail customer sample is not enough for a trade-focused migration.
+Mitigation requires B2B-specific evidence. Retail product and customer samples cannot prove trade readiness. A trade-focused migration should validate customers, products, pricing, quotes, orders, payment access, tax behavior, and visibility rules through realistic examples.
 
-### Order, Quote, and Subscription Constraints <a href="#order-quote-and-subscription-constraints" id="order-quote-and-subscription-constraints"></a>
+### Order, Quote, Subscription, and Historical Context Constraints <a href="#order-quote-subscription-and-historical-context-constraints" id="order-quote-subscription-and-historical-context-constraints"></a>
 
-Historical orders should remain useful after migration. For ShopWired, order meaning may involve customer records, product lines, discounts, payment and delivery labels, tax values, fulfillment state, notes, refunds, quote history, subscription context, or external-system references.
+Historical orders are valuable because they support service, customer account history, reporting, reconciliation, compliance, and operational continuity. They are also a common source of false confidence. Migrated orders may preserve past context but do not recreate checkout settings, delivery rates, payment gateways, taxes, quote workflows, or subscription behavior for future purchases.
 
-Risk increases when:
+Risk increases when orders include custom statuses, special instructions, customer-specific pricing, refunds, returns, partial fulfillment, quotes, subscription context, delivery exceptions, payment references, external IDs, or custom fields. These details may be essential for customer service even if they are not used for new checkout processing.
 
-* the source store uses quotes or recurring/subscription-like behavior;
-* order statuses are custom or operationally important;
-* orders include special instructions, custom fields, or fulfillment notes;
-* payment and delivery methods vary significantly;
-* discounts, vouchers, credits, or trade terms affect order meaning;
-* external systems rely on old order IDs or customer IDs;
-* historical orders are needed for service or compliance.
+| Order condition                     | Risk                                                      | Review method                                                          |
+| ----------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Custom order statuses               | Operational state may become unclear                      | Map status meaning and validate examples with service/operations users |
+| Quotes or quote-derived orders      | Negotiation history may be incomplete                     | Sample quote records, notes, totals, and converted orders              |
+| Subscriptions or recurring behavior | Historical record may not equal active subscription logic | Identify app/configuration requirements separately                     |
+| Refunds, cancellations, returns     | Financial history may be hard to interpret                | Validate totals, notes, labels, and adjustment visibility              |
+| Custom fields or instructions       | Fulfillment details may be lost                           | Check order-admin views and downstream fulfillment needs               |
+| External IDs                        | Accounting, ERP, or warehouse traceability may break      | Preserve mapping fields or external-reference records where required   |
 
-Mitigation should validate varied order samples. Historical order readability should be judged by the teams that use the records after launch, not only by record-count comparison.
+Mitigation should separate two questions: can old orders be understood, and can new orders be processed correctly? Both are important, but they are different proof requirements.
 
-### Checkout, Delivery, Payment, and Tax Constraints <a href="#checkout-delivery-payment-and-tax-constraints" id="checkout-delivery-payment-and-tax-constraints"></a>
+### Checkout, Delivery, Payment, VAT, and Sales Tax Constraints <a href="#checkout-delivery-payment-vat-and-sales-tax-constraints" id="checkout-delivery-payment-vat-and-sales-tax-constraints"></a>
 
-Live checkout behavior is a target configuration issue. Migrating historical payment, delivery, and tax labels does not configure ShopWired payment gateways, delivery rates, tax behavior, customer-group rules, or checkout fields.
+Checkout-related risk appears when merchants expect historical order labels to configure future checkout behavior. ShopWired checkout readiness depends on target setup: payment gateways, offline payment, delivery zones, delivery rates, delivery restrictions, collection options, checkout settings, VAT features, VAT zones, custom VAT rates, US sales tax settings, trade rules, and relevant checkout apps.
 
-Risk increases when:
+Source checkout data can help preserve history, but it does not configure new behavior. A migrated order may show that a customer previously used a delivery method or paid through a gateway, but future checkout still needs working payment credentials, delivery rules, tax settings, and testing.
 
-* checkout fields were customized in the source store;
-* shipping depends on zones, rates, weights, carriers, order value, customer groups, or external fulfillment systems;
-* tax behavior depends on region, product type, customer group, or B2B status;
-* the store uses quotes, purchase orders, manual payment, or account terms;
-* source checkout behavior was controlled by custom code or third-party apps.
+| Setup area               | Common risk                                                    | Pass condition                                                                         |
+| ------------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Payment methods          | Historical labels exist but live gateways are not configured   | Test successful, failed, refund, and offline-payment scenarios where relevant          |
+| Delivery rates and zones | Old delivery names do not recreate target delivery logic       | Test zones, rates, product weights, order values, customer groups, and exclusions      |
+| VAT and sales tax        | Old tax values are readable but future rules are incorrect     | Validate representative products, regions, B2B customers, delivery tax, and exemptions |
+| Checkout fields          | Custom source fields are not captured in target order views    | Confirm where fields appear in admin, emails, and fulfillment workflows                |
+| Trade checkout           | B2B customers cannot use expected payment or delivery behavior | Test logged-in trade accounts with realistic baskets                                   |
+| Checkout apps            | Source app behavior is missing                                 | Reconfigure, replace, rebuild, exclude, or escalate before launch                      |
 
-Mitigation should separate historical order validation from target checkout testing. The migration can preserve past checkout context where supported, but the target store must still be configured and tested for new orders.
+Mitigation should include full checkout testing after configuration. Product, customer, and order migration can be technically correct while checkout is still not launch-ready.
 
 ### App, API, Webhook, and Integration Constraints <a href="#app-api-webhook-and-integration-constraints" id="app-api-webhook-and-integration-constraints"></a>
 
-ShopWired stores may depend on apps, API connections, webhooks, marketplaces, accounting systems, fulfillment tools, email services, payment providers, stock systems, or channel-specific feeds. These systems can own data that does not live in ordinary store records.
+ShopWired supports apps, API access, webhooks, product feeds, stock tools, accounting integrations, fulfillment services, marketing tools, and other connected workflows. The risk is assuming that source app data and integrations automatically transfer because similar capabilities exist in ShopWired.
 
-Risk increases when:
+Apps and external systems often own data outside ordinary store records. A subscription app may own subscription state. A feed app may own channel-specific product data. An ERP may own stock authority. A fulfillment platform may rely on source order IDs. A marketing system may store segmentation data outside the store. API and webhook workflows may need authentication, pagination handling, rate-limit planning, error handling, and fresh endpoint configuration.
 
-* external systems use product, customer, or order IDs that must remain traceable;
-* marketplace listings contain channel-specific product fields;
-* stock or fulfillment is synchronized from outside ShopWired;
-* app-owned records affect product display, checkout, subscription, quote, or customer behavior;
-* webhooks trigger operational workflows;
-* the merchant expects connected services to resume automatically after migration.
+| Dependency                   | Risk if assumed standard                                     | Handling path                                                       |
+| ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------- |
+| App-owned product data       | Product display or purchasing logic may be incomplete        | App export, Add-on review, manual rebuild, or Custom Service review |
+| Accounting or ERP references | Reconciliation may break after launch                        | Preserve IDs, mapping files, custom fields, or integration logic    |
+| Stock synchronization        | Stock authority may conflict between systems                 | Decide which system owns stock and test update direction            |
+| Fulfillment automation       | Orders may not route correctly                               | Rebuild webhook/API process and validate representative orders      |
+| Marketplace feeds            | Channel-specific listings may be weaker than source listings | Review feed fields, category mapping, images, variants, and pricing |
+| Email and marketing tools    | Subscriber or segment logic may be incomplete                | Export, map, reconfigure, or accept exclusions intentionally        |
 
-Mitigation requires an integration inventory. Each connected app or system should be classified as reconfigured, rebuilt, mapped, excluded, or escalated to Custom Service review.
+Mitigation requires an integration inventory before launch planning is treated as stable. Every connected workflow should have one of five outcomes: reconfigure, map, rebuild, exclude, or escalate to Custom Service review.
 
-### Theme, Content, and SEO Constraints <a href="#theme-content-and-seo-constraints" id="theme-content-and-seo-constraints"></a>
+### Theme, Content, SEO, and Storefront Presentation Constraints <a href="#theme-content-seo-and-storefront-presentation-constraints" id="theme-content-seo-and-storefront-presentation-constraints"></a>
 
-ShopWired storefront presentation depends on themes, theme code, menus, pages, content areas, images, banners, metadata, URLs, redirects, and SEO settings. Migration can move content data while still leaving presentation, navigation, and search continuity incomplete.
+ShopWired migration can preserve valuable content data, but storefront presentation depends on theme setup, template areas, menus, images, content blocks, SEO settings, redirects, canonical behavior, breadcrumbs, and manually curated page structure. A source store may have important sales content embedded in templates, banners, product tabs, landing pages, or custom page modules.
 
-Risk increases when:
+Risk increases when organic traffic matters, when source URLs have backlinks, when category and brand pages rank, when product descriptions are highly structured, when B2B onboarding pages support sales, or when menus and landing pages guide customers through complex catalogs.
 
-* the source store has important landing pages;
-* organic search traffic is important;
-* product/category/brand URLs have ranking or backlink value;
-* menus and homepage sections are manually curated;
-* theme-controlled sections carry product or sales content;
-* product images, alt text, or metadata are important;
-* the merchant expects the new storefront to match source layout closely.
+| Asset type                     | Risk                                                    | Prevention                                                                    |
+| ------------------------------ | ------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Product/category URLs          | Ranking signals and customer bookmarks may be disrupted | Build a priority URL and redirect list before launch                          |
+| Metadata and SEO tags          | Search snippets and page relevance may weaken           | Validate priority product, category, brand, page, and blog metadata           |
+| Landing pages                  | High-value commercial pages may be missed               | Classify pages by traffic, revenue, B2B role, or trust importance             |
+| Menus and links                | Customers cannot find migrated content                  | Test main menu, footer, category links, internal links, and landing-page CTAs |
+| Theme-controlled sales content | Important content may not be in ordinary data records   | Identify what must be rebuilt in the ShopWired theme or content areas         |
+| Images and media               | Product or page context may degrade                     | Validate image assignment, ordering, alt context, and page display            |
 
-Mitigation should focus on priority content and URLs. Not every old page deserves equal review, but high-value product, category, brand, policy, B2B, and landing pages should be sampled before launch.
+Mitigation should prioritize business-critical content rather than trying to recreate every old visual detail. The right goal is continuity of discovery, trust, search visibility, and conversion support, not automatic duplication of the old storefront.
 
-### When Risk Increases Enough for Custom Service Review <a href="#when-risk-increases-enough-for-custom-service-review" id="when-risk-increases-enough-for-custom-service-review"></a>
+### When Constraints Require Add-ons or Custom Service Review <a href="#when-constraints-require-add-ons-or-custom-service-review" id="when-constraints-require-add-ons-or-custom-service-review"></a>
 
-Not every ShopWired constraint requires Custom Service. Some needs can be handled through target configuration, Standard Add-ons, or post-migration storefront setup. Custom Service review becomes more important when standard service capability or available Add-ons cannot safely preserve the required business meaning.
+Not every constraint requires Custom Service. Some needs are handled through ShopWired configuration, theme setup, existing apps, or bounded Add-ons. Custom Service review becomes important when the migration outcome depends on unsupported source data, custom fields, app-owned records, external identifiers, bespoke transformation, or tailored migration behavior.
 
-Custom Service review should be considered when:
+| Requirement                                             | Likely direction                              | Decision signal                                                                       |
+| ------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Supported field mapping or filtering                    | Add-on review                                 | The output is bounded and fits a supported migration enhancement                      |
+| Complex attribute or custom-field handling              | Add-on or Custom Service review               | Decide whether values are standard fields, custom fields, or custom transformation    |
+| Source app data                                         | Custom Service review                         | The data may not exist in ordinary product, customer, or order exports                |
+| External-system ID preservation                         | Custom Service review or mapping deliverable  | Operational continuity depends on traceability                                        |
+| Custom B2B pricing, quote, or account logic             | Custom Service review                         | The requirement is business logic, not just customer data                             |
+| Custom checkout, tax, delivery, or fulfillment behavior | Custom Service review or target configuration | The behavior must be recreated, configured, or tested outside ordinary data migration |
 
-* the Source Platform or Target Platform is Custom Platform;
-* source product choices require non-standard transformation;
-* app-owned data must be migrated, mapped, or preserved;
-* outside-system identifiers must remain traceable;
-* B2B, quote, customer-group, or account-term logic is custom;
-* checkout, delivery, payment, or tax behavior depends on custom fields or external logic;
-* historical orders include custom data that must remain usable;
-* the target outcome requires tailored migration behavior beyond Standard Add-on capability.
+A clear scope decision prevents two planning errors: underestimating the work by calling everything standard data, or overcomplicating the project by treating every non-basic request as custom development. Each constraint should be classified by evidence.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-ShopWired migration risks are manageable when the source store’s real operating structure is reviewed early. The main constraints usually involve hosted-platform boundaries, product-choice complexity, B2B and trade behavior, order and quote context, checkout configuration, apps and integrations, SEO, content, and theme presentation. These areas should be identified before the migration path is treated as straightforward.
+ShopWired migration constraints are manageable when they are identified as operating assumptions, not late-stage surprises. The most important risk areas are hosted-platform boundaries, product configuration, B2B and trade logic, historical order meaning, checkout setup, content and SEO continuity, apps, API workflows, integrations, and custom data.
 
-Before Full Migration, prepare samples that expose the store’s real complexity and review Demo Migration results against those samples. If the result shows unsupported app data, custom checkout fields, B2B logic, outside-system identifiers, or product-choice transformation needs, resolve the scope through configuration, Add-ons, or Custom Service review before launch planning continues.
+Before Full Migration, the merchant should have representative samples, a customization inventory, a product-configuration review, B2B and order-history examples, a checkout configuration plan, a content and URL priority list, and an integration handling map. If standard migration scope cannot preserve the required business meaning, the issue should be resolved through configuration, Add-ons, Custom Service review, or an explicit exclusion before launch planning continues.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What is the biggest risk when migrating to ShopWired?**
+**What is the biggest constraint when migrating to ShopWired?**
 
-The biggest risk is assuming that source-store behavior can be copied directly into a hosted platform. Product choices, B2B rules, checkout behavior, apps, integrations, and theme-controlled content must fit ShopWired’s supported structures or be reviewed separately.
+The biggest constraint is assuming source-store behavior can be copied directly into ShopWired. Product options, B2B rules, checkout behavior, custom fields, apps, integrations, and theme-controlled content must fit supported structures or be reviewed separately.
 
-**Can complex product options create migration risk?**
+**Can complex product options create ShopWired migration risk?**
 
-Yes. Source variants, modifiers, personalization fields, bundles, and add-ons may need to become ShopWired variations, choices, extras, bundles, or app-supported behavior. If they affect price, stock, delivery, or fulfillment, they should be sampled early.
+Yes. Options that affect SKU, price, stock, image, VAT, delivery, fulfillment, bundles, personalization, or app behavior can create risk if they are mapped as simple text fields or ordinary variants without review.
 
-**Are B2B customers migrated the same way as ordinary customers?**
+**Are B2B customers migrated the same way as retail customers?**
 
-Not always. B2B records may involve trade pricing, customer groups, quotes, approval, account terms, payment access, delivery rules, or tax treatment. Those behaviors may require configuration or Custom Service review.
+Not always. B2B migration may involve trade accounts, pricing bands, customer-specific prices, quotes, product visibility, account terms, payment methods, and tax behavior. These areas may need configuration or Custom Service review.
 
-**Do migrated orders prove that checkout is ready?**
+**Do migrated orders prove that ShopWired checkout is ready?**
 
-No. Migrated order history can preserve past payment and delivery context, but live checkout depends on target ShopWired payment, delivery, tax, customer-group, and app settings.
+No. Migrated orders can preserve historical checkout context, but live checkout depends on payment gateways, delivery zones and rates, VAT or sales tax setup, customer-group rules, trade behavior, and app configuration.
 
-**When should a ShopWired migration move into Custom Service review?**
+**When should ShopWired constraints be escalated to Custom Service review?**
 
-Custom Service review should be considered when the migration involves Custom Platform data, app-owned records, outside-system identifiers, custom checkout fields, non-standard product transformation, B2B custom logic, or tailored migration behavior beyond Standard Add-on capability.
+Escalate when the required outcome depends on unsupported custom fields, app-owned records, external identifiers, custom product transformation, B2B or quote logic, custom checkout behavior, or tailored migration behavior beyond standard scope.

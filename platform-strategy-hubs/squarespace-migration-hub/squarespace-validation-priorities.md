@@ -1,209 +1,185 @@
 # Squarespace Validation Priorities
 
-Squarespace migration validation should prove that the target store is usable as a hosted content-first commerce site, not only that records appear in the admin. Products, orders, customers, contacts, pages, posts, media, URLs, redirects, and design-dependent storefront behavior must be checked together because Squarespace combines commerce data with site presentation and launch settings.
+Squarespace migration validation should prove that the target store works as a hosted content-led commerce site, not only that imported records appear in the admin. Product data, Store Pages, images, variants, inventory, customers, contacts, orders, transactions, site pages, blog content, URLs, redirects, checkout settings, and integrations all need to be reviewed according to what Squarespace is expected to support after launch.
 
-The best validation process separates migrated historical data from target-side configuration. A product record can migrate correctly while product-page display still needs template, section, image, collection, or merchandising work. An order can remain useful for history while payment, tax, shipping, fulfillment, and notification settings still need target-side setup. A page or post can exist while redirects, SEO metadata, navigation, and mobile presentation still need review.
+A useful validation process separates migrated records from target configuration. Product names, descriptions, prices, images, and variants may migrate correctly while Store Page placement, navigation, templates, product display, checkout settings, tax rules, shipping rates, payments, notifications, and connected services still need Squarespace setup. Validation should therefore confirm both data usability and launch readiness without treating every target-side setting as a migration output.
 
-### What Validation Should Prove for Squarespace <a href="#what-validation-should-prove-for-squarespace" id="what-validation-should-prove-for-squarespace"></a>
+### Squarespace Validation Thesis <a href="#squarespace-validation-thesis" id="squarespace-validation-thesis"></a>
 
-Validation should prove that the migrated store supports business decisions after migration. It should not try to confirm that Squarespace behaves exactly like the Source Platform.
+Squarespace validation should prove that migrated records work inside the target website experience. A valid result is not only a matching product count, customer count, or order count. It is a Squarespace store where product pages, Store Pages, navigation, URLs, media, contacts, orders, checkout settings, and external-system boundaries have been reviewed against the intended launch plan.
 
-| Validation question                                                   | What to prove                                                                                                                                         | Why it matters for Squarespace                                                                                                                 |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Did core commerce records migrate into usable Squarespace structures? | Products, variants, inventory, orders, transactions, contacts, and customer records should be readable and connected where supported.                 | Squarespace stores are simpler than many custom or plugin-heavy commerce stacks, so usable structure matters more than exact source imitation. |
-| Did content and commerce remain aligned?                              | Store Pages, product pages, CMS Pages, Blog Posts, media, navigation, SEO fields, URLs, and redirects should support the intended customer journey.   | Squarespace is content-first, so launch quality depends heavily on presentation and path continuity.                                           |
-| Are operational records understandable?                               | Historical orders, transactions, discounts, taxes, shipping values, refunds, fulfillment references, and external IDs should remain useful for staff. | Migrated history is often needed for customer support, reporting, and post-launch reconciliation.                                              |
-| Are target-side settings separated from migrated data?                | Payment, checkout, tax, shipping, notifications, domains, template settings, and app behavior should be treated as configuration tasks.               | Validation becomes inaccurate when merchants expect migration output to complete live business setup.                                          |
-| Are exceptions documented?                                            | Unsupported records, manual rebuilds, excluded fields, Add-ons, Custom Service outputs, and accepted differences should be clear.                     | Squarespace migrations often require practical decisions about what can move, what must be rebuilt, and what remains outside scope.            |
+The most effective validation sequence is layered: confirm record accuracy first, then confirm storefront presentation, then confirm operational readiness, then confirm unresolved exceptions. This prevents the merchant from accepting a technically complete migration that still needs significant target-side setup before launch.
 
-A pass should mean that the merchant can explain what migrated correctly, what must be configured in Squarespace, what needs correction, and what is intentionally excluded.
+| Validation layer    | What must be proven                                                                                                 | Failure signal                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Record accuracy     | Products, variants, inventory, contacts, orders, media, and SEO fields are present and correctly interpreted.       | Counts match, but values, identities, images, variants, or order details are wrong. |
+| Site presentation   | Products appear on the right Store Pages, content supports discovery, and URLs or redirects are planned.            | Records exist but shoppers cannot browse, understand, or reach priority pages.      |
+| Operating readiness | Checkout, payment, tax, shipping, fulfillment, notifications, domains, and integrations are configured or assigned. | Historical data exists but the store is not ready for live transactions.            |
+| Exception control   | Unsupported fields, custom behavior, external-system records, and manual rebuild tasks are documented.              | The team discovers missing behavior only after launch preparation begins.           |
+
+### What Squarespace Validation Must Prove <a href="#what-squarespace-validation-must-prove" id="what-squarespace-validation-must-prove"></a>
+
+A Squarespace validation pass should show that the migrated store can support ordinary business work after migration: customers can find products, staff can identify orders, product pages are usable, content paths make sense, and exceptions are known before launch. Record totals are not enough. A merchant may have the expected number of products and still fail validation if variants cannot be selected correctly, content links break, inventory is unclear, or historical order details no longer help support staff answer customer questions.
+
+| Validation area             | What must be proven                                                                                                                      | Why it matters for Squarespace                                                                                                |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Commerce records            | Products, variants, inventory, orders, transactions, contacts, and customer records are readable and connected where supported.          | Squarespace stores depend on clean supported structures rather than unlimited custom record modeling.                         |
+| Site and content continuity | Store Pages, CMS Pages, Blog Posts, images, navigation, URLs, metadata, and redirects support the intended customer journey.             | Squarespace commerce usually sits inside a broader site experience, so content and storefront validation cannot be separated. |
+| Historical order meaning    | Orders, line items, totals, taxes, shipping values, discounts, refunds, fulfillment notes, and payment references remain understandable. | Historical records are often needed for customer support, finance review, and operational reconciliation.                     |
+| Target configuration        | Payment, tax, shipping, checkout, domain, notifications, email settings, and fulfillment behavior are identified as configuration work.  | A migration can preserve data without completing live commerce setup.                                                         |
+| Exceptions and scope        | Unsupported structures, manual rebuilds, Add-ons, Custom Service outputs, and accepted exclusions are documented.                        | Squarespace validation should end with clear decisions, not unresolved assumptions.                                           |
+
+The best result is a validation decision that names what passed, what needs target setup, what needs correction, what requires Custom Service review, and what has been intentionally excluded from the migration scope.
 
 ### Demo Migration Validation Priorities <a href="#demo-migration-validation-priorities" id="demo-migration-validation-priorities"></a>
 
-Demo Migration should include records that reveal Squarespace-specific behavior. A sample made only from simple products or clean pages can miss the issues that matter most at launch.
+Demo Migration should include samples that expose Squarespace-specific behavior. A small sample of ordinary products and simple orders may look correct while hiding the records that create actual launch risk. Squarespace samples should include content-led pages, Store Page relationships, product types, variants, images, URL slugs, customer/contact examples, order exceptions, and any custom or external-system data that may affect launch.
 
-| Sample group                | Include in the validation sample                                                                                                                                          | What the sample should prove                                                                              |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Products and Store Pages    | Physical products, service products, gift cards, digital downloads, products with variants, product images, inventory values, and category or collection placement.       | Whether product data lands in a usable structure and whether product presentation needs target-side work. |
-| Orders and transactions     | Standard orders, refunded orders, subscription or payment-plan examples, subscriptions, tax lines, shipping lines, discounts, payment labels, and transaction references. | Whether historical order meaning remains readable for customer service, finance, and fulfillment review.  |
-| Customers and contacts      | Registered customers, guest buyers, subscribers, donors, contacts with addresses, duplicate emails, and marketing preference examples if relevant.                        | Whether people records keep the right business meaning inside Squarespace.                                |
-| Content and SEO             | CMS Pages, Blog Posts, images, slugs, titles, metadata, internal links, redirects, and key landing pages.                                                                 | Whether content continuity supports traffic, SEO, and customer navigation.                                |
-| Integrations and exceptions | External IDs, fulfillment references, CRM fields, app-owned fields, unsupported records, custom data, and items expected to need Add-ons or Custom Service.               | Whether the migration scope has been classified accurately before Full Migration.                         |
+| Sample group                | Include in the sample                                                                                                                                                     | What the sample should prove                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Products and Store Pages    | Physical products, service products, digital products, gift cards, variants, product images, visible and hidden products, and products assigned to important Store Pages. | Whether commerce data lands in supported Squarespace structures and whether presentation needs target-side work.  |
+| Orders and transactions     | Standard orders, refunded orders, discounted orders, tax/shipping examples, payment references, fulfillment examples, and subscription-related history if relevant.       | Whether historical business meaning remains readable for staff and finance review.                                |
+| Customers and contacts      | Registered customers, guest buyers, contacts, subscribers, donors, duplicate emails, address records, and marketing preference examples where included.                   | Whether people records preserve their intended meaning instead of being flattened into one generic customer type. |
+| Content and SEO             | CMS Pages, Blog Posts, product URLs, image-heavy pages, metadata, internal links, redirects, and priority landing pages.                                                  | Whether content continuity supports traffic, navigation, and search expectations.                                 |
+| Exceptions and integrations | External IDs, CRM fields, fulfillment references, product feed values, app-owned fields, unsupported records, and custom data.                                            | Whether the migration path is correctly scoped before Full Migration.                                             |
 
-Demo validation should produce a decision, not only a list of observations. Findings should be classified as accepted Squarespace behavior, target-side setup, migration correction, Add-on need, Custom Service review, or exclusion.
+Demo validation should classify each issue. A finding may be accepted Squarespace behavior, a target-configuration task, a migration correction, an Add-on requirement, a Custom Service review point, or an exclusion. Without this classification, teams can waste time trying to correct behavior that actually belongs to Squarespace setup or outside the supported migration scope.
+
+Validation should create evidence that can be acted on. A pass condition should say what is acceptable, who owns unresolved work, and whether the issue affects launch. For example, missing source design behavior may be acceptable if it is a manual rebuild item, but missing product variants or broken priority URLs may block launch until corrected.
+
+This distinction helps the merchant avoid over-reporting cosmetic differences while still catching defects that affect commerce, SEO continuity, customer service, and operational readiness.
 
 ### Product and Catalog Validation <a href="#product-and-catalog-validation" id="product-and-catalog-validation"></a>
 
-Squarespace product validation should check both data accuracy and storefront usability. A migrated product is not launch-ready until the merchant can confirm how it appears, how it is organized, and whether customers can buy it correctly.
+Squarespace product validation should check how product data functions in context. Product records should be readable in the admin, but they also need to appear correctly on Store Pages, support the right product type, show images clearly, expose variants properly, and preserve the SEO fields that matter for discoverability.
 
-| Product area                  | Validation priority                                                                                                                | Pass condition                                                                                      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Product identity              | Product names, SKUs, descriptions, prices, sale prices, visibility, status, and product type should match migration scope.         | Products are searchable, recognizable, and correctly classified in the target store.                |
-| Product types                 | Physical products, service products, gift cards, and downloads should be checked separately when present.                          | Each product type behaves according to Squarespace-supported behavior and accepted migration scope. |
-| Variants and options          | Option names, choices, variant SKUs, prices, stock values, images, and availability should be reviewed on representative products. | Customers can select valid combinations and staff can identify variant-level details.               |
-| Inventory                     | Stock values, sold-out behavior, variant inventory, and products intentionally excluded from inventory tracking should be clear.   | Inventory is understandable and ready for post-migration management.                                |
-| Images and media              | Primary images, galleries, image order, alt text where applicable, download files, and media quality should be checked.            | Product pages are visually usable and media does not create broken or misleading presentation.      |
-| Collections and merchandising | Store Pages, categories, collections, product groups, navigation links, and featured product placement should be reviewed.         | Products appear in the expected selling paths and key merchandise groups.                           |
-| SEO fields                    | Product slugs, titles, descriptions, canonical expectations, and redirects should be checked for important products.               | High-value product paths remain discoverable and customer-facing links are planned.                 |
+| Product area         | Validation priority                                                                                                          | Pass condition                                                                                               |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Product identity     | Names, descriptions, SKUs, prices, sale prices, visibility, status, product type, and product identifiers.                   | Products are recognizable, searchable, and classified according to the approved scope.                       |
+| Product types        | Physical, service, digital, and gift card products when present.                                                             | Each product type behaves according to supported Squarespace commerce behavior and accepted migration scope. |
+| Variants and options | Variant names, option values, SKUs, prices, images, inventory values, and availability.                                      | Customers can select valid options, and staff can understand variant-level selling details.                  |
+| Inventory            | Stock values, stock tracking assumptions, sold-out behavior, and products intentionally excluded from inventory tracking.    | Inventory is understandable and ready for post-migration management.                                         |
+| Images and media     | Primary images, galleries, image order, alt text where relevant, image quality, downloadable files, and visual presentation. | Product pages are usable and do not create broken, misleading, or incomplete storefront display.             |
+| Store Page placement | Store Pages, product groups, categories, navigation links, featured placements, and merchandise groupings.                   | Products appear in the expected selling paths.                                                               |
+| SEO values           | URL slugs, product URLs, titles, descriptions, metadata, and redirect planning for important products.                       | High-value product paths remain discoverable or have a clear redirect plan.                                  |
 
-Variant-heavy catalogs need deeper sampling. Validation should include products with one option, products with multiple options, products with image-dependent variants, products with inventory differences, and products that represent the merchant’s most important revenue categories.
+Variant-heavy catalogs need deeper sampling. The validation set should include simple products, products with one option, products with multiple options, products with image-dependent variants, products with inventory differences, and products that represent the merchant’s most important revenue categories. A pass means the merchant can manage the product after migration, not simply that the product exists.
 
-### Customer, Contact, Member, and Profile Validation <a href="#customer-contact-member-and-profile-validation" id="customer-contact-member-and-profile-validation"></a>
+### Store Pages, Content, and SEO Validation <a href="#store-pages-content-and-seo-validation" id="store-pages-content-and-seo-validation"></a>
 
-Squarespace may represent people as customers, contacts, subscribers, donors, members, or profiles depending on the original store and the target configuration. Validation should confirm business meaning, not only record count.
+Squarespace validation must treat content and commerce as connected. A product can migrate correctly while the surrounding customer path remains incomplete because the Store Page, page layout, media, navigation, redirects, metadata, or internal links still need work. This matters especially for merchants that use Squarespace for editorial pages, portfolios, services, blog-driven discovery, landing pages, or brand storytelling.
 
-| People record area         | What to validate                                                                                                   | Pass condition                                                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| Customer identity          | Email addresses, names, phone numbers, billing addresses, shipping addresses, duplicate handling, and order links. | Staff can identify customers and connect them to relevant order history.                                |
-| Contacts and subscribers   | Contact lists, subscriber status, donors, marketing preferences, and opt-in meaning where included.                | Marketing or CRM-like records are not confused with ordinary commerce customers.                        |
-| Member and account meaning | Members, account access, customer login expectations, permissions, and gated-content assumptions.                  | The merchant understands what migrated and what requires Squarespace configuration or separate rebuild. |
-| Guest buyers               | Guest orders and buyer records without full accounts.                                                              | Guest purchase history remains understandable without creating false account expectations.              |
-| External references        | CRM IDs, loyalty references, donor IDs, fulfillment IDs, or other third-party references included in scope.        | Important identifiers remain visible, mapped, or documented for operational use.                        |
+Important validation samples should include the homepage, top navigation paths, high-traffic product pages, high-revenue product pages, CMS Pages, Blog Posts, content blocks, image-heavy pages, and any page that sends visitors toward checkout. Reviewers should confirm that migrated content is not only present, but also placed in a usable customer journey.
 
-A people-record pass should not be based only on matching totals. It should show that staff can answer practical questions: who bought, who subscribed, who donated, which orders belong to which person, and which records need separate app or Custom Service handling.
+| Content and SEO area | What to validate                                                                                                                     | Pass condition                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Store Pages          | Product placement, page assignment, visible products, page titles, navigation placement, and merchandising logic.                    | Store Pages lead customers to the expected products without confusing gaps.                 |
+| CMS Pages            | Page titles, body content, images, internal links, embedded media, calls to action, and formatting.                                  | Key pages remain useful and do not require unexpected rebuild work.                         |
+| Blog Posts           | Titles, body content, authorship or dates where relevant, images, internal links, categories or tags where included, and SEO values. | Blog content remains readable and supports search or content continuity goals.              |
+| URLs and redirects   | Product URLs, page URLs, blog URLs, old source paths, redirect rules, and domain launch steps.                                       | Priority traffic paths are protected or assigned to a redirect/remediation plan.            |
+| Metadata             | SEO titles, descriptions, slugs, alt text where relevant, and high-value search snippets.                                            | Important pages retain or receive discoverability signals appropriate for the target store. |
 
-### Order, Transaction, Subscription, and Fulfillment Validation <a href="#order-transaction-subscription-and-fulfillment-validation" id="order-transaction-subscription-and-fulfillment-validation"></a>
+A content validation pass should not promise exact visual parity with the old site. It should prove that priority content works in Squarespace, that URL changes are controlled, and that manual design or content rebuild work is assigned before launch.
 
-Squarespace order validation should focus on historical readability and operational continuity. It should not be confused with configuring live checkout, payment capture, tax calculation, shipping rates, or fulfillment rules.
+### Customer, Contact, Member, and Subscriber Validation <a href="#customer-contact-member-and-subscriber-validation" id="customer-contact-member-and-subscriber-validation"></a>
 
-| Order area                     | Validation priority                                                                                                   | Pass condition                                                                                                  |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Order identity                 | Order numbers, dates, statuses, customer links, email addresses, and source references.                               | Staff can recognize and search historical orders accurately.                                                    |
-| Line items                     | Product names, variant choices, quantities, prices, discounts, taxes, shipping lines, and order totals.               | Order details make business sense and totals reconcile within accepted differences.                             |
-| Transactions                   | Payment labels, transaction references, donation payments, refund references, and financial notes where included.     | Finance and support teams can interpret historical payment context.                                             |
-| Subscriptions or payment plans | Subscription orders, payment-plan history, recurring-order references, renewal expectations, and accepted exclusions. | The merchant understands what is historical data, what is live billing setup, and what needs separate handling. |
-| Fulfillment                    | Fulfillment statuses, tracking references, shipping services, external fulfillment IDs, and staff notes.              | Fulfillment history is understandable without implying the target store has rebuilt every external workflow.    |
-| Refunds and adjustments        | Refunded orders, partial refunds, canceled orders, exchanges, discounts, and manual adjustments.                      | Exceptions are readable and support staff can explain the order history.                                        |
+Squarespace people records need validation by meaning. Depending on the source and target configuration, a person may be a buyer, guest customer, registered customer, contact, mailing-list subscriber, donor, member, or profile-like record. If these roles are treated as one simple customer total, the migration may appear successful while marketing, service, and account expectations remain unclear.
 
-Validation should include both ordinary orders and exception orders. A sample with only clean paid orders is not enough for launch confidence.
+| People record area       | What to validate                                                                                                           | Pass condition                                                                                       |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Customer identity        | Email addresses, names, phone numbers, billing addresses, shipping addresses, duplicate handling, and order relationships. | Staff can identify customers and connect them to relevant order history.                             |
+| Guest buyers             | Guest orders and buyer details without full account expectations.                                                          | Guest purchase history remains usable without implying account migration that was not in scope.      |
+| Contacts and subscribers | Contact records, mailing list membership, subscriber status, donor records, and marketing preferences where included.      | Marketing or CRM-like records are not confused with ordinary commerce customers.                     |
+| Members and accounts     | Membership status, gated-content assumptions, account access expectations, and permission-based access where relevant.     | The merchant understands what moved and what requires Squarespace configuration or separate rebuild. |
+| External references      | CRM IDs, loyalty IDs, donor IDs, fulfillment IDs, or other identifiers included in scope.                                  | Important identifiers remain visible, mapped, or documented for operational use.                     |
 
-### Checkout, Payment, Tax, Shipping, and Discount Validation <a href="#checkout-payment-tax-shipping-and-discount-validation" id="checkout-payment-tax-shipping-and-discount-validation"></a>
+A strong pass condition is practical: staff should be able to answer who bought, who subscribed, who donated, which orders belong to which person, which records require follow-up configuration, and which customer-related data falls outside standard migration behavior.
 
-Checkout-related validation should separate migrated historical values from live target settings. Many launch problems happen when these two categories are mixed.
+### Order, Transaction, Refund, and Fulfillment Validation <a href="#order-transaction-refund-and-fulfillment-validation" id="order-transaction-refund-and-fulfillment-validation"></a>
 
-| Area      | Migrated-history validation                                                                          | Target-side validation                                                                                       |
-| --------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Checkout  | Historical checkout fields and notes should remain understandable where included.                    | Live checkout form, required fields, customer emails, and policies must be configured in Squarespace.        |
-| Payments  | Payment method labels and transaction references should be readable in historical orders.            | Payment providers, capture behavior, payout setup, and test transactions require target-side setup.          |
-| Tax       | Historical tax lines should be checked for readability and total reconciliation.                     | Tax rules, regions, exemptions, and calculation behavior must be configured and tested separately.           |
-| Shipping  | Historical shipping methods, costs, tracking references, and fulfillment notes should remain useful. | Shipping zones, rates, carriers, pickup options, and fulfillment settings must be configured in Squarespace. |
-| Discounts | Historical discount codes and order-level discount values should be understandable.                  | Active promotions, discount rules, eligibility, and coupon timing should be configured in the target store.  |
+Order validation should focus on historical readability and operational continuity. Migrated order history should help the merchant support customers, reconcile sales history, and understand past transactions. It should not be mistaken for live checkout configuration, payment capture setup, tax calculation, shipping-rate configuration, or fulfillment automation.
 
-This separation prevents a valid migration output from being treated as a failed migration because live store setup is incomplete.
+| Order area            | Validation priority                                                                                               | Pass condition                                                                                                  |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Order identity        | Order numbers, dates, statuses, customer links, email addresses, and source references.                           | Staff can search and recognize historical orders accurately.                                                    |
+| Line items            | Product names, variant choices, quantities, prices, discounts, taxes, shipping lines, and totals.                 | Order details make business sense and reconcile within accepted differences.                                    |
+| Transactions          | Payment references, transaction labels, donation payments, refund references, and financial notes where included. | Finance and support teams can understand transaction context without assuming payment capture can be recreated. |
+| Refunds and returns   | Refund status, refunded amounts, return notes, and support-facing history.                                        | Staff can interpret past support situations accurately.                                                         |
+| Fulfillment           | Fulfillment status, shipping references, tracking information, fulfillment notes, and external identifiers.       | Historical fulfillment context remains useful for service and reconciliation.                                   |
+| Live setup separation | Payments, tax, shipping, notifications, checkout rules, and fulfillment integrations.                             | Configuration tasks are tested separately from migrated history.                                                |
 
-### Content, Design, URL, and SEO Validation <a href="#content-design-url-and-seo-validation" id="content-design-url-and-seo-validation"></a>
+Validation should include ordinary orders and exception orders. Refunds, partial fulfillments, discounted orders, tax-heavy orders, international shipping orders, and external fulfillment examples often reveal problems that clean order samples do not.
 
-Squarespace validation must include content and presentation because the platform is often chosen for design-led sites. A migration can move records but still require target-side decisions about page layout, navigation, sections, and launch presentation.
+### Checkout, Tax, Shipping, and Notification Validation <a href="#checkout-tax-shipping-and-notification-validation" id="checkout-tax-shipping-and-notification-validation"></a>
 
-| Content area              | What to validate                                                                                              | Pass condition                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| CMS Pages                 | Page titles, body content, media, slugs, page hierarchy, navigation placement, and important calls to action. | Key pages are present, readable, and ready for layout review.                                    |
-| Blog Posts                | Titles, dates, authors where supported, body content, media, categories or tags, slugs, and SEO fields.       | Blog content remains usable and high-value posts retain path strategy.                           |
-| Media                     | Image files, galleries, downloads, embedded media, alt text where applicable, and broken references.          | Content pages and product pages do not rely on missing or broken assets.                         |
-| Templates and sections    | Layout-dependent pages, landing pages, forms, promotional sections, and mobile presentation.                  | The merchant knows which presentation work is target-side design work rather than migrated data. |
-| URLs and redirects        | Product URLs, page URLs, blog URLs, collection paths, redirects, canonical expectations, and internal links.  | High-value traffic paths have a clear redirect and SEO validation plan.                          |
-| Domains and launch timing | Domain connection, SSL behavior, redirect timing, sitemap expectations, and go-live sequence.                 | Launch steps are separated from migration output and validated before final switch.              |
+A Squarespace migration can preserve products and history without making the target store ready to transact. Payment processors, tax settings, shipping rules, checkout fields, discount behavior, order notifications, fulfillment processes, and domain launch settings must be configured and tested in Squarespace. Validation should distinguish data migration success from operational launch readiness.
 
-A content validation pass should identify which pages are ready, which require manual styling, which require redirects, and which should be excluded or rebuilt.
+| Configuration area | What to test                                                                                                       | Pass condition                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Payments           | Payment processor setup, test purchase flow, order capture, transaction labels, and refund handling.               | The merchant can place and review test orders according to launch needs.              |
+| Tax                | Tax settings, taxable products, exempt assumptions, regional rules, and order totals.                              | Tax behavior is configured and tested separately from migrated historical tax values. |
+| Shipping           | Shipping zones, rates, carrier logic, fulfillment expectations, pickup or delivery needs, and free-shipping rules. | Customers can receive accurate shipping options for intended launch regions.          |
+| Discounts          | Coupon or discount behavior, sale prices, order-level discounts, and product-level discounts.                      | Promotional logic is understood and configured where supported.                       |
+| Notifications      | Order confirmations, shipping notifications, staff alerts, email templates, and customer-facing messages.          | Customers and staff receive the right communications during test flows.               |
 
-### Apps, APIs, External Systems, and Unsupported Data Validation <a href="#apps-apis-external-systems-and-unsupported-data-validation" id="apps-apis-external-systems-and-unsupported-data-validation"></a>
+These checks should be completed before the store is accepted for launch. They are not replacements for migration validation; they are operational tests that prove migrated data can support real commerce activity.
 
-Squarespace migrations can involve app-owned data, API-supported records, and external systems. Validation should make unsupported or custom-dependent records visible before launch.
+### Integration, API, and External-System Validation <a href="#integration-api-and-external-system-validation" id="integration-api-and-external-system-validation"></a>
 
-| Dependency type               | Validation priority                                                                                                                                            | Pass condition                                                                                          |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| API-supported records         | Products, inventory, orders, contacts, transactions, profiles, and webhooks should be checked against supported target behavior.                               | Data that can be represented in Squarespace is readable and connected where expected.                   |
-| Third-party sales channels    | Imported orders, external references, and channel-specific fields should be checked if included.                                                               | Staff can distinguish Squarespace-native history from imported channel history.                         |
-| External systems              | CRM, fulfillment, inventory, accounting, subscription, donation, booking, email marketing, and analytics systems should be reviewed for retained dependencies. | The merchant knows which systems need reconnection, manual configuration, or Custom Service review.     |
-| Unsupported source structures | Custom product builders, advanced bundles, complex memberships, gated content, custom checkout logic, and source-only workflows.                               | Unsupported behavior is documented as exclusion, manual rebuild, Add-on scope, or Custom Service scope. |
-| Custom fields and identifiers | External IDs, staff notes, custom attributes, custom metadata, and operational references.                                                                     | Important custom references are mapped, retained, or clearly excluded.                                  |
+Many Squarespace stores depend on connected systems even when the target platform appears simple. Inventory feeds, fulfillment services, accounting tools, analytics, CRM systems, email platforms, payment processors, donor systems, membership tools, scheduling systems, or product feeds may hold identifiers and workflows that affect post-launch operations.
 
-Validation should not hide unsupported behavior. It should expose it early enough for the merchant to choose a realistic launch plan.
+Validation should identify which external references were migrated, which systems must be reconnected, which workflows must be rebuilt, and which behaviors are outside the migration scope. API access and app availability should be treated as planning boundaries, not as proof that every source behavior can be recreated inside Squarespace.
 
-### Add-ons and Custom Service Output Validation <a href="#add-ons-and-custom-service-output-validation" id="add-ons-and-custom-service-output-validation"></a>
+| External-system area              | What to validate                                                                                                       | Pass condition                                                                          |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Product and inventory identifiers | SKUs, external product IDs, feed IDs, fulfillment IDs, and inventory references.                                       | External systems can recognize migrated records or have a mapping plan.                 |
+| Orders and fulfillment            | Order references, tracking values, fulfillment status, shipping labels, and third-party export requirements.           | Staff can continue support and reconciliation using recognized order details.           |
+| CRM and marketing                 | Contact IDs, subscriber status, tags, donor indicators, marketing preferences, and segmentation fields where included. | Marketing or CRM work does not lose essential record meaning.                           |
+| Analytics and reporting           | Order totals, transaction references, product IDs, campaign URLs, and conversion paths.                                | Reporting expectations are documented and not assumed to transfer automatically.        |
+| Unsupported app data              | App-owned records, custom fields, custom workflows, and external-only logic.                                           | Add-ons and Custom Service review points are separated from ordinary supported records. |
 
-When a Squarespace migration includes Add-ons or Custom Service, validation should confirm the specific output promised by that scope. It should not assume that an Add-on or Custom Service automatically rebuilds the whole website.
+The outcome should be an integration readiness list. Some items will be migrated, some will be configured in Squarespace, some will require external reconnection, and some may require Custom Service or accepted exclusion.
 
-| Scope type           | What to validate                                                                                                            | Boundary to preserve                                                                                            |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Add-ons              | Filtered records, additional mapping, content/SEO handling, metadata handling, or other supported bounded outputs.          | Add-ons do not replace Custom Service, custom development, design rebuild, payment setup, or app configuration. |
-| Custom Service       | Tailored extraction, mapping, custom handling, special validation, or unsupported-record treatment defined for the project. | Custom Service should be validated against the agreed scope, not against every possible source-store feature.   |
-| Accepted exclusions  | Records or behaviors intentionally excluded from migration.                                                                 | Exclusions should be documented so they do not appear later as missing-data defects.                            |
-| Manual rebuild items | Design, template, app, subscription, membership, form, booking, or integration work outside migration scope.                | Target-side rebuild work should be tracked separately from migration validation.                                |
+### Validation After Additional Migration Options <a href="#validation-after-additional-migration-options" id="validation-after-additional-migration-options"></a>
 
-A pass requires clear evidence that each special handling item was checked against its own acceptance criteria.
+Additional Migration Options can affect the target store after the initial migration. New products, customers, orders, Blog Posts, content updates, URL changes, and changed source records may alter inventory, redirects, order history, content relationships, SEO values, customer identities, and integration references. Validation should therefore be repeated for the business areas touched by follow-up migration activity.
 
-### Entity Points and Validation Scope <a href="#entity-points-and-validation-scope" id="entity-points-and-validation-scope"></a>
+When new eligible Product, Customer, Order, or Blog Posts records are migrated for the first time, they may consume Entity Points according to the service license. If a record has already been counted through the license, migrating that same recorded entity again does not consume additional Entity Points simply because another migration action occurs on the same migration path.
 
-Entity Points should be validated against migration scope, not only against store totals. Squarespace projects can include products, customers, orders, Blog Posts, CMS Pages, and supporting records, so validation should check what was counted, what moved, and what was excluded.
+| Follow-up area                   | Revalidation priority                                                                                   | Pass condition                                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| New products or updated products | Store Page placement, images, variants, inventory, pricing, visibility, slugs, and SEO values.          | New or changed products are usable and do not break existing customer paths. |
+| New customers or contacts        | Identity, addresses, subscriber status, marketing preferences, order links, and duplicates.             | People records remain understandable after the update.                       |
+| New orders or order updates      | Order identity, totals, line items, transactions, refunds, fulfillment status, and external references. | Order history remains usable after continued migration activity.             |
+| New Blog Posts or content        | URLs, redirects, media, internal links, metadata, and navigation placement.                             | Content additions do not create broken paths or search-risk gaps.            |
+| Scope changes                    | Add-ons, Custom Service outputs, exclusions, and accepted differences.                                  | Scope decisions remain documented after follow-up activity.                  |
 
-| Scope area             | Validation check                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Products               | Confirm that migrated product records match the agreed product scope, including product-type and variant-heavy examples.                         |
-| Customers and contacts | Confirm which customer-like records were included and which subscriber, donor, member, or marketing records were excluded or handled separately. |
-| Orders                 | Confirm that migrated order history matches the agreed date range, status rules, and exclusion logic.                                            |
-| Blog Posts             | Confirm that migrated Blog Posts match the agreed content scope. New Blog Posts consume Entity Points when migrated for the first time.          |
-| CMS Pages              | Confirm whether pages were migrated, rebuilt manually, excluded, or handled through Add-ons or Custom Service.                                   |
-| Exclusions             | Confirm that obsolete products, outdated pages, test orders, inactive contacts, and unsupported data were excluded intentionally.                |
-
-Records already counted through the service license do not consume Entity Points again simply because the customer performs another migration action. New eligible Product, Customer, Order, and Blog Posts records may consume Entity Points when they are migrated for the first time. This remains true even when the customer performs a new migration for the same migration path.
-
-### Additional Migration Options and Revalidation <a href="#additional-migration-options-and-revalidation" id="additional-migration-options-and-revalidation"></a>
-
-Additional Migration Options matter when new activity occurs after an earlier migration action. Validation should define what must be rechecked so late-stage changes do not create hidden launch risk.
-
-| Later change                                    | Revalidation priority                                                                                          |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| New products or product updates                 | Recheck product fields, variants, inventory, images, Store Pages, SEO fields, and collection placement.        |
-| New customers, contacts, subscribers, or donors | Recheck identity, duplicates, marketing preference meaning, addresses, and order relationships.                |
-| New orders or transactions                      | Recheck order history, line items, totals, payment labels, tax, shipping, discounts, fulfillment, and refunds. |
-| New Blog Posts or content updates               | Recheck slugs, SEO fields, images, internal links, categories or tags, and redirects.                          |
-| Late checkout or domain setup                   | Recheck that live store settings and migrated history are not being confused.                                  |
-| Integration changes                             | Recheck external IDs, app connections, fulfillment references, CRM fields, and accepted exclusions.            |
-
-Additional Migration Options should always be paired with validation. A later migration action is only useful if the merchant confirms that new or changed records still support launch requirements.
-
-### Full Migration Acceptance Checklist <a href="#full-migration-acceptance-checklist" id="full-migration-acceptance-checklist"></a>
-
-Before approving the Squarespace migration, the merchant should review the target store using a checklist that reflects both commerce and content behavior.
-
-| Acceptance area                  | Pass condition                                                                                                                                                  |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Products and Store Pages         | Important products, product types, variants, inventory, images, Store Pages, and merchandising paths are correct or have documented target-side tasks.          |
-| Customers and contacts           | Customer, contact, subscriber, donor, member, and guest-buyer records have the expected business meaning.                                                       |
-| Orders and transactions          | Historical orders, transactions, refunds, fulfillment references, discounts, tax, and shipping details are readable and reconciled within accepted differences. |
-| Content and media                | CMS Pages, Blog Posts, images, downloads, internal links, navigation, and mobile display are checked for launch-critical pages.                                 |
-| URLs and SEO                     | High-value paths, redirects, metadata, canonical expectations, and internal links have been reviewed.                                                           |
-| Checkout and operations          | Payment, tax, shipping, fulfillment, notifications, policies, and domains are treated as target-side setup and tested separately.                               |
-| Integrations and custom handling | Add-ons, Custom Service outputs, external systems, unsupported records, and accepted exclusions are checked against agreed scope.                               |
-| Follow-up changes                | Additional Migration Options and revalidation needs are planned if new records or content changes occur before launch.                                          |
-
-Acceptance should be based on representative records and critical workflows. It should not rely only on record counts or a quick visual check of the homepage.
+Follow-up validation should be scoped. It does not require retesting the entire store every time, but it should retest the areas affected by the new or changed data.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Squarespace validation should prove that the target store can support real post-migration work. Products, orders, customers, contacts, content, media, URLs, redirects, SEO fields, and integrations must be reviewed together because Squarespace combines commerce records with site presentation and hosted launch settings.
+Squarespace validation should prove that migrated data, site content, commerce configuration, and operational context work together well enough for launch. The strongest validation process does not stop at record counts. It checks products in Store Pages, variants in inventory, contacts by meaning, order history by usefulness, checkout by real test behavior, content by customer path, SEO by priority URLs, integrations by operational dependency, and follow-up migration activity by the areas it changes.
 
-The strongest validation process begins with Demo Migration, classifies findings clearly, checks special records and edge cases, and repeats the right checks after Full Migration. When Add-ons, Custom Service, Entity Points, or Additional Migration Options are involved, each should have its own acceptance criteria so the merchant knows what passed, what needs target-side setup, and what remains outside migration scope.
+A Squarespace migration is ready when the merchant can identify what migrated correctly, what requires target setup, what needs correction, what requires Add-ons or Custom Service review, and what has been intentionally excluded.
 
 ### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**What should I validate first after a Squarespace Demo Migration?**
+**What should be validated first after a Squarespace Demo Migration?**
 
-Start with representative products, customers, contacts, orders, Store Pages, CMS Pages, Blog Posts, media, URLs, redirects, and SEO fields. The goal is to identify whether the target store structure is usable before Full Migration.
+Start with representative products, Store Pages, variants, inventory, customers or contacts, orders, transactions, key CMS Pages, Blog Posts, product URLs, and redirects. The sample should include complex records, not only clean examples.
 
-**Should checkout, payment, tax, and shipping be judged as migration output?**
+**Does migrated order history prove Squarespace checkout is ready?**
 
-Historical values in migrated orders should be checked for readability, but live checkout, payment providers, tax settings, shipping rules, notifications, and policies are target-side configuration tasks that need separate testing in Squarespace.
+No. Historical order data and live checkout configuration are separate. Payments, tax, shipping, discounts, notifications, fulfillment, and checkout settings should be configured and tested in Squarespace.
 
-**How should Squarespace product variants be validated?**
+**Why should Squarespace validation include pages and Blog Posts?**
 
-Validate products with different option structures, variant SKUs, prices, images, inventory values, and availability. Variant-heavy products should be sampled separately from simple products because they expose different migration risks.
+Squarespace commerce is closely tied to site content, Store Pages, media, navigation, SEO fields, and URLs. Product and order data can pass while content paths or search continuity still need work.
 
-**How should Add-ons or Custom Service be validated?**
+**How should customers and contacts be checked?**
 
-Validate them against the agreed scope. Add-ons should prove the specific bounded output they were selected for. Custom Service should prove the tailored extraction, mapping, handling, or validation defined for the project.
+Validate people records by business meaning. Buyers, guest customers, contacts, subscribers, donors, members, address records, and marketing preferences should not be treated as one simple customer count.
 
-**Do Additional Migration Options require another validation round?**
+**What should be rechecked after Additional Migration Options are used?**
 
-Yes. When later products, customers, orders, Blog Posts, content changes, SEO updates, or integration changes are migrated or handled, the affected areas should be revalidated before launch.
+Recheck the affected products, customers, orders, Blog Posts, content, URLs, redirects, inventory, SEO values, integration references, and service-scope decisions touched by the follow-up migration activity.

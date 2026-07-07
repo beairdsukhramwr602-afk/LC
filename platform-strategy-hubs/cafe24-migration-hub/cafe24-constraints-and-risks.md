@@ -1,134 +1,257 @@
 # Cafe24 Constraints and Risks
 
-Cafe24 migration risk is usually not limited to whether products, customers, and orders can be moved. Risk increases when the source store carries business meaning through storefront structure, design behavior, market-specific settings, apps, API activity, payment or shipping dependencies, analytics workflows, or outside systems that are not visible in ordinary export files.
+Cafe24 migration risk is rarely caused by record volume alone. The more important risk is whether the source store’s business meaning can be translated into Cafe24’s catalog, storefront, account, order, payment, shipping, app, API, and design environment without hidden assumptions.
 
-Cafe24 is an ecosystem-oriented e-commerce platform. Its developer environment includes app development, API documentation, OAuth-based app behavior, Front JavaScript SDK support, discount apps, shipping fee apps, payment gateway apps, Smart Design, Smart Themes, modules, web components, analytics API, Data Bridge, and webhooks. That breadth can support sophisticated commerce operations, but it also means migration planning must separate ordinary data transfer from configuration, integration, design, and service-side logic decisions.
+Cafe24 provides a broad commerce operating surface: product resources, options, variants, inventories, categories, customers, customer tiers, orders, payments, shipments, refunds, returns, redirects, webhooks, apps, storefront design resources, and API-connected workflows. That breadth gives merchants room to build a capable target store. It also means unclear source logic can create risk if the migration plan treats Cafe24 as a neutral copy destination.
 
-The safest Cafe24 migration plan identifies these constraints before execution. A store may appear ready because its product and order records are available, while the actual launch risk sits in storefront behavior, app-dependent rules, market-specific presentation, or external systems that must be reconnected after migration.
+Article 4 should make those risk chains visible. A constraint is not merely a limitation. It is the point where a source-store assumption meets the way Cafe24 actually needs to operate after launch. A strong migration plan identifies that point early, decides whether the issue belongs to standard migration scope, Add-ons, Custom Service, configuration, design work, or integration work, and then validates the result with representative samples.
 
-### Where Risk Concentrates in Cafe24 Migration <a href="#where-risk-concentrates-in-cafe24-migration" id="where-risk-concentrates-in-cafe24-migration"></a>
+### Cafe24 Risk Logic at a Glance <a href="#cafe24-risk-logic-at-a-glance" id="cafe24-risk-logic-at-a-glance"></a>
 
-Cafe24 risk concentrates where data meaning depends on platform configuration or ecosystem behavior. The following areas deserve early review because they can affect how the migrated store works even when the core records appear complete.
+The risk pattern in Cafe24 migration is usually a chain: the source store holds business meaning in one way, Cafe24 expects that meaning to be represented differently, and the difference affects launch readiness if it is not planned.
 
-| Risk area                                 | Why it matters in Cafe24 migration                                                                                                                                                                      | Early review focus                                                                                                                                     |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Storefront and market structure**       | Cafe24 storefronts may support different presentation, audience, language, regional, or operational expectations. If those boundaries are unclear, migrated data may land in the wrong selling context. | Identify storefront scope, market expectations, language or regional needs, and which products, content, routes, and customers belong to each context. |
-| **Design and theme behavior**             | Smart Design, Smart Themes, modules, and web components can shape how products, categories, scripts, and content appear. Migration does not automatically recreate design-dependent meaning.            | Separate transferable data from layout behavior, module placement, custom scripts, and storefront presentation logic.                                  |
-| **App and API dependencies**              | Apps, OAuth connections, Front JavaScript SDK behavior, Data Bridge, and webhooks can affect discounts, shipping, payments, analytics, customer experience, and operational workflows.                  | Identify which outcomes are native Cafe24 configuration, which are app-owned, and which require integration reconnection or Custom Service review.     |
-| **Discount, shipping, and payment logic** | Cafe24 supports app categories for discounts, shipping fees, and payment gateway workflows. These rules can be business-critical but may not exist as simple source records.                            | Document active discounts, shipping calculations, payment dependencies, gateway assumptions, and order examples that prove the intended behavior.      |
-| **Analytics and downstream data use**     | Analytics APIs, Data Bridge, and webhooks can move commerce data into reporting, marketing, or operational systems. Migration may preserve store records while disrupting downstream interpretation.    | Confirm which systems consume product, customer, order, event, or analytics data and what must be reconnected after migration.                         |
-| **Custom Platform source interpretation** | Custom or heavily modified Source Platforms can contain hidden fields, non-standard identifiers, proprietary workflows, or external data relationships.                                                 | Review source structure before assuming standard migration capability can preserve the intended meaning.                                               |
+| Constraint area                  | Common source assumption                              | Cafe24 migration risk                                                                   | Required planning response                                                                   |
+| -------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Catalog structure                | Product options and custom fields can be copied as-is | Variant, option, inventory, and product detail meaning becomes unclear                  | Classify choices, specifications, custom fields, and operational identifiers before mapping. |
+| Category and discovery structure | Old categories equal future navigation                | Products migrate but buyer paths become weak                                            | Separate category data, menu structure, landing pages, filters, and redirects.               |
+| Storefront design                | Pages and layouts are ordinary content                | Design behavior, modules, scripts, and theme logic do not transfer cleanly              | Decide what migrates, what is rebuilt, and what is retired.                                  |
+| Customer accounts                | Customer records alone preserve customer experience   | Login, tier, memo, social, payment, and segmentation context may not behave as expected | Define the required account and segmentation outcomes.                                       |
+| Order history                    | Historical orders recreate old operations             | Payment, shipping, return, refund, and status behavior may be evidence only             | Preserve order evidence without promising old workflow recreation.                           |
+| Apps and APIs                    | Connected behavior will continue automatically        | Webhooks, Data Bridge, apps, ERP, CRM, and provider logic may need reconnection         | Build an ownership map for each connected workflow.                                          |
+| SEO and redirects                | Product and category records protect discovery        | URL, metadata, redirects, and content relationships may be lost                         | Identify high-value routes and plan redirect handling before launch.                         |
 
-### Named Constraints to Review Before Migration <a href="#named-constraints-to-review-before-migration" id="named-constraints-to-review-before-migration"></a>
+These risks are manageable when they are visible. They become expensive when they are discovered only after Demo Migration, Full Migration, or launch.
 
-#### Storefront and market-context ambiguity <a href="#storefront-and-market-context-ambiguity" id="storefront-and-market-context-ambiguity"></a>
+### Catalog Translation Risk <a href="#catalog-translation-risk" id="catalog-translation-risk"></a>
 
-**Description:** Cafe24 migration planning becomes harder when the future storefront structure is not defined. A merchant may need a domestic storefront, global selling context, language-specific presentation, separate brand areas, or different product visibility by market. If the source store does not clearly separate these contexts, migration can move records without proving that they belong in the right Cafe24 storefront experience.
+Cafe24 catalog risk appears when the source store uses product fields in ways that do not match Cafe24’s product, option, variant, image, SEO, tag, custom property, and inventory structure. The source store may contain products that appear simple but depend on attributes, variant rules, bundled logic, product grouping, or external identifiers.
 
-**Who it affects:** Merchants moving from multi-store, multilingual, multi-brand, regional, marketplace-connected, or custom storefront environments. It also affects merchants that are using a single source store to support several audiences through manual content, scripts, categories, or hidden rules.
+The main constraint is that a product record cannot be judged only by visible fields. A migrated product title, price, image, and description may be present while the buyer-facing choice logic is incomplete.
 
-**Mitigation strategy:** Define the intended Cafe24 storefront structure before migration. Document which products, categories, customers, content pages, URLs, promotions, payment methods, shipping choices, and operational workflows belong to each context. If the source structure is unclear, use Demo Migration samples to test the highest-value storefront scenarios before treating the migration path as straightforward.
+| Source condition                                     | Risk if ignored                                                 | Practical mitigation                                                               |
+| ---------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Product options affect SKU, price, stock, or image   | Buyers may select the wrong item or inventory may be inaccurate | Confirm which options become Cafe24 variants and which remain product information. |
+| Custom attributes explain compatibility or size      | Product pages may lose decision-support value                   | Preserve as structured product detail, content, or custom-property context.        |
+| Bundles or kits exist in the source store            | One visible item may represent multiple operational items       | Decide whether Cafe24, an app, or Custom Service handles the relationship.         |
+| External product IDs control ERP or marketplace sync | Records migrate but integrations cannot match them              | Preserve operational identifiers where they remain necessary.                      |
+| Product groups are merchandising constructs          | Categories may be overloaded with promotional logic             | Separate catalog structure from campaign presentation.                             |
 
-#### Product and category interpretation limits <a href="#product-and-category-interpretation-limits" id="product-and-category-interpretation-limits"></a>
+The risk is not only incorrect data. It is weaker commercial meaning. Cafe24 should receive a catalog that buyers can understand and operations teams can manage.
 
-**Description:** Product records may not carry the same meaning after migration if the source platform uses custom attributes, technical specifications, bundled products, option workarounds, category duplication, or theme-dependent product presentation. Cafe24 can support structured e-commerce operations, but the migration plan must clarify what each source field should become in the Target Platform.
+### Variant and Inventory Ownership Risk <a href="#variant-and-inventory-ownership-risk" id="variant-and-inventory-ownership-risk"></a>
 
-**Who it affects:** Catalog-heavy merchants, fashion and beauty stores with detailed variants, technical product sellers, global sellers with localized product content, and stores where category navigation affects SEO or conversion.
+Cafe24 supports variant and inventory-related resources, but inventory still needs ownership clarity. A source store may store stock directly, receive stock from ERP, synchronize with marketplaces, reserve stock through fulfillment systems, or use manual admin adjustments. If that ownership is not clear, migration can create false confidence.
 
-**Mitigation strategy:** Prepare representative products before migration: simple products, variant-heavy products, products with long descriptions, products using specifications, products connected to key categories, products with important images, and products that depend on custom fields or scripts. Decide which source fields should become native Cafe24 product data, which should become content, and which require custom migration logic adjustment.
+| Inventory question                                 | Why it matters                                 | Failure signal                                               |
+| -------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| Which system owns stock after launch?              | Cafe24 may not be the only inventory authority | Stock looks correct at launch but changes incorrectly later. |
+| Are stock values parent-level or variant-level?    | Buyer choices may need different availability  | Variant selection shows inaccurate availability.             |
+| Are backorder or preorder rules involved?          | Availability may not equal physical stock      | Products become unavailable or oversell unexpectedly.        |
+| Are marketplace or warehouse systems connected?    | Outside systems may override Cafe24 values     | Admin changes do not match operational reality.              |
+| Are reserved quantities part of the source export? | Exported stock may not equal sellable stock    | Launch stock is inflated or understated.                     |
 
-#### Design, module, and storefront presentation dependency <a href="#design-module-and-storefront-presentation-dependency" id="design-module-and-storefront-presentation-dependency"></a>
+Inventory risk should be handled before execution by defining the future stock authority and including representative products in Demo Migration review.
 
-**Description:** Cafe24 storefront appearance may depend on Smart Design, Smart Themes, modules, web components, scripts, and theme-specific logic. These layers influence how data appears, but they are not the same as the data itself. A migration can transfer product and content records while leaving storefront presentation incomplete.
+### Category, Menu, and SEO Continuity Risk <a href="#category-menu-and-seo-continuity-risk" id="category-menu-and-seo-continuity-risk"></a>
 
-**Who it affects:** Merchants with heavily customized storefronts, design-led brands, conversion-optimized product pages, custom landing pages, embedded scripts, special product displays, or content areas built through platform-specific design behavior.
+Categories, menus, product grouping, landing pages, redirects, and SEO fields are closely related, but they are not the same data layer. Cafe24 risk increases when migration treats source categories as if they automatically preserve discovery.
 
-**Mitigation strategy:** Separate migration scope from redesign or theme implementation scope. Identify which content and product data should migrate, which presentation behavior must be rebuilt in Cafe24, and which elements require developer or design work outside standard migration capability. Include high-value product pages and content pages in Demo Migration review.
+A technically complete product migration can still damage revenue if buyers cannot navigate the target storefront or search engines encounter unplanned route changes.
 
-#### App-owned discount, shipping, and payment behavior <a href="#app-owned-discount-shipping-and-payment-behavior" id="app-owned-discount-shipping-and-payment-behavior"></a>
+| Discovery element | Constraint                                                        | Planning response                                                                   |
+| ----------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Category tree     | May reflect old admin structure rather than future buyer behavior | Redesign or preserve based on target navigation logic.                              |
+| Menu structure    | May not match database categories                                 | Rebuild menus intentionally rather than assuming category import solves navigation. |
+| Product filters   | May depend on attributes, tags, or theme behavior                 | Confirm which fields support filtering after migration.                             |
+| Product URLs      | May change with platform structure                                | Map high-value product and category redirects.                                      |
+| Campaign pages    | May combine content and merchandising                             | Decide whether to migrate, rebuild, or retire.                                      |
+| SEO metadata      | May exist at product, category, board, or store level             | Preserve high-value metadata where it supports discoverability.                     |
 
-**Description:** Discounts, shipping fees, and payment workflows may be controlled by apps, gateway rules, custom scripts, or outside systems. If those behaviors are treated as ordinary product or order fields, the migration result may look complete but fail during checkout, payment review, shipping calculation, or promotion testing.
+This constraint matters most for stores with strong organic traffic, advertising landing pages, seasonal campaigns, large catalogs, or category-led merchandising.
 
-**Who it affects:** Merchants with conditional discounts, market-specific shipping rules, payment gateway dependencies, regional tax or delivery expectations, subscription-like workflows, loyalty promotions, or checkout behavior influenced by third-party services.
+### Storefront Design and Content Boundary Risk <a href="#storefront-design-and-content-boundary-risk" id="storefront-design-and-content-boundary-risk"></a>
 
-**Mitigation strategy:** Inventory active discount rules, shipping rules, payment methods, gateway dependencies, and checkout-sensitive workflows. Document who owns each rule: Cafe24 configuration, an app, a payment provider, a shipping provider, an ERP, or custom logic. Requirements that exceed standard service capability should be reviewed through Custom Service.
+Cafe24 can support storefront design through its design environment, themes, modules, components, Web Components, scripts, apps, and custom storefront work. A source store may also contain custom templates, page-builder blocks, embedded scripts, product-detail layouts, banners, content pages, or blog-like materials.
 
-#### API, webhook, and Data Bridge dependency <a href="#api-webhook-and-data-bridge-dependency" id="api-webhook-and-data-bridge-dependency"></a>
+The constraint is that design behavior is not the same as data migration. Some source content can move as structured content or Trang Hệ thống quản lý nội dung (CMS pages). Some must be rebuilt. Some should be retired because it reflects old platform limitations or outdated campaigns.
 
-**Description:** Cafe24’s ecosystem can support API-driven operations, webhook events, Data Bridge workflows, and analytics connections. These can be essential to reporting, marketing, fulfillment, inventory, order routing, or customer communication. Migration risk increases when those dependencies are not documented before data movement begins.
+| Storefront element                       | Risk if treated as ordinary data                  | Correct handling                                                    |
+| ---------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| Product detail layout                    | Buying information may display poorly             | Rebuild important layout behavior in Cafe24 design work.            |
+| Smart Design or theme-dependent behavior | Old design assumptions may not transfer           | Treat as design/development planning, not record migration.         |
+| Embedded scripts                         | Tracking, personalization, or app logic may break | Review compatibility and privacy before reuse.                      |
+| Landing pages                            | Content may survive without commercial context    | Preserve product relationships, calls to action, and routing logic. |
+| Menus and banners                        | Visual elements may copy without buyer-path value | Rebuild around the target storefront journey.                       |
 
-**Who it affects:** Stores with ERP, CRM, analytics, warehouse, marketing automation, headless, custom frontend, marketplace, or operational reporting dependencies. It also affects merchants whose source store is only one part of a larger commerce system.
+The best mitigation is boundary control. Decide what belongs in migration scope, what belongs in Cafe24 configuration, and what belongs in separate design or development work.
 
-**Mitigation strategy:** Document systems of record and downstream systems before migration. Confirm whether Cafe24, the Source Platform, an ERP, a fulfillment system, a CRM, an analytics platform, or another outside system owns each important outcome. Treat API and webhook reconnection as a launch-readiness dependency, not as proof that record migration alone is complete.
+### Customer and Account Continuity Risk <a href="#customer-and-account-continuity-risk" id="customer-and-account-continuity-risk"></a>
 
-#### Historical order and customer-context gaps <a href="#historical-order-and-customer-context-gaps" id="historical-order-and-customer-context-gaps"></a>
+Customer migration can look successful while still failing business use. Cafe24 customer-related resources may involve accounts, customer tiers, signup fields, customer memos, social accounts, payment information, and segmentation or benefit logic. A source store may use loyalty apps, wholesale tools, CRM sync, marketing consent fields, or custom registration fields that do not have a simple one-to-one destination.
 
-**Description:** Order and customer records can lose operational usefulness if they are migrated without the context needed for customer service, fulfillment review, payment reference, tax review, or buyer history. This is especially important when the source store used external systems or manual processes to complete order handling.
+| Customer area           | Risk                                                       | Mitigation                                                                   |
+| ----------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Customer identity       | Duplicate or incomplete accounts reduce service continuity | Establish matching rules and account identifiers before migration.           |
+| Customer tiers/groups   | Pricing or benefit logic may not follow migrated labels    | Define whether tiers are historical labels or live commerce rules.           |
+| Signup fields           | Business-critical registration data may be lost            | Preserve required fields or plan Custom Service for non-standard structures. |
+| Customer memos          | Internal service context may be missing or over-migrated   | Review which notes are useful, sensitive, or obsolete.                       |
+| Social and payment data | Provider-owned data may not be transferable as expected    | Separate historical reference from live authentication or payment behavior.  |
+| Marketing segmentation  | Customers migrate without usable targeting context         | Confirm which fields feed future CRM or marketing processes.                 |
 
-**Who it affects:** Merchants with repeat buyers, support-heavy order history, B2B customers, international fulfillment, payment review requirements, tax-sensitive transactions, or order statuses controlled outside the source platform.
+Customer risk is especially important for merchants with repeat buyers, member pricing, wholesale behavior, subscriptions, loyalty programs, customer-service history, or account-based purchasing.
 
-**Mitigation strategy:** Define what order history must prove after migration. Include representative orders with refunds, discounts, shipping differences, payment references, customer notes, manual adjustments, or external fulfillment context in Demo Migration review. If order meaning depends on outside systems, document those systems before the migration approach is finalized.
+### Order History and Operational Evidence Risk <a href="#order-history-and-operational-evidence-risk" id="order-history-and-operational-evidence-risk"></a>
 
-#### Custom source and non-standard field interpretation <a href="#custom-source-and-non-standard-field-interpretation" id="custom-source-and-non-standard-field-interpretation"></a>
+Cafe24 order-related resources include orders, order items, buyer details, recipients, payment timelines, payments, shipments, refunds, returns, cancellations, exchanges, coupons, benefits, memos, labels, and sales channels. Historical orders can therefore carry a lot of operational context, but migration still cannot be treated as a recreation of old order operations.
 
-**Description:** Custom Platform sources and heavily modified platforms often contain fields, identifiers, and workflows that do not map cleanly into a hosted Target Platform. Source exports may show data values but not explain what those values mean or how they affect storefront, pricing, customer, or order behavior.
+The constraint is that order history should provide evidence. It should help the merchant answer what happened, not necessarily rerun every old platform workflow inside Cafe24.
 
-**Who it affects:** Merchants migrating from custom-built platforms, heavily modified open-source platforms, older custom databases, agency-built storefronts, or stores where apps and outside systems own important data.
+| Order layer                 | Risk if ignored                                     | Validation focus                                                        |
+| --------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------- |
+| Ordered items and options   | Support teams cannot see exactly what was purchased | Confirm item, SKU, option, and product association readability.         |
+| Payment status and timeline | Payment history becomes ambiguous                   | Confirm the record shows useful payment evidence.                       |
+| Recipients and shipments    | Fulfillment history is incomplete                   | Confirm recipient, address, shipment, and tracking context.             |
+| Refunds and returns         | Service and accounting review becomes harder        | Confirm the history supports common refund and return questions.        |
+| Coupons and benefits        | Discount reasoning disappears                       | Confirm promotions remain understandable as historical evidence.        |
+| Memos and labels            | Internal support context may be lost                | Review whether notes should migrate, transform, or stay outside Cafe24. |
+| Sales channel               | Channel-level reporting becomes unreliable          | Preserve channel references where they matter.                          |
 
-**Mitigation strategy:** Review source structure before execution. Custom Platform source cases require Custom Service because the migration must interpret custom fields, outside-system identifiers, third-party data, or transformation requirements before the expected outcome can be confirmed.
+Order-history risk should be evaluated with real samples, including refunded orders, returned orders, partially fulfilled orders, discounted orders, and orders tied to external providers.
 
-### What Deserves Earliest Review <a href="#what-deserves-earliest-review" id="what-deserves-earliest-review"></a>
+### App, API, Webhook, and External-System Risk <a href="#app-api-webhook-and-external-system-risk" id="app-api-webhook-and-external-system-risk"></a>
 
-The earliest review should focus on the areas most likely to change the migration approach. These are not simply technical details. They determine whether Cafe24 can be configured through standard service capability, whether Add-ons can help, or whether Custom Service is required.
+Cafe24’s developer ecosystem can support apps, Admin API resources, webhooks, analytics, Data Bridge, and integrations. This flexibility also creates risk when the source store depends on third-party behavior or custom systems that are not part of ordinary record migration.
 
-| Earliest review item              | Why it should be reviewed early                                                                            | What a clear answer should provide                                                                                                 |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Target storefront structure**   | Storefront and market decisions affect product placement, content, URL planning, and validation samples.   | A clear description of future storefronts, audiences, product visibility, content ownership, and launch-critical routes.           |
-| **Product and category model**    | Product fields, variants, specifications, and categories shape storefront usability and SEO continuity.    | Representative product samples and rules for what should remain, change, merge, or retire.                                         |
-| **Design and theme dependencies** | Design behavior may need separate implementation instead of migration-only handling.                       | A list of theme-dependent content, scripts, modules, product displays, and landing pages that must be rebuilt or validated.        |
-| **App and integration ownership** | Apps, APIs, Data Bridge, webhooks, payment, shipping, and analytics dependencies can change service scope. | Ownership map showing which system controls each important workflow and which connections must be recreated after migration.       |
-| **Order-history usefulness**      | Historical orders must support customer service and operational review, not just record preservation.      | Examples of orders with discounts, payment references, shipping details, refunds, customer notes, or external fulfillment context. |
-| **Custom source fields**          | Non-standard fields can hold business meaning that standard records do not explain.                        | Field definitions, examples, source exports, database notes, or workflow explanations for Custom Service review.                   |
+| Connected workflow           | Constraint                                                  | Migration response                                                                |
+| ---------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| ERP inventory sync           | Stock ownership may sit outside Cafe24                      | Define the future inventory authority before moving stock data.                   |
+| CRM or marketing automation  | Customer segmentation may depend on external IDs            | Preserve needed identifiers or plan integration work.                             |
+| Payment provider             | Transaction references may be provider-owned                | Preserve historical payment evidence; configure live gateway behavior separately. |
+| Shipping provider            | Rate and fulfillment logic may not be historical order data | Rebuild live provider configuration and validate sample orders.                   |
+| Marketplace or sales channel | Source orders may have channel-specific meaning             | Preserve channel context where it affects reporting or service.                   |
+| Webhook or custom app        | Business behavior may be event-driven                       | Treat custom behavior as integration or Custom Service review.                    |
 
-### When Risk Increases <a href="#when-risk-increases" id="when-risk-increases"></a>
+When app-owned data, custom fields, external identifiers, or transformation requirements drive business outcomes, the scope should not be forced into standard migration assumptions. Custom Service may be needed to interpret and transform the requirement safely.
 
-Risk increases when the merchant expects Cafe24 migration to solve unresolved platform decisions rather than execute a defined migration plan. The highest-risk cases usually share one or more of these signals:
+### Scope Boundary and Service-Path Risk <a href="#scope-boundary-and-service-path-risk" id="scope-boundary-and-service-path-risk"></a>
 
-* the future Cafe24 storefront structure is not defined;
-* products and categories have inconsistent source-side meaning;
-* critical content or SEO routes are embedded in design behavior, scripts, or custom layouts;
-* discounts, shipping, or payment behavior depends on apps or outside providers that have not been inventoried;
-* order history must support customer service, but payment, shipping, refund, or fulfillment context is unclear;
-* APIs, webhooks, analytics, or Data Bridge dependencies affect business operations but are not owned by a named system;
-* the source platform is custom or heavily modified, but custom fields and external identifiers have not been explained;
-* Demo Migration samples are chosen because they are easy, not because they reveal risk.
+Cafe24 risk often increases when migration scope, Add-ons, Custom Service, and external setup are treated as interchangeable. They are not interchangeable.
 
-These signals do not mean Cafe24 is a poor Target Platform. They mean the migration should not be treated as a simple record movement project. The correct response is to clarify the business logic, choose representative samples, and identify whether Standard Service, Managed Service, Add-ons, or Custom Service is the appropriate path.
+| Requirement type                                | Usually belongs to                     | Why the distinction matters                                                |
+| ----------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------- |
+| Supported record migration                      | Standard Service or Managed Service    | The main issue is execution quality and validation.                        |
+| Filtering or supported mapping choices          | Add-ons                                | The data is supported, but the desired output needs bounded configuration. |
+| Custom fields with special meaning              | Custom Service                         | The source meaning must be interpreted before safe transformation.         |
+| App-owned or unsupported data                   | Custom Service                         | The data may not exist as ordinary platform records.                       |
+| Live payment, shipping, tax, and checkout setup | Cafe24 configuration or provider setup | Historical data does not recreate live operational behavior.               |
+| Theme, layout, script, or module behavior       | Design or development work             | Storefront behavior is not the same as migration scope.                    |
+| ERP, CRM, WMS, marketplace, or analytics flows  | Integration planning                   | System ownership must be confirmed after migration.                        |
+
+A clear boundary prevents inflated expectations. It also helps the merchant decide whether standard service capability is enough or whether additional planning is needed before launch.
+
+### Early Warning Signals <a href="#early-warning-signals" id="early-warning-signals"></a>
+
+The strongest warning signals are visible before migration if the project is reviewed carefully.
+
+| Signal                                                    | What it usually indicates                                   | Recommended response                                                      |
+| --------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Product samples are easy but not representative           | Demo Migration may miss catalog risk                        | Include complex options, variants, custom fields, and inventory examples. |
+| Category tree is old or inconsistent                      | Navigation may need redesign                                | Separate future buyer navigation from old admin categories.               |
+| Payment or shipping rules are app-owned                   | Checkout behavior will not be recreated by record migration | Document provider and app ownership early.                                |
+| Customer tiers drive pricing or benefits                  | Customer labels may not be enough                           | Confirm live tier rules and account behavior.                             |
+| Order history includes refunds, returns, and exchanges    | Support value depends on detailed evidence                  | Include those order types in validation samples.                          |
+| Source store has custom exports or custom database fields | Field meaning may be unclear                                | Prepare field definitions and request Custom Service review where needed. |
+| Webhooks or external systems run operations               | Cafe24 may not own the workflow alone                       | Build an integration ownership map before launch.                         |
+
+### Multi-System Ownership Risk <a href="#multi-system-ownership-risk" id="multi-system-ownership-risk"></a>
+
+Cafe24 migration becomes more sensitive when the source store is only one part of a broader commerce system. A merchant may rely on ERP for product truth, WMS for fulfillment, CRM for customer segmentation, marketplace systems for channel orders, external payment providers for transaction evidence, and marketing platforms for lifecycle workflows. In those cases, the migration cannot be scoped only by the source-store export.
+
+The constraint is ownership. Cafe24 may display or store a value, but another system may own the logic that keeps that value correct. If the ownership model is not clear, migration can create duplicate truth: Cafe24 says one thing, the ERP says another, and staff no longer know which system to trust.
+
+| Ownership area        | Risk chain                                                         | Control point                                                            |
+| --------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Product master data   | Source product fields migrate, but ERP still owns product truth    | Decide which product identifiers must remain synchronized.               |
+| Inventory             | Cafe24 stock is imported, but warehouse updates continue elsewhere | Confirm the future inventory authority and sync timing.                  |
+| Customer segmentation | Customer fields migrate, but CRM rules drive targeting             | Preserve IDs and segmentation inputs that remain active.                 |
+| Order routing         | Cafe24 order history exists, but fulfillment depends on WMS logic  | Keep historical evidence separate from live fulfillment setup.           |
+| Marketplace channels  | Channel orders are present, but marketplace ownership is unclear   | Preserve channel identifiers where reporting or service depends on them. |
+
+This is a scope risk because standard record migration cannot automatically define business ownership. If ownership is unclear, validation should fail until the merchant can identify which system controls each important outcome after launch.
+
+### Regional Commerce and Compliance Risk <a href="#regional-commerce-and-compliance-risk" id="regional-commerce-and-compliance-risk"></a>
+
+Cafe24 is often used in contexts where payment methods, tax handling, shipping expectations, membership rules, privacy consent, and cross-border commerce are operationally important. Migration risk increases when source data includes regional assumptions that are hidden inside custom fields, order notes, app behavior, or checkout configuration.
+
+A field that appears harmless in the export may carry legal, tax, shipping, or customer-service implications. For example, a source order note may explain a customs requirement. A customer property may be tied to consent or business eligibility. A shipping label may represent a provider-specific workflow. A payment reference may matter for reconciliation but not be reusable for live gateway behavior.
+
+| Regional or compliance area | Why risk increases                                    | Mitigation                                                       |
+| --------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------- |
+| Tax-sensitive product data  | Product classification may affect future tax behavior | Identify tax-relevant fields before mapping or retirement.       |
+| Payment references          | Provider data may be historical evidence only         | Preserve useful references without assuming gateway recreation.  |
+| Shipping restrictions       | Delivery rules may not be ordinary product content    | Rebuild live rules through configuration or provider setup.      |
+| Customer consent            | Consent fields may have compliance meaning            | Confirm which customer properties must remain auditable.         |
+| Cross-border content        | Market-specific text may affect buyer expectations    | Separate localization, policy, and product-display requirements. |
+
+These risks should be reviewed before migration because they are difficult to fix with a simple post-launch content correction. They affect trust, compliance, and operational accuracy.
+
+### Demo Migration Risk When Samples Are Too Easy <a href="#demo-migration-risk-when-samples-are-too-easy" id="demo-migration-risk-when-samples-are-too-easy"></a>
+
+Cafe24 constraints are often invisible when the migration sample contains only simple products, clean customers, and ordinary orders. Demo Migration should reveal risk, not avoid it. If the sample is chosen only because it is small or convenient, the project may pass the wrong test.
+
+Representative samples should include the records most likely to expose data-model differences: products with options, products with custom fields, products with variant inventory, categories that drive SEO, customers with tiers or custom properties, orders with refunds or returns, and records linked to external systems.
+
+| Sample type                                     | What it reveals                           | Why it matters                             |
+| ----------------------------------------------- | ----------------------------------------- | ------------------------------------------ |
+| Complex product with options                    | Variant, price, image, and stock handling | Confirms catalog translation.              |
+| Product with custom fields                      | Field interpretation and presentation     | Confirms whether Custom Service is needed. |
+| High-traffic category or product URL            | Redirect and SEO planning                 | Confirms discovery continuity.             |
+| Customer with tier or custom signup data        | Account and segmentation continuity       | Confirms customer meaning.                 |
+| Order with refund, return, shipment, and coupon | Historical evidence quality               | Confirms support-readiness.                |
+| Integration-linked record                       | External ID and ownership handling        | Confirms system continuity.                |
+
+A weak sample creates a false pass. A strong sample gives the merchant evidence about whether the migration approach is sound before the full dataset is moved.
+
+### When the Risk Is Not a Migration Failure <a href="#when-the-risk-is-not-a-migration-failure" id="when-the-risk-is-not-a-migration-failure"></a>
+
+Some Cafe24 constraints are not migration failures. They are platform-transition decisions. Live payment methods, shipping rules, tax behavior, checkout settings, storefront theme behavior, app configuration, webhooks, and external integrations may need setup even when the migrated records are correct.
+
+This distinction matters because it prevents misplaced blame and unclear remediation. If product records are migrated correctly but the live shipping provider is not configured, the issue is launch setup. If customer tiers are migrated but benefit rules are not rebuilt, the issue is configuration or app logic. If order history is present but an old payment gateway cannot be reactivated, the issue is provider behavior rather than record transfer.
+
+| Symptom                                                  | Likely category            | Next action                                 |
+| -------------------------------------------------------- | -------------------------- | ------------------------------------------- |
+| Product data is present but page layout is wrong         | Design or theme work       | Review Cafe24 storefront setup.             |
+| Customer group exists but pricing does not apply         | Configuration or app logic | Rebuild live rule behavior.                 |
+| Order payment reference appears but gateway action fails | Provider setup             | Configure live payment workflow separately. |
+| Shipping history exists but new checkout rates fail      | Shipping provider setup    | Reconfigure live delivery rules.            |
+| External system no longer updates records                | Integration ownership      | Review API, webhook, or middleware flow.    |
+
+A mature Cafe24 migration plan separates these categories before launch. That makes post-migration issue handling faster and more accurate.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Cafe24 migration risk concentrates around business meaning that lives outside ordinary record lists: storefront structure, product and category interpretation, design behavior, app-owned rules, API and webhook activity, payment and shipping dependencies, analytics workflows, order context, and custom source fields. A strong migration plan makes these constraints visible before execution so the migrated store can be judged by operational readiness, not record presence alone.
+Cafe24 constraints are manageable when they are treated as translation decisions rather than surprises. The most important risks involve catalog structure, variant and inventory ownership, customer account meaning, order-history evidence, storefront design boundaries, SEO continuity, apps, APIs, webhooks, and external-system ownership.
 
-When Cafe24 migration includes storefront complexity, design-dependent content, app-owned rules, integrations, custom fields, or Custom Platform source data, prepare representative examples before Demo Migration and use Live Chat to clarify whether the requirement fits standard service capability, Add-ons, or Custom Service.
+A strong Cafe24 migration plan does not try to force every source behavior into ordinary record movement. It identifies where Cafe24 should own the data, where configuration or design work is required, where Add-ons can support bounded output, and where Custom Service is needed to interpret custom or unsupported requirements.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Cafe24 migration risky if the source store has many products?**
+**Is Cafe24 migration risky if the source store has many SKUs?**
 
-A large catalog is not automatically the main risk. Risk increases when product structure is unclear, when categories affect storefront navigation or SEO, or when product meaning depends on custom fields, scripts, apps, or source-side workarounds.
+Not automatically. SKU volume increases workload, but the larger risk is unclear product meaning: options, variants, inventory ownership, custom fields, category structure, and external identifiers that are not interpreted before migration.
 
-**Do Cafe24 design and theme elements migrate with store data?**
+**Can Cafe24 preserve old checkout, payment, and shipping behavior through migration?**
 
-Migration should not be assumed to recreate design behavior automatically. Product data, content, and route information can be reviewed as migration scope, but Smart Design, Smart Themes, modules, scripts, web components, and layout behavior may require separate design or development planning.
+Historical order data can preserve evidence of payment and shipping outcomes, but live checkout, payment gateways, shipping rules, tax behavior, and provider configuration must be planned separately from record migration.
 
-**When should Cafe24 apps and integrations be reviewed?**
+**Why are Cafe24 apps and webhooks a migration risk?**
 
-Apps and integrations should be reviewed before execution when they affect discounts, shipping, payment, analytics, customer experience, order handling, inventory, fulfillment, or reporting. They may determine whether standard service capability is enough or whether Custom Service is required.
+Apps and webhooks may control discounts, inventory updates, customer workflows, analytics, fulfillment, or external-system communication. If that behavior is not documented, migrated records can look complete while operations fail after launch.
 
-**Can Demo Migration reveal Cafe24 constraints?**
+**Should all source categories be preserved in Cafe24?**
 
-Yes, if the sample is chosen well. Demo Migration should include products, customers, orders, content, routes, and integration-sensitive records that reveal storefront, design, pricing, shipping, payment, or data-ownership risk.
+No. Categories should be reviewed against future navigation, merchandising, SEO, and buyer discovery. Some old categories should be preserved, some rebuilt, and some retired.
 
-**When does a Cafe24 migration require Custom Service?**
+**When does a Cafe24 project need Custom Service?**
 
-Custom Service is required when the migration involves customization, modification, Tailored Add-ons, Custom Add-ons, Custom Platform handling, custom migration logic adjustment, custom fields, outside-system identifiers, app-owned data, or source behavior that cannot be handled through standard service capability.
+Custom Service is needed when the project involves unsupported data, app-owned records, custom fields, Custom Platform behavior, external identifiers, bespoke transformation, or custom migration logic adjustment that cannot be handled safely through standard service capability.

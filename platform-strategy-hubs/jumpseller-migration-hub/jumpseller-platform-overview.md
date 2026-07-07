@@ -1,153 +1,156 @@
 # Jumpseller Platform Overview
 
-Jumpseller is a hosted SaaS e-commerce platform for building and operating an online store without managing server infrastructure, core platform updates, or a self-hosted codebase. It combines product catalog management, storefront themes, checkout, payments, shipping, sales channels, apps, and operational settings inside a managed platform environment.
+Jumpseller is a hosted eCommerce platform built for merchants that want to operate an online store without maintaining server infrastructure, platform updates, or a self-hosted commerce codebase. It brings product management, categories, inventory, storefront themes, payment methods, shipping methods, sales channels, apps, and operational settings into a managed environment.
 
-A migration to Jumpseller is therefore not only a move into a new product database. It is a move into a hosted commerce model where products, categories, customer records, orders, pages, redirects, themes, checkout settings, payment methods, shipping methods, apps, languages, and store permissions must fit the structures Jumpseller provides. The migration result should be judged by how well the store can operate inside Jumpseller, not only by whether records appear after migration.
+A migration to Jumpseller should therefore be planned as more than a database transfer. The practical outcome is a new operating environment where product data, category logic, customer records, order history, SEO fields, storefront navigation, checkout behavior, payment configuration, shipping rules, and integrations all need to make sense inside Jumpseller. A successful migration is not proven only by whether records appear. It is proven by whether the store can sell, be managed, be found, and be validated after the move.
 
-Jumpseller is often attractive for merchants that want a practical hosted e-commerce environment with editable storefront design, integrated commerce features, payment and shipping configuration, social and marketplace sales channels, multilingual storefront possibilities, and app-based extensions. It is less suitable when the existing store depends on full backend ownership, deeply custom checkout logic, unusual product configurators, complex ERP-owned stock behavior, or source-specific app data that does not have a clear Jumpseller destination.
+Jumpseller is often attractive for merchants that want a cleaner SaaS operating model, a manageable catalog structure, theme-based storefront control, social and commerce-channel support, and less technical maintenance than many self-hosted platforms require. It is less suitable when the source store depends on unrestricted backend modification, deeply custom checkout logic, unusual product builders, or app-owned workflows that do not have a clear target-side equivalent.
 
-### What Changes in a Migration to Jumpseller <a href="#what-changes-in-a-migration-to-jumpseller" id="what-changes-in-a-migration-to-jumpseller"></a>
+### Jumpseller’s Migration Identity <a href="#jumpseller-s-migration-identity" id="jumpseller-s-migration-identity"></a>
 
-A migration to Jumpseller changes where store meaning is controlled. In a self-hosted platform, merchants may have more direct access to database structure, server files, custom extensions, checkout code, and backend modification. In Jumpseller, the store runs inside a hosted SaaS environment, so the target result must respect Jumpseller’s product model, theme system, checkout structure, payment and shipping configuration, app ecosystem, and plan-sensitive features.
+Jumpseller’s migration identity sits between simple storefront builders and highly extensible self-hosted commerce platforms. It is not only a design site with checkout attached, but it is also not a platform where every backend behavior can be recreated through unrestricted code or direct database control.
 
-#### Product catalog structure becomes Jumpseller product structure <a href="#product-catalog-structure-becomes-jumpseller-product-structure" id="product-catalog-structure-becomes-jumpseller-product-structure"></a>
+The most important planning question is whether the source store’s business meaning can be represented through Jumpseller’s native structures and configurable operating areas.
 
-Products migrating into Jumpseller need to become usable Jumpseller products, not just imported product rows. Product names, descriptions, SKUs, prices, images, stock, categories, options, variants, custom fields, SEO fields, and visibility settings all need to land in places that preserve customer-facing meaning.
+| Migration area         | What Jumpseller expects                                                                                                   | Planning implication                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Products               | Products with names, descriptions, images, prices, categories, stock, options, variants, SEO fields, and visibility logic | Source product structures should be translated into usable Jumpseller records, not copied as raw rows. |
+| Categories and filters | Category organization, category hierarchy, product filters, and storefront navigation are related but not identical       | Catalog structure must be validated together with menus, search behavior, and product discovery.       |
+| Inventory              | Stock can be managed for products and variants, including stock updates and unlimited-stock behavior                      | SKU, variant, stock, and fulfillment expectations need early review.                                   |
+| Checkout               | Checkout works inside the hosted platform environment                                                                     | Source checkout customizations need target-side confirmation rather than transfer assumptions.         |
+| Storefront             | Design is rebuilt through Jumpseller themes, layout configuration, content, and possible theme customization              | Theme migration and data migration should be treated as separate workstreams.                          |
+| Integrations           | Apps, APIs, webhooks, feeds, and external tools can support operations, but ownership varies                              | Integration data and workflow ownership must be reviewed before scope is finalized.                    |
 
-Variant-heavy catalogs deserve early planning. Source platforms may represent product options, configurable products, attributes, modifiers, bundles, kits, personalization fields, or custom product properties in different ways. Jumpseller can support product options and variants, but a source product structure should be reviewed for how shoppers select products, how stock is tracked, and how source-specific product logic will be represented after migration.
+This identity makes Jumpseller a practical target for stores that want structure and operational simplicity, but it also makes expectation control important. A merchant should not enter migration expecting the previous platform’s database logic, theme system, extension behavior, and checkout customization to move exactly as they were.
 
-#### Categories are not the same as storefront navigation <a href="#categories-are-not-the-same-as-storefront-navigation" id="categories-are-not-the-same-as-storefront-navigation"></a>
+### How Store Data Changes When It Enters Jumpseller <a href="#how-store-data-changes-when-it-enters-jumpseller" id="how-store-data-changes-when-it-enters-jumpseller"></a>
 
-Category migration helps preserve product organization, but storefront navigation is a separate experience layer. A source store may use menu trees, collections, filters, landing pages, or theme-specific navigation to guide shoppers. In Jumpseller, product categories, menus, theme layout, product filtering, and page links need to work together.
+The source store may have accumulated years of platform-specific assumptions. Products may contain custom attributes. Categories may double as navigation. Customer data may be shaped by previous account rules. Orders may carry payment labels, fulfillment states, discounts, and app-specific fields. Pages may use legacy layouts. URLs may reflect an older routing pattern.
 
-This distinction matters because a migrated category can exist correctly while the storefront still feels incomplete if menus, homepage sections, collection links, or product filters are not reviewed. Category structure should therefore be validated together with navigation and theme presentation.
+Jumpseller requires those records to become operational inside its own structures.
 
-#### Checkout moves into Jumpseller’s hosted checkout structure <a href="#checkout-moves-into-jumpseller-s-hosted-checkout-structure" id="checkout-moves-into-jumpseller-s-hosted-checkout-structure"></a>
+#### Products become Jumpseller catalog records <a href="#products-become-jumpseller-catalog-records" id="products-become-jumpseller-catalog-records"></a>
 
-Jumpseller checkout behavior is part of the platform environment. Payment selection, shipping selection, billing details, checkout fields, order confirmation, manual payment instructions, and post-checkout messages must be reviewed against Jumpseller’s checkout model.
+Product migration must preserve commercial meaning: what the product is, how shoppers find it, what options they select, how stock is tracked, what price is charged, which images represent it, and whether the product can be purchased. Jumpseller supports standard product fields, product images, pricing, inventory, product options, variants, categories, and SEO-facing information.
 
-Source stores with custom checkout pages, checkout scripts, custom fields, special validation rules, delivery-date fields, invoice-field logic, business-account fields, or payment-specific workflows should not assume those behaviors will transfer exactly. The practical question is whether the target checkout captures the required information and supports the intended operational flow after migration.
+The key planning issue is whether each source product is a standard product, a variant product, a customizable product, a digital product, or a product with app-driven logic. A source item that looks like one product in the old platform may need different handling if its options affect stock, price, image, weight, or fulfillment.
 
-#### Payment, shipping, and fulfillment must be re-confirmed <a href="#payment-shipping-and-fulfillment-must-be-re-confirmed" id="payment-shipping-and-fulfillment-must-be-re-confirmed"></a>
+#### Options and variants need interpretation <a href="#options-and-variants-need-interpretation" id="options-and-variants-need-interpretation"></a>
 
-Payment gateways and shipping methods are not only migrated data. They are operating services that depend on provider availability, country support, configuration, account credentials, payment method rules, shipping zones, delivery options, pickup behavior, fulfillment workflows, and third-party integrations.
+Jumpseller product options can represent shopper choices such as size, color, material, text input, text area, file upload, or checklist-style selections. Some options generate variants with their own stock, price, SKU, weight, and images. Other options may capture customization without creating inventory-bearing variants.
 
-A migration can preserve order history while still requiring payment and shipping setup to be configured separately for the new target store. Historical order payment and shipping labels should remain understandable, but live checkout readiness depends on whether the active payment and shipping methods are configured and tested inside Jumpseller.
+This distinction is central to migration planning. A size-and-color apparel product usually needs variant-level treatment. A personalized message field does not usually need its own stock-bearing variant. A source platform may have represented both situations through the same extension or attribute system, but Jumpseller needs the merchant to decide which choices are inventory logic and which are personalization logic.
 
-#### Storefront design becomes a Jumpseller theme and content question <a href="#storefront-design-becomes-a-jumpseller-theme-and-content-question" id="storefront-design-becomes-a-jumpseller-theme-and-content-question"></a>
+#### Categories influence both structure and discovery <a href="#categories-influence-both-structure-and-discovery" id="categories-influence-both-structure-and-discovery"></a>
 
-A source storefront theme does not automatically become a Jumpseller theme. Jumpseller supports theme selection and customization, including visual editing and code-level theme work where available, but source layouts, template overrides, custom widgets, page-builder sections, and front-end scripts need target-side interpretation.
+Categories organize products and can influence how shoppers browse. In Jumpseller, categories, product order, hierarchy, filters, menus, and theme presentation need to work together. Migrating category names alone does not guarantee that the target storefront feels navigable.
 
-The migration planning question is not whether the old theme can be copied exactly. It is which storefront elements must be recreated, simplified, rebuilt in a Jumpseller theme, replaced by app behavior, or treated as separate design work outside the data migration scope.
+A good migration plan reviews category hierarchy, product assignment, category ordering, menu placement, SEO names, category descriptions, filters, and high-value landing pages. The goal is not only to preserve classification, but also to preserve discoverability.
 
-#### Apps and integrations need ownership review <a href="#apps-and-integrations-need-ownership-review" id="apps-and-integrations-need-ownership-review"></a>
+#### Inventory is an operating rule, not just a number <a href="#inventory-is-an-operating-rule-not-just-a-number" id="inventory-is-an-operating-rule-not-just-a-number"></a>
 
-Apps, feeds, invoicing systems, analytics, marketing automations, dropshipping tools, sales channels, ERP systems, and custom integrations may influence how the source store works. Some of that behavior may have a Jumpseller equivalent. Some may need reconfiguration. Some may belong outside standard migration scope because the data is owned by an external system or source-specific app.
+Inventory planning should confirm SKU behavior, variant stock, unlimited-stock settings, stock updates, and whether orders reduce or return stock as expected. Stores with external inventory ownership, warehouse systems, supplier feeds, or ERP updates need additional review because stock may not be controlled only by the storefront.
 
-This makes app and integration review important before migration. Product records, customers, orders, and pages can migrate while app-owned workflows still require separate planning.
+For many merchants, inventory is where migration becomes operationally sensitive. A product can look correct but still fail after launch if the wrong variant carries the stock quantity, if unlimited stock is applied to a limited item, or if external stock synchronization is not ready.
 
-### Where Jumpseller Is Often a Strong Target <a href="#where-jumpseller-is-often-a-strong-target" id="where-jumpseller-is-often-a-strong-target"></a>
+### Jumpseller as a Hosted Operating Environment <a href="#jumpseller-as-a-hosted-operating-environment" id="jumpseller-as-a-hosted-operating-environment"></a>
 
-Jumpseller is often a strong Target Platform when the merchant wants hosted e-commerce operation with enough built-in structure to manage a store without maintaining a self-hosted environment.
+Jumpseller reduces the merchant’s need to manage hosting, patches, server performance, or platform files. That is valuable for teams that want less technical overhead. At the same time, hosted operation means some behaviors must be configured through Jumpseller’s supported settings, theme capabilities, apps, or APIs rather than through direct backend changes.
 
-#### Hosted operation is a priority <a href="#hosted-operation-is-a-priority" id="hosted-operation-is-a-priority"></a>
+The tradeoff is simple: Jumpseller can simplify ownership, but it requires the merchant to accept the target platform’s boundaries.
 
-Merchants moving away from platforms that require hosting, plugin maintenance, database management, patching, or heavy developer involvement may benefit from Jumpseller’s hosted model. The platform reduces infrastructure responsibility and lets the merchant focus more on catalog management, storefront presentation, payment and shipping setup, sales channels, and ongoing store operation.
+| Hosted-platform benefit            | Migration advantage                                                                                     | Boundary to confirm                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Less infrastructure responsibility | Reduced dependency on old hosting, outdated platform versions, and fragile server maintenance           | Custom backend behavior may need to be simplified or rebuilt differently.                  |
+| Centralized admin management       | Products, categories, inventory, orders, customers, and settings can be managed in one SaaS environment | Previous admin workflows may not map one-to-one.                                           |
+| Theme-based storefront control     | Storefront presentation can be redesigned or refined inside the target theme system                     | Old templates, page builders, scripts, and layout overrides do not automatically transfer. |
+| Built-in commerce configuration    | Payments, shipping, taxes, emails, and checkout settings can be configured inside the platform          | Live checkout readiness must be tested separately from data migration.                     |
+| App and API ecosystem              | External workflows can often be reconnected or redesigned                                               | App-owned data and custom integrations may require separate handling.                      |
 
-This is especially useful when the source store has become difficult to maintain because of old extensions, fragile customizations, unsupported versions, hosting issues, or developer dependency.
+Merchants moving from older self-hosted systems often value this change. Stores that depended on extensive custom backend logic should evaluate it carefully before choosing Jumpseller.
 
-#### The catalog is structured enough for SaaS commerce <a href="#the-catalog-is-structured-enough-for-saas-commerce" id="the-catalog-is-structured-enough-for-saas-commerce"></a>
+### Storefront, Content, and SEO Planning <a href="#storefront-content-and-seo-planning" id="storefront-content-and-seo-planning"></a>
 
-Jumpseller is a practical target for catalogs that can be expressed through products, categories, variants, stock, images, SEO fields, and related storefront content. Stores with standard product structures, manageable variant logic, ordinary customer and order history, and clear category organization usually have a more predictable migration path than stores with highly custom product configuration.
+Jumpseller migration planning should separate data records from storefront experience. Product and category data can migrate while the storefront still needs work: homepage sections, menu structure, category pages, product-page layout, content pages, language coverage, images, redirects, metadata, and theme settings.
 
-This does not mean the source store must be simple. It means the important commerce meaning should be translatable into Jumpseller’s product, category, checkout, customer, order, and content structures without requiring a bespoke target data model.
+This distinction prevents a common launch problem. Teams may validate that products and orders migrated, but overlook whether customers can find products, understand categories, use filters, and land on the right page from search results.
 
-#### Design flexibility matters, but full platform ownership does not <a href="#design-flexibility-matters-but-full-platform-ownership-does-not" id="design-flexibility-matters-but-full-platform-ownership-does-not"></a>
+#### Storefront layout is rebuilt, not inherited <a href="#storefront-layout-is-rebuilt-not-inherited" id="storefront-layout-is-rebuilt-not-inherited"></a>
 
-Jumpseller can be a strong target when merchants want theme customization and professional storefront presentation without owning the full backend platform. A merchant can choose a theme, adjust design, use content sections, and handle storefront presentation through the platform’s theme system.
+A source theme is not a portable theme file for Jumpseller. Layout sections, product templates, collection pages, checkout styling, scripts, and app widgets need target-side handling. Some design elements can be recreated through theme settings. Others may need custom theme work or may be better simplified.
 
-It is less suitable when the business expects unrestricted backend code modification, direct database control, or custom checkout ownership similar to a self-hosted platform.
+The right planning question is not whether the old storefront can be copied exactly. It is which customer-facing experience must be preserved, which should be improved, and which legacy design behavior should be retired during the move.
 
-#### Sales channels and operational integrations are part of the plan <a href="#sales-channels-and-operational-integrations-are-part-of-the-plan" id="sales-channels-and-operational-integrations-are-part-of-the-plan"></a>
+#### SEO continuity needs a page-by-page view <a href="#seo-continuity-needs-a-page-by-page-view" id="seo-continuity-needs-a-page-by-page-view"></a>
 
-Jumpseller can support merchants that want an online store connected with social commerce, marketing apps, payment providers, shipping providers, fulfillment workflows, invoicing, or external automation. These areas should still be planned carefully, because migration does not automatically reproduce every source integration.
+SEO preservation depends on high-value destination quality, not only redirect quantity. Product names, category names, page titles, meta descriptions, image quality, URL structure, and redirect mapping should be reviewed before launch.
 
-The stronger fit is a merchant that is willing to configure the Jumpseller ecosystem around the migrated data, not a merchant expecting all source-platform apps and custom integrations to continue unchanged.
+A source store may have old URLs that no longer deserve equal treatment. Another store may have a small set of high-value product, category, and content URLs that must be preserved carefully. Jumpseller planning should identify which pages are business-critical and which can be consolidated or redirected to stronger target destinations.
 
-### Where Deeper Planning Is Usually Needed <a href="#where-deeper-planning-is-usually-needed" id="where-deeper-planning-is-usually-needed"></a>
+### Checkout, Payments, Shipping, and Order Context <a href="#checkout-payments-shipping-and-order-context" id="checkout-payments-shipping-and-order-context"></a>
 
-Jumpseller migration becomes more sensitive when the source store relies on structures that do not map cleanly into a hosted SaaS target.
+Checkout behavior deserves its own review because it connects customer experience with payment capture, shipping selection, tax handling, order creation, notifications, and fulfillment.
 
-| Planning area                                  | Why it matters when moving to Jumpseller                                                                                                                 |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Complex product options and variants           | Source option systems, bundles, personalized products, modifiers, and configurable logic may not match Jumpseller product and variant behavior directly. |
-| Category, menu, and filter behavior            | Categories may migrate, but storefront navigation, filters, landing pages, and menu logic need separate review.                                          |
-| Checkout fields and special order requirements | Custom checkout fields, business-invoice fields, delivery scheduling, payment instructions, and form logic need target-side confirmation.                |
-| Payment and shipping methods                   | Live checkout depends on provider setup, country support, shipping rules, account credentials, and fulfillment expectations.                             |
-| Customer accounts and passwords                | Customer records may migrate, but account activation, password continuity, login readiness, and customer communication require expectation planning.     |
-| SEO and URL continuity                         | Product, category, and page URLs may change, so redirects and high-value URL validation should be planned before launch.                                 |
-| Multilingual and multicurrency expectations    | Translation coverage, language limits, currency behavior, payment compatibility, and storefront labels need validation.                                  |
-| Apps and external systems                      | App-owned data, feeds, marketplace connections, invoicing, ERP, or automation workflows may need reconfiguration or Custom Service review.               |
-| Theme and storefront design                    | Source themes, page builders, scripts, and layout behavior do not automatically transfer into Jumpseller themes.                                         |
+Historical order migration and live checkout readiness are different requirements. Migrated orders help preserve customer history and operational reference. Live checkout readiness requires payment gateways, shipping methods, taxes, pickup or delivery logic, email notifications, fraud or payment rules, and fulfillment processes to be configured and tested in Jumpseller.
 
-These deeper planning areas do not automatically make Jumpseller the wrong target. They define where proof is needed before the migration approach is chosen and before the migrated result is accepted.
+| Area              | Historical data concern                                                                                   | Live-operation concern                                                                            |
+| ----------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Orders            | Preserve order numbers, products purchased, totals, customer identity, and status meaning where supported | Confirm new checkout creates orders with expected status, notification, and fulfillment behavior. |
+| Payments          | Keep payment method labels understandable in order history                                                | Configure active gateways, manual payment instructions, credentials, and payment availability.    |
+| Shipping          | Preserve shipping method names and shipping totals where relevant                                         | Configure shipping zones, rates, carrier rules, pickup logic, and delivery expectations.          |
+| Taxes             | Preserve historical totals and tax context where possible                                                 | Configure current tax rules according to the target market and compliance needs.                  |
+| Customer accounts | Preserve customer identity and contact context                                                            | Confirm account access, emails, customer categories, and marketing preferences as needed.         |
 
-### What Should Be Understood Early Before Moving into Jumpseller <a href="#what-should-be-understood-early-before-moving-into-jumpseller" id="what-should-be-understood-early-before-moving-into-jumpseller"></a>
+This split helps teams avoid overestimating what migration can prove. Data migration can preserve history, but launch readiness depends on target-side configuration and testing.
 
-Before moving into Jumpseller, the merchant should understand that migration quality depends on target fit, not only record transfer. The target store must be able to express the source business meaning inside Jumpseller’s hosted platform structure.
+### Apps, APIs, and External Workflows <a href="#apps-apis-and-external-workflows" id="apps-apis-and-external-workflows"></a>
 
-#### Jumpseller is a managed platform with target-side rules <a href="#jumpseller-is-a-managed-platform-with-target-side-rules" id="jumpseller-is-a-managed-platform-with-target-side-rules"></a>
+Jumpseller can support operational workflows through apps, APIs, webhooks, sales channels, feeds, and third-party services. Migration planning should identify which workflows belong to the platform, which belong to an app, and which belong to an external system.
 
-A hosted platform reduces infrastructure responsibility, but it also introduces boundaries. Store behavior must align with the platform’s supported catalog, checkout, theme, app, language, currency, payment, shipping, and integration behavior.
+Examples include marketing automations, analytics, accounting exports, fulfillment tools, ERP synchronization, marketplace feeds, social commerce, product recommendations, reviews, subscriptions, product add-ons, and custom theme scripts. Some workflows can be reconfigured in Jumpseller. Some require new app choices. Some require Custom Service review when data is non-standard or app-owned.
 
-A source store with unrestricted code access or custom database logic may need simplification, restructuring, or Custom Service review before its data can be safely represented in Jumpseller.
+The important migration decision is ownership. If the source platform owns the data, it may be part of migration scope. If an app or external system owns it, the workflow may need separate export, mapping, API work, or target-side reconfiguration.
 
-#### Plan-sensitive features should be checked before migration <a href="#plan-sensitive-features-should-be-checked-before-migration" id="plan-sensitive-features-should-be-checked-before-migration"></a>
+### Where Jumpseller Usually Fits Best <a href="#where-jumpseller-usually-fits-best" id="where-jumpseller-usually-fits-best"></a>
 
-Some Jumpseller features can depend on the selected plan, store country, payment provider, theme capability, or app availability. Product filtering, staff/admin access, customer login, multilingual coverage, stock locations, reviews, promotions, abandoned cart features, and code editing should be confirmed when they are important to the business.
+Jumpseller is usually strongest when the merchant wants a hosted commerce environment with practical control over products, categories, inventory, storefront design, payment configuration, shipping configuration, and day-to-day store operations.
 
-Plan-sensitive features should not be treated as small details. They can affect whether the target store can support the intended catalog, team workflow, customer experience, or launch plan.
+It is especially worth considering for:
 
-#### Demo Migration should test representative records <a href="#demo-migration-should-test-representative-records" id="demo-migration-should-test-representative-records"></a>
+| Store profile                                     | Why Jumpseller can fit                                                                                | Planning priority                                                                                     |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Merchant leaving an outdated self-hosted platform | Jumpseller reduces infrastructure and maintenance burden                                              | Translate catalog, orders, customers, URLs, and storefront priorities into target structures.         |
+| Standard retail catalog                           | Products, categories, options, variants, stock, images, and SEO fields can usually be planned clearly | Review variant logic, filters, category hierarchy, and product-page presentation.                     |
+| Brand-led store with manageable customization     | Theme-based storefront control can support polished presentation                                      | Separate data migration from target-side design reconstruction.                                       |
+| Regional or multilingual merchant                 | Store setup can include language, payment, shipping, and market-facing configuration                  | Confirm language coverage, checkout labels, payment support, shipping zones, and content consistency. |
+| Team seeking simpler operations                   | Hosted admin management can reduce reliance on developers                                             | Validate staff workflow, inventory process, app needs, and daily management expectations.             |
 
-A Demo Migration should not use only easy products or clean orders. Jumpseller migration should be tested with records that expose the store’s real complexity: variant-rich products, image-heavy products, important categories, customer records with address and language context, orders with different statuses, pages with SEO expectations, multilingual content, and records tied to payment, shipping, or app behavior.
-
-The goal is to see whether the migrated result is understandable and operational inside Jumpseller, not merely whether a sample appears in the target store.
-
-#### Add-ons and Custom Service should be separated clearly <a href="#add-ons-and-custom-service-should-be-separated-clearly" id="add-ons-and-custom-service-should-be-separated-clearly"></a>
-
-Add-ons can help when the migration needs filtering, mapping, or data configuration within supported behavior. For example, a merchant may need only selected records migrated or may need source values mapped carefully into target fields.
-
-Custom Service is different. It is used when the project requires customization, custom migration logic adjustment, Custom Platform handling, unsupported app data, external identifiers, bespoke transformation, or target behavior beyond standard service capability. A hosted SaaS target such as Jumpseller makes this distinction important because some source behavior may not have a direct target equivalent.
-
-#### Store launch readiness depends on more than migrated data <a href="#store-launch-readiness-depends-on-more-than-migrated-data" id="store-launch-readiness-depends-on-more-than-migrated-data"></a>
-
-A Jumpseller store is ready only when migrated data, storefront presentation, checkout settings, payment methods, shipping methods, redirects, email/notification expectations, apps, admin access, and validation samples all support the intended launch. Data migration is one part of the move. Target configuration and validation determine whether the new store can operate confidently.
+Jumpseller is less suitable when the business needs unrestricted backend control, deeply custom checkout logic, uncommon product configurators, large enterprise integration complexity, or exact reproduction of source-platform custom behavior.
 
 ### Conclusion <a href="#conclusion" id="conclusion"></a>
 
-Jumpseller is a strong migration target for merchants who want a hosted SaaS e-commerce platform with practical catalog management, storefront customization, payment and shipping configuration, sales-channel possibilities, apps, and less infrastructure responsibility. The main planning challenge is not whether Jumpseller can receive store data. It is whether the source store’s catalog structure, checkout behavior, storefront content, operational workflows, integrations, and SEO expectations can be represented clearly inside Jumpseller’s managed platform model.
+Jumpseller is a practical hosted commerce target for merchants that want structured catalog management, theme-based storefront control, configurable checkout, payment and shipping setup, apps, APIs, and reduced infrastructure responsibility. Its migration significance comes from the shift into a managed operating environment where data must become usable through Jumpseller’s product, category, inventory, checkout, content, and integration structures.
 
-Before choosing Jumpseller as the Target Platform, review the source store’s most important products, categories, customer records, orders, checkout fields, content pages, URLs, languages, payment methods, shipping methods, apps, and integrations. Use Demo Migration results to confirm whether Jumpseller expresses the store’s real business meaning, and use Live Chat when source complexity, unsupported app data, or custom behavior needs a service-path review.
+A good migration plan should confirm not only what data can move, but also how the store will operate after the move. Products must be sellable, categories must support discovery, checkout must be configured, orders must remain meaningful, storefront content must be rebuilt where needed, and integrations must be assigned to the right owner.
 
-### FAQs <a href="#faqs" id="faqs"></a>
+### Common Questions <a href="#common-questions" id="common-questions"></a>
 
-**Is Jumpseller a hosted e-commerce platform?**
+**Is Jumpseller mainly for small stores?**
 
-Yes. Jumpseller is a hosted SaaS e-commerce platform. Migration planning should account for the target platform’s supported product, category, checkout, payment, shipping, theme, app, language, and integration behavior rather than assuming the source store’s backend structure will transfer directly.
+Jumpseller can serve small and mid-sized merchants, but the better fit question is not store size alone. The key question is whether the catalog, checkout, storefront, inventory, and integration requirements can be represented well inside Jumpseller’s hosted commerce model.
 
-**Does moving to Jumpseller mean my source theme will migrate too?**
+**Does a migration to Jumpseller include storefront design transfer?**
 
-No. Store data and storefront design are different areas of migration planning. Product data, categories, customers, orders, and content can be migrated where supported, but the source theme, layout, custom templates, scripts, page-builder sections, or design behavior usually need to be recreated or adapted within Jumpseller’s theme environment.
+Store data migration and storefront design reconstruction are different work areas. Product, category, customer, order, and content data can be migrated, but source themes, templates, scripts, page-builder layouts, and visual behavior normally need target-side rebuilding or redesign.
 
-**What should be tested first in a Demo Migration to Jumpseller?**
+**Can variant-heavy products move to Jumpseller?**
 
-Test records that reveal real complexity: variant-rich products, products with images and SEO fields, important categories, customer accounts, orders with different payment and fulfillment states, content pages, multilingual records, and examples tied to shipping, checkout, or app behavior. Easy records alone do not prove that the target store is ready.
+Yes, when the source variant logic can be represented through Jumpseller product options and variants. Products with many combinations, custom pricing, image-specific variants, stock-specific variants, or personalization fields should be reviewed before migration scope is finalized.
 
-**When does a Jumpseller migration need Custom Service?**
+**Are payment and shipping methods migrated automatically?**
 
-Custom Service is used when the migration requires customization or modification work, such as Custom Platform handling, unsupported app or integration data, custom fields outside standard capability, external identifiers, unusual product structures, bespoke transformation, or custom migration logic adjustment. It is not the same as Managed Service, which is about Next-Cart-led execution within the agreed service scope.
+Historical payment and shipping labels may be preserved in order history where relevant, but live payment gateways and shipping methods need target-side configuration and testing. Active checkout readiness should be validated separately from historical data preservation.
 
-**Do Jumpseller payment and shipping settings migrate automatically?**
+**What makes Jumpseller migration more complex than a simple import?**
 
-Historical order information can preserve payment and shipping context where supported, but active payment gateways, shipping methods, provider accounts, delivery rules, and fulfillment workflows must be configured and validated in Jumpseller. Live checkout readiness should always be checked before launch.
+Complexity appears when source data carries platform-specific logic: custom checkout fields, source-specific apps, unusual product configuration, external inventory ownership, custom URLs, theme-dependent navigation, or integration-owned workflows. These areas need planning before the final migration path is confirmed.
